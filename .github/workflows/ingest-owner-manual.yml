@@ -1,0 +1,37 @@
+name: Versioned owner manual ingestion
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OMP_NUM_THREADS: '2'
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install CPU runtime
+        run: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+      - name: Install ingestion dependencies
+        run: pip install -r requirements-ingest.txt
+      - name: Run regression checks
+        run: python -m unittest test_diagnose test_retrieve_evidence
+      - name: Parse, chunk and index immutable source
+        run: python -u online_ingest.py --out build/index
+      - name: Save resolved dependency versions
+        run: pip freeze > build/index/requirements-resolved.txt
+      - name: Prepare cross-encoder and compare retrieval
+        run: python -u online_retrieve.py --index build/index --prepare-reranker --evaluate
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-manual-index-${{ github.run_id }}
+          path: build/index/
+          retention-days: 90
+          if-no-files-found: error
