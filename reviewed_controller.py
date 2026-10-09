@@ -316,6 +316,24 @@ class ReviewedController:
             if r.step_ready(prior.step_id) and prior.unresolved_route == "ESCALATE":
                 return session, self.response("UNSUPPORTED", "The documented check remains unresolved and calls for authorised service support.", session,
                                               reason_codes=("DOCUMENTED_ESCALATION_AFTER_UNRESOLVED_ACTION",)), decisions
+        latest_actions = {}
+        for attempt in session.active_attempts():
+            if attempt.condition_id is None:
+                latest_actions[attempt.step_id] = attempt
+        for sid, attempt in latest_actions.items():
+            if attempt.outcome_enum != Outcome.UNCLEAR or not r.step_ready(sid):
+                continue
+            count_key = "outcome:" + sid
+            counts = dict(session.clarification_counts)
+            if counts.get(count_key, 0) >= 2:
+                return session, self.response("UNSUPPORTED", "I could not verify the outcome of the documented check.", session,
+                                              reason_codes=("UNRESOLVED_OUTCOME_UNCERTAINTY",)), decisions
+            counts[count_key] = counts.get(count_key, 0) + 1
+            question = "Which outcome applies to the documented step: not tried, completed but unresolved, or resolved?"
+            session = replace(session, pending_step_id=sid, pending_rule_id=None,
+                              clarification_counts=tuple(sorted(counts.items())), version=session.version + 1)
+            return session, self.response("AMBIGUOUS", question, session, clarification_question=question,
+                                          reason_codes=("UNCLEAR_ACTION_OUTCOME",)), decisions
         eligible = [d for d in decisions if d.eligibility_status == Truth.TRUE and r.step(d.step_id).kind != "SAFETY_STOP"]
         # Prefer only source-reviewed explicit OEM NEXT_STEP links. Otherwise stable product ordering.
         completed = [a.step_id for a in session.active_attempts() if a.outcome_enum == Outcome.ACTION_COMPLETED_UNRESOLVED]

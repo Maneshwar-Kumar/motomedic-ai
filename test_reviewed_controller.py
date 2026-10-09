@@ -272,6 +272,21 @@ class ControllerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             review(c.registry, p)
 
+    def test_unclear_action_outcome_clarifies_without_repeating_instruction(self):
+        c, s = fixture()
+        s = self.observe_first(c, s)
+        s, _, _ = c.next(s, 'synthetic request')
+        s = c.feedback(s, Outcome.UNCLEAR, 'uncertain-action')
+        calls = c.retriever.model.calls
+        s, response, _ = c.next(s, 'synthetic request')
+        self.assertEqual(response.type, ResponseType.AMBIGUOUS)
+        self.assertIn('UNCLEAR_ACTION_OUTCOME', response.reason_codes)
+        self.assertIsNone(response.suggested_step_id)
+        self.assertEqual(c.retriever.model.calls, calls)
+        s = c.feedback(s, Outcome.ACTION_COMPLETED_UNRESOLVED, 'clarified-action')
+        _, response, _ = c.next(s, 'synthetic request')
+        self.assertEqual(response.suggested_step_id, 's2')
+
     def test_hard_scope_filter_excludes_wrong_variant_before_ranking(self):
         c, s = fixture()
         c.retriever.chunks[1]['scope']['variant'] = 'wrong-variant'
