@@ -83,6 +83,9 @@ def reconcile(index, output):
         new_ids=sorted(page_ids-set(old['required_evidence_ids']))
         required=sorted(set(old['required_evidence_ids'])|page_ids)
         step['required_evidence_ids']=required;dep['required_evidence_ids']=required
+        step['dependency_manifest_version']='accepted-eleven-dependencies-draft-v1'
+        dep['version']='accepted-eleven-dependencies-draft-v1'
+        step['rule_version']='accepted-eleven-rules-draft-v1'
         dep['categories']['accepted_additional_context']=new_ids
         figures=[eid for eid in required if original.evidence[eid]['type']=='picture']
         if figures:dep['categories']['figures']=figures
@@ -118,9 +121,27 @@ def reconcile(index, output):
             'draft_branches':step['branch_drafts'],'expected_runtime_before_review':'UNSUPPORTED',
             'approval_status':'DRAFT','authoring_blockers':step['authoring_blockers'],
             'evaluation_partition':'REGRESSION_TUNING_NOT_HELD_OUT'})
+    # Additional spans support questions, not diagnostic conclusions or approval.
+    c['rules']['rule_q_fuel']['source_evidence_ids']=sorted(set(c['rules']['rule_q_fuel']['source_evidence_ids'])|{'evidence_272bd86a27fe5489e66a4af6'})
+    c['rules']['rule_q_fuel']['clarification_evidence_ids']=c['rules']['rule_q_fuel']['source_evidence_ids'][:]
+    c['rules']['rule_q_switches']['source_evidence_ids']=sorted(set(c['rules']['rule_q_switches']['source_evidence_ids'])|{'evidence_001335e5b633008075189f76'})
+    c['rules']['rule_q_switches']['clarification_evidence_ids']=c['rules']['rule_q_switches']['source_evidence_ids'][:]
+    stand=deepcopy(c['rules']['rule_stand_retracted'])
+    stand['rule_id']='rule_accepted_stand_not_retracted';stand['expected_value']=False
+    stand['authorship_note']='Draft generated from accepted record10: actual position is separate from indicator.'
+    c['rules'][stand['rule_id']]=stand
+    c['steps']['a_raise_stand']['applicability_rule_ids'].append(stand['rule_id'])
+    c['steps']['a_raise_stand']['authoring_blockers'].append('COMPACT_OBSERVATION_GROUP_RUNTIME_INTEGRATION_REQUIRED')
+    c['steps']['a_refuel']['authoring_blockers'].append('SEPARATE_FUEL_OBSERVATIONS_AND_DISCREPANCY_ROUTING_REQUIRED')
+    c['steps']['a_switches_on']['authoring_blockers'].append('SWITCH_CORRECTION_VERSUS_STARTER_ACTION_BOUNDARY_REQUIRED')
+    c['steps']['lookup_starter_duration']['authoring_blockers'].append('CONDITIONAL_LOOKUP_VERSUS_ACTUAL_STARTER_ACTION_BOUNDARY_REQUIRED')
+    c['rules']['rule_q_engine_hot']['rider_resolvable']=False
+    c['rules']['rule_q_engine_hot']['authorship_note']='No reviewed display threshold establishes hot/not-hot; source uncertainty is not rider-resolvable.'
+    for example in examples:example['authoring_blockers']=c['steps'][example['record_id']]['authoring_blockers']
     for procedure in c['procedures'].values():
         procedure['review_status']='DRAFT';procedure['boundaries_checked']=False
-    for rule in c['rules'].values():rule['review_status']='DRAFT'
+    for rule in c['rules'].values():
+        rule['review_status']='DRAFT';rule['rule_version']='accepted-eleven-rules-draft-v1'
     # Approval cannot be copied across new content/version. This is an empty draft ledger.
     reviews={'schema_version':'review-ledger-v1','decisions':[]}
     drafted=EvidenceRegistry(c,reviews,original.evidence,original.source)
