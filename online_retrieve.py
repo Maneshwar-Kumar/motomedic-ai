@@ -32,7 +32,9 @@ class Retriever:
         self.vectors = np.load(self.root / "embeddings.npy", allow_pickle=False)
         if self.bm25["chunk_ids"] != [c["id"] for c in self.chunks] or len(self.vectors) != len(self.chunks):
             raise ValueError("Index row mappings disagree")
-        self.model = SentenceTransformer(str(self.root / "embedding_model"), device="cpu")
+        model_path = self.root / "embedding_model"
+        config = self.manifest["embedding"]
+        self.model = SentenceTransformer(str(model_path), device="cpu") if model_path.exists() else SentenceTransformer(config["model"], revision=config["revision"], device="cpu")
         self.reranker = None
         if rerank:
             from sentence_transformers import CrossEncoder
@@ -69,8 +71,21 @@ class Retriever:
         if use_reranker:
             if self.reranker is None:
                 raise RuntimeError("Requested reranker is not loaded")
-            scores = self.reranker.predict([(query, self.chunks[i]["index_text"]) for i in candidates])
-            rerank_scores = {i: float(s) for i, s in zip(candidates, scores)}
+            tokenizer = self.reranker.tokenizer
+            query_tokens = tokenizer.encode(query, add_special_tokens=False)
+            if len(query_tokens) > 128:
+                raise ValueError("Please shorten the query for the cross-encoder")
+            budget = min(512, tokenizer.model_max_length) - len(query_tokens) - tokenizer.num_special_tokens_to_add(pair=True)
+            pairs, owners = [], []
+            for i in candidates:
+                passage_tokens = tokenizer.encode(self.chunks[i]["index_text"], add_special_tokens=False)
+                for start in range(0, max(len(passage_tokens), 1), max(1, budget-32)):
+                    fragment = tokenizer.decode(passage_tokens[start:start+budget], skip_special_tokens=True)
+                    pairs.append((query, fragment))
+                    owners.append(i)
+            scores = self.reranker.predict(pairs, batch_size=8)
+            for i, score in zip(owners, scores):
+                rerank_scores[i] = max(rerank_scores.get(i, float("-inf")), float(score))
             candidates.sort(key=lambda i: (-rerank_scores[i], self.chunks[i]["id"]))
         hits = [{**self.chunks[i], "dense_score": float(dense[i]), "bm25_score": float(sparse[i]),
                  "rrf_score": fused[i], "cross_encoder_score": rerank_scores.get(i)} for i in candidates[:limit]]
@@ -94,7 +109,7 @@ def prepare_reranker(root):
     snapshot_download(model, revision=revision, local_dir=str(root / "reranker_model"),
                       allow_patterns=["*.json", "*.txt", "*.safetensors", "pytorch_model.bin"])
     write_json(root / "reranker_manifest.json", {"model": model, "revision": revision,
-        "candidate_limit": 20, "approval": "PROVISIONAL", "trained_for_this_manual": False})
+        "candidate_limit": 20, "approval": "PROVISIONAL", "trained_for_this_manual": False, "long_passage_policy": "max relevance across token-bounded windows"})
 
 
 def evaluate(root):

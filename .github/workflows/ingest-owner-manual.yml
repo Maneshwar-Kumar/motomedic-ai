@@ -6,6 +6,13 @@ on:
         description: Prior run containing a verified Docling parse (optional)
         required: false
         type: string
+      embedding_model:
+        description: Embedding comparison
+        type: choice
+        default: miniLM
+        options:
+          - miniLM
+          - bge-m3
 permissions:
   contents: read
   actions: read
@@ -39,12 +46,12 @@ jobs:
       - name: Parse, chunk and index immutable source
         env:
           PARSE_RUN_ID: ${{ inputs.parse_run_id }}
+          EMBEDDING_CHOICE: ${{ inputs.embedding_model }}
         run: |
-          if [ -n "$PARSE_RUN_ID" ]; then
-            python -u online_ingest.py --out build/index --parsed-document build/parsed/docling_document.json
-          else
-            python -u online_ingest.py --out build/index
-          fi
+          args=(--out build/index)
+          if [ -n "$PARSE_RUN_ID" ]; then args+=(--parsed-document build/parsed/docling_document.json); fi
+          if [ "$EMBEDDING_CHOICE" = "bge-m3" ]; then args+=(--embedding-model BAAI/bge-m3 --max-tokens 1024 --no-package-model); fi
+          python -u online_ingest.py "${args[@]}"
       - name: Save resolved dependency versions
         run: pip freeze > build/index/requirements-resolved.txt
       - name: Prepare cross-encoder and compare retrieval

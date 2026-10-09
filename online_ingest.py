@@ -53,7 +53,7 @@ def build_bm25(chunks):
             "idf": {t: math.log(1 + (n - len(p) + 0.5) / (len(p) + 0.5)) for t, p in postings.items()}}
 
 
-def build(manifest_path, out, parsed_document=None):
+def build(manifest_path, out, parsed_document=None, embedding_model=EMBED_MODEL, max_tokens=240, package_model=True):
     import numpy as np
     from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
@@ -97,8 +97,8 @@ def build(manifest_path, out, parsed_document=None):
         if str(result.status.value) != "success":
             raise RuntimeError(f"Docling conversion did not succeed: {result.status}")
     write_json(out / "docling_document.json", doc.export_to_dict())
-    model_revision = model_info(EMBED_MODEL).sha
-    tokenizer = HuggingFaceTokenizer(tokenizer=AutoTokenizer.from_pretrained(EMBED_MODEL, revision=model_revision), max_tokens=240)
+    model_revision = model_info(embedding_model).sha
+    tokenizer = HuggingFaceTokenizer(tokenizer=AutoTokenizer.from_pretrained(embedding_model, revision=model_revision), max_tokens=max_tokens)
     chunker = HybridChunker(tokenizer=tokenizer, merge_peers=False, repeat_table_header=True)
     evidence, chunks, parents, edges = {}, [], {}, []
     figures_dir = out / "figures"
@@ -119,12 +119,12 @@ def build(manifest_path, out, parsed_document=None):
     for base_number, base_chunk in enumerate(chunker.chunk(dl_doc=doc)):
         enriched_text = chunker.contextualize(base_chunk)
         encoded = tokenizer.tokenizer.encode(enriched_text, add_special_tokens=False)
-        if len(encoded) <= 238:
+        if len(encoded) <= max_tokens - 2:
             search_chunks.append((base_number, base_chunk, enriched_text, 0, False))
         else:
             overflow_count += 1
-            for window, start in enumerate(range(0, len(encoded), 206)):
-                window_text = tokenizer.tokenizer.decode(encoded[start:start+238], skip_special_tokens=True)
+            for window, start in enumerate(range(0, len(encoded), max_tokens - 34)):
+                window_text = tokenizer.tokenizer.decode(encoded[start:start+max_tokens-2], skip_special_tokens=True)
                 search_chunks.append((base_number, base_chunk, window_text, window, True))
     previous_headings, current_parent = None, None
     for number, chunk, enriched, window, overflow in search_chunks:
@@ -170,7 +170,7 @@ def build(manifest_path, out, parsed_document=None):
                           "provenance": "Docling chunk metadata", "implies_procedure_order": False})
     if not chunks:
         raise ValueError("Docling produced no searchable chunks")
-    if any(c["token_count"] > 240 for c in chunks):
+    if any(c["token_count"] > max_tokens for c in chunks):
         raise ValueError("Oversized enriched chunks would be truncated by the embedding model")
     child_lookup = {c["id"]: c for c in chunks}
     for parent in parents.values():
@@ -194,13 +194,14 @@ def build(manifest_path, out, parsed_document=None):
         [{"id": e["id"], "type": e["type"]} for e in evidence.values()], "edges": edges})
     write_json(out / "bm25.json", build_bm25(chunks))
     print(f"Embedding {len(chunks)} chunks; creating Qdrant vector index", flush=True)
-    model = SentenceTransformer(EMBED_MODEL, revision=model_revision, device="cpu")
+    model = SentenceTransformer(embedding_model, revision=model_revision, device="cpu")
     if any(len(model.tokenizer(c["index_text"], add_special_tokens=True)["input_ids"]) > model.max_seq_length for c in chunks):
         raise ValueError("Embedding input would be truncated")
     vectors = model.encode([c["index_text"] for c in chunks], normalize_embeddings=True,
-                           batch_size=32, show_progress_bar=True).astype("float32")
+                           batch_size=4 if max_tokens > 256 else 32, show_progress_bar=True).astype("float32")
     np.save(out / "embeddings.npy", vectors)
-    model.save(str(out / "embedding_model"))
+    if package_model:
+        model.save(str(out / "embedding_model"))
     client = QdrantClient(path=str(out / "qdrant"))
     client.create_collection("owner_manual", vectors_config=models.VectorParams(size=vectors.shape[1], distance=models.Distance.COSINE))
     client.upload_points("owner_manual", [models.PointStruct(
@@ -219,8 +220,8 @@ def build(manifest_path, out, parsed_document=None):
         "may_generate_procedural_advice": False}
     write_json(out / "ingestion_qa.json", qa)
     config = {"source_sha256": checksum, "parser": "Docling", "dependencies": versions,
-              "chunker": {"name": "HybridChunker", "max_tokens": 240, "merge_peers": False, "repeat_table_header": True},
-              "embedding": {"model": EMBED_MODEL, "revision": model_revision, "dimensions": int(vectors.shape[1]), "normalized": True, "metric": "cosine"},
+              "chunker": {"name": "HybridChunker", "max_tokens": max_tokens, "merge_peers": False, "repeat_table_header": True},
+              "embedding": {"model": embedding_model, "revision": model_revision, "dimensions": int(vectors.shape[1]), "normalized": True, "metric": "cosine"},
               "code_sha256": digest(Path(__file__)), "cached_parse_sha256": digest(parsed_document) if parsed_document else None, "source_manifest_sha256": digest(manifest_path), "graph_links_sha256": digest(links_path)}
     index_id = stable_id("index", checksum, config)
     files = {str(p.relative_to(out)).replace("\\", "/"): digest(p) for p in sorted(out.rglob("*")) if p.is_file()}
@@ -234,5 +235,10 @@ if __name__ == "__main__":
     parser.add_argument("--manifest", type=Path, default=ROOT / "source_manifest.json")
     parser.add_argument("--out", type=Path, default=ROOT / "build" / "index")
     parser.add_argument("--parsed-document", type=Path)
+    parser.add_argument("--embedding-model", default=EMBED_MODEL)
+    parser.add_argument("--max-tokens", type=int, default=240)
+    parser.add_argument("--no-package-model", action="store_true")
     args = parser.parse_args()
-    build(args.manifest, args.out, args.parsed_document)
+    if args.max_tokens < 64 or args.max_tokens > 2048:
+        parser.error("Use a reviewed token budget between 64 and 2048")
+    build(args.manifest, args.out, args.parsed_document, args.embedding_model, args.max_tokens, not args.no_package_model)
