@@ -1,0 +1,62 @@
+name: Verify reviewed evidence controller
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'controller_contracts.py'
+      - 'evidence_registry.py'
+      - 'reviewed_controller.py'
+      - 'reviewed_cache.py'
+      - 'session_store.py'
+      - 'registry_workflow.py'
+      - 'registry_source_candidates.py'
+      - 'verify_controller.py'
+      - 'test_reviewed_controller.py'
+      - 'registry/**'
+      - 'source_manifest.json'
+      - 'online_retrieve.py'
+      - 'diagnose.py'
+      - '.github/workflows/verify-controller.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install only the verification runtime
+        run: pip install numpy
+      - name: Reuse immutable hosted BGE snapshot
+        uses: actions/download-artifact@v4
+        with:
+          name: owner-manual-index-37908240500
+          run-id: '37908240500'
+          github-token: ${{ github.token }}
+          path: build/index
+      - name: Author draft candidates online from existing evidence objects
+        run: python registry_workflow.py propose --index build/index --registry build/proposed-registry
+      - name: Verify versioned draft registry
+        run: python registry_workflow.py validate --index build/index
+      - name: Run state, retrieval and budget regressions
+        env:
+          MOTOMEDIC_TEST_INDEX: build/index
+        run: python -m unittest -v test_reviewed_controller test_diagnose test_retrieve_evidence test_budget_guard test_online_assembly test_conditional_retrieval
+      - name: Run five direct and three multi-turn draft gates
+        run: python verify_controller.py --index build/index --output build/controller-verification.json
+      - name: Export engineering-only review packet
+        run: python registry_workflow.py packet --index build/index --kind step --id lookup_oil_grade --output build/review-packet.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reviewed-controller-verification-${{ github.run_id }}
+          path: |
+            build/controller-verification.json
+            build/review-packet.json
+            build/proposed-registry/*.json
+          retention-days: 7
+          if-no-files-found: error

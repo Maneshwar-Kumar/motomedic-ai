@@ -269,6 +269,64 @@ def lookup_cache(
     return next((entry["response"] for entry in cache["entries"] if entry["key"] == key), None)
 
 
+class ReviewedService:
+    """Hosted service boundary; never executes the provisional dialogue/cache path.
+
+    The caller supplies a trusted store and registry, never rider-authored gate inputs.
+    A private hosted worker can use SQLite; a multi-worker UI needs managed storage.
+    """
+    def __init__(self, registry, retriever, store, semantic_verifier=None, audience="end_user", trace_sink=None):
+        if audience not in ("engineering", "end_user"):
+            raise ValueError("Invalid audience")
+        self.audience = audience
+        self.trace_sink = trace_sink
+        self.last_trace = None
+        self.controller = retriever.reviewed_controller(registry, semantic_verifier)
+        self.controller.audience = audience
+        self.store = store
+
+    def start(self, intent, variant=None, edition=None):
+        from reviewed_controller import start_session
+        session = start_session(self.controller.registry, [intent], variant, edition)
+        self.store.save(session)
+        return session
+
+    def turn(self, session_id, query, **kwargs):
+        from dataclasses import asdict, replace
+        import time
+        from evidence_registry import POLICY_VERSION, content_hash
+        started = time.perf_counter()
+        session = self.store.load(session_id)
+        updated, response, decisions = self.controller.next(session, query, **kwargs)
+        if updated.version == session.version:
+            updated = replace(updated, version=updated.version + 1)
+        self.store.save(updated, expected_version=session.version)
+        self.last_trace = {"trace_id": response.trace_id, "session_hash": content_hash(session_id),
+                           "manual_checksum": session.manual_checksum, "index_id": self.controller.registry.index_id,
+                           "registry_lock": session.version_lock, "controller_version": POLICY_VERSION,
+                           "session_version_before": session.version, "session_version_after": updated.version,
+                           "eligibility": [asdict(d) for d in decisions],
+                           "retrieval": self.controller.last_retrieval_trace,
+                           "response_type": response.type.value, "reason_codes": response.reason_codes,
+                           "confirmed_input_ttfo_seconds": time.perf_counter() - started,
+                           "estimated_cost": None, "raw_input_or_media_recorded": False}
+        if self.trace_sink:
+            self.trace_sink(self.last_trace)
+        return updated, response, decisions
+
+    def feedback(self, session_id, outcome, turn_id, **kwargs):
+        session = self.store.load(session_id)
+        updated = self.controller.feedback(session, outcome, turn_id, **kwargs)
+        self.store.save(updated, expected_version=session.version)
+        return updated
+
+    def correct(self, session_id, attempt_id, fact, turn_id):
+        session = self.store.load(session_id)
+        updated = self.controller.correct(session, attempt_id, fact, turn_id)
+        self.store.save(updated, expected_version=session.version)
+        return updated
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)

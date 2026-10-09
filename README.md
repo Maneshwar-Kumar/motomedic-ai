@@ -50,3 +50,11 @@ Default experimental bounds: fused pool 20, recovery pool 40, at most one recove
 Bundles record policy/configuration, trigger signals, decision history, recovery evidence IDs, attempt/pair counts, skip reasons and stage timing. Failures raise `RetrievalSystemError` with status `SYSTEM_ERROR` and telemetry. No failed reranker is retried or silently converted into an unsupported-source claim. Mandatory reviewed evidence survives changed ranking. Model loading occurs only when scheduled and is reused in the process.
 
 Use `--rerank-mode off` and `--rerank-mode always` only for diagnostic comparisons (`--rerank` remains an always-mode alias). Run `python -m unittest test_conditional_retrieval test_online_assembly` for failure and assembly checks. The **Verify retrieval policy and TRD** GitHub workflow reuses the immutable hosted BGE artifact and renders the TRD without rebuilding its embeddings. `tools/render_docx.py` is the supplied documents skill renderer, vendored for hosted visual verification; it uses the runner's `/usr/bin/soffice`, not a desktop Office installation.
+
+## Reviewed controller integration
+
+The TRD v0.4 registry, review workflow and deterministic service boundary are implemented in [CONTROLLER_INTEGRATION.md](CONTROLLER_INTEGRATION.md). Run the private **Verify reviewed evidence controller** GitHub workflow to reuse the existing BGE snapshot, execute state/retrieval/budget regressions and verify five direct plus three multi-turn draft gates. No new document embeddings or GCP deployment are required.
+
+All eleven imported step/lookup records and the exact cache remain blocked pending independent original-page review and human sign-off. Passing synthetic controller tests is not source approval or release acceptance. `ReviewedService` integrates the trusted registry with `online_retrieve.py`; the legacy scripted controller remains an engineering prototype.
+
+The owner accepts Himalayan + BS6 confirmation and restricts PDF/excerpt display to engineering. End-user source display is denied. The manifest records the visually checked RAM00818/A edition, 4 November 2025, and the verified, owner-requested Royal Enfield support email. Public UI, production session storage, semantic-verifier calibration and release review are pending.

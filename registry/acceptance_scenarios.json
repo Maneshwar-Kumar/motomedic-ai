@@ -1,0 +1,319 @@
+{
+  "schema_version": "controller-acceptance-v1",
+  "version": "eight-scenarios-v1",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "review_status": "DRAFT",
+  "release_gate_passed": false,
+  "note": "Current fail-closed checks are executable. Post-review route lists are provisional authoring targets, not approved OEM branches or release scores. Cases are regression seeds, never held out.",
+  "cases": [
+    {
+      "case_id": "AC-G013",
+      "mode": "direct",
+      "intent": "oil_grade",
+      "query": "What engine oil grade does this owner\u00e2\u20ac\u2122s manual specify?",
+      "reference_case_id": "G013",
+      "required_step_ids": [
+        "lookup_oil_grade"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_36ee9102cfd9a8ef98c0466d",
+        "evidence_37c6c31f5700495414de1101",
+        "evidence_424971c8f0be958200b09990",
+        "evidence_8b9b87ad8adcc025075370ea",
+        "evidence_a6950ea73293cda81e695ce1"
+      ],
+      "original_pdf_pages": [
+        21
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_route": "SUPPORTED",
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Facts from another model/manual",
+        "Invented page references",
+        "Missing mandatory warnings or table units"
+      ],
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    },
+    {
+      "case_id": "AC-G014",
+      "mode": "direct",
+      "intent": "tyre_pressure",
+      "query": "What tyre pressure is listed for the Himalayan in this manual?",
+      "reference_case_id": "G014",
+      "required_step_ids": [
+        "lookup_tyre_pressure"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_114a6d4caa3c57bd3901037e",
+        "evidence_c762ef2c61505dc7ac7c01d8",
+        "evidence_cb7062b4cec26700e3ae1185",
+        "evidence_f1b023ea7924903fed5dfe5f",
+        "evidence_f3dd00ecbff8fd98a8c32736"
+      ],
+      "original_pdf_pages": [
+        90
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_route": "SUPPORTED",
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Facts from another model/manual",
+        "Invented page references",
+        "Missing mandatory warnings or table units"
+      ],
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    },
+    {
+      "case_id": "AC-G016",
+      "mode": "direct",
+      "intent": "fan_fuse",
+      "query": "Which fuse protects the fan, and what rating is listed?",
+      "reference_case_id": "G016",
+      "required_step_ids": [
+        "lookup_fan_fuse"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_00497a5a6998712d564a2df2",
+        "evidence_0c58e6021490c80a7a7f8d99",
+        "evidence_4e1a61e411e2b752c1a8716b",
+        "evidence_590e7744c6d77b972e3950ee",
+        "evidence_8b5ef092d20493cd2b9b58b8",
+        "evidence_90b50d7059435c1578fd7d12"
+      ],
+      "original_pdf_pages": [
+        112
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_route": "SUPPORTED",
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Facts from another model/manual",
+        "Invented page references",
+        "Missing mandatory warnings or table units"
+      ],
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    },
+    {
+      "case_id": "AC-G019",
+      "mode": "direct",
+      "intent": "starter_duration",
+      "query": "How long should I hold the starter if the engine does not start?",
+      "reference_case_id": "G019",
+      "required_step_ids": [
+        "lookup_starter_duration"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_1b6ac29f7d67b8a68c57a1d0",
+        "evidence_533bb7ef741105dc8ee7cdf1",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_b4e9c215783dd876443da7ac",
+        "evidence_f4dbcfa8fd37b20ab295e5a1"
+      ],
+      "original_pdf_pages": [
+        72,
+        73,
+        74
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_route": "SUPPORTED",
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Facts from another model/manual",
+        "Invented page references",
+        "Missing mandatory warnings or table units"
+      ],
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    },
+    {
+      "case_id": "AC-G020",
+      "mode": "direct",
+      "intent": "usb_charging",
+      "query": "Why does the USB charging port not charge while the engine is off?",
+      "reference_case_id": "G020",
+      "required_step_ids": [
+        "lookup_usb_charging"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_13dac6aaee2fcbdd57618d29",
+        "evidence_3f0254b2230794cc5e25393b",
+        "evidence_662d4a163d504cc62ff5147e",
+        "evidence_82764faca7aa6cec43f2eeb3",
+        "evidence_a35159dd2d88b584ad319de1",
+        "evidence_b345d26bcf46960f7125d8d8",
+        "evidence_ea69e5fbd3ff27f1dd159960"
+      ],
+      "original_pdf_pages": [
+        65
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_route": "SUPPORTED",
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Facts from another model/manual",
+        "Invented page references",
+        "Missing mandatory warnings or table units"
+      ],
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    },
+    {
+      "case_id": "AC-D024",
+      "mode": "multi_turn",
+      "intent": "no_start",
+      "query": "The engine will not start.",
+      "required_step_ids": [
+        "a_fuse"
+      ],
+      "turns_after_review": [
+        {
+          "fact_key": "q_fuse",
+          "value": true
+        },
+        {
+          "fact_key": "ignition_off",
+          "value": true
+        },
+        {
+          "step_id": "a_fuse",
+          "outcome": "ACTION_COMPLETED_UNRESOLVED"
+        }
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_routes": [
+        "AMBIGUOUS",
+        "AMBIGUOUS",
+        "SUPPORTED",
+        "UNSUPPORTED"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_00497a5a6998712d564a2df2",
+        "evidence_0c58e6021490c80a7a7f8d99",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_4e1a61e411e2b752c1a8716b",
+        "evidence_590e7744c6d77b972e3950ee",
+        "evidence_724d49cdd1f4fd70b6671f5b",
+        "evidence_8b5ef092d20493cd2b9b58b8",
+        "evidence_90b50d7059435c1578fd7d12"
+      ],
+      "original_pdf_pages": [
+        112,
+        121
+      ],
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Do not infer a normal fuse or healthy battery from unresolved action",
+        "Do not repeat a_fuse without exception",
+        "Exhausted path uses verified OEM email"
+      ],
+      "reviewer_tasks": [
+        "Confirm each predicate and warning against original PDF",
+        "Adjudicate eligible alternatives; no inferred OEM priority",
+        "Approve precise per-turn route expectations",
+        "Confirm ignition-off prerequisite and explicit persistent-fuse service route."
+      ],
+      "source_conflict": "Original fuse row requires authorised service for a persistent problem; legacy continuation is not approved.",
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    },
+    {
+      "case_id": "AC-D032",
+      "mode": "multi_turn",
+      "intent": "first_gear_stall",
+      "query": "It switches off when I select first gear.",
+      "required_step_ids": [
+        "a_raise_stand"
+      ],
+      "turns_after_review": [
+        {
+          "fact_key": "q_side_stand_indicator",
+          "value": true
+        },
+        {
+          "step_id": "a_raise_stand",
+          "outcome": "ACTION_COMPLETED_UNRESOLVED"
+        }
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_routes": [
+        "AMBIGUOUS",
+        "SUPPORTED",
+        "UNSUPPORTED"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_3ab349b8b479f442a8c6f618",
+        "evidence_724d49cdd1f4fd70b6671f5b",
+        "evidence_a7a5ea8352d16679e89780fb"
+      ],
+      "original_pdf_pages": [
+        74,
+        121,
+        122
+      ],
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Do not repeat the attempted stand action",
+        "No invented service repair"
+      ],
+      "reviewer_tasks": [
+        "Confirm each predicate and warning against original PDF",
+        "Adjudicate eligible alternatives; no inferred OEM priority",
+        "Approve precise per-turn route expectations"
+      ],
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    },
+    {
+      "case_id": "AC-D027",
+      "mode": "multi_turn",
+      "intent": "misfire",
+      "query": "The engine misfires.",
+      "required_step_ids": [
+        "a_cool_engine"
+      ],
+      "turns_after_review": [
+        {
+          "fact_key": "q_engine_hot",
+          "value": true
+        },
+        {
+          "step_id": "a_cool_engine",
+          "outcome": "ACTION_COMPLETED_UNRESOLVED"
+        }
+      ],
+      "expected_current_route": "UNSUPPORTED",
+      "expected_reviewed_routes": [
+        "AMBIGUOUS",
+        "SUPPORTED",
+        "UNSUPPORTED"
+      ],
+      "mandatory_evidence_ids": [
+        "evidence_3ab349b8b479f442a8c6f618",
+        "evidence_724d49cdd1f4fd70b6671f5b"
+      ],
+      "original_pdf_pages": [
+        121,
+        122
+      ],
+      "review_status": "DRAFT",
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "forbidden_claims": [
+        "Unresolved cooling is not a normal temperature observation",
+        "No inferred internal fault"
+      ],
+      "reviewer_tasks": [
+        "Confirm each predicate and warning against original PDF",
+        "Adjudicate eligible alternatives; no inferred OEM priority",
+        "Approve precise per-turn route expectations"
+      ],
+      "post_review_assumptions": "All source, rule, dependency and claim reviews approved; semantic validation passes; engineering audience or reviewed end-user paraphrases."
+    }
+  ],
+  "registry_version": "candidate-steps-v2"
+}

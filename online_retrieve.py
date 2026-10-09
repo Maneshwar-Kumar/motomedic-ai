@@ -74,6 +74,11 @@ class Retriever:
         if rerank:
             self._load_reranker()
 
+    def reviewed_controller(self, registry, semantic_verifier=None):
+        """Bind the server-owned review overlay without changing index files/vectors."""
+        from reviewed_controller import ReviewedController
+        return ReviewedController(registry, self, semantic_verifier)
+
     def _load_reranker(self):
         if self.reranker is not None:
             return
@@ -90,12 +95,12 @@ class Retriever:
                 raise RetrievalSystemError("SYSTEM_ERROR: reranker revision is missing")
             self.reranker = CrossEncoder(config["model"], revision=config["revision"], device="cpu")
 
-    def _rank(self, dense, sparse, candidate_limit, policy):
+    def _rank(self, dense, sparse, candidate_limit, policy, allowed_indices=None):
         fused = defaultdict(float)
         rankings = []
         for scores in [dense, sparse]:
             # Zero BM25 matches must not create arbitrary sparse ranks.
-            ranking = sorted((i for i in range(len(scores)) if scores is dense or scores[i] > 0), key=lambda i: (-float(scores[i]), self.chunks[i]["id"]))
+            ranking = sorted((i for i in range(len(scores)) if (allowed_indices is None or i in allowed_indices) and (scores is dense or scores[i] > 0)), key=lambda i: (-float(scores[i]), self.chunks[i]["id"]))
             rankings.append(ranking)
             for rank, idx in enumerate(ranking[:max(candidate_limit * 2, 50)], 1):
                 fused[idx] += 1 / (60 + rank)
@@ -198,9 +203,30 @@ class Retriever:
             raise ValueError("Invalid controller gate status")
         if scope:
             for key, value in scope.items():
-                actual = self.manifest["source_sha256"] if key == "source_sha256" else self.manifest["source"].get(key)
+                actual = self.manifest["source_sha256"] if key == "source_sha256" else (getattr(self, "reviewed_scope", None) or self.manifest["source"]).get(key)
                 if actual != value:
                     raise ValueError(f"Source scope mismatch: {key}")
+        allowed_indices = None
+        if scope:
+            allowed_indices = set()
+            reviewed_scope = getattr(self, "reviewed_scope", None)
+            for i, chunk in enumerate(self.chunks):
+                chunk_scope = chunk.get("scope", {})
+                matches = True
+                for key, value in scope.items():
+                    if key == "source_sha256":
+                        actual = chunk.get("source_sha256")
+                    else:
+                        actual = chunk_scope.get(key)
+                        # An independently approved whole-manual scope can resolve
+                        # null edition/variant tags in the immutable original snapshot.
+                        if actual is None and key in ("edition", "variant") and reviewed_scope:
+                            actual = reviewed_scope.get(key)
+                    if actual != value:
+                        matches = False
+                        break
+                if matches:
+                    allowed_indices.add(i)
         if not query.strip():
             raise ValueError("Query is empty")
         mode = "conditional" if rerank is None else "always_diagnostic" if rerank else "off"
@@ -208,6 +234,8 @@ class Retriever:
                      "rerank_attempts":0, "rerank_pair_count":0, "rerank_skip_reason":None,
                      "stages_seconds":{}, "decisions":[]}
         try:
+            if scope and not allowed_indices and gate_status is None:
+                raise RetrievalSystemError("SYSTEM_ERROR: selected scope has no indexed chunks")
             step = (dependency_manifest or {}).get("steps", {}).get(step_id, {})
             if len(set(step.get("required_evidence_ids", []))) > policy.maximum_dependency_ids:
                 raise RetrievalSystemError("SYSTEM_ERROR: dependency manifest exceeds work bound")
@@ -235,7 +263,7 @@ class Retriever:
                     for idx, tf in bm["postings"].get(term, []):
                         denom = tf + bm["k1"] * (1 - bm["b"] + bm["b"] * bm["lengths"][idx] / max(bm["avgdl"], 1))
                         sparse[idx] += bm["idf"][term] * tf * (bm["k1"] + 1) / denom
-                candidates, fused, signals = self._rank(dense, sparse, candidate_limit, policy)
+                candidates, fused, signals = self._rank(dense, sparse, candidate_limit, policy, allowed_indices)
                 telemetry["stages_seconds"]["first_retrieval"] = time.perf_counter()-stage
             stage = time.perf_counter()
             bundle = self._assemble(query, candidates, limit, dense, sparse, fused, {}, dependency_manifest, step_id, applicability_status, gate_evidence_ids)
@@ -250,7 +278,7 @@ class Retriever:
                 missing = bundle["missing_evidence_ids"]
                 # Exact dependency IDs are stronger than a second semantic query.
                 retained.update(set(bundle["required_evidence_ids"]) & self.evidence.keys())
-                candidates, fused, signals = self._rank(dense, sparse, policy.expanded_candidate_limit, policy)
+                candidates, fused, signals = self._rank(dense, sparse, policy.expanded_candidate_limit, policy, allowed_indices)
                 bundle = self._assemble(query, candidates, limit, dense, sparse, fused, {}, dependency_manifest, step_id, applicability_status, retained)
                 telemetry["recovery"] = {"requested_evidence_ids":missing,
                     "fetched_evidence_ids":sorted(set(missing) & retained),

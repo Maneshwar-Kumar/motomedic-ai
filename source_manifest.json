@@ -9,13 +9,69 @@
   "motorcycle": "Royal Enfield New Himalayan 450",
   "model_year": null,
   "market_or_region": null,
-  "variant": null,
-  "edition": null,
-  "source_uri": null,
-  "rights_status": "unverified_for_public_hosting_or_excerpt_display",
+  "variant": "Himalayan BS6",
+  "edition": "RAM00818/A; 4th November 2025",
+  "source_uri": "https://www.royalenfield.com/in/en/support/owners-manual/",
+  "rights_status": "engineering_use_authorized_by_owner_end_user_pdf_and_excerpt_display_prohibited",
   "availability_status": "publicly_available_per_project_owner",
-  "oem_service_route": null,
+  "oem_service_route": {
+    "url": "mailto:support@royalenfield.com",
+    "email": "support@royalenfield.com",
+    "wording": "Kindly write to Royal Enfield at support@royalenfield.com",
+    "verified": true,
+    "checked_date": "2026-10-09",
+    "verification_url": "https://www.royalenfield.com/in/en/support/digital-quickstart/new-himalayan/contact-us/",
+    "market": "India",
+    "market_fit_status": "PENDING_SOURCE_MARKET_CONFIRMATION",
+    "owner_requested": true
+  },
   "pdf_metadata_creation_date": "2023-10-16",
   "pdf_metadata_modified_date": "2025-11-10",
-  "notes": "Project owner approved this owner's manual as the source for the prototype index and cited Q&A. PDF metadata dates are not an edition or model-year confirmation. Verify applicability and rights before a public demo."
+  "notes": "Project owner approved this owner's manual as the source for the prototype index and cited Q&A. PDF metadata dates are not an edition or model-year confirmation. Verify applicability and rights before a public demo. Owner confirmed Himalayan + BS6 selection criterion on 9 October 2026. Model year remains unknown and is not a required rider selector under that policy. Publication labels were read from original PDF pages; independent source review remains pending. No end-user PDF, excerpts or crops may be displayed.",
+  "publication_part_number": "RAM00818/A",
+  "publication_date": "2025-11-04",
+  "original_pdf_uri": null,
+  "source_uri_status": "OEM_PORTAL_VERIFIED_EXACT_DOWNLOAD_URL_NOT_ESTABLISHED",
+  "applicability_policy": {
+    "version": "owner-himalayan-bs6-v1",
+    "owner_confirmed_on": "2026-10-09",
+    "selection_rule": "Rider confirms Himalayan and BS6; supplied immutable manual is selected.",
+    "model_year_required": false,
+    "rider_edition_selection_required": false,
+    "manual_identification": "PDF page 3 describes 452 cc liquid-cooled Sherpa; pages 1 and 4 state BS VI.",
+    "market_or_region": "Not independently confirmed; no rider market prompt required under owner selection policy."
+  },
+  "display_policy": {
+    "version": "engineering-only-v1",
+    "engineering_pdf_and_excerpts": true,
+    "end_user_pdf": false,
+    "end_user_excerpts": false,
+    "end_user_figure_crops": false,
+    "owner_statement_date": "2026-10-09",
+    "oem_redistribution_license_verified": false
+  },
+  "metadata_observations": [
+    {
+      "pdf_page": 1,
+      "finding": "Cover states Himalayan and BS VI",
+      "status": "AGENT_VISUALLY_CHECKED_NOT_INDEPENDENT_APPROVAL"
+    },
+    {
+      "pdf_page": 4,
+      "printed_page": "2",
+      "finding": "BS VI; RAM00818/A; 4th November 2025",
+      "status": "AGENT_VISUALLY_CHECKED_NOT_INDEPENDENT_APPROVAL"
+    },
+    {
+      "pdf_page": 149,
+      "finding": "Part No. RAM00818/A; Edition: 4th November 2025",
+      "status": "AGENT_VISUALLY_CHECKED_NOT_INDEPENDENT_APPROVAL"
+    }
+  ],
+  "review_policy": {
+    "human_signoff_required": true,
+    "llm_judge_may_assist": true,
+    "release_review_status": "PENDING",
+    "reviewer_plan": "Project owner will review or use an LLM judge to assist."
+  }
 }
