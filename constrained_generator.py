@@ -123,6 +123,7 @@ class SemanticSupportAdapter:
         self.last_usage = None
 
     def verify(self, draft, allowed, evidence):
+        self.last_usage = None
         # Only evidence supporting selected claims, no adjacent search hits/prompts.
         objects = {eid: {"type": e.get("type"), "raw_object": e.get("raw_object"),
                          "provenance": e.get("provenance")}
@@ -168,6 +169,7 @@ class ConstrainedGenerator:
                 trace["generation_calls"] = 1
                 trace["cost_status"] = "UNKNOWN_PENDING_PROVIDER_USAGE"
                 result = self.provider.complete(GENERATION_POLICY, deepcopy(allowed), RESPONSE_SCHEMA)
+                trace["generation_transport"] = result.telemetry
                 draft = result.output
                 trace.update(input_tokens=result.input_tokens, output_tokens=result.output_tokens,
                              estimated_cost_usd=result.cost_usd)
@@ -185,6 +187,7 @@ class ConstrainedGenerator:
             checked = self.verifier.verify(deepcopy(draft), deepcopy(allowed), deepcopy(evidence))
             # Prevent an injected adapter mutating the draft/allowed authority.
             validate_output(draft, envelope(controller, session, sid))
+            trace["verifier_transport"] = checked.telemetry
             trace["verifier_input_tokens"] = checked.input_tokens
             trace["verifier_output_tokens"] = checked.output_tokens
             trace["validation_ms"] = (time.perf_counter() - validate_started) * 1000
@@ -203,6 +206,10 @@ class ConstrainedGenerator:
             return controller.for_end_user(response) if controller.audience == "end_user" else response
         except (ValidationFailure, ProviderFailure) as exc:
             # Reason codes cannot carry provider exception bodies or secret text.
+            if isinstance(exc, ProviderFailure) and exc.telemetry:
+                trace["failed_provider_transport"] = exc.telemetry
+            if getattr(self.verifier, "last_usage", None):
+                trace["verifier_transport"] = self.verifier.last_usage.telemetry
             candidate_code = str(exc)
             known = {"SOURCE_REVIEW_REQUIRED", "STEP_NOT_ELIGIBLE", "CLAIM_BOUND_OR_EMPTY",
                      "INVALID_REVIEWED_WORDING", "END_USER_EXCERPT_DISPLAY_PROHIBITED",
@@ -214,7 +221,9 @@ class ConstrainedGenerator:
                      "SEMANTIC_SUPPORT_REJECTED", "PROVIDER_UNCONFIGURED", "LIVE_CALL_NOT_AUTHORIZED",
                      "PROVIDER_CONTEXT_BOUND", "PROVIDER_OUTPUT_BOUND", "PROVIDER_INCOMPLETE_OR_MODEL_MISMATCH",
                      "PROVIDER_REFUSAL_OR_MALFORMED", "INVALID_PROVIDER_USAGE", "PROVIDER_TOKEN_BOUND",
-                     "PROVIDER_REQUEST_FAILED", "PROVIDER_REDIRECT_REJECTED"}
+                     "PROVIDER_REQUEST_FAILED", "PROVIDER_REDIRECT_REJECTED", "PROVIDER_TIMEOUT",
+                     "PROVIDER_QUOTA_EXHAUSTED", "PROVIDER_SERVICE_ERROR", "PROVIDER_ACCESS_ERROR",
+                     "PROVIDER_REQUEST_REJECTED", "PROVIDER_CONNECTION_FAILED", "PROVIDER_TRANSPORT_UNAVAILABLE"}
             known.update("OUTPUT_CHANGED_" + k.upper() for k in ("schema_version", "route", "step_id", "kind", "citations"))
             code = candidate_code if candidate_code in known else "GENERATION_OR_VERIFICATION_FAILURE"
         except Exception:

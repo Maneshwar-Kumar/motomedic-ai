@@ -9,7 +9,9 @@ from generation_contracts import RuntimeConfig
 
 
 class ProviderFailure(RuntimeError):
-    pass
+    def __init__(self, reason, telemetry=None):
+        super().__init__(reason)
+        self.telemetry = telemetry
 
 
 @dataclass(frozen=True)
@@ -18,6 +20,7 @@ class ProviderResult:
     input_tokens: int | None = None
     output_tokens: int | None = None
     cost_usd: float | None = None
+    telemetry: dict | None = None
 
 
 class JSONProvider(Protocol):
@@ -90,9 +93,120 @@ class OpenAIResponsesProvider:
             raise ProviderFailure("PROVIDER_REQUEST_FAILED") from None
 
 
+
+class GeminiJSONProvider:
+    """Selected Gemma 31B only. JSON is locally validated, not provider-guaranteed.
+
+    System instruction carries policy and schema; payload remains untrusted user data.
+    One SSE request, minimal thinking, no tools, history, fallback model or retries.
+    """
+    MODEL = "gemma-4-31b-it"
+    def __init__(self, model, config, *, enabled=False, authorized_calls=0, transport=None):
+        from gemini_transport import stream_request
+        if not isinstance(config, RuntimeConfig) or model != self.MODEL:
+            raise ValueError("Selected Gemma 4 31B model required")
+        if type(authorized_calls) is not int or authorized_calls < 0:
+            raise ValueError("Finite nonnegative call allocation required")
+        if config.provider_revision != "gemini-sse-json-v1":
+            raise ValueError("Gemini transport revision required")
+        self.model, self.config = model, config
+        self.enabled, self.remaining_calls = enabled, authorized_calls
+        self.transport = transport or stream_request
+        self.last_telemetry = None
+
+    def complete(self, policy, payload, schema):
+        from gemini_transport import TransportFailure
+        if not self.enabled or self.remaining_calls < 1:
+            raise ProviderFailure("LIVE_CALL_NOT_AUTHORIZED")
+        key = os.environ.get("MOTOMEDIC_GEMINI_API_KEY")
+        if not key:
+            raise ProviderFailure("PROVIDER_UNCONFIGURED")
+        body = {"systemInstruction": {"parts": [{"text": policy +
+                    " Return exactly one JSON object, no Markdown or commentary. " +
+                    "Required output schema: " + json.dumps(schema, allow_nan=False)}]},
+                "contents": [{"role": "user", "parts": [{"text": json.dumps(payload, ensure_ascii=False, allow_nan=False)}]}],
+                "generationConfig": {"maxOutputTokens": self.config.max_output_tokens,
+                                     "thinkingConfig": {"thinkingLevel": "minimal"}}}
+        if len(json.dumps(body, ensure_ascii=False, allow_nan=False).encode()) > self.config.max_input_bytes:
+            raise ProviderFailure("PROVIDER_CONTEXT_BOUND")
+        self.remaining_calls -= 1
+        self.last_telemetry = {"requested_model": self.model, "retry_count": 0}
+        try:
+            chunks, trace = self.transport(self.model, key, body, self.config.timeout_seconds)
+            self.last_telemetry = trace
+            versions, fragments, finish = set(), [], []
+            usage = None
+            for chunk in chunks:
+                if chunk.get("modelVersion"):
+                    versions.add(chunk["modelVersion"])
+                if chunk.get("promptFeedback", {}).get("blockReason"):
+                    raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", trace)
+                candidates = chunk.get("candidates", [])
+                if len(candidates) > 1:
+                    raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", trace)
+                for candidate in candidates:
+                    if candidate.get("index", 0) != 0:
+                        raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", trace)
+                    if candidate.get("finishReason"):
+                        finish.append(candidate["finishReason"])
+                    for part in candidate.get("content", {}).get("parts", []):
+                        if part.get("thought") or set(part) - {"text", "thought"} or type(part.get("text")) is not str:
+                            raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", trace)
+                        fragments.append(part["text"])
+                if "usageMetadata" in chunk:
+                    usage = chunk["usageMetadata"]
+            trace["returned_model_versions"] = [self.model] if versions == {self.model} else ["MISMATCH"]
+            trace["finish_reasons"] = [f if f in ("STOP", "MAX_TOKENS", "SAFETY", "RECITATION", "OTHER") else "UNRECOGNIZED" for f in finish]
+            if versions != {self.model} or not finish or set(finish) != {"STOP"}:
+                raise ProviderFailure("PROVIDER_INCOMPLETE_OR_MODEL_MISMATCH", trace)
+            if not isinstance(usage, dict) or any(type(usage.get(k)) is not int or usage[k] < 0
+                    for k in ("promptTokenCount", "candidatesTokenCount", "totalTokenCount")):
+                raise ProviderFailure("INVALID_PROVIDER_USAGE", trace)
+            thoughts = usage.get("thoughtsTokenCount", 0)
+            if type(thoughts) is not int or thoughts != 0:
+                raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", trace)
+            if usage["totalTokenCount"] < usage["promptTokenCount"] + usage["candidatesTokenCount"]:
+                raise ProviderFailure("INVALID_PROVIDER_USAGE", trace)
+            if usage["candidatesTokenCount"] > self.config.max_output_tokens:
+                raise ProviderFailure("PROVIDER_TOKEN_BOUND", trace)
+            trace["usage_reported"] = True
+            trace["input_tokens"] = usage["promptTokenCount"]
+            trace["output_tokens"] = usage["candidatesTokenCount"]
+            trace["total_tokens"] = usage["totalTokenCount"]
+            trace["service_tier"] = usage.get("serviceTier") if usage.get("serviceTier") in ("standard", "priority", "flex") else "UNRECOGNIZED"
+            def unique_pairs(pairs):
+                obj = {}
+                for k, v in pairs:
+                    if k in obj:
+                        raise ValueError("Duplicate key")
+                    obj[k] = v
+                return obj
+            output = json.loads("".join(fragments), object_pairs_hook=unique_pairs,
+                                parse_constant=lambda _: (_ for _ in ()).throw(ValueError("Nonfinite JSON")))
+            if not isinstance(output, dict):
+                raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", trace)
+            return ProviderResult(output, usage["promptTokenCount"], usage["candidatesTokenCount"], None, trace)
+        except TransportFailure as exc:
+            self.last_telemetry = exc.telemetry
+            raise ProviderFailure(str(exc), exc.telemetry) from None
+        except ProviderFailure:
+            raise
+        except Exception:
+            raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", self.last_telemetry) from None
+
+
+def gemma_runtime_config():
+    """Explicit selected candidate; defaults elsewhere remain fail closed."""
+    return RuntimeConfig(generator_provider="gemini", generator_model=GeminiJSONProvider.MODEL,
+                         verifier_provider="gemini", verifier_model=GeminiJSONProvider.MODEL,
+                         provider_revision="gemini-sse-json-v1", timeout_seconds=30)
+
+
 def configured_provider(name, model, config, **kwargs):
     if name == "unconfigured":
         return UnconfiguredProvider()
+    if name == "gemini":
+        return GeminiJSONProvider(model, config, **kwargs)
     if name == "openai":
         return OpenAIResponsesProvider(model, config, **kwargs)
     raise ValueError("Unknown provider")

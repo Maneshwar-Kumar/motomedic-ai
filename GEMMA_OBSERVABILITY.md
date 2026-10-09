@@ -1,6 +1,6 @@
 # Gemma API observability and reviewed grounding evaluation
 
-Selected candidate: Google Gemini API `gemma-4-31b-it`, separate unbilled project `motomedic-inference-20261009`. The restricted key is stored in repository secret `MOTOMEDIC_GEMINI_API_KEY`. A working smoke endpoint does not configure or approve the grounded generator: `generation_providers.py` still needs a bounded Gemini transport before real generation/verification can run.
+Selected candidate: Google Gemini API `gemma-4-31b-it`, separate unbilled project `motomedic-inference-20261009`. The restricted key is stored in repository secret `MOTOMEDIC_GEMINI_API_KEY`. The bounded Gemini composer/verifier adapter is now integrated in `generation_providers.py` and `gemini_transport.py`. A working smoke endpoint does not approve the grounded generator; source review, conditional authoring scopes and live semantic calibration remain pending.
 
 ## Timing probes
 
@@ -26,9 +26,14 @@ The independent HTTP 500 reproduces across both networks. Local connection estab
 ## After the owner reviews the eleven records
 
 1. Review final record content against original manual pages, not only the eleven IDs. Bind human decisions to content digests and source checksum. Include every claim, exact units/table headers, mandatory warnings, prerequisites, variant fit and stopping conditions. Source, evidence, rules, procedure boundaries and dependency manifests have their own review checks; approving a step alone cannot bypass them.
-2. Resolve authoring fields before sign-off: current claims lack `response_role`, dependency scopes remain unconfirmed, and procedure boundaries are unchecked. End-user text requires reviewed `presentation_mode=REVIEWED_PARAPHRASE`; engineering excerpts remain separate. Editing these fields after approval invalidates the approval. Do not mark flags complete merely to make a test pass.
+2. Resolve authoring fields before sign-off: the original active claims lack `response_role`; the reconciled draft proposes roles while dependency scopes remain unconfirmed, and procedure boundaries are unchecked. End-user text requires reviewed `presentation_mode=REVIEWED_PARAPHRASE`; engineering excerpts remain separate. Editing these fields after approval invalidates the approval. Do not mark flags complete merely to make a test pass.
 3. Run the reviewed deterministic controller first on existing golden dialogues and lookup probes. This isolates retrieval completeness, eligibility, citations, warning scope, typed outcomes and stopping/non-repeat behavior from model errors. Keep the same immutable index and manual checksum; do not re-embed for these tests.
 4. Configure and test a bounded Gemini composer/verifier adapter, then run the same reviewed cases through the grounded pipeline. Attribute failures separately to retrieval, controller, composer, deterministic output checks, semantic verifier or provider. Use the original manual and independently adjudicated expected answers as truth; the model does not approve its own response.
 5. Calibrate semantic verification with reviewed supported claims and controlled unsupported additions, changed units/numbers, omitted warnings and wrong citations. Keep cases used for tuning out of the held-out score. Existing draft goldens are the starting dataset, not a new parallel set of invented repair advice. Report grounding and answerable coverage separately from latency and provider errors; an outage is SYSTEM_ERROR, not UNSUPPORTED.
 
-This work adds diagnostic observability only. Source review, public release, rider media, managed tracing, rate/day-spend controls and the real Gemini grounded adapter remain pending.
+This work adds diagnostic observability only. Source review, public release, rider media, managed tracing, rate/day-spend controls and live Gemma semantic calibration remain pending.
+
+
+## Grounding transport update
+
+The production-boundary candidate transport uses the same fixed Gemma31B SSE endpoint and exposes first-byte/token/completion fields for composer and verifier independently. Tests reserve each call before attempting transport, reject altered claims before semantic inference, preserve unresolved actions without repetition, and distinguish provider errors from semantic rejection. No additional live timing or grounding calls accompanied this update. Review the original eleven draft gate report and reconciled draft report alongside GENERATOR_INTEGRATION.md; all are source-gated, not release results.

@@ -1,4 +1,6 @@
-# Constrained generator engineering v1
+# Constrained generator integration
+
+Current selected provider: Google Gemini API `gemma-4-31b-it`. See the Gemma integration update below; the v1 sections record the earlier OpenAI candidate and initial credential state.
 
 The hosted service now composes only after the existing controller chooses an eligible step and verifies the reviewed dependency bundle. `ReviewedService` defaults to an unconfigured, fail-closed generator. No source approval, public deployment or change to Qdrant/GCP/billing is part of this work. The eleven actual step records and empty review ledger remain unchanged.
 
@@ -55,3 +57,31 @@ Original PDF121 (printed119) was visually inspected for the persistent-fuse stop
 ## Recorded online result
 
 Private [run 37926678059](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/37926678059) passed on implementation commit `12b57afa856c6fb4d63f621ff9031a9f57551987`: 67 combined regressions, all eight real-source draft gates, and a separate 15-test synthetic composition/adapter suite. Real-source generation and semantic calls were zero. The source ledger remains empty and no real steps are approved. The versioned downloaded report is retained in `reports/generation_engineering_v1.json`; its commit identifies the implementation tested, not a later documentation-only commit. Hosted CI reused the immutable artifact and did not rebuild the index or modify GCP/billing. Provider cost was US$0; CI cost was not measured. This result does not establish live verifier accuracy, rider answer coverage or p95.
+
+
+## Gemma integration and accepted-example reconciliation
+
+The owner selected Gemma 4 Dense 31B. `gemma_runtime_config()` in `generation_providers.py` explicitly selects `gemini` for composition and separate semantic verification, model `gemma-4-31b-it`, `provider_revision=gemini-sse-json-v1`, minimal thinking, 30-second timeout, 24,000-byte request budget, 1,800 output-token bound and zero retries. No default service configuration silently changes: ordinary `ReviewedService` remains unconfigured/fail-closed unless trusted server code injects this pipeline. The model name is a provider alias, not an immutable snapshot; record returned model identifiers and revalidate when the provider changes it. The initial model discovery reported metadata version001, which is not proof of immutable weights.
+
+```python
+from generation_providers import gemma_runtime_config
+from constrained_generator import build_generator
+config = gemma_runtime_config()
+pipeline = build_generator(config)  # selected adapters; calls disabled
+# Only after source and eligibility gates and owner-authorized bounded evaluation:
+# pipeline = build_generator(config, live_enabled=True,
+#                            authorized_calls_per_adapter=1)
+# One composer + one verifier, separately reserved; inject into ReviewedService.
+```
+
+`MOTOMEDIC_GEMINI_API_KEY` exists as a private GitHub repository secret for the separate unbilled inference sandbox. Credentials pass only via server environment and curl stdin. `gemini_transport.py` uses the fixed HTTPS SSE endpoint, no redirects/tools/history/fallback model, a hard curl request deadline and no automatic retries. Both adapters reject other model names. JSON schema is included in the system instruction and validated locally; provider-enforced structured output has not been established for this Gemma API. Malformed JSON, duplicate keys, nonfinite JSON, refusals, truncated output, wrong returned model and invalid usage fail closed. No Markdown stripping, model-repair call or hidden retry is performed.
+
+Composition and verification traces independently retain first response byte, first visible non-thinking text, completion, HTTP status, safe reason codes, model identifiers and reported usage. Raw requests, source text, rider/media data, response bodies, generated text, credentials and full curl diagnostic metadata are excluded. API500/429/access/timeout errors remain SYSTEM_ERROR with separate provider reason codes; semantic rejection is a distinct validation reason. The same model in separate instances is not independent ground truth: human-adjudicated source cases must still measure false acceptance/refusal.
+
+The original eleven conversations were accepted in `human_review/record_id_verification.md` and `human_review/subagent_feedback.md`. Those files are owned by the review/feedback chats and are not edited or automatically committed here. `reconcile_accepted_examples.py` emits the separate `registry/reconciled-accepted-eleven/` draft with source-context hashes, claim roles, draft paraphrases, immutable citation IDs, accepted branch plans and explicit authoring holds. It never overwrites the active registry or fabricates source decisions; a nonempty draft review ledger cannot be overwritten. Draft roles and text are proposals, not formal human source approval.
+
+The new dependencies are candidate page/object associations for original-page review, not verified graph edges or complete sufficiency. Conditional branch scopes, exact claim spans, procedure boundaries and display classification still need final authoring. Base lookup versus actual action boundaries need explicit review (particularly starter, fan-fuse and tyre-replacement follow-ups). Page75 recovery/post-start additions stay pending; room-temperature/overnight cooling, starter-sound diagnosis, colour-only fuse identification and construction-specific tyre-model mapping stay excluded. Reconnection is drafted as service referral only, not an owner repair action. Failed fuse replacement preserves service-stop precedence; uncertain fuse condition goes to service; fuel-level/indicator discrepancy includes the accepted page63 refresh conditions and remains separate from no-start resolution.
+
+`authoring_blockers` are enforced by `EvidenceRegistry.step_ready` and the formal step-review workflow. They must be resolved in the final content before exporting/signing its digest. A source-referenced conversation acceptance cannot remove these holds. The original review ledger remains empty. Original and reconciled registries both block all eleven real cases with zero provider calls. Figures and the newly scoped inline schematic permissions still require precise associations, display-policy reconciliation and a separately evaluated figure verifier; engineering-only policy has not been broadened here.
+
+`verify_gemma_grounding.py` runs the eleven existing accepted seeds as regression/tuning gates using the immutable BGE index. It records exact code hashes, source/index/registry/runtime versions, routes and zero-call source holds. Its optional live mode permits only one reviewed lookup, with preflight source/dependency/role/figure/eligibility gates and at most one call per adapter; unreviewed cases stop before key access or transport. Live action tests need separately reviewed typed session fixtures. This is not the full future semantic-calibration harness or a held-out evaluation set. Unsupported additions, changed specifications/pages, warning omissions, semantic rejection, unresolved outcomes and API failures are currently covered by offline fictional contract doubles; those tests do not establish Gemma's semantic accuracy. No live grounding call was made in this integration because complete content-bound review is absent.

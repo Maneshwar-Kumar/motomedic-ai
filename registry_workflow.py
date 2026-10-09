@@ -105,6 +105,8 @@ def review(registry, decision):
             raise ValueError("Independent original-page review required")
         if not all(decision.get("checks", {}).get(k) is True for k in CHECKS[kind]):
             raise ValueError("Complete review checklist required; record not-applicable explanations in notes")
+        if kind == "step" and target.get("authoring_blockers"):
+            raise ValueError("Resolve authoring blockers before reviewing the final step digest")
         if kind == "source" and not all(target.get(k) for k in ("edition", "variant", "source_uri")):
             raise ValueError("Confirm source metadata before approval")
         if kind == "procedure" and target.get("boundaries_checked") is not True:
