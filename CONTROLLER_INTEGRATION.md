@@ -28,7 +28,7 @@ The OEM owner-manual portal is recorded separately from an unverified exact down
 - `evidence_registry.py`: version/index/checksum checks, exact-content approval, reviewed procedure boundaries, dependency scope, evidence overlays and engineering-only source access.
 - `reviewed_controller.py`: TRUE/FALSE/UNKNOWN eligibility, focused questions, selection, canonical routing, verified safety-stop precedence, evidence/citation/claim gates and end-user projection.
 - `online_retrieve.py`: `Retriever.reviewed_controller(...)` binds the registry to the existing retrieval implementation. No document parsing or embedding is performed per turn.
-- `diagnose.py`: `ReviewedService` uses that boundary and a session store. The legacy `Session`/CLI and draft cache remain engineering prototypes and are never invoked by this service.
+- `diagnose.py`: `ReviewedService` uses that boundary, the constrained response pipeline and a session store. The ordinary technical pipeline defaults to an unconfigured fail-closed provider/verifier. The legacy `Session`/CLI and draft cache remain engineering prototypes and are never invoked by this service.
 - `session_store.py`: append-only session snapshots with optimistic concurrency and immutable history checks. SQLite is suitable for a single private hosted worker or CI; ephemeral Cloud Run files are not durable rider storage. A multi-worker public UI must inject a managed transactional store before release.
 - `reviewed_cache.py`: exact version/checksum/variant/path keys and closed misses for legacy/draft/stale caches. A matching reviewed entry supplies only a draft for revalidation, never a released response. The service currently selects through the controller and does not serve cached technical text.
 
@@ -66,3 +66,7 @@ Before technical answers are enabled, the owner/reviewer must approve precise pr
 The rider UI, durable hosted session adapter, public upload/rate/day-spend limits, semantic-verifier calibration, held-out evaluation and public release remain separate gates. An agent-checked conflict is recorded for legacy D024/D035: PDF page 121 calls for authorised service when a fuse problem persists. The reviewed controller follows an approved stopping condition instead of automatically advancing. Those old paths remain draft material needing adjudication.
 
 The existing private Qdrant service and INR800 budget/INR640 billing guard are unchanged. Do not re-enable billing after a real budget stop without owner authorization. No public release or new GCP deployment is authorized by passing this engineering workflow.
+
+## Constrained generation implementation
+
+The composition/validation boundary is implemented in `constrained_generator.py`, `generation_contracts.py` and `generation_providers.py`. See `GENERATOR_INTEGRATION.md` for the reviewed-wording/claim-role contract, separate semantic adapter, provider authorization, session/cache runtime locks and bounded private evaluation. This implementation does not approve the eleven real draft records or demonstrate live semantic accuracy. The legacy injected template verifier remains an engineering/controller compatibility interface; ordinary `ReviewedService` technical answers use the new pipeline. Verified safety stops and nontechnical clarification/escalation remain deterministic.
