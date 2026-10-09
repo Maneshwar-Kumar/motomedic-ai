@@ -83,7 +83,8 @@ def envelope(controller, session, sid):
     if actions != (1 if step.kind == "ACTION" else 0):
         raise ValidationFailure("ONE_STEP_DISCIPLINE")
     categories = r.candidate["dependencies"][sid]["categories"]
-    if categories.get("figures"):
+    if categories.get("figures") or any(r.evidence[eid].get("type") in ("picture", "figure", "image")
+                                        for eid in step.required_evidence_ids):
         # This text-only verifier cannot evaluate a referenced image. Do not infer it.
         raise ValidationFailure("FIGURE_SEMANTIC_ADAPTER_UNAVAILABLE")
     for category, role in (("warnings", "WARNING"), ("prerequisites", "PREREQUISITE")):

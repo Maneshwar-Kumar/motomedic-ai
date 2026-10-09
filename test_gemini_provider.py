@@ -123,6 +123,16 @@ class GemmaControllerTests(unittest.TestCase):
         c,s=self.pipeline(judge_reject=True);_,r,_=c.next(s,'synthetic')
         self.assertIn('SEMANTIC_SUPPORT_REJECTED',r.reason_codes)
         self.assertEqual(r.type,ResponseType.SYSTEM_ERROR)
+    def test_required_picture_without_category_still_blocks_text_verifier(self):
+        from test_constrained_generator import approve
+        c,s=self.pipeline()
+        c.registry.evidence['fact']['type']='picture'
+        approve(c.registry)
+        s=replace(s,version_lock=c.registry.lock)
+        _,r,_=c.next(s,'synthetic')
+        self.assertIn('FIGURE_SEMANTIC_ADAPTER_UNAVAILABLE',r.reason_codes)
+        self.assertEqual((self.composer_calls,self.verifier_calls),(0,0))
+
     def test_authoring_hold_cannot_be_bypassed_by_synthetic_approval(self):
         from test_constrained_generator import approve
         c,s=self.pipeline()
