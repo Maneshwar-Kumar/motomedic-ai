@@ -123,6 +123,17 @@ class GemmaControllerTests(unittest.TestCase):
         c,s=self.pipeline(judge_reject=True);_,r,_=c.next(s,'synthetic')
         self.assertIn('SEMANTIC_SUPPORT_REJECTED',r.reason_codes)
         self.assertEqual(r.type,ResponseType.SYSTEM_ERROR)
+    @patch.dict(os.environ,{'MOTOMEDIC_GEMINI_API_KEY':'SECRET_SENTINEL'})
+    def test_failed_new_composition_does_not_inherit_previous_verifier_trace(self):
+        c,s=self.pipeline()
+        first=c.response_generator.compose(c,s,'selected')
+        self.assertEqual(first.type,ResponseType.SUPPORTED)
+        second=c.response_generator.compose(c,s,'selected')
+        self.assertIn('LIVE_CALL_NOT_AUTHORIZED',second.reason_codes)
+        trace=c.response_generator.last_trace
+        self.assertEqual(trace['verifier_calls'],0)
+        self.assertIsNone(trace.get('verifier_transport'))
+
     def test_required_picture_without_category_still_blocks_text_verifier(self):
         from test_constrained_generator import approve
         c,s=self.pipeline()

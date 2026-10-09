@@ -158,6 +158,8 @@ class ConstrainedGenerator:
                  "output_tokens": None, "estimated_cost_usd": None, "cost_status": "NO_CALL",
                  "source_or_user_text_recorded": False}
         self.last_trace = trace
+        if hasattr(self.verifier, "last_usage"):
+            self.verifier.last_usage = None  # Never attribute a previous call to this attempt.
         def bounded(payload):
             if len(json.dumps(payload, allow_nan=False).encode()) > self.config.max_input_bytes:
                 raise ValidationFailure("CONTEXT_BOUND_NO_TRUNCATION")
