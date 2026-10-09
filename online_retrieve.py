@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 import time
 
-from online_ingest import digest, tokens, write_json
+from online_ingest import digest, tokens, write_json, stable_id
 
 
 def read_jsonl(path):
@@ -136,6 +136,21 @@ def evaluate(root):
         "cases": results,
         "complete_cited_page_cases": {key: sum(r[key]["complete_cited_page_coverage"] for r in results) for key in ["hybrid_only", "cross_encoder"]}}
     write_json(root / "retrieval_diagnostic.json", report)
+    smoke = []
+    import numpy as np
+    for query in ["engine will not start", "ABS indicator stays on", "tyre pressure", "engine oil level", "drive chain free play"]:
+        vector = retriever.model.encode(query, normalize_embeddings=True)
+        smoke.append({"query": query, "vector": vector.tolist(), "expected_dense_chunk_id": retriever.chunks[int(np.argmax(retriever.vectors @ vector))]["id"]})
+    write_json(root / "server_smoke.json", {"index_id":retriever.manifest["index_id"], "source_sha256":retriever.manifest["source_sha256"], "cases":smoke})
+    pipeline = retriever.manifest
+    pipeline["reranker"] = json.loads((root / "reranker_manifest.json").read_text())
+    pipeline["retrieval_code_sha256"] = digest(Path(__file__))
+    pipeline["evaluation_dataset_sha256"] = digest(Path(__file__).parent / "golden_qa.json")
+    pipeline["pipeline_id"] = stable_id("pipeline", pipeline["source_sha256"], [pipeline["index_id"],pipeline["reranker"],pipeline["retrieval_code_sha256"],pipeline["evaluation_dataset_sha256"]])
+    for path in root.rglob("*"):
+        if path.is_file() and path.name != "manifest.json" and ".cache" not in path.parts:
+            pipeline["file_checksums"][str(path.relative_to(root)).replace(chr(92),"/")] = digest(path)
+    write_json(root / "manifest.json",pipeline)
     print(json.dumps({k: v for k, v in report.items() if k != "cases"}, indent=2))
 
 

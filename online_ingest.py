@@ -168,6 +168,44 @@ def build(manifest_path, out, parsed_document=None, embedding_model=EMBED_MODEL,
         for eid in refs:
             edges.append({"from": cid, "to": eid, "type": "CONTAINS_EVIDENCE",
                           "provenance": "Docling chunk metadata", "implies_procedure_order": False})
+    # Keep extraction gaps searchable as whole-page candidates, pending layout review.
+    covered_pages = {p["page_no"] for obj in evidence.values() for p in obj["provenance"]}
+    fallback_pages = []
+    import pypdfium2 as pdfium
+    source_pdf = pdfium.PdfDocument(str(pdf))
+    for page in pages:
+        if page["pdf_page"] in covered_pages:
+            continue
+        fallback_pages.append(page["pdf_page"])
+        pdf_page = source_pdf[page["pdf_page"] - 1]
+        width, height = pdf_page.get_size()
+        eid = stable_id("page_fallback", checksum, page["pdf_page"])
+        image_name = eid + ".png"
+        pdf_page.render(scale=1.5).to_pil().save(figures_dir / image_name)
+        provenance = [{"page_no": page["pdf_page"], "bbox": {"l": 0, "t": height, "r": width, "b": 0, "coord_origin": "BOTTOMLEFT"}}]
+        evidence[eid] = {"id": eid, "type": "unclassified_page", "docling_ref": None,
+            "source_sha256": checksum, "provenance": provenance,
+            "raw_object": {"text": page["text"], "page_image": "figures/" + image_name},
+            "review_status": "EXTRACTION_GAP_REQUIRES_REVIEW"}
+        pid = stable_id("section_fallback", checksum, page["pdf_page"])
+        parents[pid] = {"id": pid, "type": "page_context", "section_path": [page["section"]],
+            "child_ids": [], "evidence_ids": [eid], "review_status": "EXTRACTION_GAP_REQUIRES_REVIEW"}
+        encoded = tokenizer.tokenizer.encode(page["text"], add_special_tokens=False)
+        for window, start in enumerate(range(0, max(1,len(encoded)), max_tokens-34)):
+            window_text = tokenizer.tokenizer.decode(encoded[start:start+max_tokens-2], skip_special_tokens=True)
+            cid = stable_id("chunk_fallback", checksum, [page["pdf_page"],window,window_text])
+            parents[pid]["child_ids"].append(cid)
+            chunks.append({"id": cid, "text": page["text"], "index_text": window_text,
+                "token_count": tokenizer.count_tokens(window_text), "retrieval_window": window,
+                "requires_full_source_context": True, "section_path": [page["section"]], "captions": [],
+                "parent_section_id": pid, "parent_procedure_id": None, "evidence_ids": [eid],
+                "citations": [{"page_id": page["id"], "pdf_page": page["pdf_page"], "printed_page": page["printed_page"]}],
+                "contains_warning_marker": bool(re.search(r"\b(?:WARNING|CAUTION)\b",page["text"],re.I)),
+                "scope": {k:source.get(k) for k in ["manual_id","motorcycle","variant","edition","language"]},
+                "source_sha256": checksum, "review_status": "EXTRACTION_GAP_REQUIRES_REVIEW"})
+            edges.extend([{"from":cid,"to":pid,"type":"PARENT_SECTION","provenance":"Whole PDF page fallback","implies_procedure_order":False},
+                          {"from":cid,"to":eid,"type":"CONTAINS_EVIDENCE","provenance":"Whole PDF page fallback","implies_procedure_order":False}])
+    source_pdf.close()
     if not chunks:
         raise ValueError("Docling produced no searchable chunks")
     if any(c["token_count"] > max_tokens for c in chunks):
@@ -210,7 +248,7 @@ def build(manifest_path, out, parsed_document=None, embedding_model=EMBED_MODEL,
     client.close()
     versions = {p: importlib.metadata.version(p) for p in ["docling", "docling-core", "sentence-transformers", "qdrant-client", "transformers", "torch", "numpy", "pypdfium2"]}
     covered = {p["page_no"] for e in evidence.values() for p in e["provenance"]}
-    qa = {"pdf_pages": len(pages), "chunks": len(chunks), "parent_sections": len(parents),
+    qa = {"pdf_pages": len(pages), "chunks": len(chunks), "parser_gap_pages": fallback_pages, "parent_sections": len(parents),
         "evidence_objects": len(evidence), "oversized_source_chunks_windowed": overflow_count, "type_counts": dict(Counter(e["type"] for e in evidence.values())),
         "pages_without_chunk_evidence": sorted(set(page_lookup) - covered),
         "pages_without_printed_label": [p["pdf_page"] for p in pages if p["printed_page"] is None],
