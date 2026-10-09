@@ -53,7 +53,7 @@ def build_bm25(chunks):
             "idf": {t: math.log(1 + (n - len(p) + 0.5) / (len(p) + 0.5)) for t, p in postings.items()}}
 
 
-def build(manifest_path, out):
+def build(manifest_path, out, parsed_document=None):
     import numpy as np
     from docling.document_converter import DocumentConverter, PdfFormatOption
     from docling.datamodel.base_models import InputFormat
@@ -86,13 +86,19 @@ def build(manifest_path, out):
     options.do_table_structure = True
     options.generate_picture_images = True
     options.images_scale = 1.5
-    result = DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)}).convert(pdf)
-    doc = result.document
-    if str(result.status.value) != "success":
-        raise RuntimeError(f"Docling conversion did not succeed: {result.status}")
+    if parsed_document:
+        from docling_core.types.doc import DoclingDocument
+        doc = DoclingDocument.model_validate_json(parsed_document.read_text(encoding="utf-8"))
+        if doc.origin.filename != source["file"]:
+            raise ValueError("Cached parse belongs to a different source")
+    else:
+        result = DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)}).convert(pdf)
+        doc = result.document
+        if str(result.status.value) != "success":
+            raise RuntimeError(f"Docling conversion did not succeed: {result.status}")
     write_json(out / "docling_document.json", doc.export_to_dict())
     model_revision = model_info(EMBED_MODEL).sha
-    tokenizer = HuggingFaceTokenizer(tokenizer=AutoTokenizer.from_pretrained(EMBED_MODEL, revision=model_revision), max_tokens=256)
+    tokenizer = HuggingFaceTokenizer(tokenizer=AutoTokenizer.from_pretrained(EMBED_MODEL, revision=model_revision), max_tokens=240)
     chunker = HybridChunker(tokenizer=tokenizer, merge_peers=False, repeat_table_header=True)
     evidence, chunks, parents, edges = {}, [], {}, []
     figures_dir = out / "figures"
@@ -101,7 +107,27 @@ def build(manifest_path, out):
         image = picture.get_image(doc)
         if image is not None:
             image.save(figures_dir / (stable_id("figure", checksum, picture.self_ref) + ".png"))
-    for number, chunk in enumerate(chunker.chunk(dl_doc=doc)):
+    for item, _ in doc.iterate_items():
+        if not hasattr(item, "prov") or not hasattr(item, "self_ref"):
+            continue
+        eid = stable_id("evidence", checksum, item.self_ref)
+        evidence[eid] = {"id": eid, "docling_ref": item.self_ref, "type": str(item.label.value),
+            "provenance": [p.model_dump(mode="json") for p in item.prov], "source_sha256": checksum,
+            "raw_object": item.model_dump(mode="json"), "review_status": "UNREVIEWED"}
+    search_chunks = []
+    overflow_count = 0
+    for base_number, base_chunk in enumerate(chunker.chunk(dl_doc=doc)):
+        enriched_text = chunker.contextualize(base_chunk)
+        encoded = tokenizer.tokenizer.encode(enriched_text, add_special_tokens=False)
+        if len(encoded) <= 238:
+            search_chunks.append((base_number, base_chunk, enriched_text, 0, False))
+        else:
+            overflow_count += 1
+            for window, start in enumerate(range(0, len(encoded), 206)):
+                window_text = tokenizer.tokenizer.decode(encoded[start:start+238], skip_special_tokens=True)
+                search_chunks.append((base_number, base_chunk, window_text, window, True))
+    previous_headings, current_parent = None, None
+    for number, chunk, enriched, window, overflow in search_chunks:
         if not chunk.text.strip():
             continue
         headings = list(chunk.meta.headings or [])
@@ -118,15 +144,18 @@ def build(manifest_path, out):
             refs.append(eid)
         if not pdf_pages or not pdf_pages.issubset(page_lookup):
             raise ValueError(f"Chunk {number} lacks valid PDF provenance")
-        pid = stable_id("section", checksum, [headings, min(pdf_pages)] if not headings else headings)
-        cid = stable_id("chunk", checksum, [number, refs, chunk.text])
+        if headings != previous_headings or current_parent is None:
+            current_parent = stable_id("section", checksum, [headings, refs, min(pdf_pages)])
+        pid = current_parent
+        previous_headings = headings
+        cid = stable_id("chunk", checksum, [number, window, refs, chunk.text, enriched])
         parents.setdefault(pid, {"id": pid, "type": "section_context", "section_path": headings,
                                  "child_ids": [], "evidence_ids": [], "review_status": "UNREVIEWED"})
         parents[pid]["child_ids"].append(cid)
         parents[pid]["evidence_ids"] = sorted(set(parents[pid]["evidence_ids"] + refs))
-        enriched = chunker.contextualize(chunk)
         count = tokenizer.count_tokens(enriched)
         chunks.append({"id": cid, "text": chunk.text, "index_text": enriched, "token_count": count,
+            "retrieval_window": window, "requires_full_source_context": overflow,
             "section_path": headings, "captions": list(chunk.meta.captions or []),
             "parent_section_id": pid, "parent_procedure_id": None, "evidence_ids": refs,
             "citations": [{"page_id": page_lookup[p]["id"], "pdf_page": p,
@@ -141,14 +170,21 @@ def build(manifest_path, out):
                           "provenance": "Docling chunk metadata", "implies_procedure_order": False})
     if not chunks:
         raise ValueError("Docling produced no searchable chunks")
-    if any(c["token_count"] > 256 for c in chunks):
+    if any(c["token_count"] > 240 for c in chunks):
         raise ValueError("Oversized enriched chunks would be truncated by the embedding model")
     child_lookup = {c["id"]: c for c in chunks}
     for parent in parents.values():
-        parent["text"] = "\n\n".join(child_lookup[c]["text"] for c in parent["child_ids"])
+        parent["text"] = "\n\n".join(dict.fromkeys(child_lookup[c]["text"] for c in parent["child_ids"]))
     links_path = manifest_path.parent / "reviewed_graph_links.json"
     for link in json.loads(links_path.read_text(encoding="utf-8-sig")):
         edges.append({**link, "review_status": "AGENT_CHECKED_PROVISIONAL"})
+    for obj in evidence.values():
+        for provenance in obj["provenance"]:
+            page_no = provenance["page_no"]
+            if page_no not in page_lookup:
+                raise ValueError("Evidence references a page outside the source PDF")
+            edges.append({"from": obj["id"], "to": page_lookup[page_no]["id"], "type": "ON_PAGE",
+                "provenance": provenance, "implies_procedure_order": False})
     write_jsonl(out / "evidence.jsonl", evidence.values())
     write_jsonl(out / "chunks.jsonl", chunks)
     write_jsonl(out / "parents.jsonl", parents.values())
@@ -159,6 +195,8 @@ def build(manifest_path, out):
     write_json(out / "bm25.json", build_bm25(chunks))
     print(f"Embedding {len(chunks)} chunks; creating Qdrant vector index", flush=True)
     model = SentenceTransformer(EMBED_MODEL, revision=model_revision, device="cpu")
+    if any(len(model.tokenizer(c["index_text"], add_special_tokens=True)["input_ids"]) > model.max_seq_length for c in chunks):
+        raise ValueError("Embedding input would be truncated")
     vectors = model.encode([c["index_text"] for c in chunks], normalize_embeddings=True,
                            batch_size=32, show_progress_bar=True).astype("float32")
     np.save(out / "embeddings.npy", vectors)
@@ -172,7 +210,7 @@ def build(manifest_path, out):
     versions = {p: importlib.metadata.version(p) for p in ["docling", "docling-core", "sentence-transformers", "qdrant-client", "transformers", "torch", "numpy", "pypdfium2"]}
     covered = {p["page_no"] for e in evidence.values() for p in e["provenance"]}
     qa = {"pdf_pages": len(pages), "chunks": len(chunks), "parent_sections": len(parents),
-        "evidence_objects": len(evidence), "type_counts": dict(Counter(e["type"] for e in evidence.values())),
+        "evidence_objects": len(evidence), "oversized_source_chunks_windowed": overflow_count, "type_counts": dict(Counter(e["type"] for e in evidence.values())),
         "pages_without_chunk_evidence": sorted(set(page_lookup) - covered),
         "pages_without_printed_label": [p["pdf_page"] for p in pages if p["printed_page"] is None],
         "warning_marker_chunks": sum(c["contains_warning_marker"] for c in chunks),
@@ -181,9 +219,9 @@ def build(manifest_path, out):
         "may_generate_procedural_advice": False}
     write_json(out / "ingestion_qa.json", qa)
     config = {"source_sha256": checksum, "parser": "Docling", "dependencies": versions,
-              "chunker": {"name": "HybridChunker", "max_tokens": 256, "merge_peers": False, "repeat_table_header": True},
+              "chunker": {"name": "HybridChunker", "max_tokens": 240, "merge_peers": False, "repeat_table_header": True},
               "embedding": {"model": EMBED_MODEL, "revision": model_revision, "dimensions": int(vectors.shape[1]), "normalized": True, "metric": "cosine"},
-              "code_sha256": digest(Path(__file__)), "source_manifest_sha256": digest(manifest_path), "graph_links_sha256": digest(links_path)}
+              "code_sha256": digest(Path(__file__)), "cached_parse_sha256": digest(parsed_document) if parsed_document else None, "source_manifest_sha256": digest(manifest_path), "graph_links_sha256": digest(links_path)}
     index_id = stable_id("index", checksum, config)
     files = {str(p.relative_to(out)).replace("\\", "/"): digest(p) for p in sorted(out.rglob("*")) if p.is_file()}
     write_json(out / "manifest.json", {"index_id": index_id, **config, "built_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -195,5 +233,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, default=ROOT / "source_manifest.json")
     parser.add_argument("--out", type=Path, default=ROOT / "build" / "index")
+    parser.add_argument("--parsed-document", type=Path)
     args = parser.parse_args()
-    build(args.manifest, args.out)
+    build(args.manifest, args.out, args.parsed_document)

@@ -1,8 +1,14 @@
 name: Versioned owner manual ingestion
 on:
   workflow_dispatch:
+    inputs:
+      parse_run_id:
+        description: Prior run containing a verified Docling parse (optional)
+        required: false
+        type: string
 permissions:
   contents: read
+  actions: read
 jobs:
   ingest:
     runs-on: ubuntu-latest
@@ -23,8 +29,22 @@ jobs:
         run: pip install -r requirements-ingest.txt
       - name: Run regression checks
         run: python -m unittest test_diagnose test_retrieve_evidence test_budget_guard
+      - uses: actions/download-artifact@v4
+        if: inputs.parse_run_id != ''
+        with:
+          name: owner-manual-index-${{ inputs.parse_run_id }}
+          run-id: ${{ inputs.parse_run_id }}
+          github-token: ${{ github.token }}
+          path: build/parsed
       - name: Parse, chunk and index immutable source
-        run: python -u online_ingest.py --out build/index
+        env:
+          PARSE_RUN_ID: ${{ inputs.parse_run_id }}
+        run: |
+          if [ -n "$PARSE_RUN_ID" ]; then
+            python -u online_ingest.py --out build/index --parsed-document build/parsed/docling_document.json
+          else
+            python -u online_ingest.py --out build/index
+          fi
       - name: Save resolved dependency versions
         run: pip freeze > build/index/requirements-resolved.txt
       - name: Prepare cross-encoder and compare retrieval
