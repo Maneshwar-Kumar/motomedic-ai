@@ -1,6 +1,8 @@
 """Apply the agreed conditional retrieval policy to the existing TRD."""
 from pathlib import Path
+from copy import deepcopy
 from docx import Document
+from docx.shared import Pt
 
 
 def insert_after(anchor, text, style="Normal"):
@@ -9,10 +11,34 @@ def insert_after(anchor, text, style="Normal"):
     return paragraph
 
 
+def polish(doc):
+    # Cell.text resets direct run formatting; restore the existing 8-point table style.
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for paragraph in cell.paragraphs:
+                    for run in paragraph.runs:
+                        run.font.size = Pt(8)
+        if table.rows[-1].cells[0].text == "RetrievalDecision":
+            for target, donor in zip(table.rows[-1].cells, table.rows[-3].cells):
+                current = target._tc.tcPr
+                if current is not None:
+                    target._tc.remove(current)
+                target._tc.insert(0,deepcopy(donor._tc.tcPr))
+    for section in doc.sections:
+        for footer in (section.footer, section.first_page_footer, section.even_page_footer):
+            for paragraph in footer.paragraphs:
+                for run in paragraph.runs:
+                    if "v0.3" in run.text:
+                        run.text = run.text.replace("v0.3","v0.4")
+
+
 def update(path):
     doc = Document(path)
     if any(p.text == "4 2 Conditional reranking and bounded recovery" for p in doc.paragraphs):
-        raise ValueError("Conditional policy is already present; review rather than append twice")
+        polish(doc)
+        doc.save(path)
+        return
     replacements = {
         "TRD v0.3  Reference design and implementation contracts": "TRD v0.4  Reference design and implementation contracts",
         "DRAFT v0.3  Updated 9 October 2026  Independent source review pending": "DRAFT v0.4  Updated 9 October 2026  Independent source review pending",
@@ -61,6 +87,7 @@ def update(path):
             cells = table.add_row().cells
             cells[0].text = "RetrievalDecision"
             cells[1].text = "policy_version/config, calibration_status, mode, uncertainty_signals, decisions, recovery_attempts, rerank_attempts, requested/fetched/missing_evidence_ids, pair_count, skip_reason, stages_seconds, final_action"
+    polish(doc)
     doc.save(path)
 
 
