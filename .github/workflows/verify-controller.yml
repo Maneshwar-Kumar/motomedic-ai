@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install only the verification runtime
-        run: pip install numpy
+        run: pip install numpy pypdfium2
       - name: Reuse immutable hosted BGE snapshot
         uses: actions/download-artifact@v4
         with:
