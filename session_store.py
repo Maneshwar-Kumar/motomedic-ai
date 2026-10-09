@@ -50,7 +50,7 @@ class SQLiteSessionStore:
                 old = self.load(session.session_id)
                 if session.attempted_steps[:len(old.attempted_steps)] != old.attempted_steps:
                     raise SessionConflict("Immutable attempt history was modified")
-                if (session.manual_id, session.manual_checksum, session.bike_variant, session.edition, session.version_lock) != (old.manual_id, old.manual_checksum, old.bike_variant, old.edition, old.version_lock):
+                if (session.manual_id, session.manual_checksum, session.bike_variant, session.edition, session.version_lock, session.generation_lock) != (old.manual_id, old.manual_checksum, old.bike_variant, old.edition, old.version_lock, old.generation_lock):
                     raise SessionConflict("Scope/version switch requires a new confirmed session")
             self.db.execute("INSERT INTO sessions VALUES (?, ?, ?)",
                             (session.session_id, session.version, json.dumps(asdict(session), allow_nan=False)))

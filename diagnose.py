@@ -275,19 +275,24 @@ class ReviewedService:
     The caller supplies a trusted store and registry, never rider-authored gate inputs.
     A private hosted worker can use SQLite; a multi-worker UI needs managed storage.
     """
-    def __init__(self, registry, retriever, store, semantic_verifier=None, audience="end_user", trace_sink=None):
+    def __init__(self, registry, retriever, store, semantic_verifier=None, audience="end_user", trace_sink=None,
+                 response_generator=None):
         if audience not in ("engineering", "end_user"):
             raise ValueError("Invalid audience")
         self.audience = audience
         self.trace_sink = trace_sink
         self.last_trace = None
         self.controller = retriever.reviewed_controller(registry, semantic_verifier)
+        from constrained_generator import ConstrainedGenerator
+        self.controller.response_generator = response_generator or ConstrainedGenerator()
         self.controller.audience = audience
         self.store = store
 
     def start(self, intent, variant=None, edition=None):
         from reviewed_controller import start_session
+        from dataclasses import replace
         session = start_session(self.controller.registry, [intent], variant, edition)
+        session = replace(session, generation_lock=self.controller.response_generator.config.lock)
         self.store.save(session)
         return session
 
@@ -307,6 +312,8 @@ class ReviewedService:
                            "session_version_before": session.version, "session_version_after": updated.version,
                            "eligibility": [asdict(d) for d in decisions],
                            "retrieval": self.controller.last_retrieval_trace,
+                           "generation_lock": session.generation_lock,
+                           "generation_validation": self.controller.response_generator.last_trace,
                            "response_type": response.type.value, "reason_codes": response.reason_codes,
                            "confirmed_input_ttfo_seconds": time.perf_counter() - started,
                            "estimated_cost": None, "raw_input_or_media_recorded": False}

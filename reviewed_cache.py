@@ -7,6 +7,7 @@ def reviewed_cache_key(registry, session, intent, prompt_version, verifier_versi
     payload = {"checksum": registry.checksum, "variant": session.bike_variant,
                "edition": session.edition, "intent": intent, "symptoms": sorted(session.current_symptoms),
                "registry_lock": registry.lock, "controller_version": POLICY_VERSION,
+               "generation_lock": session.generation_lock,
                "prompt_version": prompt_version, "verifier_version": verifier_version,
                "typed_path": [{"step_id": a.step_id, "condition_id": a.condition_id,
                                "outcome": a.outcome_enum.value,

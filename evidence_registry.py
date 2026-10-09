@@ -59,7 +59,8 @@ class EvidenceRegistry:
     def refresh_lock(self):
         # Policy/code updates invalidate paths without rebuilding document vectors.
         names = ("controller_contracts.py", "evidence_registry.py", "reviewed_controller.py",
-                 "retrieval_policy.py", "online_retrieve.py", "reviewed_cache.py")
+                 "retrieval_policy.py", "online_retrieve.py", "reviewed_cache.py",
+                 "generation_contracts.py", "generation_providers.py", "constrained_generator.py")
         root = Path(__file__).parent
         code = {name: hashlib.sha256((root / name).read_text(encoding="utf-8-sig").encode()).hexdigest()
                 for name in names}

@@ -65,8 +65,9 @@ def update_symptoms(session, symptoms):
 
 
 class ReviewedController:
-    def __init__(self, registry, retriever, semantic_verifier=None):
+    def __init__(self, registry, retriever, semantic_verifier=None, response_generator=None):
         self.registry, self.retriever, self.verifier = registry, retriever, semantic_verifier
+        self.response_generator = response_generator
         self.last_retrieval_trace = None
         self.audience = "engineering"
         if retriever.manifest["index_id"] != registry.index_id or retriever.manifest["source_sha256"].lower() != registry.checksum.lower():
@@ -217,9 +218,14 @@ class ReviewedController:
             if bundle.get("conflicts") or bundle.get("source_review_required") or not bundle.get("coverage_established"):
                 return self.response("UNSUPPORTED", "I could not verify complete applicable evidence.", session,
                                      reason_codes=("INCOMPLETE_EVIDENCE",))
+            if not set(s.required_evidence_ids) <= set(bundle.get("attached_evidence_ids", [])):
+                return self.response("UNSUPPORTED", "I could not verify complete applicable evidence.", session,
+                                     reason_codes=("MISSING_MANDATORY_EVIDENCE",))
             if bundle.get("retrieval_action") != "CONTINUE_GATES":
                 return self.response("UNSUPPORTED", "I could not resolve the applicable evidence ordering.", session,
                                      reason_codes=("RANKING_UNRESOLVED",))
+        if self.response_generator is not None and not safety:
+            return self.response_generator.compose(self, session, sid)
         claims, pages = [], []
         claim_ids = [c.get("claim_id") for c in s.claims]
         if len(claim_ids) != len(set(claim_ids)):
@@ -286,6 +292,8 @@ class ReviewedController:
     def next(self, session, query, *, system_failure=False, unsupported_request=False):
         r = self.registry
         self.last_retrieval_trace = None
+        if self.response_generator is not None:
+            self.response_generator.last_trace = None
         decisions = [self.eligible(session, sid) for sid in sorted(r.candidate["steps"])]
         excluded = tuple(d.step_id for d in decisions if "CONDITION_FALSE" in d.reason_codes or "SAFETY_PROHIBITS_STEP" in d.reason_codes)
         if excluded != session.excluded_branches:
@@ -310,6 +318,9 @@ class ReviewedController:
             reason = scope if scope != "CONFIRMED" else "UNSUPPORTED_REQUEST"
             return session, self.response("UNSUPPORTED", "I could not verify an applicable procedure. Source confirmation or review is required.", session,
                                           reason_codes=(reason,)), decisions
+        if self.response_generator is not None and session.generation_lock != self.response_generator.config.lock:
+            return session, self.response("UNSUPPORTED", "Response configuration changed; start a new confirmed session.", session,
+                                          reason_codes=("GENERATION_VERSION_RECONFIRM_REQUIRED",)), decisions
         completed_actions = [a for a in session.active_attempts() if a.condition_id is None and a.outcome_enum == Outcome.ACTION_COMPLETED_UNRESOLVED]
         if completed_actions:
             prior = r.step(completed_actions[-1].step_id)

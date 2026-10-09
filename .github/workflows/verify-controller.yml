@@ -12,6 +12,11 @@ on:
       - 'registry_source_candidates.py'
       - 'verify_controller.py'
       - 'test_reviewed_controller.py'
+      - 'generation_contracts.py'
+      - 'generation_providers.py'
+      - 'constrained_generator.py'
+      - 'test_constrained_generator.py'
+      - 'verify_generation.py'
       - 'registry/**'
       - 'source_manifest.json'
       - 'online_retrieve.py'
@@ -45,9 +50,11 @@ jobs:
       - name: Run state, retrieval and budget regressions
         env:
           MOTOMEDIC_TEST_INDEX: build/index
-        run: python -m unittest -v test_reviewed_controller test_diagnose test_retrieve_evidence test_budget_guard test_online_assembly test_conditional_retrieval
+        run: python -m unittest -v test_constrained_generator test_reviewed_controller test_diagnose test_retrieve_evidence test_budget_guard test_online_assembly test_conditional_retrieval
       - name: Run five direct and three multi-turn draft gates
         run: python verify_controller.py --index build/index --output build/controller-verification.json
+      - name: Verify constrained generation and output validation without paid calls
+        run: python verify_generation.py --index build/index --output build/generation-engineering-evaluation.json
       - name: Export engineering-only review packet
         run: python registry_workflow.py packet --index build/index --kind step --id lookup_oil_grade --output build/review-packet.json
       - uses: actions/upload-artifact@v4
@@ -56,6 +63,7 @@ jobs:
           name: reviewed-controller-verification-${{ github.run_id }}
           path: |
             build/controller-verification.json
+            build/generation-engineering-evaluation.json
             build/review-packet.json
             build/proposed-registry/*.json
           retention-days: 7

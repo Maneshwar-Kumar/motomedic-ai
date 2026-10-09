@@ -114,6 +114,7 @@ class DiagnosticSession:
     edition: str | None
     current_symptoms: tuple[str, ...]
     version_lock: str
+    generation_lock: str = ""
     attempted_steps: tuple[StepAttempt, ...] = ()
     status: str = "OPEN"
     version: int = 0
