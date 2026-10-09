@@ -75,3 +75,7 @@ The provisional cache stores exact reviewed-path candidates. Its key includes th
 - The Q&A set is a **draft**. Its answers are cited and source checked by the agent; an independent human review and a held-out evaluation split are still required before it is used as a release golden set.
 - A retrieval hit is candidate evidence, not permission to answer. The planned application still needs variant checks, mandatory warning and prerequisite collection, stateful next-step selection, claim-to-source validation, and distinct abstention versus system-error responses.
 - A public demo should verify rights to host or display the PDF, confirm the exact bike variant and manual edition, and verify the OEM service contact route.
+
+## Hosted pretrained index
+
+The hosted successor is implemented in `online_ingest.py` and `online_retrieve.py`, with results and limitations in [HOSTED_INDEX_DECISION.md](HOSTED_INDEX_DECISION.md). It parses Docling evidence, preserves parent context and provenance, builds BGE M3 dense vectors, serialized BM25 and a lightweight graph, and provides optional pretrained cross-encoder reranking. The local LSA baseline above remains available for comparison. The selected immutable Qdrant index is served in GCP with private source storage and a conservative lifetime spending guard.

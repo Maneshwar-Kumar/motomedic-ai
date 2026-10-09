@@ -16,17 +16,43 @@ def read_jsonl(path):
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
 
 
+def dependency_coverage(manual_checksum, attached_ids, evidence, manifest=None, step_id=None):
+    result = {"required_evidence_ids": [], "attached_evidence_ids": sorted(attached_ids),
+              "missing_evidence_ids": [], "dependency_manifest_version": None,
+              "dependency_review_status": "MISSING", "coverage_established": False}
+    if not manifest:
+        return result
+    result["dependency_manifest_version"] = manifest.get("version")
+    if manifest.get("manual_checksum") != manual_checksum:
+        result["dependency_review_status"] = "CHECKSUM_MISMATCH"
+        return result
+    step = manifest.get("steps", {}).get(step_id, {})
+    required = set(step.get("required_evidence_ids", []))
+    actions = set(step.get("action_evidence_ids", []))
+    result["required_evidence_ids"] = sorted(required)
+    result["missing_evidence_ids"] = sorted(required - set(attached_ids))
+    approved = manifest.get("review_status") == "APPROVED" and step.get("review_status") == "APPROVED"
+    result["dependency_review_status"] = "APPROVED" if approved else "UNREVIEWED"
+    checked = all(evidence.get(eid, {}).get("review_status") == "APPROVED" and
+                  evidence[eid].get("source_sha256") == manual_checksum and
+                  evidence[eid].get("provenance") and
+                  evidence[eid].get("extraction_check_status") == "PASSED" for eid in required)
+    result["coverage_established"] = bool(approved and required and actions and actions <= required and
+                                         not result["missing_evidence_ids"] and checked)
+    return result
+
+
 class Retriever:
-    def __init__(self, index_dir, rerank=False):
+    def __init__(self, index_dir, rerank=False, embedding_model=None):
         import numpy as np
-        from sentence_transformers import SentenceTransformer
         self.root = Path(index_dir)
         self.manifest = json.loads((self.root / "manifest.json").read_text(encoding="utf-8"))
-        for name in ["chunks.jsonl", "parents.jsonl", "graph.json", "bm25.json", "embeddings.npy"]:
+        for name in ["chunks.jsonl", "parents.jsonl", "evidence.jsonl", "graph.json", "bm25.json", "embeddings.npy"]:
             if digest(self.root / name) != self.manifest["file_checksums"][name]:
                 raise ValueError(f"Index integrity failure: {name}")
         self.chunks = read_jsonl(self.root / "chunks.jsonl")
         self.parents = {p["id"]: p for p in read_jsonl(self.root / "parents.jsonl")}
+        self.evidence = {e["id"]:e for e in read_jsonl(self.root / "evidence.jsonl")}
         self.graph = json.loads((self.root / "graph.json").read_text(encoding="utf-8"))
         self.bm25 = json.loads((self.root / "bm25.json").read_text(encoding="utf-8"))
         self.vectors = np.load(self.root / "embeddings.npy", allow_pickle=False)
@@ -34,7 +60,10 @@ class Retriever:
             raise ValueError("Index row mappings disagree")
         model_path = self.root / "embedding_model"
         config = self.manifest["embedding"]
-        self.model = SentenceTransformer(str(model_path), device="cpu") if model_path.exists() else SentenceTransformer(config["model"], revision=config["revision"], device="cpu")
+        self.model = embedding_model
+        if self.model is None:
+            from sentence_transformers import SentenceTransformer
+            self.model = SentenceTransformer(str(model_path), device="cpu") if model_path.exists() else SentenceTransformer(config["model"], revision=config["revision"], device="cpu")
         self.reranker = None
         if rerank:
             from sentence_transformers import CrossEncoder
@@ -94,7 +123,20 @@ class Retriever:
         linked_pages = {e["to"] for e in links}
         related = [c for c in self.chunks if any(p["page_id"] in linked_pages for p in c["citations"])]
         parent_ids = {c["parent_section_id"] for c in hits + related}
-        return {"index_id": self.manifest["index_id"], "source_sha256": self.manifest["source_sha256"],
+        attached = {eid for p in parent_ids for eid in self.parents[p]["evidence_ids"]}
+        attached.update(eid for chunk in hits + related for eid in chunk["evidence_ids"])
+        if not attached <= self.evidence.keys():
+            raise RuntimeError("SYSTEM_ERROR: attached evidence object is missing from the index")
+        dependencies = dependency_coverage(self.manifest["source_sha256"], attached, self.evidence)
+        assembly_version = stable_id("assembly", self.manifest["source_sha256"], [self.manifest["index_id"],digest(Path(__file__)),"TRD-0.3"])
+        return {"index_id": self.manifest["index_id"], "query_id": stable_id("query",self.manifest["source_sha256"],[assembly_version,query,use_reranker]),
+                "manual_checksum": self.manifest["source_sha256"], "assembly_version":assembly_version,
+                **dependencies, "evidence_ids":sorted(attached),
+                "evidence_objects":[self.evidence[eid] for eid in sorted(attached)],
+                "applicability_status":"UNCONFIRMED", "sufficiency_status":"NOT_ESTABLISHED",
+                "conflicts":[], "missing_conditions":["Confirmed manual/variant fit"],
+                "source_gaps":[{"type":"DEPENDENCY_MANIFEST_MISSING","rider_resolvable":False}],
+                "source_review_required":True, "source_sha256": self.manifest["source_sha256"],
                 "query": query, "hits": hits, "linked_chunks": related, "links": links,
                 "parents": [self.parents[p] for p in sorted(parent_ids)],
                 "elapsed_seconds": time.perf_counter() - started, "reranked": use_reranker,

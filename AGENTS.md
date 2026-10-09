@@ -158,3 +158,16 @@ The drafts propose Docling, hierarchical parent-child chunks, dense plus BM25 re
 - Version together the manual checksum, parser, chunks, indices, graph, models, prompt, verifier, and golden set so evaluations are reproducible.
 - The current `diagnose.py` is a deterministic prototype. Its 37 cases and exact cache are provisional; never enable draft cache entries for a public answer without independent source and safety review.
 - Keep credentials and raw user media out of the repository and routine telemetry. Verify manual sharing rights before putting source material into a public demo.
+
+
+## Hosted build progress and spending authorization
+
+The owner authorized the private GitHub repository `Maneshwar-Kumar/motomedic-ai` and separate GCP project `motomedic-ai-20261009`, with a US$10 project limit. Billing uses INR. A non-recurring INR800 budget starts 9 October 2026; alerts are at INR400/640/800. The simulation-checked live guard disables this project's billing at INR640 with retry delivery. Delayed reporting prevents an exact instantaneous US$10 cap. Do not re-enable billing after an actual budget stop without owner authorization.
+
+Hosted ingestion and both embedding comparisons succeeded. Current candidate index `index_a3282c4d98cf54595e4ba168` uses BGE M3, 1,024-token budgets, 532 search chunks, 277 section parents, BM25, Qdrant and a lightweight provenance graph. The optional cross-encoder is off by default: BGE hybrid assembled all cited pages in 23/27 draft cards versus 22/27 with reranking. These are in-sample page-coverage diagnostics, not evidence sufficiency or release acceptance. Remaining misses and reversal triggers are in `HOSTED_INDEX_DECISION.md` and `index_benchmark.json`.
+
+`motomedic-qdrant` serves immutable vectors on authenticated Cloud Run, with min zero/max one instance and private Cloud Storage backing. Cold starts reload stored vectors. They do not parse or embed the manual again. Consult `cloud/deployment_status.json` and `cloud/live_smoke.json` before deployment changes. The rider UI and gated generator remain pending.
+
+Docling omitted PDF page 103. Whole-page text and an image are retained as flagged candidate evidence; see `source_review_notes.json`. Procedure parents, mandatory warning/prerequisite links and figure/table associations require independent review. Candidate bundles block procedural generation. The updated TRD v0.3 is preserved; the assembler returns its dependency fields and actual typed objects. A missing or empty/unreviewed dependency set cannot establish sufficiency. Source-review gaps are not rider-resolvable questions.
+
+The deterministic state/safety controller remains the TRD choice. Decisions API or Jev may later be benchmarked for interpreting intent and typed rider outcomes or ranking already eligible candidates.

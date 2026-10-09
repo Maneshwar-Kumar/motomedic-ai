@@ -89,3 +89,14 @@ On 2026-10-09 the project owner reiterated that only the owner's manual is in sc
 The project owner then required the build and operating environment to be online and asked for a build approach following the TRD. This changes the intended deployment of the current local prototype.
 
 The owner subsequently stated that the owner's manual is publicly available and agreed to embed it once. The resulting decision is to run versioned ingestion and parent-child chunking as an online hosted job before rider requests; re-embed the manual only when its checksum or indexed pipeline version changes. The public availability statement is recorded separately from unverified rights to host the PDF or display excerpts.
+
+
+## GitHub, GCP and larger embedding inputs (9 October 2026)
+
+The owner authorized GitHub storage and requested Docling chunks, vectors, BM25, a lightweight graph and a cross-encoder. They asked whether Decisions API or Jev should replace the deterministic controller. The recommendation is a deterministic state/eligibility/safety controller with optional model interpretation of free-form intent and feedback, evaluated on reviewed cases.
+
+The owner authorized a new GCP project and Cloud Run, requesting alerts or stop at US$10. Existing GCP authentication was available. The private repository is `Maneshwar-Kumar/motomedic-ai`; the cloud project is `motomedic-ai-20261009`. The INR800 lifetime budget has alerts at INR400/640/800 and a simulation-checked live guard at INR640. Delayed billing prevents an exact US$10 cutoff.
+
+After an approval timeout/accidental denial, the owner asked to retry once and asked whether the embedding input limit could grow. MiniLM and BGE M3 comparisons completed online. BGE M3's tested chunk budget is 1,024 tokens. Its hybrid assembly covered all cited pages in 23/27 draft cards; reranking reduced this to 22/27. The selected BGE index is served by authenticated Cloud Run with a private immutable Cloud Storage snapshot. No Docling or Qdrant SaaS account was needed.
+
+A concurrent TRD v0.3 update introduced reviewed step, applicability and dependency contracts. It was read and preserved without changing the owner's DOCX. The candidate assembler now attaches typed evidence objects and dependency-status fields, and explicitly blocks missing or unreviewed dependency sets. Procedure/variant/source review and generative answering remain pending.

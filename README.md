@@ -27,8 +27,14 @@ Use the TRD's deterministic controller for state, eligibility, prerequisites, sa
 
 ## GCP spending controls
 
-The account bills in INR. A non-recurring lifetime budget starts 9 October 2026: INR800, alerts at INR400/640/800, automated billing disconnection at INR640 to leave headroom below the authorized US$10. Billing data is delayed; this cannot guarantee an instantaneous cap. The guard is restricted to this project. Compute also receives a runtime limit and authenticated access.
+The account bills in INR. A non-recurring lifetime budget starts 9 October 2026: INR800, alerts at INR400/640/800, automated billing disconnection at INR640 to leave headroom below the authorized US$10. Billing data is delayed; this cannot guarantee an instantaneous cap. The guard is restricted to this project. The private Qdrant service scales to zero, permits at most one instance, and uses a 30-second request timeout.
 
 Check the guard in simulation before enabling live shutdown. Re-enabling billing after an actual budget stop requires owner authorization. See `cloud/deployment_status.json` for deployed resources and verification results.
 
 See [INDEX_README.md](INDEX_README.md) for the local baseline and [AGENTS.md](AGENTS.md) for the project contracts.
+
+## Current hosted result
+
+The current default is BGE M3 with a 1,024-token chunk budget. It has 532 search chunks and 277 section parents. Cross-encoder reranking is available and off by default. See [HOSTED_INDEX_DECISION.md](HOSTED_INDEX_DECISION.md) and [index_benchmark.json](index_benchmark.json) for measured results and remaining misses. See [cloud/deployment_status.json](cloud/deployment_status.json) for immutable storage, authentication and spending controls.
+
+This is the retrieval backend. The Streamlit rider UI, integrated controller and gated generative answering are later build phases.

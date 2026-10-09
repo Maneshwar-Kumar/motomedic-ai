@@ -9,7 +9,7 @@ on:
       embedding_model:
         description: Embedding comparison
         type: choice
-        default: miniLM
+        default: bge-m3
         options:
           - miniLM
           - bge-m3
@@ -35,7 +35,7 @@ jobs:
       - name: Install ingestion dependencies
         run: pip install -r requirements-ingest.txt
       - name: Run regression checks
-        run: python -m unittest test_diagnose test_retrieve_evidence test_budget_guard
+        run: python -m unittest test_diagnose test_retrieve_evidence test_budget_guard test_online_assembly
       - uses: actions/download-artifact@v4
         if: inputs.parse_run_id != ''
         with:
@@ -56,6 +56,10 @@ jobs:
         run: pip freeze > build/index/requirements-resolved.txt
       - name: Prepare cross-encoder and compare retrieval
         run: python -u online_retrieve.py --index build/index --prepare-reranker --evaluate
+      - name: Verify assembled typed evidence
+        env:
+          MOTOMEDIC_TEST_INDEX: build/index
+        run: python -m unittest test_online_assembly
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -1,0 +1,50 @@
+{
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "tests": [
+    {
+      "name": "immutable_source_and_version",
+      "passed": true
+    },
+    {
+      "name": "unauthenticated_access_rejected",
+      "passed": true,
+      "http_status": 403
+    },
+    {
+      "name": "engine will not start",
+      "passed": true
+    },
+    {
+      "name": "ABS indicator stays on",
+      "passed": true
+    },
+    {
+      "name": "tyre pressure",
+      "passed": true
+    },
+    {
+      "name": "engine oil level",
+      "passed": true
+    },
+    {
+      "name": "drive chain free play",
+      "passed": true
+    },
+    {
+      "name": "reject_source_sha256",
+      "passed": true
+    },
+    {
+      "name": "reject_vector",
+      "passed": true
+    },
+    {
+      "name": "reject_index_id",
+      "passed": true
+    },
+    {
+      "name": "reject_limit",
+      "passed": true
+    }
+  ]
+}
