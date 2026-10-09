@@ -1,6 +1,6 @@
 # Hosted index decision and diagnostic
 
-The current prototype uses BGE M3, 1,024-token chunk budgets, dense cosine retrieval plus BM25 with reciprocal rank fusion, bounded graph expansion, and full section context. The pretrained cross-encoder is available and disabled by default: on this draft set it reduces cited-page coverage and adds latency. Model weights are reused; each request computes a query vector and, when enabled, new cross-encoder pair scores.
+The current prototype uses BGE M3, 1,024-token chunk budgets, dense cosine retrieval plus BM25 with reciprocal rank fusion, bounded graph expansion, and full section context. The pretrained cross-encoder has a conditional scheduling policy under TRD v0.4. Current candidate bundles skip it because applicability and independent dependency review remain pending. The earlier always/off diagnostic showed reduced cited-page coverage and added latency when always enabled. Model weights are reused; each request computes a query vector and, when scheduled, new cross-encoder pair scores.
 
 | Embedding | Retrieval mode | All cited pages assembled | Warm retrieval p95 on GitHub CPU |
 | --- | --- | --- | --- |
@@ -20,3 +20,9 @@ The choice is provisional. Reconsider the embedding model if reviewed evidence r
 The selected snapshot and Qdrant vectors are held privately in GCP; source and code are stored in the private GitHub repository. The service serves immutable vectors and rejects anonymous requests, mismatched source/index IDs and invalid vectors. Cold starts restore existing vectors from Cloud Storage. Live service verification is recorded in `cloud/live_smoke.json`.
 
 TRD v0.3 dependency fields are now returned alongside the actual typed evidence objects. Missing/unreviewed dependency sets remain insufficient, and source-review gaps are explicitly not rider-resolvable. Registry authoring, independent approval and the integrated eligibility controller remain later work. This schema update reuses the existing document vectors.
+
+## Conditional policy update 9 October 2026
+
+The owner approved conditional reranking for uncertain candidate ordering. TRD v0.4 and the implementation distinguish that uncertainty from missing required evidence, unresolved applicability, unreviewed source dependencies, safety stops and system failures. One bounded exact-ID recovery can attach reviewed dependencies and widen the candidate pool. One cross-encoder attempt can reorder a bounded pool when rank signals indicate uncertainty. Reassembly preserves mandatory evidence; controller/claim gates remain required. Current source review gaps skip both attempts rather than reranking every insufficient bundle.
+
+The initial trigger values are provisional and uncalibrated. No conditional-policy accuracy or TTFO improvement is claimed from the table above. Reviewed calibration and held-out off/always/conditional evaluation must record rescues, regressions, complete evidence recall, abstention, fallback rate, per-path and combined TTFO, cold starts and cost. The selected document vectors and Qdrant deployment are unchanged by this retrieval-policy update.

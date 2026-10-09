@@ -35,7 +35,7 @@ jobs:
       - name: Install ingestion dependencies
         run: pip install -r requirements-ingest.txt
       - name: Run regression checks
-        run: python -m unittest test_diagnose test_retrieve_evidence test_budget_guard test_online_assembly
+        run: python -m unittest test_diagnose test_retrieve_evidence test_budget_guard test_online_assembly test_conditional_retrieval
       - uses: actions/download-artifact@v4
         if: inputs.parse_run_id != ''
         with:

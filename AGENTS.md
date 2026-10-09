@@ -145,6 +145,8 @@ The release suite should contain zero manually reviewed unsupported technical st
 
 ## Decisions still open
 
+The project owner approved the conditional reranking policy on 9 October 2026. Follow TRD v0.4 and `retrieval_policy.py`: one bounded recovery for approved missing dependencies, one rerank for uncertain candidate ordering after source/applicability checks, and reassembly retaining mandatory evidence. Missing review must not trigger reranking. Trigger thresholds remain provisional pending independent reviewed calibration and held-out evaluation. Scheduling decisions never authorize an answer; candidate bundles stay blocked until controller and release gates are integrated.
+
 The drafts propose Docling, hierarchical parent-child chunks, dense plus BM25 retrieval, verified graph links, conditional cross-encoder reranking, a deterministic controller, and a Streamlit demo. They also list alternatives such as other parsers, late chunking, full GraphRAG, late-interaction retrieval, visual page retrieval, Sarvam speech-to-text, and other hosting options. Keep these as hypotheses. The actual manual and evaluation results should determine which are useful.
 
 ## Working rules for future agents

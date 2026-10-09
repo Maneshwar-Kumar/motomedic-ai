@@ -10,6 +10,12 @@ from pathlib import Path
 import time
 
 from online_ingest import digest, tokens, write_json, stable_id
+from retrieval_policy import RetrievalPolicy, ranking_signals, next_retrieval_action
+
+
+class RetrievalSystemError(RuntimeError):
+    """Operational failure must never be interpreted as an unsupported request."""
+    status = "SYSTEM_ERROR"
 
 
 def read_jsonl(path):
@@ -43,7 +49,7 @@ def dependency_coverage(manual_checksum, attached_ids, evidence, manifest=None, 
 
 
 class Retriever:
-    def __init__(self, index_dir, rerank=False, embedding_model=None):
+    def __init__(self, index_dir, rerank=False, embedding_model=None, cross_encoder=None):
         import numpy as np
         self.root = Path(index_dir)
         self.manifest = json.loads((self.root / "manifest.json").read_text(encoding="utf-8"))
@@ -64,58 +70,74 @@ class Retriever:
         if self.model is None:
             from sentence_transformers import SentenceTransformer
             self.model = SentenceTransformer(str(model_path), device="cpu") if model_path.exists() else SentenceTransformer(config["model"], revision=config["revision"], device="cpu")
-        self.reranker = None
+        self.reranker = cross_encoder
         if rerank:
-            from sentence_transformers import CrossEncoder
-            self.reranker = CrossEncoder(str(self.root / "reranker_model"), device="cpu")
+            self._load_reranker()
 
-    def search(self, query, limit=5, candidate_limit=20, scope=None, rerank=None):
-        import numpy as np
-        started = time.perf_counter()
-        source = self.manifest["source"]
-        if scope:
-            for key, value in scope.items():
-                actual = self.manifest["source_sha256"] if key == "source_sha256" else source.get(key)
-                if actual != value:
-                    raise ValueError(f"Source scope mismatch: {key}")
-        if not query.strip():
-            raise ValueError("Query is empty")
-        vector = self.model.encode(query, normalize_embeddings=True)
-        dense = self.vectors @ vector
-        sparse = np.zeros(len(self.chunks))
-        bm = self.bm25
-        for term in set(tokens(query)):
-            for idx, tf in bm["postings"].get(term, []):
-                denom = tf + bm["k1"] * (1 - bm["b"] + bm["b"] * bm["lengths"][idx] / max(bm["avgdl"], 1))
-                sparse[idx] += bm["idf"][term] * tf * (bm["k1"] + 1) / denom
+    def _load_reranker(self):
+        if self.reranker is not None:
+            return
+        from sentence_transformers import CrossEncoder
+        model_path = self.root / "reranker_model"
+        if model_path.exists():
+            self.reranker = CrossEncoder(str(model_path), device="cpu")
+        else:
+            config_path = self.root / "reranker_manifest.json"
+            if not config_path.exists():
+                raise RetrievalSystemError("SYSTEM_ERROR: pinned reranker is unavailable")
+            config = json.loads(config_path.read_text(encoding="utf-8"))
+            if not config.get("revision"):
+                raise RetrievalSystemError("SYSTEM_ERROR: reranker revision is missing")
+            self.reranker = CrossEncoder(config["model"], revision=config["revision"], device="cpu")
+
+    def _rank(self, dense, sparse, candidate_limit, policy):
         fused = defaultdict(float)
+        rankings = []
         for scores in [dense, sparse]:
             # Zero BM25 matches must not create arbitrary sparse ranks.
             ranking = sorted((i for i in range(len(scores)) if scores is dense or scores[i] > 0), key=lambda i: (-float(scores[i]), self.chunks[i]["id"]))
+            rankings.append(ranking)
             for rank, idx in enumerate(ranking[:max(candidate_limit * 2, 50)], 1):
                 fused[idx] += 1 / (60 + rank)
         candidates = sorted(fused, key=lambda i: (-fused[i], self.chunks[i]["id"]))[:candidate_limit]
+        sections = {}
+        for i in candidates:
+            section = self.chunks[i]["parent_section_id"]
+            sections[section] = max(sections.get(section, 0), fused[i])
+        signals = ranking_signals(
+            [self.chunks[i]["parent_section_id"] for i in rankings[0]],
+            [self.chunks[i]["parent_section_id"] for i in rankings[1]],
+            sorted(sections.items(), key=lambda item: (-item[1], item[0])), policy)
+        return candidates, fused, signals
+
+    def _rerank(self, query, candidates, policy):
+        import numpy as np
+        self._load_reranker()
+        tokenizer = self.reranker.tokenizer
+        query_tokens = tokenizer.encode(query, add_special_tokens=False)
+        if len(query_tokens) > 128:
+            return None, 0, "QUERY_EXCEEDS_RERANK_LIMIT"
+        budget = min(512, tokenizer.model_max_length) - len(query_tokens) - tokenizer.num_special_tokens_to_add(pair=True)
+        if budget <= 32:
+            raise RetrievalSystemError("SYSTEM_ERROR: invalid cross-encoder token budget")
+        pairs, owners = [], []
+        for i in candidates:
+            passage_tokens = tokenizer.encode(self.chunks[i]["index_text"], add_special_tokens=False)
+            for start in range(0, max(len(passage_tokens), 1), budget-32):
+                pairs.append((query, tokenizer.decode(passage_tokens[start:start+budget], skip_special_tokens=True)))
+                owners.append(i)
+                if len(pairs) > policy.maximum_rerank_pairs:
+                    return None, 0, "RERANK_PAIR_LIMIT_EXCEEDED"
+        scores = self.reranker.predict(pairs, batch_size=8)
+        if len(scores) != len(pairs) or not np.isfinite(scores).all():
+            raise RetrievalSystemError("SYSTEM_ERROR: invalid cross-encoder scores")
         rerank_scores = {}
-        use_reranker = self.reranker is not None if rerank is None else rerank
-        if use_reranker:
-            if self.reranker is None:
-                raise RuntimeError("Requested reranker is not loaded")
-            tokenizer = self.reranker.tokenizer
-            query_tokens = tokenizer.encode(query, add_special_tokens=False)
-            if len(query_tokens) > 128:
-                raise ValueError("Please shorten the query for the cross-encoder")
-            budget = min(512, tokenizer.model_max_length) - len(query_tokens) - tokenizer.num_special_tokens_to_add(pair=True)
-            pairs, owners = [], []
-            for i in candidates:
-                passage_tokens = tokenizer.encode(self.chunks[i]["index_text"], add_special_tokens=False)
-                for start in range(0, max(len(passage_tokens), 1), max(1, budget-32)):
-                    fragment = tokenizer.decode(passage_tokens[start:start+budget], skip_special_tokens=True)
-                    pairs.append((query, fragment))
-                    owners.append(i)
-            scores = self.reranker.predict(pairs, batch_size=8)
-            for i, score in zip(owners, scores):
-                rerank_scores[i] = max(rerank_scores.get(i, float("-inf")), float(score))
-            candidates.sort(key=lambda i: (-rerank_scores[i], self.chunks[i]["id"]))
+        for i, score in zip(owners, scores):
+            rerank_scores[i] = max(rerank_scores.get(i, float("-inf")), float(score))
+        return rerank_scores, len(pairs), None
+
+    def _assemble(self, query, candidates, limit, dense, sparse, fused, rerank_scores,
+                  dependency_manifest, step_id, applicability_status, retained_ids=()):
         hits = [{**self.chunks[i], "dense_score": float(dense[i]), "bm25_score": float(sparse[i]),
                  "rrf_score": fused[i], "cross_encoder_score": rerank_scores.get(i)} for i in candidates[:limit]]
         hit_pages = {c["page_id"] for h in hits for c in h["citations"]}
@@ -125,23 +147,160 @@ class Retriever:
         parent_ids = {c["parent_section_id"] for c in hits + related}
         attached = {eid for p in parent_ids for eid in self.parents[p]["evidence_ids"]}
         attached.update(eid for chunk in hits + related for eid in chunk["evidence_ids"])
+        attached.update(retained_ids)
         if not attached <= self.evidence.keys():
-            raise RuntimeError("SYSTEM_ERROR: attached evidence object is missing from the index")
-        dependencies = dependency_coverage(self.manifest["source_sha256"], attached, self.evidence)
-        assembly_version = stable_id("assembly", self.manifest["source_sha256"], [self.manifest["index_id"],digest(Path(__file__)),"TRD-0.3"])
-        return {"index_id": self.manifest["index_id"], "query_id": stable_id("query",self.manifest["source_sha256"],[assembly_version,query,use_reranker]),
+            raise RetrievalSystemError("SYSTEM_ERROR: attached evidence object is missing from the index")
+        checksum = self.manifest["source_sha256"]
+        dependencies = dependency_coverage(checksum, attached, self.evidence, dependency_manifest, step_id)
+        required = set(dependencies["required_evidence_ids"])
+        step = (dependency_manifest or {}).get("steps", {}).get(step_id, {})
+        actions = set(step.get("action_evidence_ids", []))
+        needs_review = (dependencies["dependency_review_status"] != "APPROVED" or not required or
+                        not actions or not actions <= required or any(
+            self.evidence[eid].get("review_status") != "APPROVED" or
+            self.evidence[eid].get("source_sha256") != checksum or
+            not self.evidence[eid].get("provenance") or
+            self.evidence[eid].get("extraction_check_status") != "PASSED"
+            for eid in required if eid in self.evidence))
+        assembly_version = stable_id("assembly", checksum, [self.manifest["index_id"],digest(Path(__file__)),digest(Path(__file__).with_name("retrieval_policy.py")),"TRD-0.4"])
+        return {"index_id": self.manifest["index_id"],
                 "manual_checksum": self.manifest["source_sha256"], "assembly_version":assembly_version,
                 **dependencies, "evidence_ids":sorted(attached),
                 "evidence_objects":[self.evidence[eid] for eid in sorted(attached)],
-                "applicability_status":"UNCONFIRMED", "sufficiency_status":"NOT_ESTABLISHED",
-                "conflicts":[], "missing_conditions":["Confirmed manual/variant fit"],
-                "source_gaps":[{"type":"DEPENDENCY_MANIFEST_MISSING","rider_resolvable":False}],
-                "source_review_required":True, "source_sha256": self.manifest["source_sha256"],
+                "applicability_status":applicability_status, "sufficiency_status":"NOT_ESTABLISHED",
+                "conflicts":[], "missing_conditions":[] if applicability_status == "CONFIRMED" else ["Confirmed manual/variant fit"],
+                "source_gaps":[{"type":"DEPENDENCY_REVIEW_REQUIRED","rider_resolvable":False}] if needs_review else [],
+                "source_review_required":needs_review, "source_sha256": self.manifest["source_sha256"],
                 "query": query, "hits": hits, "linked_chunks": related, "links": links,
                 "parents": [self.parents[p] for p in sorted(parent_ids)],
-                "elapsed_seconds": time.perf_counter() - started, "reranked": use_reranker,
                 "may_generate_procedural_advice": False,
                 "unresolved": ["Source applicability", "Independent evidence review", "Procedure, warning and prerequisite graph", "Claim support gate"]}
+
+    def search(self, query, limit=5, candidate_limit=None, scope=None, rerank=None, *,
+               policy=None, dependency_manifest=None, step_id=None,
+               applicability_status="UNCONFIRMED", gate_status=None, gate_evidence_ids=()):
+        """Conditional by default; bool rerank overrides are diagnostic ablations.
+
+        Manifest, applicability and gate inputs must come from the trusted registry/controller.
+        This boundary always returns candidate evidence and cannot release technical advice.
+        """
+        import numpy as np
+        started = time.perf_counter()
+        policy = policy or RetrievalPolicy()
+        candidate_limit = policy.candidate_limit if candidate_limit is None else candidate_limit
+        if rerank is not None and not isinstance(rerank, bool):
+            raise ValueError("Rerank override must be a boolean or None")
+        if not 1 <= limit <= candidate_limit <= policy.expanded_candidate_limit:
+            raise ValueError("Invalid retrieval limits")
+        if applicability_status not in ("CONFIRMED", "UNCONFIRMED", "MISMATCH"):
+            raise ValueError("Invalid applicability status")
+        if gate_status not in (None, "SAFETY_STOP", "SYSTEM_ERROR", "UNSUPPORTED", "AMBIGUOUS"):
+            raise ValueError("Invalid controller gate status")
+        if scope:
+            for key, value in scope.items():
+                actual = self.manifest["source_sha256"] if key == "source_sha256" else self.manifest["source"].get(key)
+                if actual != value:
+                    raise ValueError(f"Source scope mismatch: {key}")
+        if not query.strip():
+            raise ValueError("Query is empty")
+        mode = "conditional" if rerank is None else "always_diagnostic" if rerank else "off"
+        telemetry = {"mode":mode, "policy":policy.to_dict(), "recovery_attempts":0,
+                     "rerank_attempts":0, "rerank_pair_count":0, "rerank_skip_reason":None,
+                     "stages_seconds":{}, "decisions":[]}
+        try:
+            step = (dependency_manifest or {}).get("steps", {}).get(step_id, {})
+            if len(set(step.get("required_evidence_ids", []))) > policy.maximum_dependency_ids:
+                raise RetrievalSystemError("SYSTEM_ERROR: dependency manifest exceeds work bound")
+            if len(set(gate_evidence_ids)) > policy.maximum_dependency_ids:
+                raise RetrievalSystemError("SYSTEM_ERROR: gate evidence exceeds work bound")
+            for eid in gate_evidence_ids:
+                evidence = self.evidence.get(eid, {})
+                if not (evidence.get("review_status") == "APPROVED" and
+                        evidence.get("source_sha256") == self.manifest["source_sha256"] and
+                        evidence.get("provenance") and evidence.get("extraction_check_status") == "PASSED"):
+                    raise RetrievalSystemError("SYSTEM_ERROR: gate evidence is invalid")
+            # Terminal controller decisions need no embedding/model work.
+            if gate_status is not None:
+                dense = sparse = np.zeros(len(self.chunks))
+                candidates, fused, signals = [], {}, {"ranking_uncertain":False, "uncertainty_reasons":[]}
+            else:
+                stage = time.perf_counter()
+                vector = self.model.encode(query, normalize_embeddings=True)
+                if np.shape(vector) != (self.vectors.shape[1],) or not np.isfinite(vector).all():
+                    raise RetrievalSystemError("SYSTEM_ERROR: invalid query embedding")
+                dense = self.vectors @ vector
+                sparse = np.zeros(len(self.chunks))
+                bm = self.bm25
+                for term in set(tokens(query)):
+                    for idx, tf in bm["postings"].get(term, []):
+                        denom = tf + bm["k1"] * (1 - bm["b"] + bm["b"] * bm["lengths"][idx] / max(bm["avgdl"], 1))
+                        sparse[idx] += bm["idf"][term] * tf * (bm["k1"] + 1) / denom
+                candidates, fused, signals = self._rank(dense, sparse, candidate_limit, policy)
+                telemetry["stages_seconds"]["first_retrieval"] = time.perf_counter()-stage
+            stage = time.perf_counter()
+            bundle = self._assemble(query, candidates, limit, dense, sparse, fused, {}, dependency_manifest, step_id, applicability_status, gate_evidence_ids)
+            telemetry["stages_seconds"]["initial_assembly"] = time.perf_counter()-stage
+            telemetry["initial_ranking_signals"] = signals
+            action = next_retrieval_action(bundle, signals, gate_status=gate_status)
+            telemetry["decisions"].append(action)
+            retained = set(gate_evidence_ids)
+            if action == "RECOVER_DEPENDENCIES":
+                stage = time.perf_counter()
+                telemetry["recovery_attempts"] = 1
+                missing = bundle["missing_evidence_ids"]
+                # Exact dependency IDs are stronger than a second semantic query.
+                retained.update(set(bundle["required_evidence_ids"]) & self.evidence.keys())
+                candidates, fused, signals = self._rank(dense, sparse, policy.expanded_candidate_limit, policy)
+                bundle = self._assemble(query, candidates, limit, dense, sparse, fused, {}, dependency_manifest, step_id, applicability_status, retained)
+                telemetry["recovery"] = {"requested_evidence_ids":missing,
+                    "fetched_evidence_ids":sorted(set(missing) & retained),
+                    "remaining_missing_evidence_ids":bundle["missing_evidence_ids"],
+                    "candidate_limit":policy.expanded_candidate_limit}
+                telemetry["stages_seconds"]["dependency_recovery"] = time.perf_counter()-stage
+                action = next_retrieval_action(bundle, signals, recovered=True)
+                telemetry["decisions"].append(action)
+                if bundle["missing_evidence_ids"]:
+                    bundle["source_gaps"].append({"type":"REQUIRED_EVIDENCE_UNAVAILABLE", "rider_resolvable":False,
+                                                 "evidence_ids":bundle["missing_evidence_ids"]})
+            should_rerank = gate_status is None and (mode == "always_diagnostic" or
+                              (mode == "conditional" and action == "RERANK_CANDIDATES"))
+            if should_rerank:
+                stage = time.perf_counter()
+                telemetry["rerank_attempts"] = 1
+                # Bound the cross-encoder even when dependency search used a wider pool.
+                rerank_candidates = candidates[:candidate_limit]
+                scores, pair_count, skip = self._rerank(query, rerank_candidates, policy)
+                telemetry["rerank_pair_count"] = pair_count
+                telemetry["rerank_skip_reason"] = skip
+                telemetry["stages_seconds"]["reranking"] = time.perf_counter()-stage
+                if scores is not None:
+                    rerank_candidates.sort(key=lambda i: (-scores[i], self.chunks[i]["id"]))
+                    # Keep mandatory reviewed evidence across changes in top-k ordering.
+                    retained.update(set(bundle["required_evidence_ids"]) & self.evidence.keys())
+                    stage = time.perf_counter()
+                    bundle = self._assemble(query, rerank_candidates, limit, dense, sparse, fused, scores, dependency_manifest, step_id, applicability_status, retained)
+                    telemetry["stages_seconds"]["post_rerank_assembly"] = time.perf_counter()-stage
+                    action = next_retrieval_action(bundle, signals, recovered=bool(telemetry["recovery_attempts"]), reranked=True)
+                else:
+                    action = "RANKING_UNRESOLVED"
+                telemetry["decisions"].append(action)
+            elif action == "RERANK_CANDIDATES":
+                telemetry["rerank_skip_reason"] = "RERANK_DISABLED"
+                action = "RANKING_UNRESOLVED"
+            else:
+                telemetry["rerank_skip_reason"] = action
+            telemetry["final_action"] = action
+            bundle["retrieval_policy"] = telemetry
+            bundle["retrieval_action"] = action
+            bundle["reranked"] = bool(telemetry["rerank_attempts"] and not telemetry["rerank_skip_reason"])
+            bundle["elapsed_seconds"] = time.perf_counter()-started
+            bundle["query_id"] = stable_id("query", self.manifest["source_sha256"], [bundle["assembly_version"],query,mode,policy.to_dict(),step_id,dependency_manifest,applicability_status,gate_status,sorted(gate_evidence_ids)])
+            return bundle
+        except Exception as exc:
+            error = RetrievalSystemError("SYSTEM_ERROR: retrieval, assembly or reranking failed")
+            error.telemetry = {**telemetry, "final_action":"SYSTEM_ERROR", "error_class":type(exc).__name__,
+                               "elapsed_seconds":time.perf_counter()-started}
+            raise error from exc
 
 
 def prepare_reranker(root):
@@ -202,11 +361,14 @@ if __name__ == "__main__":
     p.add_argument("--prepare-reranker", action="store_true")
     p.add_argument("--evaluate", action="store_true")
     p.add_argument("--query")
-    p.add_argument("--rerank", action="store_true")
+    p.add_argument("--rerank", action="store_true", help="Always rerank for diagnostic comparison")
+    p.add_argument("--rerank-mode", choices=["conditional", "off", "always"], default="conditional")
     args = p.parse_args()
     if args.prepare_reranker:
         prepare_reranker(args.index)
     if args.evaluate:
         evaluate(args.index)
     if args.query:
-        print(json.dumps(Retriever(args.index, args.rerank).search(args.query), ensure_ascii=False, indent=2))
+        mode = "always" if args.rerank else args.rerank_mode
+        override = {"conditional":None, "off":False, "always":True}[mode]
+        print(json.dumps(Retriever(args.index).search(args.query, rerank=override), ensure_ascii=False, indent=2))

@@ -6,13 +6,13 @@ Owner-manual-grounded motorcycle troubleshooting prototype. The sole source is t
 
 Run **Versioned owner manual ingestion** in GitHub Actions. It verifies the PDF checksum, parses layout with Docling, retains the structured document and figure crops, creates section parents and token-bounded children, and builds pretrained embeddings, a Qdrant vector store, BM25 postings and a provenance graph. It then loads a pretrained cross-encoder and compares retrieval with and without reranking on 27 draft reference cards.
 
-The run artifact contains `manifest.json` with source/model revisions, dependency versions, chunk settings and file checksums, and `ingestion_qa.json` with extraction gaps. Changes to source, parser, chunker or embedding model create a new index. Document embeddings are reused; requests compute a query embedding and cross-encoder pair scores.
+The run artifact contains `manifest.json` with source/model revisions, dependency versions, chunk settings and file checksums, and `ingestion_qa.json` with extraction gaps. Changes to source, parser, chunker or embedding model create a new index. Document embeddings are reused; requests compute a query embedding and conditional cross-encoder pair scores. Retrieval policy changes version assembly without re-embedding the document.
 
 The hosted build uses Qdrant's open source embedded storage without a Qdrant account. A dedicated server receives the same vectors. The authorized GCP project is `motomedic-ai-20261009`; the Qdrant service name is `motomedic-qdrant`.
 
 ```bash
 pip install -r requirements-ingest.txt
-python online_retrieve.py --index build/index --query "engine will not start" --rerank
+python online_retrieve.py --index build/index --query "engine will not start" --rerank-mode conditional
 ```
 
 ## Evidence boundary
@@ -35,6 +35,18 @@ See [INDEX_README.md](INDEX_README.md) for the local baseline and [AGENTS.md](AG
 
 ## Current hosted result
 
-The current default is BGE M3 with a 1,024-token chunk budget. It has 532 search chunks and 277 section parents. Cross-encoder reranking is available and off by default. See [HOSTED_INDEX_DECISION.md](HOSTED_INDEX_DECISION.md) and [index_benchmark.json](index_benchmark.json) for measured results and remaining misses. See [cloud/deployment_status.json](cloud/deployment_status.json) for immutable storage, authentication and spending controls.
+The current default is BGE M3 with a 1,024-token chunk budget. It has 532 search chunks and 277 section parents. Conditional reranking is implemented; pending source/applicability review skips it on current candidate bundles. See [HOSTED_INDEX_DECISION.md](HOSTED_INDEX_DECISION.md) and [index_benchmark.json](index_benchmark.json) for measured baseline results and remaining misses. See [cloud/deployment_status.json](cloud/deployment_status.json) for immutable storage, authentication and spending controls.
 
 This is the retrieval backend. The Streamlit rider UI, integrated controller and gated generative answering are later build phases.
+
+## Conditional retrieval policy
+
+TRD v0.4 and `retrieval_policy.py` define the normal path: hybrid retrieve, initial assembly, source/applicability checks, one exact-dependency recovery if needed, one optional rerank for uncertain ordering, reassembly, then controller and answer gates. Complete reviewed evidence with clear ordering skips the cross-encoder. Missing review, unsupported requests, safety stops and system errors have separate routes. Current bundles always retain `may_generate_procedural_advice: false`.
+
+The trusted registry/controller supplies `dependency_manifest`, `step_id`, confirmed `applicability_status` and optional terminal `gate_status`/`gate_evidence_ids` to `Retriever.search`. These are internal service inputs and must not be accepted from rider text, uploads or model output. `retrieval_action` is a scheduling result, not a final answer verdict; `CONTINUE_GATES` still requires controller eligibility and final claim checks. `RANKING_UNRESOLVED` withholds a release decision and returns to the controller for clarification or abstention.
+
+Default experimental bounds: fused pool 20, recovery pool 40, at most one recovery and one cross-encoder attempt, at most 100 scored passage windows and 256 mandatory evidence IDs. Rank uncertainty compares distinct parent sections using dense/BM25 overlap and relative RRF margins. The thresholds are `PROVISIONAL_UNCALIBRATED`; independent reviewed calibration and held-out evaluation are required before release activation. The full rider query is preserved; queries over the current cross-encoder's 128-token limit skip it with an explicit reason.
+
+Bundles record policy/configuration, trigger signals, decision history, recovery evidence IDs, attempt/pair counts, skip reasons and stage timing. Failures raise `RetrievalSystemError` with status `SYSTEM_ERROR` and telemetry. No failed reranker is retried or silently converted into an unsupported-source claim. Mandatory reviewed evidence survives changed ranking. Model loading occurs only when scheduled and is reused in the process.
+
+Use `--rerank-mode off` and `--rerank-mode always` only for diagnostic comparisons (`--rerank` remains an always-mode alias). Run `python -m unittest test_conditional_retrieval test_online_assembly` for failure and assembly checks. The **Verify retrieval policy and TRD** GitHub workflow reuses the immutable hosted BGE artifact and renders the TRD without rebuilding its embeddings. `tools/render_docx.py` is the supplied documents skill renderer, vendored for hosted visual verification; it uses the runner's `/usr/bin/soffice`, not a desktop Office installation.
