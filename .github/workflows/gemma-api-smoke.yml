@@ -1,10 +1,26 @@
 name: Gemma API access smoke
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'gemma_api_smoke.py'
+      - 'test_gemma_api_smoke.py'
+      - '.github/workflows/gemma-api-smoke.yml'
 permissions:
   contents: read
 jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest -v test_gemma_api_smoke
   smoke:
+    if: github.event_name == 'workflow_dispatch'
+    needs: offline
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
@@ -15,4 +31,10 @@ jobs:
       - name: One synthetic request, no retries
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
-        run: python gemma_api_smoke.py
+        run: python gemma_api_smoke.py --output build/gemma-timing.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gemma-timing
+          path: build/gemma-timing.json
+          retention-days: 7
