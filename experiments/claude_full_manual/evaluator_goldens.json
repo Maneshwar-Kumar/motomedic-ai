@@ -1,0 +1,942 @@
+{
+  "evaluator_only": true,
+  "never_send_to_model": true,
+  "records": [
+    {
+      "record_id": "GEN003",
+      "expected_routes": [
+        "SUPPORTED"
+      ],
+      "canonical_answer": "Yes. The manual describes convex mirrors: their wider view makes objects look smaller and farther away than in a flat mirror. Use care when judging distance.",
+      "claims": [
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            0,
+            4
+          ],
+          "claim_id": "claim_0caf31ff063494fda7bfb5af",
+          "claim_type": "DISCOURSE",
+          "exact_claim_text": "Yes.",
+          "manual_evidence_ids": [],
+          "policy_evidence_ids": [],
+          "review_note": "Policy supports the withheld action, uncertainty, observation question or scenario behavior; this is not an OEM diagnosis, proof of global absence, or measured runtime behavior.",
+          "semantic_support_approved": false,
+          "source_spans": [],
+          "support_evidence_ids": [],
+          "support_relation": "NONTECHNICAL_DISCOURSE",
+          "verdict": "DISCOURSE"
+        },
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            5,
+            125
+          ],
+          "claim_id": "claim_410eb4e92e9a9adaee9bb6f6",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "The manual describes convex mirrors: their wider view makes objects look smaller and farther away than in a flat mirror.",
+          "manual_evidence_ids": [
+            "evidence_4d46b457c1a09f36ac446545",
+            "evidence_476d825609b60be3792825f1"
+          ],
+          "policy_evidence_ids": [],
+          "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_4d46b457c1a09f36ac446545",
+              "text_sha256": "ff6179ed067e7c117afa01143e212d0582ddba5999573d6cdd81de4d87ecef56",
+              "text_span": [
+                0,
+                74
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "evidence_476d825609b60be3792825f1",
+              "text_sha256": "2f053681d74d2dea3fa2fdfb8a7cfce2d3b45c640c4474f211eba12499231e54",
+              "text_span": [
+                0,
+                228
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_4d46b457c1a09f36ac446545",
+            "evidence_476d825609b60be3792825f1"
+          ],
+          "support_relation": "OEM_PARAPHRASE",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            126,
+            157
+          ],
+          "claim_id": "claim_fda35839e363eb0d2dc51945",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "Use care when judging distance.",
+          "manual_evidence_ids": [
+            "evidence_4eb5baa1b26eb8c52356039f"
+          ],
+          "policy_evidence_ids": [],
+          "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_4eb5baa1b26eb8c52356039f",
+              "text_sha256": "37f5063639d5e0a5cd697b2e971fd7b80da1d9287c7158de8af2df55da26adb8",
+              "text_span": [
+                0,
+                161
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_4eb5baa1b26eb8c52356039f"
+          ],
+          "support_relation": "OEM_PARAPHRASE",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "claim_410eb4e92e9a9adaee9bb6f6",
+          "evidence_id": "evidence_4d46b457c1a09f36ac446545",
+          "source_text_sha256": "ff6179ed067e7c117afa01143e212d0582ddba5999573d6cdd81de4d87ecef56"
+        },
+        {
+          "claim_id": "claim_410eb4e92e9a9adaee9bb6f6",
+          "evidence_id": "evidence_476d825609b60be3792825f1",
+          "source_text_sha256": "2f053681d74d2dea3fa2fdfb8a7cfce2d3b45c640c4474f211eba12499231e54"
+        },
+        {
+          "claim_id": "claim_fda35839e363eb0d2dc51945",
+          "evidence_id": "evidence_4eb5baa1b26eb8c52356039f",
+          "source_text_sha256": "37f5063639d5e0a5cd697b2e971fd7b80da1d9287c7158de8af2df55da26adb8"
+        }
+      ],
+      "source_pages": [
+        13
+      ],
+      "reference_plan_sha256": "cc476798a6be3f8a375dd765452b404600c1209dc75c25d8c3d2e9029d94094d",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    },
+    {
+      "record_id": "lookup_oil_grade",
+      "expected_routes": [
+        "SUPPORTED"
+      ],
+      "canonical_answer": "For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic. Using the wrong oil grade reduces the life of moving parts and seriously affects performance.",
+      "claims": [
+        {
+          "claim_id": "lookup_oil_grade:accepted-draft:main",
+          "exact_claim_text": "For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic.",
+          "response_role": "FACT",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+              "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+              "text_span": [
+                0,
+                501
+              ]
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_a6950ea73293cda81e695ce1"
+          ],
+          "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+        },
+        {
+          "claim_id": "lookup_oil_grade:accepted-draft:warning0",
+          "exact_claim_text": "Using the wrong oil grade reduces the life of moving parts and seriously affects performance.",
+          "response_role": "WARNING",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_37c6c31f5700495414de1101",
+              "text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9",
+              "text_span": [
+                0,
+                97
+              ]
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_37c6c31f5700495414de1101"
+          ],
+          "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "lookup_oil_grade:accepted-draft:main",
+          "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+          "source_text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab"
+        },
+        {
+          "claim_id": "lookup_oil_grade:accepted-draft:warning0",
+          "evidence_id": "evidence_37c6c31f5700495414de1101",
+          "source_text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9"
+        }
+      ],
+      "source_pages": [
+        21
+      ],
+      "reference_plan_sha256": "c8a6f4545a9b87bfd2a7c2b5453aedd5351284ab6c740400ce273460a3e5a361",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    },
+    {
+      "record_id": "lookup_tyre_pressure",
+      "expected_routes": [
+        "SUPPORTED"
+      ],
+      "canonical_answer": "For the selected Himalayan BS6, the manual lists 32 psi (2.24 kg/cm\u00b2) for both front and rear tyres, whether riding solo or with a pillion. Underinflated tyres can overheat, suffer damage and cause rider injury. If replacing tyres, use Royal Enfield's specified tyres; failure to do so can cause tyre damage and rider injury.",
+      "claims": [
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:main",
+          "exact_claim_text": "For the selected Himalayan BS6, the manual lists 32 psi (2.24 kg/cm\u00b2) for both front and rear tyres, whether riding solo or with a pillion.",
+          "response_role": "FACT",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+              "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text_span": [
+                0,
+                0
+              ]
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_f1b023ea7924903fed5dfe5f"
+          ],
+          "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+          "exact_claim_text": "Underinflated tyres can overheat, suffer damage and cause rider injury.",
+          "response_role": "WARNING",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+              "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+              "text_span": [
+                0,
+                187
+              ]
+            },
+            {
+              "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+              "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+              "text_span": [
+                0,
+                76
+              ]
+            },
+            {
+              "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+              "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+              "text_span": [
+                0,
+                107
+              ]
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_c762ef2c61505dc7ac7c01d8",
+            "evidence_cb7062b4cec26700e3ae1185",
+            "evidence_f3dd00ecbff8fd98a8c32736"
+          ],
+          "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+          "exact_claim_text": "If replacing tyres, use Royal Enfield's specified tyres; failure to do so can cause tyre damage and rider injury.",
+          "response_role": "WARNING",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+              "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+              "text_span": [
+                0,
+                187
+              ]
+            },
+            {
+              "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+              "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+              "text_span": [
+                0,
+                76
+              ]
+            },
+            {
+              "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+              "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+              "text_span": [
+                0,
+                107
+              ]
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_c762ef2c61505dc7ac7c01d8",
+            "evidence_cb7062b4cec26700e3ae1185",
+            "evidence_f3dd00ecbff8fd98a8c32736"
+          ],
+          "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:main",
+          "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+          "source_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+          "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+          "source_text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+          "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+          "source_text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+          "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+          "source_text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+          "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+          "source_text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+          "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+          "source_text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc"
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+          "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+          "source_text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09"
+        }
+      ],
+      "source_pages": [
+        18,
+        90
+      ],
+      "reference_plan_sha256": "34acc99bbddf213b9f0aff44da2fbc46b3959d7dc0d6eee88c880dc50021abaa",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    },
+    {
+      "record_id": "GEN004",
+      "expected_routes": [
+        "UNSUPPORTED"
+      ],
+      "canonical_answer": "This manual points to the maximum payload in the GMA fitting instructions; it does not give a universal pannier or top-box kilogram limit here. Please confirm the model-specific fitting instructions with Royal Enfield at support@royalenfield.com.",
+      "claims": [
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            0,
+            143
+          ],
+          "claim_id": "claim_605cf764add93b93a1b76ea6",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "This manual points to the maximum payload in the GMA fitting instructions; it does not give a universal pannier or top-box kilogram limit here.",
+          "manual_evidence_ids": [
+            "evidence_b9c4e4222f25cb0fca7dffc6"
+          ],
+          "policy_evidence_ids": [
+            "policy_c7c59d8b2e592d93c2827123"
+          ],
+          "review_note": "Policy supports the withheld action, uncertainty, observation question or scenario behavior; this is not an OEM diagnosis, proof of global absence, or measured runtime behavior.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_b9c4e4222f25cb0fca7dffc6",
+              "text_sha256": "ce34fb5a70a8551f1945451cf0d12ea1599253479f46ad9b080f922c7eab66a6",
+              "text_span": [
+                0,
+                106
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "policy_c7c59d8b2e592d93c2827123",
+              "text_sha256": "028103230a113f9f20ce47065f55bd4bc935dfe6673f85d62e7e5daed205802b",
+              "text_span": [
+                0,
+                373
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_b9c4e4222f25cb0fca7dffc6",
+            "policy_c7c59d8b2e592d93c2827123"
+          ],
+          "support_relation": "OEM_FACT_WITH_EXPLICIT_POLICY_LIMIT",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            144,
+            246
+          ],
+          "claim_id": "claim_3e1ca9a9599a1b35dfed05a6",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "Please confirm the model-specific fitting instructions with Royal Enfield at support@royalenfield.com.",
+          "manual_evidence_ids": [
+            "evidence_b9c4e4222f25cb0fca7dffc6"
+          ],
+          "policy_evidence_ids": [
+            "policy_5067c2fa98fb514fad94ddf7",
+            "policy_8afbff4564e2ae04dba8b809"
+          ],
+          "review_note": "Policy supports the withheld action, uncertainty, observation question or scenario behavior; this is not an OEM diagnosis, proof of global absence, or measured runtime behavior.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_b9c4e4222f25cb0fca7dffc6",
+              "text_sha256": "ce34fb5a70a8551f1945451cf0d12ea1599253479f46ad9b080f922c7eab66a6",
+              "text_span": [
+                0,
+                106
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "policy_5067c2fa98fb514fad94ddf7",
+              "text_sha256": "8e2bbed2260571150e59246f1fb80dbe38a32a045bf713c162c9afc65b190dcd",
+              "text_span": [
+                0,
+                87
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "policy_8afbff4564e2ae04dba8b809",
+              "text_sha256": "db4cc0817e52a622bacff23a79559ce2e577237c952436a539da82d3b5dc2480",
+              "text_span": [
+                0,
+                413
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_b9c4e4222f25cb0fca7dffc6",
+            "policy_5067c2fa98fb514fad94ddf7",
+            "policy_8afbff4564e2ae04dba8b809"
+          ],
+          "support_relation": "OEM_FACT_WITH_EXPLICIT_POLICY_LIMIT",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "claim_605cf764add93b93a1b76ea6",
+          "evidence_id": "evidence_b9c4e4222f25cb0fca7dffc6",
+          "source_text_sha256": "ce34fb5a70a8551f1945451cf0d12ea1599253479f46ad9b080f922c7eab66a6"
+        },
+        {
+          "claim_id": "claim_605cf764add93b93a1b76ea6",
+          "evidence_id": "policy_c7c59d8b2e592d93c2827123",
+          "source_text_sha256": "028103230a113f9f20ce47065f55bd4bc935dfe6673f85d62e7e5daed205802b"
+        },
+        {
+          "claim_id": "claim_3e1ca9a9599a1b35dfed05a6",
+          "evidence_id": "evidence_b9c4e4222f25cb0fca7dffc6",
+          "source_text_sha256": "ce34fb5a70a8551f1945451cf0d12ea1599253479f46ad9b080f922c7eab66a6"
+        },
+        {
+          "claim_id": "claim_3e1ca9a9599a1b35dfed05a6",
+          "evidence_id": "policy_5067c2fa98fb514fad94ddf7",
+          "source_text_sha256": "8e2bbed2260571150e59246f1fb80dbe38a32a045bf713c162c9afc65b190dcd"
+        },
+        {
+          "claim_id": "claim_3e1ca9a9599a1b35dfed05a6",
+          "evidence_id": "policy_8afbff4564e2ae04dba8b809",
+          "source_text_sha256": "db4cc0817e52a622bacff23a79559ce2e577237c952436a539da82d3b5dc2480"
+        }
+      ],
+      "source_pages": [
+        14,
+        15
+      ],
+      "reference_plan_sha256": "a60024b7523f7a96963d8489720be79efa54556ab28a159e7ca4fcd66f1e62af",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    },
+    {
+      "record_id": "EXP040",
+      "expected_routes": [
+        "UNSUPPORTED"
+      ],
+      "canonical_answer": "Page117 table lists3rd notch for rider-only loading, but page116 says the six-step adjuster is kept at first notch. I cannot verify which setting applies to your situation from those differing statements. Please confirm with authorised service.",
+      "claims": [
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            0,
+            115
+          ],
+          "claim_id": "claim_500d0a5fcce87dfa71984ab0",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "Page117 table lists3rd notch for rider-only loading, but page116 says the six-step adjuster is kept at first notch.",
+          "manual_evidence_ids": [
+            "evidence_f27b3a99805a40992be6f399",
+            "evidence_fb5ddc131802596bbfc6777e"
+          ],
+          "policy_evidence_ids": [],
+          "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_f27b3a99805a40992be6f399",
+              "text_sha256": "cd2b7a03d0a2618c9eca3d95f66eba13914576cca8d1816d738c8e3fd2952ed9",
+              "text_span": [
+                0,
+                75
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "evidence_fb5ddc131802596bbfc6777e",
+              "text_sha256": "48becce5a538cef49986f7eaf3e2aeb87b0ef1750d50ce75f946e62342b7f1c3",
+              "text_span": [
+                0,
+                419
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_f27b3a99805a40992be6f399",
+            "evidence_fb5ddc131802596bbfc6777e"
+          ],
+          "support_relation": "OEM_PARAPHRASE",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            116,
+            204
+          ],
+          "claim_id": "claim_196733afee0f88e87d071f98",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "I cannot verify which setting applies to your situation from those differing statements.",
+          "manual_evidence_ids": [
+            "evidence_f27b3a99805a40992be6f399",
+            "evidence_fb5ddc131802596bbfc6777e"
+          ],
+          "policy_evidence_ids": [
+            "policy_dec1ae94d172ff6ececb1329"
+          ],
+          "review_note": "Policy supports the withheld action, uncertainty, observation question or scenario behavior; this is not an OEM diagnosis, proof of global absence, or measured runtime behavior.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_f27b3a99805a40992be6f399",
+              "text_sha256": "cd2b7a03d0a2618c9eca3d95f66eba13914576cca8d1816d738c8e3fd2952ed9",
+              "text_span": [
+                0,
+                75
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "evidence_fb5ddc131802596bbfc6777e",
+              "text_sha256": "48becce5a538cef49986f7eaf3e2aeb87b0ef1750d50ce75f946e62342b7f1c3",
+              "text_span": [
+                0,
+                419
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "policy_dec1ae94d172ff6ececb1329",
+              "text_sha256": "a3772faf1949c7ddd85457ffbcd9b4cb6a8cf5c0db3cf0acd8b0b2a746439255",
+              "text_span": [
+                0,
+                296
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_f27b3a99805a40992be6f399",
+            "evidence_fb5ddc131802596bbfc6777e",
+            "policy_dec1ae94d172ff6ececb1329"
+          ],
+          "support_relation": "OEM_FACT_WITH_EXPLICIT_POLICY_LIMIT",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            205,
+            244
+          ],
+          "claim_id": "claim_8669f336c30e310fe627619e",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "Please confirm with authorised service.",
+          "manual_evidence_ids": [],
+          "policy_evidence_ids": [
+            "policy_5067c2fa98fb514fad94ddf7"
+          ],
+          "review_note": "Policy supports the withheld action, uncertainty, observation question or scenario behavior; this is not an OEM diagnosis, proof of global absence, or measured runtime behavior.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "policy_5067c2fa98fb514fad94ddf7",
+              "text_sha256": "8e2bbed2260571150e59246f1fb80dbe38a32a045bf713c162c9afc65b190dcd",
+              "text_span": [
+                0,
+                87
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "policy_5067c2fa98fb514fad94ddf7"
+          ],
+          "support_relation": "POLICY_OR_BOUNDED_SCOPE_DERIVATION",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "claim_500d0a5fcce87dfa71984ab0",
+          "evidence_id": "evidence_f27b3a99805a40992be6f399",
+          "source_text_sha256": "cd2b7a03d0a2618c9eca3d95f66eba13914576cca8d1816d738c8e3fd2952ed9"
+        },
+        {
+          "claim_id": "claim_500d0a5fcce87dfa71984ab0",
+          "evidence_id": "evidence_fb5ddc131802596bbfc6777e",
+          "source_text_sha256": "48becce5a538cef49986f7eaf3e2aeb87b0ef1750d50ce75f946e62342b7f1c3"
+        },
+        {
+          "claim_id": "claim_196733afee0f88e87d071f98",
+          "evidence_id": "evidence_f27b3a99805a40992be6f399",
+          "source_text_sha256": "cd2b7a03d0a2618c9eca3d95f66eba13914576cca8d1816d738c8e3fd2952ed9"
+        },
+        {
+          "claim_id": "claim_196733afee0f88e87d071f98",
+          "evidence_id": "evidence_fb5ddc131802596bbfc6777e",
+          "source_text_sha256": "48becce5a538cef49986f7eaf3e2aeb87b0ef1750d50ce75f946e62342b7f1c3"
+        },
+        {
+          "claim_id": "claim_196733afee0f88e87d071f98",
+          "evidence_id": "policy_dec1ae94d172ff6ececb1329",
+          "source_text_sha256": "a3772faf1949c7ddd85457ffbcd9b4cb6a8cf5c0db3cf0acd8b0b2a746439255"
+        },
+        {
+          "claim_id": "claim_8669f336c30e310fe627619e",
+          "evidence_id": "policy_5067c2fa98fb514fad94ddf7",
+          "source_text_sha256": "8e2bbed2260571150e59246f1fb80dbe38a32a045bf713c162c9afc65b190dcd"
+        }
+      ],
+      "source_pages": [
+        116,
+        117
+      ],
+      "reference_plan_sha256": "92c8e358143508e9c94da516362c30c241b446bf415c05ec09a47814c91f8d95",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    },
+    {
+      "record_id": "EXP047",
+      "expected_routes": [
+        "AMBIGUOUS"
+      ],
+      "canonical_answer": "Are the lights dim or is the horn weak?",
+      "claims": [
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            0,
+            39
+          ],
+          "claim_id": "claim_982bde74908104a2e489eb89",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "Are the lights dim or is the horn weak?",
+          "manual_evidence_ids": [
+            "evidence_15e1ce067b76cc524a0448d2"
+          ],
+          "policy_evidence_ids": [
+            "policy_240aa9e9a20851d2f8253ffc"
+          ],
+          "review_note": "Policy supports the withheld action, uncertainty, observation question or scenario behavior; this is not an OEM diagnosis, proof of global absence, or measured runtime behavior.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+              "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85",
+              "text_span": [
+                0,
+                617
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "policy_240aa9e9a20851d2f8253ffc",
+              "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+              "text_span": [
+                0,
+                595
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_15e1ce067b76cc524a0448d2",
+            "policy_240aa9e9a20851d2f8253ffc"
+          ],
+          "support_relation": "OEM_FACT_WITH_EXPLICIT_POLICY_LIMIT",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "claim_982bde74908104a2e489eb89",
+          "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+          "source_text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85"
+        },
+        {
+          "claim_id": "claim_982bde74908104a2e489eb89",
+          "evidence_id": "policy_240aa9e9a20851d2f8253ffc",
+          "source_text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8"
+        }
+      ],
+      "source_pages": [
+        121
+      ],
+      "reference_plan_sha256": "aab352acf9415c3bb938b6dd91f2695180bfbef6d64f95afa3bd11aa28ae9406",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    },
+    {
+      "record_id": "EXP048",
+      "expected_routes": [
+        "SAFETY_STOP"
+      ],
+      "canonical_answer": "The manual says not to ride when the ABS indicator remains continuously ON above5km/h. Have authorised service inspect and correct the brake system; failure risks serious injury or loss of life.",
+      "claims": [
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            0,
+            86
+          ],
+          "claim_id": "claim_a1949bc88bbdc55b100c357e",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "The manual says not to ride when the ABS indicator remains continuously ON above5km/h.",
+          "manual_evidence_ids": [
+            "evidence_be61e25b35303514cfe3e5c8"
+          ],
+          "policy_evidence_ids": [],
+          "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_be61e25b35303514cfe3e5c8",
+              "text_sha256": "848b994c63ee5eaa2231e2ddcba8cc077cb5b6206bda29037241b40381cab316",
+              "text_span": [
+                0,
+                89
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_be61e25b35303514cfe3e5c8"
+          ],
+          "support_relation": "OEM_PARAPHRASE",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            87,
+            194
+          ],
+          "claim_id": "claim_1d1d9c58492f916a9a3a0bad",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "Have authorised service inspect and correct the brake system; failure risks serious injury or loss of life.",
+          "manual_evidence_ids": [
+            "evidence_26bf2297a667bbfcac0535cc"
+          ],
+          "policy_evidence_ids": [],
+          "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_26bf2297a667bbfcac0535cc",
+              "text_sha256": "64a743594e6e347df844c094b19c4d1f06e76aed7b39ad53e321dfab8adf131f",
+              "text_span": [
+                0,
+                541
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_26bf2297a667bbfcac0535cc"
+          ],
+          "support_relation": "OEM_PARAPHRASE",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "claim_a1949bc88bbdc55b100c357e",
+          "evidence_id": "evidence_be61e25b35303514cfe3e5c8",
+          "source_text_sha256": "848b994c63ee5eaa2231e2ddcba8cc077cb5b6206bda29037241b40381cab316"
+        },
+        {
+          "claim_id": "claim_1d1d9c58492f916a9a3a0bad",
+          "evidence_id": "evidence_26bf2297a667bbfcac0535cc",
+          "source_text_sha256": "64a743594e6e347df844c094b19c4d1f06e76aed7b39ad53e321dfab8adf131f"
+        }
+      ],
+      "source_pages": [
+        63,
+        66
+      ],
+      "reference_plan_sha256": "3cf97fb407daaea98a713964ce68c1ecb71a27e60f75c9c2fd6cb2a87ba81382",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    },
+    {
+      "record_id": "EXP003",
+      "expected_routes": [
+        "AMBIGUOUS",
+        "SUPPORTED",
+        "UNSUPPORTED"
+      ],
+      "canonical_answer": "After the switch returns to its centre position, push it inward to cancel. The manual shows left ON, centre push OFF and right ON.",
+      "claims": [
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            0,
+            74
+          ],
+          "claim_id": "claim_8e22054802aefe80fb736c37",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "After the switch returns to its centre position, push it inward to cancel.",
+          "manual_evidence_ids": [
+            "evidence_3504f3277a6948b68f8943b9"
+          ],
+          "policy_evidence_ids": [],
+          "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_3504f3277a6948b68f8943b9",
+              "text_sha256": "398e99088b0183ba5b5a9a57a3cce893cc37e9dad54646bc2ecf27cf34489fc2",
+              "text_span": [
+                0,
+                182
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_3504f3277a6948b68f8943b9"
+          ],
+          "support_relation": "OEM_PARAPHRASE",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "agent_support_adjudicated": true,
+          "answer_span": [
+            75,
+            130
+          ],
+          "claim_id": "claim_29dfbf2853dc2ba0e67bf88e",
+          "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+          "exact_claim_text": "The manual shows left ON, centre push OFF and right ON.",
+          "manual_evidence_ids": [
+            "evidence_15eb4675b3a42a8864b7a47c",
+            "evidence_b1d134b17438c0640f467fe4",
+            "evidence_e02c649cb7e2569a32dbe4c4"
+          ],
+          "policy_evidence_ids": [],
+          "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+          "semantic_support_approved": false,
+          "source_spans": [
+            {
+              "evidence_id": "evidence_15eb4675b3a42a8864b7a47c",
+              "text_sha256": "de71e49aee4a587c5ded959c4342fb7483a76e045a564c8954a661eca884f01f",
+              "text_span": [
+                0,
+                23
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "evidence_b1d134b17438c0640f467fe4",
+              "text_sha256": "562173ad43abb20010a273cf1b49cc9f5ec410e01e74e9254cad99b1cd16f1ab",
+              "text_span": [
+                0,
+                24
+              ],
+              "visual_page": null
+            },
+            {
+              "evidence_id": "evidence_e02c649cb7e2569a32dbe4c4",
+              "text_sha256": "e0e7b99c6c70d1b70d67f04f39e32c694de869e4aaa4548e936f55dde8dc2142",
+              "text_span": [
+                0,
+                24
+              ],
+              "visual_page": null
+            }
+          ],
+          "support_evidence_ids": [
+            "evidence_15eb4675b3a42a8864b7a47c",
+            "evidence_b1d134b17438c0640f467fe4",
+            "evidence_e02c649cb7e2569a32dbe4c4"
+          ],
+          "support_relation": "OEM_PARAPHRASE",
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "canonical_citations": [
+        {
+          "claim_id": "claim_8e22054802aefe80fb736c37",
+          "evidence_id": "evidence_3504f3277a6948b68f8943b9",
+          "source_text_sha256": "398e99088b0183ba5b5a9a57a3cce893cc37e9dad54646bc2ecf27cf34489fc2"
+        },
+        {
+          "claim_id": "claim_29dfbf2853dc2ba0e67bf88e",
+          "evidence_id": "evidence_15eb4675b3a42a8864b7a47c",
+          "source_text_sha256": "de71e49aee4a587c5ded959c4342fb7483a76e045a564c8954a661eca884f01f"
+        },
+        {
+          "claim_id": "claim_29dfbf2853dc2ba0e67bf88e",
+          "evidence_id": "evidence_b1d134b17438c0640f467fe4",
+          "source_text_sha256": "562173ad43abb20010a273cf1b49cc9f5ec410e01e74e9254cad99b1cd16f1ab"
+        },
+        {
+          "claim_id": "claim_29dfbf2853dc2ba0e67bf88e",
+          "evidence_id": "evidence_e02c649cb7e2569a32dbe4c4",
+          "source_text_sha256": "e0e7b99c6c70d1b70d67f04f39e32c694de869e4aaa4548e936f55dde8dc2142"
+        }
+      ],
+      "source_pages": [
+        31
+      ],
+      "reference_plan_sha256": "4f8b2dc9179fda2ef47663cca76ec8512ae05a37011f8b51cf3dd967e1e5090d",
+      "reference_scope": "Exact current source approval; adaptive EXP003 also requires scoped runtime approval"
+    }
+  ]
+}
