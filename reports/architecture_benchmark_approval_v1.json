@@ -1,0 +1,21 @@
+{
+  "schema_version": "architecture-benchmark-coordinator-approval-v1",
+  "decision": "APPROVED_BOUNDED_ARCHITECTURE_EXPERIMENT",
+  "coordinator_actor": "/root",
+  "authority": "OWNER_DELEGATED_AGENT_COORDINATOR",
+  "created_at_utc": "2026-10-10T19:07:11.997167+00:00",
+  "review_file": "reports\\architecture_benchmark_review_v1.json",
+  "review_sha256": "ed0bc87a8b1677643f799c3e8f47cb69ab5840e7d8a4b4307f262ce6e890d175",
+  "budget_preflight_file": "reports\\architecture_budget_preflight_v1.json",
+  "budget_preflight_sha256": "62b15d7d1b80aa03b0a0ced57d8c958f75217a6633c9544879c2c6e284b74e46",
+  "owner_request": "Test first three architectures using Gemma26B, three samples across each, actual measured time budget",
+  "maximum_provider_calls": 18,
+  "expected_provider_calls": 16,
+  "model": "gemma-4-26b-a4b-it",
+  "retries": 0,
+  "automatic_fallback": false,
+  "production_runtime_changed": false,
+  "source_approval_inherited_only_for_exact_bound_content": true,
+  "public_deployment_authorized": false,
+  "browser_acceptance_claimed": false
+}
