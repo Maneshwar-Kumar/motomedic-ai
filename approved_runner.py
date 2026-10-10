@@ -14,10 +14,12 @@ from reviewed_controller import ReviewedController, start_session
 
 
 def build_approved_runner(index, *, root=None, retriever=None, generator=None,
-                          live=False, calls_per_adapter=0, audience="end_user"):
+                          live=False, calls_per_adapter=0, audience="end_user", runtime_config=None):
     root = Path(root or Path(__file__).parent).resolve()
     registry = ApprovedEvidenceRegistry.load(root, index)
-    pipeline = generator or build_generator(gemma_runtime_config(), live_enabled=live,
+    if generator is not None and runtime_config is not None and generator.config != runtime_config:
+        raise ValueError("Supplied generator and selected runtime configuration differ")
+    pipeline = generator or build_generator(runtime_config or gemma_runtime_config(), live_enabled=live,
                                             authorized_calls_per_adapter=calls_per_adapter)
     controller = ReviewedController(registry, retriever or Retriever(index),
                                     response_generator=pipeline)

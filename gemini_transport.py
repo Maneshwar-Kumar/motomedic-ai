@@ -5,7 +5,7 @@ import subprocess
 import threading
 import time
 
-TRANSPORT_VERSION = "gemini-curl-sse-v1"
+TRANSPORT_VERSION = "gemini-curl-sse-utf8-v2"
 TIMING_FIELDS = ("time_namelookup", "time_connect", "time_appconnect", "time_pretransfer",
                  "time_starttransfer", "time_total", "http_code", "http_version", "num_redirects")
 
@@ -13,6 +13,15 @@ class TransportFailure(RuntimeError):
     def __init__(self, reason, telemetry):
         super().__init__(reason)
         self.telemetry = telemetry
+
+def _curl_config(model, key, payload):
+    # curl configuration supports escaped quotes/backslashes, but does not
+    # decode JSON's \u escapes. Keep Unicode as UTF-8 in the outer quotation.
+    return "\n".join([
+        "url = " + json.dumps("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":streamGenerateContent?alt=sse"),
+        "header = " + json.dumps("x-goog-api-key: " + key),
+        'header = "Content-Type: application/json"',
+        "data = " + json.dumps(json.dumps(payload, ensure_ascii=False, allow_nan=False), ensure_ascii=False), ""])
 
 def stream_request(model, key, payload, timeout_seconds):
     curl = shutil.which("curl.exe") or shutil.which("curl")
@@ -22,11 +31,7 @@ def stream_request(model, key, payload, timeout_seconds):
              "usage_reported": False, "raw_content_logged": False}
     if not curl:
         raise TransportFailure("PROVIDER_TRANSPORT_UNAVAILABLE", trace)
-    config = "\n".join([
-        "url = " + json.dumps("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":streamGenerateContent?alt=sse"),
-        "header = " + json.dumps("x-goog-api-key: " + key),
-        'header = "Content-Type: application/json"',
-        "data = " + json.dumps(json.dumps(payload, ensure_ascii=False, allow_nan=False)), ""])
+    config = _curl_config(model, key, payload)
     process, reader = None, None
     started = time.monotonic()
     try:

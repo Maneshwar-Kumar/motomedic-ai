@@ -17,7 +17,7 @@ sys.path.insert(0,str(ROOT))
 from constrained_generator import build_generator,envelope,ValidationFailure
 from controller_contracts import Fact,Truth
 from evidence_registry import EvidenceRegistry,content_hash
-from generation_providers import gemma_runtime_config
+from generation_providers import gemma_runtime_config, GeminiJSONProvider
 from online_retrieve import Retriever
 from reviewed_controller import ReviewedController,start_session
 from verify_controller import NoInferenceEncoder
@@ -324,13 +324,16 @@ def evaluate(suite,live=False,limit=1):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--live',action='store_true')
     parser.add_argument('--approved',action='store_true',help='Use exact coordinator v3 authority in the shared runner')
+    parser.add_argument('--model',choices=GeminiJSONProvider.ALLOWED_MODELS,default=GeminiJSONProvider.MODEL,help='Explicit approved-run model comparison; no automatic fallback')
     parser.add_argument('--output',type=Path,default=ROOT/'reports/approved_text_journeys_v1.json')
     args=parser.parse_args()
     if args.approved:
         from approved_text_journeys import evaluate as evaluate_approved
         import os
-        report = evaluate_approved(Path(os.environ.get('MOTOMEDIC_TEST_INDEX',ROOT/'build/index-bge-final')),args.output,live=args.live)
+        report = evaluate_approved(Path(os.environ.get('MOTOMEDIC_TEST_INDEX',ROOT/'build/index-bge-final')),args.output,live=args.live,model=args.model)
         raise SystemExit(0 if report['passed'] else 1)
+    if args.model != GeminiJSONProvider.MODEL:
+        parser.error('--model comparison requires --approved')
     suite=build_suite();report=evaluate(suite,live=args.live);OUT.mkdir(exist_ok=True)
     (OUT/'suite.json').write_text(json.dumps(suite,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
     (OUT/'results.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

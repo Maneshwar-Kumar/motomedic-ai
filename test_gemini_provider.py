@@ -43,6 +43,88 @@ class GemmaProviderTests(unittest.TestCase):
     def test_selected_model_no_silent_substitution(self):
         for name in ('gemma-4-26b-a4b-it','gemini-2.5-flash','../models/injected'):
             with self.assertRaises(ValueError):GeminiJSONProvider(name,self.config)
+    def test_explicit_26b_config_and_returned_model_are_exact(self):
+        selected='gemma-4-26b-a4b-it';config=gemma_runtime_config(selected)
+        self.assertEqual((config.generator_model,config.verifier_model),(selected,selected))
+        self.assertNotEqual(config.lock,self.config.lock)
+        requested=[]
+        def transport(model,key,body,timeout):
+            requested.append(model)
+            return events({'ok':True},model=selected),{}
+        p=GeminiJSONProvider(selected,config,enabled=True,authorized_calls=1,transport=transport)
+        self.assertEqual(p.complete('policy',{},{}).output,{'ok':True})
+        self.assertEqual(requested,[selected])
+        self.assertEqual(p.last_telemetry['returned_model_versions'],[selected])
+        wrong=GeminiJSONProvider(selected,config,enabled=True,authorized_calls=1,
+            transport=lambda *args:(events({'ok':True},model=GeminiJSONProvider.MODEL),{}))
+        with self.assertRaisesRegex(ProviderFailure,'PROVIDER_INCOMPLETE_OR_MODEL_MISMATCH'):
+            wrong.complete('policy',{}, {})
+
+    def test_unknown_and_mixed_model_configs_are_rejected_before_transport(self):
+        selected='gemma-4-26b-a4b-it';config=gemma_runtime_config(selected)
+        for unknown in ('gemini-2.5-flash','gemma-4-26b','../models/injected'):
+            with self.assertRaises(ValueError):gemma_runtime_config(unknown)
+            with self.assertRaises(ValueError):GeminiJSONProvider(unknown,config)
+        for mixed in (replace(config,generator_model=GeminiJSONProvider.MODEL),
+                      replace(config,verifier_model=GeminiJSONProvider.MODEL)):
+            for model in GeminiJSONProvider.ALLOWED_MODELS:
+                with self.assertRaises(ValueError):GeminiJSONProvider(model,mixed)
+            with self.assertRaises(ValueError):build_generator(mixed)
+        self.assertEqual(gemma_runtime_config().generator_model,GeminiJSONProvider.MODEL)
+
+    def test_live_26b_preflight_requires_separate_exact_owner_authorization(self):
+        from approved_text_journeys import require_live_preflight
+        from datetime import datetime,timezone
+        from pathlib import Path
+        import tempfile
+        selected='gemma-4-26b-a4b-it'
+        proof={'project_id':'motomedic-ai-20261009','live_calls_authorized':True,
+               'main_billing_enabled':True,'inference_billing_enabled':False,
+               'billing_stop_guard_ready':True,'checked_at_utc':datetime.now(timezone.utc).isoformat()}
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)/'simulated-preflight.json'
+            path.write_text(json.dumps(proof),encoding='utf-8')
+            with patch.dict(os.environ,{'MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED':'1',
+                                        'MOTOMEDIC_BUDGET_PREFLIGHT_FILE':str(path)}):
+                self.assertEqual(require_live_preflight()['calls_per_adapter'],2)
+                with self.assertRaisesRegex(ValueError,'Explicit owner authorization'):
+                    require_live_preflight(selected)
+                proof.update(selected_comparison_model=selected,owner_authorized_model_comparison=True)
+                path.write_text(json.dumps(proof),encoding='utf-8')
+                approved=require_live_preflight(selected)
+                self.assertEqual(approved['selected_comparison_model'],selected)
+                self.assertTrue(approved['owner_authorized_model_comparison'])
+                proof['selected_comparison_model']=GeminiJSONProvider.MODEL
+                path.write_text(json.dumps(proof),encoding='utf-8')
+                with self.assertRaisesRegex(ValueError,'Explicit owner authorization'):
+                    require_live_preflight(selected)
+
+    def test_approved_factory_wires_explicit_26b_without_changing_default(self):
+        from approved_runner import build_approved_runner
+        c,_,_,_=fixture();config=gemma_runtime_config('gemma-4-26b-a4b-it')
+        with patch('approved_runner.ApprovedEvidenceRegistry.load',return_value=c.registry):
+            selected=build_approved_runner('unused-index',retriever=c.retriever,runtime_config=config)
+            default=build_approved_runner('unused-index',retriever=c.retriever)
+        self.assertEqual(selected.response_generator.config,config)
+        self.assertEqual(selected.response_generator.provider.model,'gemma-4-26b-a4b-it')
+        self.assertEqual(default.response_generator.provider.model,GeminiJSONProvider.MODEL)
+        with patch('approved_runner.ApprovedEvidenceRegistry.load',return_value=c.registry):
+            with self.assertRaisesRegex(ValueError,'configuration differ'):
+                build_approved_runner('unused-index',retriever=c.retriever,
+                                      generator=default.response_generator,runtime_config=config)
+
+    def test_explicit_26b_outage_never_falls_back_to_31b(self):
+        selected='gemma-4-26b-a4b-it';requested=[]
+        def failure(model,*args):
+            requested.append(model)
+            raise TransportFailure('PROVIDER_SERVICE_ERROR',{'http_status':500,'retry_count':0})
+        p=GeminiJSONProvider(selected,gemma_runtime_config(selected),enabled=True,
+                             authorized_calls=1,transport=failure)
+        with self.assertRaisesRegex(ProviderFailure,'PROVIDER_SERVICE_ERROR'):p.complete('policy',{}, {})
+        with self.assertRaisesRegex(ProviderFailure,'LIVE_CALL_NOT_AUTHORIZED'):p.complete('policy',{}, {})
+        self.assertEqual(requested,[selected])
+        self.assertEqual(p.remaining_calls,0)
+
     def test_payload_and_separate_policy_no_credentials_in_telemetry(self):
         p=self.provider();result=p.complete('POLICY_SENTINEL',{'observation':'untrusted data'},object_schema({'ok':{'type':'boolean'}}))
         model,key,body,timeout=self.calls[0]
@@ -50,7 +132,7 @@ class GemmaProviderTests(unittest.TestCase):
         self.assertIn('POLICY_SENTINEL',body['systemInstruction']['parts'][0]['text'])
         self.assertEqual(body['systemInstruction']['role'],'user')
         self.assertEqual(body['contents'][0]['role'],'user')
-        self.assertEqual(self.config.provider_revision,'gemini-sse-json-role-v2')
+        self.assertEqual(self.config.provider_revision,'gemini-sse-json-models-utf8-v3')
         self.assertEqual(body['generationConfig']['thinkingConfig'],{'thinkingLevel':'minimal'})
         self.assertNotIn('tools',body)
         self.assertNotIn('SECRET_SENTINEL',json.dumps(result.telemetry))
@@ -84,21 +166,21 @@ class GemmaProviderTests(unittest.TestCase):
             with self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED'):p.complete('policy',{}, {})
 
 class GemmaControllerTests(unittest.TestCase):
-    def pipeline(self, mutation=None, judge_reject=False, outage=False):
-        c,s,_,_=fixture();config=gemma_runtime_config();pipeline=build_generator(config,live_enabled=True,authorized_calls_per_adapter=1)
-        self.composer_calls=0;self.verifier_calls=0
+    def pipeline(self, mutation=None, judge_reject=False, outage=False, model=GeminiJSONProvider.MODEL):
+        c,s,_,_=fixture();config=gemma_runtime_config(model);pipeline=build_generator(config,live_enabled=True,authorized_calls_per_adapter=1)
+        self.composer_calls=0;self.verifier_calls=0;self.requested_models=[]
         def composer(model,key,body,timeout):
-            self.composer_calls+=1
+            self.composer_calls+=1;self.requested_models.append(model)
             if outage:raise TransportFailure('PROVIDER_SERVICE_ERROR',{'http_status':500})
             allowed=json.loads(body['contents'][0]['parts'][0]['text'])
             d={k:allowed[k] for k in ('schema_version','route','step_id','kind','citations')}
             d['claims']=[{'claim_id':r['claim_id'],'text':r['wording'][0],'evidence_ids':r['evidence_ids']} for r in allowed['claims']]
             if mutation:mutation(d)
-            return events(d),{'http_status':200,'first_visible_token_seconds':.01}
+            return events(d,model=model),{'http_status':200,'first_visible_token_seconds':.01}
         def verifier(model,key,body,timeout):
-            self.verifier_calls+=1;payload=json.loads(body['contents'][0]['parts'][0]['text'])
+            self.verifier_calls+=1;self.requested_models.append(model);payload=json.loads(body['contents'][0]['parts'][0]['text'])
             d={'claims':[{'claim_id':r['claim_id'],'supported':not judge_reject} for r in payload['claims']], 'unsupported_additions':judge_reject}
-            return events(d),{'http_status':200,'first_visible_token_seconds':.02}
+            return events(d,model=model),{'http_status':200,'first_visible_token_seconds':.02}
         pipeline.provider.transport=composer;pipeline.verifier.provider.transport=verifier
         c.response_generator=pipeline;s=replace(s,generation_lock=config.lock)
         return c,s
@@ -112,6 +194,18 @@ class GemmaControllerTests(unittest.TestCase):
         self.assertEqual(trace['verifier_transport']['first_visible_token_seconds'],.02)
         self.assertNotIn('SECRET_SENTINEL',json.dumps(trace))
         self.assertNotIn('raw rider media/text sentinel',json.dumps(trace))
+    @patch.dict(os.environ,{'MOTOMEDIC_GEMINI_API_KEY':'SECRET_SENTINEL'})
+    def test_explicit_26b_has_independent_exact_composer_and_verifier(self):
+        selected='gemma-4-26b-a4b-it'
+        c,s=self.pipeline(model=selected);_,r,_=c.next(s,'scripted rider')
+        self.assertEqual(r.type,ResponseType.SUPPORTED)
+        self.assertEqual((self.composer_calls,self.verifier_calls),(1,1))
+        self.assertEqual(self.requested_models,[selected,selected])
+        pipeline=c.response_generator
+        self.assertIsNot(pipeline.provider,pipeline.verifier.provider)
+        self.assertEqual((pipeline.provider.model,pipeline.verifier.provider.model),(selected,selected))
+        self.assertEqual((pipeline.provider.remaining_calls,pipeline.verifier.provider.remaining_calls),(0,0))
+
     @patch.dict(os.environ,{'MOTOMEDIC_GEMINI_API_KEY':'SECRET_SENTINEL'})
     def test_altered_claim_is_rejected_before_semantic_call(self):
         c,s=self.pipeline(mutation=lambda d:d['claims'][0].update(text='Invented bypass at 999 volts.'))

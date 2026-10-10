@@ -18,7 +18,7 @@ from approved_registry import ApprovedEvidenceRegistry, RELEASE_SHA
 from constrained_generator import ConstrainedGenerator, SemanticSupportAdapter
 from controller_contracts import Fact, Outcome, ResponseType
 from diagnose import ReviewedService
-from generation_providers import ProviderResult
+from generation_providers import ProviderResult, GeminiJSONProvider, gemma_runtime_config
 from online_retrieve import Retriever
 from reviewed_controller import ReviewedController
 from session_store import SQLiteSessionStore
@@ -67,7 +67,7 @@ class SimulatedRetrieval:
                                      'missing_evidence_ids': [], 'coverage_established': True}}
 
 
-def require_live_preflight():
+def require_live_preflight(model=GeminiJSONProvider.MODEL):
     """No provider call is permitted merely because --live was supplied."""
     if os.environ.get('MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED') != '1':
         raise ValueError('Grounded live allocation not authorized')
@@ -80,6 +80,10 @@ def require_live_preflight():
                 'billing_stop_guard_ready': True}
     if any(type(proof.get(k)) is not type(v) or proof[k] != v for k, v in expected.items()):
         raise ValueError('Budget/account preflight does not authorize this free-only allocation')
+    if model == 'gemma-4-26b-a4b-it':
+        if (proof.get('selected_comparison_model') != model or
+                proof.get('owner_authorized_model_comparison') is not True):
+            raise ValueError('Explicit owner authorization for selected 26B comparison missing')
     checked = datetime.fromisoformat(proof['checked_at_utc'].replace('Z', '+00:00'))
     if checked.tzinfo is None:
         raise ValueError('Budget preflight lacks UTC offset')
@@ -90,7 +94,10 @@ def require_live_preflight():
             'preflight_sha256': hashlib.sha256(Path(path).read_bytes()).hexdigest(),
             'project_id': proof['project_id'], 'checked_at_utc': proof['checked_at_utc'],
             'main_billing_enabled': True, 'inference_billing_enabled': False,
-            'billing_stop_guard_ready': True, 'calls_per_adapter': 2}
+            'billing_stop_guard_ready': True, 'calls_per_adapter': 2,
+            'selected_comparison_model': model if model == 'gemma-4-26b-a4b-it' else None,
+            'owner_authorized_model_comparison': proof.get('owner_authorized_model_comparison') is True
+                if model == 'gemma-4-26b-a4b-it' else False}
 
 
 def _citation_check(registry, record_id, response):
@@ -108,21 +115,22 @@ def _citation_check(registry, record_id, response):
             'required_evidence_ids': sorted(required), 'cited_evidence_ids': sorted(cited)}
 
 
-def evaluate(index, output, live=False):
+def evaluate(index, output, live=False, model=GeminiJSONProvider.MODEL):
     root = Path(__file__).resolve().parent
     index, output = Path(index).resolve(), Path(output).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
-    preflight = require_live_preflight() if live else None
+    config = gemma_runtime_config(model)
+    preflight = require_live_preflight(model) if live else None
     traces, rows, checks = [], [], []
     started = time.perf_counter()
     if live:
-        controller = build_approved_runner(index, root=root, live=True, calls_per_adapter=2)
+        controller = build_approved_runner(index, root=root, live=True, calls_per_adapter=2, runtime_config=config)
         registry, retrieval, pipeline = (controller.registry, controller.retriever,
                                          controller.response_generator)
     else:
         registry = ApprovedEvidenceRegistry.load(root, index)
         retrieval = SimulatedRetrieval(index)
-        pipeline = ConstrainedGenerator(SimulatedProvider(), SemanticSupportAdapter(SimulatedProvider(judge=True)))
+        pipeline = ConstrainedGenerator(SimulatedProvider(), SemanticSupportAdapter(SimulatedProvider(judge=True)), config)
     # Preserve the snapshots so another process can inspect typed engineering state.
     store_path = output.with_suffix('.sessions.sqlite')
     store = SQLiteSessionStore(str(store_path))
@@ -216,6 +224,7 @@ def evaluate(index, output, live=False):
               'approval_manifest_sha256': RELEASE_SHA, 'index_id': registry.index_id,
               'manual_checksum': registry.checksum, 'registry_lock': registry.lock,
               'runtime_versions': pipeline.config.versions(), 'runtime_lock': pipeline.config.lock,
+              'selected_model': model, 'automatic_model_fallback': False,
               'rider_answers': 'EXPLICIT_SCRIPTED_EVALUATION_OBSERVATIONS_NOT_FIXTURE_FACTS',
               'storage': {'backend': 'SQLite', 'scope': 'ENGINEERING_HARNESS_ONLY',
                           'file': store_path.name, 'hosted_durable_store_claimed': False},
@@ -253,6 +262,7 @@ if __name__ == '__main__':
     parser.add_argument('--index', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--live', action='store_true')
+    parser.add_argument('--model', choices=GeminiJSONProvider.ALLOWED_MODELS, default=GeminiJSONProvider.MODEL)
     args = parser.parse_args()
-    result = evaluate(args.index, args.output, args.live)
+    result = evaluate(args.index, args.output, args.live, args.model)
     raise SystemExit(0 if result['passed'] else 1)

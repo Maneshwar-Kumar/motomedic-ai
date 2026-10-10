@@ -95,19 +95,22 @@ class OpenAIResponsesProvider:
 
 
 class GeminiJSONProvider:
-    """Selected Gemma 31B only. JSON is locally validated, not provider-guaranteed.
+    """Explicit allowlisted Gemma comparison only. JSON is locally validated, not provider-guaranteed.
 
     System instruction carries policy and schema; payload remains untrusted user data.
     One SSE request, minimal thinking, no tools, history, fallback model or retries.
     """
     MODEL = "gemma-4-31b-it"
+    ALLOWED_MODELS = (MODEL, "gemma-4-26b-a4b-it")
     def __init__(self, model, config, *, enabled=False, authorized_calls=0, transport=None):
         from gemini_transport import stream_request
-        if not isinstance(config, RuntimeConfig) or model != self.MODEL:
-            raise ValueError("Selected Gemma 4 31B model required")
+        if (not isinstance(config, RuntimeConfig) or model not in self.ALLOWED_MODELS or
+                config.generator_model != model or config.verifier_model != model or
+                config.generator_provider != "gemini" or config.verifier_provider != "gemini"):
+            raise ValueError("Exact same allowlisted Gemma model required for both adapters")
         if type(authorized_calls) is not int or authorized_calls < 0:
             raise ValueError("Finite nonnegative call allocation required")
-        if config.provider_revision != "gemini-sse-json-role-v2":
+        if config.provider_revision != "gemini-sse-json-models-utf8-v3":
             raise ValueError("Gemini transport revision required")
         self.model, self.config = model, config
         self.enabled, self.remaining_calls = enabled, authorized_calls
@@ -197,11 +200,13 @@ class GeminiJSONProvider:
             raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", self.last_telemetry) from None
 
 
-def gemma_runtime_config():
-    """Explicit selected candidate; defaults elsewhere remain fail closed."""
-    return RuntimeConfig(generator_provider="gemini", generator_model=GeminiJSONProvider.MODEL,
-                         verifier_provider="gemini", verifier_model=GeminiJSONProvider.MODEL,
-                         provider_revision="gemini-sse-json-role-v2", timeout_seconds=30)
+def gemma_runtime_config(model=GeminiJSONProvider.MODEL):
+    """Explicit comparison selection; 31B default, never an automatic fallback."""
+    if model not in GeminiJSONProvider.ALLOWED_MODELS:
+        raise ValueError("Unknown Gemma comparison model")
+    return RuntimeConfig(generator_provider="gemini", generator_model=model,
+                         verifier_provider="gemini", verifier_model=model,
+                         provider_revision="gemini-sse-json-models-utf8-v3", timeout_seconds=30)
 
 
 def configured_provider(name, model, config, **kwargs):
