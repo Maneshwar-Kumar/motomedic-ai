@@ -26,12 +26,14 @@ from constrained_generator import envelope, strict_schema, citations, Validation
 from controller_contracts import Fact, Outcome, ResponseType
 from generation_contracts import object_schema
 from generation_providers import GeminiJSONProvider, gemma_runtime_config, ProviderFailure
+from generation_providers import ProviderResult
+from semantic_candidate_cache import binding as cache_binding, FEATURE_VERSION
 from online_retrieve import Retriever
 from reviewed_controller import ReviewedController, start_session, append_attempt
 from session_store import SQLiteSessionStore
 
 MODEL = "gemma-4-26b-a4b-it"
-VERSION = "architecture-comparison-v3"
+VERSION = "architecture-comparison-v4"
 MAX_CALLS = 18
 SAMPLES = (
     ("GEN003", "Cars in my mirrors look farther away than they really are. Is that described?"),
@@ -280,7 +282,8 @@ class BoundedProvider:
         return self.allocation.invoke(self.provider, policy, payload, schema)
 
 
-def run_sample(registry, retriever, config, allocation, store, rid, query, architecture):
+def run_sample(registry, retriever, config, allocation, store, rid, query, architecture, *,
+               delivery_stream=None, semantic_cache=None, cache_encoder=None, cache_bypass=True):
     capture = Capture(config)
     controller = ReviewedController(registry, retriever, response_generator=capture)
     controller.audience = "end_user"
@@ -299,14 +302,26 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
            "first_verified_output_seconds": None, "complete_response_seconds": None,
            "generation_seconds": None, "verification_wall_seconds": 0,
            "session_and_delivery_commit_seconds": 0, "delivered_blocks": [], "verification_calls": [],
-           "benchmark_sink_only": True, "raw_input_or_source_text_recorded": False}
+           "benchmark_sink_only": True, "raw_input_or_source_text_recorded": False,
+           "feature_version": FEATURE_VERSION, "semantic_cache": "BYPASS",
+           "cache_lookup_seconds": 0, "stream_event_count": 0,
+           "first_stream_event_seconds": None}
     persisted, released = session, {}
     allowed = None
     generation_start = None
+    cached_texts, cache_vector, cache_authority = None, None, None
+
+    def citation_closure():
+        refs = citations(registry, registry.step(allowed["step_id"]))
+        if refs != allowed["citations"] or not set(registry.step(allowed["step_id"]).required_evidence_ids) <= {
+                c["evidence_id"] for c in refs}:
+            raise ValidationFailure("INCOMPLETE_CITATION_CLOSURE")
+        return refs
 
     def release(index, indices, texts):
         nonlocal persisted
         validate_texts(texts, len(indices))
+        refs = citation_closure()
         if store.load(session.session_id) != persisted:
             raise ValidationFailure("SESSION_CHANGED_DURING_STREAM")
         before = time.perf_counter()
@@ -327,6 +342,13 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
                          (session.session_id, index, persisted.version, content_hash, json.dumps(eids)))
         row["session_and_delivery_commit_seconds"] += time.perf_counter() - before
         released[index] = texts
+        if delivery_stream is not None:
+            delivery_stream.deliver({"session_id": session.session_id, "session_version": persisted.version,
+                "block": index, "texts": deepcopy(texts), "citations": deepcopy(refs),
+                "content_sha256": content_hash, "architecture": architecture})
+            row["stream_event_count"] += 1
+            if row["first_stream_event_seconds"] is None:
+                row["first_stream_event_seconds"] = time.perf_counter() - started
         at = time.perf_counter() - started
         row["delivered_blocks"].append({"block": index, "at_seconds": at,
                                          "claim_indices": indices, "content_sha256": content_hash})
@@ -334,6 +356,8 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
             row["first_verified_output_seconds"] = at
 
     try:
+        if architecture not in {"A_COMPONENT_SELECTION", "B_SHORT_GENERATION", "C_VERIFIED_STREAM_BLOCKS"}:
+            raise ValidationFailure("UNKNOWN_ARCHITECTURE")
         session = store.load(session.session_id)
         controller.next(session, query)
         row["controller_retrieval_assembly_seconds"] = time.perf_counter() - started
@@ -345,11 +369,30 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
         row["claim_count"] = len(allowed["claims"])
         row["citation_count"] = len(allowed["citations"])
         units = partition(allowed)
+        if semantic_cache is not None and not cache_bypass:
+            cache_started = time.perf_counter()
+            try:
+                if cache_encoder is None: raise ValueError("Cache encoder required")
+                cache_vector = cache_encoder(query)
+                cache_authority = cache_binding(controller, capture.session, allowed, architecture, config,
+                    semantic_cache.embedding_revision, hashlib.sha256(
+                        (CHOOSE_POLICY + WRITE_POLICY + STREAM_POLICY + CHECK_POLICY).encode()).hexdigest())
+                cached_texts, row["semantic_cache"] = semantic_cache.lookup(cache_vector, cache_authority, allowed)
+            except Exception as exc:
+                # Cache is optional; malformed candidates/embedding failures miss closed.
+                cache_vector, cache_authority = None, None
+                row["semantic_cache"] = "CACHE_ERROR_MISS"
+                row["cache_error_class"] = type(exc).__name__
+            row["cache_lookup_seconds"] = time.perf_counter() - cache_started
         provider = BoundedProvider(allocation, config)
         generation_start = time.perf_counter()
         row["generation_started_at_seconds"] = generation_start - started
         if architecture == "A_COMPONENT_SELECTION":
-            result = provider.complete(CHOOSE_POLICY + " Return exactly " + str(len(allowed["claims"])) + " integer choices.",
+            if cached_texts is not None:
+                choices = [c["wording"].index(t) for c,t in zip(allowed["claims"],cached_texts)]
+                result = ProviderResult({"choices": choices}, telemetry={"execution": "REVIEWED_CANDIDATE_CACHE_NO_GENERATION_REQUEST"})
+            else:
+                result = provider.complete(CHOOSE_POLICY + " Return exactly " + str(len(allowed["claims"])) + " integer choices.",
                 {"claims": [{"position": i, "allowed_indices": list(range(len(c["wording"]))), "options": [{"index": j, "text": t} for j,t in enumerate(c["wording"])]}
                             for i,c in enumerate(allowed["claims"])]},
                 sized_schema(CHOICE_SCHEMA, "choices", len(allowed["claims"])))
@@ -368,7 +411,10 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
             release(0, list(range(len(texts))), texts)
             row["support_check"] = "EXACT_SOURCE_REVIEWED_COMPONENT_BINDINGS_NO_RUNTIME_LLM_VERIFIER"
         elif architecture == "B_SHORT_GENERATION":
-            result = provider.complete(WRITE_POLICY, {"claims": [
+            if cached_texts is not None:
+                result = ProviderResult({"texts": cached_texts}, telemetry={"execution": "REVIEWED_CANDIDATE_CACHE_NO_GENERATION_REQUEST"})
+            else:
+                result = provider.complete(WRITE_POLICY, {"claims": [
                 {"meaning": c["wording"][0], "role": c["role"]} for c in allowed["claims"]]}, sized_schema(TEXT_SCHEMA, "texts", len(allowed["claims"])))
             strict_schema(result.output, TEXT_SCHEMA)
             texts = result.output["texts"]
@@ -423,6 +469,15 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
                     stream_request(m,k,b,t,chunk_received))
                 def generate():
                     try:
+                        if cached_texts is not None:
+                            blocks = []
+                            for index, ids in enumerate(units):
+                                texts = [cached_texts[i] for i in ids]
+                                decoded(index, texts)
+                                blocks.append({"texts": texts})
+                            result = ProviderResult({"blocks": blocks}, telemetry={"execution": "REVIEWED_CANDIDATE_CACHE_NO_GENERATION_REQUEST"})
+                            events.put(("complete", None, result, time.perf_counter() - generation_start))
+                            return
                         result = stream_provider.complete(STREAM_POLICY, {"blocks": [
                             {"claims": [{"meaning": allowed["claims"][i]["wording"][0],
                                          "role": allowed["claims"][i]["role"]} for i in ids]} for ids in units]}, sized_schema(BLOCK_SCHEMA, "blocks", len(units)))
@@ -459,15 +514,12 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
                     b["at_seconds"] < row["generation_started_at_seconds"] + row["generation_seconds"]
                     for b in row["delivered_blocks"])
             row["support_check"] = "PER_COMPLETE_INDEPENDENT_BLOCK_REAL_LLM_SUPPORT_AND_COMPLETENESS"
-            row["terminal_provider_integrity_checked_after_early_blocks"] = True
+            row["terminal_provider_integrity_checked_after_early_blocks"] = cached_texts is None
         texts = [t for i in sorted(released) for t in released[i]]
         reconstruct(allowed, texts)
         if envelope(controller, capture.session, allowed["step_id"]) != allowed:
             raise ValidationFailure("ENVELOPE_CHANGED")
-        refs = citations(registry, registry.step(allowed["step_id"]))
-        if refs != allowed["citations"] or not set(registry.step(allowed["step_id"]).required_evidence_ids) <= {
-                c["evidence_id"] for c in refs}:
-            raise ValidationFailure("INCOMPLETE_CITATION_CLOSURE")
+        citation_closure()
         if store.load(session.session_id) != persisted:
             raise ValidationFailure("SESSION_PERSISTENCE_FAILED")
         row.update(route="SUPPORTED", complete_response_seconds=time.perf_counter() - started,
@@ -476,6 +528,12 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
                    rider_visible_characters=sum(len(t) for t in texts),
                    complete_response_under_5_seconds=False)
         row["complete_response_under_5_seconds"] = row["complete_response_seconds"] < 5
+        if semantic_cache is not None and cache_vector is not None:
+            try:
+                row["cache_store_result"] = semantic_cache.put(cache_vector, cache_authority, allowed, texts)
+            except Exception as exc:
+                row["cache_store_result"] = "CACHE_STORE_ERROR"
+                row["cache_store_error_class"] = type(exc).__name__
     except Exception as exc:
         # Never serialize exception bodies containing raw output or source text.
         row["failure_class"] = type(exc).__name__
@@ -490,7 +548,8 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
         row["failed_attempt_seconds"] = time.perf_counter() - started
         if generation_start is not None and row["generation_seconds"] is None:
             row["generation_seconds"] = time.perf_counter() - generation_start
-        row["partial_verified_delivery_before_failure"] = bool(released)
+        row["durable_verified_delivery_before_failure"] = bool(released)
+        row["partial_verified_delivery_before_failure"] = (row["stream_event_count"] > 0 if delivery_stream is not None else bool(released))
     attempts = sorted((deepcopy(x) for x in allocation.records if x["call"] > call_start), key=lambda x:x["call"])
     row["provider_attempts"] = attempts
     row["admission_failures"] = deepcopy(allocation.admission_failures[admission_failure_start:])
@@ -520,6 +579,8 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
     row["verification_wall_seconds"] = sum(finish-begin for begin,finish in merged)
     row["generation_verification_overlap_seconds"] = sum(max(0,min(finish,generation[0]["finished_at_seconds"])-max(begin,generation[0]["started_at_seconds"]))
         for begin,finish in merged) if generation else 0
+    if delivery_stream is not None:
+        delivery_stream.finish(row)
     return row
 
 
@@ -529,8 +590,8 @@ def evaluate(index, output):
     preflight.pop("calls_per_adapter", None)
     preflight["maximum_total_provider_calls"] = MAX_CALLS
     proof = json.loads(Path(os.environ["MOTOMEDIC_BUDGET_PREFLIGHT_FILE"]).read_text(encoding="utf-8-sig"))
-    review_path = root / "reports/architecture_benchmark_review_v3.json"
-    approval_path = root / "reports/architecture_benchmark_approval_v3.json"
+    review_path = root / "reports/architecture_benchmark_review_v4.json"
+    approval_path = root / "reports/architecture_benchmark_approval_v4.json"
     review = json.loads(review_path.read_text(encoding="utf-8"))
     approval = json.loads(approval_path.read_text(encoding="utf-8"))
     if (review["decision"] != "APPROVED_EXACT_ENGINEERING_BENCHMARK" or
@@ -538,7 +599,7 @@ def evaluate(index, output):
             approval["decision"] != "APPROVED_BOUNDED_ARCHITECTURE_EXPERIMENT" or
             approval["budget_preflight_sha256"] != digest(os.environ["MOTOMEDIC_BUDGET_PREFLIGHT_FILE"]) or
             proof.get("maximum_provider_calls") != MAX_CALLS or
-            proof.get("allocation_id") != "owner-gemma26b-three-architectures-three-samples-v3"):
+            proof.get("allocation_id") != "owner-gemma26b-three-architectures-three-samples-v4"):
         raise ValueError("Exact experimental review/allocation required")
     for name, expected in review["code_sha256"].items():
         if digest(root / name) != expected:

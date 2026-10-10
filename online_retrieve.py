@@ -5,6 +5,7 @@ Every returned bundle is candidate evidence; source review and answer gates rema
 from __future__ import annotations
 import argparse
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
 import time
@@ -114,6 +115,35 @@ class Retriever:
             [self.chunks[i]["parent_section_id"] for i in rankings[1]],
             sorted(sections.items(), key=lambda item: (-item[1], item[0])), policy)
         return candidates, fused, signals
+
+    def _dense_scores(self, query):
+        import numpy as np
+        started = time.perf_counter()
+        vector = self.model.encode(query, normalize_embeddings=True)
+        if np.shape(vector) != (self.vectors.shape[1],) or not np.isfinite(vector).all():
+            raise RetrievalSystemError("SYSTEM_ERROR: invalid query embedding")
+        return self.vectors @ vector, time.perf_counter() - started
+
+    def _sparse_scores(self, query):
+        import numpy as np
+        started = time.perf_counter()
+        sparse = np.zeros(len(self.chunks))
+        bm = self.bm25
+        for term in set(tokens(query)):
+            for idx, tf in bm["postings"].get(term, []):
+                denom = tf + bm["k1"] * (1 - bm["b"] + bm["b"] * bm["lengths"][idx] / max(bm["avgdl"], 1))
+                sparse[idx] += bm["idf"][term] * tf * (bm["k1"] + 1) / denom
+        return sparse, time.perf_counter() - started
+
+    def _first_stage(self, query):
+        # One dense query embedding, overlapped with independent sparse scoring.
+        # Index/filter/ranking/assembly authority is unchanged. Both must succeed.
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            dense_task = pool.submit(self._dense_scores, query)
+            sparse_task = pool.submit(self._sparse_scores, query)
+            dense, dense_seconds = dense_task.result()
+            sparse, sparse_seconds = sparse_task.result()
+        return dense, sparse, dense_seconds, sparse_seconds
 
     def _rerank(self, query, candidates, policy):
         import numpy as np
@@ -253,16 +283,10 @@ class Retriever:
                 candidates, fused, signals = [], {}, {"ranking_uncertain":False, "uncertainty_reasons":[]}
             else:
                 stage = time.perf_counter()
-                vector = self.model.encode(query, normalize_embeddings=True)
-                if np.shape(vector) != (self.vectors.shape[1],) or not np.isfinite(vector).all():
-                    raise RetrievalSystemError("SYSTEM_ERROR: invalid query embedding")
-                dense = self.vectors @ vector
-                sparse = np.zeros(len(self.chunks))
-                bm = self.bm25
-                for term in set(tokens(query)):
-                    for idx, tf in bm["postings"].get(term, []):
-                        denom = tf + bm["k1"] * (1 - bm["b"] + bm["b"] * bm["lengths"][idx] / max(bm["avgdl"], 1))
-                        sparse[idx] += bm["idf"][term] * tf * (bm["k1"] + 1) / denom
+                dense, sparse, dense_seconds, sparse_seconds = self._first_stage(query)
+                telemetry["first_stage_execution"] = "CONCURRENT_DENSE_AND_BM25_V1"
+                telemetry["stages_seconds"].update(dense_embedding_and_scoring=dense_seconds,
+                                                    bm25_scoring=sparse_seconds)
                 candidates, fused, signals = self._rank(dense, sparse, candidate_limit, policy, allowed_indices)
                 telemetry["stages_seconds"]["first_retrieval"] = time.perf_counter()-stage
             stage = time.perf_counter()

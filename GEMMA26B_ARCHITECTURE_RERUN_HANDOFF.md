@@ -1,5 +1,17 @@
 # Owner-requested new-chat continuation, 11 October 2026
 
+## Concurrent retrieval, candidate cache and verified delivery hooks, 11 October 2026
+
+The follow-up implementation changes `online_retrieve.py` to run BM25 alongside dense query embedding/scoring, then await both before unchanged rank fusion and evidence gates. Separate stage telemetry records overlap-capable work; no measured latency gain is claimed.
+
+`semantic_candidate_cache.py` adds a bounded, ephemeral candidate cache (default 64 entries, 300-second TTL, cosine threshold 0.95). Similarity locates a candidate; exact manual/index/registry, variant, selected step, typed state/history, runtime/model/prompt/embedding revision and allowed-envelope bindings determine reuse. Only current reviewed wording is stored. Fresh retrieval and eligibility checks still run; B/C still call their verifier. Unreviewed generated paraphrases are not cached. There is no cached retrieval or persistent rider text/media. Cache bypass remains the default for benchmark comparability.
+
+`verified_delivery_stream.py` supplies operation-scoped event and SSE iterators. Pass a `VerifiedDeliveryStream()` as `delivery_stream` to `architecture_benchmark.run_sample`, run the producer in a worker, and consume `iter_events()` or `iter_sse()` in the transport. A emits the complete selected approved unit after exact gates and durable save; B emits after whole-answer verification and durable save; C emits only independently safe complete blocks after their verification and durable save. Required cautions remain inseparable. Partial provider failure ends with an error event rather than a successful completion. Raw provider token fragments never reach this sink.
+
+To opt into candidate caching, share a `SemanticCandidateCache(embedding_revision=<pinned revision>)` across calls and pass it as `semantic_cache`, a matching server-owned query encoder as `cache_encoder`, and `cache_bypass=False`. B/C hits skip composition only. Cache encoder errors miss closed and return to the ordinary grounded path.
+
+These are engineering runtime hooks, not a deployed browser/API feature. Hosted authenticated operation ownership, connection/reconnection handling and rider UI wiring remain pending. The new hosted `architecture-feature-contracts.yml` workflow checks contracts without provider secrets or provider access. No new live model comparison, billing change or public deployment is implied. Runtime protocol is now v4; missing fresh v4 live approval prevents reuse of the v3 allocation. Historical v3 timings and approvals below remain preserved. The independent feature review is `reports/architecture_features_review_v1.json`.
+
 ## Completed continuation: protocol v3, 11 October 2026
 
 The work below has now been completed in the new local chat. Exact reviewed commit `3cd4c9ada6223decce6370089305ba9f7921afb9` ran once in hosted GitHub build `38080802638`. Shared conservative experimental admission covers all generation/verifier attempts: six request starts per rolling minute, minimum ten-second spacing, and 12,000 input-token reservations per minute using UTF-8 JSON byte lengths plus a protocol allowance. These settings are not verified account quotas. Signed-in AI Studio remained unavailable; authenticated read-only Service Usage quota inspection again returned HTTP404. No billing or production deployment changed.

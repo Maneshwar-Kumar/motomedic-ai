@@ -173,7 +173,7 @@ class StreamReleaseContracts(unittest.TestCase):
     def setUpClass(cls):
         cls.registry = ApprovedEvidenceRegistry.load(ROOT, INDEX)
 
-    def run_stream(self, *, terminal_failure=False, judge_reject=False, invalid_thought=False):
+    def run_stream(self, *, terminal_failure=False, judge_reject=False, invalid_thought=False, delivery_stream=None):
         import json
         import time
         import threading
@@ -223,7 +223,8 @@ class StreamReleaseContracts(unittest.TestCase):
             try:
                 with patch('architecture_benchmark.BoundedProvider',Provider),patch('benchmark_stream_transport.stream_request',transport):
                     row=run_sample(self.registry,SimulatedRetrieval(INDEX),gemma_runtime_config(MODEL),
-                                   Allocation(),store,'GEN026','private-input','C_VERIFIED_STREAM_BLOCKS')
+                                   Allocation(),store,'GEN026','private-input','C_VERIFIED_STREAM_BLOCKS',
+                                   delivery_stream=delivery_stream)
                 count=store.db.execute('SELECT count(*) FROM benchmark_deliveries').fetchone()[0]
                 return row,count
             finally:store.close()
