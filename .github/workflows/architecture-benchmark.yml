@@ -36,12 +36,12 @@ jobs:
           github-token: ${{ github.token }}
           path: build/index
       - name: Verify experimental contracts before provider access
-        run: python -m unittest -v test_architecture_benchmark test_gemini_provider test_gemini_transport_bytes
-      - name: Nine bounded grounded architecture samples, zero retries
+        run: python -m unittest -v test_architecture_benchmark test_benchmark_pacing test_gemini_provider test_gemini_transport_bytes
+      - name: Nine bounded grounded architecture samples, shared pacing and at most two retries
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
           MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
-          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/architecture_budget_preflight_v2.json
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/architecture_budget_preflight_v3.json
         run: python architecture_benchmark.py --index build/index --output build/architecture_comparison.json
       - uses: actions/upload-artifact@v4
         if: always()
