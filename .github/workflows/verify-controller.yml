@@ -2,6 +2,10 @@ name: Verify reviewed evidence controller
 on:
   workflow_dispatch:
     inputs:
+      provider_probe:
+        description: Two synthetic request-format controls, no grounding claim
+        type: boolean
+        default: false
       approved_live:
         description: Run the exact approved text slice with at most four provider requests
         type: boolean
@@ -36,8 +40,29 @@ permissions:
   contents: read
   actions: read
 jobs:
+  provider_shape:
+    if: github.event_name == 'workflow_dispatch' && inputs.provider_probe
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Two synthetic controls, no automatic retry or model substitution
+        env:
+          MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
+          MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/grounded_budget_preflight_v2.json
+        run: python provider_shape_probe.py --output build/provider_shape_probe.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: provider-shape-probe-${{ github.run_id }}
+          path: build/provider_shape_probe.json
+          retention-days: 7
   approved_text:
-    if: github.event_name == 'workflow_dispatch' && inputs.approved_live
+    if: github.event_name == 'workflow_dispatch' && inputs.approved_live && !inputs.provider_probe
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
@@ -81,7 +106,7 @@ jobs:
             build/approved_live.json
           retention-days: 7
   verify:
-    if: github.event_name != 'workflow_dispatch' || !inputs.approved_live
+    if: github.event_name != 'workflow_dispatch' || (!inputs.approved_live && !inputs.provider_probe)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:

@@ -1,0 +1,5315 @@
+{
+  "schema_version": "approved-text-journeys-v1",
+  "execution": "GROUNDED_EXTERNAL_PROVIDER_WITH_SCRIPTED_RIDER",
+  "approval_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "registry_lock": "416b40b5309669dd6adaac7f628e205f82c4e60ee0f8616c365171d38feba997",
+  "runtime_versions": {
+    "generator_provider": "gemini",
+    "generator_model": "gemma-4-31b-it",
+    "verifier_provider": "gemini",
+    "verifier_model": "gemma-4-31b-it",
+    "provider_revision": "gemini-sse-json-role-v2",
+    "max_input_bytes": 24000,
+    "max_output_tokens": 1800,
+    "timeout_seconds": 30,
+    "retries": 0,
+    "generator_version": "reviewed-composer-v1",
+    "prompt_version": "reviewed-composer-prompt-v1",
+    "verifier_version": "claim-entailment-v1",
+    "schema_version": "constrained-response-v1",
+    "prompt_hash": "c1e179d385c6b5a959ec34ed977de62b71042b35126d517e11ba217f99d7d88e"
+  },
+  "runtime_lock": "0f41eb661fc2cec600bfbc9394b24e4032a4fa0b0729de5085d3905cf69eafba",
+  "rider_answers": "EXPLICIT_SCRIPTED_EVALUATION_OBSERVATIONS_NOT_FIXTURE_FACTS",
+  "storage": {
+    "backend": "SQLite",
+    "scope": "ENGINEERING_HARNESS_ONLY",
+    "file": "approved_live.sessions.sqlite",
+    "hosted_durable_store_claimed": false
+  },
+  "preflight": {
+    "preflight_file": "grounded_budget_preflight_v2.json",
+    "preflight_sha256": "0688289fa2a412e1c7ba639a808da7d1f0816dd1c70846aa9c80f8eeaa8cbb9b",
+    "project_id": "motomedic-ai-20261009",
+    "checked_at_utc": "2026-10-10T14:40:47.080317+00:00",
+    "main_billing_enabled": true,
+    "inference_billing_enabled": false,
+    "billing_stop_guard_ready": true,
+    "calls_per_adapter": 2
+  },
+  "rows": [
+    {
+      "record_id": "GEN003",
+      "expected_route": "SUPPORTED",
+      "route": "SYSTEM_ERROR",
+      "route_correct": false,
+      "reason_codes": [
+        "PROVIDER_SERVICE_ERROR"
+      ],
+      "suggested_step_id": null,
+      "session_version": 1,
+      "citation_metadata": [],
+      "validated_claim_ids": [],
+      "verified_service_uri": "mailto:support@royalenfield.com",
+      "confirmed_input_to_releasable_response_seconds": 9.612353584000005,
+      "technical_text_published_only_after_validation_and_session_save": true,
+      "raw_rider_input_recorded": false
+    },
+    {
+      "record_id": "EXP003",
+      "expected_route": "AMBIGUOUS",
+      "route": "AMBIGUOUS",
+      "route_correct": true,
+      "reason_codes": [
+        "UNKNOWN_OBSERVATION"
+      ],
+      "suggested_step_id": null,
+      "session_version": 1,
+      "citation_metadata": [],
+      "validated_claim_ids": [],
+      "verified_service_uri": "mailto:support@royalenfield.com",
+      "confirmed_input_to_releasable_response_seconds": 0.19247651300000257,
+      "technical_text_published_only_after_validation_and_session_save": true,
+      "raw_rider_input_recorded": false
+    },
+    {
+      "record_id": "EXP003",
+      "expected_route": "SUPPORTED",
+      "route": "SYSTEM_ERROR",
+      "route_correct": false,
+      "reason_codes": [
+        "PROVIDER_SERVICE_ERROR"
+      ],
+      "suggested_step_id": null,
+      "session_version": 3,
+      "citation_metadata": [],
+      "validated_claim_ids": [],
+      "verified_service_uri": "mailto:support@royalenfield.com",
+      "confirmed_input_to_releasable_response_seconds": 2.4122570959999905,
+      "technical_text_published_only_after_validation_and_session_save": true,
+      "raw_rider_input_recorded": false
+    },
+    {
+      "record_id": "GEN003",
+      "expected_route": "UNSUPPORTED",
+      "route": "UNSUPPORTED",
+      "route_correct": true,
+      "reason_codes": [
+        "UNSUPPORTED_REQUEST"
+      ],
+      "suggested_step_id": null,
+      "session_version": 1,
+      "citation_metadata": [],
+      "validated_claim_ids": [],
+      "verified_service_uri": "mailto:support@royalenfield.com",
+      "confirmed_input_to_releasable_response_seconds": 0.5599494639999989,
+      "technical_text_published_only_after_validation_and_session_save": true,
+      "raw_rider_input_recorded": false
+    }
+  ],
+  "checks": [
+    {
+      "check": "GEN003:1:route",
+      "passed": false
+    },
+    {
+      "check": "GEN003 immutable citations and full mandatory closure",
+      "passed": false
+    },
+    {
+      "check": "GEN003 persisted reload",
+      "passed": true
+    },
+    {
+      "check": "EXP003:2:route",
+      "passed": true
+    },
+    {
+      "check": "EXP003 unknown emits one source-derived question",
+      "passed": true
+    },
+    {
+      "check": "EXP003 unknown has zero composer/verifier requests",
+      "passed": true
+    },
+    {
+      "check": "EXP003:3:route",
+      "passed": false
+    },
+    {
+      "check": "EXP003 immutable citations and full mandatory closure",
+      "passed": false
+    },
+    {
+      "check": "EXP003 action issued before feedback",
+      "passed": false
+    },
+    {
+      "check": "GEN003:4:route",
+      "passed": true
+    },
+    {
+      "check": "Unsupported request releases no technical steps",
+      "passed": true
+    }
+  ],
+  "traces": [
+    {
+      "trace_id": "6a415fbd336d42bb895f63ba9a89765d",
+      "session_hash": "d6126f7cdb4df70d2f094215e2b9d3648ffc151006c67bc1fb7303c8374a857c",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "registry_lock": "416b40b5309669dd6adaac7f628e205f82c4e60ee0f8616c365171d38feba997",
+      "controller_version": "controller-trd04-v1",
+      "session_version_before": 0,
+      "session_version_after": 1,
+      "eligibility": [
+        {
+          "step_id": "EXP001:candidate-v4",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "agent-hazard-identification-v4",
+          "dependency_manifest_version": "agent-hazard-identification-v4",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP003:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP004:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP041:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP047:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP048:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN001:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN003:candidate-v3",
+          "eligibility_status": "TRUE",
+          "condition_results": [
+            {
+              "rule_id": "GEN003:rule:bike_scope_confirmed",
+              "result": "TRUE",
+              "safety": false,
+              "supporting_evidence_ids": [],
+              "rule_version": "isolated-runtime-candidates-v3"
+            }
+          ],
+          "reason_codes": [],
+          "supporting_evidence_ids": [
+            "evidence_476d825609b60be3792825f1",
+            "evidence_4d46b457c1a09f36ac446545",
+            "evidence_4eb5baa1b26eb8c52356039f"
+          ],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN014:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN027:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN031:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN032:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN034:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN036:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN038:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN040:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN044:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN050:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_cool_engine:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_raise_stand:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_refuel:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_switches_on:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_fan_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_oil_grade:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_starter_duration:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_tyre_pressure:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_usb_charging:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        }
+      ],
+      "retrieval": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 21,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "first_retrieval": 1.604331942999977,
+          "initial_assembly": 0.001315932000011344,
+          "reranking": 7.073468492000018,
+          "post_rerank_assembly": 0.00113889400000744
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 1.0,
+          "relative_rrf_section_margin": 0.038833746898263063,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      },
+      "generation_lock": "0f41eb661fc2cec600bfbc9394b24e4032a4fa0b0729de5085d3905cf69eafba",
+      "generation_validation": {
+        "runtime_lock": "0f41eb661fc2cec600bfbc9394b24e4032a4fa0b0729de5085d3905cf69eafba",
+        "versions": {
+          "generator_provider": "gemini",
+          "generator_model": "gemma-4-31b-it",
+          "verifier_provider": "gemini",
+          "verifier_model": "gemma-4-31b-it",
+          "provider_revision": "gemini-sse-json-role-v2",
+          "max_input_bytes": 24000,
+          "max_output_tokens": 1800,
+          "timeout_seconds": 30,
+          "retries": 0,
+          "generator_version": "reviewed-composer-v1",
+          "prompt_version": "reviewed-composer-prompt-v1",
+          "verifier_version": "claim-entailment-v1",
+          "schema_version": "constrained-response-v1",
+          "prompt_hash": "c1e179d385c6b5a959ec34ed977de62b71042b35126d517e11ba217f99d7d88e"
+        },
+        "generation_calls": 1,
+        "verifier_calls": 0,
+        "retry_count": 0,
+        "generation_ms": 0,
+        "validation_ms": 0,
+        "input_tokens": null,
+        "output_tokens": null,
+        "estimated_cost_usd": null,
+        "cost_status": "UNKNOWN_PENDING_PROVIDER_USAGE",
+        "source_or_user_text_recorded": false,
+        "failed_provider_transport": {
+          "transport_version": "gemini-curl-sse-v1",
+          "requested_model": "gemma-4-31b-it",
+          "first_byte_seconds": 0.259879,
+          "first_visible_token_seconds": null,
+          "completion_seconds": 0.259921,
+          "retry_count": 0,
+          "http_status": 500,
+          "usage_reported": false,
+          "raw_content_logged": false,
+          "curl": {
+            "time_namelookup": 0.024903,
+            "time_connect": 0.027965,
+            "time_appconnect": 0.044291,
+            "time_pretransfer": 0.044436,
+            "time_starttransfer": 0.259879,
+            "time_total": 0.259921,
+            "http_code": 500,
+            "http_version": "2",
+            "num_redirects": 0
+          },
+          "wall_seconds": 0.304791,
+          "curl_exit_code": 0
+        },
+        "reason_codes": [
+          "PROVIDER_SERVICE_ERROR"
+        ],
+        "total_ms": 411.93928299998106
+      },
+      "response_type": "SYSTEM_ERROR",
+      "reason_codes": [
+        "PROVIDER_SERVICE_ERROR"
+      ],
+      "confirmed_input_ttfo_seconds": 9.611240167999995,
+      "estimated_cost": null,
+      "raw_input_or_media_recorded": false
+    },
+    {
+      "trace_id": "b3e7f0b86e6e4e40937668fef5b0123d",
+      "session_hash": "cd7a654fce44765fa44a82e7947ea46cc9da40ff10f8a7e1a177ae98d0d5b8e4",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "registry_lock": "416b40b5309669dd6adaac7f628e205f82c4e60ee0f8616c365171d38feba997",
+      "controller_version": "controller-trd04-v1",
+      "session_version_before": 0,
+      "session_version_after": 1,
+      "eligibility": [
+        {
+          "step_id": "EXP001:candidate-v4",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "agent-hazard-identification-v4",
+          "dependency_manifest_version": "agent-hazard-identification-v4",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP003:candidate-v3",
+          "eligibility_status": "UNKNOWN",
+          "condition_results": [
+            {
+              "rule_id": "EXP003:rule:bike_scope_confirmed",
+              "result": "TRUE",
+              "safety": false,
+              "supporting_evidence_ids": [],
+              "rule_version": "isolated-runtime-candidates-v3"
+            },
+            {
+              "rule_id": "EXP003:rule:attempted:EXP003:candidate-v3",
+              "result": "TRUE",
+              "safety": false,
+              "supporting_evidence_ids": [],
+              "rule_version": "isolated-runtime-candidates-v3"
+            },
+            {
+              "rule_id": "EXP003:rule:turn_switch_centred",
+              "result": "UNKNOWN",
+              "safety": false,
+              "supporting_evidence_ids": [
+                "evidence_15eb4675b3a42a8864b7a47c",
+                "evidence_3504f3277a6948b68f8943b9",
+                "evidence_b1d134b17438c0640f467fe4",
+                "evidence_e02c649cb7e2569a32dbe4c4"
+              ],
+              "rule_version": "isolated-runtime-candidates-v3"
+            }
+          ],
+          "reason_codes": [],
+          "supporting_evidence_ids": [
+            "evidence_15eb4675b3a42a8864b7a47c",
+            "evidence_3504f3277a6948b68f8943b9",
+            "evidence_b1d134b17438c0640f467fe4",
+            "evidence_e02c649cb7e2569a32dbe4c4"
+          ],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP004:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP041:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP047:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP048:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN001:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN003:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN014:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN027:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN031:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN032:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN034:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN036:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN038:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN040:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN044:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN050:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_cool_engine:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_raise_stand:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_refuel:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_switches_on:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_fan_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_oil_grade:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_starter_duration:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_tyre_pressure:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_usb_charging:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        }
+      ],
+      "retrieval": null,
+      "generation_lock": "0f41eb661fc2cec600bfbc9394b24e4032a4fa0b0729de5085d3905cf69eafba",
+      "generation_validation": null,
+      "response_type": "AMBIGUOUS",
+      "reason_codes": [
+        "UNKNOWN_OBSERVATION"
+      ],
+      "confirmed_input_ttfo_seconds": 0.19145262399999297,
+      "estimated_cost": null,
+      "raw_input_or_media_recorded": false
+    },
+    {
+      "trace_id": "018769f9f33145ad9d3cd7cfe0bc3f57",
+      "session_hash": "cd7a654fce44765fa44a82e7947ea46cc9da40ff10f8a7e1a177ae98d0d5b8e4",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "registry_lock": "416b40b5309669dd6adaac7f628e205f82c4e60ee0f8616c365171d38feba997",
+      "controller_version": "controller-trd04-v1",
+      "session_version_before": 2,
+      "session_version_after": 3,
+      "eligibility": [
+        {
+          "step_id": "EXP001:candidate-v4",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "agent-hazard-identification-v4",
+          "dependency_manifest_version": "agent-hazard-identification-v4",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP003:candidate-v3",
+          "eligibility_status": "TRUE",
+          "condition_results": [
+            {
+              "rule_id": "EXP003:rule:bike_scope_confirmed",
+              "result": "TRUE",
+              "safety": false,
+              "supporting_evidence_ids": [],
+              "rule_version": "isolated-runtime-candidates-v3"
+            },
+            {
+              "rule_id": "EXP003:rule:attempted:EXP003:candidate-v3",
+              "result": "TRUE",
+              "safety": false,
+              "supporting_evidence_ids": [],
+              "rule_version": "isolated-runtime-candidates-v3"
+            },
+            {
+              "rule_id": "EXP003:rule:turn_switch_centred",
+              "result": "TRUE",
+              "safety": false,
+              "supporting_evidence_ids": [
+                "evidence_15eb4675b3a42a8864b7a47c",
+                "evidence_3504f3277a6948b68f8943b9",
+                "evidence_b1d134b17438c0640f467fe4",
+                "evidence_e02c649cb7e2569a32dbe4c4"
+              ],
+              "rule_version": "isolated-runtime-candidates-v3"
+            }
+          ],
+          "reason_codes": [],
+          "supporting_evidence_ids": [
+            "evidence_15eb4675b3a42a8864b7a47c",
+            "evidence_3504f3277a6948b68f8943b9",
+            "evidence_b1d134b17438c0640f467fe4",
+            "evidence_e02c649cb7e2569a32dbe4c4"
+          ],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP004:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP041:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP047:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP048:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN001:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN003:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN014:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN027:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN031:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN032:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN034:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN036:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN038:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN040:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN044:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN050:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_cool_engine:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_raise_stand:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_refuel:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_switches_on:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_fan_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_oil_grade:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_starter_duration:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_tyre_pressure:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_usb_charging:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 2,
+          "repeat_reason": null
+        }
+      ],
+      "retrieval": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "first_retrieval": 0.29712738300000296,
+          "initial_assembly": 0.0011632700000063778,
+          "reranking": 0.9877149809999821,
+          "post_rerank_assembly": 0.001155449000009412
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.3333333333333333,
+          "relative_rrf_section_margin": 0.14480392156862754,
+          "uncertainty_reasons": [
+            "DENSE_SPARSE_DISAGREEMENT"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      },
+      "generation_lock": "0f41eb661fc2cec600bfbc9394b24e4032a4fa0b0729de5085d3905cf69eafba",
+      "generation_validation": {
+        "runtime_lock": "0f41eb661fc2cec600bfbc9394b24e4032a4fa0b0729de5085d3905cf69eafba",
+        "versions": {
+          "generator_provider": "gemini",
+          "generator_model": "gemma-4-31b-it",
+          "verifier_provider": "gemini",
+          "verifier_model": "gemma-4-31b-it",
+          "provider_revision": "gemini-sse-json-role-v2",
+          "max_input_bytes": 24000,
+          "max_output_tokens": 1800,
+          "timeout_seconds": 30,
+          "retries": 0,
+          "generator_version": "reviewed-composer-v1",
+          "prompt_version": "reviewed-composer-prompt-v1",
+          "verifier_version": "claim-entailment-v1",
+          "schema_version": "constrained-response-v1",
+          "prompt_hash": "c1e179d385c6b5a959ec34ed977de62b71042b35126d517e11ba217f99d7d88e"
+        },
+        "generation_calls": 1,
+        "verifier_calls": 0,
+        "retry_count": 0,
+        "generation_ms": 0,
+        "validation_ms": 0,
+        "input_tokens": null,
+        "output_tokens": null,
+        "estimated_cost_usd": null,
+        "cost_status": "UNKNOWN_PENDING_PROVIDER_USAGE",
+        "source_or_user_text_recorded": false,
+        "failed_provider_transport": {
+          "transport_version": "gemini-curl-sse-v1",
+          "requested_model": "gemma-4-31b-it",
+          "first_byte_seconds": 0.338387,
+          "first_visible_token_seconds": null,
+          "completion_seconds": 0.338442,
+          "retry_count": 0,
+          "http_status": 500,
+          "usage_reported": false,
+          "raw_content_logged": false,
+          "curl": {
+            "time_namelookup": 0.00089,
+            "time_connect": 0.004099,
+            "time_appconnect": 0.020573,
+            "time_pretransfer": 0.020705,
+            "time_starttransfer": 0.338387,
+            "time_total": 0.338442,
+            "http_code": 500,
+            "http_version": "2",
+            "num_redirects": 0
+          },
+          "wall_seconds": 0.347153,
+          "curl_exit_code": 0
+        },
+        "reason_codes": [
+          "PROVIDER_SERVICE_ERROR"
+        ],
+        "total_ms": 377.27814299998386
+      },
+      "response_type": "SYSTEM_ERROR",
+      "reason_codes": [
+        "PROVIDER_SERVICE_ERROR"
+      ],
+      "confirmed_input_ttfo_seconds": 2.411153826000003,
+      "estimated_cost": null,
+      "raw_input_or_media_recorded": false
+    },
+    {
+      "trace_id": "e13490f4a9e6460798ac29d3751cd362",
+      "session_hash": "7438765823dea3af73768e26bbc0169e54c892b94b9127a7e9129f823482eb30",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "registry_lock": "416b40b5309669dd6adaac7f628e205f82c4e60ee0f8616c365171d38feba997",
+      "controller_version": "controller-trd04-v1",
+      "session_version_before": 0,
+      "session_version_after": 1,
+      "eligibility": [
+        {
+          "step_id": "EXP001:candidate-v4",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "agent-hazard-identification-v4",
+          "dependency_manifest_version": "agent-hazard-identification-v4",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP003:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP004:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP041:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP047:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP048:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "EXP049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN001:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN002:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN003:candidate-v3",
+          "eligibility_status": "TRUE",
+          "condition_results": [
+            {
+              "rule_id": "GEN003:rule:bike_scope_confirmed",
+              "result": "TRUE",
+              "safety": false,
+              "supporting_evidence_ids": [],
+              "rule_version": "isolated-runtime-candidates-v3"
+            }
+          ],
+          "reason_codes": [],
+          "supporting_evidence_ids": [
+            "evidence_476d825609b60be3792825f1",
+            "evidence_4d46b457c1a09f36ac446545",
+            "evidence_4eb5baa1b26eb8c52356039f"
+          ],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN005:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN006:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN007:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN008:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN009:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN010:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN011:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN012:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN013:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN014:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN015:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN016:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN017:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN018:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN019:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN020:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN021:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN022:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN023:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN024:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN025:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN026:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN027:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN028:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN029:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN030:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN031:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN032:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN033:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN034:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN035:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN036:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN038:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN039:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN040:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN042:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN043:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN044:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN045:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN049:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "GEN050:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_cool_engine:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_raise_stand:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_refuel:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "a_switches_on:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_fan_fuse:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_oil_grade:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_starter_duration:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_tyre_pressure:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        },
+        {
+          "step_id": "lookup_usb_charging:candidate-v3",
+          "eligibility_status": "FALSE",
+          "condition_results": [],
+          "reason_codes": [
+            "IRRELEVANT_SYMPTOM"
+          ],
+          "supporting_evidence_ids": [],
+          "rule_version": "isolated-runtime-candidates-v3",
+          "dependency_manifest_version": "isolated-runtime-candidates-v3",
+          "session_version": 0,
+          "repeat_reason": null
+        }
+      ],
+      "retrieval": null,
+      "generation_lock": "0f41eb661fc2cec600bfbc9394b24e4032a4fa0b0729de5085d3905cf69eafba",
+      "generation_validation": null,
+      "response_type": "UNSUPPORTED",
+      "reason_codes": [
+        "UNSUPPORTED_REQUEST"
+      ],
+      "confirmed_input_ttfo_seconds": 0.5588918420000084,
+      "estimated_cost": null,
+      "raw_input_or_media_recorded": false
+    }
+  ],
+  "passed": false,
+  "grounded_external_composer_attempts": 2,
+  "grounded_external_verifier_attempts": 0,
+  "grounded_external_provider_attempts": 2,
+  "composer_gate_invocations": 2,
+  "grounded_external_provider_verified_answers": 0,
+  "simulated_verified_answers": 0,
+  "complete_evidence_gate_passes": 0,
+  "answerable_provider_requests": 2,
+  "first_request_in_process_cold": true,
+  "startup_seconds": 38.994913221999994,
+  "total_seconds": 53.299314291000016,
+  "representative_grounded_warm_cold_p95": "NOT_ESTABLISHED_TWO_ANSWER_SAMPLE",
+  "semantic_quality": "PROVIDER_VERIFIER_GATED_NOT_INDEPENDENT_HELD_OUT_EVALUATION",
+  "provider_cost_usd": null,
+  "provider_cost_status": "NOT_VERIFIED_PRICING_OR_BILLING",
+  "mechanical_repairs_verified": 0,
+  "manual_reparsed_or_reembedded": false,
+  "raw_rider_media_or_queries_recorded": false
+}
