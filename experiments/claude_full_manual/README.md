@@ -61,3 +61,24 @@ cases establish a smoke comparison, not release-level or held-out accuracy.
 Paid execution needs `ANTHROPIC_API_KEY` in the hosted runner's secret store.
 Never put keys in this directory, model prompts, logs or committed files.
 No provider requests have been made by the conversion workflow.
+
+## Runtime comparison limits
+
+Arm A integrates the existing reviewed controller and exact registry. Its composer
+retains approved authored wording and the benchmark selects the case intent; its
+semantic verifier receives only page contexts from the common raw Markdown.
+Arm B receives literal rider messages and manages the dialogue independently.
+This compares the complete architectures, so differences cannot be attributed
+solely to the presence of a controller.
+
+The frozen conversion has an empty page 103 and damaged table associations.
+Arm A blocks oil-grade, suspension-conflict and no-start cases on conversion
+review; the existing evidence gate also blocks the tyre-pressure case. These are
+safe abstentions but lose answerable coverage against the original-PDF goldens.
+They do not establish that the original manual lacks the relevant content.
+
+The fixed EXP003 follow-ups are replayed even if Arm B chooses a different first
+response. Report source safety and conformity to that scripted dialogue
+separately. Two passes of eight existing cases are a regression smoke experiment.
+Provider TTFT is separate from complete JSON response timing, and deterministic
+zero-call timing is separate from model-generated response timing.

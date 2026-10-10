@@ -7,23 +7,91 @@
   "approval_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
   "expected_output_source": "Current exact approved runtime objects; goldens remain outside model prompts",
   "cases": [
-    {"record_id": "GEN003", "source_pages": [13], "assistant_turns": 1},
-    {"record_id": "lookup_oil_grade", "source_pages": [21], "assistant_turns": 1},
-    {"record_id": "lookup_tyre_pressure", "source_pages": [18, 90], "assistant_turns": 1},
-    {"record_id": "GEN004", "source_pages": [14, 15], "assistant_turns": 1},
-    {"record_id": "EXP040", "source_pages": [116, 117], "assistant_turns": 1},
-    {"record_id": "EXP047", "source_pages": [121], "assistant_turns": 1},
-    {"record_id": "EXP048", "source_pages": [63, 66], "assistant_turns": 1},
-    {"record_id": "EXP003", "source_pages": [31], "assistant_turns": 3}
+    {
+      "record_id": "GEN003",
+      "source_pages": [
+        13
+      ],
+      "assistant_turns": 1
+    },
+    {
+      "record_id": "lookup_oil_grade",
+      "source_pages": [
+        21
+      ],
+      "assistant_turns": 1
+    },
+    {
+      "record_id": "lookup_tyre_pressure",
+      "source_pages": [
+        18,
+        90
+      ],
+      "assistant_turns": 1
+    },
+    {
+      "record_id": "GEN004",
+      "source_pages": [
+        14,
+        15
+      ],
+      "assistant_turns": 1
+    },
+    {
+      "record_id": "EXP040",
+      "source_pages": [
+        116,
+        117
+      ],
+      "assistant_turns": 1
+    },
+    {
+      "record_id": "EXP047",
+      "source_pages": [
+        121
+      ],
+      "assistant_turns": 1
+    },
+    {
+      "record_id": "EXP048",
+      "source_pages": [
+        63,
+        66
+      ],
+      "assistant_turns": 1
+    },
+    {
+      "record_id": "EXP003",
+      "source_pages": [
+        31
+      ],
+      "assistant_turns": 3
+    }
   ],
-  "arms": ["A_DETERMINISTIC_CONTROLLER", "B_CLAUDE_MANAGED"],
+  "arms": [
+    "A_DETERMINISTIC_CONTROLLER",
+    "B_CLAUDE_MANAGED"
+  ],
   "rider_visible_turns_per_arm_per_pass": 10,
   "passes_planned": 2,
   "provider_request_count": "Determine from actual Arm A composer/verifier implementation; not equal to rider-visible turns",
-  "accuracy_scoring": ["required claims", "warnings", "source citations", "response route", "typed outcomes", "unjustified repeats"],
-  "latency_scoring": ["cache-cold time to first token", "cache-warm time to first token", "time to complete rider-visible response"],
+  "accuracy_scoring": [
+    "required claims",
+    "warnings",
+    "source citations",
+    "response route",
+    "typed outcomes",
+    "unjustified repeats"
+  ],
+  "latency_scoring": [
+    "cache-cold time to first token",
+    "cache-warm time to first token",
+    "time to complete rider-visible response"
+  ],
   "claude_credit_ceiling_usd": 4,
   "budget_method": "Exact per-request token counts and output ceilings; no arbitrary spending target or reserve",
-  "execution_status": "NOT_RUN_NO_CLAUDE_KEY_CONFIGURED",
-  "conversion_review_status": "Candidate extraction only; verify case passages and original page context before inference"
+  "execution_status": "COMPLETED_INDEPENDENT_AGENT_ADJUDICATION_RECORDED",
+  "conversion_review_status": "INDEPENDENT_CASE_REVIEW_WITH_RECORDED_GAPS",
+  "execution_run_url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38083290522",
+  "adjudication_file": "output_adjudication.json"
 }

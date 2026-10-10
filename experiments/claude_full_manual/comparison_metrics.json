@@ -1,0 +1,100 @@
+{
+  "model": "claude-haiku-5-5",
+  "cost_basis": "PROVIDER_REPORTED_TOKENS_TIMES_PUBLISHED_RATES_NOT_BILLING_RECONCILIATION",
+  "total_estimated_cost_usd": 0.0527319,
+  "same_usage_no_cache_cost_counterfactual_usd": 0.2144288,
+  "cost_reduction_against_same_usage_counterfactual_percent": 75.40820076407647,
+  "cache_states": {
+    "MISS": 2,
+    "HIT": 26
+  },
+  "token_totals": {
+    "input_tokens": 23123,
+    "cache_creation_input_tokens": 141220,
+    "cache_read_input_tokens": 1835860,
+    "output_tokens": 28817
+  },
+  "arms": [
+    {
+      "arm": "A",
+      "rider_turns": 20,
+      "route_matches": 13,
+      "provider_requests": 8,
+      "estimated_cost_usd": 0.017612449999999998,
+      "all_model_generated_complete_response": {
+        "n": 4,
+        "median_seconds": 7.095463799999997,
+        "min_seconds": 5.271955564999985,
+        "max_seconds": 8.196355575000005
+      },
+      "warm_model_generated_complete_response": {
+        "n": 3,
+        "median_seconds": 6.172694343000003,
+        "min_seconds": 5.271955564999985,
+        "max_seconds": 8.018233256999991
+      },
+      "cold_model_generated_complete_response": {
+        "n": 1,
+        "median_seconds": 8.196355575000005,
+        "min_seconds": 8.196355575000005,
+        "max_seconds": 8.196355575000005
+      },
+      "zero_call_response": {
+        "n": 16,
+        "median_seconds": 0.005414491499998064,
+        "min_seconds": 0.0001459119999935865,
+        "max_seconds": 0.045031799000000206
+      },
+      "warm_provider_ttft": {
+        "n": 7,
+        "median_seconds": 2.3248293670000066,
+        "min_seconds": 0.7635631560000036,
+        "max_seconds": 4.144592306
+      }
+    },
+    {
+      "arm": "B",
+      "rider_turns": 20,
+      "route_matches": 11,
+      "provider_requests": 20,
+      "estimated_cost_usd": 0.03511945,
+      "all_model_generated_complete_response": {
+        "n": 20,
+        "median_seconds": 6.165151825999999,
+        "min_seconds": 3.9746063559999953,
+        "max_seconds": 8.809091956999993
+      },
+      "warm_model_generated_complete_response": {
+        "n": 19,
+        "median_seconds": 6.158330355000004,
+        "min_seconds": 3.9746063559999953,
+        "max_seconds": 8.809091956999993
+      },
+      "cold_model_generated_complete_response": {
+        "n": 1,
+        "median_seconds": 6.215280433000004,
+        "min_seconds": 6.215280433000004,
+        "max_seconds": 6.215280433000004
+      },
+      "zero_call_response": {
+        "n": 0,
+        "median_seconds": null,
+        "min_seconds": null,
+        "max_seconds": null
+      },
+      "warm_provider_ttft": {
+        "n": 19,
+        "median_seconds": 4.53988114500001,
+        "min_seconds": 2.8573970580000037,
+        "max_seconds": 6.321689836999994
+      }
+    }
+  ],
+  "latency_limits": [
+    "Complete response includes free token-count request overhead.",
+    "No partial unvalidated output is displayed; provider TTFT is separate.",
+    "A generated turns include composer and verifier; B has one request.",
+    "Only one cold rider response per arm; no causal latency improvement or stable p95 is established.",
+    "No uncached latency control was run."
+  ]
+}
