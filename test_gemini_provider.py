@@ -132,7 +132,7 @@ class GemmaProviderTests(unittest.TestCase):
         self.assertIn('POLICY_SENTINEL',body['systemInstruction']['parts'][0]['text'])
         self.assertEqual(body['systemInstruction']['role'],'user')
         self.assertEqual(body['contents'][0]['role'],'user')
-        self.assertEqual(self.config.provider_revision,'gemini-sse-json-models-utf8-v3')
+        self.assertEqual(self.config.provider_revision,'gemini-sse-json-models-utf8-diagnostics-v4')
         self.assertEqual(body['generationConfig']['thinkingConfig'],{'thinkingLevel':'minimal'})
         self.assertNotIn('tools',body)
         self.assertNotIn('SECRET_SENTINEL',json.dumps(result.telemetry))
@@ -164,6 +164,77 @@ class GemmaProviderTests(unittest.TestCase):
                 e=events({});e[0]['candidates'][0]['content']['parts'][0]['text']=raw;return e,{}
             p=GeminiJSONProvider('gemma-4-31b-it',self.config,enabled=True,authorized_calls=1,transport=transport)
             with self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED'):p.complete('policy',{}, {})
+
+    def test_response_structure_counts_rejected_parts_without_content(self):
+        cases = [
+            ([{"text":"", "thought":True}, {"text":"REJECTED_TEXT_SENTINEL"}],
+             {"text_part_count":2, "thought_part_count":1, "empty_thought_part_count":1, "nonempty_thought_part_count":0}),
+            ([{"text":"PRIVATE_THOUGHT_SENTINEL", "thought":True}],
+             {"thought_part_count":1, "empty_thought_part_count":0, "nonempty_thought_part_count":1}),
+            ([{"text":"REJECTED_TEXT_SENTINEL", "thoughtSignature":"PRIVATE_SIGNATURE_SENTINEL"}],
+             {"thought_signature_present":True, "thought_signature_part_count":1}),
+            ([{"text":"REJECTED_TEXT_SENTINEL", "PRIVATE_FIELD_KEY_SENTINEL":"PRIVATE_VALUE_SENTINEL"}],
+             {"other_part_field_count":1}),
+            ([{"functionCall":{"name":"PRIVATE_FUNCTION_SENTINEL"}}],
+             {"nontext_part_count":1, "known_nontext_field_count":1})]
+        for parts, expected in cases:
+            with self.subTest(expected=expected):
+                chunks=events({});chunks[0]['candidates'][0]['content']['parts']=parts
+                chunks[0]['usageMetadata']['thoughtsTokenCount']=0
+                p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
+                    transport=lambda *args:(chunks,{}))
+                with self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED') as caught:
+                    p.complete('policy',{}, {})
+                structure=caught.exception.telemetry['response_structure']
+                for key,value in expected.items():self.assertEqual(structure[key],value)
+                self.assertEqual(structure['reported_thoughts_token_count'],0)
+                self.assertTrue(structure['usage_metadata_present'])
+                self.assertNotIn('usage_reported',p.last_telemetry)
+                trace=json.dumps(p.last_telemetry)
+                for sentinel in ('REJECTED_TEXT_SENTINEL','PRIVATE_THOUGHT_SENTINEL','PRIVATE_SIGNATURE_SENTINEL',
+                                 'PRIVATE_FIELD_KEY_SENTINEL','PRIVATE_VALUE_SENTINEL','PRIVATE_FUNCTION_SENTINEL'):
+                    self.assertNotIn(sentinel,trace)
+
+    def test_response_structure_candidate_and_block_diagnostics_are_redacted(self):
+        for mutation,expected in (
+            (lambda c:c['candidates'].append(deepcopy(c['candidates'][0])),{'candidate_count':2,'maximum_candidates_per_chunk':2}),
+            (lambda c:c['candidates'][0].update(index=7),{'candidate_index_valid':False}),
+            (lambda c:c.update(promptFeedback={'blockReason':'SAFETY'}),{'prompt_block_reasons':['SAFETY']}),
+            (lambda c:c.update(promptFeedback={'blockReason':'PRIVATE_BLOCK_SENTINEL'}),{'prompt_block_reasons':['UNRECOGNIZED']})):
+            chunks=events({});mutation(chunks[0])
+            p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
+                transport=lambda *args:(chunks,{}))
+            with self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED'):p.complete('policy',{}, {})
+            for key,value in expected.items():self.assertEqual(p.last_telemetry['response_structure'][key],value)
+            self.assertNotIn('PRIVATE_BLOCK_SENTINEL',json.dumps(p.last_telemetry))
+
+    def test_reported_thought_tokens_are_strict_and_available_before_rejection(self):
+        for value,expected in ((0,0),(3,3),(True,'UNKNOWN'),(-1,'UNKNOWN'),('PRIVATE_TOKEN_SENTINEL','UNKNOWN'),(None,'UNKNOWN')):
+            chunks=events({});chunks[0]['candidates'][0]['content']['parts']=[{'text':'','thought':True}]
+            if value is not None:chunks[0]['usageMetadata']['thoughtsTokenCount']=value
+            p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
+                transport=lambda *args:(chunks,{}))
+            with self.assertRaises(ProviderFailure):p.complete('policy',{}, {})
+            self.assertEqual(p.last_telemetry['response_structure']['reported_thoughts_token_count'],expected)
+            self.assertNotIn('PRIVATE_TOKEN_SENTINEL',json.dumps(p.last_telemetry))
+
+    def test_new_denied_call_resets_previous_response_telemetry(self):
+        for failure in ('exhausted','disabled','unconfigured','context'):
+            with self.subTest(failure=failure):
+                p=self.provider();p.complete('policy',{}, {})
+                self.assertIsNotNone(p.last_telemetry)
+                p.remaining_calls=1
+                payload={}
+                if failure=='exhausted':p.remaining_calls=0
+                if failure=='disabled':p.enabled=False
+                if failure=='context':payload={'text':'x'*48001}
+                env={} if failure=='unconfigured' else {'MOTOMEDIC_GEMINI_API_KEY':'SECRET_SENTINEL'}
+                with patch.dict(os.environ,env,clear=True):
+                    with self.assertRaises(ProviderFailure) as caught:p.complete('policy',payload,{})
+                self.assertIsNone(p.last_telemetry)
+                self.assertIsNone(caught.exception.telemetry)
+                self.assertEqual(len(self.calls),1)
+                self.calls.clear()
 
 class GemmaControllerTests(unittest.TestCase):
     def pipeline(self, mutation=None, judge_reject=False, outage=False, model=GeminiJSONProvider.MODEL):

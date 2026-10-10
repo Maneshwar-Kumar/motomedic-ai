@@ -1,0 +1,110 @@
+{
+  "schema_version": "independent-bounded-runtime-transition-review-v5",
+  "reviewer_actor": "/root/approval_audit",
+  "reviewed_on": "2026-10-10",
+  "human_inspection_claimed": false,
+  "verdict": "PASS_DIAGNOSTICS_ONLY_EXACT_CODE_REVIEW",
+  "coordinator_decision_required": true,
+  "review_scope": [
+    "Counts/enums-only provider response diagnostics before unchanged rejection gates",
+    "One synthetic 26B response-structure request, maximum64 output tokens; no mechanical source or claim supplied"
+  ],
+  "prior_review": {
+    "file": "human_review/agent_release_161/runtime_transition_review_v4.json",
+    "sha256": "4e2d1d53f3f5a44ab899c6cd9bd50f74821ae2206910362591e1d30c45b39905",
+    "preserved_unchanged": true
+  },
+  "code_sha256": {
+    "approved_registry.py": "f6b9afc769f2a49b65ba1de4e6030fc196e8a142848d322140e89b384886e78b",
+    "approved_runner.py": "8360c1b07665b9e28da6d6fe5707ead929b5c78b53d46ac423d4bc32142c1e83",
+    "reviewed_controller.py": "2fb26dba4f2d949df15f176da6b4082efeaa78c32d70358cfa748578b388b16b",
+    "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+    "diagnose.py": "07ac29d21b6776ef0f2e20cf7d9842cbfbe9badaf6e870ce9592e2157ef35813",
+    "session_store.py": "7c517d52b2efb59db37b939fc648d898b0455ca888efa58c7fdb72dae3e30a5e",
+    "constrained_generator.py": "cab83ece473e0b47f9ff2eb6b890fa3c051a46870655c0f35287b30b51bd9d87",
+    "generation_contracts.py": "4255a16ef30e2dcafa362495662c89c55f5103feb2b694a657a051dde12c61a8",
+    "approved_text_journeys.py": "7cc79cae951b45d7056a73cf6732e6986b675e60b75abb2128f6c26b1bce2f26",
+    "test_text_journeys.py": "8c287c98d2c0523a7d7d6e8cdb303e795fab5aaaf243bafc4ad9605f26376ed9",
+    "evidence_registry.py": "7df97bb5e500a1c009e21f2a721f5c24205c7e52a9f6371e369113f20f1b6ae4",
+    "human_review/grounding_refinement/case_suite.py": "a6f373b288e61e8eda49790947610fad7ec03e66601ddfc460432a7c55b923e1",
+    "generation_providers.py": "b0388a71916f9569235bbded72321cd0fe99dd704d8b1d443483791cb137a204",
+    "gemini_transport.py": "579e852b9329277e3e85ad57a71a0ef51d6c5c8492519e246458f1cb578e3b2c",
+    "test_gemini_provider.py": "3b14daf295887ce042f1161b1c2677a76a23f37fe392d10172f80f21b7f33cc9",
+    "test_gemini_transport_bytes.py": "2e5061dde36b2087f64a6f5c468ce158c9635834897546e9252e80e945630ce3",
+    "provider_response_probe.py": "11261a23d29219b8542ba408e45337ce6158b1938cdb7106b940931642d6886e"
+  },
+  "changed_prior_runtime_files": [
+    "generation_providers.py",
+    "test_gemini_provider.py"
+  ],
+  "source_and_initial_approval": "Unchanged exact v3 source/manual approval and v4 bounded transition scopes; no new source approval or mechanical claim",
+  "diagnostic_checks": {
+    "provider_revision": "gemini-sse-json-models-utf8-diagnostics-v4",
+    "text_thought_signature_arbitrary_keys_not_logged": true,
+    "counts_and_allowlisted_enums_only": true,
+    "unknown_block_reasons_redacted": true,
+    "reported_thought_tokens_strict_integer_or_UNKNOWN": true,
+    "last_telemetry_reset_before_denied_new_call": true,
+    "thought_nontext_signature_extra_field_rejection_unchanged": true,
+    "exact_model_finish_usage_json_validation_unchanged": true,
+    "deterministic_claim_semantic_evidence_session_gates_unchanged": true,
+    "default_model": "gemma-4-31b-it",
+    "automatic_fallback": false,
+    "automatic_retries": 0
+  },
+  "runtime_checks": {
+    "command": "python -B -m unittest test_gemini_provider test_gemini_transport_bytes test_text_journeys -q",
+    "tests_run": 41,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 19.096,
+    "exit_code": 0,
+    "external_provider_calls": 0,
+    "loopback_requests": 2,
+    "independent_probe_monkeypatch": {
+      "passed": true,
+      "synthetic_complete_calls": 1,
+      "transport_calls": 0,
+      "max_output_tokens": 64,
+      "finite_allocation": 1,
+      "failure_reason_retained": true,
+      "raw_content_logged": false,
+      "mechanical_claims_sent": false
+    }
+  },
+  "diagnostic_allocation": {
+    "model": "gemma-4-26b-a4b-it",
+    "maximum_external_requests": 1,
+    "maximum_output_tokens": 64,
+    "no_retry": true,
+    "no_verifier_request": true,
+    "synthetic_only": true,
+    "preflight_file": "reports/grounded_budget_preflight_26b_v2.json",
+    "preflight_sha256": "0846950f54acee5c21d5a9956d55efbc64fdb561fb5a04d0735242d9b800d97f",
+    "workflow_file": ".github/workflows/verify-controller.yml",
+    "workflow_sha256": "5c0c761e9f99326766d04600de42a22369af9c3167fdd765bf6f325578a3d536",
+    "freshness_requirement_seconds": 1800,
+    "preflight_model_authorization_guard": true,
+    "main_billing_guard_and_free_only_inference_account_guard": true,
+    "stopped_billing_reenable_authorized": false,
+    "note": "Shared preflight return metadata carries calls_per_adapter=2 from the grounded harness; this probe independently fixes authorized_calls=1 and max_output_tokens=64, and bound proof maximum_provider_calls=1. No broader allocation follows."
+  },
+  "coordinator_approval_recommendation": {
+    "decision_recommended": "APPROVE_EXACT_DIAGNOSTICS_V4_SINGLE_SYNTHETIC_26B_REQUEST",
+    "coordinator_actor": "/root",
+    "binding_requirement": "This review SHA and all recorded runtime/probe/workflow/preflight hashes; fresh proof at dispatch",
+    "maximum_requests": 1,
+    "maximum_output_tokens": 64,
+    "does_not_approve": [
+      "Relaxed thought or malformed-output acceptance",
+      "New manual claims or source bindings",
+      "Grounded live acceptance",
+      "Automatic fallback or retries",
+      "Default model replacement",
+      "Public deployment or display rights",
+      "Claim HTTP500 is fixed",
+      "Claim HTTP200 parser failure is fixed"
+    ]
+  },
+  "reviewer_external_provider_calls": 0
+}

@@ -94,6 +94,76 @@ class OpenAIResponsesProvider:
 
 
 
+def _response_structure(chunks):
+    """Count response shapes before rejection; retain no provider text or arbitrary keys."""
+    result = {"chunk_count": 0, "candidate_count": 0,
+              "maximum_candidates_per_chunk": 0, "candidate_index_valid": True,
+              "text_part_count": 0, "thought_part_count": 0,
+              "empty_thought_part_count": 0, "nonempty_thought_part_count": 0,
+              "thought_signature_present": False, "thought_signature_part_count": 0,
+              "nontext_part_count": 0, "known_nontext_field_count": 0,
+              "other_part_field_count": 0, "invalid_structure_count": 0,
+              "prompt_block_reasons": [], "usage_metadata_present": False,
+              "reported_thoughts_token_count": "UNKNOWN"}
+    nontext = {"inlineData", "fileData", "functionCall", "functionResponse",
+               "executableCode", "codeExecutionResult"}
+    known = nontext | {"text", "thought", "thoughtSignature"}
+    blocks = {"BLOCK_REASON_UNSPECIFIED", "SAFETY", "OTHER", "BLOCKLIST",
+              "PROHIBITED_CONTENT", "IMAGE_SAFETY"}
+    for chunk in chunks:
+        result["chunk_count"] += 1
+        if not isinstance(chunk, dict):
+            result["invalid_structure_count"] += 1
+            continue
+        feedback = chunk.get("promptFeedback")
+        if isinstance(feedback, dict) and feedback.get("blockReason"):
+            reason = feedback["blockReason"]
+            result["prompt_block_reasons"].append(reason if isinstance(reason, str) and reason in blocks else "UNRECOGNIZED")
+        if "usageMetadata" in chunk:
+            result["usage_metadata_present"] = True
+            usage = chunk["usageMetadata"]
+            value = usage.get("thoughtsTokenCount") if isinstance(usage, dict) else None
+            result["reported_thoughts_token_count"] = value if type(value) is int and value >= 0 else "UNKNOWN"
+        candidates = chunk.get("candidates", [])
+        if not isinstance(candidates, list):
+            result["invalid_structure_count"] += 1
+            continue
+        result["candidate_count"] += len(candidates)
+        result["maximum_candidates_per_chunk"] = max(result["maximum_candidates_per_chunk"], len(candidates))
+        for candidate in candidates:
+            if not isinstance(candidate, dict):
+                result["candidate_index_valid"] = False
+                result["invalid_structure_count"] += 1
+                continue
+            if candidate.get("index", 0) != 0:
+                result["candidate_index_valid"] = False
+            content = candidate.get("content", {})
+            parts = content.get("parts", []) if isinstance(content, dict) else None
+            if not isinstance(parts, list):
+                result["invalid_structure_count"] += 1
+                continue
+            for part in parts:
+                if not isinstance(part, dict):
+                    result["invalid_structure_count"] += 1
+                    continue
+                text = part.get("text")
+                if type(text) is str:
+                    result["text_part_count"] += 1
+                else:
+                    result["nontext_part_count"] += 1
+                if part.get("thought"):
+                    result["thought_part_count"] += 1
+                    if type(text) is str:
+                        key = "empty_thought_part_count" if text == "" else "nonempty_thought_part_count"
+                        result[key] += 1
+                if "thoughtSignature" in part:
+                    result["thought_signature_present"] = True
+                    result["thought_signature_part_count"] += 1
+                result["known_nontext_field_count"] += len(set(part) & nontext)
+                result["other_part_field_count"] += len(set(part) - known)
+    return result
+
+
 class GeminiJSONProvider:
     """Explicit allowlisted Gemma comparison only. JSON is locally validated, not provider-guaranteed.
 
@@ -110,7 +180,7 @@ class GeminiJSONProvider:
             raise ValueError("Exact same allowlisted Gemma model required for both adapters")
         if type(authorized_calls) is not int or authorized_calls < 0:
             raise ValueError("Finite nonnegative call allocation required")
-        if config.provider_revision != "gemini-sse-json-models-utf8-v3":
+        if config.provider_revision != "gemini-sse-json-models-utf8-diagnostics-v4":
             raise ValueError("Gemini transport revision required")
         self.model, self.config = model, config
         self.enabled, self.remaining_calls = enabled, authorized_calls
@@ -119,6 +189,7 @@ class GeminiJSONProvider:
 
     def complete(self, policy, payload, schema):
         from gemini_transport import TransportFailure
+        self.last_telemetry = None  # A denied new call must not inherit an earlier response.
         if not self.enabled or self.remaining_calls < 1:
             raise ProviderFailure("LIVE_CALL_NOT_AUTHORIZED")
         key = os.environ.get("MOTOMEDIC_GEMINI_API_KEY")
@@ -139,6 +210,7 @@ class GeminiJSONProvider:
         try:
             chunks, trace = self.transport(self.model, key, body, self.config.timeout_seconds)
             self.last_telemetry = trace
+            trace["response_structure"] = _response_structure(chunks)
             versions, fragments, finish = set(), [], []
             usage = None
             for chunk in chunks:
@@ -206,7 +278,7 @@ def gemma_runtime_config(model=GeminiJSONProvider.MODEL):
         raise ValueError("Unknown Gemma comparison model")
     return RuntimeConfig(generator_provider="gemini", generator_model=model,
                          verifier_provider="gemini", verifier_model=model,
-                         provider_revision="gemini-sse-json-models-utf8-v3", timeout_seconds=30)
+                         provider_revision="gemini-sse-json-models-utf8-diagnostics-v4", timeout_seconds=30)
 
 
 def configured_provider(name, model, config, **kwargs):

@@ -1,0 +1,204 @@
+{
+  "schema_version": "provider-response-investigation-v2",
+  "checked_at_utc": "2026-10-10T18:10:24.926858+00:00",
+  "investigator": "provider_500_investigation subagent; engineering review only",
+  "previous_report": "reports/http500_investigation_v1.json",
+  "preserves_previous_report": true,
+  "external_provider_calls_by_investigator": 0,
+  "secrets_accessed": false,
+  "shared_runtime_modified_in_v2": false,
+  "actual_observation": {
+    "artifact": "reports/approved_26b_run_38074206040/approved_live.json",
+    "sha256": "bc04ace5da54bbc0de4fd958818de9715d14998c52abd8d3a6bf9c6cf918e830",
+    "workflow_run_id": 38074206040,
+    "requested_model": "gemma-4-26b-a4b-it",
+    "provider_revision": "gemini-sse-json-models-utf8-v3",
+    "transport_revision": "gemini-curl-sse-utf8-v2",
+    "composer_requests": 2,
+    "verifier_requests": 0,
+    "live_verified_answers": 0,
+    "transport_signals": [
+      {
+        "transport_version": "gemini-curl-sse-utf8-v2",
+        "requested_model": "gemma-4-26b-a4b-it",
+        "first_byte_seconds": 0.841338,
+        "first_visible_token_seconds": 1.118288,
+        "completion_seconds": 9.913195,
+        "retry_count": 0,
+        "http_status": 200,
+        "usage_reported": false,
+        "raw_content_logged": false,
+        "curl": {
+          "time_namelookup": 0.037687,
+          "time_connect": 0.042714,
+          "time_appconnect": 0.095229,
+          "time_pretransfer": 0.095459,
+          "time_starttransfer": 0.841338,
+          "time_total": 9.913195,
+          "http_code": 200,
+          "http_version": "2",
+          "num_redirects": 0
+        },
+        "wall_seconds": 10.173885,
+        "curl_exit_code": 0
+      },
+      {
+        "transport_version": "gemini-curl-sse-utf8-v2",
+        "requested_model": "gemma-4-26b-a4b-it",
+        "first_byte_seconds": 0.722983,
+        "first_visible_token_seconds": 0.744405,
+        "completion_seconds": 11.489596,
+        "retry_count": 0,
+        "http_status": 200,
+        "usage_reported": false,
+        "raw_content_logged": false,
+        "curl": {
+          "time_namelookup": 0.00091,
+          "time_connect": 0.00612,
+          "time_appconnect": 0.02676,
+          "time_pretransfer": 0.026895,
+          "time_starttransfer": 0.722983,
+          "time_total": 11.489596,
+          "http_code": 200,
+          "http_version": "2",
+          "num_redirects": 0
+        },
+        "wall_seconds": 11.499724,
+        "curl_exit_code": 0
+      }
+    ],
+    "judgment": "HTTP serving succeeded twice, but neither response passed local provider parsing; no grounded answer or semantic verification success."
+  },
+  "relation_to_31b_http500": {
+    "inference": "26B succeeding on HTTP while prior 31B calls failed makes model-specific serving behavior more plausible and argues against universal key/network failure.",
+    "limitations": [
+      "Different time and corrected Unicode transport; not a simultaneous paired benchmark.",
+      "31B backend internal cause remains unknown.",
+      "26B response correctness, semantic quality and release suitability are not established."
+    ]
+  },
+  "parser_localization": {
+    "snapshot_generation_providers_sha256": "b0388a71916f9569235bbded72321cd0fe99dd704d8b1d443483791cb137a204",
+    "reason": "PROVIDER_REFUSAL_OR_MALFORMED",
+    "usage_reported_false_means": "The adapter has not finished its usage validation. It does not prove Google omitted usageMetadata.",
+    "possible_pre_usage_rejections": [
+      "promptFeedback blockReason",
+      "More than one candidate or candidate index not0",
+      "Part thought flag truthy, including empty thought marker",
+      "Part has extra key such as thoughtSignature or lacks string text",
+      "Nonzero or invalid thoughtsTokenCount",
+      "Unexpected structural types causing caught exception"
+    ],
+    "not_primary_suspect": "Duplicate JSON keys, Markdown fencing or final JSON syntax errors occur after usage_reported=True in this adapter, so those do not match current observed flag false unless another earlier defect also exists."
+  },
+  "ranked_26b_hypotheses": [
+    {
+      "rank": 1,
+      "hypothesis": "Empty thought marker emitted with minimal thinking",
+      "evidence": "A direct firsthand response example on Google AI forum shows 26B minimal returns {text:\"\",thought:true} followed by answer text and no thoughtsTokenCount. Current parser rejects this before examining usage.",
+      "confidence": "Concrete and most actionable hypothesis; not confirmed for our actual response."
+    },
+    {
+      "rank": 2,
+      "hypothesis": "Optional Part metadata, especially thoughtSignature",
+      "evidence": "Official generateContent Part schema includes optional thoughtSignature bytes field. Current strict text parser rejects it. No evidence yet that26B included it in our calls.",
+      "confidence": "Plausible schema compatibility issue."
+    },
+    {
+      "rank": 3,
+      "hypothesis": "Nonempty thoughts despite minimal, nonzero thoughtusage, promptblock or unexpected candidate shape",
+      "evidence": "These all share current reason code and usage false; redacted structural telemetry must distinguish them.",
+      "confidence": "Unresolved; keep current fail closed behavior."
+    }
+  ],
+  "offline_synthetic_checks": {
+    "provider_requests": 0,
+    "network_calls": 0,
+    "credentials": "Fixed synthetic constant; environment key not inspected",
+    "results": [
+      {
+        "shape": "Single plain text JSON part",
+        "result": "PARSED_SYNTHETIC_JSON",
+        "usage_validated": true
+      },
+      {
+        "shape": "Empty text part with thought:true then valid JSON text",
+        "result": "PROVIDER_REFUSAL_OR_MALFORMED",
+        "usage_validated": false
+      },
+      {
+        "shape": "JSON text part with thoughtSignature",
+        "result": "PROVIDER_REFUSAL_OR_MALFORMED",
+        "usage_validated": false
+      },
+      {
+        "shape": "Nonempty thought before JSON text",
+        "result": "PROVIDER_REFUSAL_OR_MALFORMED",
+        "usage_validated": false
+      },
+      {
+        "shape": "Plain JSON text plus thoughtsTokenCount:1",
+        "result": "PROVIDER_REFUSAL_OR_MALFORMED",
+        "usage_validated": false
+      }
+    ],
+    "limitations": "Synthetic shape controls isolate current parser predicates; no claim about actual model output."
+  },
+  "recommended_next_actions": [
+    {
+      "action": "Add redacted structure diagnostics while preserving rejection behavior",
+      "fields": [
+        "SSE chunk and candidate counts",
+        "Allowlisted Part fieldnames and unknown-key counts",
+        "Empty thought count and nonempty thought count",
+        "Stringtext presence/type, signature presence/type only",
+        "Model equality and allowlisted finish enums",
+        "UsageMetadata presence and validated scalar token counts",
+        "Exact failure-stage enum"
+      ],
+      "privacy": "No text, arbitrary keynames, raw signature, error messages, prompts or raw bodies in traces."
+    },
+    {
+      "action": "One bounded fixed synthetic26B probe under fresh existing project/free-tier preflight",
+      "resolves": "Identifies actual emitted shape without sending manual or rider content.",
+      "conditions": "No hidden retries, finite request allocation, redacted artifact. Root currently preparing this."
+    },
+    {
+      "action": "If confirmed empty thought marker only, narrowly normalize exact empty marker as protocol metadata",
+      "conditions": [
+        "Exact keys {text,thought}; text exactly empty and thought booleanTrue.",
+        "No signature or extra fields.",
+        "No nonempty thought content and zero/missing thoughtsTokenCount.",
+        "Do not append empty thought marker to visible JSON or log it.",
+        "Keep exact model, single candidate,index 0,STOP,tokenbounds,strictJSON,claim,citation,warning and semanticgates unchanged."
+      ],
+      "validation": "New provider version plus tests accepting exact empty marker while rejecting whitespace/nonempty thoughts, wrong types, signatures, extras, altered model, incomplete STOP and invalid usage."
+    },
+    {
+      "action": "If signature metadata confirmed, design a separate typed handling policy with bounds and strict rejection of arbitrary data",
+      "conditions": "Do not blanket-allow every Part key or ignore all unrecognized fields. Current requests are single-turn, with no history or tool-use requirement to persist opaque signatures."
+    },
+    {
+      "action": "After protocol fix passes independent review, rerun same two real grounded journeys with a new finite allocation",
+      "acceptance": "Both real composer/verifier pass with source-bound claims, correct citations, persisted EXP003 unresolved action and referral and no repeat; synthetic probe success alone does not satisfy step2."
+    }
+  ],
+  "primary_sources": [
+    {
+      "url": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+      "role": "Authoritative feature documentation",
+      "supports": "26B A4B API support; minimal means thinking disabled; systemInstruction support."
+    },
+    {
+      "url": "https://ai.google.dev/api/generate-content#Part",
+      "role": "Authoritative shared wire schema",
+      "supports": "Part thought boolean and optional thoughtSignature opaque base64 signature; not proof 26B returns signature."
+    },
+    {
+      "url": "https://discuss.ai.google.dev/t/disable-thinking-for-gemma-4/138885/6",
+      "role": "Primary firsthand reproduction on Google AI forum; not a formal contract or our model response",
+      "supports": "Example minimal26B response contains empty thought:true marker and answer text with no thoughtsTokenCount."
+    }
+  ],
+  "release_or_mechanical_success_claimed": false
+}
