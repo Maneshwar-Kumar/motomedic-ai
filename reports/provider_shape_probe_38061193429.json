@@ -1,0 +1,81 @@
+{
+  "schema_version": "synthetic-provider-shape-probe-v1",
+  "preflight": {
+    "preflight_file": "grounded_budget_preflight_v2.json",
+    "preflight_sha256": "0688289fa2a412e1c7ba639a808da7d1f0816dd1c70846aa9c80f8eeaa8cbb9b",
+    "project_id": "motomedic-ai-20261009",
+    "checked_at_utc": "2026-10-10T14:40:47.080317+00:00",
+    "main_billing_enabled": true,
+    "inference_billing_enabled": false,
+    "billing_stop_guard_ready": true,
+    "calls_per_adapter": 2
+  },
+  "model": "gemma-4-31b-it",
+  "max_output_tokens_per_request": 64,
+  "automatic_retries": 0,
+  "execution": "SYNTHETIC_TRANSPORT_CONTROL_NOT_GROUNDING",
+  "maximum_requests": 2,
+  "rows": [
+    {
+      "system_content_role": "user",
+      "reason": "PROVIDER_SERVICE_ERROR",
+      "reserved_requests": 1,
+      "telemetry": {
+        "transport_version": "gemini-curl-sse-v1",
+        "requested_model": "gemma-4-31b-it",
+        "first_byte_seconds": 0.557447,
+        "first_visible_token_seconds": null,
+        "completion_seconds": 0.557491,
+        "retry_count": 0,
+        "http_status": 500,
+        "usage_reported": false,
+        "raw_content_logged": false,
+        "curl": {
+          "time_namelookup": 0.026376,
+          "time_connect": 0.046096,
+          "time_appconnect": 0.08364,
+          "time_pretransfer": 0.083813,
+          "time_starttransfer": 0.557447,
+          "time_total": 0.557491,
+          "http_code": 500,
+          "http_version": "2",
+          "num_redirects": 0
+        },
+        "wall_seconds": 0.647955,
+        "curl_exit_code": 0
+      }
+    },
+    {
+      "system_content_role": "system",
+      "reason": "PROVIDER_SERVICE_ERROR",
+      "reserved_requests": 1,
+      "telemetry": {
+        "transport_version": "gemini-curl-sse-v1",
+        "requested_model": "gemma-4-31b-it",
+        "first_byte_seconds": 0.229778,
+        "first_visible_token_seconds": null,
+        "completion_seconds": 0.229816,
+        "retry_count": 0,
+        "http_status": 500,
+        "usage_reported": false,
+        "raw_content_logged": false,
+        "curl": {
+          "time_namelookup": 0.000906,
+          "time_connect": 0.021819,
+          "time_appconnect": 0.060054,
+          "time_pretransfer": 0.060179,
+          "time_starttransfer": 0.229778,
+          "time_total": 0.229816,
+          "http_code": 500,
+          "http_version": "2",
+          "num_redirects": 0
+        },
+        "wall_seconds": 0.238415,
+        "curl_exit_code": 0
+      }
+    }
+  ],
+  "release_or_grounding_claimed": false,
+  "production_role_changed": false,
+  "source_or_rider_media_sent": false
+}
