@@ -1,0 +1,127 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "GEN017",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/GEN017.json",
+  "plan_sha256": "230046e93c5e346c57c3d9bf76edc34c4ce183656bf71b6c77f03a0b44a0790c",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "310885f163d7cabf8efdbd4f53fd501489dcbe79953abe7d9b9b50f838a52dcf",
+  "final_dependency_sha256": "c22f8223c660c6f01ccdcd14318b4d984822078a151d319c28efeb658427c5f8",
+  "final_rules_sha256": "ff8cb11a30fa2ed3861eb140cd4783168e06c448fea98f49126e184e10e087ae",
+  "final_route_sha256": "bc4d99fa5af5027eb2e59960d1721871a5ad79c84cd1c7728ead42979343426d",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "What output rating is listed for the USB port?",
+  "claim_texts": [
+    "The electrical specification lists USB 2.0 Type C, 5 V, 2 A output.",
+    "That is distinct from the separate warning that current draw greater than 2.5 A shuts the charger down; the charger works only with the engine running."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_13dac6aaee2fcbdd57618d29",
+      "source_sha256": "9d07b055453a7b3a960238110627d9e1ad71eeb50bcbf41159ea7b9720c6534e",
+      "text_sha256": "c92c5f3cee0f84652275a261f5b4536619b88c2b3c82d3ebd6325c8a6d10c68c",
+      "original_pdf_pages": [
+        65
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_bcc2ecdbee298a98332e9c23",
+      "source_sha256": "0dec4545e46356c4a0ef5d58d1e19b19f737cdc7279d36be3f5617e0a696ed33",
+      "text_sha256": "aee8cd5e6fc03cab8975153492fc02fc1c28e6223943a1dd588fa495999d1854",
+      "original_pdf_pages": [
+        19
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_ea69e5fbd3ff27f1dd159960",
+      "source_sha256": "b396b5e91f18b7cfd970f1c54346b617537a6267a9d2da4464391eda2f34d925",
+      "text_sha256": "f1710c7c824a8107cb87b09f6c51e7d8b546d787dac743fe2618ef3edaaf7073",
+      "original_pdf_pages": [
+        65
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    19,
+    65
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: The electrical specification lists USB 2.0 Type C, 5 V, 2 A output. | That is distinct from the separate warning that current draw greater than 2.5 A shuts the charger down; the charger works only with the engine running. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

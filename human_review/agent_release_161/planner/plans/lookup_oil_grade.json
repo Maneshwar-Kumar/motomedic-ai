@@ -1,0 +1,1407 @@
+{
+  "accepted_original_context": {
+    "accepted_source_pages": [
+      21
+    ],
+    "approval_status": "DRAFT",
+    "authoring_blockers": [
+      "INDEPENDENT_CONTENT_BOUND_REVIEW_REQUIRED",
+      "CLAIM_SPANS_AND_BRANCH_DEPENDENCY_SCOPE_REQUIRED",
+      "DRAFT_PARAPHRASES_REQUIRE_DISPLAY_REVIEW"
+    ],
+    "draft_branches": {
+      "ACTION_COMPLETED_UNRESOLVED": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+      "NOT_APPLICABLE": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+      "RESOLVED": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+      "end": "Grade lookup ends after the specification and caution; no quantity, oil-changing procedure or substitute recommendation."
+    },
+    "draft_claim_ids": [
+      "lookup_oil_grade:accepted-draft:main",
+      "lookup_oil_grade:accepted-draft:warning0"
+    ],
+    "evaluation_partition": "REGRESSION_TUNING_NOT_HELD_OUT",
+    "expected_runtime_before_review": "UNSUPPORTED",
+    "record_id": "lookup_oil_grade"
+  },
+  "approval_status": "NOT_YET_CHECKED",
+  "blanket_hold_interpretation": "DRAFT/review_complete false/human_signoff false are inherited metadata, not a demonstrated content defect. Independent checker must return exact substantive findings. Coordinator has user-authorized final approval; do not fabricate human identity.",
+  "candidate_case": {
+    "agent_support_work": "ORIGINAL_PRECISE_SPAN_AND_BRANCH_AUTHORING_PENDING",
+    "branch_context": {
+      "R001": "ACCEPTED_CONVERSATIONALLY",
+      "R002": "PENDING_POST_START_SCOPE",
+      "branches": {
+        "ACTION_COMPLETED_UNRESOLVED": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+        "NOT_APPLICABLE": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+        "RESOLVED": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+        "end": "Grade lookup ends after the specification and caution; no quantity, oil-changing procedure or substitute recommendation."
+      },
+      "citations": [
+        {
+          "evidence_id": "evidence_2d92594ceab8bbdd8f2ae2dd",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_36ee9102cfd9a8ef98c0466d",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_37c6c31f5700495414de1101",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_3a4f927af191ec4ce7915444",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_424971c8f0be958200b09990",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_70c45d6344d61b4291168200",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_8b9b87ad8adcc025075370ea",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+          "pdf_page": 21
+        },
+        {
+          "evidence_id": "evidence_fe41d7606ec45f8e0500d896",
+          "pdf_page": 21
+        }
+      ],
+      "dependency_manifest": {
+        "action_evidence_ids": [
+          "evidence_a6950ea73293cda81e695ce1"
+        ],
+        "authorship_note": "Concrete proposed dependencies from agent visual source inspection; scope still requires independent review.",
+        "categories": {
+          "accepted_additional_context": [
+            "evidence_2d92594ceab8bbdd8f2ae2dd",
+            "evidence_3a4f927af191ec4ce7915444",
+            "evidence_70c45d6344d61b4291168200",
+            "evidence_fe41d7606ec45f8e0500d896"
+          ],
+          "actions": [
+            "evidence_a6950ea73293cda81e695ce1"
+          ],
+          "table_context": [
+            "evidence_36ee9102cfd9a8ef98c0466d",
+            "evidence_8b9b87ad8adcc025075370ea",
+            "evidence_424971c8f0be958200b09990"
+          ],
+          "tables": [
+            "evidence_a6950ea73293cda81e695ce1"
+          ],
+          "warnings": [
+            "evidence_37c6c31f5700495414de1101"
+          ]
+        },
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "required_evidence_ids": [
+          "evidence_2d92594ceab8bbdd8f2ae2dd",
+          "evidence_36ee9102cfd9a8ef98c0466d",
+          "evidence_37c6c31f5700495414de1101",
+          "evidence_3a4f927af191ec4ce7915444",
+          "evidence_424971c8f0be958200b09990",
+          "evidence_70c45d6344d61b4291168200",
+          "evidence_8b9b87ad8adcc025075370ea",
+          "evidence_a6950ea73293cda81e695ce1",
+          "evidence_fe41d7606ec45f8e0500d896"
+        ],
+        "review_status": "DRAFT",
+        "scope_review_complete": false,
+        "step_id": "lookup_oil_grade",
+        "version": "accepted-eleven-dependencies-draft-v1"
+      },
+      "rules": {}
+    },
+    "candidate_expected_route": "SUPPORTED",
+    "candidate_revision": "original-eleven-suite-v2",
+    "canonical_answer": "For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic. Using the wrong oil grade reduces the life of moving parts and seriously affects performance.",
+    "canonical_citations": [
+      {
+        "claim_id": "lookup_oil_grade:accepted-draft:main",
+        "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+        "source_text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab"
+      },
+      {
+        "claim_id": "lookup_oil_grade:accepted-draft:warning0",
+        "evidence_id": "evidence_37c6c31f5700495414de1101",
+        "source_text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9"
+      }
+    ],
+    "case_digest": "7f98a66eac23acb69e4c57843157749c923b94641c196bd9da1148510d696042",
+    "case_kind": "ORIGINAL_ELEVEN_DRAFT_REFERENCE",
+    "claims": [
+      {
+        "claim_id": "lookup_oil_grade:accepted-draft:main",
+        "exact_claim_text": "For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic.",
+        "response_role": "FACT",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+            "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+            "text_span": [
+              0,
+              501
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_a6950ea73293cda81e695ce1"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      },
+      {
+        "claim_id": "lookup_oil_grade:accepted-draft:warning0",
+        "exact_claim_text": "Using the wrong oil grade reduces the life of moving parts and seriously affects performance.",
+        "response_role": "WARNING",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_37c6c31f5700495414de1101",
+            "text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9",
+            "text_span": [
+              0,
+              97
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_37c6c31f5700495414de1101"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      }
+    ],
+    "coverage_plan": {
+      "adversaries": [
+        "added instruction",
+        "changed number",
+        "changed unit",
+        "omitted claim/warning",
+        "forged citation",
+        "wrong variant",
+        "missing dependency",
+        "draft/stale cache",
+        "provider outage"
+      ],
+      "branch_execution": "Branch-specific context retained; no invented executable predicates",
+      "claim_support": "Agent maps retained; live semantic verdict NOT_MEASURED",
+      "modality": "Visible observation only; referenced figures require reviewed image-capable verifier",
+      "question_review": "Accessible observations, no internal enum, no redundant recurrence question; automatic flags require adjudication",
+      "source_policy": "Policy references never presented as OEM facts",
+      "typed_outcomes": [
+        "OBSERVED_NORMAL",
+        "OBSERVED_ABNORMAL",
+        "ACTION_COMPLETED_UNRESOLVED",
+        "NOT_APPLICABLE",
+        "UNCLEAR",
+        "RESOLVED"
+      ]
+    },
+    "formal_source_approved": false,
+    "prior_holds": [
+      "INDEPENDENT_CONTENT_BOUND_REVIEW_REQUIRED",
+      "CLAIM_SPANS_AND_BRANCH_DEPENDENCY_SCOPE_REQUIRED",
+      "DRAFT_PARAPHRASES_REQUIRE_DISPLAY_REVIEW"
+    ],
+    "producer_draft_sha256": "74292791e6d54a580c246982078c35973fc88befec986845cdb01916f391774d",
+    "producer_version": "accepted-eleven-reconciliation-draft-v1",
+    "question": "What engine oil grade is specified?",
+    "record_id": "lookup_oil_grade",
+    "required_candidate_source_ids": [
+      "evidence_2d92594ceab8bbdd8f2ae2dd",
+      "evidence_36ee9102cfd9a8ef98c0466d",
+      "evidence_37c6c31f5700495414de1101",
+      "evidence_3a4f927af191ec4ce7915444",
+      "evidence_424971c8f0be958200b09990",
+      "evidence_70c45d6344d61b4291168200",
+      "evidence_8b9b87ad8adcc025075370ea",
+      "evidence_a6950ea73293cda81e695ce1",
+      "evidence_fe41d7606ec45f8e0500d896"
+    ],
+    "required_source_locks": {
+      "evidence_2d92594ceab8bbdd8f2ae2dd": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "7a552636e3317c1d116f1c562c91b3ecff5ffcbb4dc5d1b6b77af7a2b9bef711"
+      },
+      "evidence_36ee9102cfd9a8ef98c0466d": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "d458aa838d3f0465fb3cc73ff2cb48ce2ea610b41f169d5dd5e27946ffdfce0a"
+      },
+      "evidence_37c6c31f5700495414de1101": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9"
+      },
+      "evidence_3a4f927af191ec4ce7915444": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "41691f905d17471a4f5e186be637439af853a627a3e1b792e33fef412e9a55e2"
+      },
+      "evidence_424971c8f0be958200b09990": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "42be7157f6af6b43511e21eb8400afdf584014fe8628ea8411b8ea14f55c317a"
+      },
+      "evidence_70c45d6344d61b4291168200": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1"
+      },
+      "evidence_8b9b87ad8adcc025075370ea": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "6c3e5aa5cdc73cc5752b54041fe02c54958e3f0b235dff3eaacf2cefb07dd830"
+      },
+      "evidence_a6950ea73293cda81e695ce1": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab"
+      },
+      "evidence_fe41d7606ec45f8e0500d896": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "060e946d35ef4fd0ff7dcb536df039ddcd13161624d9a9b8b8566c5e1d406c1d"
+      }
+    },
+    "runtime_binding": {
+      "facts": {},
+      "step_id": "lookup_oil_grade",
+      "symptoms": [
+        "oil_grade"
+      ]
+    }
+  },
+  "candidate_case_sha256": "2728022d780c1477f8471a31a06546df11620d1985f6838cc4f2d73be73c1939",
+  "canonical_answer_sha256": "cae4876c2416971476adb801360b29934304e374560807697fe8b92b6c597aba",
+  "claim_checks": [
+    {
+      "claim_id": "lookup_oil_grade:accepted-draft:main",
+      "exact_claim": "For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "59b687d4b039e70b6d3e36b820d5764e09008ffbe30df5f161c413b9fc75fc6f",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": "r0c0: ENGINE OIL\nr0c2: COOLANT\nr0c3: FRONT FORK OIL\nr0c4: BRAKE FLUID\nr1c0: Grade\nr1c1: 10W40 API SN, JASO MA2, Semi Synthetic\nr1c2: TOTAL COOLELF AUTO SUPRA -37 ºC\nr1c3: SS-47G\nr1c4: DOT 4*\nr2c0: Capacity\nr2c1: 1 st dry fill: 2.4 L\nr2c2: Radiator: Dry fill - 915 ml Service fill - 815 ml\nr2c3: RH fork: 589 ± 2.5 ml\nr2c4: Front - 90 ± 5 ml\nr3c1: Refill: 2.1 L for oil service (Including filter change)\nr3c2: Expansion Tank: Fill to max mark - 200 ml\nr3c3: LH fork: 507 ± 2.5 ml\nr3c4: Rear - 80 ± 5 ml",
+          "object_type": "table",
+          "pdf_pages": [
+            21
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+            "exact_text": "r0c0: ENGINE OIL\nr0c2: COOLANT\nr0c3: FRONT FORK OIL\nr0c4: BRAKE FLUID\nr1c0: Grade\nr1c1: 10W40 API SN, JASO MA2, Semi Synthetic\nr1c2: TOTAL COOLELF AUTO SUPRA -37 ºC\nr1c3: SS-47G\nr1c4: DOT 4*\nr2c0: Capacity\nr2c1: 1 st dry fill: 2.4 L\nr2c2: Radiator: Dry fill - 915 ml Service fill - 815 ml\nr2c3: RH fork: 589 ± 2.5 ml\nr2c4: Front - 90 ± 5 ml\nr3c1: Refill: 2.1 L for oil service (Including filter change)\nr3c2: Expansion Tank: Fill to max mark - 200 ml\nr3c3: LH fork: 507 ± 2.5 ml\nr3c4: Rear - 80 ± 5 ml",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 117.94845125804227,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 20.66205596923828,
+                  "r": 419.10333568226207,
+                  "t": 212.85132178452434
+                },
+                "charspan": [
+                  0,
+                  0
+                ],
+                "page_no": 21
+              }
+            ],
+            "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+            "text_span": [
+              0,
+              501
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    },
+    {
+      "claim_id": "lookup_oil_grade:accepted-draft:warning0",
+      "exact_claim": "Using the wrong oil grade reduces the life of moving parts and seriously affects performance.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "28d5977bf0c2ffff2d2c6a3cf3a3e325887064d61d2dbcb69a65abbd5f5bd08e",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": "Use of wrong oil grade will reduce the life of the moving parts and seriously affect performance.",
+          "object_type": "text",
+          "pdf_pages": [
+            21
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_37c6c31f5700495414de1101",
+            "exact_text": "Use of wrong oil grade will reduce the life of the moving parts and seriously affect performance.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 36.87151875589066,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 21.5718,
+                  "r": 331.7397999999998,
+                  "t": 43.54939999999999
+                },
+                "charspan": [
+                  0,
+                  97
+                ],
+                "page_no": 21
+              }
+            ],
+            "text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9",
+            "text_span": [
+              0,
+              97
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    }
+  ],
+  "context_pin_sha256": "27c61d0e42be3d4582a6559e2becfcd28e27e8d065bbea1033f7ec5789c64250",
+  "coordinator_snapshot_sha256": "29a19c789bd5e97addf1fa2b0e6c58bde9a40b22c2d4c3c655a99f8308bc3b6f",
+  "figure_necessity_checks": [],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "missing_source_ids": [],
+  "original_pdf_pages_to_check": [
+    21
+  ],
+  "planner_actor": "check_planner",
+  "planning_only": true,
+  "prior_support_context": null,
+  "producer_binding_context": null,
+  "quality_and_routing_checks": [
+    "Check exact accepted follow-up context, do not collapse entire conversation into terminal answer.",
+    "Relevant concise main response; compact setup conditions without assuming completion.",
+    "No invented OEM ranking from independent documented checks.",
+    "Separate SUPPORTED/AMBIGUOUS/UNSUPPORTED/SAFETY_STOP/SYSTEM_ERROR; a synthetic error fixture is not an actual outage measurement.",
+    "Source facts, user observations, policy conditions and unverified mechanical diagnosis remain distinct.",
+    "Inspect all branch warnings, prerequisite object links, citations and claim spans; do not use a broad whole-table span as automatic entailment.",
+    "Verify branch predicates execute as typed reviewed records; prose is not executable.",
+    "No provider/secret reads/deployment/billing/index changes; review release artifacts only."
+  ],
+  "record_id": "lookup_oil_grade",
+  "runtime_mapping": {
+    "conditional_branches": [
+      {
+        "branch_context": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+        "branch_id": "lookup_oil_grade:branch:ACTION_COMPLETED_UNRESOLVED",
+        "parent_step_id": "lookup_oil_grade:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_2d92594ceab8bbdd8f2ae2dd",
+          "evidence_36ee9102cfd9a8ef98c0466d",
+          "evidence_37c6c31f5700495414de1101",
+          "evidence_3a4f927af191ec4ce7915444",
+          "evidence_424971c8f0be958200b09990",
+          "evidence_70c45d6344d61b4291168200",
+          "evidence_8b9b87ad8adcc025075370ea",
+          "evidence_a6950ea73293cda81e695ce1",
+          "evidence_fe41d7606ec45f8e0500d896"
+        ]
+      },
+      {
+        "branch_context": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+        "branch_id": "lookup_oil_grade:branch:NOT_APPLICABLE",
+        "parent_step_id": "lookup_oil_grade:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_2d92594ceab8bbdd8f2ae2dd",
+          "evidence_36ee9102cfd9a8ef98c0466d",
+          "evidence_37c6c31f5700495414de1101",
+          "evidence_3a4f927af191ec4ce7915444",
+          "evidence_424971c8f0be958200b09990",
+          "evidence_70c45d6344d61b4291168200",
+          "evidence_8b9b87ad8adcc025075370ea",
+          "evidence_a6950ea73293cda81e695ce1",
+          "evidence_fe41d7606ec45f8e0500d896"
+        ]
+      },
+      {
+        "branch_context": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+        "branch_id": "lookup_oil_grade:branch:RESOLVED",
+        "parent_step_id": "lookup_oil_grade:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_2d92594ceab8bbdd8f2ae2dd",
+          "evidence_36ee9102cfd9a8ef98c0466d",
+          "evidence_37c6c31f5700495414de1101",
+          "evidence_3a4f927af191ec4ce7915444",
+          "evidence_424971c8f0be958200b09990",
+          "evidence_70c45d6344d61b4291168200",
+          "evidence_8b9b87ad8adcc025075370ea",
+          "evidence_a6950ea73293cda81e695ce1",
+          "evidence_fe41d7606ec45f8e0500d896"
+        ]
+      },
+      {
+        "branch_context": "Grade lookup ends after the specification and caution; no quantity, oil-changing procedure or substitute recommendation.",
+        "branch_id": "lookup_oil_grade:branch:end",
+        "parent_step_id": "lookup_oil_grade:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_2d92594ceab8bbdd8f2ae2dd",
+          "evidence_36ee9102cfd9a8ef98c0466d",
+          "evidence_37c6c31f5700495414de1101",
+          "evidence_3a4f927af191ec4ce7915444",
+          "evidence_424971c8f0be958200b09990",
+          "evidence_70c45d6344d61b4291168200",
+          "evidence_8b9b87ad8adcc025075370ea",
+          "evidence_a6950ea73293cda81e695ce1",
+          "evidence_fe41d7606ec45f8e0500d896"
+        ]
+      }
+    ],
+    "dependency": {
+      "action_evidence_ids": [
+        "evidence_a6950ea73293cda81e695ce1"
+      ],
+      "branch_scope": "Main response and explicit conditional children are separate; not relevance-based closure",
+      "categories": {
+        "actions": [
+          "evidence_a6950ea73293cda81e695ce1"
+        ],
+        "conditions": [],
+        "figures": [],
+        "prerequisites": [],
+        "tables": [
+          "evidence_a6950ea73293cda81e695ce1"
+        ],
+        "warnings": [
+          "evidence_37c6c31f5700495414de1101"
+        ]
+      },
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "required_evidence_ids": [
+        "evidence_2d92594ceab8bbdd8f2ae2dd",
+        "evidence_36ee9102cfd9a8ef98c0466d",
+        "evidence_37c6c31f5700495414de1101",
+        "evidence_3a4f927af191ec4ce7915444",
+        "evidence_424971c8f0be958200b09990",
+        "evidence_70c45d6344d61b4291168200",
+        "evidence_8b9b87ad8adcc025075370ea",
+        "evidence_a6950ea73293cda81e695ce1",
+        "evidence_fe41d7606ec45f8e0500d896"
+      ],
+      "review_status": "DRAFT",
+      "scope_review_complete": false,
+      "step_id": "lookup_oil_grade:candidate-v3",
+      "version": "isolated-runtime-candidates-v3"
+    },
+    "dependency_sha256": "f8fe3eb7199d17d9da47d64495d8b9fd5cfcc258ef726a67916de5a65698dd84",
+    "procedure": null,
+    "rules": {
+      "lookup_oil_grade:rule:bike_scope_confirmed": {
+        "authoring_scope": "Explicit typed proposition; no mechanical health or diagnostic order inferred",
+        "clarification_evidence_ids": [],
+        "clarification_question": null,
+        "expected_value": true,
+        "fact_key": "bike_scope_confirmed",
+        "human_signoff": false,
+        "operator": "EQ",
+        "origin": "PRODUCT_POLICY",
+        "policy_source_ids": [
+          "policy_240aa9e9a20851d2f8253ffc",
+          "policy_680d331344f35db68e62a9cf",
+          "policy_856cb9f6fbe76bd5e7103080"
+        ],
+        "policy_version": "isolated-runtime-candidates-v3",
+        "predicate_type": "BOOLEAN",
+        "review_status": "DRAFT",
+        "rider_resolvable": false,
+        "rule_id": "lookup_oil_grade:rule:bike_scope_confirmed",
+        "rule_version": "isolated-runtime-candidates-v3",
+        "source_evidence_ids": [],
+        "unit": null
+      }
+    },
+    "session_fixture": {
+      "actual_runtime_measured": false,
+      "events": [
+        {
+          "expected_new_health_fact": false,
+          "expected_repeat": false,
+          "outcome": "ACTION_COMPLETED_UNRESOLVED"
+        },
+        {
+          "must_not_prove_system_health": true,
+          "outcome": "OBSERVED_NORMAL",
+          "requires_rule_id_and_typed_fact": true
+        },
+        {
+          "expected_one_focused_question": true,
+          "outcome": "UNCLEAR"
+        },
+        {
+          "outcome": "RESOLVED",
+          "scope": "Selected issue only; other issues remain open"
+        },
+        {
+          "outcome": "CORRECTION",
+          "supersedes_immutable_attempt": true
+        }
+      ],
+      "initial_facts": {
+        "bike_scope_confirmed": true
+      },
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "record_id": "lookup_oil_grade",
+      "review_status": "DRAFT",
+      "step_id": "lookup_oil_grade:candidate-v3",
+      "symptoms": [
+        "lookup_oil_grade"
+      ]
+    },
+    "step": {
+      "action_evidence_ids": [
+        "evidence_a6950ea73293cda81e695ce1"
+      ],
+      "applicability_rule_ids": [
+        "lookup_oil_grade:rule:bike_scope_confirmed"
+      ],
+      "authoring_blockers": [
+        "INDEPENDENT_SOURCE_RULE_DEPENDENCY_SIGNOFF_REQUIRED",
+        "BRANCH_SCOPES_AND_ROLE_GROUPS_NOT_RUNTIME_APPROVED"
+      ],
+      "canonical_record_id": "lookup_oil_grade",
+      "claims": [
+        {
+          "claim_id": "lookup_oil_grade:accepted-draft:main",
+          "evidence_ids": [
+            "evidence_a6950ea73293cda81e695ce1"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "FACT",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+              "exact_text": "r0c0: ENGINE OIL\nr0c2: COOLANT\nr0c3: FRONT FORK OIL\nr0c4: BRAKE FLUID\nr1c0: Grade\nr1c1: 10W40 API SN, JASO MA2, Semi Synthetic\nr1c2: TOTAL COOLELF AUTO SUPRA -37 ºC\nr1c3: SS-47G\nr1c4: DOT 4*\nr2c0: Capacity\nr2c1: 1 st dry fill: 2.4 L\nr2c2: Radiator: Dry fill - 915 ml Service fill - 815 ml\nr2c3: RH fork: 589 ± 2.5 ml\nr2c4: Front - 90 ± 5 ml\nr3c1: Refill: 2.1 L for oil service (Including filter change)\nr3c2: Expansion Tank: Fill to max mark - 200 ml\nr3c3: LH fork: 507 ± 2.5 ml\nr3c4: Rear - 80 ± 5 ml",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 117.94845125804227,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 20.66205596923828,
+                    "r": 419.10333568226207,
+                    "t": 212.85132178452434
+                  },
+                  "charspan": [
+                    0,
+                    0
+                  ],
+                  "page_no": 21
+                }
+              ],
+              "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+              "text_span": [
+                0,
+                501
+              ]
+            }
+          ],
+          "text": "For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic."
+        },
+        {
+          "claim_id": "lookup_oil_grade:accepted-draft:warning0",
+          "evidence_ids": [
+            "evidence_37c6c31f5700495414de1101"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "WARNING",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_37c6c31f5700495414de1101",
+              "exact_text": "Use of wrong oil grade will reduce the life of the moving parts and seriously affect performance.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 36.87151875589066,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 21.5718,
+                    "r": 331.7397999999998,
+                    "t": 43.54939999999999
+                  },
+                  "charspan": [
+                    0,
+                    97
+                  ],
+                  "page_no": 21
+                }
+              ],
+              "text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9",
+              "text_span": [
+                0,
+                97
+              ]
+            }
+          ],
+          "text": "Using the wrong oil grade reduces the life of moving parts and seriously affects performance."
+        }
+      ],
+      "dependency_manifest_version": "isolated-runtime-candidates-v3",
+      "kind": "LOOKUP",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "next_step_evidence_ids": [],
+      "next_step_ids": [],
+      "parent_procedure_id": null,
+      "repeat_rule_ids": [],
+      "required_evidence_ids": [
+        "evidence_2d92594ceab8bbdd8f2ae2dd",
+        "evidence_36ee9102cfd9a8ef98c0466d",
+        "evidence_37c6c31f5700495414de1101",
+        "evidence_3a4f927af191ec4ce7915444",
+        "evidence_424971c8f0be958200b09990",
+        "evidence_70c45d6344d61b4291168200",
+        "evidence_8b9b87ad8adcc025075370ea",
+        "evidence_a6950ea73293cda81e695ce1",
+        "evidence_fe41d7606ec45f8e0500d896"
+      ],
+      "review_status": "DRAFT",
+      "rule_version": "isolated-runtime-candidates-v3",
+      "runtime_authorized": false,
+      "safety_rule_ids": [],
+      "step_id": "lookup_oil_grade:candidate-v3",
+      "symptom_tags": [
+        "lookup_oil_grade"
+      ],
+      "unresolved_evidence_ids": [],
+      "unresolved_route": "CONTINUE_DOCUMENTED"
+    },
+    "step_sha256": "70e2f64fce8ede4eee37928c3697274d7c9c822963c82bfe769be6bb9a526b86",
+    "trusted_route": {
+      "initial_candidate_route": "SUPPORTED",
+      "record_id": "lookup_oil_grade",
+      "requires_actual_formal_approval": true,
+      "route_kind": "SOURCE_DRAFT_STEP",
+      "runtime_authorized": false,
+      "step_id": "lookup_oil_grade:candidate-v3"
+    }
+  },
+  "schema_version": "case-check-plan-v1",
+  "source_limit_checks": [],
+  "source_manifest_scope": {
+    "applicability_policy": {
+      "manual_identification": "PDF page 3 describes 452 cc liquid-cooled Sherpa; pages 1 and 4 state BS VI.",
+      "market_or_region": "Not independently confirmed; no rider market prompt required under owner selection policy.",
+      "model_year_required": false,
+      "owner_confirmed_on": "2026-10-09",
+      "rider_edition_selection_required": false,
+      "selection_rule": "Rider confirms Himalayan and BS6; supplied immutable manual is selected.",
+      "version": "owner-himalayan-bs6-v1"
+    },
+    "display_policy": {
+      "end_user_excerpts": false,
+      "end_user_figure_crops": false,
+      "end_user_pdf": false,
+      "engineering_pdf_and_excerpts": true,
+      "oem_redistribution_license_verified": false,
+      "owner_statement_date": "2026-10-09",
+      "version": "engineering-only-v1"
+    },
+    "oem_service_route": {
+      "checked_date": "2026-10-09",
+      "email": "support@royalenfield.com",
+      "market": "India",
+      "market_fit_status": "PENDING_SOURCE_MARKET_CONFIRMATION",
+      "owner_requested": true,
+      "url": "mailto:support@royalenfield.com",
+      "verification_url": "https://www.royalenfield.com/in/en/support/digital-quickstart/new-himalayan/contact-us/",
+      "verified": true,
+      "wording": "Kindly write to Royal Enfield at support@royalenfield.com"
+    },
+    "rights_status": "engineering_use_authorized_by_owner_end_user_pdf_and_excerpt_display_prohibited"
+  },
+  "source_objects": {
+    "evidence_2d92594ceab8bbdd8f2ae2dd": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_2d92594ceab8bbdd8f2ae2dd",
+      "exact_text": "NOTE",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 94.24128306789606,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 22.5094,
+            "r": 44.741400000000006,
+            "t": 101.42590000000001
+          },
+          "charspan": [
+            0,
+            4
+          ],
+          "page_no": 21
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "7a552636e3317c1d116f1c562c91b3ecff5ffcbb4dc5d1b6b77af7a2b9bef711",
+      "text_span": [
+        0,
+        4
+      ]
+    },
+    "evidence_36ee9102cfd9a8ef98c0466d": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_36ee9102cfd9a8ef98c0466d",
+      "exact_text": "* Do not mix DOT 4 or other brake fluid together.",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "5717c110096ec4df9d135e004da8b9aeac58e96db94dcfc49bf7e6d76590bd57",
+      "object_type": "footnote",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 110.37241875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 181.02379999999988,
+            "t": 117.0503
+          },
+          "charspan": [
+            0,
+            49
+          ],
+          "page_no": 21
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "text_sha256": "d458aa838d3f0465fb3cc73ff2cb48ce2ea610b41f169d5dd5e27946ffdfce0a",
+      "text_span": [
+        0,
+        49
+      ]
+    },
+    "evidence_37c6c31f5700495414de1101": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_37c6c31f5700495414de1101",
+      "exact_text": "Use of wrong oil grade will reduce the life of the moving parts and seriously affect performance.",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "c265cf26185ba127d32d980365448414ac67410564148739ab47c82b20641c0f",
+      "object_type": "text",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 36.87151875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 331.7397999999998,
+            "t": 43.54939999999999
+          },
+          "charspan": [
+            0,
+            97
+          ],
+          "page_no": 21
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9",
+      "text_span": [
+        0,
+        97
+      ]
+    },
+    "evidence_3a4f927af191ec4ce7915444": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_3a4f927af191ec4ce7915444",
+      "exact_text": "Coolant from is ready to use and does not require mixing.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 83.62201875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 215.6629999999999,
+            "t": 90.29989999999998
+          },
+          "charspan": [
+            0,
+            60
+          ],
+          "page_no": 21
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "41691f905d17471a4f5e186be637439af853a627a3e1b792e33fef412e9a55e2",
+      "text_span": [
+        0,
+        57
+      ]
+    },
+    "evidence_424971c8f0be958200b09990": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_424971c8f0be958200b09990",
+      "exact_text": "The above values are approximate and the actual capacity will vary.",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "d6a4f79e4a166a35256a6bb493b224cc235a3c7d8f175f8fdc4c5013418b0911",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 63.62201875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 248.5422,
+            "t": 70.29989999999998
+          },
+          "charspan": [
+            0,
+            70
+          ],
+          "page_no": 21
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "text_sha256": "42be7157f6af6b43511e21eb8400afdf584014fe8628ea8411b8ea14f55c317a",
+      "text_span": [
+        0,
+        67
+      ]
+    },
+    "evidence_70c45d6344d61b4291168200": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_70c45d6344d61b4291168200",
+      "exact_text": "CAUTION",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 47.44238306789606,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 22.5094,
+            "r": 59.5726,
+            "t": 54.62700000000001
+          },
+          "charspan": [
+            0,
+            7
+          ],
+          "page_no": 21
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "text_span": [
+        0,
+        7
+      ]
+    },
+    "evidence_8b9b87ad8adcc025075370ea": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_8b9b87ad8adcc025075370ea",
+      "exact_text": "Recommendation subject to change without notice.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 74.62201875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 199.10379999999992,
+            "t": 81.29989999999998
+          },
+          "charspan": [
+            0,
+            51
+          ],
+          "page_no": 21
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "6c3e5aa5cdc73cc5752b54041fe02c54958e3f0b235dff3eaacf2cefb07dd830",
+      "text_span": [
+        0,
+        48
+      ]
+    },
+    "evidence_a6950ea73293cda81e695ce1": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+      "exact_text": "r0c0: ENGINE OIL\nr0c2: COOLANT\nr0c3: FRONT FORK OIL\nr0c4: BRAKE FLUID\nr1c0: Grade\nr1c1: 10W40 API SN, JASO MA2, Semi Synthetic\nr1c2: TOTAL COOLELF AUTO SUPRA -37 ºC\nr1c3: SS-47G\nr1c4: DOT 4*\nr2c0: Capacity\nr2c1: 1 st dry fill: 2.4 L\nr2c2: Radiator: Dry fill - 915 ml Service fill - 815 ml\nr2c3: RH fork: 589 ± 2.5 ml\nr2c4: Front - 90 ± 5 ml\nr3c1: Refill: 2.1 L for oil service (Including filter change)\nr3c2: Expansion Tank: Fill to max mark - 200 ml\nr3c3: LH fork: 507 ± 2.5 ml\nr3c4: Rear - 80 ± 5 ml",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "127bc973f654366cd01ef587919b716ebfae73825abf10fb206e162acdae9712",
+      "object_type": "table",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 117.94845125804227,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 20.66205596923828,
+            "r": 419.10333568226207,
+            "t": 212.85132178452434
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 21
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "table_cells": [
+        {
+          "bbox": {
+            "b": 53.499671350364935,
+            "coord_origin": "TOPLEFT",
+            "l": 94.1618,
+            "r": 130.99089999999995,
+            "t": 47.652799999999985
+          },
+          "col_span": 2,
+          "column_header": true,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 0,
+          "text": "ENGINE OIL"
+        },
+        {
+          "bbox": {
+            "b": 53.499671350364935,
+            "coord_origin": "TOPLEFT",
+            "l": 228.25379999999998,
+            "r": 259.9414,
+            "t": 47.652799999999985
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 0,
+          "text": "COOLANT"
+        },
+        {
+          "bbox": {
+            "b": 53.499671350364935,
+            "coord_origin": "TOPLEFT",
+            "l": 294.6418,
+            "r": 348.2702,
+            "t": 47.652799999999985
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 4,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 3,
+          "start_row_offset_idx": 0,
+          "text": "FRONT FORK OIL"
+        },
+        {
+          "bbox": {
+            "b": 53.499671350364935,
+            "coord_origin": "TOPLEFT",
+            "l": 366.8678,
+            "r": 409.6098,
+            "t": 47.652799999999985
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 5,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 4,
+          "start_row_offset_idx": 0,
+          "text": "BRAKE FLUID"
+        },
+        {
+          "bbox": {
+            "b": 72.49394608859564,
+            "coord_origin": "TOPLEFT",
+            "l": 31.182799999999986,
+            "r": 48.57429999999999,
+            "t": 66.65079999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": true,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 1,
+          "text": "Grade"
+        },
+        {
+          "bbox": {
+            "b": 72.49394608859564,
+            "coord_origin": "TOPLEFT",
+            "l": 62.05979999999999,
+            "r": 182.99809999999997,
+            "t": 66.65079999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": true,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 1,
+          "text": "10W40 API SN, JASO MA2, Semi Synthetic"
+        },
+        {
+          "bbox": {
+            "b": 77.07204999999999,
+            "coord_origin": "TOPLEFT",
+            "l": 207.44979999999998,
+            "r": 274.4174,
+            "t": 62.65379999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 1,
+          "text": "TOTAL COOLELF AUTO SUPRA -37 ºC"
+        },
+        {
+          "bbox": {
+            "b": 72.50094608859567,
+            "coord_origin": "TOPLEFT",
+            "l": 311.0218,
+            "r": 332.01199999999994,
+            "t": 66.65780000000001
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 4,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 3,
+          "start_row_offset_idx": 1,
+          "text": "SS-47G"
+        },
+        {
+          "bbox": {
+            "b": 72.50094608859567,
+            "coord_origin": "TOPLEFT",
+            "l": 377.9348,
+            "r": 398.5778000000001,
+            "t": 66.65780000000001
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 5,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 4,
+          "start_row_offset_idx": 1,
+          "text": "DOT 4*"
+        },
+        {
+          "bbox": {
+            "b": 111.10594608859566,
+            "coord_origin": "TOPLEFT",
+            "l": 27.486800000000017,
+            "r": 51.95950000000001,
+            "t": 105.2628
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": true,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 2,
+          "text": "Capacity"
+        },
+        {
+          "bbox": {
+            "b": 99.51067135036496,
+            "coord_origin": "TOPLEFT",
+            "l": 107.34280000000001,
+            "r": 154.0518,
+            "t": 91.8235693
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": true,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 2,
+          "text": "1 st dry fill: 2.4 L"
+        },
+        {
+          "bbox": {
+            "b": 107.49744608859567,
+            "coord_origin": "TOPLEFT",
+            "l": 217.8057,
+            "r": 270.2245,
+            "t": 85.6523
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 2,
+          "text": "Radiator: Dry fill - 915 ml Service fill - 815 ml"
+        },
+        {
+          "bbox": {
+            "b": 99.84960994152047,
+            "coord_origin": "TOPLEFT",
+            "l": 290.1227,
+            "r": 352.96940000000006,
+            "t": 93.6533
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 4,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 3,
+          "start_row_offset_idx": 2,
+          "text": "RH fork: 589 ± 2.5 ml"
+        },
+        {
+          "bbox": {
+            "b": 99.84960994152047,
+            "coord_origin": "TOPLEFT",
+            "l": 363.80469999999997,
+            "r": 412.9047999999999,
+            "t": 93.6533
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 5,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 4,
+          "start_row_offset_idx": 2,
+          "text": "Front - 90 ± 5 ml"
+        },
+        {
+          "bbox": {
+            "b": 130.59744608859566,
+            "coord_origin": "TOPLEFT",
+            "l": 95.36169999999987,
+            "r": 166.23389999999995,
+            "t": 116.7533
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": true,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 3,
+          "text": "Refill: 2.1 L for oil service (Including filter change)"
+        },
+        {
+          "bbox": {
+            "b": 130.59744608859566,
+            "coord_origin": "TOPLEFT",
+            "l": 208.4326999999999,
+            "r": 279.57089999999977,
+            "t": 116.7533
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 3,
+          "text": "Expansion Tank: Fill to max mark - 200 ml"
+        },
+        {
+          "bbox": {
+            "b": 126.95360994152045,
+            "coord_origin": "TOPLEFT",
+            "l": 290.8436999999999,
+            "r": 352.08319999999986,
+            "t": 120.75729999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 4,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 3,
+          "start_row_offset_idx": 3,
+          "text": "LH fork: 507 ± 2.5 ml"
+        },
+        {
+          "bbox": {
+            "b": 126.95360994152045,
+            "coord_origin": "TOPLEFT",
+            "l": 365.14169999999984,
+            "r": 411.30669999999975,
+            "t": 120.75729999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 5,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 4,
+          "start_row_offset_idx": 3,
+          "text": "Rear - 80 ± 5 ml"
+        }
+      ],
+      "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+      "text_span": [
+        0,
+        501
+      ]
+    },
+    "evidence_fe41d7606ec45f8e0500d896": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_fe41d7606ec45f8e0500d896",
+      "exact_text": "RECOMMENDED LUBRICANTS",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.68907460184408,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 199.87499999999994,
+            "t": 228.46599999999998
+          },
+          "charspan": [
+            0,
+            22
+          ],
+          "page_no": 21
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "060e946d35ef4fd0ff7dcb536df039ddcd13161624d9a9b8b8566c5e1d406c1d",
+      "text_span": [
+        0,
+        22
+      ]
+    }
+  },
+  "state_quality_checks": [
+    {
+      "check": "Append immutable unsuccessful attempt, do not infer normality, do not repeat this action automatically.",
+      "outcome": "ACTION_COMPLETED_UNRESOLVED"
+    },
+    {
+      "check": "Require exact eligible inspection rule and typed observation; not equivalent to unresolved action or proof of system health.",
+      "outcome": "OBSERVED_NORMAL"
+    },
+    {
+      "check": "Withhold dependent branch; clarify bike/control applicability only through observable question.",
+      "outcome": "NOT_APPLICABLE"
+    },
+    {
+      "check": "One practical source-derived question only if rider-resolvable; source-review gaps route internally or to scoped abstention.",
+      "outcome": "UNCLEAR"
+    },
+    {
+      "check": "Customer-reported symptom resolution only; other issues and service inspection mandates remain.",
+      "outcome": "RESOLVED"
+    },
+    {
+      "check": "Supersede prior observation while preserving attempt history; re-evaluate eligibility without invented order.",
+      "outcome": "CORRECTION"
+    }
+  ],
+  "table_number_unit_checks": [
+    {
+      "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+      "exact_text": "r0c0: ENGINE OIL\nr0c2: COOLANT\nr0c3: FRONT FORK OIL\nr0c4: BRAKE FLUID\nr1c0: Grade\nr1c1: 10W40 API SN, JASO MA2, Semi Synthetic\nr1c2: TOTAL COOLELF AUTO SUPRA -37 ºC\nr1c3: SS-47G\nr1c4: DOT 4*\nr2c0: Capacity\nr2c1: 1 st dry fill: 2.4 L\nr2c2: Radiator: Dry fill - 915 ml Service fill - 815 ml\nr2c3: RH fork: 589 ± 2.5 ml\nr2c4: Front - 90 ± 5 ml\nr3c1: Refill: 2.1 L for oil service (Including filter change)\nr3c2: Expansion Tank: Fill to max mark - 200 ml\nr3c3: LH fork: 507 ± 2.5 ml\nr3c4: Rear - 80 ± 5 ml",
+      "object_type": "table",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    }
+  ]
+}

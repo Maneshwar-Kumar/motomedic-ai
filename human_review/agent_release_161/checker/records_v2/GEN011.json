@@ -1,0 +1,162 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "GEN011",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/GEN011.json",
+  "plan_sha256": "722f87764b2ce914a2fc58235813f0aa4c788e5862ef64fdfe77fabbba05dca6",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "f3034e0d049e872de71c8f5d09b0d2aaff18f1b59f0e3240d2f9b4553d378358",
+  "final_dependency_sha256": "36e928f6a2e28dd4a9a95a02c7d1b2b5ba65f316fd41a2777f6f433ce3fe4a1f",
+  "final_rules_sha256": "3156f7a9b76bf6e31a5d8eab2e048e2560b1412afabb0824b896b3dd042f367c",
+  "final_route_sha256": "607cc14e8f544162d0458a458ebc893d6f6b9d79a18b4b50b4c8e931335bf5dd",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "Are the standard and low seats the same adjustable height?",
+  "claim_texts": [
+    "No. The standard seat is listed as adjustable from 825 to 845 mm; the low seat from 805 to 825 mm.",
+    "These are specification values for guidance, not confirmation of the seat fitted to your bike."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_0977d270b64406ab9d320956",
+      "source_sha256": "8c0c02dc9a46a71e2ef3ad87dee8de99507bce2555a4881155abb53e8fda64e0",
+      "text_sha256": "4240ddf7414886f3095d79c760cecc48c9a1a84d0f60749a449e4a15043ecaaa",
+      "original_pdf_pages": [
+        20
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_6058a38ed55c9b65bad75313",
+      "source_sha256": "75cfc8bb546d31a9ef03507b48c378743e6ae3627bf80a0d16077881844d189b",
+      "text_sha256": "92c83c059a27b951e3e9a360a951bc3c053646f175798e08d305cef520ee5890",
+      "original_pdf_pages": [
+        20
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_74d7693f57971057cf41fb71",
+      "source_sha256": "71863174ff891b2c5552c4ed5786c635571cf5c430a85c63b691b5db93cd163a",
+      "text_sha256": "3fe4026add6ff31b5967b430dda22ba94146e3448547bf474495998338d3c076",
+      "original_pdf_pages": [
+        20
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    20
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: No. The standard seat is listed as adjustable from 825 to 845 mm; the low seat from 805 to 825 mm. | These are specification values for guidance, not confirmation of the seat fitted to your bike. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": [],
+  "conclusion_adjudication": {
+    "record_id": "GEN011",
+    "question": "Are the standard and low seats the same adjustable height?",
+    "question_sha256": "3f9c911ba1fbc7d767e04c531adb68446b87b9a7d22c425a103bfd270af16e16",
+    "original_orphan_claim_sha256": "2eccda1bb5366159e7645f5b01c2471829ddfd56c05effc655403a09a490e2f3",
+    "final_grouped_claim_sha256": "bb8be8d493c0f0272451e5bce61e086ba414bbf69584d5860d900c5d01f10164",
+    "final_claim_id": "claim_c2678e3a55942c58c0e754f0",
+    "source_ids": [
+      "evidence_0977d270b64406ab9d320956",
+      "evidence_74d7693f57971057cf41fb71"
+    ],
+    "source_spans": [
+      {
+        "evidence_id": "evidence_0977d270b64406ab9d320956",
+        "text_sha256": "4240ddf7414886f3095d79c760cecc48c9a1a84d0f60749a449e4a15043ecaaa",
+        "text_span": [
+          0,
+          59
+        ],
+        "visual_page": null
+      },
+      {
+        "evidence_id": "evidence_74d7693f57971057cf41fb71",
+        "text_sha256": "3fe4026add6ff31b5967b430dda22ba94146e3448547bf474495998338d3c076",
+        "text_span": [
+          0,
+          61
+        ],
+        "visual_page": null
+      }
+    ],
+    "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+    "reason": "No follows the separate seat-height specifications825-845mm and805-825mm. Overlap at825 does not make the two adjustable ranges identical.",
+    "checker_actor": "independent-source-checker",
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+  }
+}

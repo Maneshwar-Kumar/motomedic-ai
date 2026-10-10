@@ -1,0 +1,678 @@
+{
+  "schema_version": "independent-question-conclusion-check-v2",
+  "count": 22,
+  "package_manifest_sha256": "0fd4c737ce1d16aff7343109444d8828b90f40d7e557e83acf2db97af318bf24",
+  "repair_file_sha256": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa",
+  "records": [
+    {
+      "record_id": "EXP007",
+      "question": "Can I change the dashboard to digital?",
+      "question_sha256": "3852a3b7cbc375ef746857853a6a8460aec0ee30d851a7a45902fb0073dcd09f",
+      "original_orphan_claim_sha256": "778bf471fa4c27d2381746fce5ebeee94936406107c4fede8ea05dad8dbd8af2",
+      "final_grouped_claim_sha256": "81ec1b1b6a41ba6755fdb77645afb15658cde5f749c08d983cc596ac6f9ceb61",
+      "final_claim_id": "claim_9123d3efdf22afed54044f50",
+      "source_ids": [
+        "evidence_25ed21bb128f803a5eb599e5"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_25ed21bb128f803a5eb599e5",
+          "text_sha256": "cd206610cadabd3b89d1ec4ef7b7f8edb2db582892c5721203a4923a76f15e5d",
+          "text_span": [
+            0,
+            102
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "Yes is qualified by the following Analog-to-Digital direction and documented long press of the right-hand Mode button on originalPDF42. It does not claim a reverse long-press operation.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "EXP009",
+      "question": "Can I rely on the displayed fuel range as exact?",
+      "question_sha256": "864107d9d0b1eb8df5ee0730eeae97419a7a01ab6f51185edf0e86748eb917ec",
+      "original_orphan_claim_sha256": "a27756d3b969095033b3c1d166ce819840a39f964c3ee2ae2e872d6f0390370d",
+      "final_grouped_claim_sha256": "f35cb63f73c24d895cd30b1a3221b2f0933e413cacbeb6d859bf60339c633491",
+      "final_claim_id": "claim_2d09c154e5e494b6503f1927",
+      "source_ids": [
+        "evidence_954bc918ef81aedd2b5130d8"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_954bc918ef81aedd2b5130d8",
+          "text_sha256": "eea8e0667419a5d1091810711cf10f8b4ea9ba12861974d379b30eb10b428c32",
+          "text_span": [
+            0,
+            113
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the source explicitly calling fuel range an estimate whose actual values may vary. No quantitative accuracy guarantee is inferred.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "EXP016",
+      "question": "Can I sit on the bike when it is on its side stand?",
+      "question_sha256": "c961d4795448ed1e347529796c99b74b48e8b5c55b651e12ba8e340b6a099b53",
+      "original_orphan_claim_sha256": "baf07ead32b2266e802ab5c099f4f17f2f17cb76a0c28e1a205c6f299ab51673",
+      "final_grouped_claim_sha256": "a86bd9e33a021d359535353a11be614017d946867e1cd35ee4d1cab5bba91756",
+      "final_claim_id": "claim_0c33412049634cb76e9e0b22",
+      "source_ids": [
+        "evidence_2998102be40f6ca8bc594a02"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_2998102be40f6ca8bc594a02",
+          "text_sha256": "43069820f3fdad4166ba0d31b353455176a38cd887aa149603c32335d5a091eb",
+          "text_span": [
+            0,
+            211
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the selected source clause itself saying not to sit on the motorcycle on its side stand; the same clause states motorcycle-weight-only design and damage/fall risks.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "EXP020",
+      "question": "Should I add 350 ml whenever the oil looks low?",
+      "question_sha256": "42c3585f4cff35c19460c778b6f48051a8a8c2cabb851142381283fe12d4f97b",
+      "original_orphan_claim_sha256": "7e48ddc3aa17891d2c98ee1037e992e512404cf831d145bca139f34624ec9552",
+      "final_grouped_claim_sha256": "4cbd8982e54f93805afb07c0c3a267de6ed9262fd936eb8c3908dabbfc52782c",
+      "final_claim_id": "claim_bde86adc9acca0836b9ad6e8",
+      "source_ids": [
+        "evidence_b5748074c64e0a831d8193f6"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_b5748074c64e0a831d8193f6",
+          "text_sha256": "6deab1f6f00cd9c5f132f688487dabc2829d271cd492ed929a7fcc9534b3c5af",
+          "text_span": [
+            0,
+            138
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No rejects arbitrary350ml additions. The selected original83 passage expressly limits approximately350ml to the MIN-to-MAX difference after the specified settling/level-check conditions.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "EXP023",
+      "question": "The engine is hot. Can I open the radiator cap now?",
+      "question_sha256": "b6d0cdcf307530cd1cb1294f670fd029e744c8062dc6089dd508e89275474b3e",
+      "original_orphan_claim_sha256": "2de92e24aefa2ccdc74ec0aa2da4e2fc2a8d39701674bdf962ad82393f05b59e",
+      "final_grouped_claim_sha256": "2d31a0473d642479994200dc371e8be6b10b2d5b9e02baaf698655be391f7011",
+      "final_claim_id": "claim_1176f73c5f5b421189fa3a0a",
+      "source_ids": [
+        "evidence_fd36c1641a183a760642e6eb"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_fd36c1641a183a760642e6eb",
+          "text_sha256": "49f298241985b4d224d39bb7c48c1ba9918f02e625721162a6b9b6eb355a81a6",
+          "text_span": [
+            0,
+            205
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the explicit never-open-radiator-cap-when-hot warning. The question already states a hot engine; pressure and severe-burn warning remain part of the answer.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "EXP024",
+      "question": "Can I mix another brake fluid with DOT4?",
+      "question_sha256": "9a6bd04f8cc284f2d8f189cfebef5e31817c5706995f02ef3f4e19832af3f83b",
+      "original_orphan_claim_sha256": "f038a69806b0a76303d2bf8f14b2d365b0beefa636f277eb8c9ce297f0d20573",
+      "final_grouped_claim_sha256": "6a02acd745c43fb783afcefb19241811db88135258f3458085f40d3bf0051906",
+      "final_claim_id": "claim_7c76d1f9a0019818be86c1ea",
+      "source_ids": [
+        "evidence_a6950ea73293cda81e695ce1",
+        "evidence_36ee9102cfd9a8ef98c0466d",
+        "evidence_fdd616b47465a42cfd4f1c01"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+          "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+          "text_span": [
+            0,
+            501
+          ]
+        },
+        {
+          "evidence_id": "evidence_36ee9102cfd9a8ef98c0466d",
+          "text_sha256": "d458aa838d3f0465fb3cc73ff2cb48ce2ea610b41f169d5dd5e27946ffdfce0a",
+          "text_span": [
+            0,
+            49
+          ]
+        },
+        {
+          "evidence_id": "evidence_fdd616b47465a42cfd4f1c01",
+          "text_sha256": "6edac274c41786c455d7efe2c4c075d0cb412b746f45d261d0fb6233e5db8f9d",
+          "text_span": [
+            0,
+            48
+          ]
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the explicit DOT4/other-fluid non-mixing warnings on original21and88. This does not authorize flushing, topping up or an alternative fluid.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "EXP043",
+      "question": "Should I use warm water after riding through road salt?",
+      "question_sha256": "8b3e68eb2b5264a30acbd97e1b3b5a543155b178604e3ffb13a51fd618213052",
+      "original_orphan_claim_sha256": "26009b468e0f4292ba96f6640ca037f809de422057154215fa538ae9ff890409",
+      "final_grouped_claim_sha256": "6a9c7f56039a66d97e0875380f6a6baf7390664b5158620996cdf2fed35b19a4",
+      "final_claim_id": "claim_8d4e0500eba23a42a44e0a88",
+      "source_ids": [
+        "evidence_17955ec3bb127d5f014bdc32",
+        "originalpdf_2635004f70b49330d7c49a8b"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_17955ec3bb127d5f014bdc32",
+          "text_sha256": "31360f719a4e221b654cd3b6211a6b82da333c052e4f6bff219ace26cab4a92d",
+          "text_span": [
+            0,
+            545
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "originalpdf_2635004f70b49330d7c49a8b",
+          "text_sha256": "792c98414df2b382d4233521cdf4244a4d11c7e80103adfa89cb590edda5e6e6",
+          "text_span": [
+            0,
+            1665
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the salt-exposure-specific prohibition of warm-water washing and cold-water recommendation. Engine-cold washing prerequisite comes from original118; generic lukewarm paint washing does not override the salt-specific restriction.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "EXP045",
+      "question": "Can I pour used oil or coolant into the ground?",
+      "question_sha256": "617f71144dbea11cefd2a7ff62ff3cfa72b947e34c5e6e48513947aa85e0975e",
+      "original_orphan_claim_sha256": "86bcacda22ce1547a7c1f3ced87a875d06be3fb22e97b936db25d85e1662c1a7",
+      "final_grouped_claim_sha256": "4cd74615bf5528f9aae0f7f7e8dbc2e96f20c9e794c0cba986a8bc357e7678b4",
+      "final_claim_id": "claim_eb227e5ab1d03dcc1e1f010e",
+      "source_ids": [
+        "evidence_c3b27f95a2bb4cb96b6a1c06"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_c3b27f95a2bb4cb96b6a1c06",
+          "text_sha256": "d5769d6100a5e64b8a5af5a7c46ce1ad8931adc55469997379c4b99fe9d4a969",
+          "text_span": [
+            0,
+            188
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the explicit prohibition on dumping engine oil/coolant/liquid waste in soil or water. Approved recycling/service handoff is separately sourced.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN003",
+      "question": "Cars in my mirrors look farther away than they really are. Is that described?",
+      "question_sha256": "b507367aa8ea14c5aef5abbd2836e21899b4b21af2d6b2ccc7b85dd18eeccac8",
+      "original_orphan_claim_sha256": "4425f07ec90ff13a27e6b843aae5763c2ac0c999e79aaaf66b7879b225d0c57e",
+      "final_grouped_claim_sha256": "b6c2f2ce63fdd21eb6c8622eaf96215cc90eb3d78877e885a7eb622129154140",
+      "final_claim_id": "claim_d224a18f854725eac42cd68d",
+      "source_ids": [
+        "evidence_4d46b457c1a09f36ac446545",
+        "evidence_476d825609b60be3792825f1"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_4d46b457c1a09f36ac446545",
+          "text_sha256": "ff6179ed067e7c117afa01143e212d0582ddba5999573d6cdd81de4d87ecef56",
+          "text_span": [
+            0,
+            74
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "evidence_476d825609b60be3792825f1",
+          "text_sha256": "2f053681d74d2dea3fa2fdfb8a7cfce2d3b45c640c4474f211eba12499231e54",
+          "text_span": [
+            0,
+            228
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "Yes answers whether the manual describes the convex-mirror effect. The following exact source says wider convex mirrors make objects look smaller and farther away than flat mirrors. It does not verify the actual distance to these cars.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN008",
+      "question": "Is 17 litres an amount I should always add when filling?",
+      "question_sha256": "7efc2455470e8304e07a20f4248c9430dfc17d972b51b5f26336c60971528cbf",
+      "original_orphan_claim_sha256": "66198c5c84943916acdb8496ad3a11545bda055becc1d6bda7512c243e619811",
+      "final_grouped_claim_sha256": "0df2160e1215a878bc99235fbd1c1ecb2a4cf9c7151ec86a59eb8aa0ec81e6c8",
+      "final_claim_id": "claim_a416500343d2af6ed44a808a",
+      "source_ids": [
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_64de3cc72b85735055b58fec"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_3f8de8466049af12783de7d0",
+          "text_sha256": "80cbcce80531c1edb6a58e735eb3287e6fd461db7ae0469fed5b9ed5774c934c",
+          "text_span": [
+            0,
+            479
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "evidence_64de3cc72b85735055b58fec",
+          "text_sha256": "d1f672f5c34221222101a3b6002fbf4a7f08c96a2f46fa14e1aedc67ee69a3c2",
+          "text_span": [
+            0,
+            108
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No rejects always adding17litres: the table labels17L as approximate tank capacity and its footnote says actual filling capacity varies. It does not become a universal refill amount.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN009",
+      "question": "Is the low-fuel warning the same quantity as dead stock?",
+      "question_sha256": "55196bac1dac1e86c3cdb0ea488e19ffedf0bbfa36bb73405c00f32af6e04630",
+      "original_orphan_claim_sha256": "99b5993c6b0cc9f4f5f449ab2a3d90f6bf0a95872c9cee45c680c37a09ff44b5",
+      "final_grouped_claim_sha256": "4a5c12f08017b1f3e89cd9391579c5e896d3ad22afa99cb72f2d444355b8a793",
+      "final_claim_id": "claim_4227cec41b77fbc74284ce27",
+      "source_ids": [
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_64de3cc72b85735055b58fec"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_3f8de8466049af12783de7d0",
+          "text_sha256": "80cbcce80531c1edb6a58e735eb3287e6fd461db7ae0469fed5b9ed5774c934c",
+          "text_span": [
+            0,
+            479
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "evidence_64de3cc72b85735055b58fec",
+          "text_sha256": "d1f672f5c34221222101a3b6002fbf4a7f08c96a2f46fa14e1aedc67ee69a3c2",
+          "text_span": [
+            0,
+            108
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No is supported by the distinct table rows: low-fuel warning3±0.5L versus dead stock0.95-1.15L, with approximation retained. This is a comparison of specified quantities, not a range prediction.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN010",
+      "question": "Can I count the whole 394 kg figure as luggage capacity?",
+      "question_sha256": "9f4baf8ae64b7e53c8944a459560c83289e50e0b4c8c9a69215fab156218bfda",
+      "original_orphan_claim_sha256": "15a4e1635dcc743f1799fd1c1aade7556f0dcf6e31f49e780138076a1566760b",
+      "final_grouped_claim_sha256": "9748ce7a359d2aac476953c4ed27dbf5270c298b9586989ee12bb7ac38e534f3",
+      "final_claim_id": "claim_6492e6e5b16e89d4e51d32ff",
+      "source_ids": [
+        "evidence_c3f89576489b978b3db27348",
+        "evidence_f215ffd94a6c830c1ba6dfb0"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_c3f89576489b978b3db27348",
+          "text_sha256": "40aa5d89ce371717df10eec48a2cc18cdb61507efb3ee7cdf43f6c7a581b3830",
+          "text_span": [
+            0,
+            53
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "evidence_f215ffd94a6c830c1ba6dfb0",
+          "text_sha256": "4b9bf3f3fa2480dde923fe27c8e7a6caf3d6c1e05ad362102f0df552cda8a886",
+          "text_span": [
+            0,
+            149
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No rejects treating gross vehicle weight as luggage capacity. The exact heading is gross vehicle weight394kg and the maximum applies to the entire vehicle; no accessory payload limit is inferred.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN011",
+      "question": "Are the standard and low seats the same adjustable height?",
+      "question_sha256": "3f9c911ba1fbc7d767e04c531adb68446b87b9a7d22c425a103bfd270af16e16",
+      "original_orphan_claim_sha256": "2eccda1bb5366159e7645f5b01c2471829ddfd56c05effc655403a09a490e2f3",
+      "final_grouped_claim_sha256": "bb8be8d493c0f0272451e5bce61e086ba414bbf69584d5860d900c5d01f10164",
+      "final_claim_id": "claim_c2678e3a55942c58c0e754f0",
+      "source_ids": [
+        "evidence_0977d270b64406ab9d320956",
+        "evidence_74d7693f57971057cf41fb71"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_0977d270b64406ab9d320956",
+          "text_sha256": "4240ddf7414886f3095d79c760cecc48c9a1a84d0f60749a449e4a15043ecaaa",
+          "text_span": [
+            0,
+            59
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "evidence_74d7693f57971057cf41fb71",
+          "text_sha256": "3fe4026add6ff31b5967b430dda22ba94146e3448547bf474495998338d3c076",
+          "text_span": [
+            0,
+            61
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the separate seat-height specifications825-845mm and805-825mm. Overlap at825 does not make the two adjustable ranges identical.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN014",
+      "question": "Are the left and right fork oil quantities identical?",
+      "question_sha256": "a55815492b09890fc6aab52b356971707eb4ad99859d4840836e16d9ca02bf3a",
+      "original_orphan_claim_sha256": "08a8404dde5faa04a252d1d81cb5850c5241565f7b6fdac8f250e4ce75081553",
+      "final_grouped_claim_sha256": "e8c01bad65f84424d5284f89b979d8541d577be5bdeb46261e4207f8474dfb15",
+      "final_claim_id": "claim_fe979db61dffc74493f9f0e6",
+      "source_ids": [
+        "evidence_a6950ea73293cda81e695ce1"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+          "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+          "text_span": [
+            0,
+            501
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows different RH589±2.5ml andLH507±2.5ml quantities under the same SS-47G fork-oil column. This does not authorize fork service.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN015",
+      "question": "Does this manual list six gears?",
+      "question_sha256": "b0c54aac56e3ea2213d461b393f9195de6d70e1af98e7e253d5fa33be0271349",
+      "original_orphan_claim_sha256": "f5d2c7b98e66f2219a7d6c787509a21989a5396c0e221ff4c23b475a56fcfd3b",
+      "final_grouped_claim_sha256": "6c71b356f296c39e1760cdb602b4c352c1390e56e829f466bb04db2d1c9b22f9",
+      "final_claim_id": "claim_521192ffe7d8296c4dd3ac19",
+      "source_ids": [
+        "evidence_6da3a0b254b526e89420b61b",
+        "evidence_e27bb103e1f23b6a7f3d68f0"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_6da3a0b254b526e89420b61b",
+          "text_sha256": "1a9ca973446da206709a4a97976d617854e9dc7ff5f043c161a10dac4182e32f",
+          "text_span": [
+            0,
+            73
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "evidence_e27bb103e1f23b6a7f3d68f0",
+          "text_sha256": "bd955823e13f98c9890b90249a34f9cb81fa4ed1dc45ad4960a261057e67d931",
+          "text_span": [
+            0,
+            46
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "Yes follows the explicit gearbox6Speed specification. The clutch specification stays separately supported; no gear-selection diagnosis follows.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN016",
+      "question": "Can I fit an electrical gadget with any rating if it plugs in?",
+      "question_sha256": "7192f2f81bd876890490cc33f1f1c15fb375ac4ddad8f8a5df616391bfb76449",
+      "original_orphan_claim_sha256": "aa2c019e7e866a412681909306604598580d961f5ea891f61df84afff7b57f36",
+      "final_grouped_claim_sha256": "06a66c5f7d6538cd3043ca9d9ddf02a76d72b2e78e70c9a1567a6400eab4d420",
+      "final_claim_id": "claim_e45a743f3780c8cbdf61e06d",
+      "source_ids": [
+        "evidence_da497f5f0bbf1c24b8f93714"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_da497f5f0bbf1c24b8f93714",
+          "text_sha256": "d5632bf16ac2c0910f133c5077e6792b26267b12c8a6052911e1aac38167ebff",
+          "text_span": [
+            0,
+            140
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the exact warning against electrical gadgets of ratings other than specified; physical plug compatibility does not waive that restriction.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN018",
+      "question": "Can this USB port transfer files?",
+      "question_sha256": "8366ddcfbdc852013dd3f89ba9fa32a1baf761a7f809ac50cc0bc0837e965501",
+      "original_orphan_claim_sha256": "d6fb956a2afddeb5179d27a576c483f5353aa4b51c94d9f3b2465e18fcb801de",
+      "final_grouped_claim_sha256": "6f8cacd1bbdfc58e7440bca1d00a38189eb81aeeba10842386fca0383c20c563",
+      "final_claim_id": "claim_95c5e7b11bb9af4b7133d8a0",
+      "source_ids": [
+        "evidence_82764faca7aa6cec43f2eeb3"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_82764faca7aa6cec43f2eeb3",
+          "text_sha256": "7837e1605caab298e8763ef79e0feb3345869ace8da68654c782d3de09f20b70",
+          "text_span": [
+            0,
+            86
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the explicit charging-only/no-data-transfer sentence, with no unsupported USB capability claim.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN027",
+      "question": "My clock reads 00:00 after the battery was disconnected. Is that described?",
+      "question_sha256": "5b819c9d62f090b896b713c40b591dc358b1ba542328848482820460c234f090",
+      "original_orphan_claim_sha256": "3183964fb07603f8e8e4a85b6ca443e8ce9fd7a078f4f76d162104d58580c542",
+      "final_grouped_claim_sha256": "68d51b1cd9af486afa13a6d8a3ae15910671d1de2c64d3bf55243d9fdf600fca",
+      "final_claim_id": "claim_f2d1327ee81f9d4de907121c",
+      "source_ids": [
+        "evidence_f8a6e2c300053f657c1ea311"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_f8a6e2c300053f657c1ea311",
+          "text_sha256": "06ea7e8f90d56a4968612ea08ca7b076049c3b40ca99fab7ccaf992f59c0f271",
+          "text_span": [
+            0,
+            51
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "Yes follows the documented reset to00:00 when the battery is disconnected. It describes the reported event without diagnosing battery health.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN031",
+      "question": "Can I find the cluster firmware version without updating it?",
+      "question_sha256": "44a529ba55d689d233325a7cdbe0bcdfc9dd70143f337fa44223f203520546c9",
+      "original_orphan_claim_sha256": "c677a7f24b86f8a601f585fe06b5f0db87b13c6ac2154b2a453cf9d5a6a2af4b",
+      "final_grouped_claim_sha256": "57140a38d9173f837d0ef1821b7bcbe9b967037d45e75e4bce9399efbe23127d",
+      "final_claim_id": "claim_67bc5bd50d5ca7ffecf88783",
+      "source_ids": [
+        "evidence_db0207613af3f21f31e7456d"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_db0207613af3f21f31e7456d",
+          "text_sha256": "7c8f65a63c8c3e641de185efc71ef62e7ac88ddbb3c7a646200f38f11becb947",
+          "text_span": [
+            0,
+            133
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "Yes follows the firmware-version menu option for viewing the current version. Viewing is the supported scope; updating or downgrading is not added.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN034",
+      "question": "Does the manual support cluster calls and messages for iOS?",
+      "question_sha256": "c84be2e221c10fe8f43b3f4174c6974f324f3ae5dd9fed34f0bcb68f4bc79dc3",
+      "original_orphan_claim_sha256": "0b3fa6bba63ee61eb3b50216e2ded2be12c9136492330e3122630702e3abab7f",
+      "final_grouped_claim_sha256": "a14bc7e0bcd1e62f9787c53c84abf93b4a553f50c60054e23324cb75963e1a90",
+      "final_claim_id": "claim_ce06cab9d6862fbfa414cc61",
+      "source_ids": [
+        "evidence_a8591f7574943dfa18074e33"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_a8591f7574943dfa18074e33",
+          "text_sha256": "fb1cc8042d86e94dc224902dad3f1f240db15524e8a25e914140f464d08d6783",
+          "text_span": [
+            0,
+            48
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the explicit note that iOS calls and messages are not supported. This is the frozen manual statement, not a claim about every later firmware release.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN044",
+      "question": "At 300 km, does this manual allow full throttle?",
+      "question_sha256": "3ef4f99a3a01a9f81e5c43897c476011eacfbdd1601b111bb05143c8d7a48607",
+      "original_orphan_claim_sha256": "d0dcea6971785b80e37c82231142b7dc2eb96c57858639400b33479eef8e2ce7",
+      "final_grouped_claim_sha256": "5da247733cd75ee0eb7f44075860b090e95125a49453762fe66aa5e75d09f75b",
+      "final_claim_id": "claim_978b8944a5c00930c5d33517",
+      "source_ids": [
+        "evidence_b27f0ee41aa174a7ff6818ea"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_b27f0ee41aa174a7ff6818ea",
+          "text_sha256": "efd37e8c4517afb3e486dbfea4df325d41997cb06b4fb8fe5e5a65016b5f5843",
+          "text_span": [
+            0,
+            174
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the0-500km row stating no full throttle. The question specifies300km, within that interval; the distance-conditioned restriction remains explicit.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    },
+    {
+      "record_id": "GEN045",
+      "question": "At 900 km, should I hold maximum rpm continuously?",
+      "question_sha256": "a2205f1dda3dbf144e0899f6c7ef0b971dce51909f5d3172167eafc414b198bd",
+      "original_orphan_claim_sha256": "1596645348abaade853434a3a47f73109f7ab14cd36def9ba145b3f74045dae6",
+      "final_grouped_claim_sha256": "da71066c565a187f5cb1295ac01e2080c9057370693f2b4ea1b29721dc1aaae7",
+      "final_claim_id": "claim_b436db3d9f199e2b11b55cb0",
+      "source_ids": [
+        "evidence_b27f0ee41aa174a7ff6818ea",
+        "evidence_22f28ee80b5722700b451737"
+      ],
+      "source_spans": [
+        {
+          "evidence_id": "evidence_b27f0ee41aa174a7ff6818ea",
+          "text_sha256": "efd37e8c4517afb3e486dbfea4df325d41997cb06b4fb8fe5e5a65016b5f5843",
+          "text_span": [
+            0,
+            174
+          ],
+          "visual_page": null
+        },
+        {
+          "evidence_id": "evidence_22f28ee80b5722700b451737",
+          "text_sha256": "b76444cd7c89a0b62e943ee8a84d0420e8f264f870fe8dd180cde5a638c5a003",
+          "text_span": [
+            0,
+            116
+          ],
+          "visual_page": null
+        }
+      ],
+      "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+      "reason": "No follows the501-1500km row permitting maximum rpm only for short periods, together with the prohibition of continuous constant throttle.900km is within that interval.",
+      "checker_actor": "independent-source-checker",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+    }
+  ],
+  "method": "Independent question-context semantic adjudication against selected original OEM clauses; grouping was approved individually, never by automatically copying page IDs."
+}

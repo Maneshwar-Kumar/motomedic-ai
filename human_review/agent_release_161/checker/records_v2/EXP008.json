@@ -1,0 +1,208 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "EXP008",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/EXP008.json",
+  "plan_sha256": "d7bbc86abe507e7a859b0d5b4e7c3a8c115c2d4add6cd34ad6f05d6aaa06020a",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "a02a15e0c973c80a0fa6eae1265c9b3e950ff913895bea091678e974c0397506",
+  "final_dependency_sha256": "244e987f87b0062e17bc377de86d558397577a0809dcbbf55ccbb5b1836d8df9",
+  "final_rules_sha256": "57ab750fabbf5cf6816cdb7425badffdbddc35235ba05b8edaab5d0dd0dfba64",
+  "final_route_sha256": "7385936eb786dc3d06d137d6e94a6044b72511f43c05846423f4b7619a14e438",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "How do I reset Trip 1?",
+  "claim_texts": [
+    "While safely stopped (product policy), press joystick UP to open Settings.",
+    "Highlight Trip Preference using up/down and centre-press to open it.",
+    "Highlight Reset Trip and centre-press.",
+    "Highlight Reset Trip1 with up/down and centre-press.",
+    "The display asks for confirmation; confirm only if you intend to reset that trip, or decline.",
+    "Home returns to the previous screen."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_4c5b5a3bbd766e894b4dfb4f",
+      "source_sha256": "1f1fa81507949fa0f9de72f2c5715fabda47a8a4487b5d7f120142a1eec6b259",
+      "text_sha256": "562b1f9f0e3ff91ad4861abfb241bf0e5dbcb04943bf7734853985de5a2b1eca",
+      "original_pdf_pages": [
+        43
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_67d7ecf9587700c04794b8b8",
+      "source_sha256": "517309d0c22dc6f605d13b0f92ffb98d3baf5b75f541f0e4d13f61fde29c57ed",
+      "text_sha256": "bf5b463de133e9bbc3695ce15776209d3d73a8edd16e3ff8138e3b4310a8bd25",
+      "original_pdf_pages": [
+        44
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_8834d4a75fd1b4b103b4b888",
+      "source_sha256": "d7d8590f5bbbfe8523d9433fcda40f334768eb359ffb777d4bd2baefc1dfd2ba",
+      "text_sha256": "bd21e77604a389bdd3cd1143716ea4a988cfea0a6bb46366e9ce3ede0c3523c8",
+      "original_pdf_pages": [
+        44
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_94d43e96d6640ec39d4355bf",
+      "source_sha256": "fb827d1ef0f68ca72e69c6379ff0de007a9c387911ff83871f2156009c5ff988",
+      "text_sha256": "c462ff0cd7bd35ae22ea249a7da90fc47ff8bd1e0922a48aea7e767f13598b9b",
+      "original_pdf_pages": [
+        43
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_afbe0afba2d95e1a75f876de",
+      "source_sha256": "c988b607b359bf12022375740bd7d0970ed6c0f94c077dc21068795c41278f1e",
+      "text_sha256": "f9b5940febd831b6660d527fe72fc74bc65ccd3c4408e615803cef5d2550516e",
+      "original_pdf_pages": [
+        44
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_ddedb080eedbf02f5e165820",
+      "source_sha256": "50df66a7045da9b6e4b722c4f2cc1f03ada8a5fe4c00d325179cc9e77c4a70f8",
+      "text_sha256": "4f26bde26b66bd079857dd961eb0f4ae02efccb09010fb8c1f6710c4fa2540f2",
+      "original_pdf_pages": [
+        44
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "originalpdf_1eb13287175ceaf39786f5dc",
+      "source_sha256": "1eb6816069358c1d16e9521019923e178aef326c91dc7b88abab623b44152eb8",
+      "text_sha256": "fd3a908a0b123e327d3f3a71e63c0c597b1344a415ed9f56924eb3c2effafe78",
+      "original_pdf_pages": [
+        39
+      ],
+      "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "originalpdf_623800fbeb53948bd75808d3",
+      "source_sha256": "7a7c31030434f4653b1949127a91dbd355c22f07e1f04613e6fc7e0eb9279415",
+      "text_sha256": "9c8705e0cc1eebd964466868f9f1d6f44e363ffd2062a01edfbdb3c87b7c44f5",
+      "original_pdf_pages": [
+        44
+      ],
+      "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_46f874c8ba7f9aaffdd16ed8",
+      "source_sha256": "08a1b8dc795d8a6bc403bcc6487b846597db894d0a33986bd2f17e19f8e4094d",
+      "text_sha256": "c5fdc9f0a3e31b5bb742b1f95eda1cb2c63dc72806fb2bed7f278c83bbfee0e0",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    39,
+    43,
+    44
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: While safely stopped (product policy), press joystick UP to open Settings. | Highlight Trip Preference using up/down and centre-press to open it. | Highlight Reset Trip and centre-press. | Highlight Reset Trip1 with up/down and centre-press. | The display asks for confirmation; confirm only if you intend to reset that trip, or decline. | Home returns to the previous screen. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

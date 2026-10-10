@@ -1,0 +1,162 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "GEN003",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/GEN003.json",
+  "plan_sha256": "cc476798a6be3f8a375dd765452b404600c1209dc75c25d8c3d2e9029d94094d",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "5ed0acbb964fa7b3b43110575263678843bae0a2648e1ef0b69fe9c21577b568",
+  "final_dependency_sha256": "c0428e246c99ec338cf109a88e6214669a0afb767f77e94a24eb42ea139e8efc",
+  "final_rules_sha256": "7ab6d1a4e1de0eb1ac1c76cccb736ad0a2b8cd414deed689fe56edc753677295",
+  "final_route_sha256": "f172db0fc1d77bfcafccb8765a2a85345cfa4671e2c2d97f5a24e12dab4c6100",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "Cars in my mirrors look farther away than they really are. Is that described?",
+  "claim_texts": [
+    "Yes. The manual describes convex mirrors: their wider view makes objects look smaller and farther away than in a flat mirror.",
+    "Use care when judging distance."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_476d825609b60be3792825f1",
+      "source_sha256": "7bee28470296d95ac6b9476340324d9a729a53e0498c425145996a6fc31acf6b",
+      "text_sha256": "2f053681d74d2dea3fa2fdfb8a7cfce2d3b45c640c4474f211eba12499231e54",
+      "original_pdf_pages": [
+        13
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_4d46b457c1a09f36ac446545",
+      "source_sha256": "182f497d3bc2a73a9b00b0225854232ab164808ea832f4506a1e25b7a0da4f45",
+      "text_sha256": "ff6179ed067e7c117afa01143e212d0582ddba5999573d6cdd81de4d87ecef56",
+      "original_pdf_pages": [
+        13
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_4eb5baa1b26eb8c52356039f",
+      "source_sha256": "5a01f2b964e6933d8fed83fc54104ebafc30e3825616a482e4b05d797e83c76b",
+      "text_sha256": "37f5063639d5e0a5cd697b2e971fd7b80da1d9287c7158de8af2df55da26adb8",
+      "original_pdf_pages": [
+        13
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    13
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: Yes. The manual describes convex mirrors: their wider view makes objects look smaller and farther away than in a flat mirror. | Use care when judging distance. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": [],
+  "conclusion_adjudication": {
+    "record_id": "GEN003",
+    "question": "Cars in my mirrors look farther away than they really are. Is that described?",
+    "question_sha256": "b507367aa8ea14c5aef5abbd2836e21899b4b21af2d6b2ccc7b85dd18eeccac8",
+    "original_orphan_claim_sha256": "4425f07ec90ff13a27e6b843aae5763c2ac0c999e79aaaf66b7879b225d0c57e",
+    "final_grouped_claim_sha256": "b6c2f2ce63fdd21eb6c8622eaf96215cc90eb3d78877e885a7eb622129154140",
+    "final_claim_id": "claim_d224a18f854725eac42cd68d",
+    "source_ids": [
+      "evidence_4d46b457c1a09f36ac446545",
+      "evidence_476d825609b60be3792825f1"
+    ],
+    "source_spans": [
+      {
+        "evidence_id": "evidence_4d46b457c1a09f36ac446545",
+        "text_sha256": "ff6179ed067e7c117afa01143e212d0582ddba5999573d6cdd81de4d87ecef56",
+        "text_span": [
+          0,
+          74
+        ],
+        "visual_page": null
+      },
+      {
+        "evidence_id": "evidence_476d825609b60be3792825f1",
+        "text_sha256": "2f053681d74d2dea3fa2fdfb8a7cfce2d3b45c640c4474f211eba12499231e54",
+        "text_span": [
+          0,
+          228
+        ],
+        "visual_page": null
+      }
+    ],
+    "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+    "reason": "Yes answers whether the manual describes the convex-mirror effect. The following exact source says wider convex mirrors make objects look smaller and farther away than flat mirrors. It does not verify the actual distance to these cars.",
+    "checker_actor": "independent-source-checker",
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+  }
+}

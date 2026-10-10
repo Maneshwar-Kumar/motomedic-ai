@@ -1,0 +1,99 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "EXP018",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/EXP018.json",
+  "plan_sha256": "c32fcdd07ff30f7ddcab521228919b3567e41b76d44b51386a5418818a226cf5",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "b80d7052feb72aba4b44ffe24f7bde06eb14fd9e6f8b7b19e1a860a947d1c748",
+  "final_dependency_sha256": "69cb542ccbb2c7f241ab86016875a419b2a775d99f9ea3d7791708a0b7c0a182",
+  "final_rules_sha256": "76266fc92958387c1697a4d027336fbf6a38dbc1fe3887f4b4008c29dba5eaa5",
+  "final_route_sha256": "d1a652f444019b1b046753ad83212e42564ddcdc7a066612d86d4c263249df06",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "Where is the tool kit?",
+  "claim_texts": [
+    "The manual says it is strapped underneath the pillion seat."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_dfa068e3f6f0ab772973cbae",
+      "source_sha256": "99b7fdce8dcf9727d798651d9f896ed61fb6e44e4016459b22be0e6682de8457",
+      "text_sha256": "0c78d66b2d6fb7ecca9dd012c9ef536e97247b819cc6694c0d4cee179b2bc424",
+      "original_pdf_pages": [
+        81
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    81
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: The manual says it is strapped underneath the pillion seat. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

@@ -106,6 +106,14 @@ class ReviewedController:
         return "CONFIRMED"
 
     def eligible(self, session, sid):
+        # Relevance can only exclude. Skip costly approval closure checks for
+        # unrelated records; every candidate that might authorize content still
+        # traverses exact source, step, rule and dependency integrity checks.
+        raw = self.registry.candidate["steps"][sid]
+        if not set(raw["symptom_tags"]) & set(session.current_symptoms):
+            return EligibilityDecision(sid, Truth.FALSE, (), ("IRRELEVANT_SYMPTOM",),
+                                       (), raw["rule_version"], raw["dependency_manifest_version"],
+                                       session.version)
         r, s = self.registry, self.registry.step(sid)
         reasons, results, repeat = [], [], None
         scope = self.scope_status(session)
@@ -116,6 +124,10 @@ class ReviewedController:
         if not set(s.symptom_tags) & set(session.current_symptoms):
             reasons.append("IRRELEVANT_SYMPTOM")
         facts = session.known_observations()
+        # This product-policy fact comes only from the validated session selector.
+        # Case fixtures, user text and models cannot supply approval/applicability.
+        if getattr(r, "coordinator_scoped_authority", False):
+            facts["bike_scope_confirmed"] = Fact(scope == "CONFIRMED", "BOOLEAN")
         # Product-policy attempt facts describe history only, never component health.
         for prior_sid in r.candidate["steps"]:
             facts["attempted:" + prior_sid] = Fact(any(
@@ -140,7 +152,9 @@ class ReviewedController:
             last_index = session.attempted_steps.index(last)
             corrections = [a for a in session.attempted_steps[last_index+1:]
                            if a.supersedes and a.condition_id and relevant_keys & dict(a.observed_details).keys()]
-            if corrections:
+            if getattr(r, "terminal_initial_scope_only", False):
+                reasons.append("ALREADY_ATTEMPTED")
+            elif corrections:
                 repeat = "A relevant observation was corrected; eligibility was re-evaluated."
             elif last.symptom_revision < session.symptom_revision and set(last.applicability_symptoms) != set(s.symptom_tags) & set(session.current_symptoms):
                 repeat = "The reported symptoms changed; applicability was re-evaluated."
@@ -260,7 +274,11 @@ class ReviewedController:
         exact_warning = safety and all(c.get("verbatim_warning") is True and any(
             c["text"] == r.evidence[eid].get("raw_object", {}).get("text") for eid in c["evidence_ids"])
             for c in claims)
-        if not exact_warning:
+        # Finite exact coordinator-approved safety wording has independent source
+        # checking already bound to this version; ordinary generated claims still
+        # require the semantic adapter. Optional provider failure cannot erase it.
+        approved_safety = safety and bool(getattr(r, "verified_safety_claims", lambda _: False)(sid))
+        if not exact_warning and not approved_safety:
             if self.verifier is None:
                 return self.response("SYSTEM_ERROR", "I am temporarily unable to validate claim support.", session,
                                      reason_codes=("SEMANTIC_VERIFIER_UNAVAILABLE",))
@@ -324,6 +342,11 @@ class ReviewedController:
         completed_actions = [a for a in session.active_attempts() if a.condition_id is None and a.outcome_enum == Outcome.ACTION_COMPLETED_UNRESOLVED]
         if completed_actions:
             prior = r.step(completed_actions[-1].step_id)
+            if (r.step_ready(prior.step_id) and
+                    getattr(r, "terminal_initial_scope_only", False) and
+                    prior.unresolved_route == "ESCALATE_NO_APPROVED_NEXT_STEP"):
+                return session, self.response("UNSUPPORTED", "You reported that the documented action did not resolve the symptom. No further approved step is available in this path; please contact OEM or authorised service support.", session,
+                                              reason_codes=("NO_APPROVED_NEXT_STEP_AFTER_UNRESOLVED_ACTION",)), decisions
             if r.step_ready(prior.step_id) and prior.unresolved_route == "ESCALATE":
                 return session, self.response("UNSUPPORTED", "The documented check remains unresolved and calls for authorised service support.", session,
                                               reason_codes=("DOCUMENTED_ESCALATION_AFTER_UNRESOLVED_ACTION",)), decisions

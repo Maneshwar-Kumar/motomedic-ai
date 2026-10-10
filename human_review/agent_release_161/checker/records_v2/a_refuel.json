@@ -1,0 +1,1023 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "a_refuel",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/a_refuel.json",
+  "plan_sha256": "9213a11b041c5c49a0a7da31fc4c04421df2a2c61a524af12d9ac49933b29b7a",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "a9ef1abb6f717691237e0b6454fc4f5db70d7eb7e7c9785f518027881f9fa5c0",
+  "final_dependency_sha256": "dfd2179d732d276b8aae78384e7e9e349ecab4cb10d33dcab92c32c0428668b0",
+  "final_rules_sha256": "85cf09fb4134451405c1183ed67ddbfab67c5cad6e9116b3bf878124111b01e8",
+  "final_route_sha256": "a9506da7742aa705fa4c26af220129209dec8a74d3ca4aa3a568aa9bcebf9c70",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "The engine will not start.",
+  "claim_texts": [
+    "Read the guidance before refuelling and return to the chat after completion. Open the fuel cap slowly and top up only to the bottom of the anti-splash plate, leaving expansion space; do not fill to the brim.",
+    "Gasoline vapour is highly explosive; no smoking, flames or sparks while refuelling or while the cap is open.",
+    "Overfilling can send gasoline into the EVAP canister and damage the emission system.",
+    "Avoid fuel spills on painted surfaces and wipe any immediately to prevent permanent stains.",
+    "Refuel only with engine OFF in a well-ventilated area, no smoking/flames/sparks and mobile/handheld devices OFF. Read beforehand and return to chat after completion.",
+    "Press the cap to lock with the key in position, then remove the key and close the flap."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_017a78d6fdfd30389967f3c9",
+      "source_sha256": "47c4caea80c591281d7333d038ee49dd02976ab19bc3fd122a4122656e3ddfbc",
+      "text_sha256": "720c52f50d20334a29d55c0e18a379a6432a27b1307dd9a3e79eb3a2e6e9daa1",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_08f733b5af1455e073ff4100",
+      "source_sha256": "ffc7038ec6dc3586d3146cd0067c11641823bed1aa18ca74552ea5e730c9e2d7",
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_0ff1bb58e722c529d5bf3564",
+      "source_sha256": "129c273d1e56f4ab0661393d6e37aed21769d5126bb13f645e3d2587a669debc",
+      "text_sha256": "1891379762c344fd21f606c327d91fa22f57578b734e22659fe5f4d83cf7f902",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_15e1ce067b76cc524a0448d2",
+      "source_sha256": "4648b82a5c5906a043265394bb412bd28b8aa29132eff232ca6f46bf95722175",
+      "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85",
+      "original_pdf_pages": [
+        121
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "table",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_17c02f5850fb622a858a2e5d",
+      "source_sha256": "a5ef92c711047cd8adde3570eff7ab49ab6126eb95d37100b8bbfa81650f1242",
+      "text_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_1ef860fc5e1414bd0addfb9a",
+      "source_sha256": "6b20c5131452233362d2266faed589c409735e1a5898d684a353253389b7aadf",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_22d8248193002b49458b9154",
+      "source_sha256": "ca2082c98da57e5339e8a6ffdbf51bcbd36626507efc5dda2b9a4062125d6385",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_26096eb949d668e5bf4df512",
+      "source_sha256": "82bc0ad73beb5238c9ba8657a1b46b1015e9ef2c9bcbc4eed89bdfda9b6e88c3",
+      "text_sha256": "83473d7d2ef745affa7c4720b40f8067942d9a60843bb757f35bcfed8b73338a",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "checkbox_selected",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_2609f2c9990fc254d3c9f984",
+      "source_sha256": "d41fa97b3771b6693421549ef6c08b821e127dd50ca74a3e0c762ebb64bcbff8",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_272bd86a27fe5489e66a4af6",
+      "source_sha256": "7c22b84b6c1ce7e6df395056eb0a403e8ece4fd4cd1a644173e7e3e22ae8ce7e",
+      "text_sha256": "6c115b6158cef18bfea4ae50317f8647384538d0d3c298fe054911db7c85fe18",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_27ab98e23119feb63456718d",
+      "source_sha256": "b5862fc2e5b9655f10cf604e8a322dfece119b5e5544b7f6f0454abf07c48b2c",
+      "text_sha256": "49bf50c3adce35b2039c0259953c6b02421a6ac93f746a61d3338cb8628af7df",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_27e3084b428698e642724d66",
+      "source_sha256": "98ce5303f139014e6624f85c724329fc7ff7815c7a82b1f6f72db4834a5f4029",
+      "text_sha256": "6ee90f233d6582dd78034c750b9f5e2717d84c2675a37ec00abc110b5820f88b",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_2a4402c7fa3a280cff8e7923",
+      "source_sha256": "bb7d3b05a61a7e374305028aadd383acfb93ce37a69754aacae209c503fb35e2",
+      "text_sha256": "87c9e87e4a849eac8bb4416ea2dc4cd826e2a9141cd31b333185e49f36e08051",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_2fae063ecb8128e3a24d1dfd",
+      "source_sha256": "86a3446e6bcda70f3d31d60669128702429ba2dfcb4ac287c38d79873b77e520",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_323bcafc4948d59704fec0d5",
+      "source_sha256": "9d04e792be59d0f2cc24b397c00c492dbd1e6a557855dabbf0d660a82707b8d2",
+      "text_sha256": "302bc40ef47acc2eab6df27bee6b0485aa7161b14058d69ef39ac4c2cb2db961",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_327fb6241838980e6010f505",
+      "source_sha256": "4ab9dee728d37be50408c86234fecde13dbe7a1b320b33384ae59049cabe13c8",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_38d4cced38a0586a204bbc15",
+      "source_sha256": "f1fadd6652c49b819cb02d38dd9afd8ba50c3a7e1b165ceb480e1dfbc316301d",
+      "text_sha256": "d6084bcdbcd19552b15ffc71e7769ca128c48fb37763533212061874b0b56baa",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_3b85a6b930363f5bd9ce3f4e",
+      "source_sha256": "1bedf45a2721126866d205854c1ec2ef1987e119c56c23d0ad9eabe241e4959e",
+      "text_sha256": "1d87feda0d3603c797d00c72a655a2081539cca0d8c15c0855f0b9b828511103",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_3db28bf4bc8b39ec2ccccb38",
+      "source_sha256": "2be32a360717addf4e09b992bc2b53ad2302a8dfadea4d6abb0d63f72603176e",
+      "text_sha256": "2ddf60d56737074dada9ba53859adcf12f11d3740bae69e8c188f9adf49d0700",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_430d1ff1fa68dbcabfbbb0cf",
+      "source_sha256": "5a3255862468c53de4bfa5223ce38bca38b4750d50b6a82be62602d54f1d935d",
+      "text_sha256": "04e783cbf8d4b88388461a99dd6320923955933b80fdeaabb68ba95e5d38813d",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_45666c1e6ad158565c92a6de",
+      "source_sha256": "c7ee556c194643290c7ae0e6f51b6e940097ced63550d72f040a4da7e0140c66",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_4dbdc60e9dcc24e19848ee28",
+      "source_sha256": "3488f6c83418421e8de6e1717b368bd954bd2eb1b99db858a2aa0aab04a07423",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_4e632b1b7a18bb739a61c9fd",
+      "source_sha256": "43d5c8ae8798d6e7b6600f420f122d09b387750add94c7766be8242220fe4955",
+      "text_sha256": "f46f5bf779e6bf824ae9691ebe0a5b5a9609d0d7df059e84d23cf4b9832ea8f8",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_5034a983959e52887c0072bf",
+      "source_sha256": "6ca34d5e838b85b1ec1093c8f9f98f571bdcb8931e20c6f6442e5f2abc7b7c58",
+      "text_sha256": "6ff9593a3837d7ac820794b30cd25354b8f13dca8e0abe424bf705b3f652fc7f",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_5809b88f4cf2d77391b36c46",
+      "source_sha256": "5a472f1954a81d138be98781749a325bc6cfe6fda2b7284fc079dc7d7c36cab9",
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_59184c3d66b4b2a53143442e",
+      "source_sha256": "13c6e2174c949f94e8ac26ec908ac080217bf40a380675b417ade03f20eb3853",
+      "text_sha256": "652ad256f5c56d02ba995e4320fa0489c95ee886e8ca4fa7ce2d547227dbaa59",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_59da6e14fc6ea4c1d973878e",
+      "source_sha256": "210439937d68229c27491345cf0fd1a08eb7d1e55b95be28642f7eb4e4428d9a",
+      "text_sha256": "1891379762c344fd21f606c327d91fa22f57578b734e22659fe5f4d83cf7f902",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_65270170ab77cd81e769fc81",
+      "source_sha256": "8e59cc6c07c0a30c92a39ea605f1052eb50c40d23b4d62d5c6b6e76749f2beeb",
+      "text_sha256": "0def2950f92eb77d9d97a907e392d37fee39a4a59f4febff48533fcd66c662c3",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_67724bd81387131d7cfe6c4a",
+      "source_sha256": "ffa1063f964700c8ba8a8a7bd0196fd4e6df644d244a042c51c4f2e694c4abe6",
+      "text_sha256": "ec3a0358bbdae54581285364021b839f2840783e501c946028a07aac89066af6",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_6b67fcda1270d0ed837c233d",
+      "source_sha256": "556dd14404b329bb9bd60ad9cd37ff85b7f6b8faf507410c9ed70d5d24a5a2c8",
+      "text_sha256": "7a552636e3317c1d116f1c562c91b3ecff5ffcbb4dc5d1b6b77af7a2b9bef711",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_6bb93ee3bacd0e2f20753f9f",
+      "source_sha256": "d7b9e37ca121c71269c694ec97e6e40d5c9d4a334bf905f732f4625acf4de7e2",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_6d68a60a154ef288c48fe61c",
+      "source_sha256": "93d10672dfe5a9157202b539d0fb6533fd0ef5f3c18ee6c54e2d5bd4acc694e6",
+      "text_sha256": "56d6a4f2aef3feed9d49e75bb3287671979abf21310e44ae4dee2b9f09840d91",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_6ed01159fd5669cd60c2a656",
+      "source_sha256": "2723595ee14481fbd4f9a61eff2c32495faccb0d4fe0cb0527f8bc029c76fc6d",
+      "text_sha256": "bacf6c6a6ede8e870630b699bc1ad8c9395658446997c1538a0a91fa7df7b95c",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_724d49cdd1f4fd70b6671f5b",
+      "source_sha256": "c7ae7fc21d85790d3c8ab7cd26cc51e8254f8eedbb88f0c892f31dcdcd661390",
+      "text_sha256": "06f7b1c88f09497adf8aa28d8c4ddfd0259b380babf17346f4da9fe24e97eb9c",
+      "original_pdf_pages": [
+        121
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_808032c65f7146b525114fcd",
+      "source_sha256": "e1a539981f172b3a3cd248e8173ae704dc8f8b0a42bcb4e1b935dda2c7b65825",
+      "text_sha256": "1139334a66dbea3ede54b789894875c05f948a44e73b7041d1a0e2dda47cb37f",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_80fc3c1545382e074eccbcea",
+      "source_sha256": "46b4c48e7454b9be6c33490428e72615e5c0c93bfeea9bd8f1ba2f21301fa939",
+      "text_sha256": "8a19079ce69d165aaa75c11932dbf4672b48cbdb6647b8ed5a5f40caacbabe7c",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_86fc55f5643415ada60288dc",
+      "source_sha256": "20b20cc2ff7af6fa4d0c5f56bf43517ede068192bde418a11cfb354b57163664",
+      "text_sha256": "f6c145c88609d279fafb4edda2587aeecfad413a4a176348ada4cc708c4bdccd",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_8dddf4fa5d7c047bbd6b08a2",
+      "source_sha256": "ed3986ad052d81ab0ad8461f0dd598e1537f6468e4e80da4c9c6fe597c37fbd7",
+      "text_sha256": "a4a3e6313b1af657b02d84f3737cfda64e0efe37af31f4f09c4ee1e20cdcd116",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_90eff9b7639218393073488a",
+      "source_sha256": "64dbe7e11a3e62e50d1b4f817d4581570a6ef5ebcd215fb315ca6fe94708749b",
+      "text_sha256": "8d8bf458b03f05a7a923e95745c725a2f07357973ff7ace6ef9c19989a9c5112",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_92baaf5666550693625e5b6e",
+      "source_sha256": "db14971d9893fcff634c44468505857dac10b2ecc743422745863c1864fa1fd7",
+      "text_sha256": "86f56fe8221f029db2c9755cc998669a7d873c32bfa83bc9431bafe0bb814400",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_95e3cff68319cdacc6ea8f95",
+      "source_sha256": "eae4262556195f36cc54ec388c1bdbd7cb4378276d951542f1817a3d2b00ba70",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_95ed4d74965c06b3f0e5174b",
+      "source_sha256": "255bfe396ec921141259e93c1bad395575dfc2c9ed2963cc0f241bef4bc96836",
+      "text_sha256": "7dc004134cc886a0d69374d81f88bc9437dc5d979ccb79867cc8c1cd93dab05a",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_99063aa16735b277a9cb4fb3",
+      "source_sha256": "4611a0640919b626fc1e13bde3fe5103c4333b7285ae4b0921097b095bb7dc81",
+      "text_sha256": "da60c214caa1084792860cc0fd9b0477cd2d8007d227e971953967118fbc2625",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a4169d7cda2689fda54467a2",
+      "source_sha256": "10bec2c6b5c09ea0281375736a9ddae4290d55315690f68498e77356d825544d",
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a509149b220b562583a4cf2d",
+      "source_sha256": "9048c8e30a7fcd2b3bd0c7cfd0ba4abea82e65fe700e414ca00bd608fd8dac7e",
+      "text_sha256": "f79a0b650ff6109fba7e02e8a43be18a1570dd5216b84f50ae48a344ae826c82",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a54b5925c3d20360541d2114",
+      "source_sha256": "8efd1a6a035e9520f8aed75ce3a30d704222aeb4e31d8e62ebc17cdf50120bc2",
+      "text_sha256": "c1947ff4e88b1d5d173b9326f5a5110787db4964b279ad99e8241c7bc435e205",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "checkbox_unselected",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a66e862d634c23573bb30c90",
+      "source_sha256": "0e41e6634fc194b23366477ea20d7a96e7f27fd063364499c93c6c4a6f1dbc1e",
+      "text_sha256": "8d9b8a666276c2c908fb60609c61434915c62222e7cec3bfe6fd57c3ddd80031",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a78c6a9b572f78eb890d126e",
+      "source_sha256": "3647eb780481f00432fdb926d92f686ef5a6496ba3d2a93cdcfc2e6edbc72b17",
+      "text_sha256": "c666909bcf96bfd41f0c49c092bff5bb9b86be3453d27d51c5ac990f9360af05",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a9e890051963e1fe3fff5153",
+      "source_sha256": "921bdd7495c22f14c95c620f4c752191f39d992e2a111f6254ef67c677e58670",
+      "text_sha256": "323dc8cbe0207ffa9cd6a6bd7a2484756ad62c129c590f964c73ca110c71dbd4",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_aa6ff3af3a922c597647a3f0",
+      "source_sha256": "e13b28590f025b4b9eafa6df1593e8ad02b1eb38429fa34676e39102ecc80555",
+      "text_sha256": "3cc1423a2fb9142df640f5c14c021eb4c5016aca89f338397a6eca8905b73f55",
+      "original_pdf_pages": [
+        121
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_acf750a79d2847320b3273ae",
+      "source_sha256": "c607df84b71a8df50a4997b5cde670fc5a7b80cec812794d84abe7243793193c",
+      "text_sha256": "1853121ad99b6fdb8e08ccd5984e7b43e5904d45cb4090e734605c4c734adff7",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_b02f383c70aefc628503f3ce",
+      "source_sha256": "476bb6e43e1895da10202a8a3c666868f12ee98e552c23c95a2fbc0d896cfa2b",
+      "text_sha256": "7eddcbb8cec7db3a9c67409fd32025e97ddbce2e23cb72124b8872d84a673f13",
+      "original_pdf_pages": [
+        27
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_b1906b340642a9c8a40262a4",
+      "source_sha256": "f47fd5d2e4c3efa447a85697c7fb94f7a325bb34df0c262fa5043cdc34ad4b66",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_b2babab1f47ccac4bdff89d1",
+      "source_sha256": "9420559cde1f98e4171bf9862fba7bab64dd675f2982307a4688ce8a09fc8ef9",
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_b4e9c215783dd876443da7ac",
+      "source_sha256": "9e2df2934c92ad5d0d46bcc23c78cb69036271940563a7148c7711b8fb80d968",
+      "text_sha256": "d489cd99fb642cce55b94a24b35bfea6f3eefc8e9ff4dd9943d0c3d7c40b9300",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_b57860aec348c8aefa09d0e3",
+      "source_sha256": "df36b1849922f29f586c21b9b3f91eb3325bfeb7af3f9cdeeb5c455c0fb11a2c",
+      "text_sha256": "9516c977af9e190ad7e89230d09e69acaeb1af3190b1cc78e68f378f45962b53",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_b6d98c3420a27b81214d7e15",
+      "source_sha256": "231ce04dd4421c35d3f27438deeea0fb8edd071f1cc8639b2d00a5bd8cec3d79",
+      "text_sha256": "9d775405383818cbe8d701d359736c7200b2bbee54ab39a48d999bddd971e71a",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_bcdbe761342bdbe974de6c58",
+      "source_sha256": "72594a562b89984c0dc71a88ab453a34409f35f47c6a66faa3a3762bf43c5225",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        73
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_be61e25b35303514cfe3e5c8",
+      "source_sha256": "684897cf0901ce9423e7056b9a81f1481ef3ab5eda25cae76c59fe3f79ac1f58",
+      "text_sha256": "848b994c63ee5eaa2231e2ddcba8cc077cb5b6206bda29037241b40381cab316",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_c31143757dc5fc6c853db707",
+      "source_sha256": "4983d805aaad44bf45cac14cb51b5c8448d6a6d389b66e711a2b42d620e73062",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_c4b345a3535cf5b8b9f3401b",
+      "source_sha256": "7b9d17e55fbbc23a09fdca30b6c1b9902a8ab78f9cc16c0a82da5a5c067bcc6b",
+      "text_sha256": "e3d3d4b425e8afff08fd009a25a665e5e960b02bc93233a809d9e6d4d3523a3e",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_c848dfa8630c0f90ac639ab4",
+      "source_sha256": "c888d5d406bcda98da1a6054d0fdb272096e9ed9bcb163db17d1cb467efdebda",
+      "text_sha256": "ea909b537b83ef1938756fbbcd03591bb21b303bf2cc63163d38271ffc929fc6",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_d3ecbc3322fc4d9acc77064a",
+      "source_sha256": "0094f2ede956fcf5fd98c6fb17cada7f19ed032f8363c27e4dd7ac8c9a2f66ab",
+      "text_sha256": "b13df0653697342ee5bb4a96f03357fc3fb6c8915163e52861386999a77907ed",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_da7924c0a73644129b574991",
+      "source_sha256": "51612168385d0edda44bf9a6a858e69010a9569a601abb7b59b568246e08db70",
+      "text_sha256": "8afe6c30347e59079f5484147b66a691a887155af4141636b860ff2880f3a2db",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_e141910747861df746685a2e",
+      "source_sha256": "80463348f18ab3d0348e6b1a7922c33b4a0edc15e1bb4eb21385a444d999c7f7",
+      "text_sha256": "9ce4bbf8092a483e6cf3822546fd134d9dc391f8b6ef0c3d273ad0aef386e758",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_f008b65a1c3864b9ce1ca3bc",
+      "source_sha256": "38b68f977eb0117cc514f63c96666ef7a0ae2c40fe2a81a3896c7ca91b91ef2f",
+      "text_sha256": "02387d4234bbafe88b1e513f2ee52f468bfe5c856ec466edca1b487c0b1d56f8",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_f4b89f54877b99a3305617ce",
+      "source_sha256": "fa9e0f20c6b3726bfcab245b5a69a920571a9e83bfc5de1433a09009b8bbbc8e",
+      "text_sha256": "1891379762c344fd21f606c327d91fa22f57578b734e22659fe5f4d83cf7f902",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "section_header",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_f7af2089af452504d4726e13",
+      "source_sha256": "a9f453fbc516ff213b773e6f3d4f058230795f72b49d42027b953eaf55641b2d",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_pdf_pages": [
+        28
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "picture",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_fd5a9183e18775af14291d97",
+      "source_sha256": "ef85c6d0704725cf78495305b80a0dfeb4608e18b383548ba74ede0f1c3f2d80",
+      "text_sha256": "f46bea3f8acd078d95b8ba06753ebf8fd5d3e34d94f29fa72683efdf39382d44",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_ff04ce4096a0444b874929b5",
+      "source_sha256": "47f6b41c39d8cd245c72c55c9fee90cf17611b7cb3b162e047db1480ca1da45a",
+      "text_sha256": "2567fc2fcd27eee796e3b360350d09f3e353239629564d72e8489022797c7f7b",
+      "original_pdf_pages": [
+        8
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_46f874c8ba7f9aaffdd16ed8",
+      "source_sha256": "08a1b8dc795d8a6bc403bcc6487b846597db894d0a33986bd2f17e19f8e4094d",
+      "text_sha256": "c5fdc9f0a3e31b5bb742b1f95eda1cb2c63dc72806fb2bed7f278c83bbfee0e0",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    8,
+    27,
+    28,
+    63,
+    73,
+    121
+  ],
+  "visual_pages_inspected": [
+    27,
+    28,
+    63,
+    73,
+    121
+  ],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Original27/28 cap/anti-splashplate relationship and8 warnings support scopedaction. MandatoryengineOFF, ventilation, noignitionsources, handhelddevicesOFF; confirmedconditions not reasked; fuel/indicator discrepancy remains separate. Publiccropdelivery outside approval.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

@@ -1,0 +1,2783 @@
+{
+  "accepted_original_context": {
+    "accepted_source_pages": [
+      90,
+      18
+    ],
+    "approval_status": "DRAFT",
+    "authoring_blockers": [
+      "INDEPENDENT_CONTENT_BOUND_REVIEW_REQUIRED",
+      "CLAIM_SPANS_AND_BRANCH_DEPENDENCY_SCOPE_REQUIRED",
+      "DRAFT_PARAPHRASES_REQUIRE_DISPLAY_REVIEW",
+      "PRECISE_FIGURE_LEGEND_ASSOCIATION_REQUIRED",
+      "SCOPED_DISPLAY_POLICY_RECONCILIATION_REQUIRED",
+      "FIGURE_VERIFIER_NOT_IMPLEMENTED"
+    ],
+    "draft_branches": {
+      "ACTION_COMPLETED_UNRESOLVED": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+      "NOT_APPLICABLE": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+      "RESOLVED": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+      "pressure_only": "Do not ask construction questions for the pressure-only lookup.",
+      "replacement": "Ask fitted tyre construction separately from rim type. In tube and tubeless branches show front CEAT Gripp RE F â€” 90/90-21 M/C 54H, rear CEAT Gripp Rad steel RE â€” 140/80R17 M/C 69H. Tube-type rim requires tyre fitted with tube; tubeless-type rim requires only tubeless-type tyre. Ask rim confirmation. These models are not labelled by construction in this source.",
+      "unknown_or_alternative": "Show both rim requirements when unknown. Do not infer alternate-brand/version compatibility or current fitment. Refer to Royal Enfield support."
+    },
+    "draft_claim_ids": [
+      "lookup_tyre_pressure:accepted-draft:main",
+      "lookup_tyre_pressure:accepted-draft:warning0",
+      "lookup_tyre_pressure:accepted-draft:warning1"
+    ],
+    "evaluation_partition": "REGRESSION_TUNING_NOT_HELD_OUT",
+    "expected_runtime_before_review": "UNSUPPORTED",
+    "record_id": "lookup_tyre_pressure"
+  },
+  "approval_status": "NOT_YET_CHECKED",
+  "blanket_hold_interpretation": "DRAFT/review_complete false/human_signoff false are inherited metadata, not a demonstrated content defect. Independent checker must return exact substantive findings. Coordinator has user-authorized final approval; do not fabricate human identity.",
+  "candidate_case": {
+    "agent_support_work": "ORIGINAL_PRECISE_SPAN_AND_BRANCH_AUTHORING_PENDING",
+    "branch_context": {
+      "R001": "ACCEPTED_CONVERSATIONALLY",
+      "R002": "PENDING_POST_START_SCOPE",
+      "branches": {
+        "ACTION_COMPLETED_UNRESOLVED": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+        "NOT_APPLICABLE": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+        "RESOLVED": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+        "pressure_only": "Do not ask construction questions for the pressure-only lookup.",
+        "replacement": "Ask fitted tyre construction separately from rim type. In tube and tubeless branches show front CEAT Gripp RE F â€” 90/90-21 M/C 54H, rear CEAT Gripp Rad steel RE â€” 140/80R17 M/C 69H. Tube-type rim requires tyre fitted with tube; tubeless-type rim requires only tubeless-type tyre. Ask rim confirmation. These models are not labelled by construction in this source.",
+        "unknown_or_alternative": "Show both rim requirements when unknown. Do not infer alternate-brand/version compatibility or current fitment. Refer to Royal Enfield support."
+      },
+      "citations": [
+        {
+          "evidence_id": "evidence_114a6d4caa3c57bd3901037e",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_1fe8af98a9e6d6027d12f8c8",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_37f3fc6c42e5e41bd34c92b9",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_3f8de8466049af12783de7d0",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_5b6388c083677b5d5cd6ad4a",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_64de3cc72b85735055b58fec",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_740614ac6db75e3671ac186b",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_7cd1de903310b8e09d8a9d4e",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_90f82c8d6df539c2ddff81e0",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_933903b987f75a2fa606efe8",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_95aaf2b056eacbbf96d4d973",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_95b0889e1fced15e1322d39c",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_a5b62eee4c0caf239437fa68",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_b8a86ed77641d6fc80a14c58",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_be7a1fe2395a01c7a8a9fcba",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_dd285d8b6e6a1682de0e10f0",
+          "pdf_page": 18
+        },
+        {
+          "evidence_id": "evidence_e13cbf4588e98761e424bb98",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_e6d8b3e13b2194148fba11d0",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+          "pdf_page": 90
+        },
+        {
+          "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+          "pdf_page": 90
+        }
+      ],
+      "dependency_manifest": {
+        "action_evidence_ids": [
+          "evidence_f1b023ea7924903fed5dfe5f"
+        ],
+        "authorship_note": "Concrete proposed dependencies from agent visual source inspection; scope still requires independent review.",
+        "categories": {
+          "accepted_additional_context": [
+            "evidence_1fe8af98a9e6d6027d12f8c8",
+            "evidence_37f3fc6c42e5e41bd34c92b9",
+            "evidence_3f8de8466049af12783de7d0",
+            "evidence_5b6388c083677b5d5cd6ad4a",
+            "evidence_64de3cc72b85735055b58fec",
+            "evidence_740614ac6db75e3671ac186b",
+            "evidence_7cd1de903310b8e09d8a9d4e",
+            "evidence_90f82c8d6df539c2ddff81e0",
+            "evidence_933903b987f75a2fa606efe8",
+            "evidence_95aaf2b056eacbbf96d4d973",
+            "evidence_95b0889e1fced15e1322d39c",
+            "evidence_a5b62eee4c0caf239437fa68",
+            "evidence_b8a86ed77641d6fc80a14c58",
+            "evidence_be7a1fe2395a01c7a8a9fcba",
+            "evidence_dd285d8b6e6a1682de0e10f0",
+            "evidence_e13cbf4588e98761e424bb98",
+            "evidence_e6d8b3e13b2194148fba11d0"
+          ],
+          "actions": [
+            "evidence_f1b023ea7924903fed5dfe5f"
+          ],
+          "context": [
+            "evidence_114a6d4caa3c57bd3901037e"
+          ],
+          "figures": [
+            "evidence_90f82c8d6df539c2ddff81e0",
+            "evidence_933903b987f75a2fa606efe8",
+            "evidence_e6d8b3e13b2194148fba11d0"
+          ],
+          "tables": [
+            "evidence_f1b023ea7924903fed5dfe5f"
+          ],
+          "warnings": [
+            "evidence_c762ef2c61505dc7ac7c01d8",
+            "evidence_f3dd00ecbff8fd98a8c32736",
+            "evidence_cb7062b4cec26700e3ae1185"
+          ]
+        },
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "required_evidence_ids": [
+          "evidence_114a6d4caa3c57bd3901037e",
+          "evidence_1fe8af98a9e6d6027d12f8c8",
+          "evidence_37f3fc6c42e5e41bd34c92b9",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_740614ac6db75e3671ac186b",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8",
+          "evidence_95aaf2b056eacbbf96d4d973",
+          "evidence_95b0889e1fced15e1322d39c",
+          "evidence_a5b62eee4c0caf239437fa68",
+          "evidence_b8a86ed77641d6fc80a14c58",
+          "evidence_be7a1fe2395a01c7a8a9fcba",
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_e13cbf4588e98761e424bb98",
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ],
+        "review_status": "DRAFT",
+        "scope_review_complete": false,
+        "step_id": "lookup_tyre_pressure",
+        "version": "accepted-eleven-dependencies-draft-v1"
+      },
+      "rules": {}
+    },
+    "candidate_expected_route": "SUPPORTED",
+    "candidate_revision": "original-eleven-suite-v2",
+    "canonical_answer": "For the selected Himalayan BS6, the manual lists 32 psi (2.24 kg/cm²) for both front and rear tyres, whether riding solo or with a pillion. Underinflated tyres can overheat, suffer damage and cause rider injury. If replacing tyres, use Royal Enfield's specified tyres; failure to do so can cause tyre damage and rider injury.",
+    "canonical_citations": [
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:main",
+        "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+        "source_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+        "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+        "source_text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+        "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+        "source_text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+        "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+        "source_text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+        "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+        "source_text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+        "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+        "source_text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+        "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+        "source_text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09"
+      }
+    ],
+    "case_digest": "1ae36f0313b2162bc03b62813f30d2611dc78a0f1defc95df43af0b0ff2dfca5",
+    "case_kind": "ORIGINAL_ELEVEN_DRAFT_REFERENCE",
+    "claims": [
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:main",
+        "exact_claim_text": "For the selected Himalayan BS6, the manual lists 32 psi (2.24 kg/cm²) for both front and rear tyres, whether riding solo or with a pillion.",
+        "response_role": "FACT",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+            "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text_span": [
+              0,
+              0
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_f1b023ea7924903fed5dfe5f"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+        "exact_claim_text": "Underinflated tyres can overheat, suffer damage and cause rider injury.",
+        "response_role": "WARNING",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+            "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+            "text_span": [
+              0,
+              187
+            ]
+          },
+          {
+            "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+            "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+            "text_span": [
+              0,
+              76
+            ]
+          },
+          {
+            "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+            "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+            "text_span": [
+              0,
+              107
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      },
+      {
+        "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+        "exact_claim_text": "If replacing tyres, use Royal Enfield's specified tyres; failure to do so can cause tyre damage and rider injury.",
+        "response_role": "WARNING",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+            "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+            "text_span": [
+              0,
+              187
+            ]
+          },
+          {
+            "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+            "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+            "text_span": [
+              0,
+              76
+            ]
+          },
+          {
+            "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+            "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+            "text_span": [
+              0,
+              107
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      }
+    ],
+    "coverage_plan": {
+      "adversaries": [
+        "added instruction",
+        "changed number",
+        "changed unit",
+        "omitted claim/warning",
+        "forged citation",
+        "wrong variant",
+        "missing dependency",
+        "draft/stale cache",
+        "provider outage"
+      ],
+      "branch_execution": "Branch-specific context retained; no invented executable predicates",
+      "claim_support": "Agent maps retained; live semantic verdict NOT_MEASURED",
+      "modality": "Visible observation only; referenced figures require reviewed image-capable verifier",
+      "question_review": "Accessible observations, no internal enum, no redundant recurrence question; automatic flags require adjudication",
+      "source_policy": "Policy references never presented as OEM facts",
+      "typed_outcomes": [
+        "OBSERVED_NORMAL",
+        "OBSERVED_ABNORMAL",
+        "ACTION_COMPLETED_UNRESOLVED",
+        "NOT_APPLICABLE",
+        "UNCLEAR",
+        "RESOLVED"
+      ]
+    },
+    "formal_source_approved": false,
+    "prior_holds": [
+      "INDEPENDENT_CONTENT_BOUND_REVIEW_REQUIRED",
+      "CLAIM_SPANS_AND_BRANCH_DEPENDENCY_SCOPE_REQUIRED",
+      "DRAFT_PARAPHRASES_REQUIRE_DISPLAY_REVIEW",
+      "PRECISE_FIGURE_LEGEND_ASSOCIATION_REQUIRED",
+      "SCOPED_DISPLAY_POLICY_RECONCILIATION_REQUIRED",
+      "FIGURE_VERIFIER_NOT_IMPLEMENTED"
+    ],
+    "producer_draft_sha256": "74292791e6d54a580c246982078c35973fc88befec986845cdb01916f391774d",
+    "producer_version": "accepted-eleven-reconciliation-draft-v1",
+    "question": "What tyre pressure should I use?",
+    "record_id": "lookup_tyre_pressure",
+    "required_candidate_source_ids": [
+      "evidence_114a6d4caa3c57bd3901037e",
+      "evidence_1fe8af98a9e6d6027d12f8c8",
+      "evidence_37f3fc6c42e5e41bd34c92b9",
+      "evidence_3f8de8466049af12783de7d0",
+      "evidence_5b6388c083677b5d5cd6ad4a",
+      "evidence_64de3cc72b85735055b58fec",
+      "evidence_740614ac6db75e3671ac186b",
+      "evidence_7cd1de903310b8e09d8a9d4e",
+      "evidence_90f82c8d6df539c2ddff81e0",
+      "evidence_933903b987f75a2fa606efe8",
+      "evidence_95aaf2b056eacbbf96d4d973",
+      "evidence_95b0889e1fced15e1322d39c",
+      "evidence_a5b62eee4c0caf239437fa68",
+      "evidence_b8a86ed77641d6fc80a14c58",
+      "evidence_be7a1fe2395a01c7a8a9fcba",
+      "evidence_c762ef2c61505dc7ac7c01d8",
+      "evidence_cb7062b4cec26700e3ae1185",
+      "evidence_dd285d8b6e6a1682de0e10f0",
+      "evidence_e13cbf4588e98761e424bb98",
+      "evidence_e6d8b3e13b2194148fba11d0",
+      "evidence_f1b023ea7924903fed5dfe5f",
+      "evidence_f3dd00ecbff8fd98a8c32736"
+    ],
+    "required_source_locks": {
+      "evidence_114a6d4caa3c57bd3901037e": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "0b7aee0fbc151707edc798438899a7093b4a41e8a91d218112ee9121a8e13d34"
+      },
+      "evidence_1fe8af98a9e6d6027d12f8c8": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "30c283fecfd132faabb1f4c34ed945969dc314e1541de1f303921426ca3d6e68"
+      },
+      "evidence_37f3fc6c42e5e41bd34c92b9": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "a9f8c6261bc46ae53557f2669e0a65d63848b7a67b8822128a0ed4eb854b6020"
+      },
+      "evidence_3f8de8466049af12783de7d0": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "80cbcce80531c1edb6a58e735eb3287e6fd461db7ae0469fed5b9ed5774c934c"
+      },
+      "evidence_5b6388c083677b5d5cd6ad4a": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_64de3cc72b85735055b58fec": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "d1f672f5c34221222101a3b6002fbf4a7f08c96a2f46fa14e1aedc67ee69a3c2"
+      },
+      "evidence_740614ac6db75e3671ac186b": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "322bd94ca5ea2b4aaa8ef8931a356b94b686e6b3a37f75f426b6ed338b6918a5"
+      },
+      "evidence_7cd1de903310b8e09d8a9d4e": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "a804d6a7e10e62111c87165c11f326a01be7713faaf0de34f8cd061f545ae17e"
+      },
+      "evidence_90f82c8d6df539c2ddff81e0": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_933903b987f75a2fa606efe8": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_95aaf2b056eacbbf96d4d973": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "8ab4f3e9f15a535244200d9ea554bbf7c836c4f0ba7ad9edee1cdaf094240a09"
+      },
+      "evidence_95b0889e1fced15e1322d39c": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "86f56fe8221f029db2c9755cc998669a7d873c32bfa83bc9431bafe0bb814400"
+      },
+      "evidence_a5b62eee4c0caf239437fa68": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "65ff99fde98f1ea9cd97c35a7f8d2e7280818eab8d1319c5540538c585596cad"
+      },
+      "evidence_b8a86ed77641d6fc80a14c58": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "7a552636e3317c1d116f1c562c91b3ecff5ffcbb4dc5d1b6b77af7a2b9bef711"
+      },
+      "evidence_be7a1fe2395a01c7a8a9fcba": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "99b6e3b24ea0428561be6f029166470ddb9651355b26faf3da1fcc1951147902"
+      },
+      "evidence_c762ef2c61505dc7ac7c01d8": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c"
+      },
+      "evidence_cb7062b4cec26700e3ae1185": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc"
+      },
+      "evidence_dd285d8b6e6a1682de0e10f0": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_e13cbf4588e98761e424bb98": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "57691448b2c63e4cf87a89787335d463516d3717152e1c47a501c46bb5dd63d4"
+      },
+      "evidence_e6d8b3e13b2194148fba11d0": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_f1b023ea7924903fed5dfe5f": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_f3dd00ecbff8fd98a8c32736": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09"
+      }
+    },
+    "runtime_binding": {
+      "facts": {},
+      "step_id": "lookup_tyre_pressure",
+      "symptoms": [
+        "tyre_pressure"
+      ]
+    }
+  },
+  "candidate_case_sha256": "48cd1ebe3bac152469ff7e88cdf6006faa6529077e505af782d8f08b7efac425",
+  "canonical_answer_sha256": "b22e648312de418ea5302a8f459a50ec5e769a5baa02f5b34e30ed4474850f1b",
+  "claim_checks": [
+    {
+      "claim_id": "lookup_tyre_pressure:accepted-draft:main",
+      "exact_claim": "For the selected Himalayan BS6, the manual lists 32 psi (2.24 kg/cm²) for both front and rear tyres, whether riding solo or with a pillion.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "c79dfc051596df7919aa54d45bc0b529f2834e01f5f3a472e5d99f5659ba9906",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": "[{\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 48.95760000000001, \"r\": 98.44400000000002, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Tyre pressure\"}, {\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 148.0216, \"r\": 192.924, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Front & Rear\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 43.8776, \"r\": 103.58720000000007, \"t\": 120.75089999999997}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Solo & With Pillion\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 139.60559999999998, \"r\": 201.2507484, \"t\": 118.65946929999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"32 psi/2.24 kg/cm 2\"}]",
+          "object_type": "table",
+          "pdf_pages": [
+            90
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+            "exact_text": "[{\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 48.95760000000001, \"r\": 98.44400000000002, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Tyre pressure\"}, {\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 148.0216, \"r\": 192.924, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Front & Rear\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 43.8776, \"r\": 103.58720000000007, \"t\": 120.75089999999997}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Solo & With Pillion\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 139.60559999999998, \"r\": 201.2507484, \"t\": 118.65946929999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"32 psi/2.24 kg/cm 2\"}]",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 121.96960491716862,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 20.748931804097783,
+                  "r": 215.53989380649222,
+                  "t": 158.32275238376855
+                },
+                "charspan": [
+                  0,
+                  0
+                ],
+                "page_no": 90
+              }
+            ],
+            "text_sha256": "2455377da680c1e923d8ad9facda5eaaaa509fd6bef0be017e74c35e4848845a",
+            "text_span": [
+              0,
+              1504
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    },
+    {
+      "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+      "exact_claim": "Underinflated tyres can overheat, suffer damage and cause rider injury.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "c76661b7d5b97b9c2eaa54e67eee1236ef30d29860c0b02c643788e497d26fe9",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider.",
+          "object_type": "list_item",
+          "pdf_pages": [
+            90
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+            "exact_text": " It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 65.18971875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 21.5715,
+                  "r": 215.09949999999998,
+                  "t": 98.86759999999998
+                },
+                "charspan": [
+                  0,
+                  187
+                ],
+                "page_no": 90
+              }
+            ],
+            "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+            "text_span": [
+              0,
+              187
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        },
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": "adhere the same may result in tyre damage and may cause injury to the rider.",
+          "object_type": "text",
+          "pdf_pages": [
+            90
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+            "exact_text": "adhere the same may result in tyre damage and may cause injury to the rider.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 193.81371875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 240.0195,
+                  "r": 418.56429999999995,
+                  "t": 209.4916
+                },
+                "charspan": [
+                  0,
+                  76
+                ],
+                "page_no": 90
+              }
+            ],
+            "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+            "text_span": [
+              0,
+              76
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        },
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " It is recommended to use Royal Enfield tyre specification in case of replacement of new tyres, failure to",
+          "object_type": "list_item",
+          "pdf_pages": [
+            90
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+            "exact_text": " It is recommended to use Royal Enfield tyre specification in case of replacement of new tyres, failure to",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 47.18971875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 21.571499999999986,
+                  "r": 215.09949999999998,
+                  "t": 62.86759999999998
+                },
+                "charspan": [
+                  0,
+                  107
+                ],
+                "page_no": 90
+              }
+            ],
+            "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+            "text_span": [
+              0,
+              107
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    },
+    {
+      "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+      "exact_claim": "If replacing tyres, use Royal Enfield's specified tyres; failure to do so can cause tyre damage and rider injury.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "504cbb1b50075a76094c2a4f28490180f4e50497da09a1d9983f9e70c1d5879b",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider.",
+          "object_type": "list_item",
+          "pdf_pages": [
+            90
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+            "exact_text": " It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 65.18971875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 21.5715,
+                  "r": 215.09949999999998,
+                  "t": 98.86759999999998
+                },
+                "charspan": [
+                  0,
+                  187
+                ],
+                "page_no": 90
+              }
+            ],
+            "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+            "text_span": [
+              0,
+              187
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        },
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": "adhere the same may result in tyre damage and may cause injury to the rider.",
+          "object_type": "text",
+          "pdf_pages": [
+            90
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+            "exact_text": "adhere the same may result in tyre damage and may cause injury to the rider.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 193.81371875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 240.0195,
+                  "r": 418.56429999999995,
+                  "t": 209.4916
+                },
+                "charspan": [
+                  0,
+                  76
+                ],
+                "page_no": 90
+              }
+            ],
+            "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+            "text_span": [
+              0,
+              76
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        },
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " It is recommended to use Royal Enfield tyre specification in case of replacement of new tyres, failure to",
+          "object_type": "list_item",
+          "pdf_pages": [
+            90
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+            "exact_text": " It is recommended to use Royal Enfield tyre specification in case of replacement of new tyres, failure to",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 47.18971875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 21.571499999999986,
+                  "r": 215.09949999999998,
+                  "t": 62.86759999999998
+                },
+                "charspan": [
+                  0,
+                  107
+                ],
+                "page_no": 90
+              }
+            ],
+            "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+            "text_span": [
+              0,
+              107
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    }
+  ],
+  "context_pin_sha256": "27c61d0e42be3d4582a6559e2becfcd28e27e8d065bbea1033f7ec5789c64250",
+  "coordinator_snapshot_sha256": "29a19c789bd5e97addf1fa2b0e6c58bde9a40b22c2d4c3c655a99f8308bc3b6f",
+  "figure_necessity_checks": [
+    {
+      "evidence_id": "evidence_90f82c8d6df539c2ddff81e0",
+      "pdf_pages": [
+        90
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_933903b987f75a2fa606efe8",
+      "pdf_pages": [
+        90
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_e6d8b3e13b2194148fba11d0",
+      "pdf_pages": [
+        90
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    }
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "missing_source_ids": [],
+  "original_pdf_pages_to_check": [
+    18,
+    90
+  ],
+  "planner_actor": "check_planner",
+  "planning_only": true,
+  "prior_support_context": null,
+  "producer_binding_context": null,
+  "quality_and_routing_checks": [
+    "Check exact accepted follow-up context, do not collapse entire conversation into terminal answer.",
+    "Relevant concise main response; compact setup conditions without assuming completion.",
+    "No invented OEM ranking from independent documented checks.",
+    "Separate SUPPORTED/AMBIGUOUS/UNSUPPORTED/SAFETY_STOP/SYSTEM_ERROR; a synthetic error fixture is not an actual outage measurement.",
+    "Source facts, user observations, policy conditions and unverified mechanical diagnosis remain distinct.",
+    "Inspect all branch warnings, prerequisite object links, citations and claim spans; do not use a broad whole-table span as automatic entailment.",
+    "Verify branch predicates execute as typed reviewed records; prose is not executable.",
+    "No provider/secret reads/deployment/billing/index changes; review release artifacts only."
+  ],
+  "record_id": "lookup_tyre_pressure",
+  "runtime_mapping": {
+    "conditional_branches": [
+      {
+        "branch_context": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+        "branch_id": "lookup_tyre_pressure:branch:ACTION_COMPLETED_UNRESOLVED",
+        "parent_step_id": "lookup_tyre_pressure:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_114a6d4caa3c57bd3901037e",
+          "evidence_1fe8af98a9e6d6027d12f8c8",
+          "evidence_37f3fc6c42e5e41bd34c92b9",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_740614ac6db75e3671ac186b",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8",
+          "evidence_95aaf2b056eacbbf96d4d973",
+          "evidence_95b0889e1fced15e1322d39c",
+          "evidence_a5b62eee4c0caf239437fa68",
+          "evidence_b8a86ed77641d6fc80a14c58",
+          "evidence_be7a1fe2395a01c7a8a9fcba",
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_e13cbf4588e98761e424bb98",
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ]
+      },
+      {
+        "branch_context": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+        "branch_id": "lookup_tyre_pressure:branch:NOT_APPLICABLE",
+        "parent_step_id": "lookup_tyre_pressure:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_114a6d4caa3c57bd3901037e",
+          "evidence_1fe8af98a9e6d6027d12f8c8",
+          "evidence_37f3fc6c42e5e41bd34c92b9",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_740614ac6db75e3671ac186b",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8",
+          "evidence_95aaf2b056eacbbf96d4d973",
+          "evidence_95b0889e1fced15e1322d39c",
+          "evidence_a5b62eee4c0caf239437fa68",
+          "evidence_b8a86ed77641d6fc80a14c58",
+          "evidence_be7a1fe2395a01c7a8a9fcba",
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_e13cbf4588e98761e424bb98",
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ]
+      },
+      {
+        "branch_context": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+        "branch_id": "lookup_tyre_pressure:branch:RESOLVED",
+        "parent_step_id": "lookup_tyre_pressure:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_114a6d4caa3c57bd3901037e",
+          "evidence_1fe8af98a9e6d6027d12f8c8",
+          "evidence_37f3fc6c42e5e41bd34c92b9",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_740614ac6db75e3671ac186b",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8",
+          "evidence_95aaf2b056eacbbf96d4d973",
+          "evidence_95b0889e1fced15e1322d39c",
+          "evidence_a5b62eee4c0caf239437fa68",
+          "evidence_b8a86ed77641d6fc80a14c58",
+          "evidence_be7a1fe2395a01c7a8a9fcba",
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_e13cbf4588e98761e424bb98",
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ]
+      },
+      {
+        "branch_context": "Ask fitted tyre construction separately from rim type. In tube and tubeless branches show front CEAT Gripp RE F â€” 90/90-21 M/C 54H, rear CEAT Gripp Rad steel RE â€” 140/80R17 M/C 69H. Tube-type rim requires tyre fitted with tube; tubeless-type rim requires only tubeless-type tyre. Ask rim confirmation. These models are not labelled by construction in this source.",
+        "branch_id": "lookup_tyre_pressure:branch:replacement",
+        "parent_step_id": "lookup_tyre_pressure:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_114a6d4caa3c57bd3901037e",
+          "evidence_1fe8af98a9e6d6027d12f8c8",
+          "evidence_37f3fc6c42e5e41bd34c92b9",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_740614ac6db75e3671ac186b",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8",
+          "evidence_95aaf2b056eacbbf96d4d973",
+          "evidence_95b0889e1fced15e1322d39c",
+          "evidence_a5b62eee4c0caf239437fa68",
+          "evidence_b8a86ed77641d6fc80a14c58",
+          "evidence_be7a1fe2395a01c7a8a9fcba",
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_e13cbf4588e98761e424bb98",
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ]
+      },
+      {
+        "branch_context": "Show both rim requirements when unknown. Do not infer alternate-brand/version compatibility or current fitment. Refer to Royal Enfield support.",
+        "branch_id": "lookup_tyre_pressure:branch:unknown_or_alternative",
+        "parent_step_id": "lookup_tyre_pressure:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_114a6d4caa3c57bd3901037e",
+          "evidence_1fe8af98a9e6d6027d12f8c8",
+          "evidence_37f3fc6c42e5e41bd34c92b9",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_740614ac6db75e3671ac186b",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8",
+          "evidence_95aaf2b056eacbbf96d4d973",
+          "evidence_95b0889e1fced15e1322d39c",
+          "evidence_a5b62eee4c0caf239437fa68",
+          "evidence_b8a86ed77641d6fc80a14c58",
+          "evidence_be7a1fe2395a01c7a8a9fcba",
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_e13cbf4588e98761e424bb98",
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ]
+      },
+      {
+        "branch_context": "Do not ask construction questions for the pressure-only lookup.",
+        "branch_id": "lookup_tyre_pressure:branch:pressure_only",
+        "parent_step_id": "lookup_tyre_pressure:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_114a6d4caa3c57bd3901037e",
+          "evidence_1fe8af98a9e6d6027d12f8c8",
+          "evidence_37f3fc6c42e5e41bd34c92b9",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_740614ac6db75e3671ac186b",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8",
+          "evidence_95aaf2b056eacbbf96d4d973",
+          "evidence_95b0889e1fced15e1322d39c",
+          "evidence_a5b62eee4c0caf239437fa68",
+          "evidence_b8a86ed77641d6fc80a14c58",
+          "evidence_be7a1fe2395a01c7a8a9fcba",
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_e13cbf4588e98761e424bb98",
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ]
+      }
+    ],
+    "dependency": {
+      "action_evidence_ids": [
+        "evidence_f1b023ea7924903fed5dfe5f"
+      ],
+      "branch_scope": "Main response and explicit conditional children are separate; not relevance-based closure",
+      "categories": {
+        "actions": [
+          "evidence_f1b023ea7924903fed5dfe5f"
+        ],
+        "conditions": [],
+        "figures": [
+          "evidence_e6d8b3e13b2194148fba11d0",
+          "evidence_90f82c8d6df539c2ddff81e0",
+          "evidence_933903b987f75a2fa606efe8"
+        ],
+        "prerequisites": [],
+        "tables": [
+          "evidence_f1b023ea7924903fed5dfe5f",
+          "evidence_5b6388c083677b5d5cd6ad4a",
+          "evidence_dd285d8b6e6a1682de0e10f0",
+          "evidence_3f8de8466049af12783de7d0"
+        ],
+        "warnings": [
+          "evidence_c762ef2c61505dc7ac7c01d8",
+          "evidence_cb7062b4cec26700e3ae1185",
+          "evidence_f3dd00ecbff8fd98a8c32736"
+        ]
+      },
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "required_evidence_ids": [
+        "evidence_114a6d4caa3c57bd3901037e",
+        "evidence_1fe8af98a9e6d6027d12f8c8",
+        "evidence_37f3fc6c42e5e41bd34c92b9",
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_5b6388c083677b5d5cd6ad4a",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_740614ac6db75e3671ac186b",
+        "evidence_7cd1de903310b8e09d8a9d4e",
+        "evidence_90f82c8d6df539c2ddff81e0",
+        "evidence_933903b987f75a2fa606efe8",
+        "evidence_95aaf2b056eacbbf96d4d973",
+        "evidence_95b0889e1fced15e1322d39c",
+        "evidence_a5b62eee4c0caf239437fa68",
+        "evidence_b8a86ed77641d6fc80a14c58",
+        "evidence_be7a1fe2395a01c7a8a9fcba",
+        "evidence_c762ef2c61505dc7ac7c01d8",
+        "evidence_cb7062b4cec26700e3ae1185",
+        "evidence_dd285d8b6e6a1682de0e10f0",
+        "evidence_e13cbf4588e98761e424bb98",
+        "evidence_e6d8b3e13b2194148fba11d0",
+        "evidence_f1b023ea7924903fed5dfe5f",
+        "evidence_f3dd00ecbff8fd98a8c32736"
+      ],
+      "review_status": "DRAFT",
+      "scope_review_complete": false,
+      "step_id": "lookup_tyre_pressure:candidate-v3",
+      "version": "isolated-runtime-candidates-v3"
+    },
+    "dependency_sha256": "8a6c3ab6a6fcc44ba104d3de49e98d2cbbc4b3a16f0b9247054dd75c5428c730",
+    "procedure": null,
+    "rules": {
+      "lookup_tyre_pressure:rule:bike_scope_confirmed": {
+        "authoring_scope": "Explicit typed proposition; no mechanical health or diagnostic order inferred",
+        "clarification_evidence_ids": [],
+        "clarification_question": null,
+        "expected_value": true,
+        "fact_key": "bike_scope_confirmed",
+        "human_signoff": false,
+        "operator": "EQ",
+        "origin": "PRODUCT_POLICY",
+        "policy_source_ids": [
+          "policy_240aa9e9a20851d2f8253ffc",
+          "policy_680d331344f35db68e62a9cf",
+          "policy_856cb9f6fbe76bd5e7103080"
+        ],
+        "policy_version": "isolated-runtime-candidates-v3",
+        "predicate_type": "BOOLEAN",
+        "review_status": "DRAFT",
+        "rider_resolvable": false,
+        "rule_id": "lookup_tyre_pressure:rule:bike_scope_confirmed",
+        "rule_version": "isolated-runtime-candidates-v3",
+        "source_evidence_ids": [],
+        "unit": null
+      }
+    },
+    "session_fixture": {
+      "actual_runtime_measured": false,
+      "events": [
+        {
+          "expected_new_health_fact": false,
+          "expected_repeat": false,
+          "outcome": "ACTION_COMPLETED_UNRESOLVED"
+        },
+        {
+          "must_not_prove_system_health": true,
+          "outcome": "OBSERVED_NORMAL",
+          "requires_rule_id_and_typed_fact": true
+        },
+        {
+          "expected_one_focused_question": true,
+          "outcome": "UNCLEAR"
+        },
+        {
+          "outcome": "RESOLVED",
+          "scope": "Selected issue only; other issues remain open"
+        },
+        {
+          "outcome": "CORRECTION",
+          "supersedes_immutable_attempt": true
+        }
+      ],
+      "initial_facts": {
+        "bike_scope_confirmed": true
+      },
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "record_id": "lookup_tyre_pressure",
+      "review_status": "DRAFT",
+      "step_id": "lookup_tyre_pressure:candidate-v3",
+      "symptoms": [
+        "lookup_tyre_pressure"
+      ]
+    },
+    "step": {
+      "action_evidence_ids": [
+        "evidence_f1b023ea7924903fed5dfe5f"
+      ],
+      "applicability_rule_ids": [
+        "lookup_tyre_pressure:rule:bike_scope_confirmed"
+      ],
+      "authoring_blockers": [
+        "INDEPENDENT_SOURCE_RULE_DEPENDENCY_SIGNOFF_REQUIRED",
+        "BRANCH_SCOPES_AND_ROLE_GROUPS_NOT_RUNTIME_APPROVED"
+      ],
+      "canonical_record_id": "lookup_tyre_pressure",
+      "claims": [
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:main",
+          "evidence_ids": [
+            "evidence_f1b023ea7924903fed5dfe5f"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "FACT",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+              "exact_text": "[{\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 48.95760000000001, \"r\": 98.44400000000002, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Tyre pressure\"}, {\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 148.0216, \"r\": 192.924, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Front & Rear\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 43.8776, \"r\": 103.58720000000007, \"t\": 120.75089999999997}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Solo & With Pillion\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 139.60559999999998, \"r\": 201.2507484, \"t\": 118.65946929999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"32 psi/2.24 kg/cm 2\"}]",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 121.96960491716862,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 20.748931804097783,
+                    "r": 215.53989380649222,
+                    "t": 158.32275238376855
+                  },
+                  "charspan": [
+                    0,
+                    0
+                  ],
+                  "page_no": 90
+                }
+              ],
+              "text_sha256": "2455377da680c1e923d8ad9facda5eaaaa509fd6bef0be017e74c35e4848845a",
+              "text_span": [
+                0,
+                1504
+              ]
+            }
+          ],
+          "text": "For the selected Himalayan BS6, the manual lists 32 psi (2.24 kg/cm²) for both front and rear tyres, whether riding solo or with a pillion."
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning0",
+          "evidence_ids": [
+            "evidence_c762ef2c61505dc7ac7c01d8",
+            "evidence_cb7062b4cec26700e3ae1185",
+            "evidence_f3dd00ecbff8fd98a8c32736"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "WARNING",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+              "exact_text": " It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 65.18971875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 21.5715,
+                    "r": 215.09949999999998,
+                    "t": 98.86759999999998
+                  },
+                  "charspan": [
+                    0,
+                    187
+                  ],
+                  "page_no": 90
+                }
+              ],
+              "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+              "text_span": [
+                0,
+                187
+              ]
+            },
+            {
+              "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+              "exact_text": "adhere the same may result in tyre damage and may cause injury to the rider.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 193.81371875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 240.0195,
+                    "r": 418.56429999999995,
+                    "t": 209.4916
+                  },
+                  "charspan": [
+                    0,
+                    76
+                  ],
+                  "page_no": 90
+                }
+              ],
+              "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+              "text_span": [
+                0,
+                76
+              ]
+            },
+            {
+              "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+              "exact_text": " It is recommended to use Royal Enfield tyre specification in case of replacement of new tyres, failure to",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 47.18971875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 21.571499999999986,
+                    "r": 215.09949999999998,
+                    "t": 62.86759999999998
+                  },
+                  "charspan": [
+                    0,
+                    107
+                  ],
+                  "page_no": 90
+                }
+              ],
+              "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+              "text_span": [
+                0,
+                107
+              ]
+            }
+          ],
+          "text": "Underinflated tyres can overheat, suffer damage and cause rider injury."
+        },
+        {
+          "claim_id": "lookup_tyre_pressure:accepted-draft:warning1",
+          "evidence_ids": [
+            "evidence_c762ef2c61505dc7ac7c01d8",
+            "evidence_cb7062b4cec26700e3ae1185",
+            "evidence_f3dd00ecbff8fd98a8c32736"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "WARNING",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+              "exact_text": " It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 65.18971875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 21.5715,
+                    "r": 215.09949999999998,
+                    "t": 98.86759999999998
+                  },
+                  "charspan": [
+                    0,
+                    187
+                  ],
+                  "page_no": 90
+                }
+              ],
+              "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+              "text_span": [
+                0,
+                187
+              ]
+            },
+            {
+              "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+              "exact_text": "adhere the same may result in tyre damage and may cause injury to the rider.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 193.81371875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 240.0195,
+                    "r": 418.56429999999995,
+                    "t": 209.4916
+                  },
+                  "charspan": [
+                    0,
+                    76
+                  ],
+                  "page_no": 90
+                }
+              ],
+              "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+              "text_span": [
+                0,
+                76
+              ]
+            },
+            {
+              "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+              "exact_text": " It is recommended to use Royal Enfield tyre specification in case of replacement of new tyres, failure to",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 47.18971875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 21.571499999999986,
+                    "r": 215.09949999999998,
+                    "t": 62.86759999999998
+                  },
+                  "charspan": [
+                    0,
+                    107
+                  ],
+                  "page_no": 90
+                }
+              ],
+              "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+              "text_span": [
+                0,
+                107
+              ]
+            }
+          ],
+          "text": "If replacing tyres, use Royal Enfield's specified tyres; failure to do so can cause tyre damage and rider injury."
+        }
+      ],
+      "dependency_manifest_version": "isolated-runtime-candidates-v3",
+      "kind": "LOOKUP",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "next_step_evidence_ids": [],
+      "next_step_ids": [],
+      "parent_procedure_id": null,
+      "repeat_rule_ids": [],
+      "required_evidence_ids": [
+        "evidence_114a6d4caa3c57bd3901037e",
+        "evidence_1fe8af98a9e6d6027d12f8c8",
+        "evidence_37f3fc6c42e5e41bd34c92b9",
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_5b6388c083677b5d5cd6ad4a",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_740614ac6db75e3671ac186b",
+        "evidence_7cd1de903310b8e09d8a9d4e",
+        "evidence_90f82c8d6df539c2ddff81e0",
+        "evidence_933903b987f75a2fa606efe8",
+        "evidence_95aaf2b056eacbbf96d4d973",
+        "evidence_95b0889e1fced15e1322d39c",
+        "evidence_a5b62eee4c0caf239437fa68",
+        "evidence_b8a86ed77641d6fc80a14c58",
+        "evidence_be7a1fe2395a01c7a8a9fcba",
+        "evidence_c762ef2c61505dc7ac7c01d8",
+        "evidence_cb7062b4cec26700e3ae1185",
+        "evidence_dd285d8b6e6a1682de0e10f0",
+        "evidence_e13cbf4588e98761e424bb98",
+        "evidence_e6d8b3e13b2194148fba11d0",
+        "evidence_f1b023ea7924903fed5dfe5f",
+        "evidence_f3dd00ecbff8fd98a8c32736"
+      ],
+      "review_status": "DRAFT",
+      "rule_version": "isolated-runtime-candidates-v3",
+      "runtime_authorized": false,
+      "safety_rule_ids": [],
+      "step_id": "lookup_tyre_pressure:candidate-v3",
+      "symptom_tags": [
+        "lookup_tyre_pressure"
+      ],
+      "unresolved_evidence_ids": [],
+      "unresolved_route": "CONTINUE_DOCUMENTED"
+    },
+    "step_sha256": "f7a10673290cfc96d5e542e6afb050b38b81a04fe958609ff3bbc56184b2912a",
+    "trusted_route": {
+      "initial_candidate_route": "SUPPORTED",
+      "record_id": "lookup_tyre_pressure",
+      "requires_actual_formal_approval": true,
+      "route_kind": "SOURCE_DRAFT_STEP",
+      "runtime_authorized": false,
+      "step_id": "lookup_tyre_pressure:candidate-v3"
+    }
+  },
+  "schema_version": "case-check-plan-v1",
+  "source_limit_checks": [],
+  "source_manifest_scope": {
+    "applicability_policy": {
+      "manual_identification": "PDF page 3 describes 452 cc liquid-cooled Sherpa; pages 1 and 4 state BS VI.",
+      "market_or_region": "Not independently confirmed; no rider market prompt required under owner selection policy.",
+      "model_year_required": false,
+      "owner_confirmed_on": "2026-10-09",
+      "rider_edition_selection_required": false,
+      "selection_rule": "Rider confirms Himalayan and BS6; supplied immutable manual is selected.",
+      "version": "owner-himalayan-bs6-v1"
+    },
+    "display_policy": {
+      "end_user_excerpts": false,
+      "end_user_figure_crops": false,
+      "end_user_pdf": false,
+      "engineering_pdf_and_excerpts": true,
+      "oem_redistribution_license_verified": false,
+      "owner_statement_date": "2026-10-09",
+      "version": "engineering-only-v1"
+    },
+    "oem_service_route": {
+      "checked_date": "2026-10-09",
+      "email": "support@royalenfield.com",
+      "market": "India",
+      "market_fit_status": "PENDING_SOURCE_MARKET_CONFIRMATION",
+      "owner_requested": true,
+      "url": "mailto:support@royalenfield.com",
+      "verification_url": "https://www.royalenfield.com/in/en/support/digital-quickstart/new-himalayan/contact-us/",
+      "verified": true,
+      "wording": "Kindly write to Royal Enfield at support@royalenfield.com"
+    },
+    "rights_status": "engineering_use_authorized_by_owner_end_user_pdf_and_excerpt_display_prohibited"
+  },
+  "source_objects": {
+    "evidence_114a6d4caa3c57bd3901037e": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_114a6d4caa3c57bd3901037e",
+      "exact_text": " Use only recommended tyres, inflated to correct air pressure.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 158.8141187558907,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5715,
+            "r": 214.94829999999996,
+            "t": 173.49200000000002
+          },
+          "charspan": [
+            0,
+            63
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "0b7aee0fbc151707edc798438899a7093b4a41e8a91d218112ee9121a8e13d34",
+      "text_span": [
+        0,
+        63
+      ]
+    },
+    "evidence_1fe8af98a9e6d6027d12f8c8": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_1fe8af98a9e6d6027d12f8c8",
+      "exact_text": " On tube type rim, fit the tyre with a tube.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 89.79745041518385,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 170.10459999999995,
+            "t": 96.5649
+          },
+          "charspan": [
+            0,
+            45
+          ],
+          "page_no": 18
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "30c283fecfd132faabb1f4c34ed945969dc314e1541de1f303921426ca3d6e68",
+      "text_span": [
+        0,
+        45
+      ]
+    },
+    "evidence_37f3fc6c42e5e41bd34c92b9": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_37f3fc6c42e5e41bd34c92b9",
+      "exact_text": "BRAKE PADS",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 182.40648306789606,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.0216,
+            "r": 275.732,
+            "t": 189.5911
+          },
+          "charspan": [
+            0,
+            10
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "a9f8c6261bc46ae53557f2669e0a65d63848b7a67b8822128a0ed4eb854b6020",
+      "text_span": [
+        0,
+        10
+      ]
+    },
+    "evidence_3f8de8466049af12783de7d0": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_3f8de8466049af12783de7d0",
+      "exact_text": "r0c0: Steering lock.......................\nr0c1: Inbuilt\nr1c0: Fuel type.............................\nr1c1: Unleaded gasoline\nr2c0: Ethanol content..................\nr2c1: Up to E20\nr3c0: Induction ............................\nr3c1: Electronic fuel injection, 42 mm throttle body, ride by wire system\nr4c0: Fuel tank capacity...............\nr4c1: 17.0* L\nr5c0: Low fuel warning................\nr5c1: 3 L ± 0.5* L\nr6c0: Dead stock..........................\nr6c1: 0.95 L to 1.15* L",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "f03d6f820ec422936c7af387a66ba5e7d1897808e16a5bf5f75a072dac981978",
+      "object_type": "table",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 97.58518997012868,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 223.82451332785865,
+            "r": 412.7410536887429,
+            "t": 211.87501675953584
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 18
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "table_cells": [
+        {
+          "bbox": {
+            "b": 52.304981244109314,
+            "coord_origin": "TOPLEFT",
+            "l": 225.02779999999998,
+            "r": 314.3070000000004,
+            "t": 45.627099999999984
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 0,
+          "text": "Steering lock......................."
+        },
+        {
+          "bbox": {
+            "b": 52.304981244109314,
+            "coord_origin": "TOPLEFT",
+            "l": 316.4678000000004,
+            "r": 337.6830000000004,
+            "t": 45.627099999999984
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 0,
+          "text": "Inbuilt"
+        },
+        {
+          "bbox": {
+            "b": 66.30498124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 225.02779999999998,
+            "r": 314.2182000000004,
+            "t": 59.627099999999984
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 1,
+          "text": "Fuel type............................."
+        },
+        {
+          "bbox": {
+            "b": 66.30498124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 316.4678000000004,
+            "r": 376.8342000000005,
+            "t": 59.627099999999984
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 1,
+          "text": "Unleaded gasoline"
+        },
+        {
+          "bbox": {
+            "b": 80.30498124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 225.02779999999998,
+            "r": 314.3070000000003,
+            "t": 73.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 2,
+          "text": "Ethanol content.................."
+        },
+        {
+          "bbox": {
+            "b": 80.30498124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 316.4758000000003,
+            "r": 349.77100000000024,
+            "t": 73.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 2,
+          "text": "Up to E20"
+        },
+        {
+          "bbox": {
+            "b": 94.30498124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 225.0358,
+            "r": 314.3222000000006,
+            "t": 87.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 3,
+          "text": "Induction ............................"
+        },
+        {
+          "bbox": {
+            "b": 114.30498124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 316.47580000000056,
+            "r": 411.34539999999987,
+            "t": 87.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 3,
+          "text": "Electronic fuel injection, 42 mm throttle body, ride by wire system"
+        },
+        {
+          "bbox": {
+            "b": 128.30498124410934,
+            "coord_origin": "TOPLEFT",
+            "l": 225.0358,
+            "r": 314.1150000000002,
+            "t": 121.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 5,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 4,
+          "text": "Fuel tank capacity..............."
+        },
+        {
+          "bbox": {
+            "b": 128.30498124410934,
+            "coord_origin": "TOPLEFT",
+            "l": 316.47580000000016,
+            "r": 338.93900000000025,
+            "t": 121.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 5,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 4,
+          "text": "17.0* L"
+        },
+        {
+          "bbox": {
+            "b": 142.30498124410934,
+            "coord_origin": "TOPLEFT",
+            "l": 225.0358,
+            "r": 314.2590000000003,
+            "t": 135.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 6,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 5,
+          "text": "Low fuel warning................"
+        },
+        {
+          "bbox": {
+            "b": 142.70859707602338,
+            "coord_origin": "TOPLEFT",
+            "l": 316.4758000000003,
+            "r": 353.2998,
+            "t": 135.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 6,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 5,
+          "text": "3 L ± 0.5* L"
+        },
+        {
+          "bbox": {
+            "b": 156.30498124410934,
+            "coord_origin": "TOPLEFT",
+            "l": 225.0358,
+            "r": 314.27420000000035,
+            "t": 149.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 7,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 6,
+          "text": "Dead stock.........................."
+        },
+        {
+          "bbox": {
+            "b": 156.30498124410934,
+            "coord_origin": "TOPLEFT",
+            "l": 316.4838000000004,
+            "r": 367.98620000000045,
+            "t": 149.62709999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 7,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 6,
+          "text": "0.95 L to 1.15* L"
+        }
+      ],
+      "text_sha256": "80cbcce80531c1edb6a58e735eb3287e6fd461db7ae0469fed5b9ed5774c934c",
+      "text_span": [
+        0,
+        479
+      ]
+    },
+    "evidence_5b6388c083677b5d5cd6ad4a": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_5b6388c083677b5d5cd6ad4a",
+      "exact_text": "[{\"bbox\": {\"b\": 122.49323868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 42.291799999999995, \"r\": 92.41099999999997, \"t\": 115.81109999999998}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Type of wheel\"}, {\"bbox\": {\"b\": 122.49323868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 131.61179999999996, \"r\": 197.21819999999994, \"t\": 115.81109999999998}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Solo & With pillion\"}, {\"bbox\": {\"b\": 138.4889812441093, \"coord_origin\": \"TOPLEFT\", \"l\": 46.8758, \"r\": 87.979, \"t\": 131.8111}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Front & Rear\"}, {\"bbox\": {\"b\": 138.4889812441093, \"coord_origin\": \"TOPLEFT\", \"l\": 154.8838, \"r\": 173.92299999999994, \"t\": 131.8111}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"32 psi\"}]",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "table",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 110.35983045151653,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 20.700767576044257,
+            "r": 216.35304565429686,
+            "t": 143.82610697667738
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 18
+        }
+      ],
+      "requires_visual_verification": false,
+      "table_cells": [
+        {
+          "bbox": {
+            "b": 122.49323868613138,
+            "coord_origin": "TOPLEFT",
+            "l": 42.291799999999995,
+            "r": 92.41099999999997,
+            "t": 115.81109999999998
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 0,
+          "text": "Type of wheel"
+        },
+        {
+          "bbox": {
+            "b": 122.49323868613138,
+            "coord_origin": "TOPLEFT",
+            "l": 131.61179999999996,
+            "r": 197.21819999999994,
+            "t": 115.81109999999998
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 0,
+          "text": "Solo & With pillion"
+        },
+        {
+          "bbox": {
+            "b": 138.4889812441093,
+            "coord_origin": "TOPLEFT",
+            "l": 46.8758,
+            "r": 87.979,
+            "t": 131.8111
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 1,
+          "text": "Front & Rear"
+        },
+        {
+          "bbox": {
+            "b": 138.4889812441093,
+            "coord_origin": "TOPLEFT",
+            "l": 154.8838,
+            "r": 173.92299999999994,
+            "t": 131.8111
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 1,
+          "text": "32 psi"
+        }
+      ],
+      "table_representation": "Exact structured cells with row/column spans and header flags; not invented row interpretation",
+      "text_sha256": "14c1ade06d0e20ae1b9157bf7c95c0707b6ade9b90a37dc0cb331da01e0297c7",
+      "text_span": [
+        0,
+        1476
+      ]
+    },
+    "evidence_64de3cc72b85735055b58fec": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_64de3cc72b85735055b58fec",
+      "exact_text": "* The above values are approximate and the actual fuel filling capacity will vary from the values mentioned.",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "17cd0e22120ac9ff74103e0693f8c23be7706ff7b461ea7e9ff509a0b42c5233",
+      "object_type": "footnote",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 74.57501875589065,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.0438,
+            "r": 418.5590000000003,
+            "t": 91.25290000000001
+          },
+          "charspan": [
+            0,
+            108
+          ],
+          "page_no": 18
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "text_sha256": "d1f672f5c34221222101a3b6002fbf4a7f08c96a2f46fa14e1aedc67ee69a3c2",
+      "text_span": [
+        0,
+        108
+      ]
+    },
+    "evidence_740614ac6db75e3671ac186b": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_740614ac6db75e3671ac186b",
+      "exact_text": "TECHNICAL SPECIFICATIONS",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.68907460184408,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 196.51499999999996,
+            "t": 228.46599999999998
+          },
+          "charspan": [
+            0,
+            24
+          ],
+          "page_no": 18
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "322bd94ca5ea2b4aaa8ef8931a356b94b686e6b3a37f75f426b6ed338b6918a5",
+      "text_span": [
+        0,
+        24
+      ]
+    },
+    "evidence_7cd1de903310b8e09d8a9d4e": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_7cd1de903310b8e09d8a9d4e",
+      "exact_text": " The front and rear brake pads must be checked for wear at the intervals specified in the periodic maintenance chart.",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "5fdc01c408442d5af48172fc6eb57735d5626784c3e732041ef0553550b32d09",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 151.5612187558907,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.0216,
+            "r": 418.63839999999993,
+            "t": 176.23910000000004
+          },
+          "charspan": [
+            0,
+            118
+          ],
+          "page_no": 90
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "text_sha256": "a804d6a7e10e62111c87165c11f326a01be7713faaf0de34f8cd061f545ae17e",
+      "text_span": [
+        0,
+        118
+      ]
+    },
+    "evidence_90f82c8d6df539c2ddff81e0": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_90f82c8d6df539c2ddff81e0",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 100.78300979733467,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.614426189643687,
+            "r": 38.59917926506563,
+            "t": 118.08765520238876
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_933903b987f75a2fa606efe8": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_933903b987f75a2fa606efe8",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 92.70942053675651,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.327040990179235,
+            "r": 28.4893222440763,
+            "t": 100.15262083363532
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_95aaf2b056eacbbf96d4d973": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_95aaf2b056eacbbf96d4d973",
+      "exact_text": "MINOR MAINTENANCE TIPS",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.9272746018441,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5715,
+            "r": 187.39350000000002,
+            "t": 228.7042
+          },
+          "charspan": [
+            0,
+            22
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "8ab4f3e9f15a535244200d9ea554bbf7c836c4f0ba7ad9edee1cdaf094240a09",
+      "text_span": [
+        0,
+        22
+      ]
+    },
+    "evidence_95b0889e1fced15e1322d39c": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_95b0889e1fced15e1322d39c",
+      "exact_text": "WARNING",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 105.19198306789605,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 43.8218,
+            "r": 84.13219999999998,
+            "t": 112.3766
+          },
+          "charspan": [
+            0,
+            7
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "86f56fe8221f029db2c9755cc998669a7d873c32bfa83bc9431bafe0bb814400",
+      "text_span": [
+        0,
+        7
+      ]
+    },
+    "evidence_a5b62eee4c0caf239437fa68": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_a5b62eee4c0caf239437fa68",
+      "exact_text": " On tubeless type rim, use tubeless type tyre only.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 77.79745041518385,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.571799999999996,
+            "r": 196.98379999999983,
+            "t": 84.5649
+          },
+          "charspan": [
+            0,
+            52
+          ],
+          "page_no": 18
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "65ff99fde98f1ea9cd97c35a7f8d2e7280818eab8d1319c5540538c585596cad",
+      "text_span": [
+        0,
+        52
+      ]
+    },
+    "evidence_b8a86ed77641d6fc80a14c58": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_b8a86ed77641d6fc80a14c58",
+      "exact_text": "NOTE",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 98.97842764598539,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 43.482249999999986,
+            "t": 106.07820000000001
+          },
+          "charspan": [
+            0,
+            4
+          ],
+          "page_no": 18
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "7a552636e3317c1d116f1c562c91b3ecff5ffcbb4dc5d1b6b77af7a2b9bef711",
+      "text_span": [
+        0,
+        4
+      ]
+    },
+    "evidence_be7a1fe2395a01c7a8a9fcba": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_be7a1fe2395a01c7a8a9fcba",
+      "exact_text": " Periodically inspect wheels for spokes damage and wheel rim for wobbling or run out.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 194.8141187558907,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5715,
+            "r": 214.9163,
+            "t": 209.49200000000002
+          },
+          "charspan": [
+            0,
+            86
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "99b6e3b24ea0428561be6f029166470ddb9651355b26faf3da1fcc1951147902",
+      "text_span": [
+        0,
+        86
+      ]
+    },
+    "evidence_c762ef2c61505dc7ac7c01d8": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+      "exact_text": " It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 65.18971875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5715,
+            "r": 215.09949999999998,
+            "t": 98.86759999999998
+          },
+          "charspan": [
+            0,
+            187
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "8e715dc02fa625481c37a2ad646bc0e0b6e6d73972ebd609b619e18131d9bd9c",
+      "text_span": [
+        0,
+        187
+      ]
+    },
+    "evidence_cb7062b4cec26700e3ae1185": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_cb7062b4cec26700e3ae1185",
+      "exact_text": "adhere the same may result in tyre damage and may cause injury to the rider.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "text",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 193.81371875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 240.0195,
+            "r": 418.56429999999995,
+            "t": 209.4916
+          },
+          "charspan": [
+            0,
+            76
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "711dc81661bfe771fb0c44cf08dd9fada44d3c9c8f39fefa5d832271baaea2fc",
+      "text_span": [
+        0,
+        76
+      ]
+    },
+    "evidence_dd285d8b6e6a1682de0e10f0": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_dd285d8b6e6a1682de0e10f0",
+      "exact_text": "[{\"bbox\": {\"b\": 56.30923868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 41.96379999999999, \"r\": 92.0822, \"t\": 49.627099999999984}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Type of wheel\"}, {\"bbox\": {\"b\": 56.30923868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 147.6438, \"r\": 179.37099999999995, \"t\": 49.627099999999984}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Tyre size\"}, {\"bbox\": {\"b\": 73.89698124410933, \"coord_origin\": \"TOPLEFT\", \"l\": 58.1078, \"r\": 75.96380000000002, \"t\": 67.2191}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Front\"}, {\"bbox\": {\"b\": 78.89698124410933, \"coord_origin\": \"TOPLEFT\", \"l\": 116.3878, \"r\": 197.96139999999994, \"t\": 62.2191}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"90/90-21 M/C 54H CEAT (Gripp RE F)\"}, {\"bbox\": {\"b\": 96.48898124410931, \"coord_origin\": \"TOPLEFT\", \"l\": 59.5318, \"r\": 74.47579999999999, \"t\": 89.81109999999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 3, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 2, \"text\": \"Rear\"}, {\"bbox\": {\"b\": 101.48898124410931, \"coord_origin\": \"TOPLEFT\", \"l\": 116.3878, \"r\": 203.00140000000005, \"t\": 84.81109999999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 3, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 2, \"text\": \"140/80R17 M/C 69H CEAT (Gripp Rad steel RE)\"}]",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "table",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 149.132446590648,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 20.728181554620917,
+            "r": 215.1835298018022,
+            "t": 207.93274287683823
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 18
+        }
+      ],
+      "requires_visual_verification": false,
+      "table_cells": [
+        {
+          "bbox": {
+            "b": 56.30923868613138,
+            "coord_origin": "TOPLEFT",
+            "l": 41.96379999999999,
+            "r": 92.0822,
+            "t": 49.627099999999984
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 0,
+          "text": "Type of wheel"
+        },
+        {
+          "bbox": {
+            "b": 56.30923868613138,
+            "coord_origin": "TOPLEFT",
+            "l": 147.6438,
+            "r": 179.37099999999995,
+            "t": 49.627099999999984
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 0,
+          "text": "Tyre size"
+        },
+        {
+          "bbox": {
+            "b": 73.89698124410933,
+            "coord_origin": "TOPLEFT",
+            "l": 58.1078,
+            "r": 75.96380000000002,
+            "t": 67.2191
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 1,
+          "text": "Front"
+        },
+        {
+          "bbox": {
+            "b": 78.89698124410933,
+            "coord_origin": "TOPLEFT",
+            "l": 116.3878,
+            "r": 197.96139999999994,
+            "t": 62.2191
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 1,
+          "text": "90/90-21 M/C 54H CEAT (Gripp RE F)"
+        },
+        {
+          "bbox": {
+            "b": 96.48898124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 59.5318,
+            "r": 74.47579999999999,
+            "t": 89.81109999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 2,
+          "text": "Rear"
+        },
+        {
+          "bbox": {
+            "b": 101.48898124410931,
+            "coord_origin": "TOPLEFT",
+            "l": 116.3878,
+            "r": 203.00140000000005,
+            "t": 84.81109999999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 2,
+          "text": "140/80R17 M/C 69H CEAT (Gripp Rad steel RE)"
+        }
+      ],
+      "table_representation": "Exact structured cells with row/column spans and header flags; not invented row interpretation",
+      "text_sha256": "b564b0f11f114b767bc2c195d9722a674d6cf800f4f8a4621f82765047cda908",
+      "text_span": [
+        0,
+        2237
+      ]
+    },
+    "evidence_e13cbf4588e98761e424bb98": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_e13cbf4588e98761e424bb98",
+      "exact_text": " Check proper seating of the tyre beading on the rim whenever the tyre is reassembled.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 176.8141187558907,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5715,
+            "r": 214.87630000000001,
+            "t": 191.49200000000002
+          },
+          "charspan": [
+            0,
+            87
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "57691448b2c63e4cf87a89787335d463516d3717152e1c47a501c46bb5dd63d4",
+      "text_span": [
+        0,
+        87
+      ]
+    },
+    "evidence_e6d8b3e13b2194148fba11d0": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_e6d8b3e13b2194148fba11d0",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 75.68338345360755,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 264.1267472433611,
+            "r": 379.1414089696711,
+            "t": 148.15989723014832
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_f1b023ea7924903fed5dfe5f": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+      "exact_text": "[{\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 48.95760000000001, \"r\": 98.44400000000002, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Tyre pressure\"}, {\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 148.0216, \"r\": 192.924, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Front & Rear\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 43.8776, \"r\": 103.58720000000007, \"t\": 120.75089999999997}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Solo & With Pillion\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 139.60559999999998, \"r\": 201.2507484, \"t\": 118.65946929999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"32 psi/2.24 kg/cm 2\"}]",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "table",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 121.96960491716862,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 20.748931804097783,
+            "r": 215.53989380649222,
+            "t": 158.32275238376855
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "table_cells": [
+        {
+          "bbox": {
+            "b": 110.12103868613136,
+            "coord_origin": "TOPLEFT",
+            "l": 48.95760000000001,
+            "r": 98.44400000000002,
+            "t": 103.43889999999996
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 0,
+          "text": "Tyre pressure"
+        },
+        {
+          "bbox": {
+            "b": 110.12103868613136,
+            "coord_origin": "TOPLEFT",
+            "l": 148.0216,
+            "r": 192.924,
+            "t": 103.43889999999996
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 0,
+          "text": "Front & Rear"
+        },
+        {
+          "bbox": {
+            "b": 127.42878124410932,
+            "coord_origin": "TOPLEFT",
+            "l": 43.8776,
+            "r": 103.58720000000007,
+            "t": 120.75089999999997
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 1,
+          "text": "Solo & With Pillion"
+        },
+        {
+          "bbox": {
+            "b": 127.42878124410932,
+            "coord_origin": "TOPLEFT",
+            "l": 139.60559999999998,
+            "r": 201.2507484,
+            "t": 118.65946929999998
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 1,
+          "text": "32 psi/2.24 kg/cm 2"
+        }
+      ],
+      "table_representation": "Exact structured cells with row/column spans and header flags; not invented row interpretation",
+      "text_sha256": "2455377da680c1e923d8ad9facda5eaaaa509fd6bef0be017e74c35e4848845a",
+      "text_span": [
+        0,
+        1504
+      ]
+    },
+    "evidence_f3dd00ecbff8fd98a8c32736": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_f3dd00ecbff8fd98a8c32736",
+      "exact_text": " It is recommended to use Royal Enfield tyre specification in case of replacement of new tyres, failure to",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 47.18971875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.571499999999986,
+            "r": 215.09949999999998,
+            "t": 62.86759999999998
+          },
+          "charspan": [
+            0,
+            107
+          ],
+          "page_no": 90
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "e8c93bd5089c4699e797127595355a134fe065daaec1bf124be86e625957de09",
+      "text_span": [
+        0,
+        107
+      ]
+    }
+  },
+  "state_quality_checks": [
+    {
+      "check": "Append immutable unsuccessful attempt, do not infer normality, do not repeat this action automatically.",
+      "outcome": "ACTION_COMPLETED_UNRESOLVED"
+    },
+    {
+      "check": "Require exact eligible inspection rule and typed observation; not equivalent to unresolved action or proof of system health.",
+      "outcome": "OBSERVED_NORMAL"
+    },
+    {
+      "check": "Withhold dependent branch; clarify bike/control applicability only through observable question.",
+      "outcome": "NOT_APPLICABLE"
+    },
+    {
+      "check": "One practical source-derived question only if rider-resolvable; source-review gaps route internally or to scoped abstention.",
+      "outcome": "UNCLEAR"
+    },
+    {
+      "check": "Customer-reported symptom resolution only; other issues and service inspection mandates remain.",
+      "outcome": "RESOLVED"
+    },
+    {
+      "check": "Supersede prior observation while preserving attempt history; re-evaluate eligibility without invented order.",
+      "outcome": "CORRECTION"
+    }
+  ],
+  "table_number_unit_checks": [
+    {
+      "evidence_id": "evidence_3f8de8466049af12783de7d0",
+      "exact_text": "r0c0: Steering lock.......................\nr0c1: Inbuilt\nr1c0: Fuel type.............................\nr1c1: Unleaded gasoline\nr2c0: Ethanol content..................\nr2c1: Up to E20\nr3c0: Induction ............................\nr3c1: Electronic fuel injection, 42 mm throttle body, ride by wire system\nr4c0: Fuel tank capacity...............\nr4c1: 17.0* L\nr5c0: Low fuel warning................\nr5c1: 3 L ± 0.5* L\nr6c0: Dead stock..........................\nr6c1: 0.95 L to 1.15* L",
+      "object_type": "table",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_5b6388c083677b5d5cd6ad4a",
+      "exact_text": "[{\"bbox\": {\"b\": 122.49323868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 42.291799999999995, \"r\": 92.41099999999997, \"t\": 115.81109999999998}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Type of wheel\"}, {\"bbox\": {\"b\": 122.49323868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 131.61179999999996, \"r\": 197.21819999999994, \"t\": 115.81109999999998}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Solo & With pillion\"}, {\"bbox\": {\"b\": 138.4889812441093, \"coord_origin\": \"TOPLEFT\", \"l\": 46.8758, \"r\": 87.979, \"t\": 131.8111}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Front & Rear\"}, {\"bbox\": {\"b\": 138.4889812441093, \"coord_origin\": \"TOPLEFT\", \"l\": 154.8838, \"r\": 173.92299999999994, \"t\": 131.8111}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"32 psi\"}]",
+      "object_type": "table",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_dd285d8b6e6a1682de0e10f0",
+      "exact_text": "[{\"bbox\": {\"b\": 56.30923868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 41.96379999999999, \"r\": 92.0822, \"t\": 49.627099999999984}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Type of wheel\"}, {\"bbox\": {\"b\": 56.30923868613138, \"coord_origin\": \"TOPLEFT\", \"l\": 147.6438, \"r\": 179.37099999999995, \"t\": 49.627099999999984}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Tyre size\"}, {\"bbox\": {\"b\": 73.89698124410933, \"coord_origin\": \"TOPLEFT\", \"l\": 58.1078, \"r\": 75.96380000000002, \"t\": 67.2191}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Front\"}, {\"bbox\": {\"b\": 78.89698124410933, \"coord_origin\": \"TOPLEFT\", \"l\": 116.3878, \"r\": 197.96139999999994, \"t\": 62.2191}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"90/90-21 M/C 54H CEAT (Gripp RE F)\"}, {\"bbox\": {\"b\": 96.48898124410931, \"coord_origin\": \"TOPLEFT\", \"l\": 59.5318, \"r\": 74.47579999999999, \"t\": 89.81109999999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 3, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 2, \"text\": \"Rear\"}, {\"bbox\": {\"b\": 101.48898124410931, \"coord_origin\": \"TOPLEFT\", \"l\": 116.3878, \"r\": 203.00140000000005, \"t\": 84.81109999999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 3, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 2, \"text\": \"140/80R17 M/C 69H CEAT (Gripp Rad steel RE)\"}]",
+      "object_type": "table",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+      "exact_text": "[{\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 48.95760000000001, \"r\": 98.44400000000002, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 0, \"text\": \"Tyre pressure\"}, {\"bbox\": {\"b\": 110.12103868613136, \"coord_origin\": \"TOPLEFT\", \"l\": 148.0216, \"r\": 192.924, \"t\": 103.43889999999996}, \"col_span\": 1, \"column_header\": true, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 1, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 0, \"text\": \"Front & Rear\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 43.8776, \"r\": 103.58720000000007, \"t\": 120.75089999999997}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 1, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 0, \"start_row_offset_idx\": 1, \"text\": \"Solo & With Pillion\"}, {\"bbox\": {\"b\": 127.42878124410932, \"coord_origin\": \"TOPLEFT\", \"l\": 139.60559999999998, \"r\": 201.2507484, \"t\": 118.65946929999998}, \"col_span\": 1, \"column_header\": false, \"end_col_offset_idx\": 2, \"end_row_offset_idx\": 2, \"fillable\": false, \"row_header\": false, \"row_section\": false, \"row_span\": 1, \"start_col_offset_idx\": 1, \"start_row_offset_idx\": 1, \"text\": \"32 psi/2.24 kg/cm 2\"}]",
+      "object_type": "table",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    }
+  ]
+}

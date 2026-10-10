@@ -1,0 +1,43 @@
+{
+  "schema_version": "independent-selected-source-metadata-v1",
+  "verdict": "APPROVED_SELECTED_MANUAL_HIMALAYAN_BS6_SCOPE",
+  "checker_actor": "independent-source-checker",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "source_manifest_sha256": "3b38e5ead40555ba810e94ff758b0cd30e4c874642fe089b6ac52fe97b534e18",
+  "source_manifest_canonical_sha256": "1efae1e17e1900859a3ec19a9f8f67af0f5207d586b567d28baec9df88fbaf27",
+  "observations": [
+    {
+      "pdf_page": 1,
+      "checked": "Visual cover says Royal Enfield Himalayan owners manual BS VI; extracted cover BS VI text is corrupt, so the rendered original controls this field."
+    },
+    {
+      "pdf_page": 3,
+      "checked": "Foreword explicitly identifies the new Royal Enfield Himalayan with452cc liquid-cooled Sherpa engine and6-speed gearbox."
+    },
+    {
+      "pdf_page": 4,
+      "checked": "Notice explicitly states BS VI norms and RAM00818/A /4thNovember2025. Product variation disclaimer means the manual does not establish every rider bike/firmware/feature."
+    },
+    {
+      "pdf_page": 149,
+      "checked": "Original back cover visually confirms partRAM00818/A and edition4thNovember2025; extracted back-cover glyphs are corrupt."
+    }
+  ],
+  "render_hashes": {
+    "1": "096757f38aff5990a41577200a08207eab22b1939b783e4bdbdf353c517ff803",
+    "3": "202b110b255df716c557e35a4078bd10afa960593e057e38fe0b09576ba4ccd3",
+    "4": "3f9bcd32a58b9f626563f904174646102791afb1ae76563ae4d5b30f2ba80f83",
+    "149": "6cfa78f9b8d27230109ed4f2534d96e3d0943a0f41d3cb3de25d54fd09ac1ba6"
+  },
+  "approved_scope": "Exact immutable supplied Himalayan BS VI manual as selected source, under owner-authorized Himalayan+BS6 selection policy. Rider model/variant confirmation and case-specific feature applicability remain required.",
+  "not_asserted": [
+    "Exact model year",
+    "All-market applicability",
+    "OEM copyright/display/hosting rights",
+    "Every future firmware feature",
+    "Applicability to another model or engine"
+  ],
+  "source_rights_observation": "Original4 contains OEM reserved-rights notice; this metadata approval grants no reproduction or public-display rights.",
+  "final_authority": "Agent coordinator under explicit owner authorization",
+  "human_inspection_claimed": false
+}

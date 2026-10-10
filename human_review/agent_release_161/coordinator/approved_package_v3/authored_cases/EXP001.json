@@ -1,0 +1,627 @@
+{
+  "approval_status": "AWAITING_INDEPENDENT_CORRECTION_CHECK",
+  "candidate_case": {
+    "agent_support_work": "COMPLETE_SAME_CHAT_EDITORIAL",
+    "branch_context": {
+      "dependencies": [
+        {
+          "evidence_ids": [
+            "policy_240aa9e9a20851d2f8253ffc",
+            "policy_9111e6e2299a2b15cf63eeb7",
+            "policy_149ecd0806ed20f4941cdb11",
+            "policy_94d98bcf79f7faecba16976a",
+            "policy_46f874c8ba7f9aaffdd16ed8",
+            "policy_303787821f29b1deb8fe9f76",
+            "policy_a582429020c644c2e81622ed",
+            "policy_e978314f8b1f0dc0999a0ec4"
+          ],
+          "kind": "STATE_AND_STOPS",
+          "runtime_authorized": false,
+          "scope": "Unknown, mismatch, unresolved action, superseding correction, no unjustified repeats, service, customer-reported resolution and failure routing remain distinct."
+        },
+        {
+          "evidence_ids": [
+            "originalpdf_979bc0c9bccf9767693d4b4b",
+            "originalpdf_18915d2f69b54eaebaea4581",
+            "originalpdf_df6fa2efc886debc48c819f8"
+          ],
+          "kind": "OEM_BRANCH_CONTEXT",
+          "runtime_authorized": false,
+          "scope": "Only the quoted conditional branch facts are supported. Pages reserved for a future full procedure do not authorize that procedure here. No inferred OEM sequence."
+        },
+        {
+          "evidence_ids": [
+            "policy_c7c59d8b2e592d93c2827123",
+            "policy_64b427692eb932980612b66d",
+            "policy_856cb9f6fbe76bd5e7103080",
+            "policy_dec1ae94d172ff6ececb1329",
+            "policy_5067c2fa98fb514fad94ddf7",
+            "policy_c27718acc88fc45209919b52",
+            "policy_f88b78f11e4561f77dd866f4",
+            "policy_cff5c1033095e5d1045f7870",
+            "policy_1d31e14c1b9e8f611c8498b1",
+            "feedback_1a7731420c0717da45ae8302"
+          ],
+          "kind": "SOURCE_AND_DISPLAY_LIMITS",
+          "runtime_authorized": false,
+          "scope": "Source gaps cannot become rider questions; no hidden photo diagnosis, unreviewed crop display, global absence assertion or loss of separate unresolved issues."
+        }
+      ],
+      "producer": {
+        "full_record_text": "# EXP001 v4 - Hazards cannot start with ignition OFF\r\n\r\nGenerated based on feedback from the first 11 cases.\r\n\r\nStatus: DRAFT; tuning/regression candidate only. No human source approval or runtime authorization.\r\nManual: Royal Enfield Himalayan BS6 owner's manual, RAM00818/A, 4 November 2025.\r\nSHA-256: cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89.\r\nType: control clarification. Applicability: confirmed Himalayan + BS6 selection; unresolved actual variant/display differences block specific guidance.\r\n\r\nOriginal pages: PDF 23, 29-30; printed 21, 27-28. Author read original PDF text, not retrieval output. Independent full-page visual/source review remains required, including any figure and continuation boundary.\r\n\r\nProposed engineering conversation:\r\n\r\nRider: \"My hazard lights will not turn on with the key OFF.\"\r\n\r\nAssistant: \"The manual says hazards cannot be activated with ignition OFF. The hazard button is the triangle-marked button on the right-hand handlebar control. Can you match that button on your bike? If yes, activate hazards with ignition ON. If you then turn the ignition OFF, they continue for up to 30 minutes unless manually switched off. Hazard flashing strains the battery; avoid prolonged use unless necessary. Turn signals do not work while hazards are ON. For prolonged stops turn the ignition key OFF to avoid battery discharge.\"\r\n\r\nFollow-up/outcome handling: If already activated but not operating as described, do not infer a relay or fuse fault: the cited pages give no further repair process; authorised service. If unsure whether previously activated, clarify that observation. If control differs, reconfirm selected manual.\r\n\r\nSource checks for reviewer: Check all three activation states and the continuation-page turn-signal warning; do not imply hazards can always start key-OFF.\r\n\r\nScope and stop: this card supplies only the cited answer/action, not an OEM diagnostic order. Uncertain rider facts remain UNKNOWN. Attempted-but-unresolved actions remain ACTION_COMPLETED_UNRESOLVED, never normal. Success is customer-reported resolution only; preserve separate open issues. No repeat without valid correction/new applicability or an explicit manual requirement. Source gaps explain missing guidance; operational errors return SYSTEM_ERROR, not claims of absent manual information. Service wording: \"Kindly write to Royal Enfield at support@royalenfield.com\" if service location/support is needed.\r\n\r\nDisplay: all references/excerpts/figures are engineering review context; no public excerpt/crop permission is implied. Runtime answers require approved immutable evidence IDs and dependencies, not these draft page references.\r\n\r\nRevision provenance: v2 responds to Agent2 and Agent3 feedback on immutable v1; practical identification, relevant content and complete navigation context. Previous version retained. Exact new content requires re-review; not human approval.\r\n\r\nRevision provenance: owner-requested origin declaration added; previous frozen content preserved. This provenance does not imply approval.\r\n"
+      },
+      "reviewed_conditional_spans": [
+        {
+          "draft_span": [
+            1386,
+            1683
+          ],
+          "exact_text": "Follow-up/outcome handling: If already activated but not operating as described, do not infer a relay or fuse fault: the cited pages give no further repair process; authorised service. If unsure whether previously activated, clarify that observation. If control differs, reconfirm selected manual.",
+          "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+        },
+        {
+          "draft_span": [
+            1687,
+            1842
+          ],
+          "exact_text": "Source checks for reviewer: Check all three activation states and the continuation-page turn-signal warning; do not imply hazards can always start key-OFF.",
+          "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+        }
+      ]
+    },
+    "candidate_expected_route": null,
+    "candidate_revision": "agent-hazard-identification-v4",
+    "canonical_answer": "The manual says hazards cannot be activated with ignition OFF. The hazard button is the triangle-marked button on the right-hand handlebar control. Can you match that button on your bike? If yes, activate hazards with ignition ON. If you then turn the ignition OFF, they continue for up to 30 minutes unless manually switched off. Hazard flashing strains the battery; avoid prolonged use unless necessary. Turn signals do not work while hazards are ON. For prolonged stops turn the ignition key OFF to avoid battery discharge.",
+    "canonical_citations": [
+      {
+        "claim_id": "claim_987bf58a2305ac2eeeeee237",
+        "evidence_id": "evidence_44a2b6212ef27400fd09bff2",
+        "source_text_sha256": "db6c5f2f6934072263e8653b694b15bf7d21018053745160101cd627baa1931c"
+      },
+      {
+        "claim_id": "claim_a98ab29d6ab2507696faf679",
+        "evidence_id": "originalpdf_979bc0c9bccf9767693d4b4b",
+        "source_text_sha256": "0216d259d2b9946b121d934935071ff7657def94c2e09b605d816eef5971542b"
+      },
+      {
+        "claim_id": "claim_a98ab29d6ab2507696faf679",
+        "evidence_id": "originalpdf_df6fa2efc886debc48c819f8",
+        "source_text_sha256": "8c224c75bac5fa8a83f8e0c98f96c3686acc0d53d8c6465186558e9ba29624af"
+      },
+      {
+        "claim_id": "claim_12082ebf876f1b009683025e",
+        "evidence_id": "originalpdf_979bc0c9bccf9767693d4b4b",
+        "source_text_sha256": "0216d259d2b9946b121d934935071ff7657def94c2e09b605d816eef5971542b"
+      },
+      {
+        "claim_id": "claim_12082ebf876f1b009683025e",
+        "evidence_id": "policy_240aa9e9a20851d2f8253ffc",
+        "source_text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8"
+      },
+      {
+        "claim_id": "claim_eb330b84b65392ec56f3def4",
+        "evidence_id": "evidence_68cab1ad40962f1c5dad77f6",
+        "source_text_sha256": "c4b092aa83ed09c508fc3907f510de8d713ef52bfb80cf840e3ca21aeec3df80"
+      },
+      {
+        "claim_id": "claim_5eaab6e22613ff8ea97f084f",
+        "evidence_id": "evidence_588e414b95e547c434f207d6",
+        "source_text_sha256": "e45c92ba718c61c5e9f77d3a61ef235080edac065a23f1cc8429a460af8cece7"
+      },
+      {
+        "claim_id": "claim_5eaab6e22613ff8ea97f084f",
+        "evidence_id": "evidence_48b61228a98a05869c70a4f1",
+        "source_text_sha256": "ef0083f2cfc18a8103b8ec4491c8c89999ee1bcfce63e9e2d66b50aaa1c9d0c9"
+      },
+      {
+        "claim_id": "claim_1cf723d2aafebd3b3c734cf6",
+        "evidence_id": "evidence_8ee409a6e58bad5ea0f5ab2c",
+        "source_text_sha256": "223a3f167f03500d69ad55ca6380958841694a28c76077d96b96c506b56899a2"
+      },
+      {
+        "claim_id": "claim_5aae1d8cf73eb12cabbc13c1",
+        "evidence_id": "evidence_7936d013ddebf1f7cfa4b218",
+        "source_text_sha256": "2ef1d4bb0d01c1174e140f3597b32dcd3f86cca31f7785a1f257fa942471a7ae"
+      },
+      {
+        "claim_id": "claim_455dbbb08d9c19f6f3c0d200",
+        "evidence_id": "evidence_73d44fec8ee6bd655c1f278c",
+        "source_text_sha256": "b55e9741cf6298549abde5bbfce0d145bb8b42ee15a54bf75398e3e1b6aff029"
+      }
+    ],
+    "case_digest": "1d15bc02c3ae3c8786bf5abdf1eef26d90e730b535d3402fa515721ddbc92394",
+    "case_kind": "OEM_SCOPE_CANDIDATE",
+    "claims": [
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          0,
+          62
+        ],
+        "claim_id": "claim_987bf58a2305ac2eeeeee237",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "The manual says hazards cannot be activated with ignition OFF.",
+        "manual_evidence_ids": [
+          "evidence_44a2b6212ef27400fd09bff2"
+        ],
+        "policy_evidence_ids": [],
+        "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "evidence_44a2b6212ef27400fd09bff2",
+            "text_sha256": "db6c5f2f6934072263e8653b694b15bf7d21018053745160101cd627baa1931c",
+            "text_span": [
+              0,
+              70
+            ],
+            "visual_page": null
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_44a2b6212ef27400fd09bff2"
+        ],
+        "support_relation": "OEM_PARAPHRASE",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      },
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          63,
+          147
+        ],
+        "claim_id": "claim_a98ab29d6ab2507696faf679",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "The hazard button is the triangle-marked button on the right-hand handlebar control.",
+        "manual_evidence_ids": [
+          "originalpdf_979bc0c9bccf9767693d4b4b",
+          "originalpdf_df6fa2efc886debc48c819f8"
+        ],
+        "policy_evidence_ids": [],
+        "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "originalpdf_979bc0c9bccf9767693d4b4b",
+            "text_sha256": "0216d259d2b9946b121d934935071ff7657def94c2e09b605d816eef5971542b",
+            "text_span": [
+              0,
+              829
+            ],
+            "visual_page": 29
+          },
+          {
+            "evidence_id": "originalpdf_df6fa2efc886debc48c819f8",
+            "text_sha256": "8c224c75bac5fa8a83f8e0c98f96c3686acc0d53d8c6465186558e9ba29624af",
+            "text_span": [
+              0,
+              347
+            ],
+            "visual_page": 23
+          }
+        ],
+        "support_evidence_ids": [
+          "originalpdf_979bc0c9bccf9767693d4b4b",
+          "originalpdf_df6fa2efc886debc48c819f8"
+        ],
+        "support_relation": "OEM_PARAPHRASE",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      },
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          148,
+          187
+        ],
+        "claim_id": "claim_12082ebf876f1b009683025e",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "Can you match that button on your bike?",
+        "manual_evidence_ids": [
+          "originalpdf_979bc0c9bccf9767693d4b4b"
+        ],
+        "policy_evidence_ids": [
+          "policy_240aa9e9a20851d2f8253ffc"
+        ],
+        "review_note": "Policy supports the withheld action, uncertainty, observation question or scenario behavior; this is not an OEM diagnosis, proof of global absence, or measured runtime behavior.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "originalpdf_979bc0c9bccf9767693d4b4b",
+            "text_sha256": "0216d259d2b9946b121d934935071ff7657def94c2e09b605d816eef5971542b",
+            "text_span": [
+              0,
+              829
+            ],
+            "visual_page": null
+          },
+          {
+            "evidence_id": "policy_240aa9e9a20851d2f8253ffc",
+            "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+            "text_span": [
+              0,
+              595
+            ],
+            "visual_page": null
+          }
+        ],
+        "support_evidence_ids": [
+          "originalpdf_979bc0c9bccf9767693d4b4b",
+          "policy_240aa9e9a20851d2f8253ffc"
+        ],
+        "support_relation": "OEM_FACT_WITH_EXPLICIT_POLICY_LIMIT",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      },
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          188,
+          230
+        ],
+        "claim_id": "claim_eb330b84b65392ec56f3def4",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "If yes, activate hazards with ignition ON.",
+        "manual_evidence_ids": [
+          "evidence_68cab1ad40962f1c5dad77f6"
+        ],
+        "policy_evidence_ids": [],
+        "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "evidence_68cab1ad40962f1c5dad77f6",
+            "text_sha256": "c4b092aa83ed09c508fc3907f510de8d713ef52bfb80cf840e3ca21aeec3df80",
+            "text_span": [
+              0,
+              97
+            ],
+            "visual_page": null
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_68cab1ad40962f1c5dad77f6"
+        ],
+        "support_relation": "OEM_PARAPHRASE",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      },
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          231,
+          330
+        ],
+        "claim_id": "claim_5eaab6e22613ff8ea97f084f",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "If you then turn the ignition OFF, they continue for up to 30 minutes unless manually switched off.",
+        "manual_evidence_ids": [
+          "evidence_588e414b95e547c434f207d6",
+          "evidence_48b61228a98a05869c70a4f1"
+        ],
+        "policy_evidence_ids": [],
+        "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "evidence_588e414b95e547c434f207d6",
+            "text_sha256": "e45c92ba718c61c5e9f77d3a61ef235080edac065a23f1cc8429a460af8cece7",
+            "text_span": [
+              0,
+              93
+            ],
+            "visual_page": null
+          },
+          {
+            "evidence_id": "evidence_48b61228a98a05869c70a4f1",
+            "text_sha256": "ef0083f2cfc18a8103b8ec4491c8c89999ee1bcfce63e9e2d66b50aaa1c9d0c9",
+            "text_span": [
+              0,
+              89
+            ],
+            "visual_page": null
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_588e414b95e547c434f207d6",
+          "evidence_48b61228a98a05869c70a4f1"
+        ],
+        "support_relation": "OEM_PARAPHRASE",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      },
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          331,
+          405
+        ],
+        "claim_id": "claim_1cf723d2aafebd3b3c734cf6",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "Hazard flashing strains the battery; avoid prolonged use unless necessary.",
+        "manual_evidence_ids": [
+          "evidence_8ee409a6e58bad5ea0f5ab2c"
+        ],
+        "policy_evidence_ids": [],
+        "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "evidence_8ee409a6e58bad5ea0f5ab2c",
+            "text_sha256": "223a3f167f03500d69ad55ca6380958841694a28c76077d96b96c506b56899a2",
+            "text_span": [
+              0,
+              112
+            ],
+            "visual_page": null
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_8ee409a6e58bad5ea0f5ab2c"
+        ],
+        "support_relation": "OEM_PARAPHRASE",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      },
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          406,
+          452
+        ],
+        "claim_id": "claim_5aae1d8cf73eb12cabbc13c1",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "Turn signals do not work while hazards are ON.",
+        "manual_evidence_ids": [
+          "evidence_7936d013ddebf1f7cfa4b218"
+        ],
+        "policy_evidence_ids": [],
+        "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "evidence_7936d013ddebf1f7cfa4b218",
+            "text_sha256": "2ef1d4bb0d01c1174e140f3597b32dcd3f86cca31f7785a1f257fa942471a7ae",
+            "text_span": [
+              0,
+              64
+            ],
+            "visual_page": null
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_7936d013ddebf1f7cfa4b218"
+        ],
+        "support_relation": "OEM_PARAPHRASE",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      },
+      {
+        "agent_support_adjudicated": true,
+        "answer_span": [
+          453,
+          526
+        ],
+        "claim_id": "claim_455dbbb08d9c19f6f3c0d200",
+        "claim_type": "OEM_FACT_WITH_POLICY_SCOPE",
+        "exact_claim_text": "For prolonged stops turn the ignition key OFF to avoid battery discharge.",
+        "manual_evidence_ids": [
+          "evidence_73d44fec8ee6bd655c1f278c"
+        ],
+        "policy_evidence_ids": [],
+        "review_note": "Exact selected object(s) support the stated fact, including its qualifiers and units.",
+        "semantic_support_approved": false,
+        "source_spans": [
+          {
+            "evidence_id": "evidence_73d44fec8ee6bd655c1f278c",
+            "text_sha256": "b55e9741cf6298549abde5bbfce0d145bb8b42ee15a54bf75398e3e1b6aff029",
+            "text_span": [
+              0,
+              103
+            ],
+            "visual_page": null
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_73d44fec8ee6bd655c1f278c"
+        ],
+        "support_relation": "OEM_PARAPHRASE",
+        "verdict": "SUPPORTED_AGENT_REVIEW"
+      }
+    ],
+    "coverage_plan": {
+      "adversaries": [
+        "added instruction",
+        "changed number",
+        "changed unit",
+        "omitted claim/warning",
+        "forged citation",
+        "wrong variant",
+        "missing dependency",
+        "draft/stale cache",
+        "provider outage"
+      ],
+      "branch_execution": "Branch-specific context retained; no invented executable predicates",
+      "claim_support": "Agent maps retained; live semantic verdict NOT_MEASURED",
+      "modality": "Visible observation only; referenced figures require reviewed image-capable verifier",
+      "question_review": "Accessible observations, no internal enum, no redundant recurrence question; automatic flags require adjudication",
+      "source_policy": "Policy references never presented as OEM facts",
+      "typed_outcomes": [
+        "OBSERVED_NORMAL",
+        "OBSERVED_ABNORMAL",
+        "ACTION_COMPLETED_UNRESOLVED",
+        "NOT_APPLICABLE",
+        "UNCLEAR",
+        "RESOLVED"
+      ]
+    },
+    "formal_source_approved": false,
+    "prior_holds": [
+      "BLOCKED_BINDING",
+      "FIGURE_RELATION_AND_VISUAL_VERIFICATION_REQUIRED"
+    ],
+    "producer_draft_sha256": "12ad349a6c4150247d779221ee38cc937bc23787439fa27c1573e1e31d7af551",
+    "producer_version": 4,
+    "question": "My hazard lights will not turn on with the key OFF.",
+    "record_id": "EXP001",
+    "required_candidate_source_ids": [
+      "evidence_44a2b6212ef27400fd09bff2",
+      "evidence_48b61228a98a05869c70a4f1",
+      "evidence_588e414b95e547c434f207d6",
+      "evidence_68cab1ad40962f1c5dad77f6",
+      "evidence_73d44fec8ee6bd655c1f278c",
+      "evidence_7936d013ddebf1f7cfa4b218",
+      "evidence_8ee409a6e58bad5ea0f5ab2c",
+      "feedback_1a7731420c0717da45ae8302",
+      "originalpdf_18915d2f69b54eaebaea4581",
+      "originalpdf_979bc0c9bccf9767693d4b4b",
+      "originalpdf_df6fa2efc886debc48c819f8",
+      "policy_149ecd0806ed20f4941cdb11",
+      "policy_1d31e14c1b9e8f611c8498b1",
+      "policy_240aa9e9a20851d2f8253ffc",
+      "policy_303787821f29b1deb8fe9f76",
+      "policy_46f874c8ba7f9aaffdd16ed8",
+      "policy_5067c2fa98fb514fad94ddf7",
+      "policy_64b427692eb932980612b66d",
+      "policy_856cb9f6fbe76bd5e7103080",
+      "policy_9111e6e2299a2b15cf63eeb7",
+      "policy_94d98bcf79f7faecba16976a",
+      "policy_a582429020c644c2e81622ed",
+      "policy_c27718acc88fc45209919b52",
+      "policy_c7c59d8b2e592d93c2827123",
+      "policy_cff5c1033095e5d1045f7870",
+      "policy_dec1ae94d172ff6ececb1329",
+      "policy_e978314f8b1f0dc0999a0ec4",
+      "policy_f88b78f11e4561f77dd866f4"
+    ],
+    "required_source_locks": {
+      "evidence_44a2b6212ef27400fd09bff2": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "db6c5f2f6934072263e8653b694b15bf7d21018053745160101cd627baa1931c"
+      },
+      "evidence_48b61228a98a05869c70a4f1": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "ef0083f2cfc18a8103b8ec4491c8c89999ee1bcfce63e9e2d66b50aaa1c9d0c9"
+      },
+      "evidence_588e414b95e547c434f207d6": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e45c92ba718c61c5e9f77d3a61ef235080edac065a23f1cc8429a460af8cece7"
+      },
+      "evidence_68cab1ad40962f1c5dad77f6": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "c4b092aa83ed09c508fc3907f510de8d713ef52bfb80cf840e3ca21aeec3df80"
+      },
+      "evidence_73d44fec8ee6bd655c1f278c": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "b55e9741cf6298549abde5bbfce0d145bb8b42ee15a54bf75398e3e1b6aff029"
+      },
+      "evidence_7936d013ddebf1f7cfa4b218": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "2ef1d4bb0d01c1174e140f3597b32dcd3f86cca31f7785a1f257fa942471a7ae"
+      },
+      "evidence_8ee409a6e58bad5ea0f5ab2c": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "223a3f167f03500d69ad55ca6380958841694a28c76077d96b96c506b56899a2"
+      },
+      "feedback_1a7731420c0717da45ae8302": {
+        "authority": "OWNER_FEEDBACK_POLICY",
+        "text_sha256": "e9872cf7943a3e8e6b68a883ff0c462f4b391a3f4cb5c30047ed57de616ab4dd"
+      },
+      "originalpdf_18915d2f69b54eaebaea4581": {
+        "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+        "text_sha256": "7494122713adbfa7d8712dfeb687f812aa5f599a242a8639a934a4b917e8bb08"
+      },
+      "originalpdf_979bc0c9bccf9767693d4b4b": {
+        "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+        "text_sha256": "0216d259d2b9946b121d934935071ff7657def94c2e09b605d816eef5971542b"
+      },
+      "originalpdf_df6fa2efc886debc48c819f8": {
+        "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+        "text_sha256": "8c224c75bac5fa8a83f8e0c98f96c3686acc0d53d8c6465186558e9ba29624af"
+      },
+      "policy_149ecd0806ed20f4941cdb11": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "320817b6afd005d90a06cf10cc952aa77dbc0bea48e83e78f73af93430dd5a50"
+      },
+      "policy_1d31e14c1b9e8f611c8498b1": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "68a7f539dab02a7f95841d2658dde1a5530929b5c6b6653351dac45b2650f1d5"
+      },
+      "policy_240aa9e9a20851d2f8253ffc": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8"
+      },
+      "policy_303787821f29b1deb8fe9f76": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "82a862edf87ca60c9eade76a8fc27ebdda79de1f4768760e821e502e8bf9f30a"
+      },
+      "policy_46f874c8ba7f9aaffdd16ed8": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "c5fdc9f0a3e31b5bb742b1f95eda1cb2c63dc72806fb2bed7f278c83bbfee0e0"
+      },
+      "policy_5067c2fa98fb514fad94ddf7": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "8e2bbed2260571150e59246f1fb80dbe38a32a045bf713c162c9afc65b190dcd"
+      },
+      "policy_64b427692eb932980612b66d": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "ebc2a6d5773da46045c22f1fa12d8edbc891ca0de3faa5d66c4833e6cde3b839"
+      },
+      "policy_856cb9f6fbe76bd5e7103080": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e"
+      },
+      "policy_9111e6e2299a2b15cf63eeb7": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "6a73c9d4eea9eb521c91445fdf2a93db553e367fd33eca7f7a6bd5e851225dcc"
+      },
+      "policy_94d98bcf79f7faecba16976a": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "a948a303d91619c2188649060c1abbcd452a0b019d268ab8a469de41dafb991c"
+      },
+      "policy_a582429020c644c2e81622ed": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "bd1939ba610686dae57a617559ff3e702cd520ce8f0da577967cfd060bb3fe2a"
+      },
+      "policy_c27718acc88fc45209919b52": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "496d62c0df946fe0d9cd2f3075c4f2054c1ecd0e8a97e8cd855e4be2cdbf9b32"
+      },
+      "policy_c7c59d8b2e592d93c2827123": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "028103230a113f9f20ce47065f55bd4bc935dfe6673f85d62e7e5daed205802b"
+      },
+      "policy_cff5c1033095e5d1045f7870": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "c8ea9642f1db20333e20f433fbe7e8e943e8acd0c55144f0c048a59b468da683"
+      },
+      "policy_dec1ae94d172ff6ececb1329": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "a3772faf1949c7ddd85457ffbcd9b4cb6a8cf5c0db3cf0acd8b0b2a746439255"
+      },
+      "policy_e978314f8b1f0dc0999a0ec4": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "8b8c624ef8cb5a4ad58d07753b305b79b3ca86576de82a3fbaffab1d8f1a65ff"
+      },
+      "policy_f88b78f11e4561f77dd866f4": {
+        "authority": "PRODUCT_POLICY",
+        "text_sha256": "6f9653362bcea02c3055be7f5d468866a7d28f44cdbe0fadf9cdaf8acb105e43"
+      }
+    },
+    "revision_provenance": {
+      "correction_scope": "Hazard button side and original source bindings only; original branch semantics retained; no executable adaptive approval.",
+      "current_producer_hash_scope": "UTF8 exact retained full_record_text",
+      "decision_authority": "OWNER_DELEGATED_AGENT_COORDINATOR",
+      "original_planner_file_sha256": "dabd06caf5101744dbcbde67ff243febff0e9c37f8cdc516925c0c27c673b580",
+      "original_producer_draft_sha256": "20160cfd1a0e345074bcabeb1cd2f963cd6e7dceae8826bc5bc7ee6b15be28e3",
+      "original_producer_version": 3,
+      "supersedes_planner_case": {
+        "file": "human_review/agent_release_161/planner/plans/EXP001.json",
+        "key": "candidate_case",
+        "sha256": "24c8454f96cc5f62f97ac5a2715c8d0c4695948eee6ba37df23893419aa5e974"
+      }
+    },
+    "runtime_binding": null
+  },
+  "candidate_case_sha256": "9e03cab930936cc58a8893892d16bebf51ac79bf8d998d3adf103da8e222de6b",
+  "canonical_answer_sha256": "d84260831049c07d8a3f359066e8b46dc09cf948834e306c9b4199ba1cf96c60",
+  "original_planner_file": "human_review/agent_release_161/planner/plans/EXP001.json",
+  "original_planner_file_sha256": "dabd06caf5101744dbcbde67ff243febff0e9c37f8cdc516925c0c27c673b580",
+  "record_id": "EXP001",
+  "runtime_authorized": false,
+  "schema_version": "agent-hazard-corrected-authored-case-v4"
+}

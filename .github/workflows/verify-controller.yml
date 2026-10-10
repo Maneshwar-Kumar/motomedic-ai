@@ -1,6 +1,11 @@
 name: Verify reviewed evidence controller
 on:
   workflow_dispatch:
+    inputs:
+      approved_live:
+        description: Run the exact approved text slice with at most four provider requests
+        type: boolean
+        default: false
   push:
     paths:
       - 'controller_contracts.py'
@@ -31,7 +36,52 @@ permissions:
   contents: read
   actions: read
 jobs:
+  approved_text:
+    if: github.event_name == 'workflow_dispatch' && inputs.approved_live
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: '2'
+      TOKENIZERS_PARALLELISM: 'false'
+      MOTOMEDIC_TEST_INDEX: build/index
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CPU query runtime
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy sentence-transformers==6.1.0 pypdfium2
+      - name: Reuse immutable hosted BGE snapshot
+        uses: actions/download-artifact@v4
+        with:
+          name: owner-manual-index-37908240500
+          run-id: '37908240500'
+          github-token: ${{ github.token }}
+          path: build/index
+      - name: Verify approval integration and persistence before provider access
+        run: |
+          python verify_approved_integration.py
+          python -m unittest -v test_text_journeys
+          python human_review/grounding_refinement/case_suite.py --approved --output build/approved_simulated.json
+      - name: Two grounded composer and verifier pairs, zero retries
+        env:
+          MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
+          MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/grounded_budget_preflight_v1.json
+        run: python human_review/grounding_refinement/case_suite.py --approved --live --output build/approved_live.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: approved-text-journeys-${{ github.run_id }}
+          path: |
+            reports/approved_integration_exit_v1.json
+            build/approved_simulated.json
+            build/approved_live.json
+          retention-days: 7
   verify:
+    if: github.event_name != 'workflow_dispatch' || !inputs.approved_live
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:

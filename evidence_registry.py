@@ -60,7 +60,8 @@ class EvidenceRegistry:
         # Policy/code updates invalidate paths without rebuilding document vectors.
         names = ("controller_contracts.py", "evidence_registry.py", "reviewed_controller.py",
                  "retrieval_policy.py", "online_retrieve.py", "reviewed_cache.py",
-                 "generation_contracts.py", "generation_providers.py", "gemini_transport.py", "constrained_generator.py")
+                 "generation_contracts.py", "generation_providers.py", "gemini_transport.py", "constrained_generator.py",
+                 "diagnose.py", "session_store.py", "approved_registry.py", "approved_runner.py")
         root = Path(__file__).parent
         code = {name: hashlib.sha256((root / name).read_text(encoding="utf-8-sig").encode()).hexdigest()
                 for name in names}

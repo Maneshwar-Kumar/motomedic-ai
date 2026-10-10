@@ -1,0 +1,419 @@
+{
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "authored_case_digest": "1d15bc02c3ae3c8786bf5abdf1eef26d90e730b535d3402fa515721ddbc92394",
+  "authored_case_file_sha256": "0032bc774a3248fdee6d7081fa516d7e3654c176664d4ab39320271ae62db2cf",
+  "authored_case_sha256": "9e03cab930936cc58a8893892d16bebf51ac79bf8d998d3adf103da8e222de6b",
+  "authored_identification_scope": "Static source-supported side and triangle-symbol text in the retained branch only; no adaptive runtime execution or public image delivery approval.",
+  "authored_identification_verdict": "PASS_SCOPED_AUTHORED_IDENTIFICATION",
+  "candidate_question": "My hazard lights will not turn on with the key OFF.",
+  "canonical_answer_sha256": "ded67e2e51d14b46b82615eac993ded39c9015110bd054d13419ebd4b1c87f74",
+  "case_sha256": "8b6c73f0613f68c993194a71dadf403e4684761ad39fc174d31df5e83a89d6e1",
+  "checker_actor": "independent-source-checker",
+  "checker_agent": "/root/hazard_checker",
+  "claim_texts": [
+    "The manual says hazards cannot be activated with ignition OFF.",
+    "The hazard button is the triangle-marked button on the right-hand handlebar control.",
+    "Can you match that button on your bike?",
+    "If yes, activate hazards with ignition ON.",
+    "If you then turn the ignition OFF, they continue for up to 30 minutes unless manually switched off.",
+    "Hazard flashing strains the battery; avoid prolonged use unless necessary.",
+    "Turn signals do not work while hazards are ON.",
+    "For prolonged stops turn the ignition key OFF to avoid battery discharge."
+  ],
+  "constraint_sha256": "00c385f9b0a1c4ff99e208af0e9b09b5c137957acef7f5d4a12a728b000e5c9e",
+  "coordinator_final_approval_pending": true,
+  "deployment_performed": false,
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success",
+    "No full adaptive conversation approval; exact initial scope only"
+  ],
+  "feedback": "The corrected current and retained authored identification says right-hand and retains the triangle symbol. Original PDF23 item6 and PDF29 drawing independently support the side/symbol. All other claims, activation states, 30-minute conditional continuation, battery cautions and PDF30 turn-signal warning are unchanged.",
+  "final_check_verdict": "PASS_SCOPED_RELEASE",
+  "final_dependency_sha256": "6209a2e58de361c9aae0c150d3e8099abfa26f5f527eefce4df013dc5044262b",
+  "final_route_sha256": "408cd766066d0a292c781035f4f532546e9bc269a99675ce3bc684fb0c70623e",
+  "final_rules_sha256": "1e1bf083cf4c76a9fb90a46be2f39991bca95625c4f397c7301c467c2231d140",
+  "final_step_sha256": "f37ec351887879115a397f2209d3a7f30b153ac0b390936fcf964aa9ec2fce2d",
+  "findings": [
+    "The corrected current and retained authored identification says right-hand and retains the triangle symbol. Original PDF23 item6 and PDF29 drawing independently support the side/symbol. All other claims, activation states, 30-minute conditional continuation, battery cautions and PDF30 turn-signal warning are unchanged."
+  ],
+  "full_adaptive_transitions_approved": false,
+  "general_vision_evaluation_performed": false,
+  "independent_human_review": false,
+  "live_provider_calls": 0,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_figure_claim_verdict": "PASS_FINITE_ORIGINAL_MANUAL_RELATIONSHIP",
+  "original_pdf_pages_checked_for_correspondence": [
+    23,
+    29,
+    30
+  ],
+  "original_planner_file": "human_review/agent_release_161/planner/plans/EXP001.json",
+  "original_planner_file_sha256": "dabd06caf5101744dbcbde67ff243febff0e9c37f8cdc516925c0c27c673b580",
+  "package_manifest_sha256": "016f0fbbf8e841c1198237defec1357457e6ef02880b8d020c32da4efec40ab0",
+  "package_outputs": {
+    "authored_cases/EXP001.json": "0032bc774a3248fdee6d7081fa516d7e3654c176664d4ab39320271ae62db2cf",
+    "authored_cases/EXP002.json": "cf4a6ccfbc55ff692b8632ee3562423a5983d8c1cffdae401c2520a49cbecc90",
+    "branch_dependencies.json": "9321cc15355df3e91edaefb91a99c160db61a409779fe14c5e503cc7c8a7abe5",
+    "candidate_registry.json": "d0b91c3558af132e337ec08f87bfc726c43efe3fe6608e60777b5f3475db8023",
+    "case_constraints.json": "b4e03c2de5714578dd4fed497bb27636b4894b7dcc6ba5b57a7f645d24558657",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "hazard_location_corrections.json": "adf06ca155571791464514530f1a02193b3bf0bb07b68cbcf6864b6812c12027",
+    "session_fixtures.json": "757da427504404a3895a5027b37fb4789bb7fbf9f45ade2db7034c61f9168a97",
+    "source_objects.json": "3fd397cd4f877e2eb7de3048b564a1bcdbad24ebf078611ca1e2251624ba1b00",
+    "trusted_routes.json": "ac5177cb5d5245421a07db8f1984c1039d318723f4855743f71237afee7c5c13"
+  },
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "plan_path": "human_review/agent_release_161/coordinator/approved_package_v3/authored_cases/EXP001.json",
+  "plan_sha256": "0032bc774a3248fdee6d7081fa516d7e3654c176664d4ab39320271ae62db2cf",
+  "preserved_conditions_and_state": [
+    "Initial unknown fact remains UNKNOWN",
+    "ACTION_COMPLETED_UNRESOLVED remains distinct from OBSERVED_NORMAL",
+    "No new successors or automatic repeats",
+    "Customer report does not verify a repair",
+    "Separate unresolved issues retained",
+    "Source gap and SYSTEM_ERROR remain distinct"
+  ],
+  "public_figure_delivery_approved": false,
+  "quality_scope": "Correction-only reassessment of EXP001/EXP002; frozen 161-case judge results remain unchanged; no new whole-corpus quality-pass claim.",
+  "record_id": "EXP001",
+  "remaining_quality_findings_count": 10,
+  "remaining_quality_findings_record_ids": [
+    "EXP030",
+    "EXP044",
+    "EXP049",
+    "GEN043",
+    "GEN053",
+    "GEN056",
+    "a_cool_engine",
+    "a_reconnect",
+    "a_refuel",
+    "a_switches_on"
+  ],
+  "reviewed_at_utc": "2026-10-10T13:31:08.694182+00:00",
+  "reviewed_full_authored_branch": [
+    {
+      "draft_span": [
+        1386,
+        1683
+      ],
+      "exact_text": "Follow-up/outcome handling: If already activated but not operating as described, do not infer a relay or fuse fault: the cited pages give no further repair process; authorised service. If unsure whether previously activated, clarify that observation. If control differs, reconfirm selected manual.",
+      "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+    },
+    {
+      "draft_span": [
+        1687,
+        1842
+      ],
+      "exact_text": "Source checks for reviewer: Check all three activation states and the continuation-page turn-signal warning; do not imply hazards can always start key-OFF.",
+      "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+    }
+  ],
+  "schema_version": "independent-agent-hazard-correction-check-v3",
+  "source_checks": [
+    {
+      "authority": "OEM_MANUAL",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        29
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "evidence_44a2b6212ef27400fd09bff2",
+      "source_sha256": "c7892a2ac1260122f256ce1bfc22d84265f74413b3fec7fd1d0356e4103e6efa",
+      "text_sha256": "db6c5f2f6934072263e8653b694b15bf7d21018053745160101cd627baa1931c"
+    },
+    {
+      "authority": "OEM_MANUAL",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        29
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "evidence_48b61228a98a05869c70a4f1",
+      "source_sha256": "15971d004185145a2bd9bd765e415227aa849b89406bf373aef95e7546fca644",
+      "text_sha256": "ef0083f2cfc18a8103b8ec4491c8c89999ee1bcfce63e9e2d66b50aaa1c9d0c9"
+    },
+    {
+      "authority": "OEM_MANUAL",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        29
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "evidence_588e414b95e547c434f207d6",
+      "source_sha256": "bddc5bcc292703a3bed5bf3d1f6b3e97338b028944bbe8fda8175be904da9f18",
+      "text_sha256": "e45c92ba718c61c5e9f77d3a61ef235080edac065a23f1cc8429a460af8cece7"
+    },
+    {
+      "authority": "OEM_MANUAL",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        29
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "evidence_68cab1ad40962f1c5dad77f6",
+      "source_sha256": "59946cdd66acda6909a758d1e5867ab1d250eb0476d9beec791c035dae882d0c",
+      "text_sha256": "c4b092aa83ed09c508fc3907f510de8d713ef52bfb80cf840e3ca21aeec3df80"
+    },
+    {
+      "authority": "OEM_MANUAL",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        29
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "evidence_73d44fec8ee6bd655c1f278c",
+      "source_sha256": "a9fd982cbf903d964e166508ccf72372c4edfa17aec7b093a96aeb0804089f2d",
+      "text_sha256": "b55e9741cf6298549abde5bbfce0d145bb8b42ee15a54bf75398e3e1b6aff029"
+    },
+    {
+      "authority": "OEM_MANUAL",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        30
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "evidence_7936d013ddebf1f7cfa4b218",
+      "source_sha256": "7f73c901e49d0d547c91a20c9880848829f3432521c175d2f3f555498e0c396a",
+      "text_sha256": "2ef1d4bb0d01c1174e140f3597b32dcd3f86cca31f7785a1f257fa942471a7ae"
+    },
+    {
+      "authority": "OEM_MANUAL",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        29
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "evidence_8ee409a6e58bad5ea0f5ab2c",
+      "source_sha256": "622d8eebdd324978f4b4277a213a9b78ccde485c40f300722efe09717c4fa9b5",
+      "text_sha256": "223a3f167f03500d69ad55ca6380958841694a28c76077d96b96c506b56899a2"
+    },
+    {
+      "authority": "OWNER_FEEDBACK_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "feedback_1a7731420c0717da45ae8302",
+      "source_sha256": "29e6cee665e2ca66381f043f54df143ab179f917b3d5542bcfb8f0983e3cc8ce",
+      "text_sha256": "e9872cf7943a3e8e6b68a883ff0c462f4b391a3f4cb5c30047ed57de616ab4dd"
+    },
+    {
+      "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        30
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "originalpdf_18915d2f69b54eaebaea4581",
+      "source_sha256": "2cb0069002790bd1b169d331e33878c6b0161b1ca9c2b62cdc0f81e6321d262a",
+      "text_sha256": "7494122713adbfa7d8712dfeb687f812aa5f599a242a8639a934a4b917e8bb08"
+    },
+    {
+      "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        29
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "originalpdf_979bc0c9bccf9767693d4b4b",
+      "source_sha256": "b90772af53fe5e93b0774b8fc06f0795f247776e1d96ec918be4ae35160a162d",
+      "text_sha256": "0216d259d2b9946b121d934935071ff7657def94c2e09b605d816eef5971542b"
+    },
+    {
+      "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+      "figure_render_inspected": true,
+      "original_pdf_pages": [
+        23
+      ],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "originalpdf_df6fa2efc886debc48c819f8",
+      "source_sha256": "6ad29ee0e8747bb712732b06d48932bb98b916f7c1e9d15be0b5f19ce45d029a",
+      "text_sha256": "8c224c75bac5fa8a83f8e0c98f96c3686acc0d53d8c6465186558e9ba29624af"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_149ecd0806ed20f4941cdb11",
+      "source_sha256": "34c9b5c5f04eaa27564902e5040564e7e432519b3dd88d5e25e934bc4e244865",
+      "text_sha256": "320817b6afd005d90a06cf10cc952aa77dbc0bea48e83e78f73af93430dd5a50"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_1d31e14c1b9e8f611c8498b1",
+      "source_sha256": "7ee486da7884f51b4c2a21b9c75d0989c54947fd639d1f5a16b249ab73698350",
+      "text_sha256": "68a7f539dab02a7f95841d2658dde1a5530929b5c6b6653351dac45b2650f1d5"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_303787821f29b1deb8fe9f76",
+      "source_sha256": "d19823ea32a583471f67d5fc74a60172ec4b41bf01df73d53ac259c6ae61822d",
+      "text_sha256": "82a862edf87ca60c9eade76a8fc27ebdda79de1f4768760e821e502e8bf9f30a"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_46f874c8ba7f9aaffdd16ed8",
+      "source_sha256": "08a1b8dc795d8a6bc403bcc6487b846597db894d0a33986bd2f17e19f8e4094d",
+      "text_sha256": "c5fdc9f0a3e31b5bb742b1f95eda1cb2c63dc72806fb2bed7f278c83bbfee0e0"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_5067c2fa98fb514fad94ddf7",
+      "source_sha256": "bd29a1f5060b95c76db6216360b698c562059b6698ba4c1c9c7af53b93fbb803",
+      "text_sha256": "8e2bbed2260571150e59246f1fb80dbe38a32a045bf713c162c9afc65b190dcd"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_64b427692eb932980612b66d",
+      "source_sha256": "7e3f7a523459c67bcd0a51aad0af4de40bb2e9ed9b20bd0141ae42352b6e7454",
+      "text_sha256": "ebc2a6d5773da46045c22f1fa12d8edbc891ca0de3faa5d66c4833e6cde3b839"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_9111e6e2299a2b15cf63eeb7",
+      "source_sha256": "6c8597d38e8dc824c6ef97dd3ffc14c6e8ba43348584d82bc78e25d5a088836b",
+      "text_sha256": "6a73c9d4eea9eb521c91445fdf2a93db553e367fd33eca7f7a6bd5e851225dcc"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_94d98bcf79f7faecba16976a",
+      "source_sha256": "9f70e1bfe9ff9cb787df9cc7ad0feb78370955b5fdcdb734e511c3f545adbf1e",
+      "text_sha256": "a948a303d91619c2188649060c1abbcd452a0b019d268ab8a469de41dafb991c"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_a582429020c644c2e81622ed",
+      "source_sha256": "a71897321bc2e7264587483014566a51293927bfd20462218feb5dcdebb6d0b2",
+      "text_sha256": "bd1939ba610686dae57a617559ff3e702cd520ce8f0da577967cfd060bb3fe2a"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_c27718acc88fc45209919b52",
+      "source_sha256": "c5b2d4f23537141b5230b82fea999a4f383d6159a3b7d06bef61c1225a5a715a",
+      "text_sha256": "496d62c0df946fe0d9cd2f3075c4f2054c1ecd0e8a97e8cd855e4be2cdbf9b32"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_c7c59d8b2e592d93c2827123",
+      "source_sha256": "623067aee081b553090d29fa5d562ea29d7411914a65071da58a8a14a941e563",
+      "text_sha256": "028103230a113f9f20ce47065f55bd4bc935dfe6673f85d62e7e5daed205802b"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_cff5c1033095e5d1045f7870",
+      "source_sha256": "40ad1700658d712870b6ff595ee447a85598e72ac55952514ddf6fca71d58610",
+      "text_sha256": "c8ea9642f1db20333e20f433fbe7e8e943e8acd0c55144f0c048a59b468da683"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_dec1ae94d172ff6ececb1329",
+      "source_sha256": "9e4e06ca4c41ad63bc65335164b38484162492c2cb7f03c983994cc4b72e077f",
+      "text_sha256": "a3772faf1949c7ddd85457ffbcd9b4cb6a8cf5c0db3cf0acd8b0b2a746439255"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_e978314f8b1f0dc0999a0ec4",
+      "source_sha256": "a5f9461da3cd7473161086930baaa44c35d289d0f77ac1a38440b17e11dbd0f4",
+      "text_sha256": "8b8c624ef8cb5a4ad58d07753b305b79b3ca86576de82a3fbaffab1d8f1a65ff"
+    },
+    {
+      "authority": "PRODUCT_POLICY",
+      "figure_render_inspected": false,
+      "original_pdf_pages": [],
+      "review_basis": "Fresh original-page visual/text review for PDF23/29/30; unchanged exact source/policy objects retain their previous scoped agent review.",
+      "source_id": "policy_f88b78f11e4561f77dd866f4",
+      "source_sha256": "b2b1c74c0d62142eb489e5e1bb776a0306b4db1926c61064d0cbc46cf36ef84a",
+      "text_sha256": "6f9653362bcea02c3055be7f5d468866a7d28f44cdbe0fadf9cdaf8acb105e43"
+    }
+  ],
+  "source_inspection_file": "human_review/agent_release_161/checker/hazard_review_v3/source_inspection.json",
+  "source_inspection_sha256": "e75a795c3930e6686527e15d76a06e4c7f78bf78e36c9781827925a52d4670db",
+  "specific_limits": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success",
+    "No full adaptive conversation approval; exact initial scope only"
+  ],
+  "structural_errors": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "visual_pages_inspected": [
+    23,
+    29,
+    30
+  ]
+}

@@ -14,6 +14,11 @@ class SessionConflict(RuntimeError):
     pass
 
 
+class SessionOperationError(RuntimeError):
+    """Sanitized operational reason; never carries storage/provider bodies."""
+    pass
+
+
 def decode(raw):
     d = json.loads(raw)
     attempts = []

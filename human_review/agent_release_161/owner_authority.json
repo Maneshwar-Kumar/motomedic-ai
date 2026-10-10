@@ -1,0 +1,23 @@
+{
+  "schema_version": "owner-agent-release-authority-v1",
+  "recorded_at_utc": "2026-10-10T11:25:10.633142+00:00",
+  "owner_instructions": [
+    "I am not doing human input. Initial chats mentioned the sources perfectly fine. Spin up sub agents to do this work on 161 cases. One tells what to check, sends to a coordinator agent. The second type of agent takes it from the coordinator agent and checks it and then sends feedback. Coordinator agent gives the final sign off. Do this at parallel compute, spinning up as many sub agents as you would like.",
+    "Coordinator agent has the release approval. no further human review."
+  ],
+  "scope": "All 161 accepted/expanded case source, step, applicability-rule, dependency and answer-quality review; coordinator makes exact-version scoped approval decisions.",
+  "authority": "OWNER_DELEGATED_AGENT_COORDINATOR",
+  "human_signoff_required_for_this_workflow": false,
+  "planner": "/root/check_planner",
+  "independent_checker": "/root/source_checker",
+  "release_coordinator": "/root/release_coordinator",
+  "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "constraints": [
+    "Do not manufacture human inspection or owner decisions.",
+    "Approval must bind exact final source and runtime objects and independent feedback.",
+    "Retain only substantiated case-specific evidence or implementation gaps; do not inherit blanket human-only holds.",
+    "Unchanged earlier owner content acceptance remains evidence; do not erase it.",
+    "Coordinator authority does not change manual facts, grant OEM redistribution rights, or assert measured live model performance."
+  ],
+  "deployment_performed": false
+}

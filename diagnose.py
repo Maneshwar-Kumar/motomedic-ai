@@ -293,19 +293,48 @@ class ReviewedService:
         from dataclasses import replace
         session = start_session(self.controller.registry, [intent], variant, edition)
         session = replace(session, generation_lock=self.controller.response_generator.config.lock)
-        self.store.save(session)
+        try:
+            self.store.save(session)
+        except Exception:
+            from session_store import SessionOperationError
+            raise SessionOperationError("SESSION_SAVE_FAILURE") from None
         return session
+
+    def operational_failure(self, reason, session=None, response=None):
+        from controller_contracts import Response, ResponseType
+        from dataclasses import replace
+        # A verified applicable safety stop survives optional persistence/trace
+        # failure. Ordinary technical actions are withheld until state is saved.
+        if response is not None and response.type == ResponseType.SAFETY_STOP:
+            result = replace(response, reason_codes=response.reason_codes + (reason,))
+        else:
+            result = Response(ResponseType.SYSTEM_ERROR,
+                              "I am temporarily unable to save or verify this session. Please try again.",
+                              reason_codes=(reason,),
+                              escalation_uri=self.controller.registry.support_uri())
+        self.last_trace = {"response_type": result.type.value, "reason_codes": result.reason_codes,
+                           "raw_input_or_media_recorded": False}
+        return session, result, []
 
     def turn(self, session_id, query, **kwargs):
         from dataclasses import asdict, replace
         import time
         from evidence_registry import POLICY_VERSION, content_hash
         started = time.perf_counter()
-        session = self.store.load(session_id)
-        updated, response, decisions = self.controller.next(session, query, **kwargs)
+        try:
+            session = self.store.load(session_id)
+        except Exception:
+            return self.operational_failure("SESSION_LOAD_FAILURE")
+        try:
+            updated, response, decisions = self.controller.next(session, query, **kwargs)
+        except Exception:
+            return self.operational_failure("CONTROLLER_FAILURE", session)
         if updated.version == session.version:
             updated = replace(updated, version=updated.version + 1)
-        self.store.save(updated, expected_version=session.version)
+        try:
+            self.store.save(updated, expected_version=session.version)
+        except Exception:
+            return self.operational_failure("SESSION_SAVE_FAILURE", session, response)
         self.last_trace = {"trace_id": response.trace_id, "session_hash": content_hash(session_id),
                            "manual_checksum": session.manual_checksum, "index_id": self.controller.registry.index_id,
                            "registry_lock": session.version_lock, "controller_version": POLICY_VERSION,
@@ -318,19 +347,36 @@ class ReviewedService:
                            "confirmed_input_ttfo_seconds": time.perf_counter() - started,
                            "estimated_cost": None, "raw_input_or_media_recorded": False}
         if self.trace_sink:
-            self.trace_sink(self.last_trace)
+            try:
+                self.trace_sink(self.last_trace)
+            except Exception:
+                return self.operational_failure("TRACE_SAVE_FAILURE", updated, response)
         return updated, response, decisions
 
     def feedback(self, session_id, outcome, turn_id, **kwargs):
-        session = self.store.load(session_id)
+        from session_store import SessionOperationError
+        try:
+            session = self.store.load(session_id)
+        except Exception:
+            raise SessionOperationError("SESSION_LOAD_FAILURE") from None
         updated = self.controller.feedback(session, outcome, turn_id, **kwargs)
-        self.store.save(updated, expected_version=session.version)
+        try:
+            self.store.save(updated, expected_version=session.version)
+        except Exception:
+            raise SessionOperationError("SESSION_SAVE_FAILURE") from None
         return updated
 
     def correct(self, session_id, attempt_id, fact, turn_id):
-        session = self.store.load(session_id)
+        from session_store import SessionOperationError
+        try:
+            session = self.store.load(session_id)
+        except Exception:
+            raise SessionOperationError("SESSION_LOAD_FAILURE") from None
         updated = self.controller.correct(session, attempt_id, fact, turn_id)
-        self.store.save(updated, expected_version=session.version)
+        try:
+            self.store.save(updated, expected_version=session.version)
+        except Exception:
+            raise SessionOperationError("SESSION_SAVE_FAILURE") from None
         return updated
 
 

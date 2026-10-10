@@ -1,0 +1,4186 @@
+{
+  "accepted_original_context": {
+    "accepted_source_pages": [
+      28,
+      72,
+      73,
+      74,
+      121
+    ],
+    "approval_status": "DRAFT",
+    "authoring_blockers": [
+      "INDEPENDENT_CONTENT_BOUND_REVIEW_REQUIRED",
+      "CLAIM_SPANS_AND_BRANCH_DEPENDENCY_SCOPE_REQUIRED",
+      "DRAFT_PARAPHRASES_REQUIRE_DISPLAY_REVIEW",
+      "PRECISE_FIGURE_LEGEND_ASSOCIATION_REQUIRED",
+      "SCOPED_DISPLAY_POLICY_RECONCILIATION_REQUIRED",
+      "FIGURE_VERIFIER_NOT_IMPLEMENTED",
+      "STARTING_PAGE75_ADDITIONS_PENDING_SEPARATE_SCOPE_REVIEW",
+      "SWITCH_CORRECTION_VERSUS_STARTER_ACTION_BOUNDARY_REQUIRED"
+    ],
+    "draft_branches": {
+      "ACTION_COMPLETED_UNRESOLVED": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+      "NOT_APPLICABLE": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+      "RESOLVED": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+      "already_correct": "Do not repeat switching; retain confirmed observations and address remaining eligible unknown conditions.",
+      "cannot_identify": "Show reviewed page28 right-hand switch drawing and ON/OFF legend inline, ask if position can now be identified. If controls differ reconfirm applicability; persistent uncertainty goes to service without guessing.",
+      "finishing_checks": "Turn ignition OFF when engine is not running; continuously ON headlamp discharges battery. Do not misapply this caution to prohibit documented starting setup.",
+      "unresolved": "Keep unsuccessful attempt separate; clarify fuel only if unknown; no inferred switch/battery health or repeat. Starter attempt uses independently reviewed compact checklist/limits and post-start MIL branch."
+    },
+    "draft_claim_ids": [
+      "a_switches_on:accepted-draft:main",
+      "a_switches_on:accepted-draft:warning0",
+      "a_switches_on:accepted-draft:setup0"
+    ],
+    "evaluation_partition": "REGRESSION_TUNING_NOT_HELD_OUT",
+    "expected_runtime_before_review": "UNSUPPORTED",
+    "record_id": "a_switches_on"
+  },
+  "approval_status": "NOT_YET_CHECKED",
+  "blanket_hold_interpretation": "DRAFT/review_complete false/human_signoff false are inherited metadata, not a demonstrated content defect. Independent checker must return exact substantive findings. Coordinator has user-authorized final approval; do not fabricate human identity.",
+  "candidate_case": {
+    "agent_support_work": "ORIGINAL_PRECISE_SPAN_AND_BRANCH_AUTHORING_PENDING",
+    "branch_context": {
+      "R001": "ACCEPTED_CONVERSATIONALLY",
+      "R002": "PENDING_POST_START_SCOPE",
+      "branches": {
+        "ACTION_COMPLETED_UNRESOLVED": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+        "NOT_APPLICABLE": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+        "RESOLVED": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+        "already_correct": "Do not repeat switching; retain confirmed observations and address remaining eligible unknown conditions.",
+        "cannot_identify": "Show reviewed page28 right-hand switch drawing and ON/OFF legend inline, ask if position can now be identified. If controls differ reconfirm applicability; persistent uncertainty goes to service without guessing.",
+        "finishing_checks": "Turn ignition OFF when engine is not running; continuously ON headlamp discharges battery. Do not misapply this caution to prohibit documented starting setup.",
+        "starter_recovery_R001": {
+          "claims": [
+            {
+              "claim_id": "a_switches_on:R001:recovery",
+              "exact_claim_text": "If you have already made three successive cranking attempts, wait 15–20 seconds for the battery to recover.",
+              "response_role": "WARNING",
+              "source_spans": [
+                {
+                  "evidence_id": "evidence_634643c9be7de4d37ee7b5a2",
+                  "text_sha256": "48a1aadf6987f54796e2f29c0890c3d8597b93f6d4d9fcf8396f009c682dfd5d",
+                  "text_span": [
+                    0,
+                    136
+                  ]
+                }
+              ],
+              "support_evidence_ids": [
+                "evidence_634643c9be7de4d37ee7b5a2"
+              ],
+              "support_review_status": "ACCEPTED_R001_WORDING_SOURCE_OBJECT_APPROVAL_PENDING"
+            }
+          ],
+          "condition": "Three successive cranking attempts already reported; not a request to make three attempts",
+          "formal_source_approved": false,
+          "owner_status": "CONVERSATIONALLY_ACCEPTED"
+        },
+        "unresolved": "Keep unsuccessful attempt separate; clarify fuel only if unknown; no inferred switch/battery health or repeat. Starter attempt uses independently reviewed compact checklist/limits and post-start MIL branch."
+      },
+      "citations": [
+        {
+          "evidence_id": "evidence_001335e5b633008075189f76",
+          "pdf_page": 72
+        },
+        {
+          "evidence_id": "evidence_017a78d6fdfd30389967f3c9",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_08f733b5af1455e073ff4100",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+          "pdf_page": 121
+        },
+        {
+          "evidence_id": "evidence_17c02f5850fb622a858a2e5d",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_1ef860fc5e1414bd0addfb9a",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_26096eb949d668e5bf4df512",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_272bd86a27fe5489e66a4af6",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_2da295467109e2ffd40840cf",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_323bcafc4948d59704fec0d5",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_327fb6241838980e6010f505",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_38d4cced38a0586a204bbc15",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_39d514c9ac7daf378111288d",
+          "pdf_page": 72
+        },
+        {
+          "evidence_id": "evidence_45666c1e6ad158565c92a6de",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_4c7733b0ad33581282de44ed",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_4cfcbb4612d5809c3511d6fa",
+          "pdf_page": 72
+        },
+        {
+          "evidence_id": "evidence_533bb7ef741105dc8ee7cdf1",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_5809b88f4cf2d77391b36c46",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_65270170ab77cd81e769fc81",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_6bb93ee3bacd0e2f20753f9f",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_6ed01159fd5669cd60c2a656",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_724d49cdd1f4fd70b6671f5b",
+          "pdf_page": 121
+        },
+        {
+          "evidence_id": "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "pdf_page": 72
+        },
+        {
+          "evidence_id": "evidence_7942508c8527d4c2550af80a",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_7d6b57fe2bbc40d73edcdec9",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_80fc3c1545382e074eccbcea",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_8390400b310264a086506b1f",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_86fc55f5643415ada60288dc",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_95ed4d74965c06b3f0e5174b",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_a54b5925c3d20360541d2114",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_a7a5ea8352d16679e89780fb",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_a9e890051963e1fe3fff5153",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_aa6ff3af3a922c597647a3f0",
+          "pdf_page": 121
+        },
+        {
+          "evidence_id": "evidence_b1906b340642a9c8a40262a4",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_b4e9c215783dd876443da7ac",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_bcdbe761342bdbe974de6c58",
+          "pdf_page": 73
+        },
+        {
+          "evidence_id": "evidence_c31143757dc5fc6c853db707",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_c848dfa8630c0f90ac639ab4",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_c9cab1907f963dfd74acfe71",
+          "pdf_page": 72
+        },
+        {
+          "evidence_id": "evidence_c9df184906bf88efbfdf3cde",
+          "pdf_page": 74
+        },
+        {
+          "evidence_id": "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "pdf_page": 72
+        },
+        {
+          "evidence_id": "evidence_e141910747861df746685a2e",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_f4b89f54877b99a3305617ce",
+          "pdf_page": 28
+        },
+        {
+          "evidence_id": "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "pdf_page": 72
+        },
+        {
+          "evidence_id": "evidence_f7af2089af452504d4726e13",
+          "pdf_page": 28
+        }
+      ],
+      "dependency_manifest": {
+        "action_evidence_ids": [
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_001335e5b633008075189f76"
+        ],
+        "authorship_note": "Concrete proposed dependencies from agent visual source inspection; scope still requires independent review.",
+        "categories": {
+          "accepted_additional_context": [
+            "evidence_08f733b5af1455e073ff4100",
+            "evidence_17c02f5850fb622a858a2e5d",
+            "evidence_1ef860fc5e1414bd0addfb9a",
+            "evidence_26096eb949d668e5bf4df512",
+            "evidence_272bd86a27fe5489e66a4af6",
+            "evidence_2da295467109e2ffd40840cf",
+            "evidence_323bcafc4948d59704fec0d5",
+            "evidence_327fb6241838980e6010f505",
+            "evidence_38d4cced38a0586a204bbc15",
+            "evidence_39d514c9ac7daf378111288d",
+            "evidence_45666c1e6ad158565c92a6de",
+            "evidence_4c7733b0ad33581282de44ed",
+            "evidence_4cfcbb4612d5809c3511d6fa",
+            "evidence_5809b88f4cf2d77391b36c46",
+            "evidence_65270170ab77cd81e769fc81",
+            "evidence_6bb93ee3bacd0e2f20753f9f",
+            "evidence_6ed01159fd5669cd60c2a656",
+            "evidence_74c559f58f2c0c5d9f5cd3c3",
+            "evidence_7942508c8527d4c2550af80a",
+            "evidence_7d6b57fe2bbc40d73edcdec9",
+            "evidence_80fc3c1545382e074eccbcea",
+            "evidence_8390400b310264a086506b1f",
+            "evidence_86fc55f5643415ada60288dc",
+            "evidence_95ed4d74965c06b3f0e5174b",
+            "evidence_a54b5925c3d20360541d2114",
+            "evidence_a9e890051963e1fe3fff5153",
+            "evidence_aa6ff3af3a922c597647a3f0",
+            "evidence_b1906b340642a9c8a40262a4",
+            "evidence_bcdbe761342bdbe974de6c58",
+            "evidence_c31143757dc5fc6c853db707",
+            "evidence_c848dfa8630c0f90ac639ab4",
+            "evidence_c9cab1907f963dfd74acfe71",
+            "evidence_c9df184906bf88efbfdf3cde",
+            "evidence_d4cac8f8c2a17b9fd5955cd7",
+            "evidence_e141910747861df746685a2e",
+            "evidence_f4b89f54877b99a3305617ce",
+            "evidence_f7af2089af452504d4726e13"
+          ],
+          "actions": [
+            "evidence_15e1ce067b76cc524a0448d2",
+            "evidence_001335e5b633008075189f76"
+          ],
+          "conditions": [
+            "evidence_15e1ce067b76cc524a0448d2"
+          ],
+          "cross_references": [
+            "evidence_724d49cdd1f4fd70b6671f5b"
+          ],
+          "figures": [
+            "evidence_1ef860fc5e1414bd0addfb9a",
+            "evidence_327fb6241838980e6010f505",
+            "evidence_39d514c9ac7daf378111288d",
+            "evidence_45666c1e6ad158565c92a6de",
+            "evidence_6bb93ee3bacd0e2f20753f9f",
+            "evidence_74c559f58f2c0c5d9f5cd3c3",
+            "evidence_7d6b57fe2bbc40d73edcdec9",
+            "evidence_b1906b340642a9c8a40262a4",
+            "evidence_bcdbe761342bdbe974de6c58",
+            "evidence_c31143757dc5fc6c853db707",
+            "evidence_f7af2089af452504d4726e13"
+          ],
+          "prerequisites": [
+            "evidence_f4dbcfa8fd37b20ab295e5a1",
+            "evidence_017a78d6fdfd30389967f3c9",
+            "evidence_a7a5ea8352d16679e89780fb"
+          ],
+          "starting_limits": [
+            "evidence_b4e9c215783dd876443da7ac",
+            "evidence_1b6ac29f7d67b8a68c57a1d0"
+          ],
+          "warnings": [
+            "evidence_533bb7ef741105dc8ee7cdf1"
+          ]
+        },
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "required_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ],
+        "review_status": "DRAFT",
+        "scope_review_complete": false,
+        "step_id": "a_switches_on",
+        "version": "accepted-eleven-dependencies-draft-v1"
+      },
+      "rules": {
+        "rule_clutch_held": {
+          "clarification_evidence_ids": [
+            "evidence_017a78d6fdfd30389967f3c9"
+          ],
+          "clarification_question": "Is the clutch lever held in its depressed position?",
+          "expected_value": true,
+          "fact_key": "clutch_held",
+          "operator": "EQ",
+          "origin": "MANUAL",
+          "policy_version": null,
+          "predicate_type": "BOOLEAN",
+          "review_status": "DRAFT",
+          "rider_resolvable": true,
+          "rule_id": "rule_clutch_held",
+          "rule_version": "accepted-eleven-rules-draft-v1",
+          "source_evidence_ids": [
+            "evidence_017a78d6fdfd30389967f3c9"
+          ],
+          "unit": null
+        },
+        "rule_gear_neutral": {
+          "clarification_evidence_ids": [
+            "evidence_f4dbcfa8fd37b20ab295e5a1"
+          ],
+          "clarification_question": "Is the gear in neutral with the neutral lamp glowing?",
+          "expected_value": true,
+          "fact_key": "gear_neutral",
+          "operator": "EQ",
+          "origin": "MANUAL",
+          "policy_version": null,
+          "predicate_type": "BOOLEAN",
+          "review_status": "DRAFT",
+          "rider_resolvable": true,
+          "rule_id": "rule_gear_neutral",
+          "rule_version": "accepted-eleven-rules-draft-v1",
+          "source_evidence_ids": [
+            "evidence_f4dbcfa8fd37b20ab295e5a1"
+          ],
+          "unit": null
+        },
+        "rule_q_switches": {
+          "authorship_note": "Predicate/question proposed against original troubleshooting observation cell; independent review required.",
+          "clarification_evidence_ids": [
+            "evidence_001335e5b633008075189f76",
+            "evidence_15e1ce067b76cc524a0448d2"
+          ],
+          "clarification_question": "Are the ignition key and engine kill switch both in their ON or RUN positions?",
+          "expected_value": false,
+          "fact_key": "q_switches",
+          "operator": "EQ",
+          "origin": "MANUAL",
+          "policy_version": null,
+          "predicate_type": "BOOLEAN",
+          "review_status": "DRAFT",
+          "rider_resolvable": true,
+          "rule_id": "rule_q_switches",
+          "rule_version": "accepted-eleven-rules-draft-v1",
+          "source_evidence_ids": [
+            "evidence_001335e5b633008075189f76",
+            "evidence_15e1ce067b76cc524a0448d2"
+          ],
+          "unit": null
+        },
+        "rule_stand_retracted": {
+          "clarification_evidence_ids": [
+            "evidence_a7a5ea8352d16679e89780fb"
+          ],
+          "clarification_question": "Is the side stand retracted?",
+          "expected_value": true,
+          "fact_key": "stand_retracted",
+          "operator": "EQ",
+          "origin": "MANUAL",
+          "policy_version": null,
+          "predicate_type": "BOOLEAN",
+          "review_status": "DRAFT",
+          "rider_resolvable": true,
+          "rule_id": "rule_stand_retracted",
+          "rule_version": "accepted-eleven-rules-draft-v1",
+          "source_evidence_ids": [
+            "evidence_a7a5ea8352d16679e89780fb"
+          ],
+          "unit": null
+        }
+      }
+    },
+    "candidate_expected_route": "SUPPORTED",
+    "candidate_revision": "original-eleven-suite-v2",
+    "canonical_answer": "Set only the reported OFF ignition or engine kill switch to the documented ON or RUN position. This does not establish that the remaining starting conditions are satisfied. When finishing checks with the engine not running, turn ignition OFF; the continuously ON headlamp can discharge the battery. Setting a switch does not authorize starting. Establish the compact starting checklist before any starter action; retained confirmations are not re-asked.",
+    "canonical_citations": [
+      {
+        "claim_id": "a_switches_on:accepted-draft:main",
+        "evidence_id": "evidence_001335e5b633008075189f76",
+        "source_text_sha256": "54ae7ad0def1cf3258243f9d9f6cd16933eb7f9e1e92177848e96616a5f17e23"
+      },
+      {
+        "claim_id": "a_switches_on:accepted-draft:main",
+        "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+        "source_text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85"
+      },
+      {
+        "claim_id": "a_switches_on:accepted-draft:warning0",
+        "evidence_id": "evidence_533bb7ef741105dc8ee7cdf1",
+        "source_text_sha256": "4efb361a4f5080d68200bab0c326a8e1ccdf945a09bef0432c57081badceff3e"
+      },
+      {
+        "claim_id": "a_switches_on:accepted-draft:setup0",
+        "evidence_id": "evidence_017a78d6fdfd30389967f3c9",
+        "source_text_sha256": "720c52f50d20334a29d55c0e18a379a6432a27b1307dd9a3e79eb3a2e6e9daa1"
+      },
+      {
+        "claim_id": "a_switches_on:accepted-draft:setup0",
+        "evidence_id": "evidence_a7a5ea8352d16679e89780fb",
+        "source_text_sha256": "934985e941378347edd0a001e5b37b4dd0c68683e7052cf079a23fc42e6ea315"
+      },
+      {
+        "claim_id": "a_switches_on:accepted-draft:setup0",
+        "evidence_id": "evidence_f4dbcfa8fd37b20ab295e5a1",
+        "source_text_sha256": "4c5d609797f93b77d37ce336b3db1345860b9cd6228ecae5ca178ae0e32b70ad"
+      }
+    ],
+    "case_digest": "27bfe22c42d1004ecdb904d78938698821b3285a550f4f76c49a4f7831206c3c",
+    "case_kind": "ORIGINAL_ELEVEN_DRAFT_REFERENCE",
+    "claims": [
+      {
+        "claim_id": "a_switches_on:accepted-draft:main",
+        "exact_claim_text": "Set only the reported OFF ignition or engine kill switch to the documented ON or RUN position. This does not establish that the remaining starting conditions are satisfied.",
+        "response_role": "ACTION",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_001335e5b633008075189f76",
+            "text_sha256": "54ae7ad0def1cf3258243f9d9f6cd16933eb7f9e1e92177848e96616a5f17e23",
+            "text_span": [
+              0,
+              104
+            ]
+          },
+          {
+            "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+            "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85",
+            "text_span": [
+              0,
+              617
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_15e1ce067b76cc524a0448d2"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      },
+      {
+        "claim_id": "a_switches_on:accepted-draft:warning0",
+        "exact_claim_text": "When finishing checks with the engine not running, turn ignition OFF; the continuously ON headlamp can discharge the battery.",
+        "response_role": "WARNING",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_533bb7ef741105dc8ee7cdf1",
+            "text_sha256": "4efb361a4f5080d68200bab0c326a8e1ccdf945a09bef0432c57081badceff3e",
+            "text_span": [
+              0,
+              313
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_533bb7ef741105dc8ee7cdf1"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      },
+      {
+        "claim_id": "a_switches_on:accepted-draft:setup0",
+        "exact_claim_text": "Setting a switch does not authorize starting. Establish the compact starting checklist before any starter action; retained confirmations are not re-asked.",
+        "response_role": "PREREQUISITE",
+        "source_spans": [
+          {
+            "evidence_id": "evidence_017a78d6fdfd30389967f3c9",
+            "text_sha256": "720c52f50d20334a29d55c0e18a379a6432a27b1307dd9a3e79eb3a2e6e9daa1",
+            "text_span": [
+              0,
+              85
+            ]
+          },
+          {
+            "evidence_id": "evidence_a7a5ea8352d16679e89780fb",
+            "text_sha256": "934985e941378347edd0a001e5b37b4dd0c68683e7052cf079a23fc42e6ea315",
+            "text_span": [
+              0,
+              217
+            ]
+          },
+          {
+            "evidence_id": "evidence_f4dbcfa8fd37b20ab295e5a1",
+            "text_sha256": "4c5d609797f93b77d37ce336b3db1345860b9cd6228ecae5ca178ae0e32b70ad",
+            "text_span": [
+              0,
+              201
+            ]
+          }
+        ],
+        "support_evidence_ids": [
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_f4dbcfa8fd37b20ab295e5a1"
+        ],
+        "support_review_status": "PRECISE_SPAN_AND_ENTAILMENT_AGENT_WORK_PENDING"
+      }
+    ],
+    "coverage_plan": {
+      "adversaries": [
+        "added instruction",
+        "changed number",
+        "changed unit",
+        "omitted claim/warning",
+        "forged citation",
+        "wrong variant",
+        "missing dependency",
+        "draft/stale cache",
+        "provider outage"
+      ],
+      "branch_execution": "Branch-specific context retained; no invented executable predicates",
+      "claim_support": "Agent maps retained; live semantic verdict NOT_MEASURED",
+      "modality": "Visible observation only; referenced figures require reviewed image-capable verifier",
+      "question_review": "Accessible observations, no internal enum, no redundant recurrence question; automatic flags require adjudication",
+      "source_policy": "Policy references never presented as OEM facts",
+      "typed_outcomes": [
+        "OBSERVED_NORMAL",
+        "OBSERVED_ABNORMAL",
+        "ACTION_COMPLETED_UNRESOLVED",
+        "NOT_APPLICABLE",
+        "UNCLEAR",
+        "RESOLVED"
+      ]
+    },
+    "formal_source_approved": false,
+    "prior_holds": [
+      "INDEPENDENT_CONTENT_BOUND_REVIEW_REQUIRED",
+      "CLAIM_SPANS_AND_BRANCH_DEPENDENCY_SCOPE_REQUIRED",
+      "DRAFT_PARAPHRASES_REQUIRE_DISPLAY_REVIEW",
+      "PRECISE_FIGURE_LEGEND_ASSOCIATION_REQUIRED",
+      "SCOPED_DISPLAY_POLICY_RECONCILIATION_REQUIRED",
+      "FIGURE_VERIFIER_NOT_IMPLEMENTED",
+      "STARTING_PAGE75_ADDITIONS_PENDING_SEPARATE_SCOPE_REVIEW",
+      "SWITCH_CORRECTION_VERSUS_STARTER_ACTION_BOUNDARY_REQUIRED"
+    ],
+    "producer_draft_sha256": "74292791e6d54a580c246982078c35973fc88befec986845cdb01916f391774d",
+    "producer_version": "accepted-eleven-reconciliation-draft-v1",
+    "question": "The engine will not start.",
+    "record_id": "a_switches_on",
+    "required_candidate_source_ids": [
+      "evidence_001335e5b633008075189f76",
+      "evidence_017a78d6fdfd30389967f3c9",
+      "evidence_08f733b5af1455e073ff4100",
+      "evidence_15e1ce067b76cc524a0448d2",
+      "evidence_17c02f5850fb622a858a2e5d",
+      "evidence_1b6ac29f7d67b8a68c57a1d0",
+      "evidence_1ef860fc5e1414bd0addfb9a",
+      "evidence_26096eb949d668e5bf4df512",
+      "evidence_272bd86a27fe5489e66a4af6",
+      "evidence_2da295467109e2ffd40840cf",
+      "evidence_323bcafc4948d59704fec0d5",
+      "evidence_327fb6241838980e6010f505",
+      "evidence_38d4cced38a0586a204bbc15",
+      "evidence_39d514c9ac7daf378111288d",
+      "evidence_45666c1e6ad158565c92a6de",
+      "evidence_4c7733b0ad33581282de44ed",
+      "evidence_4cfcbb4612d5809c3511d6fa",
+      "evidence_533bb7ef741105dc8ee7cdf1",
+      "evidence_5809b88f4cf2d77391b36c46",
+      "evidence_634643c9be7de4d37ee7b5a2",
+      "evidence_65270170ab77cd81e769fc81",
+      "evidence_6bb93ee3bacd0e2f20753f9f",
+      "evidence_6ed01159fd5669cd60c2a656",
+      "evidence_724d49cdd1f4fd70b6671f5b",
+      "evidence_74c559f58f2c0c5d9f5cd3c3",
+      "evidence_7942508c8527d4c2550af80a",
+      "evidence_7d6b57fe2bbc40d73edcdec9",
+      "evidence_80fc3c1545382e074eccbcea",
+      "evidence_8390400b310264a086506b1f",
+      "evidence_86fc55f5643415ada60288dc",
+      "evidence_95ed4d74965c06b3f0e5174b",
+      "evidence_a54b5925c3d20360541d2114",
+      "evidence_a7a5ea8352d16679e89780fb",
+      "evidence_a9e890051963e1fe3fff5153",
+      "evidence_aa6ff3af3a922c597647a3f0",
+      "evidence_b1906b340642a9c8a40262a4",
+      "evidence_b4e9c215783dd876443da7ac",
+      "evidence_bcdbe761342bdbe974de6c58",
+      "evidence_c31143757dc5fc6c853db707",
+      "evidence_c848dfa8630c0f90ac639ab4",
+      "evidence_c9cab1907f963dfd74acfe71",
+      "evidence_c9df184906bf88efbfdf3cde",
+      "evidence_d4cac8f8c2a17b9fd5955cd7",
+      "evidence_e141910747861df746685a2e",
+      "evidence_f4b89f54877b99a3305617ce",
+      "evidence_f4dbcfa8fd37b20ab295e5a1",
+      "evidence_f7af2089af452504d4726e13"
+    ],
+    "required_source_locks": {
+      "evidence_001335e5b633008075189f76": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "54ae7ad0def1cf3258243f9d9f6cd16933eb7f9e1e92177848e96616a5f17e23"
+      },
+      "evidence_017a78d6fdfd30389967f3c9": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "720c52f50d20334a29d55c0e18a379a6432a27b1307dd9a3e79eb3a2e6e9daa1"
+      },
+      "evidence_08f733b5af1455e073ff4100": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1"
+      },
+      "evidence_15e1ce067b76cc524a0448d2": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85"
+      },
+      "evidence_17c02f5850fb622a858a2e5d": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+      },
+      "evidence_1b6ac29f7d67b8a68c57a1d0": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "6b487e558b44333993fce4d939e65eb92d82a7bef9ea5c8175b76a960215347a"
+      },
+      "evidence_1ef860fc5e1414bd0addfb9a": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_26096eb949d668e5bf4df512": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "83473d7d2ef745affa7c4720b40f8067942d9a60843bb757f35bcfed8b73338a"
+      },
+      "evidence_272bd86a27fe5489e66a4af6": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "6c115b6158cef18bfea4ae50317f8647384538d0d3c298fe054911db7c85fe18"
+      },
+      "evidence_2da295467109e2ffd40840cf": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "cf1d11677ae78a0daa63085ef9cdd3d8c69275f6d16014f37cb915690b5bb752"
+      },
+      "evidence_323bcafc4948d59704fec0d5": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "302bc40ef47acc2eab6df27bee6b0485aa7161b14058d69ef39ac4c2cb2db961"
+      },
+      "evidence_327fb6241838980e6010f505": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_38d4cced38a0586a204bbc15": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "d6084bcdbcd19552b15ffc71e7769ca128c48fb37763533212061874b0b56baa"
+      },
+      "evidence_39d514c9ac7daf378111288d": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_45666c1e6ad158565c92a6de": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_4c7733b0ad33581282de44ed": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1"
+      },
+      "evidence_4cfcbb4612d5809c3511d6fa": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "5f2673923e5c9de0f5769f3b75cf3450f9f8d79457066cd5eb09ad29dcc10e6f"
+      },
+      "evidence_533bb7ef741105dc8ee7cdf1": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "4efb361a4f5080d68200bab0c326a8e1ccdf945a09bef0432c57081badceff3e"
+      },
+      "evidence_5809b88f4cf2d77391b36c46": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1"
+      },
+      "evidence_634643c9be7de4d37ee7b5a2": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "48a1aadf6987f54796e2f29c0890c3d8597b93f6d4d9fcf8396f009c682dfd5d"
+      },
+      "evidence_65270170ab77cd81e769fc81": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "0def2950f92eb77d9d97a907e392d37fee39a4a59f4febff48533fcd66c662c3"
+      },
+      "evidence_6bb93ee3bacd0e2f20753f9f": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_6ed01159fd5669cd60c2a656": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "bacf6c6a6ede8e870630b699bc1ad8c9395658446997c1538a0a91fa7df7b95c"
+      },
+      "evidence_724d49cdd1f4fd70b6671f5b": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "06f7b1c88f09497adf8aa28d8c4ddfd0259b380babf17346f4da9fe24e97eb9c"
+      },
+      "evidence_74c559f58f2c0c5d9f5cd3c3": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_7942508c8527d4c2550af80a": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "7a552636e3317c1d116f1c562c91b3ecff5ffcbb4dc5d1b6b77af7a2b9bef711"
+      },
+      "evidence_7d6b57fe2bbc40d73edcdec9": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_80fc3c1545382e074eccbcea": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "8a19079ce69d165aaa75c11932dbf4672b48cbdb6647b8ed5a5f40caacbabe7c"
+      },
+      "evidence_8390400b310264a086506b1f": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "a95adfcc85e42bc643443601c0948dff78b502cf77b121b1fba8b2d8f6dada88"
+      },
+      "evidence_86fc55f5643415ada60288dc": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "f6c145c88609d279fafb4edda2587aeecfad413a4a176348ada4cc708c4bdccd"
+      },
+      "evidence_95ed4d74965c06b3f0e5174b": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "7dc004134cc886a0d69374d81f88bc9437dc5d979ccb79867cc8c1cd93dab05a"
+      },
+      "evidence_a54b5925c3d20360541d2114": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "c1947ff4e88b1d5d173b9326f5a5110787db4964b279ad99e8241c7bc435e205"
+      },
+      "evidence_a7a5ea8352d16679e89780fb": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "934985e941378347edd0a001e5b37b4dd0c68683e7052cf079a23fc42e6ea315"
+      },
+      "evidence_a9e890051963e1fe3fff5153": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "323dc8cbe0207ffa9cd6a6bd7a2484756ad62c129c590f964c73ca110c71dbd4"
+      },
+      "evidence_aa6ff3af3a922c597647a3f0": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "3cc1423a2fb9142df640f5c14c021eb4c5016aca89f338397a6eca8905b73f55"
+      },
+      "evidence_b1906b340642a9c8a40262a4": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_b4e9c215783dd876443da7ac": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "d489cd99fb642cce55b94a24b35bfea6f3eefc8e9ff4dd9943d0c3d7c40b9300"
+      },
+      "evidence_bcdbe761342bdbe974de6c58": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_c31143757dc5fc6c853db707": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence_c848dfa8630c0f90ac639ab4": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "ea909b537b83ef1938756fbbcd03591bb21b303bf2cc63163d38271ffc929fc6"
+      },
+      "evidence_c9cab1907f963dfd74acfe71": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "8a19079ce69d165aaa75c11932dbf4672b48cbdb6647b8ed5a5f40caacbabe7c"
+      },
+      "evidence_c9df184906bf88efbfdf3cde": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "8a19079ce69d165aaa75c11932dbf4672b48cbdb6647b8ed5a5f40caacbabe7c"
+      },
+      "evidence_d4cac8f8c2a17b9fd5955cd7": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "bafee3cfbf104d1f15b82b29a97191bc1aa89249df152afa9dd7643de86231e8"
+      },
+      "evidence_e141910747861df746685a2e": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "9ce4bbf8092a483e6cf3822546fd134d9dc391f8b6ef0c3d273ad0aef386e758"
+      },
+      "evidence_f4b89f54877b99a3305617ce": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "1891379762c344fd21f606c327d91fa22f57578b734e22659fe5f4d83cf7f902"
+      },
+      "evidence_f4dbcfa8fd37b20ab295e5a1": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "4c5d609797f93b77d37ce336b3db1345860b9cd6228ecae5ca178ae0e32b70ad"
+      },
+      "evidence_f7af2089af452504d4726e13": {
+        "authority": "OEM_MANUAL",
+        "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "runtime_binding": {
+      "facts": {},
+      "step_id": "a_switches_on",
+      "symptoms": [
+        "no_start"
+      ]
+    }
+  },
+  "candidate_case_sha256": "5aa383bdc8031d80e2f8b53a3e196e8a634d7639534cd7676658a83645b23107",
+  "canonical_answer_sha256": "e407c92f90fe7c57ea148c307ad856585aa88bf1ded31e46a8f030a172d82033",
+  "claim_checks": [
+    {
+      "claim_id": "a_switches_on:accepted-draft:main",
+      "exact_claim": "Set only the reported OFF ignition or engine kill switch to the documented ON or RUN position. This does not establish that the remaining starting conditions are satisfied.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "51eca893bb08ebcbeb30ad348077c3472b0255c9a12e9d0a6db88ec887896697",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " Turn ignition key to ON position and engine kill switch on right hand side handle bar to run position.",
+          "object_type": "list_item",
+          "pdf_pages": [
+            72
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_001335e5b633008075189f76",
+            "exact_text": " Turn ignition key to ON position and engine kill switch on right hand side handle bar to run position.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 71.71171875589067,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 21.571799999999996,
+                  "r": 215.0789999999998,
+                  "t": 88.38959999999997
+                },
+                "charspan": [
+                  0,
+                  104
+                ],
+                "page_no": 72
+              }
+            ],
+            "text_sha256": "54ae7ad0def1cf3258243f9d9f6cd16933eb7f9e1e92177848e96616a5f17e23",
+            "text_span": [
+              0,
+              104
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        },
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": "r0c0: Symptom\nr0c1: Observations\nr0c2: Check for/Remedy\nr1c0: Engine does not start\nr1c1: If the ignition/Engine kill switch in OFF position\nr1c2: Switch ON ignition\nr2c1: If inadequate fuel level in fuel tank\nr2c2: Top up the fuel\nr3c1: If the lights are dim/weak horn sound\nr3c2: Weak or discharged battery / problem in charging circuit Contact Authorised service center\nr4c1: If fuse is blown\nr4c2: 1. Replace the fuse with same rating 2. Contact Authorised service center if prob- lem persists\nr5c1: Connection issue with spark plug, cap, high tension cable\nr5c2: Reconnect spark plug, cap and high tension cable.",
+          "object_type": "table",
+          "pdf_pages": [
+            121
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+            "exact_text": "r0c0: Symptom\nr0c1: Observations\nr0c2: Check for/Remedy\nr1c0: Engine does not start\nr1c1: If the ignition/Engine kill switch in OFF position\nr1c2: Switch ON ignition\nr2c1: If inadequate fuel level in fuel tank\nr2c2: Top up the fuel\nr3c1: If the lights are dim/weak horn sound\nr3c2: Weak or discharged battery / problem in charging circuit Contact Authorised service center\nr4c1: If fuse is blown\nr4c2: 1. Replace the fuse with same rating 2. Contact Authorised service center if prob- lem persists\nr5c1: Connection issue with spark plug, cap, high tension cable\nr5c2: Reconnect spark plug, cap and high tension cable.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 40.302512609145225,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 20.856049991954457,
+                  "r": 419.2077901944247,
+                  "t": 177.41958954216452
+                },
+                "charspan": [
+                  0,
+                  0
+                ],
+                "page_no": 121
+              }
+            ],
+            "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85",
+            "text_span": [
+              0,
+              617
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    },
+    {
+      "claim_id": "a_switches_on:accepted-draft:warning0",
+      "exact_claim": "When finishing checks with the engine not running, turn ignition OFF; the continuously ON headlamp can discharge the battery.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "8a4d6a0859f744b1a26711fe1d39017432cc4aec9964ec650caa28046633a516",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON.",
+          "object_type": "list_item",
+          "pdf_pages": [
+            28
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_e141910747861df746685a2e",
+            "exact_text": " Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 88.25841875589066,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 225.025,
+                  "r": 418.7081999999998,
+                  "t": 114.93630000000002
+                },
+                "charspan": [
+                  0,
+                  141
+                ],
+                "page_no": 28
+              }
+            ],
+            "text_sha256": "9ce4bbf8092a483e6cf3822546fd134d9dc391f8b6ef0c3d273ad0aef386e758",
+            "text_span": [
+              0,
+              141
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    },
+    {
+      "claim_id": "a_switches_on:accepted-draft:setup0",
+      "exact_claim": "Setting a switch does not authorize starting. Establish the compact starting checklist before any starter action; retained confirmations are not re-asked.",
+      "required_check": "Read original page and verify entire paraphrase, scope, number/unit and warning; inherited verdict is not evidence.",
+      "runtime_claim_sha256": "2b7fff20ec3c605f32fef22e4dd0b2783e9bc1be7fab2e655251359d3deb9986",
+      "selected_source_bindings": [
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " Disengage clutch by pulling in the clutch lever and hold it in depressed condition.",
+          "object_type": "list_item",
+          "pdf_pages": [
+            73
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_017a78d6fdfd30389967f3c9",
+            "exact_text": " Disengage clutch by pulling in the clutch lever and hold it in depressed condition.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 194.57851875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 225.02779999999998,
+                  "r": 418.6149999999998,
+                  "t": 211.2564
+                },
+                "charspan": [
+                  0,
+                  85
+                ],
+                "page_no": 73
+              }
+            ],
+            "text_sha256": "720c52f50d20334a29d55c0e18a379a6432a27b1307dd9a3e79eb3a2e6e9daa1",
+            "text_span": [
+              0,
+              85
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        },
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " Vehicle may start with side stand condition but engine will turn-off when gear is engaged, this side stand cutoff feature is provided for rider safety ensure side stand is retracted before vehicle moving / starting.",
+          "object_type": "list_item",
+          "pdf_pages": [
+            74
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_a7a5ea8352d16679e89780fb",
+            "exact_text": " Vehicle may start with side stand condition but engine will turn-off when gear is engaged, this side stand cutoff feature is provided for rider safety ensure side stand is retracted before vehicle moving / starting.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 158.57161875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 225.025,
+                  "r": 418.7402,
+                  "t": 195.2495
+                },
+                "charspan": [
+                  0,
+                  217
+                ],
+                "page_no": 74
+              }
+            ],
+            "text_sha256": "934985e941378347edd0a001e5b37b4dd0c68683e7052cf079a23fc42e6ea315",
+            "text_span": [
+              0,
+              217
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        },
+        {
+          "authority": "OEM_MANUAL",
+          "exact_selected_text": " To shift into neutral, move the motorcycle back and forth gently, while simultaneously shifting the gear. Ensure gear is in neutral position and the neutral lamp is glowing in the instrument cluster.",
+          "object_type": "list_item",
+          "pdf_pages": [
+            72
+          ],
+          "requires_visual_verification": false,
+          "source_span": {
+            "evidence_id": "evidence_f4dbcfa8fd37b20ab295e5a1",
+            "exact_text": " To shift into neutral, move the motorcycle back and forth gently, while simultaneously shifting the gear. Ensure gear is in neutral position and the neutral lamp is glowing in the instrument cluster.",
+            "provenance": [
+              {
+                "bbox": {
+                  "b": 171.57571875589068,
+                  "coord_origin": "BOTTOMLEFT",
+                  "l": 21.5718,
+                  "r": 214.98299999999995,
+                  "t": 208.2536
+                },
+                "charspan": [
+                  0,
+                  201
+                ],
+                "page_no": 72
+              }
+            ],
+            "text_sha256": "4c5d609797f93b77d37ce336b3db1345860b9cd6228ecae5ca178ae0e32b70ad",
+            "text_span": [
+              0,
+              201
+            ]
+          },
+          "source_text_hash_matches": true,
+          "span_in_bounds": true
+        }
+      ]
+    }
+  ],
+  "context_pin_sha256": "27c61d0e42be3d4582a6559e2becfcd28e27e8d065bbea1033f7ec5789c64250",
+  "coordinator_snapshot_sha256": "29a19c789bd5e97addf1fa2b0e6c58bde9a40b22c2d4c3c655a99f8308bc3b6f",
+  "figure_necessity_checks": [
+    {
+      "evidence_id": "evidence_1ef860fc5e1414bd0addfb9a",
+      "pdf_pages": [
+        28
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_327fb6241838980e6010f505",
+      "pdf_pages": [
+        73
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_39d514c9ac7daf378111288d",
+      "pdf_pages": [
+        72
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_45666c1e6ad158565c92a6de",
+      "pdf_pages": [
+        28
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_6bb93ee3bacd0e2f20753f9f",
+      "pdf_pages": [
+        28
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_74c559f58f2c0c5d9f5cd3c3",
+      "pdf_pages": [
+        72
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_7d6b57fe2bbc40d73edcdec9",
+      "pdf_pages": [
+        74
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_b1906b340642a9c8a40262a4",
+      "pdf_pages": [
+        28
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_bcdbe761342bdbe974de6c58",
+      "pdf_pages": [
+        73
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_c31143757dc5fc6c853db707",
+      "pdf_pages": [
+        28
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    },
+    {
+      "evidence_id": "evidence_f7af2089af452504d4726e13",
+      "pdf_pages": [
+        28
+      ],
+      "planning_disposition": "CHECK_ACTUAL_NECESSITY; picture presence alone never establishes a mandatory dependency",
+      "required_check": "Identify the precise rider claim/conditional branch needing this figure. Verify labels/legend on original page; remove irrelevant figure dependency, or approve internal association only. No crop display authorization inferred."
+    }
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "missing_source_ids": [],
+  "original_pdf_pages_to_check": [
+    28,
+    72,
+    73,
+    74,
+    75,
+    121
+  ],
+  "planner_actor": "check_planner",
+  "planning_only": true,
+  "prior_support_context": null,
+  "producer_binding_context": null,
+  "quality_and_routing_checks": [
+    "Check exact accepted follow-up context, do not collapse entire conversation into terminal answer.",
+    "Relevant concise main response; compact setup conditions without assuming completion.",
+    "No invented OEM ranking from independent documented checks.",
+    "Separate SUPPORTED/AMBIGUOUS/UNSUPPORTED/SAFETY_STOP/SYSTEM_ERROR; a synthetic error fixture is not an actual outage measurement.",
+    "Source facts, user observations, policy conditions and unverified mechanical diagnosis remain distinct.",
+    "Inspect all branch warnings, prerequisite object links, citations and claim spans; do not use a broad whole-table span as automatic entailment.",
+    "Verify branch predicates execute as typed reviewed records; prose is not executable.",
+    "No provider/secret reads/deployment/billing/index changes; review release artifacts only."
+  ],
+  "record_id": "a_switches_on",
+  "runtime_mapping": {
+    "conditional_branches": [
+      {
+        "branch_context": "Preserve an immutable unresolved attempt; never infer normality or repeat automatically.",
+        "branch_id": "a_switches_on:branch:ACTION_COMPLETED_UNRESOLVED",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_context": "Withhold mismatched guidance and reconfirm manual/bike scope.",
+        "branch_id": "a_switches_on:branch:NOT_APPLICABLE",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_context": "Record only customer-reported resolution of the specified symptom; retain other open issues.",
+        "branch_id": "a_switches_on:branch:RESOLVED",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_context": "Do not repeat switching; retain confirmed observations and address remaining eligible unknown conditions.",
+        "branch_id": "a_switches_on:branch:already_correct",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_context": "Show reviewed page28 right-hand switch drawing and ON/OFF legend inline, ask if position can now be identified. If controls differ reconfirm applicability; persistent uncertainty goes to service without guessing.",
+        "branch_id": "a_switches_on:branch:cannot_identify",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_context": "Turn ignition OFF when engine is not running; continuously ON headlamp discharges battery. Do not misapply this caution to prohibit documented starting setup.",
+        "branch_id": "a_switches_on:branch:finishing_checks",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_context": "Keep unsuccessful attempt separate; clarify fuel only if unknown; no inferred switch/battery health or repeat. Starter attempt uses independently reviewed compact checklist/limits and post-start MIL branch.",
+        "branch_id": "a_switches_on:branch:unresolved",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_context": {
+          "claims": [
+            {
+              "claim_id": "a_switches_on:R001:recovery",
+              "exact_claim_text": "If you have already made three successive cranking attempts, wait 15–20 seconds for the battery to recover.",
+              "response_role": "WARNING",
+              "source_spans": [
+                {
+                  "evidence_id": "evidence_634643c9be7de4d37ee7b5a2",
+                  "text_sha256": "48a1aadf6987f54796e2f29c0890c3d8597b93f6d4d9fcf8396f009c682dfd5d",
+                  "text_span": [
+                    0,
+                    136
+                  ]
+                }
+              ],
+              "support_evidence_ids": [
+                "evidence_634643c9be7de4d37ee7b5a2"
+              ],
+              "support_review_status": "ACCEPTED_R001_WORDING_SOURCE_OBJECT_APPROVAL_PENDING"
+            }
+          ],
+          "condition": "Three successive cranking attempts already reported; not a request to make three attempts",
+          "formal_source_approved": false,
+          "owner_status": "CONVERSATIONALLY_ACCEPTED"
+        },
+        "branch_id": "a_switches_on:branch:starter_recovery_R001",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "review_status": "DRAFT",
+        "runtime_authorized": false,
+        "selection": "Explicit reviewed typed predicate required; narrative never executes as code",
+        "source_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_08f733b5af1455e073ff4100",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_17c02f5850fb622a858a2e5d",
+          "evidence_1b6ac29f7d67b8a68c57a1d0",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_26096eb949d668e5bf4df512",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2da295467109e2ffd40840cf",
+          "evidence_323bcafc4948d59704fec0d5",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_38d4cced38a0586a204bbc15",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_4c7733b0ad33581282de44ed",
+          "evidence_4cfcbb4612d5809c3511d6fa",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5809b88f4cf2d77391b36c46",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_65270170ab77cd81e769fc81",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_6ed01159fd5669cd60c2a656",
+          "evidence_724d49cdd1f4fd70b6671f5b",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_7942508c8527d4c2550af80a",
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_80fc3c1545382e074eccbcea",
+          "evidence_8390400b310264a086506b1f",
+          "evidence_86fc55f5643415ada60288dc",
+          "evidence_95ed4d74965c06b3f0e5174b",
+          "evidence_a54b5925c3d20360541d2114",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_a9e890051963e1fe3fff5153",
+          "evidence_aa6ff3af3a922c597647a3f0",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_b4e9c215783dd876443da7ac",
+          "evidence_bcdbe761342bdbe974de6c58",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_c848dfa8630c0f90ac639ab4",
+          "evidence_c9cab1907f963dfd74acfe71",
+          "evidence_c9df184906bf88efbfdf3cde",
+          "evidence_d4cac8f8c2a17b9fd5955cd7",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4b89f54877b99a3305617ce",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f7af2089af452504d4726e13"
+        ]
+      },
+      {
+        "branch_id": "a_switches_on:R001-recovery",
+        "claim_text": "If you have already made three successive cranking attempts, wait 15–20 seconds for the battery to recover.",
+        "condition": {
+          "expected_value": 3,
+          "fact_key": "successive_cranking_attempts",
+          "operator": "GE",
+          "unit": "attempts",
+          "value_type": "NUMBER"
+        },
+        "owner_scope": "R001_ACCEPTED; R002_PENDING",
+        "parent_step_id": "a_switches_on:candidate-v3",
+        "repeat_authorized": false,
+        "runtime_authorized": false,
+        "source_ids": [
+          "evidence_634643c9be7de4d37ee7b5a2"
+        ]
+      }
+    ],
+    "dependency": {
+      "action_evidence_ids": [
+        "evidence_001335e5b633008075189f76",
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_e141910747861df746685a2e",
+        "evidence_f4dbcfa8fd37b20ab295e5a1"
+      ],
+      "branch_scope": "Main response and explicit conditional children are separate; not relevance-based closure",
+      "categories": {
+        "actions": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4dbcfa8fd37b20ab295e5a1"
+        ],
+        "conditions": [],
+        "figures": [
+          "evidence_7d6b57fe2bbc40d73edcdec9",
+          "evidence_327fb6241838980e6010f505",
+          "evidence_6bb93ee3bacd0e2f20753f9f",
+          "evidence_b1906b340642a9c8a40262a4",
+          "evidence_45666c1e6ad158565c92a6de",
+          "evidence_74c559f58f2c0c5d9f5cd3c3",
+          "evidence_1ef860fc5e1414bd0addfb9a",
+          "evidence_f7af2089af452504d4726e13",
+          "evidence_39d514c9ac7daf378111288d",
+          "evidence_c31143757dc5fc6c853db707",
+          "evidence_bcdbe761342bdbe974de6c58"
+        ],
+        "prerequisites": [],
+        "tables": [
+          "evidence_15e1ce067b76cc524a0448d2"
+        ],
+        "warnings": []
+      },
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "required_evidence_ids": [
+        "evidence_001335e5b633008075189f76",
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_08f733b5af1455e073ff4100",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_17c02f5850fb622a858a2e5d",
+        "evidence_1b6ac29f7d67b8a68c57a1d0",
+        "evidence_1ef860fc5e1414bd0addfb9a",
+        "evidence_26096eb949d668e5bf4df512",
+        "evidence_272bd86a27fe5489e66a4af6",
+        "evidence_2da295467109e2ffd40840cf",
+        "evidence_323bcafc4948d59704fec0d5",
+        "evidence_327fb6241838980e6010f505",
+        "evidence_38d4cced38a0586a204bbc15",
+        "evidence_39d514c9ac7daf378111288d",
+        "evidence_45666c1e6ad158565c92a6de",
+        "evidence_4c7733b0ad33581282de44ed",
+        "evidence_4cfcbb4612d5809c3511d6fa",
+        "evidence_533bb7ef741105dc8ee7cdf1",
+        "evidence_5809b88f4cf2d77391b36c46",
+        "evidence_634643c9be7de4d37ee7b5a2",
+        "evidence_65270170ab77cd81e769fc81",
+        "evidence_6bb93ee3bacd0e2f20753f9f",
+        "evidence_6ed01159fd5669cd60c2a656",
+        "evidence_724d49cdd1f4fd70b6671f5b",
+        "evidence_74c559f58f2c0c5d9f5cd3c3",
+        "evidence_7942508c8527d4c2550af80a",
+        "evidence_7d6b57fe2bbc40d73edcdec9",
+        "evidence_80fc3c1545382e074eccbcea",
+        "evidence_8390400b310264a086506b1f",
+        "evidence_86fc55f5643415ada60288dc",
+        "evidence_95ed4d74965c06b3f0e5174b",
+        "evidence_a54b5925c3d20360541d2114",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_a9e890051963e1fe3fff5153",
+        "evidence_aa6ff3af3a922c597647a3f0",
+        "evidence_b1906b340642a9c8a40262a4",
+        "evidence_b4e9c215783dd876443da7ac",
+        "evidence_bcdbe761342bdbe974de6c58",
+        "evidence_c31143757dc5fc6c853db707",
+        "evidence_c848dfa8630c0f90ac639ab4",
+        "evidence_c9cab1907f963dfd74acfe71",
+        "evidence_c9df184906bf88efbfdf3cde",
+        "evidence_d4cac8f8c2a17b9fd5955cd7",
+        "evidence_e141910747861df746685a2e",
+        "evidence_f4b89f54877b99a3305617ce",
+        "evidence_f4dbcfa8fd37b20ab295e5a1",
+        "evidence_f7af2089af452504d4726e13"
+      ],
+      "review_status": "DRAFT",
+      "scope_review_complete": false,
+      "step_id": "a_switches_on:candidate-v3",
+      "version": "isolated-runtime-candidates-v3"
+    },
+    "dependency_sha256": "3689f15e34939fbfcc9218a68873883009e47aa805d2c51cc7be681fbf1d99a2",
+    "procedure": {
+      "boundaries_checked": false,
+      "evidence_ids": [
+        "evidence_001335e5b633008075189f76",
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_08f733b5af1455e073ff4100",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_17c02f5850fb622a858a2e5d",
+        "evidence_1b6ac29f7d67b8a68c57a1d0",
+        "evidence_1ef860fc5e1414bd0addfb9a",
+        "evidence_26096eb949d668e5bf4df512",
+        "evidence_272bd86a27fe5489e66a4af6",
+        "evidence_2da295467109e2ffd40840cf",
+        "evidence_323bcafc4948d59704fec0d5",
+        "evidence_327fb6241838980e6010f505",
+        "evidence_38d4cced38a0586a204bbc15",
+        "evidence_39d514c9ac7daf378111288d",
+        "evidence_45666c1e6ad158565c92a6de",
+        "evidence_4c7733b0ad33581282de44ed",
+        "evidence_4cfcbb4612d5809c3511d6fa",
+        "evidence_533bb7ef741105dc8ee7cdf1",
+        "evidence_5809b88f4cf2d77391b36c46",
+        "evidence_634643c9be7de4d37ee7b5a2",
+        "evidence_65270170ab77cd81e769fc81",
+        "evidence_6bb93ee3bacd0e2f20753f9f",
+        "evidence_6ed01159fd5669cd60c2a656",
+        "evidence_724d49cdd1f4fd70b6671f5b",
+        "evidence_74c559f58f2c0c5d9f5cd3c3",
+        "evidence_7942508c8527d4c2550af80a",
+        "evidence_7d6b57fe2bbc40d73edcdec9",
+        "evidence_80fc3c1545382e074eccbcea",
+        "evidence_8390400b310264a086506b1f",
+        "evidence_86fc55f5643415ada60288dc",
+        "evidence_95ed4d74965c06b3f0e5174b",
+        "evidence_a54b5925c3d20360541d2114",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_a9e890051963e1fe3fff5153",
+        "evidence_aa6ff3af3a922c597647a3f0",
+        "evidence_b1906b340642a9c8a40262a4",
+        "evidence_b4e9c215783dd876443da7ac",
+        "evidence_bcdbe761342bdbe974de6c58",
+        "evidence_c31143757dc5fc6c853db707",
+        "evidence_c848dfa8630c0f90ac639ab4",
+        "evidence_c9cab1907f963dfd74acfe71",
+        "evidence_c9df184906bf88efbfdf3cde",
+        "evidence_d4cac8f8c2a17b9fd5955cd7",
+        "evidence_e141910747861df746685a2e",
+        "evidence_f4b89f54877b99a3305617ce",
+        "evidence_f4dbcfa8fd37b20ab295e5a1",
+        "evidence_f7af2089af452504d4726e13"
+      ],
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "procedure_id": "a_switches_on:candidate-v3:procedure",
+      "review_status": "DRAFT",
+      "runtime_authorized": false,
+      "sequence_kind": "SOURCE_PROCEDURE_CANDIDATE_NO_DIAGNOSTIC_NEXT_STEP_ORDER",
+      "source_text": "Set only the reported OFF ignition or engine kill switch to the documented ON or RUN position. This does not establish that the remaining starting conditions are satisfied. When finishing checks with the engine not running, turn ignition OFF; the continuously ON headlamp can discharge the battery. Setting a switch does not authorize starting. Establish the compact starting checklist before any starter action; retained confirmations are not re-asked."
+    },
+    "rules": {
+      "a_switches_on:rule:attempted:a_switches_on:candidate-v3": {
+        "authoring_scope": "Explicit typed proposition; no mechanical health or diagnostic order inferred",
+        "clarification_evidence_ids": [],
+        "clarification_question": null,
+        "expected_value": false,
+        "fact_key": "attempted:a_switches_on:candidate-v3",
+        "human_signoff": false,
+        "operator": "EQ",
+        "origin": "PRODUCT_POLICY",
+        "policy_source_ids": [
+          "policy_46f874c8ba7f9aaffdd16ed8"
+        ],
+        "policy_version": "isolated-runtime-candidates-v3",
+        "predicate_type": "BOOLEAN",
+        "review_status": "DRAFT",
+        "rider_resolvable": false,
+        "rule_id": "a_switches_on:rule:attempted:a_switches_on:candidate-v3",
+        "rule_version": "isolated-runtime-candidates-v3",
+        "source_evidence_ids": [],
+        "unit": null
+      },
+      "a_switches_on:rule:bike_scope_confirmed": {
+        "authoring_scope": "Explicit typed proposition; no mechanical health or diagnostic order inferred",
+        "clarification_evidence_ids": [],
+        "clarification_question": null,
+        "expected_value": true,
+        "fact_key": "bike_scope_confirmed",
+        "human_signoff": false,
+        "operator": "EQ",
+        "origin": "PRODUCT_POLICY",
+        "policy_source_ids": [
+          "policy_240aa9e9a20851d2f8253ffc",
+          "policy_680d331344f35db68e62a9cf",
+          "policy_856cb9f6fbe76bd5e7103080"
+        ],
+        "policy_version": "isolated-runtime-candidates-v3",
+        "predicate_type": "BOOLEAN",
+        "review_status": "DRAFT",
+        "rider_resolvable": false,
+        "rule_id": "a_switches_on:rule:bike_scope_confirmed",
+        "rule_version": "isolated-runtime-candidates-v3",
+        "source_evidence_ids": [],
+        "unit": null
+      },
+      "a_switches_on:rule:reported_switch_off": {
+        "authoring_scope": "Explicit typed proposition; no mechanical health or diagnostic order inferred",
+        "clarification_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4dbcfa8fd37b20ab295e5a1"
+        ],
+        "clarification_question": "Can you confirm reported switch off?",
+        "expected_value": true,
+        "fact_key": "reported_switch_off",
+        "human_signoff": false,
+        "operator": "EQ",
+        "origin": "MANUAL",
+        "policy_source_ids": [],
+        "policy_version": null,
+        "predicate_type": "BOOLEAN",
+        "review_status": "DRAFT",
+        "rider_resolvable": true,
+        "rule_id": "a_switches_on:rule:reported_switch_off",
+        "rule_version": "isolated-runtime-candidates-v3",
+        "source_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_e141910747861df746685a2e",
+          "evidence_f4dbcfa8fd37b20ab295e5a1"
+        ],
+        "unit": null
+      },
+      "a_switches_on:rule:switch_identified": {
+        "authoring_scope": "Explicit typed proposition; no mechanical health or diagnostic order inferred",
+        "clarification_evidence_ids": [],
+        "clarification_question": "Can you confirm switch identified?",
+        "expected_value": true,
+        "fact_key": "switch_identified",
+        "human_signoff": false,
+        "operator": "EQ",
+        "origin": "PRODUCT_POLICY",
+        "policy_source_ids": [
+          "policy_240aa9e9a20851d2f8253ffc",
+          "policy_680d331344f35db68e62a9cf",
+          "policy_856cb9f6fbe76bd5e7103080"
+        ],
+        "policy_version": "isolated-runtime-candidates-v3",
+        "predicate_type": "BOOLEAN",
+        "review_status": "DRAFT",
+        "rider_resolvable": true,
+        "rule_id": "a_switches_on:rule:switch_identified",
+        "rule_version": "isolated-runtime-candidates-v3",
+        "source_evidence_ids": [],
+        "unit": null
+      }
+    },
+    "session_fixture": {
+      "actual_runtime_measured": false,
+      "events": [
+        {
+          "expected_new_health_fact": false,
+          "expected_repeat": false,
+          "outcome": "ACTION_COMPLETED_UNRESOLVED"
+        },
+        {
+          "must_not_prove_system_health": true,
+          "outcome": "OBSERVED_NORMAL",
+          "requires_rule_id_and_typed_fact": true
+        },
+        {
+          "expected_one_focused_question": true,
+          "outcome": "UNCLEAR"
+        },
+        {
+          "outcome": "RESOLVED",
+          "scope": "Selected issue only; other issues remain open"
+        },
+        {
+          "outcome": "CORRECTION",
+          "supersedes_immutable_attempt": true
+        }
+      ],
+      "initial_facts": {
+        "bike_scope_confirmed": true,
+        "reported_switch_off": null,
+        "switch_identified": null
+      },
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "record_id": "a_switches_on",
+      "review_status": "DRAFT",
+      "step_id": "a_switches_on:candidate-v3",
+      "symptoms": [
+        "a_switches_on"
+      ]
+    },
+    "step": {
+      "action_evidence_ids": [
+        "evidence_001335e5b633008075189f76",
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_e141910747861df746685a2e",
+        "evidence_f4dbcfa8fd37b20ab295e5a1"
+      ],
+      "applicability_rule_ids": [
+        "a_switches_on:rule:bike_scope_confirmed",
+        "a_switches_on:rule:attempted:a_switches_on:candidate-v3",
+        "a_switches_on:rule:reported_switch_off",
+        "a_switches_on:rule:switch_identified"
+      ],
+      "authoring_blockers": [
+        "INDEPENDENT_SOURCE_RULE_DEPENDENCY_SIGNOFF_REQUIRED",
+        "BRANCH_SCOPES_AND_ROLE_GROUPS_NOT_RUNTIME_APPROVED"
+      ],
+      "canonical_record_id": "a_switches_on",
+      "claims": [
+        {
+          "claim_id": "a_switches_on:accepted-draft:main",
+          "evidence_ids": [
+            "evidence_001335e5b633008075189f76",
+            "evidence_15e1ce067b76cc524a0448d2"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "ACTION",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_001335e5b633008075189f76",
+              "exact_text": " Turn ignition key to ON position and engine kill switch on right hand side handle bar to run position.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 71.71171875589067,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 21.571799999999996,
+                    "r": 215.0789999999998,
+                    "t": 88.38959999999997
+                  },
+                  "charspan": [
+                    0,
+                    104
+                  ],
+                  "page_no": 72
+                }
+              ],
+              "text_sha256": "54ae7ad0def1cf3258243f9d9f6cd16933eb7f9e1e92177848e96616a5f17e23",
+              "text_span": [
+                0,
+                104
+              ]
+            },
+            {
+              "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+              "exact_text": "r0c0: Symptom\nr0c1: Observations\nr0c2: Check for/Remedy\nr1c0: Engine does not start\nr1c1: If the ignition/Engine kill switch in OFF position\nr1c2: Switch ON ignition\nr2c1: If inadequate fuel level in fuel tank\nr2c2: Top up the fuel\nr3c1: If the lights are dim/weak horn sound\nr3c2: Weak or discharged battery / problem in charging circuit Contact Authorised service center\nr4c1: If fuse is blown\nr4c2: 1. Replace the fuse with same rating 2. Contact Authorised service center if prob- lem persists\nr5c1: Connection issue with spark plug, cap, high tension cable\nr5c2: Reconnect spark plug, cap and high tension cable.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 40.302512609145225,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 20.856049991954457,
+                    "r": 419.2077901944247,
+                    "t": 177.41958954216452
+                  },
+                  "charspan": [
+                    0,
+                    0
+                  ],
+                  "page_no": 121
+                }
+              ],
+              "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85",
+              "text_span": [
+                0,
+                617
+              ]
+            }
+          ],
+          "text": "Set only the reported OFF ignition or engine kill switch to the documented ON or RUN position. This does not establish that the remaining starting conditions are satisfied."
+        },
+        {
+          "claim_id": "a_switches_on:accepted-draft:warning0",
+          "evidence_ids": [
+            "evidence_e141910747861df746685a2e"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "FACT",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_e141910747861df746685a2e",
+              "exact_text": " Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 88.25841875589066,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 225.025,
+                    "r": 418.7081999999998,
+                    "t": 114.93630000000002
+                  },
+                  "charspan": [
+                    0,
+                    141
+                  ],
+                  "page_no": 28
+                }
+              ],
+              "text_sha256": "9ce4bbf8092a483e6cf3822546fd134d9dc391f8b6ef0c3d273ad0aef386e758",
+              "text_span": [
+                0,
+                141
+              ]
+            }
+          ],
+          "text": "When finishing checks with the engine not running, turn ignition OFF; the continuously ON headlamp can discharge the battery."
+        },
+        {
+          "claim_id": "a_switches_on:accepted-draft:setup0",
+          "evidence_ids": [
+            "evidence_017a78d6fdfd30389967f3c9",
+            "evidence_a7a5ea8352d16679e89780fb",
+            "evidence_f4dbcfa8fd37b20ab295e5a1"
+          ],
+          "policy_support_ids": [],
+          "presentation_mode": "DRAFT_PARAPHRASE",
+          "response_role": "FACT",
+          "source_spans": [
+            {
+              "evidence_id": "evidence_017a78d6fdfd30389967f3c9",
+              "exact_text": " Disengage clutch by pulling in the clutch lever and hold it in depressed condition.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 194.57851875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 225.02779999999998,
+                    "r": 418.6149999999998,
+                    "t": 211.2564
+                  },
+                  "charspan": [
+                    0,
+                    85
+                  ],
+                  "page_no": 73
+                }
+              ],
+              "text_sha256": "720c52f50d20334a29d55c0e18a379a6432a27b1307dd9a3e79eb3a2e6e9daa1",
+              "text_span": [
+                0,
+                85
+              ]
+            },
+            {
+              "evidence_id": "evidence_a7a5ea8352d16679e89780fb",
+              "exact_text": " Vehicle may start with side stand condition but engine will turn-off when gear is engaged, this side stand cutoff feature is provided for rider safety ensure side stand is retracted before vehicle moving / starting.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 158.57161875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 225.025,
+                    "r": 418.7402,
+                    "t": 195.2495
+                  },
+                  "charspan": [
+                    0,
+                    217
+                  ],
+                  "page_no": 74
+                }
+              ],
+              "text_sha256": "934985e941378347edd0a001e5b37b4dd0c68683e7052cf079a23fc42e6ea315",
+              "text_span": [
+                0,
+                217
+              ]
+            },
+            {
+              "evidence_id": "evidence_f4dbcfa8fd37b20ab295e5a1",
+              "exact_text": " To shift into neutral, move the motorcycle back and forth gently, while simultaneously shifting the gear. Ensure gear is in neutral position and the neutral lamp is glowing in the instrument cluster.",
+              "provenance": [
+                {
+                  "bbox": {
+                    "b": 171.57571875589068,
+                    "coord_origin": "BOTTOMLEFT",
+                    "l": 21.5718,
+                    "r": 214.98299999999995,
+                    "t": 208.2536
+                  },
+                  "charspan": [
+                    0,
+                    201
+                  ],
+                  "page_no": 72
+                }
+              ],
+              "text_sha256": "4c5d609797f93b77d37ce336b3db1345860b9cd6228ecae5ca178ae0e32b70ad",
+              "text_span": [
+                0,
+                201
+              ]
+            }
+          ],
+          "text": "Setting a switch does not authorize starting. Establish the compact starting checklist before any starter action; retained confirmations are not re-asked."
+        }
+      ],
+      "dependency_manifest_version": "isolated-runtime-candidates-v3",
+      "kind": "ACTION",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "next_step_evidence_ids": [],
+      "next_step_ids": [],
+      "parent_procedure_id": "a_switches_on:candidate-v3:procedure",
+      "repeat_rule_ids": [],
+      "required_evidence_ids": [
+        "evidence_001335e5b633008075189f76",
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_08f733b5af1455e073ff4100",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_17c02f5850fb622a858a2e5d",
+        "evidence_1b6ac29f7d67b8a68c57a1d0",
+        "evidence_1ef860fc5e1414bd0addfb9a",
+        "evidence_26096eb949d668e5bf4df512",
+        "evidence_272bd86a27fe5489e66a4af6",
+        "evidence_2da295467109e2ffd40840cf",
+        "evidence_323bcafc4948d59704fec0d5",
+        "evidence_327fb6241838980e6010f505",
+        "evidence_38d4cced38a0586a204bbc15",
+        "evidence_39d514c9ac7daf378111288d",
+        "evidence_45666c1e6ad158565c92a6de",
+        "evidence_4c7733b0ad33581282de44ed",
+        "evidence_4cfcbb4612d5809c3511d6fa",
+        "evidence_533bb7ef741105dc8ee7cdf1",
+        "evidence_5809b88f4cf2d77391b36c46",
+        "evidence_634643c9be7de4d37ee7b5a2",
+        "evidence_65270170ab77cd81e769fc81",
+        "evidence_6bb93ee3bacd0e2f20753f9f",
+        "evidence_6ed01159fd5669cd60c2a656",
+        "evidence_724d49cdd1f4fd70b6671f5b",
+        "evidence_74c559f58f2c0c5d9f5cd3c3",
+        "evidence_7942508c8527d4c2550af80a",
+        "evidence_7d6b57fe2bbc40d73edcdec9",
+        "evidence_80fc3c1545382e074eccbcea",
+        "evidence_8390400b310264a086506b1f",
+        "evidence_86fc55f5643415ada60288dc",
+        "evidence_95ed4d74965c06b3f0e5174b",
+        "evidence_a54b5925c3d20360541d2114",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_a9e890051963e1fe3fff5153",
+        "evidence_aa6ff3af3a922c597647a3f0",
+        "evidence_b1906b340642a9c8a40262a4",
+        "evidence_b4e9c215783dd876443da7ac",
+        "evidence_bcdbe761342bdbe974de6c58",
+        "evidence_c31143757dc5fc6c853db707",
+        "evidence_c848dfa8630c0f90ac639ab4",
+        "evidence_c9cab1907f963dfd74acfe71",
+        "evidence_c9df184906bf88efbfdf3cde",
+        "evidence_d4cac8f8c2a17b9fd5955cd7",
+        "evidence_e141910747861df746685a2e",
+        "evidence_f4b89f54877b99a3305617ce",
+        "evidence_f4dbcfa8fd37b20ab295e5a1",
+        "evidence_f7af2089af452504d4726e13"
+      ],
+      "review_status": "DRAFT",
+      "rule_version": "isolated-runtime-candidates-v3",
+      "runtime_authorized": false,
+      "safety_rule_ids": [],
+      "step_id": "a_switches_on:candidate-v3",
+      "symptom_tags": [
+        "a_switches_on"
+      ],
+      "unresolved_evidence_ids": [],
+      "unresolved_route": "CONTINUE_DOCUMENTED"
+    },
+    "step_sha256": "d7eaca80a54b69719cd1202fd1e5379684d30d9d4836a9c72b0f5b1f1bec6808",
+    "trusted_route": {
+      "initial_candidate_route": "AMBIGUOUS",
+      "record_id": "a_switches_on",
+      "requires_actual_formal_approval": true,
+      "route_kind": "SOURCE_DRAFT_STEP",
+      "runtime_authorized": false,
+      "step_id": "a_switches_on:candidate-v3"
+    }
+  },
+  "schema_version": "case-check-plan-v1",
+  "source_limit_checks": [],
+  "source_manifest_scope": {
+    "applicability_policy": {
+      "manual_identification": "PDF page 3 describes 452 cc liquid-cooled Sherpa; pages 1 and 4 state BS VI.",
+      "market_or_region": "Not independently confirmed; no rider market prompt required under owner selection policy.",
+      "model_year_required": false,
+      "owner_confirmed_on": "2026-10-09",
+      "rider_edition_selection_required": false,
+      "selection_rule": "Rider confirms Himalayan and BS6; supplied immutable manual is selected.",
+      "version": "owner-himalayan-bs6-v1"
+    },
+    "display_policy": {
+      "end_user_excerpts": false,
+      "end_user_figure_crops": false,
+      "end_user_pdf": false,
+      "engineering_pdf_and_excerpts": true,
+      "oem_redistribution_license_verified": false,
+      "owner_statement_date": "2026-10-09",
+      "version": "engineering-only-v1"
+    },
+    "oem_service_route": {
+      "checked_date": "2026-10-09",
+      "email": "support@royalenfield.com",
+      "market": "India",
+      "market_fit_status": "PENDING_SOURCE_MARKET_CONFIRMATION",
+      "owner_requested": true,
+      "url": "mailto:support@royalenfield.com",
+      "verification_url": "https://www.royalenfield.com/in/en/support/digital-quickstart/new-himalayan/contact-us/",
+      "verified": true,
+      "wording": "Kindly write to Royal Enfield at support@royalenfield.com"
+    },
+    "rights_status": "engineering_use_authorized_by_owner_end_user_pdf_and_excerpt_display_prohibited"
+  },
+  "source_objects": {
+    "evidence_001335e5b633008075189f76": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_001335e5b633008075189f76",
+      "exact_text": " Turn ignition key to ON position and engine kill switch on right hand side handle bar to run position.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 71.71171875589067,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.571799999999996,
+            "r": 215.0789999999998,
+            "t": 88.38959999999997
+          },
+          "charspan": [
+            0,
+            104
+          ],
+          "page_no": 72
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "54ae7ad0def1cf3258243f9d9f6cd16933eb7f9e1e92177848e96616a5f17e23",
+      "text_span": [
+        0,
+        104
+      ]
+    },
+    "evidence_017a78d6fdfd30389967f3c9": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_017a78d6fdfd30389967f3c9",
+      "exact_text": " Disengage clutch by pulling in the clutch lever and hold it in depressed condition.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 194.57851875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.02779999999998,
+            "r": 418.6149999999998,
+            "t": 211.2564
+          },
+          "charspan": [
+            0,
+            85
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "720c52f50d20334a29d55c0e18a379a6432a27b1307dd9a3e79eb3a2e6e9daa1",
+      "text_span": [
+        0,
+        85
+      ]
+    },
+    "evidence_08f733b5af1455e073ff4100": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_08f733b5af1455e073ff4100",
+      "exact_text": "CAUTION",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 121.56058306789606,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.9625,
+            "r": 263.0256999999999,
+            "t": 128.74519999999998
+          },
+          "charspan": [
+            0,
+            7
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "text_span": [
+        0,
+        7
+      ]
+    },
+    "evidence_15e1ce067b76cc524a0448d2": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+      "exact_text": "r0c0: Symptom\nr0c1: Observations\nr0c2: Check for/Remedy\nr1c0: Engine does not start\nr1c1: If the ignition/Engine kill switch in OFF position\nr1c2: Switch ON ignition\nr2c1: If inadequate fuel level in fuel tank\nr2c2: Top up the fuel\nr3c1: If the lights are dim/weak horn sound\nr3c2: Weak or discharged battery / problem in charging circuit Contact Authorised service center\nr4c1: If fuse is blown\nr4c2: 1. Replace the fuse with same rating 2. Contact Authorised service center if prob- lem persists\nr5c1: Connection issue with spark plug, cap, high tension cable\nr5c2: Reconnect spark plug, cap and high tension cable.",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "fdf0b935567fa48295e9af2751a4f4c6828cbe64a21ce03aa7d9d8a947a7a04b",
+      "object_type": "table",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 40.302512609145225,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 20.856049991954457,
+            "r": 419.2077901944247,
+            "t": 177.41958954216452
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 121
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "table_cells": [
+        {
+          "bbox": {
+            "b": 87.30763868613138,
+            "coord_origin": "TOPLEFT",
+            "l": 46.0836,
+            "r": 81.15480000000001,
+            "t": 80.62549999999999
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 0,
+          "text": "Symptom"
+        },
+        {
+          "bbox": {
+            "b": 87.30763868613138,
+            "coord_origin": "TOPLEFT",
+            "l": 155.7316,
+            "r": 204.03400000000002,
+            "t": 80.62549999999999
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 0,
+          "text": "Observations"
+        },
+        {
+          "bbox": {
+            "b": 87.30763868613138,
+            "coord_origin": "TOPLEFT",
+            "l": 302.9556,
+            "r": 369.5772000000001,
+            "t": 80.62549999999999
+          },
+          "col_span": 1,
+          "column_header": true,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 1,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 0,
+          "text": "Check for/Remedy"
+        },
+        {
+          "bbox": {
+            "b": 154.79938124410933,
+            "coord_origin": "TOPLEFT",
+            "l": 25.57159999999999,
+            "r": 95.02520000000001,
+            "t": 148.1215
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 1,
+          "end_row_offset_idx": 6,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 5,
+          "start_col_offset_idx": 0,
+          "start_row_offset_idx": 1,
+          "text": "Engine does not start"
+        },
+        {
+          "bbox": {
+            "b": 109.30338124410932,
+            "coord_origin": "TOPLEFT",
+            "l": 109.65959999999998,
+            "r": 234.70279999999977,
+            "t": 92.62549999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 1,
+          "text": "If the ignition/Engine kill switch in OFF position"
+        },
+        {
+          "bbox": {
+            "b": 104.30338124410932,
+            "coord_origin": "TOPLEFT",
+            "l": 258.1556,
+            "r": 318.8251999999999,
+            "t": 97.62549999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 2,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 1,
+          "text": "Switch ON ignition"
+        },
+        {
+          "bbox": {
+            "b": 121.30338124410932,
+            "coord_origin": "TOPLEFT",
+            "l": 109.65959999999998,
+            "r": 221.2395999999998,
+            "t": 114.62549999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 2,
+          "text": "If inadequate fuel level in fuel tank"
+        },
+        {
+          "bbox": {
+            "b": 121.30338124410932,
+            "coord_origin": "TOPLEFT",
+            "l": 258.1555999999998,
+            "r": 306.9539999999997,
+            "t": 114.62549999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 3,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 2,
+          "text": "Top up the fuel"
+        },
+        {
+          "bbox": {
+            "b": 143.30338124410935,
+            "coord_origin": "TOPLEFT",
+            "l": 109.65959999999998,
+            "r": 231.12679999999992,
+            "t": 136.6255
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 3,
+          "text": "If the lights are dim/weak horn sound"
+        },
+        {
+          "bbox": {
+            "b": 153.30338124410935,
+            "coord_origin": "TOPLEFT",
+            "l": 258.1556,
+            "r": 398.19799999999975,
+            "t": 126.62549999999999
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 4,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 3,
+          "text": "Weak or discharged battery / problem in charging circuit Contact Authorised service center"
+        },
+        {
+          "bbox": {
+            "b": 176.79938124410933,
+            "coord_origin": "TOPLEFT",
+            "l": 109.65959999999998,
+            "r": 158.32999999999987,
+            "t": 170.1215
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 5,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 4,
+          "text": "If fuse is blown"
+        },
+        {
+          "bbox": {
+            "b": 188.30338124410935,
+            "coord_origin": "TOPLEFT",
+            "l": 258.1556,
+            "r": 402.5876,
+            "t": 158.6255
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 5,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 4,
+          "text": "1. Replace the fuse with same rating 2. Contact Authorised service center if prob- lem persists"
+        },
+        {
+          "bbox": {
+            "b": 210.30338124410935,
+            "coord_origin": "TOPLEFT",
+            "l": 109.65959999999998,
+            "r": 234.0708,
+            "t": 193.6255
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 2,
+          "end_row_offset_idx": 6,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 1,
+          "start_row_offset_idx": 5,
+          "text": "Connection issue with spark plug, cap, high tension cable"
+        },
+        {
+          "bbox": {
+            "b": 210.30338124410935,
+            "coord_origin": "TOPLEFT",
+            "l": 258.1556,
+            "r": 399.462,
+            "t": 193.6255
+          },
+          "col_span": 1,
+          "column_header": false,
+          "end_col_offset_idx": 3,
+          "end_row_offset_idx": 6,
+          "fillable": false,
+          "row_header": false,
+          "row_section": false,
+          "row_span": 1,
+          "start_col_offset_idx": 2,
+          "start_row_offset_idx": 5,
+          "text": "Reconnect spark plug, cap and high tension cable."
+        }
+      ],
+      "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85",
+      "text_span": [
+        0,
+        617
+      ]
+    },
+    "evidence_17c02f5850fb622a858a2e5d": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_17c02f5850fb622a858a2e5d",
+      "exact_text": "5",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "text",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 208.035955,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 97.9471,
+            "r": 100.78258880000001,
+            "t": 212.258755
+          },
+          "charspan": [
+            0,
+            1
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+      "text_span": [
+        0,
+        1
+      ]
+    },
+    "evidence_1b6ac29f7d67b8a68c57a1d0": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_1b6ac29f7d67b8a68c57a1d0",
+      "exact_text": " In case the engine does not start within 5 seconds, release starter switch and wait for about 5 seconds before attempting to start the engine again.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 87.45851875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 215.03900000000004,
+            "t": 114.13639999999998
+          },
+          "charspan": [
+            0,
+            150
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "6b487e558b44333993fce4d939e65eb92d82a7bef9ea5c8175b76a960215347a",
+      "text_span": [
+        0,
+        150
+      ]
+    },
+    "evidence_1ef860fc5e1414bd0addfb9a": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_1ef860fc5e1414bd0addfb9a",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 60.021347684972426,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 26.85740189292214,
+            "r": 37.89587768554687,
+            "t": 70.76606008731616
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_26096eb949d668e5bf4df512": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_26096eb949d668e5bf4df512",
+      "exact_text": "\"OFF\"",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "checkbox_selected",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 63.27681559999999,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 39.7616,
+            "r": 55.069311400000004,
+            "t": 67.4383536
+          },
+          "charspan": [
+            0,
+            5
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "83473d7d2ef745affa7c4720b40f8067942d9a60843bb757f35bcfed8b73338a",
+      "text_span": [
+        0,
+        5
+      ]
+    },
+    "evidence_272bd86a27fe5489e66a4af6": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_272bd86a27fe5489e66a4af6",
+      "exact_text": " Check the fuel level indicator in the cluster for adequate fuel in the fuel tank. In case the last bar is blinking continuously, it indicates low fuel level in the tank. Please re-fuel immediately.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 48.25851875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.571799999999996,
+            "r": 215.1078,
+            "t": 84.93639999999999
+          },
+          "charspan": [
+            0,
+            199
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "6c115b6158cef18bfea4ae50317f8647384538d0d3c298fe054911db7c85fe18",
+      "text_span": [
+        0,
+        199
+      ]
+    },
+    "evidence_2da295467109e2ffd40840cf": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_2da295467109e2ffd40840cf",
+      "exact_text": " In case vehicle not starting on multiple continuous attempts, please turn OFF and turn ON ignition switch and then start again.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 55.45851875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.571799999999996,
+            "r": 215.07899999999998,
+            "t": 82.13639999999998
+          },
+          "charspan": [
+            0,
+            129
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "cf1d11677ae78a0daa63085ef9cdd3d8c69275f6d16014f37cb915690b5bb752",
+      "text_span": [
+        0,
+        129
+      ]
+    },
+    "evidence_323bcafc4948d59704fec0d5": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_323bcafc4948d59704fec0d5",
+      "exact_text": "Maximum fuel level",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 168.82861875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 93.49020000000002,
+            "t": 175.5065
+          },
+          "charspan": [
+            0,
+            21
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "302bc40ef47acc2eab6df27bee6b0485aa7161b14058d69ef39ac4c2cb2db961",
+      "text_span": [
+        0,
+        18
+      ]
+    },
+    "evidence_327fb6241838980e6010f505": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_327fb6241838980e6010f505",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 114.58188746553307,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 263.96672657359727,
+            "r": 379.21563321200284,
+            "t": 187.4856282456342
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_38d4cced38a0586a204bbc15": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_38d4cced38a0586a204bbc15",
+      "exact_text": "IGNITION/ENGINE KILL SWITCH",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 78.80038306789606,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 146.6486,
+            "t": 85.98500000000001
+          },
+          "charspan": [
+            0,
+            27
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "d6084bcdbcd19552b15ffc71e7769ca128c48fb37763533212061874b0b56baa",
+      "text_span": [
+        0,
+        27
+      ]
+    },
+    "evidence_39d514c9ac7daf378111288d": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_39d514c9ac7daf378111288d",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 92.66645473345588,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 263.8774726451527,
+            "r": 379.3478691517223,
+            "t": 165.40158898207721
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 72
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_45666c1e6ad158565c92a6de": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_45666c1e6ad158565c92a6de",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 90.65032936006432,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 60.29788644270463,
+            "r": 175.66805886008524,
+            "t": 163.48013034237133
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_4c7733b0ad33581282de44ed": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_4c7733b0ad33581282de44ed",
+      "exact_text": "CAUTION",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 141.48008306789606,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.9625,
+            "r": 263.0256999999999,
+            "t": 148.6647
+          },
+          "charspan": [
+            0,
+            7
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "text_span": [
+        0,
+        7
+      ]
+    },
+    "evidence_4cfcbb4612d5809c3511d6fa": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_4cfcbb4612d5809c3511d6fa",
+      "exact_text": "that all the function of the electronic fuel injection (EFI) system is functioning normally. In the event of any malfunction in the EFI system the MIL will glow continuously.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "text",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 174.57571875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 240.02779999999996,
+            "r": 418.575,
+            "t": 211.2536
+          },
+          "charspan": [
+            0,
+            174
+          ],
+          "page_no": 72
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "5f2673923e5c9de0f5769f3b75cf3450f9f8d79457066cd5eb09ad29dcc10e6f",
+      "text_span": [
+        0,
+        174
+      ]
+    },
+    "evidence_533bb7ef741105dc8ee7cdf1": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_533bb7ef741105dc8ee7cdf1",
+      "exact_text": " If the engine does not start. Do not hold the starter switch in depressed condition for long periods, this will cause the battery to drain below the threshold level of 10 V. Please get the motorcycle checked through an Royal Enfield Authorised Service Centre to identify and correct the reason for not starting.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 78.12471875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.025,
+            "r": 418.6922000000002,
+            "t": 134.8026
+          },
+          "charspan": [
+            0,
+            313
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "4efb361a4f5080d68200bab0c326a8e1ccdf945a09bef0432c57081badceff3e",
+      "text_span": [
+        0,
+        313
+      ]
+    },
+    "evidence_5809b88f4cf2d77391b36c46": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_5809b88f4cf2d77391b36c46",
+      "exact_text": "CAUTION",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 123.72048306789605,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 22.5094,
+            "r": 59.5726,
+            "t": 130.9051
+          },
+          "charspan": [
+            0,
+            7
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "b79621963d944401a079f4343c8047e49022faa0d2b499aa519255782b6418f1",
+      "text_span": [
+        0,
+        7
+      ]
+    },
+    "evidence_634643c9be7de4d37ee7b5a2": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_634643c9be7de4d37ee7b5a2",
+      "exact_text": " Do not press the starter button more than 5 seconds after three successive cranking, wait for 15 to 20 seconds the battery to recover.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 38.96141875589069,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.02499999999998,
+            "r": 418.7321999999998,
+            "t": 65.63929999999999
+          },
+          "charspan": [
+            0,
+            136
+          ],
+          "page_no": 75
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "48a1aadf6987f54796e2f29c0890c3d8597b93f6d4d9fcf8396f009c682dfd5d",
+      "text_span": [
+        0,
+        136
+      ]
+    },
+    "evidence_65270170ab77cd81e769fc81": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_65270170ab77cd81e769fc81",
+      "exact_text": "Fuel filler collar",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 190.82861875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 79.07499999999999,
+            "t": 197.5065
+          },
+          "charspan": [
+            0,
+            21
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "0def2950f92eb77d9d97a907e392d37fee39a4a59f4febff48533fcd66c662c3",
+      "text_span": [
+        0,
+        18
+      ]
+    },
+    "evidence_6bb93ee3bacd0e2f20753f9f": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_6bb93ee3bacd0e2f20753f9f",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 20.897784409466908,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 20.2963319050182,
+            "r": 31.22617035952481,
+            "t": 28.271540556066157
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_6ed01159fd5669cd60c2a656": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_6ed01159fd5669cd60c2a656",
+      "exact_text": "FUEL FILLING LEVEL",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 203.41788306789604,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 104.01739999999995,
+            "t": 210.6025
+          },
+          "charspan": [
+            0,
+            18
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "bacf6c6a6ede8e870630b699bc1ad8c9395658446997c1538a0a91fa7df7b95c",
+      "text_span": [
+        0,
+        18
+      ]
+    },
+    "evidence_724d49cdd1f4fd70b6671f5b": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_724d49cdd1f4fd70b6671f5b",
+      "exact_text": "We have listed below a few basic checks in case your motorcycle is not functioning. If in case the problem is not rectified after these checks, it is necessary to get the motorcycle checked by a Royal Enfield Authorised Dealer/ Service Centre to rectify the problem and to ensure trouble free performance.",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_sha256": "74a140ae68faa3f0d46d609c2ba42e8e245924b72b6dab6797765e1b82924d4c",
+      "object_type": "text",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 182.57641875589067,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5715,
+            "r": 411.3475,
+            "t": 209.2543
+          },
+          "charspan": [
+            0,
+            305
+          ],
+          "page_no": 121
+        }
+      ],
+      "review_status": "BINDING_AUTHORED_NOT_FORMALLY_APPROVED",
+      "text_sha256": "06f7b1c88f09497adf8aa28d8c4ddfd0259b380babf17346f4da9fe24e97eb9c",
+      "text_span": [
+        0,
+        305
+      ]
+    },
+    "evidence_74c559f58f2c0c5d9f5cd3c3": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_74c559f58f2c0c5d9f5cd3c3",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 91.90764145795038,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 60.09096506985751,
+            "r": 175.65232518976384,
+            "t": 164.48435724954044
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 72
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_7942508c8527d4c2550af80a": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_7942508c8527d4c2550af80a",
+      "exact_text": "NOTE",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 120.60058306789608,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 22.5094,
+            "r": 44.741400000000006,
+            "t": 127.7852
+          },
+          "charspan": [
+            0,
+            4
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "7a552636e3317c1d116f1c562c91b3ecff5ffcbb4dc5d1b6b77af7a2b9bef711",
+      "text_span": [
+        0,
+        4
+      ]
+    },
+    "evidence_7d6b57fe2bbc40d73edcdec9": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_7d6b57fe2bbc40d73edcdec9",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 137.39250573012407,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 60.215197095003994,
+            "r": 175.7607550048828,
+            "t": 210.20548418830424
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_80fc3c1545382e074eccbcea": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_80fc3c1545382e074eccbcea",
+      "exact_text": "STARTING",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.68907460184408,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 83.9586,
+            "t": 228.46599999999998
+          },
+          "charspan": [
+            0,
+            8
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "8a19079ce69d165aaa75c11932dbf4672b48cbdb6647b8ed5a5f40caacbabe7c",
+      "text_span": [
+        0,
+        8
+      ]
+    },
+    "evidence_8390400b310264a086506b1f": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_8390400b310264a086506b1f",
+      "exact_text": "PRECAUTIONS",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 201.79288306789604,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.025,
+            "r": 282.9354,
+            "t": 208.9775
+          },
+          "charspan": [
+            0,
+            11
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "a95adfcc85e42bc643443601c0948dff78b502cf77b121b1fba8b2d8f6dada88",
+      "text_span": [
+        0,
+        11
+      ]
+    },
+    "evidence_86fc55f5643415ada60288dc": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_86fc55f5643415ada60288dc",
+      "exact_text": " In case the malfunction indicator does not turn OFF, get the motorcycle checked through an Royal Enfield Authorised Service Centre for rectification.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 90.25851875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 214.98299999999998,
+            "t": 116.93639999999999
+          },
+          "charspan": [
+            0,
+            151
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "f6c145c88609d279fafb4edda2587aeecfad413a4a176348ada4cc708c4bdccd",
+      "text_span": [
+        0,
+        151
+      ]
+    },
+    "evidence_95ed4d74965c06b3f0e5174b": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_95ed4d74965c06b3f0e5174b",
+      "exact_text": "Anti splash plate",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 179.82861875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 83.45820000000002,
+            "t": 186.5065
+          },
+          "charspan": [
+            0,
+            20
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "7dc004134cc886a0d69374d81f88bc9437dc5d979ccb79867cc8c1cd93dab05a",
+      "text_span": [
+        0,
+        17
+      ]
+    },
+    "evidence_a54b5925c3d20360541d2114": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_a54b5925c3d20360541d2114",
+      "exact_text": "\"ON\"",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "checkbox_unselected",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 45.21349119999999,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 40.4701862,
+            "r": 52.87550603,
+            "t": 49.3750292
+          },
+          "charspan": [
+            0,
+            4
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "c1947ff4e88b1d5d173b9326f5a5110787db4964b279ad99e8241c7bc435e205",
+      "text_span": [
+        0,
+        4
+      ]
+    },
+    "evidence_a7a5ea8352d16679e89780fb": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_a7a5ea8352d16679e89780fb",
+      "exact_text": " Vehicle may start with side stand condition but engine will turn-off when gear is engaged, this side stand cutoff feature is provided for rider safety ensure side stand is retracted before vehicle moving / starting.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 158.57161875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.025,
+            "r": 418.7402,
+            "t": 195.2495
+          },
+          "charspan": [
+            0,
+            217
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "934985e941378347edd0a001e5b37b4dd0c68683e7052cf079a23fc42e6ea315",
+      "text_span": [
+        0,
+        217
+      ]
+    },
+    "evidence_a9e890051963e1fe3fff5153": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_a9e890051963e1fe3fff5153",
+      "exact_text": "Push and hold electric start switch until engine starts for a maximum of 5 seconds.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "text",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 45.511118755890664,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 250.865,
+            "r": 418.74899999999974,
+            "t": 62.18899999999999
+          },
+          "charspan": [
+            0,
+            83
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "323dc8cbe0207ffa9cd6a6bd7a2484756ad62c129c590f964c73ca110c71dbd4",
+      "text_span": [
+        0,
+        83
+      ]
+    },
+    "evidence_aa6ff3af3a922c597647a3f0": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_aa6ff3af3a922c597647a3f0",
+      "exact_text": "TROUBLESHOOTING",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.6895746018441,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5715,
+            "r": 142.99470000000002,
+            "t": 228.4665
+          },
+          "charspan": [
+            0,
+            15
+          ],
+          "page_no": 121
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "3cc1423a2fb9142df640f5c14c021eb4c5016aca89f338397a6eca8905b73f55",
+      "text_span": [
+        0,
+        15
+      ]
+    },
+    "evidence_b1906b340642a9c8a40262a4": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_b1906b340642a9c8a40262a4",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 141.55865034754135,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 264.25492842240766,
+            "r": 379.2224262584339,
+            "t": 213.58791727941176
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_b4e9c215783dd876443da7ac": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_b4e9c215783dd876443da7ac",
+      "exact_text": " Push and hold electric start switch until engine starts for a maximum of 5 seconds.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 94.71451875589065,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.02779999999998,
+            "r": 418.73499999999973,
+            "t": 111.39240000000001
+          },
+          "charspan": [
+            0,
+            85
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "d489cd99fb642cce55b94a24b35bfea6f3eefc8e9ff4dd9943d0c3d7c40b9300",
+      "text_span": [
+        0,
+        85
+      ]
+    },
+    "evidence_bcdbe761342bdbe974de6c58": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_bcdbe761342bdbe974de6c58",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 137.54579964671416,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 60.08559993397106,
+            "r": 175.78006797096947,
+            "t": 210.2250710664637
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 73
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_c31143757dc5fc6c853db707": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_c31143757dc5fc6c853db707",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 42.560162454044104,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 27.3586613221602,
+            "r": 37.4511654177579,
+            "t": 53.20342115693933
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    },
+    "evidence_c848dfa8630c0f90ac639ab4": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_c848dfa8630c0f90ac639ab4",
+      "exact_text": "E-START SWITCH",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 73.10038306789608,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.025,
+            "r": 294.4234000000001,
+            "t": 80.285
+          },
+          "charspan": [
+            0,
+            14
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "ea909b537b83ef1938756fbbcd03591bb21b303bf2cc63163d38271ffc929fc6",
+      "text_span": [
+        0,
+        14
+      ]
+    },
+    "evidence_c9cab1907f963dfd74acfe71": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_c9cab1907f963dfd74acfe71",
+      "exact_text": "STARTING",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.68907460184408,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 83.9586,
+            "t": 228.46599999999998
+          },
+          "charspan": [
+            0,
+            8
+          ],
+          "page_no": 72
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "8a19079ce69d165aaa75c11932dbf4672b48cbdb6647b8ed5a5f40caacbabe7c",
+      "text_span": [
+        0,
+        8
+      ]
+    },
+    "evidence_c9df184906bf88efbfdf3cde": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_c9df184906bf88efbfdf3cde",
+      "exact_text": "STARTING",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.68907460184408,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 83.9586,
+            "t": 228.46599999999998
+          },
+          "charspan": [
+            0,
+            8
+          ],
+          "page_no": 74
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "8a19079ce69d165aaa75c11932dbf4672b48cbdb6647b8ed5a5f40caacbabe7c",
+      "text_span": [
+        0,
+        8
+      ]
+    },
+    "evidence_d4cac8f8c2a17b9fd5955cd7": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_d4cac8f8c2a17b9fd5955cd7",
+      "exact_text": " When both the ignition and engine kill switch is in \"ON\" position and after the vehicle is started, the MIL will glow for a few seconds and turns \"OFF\", this indicates",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 39.71171875589067,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.571799999999996,
+            "r": 215.03899999999982,
+            "t": 66.38959999999997
+          },
+          "charspan": [
+            0,
+            169
+          ],
+          "page_no": 72
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "bafee3cfbf104d1f15b82b29a97191bc1aa89249df152afa9dd7643de86231e8",
+      "text_span": [
+        0,
+        169
+      ]
+    },
+    "evidence_e141910747861df746685a2e": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_e141910747861df746685a2e",
+      "exact_text": " Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 88.25841875589066,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 225.025,
+            "r": 418.7081999999998,
+            "t": 114.93630000000002
+          },
+          "charspan": [
+            0,
+            141
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "9ce4bbf8092a483e6cf3822546fd134d9dc391f8b6ef0c3d273ad0aef386e758",
+      "text_span": [
+        0,
+        141
+      ]
+    },
+    "evidence_f4b89f54877b99a3305617ce": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_f4b89f54877b99a3305617ce",
+      "exact_text": "OPERATION OF CONTROLS",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "section_header",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 217.68907460184408,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 180.1962,
+            "t": 228.46599999999998
+          },
+          "charspan": [
+            0,
+            21
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "1891379762c344fd21f606c327d91fa22f57578b734e22659fe5f4d83cf7f902",
+      "text_span": [
+        0,
+        21
+      ]
+    },
+    "evidence_f4dbcfa8fd37b20ab295e5a1": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_f4dbcfa8fd37b20ab295e5a1",
+      "exact_text": " To shift into neutral, move the motorcycle back and forth gently, while simultaneously shifting the gear. Ensure gear is in neutral position and the neutral lamp is glowing in the instrument cluster.",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "list_item",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 171.57571875589068,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 21.5718,
+            "r": 214.98299999999995,
+            "t": 208.2536
+          },
+          "charspan": [
+            0,
+            201
+          ],
+          "page_no": 72
+        }
+      ],
+      "requires_visual_verification": false,
+      "text_sha256": "4c5d609797f93b77d37ce336b3db1345860b9cd6228ecae5ca178ae0e32b70ad",
+      "text_span": [
+        0,
+        201
+      ]
+    },
+    "evidence_f7af2089af452504d4726e13": {
+      "authority": "OEM_MANUAL",
+      "evidence_id": "evidence_f7af2089af452504d4726e13",
+      "exact_text": "",
+      "formal_approval": false,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "object_type": "picture",
+      "provenance": [
+        {
+          "bbox": {
+            "b": 46.85275815716912,
+            "coord_origin": "BOTTOMLEFT",
+            "l": 226.86360959139736,
+            "r": 242.90528212113813,
+            "t": 63.413259650735284
+          },
+          "charspan": [
+            0,
+            0
+          ],
+          "page_no": 28
+        }
+      ],
+      "requires_visual_verification": true,
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text_span": [
+        0,
+        0
+      ]
+    }
+  },
+  "state_quality_checks": [
+    {
+      "check": "Append immutable unsuccessful attempt, do not infer normality, do not repeat this action automatically.",
+      "outcome": "ACTION_COMPLETED_UNRESOLVED"
+    },
+    {
+      "check": "Require exact eligible inspection rule and typed observation; not equivalent to unresolved action or proof of system health.",
+      "outcome": "OBSERVED_NORMAL"
+    },
+    {
+      "check": "Withhold dependent branch; clarify bike/control applicability only through observable question.",
+      "outcome": "NOT_APPLICABLE"
+    },
+    {
+      "check": "One practical source-derived question only if rider-resolvable; source-review gaps route internally or to scoped abstention.",
+      "outcome": "UNCLEAR"
+    },
+    {
+      "check": "Customer-reported symptom resolution only; other issues and service inspection mandates remain.",
+      "outcome": "RESOLVED"
+    },
+    {
+      "check": "Supersede prior observation while preserving attempt history; re-evaluate eligibility without invented order.",
+      "outcome": "CORRECTION"
+    }
+  ],
+  "table_number_unit_checks": [
+    {
+      "evidence_id": "evidence_15e1ce067b76cc524a0448d2",
+      "exact_text": "r0c0: Symptom\nr0c1: Observations\nr0c2: Check for/Remedy\nr1c0: Engine does not start\nr1c1: If the ignition/Engine kill switch in OFF position\nr1c2: Switch ON ignition\nr2c1: If inadequate fuel level in fuel tank\nr2c2: Top up the fuel\nr3c1: If the lights are dim/weak horn sound\nr3c2: Weak or discharged battery / problem in charging circuit Contact Authorised service center\nr4c1: If fuse is blown\nr4c2: 1. Replace the fuse with same rating 2. Contact Authorised service center if prob- lem persists\nr5c1: Connection issue with spark plug, cap, high tension cable\nr5c2: Reconnect spark plug, cap and high tension cable.",
+      "object_type": "table",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_1b6ac29f7d67b8a68c57a1d0",
+      "exact_text": " In case the engine does not start within 5 seconds, release starter switch and wait for about 5 seconds before attempting to start the engine again.",
+      "object_type": "list_item",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_533bb7ef741105dc8ee7cdf1",
+      "exact_text": " If the engine does not start. Do not hold the starter switch in depressed condition for long periods, this will cause the battery to drain below the threshold level of 10 V. Please get the motorcycle checked through an Royal Enfield Authorised Service Centre to identify and correct the reason for not starting.",
+      "object_type": "list_item",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_634643c9be7de4d37ee7b5a2",
+      "exact_text": " Do not press the starter button more than 5 seconds after three successive cranking, wait for 15 to 20 seconds the battery to recover.",
+      "object_type": "list_item",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_a9e890051963e1fe3fff5153",
+      "exact_text": "Push and hold electric start switch until engine starts for a maximum of 5 seconds.",
+      "object_type": "text",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    },
+    {
+      "evidence_id": "evidence_b4e9c215783dd876443da7ac",
+      "exact_text": " Push and hold electric start switch until engine starts for a maximum of 5 seconds.",
+      "object_type": "list_item",
+      "required_check": "Preserve row/header/qualifier associations; compare dimensions, units, warning scope and variant against original PDF."
+    }
+  ]
+}

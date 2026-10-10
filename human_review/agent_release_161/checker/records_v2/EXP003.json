@@ -1,0 +1,150 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "EXP003",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/EXP003.json",
+  "plan_sha256": "4f8b2dc9179fda2ef47663cca76ec8512ae05a37011f8b51cf3dd967e1e5090d",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "304db881d24d62e2cba00886414a06f2edf46b5108d257228b81d875a2a5585a",
+  "final_dependency_sha256": "0b85ae618747c9051fec4db399aaf347157de7f37bb283340b83ac65ceeadb9b",
+  "final_rules_sha256": "7084eea2cc76188f61a12d06802c7a5ae50a92c5ade789055c9d8ae3abfb3b58",
+  "final_route_sha256": "238a5a76a996d3e3e48e0b6891e7b0e4a05fee9bd26f56454a158988e3a1e208",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "How do I cancel the turn signal?",
+  "claim_texts": [
+    "After the switch returns to its centre position, push it inward to cancel.",
+    "The manual shows left ON, centre push OFF and right ON."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_15eb4675b3a42a8864b7a47c",
+      "source_sha256": "50ce0f7c327bb6cbbb242d4bf6d271357c9d8ebd9f68ab3f0b9ff2d7c011d0e3",
+      "text_sha256": "de71e49aee4a587c5ded959c4342fb7483a76e045a564c8954a661eca884f01f",
+      "original_pdf_pages": [
+        31
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_3504f3277a6948b68f8943b9",
+      "source_sha256": "6b80ba41d65de7249ed815ab10fe461f44b3fcb53fd177a5c59ad43bfa16ff97",
+      "text_sha256": "398e99088b0183ba5b5a9a57a3cce893cc37e9dad54646bc2ecf27cf34489fc2",
+      "original_pdf_pages": [
+        31
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_b1d134b17438c0640f467fe4",
+      "source_sha256": "72bb039b984f2120d3a1dd1d31013bd481288a9eece98b8eae54febd069074be",
+      "text_sha256": "562173ad43abb20010a273cf1b49cc9f5ec410e01e74e9254cad99b1cd16f1ab",
+      "original_pdf_pages": [
+        31
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_e02c649cb7e2569a32dbe4c4",
+      "source_sha256": "5fca4ed3c9ba74008a1e75b9603ed89f7e9ef096dea0e76e5f51374389110ba8",
+      "text_sha256": "e0e7b99c6c70d1b70d67f04f39e32c694de869e4aaa4548e936f55dde8dc2142",
+      "original_pdf_pages": [
+        31
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_46f874c8ba7f9aaffdd16ed8",
+      "source_sha256": "08a1b8dc795d8a6bc403bcc6487b846597db894d0a33986bd2f17e19f8e4094d",
+      "text_sha256": "c5fdc9f0a3e31b5bb742b1f95eda1cb2c63dc72806fb2bed7f278c83bbfee0e0",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    31
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: After the switch returns to its centre position, push it inward to cancel. | The manual shows left ON, centre push OFF and right ON. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

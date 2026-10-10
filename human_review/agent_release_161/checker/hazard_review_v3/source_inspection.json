@@ -1,0 +1,63 @@
+{
+  "end_user_display_permission": false,
+  "engineering_only": true,
+  "inspection_status": "INDEPENDENTLY_VISUALLY_REVIEWED",
+  "original_pdf_path": "royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf",
+  "original_pdf_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "page_count": 149,
+  "pages": [
+    {
+      "image_path": "human_review/agent_release_161/checker/hazard_review_v3/original_pdf_023.png",
+      "image_sha256": "85771426fbdddedc1b81590dcf3fa8a0fa204bba90d4155146bc300ac50c863a",
+      "pdf_page": 23,
+      "printed_label": "21",
+      "text": "Royal Enfield Himalayan 21\n\nLOCATION OF KEY PARTS\n\n1. High/Low beam/Flashing switch\n\n2. Turn signal switch\n\n3. Instrument cluster\n\n4. Mode switch\n\n5. Ignition/Engine kill switch\n\n6. Hazard switch\n\n7. USB charger port\n\n8. Fuel tank cap\n\n9. Joystick\n\n10. Horn switch\n\n11. Home button\n\n1 2 3 4 5\n\n6\n\n7\n\n8\n\n9 10\n\n11 1831km\n\nkm/h\n\n00:12\n\nR.P.M 1000\n\n1\n\n2\n\n3\n\n4\n\n5 6 7\n\n8\n\n9\n\n32\n\n0",
+      "text_path": "human_review/agent_release_161/checker/hazard_review_v3/original_pdf_023.txt",
+      "text_sha256": "4344043ec7a6ff956bd5334d4244e00b477085e143dc9a0998fb79c1c83d7ecf"
+    },
+    {
+      "image_path": "human_review/agent_release_161/checker/hazard_review_v3/original_page-029.png",
+      "image_sha256": "565a2f03ba0d6ba48f53a7a79ac24d1f1190dcc8a847ff2af7df6da46c0e8c33",
+      "pdf_page": 29,
+      "printed_label": "27",
+      "text": "Royal Enfield Himalayan 27\n\nOPERATION OF CONTROLS\n\nCAUTION\n\n In case of prolonged stoppage of vehicle, please turn\n\noff ignition key to avoid discharge of battery.\n\nHAZARD LIGHT SWITCH \n\n Press the hazard button to hazard blinking ON.\n\nCAUTION\n\n Hazard flashing will create a strain on battery. Do not\n\nuse hazard warning for longer period unless necessary.\n\nMethods to activate hazard flasher:\n\n Ignition switch ON, press the hazard switch. Hazard\n\nwill work unless manual deactivation (OFF).\n\n Ignition switch ON, press the hazard switch\n\nhazard will start working - Ignition switch OFF\n\n- Hazard will keep working for a duration of 30 minutes \n\n- Unless manual deactivation (OFF).\n\n Hazard flasher cannot be activated in ignition switch\n\nOFF condition.",
+      "text_path": "human_review/agent_release_161/checker/hazard_review_v3/original_pdf_029.txt",
+      "text_sha256": "6fb49929910da93fdee2cc89823cb7e081c77d18d90badfd24abd73f444ec971"
+    },
+    {
+      "image_path": "human_review/agent_release_161/checker/hazard_review_v3/original_page-030.png",
+      "image_sha256": "a4add1b84c313a68a635bf1008ce4322b3883a3952b3c3291d3ada7f4bc1a671",
+      "pdf_page": 30,
+      "printed_label": "28",
+      "text": "28 Royal Enfield Himalayan\n\nOPERATION OF CONTROLS\n\nWARNING\n\n Turn signals do not work when the hazard light switch\n\nis “ON”.\n\n All the trafficator lamps will flash simultaneously.\n\nHORN \n\nPress the horn button to sound horn.\n\nHIGH BEAM/LOW BEAM SWITCH \n\n When the headlamp is in “ON” condition High / Low\n\nbeam will be selected by toggling the switch. High\n\nbeam indicator tell tale located in instrument cluster\n\nwill glow when high beam is selected.\n\nHigh beam\n\nLow beam",
+      "text_path": "human_review/agent_release_161/checker/hazard_review_v3/original_pdf_030.txt",
+      "text_sha256": "ccc507c64b36cfcc32959f97d7260dddc4f6c5f0cbaf3fe53708e9336d13ad1c"
+    }
+  ],
+  "render_engine": "Poppler pdftoppm 150 DPI",
+  "reviewed_at_utc": "2026-10-10T13:31:08.653656+00:00",
+  "reviewer": "/root/hazard_checker",
+  "schema_version": "independent-hazard-source-inspection-v3",
+  "source_manifest_sha256": "3b38e5ead40555ba810e94ff758b0cd30e4c874642fe089b6ac52fe97b534e18",
+  "text_engine": "pypdfium2",
+  "visual_adjudication": [
+    {
+      "finding": "Item 6 Hazard switch points to the rider right-hand control, adjacent to item 5 Ignition/Engine kill switch.",
+      "pdf_page": 23,
+      "printed_label": "21",
+      "scope": "Finite original diagram and label relationship; not a rider-photo diagnosis."
+    },
+    {
+      "finding": "The hazard drawing has the triangle-marked hazard control on the same right-hand assembly. Ignition ON activation, OFF continuation for 30 minutes unless deactivated, OFF activation prohibition, prolonged-stop ignition-off and battery-strain cautions are retained.",
+      "pdf_page": 29,
+      "printed_label": "27",
+      "scope": "Hazard control identity and stated activation conditions/cautions."
+    },
+    {
+      "finding": "The warning states turn signals do not work while hazards are ON and trafficator lamps flash simultaneously.",
+      "pdf_page": 30,
+      "printed_label": "28",
+      "scope": "Hazard warning continuation only; no repair process authorized."
+    }
+  ]
+}

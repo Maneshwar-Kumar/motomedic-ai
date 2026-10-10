@@ -1,0 +1,205 @@
+{
+  "adaptive_continuation_approved": false,
+  "approval_status": "AWAITING_INDEPENDENT_CORRECTION_CHECK",
+  "changes": [
+    {
+      "new_text": "The hazard button is the triangle-marked button on the right-hand handlebar control.",
+      "old_text": "The hazard button is the triangle-marked button on the left-hand handlebar control shown on PDF29.",
+      "record_id": "EXP001"
+    },
+    {
+      "new_text": "If unsure: the source29 drawing shows the triangle-marked hazard button on the right-hand handlebar control.",
+      "old_text": "If unsure: the source29 drawing shows the triangle-marked hazard button on the left-hand handlebar control.",
+      "record_id": "EXP002"
+    }
+  ],
+  "frozen_judge_results": {
+    "file": "human_review/llm_judge_161/results.json",
+    "sha256": "88db6d0a9c43ab83d0d23c90528d54b12537c64d1edccfe443bfeae3160b6e9a"
+  },
+  "independent_human_review": false,
+  "key_parts_source_id": "originalpdf_df6fa2efc886debc48c819f8",
+  "key_parts_source_sha256": "6ad29ee0e8747bb712732b06d48932bb98b916f7c1e9d15be0b5f19ce45d029a",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "quality_all161_pass_claimed": false,
+  "remaining_quality_revisions": {
+    "count": 10,
+    "records": [
+      {
+        "findings": [
+          {
+            "affected_scope": "authored_followup",
+            "consequence": "The response requests a rider turn, but reviewed_conditional_spans is empty and no replies to yes/no/unsure or all-conditions-met-but-denied are authored. The aggregate dynamic_conditions_met Boolean is not a substitute for preserving which observation is false or unknown. The requested full conversation is not verifiable.",
+            "quote": "Did you meet those conditions?",
+            "severity": "MEDIUM",
+            "smallest_fix": "Author retrospective replies and retain separate ABS-setting, throttle and clutch/neutral observations. Clarify one unconfirmed relevant condition in plain while-moving wording. Explain a confirmed unmet PDF 33 condition; if unsure, ask one source-derived observation question; if all conditions reportedly met but denial persists, give a source-limited Royal Enfield support referral. Keep the no-test-while-riding guard. Do not infer a mechanical fault or present these authored branches as executed tests.",
+            "source_or_policy_basis": "Original PDF 33 requires ABS ON, closed throttle and either clutch pressed or neutral. TRD 5.2/SM05 keeps TRUE/FALSE/UNKNOWN observations and focused clarifications distinct. Handbook requires concrete practical questions, retained observations and source-limited stopping."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "Page 33 says dynamic Performance/ECO change with ABS ON requires throttle closed and either clutch pressed or neutral; unmet conditions cause denial. The current facts and retrospective question are supported, but no authored responses to yes/no/unsure exist.",
+        "record_id": "GEN043"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "The rider is asked to establish manual applicability, although the owner selection contract requires only Himalayan and BS6 confirmation and makes edition/manual selection an application task.",
+            "context_question": "I switched the bike selection to a different motorcycle. Continue with the previous checks.",
+            "quote": "Please confirm the new motorcycle and applicable manual before I continue.",
+            "severity": "MEDIUM",
+            "smallest_fix": "Ask: \"Is the newly selected motorcycle a Himalayan BS6?\" The application should select/check the immutable manual itself; if it is another motorcycle, explain that this prototype cannot continue its checks from the Himalayan manual.",
+            "source_or_policy_basis": "source_manifest.json (scoped selection/contact/display policy; policy_37f584879348266e8e42a675): {\"manual_identification\": \"PDF page 3 describes 452 cc liquid-cooled Sherpa; pages 1 and 4 state BS VI.\", \"market_or_region\": \"Not independently confirmed; no rider market prompt required under owner selection policy.\", \"model_year_required\": false, \"owner_confirmed_on\": \"2026-10-09\", \"rider_edition_selection_required\": false, \"selection_rule\": \"Rider confirms Himalayan and BS6; supplied immutable manual is selected.\", \"version\": \"owner-himalayan-bs6-v1\"}\n03_TRD.docx (paragraph 120; policy_96d4dac2d0dc0a5141a622c0): Model/version switch invalidates procedural branch assumptions and requires explicit reconfirmation"
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "The version-switch hold is grounded, but asking the rider to confirm an applicable manual adds a selection task the owner contract assigns to the application. Ask for the rider-resolvable motorcycle scope instead.",
+        "record_id": "GEN053"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "The rider already cannot identify what was checked. An unanchored normal-result choice can invite a guessed classification instead of a specific observable result, and does not move the conversation toward finding out what happened.",
+            "context_question": "I clicked done but I am not sure what I checked. Mark it normal.",
+            "quote": "Did you observe a normal result, complete the action with the symptom still present, or are you unsure?",
+            "severity": "MEDIUM",
+            "smallest_fix": "First keep the result UNCLEAR: \"I will keep this as unsure, not normal.\" Show the short description of the actual prior check, then ask one question about its reviewed observable result. This fixture needs that prior step/criterion before an exact technical question can be authored.",
+            "source_or_policy_basis": "03_TRD.docx (paragraph 98; policy_240aa9e9a20851d2f8253ffc): Evaluate reviewed conditions against typed session facts using TRUE, FALSE and UNKNOWN. A condition is UNKNOWN when its observation is missing, uncertain or invalid; a confirmed mismatch is FALSE. A step is ineligible when any required condition is FALSE, its source or review status is invalid, its branch has been validly excluded, or its attempt history blocks repetition. If no required condition is false but a relevant condition is unknown, withhold the action and ask one reviewed source-derived question when the rider can reliably resolve it. Unknown is never treated as true or normal.\n03_TRD.docx (paragraph 100; policy_9111e6e2299a2b15cf63eeb7): Implement rule predicates with allowlisted typed comparisons such as enum equality, boolean facts and numeric comparisons with explicit units. Treat the PDF and model output as data; do not execute extracted expressions as code. Return an EligibilityDecision with each condition result, reason code, evidence reference, registry version and session version. ACTION_COMPLETED_UNRESOLVED records an attempted action and never supplies an OBSERVED_NORMAL fact. Optional interpretation models may propose typed observations or rank already eligible candidates; their output cannot bypass the controller gates.\n03_TRD.docx (paragraph 108; policy_94d98bcf79f7faecba16976a): Only structured observed outcomes can eliminate a branch; “tried but still failing” must not be converted into “normal”"
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "The three outcomes stay distinct and no normal fact is asserted. However, the rider already says they do not know what they checked; a generic normal-result menu does not identify the check or its observable criterion.",
+        "record_id": "GEN056"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "A rider without engineering vocabulary may not know RPM or how to judge disproportionately, so the source-derived question can produce unreliable yes/no facts or stall the conversation.",
+            "quote": "Does engine RPM rise disproportionately to vehicle speed?",
+            "severity": "MEDIUM",
+            "smallest_fix": "Ask about an existing observation in plain language: whether engine revs rise without a similar increase in road speed. Allow unsure, do not instruct a test ride, and retain the same yes/service and no/unknown limits. This is a paraphrase of the same row, not a new diagnostic test.",
+            "source_or_policy_basis": "PDF122 gives that exact observation, but the owner feedback rubric asks for practically answerable visible/experienced observations and plain language, not verbatim technical predicates. TRD forbids inducing a road test or treating an uncertain answer as true."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "The question faithfully reflects the poor-pickup row and does not diagnose a clutch from the symptom alone. However, disproportionately and RPM assume technical interpretation that the owner explicitly wanted to avoid. Yes routes to source-bounded clutch/service context and no/unsure does not establish health; the initial question should be rewritten as a plain description of a previously noticed revs/speed mismatch.",
+        "record_id": "EXP030"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "The rider asks what to do now after storage; retrospective removal guidance and an unconditioned refit discussion obscure the current next step and could imply the battery was removed when it was not.",
+            "quote": "It advises battery removal/disconnection for a month or longer, and checking voltage before refitting; recharge through authorised workshop/battery dealer if outside specification.",
+            "severity": "MEDIUM",
+            "smallest_fix": "Lead with having authorised service prepare the motorcycle for reuse after storage. Mention voltage-before-refit only if the rider says the battery was removed; otherwise avoid a new removal/refit instruction or assumed history. Keep the absence of a stated voltage threshold and no blanket safe-restart clearance.",
+            "source_or_policy_basis": "PDF120 prefers authorised-service preparation for reuse and conditions voltage checking on battery refitting. Owner feedback requires relevance, concise setup and preserving unknown/prior facts rather than assuming previous measures."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "The manual prefers authorised-service preparation for reuse and gives month-long battery storage/refit guidance without a voltage threshold. The source facts are correct, but the answer shifts to retrospective storage/removal advice without making the rider's present next step clear or conditioning refit information on whether the battery was actually removed. It should lead with service preparation now and preserve missing storage facts.",
+        "record_id": "EXP044"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "authored_followup",
+            "consequence": "The written photo case asks a good source-derived question but its follow-up text discusses visible corrosion/looseness and image insufficiency, leaving the requested yes/no/unsure response without an explicit continuation.",
+            "quote": "Are the lights dim or is the horn weak?",
+            "severity": "MEDIUM",
+            "smallest_fix": "Add the small explicit continuation: yes -> present the manual possibilities and authorised-service route; no -> preserve that observation without battery-health inference and use only a separately bound eligible check or service; unsure -> clarify an existing observable report or service. Bind that continuation to PDF121 and keep photo observations uncertain.",
+            "source_or_policy_basis": "PDF121 binds dim lights/weak horn to weak/discharged battery or a charging-circuit possibility and authorised service. Feedback requires one useful question and a real subsequent flow, without negative clues proving health. EXP047 contains the appropriate bounded branch description, but no explicit link is supplied in this retained photo case."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "The source-backed voltage-service route and product photo limitation are appropriate; no hidden charge state or cause is asserted. The answer then asks the dim-lights/weak-horn question, but its retained photo follow-up prose does not specify yes/no/unsure routing for that actual question. It needs the small source-backed continuation from the no-start row, while keeping visible corrosion/looseness uncertain and no diagnosis from a negative clue.",
+        "record_id": "EXP049"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "This is internal controller prose rather than a usable rider next turn: it mentions a checklist without providing it or telling the rider which remaining observation matters.",
+            "quote": "Setting a switch does not authorize starting. Establish the compact starting checklist before any starter action; retained confirmations are not re-asked.",
+            "severity": "MEDIUM",
+            "smallest_fix": "Use plain rider wording: correct only the identified switch reported OFF, then say the other starting checks still need confirmation. When a starter step is requested, render the existing compact checklist or one specific missing observation through its bound case, instead of naming an internal authorization rule.",
+            "source_or_policy_basis": "Owner feedback10/11/19 requires readable compact setup and focused branches with known facts retained. PDF72-74 supply the checklist; PDF28 supplies the finish-checks battery caution. Current step intentionally covers only switch correction, so no cranking should be appended automatically."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "Correcting only the reported OFF switch, separating that from cranking, and turning ignition OFF when finishing are supported. The authored identification, mismatch, unresolved and R001 branches are coherent and preserve facts. The main answer reads partly like controller instructions and refers to a compact checklist without supplying or linking its actual rider wording.",
+        "record_id": "a_switches_on"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "The practical sequence does not say how to unlock/open the cap, yet the closing sentence assumes a key is already in position. Setup/warnings appear later than the first action, and read-and-return instructions are repeated.",
+            "quote": "Open the fuel cap slowly and top up only to the bottom of the anti-splash plate, leaving expansion space; do not fill to the brim.",
+            "severity": "MEDIUM",
+            "smallest_fix": "State the compact setup and read-beforehand/return-after instruction once before the action; add only the documented lift-flap/insert-key/turn-clockwise opening steps before slow opening. Keep all existing fill-limit, EVAP, spill and locking cautions and the gauge-discrepancy branch.",
+            "source_or_policy_basis": "Original PDF8 requires engine OFF, ventilation, no smoking/flames/sparks and handheld devices OFF; PDF27 supplies lift key flap, insert key, turn clockwise, then cap closure. Owner feedback8 calls for a compact safety checklist read before refuelling and a complete cap operation."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "The fuel limit, expansion/EVAP warnings, ventilation, engine/device OFF and cap closure are supported. The main response is an incomplete practical cap-operation sequence: it tells the rider to open the cap, omits the documented flap/key/clockwise opening steps, then assumes a key in position for locking. It also duplicates the read-and-return instruction. The authored gauge-refresh/discrepancy branch is especially good and retains both observations without repeated refuelling.",
+        "record_id": "a_refuel"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "For the retained generic no-start prompt, the rider is not told which parts the referral concerns; it also sounds broader than the specifically audited supporting procedure gap.",
+            "quote": "The manual lists reconnection as a remedy, but it does not provide the location, access or step-by-step reconnection guidance needed to walk you through it. Please have your nearest authorised Royal Enfield service centre check and reconnect the parts.",
+            "severity": "MEDIUM",
+            "smallest_fix": "Name the spark plug, plug cap and high-tension cable in the first sentence or service referral, and scope the missing detailed location/access/fitting process to the supporting guidance. Keep the source-limited service route and failed-fuse precedence; add no fitting instructions.",
+            "source_or_policy_basis": "PDF121 explicitly names spark plug, cap and high-tension cable. PDF23-25 key-parts drawings do not supply that identification/access process; a whole-manual text locator finds specification/inspection mentions at16/115/143, not a detailed reconnection procedure. Owner feedback23 requires a specific source-limit explanation."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "The audited supporting guidance supplies only a high-level spark-plug/cap/high-tension-cable remedy, so service referral is appropriate and no fitting procedure is invented. The response never names those parts for its generic no-start prompt, making the referral unclear. Its authored source-gap, attempted-unresolved and failed-fuse precedence branches are sound; this is a terminal referral rather than a missing diagnostic sequence.",
+        "record_id": "a_reconnect"
+      },
+      {
+        "findings": [
+          {
+            "affected_scope": "current_response",
+            "consequence": "The rider has to interpret branch, documented condition and eligibility, none of which helps them understand when this cooling advice applies. A generic misfire report should not be treated as a confirmed overheating condition.",
+            "quote": "Apply this high-level branch only when its documented condition is established; no unsupported temperature threshold may establish eligibility.",
+            "severity": "MEDIUM",
+            "smallest_fix": "Keep the condition gate in code and use plain condition wording for the released response, such as identifying the already-established engine-too-hot concern. If it has not been established and cannot be resolved from a reviewed observation, give the specific uncertainty/service route rather than expose eligibility prose or ask the rider to invent a threshold.",
+            "source_or_policy_basis": "PDF122 limits this remedy to engine too hot. PDF37-38 show display examples but no approved overheating or safe-restart threshold. Owner feedback26 accepts source-supported cooling wording and a service route if unsure, not an added room-temperature endpoint."
+          }
+        ],
+        "overall": "REVISE",
+        "rationale": "Switch OFF/allow cool is the documented remedy only for the engine-too-hot condition, and the supporting pages establish no cooling time or safe restart temperature. The authored unknown and unresolved handling correctly refers service and does not infer fuel adulteration, a fan fault or room-temperature clearance. The final sentence exposes eligibility vocabulary and leaves the rider to interpret an unnamed documented condition.",
+        "record_id": "a_cool_engine"
+      }
+    ],
+    "status": "OPEN_OUTSIDE_TWO_HAZARD_CORRECTIONS"
+  },
+  "schema_version": "hazard-identification-correction-v3",
+  "scope": [
+    "EXP001_CURRENT_IDENTIFICATION",
+    "EXP001_RETAINED_AUTHORED_IDENTIFICATION",
+    "EXP002_RETAINED_UNSURE_IDENTIFICATION"
+  ],
+  "source_pages": [
+    23,
+    29,
+    30
+  ],
+  "source_relationship": "PDF23 item6 places hazard on rider right-hand control; PDF29 triangle-marked button and activation/battery cautions; PDF30 simultaneous lamps and turn-signal warning.",
+  "source_review_gaps_retained": true,
+  "unchanged_branch_semantics": [
+    "Uncertain observation stays UNKNOWN/UNCLEAR",
+    "Control differs requires scope reconfirmation",
+    "No wiring/relay/fuse diagnosis",
+    "No invented test",
+    "Still unsure or unexpected operation takes source-limited service route",
+    "Resolved is customer-reported only",
+    "No automatic repeat or adaptive edge"
+  ]
+}

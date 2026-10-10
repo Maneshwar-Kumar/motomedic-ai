@@ -1,0 +1,280 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "GEN086",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/GEN086.json",
+  "plan_sha256": "70e21fded543772cd651e6a86b557db33d699941d6de2b8b65900684925f959a",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": null,
+  "final_dependency_sha256": null,
+  "final_rules_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "final_route_sha256": "6320f220eeddaf17bf443c64eb7137c279b702e503d8d654cf38fe67d1b8e3ce",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "I already reported continuous ABS warning above 5 km/h, and retrieval is now down. Can I ride while it retries?",
+  "claim_texts": [
+    "Do not continue riding with the ABS indicator continuously ON above 5 km/h. The manual calls for inspection and correction through the nearest authorised Royal Enfield service centre; failing to do so can result in serious injury and loss of life. The retrieval outage does not cancel that previously verified warning."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_26bf2297a667bbfcac0535cc",
+      "source_sha256": "c983b3a55c9fa382320815ee89219eaddc0d24f4ad3edcdb8faa9a86788eb7e8",
+      "text_sha256": "64a743594e6e347df844c094b19c4d1f06e76aed7b39ad53e321dfab8adf131f",
+      "original_pdf_pages": [
+        66
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_be61e25b35303514cfe3e5c8",
+      "source_sha256": "684897cf0901ce9423e7056b9a81f1481ef3ab5eda25cae76c59fe3f79ac1f58",
+      "text_sha256": "848b994c63ee5eaa2231e2ddcba8cc077cb5b6206bda29037241b40381cab316",
+      "original_pdf_pages": [
+        63
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_0bf7c40741c9e3355e8d2737",
+      "source_sha256": "724ef20efe6d919583132602a2a8294790d8ccc4755f3a51a12c5420e10c4419",
+      "text_sha256": "a1761511d975b5231694b2b19c63fbf89765159b1445fd371f78a6d18fa405bb",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_149ecd0806ed20f4941cdb11",
+      "source_sha256": "34c9b5c5f04eaa27564902e5040564e7e432519b3dd88d5e25e934bc4e244865",
+      "text_sha256": "320817b6afd005d90a06cf10cc952aa77dbc0bea48e83e78f73af93430dd5a50",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_303787821f29b1deb8fe9f76",
+      "source_sha256": "d19823ea32a583471f67d5fc74a60172ec4b41bf01df73d53ac259c6ae61822d",
+      "text_sha256": "82a862edf87ca60c9eade76a8fc27ebdda79de1f4768760e821e502e8bf9f30a",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_46f874c8ba7f9aaffdd16ed8",
+      "source_sha256": "08a1b8dc795d8a6bc403bcc6487b846597db894d0a33986bd2f17e19f8e4094d",
+      "text_sha256": "c5fdc9f0a3e31b5bb742b1f95eda1cb2c63dc72806fb2bed7f278c83bbfee0e0",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_4bacac5bf58eb3c06b73fef3",
+      "source_sha256": "a1e493c10621f8b5a487600f2a8ef8d1b38b5752be97a2524274b0ca822b9cb7",
+      "text_sha256": "76e299cd636f6de40c315a46ccbe859bf82772dc3891697fd1035a33377acf98",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_8afbff4564e2ae04dba8b809",
+      "source_sha256": "1292d29255b9f269d89d04d6f5e7f264ed223697bf730b070af955221007eefc",
+      "text_sha256": "db4cc0817e52a622bacff23a79559ce2e577237c952436a539da82d3b5dc2480",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_9111e6e2299a2b15cf63eeb7",
+      "source_sha256": "6c8597d38e8dc824c6ef97dd3ffc14c6e8ba43348584d82bc78e25d5a088836b",
+      "text_sha256": "6a73c9d4eea9eb521c91445fdf2a93db553e367fd33eca7f7a6bd5e851225dcc",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_94d98bcf79f7faecba16976a",
+      "source_sha256": "9f70e1bfe9ff9cb787df9cc7ad0feb78370955b5fdcdb734e511c3f545adbf1e",
+      "text_sha256": "a948a303d91619c2188649060c1abbcd452a0b019d268ab8a469de41dafb991c",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_a582429020c644c2e81622ed",
+      "source_sha256": "a71897321bc2e7264587483014566a51293927bfd20462218feb5dcdebb6d0b2",
+      "text_sha256": "bd1939ba610686dae57a617559ff3e702cd520ce8f0da577967cfd060bb3fe2a",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_c7c59d8b2e592d93c2827123",
+      "source_sha256": "623067aee081b553090d29fa5d562ea29d7411914a65071da58a8a14a941e563",
+      "text_sha256": "028103230a113f9f20ce47065f55bd4bc935dfe6673f85d62e7e5daed205802b",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_dec1ae94d172ff6ececb1329",
+      "source_sha256": "9e4e06ca4c41ad63bc65335164b38484162492c2cb7f03c983994cc4b72e077f",
+      "text_sha256": "a3772faf1949c7ddd85457ffbcd9b4cb6a8cf5c0db3cf0acd8b0b2a746439255",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_e27e55df4b38f7ac71faa0df",
+      "source_sha256": "28476b32a00fb37bff83226a939ce2f74f91a99180ec8183709ab6a00cb63645",
+      "text_sha256": "9742e679a7c7a0f7e54651bd2a4480c4b438aa8969527169b021c26eb8f9bed1",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_e7e1b991bd3b8087d1bba5d3",
+      "source_sha256": "f5039ffd53b4bcf17089f53a91c6a0d7b3bbd2e805e14670bb3ad5e9348b6f27",
+      "text_sha256": "43a409ce6a2038d76e0e19f4567b021751cf7beca1fc6c52c605eb3d3f455e53",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_e978314f8b1f0dc0999a0ec4",
+      "source_sha256": "a5f9461da3cd7473161086930baaa44c35d289d0f77ac1a38440b17e11dbd0f4",
+      "text_sha256": "8b8c624ef8cb5a4ad58d07753b305b79b3ca86576de82a3fbaffab1d8f1a65ff",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_f196384f650ba83df2a81a1f",
+      "source_sha256": "43015d47f60d7760035c1a81676bd49b8ecc6ea0a9b2aab69a236f1c88de1e13",
+      "text_sha256": "931789cc97e8e6832ac239d9c6b5d7df4e83b4680c10d7b977a24ef77a5808be",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_fd0622ee416c74c87cbaf0d6",
+      "source_sha256": "d7cf31fbaec41282305717b59a64f217d421124ed61e8b23e15759de1175de74",
+      "text_sha256": "1b92e5c37964e983e1ba3f03392b16d6edad587a65655a3764d36d5b1a0a38a3",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    63,
+    66
+  ],
+  "visual_pages_inspected": [
+    63
+  ],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Previouslyverified63/66 ABSstop retainsserviceandseverity despite syntheticretrievaloutage. A genuine typedknownstop isrequired; untrustedtextcannotfabricateit.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

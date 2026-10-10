@@ -1,0 +1,113 @@
+{
+  "approved_package": "human_review/agent_release_161/coordinator/approved_package_v3",
+  "package_manifest_sha256": "016f0fbbf8e841c1198237defec1357457e6ef02880b8d020c32da4efec40ab0",
+  "package_outputs": {
+    "authored_cases/EXP001.json": "0032bc774a3248fdee6d7081fa516d7e3654c176664d4ab39320271ae62db2cf",
+    "authored_cases/EXP002.json": "cf4a6ccfbc55ff692b8632ee3562423a5983d8c1cffdae401c2520a49cbecc90",
+    "branch_dependencies.json": "9321cc15355df3e91edaefb91a99c160db61a409779fe14c5e503cc7c8a7abe5",
+    "candidate_registry.json": "d0b91c3558af132e337ec08f87bfc726c43efe3fe6608e60777b5f3475db8023",
+    "case_constraints.json": "b4e03c2de5714578dd4fed497bb27636b4894b7dcc6ba5b57a7f645d24558657",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "hazard_location_corrections.json": "adf06ca155571791464514530f1a02193b3bf0bb07b68cbcf6864b6812c12027",
+    "session_fixtures.json": "757da427504404a3895a5027b37fb4789bb7fbf9f45ade2db7034c61f9168a97",
+    "source_objects.json": "3fd397cd4f877e2eb7de3048b564a1bcdbad24ebf078611ca1e2251624ba1b00",
+    "trusted_routes.json": "ac5177cb5d5245421a07db8f1984c1039d318723f4855743f71237afee7c5c13"
+  },
+  "records": [
+    {
+      "authored_case_digest": "1d15bc02c3ae3c8786bf5abdf1eef26d90e730b535d3402fa515721ddbc92394",
+      "authored_case_file": "human_review/agent_release_161/coordinator/approved_package_v3/authored_cases/EXP001.json",
+      "authored_case_file_sha256": "0032bc774a3248fdee6d7081fa516d7e3654c176664d4ab39320271ae62db2cf",
+      "authored_case_sha256": "9e03cab930936cc58a8893892d16bebf51ac79bf8d998d3adf103da8e222de6b",
+      "canonical_answer_sha256": "ded67e2e51d14b46b82615eac993ded39c9015110bd054d13419ebd4b1c87f74",
+      "case_sha256": "8b6c73f0613f68c993194a71dadf403e4684761ad39fc174d31df5e83a89d6e1",
+      "claim_texts": [
+        "The manual says hazards cannot be activated with ignition OFF.",
+        "The hazard button is the triangle-marked button on the right-hand handlebar control.",
+        "Can you match that button on your bike?",
+        "If yes, activate hazards with ignition ON.",
+        "If you then turn the ignition OFF, they continue for up to 30 minutes unless manually switched off.",
+        "Hazard flashing strains the battery; avoid prolonged use unless necessary.",
+        "Turn signals do not work while hazards are ON.",
+        "For prolonged stops turn the ignition key OFF to avoid battery discharge."
+      ],
+      "constraint_sha256": "00c385f9b0a1c4ff99e208af0e9b09b5c137957acef7f5d4a12a728b000e5c9e",
+      "final_dependency_sha256": "6209a2e58de361c9aae0c150d3e8099abfa26f5f527eefce4df013dc5044262b",
+      "final_route_sha256": "408cd766066d0a292c781035f4f532546e9bc269a99675ce3bc684fb0c70623e",
+      "final_rules_sha256": "1e1bf083cf4c76a9fb90a46be2f39991bca95625c4f397c7301c467c2231d140",
+      "final_step_sha256": "f37ec351887879115a397f2209d3a7f30b153ac0b390936fcf964aa9ec2fce2d",
+      "full_authored_branch": [
+        {
+          "draft_span": [
+            1386,
+            1683
+          ],
+          "exact_text": "Follow-up/outcome handling: If already activated but not operating as described, do not infer a relay or fuse fault: the cited pages give no further repair process; authorised service. If unsure whether previously activated, clarify that observation. If control differs, reconfirm selected manual.",
+          "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+        },
+        {
+          "draft_span": [
+            1687,
+            1842
+          ],
+          "exact_text": "Source checks for reviewer: Check all three activation states and the continuation-page turn-signal warning; do not imply hazards can always start key-OFF.",
+          "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+        }
+      ],
+      "record_id": "EXP001",
+      "rule_sha256s": {
+        "EXP001:rule:bike_scope_confirmed": "636a07514d3c3d11d45a5ee5806140352313f62b9811821961f0d7e45a553736",
+        "EXP001:rule:hazard_button_identified": "cd989e0539f3b4cce899882bd1577dfe5f5c3389b73971137199a3458d079d50"
+      },
+      "step_id": "EXP001:candidate-v4"
+    },
+    {
+      "authored_case_digest": "f45900e6a982b27ae869eaf2143857caf52a2028822e5fa1a71fe315b4ca9e37",
+      "authored_case_file": "human_review/agent_release_161/coordinator/approved_package_v3/authored_cases/EXP002.json",
+      "authored_case_file_sha256": "cf4a6ccfbc55ff692b8632ee3562423a5983d8c1cffdae401c2520a49cbecc90",
+      "authored_case_sha256": "27cebc47a89c59eacd7b271496d018627ddd7316f9db0e8bec17e54d5b43b6f4",
+      "canonical_answer_sha256": "2ede0cabc40f9ba62203b90411c78136e1e04eba0d8d1af2f7719c065a877cb0",
+      "case_sha256": "1f1029773eca5897b9ce0beb42c98a21c799f93cf65d619e79c1b92b0f4cd1fe",
+      "claim_texts": [
+        "Are the hazard lights switched ON?",
+        "The manual says all trafficator lamps flash simultaneously with hazards ON, and turn signals do not work then.",
+        "Hazard flashing strains the battery; avoid prolonged use unless necessary."
+      ],
+      "constraint_sha256": "e93cfc5377028195d6a42fac3035472996a7bdb416393be9ce21ceb144992a77",
+      "final_dependency_sha256": "a3a02e63ce6d5aa76adb5cdb167d879ea1551e35d615559c4c29cc7b8f192074",
+      "final_route_sha256": "1bcab0817bed3de95cb5bcdb0bd157dcbaa012f4269866a94ca0dc93cad7c44f",
+      "final_rules_sha256": "b4aecf9841e15fd95dc488fd8e4ed4ba95990a12b5579d3c8b397dc0ce2938f1",
+      "final_step_sha256": "af3f5b51e049898229a009c6f6f75f95d3a953f7fa9614b8901a9bd1ebd5bd75",
+      "full_authored_branch": [
+        {
+          "draft_span": [
+            1072,
+            1620
+          ],
+          "exact_text": "Follow-up/outcome handling: If hazards confirmed ON, explain the documented behaviour without diagnosing wiring. If unsure: the source29 drawing shows the triangle-marked hazard button on the right-hand handlebar control. Ask whether the rider can identify it and confirm whether hazards are ON; engineering-only figure unless scoped display permitted. If still unsure or hazards confirmed OFF, retain observation and do not diagnose; these pages give no further fault test, authorised service. Reported normal operation closes only reported issue.",
+          "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+        },
+        {
+          "draft_span": [
+            1624,
+            1742
+          ],
+          "exact_text": "Source checks for reviewer: Condition the explanation on hazard status; retain both warning scope and battery caution.",
+          "review": "AGENT_REVIEWED_CONDITIONAL_SCOPE; see branch dependencies; no instruction beyond this scope authorized"
+        }
+      ],
+      "record_id": "EXP002",
+      "rule_sha256s": {
+        "EXP002:rule:bike_scope_confirmed": "0905562802b3d70e359476ec2994465c173e772a84e5c23b1a3a7cf2181b6d70",
+        "EXP002:rule:hazards_on": "325c349d415ac191060567e5e19da2a4dfc5a45e10c9a296ee84b76e7083265e"
+      },
+      "step_id": "EXP002:candidate-v3"
+    }
+  ],
+  "schema_version": "hazard-correction-candidate-bindings-v3",
+  "source23_id": "originalpdf_df6fa2efc886debc48c819f8",
+  "source23_sha256": "6ad29ee0e8747bb712732b06d48932bb98b916f7c1e9d15be0b5f19ce45d029a"
+}

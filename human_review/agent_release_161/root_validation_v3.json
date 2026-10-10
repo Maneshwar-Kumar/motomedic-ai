@@ -1,0 +1,79 @@
+{
+  "schema_version": "root-agent-release-validation-v3",
+  "verified_at_utc": "2026-10-10T13:39:37.595667+00:00",
+  "release_manifest_path": "human_review/agent_release_161/coordinator/release_manifest_v3.json",
+  "release_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+  "decision_authority": "OWNER_DELEGATED_AGENT_COORDINATOR",
+  "record_count": 161,
+  "counts": {
+    "APPROVED_AGENT_RELEASE": 161
+  },
+  "bound_output_file_count": 187,
+  "independent_case_source_step_rule_dependency_bindings": "PASS",
+  "source_manual_applicability": "APPROVED_SELECTED_MANUAL_HIMALAYAN_BS6_SCOPE",
+  "approval_consumer_exit_code": 0,
+  "tests_passed": 17,
+  "tests_failed": 0,
+  "test_command": "python -m unittest discover -s human_review/agent_release_161 -p 'test_approval_consumer.py' -v",
+  "consumer_sha256": "58e29397d5606b2385720248d6ce28afc1fe7b13f0f39a3b93ce2ddff2270e24",
+  "test_file_sha256": "e0699cdf54938f9c620e6a7379d53369819189527922fcd07f752776a6d9ffb2",
+  "regressions_added": [
+    "Retired release v2 rejected by current v3 consumer",
+    "Right-hand location in current EXP001 and both corrected full authored cases"
+  ],
+  "human_review_required": false,
+  "provider_calls": 0,
+  "shared_runtime_installed": false,
+  "deployment_performed": false,
+  "index_rebuilt": false,
+  "billing_changed": false,
+  "approved_scopes": [
+    "SOURCE_MANUAL_APPLICABILITY",
+    "SOURCE_CONTENT",
+    "INITIAL_ROUTE",
+    "EXP001_EXP002_SCOPED_AUTHORED_IDENTIFICATION"
+  ],
+  "excluded_scopes": [
+    "Unimplemented adaptive transitions",
+    "Public PDF/excerpt/figure delivery",
+    "General vision model validation",
+    "Measured grounded live provider performance",
+    "Deployment"
+  ],
+  "independent_hazard_source_review": {
+    "file": "human_review/agent_release_161/checker/review_inventory_v3.json",
+    "sha256": "ea948a0b621c1ca0c058f03d07b26b58abb51919de0b33aacf35d657ef6b9282"
+  },
+  "correction_record_ids": [
+    "EXP001",
+    "EXP002"
+  ],
+  "unaffected_case_count": 159,
+  "remaining_quality_revisions": {
+    "count": 10,
+    "record_ids": [
+      "GEN043",
+      "GEN053",
+      "GEN056",
+      "EXP030",
+      "EXP044",
+      "EXP049",
+      "a_switches_on",
+      "a_refuel",
+      "a_reconnect",
+      "a_cool_engine"
+    ],
+    "status": "OPEN_OUTSIDE_TWO_HAZARD_CORRECTIONS"
+  },
+  "new_whole_corpus_quality_pass_claimed": false,
+  "preserved_history": {
+    "v2_manifest_and_consumer_and_test_snapshot": "HASH_MATCH",
+    "frozen_llm_judge_results": "HASH_MATCH",
+    "v1_v2_planner_and_judge_history": "Independent checker preservation baseline:414 files unchanged"
+  },
+  "next_integration_scope": "Install trusted scoped approval adapter into existing retrieval/controller/composer runner; prove text lookup and clarification-action-unresolved-service slice",
+  "release_report": {
+    "path": "human_review/agent_release_161/coordinator/RELEASE_REPORT_v3.md",
+    "sha256": "f7da8188f64ba581b14a68218bc5ae7165874c7aba1c226354975feed47f3b1e"
+  }
+}

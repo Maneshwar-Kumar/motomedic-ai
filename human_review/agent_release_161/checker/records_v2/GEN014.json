@@ -1,0 +1,156 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "GEN014",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/GEN014.json",
+  "plan_sha256": "85b362bf226ef1abd7bba03fb19f5189699d1267edd138d6c126a8e21bf02445",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "33ca692427e4890d3aa5981c59e249b1da2c8f3b0bdecb19fbda09dcd29a50d5",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04",
+    "conclusion_claim_repairs.json": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa"
+  },
+  "final_step_sha256": "b31859474abb834f199fbe35bfa9d6cebc4d7dd0688c9a5bb25fe08810c85219",
+  "final_dependency_sha256": "ec18364c982b166e2f592d5715b34b8a7f6a59b616bff5a040b82ed1d205afa2",
+  "final_rules_sha256": "5c28f6d20e3650afd894eb14cfb2f2a740914c8bbf4a77b0bf97bc3d1544b8ee",
+  "final_route_sha256": "9978dd525b3907bf8c4a3eddd6ee4ba4f990b70f386b1a18e479b2019b4f7bfa",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "Are the left and right fork oil quantities identical?",
+  "claim_texts": [
+    "No. The table specifies SS-47G fork oil, right-hand fork 589 ± 2.5 ml and left-hand fork 507 ± 2.5 ml.",
+    "This is a specification lookup; it does not supply a fork-service procedure.",
+    "The table notes actual capacities can vary.",
+    "Its caution says using the wrong oil grade reduces moving-part life and seriously affects performance."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_37c6c31f5700495414de1101",
+      "source_sha256": "b8604f8e5fe14fbe8863730dcdb7cb1035775b23c897d1413d401a7bfb1e879c",
+      "text_sha256": "3b4f334226fd1ba3e861fee62e92dccd6187e52b57762f47e61fc94c2d1283f9",
+      "original_pdf_pages": [
+        21
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_424971c8f0be958200b09990",
+      "source_sha256": "8e2aa41651b2a01ffe056142498c9738e803969f036b40b5104e6de7c4886333",
+      "text_sha256": "42be7157f6af6b43511e21eb8400afdf584014fe8628ea8411b8ea14f55c317a",
+      "original_pdf_pages": [
+        21
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": true,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a6950ea73293cda81e695ce1",
+      "source_sha256": "3c9facd06df40edddcf7a22bddc255b123bfed5a346ba41e5f6ff5ecc40b8e66",
+      "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+      "original_pdf_pages": [
+        21
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "table",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    21
+  ],
+  "visual_pages_inspected": [
+    21
+  ],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Original21 visualtable confirms RH589±2.5ml/LH507±2.5ml SS-47G; capacitiesapproximate andwrongoilgrade caution retained; no forkserviceprocedure.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": [],
+  "conclusion_adjudication": {
+    "record_id": "GEN014",
+    "question": "Are the left and right fork oil quantities identical?",
+    "question_sha256": "a55815492b09890fc6aab52b356971707eb4ad99859d4840836e16d9ca02bf3a",
+    "original_orphan_claim_sha256": "08a8404dde5faa04a252d1d81cb5850c5241565f7b6fdac8f250e4ce75081553",
+    "final_grouped_claim_sha256": "e8c01bad65f84424d5284f89b979d8541d577be5bdeb46261e4207f8474dfb15",
+    "final_claim_id": "claim_fe979db61dffc74493f9f0e6",
+    "source_ids": [
+      "evidence_a6950ea73293cda81e695ce1"
+    ],
+    "source_spans": [
+      {
+        "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+        "text_sha256": "2d4140d4f3f08a428328dedb9be68679f32e2e04ccb4f9d27acf88d2fc0983ab",
+        "text_span": [
+          0,
+          501
+        ],
+        "visual_page": null
+      }
+    ],
+    "verdict": "APPROVED_QUESTION_BOUND_CONCLUSION",
+    "reason": "No follows different RH589±2.5ml andLH507±2.5ml quantities under the same SS-47G fork-oil column. This does not authorize fork service.",
+    "checker_actor": "independent-source-checker",
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+  }
+}

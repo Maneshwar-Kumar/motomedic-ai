@@ -1,0 +1,9 @@
+# Exact-version approvals bind raw bytes, including source metadata line endings.
+human_review/** -text
+*.py -text
+.github/workflows/verify-controller.yml -text
+reports/approved* -text
+reports/grounded* -text
+source_manifest.json -text
+*.pdf binary
+*.docx binary
