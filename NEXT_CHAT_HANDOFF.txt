@@ -1,0 +1,64 @@
+MotoMedic AI: sequential implementation handoff
+Prepared 10 October 2026 for a new Service Agent project chat.
+
+Owner instruction: carry out the following three steps sequentially, continuing from the completed source/initial-response approvals. The owner is cleaning up older conversations. This handoff and the project files must be sufficient without access to those chats. Implement and verify the work; do not stop after proposing a plan. Parallelize independent subtasks within each step, but finish and record its exit checks before moving to the next step.
+
+1. Connect the approved v3 records to the existing retrieval-to-generation runner.
+2. Test real text journeys: direct lookup, then clarification -> documented action -> still unresolved -> verified service referral, with citations, remembered typed outcomes and no repeated action.
+3. Build the browser demo, then add observation-only photos and measure grounded quality, latency and cost.
+
+Workspace and design
+Use the existing local Service Agent project and its working files. Do not start a clean checkout that discards uncommitted approvals. Read AGENTS.md, conversation_context.md, source_manifest.json, and the four design documents before changing product behavior. TRD v0.4 is authoritative. The owner requires an online build/operating environment; local harnesses are engineering checks, not the deployed architecture. Keep production session state and server-side secrets in the hosted implementation. Reuse the existing immutable hosted index; ingestion/embedding is not a per-rider-request operation.
+
+Exact current evidence
+- human_review/agent_release_161/README.md
+- human_review/agent_release_161/coordinator/release_manifest_v3.json
+  Raw SHA-256 b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298
+- human_review/agent_release_161/coordinator/RELEASE_REPORT_v3.md
+- human_review/agent_release_161/root_validation_v3.json
+  Raw SHA-256 f460ef690e06ed814b59f8b9449e6953cda5623158b99c9a14cc1c7942403a75
+- human_review/agent_release_161/approval_consumer.py and test_approval_consumer.py
+- human_review/agent_release_161/checker/hazard_review_v3/consumer_audit_v3.json
+- human_review/agent_release_161/next_steps/README.md and runtime_inspection.json
+- human_review/subagent_feedback.md: the owner's full agent-feedback rubric/history. The frozen LLM-judge copy is human_review/llm_judge_161/subagent_feedback.md.
+- human_review/llm_judge_161/REPORT.md and results.json: frozen static review findings; do not rewrite them as live evaluation.
+
+Approval authority and scope
+The owner explicitly said: 'Coordinator agent has the release approval. no further human review.' This remains authorization for the recorded scoped approvals and the planner -> independent checker -> coordinator workflow for necessary new versions. Preserve independent review for changed claims/branches without recreating a human-only gate. Use owner_authority.json and exact signed coordinator decisions as authority, never fabricate human inspection or set legacy human_signoff=true to stand for an agent review.
+
+All 161 source-content/initial-response scopes are approved under v3, conditional on actual typed rider facts and complete bound evidence. The supplied immutable English Himalayan BS6 owner's manual (RAM00818/A, 4 November 2025) is approved under the owner's Himalayan + BS6 selection policy. Do not reopen resolved blanket source/formal/human approval holds. Verify the exact bindings and preserve actual safety/applicability/source limits.
+
+Source PDF: royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf, 149 pages, SHA-256 cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89. Selected hosted index: index_a3282c4d98cf54595e4ba168 (BGE M3, BM25, Qdrant). Keep source and index locks aligned. Manual/parser/embedding changes require a new version; these corrections do not require re-embedding.
+
+v3 closes both hazard identification defects: EXP001 current answer and EXP002 retained unsure follow-up now identify the triangle-marked button on the right-hand handlebar. EXP001 has StepDefinition EXP001:candidate-v4 and original-PDF page 23 diagram support alongside pages 29/30. All159 unaffected cases are preserved. Independent checker and coordinator approvals are bound to187 files. Current consumer validated all161 case/source/step/rule/dependency bindings and passed17 tests; the retired v2 release is rejected by the current consumer. v1/v2, original planner records and LLM-judge corpus/results remain immutable history.
+
+Ten other LLM-judge quality/flow findings remain open: GEN043, GEN053, GEN056, EXP030, EXP044, EXP049, a_switches_on, a_refuel, a_reconnect, a_cool_engine. Resolve and independently recheck them as affected flows are integrated, before claiming all-case quality completion or serving affected unsafe/incomplete content. Add new correction/evaluation records instead of rewriting historical scores. The prior149 PASS/12 REVISE static score is not a live-model result.
+
+Step 1: install exact scoped authority
+The retrieval backend, deterministic controller, constrained composer/verifier adapters and engineering harness exist. The approved isolated package is not installed in the shared runner. Inspect evidence_registry.py, verify_generation.py, generation_providers.py, the relevant controller/composer, and human_review/grounding_refinement/case_suite.py against runtime_inspection.json (locate actual paths if needed). Current shared code reads registry/candidate_registry.json or registry/reconciled-accepted-eleven rather than ApprovalConsumer. Its reviewed-registry-v1/legacy flags differ from the isolated-draft-step-registry-v3 package. A path substitution or flipping approval booleans is insufficient.
+
+Implement a trusted adapter/overlay that consumes exact pinned coordinator scopes and source/step/rule/dependency/claim bindings. Preserve immutable signed bytes and invalidation on changed content. Do not copy stale human_review/grounding_refinement/candidate_runtime_v3 into serving. Enforce TRUE/FALSE/UNKNOWN eligibility, safety-stop precedence, required warnings/prerequisites, claim-source checks and exact citations. UNKNOWN is not permission. Do not seed live rider facts from case fixtures.
+
+Exit: the real shared runner uses the approved authority and objects, and meaningful integration tests prove source/claim mutation, wrong variant, missing dependency and unknown facts fail closed, with distinct support/error states preserved. Record changed files, versions and test evidence. The current package has92 source steps,141 rules and zero approved successor edges: do not infer OEM order or broader adaptive routes.
+
+Step 2: measured text session
+Start with GEN003 (mirror-distance direct lookup) and EXP003 (cancel turn signal). Both are approved, use indexed text only and have no figure dependency. For EXP003, execute source-supported clarification and action, store ACTION_COMPLETED_UNRESOLVED as an immutable typed attempt, then route to verified service when no approved next step exists. Normal observation and unresolved action must remain different. No automatic repeat or invented repair follows. New transition records or revised content need the agent review/coordinator version workflow, not a fresh human signoff.
+
+Use the existing configured provider safely within the authorized budget. First prove deterministic gates and controlled failure behavior, then record genuine grounded provider runs and session persistence. Check citations, unsupported repair requests, prompt injection, wrong source/variant, missing warnings, provider/retrieval/state-save errors, corrections and no-repeat. Preserve SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR. A ~16-second READY transport probe already exists; it is not grounded latency or a p95 measurement. Previously recorded grounded live calls are zero; update that statement only with actual traces.
+
+Exit: reproducible successful text journeys, correct abstention/safety/error behavior, retained typed state, valid immutable citations, and a versioned results record. Distinguish simulation, external provider execution and real mechanical repair success.
+
+Step 3: browser demo, then photos and measurements
+Expose hosted session/turn/feedback APIs and a simple usable rider UI with bike/manual selection, one documented question/action at a time, understandable warnings, citation metadata and structured outcomes. Independently smoke-test the text UI before extending to photos. Extend to three reviewed source-bounded journeys, address the ten affected quality findings, and compile exact approved caches only when their full version locks match; stale/draft/variant-mismatched keys miss closed.
+
+Owner-added UI acceptance requirement: once the text UI is built, demonstrate Browser -> hosted session/controller -> real BGE + BM25 retrieval -> graph/dependency assembly -> gated generation/verifier -> cited response. This is a Step 3 text UI exit gate before photo extension. Use the deployed hosted service, immutable approved index and actual provider calls; disable the exact-response cache for this check. Keep a versioned report with a correlated redacted browser/session trace, controller state transition, actual dense/sparse retrieval and fusion results, verified graph/dependency closure, gate/composer/verifier verdicts, exact source/index/runtime bindings, timing, and the matching citations displayed in the browser. Scripted doubles or a direct command-line/API-only test do not establish this browser acceptance. Current implementation status and outstanding provider dependency are in IMPLEMENTATION_PROGRESS.md; this added gate is pending.
+
+Add photos as visible observations with uncertainty, never hidden-fault diagnoses. Use the same deterministic evidence/safety gate and clarification behavior. Evaluate actual vision behavior, keep raw rider media ephemeral and out of public traces, and add file/type limits, rate limits and per-day spending controls. Reviewed manual-figure checks do not constitute general rider-image validation. Current v3 has407 required evidence IDs:397 indexed plus10 approved original-PDF supplements, and9 figure-dependent steps. Integrate these original-page supplements explicitly; do not silently drop them. Source policy currently permits engineering evidence but prohibits rider delivery of PDF/excerpts/crops; retain citation metadata and inspect the signed source/applicability scope before showing source content.
+
+Measure grounded citation support, answer quality, complete evidence recall, abstention, next-step correctness and repetition, with fixed regression plus independently held-out cases. Record TTFO to first releasable token including validation, warm/cold p95 by modality, provider errors and cost per correctly handled case. Report measured limitations without claiming static judge ratings or fixture passes as live performance.
+
+Existing project/budget boundaries
+Private repository: Maneshwar-Kumar/motomedic-ai. GCP project: motomedic-ai-20261009. Existing owner-authorized budget is US$10 / INR800, with simulated billing-stop guard at INR640. Read cloud/deployment_status.json, cloud/live_smoke.json and current spend/guard state before changing hosted services. Never re-enable billing after an actual budget stop without owner authorization. Keep keys server-side, avoid credential/media leakage, and retain authenticated services and rollout/rollback notes. The case approval manifest itself does not grant public content rights or a deployment approval; apply the owner's requested implementation scope and existing deployment permissions, preparing a concrete tested release before any approval that genuinely remains necessary. Do not ask for another generic human case review.
+
+Make the handoff self-contained
+Record progress, exact versions, tests, live-vs-simulated results, remaining work and next action in project files throughout. Consult repository artifacts rather than relying on deleted conversations or messaging old chats. Use parallel subagents within steps where useful. The only newly requested chat is this implementation chat; do not scatter these sequential steps into additional user-owned chats without an explicit request.

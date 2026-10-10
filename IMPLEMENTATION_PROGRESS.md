@@ -20,6 +20,8 @@ GEN003 and EXP003 persistence checks pass: 12 tests and 16 simulated journey che
 
 Hosted session/turn/feedback APIs, browser text smoke, scoped quality fixes, observation-only photos, held-out evaluation and run/rollback notes. Public deployment/source-content delivery is outside the v3 approval itself. Citation metadata is permitted; rider PDF/excerpts/crops remain prohibited.
 
+Owner-added UI acceptance gate: once the text UI is built, demonstrate **Browser → hosted session/controller → real BGE + BM25 retrieval → graph/dependency assembly → gated generation/verifier → cited response** before extending to photos. Run from the browser against the deployed hosted service with the immutable approved index and real provider calls. Retain a versioned acceptance report and one correlated, redacted trace showing the browser/session request, hosted controller transition, BGE and BM25 candidate results and fusion, verified graph/dependency closure, evidence/applicability gates, composer/verifier results, and the matching immutable citations rendered in the browser. Record source/index/runtime versions and response timing. Disable the exact-response cache for this check so the demonstrated request traverses every required stage. Scripted retrieval/provider doubles or a direct command-line/API-only run cannot satisfy this browser gate. It remains pending; no acceptance pass is claimed by adding it to the sequence.
+
 Fresh read-only billing checks: main project billing enabled; inference project billing disabled. No billing changes, deployment changes, provider requests or index rebuild have occurred in this implementation yet.
 
 ## Current continuation record — Step 2 provider dependency
