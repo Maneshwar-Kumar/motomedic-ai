@@ -107,7 +107,7 @@ class GeminiJSONProvider:
             raise ValueError("Selected Gemma 4 31B model required")
         if type(authorized_calls) is not int or authorized_calls < 0:
             raise ValueError("Finite nonnegative call allocation required")
-        if config.provider_revision != "gemini-sse-json-v1":
+        if config.provider_revision != "gemini-sse-json-role-v2":
             raise ValueError("Gemini transport revision required")
         self.model, self.config = model, config
         self.enabled, self.remaining_calls = enabled, authorized_calls
@@ -121,7 +121,9 @@ class GeminiJSONProvider:
         key = os.environ.get("MOTOMEDIC_GEMINI_API_KEY")
         if not key:
             raise ProviderFailure("PROVIDER_UNCONFIGURED")
-        body = {"systemInstruction": {"parts": [{"text": policy +
+        # Match Google SDK's UserContent transformation while retaining the
+        # dedicated systemInstruction boundary for policy and schema.
+        body = {"systemInstruction": {"role": "user", "parts": [{"text": policy +
                     " Return exactly one JSON object, no Markdown or commentary. " +
                     "Required output schema: " + json.dumps(schema, allow_nan=False)}]},
                 "contents": [{"role": "user", "parts": [{"text": json.dumps(payload, ensure_ascii=False, allow_nan=False)}]}],
@@ -199,7 +201,7 @@ def gemma_runtime_config():
     """Explicit selected candidate; defaults elsewhere remain fail closed."""
     return RuntimeConfig(generator_provider="gemini", generator_model=GeminiJSONProvider.MODEL,
                          verifier_provider="gemini", verifier_model=GeminiJSONProvider.MODEL,
-                         provider_revision="gemini-sse-json-v1", timeout_seconds=30)
+                         provider_revision="gemini-sse-json-role-v2", timeout_seconds=30)
 
 
 def configured_provider(name, model, config, **kwargs):

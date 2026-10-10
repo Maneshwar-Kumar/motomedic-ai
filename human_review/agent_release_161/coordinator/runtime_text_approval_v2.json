@@ -1,0 +1,62 @@
+{
+  "schema_version": "coordinator-bounded-text-runtime-approval-v2",
+  "coordinator_actor": "/root",
+  "authority": "OWNER_DELEGATED_AGENT_COORDINATOR",
+  "decision": "APPROVED_EXACT_BOUNDED_TEXT_RUNTIME_SCOPES",
+  "approved_at_utc": "2026-10-10T14:42:38.217669+00:00",
+  "independent_review_file": "human_review/agent_release_161/runtime_transition_review_v3.json",
+  "independent_review_sha256": "f60bbedb7d8a0ce00f1e2c27ad5761412b87ca7fa1c9cce2d6de22f64ed70403",
+  "release_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "source_contract": {
+    "manual_file": "royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf",
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "release_manifest": "human_review/agent_release_161/coordinator/release_manifest_v3.json",
+    "release_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+    "execution_contract": "human_review/agent_release_161/coordinator/approved_package_v3/execution_contract.json",
+    "execution_contract_sha256": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "index_id": "index_a3282c4d98cf54595e4ba168"
+  },
+  "code_sha256": {
+    "approved_registry.py": "f6b9afc769f2a49b65ba1de4e6030fc196e8a142848d322140e89b384886e78b",
+    "approved_runner.py": "7bc54afc02a33af8f746f70fb4f52b07894863af3849adf186a5cf2e9ffe16d6",
+    "reviewed_controller.py": "2fb26dba4f2d949df15f176da6b4082efeaa78c32d70358cfa748578b388b16b",
+    "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+    "diagnose.py": "07ac29d21b6776ef0f2e20cf7d9842cbfbe9badaf6e870ce9592e2157ef35813",
+    "session_store.py": "7c517d52b2efb59db37b939fc648d898b0455ca888efa58c7fdb72dae3e30a5e",
+    "constrained_generator.py": "cab83ece473e0b47f9ff2eb6b890fa3c051a46870655c0f35287b30b51bd9d87",
+    "generation_contracts.py": "4255a16ef30e2dcafa362495662c89c55f5103feb2b694a657a051dde12c61a8",
+    "approved_text_journeys.py": "ac6fbbc6256b6d8bf93ce41f3b969f0dcf0de16fa19bfb8f0e6077039db9b8b5",
+    "test_text_journeys.py": "8c287c98d2c0523a7d7d6e8cdb303e795fab5aaaf243bafc4ad9605f26376ed9",
+    "evidence_registry.py": "7df97bb5e500a1c009e21f2a721f5c24205c7e52a9f6371e369113f20f1b6ae4",
+    "human_review/grounding_refinement/case_suite.py": "a5ac947d7f2b483466467b8b0f9ca1cc98e25b22fb5f3c5c491af48df89caf1c",
+    "generation_providers.py": "be74a936d112c738c31733ab8dc419bee6477a48f4c9abdb92c6973c90b22473",
+    "gemini_transport.py": "90a6d372bd112f946d2e199808cb365e3c04a36437039b14dabb23e0384ee2dc",
+    "test_gemini_provider.py": "1c4e677326eb53bbdc520b44abb07c73ba6c82ac06e587f3b0365af325edbcdb"
+  },
+  "scope": [
+    "GEN003 confirmed Himalayan BS6 manual selection to approved lookup through evidence/composer/verifier/session-save gates",
+    "EXP003 UNKNOWN turn_switch_centred to exactly one reviewed clarification; explicit confirmed typed TRUE to approved inward-push action",
+    "EXP003 typed ACTION_COMPLETED_UNRESOLVED to persisted immutable attempt, zero approved successors to verified support and no automatic repetition",
+    "Canonical operational failures withhold ordinary technical text; already verified safety stop retains its exact scoped warning"
+  ],
+  "scope_limits": [
+    "No new technical claim, manual successor edge or OEM diagnostic ordering approved by this review",
+    "Verified service referral is a bounded product-policy handling path; it does not claim the manual documents the unresolved repair",
+    "SQLite is engineering persistence evidence only; managed hosted sessions remain separate work",
+    "No live provider or cloud request was made by this reviewer",
+    "Synthetic judge success is not independent semantic-model quality or latency evaluation",
+    "No public PDF, excerpt or crop display rights granted",
+    "No rider-photo or general vision performance approval",
+    "Changed code/source objects require new exact review; prior signed history remains unchanged",
+    "V2 current runtime code supersedes v1 only for the exact bounded transition review; signed v3 source/initial approval and v1 review history remain unchanged"
+  ],
+  "human_inspection_claimed": false,
+  "legacy_human_flags_changed": false,
+  "public_deployment_authorized": false,
+  "successor_edges_approved": 0,
+  "provider_calls_authorized_for_test": 4,
+  "provider_revision": "gemini-sse-json-role-v2",
+  "supersedes_runtime_approval_file": "human_review/agent_release_161/coordinator/runtime_text_approval_v1.json",
+  "transport_hypothesis_not_proven": true
+}

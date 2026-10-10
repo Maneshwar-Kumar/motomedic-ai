@@ -1,0 +1,23 @@
+{
+  "schema_version": "provider-role-hypothesis-v1",
+  "selected_model": "gemma-4-31b-it",
+  "prior_run_id": 38060044433,
+  "prior_http_statuses": [
+    500,
+    500
+  ],
+  "change": "systemInstruction.role=user matching Google Python SDK string conversion",
+  "provider_revision": "gemini-sse-json-role-v2",
+  "primary_sources": [
+    "https://raw.githubusercontent.com/googleapis/python-genai/main/google/genai/_transformers.py",
+    "https://raw.githubusercontent.com/googleapis/python-genai/main/google/genai/models.py",
+    "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api#system-instructions"
+  ],
+  "causal_fix_proven": false,
+  "official_rest_example_omits_role": true,
+  "policy_schema_and_untrusted_content_still_separate": true,
+  "model_fallback": false,
+  "automatic_retries": 0,
+  "offline_tests_passed": 28,
+  "mechanical_claims_changed": false
+}

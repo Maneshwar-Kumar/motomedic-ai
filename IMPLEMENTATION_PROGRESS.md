@@ -14,7 +14,7 @@ Step 1 exit checks: **75 tests passed, zero failures/errors**, recorded in `repo
 
 ## Step 2 — active
 
-GEN003 and EXP003 text journeys, persisted outcomes and live provider traces. Previously recorded grounded live calls: zero. Synthetic transport timing is not grounded p95. No mechanical repair has been verified.
+GEN003 and EXP003 persistence checks pass: 12 tests and 16 simulated journey checks. Independent original-source/runtime v2 review and coordinator exact bounded approval are recorded. Private commit `4837cc7` ran hosted build `38060044433`: all 75 integration and 12 persistence tests passed, then both genuine grounded composer attempts returned HTTP 500. No verifier calls, no supported live answers and no automatic retries occurred. Raw source/index bytes passed on Ubuntu. Reports are in `reports/approved_hosted_run_38060044433/`; Step 2 exit remains open. Synthetic transport timing is not grounded p95. No mechanical repair has been verified.
 
 ## Step 3 — pending
 

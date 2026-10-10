@@ -48,6 +48,9 @@ class GemmaProviderTests(unittest.TestCase):
         model,key,body,timeout=self.calls[0]
         self.assertEqual((model,timeout),('gemma-4-31b-it',30))
         self.assertIn('POLICY_SENTINEL',body['systemInstruction']['parts'][0]['text'])
+        self.assertEqual(body['systemInstruction']['role'],'user')
+        self.assertEqual(body['contents'][0]['role'],'user')
+        self.assertEqual(self.config.provider_revision,'gemini-sse-json-role-v2')
         self.assertEqual(body['generationConfig']['thinkingConfig'],{'thinkingLevel':'minimal'})
         self.assertNotIn('tools',body)
         self.assertNotIn('SECRET_SENTINEL',json.dumps(result.telemetry))
