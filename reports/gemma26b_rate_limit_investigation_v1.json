@@ -1,0 +1,59 @@
+{
+  "schema_version": "gemma26b-rate-limit-investigation-v1",
+  "checked_at_utc": "2026-10-10T19:30:17.088418+00:00",
+  "model": "gemma-4-26b-a4b-it",
+  "official_sources": [
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+      "finding": "Request-per-minute, input-token-per-minute and daily quotas are per project, shared across keys. Active numbers are in signed-in AI Studio; capacity not guaranteed."
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/api-errors",
+      "finding": "Documented rate/quota errors are HTTP429; HTTP500 is an unexpected server error."
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/troubleshooting",
+      "finding": "Google recommends finite exponential backoff with jitter for transient rate and server errors."
+    },
+    {
+      "url": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+      "finding": "26B is supported; no current numeric quota table on this page."
+    }
+  ],
+  "active_project_quota_numbers_verified": false,
+  "quota_inspection_report": "reports/gemma26b_quota_inspection_v1.json",
+  "access_limits": "AI Studio redirects to login; authenticated read-only Service Usage quota endpoint returned HTTP404. Neither establishes absence of quota.",
+  "prior_run": "38079224669",
+  "actual_request_count": 11,
+  "ordered_http_statuses": [
+    200,
+    200,
+    200,
+    500,
+    500,
+    500,
+    200,
+    500,
+    200,
+    200,
+    200
+  ],
+  "sum_measured_trial_durations_seconds": 20.51893826999998,
+  "confirmed_harness_issues": [
+    "Shared total-call cap and sequential samples exist, but no RPM/input-TPM admission control or quota-wait telemetry.",
+    "C may overlap generator and block verifiers, so quota control must be shared across all composer/verifier calls without silently serializing the architecture.",
+    "No finite transient-error retry policy in prior controlled runs; this was intentional zero-retry measurement, not a proven cause of failure.",
+    "A EXP003 returned an unavailable option index, unrelated to HTTP500. Keep rejection and improve explicit choice wording rather than coercing the answer."
+  ],
+  "not_established": [
+    "Exact 26B project RPM/TPM/RPD",
+    "Rate limits caused observed HTTP500",
+    "Pacing will fix the backend failure",
+    "Remaining daily quota",
+    "Free access provides a production capacity guarantee"
+  ],
+  "correction_and_execution_destination": "New owner-requested Service Agent chat; implement, independently review, then rerun the same nine trials.",
+  "new_provider_generation_calls_this_investigation": 0,
+  "production_runtime_changed": false,
+  "deployment_or_billing_changed": false
+}
