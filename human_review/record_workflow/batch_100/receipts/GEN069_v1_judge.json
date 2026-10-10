@@ -1,0 +1,27 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "dd619e41f36afbc7b3d2910cab6fe86ed0b552c8b908074bd8e622f5f2035281",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "MINOR MAINTENANCE TIPS\nMINI BLADE FUSE USAGE LIST                                       WARNING\n   Fuse ID                 Color    Rating       Remarks   number                                               Please get the electrical system of your motorcycle checked\n       F1          Blue       15 A            Ignition         thoroughly and get the faults corrected immediately after\n      F2         Blue       15 A           EFI relay         experiencing any fuse failure. Failure to do so may result in\n      F3        Red      10 A           Fan           repeated fuse failure.\n     F4         Yellow      5 A      POS, lights & CTRL    Usage of fuses other than specified rating or usage of any\n                                                         other conductive materials or low grade fuses will damage      F5         Yellow      5 A         Instruments\n                                                        the complete electrical system.                                   Low/High Beam &     F6        Red      10 A                          Please ensure to replace a spare fuse in the holder at the                                         Accessory\n                                                                    earliest opportunity.      F7        Red      10 A          Horn                                               Any attempt to jumper a defective fuse gives rise to the risk\n     F8         Blue       15 A       ABS S motor        of a short-circuit and fire. Always replace a defective fuse\n     F9        Red      10 A        ABS valve        with a new fuse of the same rating.\n                      Spare fuse list\n      SF1        Yellow      5 A                 NOTE\n     SF2        Red      10 A         Spare fuse       Make sure the ignition switch is in “OFF” position when\n     SF3         Blue       15 A                            replacing the bulbs, fuses and electrical parts.\n\n110   Royal Enfield Himalayan",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-112.png",
+      "pdf_page": 112,
+      "printed_page": "110"
+    }
+  ],
+  "payload_sha256": "36b1ca80271069f3c24f9e4dc264676d0f7bda05f49c9af578a0345325ece5de",
+  "reason": "Synthetic stale-policy cache fixture follows version/dependency invalidation contract. Original PDF112 safety block checked; no cache or approval records changed. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN069",
+  "review_sha256": "49522aa568674b5cc90a0f75f7b0b2fc910d744d06b18b33f674a4bb8d25f5e8",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

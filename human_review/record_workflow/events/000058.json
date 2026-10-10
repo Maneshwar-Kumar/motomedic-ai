@@ -1,0 +1,57 @@
+{
+  "event_sha256": "80fac0cc7796663d07615f497ecb3fda5f85f96d5a73e68f125ac2f2def202b6",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-author",
+    "answer": "The manual says N indicates neutral; gears are displayed as the appropriate number from 1 to 6. This describes the indication without verifying the actual mechanical gear position.",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "conditions": [
+      "Confirmed applicable Himalayan BS6 and immutable selected manual; this expected route is conditional, not runtime authorization."
+    ],
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "distinctive_intent": "gear_N_display_lookup",
+    "expected_route": "SUPPORTED",
+    "forbidden_claims": [
+      "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+      "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+    ],
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "origin_declaration": "Generated based on feedback from the first 11 cases",
+    "payload_sha256": "a65da0bf57f1efb4da0faa9f2b251968c0c60bacb9ca8e5b07826a0bdde7ecce",
+    "question": "What does N mean on the gear display?",
+    "record_id": "GEN039",
+    "role": "author",
+    "source_limits": [],
+    "source_refs": [
+      {
+        "checked_span": "Royal Enfield Himalayan\n59\nOPERATION OF CONTROLS\nODOMETER                                                                                                 \n\nDisplays the cumulative kilometers the vehicle has\ncovered.\nGEAR POSITION INDICATION                                                      \n\nDisplays the gear position in which the vehicle is\ntraveling.\n\nWhen in neutral the indication will be “N”.\n\nWhen in gear the appropriate number between 1 to 6\nwill be displayed.\nTELL TALES\n1831km\nkm/h\n00:12\n1\n2\n3\n9\n32\n0\nSide\nStand\n1831km\nkm/h\n00:12\nR.P.M   1000\n1\n2\n3\n4\n5\n6\n7\n8\n9\n32\n0\nSide\nStand\n1831km\nkm/h\n00:12\n1\n2\n3\n4\n9\n32\n0\n1\n2\n5\n4\n7\n8\n3\n6",
+        "evidence_ids": [],
+        "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+        "pdf_page": 61,
+        "printed_page": "59"
+      }
+    ],
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "stopping_rules": [
+      "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+      "Do not repeat attempted actions without a documented exception or superseding correction.",
+      "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+    ],
+    "turns": [
+      {
+        "speaker": "rider",
+        "text": "What does N mean on the gear display?"
+      },
+      {
+        "speaker": "assistant",
+        "text": "The manual says N indicates neutral; gears are displayed as the appropriate number from 1 to 6. This describes the indication without verifying the actual mechanical gear position."
+      }
+    ],
+    "version": 1,
+    "warnings": []
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "d72ace5b991577fb9cb1063db7f2fec65873130a5b247178e7911c6c0b131633",
+  "recorded_at_utc": "2026-10-09T18:56:31.037607+00:00",
+  "sequence": 58
+}

@@ -1,0 +1,31 @@
+{
+  "event_sha256": "b350d63cf5117011647a66dda66b87260c65160752b8629c14d8294c1442d56c",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "7c48bf6b3e39e4966e9963e2df026807399d3cea46a0f3acf60d49f8c1477b24",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "CHARGER warning: rain damage, one mobile at a time/no other devices, wrong insertion, cap full closed, no conductive insertion.",
+        "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+        "pdf_page": 64,
+        "printed_page": "62"
+      }
+    ],
+    "payload_sha256": "94ae8f8bc202464fe6f70d98d2c0cf62ef5ed65d6d8835106cdd5752b3600def",
+    "reason": "Exact splitter-use proposal now SAFETY_STOP with original PDF64 one-mobile/no-other-device charging WARNING preserved in answer/turn; no connector/current compatibility inference. Independently rechecked corrected v2 plus immutable prior feedback against original page and TRD canonical route. Engineering-only; no source/human/release approval.",
+    "record_id": "GEN021",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 2
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "ed22309b4554cb52a46a41373fc7503a742c142a7b267dbc5759435c4a924cb0",
+  "recorded_at_utc": "2026-10-10T02:23:06.984966+00:00",
+  "sequence": 268
+}

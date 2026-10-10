@@ -1,0 +1,161 @@
+import json
+from pathlib import Path
+import tempfile
+import unittest
+
+from workflow import MANUAL_SHA, ORIGIN, Store
+
+
+class WorkflowTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.store = Store(self.root)
+        self.store.context = lambda: {"manual_sha256": MANUAL_SHA, "files": {}, "policy_version": "test"}
+
+    def author(self, version=1, **extras):
+        value = {"record_id": "GEN001", "version": version, "role": "author", "actor": "author-a", "manual_sha256": MANUAL_SHA,
+                 "origin_declaration": ORIGIN, "question": "Synthetic source-limit question", "answer": "Synthetic answer for workflow testing only",
+                 "turns": [{"speaker": "rider", "text": "I tried it; still unresolved", "outcome": "ACTION_COMPLETED_UNRESOLVED"}],
+                 "expected_route": "UNSUPPORTED", "conditions": [], "warnings": [], "source_limits": ["Synthetic fixture"],
+                 "stopping_rules": ["Stop at source limit"], "forbidden_claims": ["Verified repair"], "source_refs": [{"pdf_page": 21, "printed_page": "19"}]}
+        value.update(extras)
+        return value
+
+    def reviewer(self, author, verdict="PASS", **extras):
+        value = {"record_id": "GEN001", "version": author["version"], "role": "reviewer", "actor": "reviewer-b", "manual_sha256": MANUAL_SHA,
+                 "author_sha256": author["payload_sha256"], "context_sha256": author["context_sha256"], "independent_original_review": True,
+                 "original_page_checks": [{"pdf_page": 21, "printed_page": "19", "checked_span": "Synthetic fixture; no actual source approval"}],
+                 "findings": [] if verdict == "PASS" else [{"id": "F1", "issue": "Synthetic missing guidance"}], "reason": "Synthetic test", "verdict": verdict}
+        value.update(extras)
+        return value
+
+    def judge(self, author, review, verdict="PASS_AGENT_REVIEW"):
+        value = self.reviewer(author)
+        value.update(role="judge", actor="judge-c", review_sha256=review["payload_sha256"], verdict=verdict,
+                     feedback_disposition={f["id"]: "Synthetic disposition" for f in review["findings"]})
+        return value
+
+    def test_three_roles_and_typed_unresolved_are_preserved(self):
+        author = self.store.submit(self.author())
+        review = self.store.submit(self.reviewer(author))
+        self.store.submit(self.judge(author, review))
+        status = self.store.native_status()[0]
+        self.assertEqual(status["state"], "PASS_AGENT_REVIEW")
+        self.assertFalse(status["runtime_authorized"])
+        self.assertEqual(json.loads(self.store.object(author["payload_sha256"]))["turns"][0]["outcome"], "ACTION_COMPLETED_UNRESOLVED")
+
+    def test_self_review_and_stale_hash_are_rejected(self):
+        author = self.store.submit(self.author())
+        with self.assertRaisesRegex(ValueError, "own work"):
+            self.store.submit(self.reviewer(author, actor="author-a"))
+        with self.assertRaisesRegex(ValueError, "Exact author"):
+            self.store.submit(self.reviewer(author, author_sha256="0" * 64))
+        review = self.store.submit(self.reviewer(author))
+        judge = self.judge(author, review)
+        judge["actor"] = "reviewer-b"
+        with self.assertRaisesRegex(ValueError, "own review"):
+            self.store.submit(judge)
+
+    def test_source_page_coverage_and_context_change_fail_closed(self):
+        author = self.store.submit(self.author())
+        with self.assertRaisesRegex(ValueError, "every author source page"):
+            self.store.submit(self.reviewer(author, original_page_checks=[{"pdf_page": 22, "printed_page": "20", "checked_span": "Wrong page"}]))
+        self.store.context = lambda: {"manual_sha256": MANUAL_SHA, "files": {}, "policy_version": "changed"}
+        with self.assertRaisesRegex(ValueError, "Context changed"):
+            self.store.submit(self.reviewer(author))
+        revised = self.store.submit(self.author(2, previous_author_sha256=author["payload_sha256"], context_change_reason="Policy changed", changes=["Revalidate"], feedback_disposition={"context": "Revalidate changed policy"}))
+        self.assertEqual(revised["version"], 2)
+
+    def test_judge_cannot_silently_override_source_review(self):
+        author = self.store.submit(self.author())
+        review = self.store.submit(self.reviewer(author, "SOURCE_GAP"))
+        with self.assertRaisesRegex(ValueError, "Pass requires"):
+            self.store.submit(self.judge(author, review))
+        self.store.submit(self.judge(author, review, "SOURCE_GAP"))
+        self.assertEqual(self.store.native_status()[0]["state"], "BLOCKED_SOURCE_GAP")
+        with self.assertRaisesRegex(ValueError, "adjudicated feedback"):
+            self.store.submit(self.author(2))
+
+    def test_three_revisions_then_explicit_human_block(self):
+        previous_author = previous_judge = None
+        for version in range(1, 5):
+            extras = {} if version == 1 else {"previous_author_sha256": previous_author["payload_sha256"], "feedback_judgment_sha256": previous_judge["payload_sha256"], "changes": ["Synthetic change"], "feedback_disposition": {"F1": "Synthetic revision"}}
+            author = self.store.submit(self.author(version, **extras))
+            review = self.store.submit(self.reviewer(author, "NEEDS_REVISION"))
+            judge = self.store.submit(self.judge(author, review, "NEEDS_REVISION"))
+            previous_author, previous_judge = author, judge
+        self.assertEqual(self.store.native_status()[0]["state"], "BLOCKED_HUMAN_REVIEW")
+        with self.assertRaisesRegex(ValueError, "three revisions"):
+            self.store.submit(self.author(5))
+
+    def test_ledger_and_immutable_object_tampering_detected(self):
+        author = self.store.submit(self.author())
+        event = self.store.home / "events/000001.json"
+        original = event.read_bytes()
+        event.write_bytes(original.replace(b'"author-a"', b'"changed-a"'))
+        with self.assertRaisesRegex(ValueError, "corrupted"):
+            self.store.ledger()
+        event.write_bytes(original)
+        obj = self.store.home / "objects" / author["payload_sha256"]
+        obj.write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "corrupted"):
+            self.store.object(author["payload_sha256"])
+
+    def test_removed_tail_and_changed_context_invalidate_status(self):
+        author = self.store.submit(self.author())
+        self.store.context = lambda: {"manual_sha256": MANUAL_SHA, "files": {}, "policy_version": "changed"}
+        self.assertEqual(self.store.native_status()[0]["state"], "STALE_CONTEXT")
+        (self.store.home / "events/000001.json").unlink()
+        with self.assertRaisesRegex(ValueError, "recorded head"):
+            self.store.ledger()
+
+    def test_duplicate_decision_and_active_namespace_rejected(self):
+        payload = self.author()
+        self.store.submit(payload)
+        with self.assertRaisesRegex(ValueError, "already exists"):
+            self.store.submit(payload)
+        payload["record_id"] = "EXP001"
+        with self.assertRaisesRegex(ValueError, "read-only"):
+            self.store.submit(payload)
+
+    def legacy_snapshot(self, latest=2):
+        artifacts = {}
+        for version in range(1, latest + 1):
+            prefix = "human_review/agent_expansion/"
+            draft = f"# EXP001 v{version}\n\n{ORIGIN}.\nSynthetic conversation\n".encode()
+            dsha = self.store.freeze(draft)
+            artifacts[prefix + f"drafts/EXP001_v{version}.md"] = dsha
+            if version == 1:
+                review = f"Draft SHA-256: {dsha}\nManual SHA-256: {MANUAL_SHA}\nVerdict: PASS\n"
+                rsha = self.store.freeze(review.encode())
+                artifacts[prefix + f"reviews/EXP001_v{version}_review.md"] = rsha
+                judge = f"Draft SHA-256: {dsha}\nReview SHA-256: {rsha}\nManual SHA-256: {MANUAL_SHA}\nVerdict: PASS_AGENT_REVIEW\n"
+                artifacts[prefix + f"judgments/EXP001_v{version}_judgment.md"] = self.store.freeze(judge.encode())
+        return {"artifacts": artifacts, "expected_generated_ids": ["EXP001", "EXP002"], "unstable_files": []}
+
+    def test_historical_pass_never_transfers_to_new_version(self):
+        report = self.store.report("0" * 64, self.legacy_snapshot())
+        self.assertEqual(report["records"][0]["state"], "AWAITING_REVIEW")
+        self.assertEqual(report["records"][0]["versions"][0]["state"], "PASS_AGENT_REVIEW")
+        self.assertEqual(report["records"][1]["state"], "AWAITING_AUTHOR")
+        self.assertFalse(report["agent_loop_complete"])
+
+    def test_changed_review_invalidates_matching_draft_judgment(self):
+        snapshot = self.legacy_snapshot(1)
+        name = "human_review/agent_expansion/reviews/EXP001_v1_review.md"
+        snapshot["artifacts"][name] = self.store.freeze(self.store.object(snapshot["artifacts"][name]) + b"New finding\n")
+        report = self.store.report("0" * 64, snapshot)
+        self.assertEqual(report["records"][0]["state"], "BLOCKED_BINDING")
+
+    def test_nested_old_hash_cannot_bind_current_review(self):
+        snapshot = self.legacy_snapshot(1)
+        name = "human_review/agent_expansion/reviews/EXP001_v1_review.md"
+        old = self.store.object(snapshot["artifacts"][name])
+        snapshot["artifacts"][name] = self.store.freeze(b"SHA-256: " + b"0" * 64 + b"\n" + old)
+        self.assertEqual(self.store.report("0" * 64, snapshot)["records"][0]["state"], "BLOCKED_BINDING")
+
+
+if __name__ == "__main__":
+    unittest.main()

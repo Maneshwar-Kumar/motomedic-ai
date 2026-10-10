@@ -1,0 +1,49 @@
+{
+  "actor": "batch100-author",
+  "answer": "Yes. The manual describes convex mirrors: their wider view makes objects look smaller and farther away than in a flat mirror. Use care when judging distance.",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "conditions": [
+    "Confirmed applicable Himalayan BS6 and immutable selected manual; this expected route is conditional, not runtime authorization."
+  ],
+  "distinctive_intent": "convex_mirror_distance_observation",
+  "expected_route": "SUPPORTED",
+  "forbidden_claims": [
+    "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+    "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "origin_declaration": "Generated based on feedback from the first 11 cases",
+  "question": "Cars in my mirrors look farther away than they really are. Is that described?",
+  "record_id": "GEN003",
+  "role": "author",
+  "source_limits": [
+    "This explains the documented mirror effect; it does not confirm that the fitted mirrors match the manual."
+  ],
+  "source_refs": [
+    {
+      "checked_span": "Royal Enfield Himalayan\n11\nRULES OF THE ROAD\n\nDo not leave the curb or parking area without signal-\ning. Be sure your way is clear to enter moving traffic. A\nmoving line of traffic always has the right-of-way.\n\nWhen parking the motorcycle, park on a firm and flat\nsurface to prevent it from falling over.\n\nProtect your motorcycle against theft. After parking\nyour motorcycle, ensure that the steering head is\nlocked and then remove the ignition key.\nSIDE VIEW MIRRORS\nYour motorcycle is equipped with convex mirrors and have\na curved surface.\nThis type of mirror is designed to give a much wider view of\nthe rear than a normal flat mirror. However, vehicles and\nother objects seen in this type of mirror will look smaller\nand farther away than when seen in a flat mirror.\nUse care when judging the size or distance of vehicles /\nobjects seen in these mirrors. Use the tool available in tool\nkit to loosen and adjust the side mirrors.\nNOTE\n \nTo establish the relative distance of vehicles / objects\nbehind your motorcycle through the mirrors, adjust each\nmirror in such a way, that a small portion of your shoulder is\nvisible and a large portion behind your motorcycle is seen\nclearly with reference to your riding posture.",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 13,
+      "printed_page": "11"
+    }
+  ],
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "stopping_rules": [
+    "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+    "Do not repeat attempted actions without a documented exception or superseding correction.",
+    "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+  ],
+  "turns": [
+    {
+      "speaker": "rider",
+      "text": "Cars in my mirrors look farther away than they really are. Is that described?"
+    },
+    {
+      "speaker": "assistant",
+      "text": "Yes. The manual describes convex mirrors: their wider view makes objects look smaller and farther away than in a flat mirror. Use care when judging distance."
+    }
+  ],
+  "version": 1,
+  "warnings": []
+}

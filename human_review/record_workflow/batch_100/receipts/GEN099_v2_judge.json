@@ -1,0 +1,27 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "a089399e3e62d9a771eb4711a2e1188390c780c140dec09e9f2b35f112ae06f7",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "OPERATION OF CONTROLS\n   (1) Mobile connectivity symbol - It’s shows mobile   (8) Engine MIL - Will be continuously ON in case of\n    connecting and disconnecting indication.              EMS malfunction.\n  (2) Ride mode - It can be viewed both performance\n                                     NOTE   mode and ECO mode indication based on the vehicle\n     riding condition.                      Tell tales lights will switch “OFF” after engine is started.\n  (3) ABS - Will be continuously ON during initial check  CAUTION\n    up (until or after vehicle running for a particular dis-\n                               Do not run motorcycle in case the malfunction remains    tance / speed) and will turn OFF if system is ok, then\n                                                    “ON” continuously as it can cause severe damage to      will light up again in case of any ABS system malfunc-                                                            the ECU & Sensors. Please visit the nearest authorised\n     tion.                                                            Royal Enfield dealer to diagnose & rectify the defect in\n  (4) Turn right - Right turn signal ON.                      the EMS.\n  (5) High beam indication - Head lamp high beam ON.   Do not run motorcycle in case the ABS indicator lamp\n                                                              continuously “ON”.\n  (6) Warning symbol - This indicator glows whenever\n    the vehicle components fault.\n  (7) Turn left - Left turn signal ON.\n\n\n60   Royal Enfield Himalayan",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-062.png",
+      "pdf_page": 62,
+      "printed_page": "60"
+    }
+  ],
+  "payload_sha256": "bf7d7c70de4816963749c3c23d71efec4e9761ff20b4fb463dcdc2e7f660c909",
+  "reason": "GEN099-F1 resolved: only reported resolved symptom closes as customer-reported; remaining warning stays open with one accessible visible-symbol/label question. PDF62 distinct MIL/ABS/general-warning meanings not collapsed to allfixed. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN099",
+  "review_sha256": "4d9a76bc9732db8bfafda35ea40dd6a5df4bf98871b81e0c3a605efebc3eaaae",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 2
+}

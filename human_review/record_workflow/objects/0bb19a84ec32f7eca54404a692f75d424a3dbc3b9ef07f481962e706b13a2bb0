@@ -1,0 +1,23 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "da6bd6a700d0d81f30c0e448a329c4a95bdbf3ad005d5ae1030b600157fd2688",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "Poorpickup disproportionate RPM=> clutchfreeplay+service; original high-level action does not approve draft/stale registry or failed processing.",
+      "inspection_method": "Independent original PDF text and full-page layout/footer checked; product policy separately checked in TRDv0.4.",
+      "pdf_page": 122,
+      "printed_page": "120"
+    }
+  ],
+  "payload_sha256": "de6fc1ed647e844d12b130a65748a2b9010c8d4ab67f6eb28c1e396c84a71d1c",
+  "reason": "Required reranker failure SYSTEM_ERROR; no false success or source absence. Engineering policy/source candidate only; no actual infrastructure test, human/source/dependency/release approval.",
+  "record_id": "GEN074",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

@@ -1,0 +1,57 @@
+{
+  "event_sha256": "4a98b7e0bf4700cd5b72b9330e8980a072dd918deb02b960b601f6f32e0d6d9c",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-author",
+    "answer": "No. The manual says the port is for charging only and data transfer is not enabled.",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "conditions": [
+      "Confirmed applicable Himalayan BS6 and immutable selected manual; this expected route is conditional, not runtime authorization."
+    ],
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "distinctive_intent": "usb_data_transfer_scope",
+    "expected_route": "SUPPORTED",
+    "forbidden_claims": [
+      "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+      "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+    ],
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "origin_declaration": "Generated based on feedback from the first 11 cases",
+    "payload_sha256": "bdef39698fcd13916c4d2cba5232f88ca62e8349655e668e5f31dce7139b60ba",
+    "question": "Can this USB port transfer files?",
+    "record_id": "GEN018",
+    "role": "author",
+    "source_limits": [],
+    "source_refs": [
+      {
+        "checked_span": "Royal Enfield Himalayan\n63\nOPERATION OF CONTROLS\nNOTE\n\nCharging port is provided only for charging purpose\nand no data transfer is enabled.\n\nOnly constant charging mode is provided, fast / dash\ncharging mode is not provided to be compatible with\nmultiple makes mobile phones and cannot be com-\npared with the performance of original smartphone\nchargers.\n\nDuration of charging can be higher and will vary for dif-\nferent make mobile phones depending on smart\nphone battery capacity, SOC and smart phone\ncharging circuits.\nCAUTION\n\nCustomer to ensure USB port cap is closed and locked\nproperly when not in use, warranty will not be pro-\nvided if port cap is damaged and not sealed properly.\n\nIf high current draw greater than 2.5 A is observed USB\ncharger will shutdown please check your smart phone\nbattery current ratings before using.\n\nUSB charger will function only when engine is in\nrunning condition.\n\nUse standard approved and high quality USB cables for\nproper functioning.",
+        "evidence_ids": [],
+        "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+        "pdf_page": 65,
+        "printed_page": "63"
+      }
+    ],
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "stopping_rules": [
+      "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+      "Do not repeat attempted actions without a documented exception or superseding correction.",
+      "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+    ],
+    "turns": [
+      {
+        "speaker": "rider",
+        "text": "Can this USB port transfer files?"
+      },
+      {
+        "speaker": "assistant",
+        "text": "No. The manual says the port is for charging only and data transfer is not enabled."
+      }
+    ],
+    "version": 1,
+    "warnings": []
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "ae3bfaf711a5890c4065743276b3004eaf3ec6b3c204e5a1365d4727deffe408",
+  "recorded_at_utc": "2026-10-09T18:56:25.222315+00:00",
+  "sequence": 37
+}

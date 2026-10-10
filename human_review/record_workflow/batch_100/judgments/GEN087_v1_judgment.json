@@ -1,0 +1,26 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "5b461afa3db32bedc9f0b04895c8b224baf68cd0b9db3c27f948680c4547b3b8",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "MINOR MAINTENANCE TIPS\n                               Wait 2 to 3 minutes to settle the oil and assess the sight\n                                                                        glass. The volume added the minimum to maximum\n                                                                       level is approximately 350 ml.\n                               Engine oil level should be close to “MAX” condition.\n\n\n\n  Wait for a few minutes and clean the chain thoroughly\n    from any dirt, grime, etc.\n  Rotate rear wheel slowly and simultaneously apply rec-\n   ommended chain lubricant on the chain links.\n  Wipe oﬀ excess chain lubricant after a few minutes\n    with a clean cloth.                     If in case of oil level is not in above mentioned condi-\nENGINE OIL LEVEL CHECKING                                 tion, then top-up the oil to “MAX” condition and repeat\n                                                            the procedure.  Place the vehicle on a level surface upright.\n   Start the engine from cold condition, allow the engine   Do not over ﬁll above the “MAX” mark as it may aﬀect\n    to idle for 2 to 3 minutes and stop the engine.               the clutch function.\n                                                               Royal Enfield Himalayan   81",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-083.png",
+      "pdf_page": 83,
+      "printed_page": "81"
+    }
+  ],
+  "reason": "Synthetic successful bounded recovery leaving unresolved evidence gap correctly withholds instruction/enters source review instead of unlimited searches. OriginalPDF83 complete source checked; no actual missing manual page claimed. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN087",
+  "review_sha256": "c033c98d393c61de8c49f7f9a7c40bc306fbc8fd4fc5ccc3acb0282c7b813cb0",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

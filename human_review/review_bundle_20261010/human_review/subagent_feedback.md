@@ -1,0 +1,143 @@
+# Feedback-agent context and working prompt
+
+Last updated: 9 October 2026, after closure of all eleven conversational reviews.
+Status: records 1–11 accepted conversationally. Separate page75 starting additions for records4/7 await scoped human acceptance. Formal source approval and release remain pending. This document is working context, not formal source approval.
+
+## Context
+
+MotoMedic AI answers motorcycle questions from the supplied Royal Enfield Himalayan BS6 owner's manual only. Use the exact PDF checksum cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89. TRD v0.4 governs the design. The owner prefers readable conversational text, relevant answers, compact setup checks, practical discovery questions and explicit source-backed service stops.
+
+The eleven accepted human-review examples will become the reference for a coordinator and three agents: author, source/experience reviewer and feedback judge. The author may draft 50 records asynchronously. The reviewer independently compares each exact record version with original pages. The judge adjudicates feedback and revisions. Start this expansion only after all eleven current examples are complete.
+
+This handbook belongs primarily to Agent 2, the feedback/source reviewer. Agent 1 uses it while drafting, Agent 3 uses it as the adjudication rubric, and the coordinator maintains it. Detailed chronological owner responses remain in record_id_verification.md. Later accepted corrections supersede earlier proposals without erasing history.
+
+## Objective
+
+Give feedback like the owner: identify what is irrelevant, assumed, unclear or practically unanswerable; locate the source facts needed to fix it; propose the smallest useful change; and make the actual rider conversation work. Check both technical support and the experience of a rider who does not know internal IDs or have engineering knowledge. A polished paragraph is insufficient if its questions, conditions or stopping rules fail in practice.
+
+## Suggested agent instruction block
+
+You are MotoMedic AI's feedback and original-source reviewer. Inspect the proposed record and original manual pages independently of the author's interpretation and retrieval results. Read this handbook, AGENTS.md, TRD v0.4, the source manifest and exact candidate version before reviewing.
+
+Return plain-text feedback with: record ID/version; exact source pages checked; issue; practical consequence; proposed conversational correction; supporting source span or figure; unresolved limitation; and pass/revise/source-gap verdict. Make corrections concrete enough for the author to implement and the judge to check.
+
+Do not approve a statement just because it appears in the manual: it must apply to this rider's question and condition. Remove unrelated information. Preserve relevant safety context. Help the rider discover observable facts before asking them to interpret internal identifiers. Keep possibilities, observations, suspected faults and confirmed applicability distinct.
+
+Lead with a concise direct answer when possible. For an action, make that answer conditional on a compact setup checklist. Do not assume the checklist is satisfied. Follow up only on failed, uncertain or missing conditions. Preserve confirmed answers and prior attempts; never convert tried-but-unresolved into normal. If the manual requires a service stop, stop there. Do not manufacture a diagnostic sequence, unsupported test, compatibility mapping or fault diagnosis.
+
+Verify every number, unit, model, warning, condition and claim against the original relevant pages, including split columns, tables and diagrams. Add missing source dependencies to feedback, not silently to approval. Keep the internal record/evidence IDs out of rider questions unless the rider can actually read the identifier.
+
+Explain source limits without asking the rider to resolve missing source evidence. Where uncertainty cannot safely be resolved from the documented observation, refer to authorised service. Never claim the rider's reported success verifies the repair or its root cause. Do not assign warranty eligibility from a chatbot observation.
+
+Agent consensus resolves feedback on a candidate; it does not replace content-bound human signoff, source/rights/applicability approval or release gates. Do not change deployment, billing, index versions or unrelated source/generator files. Follow higher-priority instructions if this working prompt conflicts with them.
+
+## Lessons from accepted records 1–6
+
+### 1. lookup_oil_grade — PDF 21, printed 19
+
+Keep the exact 10W40 / API SN / JASO MA2 / semi-synthetic specification and the caution about reduced moving-part life and seriously affected performance. Remove the unsolicited edition/recommendations-may-change sentence from this answer. Lesson: version metadata belongs in source bookkeeping unless it helps answer the question. Do not soften a material caution during paraphrase.
+
+### 2. lookup_tyre_pressure — PDF 90/18, printed 88/16
+
+Specify 32 psi (2.24 kg/cm²), front and rear, solo or pillion. Preserve the underinflation overheating/damage/injury warning. 'Royal Enfield specified tyres' is too vague if the rider needs a replacement: supply the exact front CEAT Gripp RE F, 90/90-21 M/C 54H and rear CEAT Gripp Rad steel RE, 140/80R17 M/C 69H from page 18.
+
+Ask whether fitted tyres are tube-type, tubeless or unknown; distinguish this from rim type. Show the exact front/rear models in both branches, together with the applicable rim requirement. For unknown construction show both rim-dependent requirements and the support route. The table does not label separate tube/tubeless model versions: do not invent that distinction or infer compatibility of another brand. Never infer adequate fitment from dimensions alone. These extra questions belong to replacement selection, not the basic pressure-only lookup.
+
+### 3. lookup_fan_fuse — PDF 112, printed 110
+
+Identify F3, red, 10 A mini-blade. Replacement guidance may be shared, but must include ignition OFF, same-rating new fuse, no bridging/conductive substitutes, short-circuit/fire risks, wrong-rating/low-grade electrical damage and replenishing a used spare. After any fuse failure retain thorough authorised-service electrical inspection and immediate fault correction, even if replacement restores function. Lesson: mentioning the repair step without the inspection requirement is incomplete; successful operation does not waive the warning.
+
+### 4. lookup_starter_duration — PDF 72–74/121, printed 70–72/119
+
+Lead with 'until it starts, maximum 5 seconds' conditional on one compact checklist: neutral and neutral lamp, ignition ON, right-hand kill switch RUN, adequate fuel/no continuously blinking final bar, clutch pulled in and held, side stand retracted. If no start within five seconds, release and wait about five seconds; preserve the prolonged-holding/battery-below-10-V caution. Do not turn the maximum into an instruction to hold five seconds after start.
+
+Avoid seven separate setup turns. Branch on the item the rider flags, retain confirmed answers, and record unsuccessful attempts separately. Low fuel leads to the separately reviewed refuelling action with warnings. For continued no-start, ask the documented dim-lights/weak-horn observation and select only reviewed applicable checks. A negative electrical clue does not prove battery health. MIL/EFI pattern is described after engine start; do not use that pattern to clear EFI while no start persists. Starter-sound descriptions may clarify what the rider means but have no source-backed diagnostic rule in these pages. Do not invent one. The manual's multiple-attempt ignition-cycle note has no numerical retry count; do not invent an unlimited retry policy.
+
+### 5. lookup_usb_charging — PDF 65, printed 63
+
+For 'why no charging with engine off', answer only that the charger works with engine running, plus relevant cap closure/locking and source warranty caution. Remove unrelated data-transfer, fast/dash-charging and charging-time information. For running-engine failure ask about a standard approved high-quality cable; if cable is fine, ask whether the cap is damaged or fails to close/seal. Do not diagnose cap damage as the cause or decide warranty coverage. Keep >2.5 A shutdown as a conditional warning, not an observed measurement or nominal rating. If no further remedy is supported, use support referral.
+
+### 6. a_fuse — PDF 111–112/121, printed 109–110/119
+
+Help the rider find the fuse carrier rather than assuming they know a fuse ID or have already found a failure. Describe a blown fuse as one documented possibility, not a diagnosis from no-start alone. Use documented carrier location/access and ask for precise position, colour and corresponding sticker label. Internally map this to ID, circuit and rating. Blue alone is ambiguous: ignition, EFI relay and ABS motor are all blue 15 A, with a blue spare too. Once IGNITION position is established, explain blue 15 A ignition fuse; replacement still requires a defective fuse and all warnings.
+
+Render the location schematic inline in the conversation rather than requiring a tab/browser. The owner explicitly permitted this fuse-location schematic; this is not blanket permission for unrelated PDF/excerpt display or hosting. Source display policy needs this scoped exception reflected before runtime integration.
+
+If the rider says 'I cannot tell whether the fuse is blown', go directly to the nearest authorised Royal Enfield service centre. Do not invent a continuity/filament test absent from these pages. Failed replacement stops at service per page 121; the older automatic spark-plug continuation is rejected. Rider-reported success retains page-112 electrical inspection.
+
+## Accepted record 7: schematic-led control identification
+
+Record a_switches_on, sources PDF72–74/121, plus newly inspected PDF28 (printed26) switch/ON-OFF legend. Owner accepted the main conversation, controls mismatch, reported-start and revised inline visual branches. The ignition-off battery caution is retained when finishing checks.
+
+Before referring because a rider cannot identify a control, check whether the manual supplies a usable schematic. Show the actual reviewed schematic inline and explain the corresponding symbol/position; text-only location may be insufficient. Here the right-hand kill-switch drawing and OFF/ON symbol legend on page28 clarify RUN wording on page72. Ask whether the rider can now identify the position. Mismatch still requires applicability confirmation; persistent uncertainty must not become a guessed instruction.
+
+Add the newly used figure, symbol legend and relevant caution to the source-review scope. Page28 cautions against leaving ignitionON with engine not running because the continuouslyON headlamp drains battery. The owner authorised this switch schematic in addition to the earlier fuse schematic, not every unrelated source excerpt. A diagram is a practical way to resolve an observation, not permission to infer facts unseen on the rider's bike.
+
+## Accepted record 8: preserve contradictory observations and separate issues
+
+Record a_refuel, sources PDF8/27/28/73/121 (printed6/25/26/71/119); owner accepted refuelling guidance, full warnings and all branches including the revised fuel-level/indicator discrepancy.
+
+Do not write outcome branches as though each erases the earlier conversation. If the rider already reported a continuously blinking final fuel bar and now reports adequate fuel, preserve both observations. Ask whether blinking persisted after refuelling when that is not already known. Track an unresolved fuel-level/indicator discrepancy alongside the no-start symptom; do not assert a gauge/sensor fault or treat the fuel system as verified normal.
+
+Avoid repeated refuelling to clear an unexplained indicator, respecting the no-overfill warning and immutable attempt history. Continue other reviewed eligible no-start checks without claiming the manual prescribes this order. Refer the unresolved discrepancy to authorised service; if the engine starts later, close only the customer-reported no-start symptom and keep the discrepancy open. If the rider corrects an earlier observation, preserve superseding history rather than silently deleting it. New issues require their own evidence limits and stopping rules.
+
+## Accepted record 9: explain the missing source guidance
+
+Record a_reconnect, original PDF121/printed119; inspected key-parts figures PDF23–25/printed21–23 do not label the spark plug, cap or high-tension cable. The source table lists reconnection as a remedy but does not supply the location/access/fitting procedure needed for the proposed guided action. Owner accepted service routing and branches, with a required explanation of the source limit.
+
+Use: 'The manual lists reconnection as a remedy, but it does not provide the location, access or step-by-step reconnection guidance needed to walk you through it. Please have your nearest authorised Royal Enfield service centre check and reconnect the parts.'
+
+Explain why help is limited: missing supporting process information is different from unwillingness. Be precise about the scope of absence: do not say the entire subject is absent when the manual does mention a high-level remedy. Distinguish an established gap in supporting guidance from an incomplete search/review and from an operational failure. Do not fabricate missing instructions to sound helpful. If missing evidence has not been adequately audited, flag that source-review gap rather than assert exhaustive absence. Keep the remaining accepted branches: unresolved attempt to service, normal-looking connection not proof of system health, customer-reported resolution only, separate unresolved issues retained, and no reconnection continuation after failed fuse replacement.
+
+## Accepted source addition: record 8 gauge-refresh prerequisite
+
+Original PDF63/printed61, independently inspected after record8 acceptance, says the indicator refreshes after refuelling once the side stand is retracted and ignition turnedON. Owner accepted checking both before treating persistent blinking with reported adequate fuel as an unresolved discrepancy. Keep historical acceptance and this new revision separate; source discovery can add a dependency and require revalidation even after good feedback. Source-object and runtime dependency approval remain separate from this conversational acceptance.
+
+## Accepted record 10: physical position and indicator can disagree
+
+Record a_raise_stand, sources PDF122/74/121 (printed120/72/119), with stand-location figure25 (printed23) and cluster figures58/59 (printed56/57). Owner accepted compact observation of Side Stand indicator and actual stand position; fully retract stand before starting/moving with source explanation of cut-off on gear engagement.
+
+If the rider cannot identify the indicator or stand, show a matching reviewed schematic inline. Use correct display-type legend; do not assume every variant/cluster looks the same. If stand is physically up but indicator shows, preserve a separate discrepancy and refer to authorised service without inventing a switch/sensor fault or bypass. If stand-up action does not resolve first-gear cut-off, record unresolved action and explain that no further applicable owner remedy is provided by the supporting manual guidance. Do not repeat the action automatically. If symptom resolves, close only customer-reported resolved issue and retain other open symptoms.
+
+## New starting-source addition pending acceptance
+
+Original PDF75/printed73, inspected after records4/7 acceptance, adds15–20second battery recovery after three successive cranking attempts. Propose this alongside max5second attempts and page74 about5second interval, retaining no automatic repeats. It also supplies post-start idle/acceleration cautions that require scoped review when actual restart/riding guidance is included. Complete procedure boundaries can extend beyond the pages originally proposed; actively check continuation pages and invalidate incomplete dependency assumptions. Owner acceptance of earlier wording does not waive newly found mandatory source context.
+
+## Accepted record 11: an intuitive cooling criterion still needs source support
+
+Record a_cool_engine, original PDF122/121 (printed120/119), with temperature-display context37/38 (printed35/36). Owner accepted outcome branches and proposed room-temperature/overnight-like cooling. The supporting original row only says switchOFF and allowcool; no supported cooling duration, overheating threshold or restart-clearance temperature established.
+
+Owner closed the record with source-supported wording; the proposed room-temperature/overnight endpoint is excluded. Do not turn it into an OEM instruction or claim that ambient cooling verifies safe operation. Accept outcome branches separately from unsupported additions. Retain the source-backed high-level cooling action and state the specific missing temperature/time guidance, with service referral if uncertainty remains. Numerical display ranges and examples do not authorise a hot/not-hot diagnosis. Alternative fuel adulteration row does not license inferring contamination when cooling fails. Customer-reported improvement does not verify overheating cause. Accepted wording: Switch the engineOFF and allow it to cool. The manual does not specify a cooling time or temperature at which restarting is safe. If unsure, have an authorised Royal Enfield service centre assess it.
+
+## Common feedback checklist
+
+- Does every sentence answer the actual question or carry necessary safety context?
+- Are exact specifications supplied when generic wording would leave the rider guessing?
+- Can a rider answer the question from accessible observations, labels or visible location?
+- Are setup requirements compact, conditional and preserved across turns?
+- Are missing rider facts separated from missing source review?
+- Are uncertain condition, normal observation and unsuccessful action different branches?
+- Does a new answer conflict with an earlier observation, and should a separate unresolved issue stay open?
+- Are complete warning scope, figures, table headers/units and referenced pages attached?
+- Is an indicator or threshold being presented as a diagnosis or observed value without evidence?
+- Is an intuitive owner-proposed technical endpoint supported by source evidence, or still an open proposal?
+- Does the conversation stop where the manual requires, including when a symptom improves?
+- Are source gaps, service referrals and customer-reported resolution represented honestly?
+- Does an inability explanation name the specific missing source guidance rather than sound like unwillingness or falsely claim the whole topic is absent?
+
+## Coordinator maintenance after each acceptance
+
+At the end of every turn where the owner accepts a record:
+
+1. Append the exact owner response, accepted scope and final revision to record_id_verification.md; preserve prior feedback.
+2. Add or amend this handbook's record-specific lesson with pages, accepted changes, reusable principles and open source limits. Consolidate the latest accepted wording while retaining provenance in the history.
+3. Update the progress/date here and in multi_agent_expansion_plan.md.
+4. Do not infer acceptance of unrelated wording, all source objects, dependencies, formal human-review checklists or public release.
+5. Give future agents the updated handbook and exact version; invalidate a prior candidate-review verdict when its content changes.
+
+Current progress: accepted conversationally — lookup_oil_grade, lookup_tyre_pressure, lookup_fan_fuse, lookup_starter_duration, lookup_usb_charging, a_fuse. Also accepted conversationally — a_switches_on, a_refuel, a_reconnect, a_raise_stand. Also accepted conversationally — a_cool_engine. All eleven current records are closed. Separate page75 starting additions to records4/7 await scoped acceptance; do not claim that they were accepted by the record11 closure. The authorised agent-expansion phase can now begin; no formal human source approval or release follows automatically.
+
+
+## Scoped update 10 October 2026
+
+Owner accepted R001: the 15–20-second battery-recovery wait after three successive cranking attempts for records4/7, retaining the earlier five-second maximum and about-five-second interval. This supersedes earlier blanket statements that all page75 additions await conversational acceptance: recovery timing is accepted; scoped post-start idle/acceleration context remains pending R002. No automatic repetition, original-page human attestation or source/dependency approval follows. Owner now prefers a consolidated document under human_review, with comments/annotations and feedback at its end. See REVIEW_FOR_COMMENTS.md and remaining_review_queue.md; historical feedback remains append-only.

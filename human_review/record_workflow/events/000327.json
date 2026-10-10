@@ -1,0 +1,35 @@
+{
+  "event_sha256": "890b72bfd3bc819550cf0cc35c5bcd6a4721dadbddd9686c3ee0665c38fd3039",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "7c48bf6b3e39e4966e9963e2df026807399d3cea46a0f3acf60d49f8c1477b24",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "OPERATION OF CONTROLS\n\n    WARNING                            WARNING\n  Do not use the motorcycle for long duration with the   Recommended not to use in rainy conditions to avoid\n     fuel indication in last segment blinking. Refuel at the                                                    damages to smart phones and charger, RE shall not be     earliest.\n  Failure to do so will cause the motorcycle to run out of         liable for any damage to smart phones.\n     fuel and get stranded in addition to causing serious   Do not use any other device other than mobile phones,\n   damage to the fuel pump.                                                              only one mobile shall be charged at one point of time.\nCHARGER PORT                      Ensure proper insertion of USB cable, damages due to\n  Charger port is located on the center part of handle       hard / wrong insertion of cable will not be entertained\n     bar.                                                              in warranty.\n                               Do not leave the USB port cap opened / closed partially\n                                                             to avoid any short circuit when not in use.\n                               Do not insert any metal or conductive materials inside\n                                               USB charging port which may lead to short circuit.\n\n\n\n62    Royal Enfield Himalayan",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-064.png",
+        "pdf_page": 64,
+        "printed_page": "62"
+      }
+    ],
+    "payload_sha256": "dfb55bdbadfd48d7879617845feb6ddbb51f021915b44f611d6f98aa2c11bfb6",
+    "reason": "GEN021-J1 resolved: proposed prohibited splitter/multi-device use nowSAFETY_STOP, PDF64 one-mobile/no-other-device warning retained; no current or connector compatibility inferred. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN021",
+    "review_sha256": "94ae8f8bc202464fe6f70d98d2c0cf62ef5ed65d6d8835106cdd5752b3600def",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 2
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "59d6e5df02737bc46ef5cf083664d69658270c6fa0c6b5df2a860dedaf8628de",
+  "recorded_at_utc": "2026-10-10T09:53:33.438635+00:00",
+  "sequence": 327
+}

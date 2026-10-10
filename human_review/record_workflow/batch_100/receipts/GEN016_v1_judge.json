@@ -1,0 +1,37 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "c69003aad3a5efc55df08ead20a1c5d12d2e77d6661659064ba3fdd7a7f837f3",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {
+    "GEN016-F1": "ACCEPTED: independently checked against original page and exact candidate; correction remains required before agent closure."
+  },
+  "findings": [
+    {
+      "consequence": "Controller training could treat documented electrical-overload stop as ordinary approved fitment advice.",
+      "correction": "Change expected_route to SAFETY_STOP; preserve concise stop/warning and authorised approved-fitment referral; do not calculate compatibility from connector.",
+      "id": "GEN016-F1",
+      "issue": "Unsafe any-rating electrical-fitment request is labeled SUPPORTED rather than SAFETY_STOP.",
+      "supporting_source": "Original PDF19 printed17 electrical WARNING; TRDv0.4 section6.1 known applicable safety-stop precedence."
+    }
+  ],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "TECHNICAL SPECIFICATIONS\n                                                     Turn signal.......................... Front - 12 V, 2 W x 1 no\nELECTRICALS                                                                              Rear - 12 V, 4.2 W x 1 no\nAlternator output ............... 280 W @ 1400 rpm            Hazard warning .................. Front - 12 V, 2 W x 2 nos\nGeneration.......................... Alternator, III Phase                                     Rear - 12 V, 4.2 W x 2 nos\nSystem................................ 12 V - DC                                     Horn.................................... 12 V, 2.5 A\nBattery................................ 12 V - 8 Ah VRLA                  Starter motor...................... 12 V - 0.7 kW\nHead lamp .......................... 12 V, FPL 1.5 W LED, low beam    Charger port. ....................... USB 2.0 Type C - 5 V, 2 A output\n                             12.12 W, high beam + low beam\n                          14.22 W                   WARNING\nBrake lamp ......................... 12 V, 1.4 W                     Using bulbs/electrical gadgets other than specified rating\n                                                                         will lead to overloading/erratic behavior/premature failureTail lamp............................. 12 V, 0.31 W\n                                                              of electrical system.\nLicense plate illuminator .... 12 V - LED                       Modifications or fitments which are not approved by Royal\nInstrument cluster.............. Colour TFT (Thin Film             Enfield, will seriously affect the performance of the vehicle\n                            Transistor)                   and will render the warranty void.\n\n                                                              Royal Enfield Himalayan     17",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-019.png",
+      "pdf_page": 19,
+      "printed_page": "17"
+    }
+  ],
+  "payload_sha256": "e5cc00a8b49387019f7e7b3d03170560b0e149676c4d13c0ab00817722dd6e0f",
+  "reason": "Accept GEN016-F1: electrical outside-rating warning PDF19 printed17 and applicable TRD safety precedence require SAFETY_STOP for proposed any-rating fitment. Answer warning can remain; revise route into exact new version. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN016",
+  "review_sha256": "06dd913efa1b36642be6e93a9fa24222cffa2127fa8bd971b394513161743fc8",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "NEEDS_REVISION",
+  "version": 1
+}

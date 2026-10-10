@@ -1,0 +1,35 @@
+{
+  "event_sha256": "b1c8d66bf27f469e2ae6b5effe8c2500f74015ead405ba5e5d3acb6c2ee4467b",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "b7ea1a4ba78ea9dffcd57ad921824fc691b1a5ea640af994a2cebe2c4fcca4d9",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "STARTING\n                                       PRECAUTIONS\n                               Vehicle may start with side stand condition but engine\n                                                                               will turn-off when gear is engaged, this side stand cut-\n                                                                       off feature  is provided for rider safety ensure side\n                                                           stand is retracted before vehicle moving / starting.\n                                       CAUTION\n                                If the engine does not start. Do not hold the starter\nNOTE                                                      switch in depressed condition for long periods, this will\n   In case the engine does not start within 5 seconds,       cause the battery to drain below the threshold level of\n     release starter switch and wait for about 5 seconds      10 V. Please get the motorcycle checked through an\n    before attempting to start the engine again.                 Royal Enfield Authorised Service Centre to identify and\n   In case vehicle not starting on multiple continuous       correct the reason for not starting.\n    attempts, please turn OFF and turn ON ignition switch\n    and then start again.\n\n\n72    Royal Enfield Himalayan",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-074.png",
+        "pdf_page": 74,
+        "printed_page": "72"
+      }
+    ],
+    "payload_sha256": "29a80dc205c074c595bf93f720b53e8909ea512064e560e2841b290635a8f309",
+    "reason": "Policy relevance-confidence fixture correctly cannot waive prerequisite; original PDF74 side-stand safety context checked. No actual99percent model evaluation or clearance asserted. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN067",
+    "review_sha256": "185270d90a5b6bd493f9043e09896e61d6c7c273f2c5369621bd3d601ae806b8",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "4b9da857f070051b5fb7cbaddfe02a8aa94a7ab6413d6675f69341fbc1d76571",
+  "recorded_at_utc": "2026-10-10T02:23:21.501022+00:00",
+  "sequence": 286
+}

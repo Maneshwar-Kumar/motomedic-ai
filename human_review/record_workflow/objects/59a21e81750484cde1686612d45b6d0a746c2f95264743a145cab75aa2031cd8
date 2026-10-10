@@ -1,0 +1,54 @@
+{
+  "actor": "batch100-author",
+  "answer": "That affected cached response must be invalidated and revalidated against the current policy and source dependencies. I cannot serve the stale entry.",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "case_type": "engineering_policy_regression",
+  "conditions": [],
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "distinctive_intent": "policy_changed_cache_hold",
+  "expected_route": "UNSUPPORTED",
+  "forbidden_claims": [
+    "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+    "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "origin_declaration": "Generated based on feedback from the first 11 cases",
+  "payload_sha256": "dd619e41f36afbc7b3d2910cab6fe86ed0b552c8b908074bd8e622f5f2035281",
+  "policy_refs": [
+    "TRD9/12"
+  ],
+  "question": "The response cache was approved before the warning policy changed. Can it still answer?",
+  "record_id": "GEN069",
+  "role": "author",
+  "scenario_setup": "Relevant policy/dependency change invalidates exact cached response.",
+  "source_limits": [
+    "This is a labelled engineering policy/state/failure scenario, not a new OEM procedure."
+  ],
+  "source_refs": [
+    {
+      "checked_span": "Royal Enfield Himalayan\n110\nMINOR MAINTENANCE TIPS\nMINI  BLADE   FUSE  USAGE  LIST                                                                 \nWARNING\nPlease get the electrical system of your motorcycle checked\nthoroughly and get the faults corrected immediately after\nexperiencing any fuse failure. Failure to do so may result in\nrepeated fuse failure.\nUsage of fuses other than specified rating or usage of any\nother conductive materials or low grade fuses will damage\nthe complete electrical system.\nPlease ensure to replace a spare fuse in the holder at the\nearliest opportunity.\nAny attempt to jumper a defective fuse gives rise to the risk\nof a short-circuit and fire. Always replace a defective fuse\nwith a new fuse of the same rating.\nNOTE\nMake sure the ignition switch is in “OFF” position when\nreplacing the bulbs, fuses and electrical parts.\nFuse ID \nnumber\nColor\nRating\nRemarks\nF1\nBlue\n15 A\nIgnition\nF2\nBlue\n15 A\nEFI relay\nF3\nRed\n10 A\nFan\nF4\nYellow\n5 A\nPOS, lights & CTRL\nF5\nYellow\n5 A\nInstruments\nF6\nRed\n10 A\nLow/High Beam & \nAccessory\nF7\nRed\n10 A\nHorn\nF8\nBlue\n15 A\nABS S motor\nF9\nRed\n10 A\nABS valve\nSpare fuse list\nSF1\nYellow\n5 A\nSpare fuse\nSF2\nRed\n10 A\nSF3\nBlue\n15 A",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 112,
+      "printed_page": "110"
+    }
+  ],
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "stopping_rules": [
+    "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+    "Do not repeat attempted actions without a documented exception or superseding correction.",
+    "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+  ],
+  "turns": [
+    {
+      "speaker": "rider",
+      "text": "The response cache was approved before the warning policy changed. Can it still answer?"
+    },
+    {
+      "speaker": "assistant",
+      "text": "That affected cached response must be invalidated and revalidated against the current policy and source dependencies. I cannot serve the stale entry."
+    }
+  ],
+  "version": 1,
+  "warnings": []
+}

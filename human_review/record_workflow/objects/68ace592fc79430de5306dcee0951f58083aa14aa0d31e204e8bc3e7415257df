@@ -1,0 +1,49 @@
+{
+  "actor": "batch100-author",
+  "answer": "The manual says pushing the flash switch flashes the headlight. That does not establish a diagnosis if the flash does not work.",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "conditions": [
+    "Confirmed applicable Himalayan BS6 and immutable selected manual; this expected route is conditional, not runtime authorization."
+  ],
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "distinctive_intent": "flash_switch_role",
+  "expected_route": "SUPPORTED",
+  "forbidden_claims": [
+    "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+    "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "origin_declaration": "Generated based on feedback from the first 11 cases",
+  "payload_sha256": "99feea91f60b1fa39f37d7103f33b433d59e0514b04a8e4e043acb7570a498b9",
+  "question": "What does the flash switch do?",
+  "record_id": "GEN024",
+  "role": "author",
+  "source_limits": [],
+  "source_refs": [
+    {
+      "checked_span": "Royal Enfield Himalayan\n29\nOPERATION OF CONTROLS\nFLASH SWITCH                                                                                                  \nPush the switch for headlight flash.\nTURN SIGNAL SWITCH                                                                                                 \n⇦ Left turn signal “ON”\n⇧ “OFF” (Push to cancel)\n⇨ Right turn signal “ON”\nPush the button from OFF position to either left or right\nbefore turning as needed. To cancel the turn signal lights,\npush the switch in after it has returned to the center\nposition.",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 31,
+      "printed_page": "29"
+    }
+  ],
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "stopping_rules": [
+    "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+    "Do not repeat attempted actions without a documented exception or superseding correction.",
+    "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+  ],
+  "turns": [
+    {
+      "speaker": "rider",
+      "text": "What does the flash switch do?"
+    },
+    {
+      "speaker": "assistant",
+      "text": "The manual says pushing the flash switch flashes the headlight. That does not establish a diagnosis if the flash does not work."
+    }
+  ],
+  "version": 1,
+  "warnings": []
+}

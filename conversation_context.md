@@ -103,3 +103,7 @@ A concurrent TRD v0.3 update introduced reviewed step, applicability and depende
 # Conditional reranking decision 9 October 2026
 
 The project owner approved the suggested policy and requested a TRD update and code implementation. Conditional reranking handles uncertain candidate ordering; missing dependencies use one bounded recovery; unreviewed sources, applicability gaps, unsupported requests, safety stops and operational errors retain distinct handling. TRD v0.4 and the hosted retrieval code implement bounded attempts, preserved mandatory evidence and policy telemetry. Thresholds are explicitly provisional and require independently reviewed calibration. The index vectors are reused. Current candidate bundles remain blocked from rider-facing technical generation.
+
+## Reconciliation and refresh 9 October 2026
+
+The owner made the TRD the more authoritative document and requested reconciliation of the PRD, design note, concept and TODO list, plus a before/after account of changed design and technology choices. TRD v0.4 governs this refresh; companion Word documents become v0.3. Historical local/index results remain provisional. Source approval and integrated rider release remain pending.

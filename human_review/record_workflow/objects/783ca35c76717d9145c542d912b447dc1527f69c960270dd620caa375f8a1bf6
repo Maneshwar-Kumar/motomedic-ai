@@ -1,0 +1,26 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "de56f1b0b44099a203f11826eb4e7698ed81d18fc0bd01f6bd7c755d79bb78b9",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "OPERATION OF CONTROLS\n                                                  mance + Rear ABS OFF and leave the screen for a few       2       0km 2       0km                                                         seconds the mode changes.\n                                       1831km                               1831 km\n         1                         1                Likewise we can change the modes to ECO + ABS ON\n                    Ride Mode                        Ride Mode                          Performance                                 Performance                  and ECO + Rear ABS OFF.\n                       ABS ON                                                                                   REAR REAR ABS OFF          In dynamic condition we can change the mode only\n                                                      from performance to ECO and ECO to performance\n                                                            with ABS ON, to change the mode in dynamic condi-\n       2       0km 2       0km              tion some of the conditions to be meet.\n                                       1831km  1                          1831km        Throttle to be closed         1\n                    Ride                   Mode                         Ride                                             Mode            Clutch should be pressed or vehicle to be  in                                                              ECO                      ECO\n                      ABS ON                                                                                      REAR REAR ABS OFF                        Neutral gear\n                                If the above said condition are not met cluster will not\n                                                               allow to change the mode and it will deny the mode\nNOTE                                                      with note in cluster home screen.\n  To change the mode from performance + ABS ON to   ABS ON to OFF is not allowed in dynamic condition\n    performance + Rear ABS OFF in static condition, press       considering the safety by norms, but at the same time\n    the MODE button two times, the display shows perfor-     we can able to change the ABS mode from ABS OFF to\n                                                ABS ON.\n\n                                                               Royal Enfield Himalayan     31",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-033.png",
+      "pdf_page": 33,
+      "printed_page": "31"
+    }
+  ],
+  "reason": "Original PDF33 printed31 explicitly prohibits ABS ON-to-OFF in dynamic condition for safety. Correct safety stop and no workaround. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN042",
+  "review_sha256": "6888bce941667ea4c6a7175269df4bf35e2e2f6a7e8bfc37d11143a7085f0010",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

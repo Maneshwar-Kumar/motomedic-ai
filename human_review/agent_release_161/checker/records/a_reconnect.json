@@ -1,0 +1,67 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "a_reconnect",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/a_reconnect.json",
+  "plan_sha256": "29e6cc8a270fd88c820beda1ace34eec417c3268a1a20d452344fbe2d94f05f6",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "d215ce6a0aa0c05f25baa9108b21adfc73cfe9872550433ec19e495cdf226ca0",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04"
+  },
+  "final_step_sha256": null,
+  "final_dependency_sha256": null,
+  "final_rules_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "final_route_sha256": "c21651c7834f36658d14956098e74a82d379dc90e44a87849497fa3a22f8fd2a",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "The engine will not start.",
+  "claim_texts": [
+    "The manual lists reconnection as a remedy, but it does not provide the location, access or step-by-step reconnection guidance needed to walk you through it. Please have your nearest authorised Royal Enfield service centre check and reconnect the parts."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_15e1ce067b76cc524a0448d2",
+      "source_sha256": "4648b82a5c5906a043265394bb412bd28b8aa29132eff232ca6f46bf95722175",
+      "text_sha256": "7b5ac63c0de36688fff95afca8ecbe12f5754be580ac01b6586e8d7b5e172e85",
+      "original_pdf_pages": [
+        121
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": false,
+      "figure_render_inspected": true,
+      "object_type": "table",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    121
+  ],
+  "visual_pages_inspected": [
+    121
+  ],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Original121 lists reconnection remedy but not owner-safe location/access/fullprocedure. Correct source-limit referral approved; no guessedreconnection.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

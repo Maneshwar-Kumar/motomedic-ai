@@ -1,0 +1,37 @@
+{
+  "event_sha256": "dd286ce5626f61c0f38069b7cd3a0d172e8c3f753f76f1f62562cdf192a54606",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "07ae575e42875d11fc1d0cbac1979d55fc3671cdae36a22f080c6d3b83ef9759",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "ACCESSORIES AND LUGGAGE: accessory-equipped motorcycle 110 km/h ceiling solo/pillion/payload; keep luggage low/close/even; no weight on handlebars/front forks; model-specific genuine accessory installation.",
+        "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+        "pdf_page": 14,
+        "printed_page": "12"
+      },
+      {
+        "checked_span": "Incorrect loading affects stability/handling and risks serious injury/loss of life; respect model/design; pannier/top-box max payload is in GMA fitting instructions.",
+        "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+        "pdf_page": 15,
+        "printed_page": "13"
+      }
+    ],
+    "payload_sha256": "1b98c7ed0ca8c133e92a5a15ad827aca9a692a5b9e42125306cd6fd47069042f",
+    "reason": "Handlebar-loading stop and low/close/even distribution match source; consequence retained without a fabricated weight threshold. Engineering candidate review only; no human acceptance, formal source/dependency approval or release.",
+    "record_id": "GEN005",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "023d989351b43455de5e5da5d7526e13d3e0163ceed4ffbcc02a1af81ae9a50d",
+  "recorded_at_utc": "2026-10-09T18:56:22.656222+00:00",
+  "sequence": 24
+}

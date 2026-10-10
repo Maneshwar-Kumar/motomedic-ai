@@ -1,0 +1,422 @@
+"""Engineering-only, offline review queue. Never writes registry/cache/provider files."""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from contextlib import contextmanager
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import re
+
+ORIGIN = "Generated based on feedback from the first 11 cases"
+POLICY = "record-loop-v1"
+MANUAL_SHA = "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+ROUTES = {"SUPPORTED", "AMBIGUOUS", "UNSUPPORTED", "SAFETY_STOP", "SYSTEM_ERROR"}
+OUTCOMES = {"NOT_TRIED", "OBSERVED_NORMAL", "OBSERVED_ABNORMAL", "ACTION_COMPLETED_UNRESOLVED", "NOT_APPLICABLE", "UNCLEAR", "RESOLVED"}
+ORIGINAL_IDS = ["lookup_oil_grade", "lookup_tyre_pressure", "lookup_fan_fuse", "lookup_starter_duration", "lookup_usb_charging", "a_fuse", "a_switches_on", "a_refuel", "a_reconnect", "a_raise_stand", "a_cool_engine"]
+CONTEXT_FILES = ["AGENTS.md", "01_Concept_Architecture.docx", "02_PRD.docx", "03_TRD.docx", "04_To_Build_Evaluation_Decisions.docx", "source_manifest.json", "human_review/subagent_feedback.md", "human_review/record_id_verification.md", "human_review/multi_agent_expansion_plan.md", "human_review/agent_expansion/COORDINATION.md"]
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def encoded(value):
+    return (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n").encode("utf-8")
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+class Store:
+    def __init__(self, root):
+        self.root = Path(root).resolve()
+        self.home = self.root / "human_review/record_workflow"
+
+    @contextmanager
+    def lock(self):
+        self.home.mkdir(parents=True, exist_ok=True)
+        path = self.home / ".coordinator.lock"
+        with path.open("x", encoding="utf-8") as f:
+            f.write("Single writer; do not remove while coordinator is running.\n")
+        try:
+            yield
+        finally:
+            path.unlink()
+
+    def freeze(self, data):
+        sha = digest(data)
+        path = self.home / "objects" / sha
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists():
+            require(path.read_bytes() == data, "Immutable object corrupted: " + sha)
+        else:
+            with path.open("xb") as f:
+                f.write(data)
+        return sha
+
+    def object(self, sha):
+        require(bool(re.fullmatch(r"[0-9a-f]{64}", sha)), "Invalid object digest")
+        data = (self.home / "objects" / sha).read_bytes()
+        require(digest(data) == sha, "Immutable object corrupted: " + sha)
+        return data
+
+    def ledger(self):
+        result = []
+        previous = None
+        for path in sorted((self.home / "events").glob("*.json")):
+            event = json.loads(path.read_bytes())
+            sha = event.pop("event_sha256")
+            require(digest(encoded(event)) == sha, "Event content corrupted")
+            require(event["previous_event_sha256"] == previous, "Broken event chain")
+            require(event["sequence"] == len(result) + 1, "Non-contiguous event chain")
+            event["event_sha256"] = sha
+            result.append(event)
+            previous = sha
+        head_path = self.home / "ledger_head.json"
+        if head_path.exists():
+            head = json.loads(head_path.read_bytes())
+            require(head == {"sequence": len(result), "event_sha256": previous}, "Event chain tail differs from recorded head")
+        return result
+
+    def append(self, kind, payload):
+        events = self.ledger()
+        event = {"sequence": len(events) + 1, "previous_event_sha256": events[-1]["event_sha256"] if events else None,
+                 "recorded_at_utc": datetime.now(timezone.utc).isoformat(), "policy_version": POLICY,
+                 "kind": kind, "payload": payload}
+        event["event_sha256"] = digest(encoded(event))
+        path = self.home / "events" / f"{event['sequence']:06d}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("xb") as f:
+            f.write(encoded(event))
+        head = self.home / "ledger_head.json"
+        pending = self.home / "ledger_head.pending"
+        pending.write_bytes(encoded({"sequence": event["sequence"], "event_sha256": event["event_sha256"]}))
+        pending.replace(head)
+        return event
+
+    def context(self):
+        manifest = json.loads((self.root / "source_manifest.json").read_bytes())
+        require(manifest["sha256"].lower() == MANUAL_SHA, "Manual manifest changed; new workflow policy required")
+        manual = (self.root / manifest["file"]).resolve()
+        require(manual.is_relative_to(self.root), "Manual must be inside project")
+        require(digest(manual.read_bytes()) == MANUAL_SHA, "Original manual checksum mismatch")
+        files = {}
+        for name in CONTEXT_FILES:
+            data = (self.root / name).read_bytes()
+            require(data == (self.root / name).read_bytes(), "Context changed during capture; retry")
+            files[name] = self.freeze(data)
+        for path in sorted(self.home.glob("*.py")) + sorted(self.home.glob("*.md")):
+            files[path.relative_to(self.root).as_posix()] = self.freeze(path.read_bytes())
+        return {"policy_version": POLICY, "manual_sha256": MANUAL_SHA, "manual_path": manifest["file"], "files": files}
+
+    def submit(self, payload):
+        """Typed durable author -> independent reviewer -> feedback judge loop."""
+        rid, version, role = payload["record_id"], payload["version"], payload["role"]
+        require(bool(re.fullmatch(r"GEN[0-9]{3,}", rid)), "Native records use GEN IDs; active EXP files are read-only")
+        require(type(version) is int and 1 <= version <= 4, "At most initial version plus three revisions")
+        require(role in {"author", "reviewer", "judge"}, "Invalid role")
+        require(isinstance(payload.get("actor"), str) and payload["actor"].strip(), "Actor required")
+        context = self.context()
+        context_sha = self.freeze(encoded(context))
+        require(payload.get("manual_sha256", "").lower() == MANUAL_SHA, "Source checksum required")
+        prior = [e["payload"] for e in self.ledger() if e["kind"] == "SUBMISSION" and e["payload"]["record_id"] == rid]
+        require(not any(p["version"] == version and p["role"] == role for p in prior), "Decision already exists; append a new version")
+        current = [p for p in prior if p["version"] == version]
+        if role == "author":
+            require(version == 1 + max((p["version"] for p in prior if p["role"] == "author"), default=0), "Author versions must be contiguous")
+            if version > 1:
+                judges = [p for p in prior if p["version"] == version - 1 and p["role"] == "judge"]
+                previous_author = next(p for p in prior if p["version"] == version - 1 and p["role"] == "author")
+                context_changed = previous_author["context_sha256"] != context_sha and bool(payload.get("context_change_reason"))
+                require(context_changed or (judges and judges[0]["verdict"] == "NEEDS_REVISION"), "Revision needs adjudicated feedback or an explicit changed-context reason")
+                require(payload.get("previous_author_sha256") == previous_author["payload_sha256"], "Revision must bind previous exact content")
+                if not context_changed:
+                    require(payload.get("feedback_judgment_sha256") == judges[0]["payload_sha256"], "Revision must bind feedback judgment")
+                require(payload.get("changes") and payload.get("feedback_disposition"), "Revision changes and feedback disposition required")
+            require(payload.get("origin_declaration") == ORIGIN, "Origin declaration required")
+            for key in ("question", "answer", "turns", "conditions", "warnings", "source_limits", "stopping_rules", "forbidden_claims", "source_refs"):
+                require(key in payload, "Missing author field: " + key)
+            require(payload["question"] and payload["answer"] and payload["turns"], "Readable Q&A and dialogue required")
+            require(payload.get("expected_route") in ROUTES, "Expected route required; it is not authorization")
+            for turn in payload["turns"]:
+                if "outcome" in turn:
+                    require(turn["outcome"] in OUTCOMES, "Invalid typed outcome")
+            self.check_pages(payload["source_refs"])
+        else:
+            author = next((p for p in current if p["role"] == "author"), None)
+            require(author is not None and payload.get("author_sha256") == author["payload_sha256"], "Exact author hash required")
+            require(payload["actor"] != author["actor"], "Author cannot review or judge own work")
+            require(payload.get("independent_original_review") is True, "Independent original-page inspection attestation required")
+            require(payload.get("original_page_checks"), "Original page checks required")
+            self.check_pages(payload["original_page_checks"])
+            required_pages = {ref["pdf_page"] for ref in author["source_refs"]}
+            require(required_pages <= {ref["pdf_page"] for ref in payload["original_page_checks"]}, "Review must check every author source page")
+            require(all(p.get("checked_span") for p in payload["original_page_checks"]), "Checked source spans required")
+            require("findings" in payload and "reason" in payload, "Findings and reason required")
+            require(payload.get("context_sha256") == context_sha == author["context_sha256"], "Context changed; reauthor a new candidate under the current context")
+            if role == "reviewer":
+                require(payload.get("verdict") in {"PASS", "NEEDS_REVISION", "SOURCE_GAP"}, "Invalid review verdict")
+            else:
+                review = next((p for p in current if p["role"] == "reviewer"), None)
+                require(review is not None and payload.get("review_sha256") == review["payload_sha256"], "Exact independent review hash required")
+                require(payload["actor"] != review["actor"], "Reviewer cannot adjudicate own review")
+                require(payload.get("verdict") in {"PASS_AGENT_REVIEW", "NEEDS_REVISION", "SOURCE_GAP"}, "Invalid judge verdict")
+                require("feedback_disposition" in payload, "Feedback dispositions required")
+                finding_ids = {f["id"] for f in review["findings"]}
+                require(finding_ids <= set(payload["feedback_disposition"]), "Every reviewer finding needs adjudication")
+                if payload["verdict"] == "PASS_AGENT_REVIEW":
+                    require(review["verdict"] == "PASS" and not payload["findings"], "Pass requires a passing review and no unresolved judge findings; revise or explicitly block")
+        data = encoded(payload)
+        result = dict(payload, payload_sha256=self.freeze(data), context_sha256=context_sha)
+        self.append("SUBMISSION", result)
+        return result
+
+    @staticmethod
+    def check_pages(refs):
+        for ref in refs:
+            require(type(ref.get("pdf_page")) is int and 1 <= ref["pdf_page"] <= 149, "Original PDF page 1..149 required")
+            require(isinstance(ref.get("printed_page"), str) and ref["printed_page"], "Actual printed label required; never calculate it")
+
+    def capture(self):
+        """Freeze concurrent legacy batches without changing any agent-owned files."""
+        context = self.context()
+        artifacts, unstable = {}, []
+        base = self.root / "human_review/agent_expansion"
+        for folder, pattern in (("drafts", r"EXP\d{3}_v\d+\.md"), ("reviews", r"EXP\d{3}_v\d+_review\.md"), ("judgments", r"EXP\d{3}_v\d+_judgment\.md")):
+            for path in sorted((base / folder).glob("*.md")):
+                if not re.fullmatch(pattern, path.name):
+                    continue
+                data = path.read_bytes()
+                if data != path.read_bytes() or not data.endswith(b"\n"):
+                    unstable.append(path.relative_to(self.root).as_posix())
+                    continue
+                artifacts[path.relative_to(self.root).as_posix()] = self.freeze(data)
+        for folder in ("drafts/source_views", "reviews/source_pages", "judgments/assets"):
+            for path in sorted((base / folder).glob("*.png")):
+                data = path.read_bytes()
+                if data == path.read_bytes():
+                    artifacts[path.relative_to(self.root).as_posix()] = self.freeze(data)
+        snapshot = {"context": context, "artifacts": artifacts, "unstable_files": unstable, "expected_generated_ids": [f"EXP{i:03d}" for i in range(1, 51)]}
+        sha = self.freeze(encoded(snapshot))
+        last = next((e for e in reversed(self.ledger()) if e["kind"] == "CAPTURE"), None)
+        if not last or last["payload"]["snapshot_sha256"] != sha:
+            self.append("CAPTURE", {"snapshot_sha256": sha})
+        return sha, snapshot
+
+    def report(self, sha, snapshot):
+        artifacts = snapshot["artifacts"]
+        rows = []
+        for rid in snapshot["expected_generated_ids"]:
+            drafts = [(int(re.search(r"_v(\d+)", name)[1]), name, value) for name, value in artifacts.items() if re.search(r"/drafts/" + rid + r"_v\d+\.md$", name)]
+            if not drafts:
+                rows.append({"record_id": rid, "state": "AWAITING_AUTHOR", "reason": "Draft not captured", "versions": []})
+                continue
+            versions = []
+            for version, name, draft_sha in sorted(drafts):
+                stem = f"human_review/agent_expansion/"
+                review_name = stem + f"reviews/{rid}_v{version}_review.md"
+                judge_name = stem + f"judgments/{rid}_v{version}_judgment.md"
+                review_sha, judge_sha = artifacts.get(review_name), artifacts.get(judge_name)
+                draft = self.object(draft_sha).decode("utf-8-sig")
+                review = self.object(review_sha).decode("utf-8-sig") if review_sha else ""
+                judge = self.object(judge_sha).decode("utf-8-sig") if judge_sha else ""
+                hashes = lambda text: re.findall(r"SHA-256:\s*`?([0-9a-fA-F]{64})", text)
+                rh, jh = hashes(review), hashes(judge)
+                verdict = lambda text: (re.search(r"Verdict:\s*(PASS_AGENT_REVIEW|NEEDS_REVISION|SOURCE_GAP|REVISE|PASS)\b", text) or [None, None])[1]
+                rv, jv = verdict(review), verdict(judge)
+                review_failures, judge_failures = [], []
+                if review_sha:
+                    if not rh or rh[0].lower() != draft_sha:
+                        review_failures.append("Reviewer does not bind the exact current draft SHA-256")
+                    if MANUAL_SHA not in [s.lower() for s in rh]:
+                        review_failures.append("Reviewer lacks explicit original manual SHA-256 binding")
+                    if not rv:
+                        review_failures.append("Reviewer verdict missing/unrecognized")
+                if judge_sha:
+                    if not jh or jh[0].lower() != draft_sha:
+                        judge_failures.append("Judge does not bind the exact current draft SHA-256")
+                    if len(jh) < 2 or jh[1].lower() != review_sha:
+                        judge_failures.append("Judge does not bind the exact independent review SHA-256")
+                    if MANUAL_SHA not in [s.lower() for s in jh]:
+                        judge_failures.append("Judge lacks explicit original manual SHA-256 binding")
+                    if not jv:
+                        judge_failures.append("Judge verdict missing/unrecognized")
+                review_valid = bool(review_sha and not review_failures)
+                judge_valid = bool(judge_sha and not judge_failures)
+                if ORIGIN not in draft:
+                    state, reason = "BLOCKED_PROVENANCE", "Required origin declaration missing; preserved original draft"
+                elif version > 4:
+                    state, reason = "BLOCKED_HUMAN_REVIEW", "Revision budget exceeded (maximum three revisions)"
+                elif not review_sha:
+                    state, reason = "AWAITING_REVIEW", "No review of this exact version"
+                elif not review_valid or not rv:
+                    state, reason = "BLOCKED_BINDING", "; ".join(review_failures)
+                elif judge_sha and (not judge_valid or not jv):
+                    state, reason = "BLOCKED_BINDING", "; ".join(judge_failures)
+                elif not judge_sha:
+                    state, reason = "AWAITING_JUDGE", "Current review captured; final exact-version adjudication missing"
+                elif jv == "SOURCE_GAP":
+                    state, reason = "BLOCKED_SOURCE_GAP", "Judge identifies unresolved source guidance; human source review required"
+                elif jv == "NEEDS_REVISION":
+                    state, reason = ("BLOCKED_HUMAN_REVIEW" if version >= 4 else "NEEDS_REVISION"), "Judge requests changes" + ("; three revisions exhausted" if version >= 4 else "")
+                elif jv == "PASS_AGENT_REVIEW" and rv == "PASS":
+                    state, reason = "PASS_AGENT_REVIEW", "Imported exact-content agent consensus only; human/source/release approvals pending"
+                else:
+                    state, reason = "BLOCKED_REVIEW_CONFLICT", "Passing judge conflicts with non-passing reviewer; explicit reconciliation required"
+                gap = re.search(r"(?m)^Disposition[^\n]*:(.*?)(?=\n\s*\n|\Z)", judge, re.DOTALL)
+                versions.append({"version": version, "draft_path": name, "draft_sha256": draft_sha, "review_path": review_name if review_sha else None,
+                                 "review_sha256": review_sha, "review_verdict": rv, "review_binding_valid": review_valid,
+                                 "judgment_path": judge_name if judge_sha else None, "judgment_sha256": judge_sha, "judge_verdict": jv,
+                                 "judgment_binding_valid": judge_valid, "review_binding_failures": review_failures, "judgment_binding_failures": judge_failures,
+                                 "source_gap_detail": gap[1].strip() if jv == "SOURCE_GAP" and gap else None,
+                                 "state": state, "reason": reason})
+            latest = versions[-1]
+            rows.append(dict(latest, record_id=rid, versions=versions, human_acceptance="NOT_RECORDED", formal_source_approval="PENDING", release="BLOCKED", imported_agent_attestations_only=True))
+        return {"policy_version": POLICY, "snapshot_sha256": sha, "manual_sha256": MANUAL_SHA, "counts": dict(Counter(r["state"] for r in rows)),
+                "complete_inventory": len(rows) == 50 and all(r["versions"] for r in rows),
+                "agent_outputs_complete": all(r.get("review_sha256") and r.get("judgment_sha256") for r in rows),
+                "agent_loop_complete": all(r["state"] in {"PASS_AGENT_REVIEW", "BLOCKED_SOURCE_GAP", "BLOCKED_HUMAN_REVIEW"} for r in rows),
+                "unstable_files": snapshot["unstable_files"], "records": rows}
+
+    def catalogue(self, sha, snapshot, report):
+        """Readable materialized view; all underlying bytes and snapshots remain immutable."""
+        lines = ["# MotoMedic unified record catalogue", "", "Engineering-only review material. All technical content remains gated from runtime and public display.", "",
+                 f"Snapshot `{sha}`. Workflow `{POLICY}`; manual SHA-256 `{MANUAL_SHA}`.", "",
+                 "The original eleven have scoped conversational acceptance. Generated agent verdicts are distinct from human acceptance, formal independent source approval and release. No registry approvals or draft cache entries are enabled.", "",
+                 "Page75 starting additions for originals 4/7 remain pending acceptance. Fuse/switch schematic permissions are scoped exceptions; other diagrams/excerpts remain engineering-only. The source manifest still carries the broader restrictive display policy; runtime reconciliation belongs to the source-review queue.", "",
+                 "This is a progressive snapshot. Missing exact-version judgments stay pending; historical verdicts never transfer automatically. Version numbers count conservatively toward the initial version plus three revisions, including provenance-only changes.", "",
+                 "## Original eleven records", ""]
+        files = snapshot["context"]["files"]
+        history_sha = files["human_review/record_id_verification.md"]
+        history = self.object(history_sha).decode("utf-8-sig")
+        handbook = self.object(files["human_review/subagent_feedback.md"]).decode("utf-8-sig")
+        sections = re.split(r"(?m)(?=^## )", history)
+        lessons = re.split(r"(?m)(?=^###? )", handbook)
+        feedback_map = {1: [1], 2: [2, 3, 4, 5], 3: [6, 7, 8], 4: [9, 10, 11], 5: [13, 14], 6: [15, 16, 17, 18], 7: [19, 20], 8: [21, 22, 24], 9: [23], 10: [24], 11: [25, 26]}
+        for number, rid in enumerate(ORIGINAL_IDS, 1):
+            lines += [f"### Original {number}: {rid}", "", "Conversational acceptance: scoped and recorded. Formal source approval: pending. Release: blocked.", "",
+                      f"[Immutable original history](record_workflow/objects/{history_sha}); original labels and chronological feedback preserved verbatim below.", ""]
+            matching = [s for s in lessons if re.match(rf"^### {number}\. ", s) or re.match(rf"^## Accepted record {number}: ", s)]
+            if number == 8:
+                matching += [s for s in lessons if s.startswith("## Accepted source addition:")]
+            if number in {4, 7}:
+                matching += [s for s in lessons if s.startswith("## New starting-source addition")]
+            lines += ["Current feedback-guide consolidation (engineering context):", ""] + matching
+            selected = []
+            for section in sections:
+                card = re.match(r"^## Card\s*(\d+):", section)
+                feedback = re.match(r"^## Owner feedback (\d+):", section)
+                if (card and int(card[1]) == number) or (feedback and int(feedback[1]) in feedback_map[number]):
+                    selected.append(section)
+                if number == 8 and section.startswith("## New original-source dependency"):
+                    selected.append(section)
+                if number in {4, 7} and section.startswith("## Additional source findings"):
+                    selected.append(section)
+            lines += ["<details><summary>Original question, proposals, feedback and scoped acceptance history</summary>", ""] + selected + ["</details>", ""]
+        lines += ["## Generated records alongside the originals", "", "Every generated record below is **Generated based on feedback from the first 11 cases**. Human acceptance is not recorded; formal source approval and release remain pending.", "",
+                  "| ID | Latest version | Agent loop state | Reason |", "|---|---:|---|---|"]
+        for row in report["records"]:
+            lines.append(f"| {row['record_id']} | {row.get('version', '—')} | {row['state']} | {row['reason']} |")
+        for row in report["records"]:
+            lines += ["", f"### {row['record_id']}", "", ORIGIN + ".", "", f"Current state: **{row['state']}**. {row['reason']}.", ""]
+            for version in row["versions"]:
+                lines.append(f"- v{version['version']}: {version['state']}; [draft bytes](record_workflow/objects/{version['draft_sha256']}) SHA-256 `{version['draft_sha256']}`.")
+                for label, key in (("review", "review_sha256"), ("judgment", "judgment_sha256")):
+                    if version[key]:
+                        lines.append(f"  - [{label} bytes](record_workflow/objects/{version[key]}) SHA-256 `{version[key]}`.")
+            if not row["versions"]:
+                continue
+            latest = row["versions"][-1]
+            lines += ["", "Latest draft conversation and source boundaries (verbatim):", "", self.object(latest["draft_sha256"]).decode("utf-8-sig"), "",
+                      "<details><summary>Latest feedback and final judgment, including actual unresolved reasons</summary>", ""]
+            for key in ("review_sha256", "judgment_sha256"):
+                if latest[key]:
+                    lines += [self.object(latest[key]).decode("utf-8-sig"), ""]
+                else:
+                    lines += [f"{key}: pending for the latest draft.", ""]
+            # Historical corrections remain visible even when the latest version awaits review.
+            if latest["state"].startswith("AWAITING"):
+                historical = next((v for v in reversed(row["versions"][:-1]) if v["judgment_sha256"] or v["review_sha256"]), None)
+                if historical:
+                    lines += [f"Historical v{historical['version']} feedback, not a verdict on current content:", ""]
+                    for key in ("review_sha256", "judgment_sha256"):
+                        if historical[key]:
+                            lines += [self.object(historical[key]).decode("utf-8-sig"), ""]
+            lines += ["</details>", ""]
+        catalogue = ("\n".join(lines) + "\n").encode("utf-8")
+        cat_sha = self.freeze(catalogue)
+        inventory_sha = self.freeze(encoded(report))
+        self.append("CATALOGUE", {"snapshot_sha256": sha, "catalogue_sha256": cat_sha, "inventory_sha256": inventory_sha})
+        (self.root / "human_review/record_catalogue.md").write_bytes(catalogue)
+        (self.home / "inventory.json").write_bytes(encoded(report))
+        return cat_sha
+
+    def native_status(self):
+        submissions = [e["payload"] for e in self.ledger() if e["kind"] == "SUBMISSION"]
+        context_sha = digest(encoded(self.context())) if submissions else None
+        rows = []
+        for rid in sorted({s["record_id"] for s in submissions}):
+            version = max(s["version"] for s in submissions if s["record_id"] == rid)
+            current = {s["role"]: s for s in submissions if s["record_id"] == rid and s["version"] == version}
+            judge = current.get("judge")
+            state = "AWAITING_REVIEW" if "reviewer" not in current else "AWAITING_JUDGE"
+            if judge:
+                state = {"PASS_AGENT_REVIEW": "PASS_AGENT_REVIEW", "SOURCE_GAP": "BLOCKED_SOURCE_GAP", "NEEDS_REVISION": "BLOCKED_HUMAN_REVIEW" if version == 4 else "NEEDS_REVISION"}[judge["verdict"]]
+            if current["author"]["context_sha256"] != context_sha:
+                state = "STALE_CONTEXT"
+            rows.append({"record_id": rid, "version": version, "state": state, "roles": current, "runtime_authorized": False})
+        return rows
+
+    def work_items(self, snapshot_sha, report):
+        """Concrete dispatch queue for existing agents; no automatic provider calls."""
+        tasks = []
+        for row in report["records"]:
+            role = {"AWAITING_AUTHOR": "author", "AWAITING_REVIEW": "reviewer", "AWAITING_JUDGE": "judge", "NEEDS_REVISION": "author"}.get(row["state"])
+            tasks.append({"record_id": row["record_id"], "version": row.get("version"), "assigned_role": role,
+                          "state": row["state"], "reason": row["reason"], "snapshot_sha256": snapshot_sha,
+                          "draft_sha256": row.get("draft_sha256"), "review_sha256": row.get("review_sha256"),
+                          "judgment_sha256": row.get("judgment_sha256"), "revision_cycles_used": max(0, row.get("version", 1) - 1),
+                          "revision_cycles_remaining": max(0, 4 - row.get("version", 1)),
+                          "source_gap_detail": row.get("source_gap_detail"),
+                          "maintenance_action": ("Independent human/OEM source clarification required; preserve abstention" if row["state"] == "BLOCKED_SOURCE_GAP" else "Resolve exact-content/source binding with current owning agents") if row["state"].startswith("BLOCKED") else None,
+                          "human_source_signoff_required": True, "runtime_authorized": False})
+        data = encoded({"policy_version": POLICY, "snapshot_sha256": snapshot_sha, "tasks": tasks})
+        self.freeze(data)
+        (self.home / "work_items.json").write_bytes(data)
+        return tasks
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("command", choices=("sync", "submit", "status", "verify"))
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--input", type=Path)
+    args = parser.parse_args()
+    store = Store(args.root)
+    if args.command == "verify":
+        events = store.ledger()
+        for path in (store.home / "objects").glob("*"):
+            store.object(path.name)
+        print(json.dumps({"events_verified": len(events), "objects_verified": len(list((store.home / 'objects').glob('*')))}))
+    elif args.command == "status":
+        print(json.dumps(store.native_status(), indent=2))
+    else:
+        with store.lock():
+            if args.command == "submit":
+                require(args.input is not None, "--input required")
+                print(json.dumps(store.submit(json.loads(args.input.read_bytes())), indent=2))
+            else:
+                sha, snapshot = store.capture()
+                report = store.report(sha, snapshot)
+                cat_sha = store.catalogue(sha, snapshot, report)
+                store.work_items(sha, report)
+                print(json.dumps({"snapshot_sha256": sha, "catalogue_sha256": cat_sha, "counts": report["counts"], "complete_inventory": report["complete_inventory"], "agent_loop_complete": report["agent_loop_complete"]}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

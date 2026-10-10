@@ -1,0 +1,22 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "6bf50be775fe0ca4252e3272c945880533bd2ab85b9b8fb9dc5d109726c30ed6",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "Lubricant table headers FRONT FORK OIL SS-47G; RH589±2.5ml,LH507±2.5ml; actual capacities vary. CAUTION: wrong oil grade reduces moving-part life and seriously affects performance, unqualified table warning.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 21,
+      "printed_page": "19"
+    }
+  ],
+  "reason": "Exact SS-47G, RH589±2.5ml,LH507±2.5ml lookup and approximate capacity retained; original PDF21 unqualified wrong-oil-grade caution now visible consistently; no fork-service steps. Rechecked exact v2 against original source layout/text and prior judge correction; engineering-only, no human/source/dependency/release approval.",
+  "record_id": "GEN014",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 2
+}

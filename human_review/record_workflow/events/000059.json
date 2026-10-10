@@ -1,0 +1,64 @@
+{
+  "event_sha256": "e1f900632a5912387ae330d5c308ed6eaa660a4583810f35099fb8edf5e30936",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-author",
+    "answer": "The manual says any two of the listed trip-content options appear on the analogue screen; the digital screen allows any four. This is display configuration, not a trip-reset action.",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "conditions": [
+      "Confirmed applicable Himalayan BS6 and immutable selected manual; this expected route is conditional, not runtime authorization."
+    ],
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "distinctive_intent": "analog_content_two_items",
+    "expected_route": "SUPPORTED",
+    "forbidden_claims": [
+      "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+      "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+    ],
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "origin_declaration": "Generated based on feedback from the first 11 cases",
+    "payload_sha256": "0293cf6f29d9424d782dbbedd26e67de76c4453ca6384873d42a1076f2f630f5",
+    "question": "Can the analogue screen show four trip-content items?",
+    "record_id": "GEN040",
+    "role": "author",
+    "source_limits": [],
+    "source_refs": [
+      {
+        "checked_span": "Royal Enfield Himalayan\n42\nOPERATION OF CONTROLS\ni. Reset trip\n\nCenter press the joystick with the reset trip option\nselected to reset the trip.\n\nThere are two options available: Reset trip 1 and reset\ntrip 2.\n\nThe options can be navigated by joystick up and down\npress and selected by joystick center press.\n\nSelecting either reset trip 1 or reset trip 2 will show a\nconfirmation popup for reset.\n\nPress the home button on the LH switch cube to go\nback.\nii. Analogue content\n\nCenter press the joystick with the analogue content\noption selected to explore the options.\n\nThe following options are available.\n\nTrip distance\n\nAverage fuel consumption\n\nTrip time\n\nAverage speed\n\nMax speed\n1831km\nkm\n1\n2\n0\n1831km\nkm\n1\n2\n0\n1831km\nkm\n1\n2\n0\n1831km\nkm\n1\n2\n0\nReset Trip 1\nReset Trip 2\nReset Trip\nReset Trip 1 ?\nConfirm\nDecline\nReset Trip 2\nReset Trip\nReset Trip 2 ?\nConfirm\nDecline",
+        "evidence_ids": [],
+        "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+        "pdf_page": 44,
+        "printed_page": "42"
+      },
+      {
+        "checked_span": "Royal Enfield Himalayan\n43\nOPERATION OF CONTROLS\n\nThe options can be navigated by joystick up and down\npress and selected by joystick center press.\n\nAny two of the above options will be shown in the ana-\nlog screen.\n\nPress the home button on the LH switch cube to go\nback.\niii. Digital content\n\nCenter press the joystick with the digital content\noption selected to explore the options.\n\nThe following options are available.\n\nTrip distance\n\nAverage fuel consumption\n\nTrip time\n\nAverage speed\n\nMax speed\n\nThe options can be navigated by joystick up and down\npress and selected by joystick center press.\n\nAny four of the above options will be shown in the digi-\ntal screen.\n\nPress the home button on the LH switch cube to go\nback.\n1831km\nkm\n1\n2\n0\n1831km\nkm\n1\n2\n0\nTrip Distance\nAvg.Fuel Cons.\nAnalogue Content\nTrip Time\nAvg. Speed\nAnalogue Content\n1831km\nkm/\n1\n2\n0\nAvg. Speed\nMax Speed\nAnalogue Content",
+        "evidence_ids": [],
+        "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+        "pdf_page": 45,
+        "printed_page": "43"
+      }
+    ],
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "stopping_rules": [
+      "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+      "Do not repeat attempted actions without a documented exception or superseding correction.",
+      "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+    ],
+    "turns": [
+      {
+        "speaker": "rider",
+        "text": "Can the analogue screen show four trip-content items?"
+      },
+      {
+        "speaker": "assistant",
+        "text": "The manual says any two of the listed trip-content options appear on the analogue screen; the digital screen allows any four. This is display configuration, not a trip-reset action."
+      }
+    ],
+    "version": 1,
+    "warnings": []
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "80fac0cc7796663d07615f497ecb3fda5f85f96d5a73e68f125ac2f2def202b6",
+  "recorded_at_utc": "2026-10-09T18:56:31.369913+00:00",
+  "sequence": 59
+}

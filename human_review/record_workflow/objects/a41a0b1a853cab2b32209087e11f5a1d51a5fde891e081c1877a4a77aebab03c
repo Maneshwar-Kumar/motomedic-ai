@@ -1,0 +1,26 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "8401a07b60c218f588ed2d0857c4c21900e0644439b4f9c1d0eb216b7629cbd1",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "RECOMMENDED LUBRICANTS\n\n                 ENGINE OIL                     COOLANT        FRONT FORK OIL    BRAKE FLUID\n\n                                                TOTAL COOLELF AUTO   Grade   10W40 API SN, JASO MA2, Semi Synthetic                                     SS-47G           DOT 4*                                              SUPRA -37 ºC\n\n                                                                 Radiator:\n                               1 st dry fill: 2.4 L                    Dry fill - 915 ml     RH fork: 589 ± 2.5 ml   Front - 90 ± 5 ml\n                                                                  Service fill - 815 ml  Capacity\n                            Refill: 2.1 L for oil service              Expansion Tank:                                                             LH fork: 507 ± 2.5 ml    Rear - 80 ± 5 ml                          (Including filter change)                      Fill to max mark - 200 ml\n* Do not mix DOT 4 or other brake fluid together.\nNOTE\n1. Coolant from is ready to use and does not require mixing.\n2. Recommendation subject to change without notice.\n3. The above values are approximate and the actual capacity will vary.\nCAUTION\nUse of wrong oil grade will reduce the life of the moving parts and seriously aﬀect performance.\n                                                               Royal Enfield Himalayan    19",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-021.png",
+      "pdf_page": 21,
+      "printed_page": "19"
+    }
+  ],
+  "reason": "Synthetic required-claim-verifier timeout follows TRD final claim gate: SYSTEM_ERROR withholds technical text until successful checks. PDF21 factual source remains available, not absent. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN076",
+  "review_sha256": "463e48dbba2d258674676a302fa102eae8b5840ed7b9dac5cd5b0332ed9b9832",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

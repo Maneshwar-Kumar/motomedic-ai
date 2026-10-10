@@ -1,0 +1,35 @@
+{
+  "event_sha256": "58ae50201309f46e715e077e7262f54aec023bbc88977467caec5abf64252cfa",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "f125734d35ef10106f07d2b851e1fff6f20f781458871d3ef159710e8e07f4ee",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "RECOMMENDED LUBRICANTS\n\n                 ENGINE OIL                     COOLANT        FRONT FORK OIL    BRAKE FLUID\n\n                                                TOTAL COOLELF AUTO   Grade   10W40 API SN, JASO MA2, Semi Synthetic                                     SS-47G           DOT 4*                                              SUPRA -37 ºC\n\n                                                                 Radiator:\n                               1 st dry fill: 2.4 L                    Dry fill - 915 ml     RH fork: 589 ± 2.5 ml   Front - 90 ± 5 ml\n                                                                  Service fill - 815 ml  Capacity\n                            Refill: 2.1 L for oil service              Expansion Tank:                                                             LH fork: 507 ± 2.5 ml    Rear - 80 ± 5 ml                          (Including filter change)                      Fill to max mark - 200 ml\n* Do not mix DOT 4 or other brake fluid together.\nNOTE\n1. Coolant from is ready to use and does not require mixing.\n2. Recommendation subject to change without notice.\n3. The above values are approximate and the actual capacity will vary.\nCAUTION\nUse of wrong oil grade will reduce the life of the moving parts and seriously aﬀect performance.\n                                                               Royal Enfield Himalayan    19",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-021.png",
+        "pdf_page": 21,
+        "printed_page": "19"
+      }
+    ],
+    "payload_sha256": "78f5aec0e2b26b868b67aa9cf78cec5c0a4c986d0d496ac48991425baecddcb9",
+    "reason": "Synthetic lost-unit extraction fixture correctly withholds capacity instead of guessing. Original PDF21 actual unit/header present and checked; case does not claim manual absence or actual failed extraction. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN063",
+    "review_sha256": "d8068fa38e7304ec9dfcede60c1fc2632bb3b3afbdf3b644cc35713db6a173c2",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "080ac86dfe7cb26eeab6a4f089d3e10c6ba0159eb42c86986bda32cf907125ba",
+  "recorded_at_utc": "2026-10-10T02:23:18.659952+00:00",
+  "sequence": 282
+}

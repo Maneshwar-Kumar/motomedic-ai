@@ -1,0 +1,31 @@
+{
+  "event_sha256": "3120ba4ffbb9076f705617a9ae086c2898bec6b0f0287b7e9ce4255abdc030f5",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "51e19d67b4c12d1ce59eeecd1a1d19b2bdd0b57dd612975e32cd86925e43d652",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "Original blank personal/motorcycle information form incl names/address/contact/VIN; app privacy/redaction authority is TRD7/10, not this form.",
+        "inspection_method": "Independent original PDF text and full-page layout/footer checked; synthetic product policy separately checked against TRDv0.4/manifest/feedback.",
+        "pdf_page": 7,
+        "printed_page": "5"
+      }
+    ],
+    "payload_sha256": "7d0147371f2b0491383c85700a6644dca7ea395c86ad08fc1ef957153901c194",
+    "reason": "Necessary redacted observations only, policy privacy scope clear; no raw-media/personaltrace claim as OEM. Engineering fixture review only; no actual outage test or formal human/source/dependency/release approval.",
+    "record_id": "GEN092",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "6ad48193c4cb40a60b96ee3a5abfc0dce89220b26d26ef928165980b7250c48c",
+  "recorded_at_utc": "2026-10-09T19:04:30.419805+00:00",
+  "sequence": 255
+}

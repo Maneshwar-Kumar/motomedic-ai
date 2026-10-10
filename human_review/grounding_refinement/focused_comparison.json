@@ -1,0 +1,23 @@
+[
+  {
+    "record_id": "GEN099",
+    "scope": "Synthetic policy implementation regression; not full candidate dialogue or OEM validation",
+    "baseline": "You reported that the symptom is resolved. The repair and cause have not been mechanically verified.",
+    "revised": "You reported this symptom resolved. Other reported symptoms remain open. The repair and cause have not been mechanically verified.",
+    "other_issue_unchanged": true
+  },
+  {
+    "record_id": "GEN058",
+    "scope": "Synthetic recurrence transition regression; no OEM validation",
+    "baseline_status": "CUSTOMER_REPORTED_RESOLVED",
+    "revised_status": "OPEN",
+    "attempts_preserved": true,
+    "repeat_blocked": true
+  },
+  {
+    "record_id": "GEN052",
+    "scope": "Synthetic owner-selection question regression",
+    "baseline": "Which exact bike variant and manual edition have you selected?",
+    "revised": "Is your motorcycle a Himalayan BS6?"
+  }
+]

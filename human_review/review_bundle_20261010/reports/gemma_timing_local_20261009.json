@@ -1,0 +1,113 @@
+{
+  "schema_version": "gemma-timing-v1",
+  "checked_at_utc": "2026-10-09T14:04:12.719776+00:00",
+  "model": "gemma-4-31b-it",
+  "prompt": "synthetic_READY",
+  "max_output_tokens_per_request": 64,
+  "thinking_level": "minimal",
+  "automatic_retries": 0,
+  "connection_policy": "fresh curl process per request; no deliberate connection reuse",
+  "origin": "local",
+  "requests": [
+    {
+      "request_number": 1,
+      "ok": false,
+      "curl_exit_code": 0,
+      "curl": {
+        "time_namelookup": 0.01264,
+        "time_connect": 0.028361,
+        "time_appconnect": 0.569758,
+        "time_pretransfer": 0.5699,
+        "time_starttransfer": 1.315726,
+        "time_total": 1.315771,
+        "http_code": 500,
+        "http_version": "1.1",
+        "num_redirects": 0,
+        "num_connects": 1,
+        "size_upload": 151,
+        "size_download": 109,
+        "proxy_used": 0
+      },
+      "tcp_after_dns_seconds": 0.0157,
+      "tls_after_connect_seconds": 0.5414,
+      "request_ready_to_first_byte_seconds": 0.7458,
+      "first_sse_event_seconds": null,
+      "first_visible_text_seconds": null,
+      "wall_seconds": 1.5937,
+      "finish_reasons": [],
+      "model_versions": [],
+      "usage": {}
+    },
+    {
+      "request_number": 2,
+      "ok": false,
+      "curl_exit_code": 28,
+      "curl": {
+        "time_namelookup": 0.007352,
+        "time_connect": 0.023563,
+        "time_appconnect": 0.570189,
+        "time_pretransfer": 0.570308,
+        "time_starttransfer": 0.0,
+        "time_total": 30.012284,
+        "http_code": 0,
+        "http_version": "0",
+        "num_redirects": 0,
+        "num_connects": 1,
+        "size_upload": 151,
+        "size_download": 0,
+        "proxy_used": 0
+      },
+      "tcp_after_dns_seconds": 0.0162,
+      "tls_after_connect_seconds": 0.5466,
+      "request_ready_to_first_byte_seconds": null,
+      "first_sse_event_seconds": null,
+      "first_visible_text_seconds": null,
+      "wall_seconds": 30.2593,
+      "finish_reasons": [],
+      "model_versions": [],
+      "usage": {}
+    },
+    {
+      "request_number": 3,
+      "ok": true,
+      "curl_exit_code": 0,
+      "curl": {
+        "time_namelookup": 0.015635,
+        "time_connect": 0.030564,
+        "time_appconnect": 0.565614,
+        "time_pretransfer": 0.565725,
+        "time_starttransfer": 15.759573,
+        "time_total": 15.805039,
+        "http_code": 200,
+        "http_version": "1.1",
+        "num_redirects": 0,
+        "num_connects": 1,
+        "size_upload": 151,
+        "size_download": 1044,
+        "proxy_used": 0
+      },
+      "tcp_after_dns_seconds": 0.0149,
+      "tls_after_connect_seconds": 0.535,
+      "request_ready_to_first_byte_seconds": 15.1938,
+      "first_sse_event_seconds": 16.0186,
+      "first_visible_text_seconds": 16.0609,
+      "wall_seconds": 16.071,
+      "finish_reasons": [
+        "STOP"
+      ],
+      "model_versions": [
+        "gemma-4-31b-it"
+      ],
+      "usage": {
+        "promptTokenCount": 4,
+        "candidatesTokenCount": 1,
+        "totalTokenCount": 5,
+        "serviceTier": "standard"
+      }
+    }
+  ],
+  "measured_total_tokens": 5,
+  "usage_missing_requests": 2,
+  "discarded_harness_attempts": 1,
+  "discarded_harness_attempt_note": "An earlier probe was stopped because subprocess stderr metadata blocked the harness; outcome and token usage were not collected."
+}

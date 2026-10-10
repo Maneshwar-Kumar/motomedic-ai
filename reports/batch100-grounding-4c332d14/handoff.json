@@ -1,0 +1,66 @@
+{
+  "schema_version": "grounding-monitor-handoff-v1",
+  "processed_completion_sha256": "4c332d1441417fe25caeadc3b0a83768f32622fd777f7cc9815ed3dca7111590",
+  "status": "CLAIM_SUPPORT_AGENT_REVIEW_COMPLETE_FORMAL_SOURCE_APPROVAL_PENDING",
+  "fixtures": "reports/batch100-grounding-4c332d14/fixtures.json",
+  "readiness_report": "reports/batch100-grounding-4c332d14/readiness.json",
+  "existing_controller_report": "reports/batch100-grounding-4c332d14/existing-controller-gates.json",
+  "fixture_sha256": "bfb85a2fa4b415d2321500ef849eab6f7e508be14019613c2a6dfac26aadd0cc",
+  "readiness_sha256": "2f5d2740ba495a1b6a25e026d8e2e44ada2c7e6e64e7d99c838827166ae00f7e",
+  "refinement_thread_id": "01a121fc-f04c-7983-bb9e-e3acbd3aa072",
+  "provider_calls": 0,
+  "semantic_accuracy": "NOT_EVALUATED",
+  "formal_source_approval": false,
+  "next_heartbeat": "Read refinement progress for the delegated 161-record Gemma suite; do not duplicate its evaluation implementation or live calls. Agent adjudication is complete; preserve formal source holds and wait for actual content-bound decisions. Notify only meaningful results, failure or required action.",
+  "refinement_checked_at": "2026-10-10T10:33:20.384Z",
+  "refinement_artifact_sha256": {
+    "human_review/grounding_refinement/RESULTS.md": "98873682e6aca892f3138e806eb3e49814f6ff876ac9d61709900ad48ff6c32c",
+    "human_review/grounding_refinement/status.json": "db107f4d1b43bddc75901cc1e978701af037d712c653534a620cb5595103114e",
+    "human_review/grounding_refinement/corpus_results.json": "a1430eab0a25cd6d98fb470f8a2afb31158f3b75f5094e6fe85681e17b1f8574",
+    "human_review/grounding_refinement/protocol_results.json": "aaa7dfe22f1b01663cda2bd83ec21349595d339c4ef8e43f0be50fcda5b1976e"
+  },
+  "refinement_results": {
+    "corpus_records": 161,
+    "arms": 3,
+    "measured_behavior": "SOURCE_HOLD_ONLY",
+    "protocol_tests_passed": 77,
+    "provider_calls": 0,
+    "semantic_accuracy": "NOT_EVALUATED",
+    "shared_runtime_changed": false
+  },
+  "claim_binding_status": "ALL_150_RECORDS_ADJUDICATED; 371_ANSWER_CLAIMS; FOUR_CORRECTED_CANDIDATES; TEN_INTEGRITY_TESTS_PASSED",
+  "support_review": "grounding_bindings/expanded-v1/support_review.json",
+  "support_review_sha256": "baff1055936a46242a816a8ae095c350d093a0308be2776225c4453dc5e78547",
+  "candidate_fixtures_sha256": "3e76e5ecdadd334efb0cb0c20e6dfc0ed7305fc009e49d6720bfdae2ea5478d9",
+  "gemma_evaluation_handoff": {
+    "thread_id": "01a121fc-f04c-7983-bb9e-e3acbd3aa072",
+    "owner_authorized": true,
+    "scope_records": 161,
+    "dispatched": true,
+    "thread_status_at_dispatch": "ACTIVE",
+    "eligibility": "FORMAL_SOURCE_PREFLIGHT_REQUIRED; LAST_OBSERVED_APPROVED_CASES_ZERO",
+    "provider": "gemma-4-31b-it",
+    "automatic_retries": 0
+  },
+  "delegated_suite_observation": {
+    "checked_at": "2026-10-10T11:12:21.017Z",
+    "thread_state": "ACTIVE",
+    "suite_digest": "e119e9c5bd126dbfc04b80708c27f109e1bef2c8a1863797c21d4e63efbc41ec",
+    "test_results": {
+      "tests_run": 9,
+      "success": true,
+      "live_calls": 0,
+      "scope": "Case-specific identity/source/citation/omission tests and formal preflight; not model accuracy"
+    },
+    "artifact_sha256": {
+      "results.json": "25c77b33901ae83284752f33737261b9880a31feef28707a52fa2b89831f624c",
+      "readiness.json": "a16086edb233e5f58b68eb0537ca48663d3af2f589263f15ca96fabefef99fad",
+      "manifest.json": "56d726a38149f95786dc8916ea8f352a0575044e69a08b110dd55199cbb52fc8",
+      "suite.json": "640ffbc075f707db285870ee903cb0e0de15f950c6bfb9e1a500a8e9eb890fc0",
+      "test_results.json": "f72d2d2c9352a52ce0272cd3750ab7e4ae54e56b82c39bd1e2afaae359764d1d"
+    },
+    "live_eligible_cases": 0,
+    "provider_calls": 0,
+    "limitations": "Current reports are contract/withholding checks, not measured Gemma accuracy. Runtime candidate bindings and original-eleven authoring remain agent implementation work. Explicit authorized continuation sent to delegated chat; formal source holds preserved."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "44856f0c835292f8170487f4be02f0e7d83e28aeeb47376bc6bbca873e71758b",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "TROUBLESHOOTING\n\n       Symptom                      Observations                     Check for/Remedy\n Engine starts but vehicle\n OFF’s automatically when     Side stand indicator is glowing in the cluster    Side stand should be kept up right\n apply the first gear\n                                               If any adulteration/water in fuel               Contact Authorised service center Engine misfires & runs\n                                                                       Switch OFF the engine and allow it to\n erratically/stops.                     If the engine is too hot                                                                            cool down\n                                               If engine RPM raises disproportionately to      Adjust the clutch free play and contact Poor pickup                             the vehicle speed                            Authorised service center\n ABS (Anti - lock Braking                                               If the ABS lamp continuously ON              Contact Authorised service center System)\n\n\n\n\n\n120   Royal Enfield Himalayan",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-122.png",
+      "pdf_page": 122,
+      "printed_page": "120"
+    }
+  ],
+  "payload_sha256": "75383be50be2d68f5e3302db13f7dd54acb7a10c5e8af57cd134d59bbd9b9b31",
+  "reason": "Policy overlong-reranker-input fixture follows TRD preserve-full-query/skip-inference limitation, mandatory safety evidence retained. No truncated rider facts or bypassed controller gate. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN088",
+  "review_sha256": "c58951b31272027ff4bff77117bf200fbb5434a812b41e411c06d96b481f4b09",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

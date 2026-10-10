@@ -1,0 +1,40 @@
+{
+  "event_sha256": "eef6ae3fe7a01f66e1322c079ba27cd9d62b9352a8bcfe199bd2dd0213d8f350",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "0a3e28a1ad1f96e85c4babe892a6a0e31e9101741b6ea661e9e7af9d2c0731a8",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "Refuel engine/devicesOFF,ventilation,no smoke/flames/sparks,open cap slowly,leave expansion gap.",
+        "pdf_page": 8,
+        "printed_page": "6"
+      },
+      {
+        "checked_span": "17.0L approximate tankcapacity, actual filling varies.",
+        "pdf_page": 18,
+        "printed_page": "16"
+      },
+      {
+        "checked_span": "Anti-splash plate max,overfillEVAPdamage,explosivevapour/spillpaintcleanup.",
+        "pdf_page": 27,
+        "printed_page": "25"
+      }
+    ],
+    "payload_sha256": "c672b00dcc52d9670f28b3861fdaa9d0dceba9b75e51df17dbfb557576ca23dd",
+    "reason": "GEN008-F1 corrected in exact answer and matching turn: conditional compact safety setup/explosivevapour/paintspill caution retained alongside capacity answer; no new cap-access instruction. Engineering-only, no source/human/release approval.",
+    "record_id": "GEN008",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 2
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "de0f9b98a5a900448f8fbb0d4597b1d7b5aec4bf11e0db5c4a81efe6944c8338",
+  "recorded_at_utc": "2026-10-09T19:03:23.112589+00:00",
+  "sequence": 181
+}

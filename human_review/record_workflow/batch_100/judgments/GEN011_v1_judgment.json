@@ -1,0 +1,26 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "888e900844ea0adce4a13440a046e39cfb85299adb2c05e352d4a6a83cda76d4",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "TECHNICAL SPECIFICATIONS\nDIMENSIONS                            NOTE\nLength ................................ 2245 mm             Values / Dimensions given above are for your guidance\n                                                                    only.Width.................................. 852 mm\n                               In view of continuous improvements being done on\nStandard seat height .......... Adjustable 825 mm to 845 mm                                                          our products, the specifications are likely to change\nLow seat height.................. Adjustable 805mm to 825 mm       without prior notice.\nHeight................................. 1316 mm              Do not use the vehicle beyond the allowed gross\n                                                              weight. The suspensions and tyres are designed to per-\nWheelbase.......................... 1510 mm                                                      form only to the maximum gross vehicle weight.\nGround clearance ............... 224 mm\nWEIGHTS\n\nKerb weight (90% fuel and oil) ........ 196 kg\nGross vehicle weight ......................... 394 kg\n\n\n18    Royal Enfield Himalayan",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-020.png",
+      "pdf_page": 20,
+      "printed_page": "18"
+    }
+  ],
+  "reason": "PDF20 printed18 supports standard825-845 mm and low805-825 mm; guidance qualification avoids identifying actual fitted seat. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN011",
+  "review_sha256": "b0939018ed444ea327df4ca07e68e733ac7b7f5b225b32fbe0e0b2520f649dcd",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

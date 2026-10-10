@@ -12,6 +12,8 @@ The project owner has since confirmed that the owner's manual is publicly availa
 
 ## Source of truth
 
+TRD v0.4 is the authoritative design and technical contract, as confirmed by the owner on 9 October 2026. The concept, PRD, design notes and TODO register are reconciled to it. Manual facts, applicability, safety and usage rights still govern release. The before/after design record is in section Reconciliation change record of `04_To_Build_Evaluation_Decisions.docx`.
+
 - [Conversation context](conversation_context.md) records the retrievable user requests and the limits of the chat export.
 - [Concept and architecture](01_Concept_Architecture.docx) defines the product promise and high level flow.
 - [PRD](02_PRD.docx) defines behavior, priorities, and acceptance criteria.
@@ -83,11 +85,14 @@ Use this as the working tracker. Tick an item only after its evidence or test re
 
 ### 3. Search index and evidence assembly
 
-- [ ] Choose a compatible query/document embedding model and record its version, vector size, normalization, and similarity metric.
-- [ ] Build the dense index from approved evidence chunks once per manual checksum; store chunk-to-evidence mappings.
-- [ ] Build a sparse/BM25 index for exact component names, codes, units, and warning labels.
+- [x] Select the hosted candidate embedding configuration: BGE M3, 1,024-token budget, recorded model revisions and cosine settings in the immutable index manifest; reviewed release calibration remains pending.
+- [x] Build the versioned hosted candidate dense index once per manual/pipeline version and retain chunk-to-evidence mappings; selected index `index_a3282c4d98cf54595e4ba168`.
+- [ ] Independently approve source objects, procedure boundaries and chunk dependencies before treating this index as release evidence.
+- [x] Build hosted BM25 postings alongside the immutable BGE index; recorded in the hosted snapshot.
+- [ ] Validate exact component/code/unit/warning retrieval on independently reviewed cases.
 - [ ] Enforce manual, model, variant, edition, and language filters before ranking.
-- [ ] Fuse dense and sparse candidates; benchmark optional reranking on the golden set.
+- [x] Implement hybrid RRF and bounded conditional recovery/reranking (`retrieval_policy.py`, `online_retrieve.py`, TRD v0.4); record draft in-sample comparisons in `index_benchmark.json`.
+- [ ] Calibrate trigger thresholds on independently reviewed tuning cases and compare off/always/conditional on held-out cases; current review gaps skip reranking.
 - [ ] Attach parent procedure, mandatory warnings/prerequisites, and verified referenced figures/tables before answer composition.
 - [ ] Measure complete evidence recall, wrong-variant leakage, latency, and index size; rebuild deterministically from the manifest.
 
@@ -104,7 +109,7 @@ Use this as the working tracker. Tick an item only after its evidence or test re
 ### 5. Session and answer policy
 
 - [x] Prototype one-question-at-a-time flow for no-start, weak horn, first-gear cut-out, misfire, poor pickup and ABS indicator, with cited branch outcomes.
-- [ ] Integrate the drafted flow with the full evidence gate, typed session store, UI and retrieval stack; the current command-line controller is not a deployed agent.
+- [ ] Integrate approved StepDefinition/ApplicabilityRule records, TRUE/FALSE/UNKNOWN eligibility, full evidence/claim gates, typed session store, UI and retrieval stack; the current command-line controller is not a deployed agent.
 - [ ] Implement typed outcomes: `NOT_TRIED`, `OBSERVED_NORMAL`, `OBSERVED_ABNORMAL`, `ACTION_COMPLETED_UNRESOLVED`, `NOT_APPLICABLE`, `UNCLEAR`, and `RESOLVED`.
 - [ ] Store immutable step attempts with superseding corrections; keep diagnostic state separate from conversational text.
 - [ ] Select only relevant, applicable, prerequisite-satisfied, untried documented steps; avoid unjustified repetition.
@@ -170,6 +175,26 @@ Hosted ingestion and both embedding comparisons succeeded. Current candidate ind
 
 `motomedic-qdrant` serves immutable vectors on authenticated Cloud Run, with min zero/max one instance and private Cloud Storage backing. Cold starts reload stored vectors. They do not parse or embed the manual again. Consult `cloud/deployment_status.json` and `cloud/live_smoke.json` before deployment changes. The rider UI and gated generator remain pending.
 
-Docling omitted PDF page 103. Whole-page text and an image are retained as flagged candidate evidence; see `source_review_notes.json`. Procedure parents, mandatory warning/prerequisite links and figure/table associations require independent review. Candidate bundles block procedural generation. The updated TRD v0.3 is preserved; the assembler returns its dependency fields and actual typed objects. A missing or empty/unreviewed dependency set cannot establish sufficiency. Source-review gaps are not rider-resolvable questions.
+Docling omitted PDF page 103. Whole-page text and an image are retained as flagged candidate evidence; see `source_review_notes.json`. Procedure parents, mandatory warning/prerequisite links and figure/table associations require independent review. Candidate bundles block procedural generation. The recorded candidate deployment retains the TRD v0.3 dependency schema; TRD v0.4 now governs reviewed eligibility and conditional scheduling. The assembler returns dependency fields and actual typed objects. A missing or empty/unreviewed dependency set cannot establish sufficiency. Source-review gaps are not rider-resolvable questions.
 
 The deterministic state/safety controller remains the TRD choice. Decisions API or Jev may later be benchmarked for interpreting intent and typed rider outcomes or ranking already eligible candidates.
+
+## Reconciliation refresh 9 October 2026
+
+- [x] Reconcile concept and architecture, PRD, design decisions and TODO status to authoritative TRD v0.4; companion Word documents are v0.3.
+- [x] Preserve historical local baseline measurements separately from selected hosted candidate decisions.
+- [ ] Author and independently approve the step registry, applicability rules and dependency manifests against original pages.
+- [ ] Integrate canonical response routing, verified safety-stop precedence and claim checks; source gaps must not become rider questions.
+- [ ] Complete public-demo upload/rate/per-day spend controls and versioned redacted eligibility/TTFO telemetry.
+
+No source approval, release gate, new deployment or billing change is implied by this documentation refresh.
+
+
+## Owner-delegated case approval, 10 October 2026
+
+The owner explicitly delegated final release approval to the coordinator agent for all 161 cases and requires no further human review. This supersedes earlier blanket human-only signoff requirements for the exact approved scopes in `human_review/agent_release_161/coordinator/release_manifest_v3.json` (SHA-256 `b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298`). Read `human_review/agent_release_161/README.md` and `human_review/agent_release_161/root_validation_v3.json`. All 161 source-content/initial-response scopes and the selected-manual Himalayan + BS6 applicability scope have content-bound coordinator approval following independent agent original-source checks. Never fabricate human inspection or set legacy human_signoff flags to represent these decisions. Do not recreate a generic human-review blocker for this approved version.
+
+Approval remains exact-version and scope-bound: typed eligibility, warnings, mandatory evidence and specific unresolved source limitations remain enforced. A correct abstention is an approved handling path, not permission for the underlying undocumented repair. Full adaptive transitions, public PDF/excerpt/image delivery, general vision-model performance and deployment are outside this approval. The isolated package is not installed in the shared generator/controller; integration must consume its scoped authority and exact bindings. Changed source or runtime objects need a new agent review/version rather than carrying old approval forward.
+
+
+Version 3 corrects EXP001 hazard identification and EXP002 retained authored unsure identification to the right-hand control, independently checked against original PDF pages 23, 29 and 30. It preserves the 159 unaffected cases, versions 1 and 2, and the frozen LLM-judge history. The two exact authored identification scopes have coordinator approval; the ten other judge quality revisions remain tracked separately. The current consumer verifies 187 bound files and passes 17 tests. This correction does not claim whole-corpus quality completion or shared-runner installation.

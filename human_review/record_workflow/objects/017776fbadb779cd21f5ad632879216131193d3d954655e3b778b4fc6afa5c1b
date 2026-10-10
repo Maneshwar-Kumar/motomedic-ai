@@ -1,0 +1,52 @@
+{
+  "actor": "batch100-author",
+  "answer": "I cannot identify the layout reliably from this image. Is your display using an analogue-style dial or the digital layout?",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "case_type": "engineering_policy_regression",
+  "conditions": [],
+  "distinctive_intent": "photo_cluster_wrong_type_unknown",
+  "expected_route": "AMBIGUOUS",
+  "forbidden_claims": [
+    "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+    "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "origin_declaration": "Generated based on feedback from the first 11 cases",
+  "policy_refs": [
+    "TRD7/5.2"
+  ],
+  "question": "My photo is blurry; tell me whether this is the analogue or digital warning layout.",
+  "record_id": "GEN091",
+  "role": "author",
+  "scenario_setup": "Unknown visible layout; one accessible observation; no guessed symbol mapping.",
+  "source_limits": [
+    "This is a labelled engineering policy/state/failure scenario, not a new OEM procedure."
+  ],
+  "source_refs": [
+    {
+      "checked_span": "Royal Enfield Himalayan\n56\nOPERATION OF CONTROLS\nINSTRUMENT CLUSTER\nFor Analog Type                                                                                    \n1. Mobile connectivity symbol\n2. Real time clock (RTC)\n3. Ambient air temperature\n4.Ride mode\n5.Speed indicator (km/miles can be selected based on \ncountry)\n6.Odometer (km/miles can be selected based on country)\n7. Side stand indicator\n8. ABS warning lamp\n9. High beam indicator\n10.Right turn indicator\n11. Ambient sensor\n12.Home screen\n13.Left turn indicator\n14.General warning symbol\n15.Engine MIL\n16.Gear indication\n17.Fuel bar gauge\n18. Engine RPM gauge\n19.Gear upshift indicator\n1831\nSide\nStand\nkm\nkm/h\n00:12\nR.P.M   1000\n1\n2\n3\n4\n5\n6\n7\n8\n9\n32\n0\n1\n2\n3\n5\n4\n6\n7\n9\n10\n8\n12\n13\n14\n15\n16\n17\n18\n19\n11",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 58,
+      "printed_page": "56"
+    }
+  ],
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "stopping_rules": [
+    "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+    "Do not repeat attempted actions without a documented exception or superseding correction.",
+    "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+  ],
+  "turns": [
+    {
+      "speaker": "rider",
+      "text": "My photo is blurry; tell me whether this is the analogue or digital warning layout."
+    },
+    {
+      "speaker": "assistant",
+      "text": "I cannot identify the layout reliably from this image. Is your display using an analogue-style dial or the digital layout?"
+    }
+  ],
+  "version": 1,
+  "warnings": []
+}

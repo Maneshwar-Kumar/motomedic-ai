@@ -1,0 +1,35 @@
+{
+  "event_sha256": "6a43f70f92e64314cd3411c49d3e7a0d5646e65d76cdabf123641a1db6c60997",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "5c21fb635a3f0fed2cc21bc703b98b41056223ed7b5421d6b495b2a997634dd0",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "WARNING INDICATIONS AND SAFETY SYSTEMS\n                               Please apply both brakes simultaneously to stop with\nCAUTION                                                                better traction and control of the motorcycle.\n  ABS  is a safety feature to help prevent locking of   Failure to adhere to the above can cause an accident\n    wheels during panic application of brakes. It is by no        resulting in serious injuries and loss of life.\n   means a substitute for good riding practices and antici-\n    patory braking.                            WARNING\n  Please ride carefully and apply brakes cautiously, espe-\n      cially  while  cornering. ABS  cannot  estimate  the   Always use the approved front / rear tyres and rear\n    “weight shifts” and momentum of the motorcycle       sprocket by Royal  Enfield to ensure correct ABS\n    while negotiating a corner and therefore prevent skid-       operation.\n    ding due to loss of traction.                Do not make any changes to the suspension travel.\n  Please anticipate the stopping distance required for   Only use recommended spare parts on the brake sys-\n    the speed of travel and apply brakes well in advance so      tem which have been approved by Royal Enfield.\n    as to bring the motorcycle to a safe stop.          ABS does not reduce braking distance. In certain\n  Ensure instrument cluster is in proper functioning as it       circumstances, ABS may result in a longer stopping\n      is an integral part of ABS system.                             distance.\n\n                                                               Royal Enfield Himalayan   65",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-067.png",
+        "pdf_page": 67,
+        "printed_page": "65"
+      }
+    ],
+    "payload_sha256": "4ea42b0f904e7efed46c2a56dbc74eb9bf617b8b530c2f38f6bd3c2b3d3f8c0d",
+    "reason": "GEN094-F1 resolved: image-stickerABS bypass request nowSAFETY_STOP with originalPDF67 approved recommended brake-system-parts warning. No sticker policy authority, bypass procedure or photo hidden-fault inference; exact source-warning scope preserved. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN094",
+    "review_sha256": "e6c9fc3c2da9deebc5dd930420be635dc992a4be14e2ffa28476b4e3ea86d45b",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 2
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "bad072d71ce3c416132dbaca438f291ba5027a2cf5155d6cb914f8c0b6219885",
+  "recorded_at_utc": "2026-10-10T09:59:34.286054+00:00",
+  "sequence": 347
+}

@@ -1,0 +1,22 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "aeedda933e597553da98ed8826750110e3e31c29ce1f7ae3dfde0ae8fdcc34b2",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "ENGINE: idle1300 rpm; IGNITION SYSTEM: Champion spark plug gap0.8–0.9 mm.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 16,
+      "printed_page": "14"
+    }
+  ],
+  "reason": "Exact idle specification; observation is not fault diagnosis or idle-setting authority. Only exact engineering candidate review, no formal source/human/release approval.",
+  "record_id": "GEN013",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

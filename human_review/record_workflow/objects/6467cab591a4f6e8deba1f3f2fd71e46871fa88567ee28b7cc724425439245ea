@@ -1,0 +1,409 @@
+# Record ID verification
+
+Started 9 October 2026. Plain-text owner review; no source records, review ledger, generator files, index or deployment changed.
+
+Manual: royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf; SHA-256 cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89; 149 PDF pages. Engineering PDF display permitted; end-user PDF/excerpts/crops prohibited.
+
+Review order: lookup_oil_grade, lookup_tyre_pressure, lookup_fan_fuse, lookup_starter_duration, lookup_usb_charging, a_fuse, a_switches_on, a_refuel, a_reconnect, a_raise_stand, a_cool_engine.
+
+## Card 1: lookup_oil_grade
+
+Status: PRESENTED FOR REVIEW; no owner response or approval yet.
+
+Original PDF page 21, printed page 19, Recommended lubricants. Agent independently inspected original full-page render and text; this is not human signoff. Checksum verified against the supplied file.
+
+Existing draft says: The recommended lubricants table specifies 10W40 API SN, JASO MA2, semi-synthetic engine oil. The manual cautions that the wrong grade can reduce moving-part life and performance.
+
+Proposed review wording: For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic. Using the wrong oil grade reduces the life of moving parts and seriously affects performance. This specification comes from this manual edition; its note says recommendations may change without notice.
+
+Rider question: What engine oil grade is specified?
+
+Conditions: confirmed Himalayan BS6 selection and the exact selected manual. Lookup only; no oil-changing procedure, quantity recommendation, substitute oil or diagnosis is implied. The answer ends after the specification and caution.
+
+Owner checks requested: ENGINE OIL / Grade row, all three designations and semi-synthetic; complete bottom caution including seriousness; edition/applicability; scope of recommendation-change note. Capacities are separate from the grade question. The draft dependency set retains the complete multi-fluid table and notes, whose scope still needs separate review.
+
+Open: owner wording/condition/caution/scope response; independent underlying evidence and dependency review; source metadata review. Accepting conversational wording does not approve all source objects/rules/dependencies or public release. Formal decisions require content-bound checks, checked spans, reviewer identity, independent original-page review and human signoff per registry_workflow.py. Preserve all later feedback as append-only entries.
+
+Known later card conflict: a_fuse legacy unresolved branch advances to spark-plug question, while original PDF page 121 requires authorised service if the problem persists. Present and adjudicate that stopping conflict before other actions; do not modify concurrent generator/source records.
+
+## Owner feedback 1: oil grade, 9 October 2026
+
+Owner response: Grade is fine. The sentence about this manual edition and recommendations changing without notice is unnecessary. Rest is fine.
+
+Scoped conversational decision: ACCEPTED WITH SENTENCE REMOVED. Accepted answer: For the selected Himalayan BS6 manual, the specified engine oil is 10W40, API SN, JASO MA2, semi-synthetic. Using the wrong oil grade reduces the life of moving parts and seriously affects performance.
+
+The accepted condition and stopping scope remain confirmed Himalayan BS6 selection, exact selected manual, grade lookup only, no quantity or oil-change procedure. Record the owner's feedback as given; do not infer an explicit declaration of independent original-page inspection, checked source spans or completed object/dependency checklists. No formal registry approval recorded and no source records edited.
+
+## Card 2: lookup_tyre_pressure
+
+Status: PRESENTED FOR REVIEW; no owner response yet.
+
+Original PDF page 90, printed page 88, Minor maintenance tips. Agent independently inspected full-page rendering and text. Front & Rear / Solo & With Pillion table states 32 psi / 2.24 kg/cm2. Warning spans run from lower left to upper right: replacement-tyre warning must be read across both columns.
+
+Proposed conversation, for engineering review:
+Rider: What tyre pressure should I use?
+Assistant: For the selected Himalayan BS6, the manual lists 32 psi (2.24 kg/cm2) for both front and rear tyres, whether riding solo or with a pillion. Underinflated tyres can overheat, suffer damage and cause rider injury. If replacing tyres, use Royal Enfield's specified tyres; failing to do so can cause tyre damage and rider injury.
+
+Scope: confirmed Himalayan BS6 selection and exact selected manual. Direct specification lookup ends after value and warnings. No inflation, tyre fitting, replacement procedure or diagnosis implied. No temperature condition added from general knowledge; this cited page does not state one. Required checks: front/rear and solo/pillion headers, both units, full underinflation warning, full replacement warning across columns, and whether conditional replacement warning belongs in this lookup's mandatory output. Existing draft has corrupted superscript encoding and separately split replacement-warning text; record for author to reconcile after scoped review, without editing concurrent source files.
+
+## Owner feedback 2: tyre specification clarification, 9 October 2026
+
+Owner asks what Royal Enfield specified tyres means, including brands, and requests checking the owner's manual. If the manual does not refer to tyres, be ready to refer to the website or support. This is change feedback, not approval of card 2.
+
+Original-page finding: PDF page 18, printed page 16, Technical specifications names Front 90/90-21 M/C 54H CEAT (Gripp RE F) and Rear 140/80R17 M/C 69H CEAT (Gripp Rad steel RE). Agent read original text and visually inspected complete rendered page. Its note says to fit a tyre with a tube on a tube-type rim, and to use only tubeless-type tyres on a tubeless-type rim. These are documented specifications, not proof of the tyres currently fitted to the rider's motorcycle. No independent human approval of this newly added source page recorded.
+
+Revised conversational proposal: Pressure response states 32 psi (2.24 kg/cm2) front and rear, solo or pillion, and includes underinflation overheating/damage/injury warning. Clarify replacement warning by pointing to the actual named front and rear CEAT specifications above, with rim-type requirements. On a rider follow-up about another brand, say this manual does not establish approval for that alternative and use the owner-approved route: Kindly write to Royal Enfield at support@royalenfield.com. Do not infer replacement compatibility from size alone or assume the rider currently has CEAT fitted.
+
+Source/dependency change proposal for the author: attach and independently review PDF page 18 specifications and rim-type note alongside page 90 warnings before authorizing any expanded technical answer. Original candidate currently cites page 90 only. Keep source records and concurrent generator files untouched. Owner to check exact models, all size/load/speed codes, rim conditions and revised wording before proceeding to card 3.
+
+## Owner feedback 3: tube/tubeless question, 9 October 2026
+
+Owner requests asking what is fitted to the vehicle, tube or tubeless, answering based on that input, and showing both options when the rider does not know. Recorded as requested dialogue change; revised exact wording remains pending.
+
+Source boundary: PDF page 18 names front CEAT Gripp RE F 90/90-21 M/C 54H and rear CEAT Gripp Rad steel RE 140/80R17 M/C 69H, and gives separate tube-type/tubeless-type rim requirements. That table does not identify a separate named model list for each construction. Do not manufacture that mapping or infer rim type from the rider's description of a currently fitted tyre.
+
+Proposed follow-up:
+Assistant: Are the tyres currently fitted to your bike tube-type, tubeless, or are you unsure?
+If tube-type: The manual says a tube-type rim requires a tyre fitted with a tube. Before recommending a replacement, is your rim also tube-type?
+If tubeless: The manual says a tubeless-type rim must use only a tubeless-type tyre. Before recommending a replacement, is your rim also tubeless-type?
+If unsure: The manual gives two rim-dependent options: on a tube-type rim, fit the tyre with a tube; on a tubeless-type rim, use only a tubeless-type tyre. It lists the front and rear CEAT specifications above but does not name separate tube and tubeless models. Kindly write to Royal Enfield at support@royalenfield.com to confirm the correct version for your wheels.
+
+For a confirmed matching rim: show the applicable rim requirement with the manual's front/rear specifications, without asserting that the named models establish a specific construction or approving a purchasable replacement version. For unknown/mismatched rim or alternative brand/version: withhold replacement compatibility recommendation and use verified support route. Rider input is recorded as a reported observation, not independently verified fitment. Pressure lookup remains a separate direct answer and does not need this construction question because the manual lists the same 32 psi value for front/rear and solo/pillion without a construction split.
+
+No blanket or formal source approval, code change, deployment or message to another chat follows from this feedback.
+
+## Owner feedback 4: show exact tyre models in both branches, 9 October 2026
+
+Owner requests sharing the exact tyre model when the rider says tube and also when the rider says tubeless. This refines the previous branch proposal; no acceptance of complete revised wording inferred.
+
+Revised tube branch: The manual lists front CEAT Gripp RE F — 90/90-21 M/C 54H, and rear CEAT Gripp Rad steel RE — 140/80R17 M/C 69H. For a tube-type rim, it requires fitting the tyre with a tube. It does not label these named models as tube-type or tubeless versions. Is your rim also tube-type?
+
+Revised tubeless branch: The manual lists front CEAT Gripp RE F — 90/90-21 M/C 54H, and rear CEAT Gripp Rad steel RE — 140/80R17 M/C 69H. For a tubeless-type rim, it requires using only a tubeless-type tyre. It does not label these named models as tube-type or tubeless versions. Is your rim also tubeless-type?
+
+Both branches show the same documented model specifications because PDF page 18, printed page 16, provides one front/rear model table and separate rim requirements, not separate model tables by construction. Do not present these as independently verified construction-specific replacement recommendations. Unknown or alternative version compatibility retains Royal Enfield support route. Prior unknown branch remains proposed. Source author must review expanded page-18 dependencies; source/generator files remain untouched.
+
+## Owner feedback 5: tyre card acceptance, 9 October 2026
+
+Owner response: I accept. move on.
+
+Scoped conversational decision: ACCEPTED revised record 2 wording and tube/tubeless branches as last presented, with named front/rear CEAT specifications in each branch, rim-type confirmation question, construction-version source limit and support route. Preserve earlier pressure value and warnings and unknown branch. This records acceptance of conversational content; it does not manufacture an explicit independent original-page review declaration, reviewer identity/checklists or formal approval of newly added page-18 source objects/dependencies. No formal ledger decision recorded; no concurrent source/generator records changed.
+
+## Card 3: lookup_fan_fuse
+
+Status: PRESENTED FOR REVIEW; no owner response yet.
+
+Original PDF page 112, printed page 110, Minor maintenance tips / Mini blade fuse usage list. Agent independently inspected original full-page rendering and text. F3 row: Red, 10 A, Fan. Exact selected Himalayan BS6 manual applies.
+
+Proposed conversation:
+Rider: Which fuse protects the fan, and what rating is it?
+Assistant: The fan uses fuse F3, a red 10 A mini-blade fuse.
+Conditional safety wording: If replacing a failed fuse, switch the ignition OFF and use a new fuse of the same rating. Never bridge/jumper it or use other conductive material; this risks short-circuit and fire. Wrong-rating or low-grade fuses can damage the electrical system. After any fuse failure, have the electrical system thoroughly checked and faults corrected immediately to avoid repeated failure. If you use a spare, replenish the spare fuse in its holder at the earliest opportunity.
+
+Stopping scope: direct identification/rating lookup; no claim the fuse is blown or caused a fan symptom, no access/removal procedure, no automatic replacement recommendation. Warning and ignition condition included conditionally because current draft mentions replacement and requires these dependencies. Physical access and unresolved-action stopping rule will be separately reviewed with a_fuse. Owner checks requested: exact F3/red/10 A/Fan row, all relevant warning paragraphs, ignition OFF note, and whether wording clearly separates lookup from conditional replacement warnings. Complete conditional wording is proposed engineering review content and remains unapproved.
+
+
+## Owner feedback 6: fan-fuse service routing, 9 October 2026
+
+Owner requests that replacement discussion route to an authorised service centre, pointing to original PDF page 112 warning requiring thorough electrical-system inspection after fuse failure. This supersedes the card-3 proposal to present rider replacement instructions.
+
+Revised proposed conversation:
+Rider: Which fuse protects the fan, and what rating is it?
+Assistant: The fan uses F3, a red 10 A mini-blade fuse.
+Rider: It has failed / Can I replace it?
+Assistant: Please take the motorcycle to an authorised Royal Enfield service centre. The manual says that after any fuse failure, the electrical system must be thoroughly checked and faults corrected immediately to avoid repeated fuse failure. Never bridge the failed fuse or substitute conductive material; this risks short-circuit and fire.
+
+Condition and stopping scope: service referral whenever replacement is discussed, as requested by the owner, and after reported fuse failure. No rider replacement procedure follows. The manual supports thorough inspection after any fuse failure; routing all replacement discussions to authorised service is the owner's conservative product policy, not a claim that page 112 prohibits every owner replacement. Record 3 revised exact wording awaits acceptance. Record a_fuse will need separate original-page review and explicit adjudication under this policy; no source/generator files or formal ledger decisions changed.
+
+
+## Owner feedback 7: retain replacement guidance alongside service referral, 9 October 2026
+
+Owner clarification: You may still share the steps. This supersedes the no-rider-steps interpretation in feedback 6. Preserve mandatory authorised-service inspection after any fuse failure alongside the documented replacement conditions and warnings; replacement success does not waive inspection.
+
+Revised record-3 proposal: identify F3 as red 10 A mini-blade. If rider reports failure or asks about replacement, first advise authorised Royal Enfield service inspection, citing page 112's thorough electrical-system inspection and immediate fault-correction warning. Then share only page-112-supported replacement guidance: ignition OFF; replace a defective F3 with a new fuse of the same 10 A rating; never bridge/jumper or substitute conductive material due to short-circuit/fire risk; wrong-rating/low-grade fuses damage the electrical system; replenish a used spare in its holder at earliest opportunity. Do not assert access/removal steps from this page. Service inspection remains required even if fan operates after replacement. Revised wording and stopping condition await owner's scoped acceptance. No formal source approval or source/generator modification.
+
+
+## Owner feedback 8: fan-fuse acceptance, 9 October 2026
+
+Owner response: ok. Scoped conversational acceptance of the last presented record-3 replacement guidance, warnings and mandatory authorised-service electrical-system check even if replacement restores fan operation. No formal approval of underlying source objects/dependencies or independent-page checks inferred. Proceed to record 4, lookup_starter_duration.
+
+
+## Card 4: lookup_starter_duration
+
+Status: PRESENTED FOR REVIEW; no owner response yet. Original PDF pages 72/73/74, printed pages 70/71/72, Starting. Agent visually inspected all three complete pages independently of retrieval.
+
+Proposed direct Q&A: Rider asks how long to hold starter. Assistant says maximum 5 seconds per attempt, release when engine starts; if no start within 5 seconds, release and wait about 5 seconds before another attempt. Do not keep holding for long periods; manual warns battery can drain below 10 V and directs authorised-service inspection to identify/correct no-start cause. This warning is not a diagnostic assertion that the rider battery is below 10 V.
+
+Before an actual starting attempt: neutral and neutral indicator glowing (72); ignition ON/kill switch RUN (72); adequate fuel, last fuel bar continuously blinking means refuel immediately (73); hold clutch lever in (73); side stand retracted before starting/moving (74). If malfunction indicator does not turn OFF as described after starting, authorised-service inspection (72-73). Lookup is not a complete guided starting procedure or no-start diagnosis.
+
+Potential continuation: page 74 says ignition OFF then ON and start again after multiple continuous unsuccessful attempts, but gives no numerical attempt limit. Show this note as a scope question for human review; do not invent a retry count or present unlimited retry permission. Proposed unresolved response refers rider to authorised service and does not automatically loop. Fixed report is customer-reported resolution, not verified fault diagnosis.
+
+Owner checks requested: maximum 5 seconds on page 73; about 5-second wait and full battery/service caution on page 74; prerequisite scope on 72-74; treatment of multiple-attempt ignition-cycle note versus service stopping rule. All underlying approvals remain pending.
+
+
+## Owner feedback 9: starter eligibility and no-start branches, 9 October 2026
+
+Owner requires checking gear neutral, neutral lamp, ignition ON and right-handlebar kill switch RUN before starter advice. Requests consideration of EFI/MIL, starter sound, low fuel/final blinking bar, and continued diagnostic questions after tried-but-no-start. This rejects the immediate starter-instruction/service-only draft; revised exact dialogue remains pending.
+
+Revised proposal: after confirmed Himalayan BS6/manual selection, ask one question per turn, reusing confirmed facts: gear neutral (72), neutral lamp glowing (72), ignition key ON (72), right-handlebar kill switch RUN (72), final fuel bar continuously blinking (73; yes blocks starting and routes to separately reviewed refuelling action), adequate fuel if not established (73; no routes refuelling; absence of blinking does not prove adequate fuel), clutch held in (73), side stand retracted (74). Only once starting conditions are established, give max-5-second instruction and about-5-second interval, with full battery drain/service caution. Do not invent an unsourced way to verify an unknown fact; withhold start action and clarify or refer. Negative switch/stand observations lead only to separately reviewed corresponding action, never inferred diagnosis. All sequence ordering is product dialogue design, not OEM diagnostic order.
+
+After tried-but-no-start: record ACTION_COMPLETED_UNRESOLVED, preserve confirmed setup facts, clarify any genuinely unknown prerequisite, and ask lights dim or horn weak (121) as an independently documented electrical clue. Yes routes authorised service without diagnosing a specific electrical fault; no does not establish battery/charging health. Other remaining documented no-start checks require their own reviewed source/rule gates, with mandatory fuse inspection/referral policy and stopping conditions preserved. Do not instruct repeated starting or automatically re-run confirmed checks.
+
+EFI source limit: pages 72-73 describe MIL briefly glowing then turning OFF after engine starts; if it does not turn OFF as described, service rectification. Ask about this pattern after reported start, not as a rule eliminating EFI faults while engine still will not start. Normal MIL pattern is only the manual-described indicator behaviour, not verified health of all EFI components. Customer-reported start remains customer-reported resolution; indicator issue may separately require service.
+
+Starter sound: page 121 table has weak horn/dim lights clue, not a starter-sound diagnostic criterion. May collect voluntary sound description for service context if owner wants it; do not infer battery/starter faults or select repairs from that sound. It is not a source-derived branch for this record. Exact revised card and added page-121 dependency require review; no source/generator edits or formal approvals.
+
+
+## Owner feedback 10: compact conditional starter answer, 9 October 2026
+
+Owner rejects many sequential setup turns. Requests leading with five-second starter answer conditioned on one combined setup checklist, followed by branches only for conditions the rider flags or an unclear result such as no sound. This explicit preference supersedes the previous one-question-per-turn interpretation for presentation of the setup checklist. Keep focused follow-ups where needed.
+
+Revised exact proposal: Hold the starter until the engine starts, for a maximum of 5 seconds, provided the following setup is satisfied: gear neutral and neutral lamp glowing; ignition key ON; right-hand handlebar engine kill switch RUN; adequate fuel and final fuel-gauge bar not blinking continuously; clutch lever pulled in and held; side stand fully retracted. If no start within 5 seconds, release and wait about 5 seconds before another attempt. Do not keep holding: manual warns battery can drain below 10 V. If any condition is not met or rider is unsure, ask them to name that condition and withhold the starting attempt until clarified/corrected through reviewed guidance. A nonblinking fuel bar alone does not establish adequate fuel. Five seconds is a maximum, not a required duration after the engine starts. Conditional text does not assert rider actually satisfied prerequisites or authorize runtime action before eligibility facts are established.
+
+Branches: neutral/neutral-lamp uncertainty clarifies that observation; ignition OFF or kill switch not RUN routes reviewed switches guidance; inadequate fuel or blinking last bar routes reviewed refuelling with complete warnings; clutch not held blocks attempt until held; stand down routes reviewed stand guidance; tried-but-no-start stores unresolved attempt and asks documented dim-lights/weak-horn clue if not already known, then other independently documented eligible checks or authorised service. No automatic repeats or invented OEM diagnostic ordering. No-sound statement asks which sound rider means (starter versus horn), without diagnosing from absent starter sound. MIL question applies only after engine starts, and sustained indicator as described requires authorised service. Revised compact card remains pending scoped acceptance. Source/generator files and formal review ledger untouched.
+
+
+## Owner feedback 11: compact starter card acceptance, 9 October 2026
+
+Owner response: this is good. Scoped conversational acceptance of record 4 as last presented: lead with max-5-second conditional answer, combined setup checklist, about-5-second wait, battery caution, and focused branches for failed/unknown setup, low fuel, unresolved start, unclear sound and post-start MIL. This does not approve underlying source/rule/dependency records or declare independent original-page checks. No formal ledger or concurrent source/generator changes. Proceed to record 5, USB charging.
+
+
+## Card 5: lookup_usb_charging
+
+Status: PRESENTED FOR REVIEW; no owner response yet. PDF page 65, printed page 63, Operation of controls. Original complete page visually inspected and text read by agent independently of retrieval.
+
+Proposed Q&A: Rider asks why USB port does not charge when engine is off. Assistant says USB charger operates only while engine is running; port is charging-only, no data transfer or fast/dash charging. Charging time varies by phone capacity, charge level and circuitry, and may be longer than the original phone charger.
+
+Conditions/cautions: use standard approved high-quality USB cables; check phone current requirements before use; manual says charger shuts down if draw exceeds 2.5 A (not a claim that 2.5 A is nominal output or diagnosis of rider failure). Close and lock cap when not in use; manual says warranty will not be provided if cap is damaged and port not properly sealed. Do not infer broader warranty scope.
+
+Proposed follow-up if engine runs but charging still fails: ask whether cable is standard approved/high quality and phone's current requirements are known, rather than diagnose charging-port fault. Unknown current is unknown, not confirmed excessive draw. Source gives no fault-repair sequence or automatic reset instruction. If issue remains unexplained, state cannot verify a further remedy from the manual and use support@royalenfield.com route. No instruction to run engine solely to test charger.
+
+Original draft action-evidence IDs cover engine-running statement only although claim also includes data/fast-charging facts: source author must separately map those claims to the relevant already-required context objects. No source/generator edits or formal approvals. Owner checks requested: engine-running condition; charging-only/no data/no fast charging notes; exact >2.5 A shutdown threshold; complete cable/cap/warranty cautions; lookup stopping scope and unsupported follow-up.
+
+
+## Owner instruction 12: coordinated multi-agent expansion after eleven reviews, 9 October 2026
+
+Owner explicitly requests saving a future work phase, to begin once all eleven current human-review examples are complete. Do not spawn agents before that prerequisite is met. Current card 5 is pending; this instruction is not card acceptance.
+
+Requested architecture: coordinator agent plus three subagents working together. Subagent 1 authors record IDs and plain-text conversational turns, and may work asynchronously to draft 50 records. Subagent 2 independently eyeballs original manual pages and actual proposed record, supplying concrete feedback. Subagent 3 judges that feedback and whether revisions resolve it; loop author/reviewer/judge until feedback is satisfactory, then resolve that record's review loop and move to another. Coordinator may use multiple hub-and-spoke instances to process the list, subject to available agent concurrency. User explicitly authorizes delegation for this future phase.
+
+Working interpretation to preserve for implementation: freeze the final eleven accepted examples as the writing/interaction reference; draft against this exact owner-manual checksum; use readable text cards, page references, conditions, warnings, typed feedback branches and explicit stopping rules. Reviewer compares original pages independently of retrieval and author's source interpretation. Judge checks feedback validity and revision completeness against source/policy, and cannot vote an unsupported claim into existence. Coordinator controls unique IDs, work ownership, versioned revisions, review provenance and ready/blocked status; avoid simultaneous writes to shared source records. Asynchronous authoring is permitted, but reviewed records stay tied to their exact content version.
+
+Agent-loop resolution means agent-reviewed candidate ready for human signoff, not formal independent human approval, approved cache content or public release. Existing content-bound registry checks still apply. Bound review loops and flag irresolvable source gaps or disagreements for human review rather than iterating endlessly or manufacturing consensus. Fifty cases are the requested draft batch; do not call them a held-out evaluation set if they are revised using these examples or feedback. No deployment, index rebuild, billing/resource operation or inter-chat messaging is included.
+
+
+## Owner feedback 13: USB answer relevance and cap branch, 9 October 2026
+
+Owner removes unrelated charging-only/data-transfer, fast/dash charging and charging-time information from the engine-off question. Accepts cap closure/locking caution and warranty wording; engine-running failure may ask about cable and cap damage. Accepts shutdown threshold as a warning only, not a measurable rider fact or observed cause. Supports escalation when no further repair is documented. Revised exact card remains pending; feedback is not acceptance of all original card wording.
+
+Revised first Q&A:
+Rider: Why does the USB port not charge when the engine is off?
+Assistant: The USB charger works only while the engine is running. Keep the port cap closed and locked when not in use. The manual warns that warranty will not be provided if the cap is damaged and the port is not properly sealed.
+
+Revised follow-up:
+Rider: The engine is running, but it still will not charge.
+Assistant: Are you using a standard approved, high-quality USB cable?
+Rider: Yes, the cable is fine.
+Assistant: Is the USB port cap damaged, or does it fail to close and seal properly?
+If damaged/unsealed: report the observed cap condition to an authorised Royal Enfield service centre; do not infer that it caused charging failure or decide warranty eligibility.
+If intact or unknown and charging remains unresolved: cannot verify a further repair procedure from this manual; kindly write to Royal Enfield at support@royalenfield.com.
+
+Relevant caution for charging-use/failure discussion: manual says charger shuts down if current draw exceeds 2.5 A and asks rider to check phone current ratings before use. Present as conditional source warning, without claiming current was observed, treating unknown current as excessive, asking rider to measure current or confusing shutdown threshold with nominal output. No unrelated charging capabilities or timing material in initial answer. Source page remains PDF 65 / printed 63. Branch is product clarification/service routing, not an OEM assertion that a damaged cap causes the failure. Source/generator files untouched; no formal approval.
+
+
+## Owner feedback 14: revised USB acceptance, 9 October 2026
+
+Owner response: Yes. Scoped conversational acceptance of record 5 as last presented: concise engine-running answer with cap/warranty caution, cable then cap clarification for running-engine charging failure, support escalation and >2.5 A warning only without claiming observed current or cap causation. Source/rule/dependency approvals remain separate. Records 1–5 now have conversational acceptance; proceed to record 6, a_fuse. No agent expansion yet.
+
+
+## Card 6: a_fuse
+
+Status: PRESENTED FOR REVIEW; no owner response yet. Sources: PDF 112 / printed 110 (fuse ID/color/rating table, all replacement warnings and ignition-OFF note) and PDF 121 / printed 119 (no-start table, fuse row and unresolved service requirement). Both complete original pages already visually inspected in this review; reuse original source inspection, not retrieval output.
+
+Entry: rider says engine will not start. Reuse accepted starting setup and confirmed observations; question only when fuse evidence is needed: Have you found a blown fuse? If yes, ask which fuse ID to establish exact table rating before replacement. Example rider reports F1; table maps F1 to blue 15 A ignition fuse. Do not treat an unspecified fuse as 10 A or infer this observation establishes the root cause. Before replacement, ignition OFF must be confirmed.
+
+Proposed action: for identified defective F1 and ignition OFF, new same-rating 15 A fuse. Never bridge/jumper or substitute conductive material (short-circuit/fire risk); wrong-rating/low-grade fuses damage electrical system. Replenish a used spare at earliest opportunity. Advise authorised Royal Enfield electrical-system inspection and immediate fault correction after any fuse failure, even if replacement restores starting. No physical access/removal procedure claimed from these pages. Any actual subsequent start uses accepted record-4 setup gates, max5-second limit and about5-second interval; no automatic repeated attempts.
+
+Outcome branches: observed not blown excludes this replacement action but does not establish entire electrical system health; select only another independently documented eligible check, not claimed OEM order. Abnormal/blown selects replacement only with known ID/rating and ignitionOFF, plus service requirement. Tried-unresolved goes directly to authorised service per 121, no automatic spark-plug continuation and no repeat. Unknown fuse identity/rating/condition withholds replacement and clarifies or refers; do not invent a testing method. Not applicable reconfirms bike/manual scope and blocks action. Fixed closes customer-reported no-start resolution while retaining required electrical inspection; no verified repair or root-cause claim.
+
+Legacy conflict: diagnosis_flow a_fuse unresolved and D024/D035 still advance to spark-plug question despite paragraph mentioning service. Candidate a_fuse unresolved_route already says ESCALATE. Proposed reviewed route follows original121 service stop. Record conflict for later source author; no concurrent source/generator edit. Owner checks requested: F1 example exact table mapping, full ignition/same-rating/warnings/spare scope, mandatory after-failure inspection even on reported success, unresolved stop and all six feedback branches. No formal ledger approvals inferred.
+
+
+## Owner feedback 15: fuse identification by location and colour, 9 October 2026
+
+Owner asks to avoid expecting rider to know F1/F2 IDs; identify fuse from location and colour, then supply exact rating and function. Original PDF111/printed109 newly inspected visually and textually: carrier under rider seat; diagram labels F1 at the end beside F2, and sticker maps F1 Ignition15A, F2 EFI relay15A, F8 ABS S motor15A. PDF112/printed110 lists F1/F2/F8 all blue15A and blue15A spare. Thus under-seat location plus blue colour cannot uniquely identify ignition fuse. Precise position/orientation or corresponding sticker function label must establish the circuit. Do not infer failed fuse merely from colour or no-start symptom.
+
+Revised proposal: ask where the already-reported blown fuse is, its position in the carrier/nearby sticker label and colour, not the ID. If rider only says under seat/blue, clarify exact slot. If slot is identified as IGNITION and colour blue, assistant maps internally to F1 and says ignition fuse is blue15A; ignitionOFF and same-rating new fuse guidance then applies, with all previously reviewed warnings/spare replenishment and mandatory after-failure authorised electrical inspection. Uncertain position, contradictory label/colour or vague location withholds circuit-specific replacement and clarifies or refers. A photo may support visible position/colour observations if offered, but does not prove internal fuse failure or hidden fault. No end-user manual crop/diagram display authorised.
+
+Closing: identification can resolve the rider's identification question, not mechanically verify a repair. After unsuccessful replacement stop at authorised service per121; after customer-reported success retain required inspection per112. New source111 diagram/sticker and any figure dependencies need independent review alongside existing112/121 before runtime authorisation. Source records/generator untouched; revised wording pending conversational acceptance.
+
+
+## Owner feedback 16: assist discovery and allow fuse-location schematic, 9 October 2026
+
+Owner requires assistant to guide rider in discovering a defective/blown fuse rather than presuming one is already found. When conversation suggests that possibility, explain it and direct rider to accessible documented fuse locations, then continue location/colour/sticker identification. Owner explicitly permits sharing schematics for these locations in the answer. This is scoped permission for fuse-location schematic; not blanket permission for unrelated end-user PDF/excerpts/crops, source hosting, redistribution licence or deployment. Existing source_manifest display fields remain unchanged; reconcile this scoped exception with author before future runtime use.
+
+Revised entry: after recorded starting setup and relevant observations, say a blown fuse is one of the owner's manual's listed no-start possibilities; do not declare confirmed blown fuse or electrical root cause from symptom/exclusion alone. Guide documented access from111: ignitionOFF from112; carrier under rider seat; insert key in seat lock/turn clockwise as described, remove pillion/rider seats. Location schematic may accompany guide under owner's explicit permission. Clarify uncertainty in access/orientation rather than improvising access to other locations.
+
+Rider then describes what is seen, location and colour. Use corresponding sticker labels to identify circuit, internal F-ID and rating. Blue alone remains ambiguous among F1/F2/F8/spare. If position labelled IGNITION is confirmed, state blue15A ignition specification. Replace only a defective fuse with new same rating under ignitionOFF and all existing warning/service requirements.
+
+Source limitation: inspected111/112/121 give location, table and replacement instruction but do not establish a detailed test or visual criterion for determining that a fuse is blown. Do not invent multimeter/filament tests or treat a visible observation as verified electrical failure. If rider cannot determine condition, report that uncertainty and route authorised-service checking. Any discovered fault and subsequent unresolved replacement retain the required service routes. No automatic next-step-to-spark-plug after replacement failure.
+
+Revised exact conversation is pending acceptance. New location figure/source scope and source-policy permission must be separately represented and independently reviewed before runtime release. No source/generator or formal-ledger modification.
+
+
+## Owner feedback 17: inline fuse schematic and unsure-condition escalation, 9 October 2026
+
+Owner requires rendering the fuse-location schematic directly in conversation/UI instead of a tab/browser link. Use the already-inspected original page111 rendering inline for this engineering review. Future implementation should display the reviewed schematic inline under the owner's scoped fuse-schematic permission; unrelated PDF/excerpt permissions remain separate.
+
+Exact unclear-condition branch:
+Rider: I cannot tell whether the fuse is blown.
+Assistant: Please have the fuses and electrical system checked at your nearest authorised Royal Enfield service centre. Kindly write to Royal Enfield at support@royalenfield.com if you need help locating one.
+
+No additional fuse-condition guessing, unsupported testing or replacement instruction after this uncertainty. Location/rating clarification remains available when condition is established. Nearest centre is a referral description, not a claim that a specific centre has been located/verified. Do not give unverified centre details. Revised record6 full wording remains pending conversational acceptance; no formal source approval or generator/source edit.
+
+
+## Owner feedback 18: fuse acceptance and feedback-agent handbook, 9 October 2026
+
+Owner response: This is fine! Scoped conversational acceptance of record6 discovery-first flow, inline fuse-location schematic, location/colour/sticker identification, all earlier warning/service requirements and immediate nearest-authorised-service referral for uncertain fuse condition. Underlying source/figure/procedure/dependency approvals remain separate. Records1–6 now accepted conversationally.
+
+Owner explicitly requests a subagent feedback Markdown recording learnings from records1–6 as future agent context/objective/system-prompt material, updated at the end of each record-acceptance turn. Created human_review/subagent_feedback.md; coordinator must maintain it on each later acceptance, preserving raw history here. This authoring request does not start the expansion agents before all eleven reviews are complete.
+
+
+## Card 7: a_switches_on
+
+Status: PRESENTED FOR REVIEW; no owner response yet. Sources PDF72/73/74/121, printed70/71/72/119. Complete original pages already inspected visually in this review. Reuse original-page evidence; do not derive support from retrieval ranking.
+
+Proposed conversation: rider reports engine will not start. Assistant asks whether ignition key is ON and right-hand handlebar engine kill switch is RUN, unless already confirmed. Rider reports ignition ON but kill switch OFF. Assistant instructs setting that switch to RUN, preserving already-confirmed key state. Before any starter attempt use one compact checklist: neutral and neutral lamp glowing; adequate fuel/final bar not continuously blinking; clutch lever pulled in and held; side stand fully retracted. With all starting conditions satisfied, starter until engine starts max5seconds; if no start, release and wait about5seconds before another attempt. Full prolonged-holding caution says battery may drain below10V; unresolved no-start needs authorised-service inspection.
+
+Branches: both switches already correct -> do not repeat switching; address remaining eligible unknown/untried documented conditions. Reported OFF -> correct only off switch using source72. Tried-unresolved -> immutable unresolved attempt, no healthy-component inference/no repeat; if fuel adequacy unknown, clarify low fuel/final bar; if fuel already confirmed, skip that question and use next independently documented eligible clue/check or service; no claimed OEM order. Unknown switch position -> clarify right-hand switch observation without guessing; if unresolved refer service. Bike/control mismatch -> recheck manual applicability and block action. Starts -> customer-reported resolution; if MIL does not turnOFF as described after start, authorised-service rectification.
+
+Source author open items: current registry predicates/dependency set do not include adequate-fuel/gauge condition or MIL caution despite starter-attempt text, and switch fact combines two observations. Request precise fact/source mapping and expanded dependencies for accepted full starting context; don't silently treat draft set as complete. Keep switch-setting distinct from permission to attempt starting. Candidate remains draft; no source/generator edit. Owner checks requested: keyON versus killRUN wording72; starter max73/wait/caution74; fuel/MIL73; no-start switch row121; compact checklist, no repeat and unresolved branches.
+
+
+## Owner feedback 19: switch schematic before service referral, 9 October 2026
+
+Owner accepts record7's conversation apart from the cannot-identify-switch branch, and explicitly requests checking/using a schematic to locate the switch instead of relying on text. Controls mismatch and reported start branches accepted. Scoped diagram permission now includes this switch schematic; unrelated end-user source display/hosting rights remain separate.
+
+Agent inspected original PDF28/printed26, Operation of controls, complete page text and rendered image. It contains a right-hand switch drawing, OFF symbol (crossed circular symbol) and ON symbol (uncrossed circular symbol), and E-start symbol. Page72 uses RUN wording. Revised branch: rider cannot identify switch; show this schematic inline, describe right-hand handlebar switch and match ON/RUN symbol to legend; ask whether rider can identify the shown position now. If controls differ, recheck applicability; if still uncertain, refer service without guessing. This is newly inspected source/figure evidence; current step registry does not include page28 and must gain reviewed figure/legend/condition dependencies before runtime use.
+
+Page28 additional caution: ignitionOFF when engine is not running because continuouslyON headlamp discharges battery. Include when stopping the checks rather than recommending leaving ignitionON indefinitely. Do not reinterpret this caution as forbidding the source72 starting setup. Rest of prior compact checklist, starter limits, unresolved outcomes and MIL service branch unchanged. Newly shown exact schematic branch pending final confirmation; no formal source approval or generator/source edits.
+
+
+## Owner feedback 20: record7 schematic acceptance, 9 October 2026
+
+Owner response: Yes. Accepted revised schematic branch as last presented, including inline page28 diagram/ON-OFF legend, identification question, mismatch/applicability branch, persistent uncertainty service route and battery caution. Together with prior scoped acceptance, record7 now conversationally accepted. Source/figure/condition/dependency signoff remains separate. Handbook and plan progress updated at this acceptance turn. Proceed to record8 a_refuel.
+
+
+## Card 8: a_refuel
+
+Status: PRESENTED FOR REVIEW; no owner response yet. Sources original PDF8/27/28/73/121, printed6/25/26/71/119. All complete pages independently inspected visually/textually; pages28/73/121 reused from earlier direct-source inspection. No retrieval inference.
+
+Proposed entry: engine will not start, remaining setup confirmed. Ask whether fuel is low or final fuel-gauge bar blinking continuously only if not already known. Rider says final bar blinking; source73 says low fuel/refuel immediately. Lead with refuelling recommendation conditioned on compact safety checklist: engineOFF, well ventilated area, no smoking/flames/sparks, mobile/handheld devices switchedOFF. Read guidance before refuelling; return to chat after completed, preserving the manual requirement to turn handheld devicesOFF during refuelling rather than asking live chat questions at the open tank.
+
+Action: lift fuel-cap key flap/insert key/turn clockwise, open cap slowly; top up only to bottom of anti-splash plate, not brim, preserving expansion space; overfill can send gasoline into EVAP canister and damage emission system. Avoid painted-surface spills and wipe any immediately to prevent permanent stain. Close by pressing cap to lock with key in position, remove key and close flap. Gasoline vapour highly explosive; retain no-smoke condition whenever cap open. No instruction to bypass latch, force cap or guess fill point. If rider cannot identify fill-limit plate, source28 diagram can support proposed inline clarification subject to reviewed source/figure and scoped display permission, otherwise withhold uncertain fill-limit action and seek help.
+
+After refuelling, confirmed starting conditions and limits from accepted record4 apply; do not ask rider to operate phone while refuelling. Outcomes: adequate fuel/not blinking is not independently an instruction to add fuel; if inadequate not established skip refuel and use another eligible check. Unresolved after refuel records attempted action, not normal fuel system; clarify next relevant unconfirmed documented no-start clue/check without repeating refuel or claiming OEM order; exhausted path authorised service121. Unsure fuel observation clarifies gauge once, does not invent volume threshold. Not-applicable/mismatched gauge or cap requires source applicability recheck. Reported start closes customer-reported resolution, not proven low-fuel root cause. Unmet safety prerequisite blocks refuelling.
+
+Source-author open items: rule_q_fuel currently cites troubleshooting table only although question contains blinking-gauge fact from73; add exact fact provenance and ensure required gauge object is included before approval. Full cap/action/figure/warning scope needs independent review. No source/generator edits or formal approvals. Owner checks requested: low-fuel/blinking branch73, all safety guidance8, cap operation/warning27, anti-splash diagram28, continuation/exhaustion121.
+
+
+## Owner feedback 21: adequate-fuel/blinking-gauge contradiction, 9 October 2026
+
+Owner accepts record8 other points but says the adequate-fuel branch must account for an already-reported continuously blinking final bar. Requests a separate issue related to fuel gauge while continuing to identify other no-start causes. Interpreted as tracking a second unresolved symptom in the same diagnostic session, not creating another chat, confirming gauge fault or blindly continuing refuelling. Revised exact discrepancy branch awaits acceptance.
+
+Proposed branch:
+Rider: There is adequate fuel, but the last bar is still blinking.
+Assistant: The manual describes a continuously blinking final bar as low fuel, so that does not match your reported fuel level. Did the blinking continue after you refuelled?
+Rider: Yes.
+Assistant: I will keep the fuel-level/indicator discrepancy open separately while we continue the other documented no-start checks. It does not establish a gauge fault. Do not keep adding fuel just to clear the blinking indicator; the manual warns against overfilling. Have the discrepancy checked at an authorised Royal Enfield service centre.
+
+If refuelling already completed, retain ACTION_COMPLETED_UNRESOLVED where symptom persists; do not repeat that action or turn attempted refuelling into verified normal fuel-system fact. Rider adequate-fuel report and observed gauge blinking coexist as conflicting observations, not a single Boolean normal/abnormal verdict. If rider corrects earlier blinking report, supersede that observation immutably. Continue only independently documented eligible no-start checks after known safety prerequisites; discrepancy does not validate a particular new cause. Examples dim-lights/weak-horn clue if not already confirmed, or reviewed fuse-discovery path; no OEM ordering asserted. Gauge issue remains open even if no-start later resolves; report success only for the resolved symptom. Source73 gives blinking-low-fuel meaning; sources8/27 provide no-overfill limit; these inspected pages do not give an indicator repair or confirmed sensor diagnosis.
+
+Add this as a future draft regression scenario: after refuelling and declared adequate fuel, final bar still blinking and engine still does not start; expected separate open discrepancy, no repeat refuel/overfill, no invented gauge diagnosis, retained no-start progression and service referral. Source/generator records untouched.
+
+
+## Owner feedback 22: refuelling discrepancy acceptance, 9 October 2026
+
+Owner response: yes. Accepted revised adequate-fuel/still-blinking branch. Together with prior acceptance of other record8 content, record8 is conversationally accepted. Track gauge discrepancy separately, no repeated refuel or inferred gauge fault, continue eligible no-start checks, retain unresolved gauge issue if no-start resolves. Formal source and dependency approvals remain separate. Update handbook and plan now; proceed to record9 a_reconnect.
+
+
+## Card 9: a_reconnect
+
+Status: PRESENTED FOR REVIEW; no owner response yet. Source original PDF121/printed119, full page visually inspected earlier. Candidate proposes reconnecting a loose spark plug/cap/high-tension cable with only troubleshooting table and introduction evidence; no prerequisite/access/procedure/figure objects. New original PDF23–25/printed21–23 key-parts diagrams rendered and visually inspected; none labels spark plug/cap/high-tension cable. Candidate page search used solely to locate possible references, not as final support; no claim every unlabeled figure in the manual has been exhausted.
+
+Finding: table lists connection issue -> reconnect spark plug/cap/high-tension cable, plus service inspection when basic checks fail. This is a high-level remedy, not a complete rider access/identification/fitting procedure. No safe detailed action or discovery schematic established from reviewed pages. Do not import general motorcycle location/disassembly, touching/hot-part precautions or connector test as though OEM-supported. Flag incomplete procedure/source boundary rather than treating source gap as a rider-resolvable question.
+
+Proposed safe conversational handling:
+Rider: Engine still will not start; the earlier checks did not resolve it.
+Assistant: The manual lists a spark-plug, cap or high-tension-cable connection issue as another possible no-start condition. Have you already noticed a loose or disconnected connection, or are you unsure?
+Rider: I cannot identify those parts.
+Assistant: I cannot guide their location or reconnection from the reviewed manual evidence. Please have your nearest authorised Royal Enfield service centre check the connections.
+If rider reports identified disconnected cap: manual lists reconnection as remedy, but reviewed evidence lacks detailed fitting instructions; service check/reconnection, no invented guided procedure or diagnosis.
+If observation reported normal: do not infer ignition-system health; use only another eligible untried documented check or exhausted-service route.
+If attempted reconnection unresolved: store ACTION_COMPLETED_UNRESOLVED and refer service, no repeated action.
+If condition inapplicable/control mismatch: reconfirm bike/manual scope.
+If engine starts after previously attempted check: close customer-reported no-start resolution, preserve any separate open issue, no verified cause.
+Not eligible after failed fuse replacement because accepted fuse stopping rule121 already requires service. Conversation ordering is design, not OEM order.
+
+Owner review question: accept record9 as source-limited service-routing case until a complete reviewed reconnection procedure is established, or flag for further original-page evidence search? Existing a_reconnect runtime action remains draft and blocked; no source/generator edit or formal approval.
+
+
+## Owner feedback 23: explain missing manual guidance, record9 acceptance, 9 October 2026
+
+Owner requests explaining inability by absent manual process/guidance, rather than language suggesting unwillingness. Accepts all other record9 content. Scoped acceptance with this wording correction: The manual lists reconnection as a remedy, but it does not provide the location, access or step-by-step reconnection guidance needed to walk you through it. Please have your nearest authorised Royal Enfield service centre check and reconnect the parts.
+
+Evidence precision: original121 provides high-level remedy; inspected23–25 do not label the relevant parts; current reviewed record lacks complete access/fitting evidence. Do not overstate this as proof that no guidance exists anywhere in an uninspected/unextracted figure. Record as an established gap in this record's supporting manual guidance, not a retrieval outage, model unwillingness or blanket lack of all spark-plug facts. Source author must establish completeness or maintain source-gap abstention before runtime.
+
+Record9 conversationally accepted with explicit source-limit explanation, service routes, no repeat/unresolved handling, no inferred ignition health and fuse-service-stop precedence. Human source/procedure/dependency approval remains separate. Update guide and progress now; record10 remains next.
+
+
+## New original-source dependency for accepted record8, 9 October 2026
+
+While locating side-stand indicator schematics, original PDF63/printed61 was inspected in text and complete page image. Fuel-gauge NOTE states indicator refreshes after refuelling once side stand is retracted and ignition turnedON. This is a missing dependency for record8's post-refuel still-blinking branch. Proposed revision: establish those two refresh conditions before classifying mismatch as persistent and referring for that discrepancy. Do not add fuel repeatedly. Prior scoped acceptance remains historical; this new content requires owner review and source/dependency approval. Not a field-performance claim or automatic runtime authorisation.
+
+## Card 10: a_raise_stand
+
+Status: PRESENTED FOR REVIEW; no owner response yet. Original PDF122/printed120 stall row independently inspected full rendering/text; source74/printed72 stand-cutoff precaution and121/printed119 service introduction reused. Additional original25/printed23 stand location (#7) already visually inspected; original58/59/printed56/57 cluster diagrams now visually inspected, label side-stand indicator #7 (Analog Type) and #2 (Digital Type). Runtime must match selected bike/display and attach reviewed figure/legend dependencies; no guessed icon or variant mapping.
+
+Proposed conversation: rider reports engine starts but stops when first gear engaged. Assistant asks whether Side Stand indicator shows on cluster and stand is still down, as a compact observation pair. Rider says yes to both. Assistant instructs fully retracting side stand before starting/moving; explains source74 standcutoff stops engine on gear engagement for rider safety. Actual restart uses accepted setup/starter limits rather than invented road-test procedure.
+
+Branches: stand already fullyup but indicator stillshows -> preserve positional/indicator mismatch as separate unresolved issue, no inferred switch/sensor diagnosis; authorised service because inspected source lacks repair process for this discrepancy. Stand fullyup yet firstgearcutoff continues -> action recorded unresolved, no repeat/bypass, source lacks further applicable owner remedy, authorised service. Indicator notshowing yet cut-off persists -> do not apply glowing-indicator table row as though conditiontrue; service after applicable documented paths exhausted. Unsure indicator -> inline matching cluster schematic, then if stillunsure service. Unsure standlocation -> original25 diagram label7; controls/stand mismatch recheck applicability. Reported symptomfixed -> customer-reported closure only, retain other open issues. Source conditions and safety precaution scope distinct from product conversation order.
+
+Owner checks requested: row122 links firstgearcutoff and glowing side-stand indicator to standupright;74 says fullyretracted before starting/moving; diagrams25/58/59 support practical identification; unresolved source-limit service wording and separate discrepancy. New source/figure dependencies remain unapproved; no source/generator edits.
+
+
+## Owner feedback 24: stand card and gauge-refresh addition accepted, 9 October 2026
+
+Owner response: Yes, to record10 and added record8 refresh check. Record10 conversational acceptance includes compact stand/indicator observation pair, retraction/safety explanation, reviewed matching inline schematics, separate stand/indicator discrepancy, source-limited authorised-service referral for unresolved or inapplicable row, customer-reported resolution with other issues retained. Record8 discrepancy now checks side stand retracted and ignitionON for documented gauge refresh (original63/printed61) before classifying blinking as persistent. Preserve prior version acceptance and new revision history separately. Underlying source/figure/rule/dependency review remains pending. Handbook and plan updated now. Record11 is next; do not start expansion until it is accepted.
+
+
+## Additional source findings for starting records4/7, 9 October 2026
+
+Original PDF75/printed73 newly textually and visually inspected while checking temperature context. It adds wait15–20seconds for battery recovery after three successive cranking attempts, besides max5second hold. This supplements page74's about5second interval; it is not permission or an obligation to perform three attempts. Earlier claim that the reviewed starting material provides no numerical retry context must be scoped to page74; page75 supplies this three-attempt recovery condition. Proposed source-bound addition to records4/7 pending owner acceptance. Do not automatically retry any unresolved controller action.
+
+Page75 also says do not accelerate immediately after start, especially cold; allow idle at least120seconds for oil circulation/warming, accelerate only after idle stabilises, nonadherence can seriously damage engine internals. It includes neutral-shifting/moving-bike caution, clutchheld and general riding warning. These require review when adding a complete restart/riding procedure; do not silently append a hot-engine restart/road-test to record11. The same page's untilstarts wording must remain constrained by five-second maximum and release/wait instruction from73/74; do not hold indefinitely. Source/procedure/dependency scopes and affected accepted cards need revalidation, not automatic approval.
+
+## Card11: a_cool_engine
+
+Status: PRESENTED FOR REVIEW; no owner response yet. Original PDF122/printed120 misfire/erratic/stops row and121/printed119 service introduction independently inspected complete pages. Additional original37/38 (printed35/36) engine-temperature display pages now independently textually/visually inspected. They show reading/segment interpretation, not a declared overheating threshold. No numerical threshold or cooldown time in the reviewed misfire row.
+
+Proposed conversation: rider reports engine misfires or stops. Assistant asks whether rider is reporting engine too hot or unsure. If explicitly reported too hot, manual-supported action: switchOFF and allowcool. No invented ten-minute wait, cool-enough numeric threshold, road test, coolant-cap opening or touch test. If uncertain, may ask existing engine-temperature display observation, with matching original schematic if needed, but do not use gauge60–120 scale or90/98 examples to invent hot/not-hot rule; unclear eligibility remains unclear and routes service when no source-backed discrimination established. Source gap is not resolved by asking rider for a missing OEM threshold.
+
+Outcome branches: cooling attempted unresolved -> immutable action-unresolved/service, no normalengine inference or repeatcooling loop. Not reportedhot -> withhold hot-engine branch; manual also lists water/adulteration in fuel -> service if actually reported/established, not inferred from failure-to-cool or misfire. If no supported further owner remedy, explain guidance limit and service. Rider reports concern about fuel -> separate issue without proving contamination. Mismatch scope -> reconfirmmanual. Resolved -> customerreportedresolution with separately open issues retained, no verified overheating cause or repaired engine. Continued/recurrent engine-too-hot report is unresolved and service, no coolant/fan repair inference.
+
+Owner checks requested: exact122 condition/remedy, high-level service121, lack of temperature/cooldown thresholds in inspected source; useful but nonauthorising temperature-display schematics37/38; no invented repair, restart or diagnostic elimination. Existing candidate only121/122 dependency set remains draft; any display/question addition requires reviewed figure/predicate source mapping. No source/generator edit or formal approval.
+
+
+## Owner feedback 25: cooling branches accepted; room-temperature suggestion, 9 October 2026
+
+Owner proposes cooling to room temperature, as though not operated overnight, and says branches are nicely made/fine. Record scoped acceptance of record11 outcome branches. Do not infer acceptance of newly proposed starting additions for records4/7.
+
+Source check: searched candidate page text for room/ambient temperature, overnight, cool/cold-engine phrases; applicable original122 remedy remains SwitchOFF engine and allowcool, with no numerical/ambient/overnight endpoint. Other candidate references concern cold engine for oil/clutch/washing or cooling within coolant procedure, not a supporting restart criterion for misfire. Candidate search is a locator, not independent evidence approval, and does not prove all figures have been exhaustively audited. No room-temperature/overnight criterion established in this record's supporting original pages.
+
+Keep owner's proposed room-temperature/overnight wording as an open request; do not attribute it to OEM or add it as a source-supported restart clearance. Revised proposal for confirmation: Switch the engineOFF and allow it to cool. The manual does not specify a cooling time or temperature at which restarting is safe. If uncertain, have an authorised Royal Enfield service centre assess it. Accepted branches remain; action criterion wording pending owner's confirmation under manual-only policy. Record11 not fully complete; no expansion agents started.
+
+
+## Owner feedback 26: record11 closed, 9 October 2026
+
+Owner response: Closed. Scoped acceptance closes record11 with last proposed source-supported cooling wording (switchOFF/allowcool; no specified cooling time or safe restart temperature; service assessment if unsure), and previously accepted branches. Room-temperature/overnight endpoint remains excluded because supporting source does not specify it. All eleven current examples now have conversational acceptance. This does not implicitly approve the separate page75 starting additions for records4/7, formal source/figure/rule/dependency checks or release.
+
+Update handbook/phase progress and begin the previously explicitly requested coordinator + author/reviewer/judge expansion. Preserve existing source/generator files; new drafts are confined to human_review/agent_expansion. Agent-reviewed resolution is a candidate-review outcome only; human source signoff and registry workflow remain mandatory.

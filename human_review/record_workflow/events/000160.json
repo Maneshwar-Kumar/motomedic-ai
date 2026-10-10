@@ -1,0 +1,42 @@
+{
+  "event_sha256": "238ac01ec7671396e11c79d434e0ad93fd205667254b2d6e870113d96003f38b",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "4f729128c415a8a09ba2b621ba487da44b6e18ba0c0d4675564bde6cb975853f",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "OPERATION OF CONTROLS\n\n    WARNING                            WARNING\n  Do not use the motorcycle for long duration with the   Recommended not to use in rainy conditions to avoid\n     fuel indication in last segment blinking. Refuel at the                                                    damages to smart phones and charger, RE shall not be     earliest.\n  Failure to do so will cause the motorcycle to run out of         liable for any damage to smart phones.\n     fuel and get stranded in addition to causing serious   Do not use any other device other than mobile phones,\n   damage to the fuel pump.                                                              only one mobile shall be charged at one point of time.\nCHARGER PORT                      Ensure proper insertion of USB cable, damages due to\n  Charger port is located on the center part of handle       hard / wrong insertion of cable will not be entertained\n     bar.                                                              in warranty.\n                               Do not leave the USB port cap opened / closed partially\n                                                             to avoid any short circuit when not in use.\n                               Do not insert any metal or conductive materials inside\n                                               USB charging port which may lead to short circuit.\n\n\n\n62    Royal Enfield Himalayan",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-064.png",
+        "pdf_page": 64,
+        "printed_page": "62"
+      },
+      {
+        "checked_span": "OPERATION OF CONTROLS\n                                If high current draw greater than 2.5 A is observed USB\nNOTE                                                             charger will shutdown please check your smart phone\n  Charging port is provided only for charging purpose                                                               battery current ratings before using.\n    and no data transfer is enabled.\n                               USB charger  will function only when engine  is in  Only constant charging mode is provided, fast / dash\n                                                            running condition.    charging mode is not provided to be compatible with\n    multiple makes mobile phones and cannot be com-   Use standard approved and high quality USB cables for\n    pared with the performance of original smartphone       proper functioning.\n    chargers.\n  Duration of charging can be higher and will vary for dif-\n    ferent make mobile phones depending on smart\n    phone  battery  capacity, SOC  and  smart  phone\n    charging circuits.\nCAUTION\n  Customer to ensure USB port cap is closed and locked\n    properly when not in use, warranty will not be pro-\n    vided if port cap is damaged and not sealed properly.\n                                                               Royal Enfield Himalayan    63",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-065.png",
+        "pdf_page": 65,
+        "printed_page": "63"
+      }
+    ],
+    "payload_sha256": "d221dcec8a4dab20ce40acb88ba1b4e983fb5b60831c49024cebaa7cee41cbcb",
+    "reason": "Original PDF64/65 printed62/63 recommends avoiding rainy-condition use and closed/locked cap while unused. Answer avoids deciding actual warranty eligibility or diagnosing ingress. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN020",
+    "review_sha256": "099be4734aade8a82c9485aa44719dfd2a8a3f7a81f8995a0a207679ce562e50",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "c71af6ada9aaaeb19ea52c991a3324ddd40885e7c204fb4d3a04c5510c578665",
+  "recorded_at_utc": "2026-10-09T19:00:43.634197+00:00",
+  "sequence": 160
+}

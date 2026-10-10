@@ -1,0 +1,165 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "GEN030",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/GEN030.json",
+  "plan_sha256": "3386d1a70089c1bbbe8a87cc88a4c2e4b04b60488976b030f641035d473c3d64",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "d215ce6a0aa0c05f25baa9108b21adfc73cfe9872550433ec19e495cdf226ca0",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04"
+  },
+  "final_step_sha256": "a7734ad120ceb20d955bee133ccda87fa29f77b40eb1f0cc76b87c882b9e009d",
+  "final_dependency_sha256": "7b706567ae24b5565ffe334c40c16d5b37e22c195f1fa9237a2a16de912b16b9",
+  "final_rules_sha256": "b89c37968e205f198e1ac75b22519ff820626aff9e91c29e3dc55c099d3c5697",
+  "final_route_sha256": "d5c7fe2198a9d9eb3d1ff8c12fba4a892d58fd06e2ece5e09a4735f0ec86a66c",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "Which display languages are listed?",
+  "claim_texts": [
+    "The manual lists English, Italian, Spanish, Portuguese, German and French.",
+    "That is this manual’s listed menu content, not a guarantee that every firmware version has identical options."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_0dff6026a67902df25210af2",
+      "source_sha256": "142ee00538d0f1102dd7cda896c798f0c2d9fd9510ff20da4a4747cc4d50cf7c",
+      "text_sha256": "354f2935acce52f4c8a26e1b70de692cdddd5bca27283890b0c93a0bc7581e7d",
+      "original_pdf_pages": [
+        51
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_7f57d765db8c41979f270112",
+      "source_sha256": "df9eead48674fb51b4d227b3b93f32a6c727effcbdb626d6bcd461fbbb9a7dd1",
+      "text_sha256": "413702e5d41441e57553ba3154bab4a1757061ccf34f919bf8dc6e78b60788a5",
+      "original_pdf_pages": [
+        50
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_90061300e4df669ac99f9d8d",
+      "source_sha256": "c4644f7ba29add2a030d90fee44c581218047effa8821cbb71de8e210e632fd6",
+      "text_sha256": "f9ea4902906ccbc734775456a9ea1a770d9c6eb146d5f12cfa81466815b847de",
+      "original_pdf_pages": [
+        50
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a5e8430eda5a282f5c17e986",
+      "source_sha256": "8bb9a4b8d1376b31adbd8493571e72a6e3b6fae532a0b1690107d10437e65aef",
+      "text_sha256": "2f2882fc29982947ab819a845be2952c6f143763641d59e4131dcbce57a7629b",
+      "original_pdf_pages": [
+        51
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_c6c47cb26648960a02d4b727",
+      "source_sha256": "37d23a069fd9cdaa892636c2084b167f72f88663f06b3644cbaa3d4d1ee22973",
+      "text_sha256": "4fae487a857d46ec482957b07f3a7734a24885752590217127e41ef6b1648821",
+      "original_pdf_pages": [
+        50
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_de4c690b1c25827ccfdc72d1",
+      "source_sha256": "87719cc28b10e4ebec2000a10d36cacb214650a56459c4f7247dc140d0fcfd34",
+      "text_sha256": "d2382097d53fce745991c9a48cb319f6ed96aad17dd634024b35894d2c7e6d76",
+      "original_pdf_pages": [
+        50
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    50,
+    51
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: The manual lists English, Italian, Spanish, Portuguese, German and French. | That is this manual’s listed menu content, not a guarantee that every firmware version has identical options. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

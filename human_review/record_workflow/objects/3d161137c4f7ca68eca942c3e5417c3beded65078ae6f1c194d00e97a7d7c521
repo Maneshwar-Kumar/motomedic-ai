@@ -1,0 +1,56 @@
+{
+  "actor": "batch100-author",
+  "answer": "The manual says that with a phone connected only the hour format is selectable. With the phone not connected, Set Time is also available.",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "conditions": [
+    "Confirmed applicable Himalayan BS6 and immutable selected manual; this expected route is conditional, not runtime authorization."
+  ],
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "distinctive_intent": "clock_connected_set_time_constraint",
+  "expected_route": "SUPPORTED",
+  "forbidden_claims": [
+    "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+    "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "origin_declaration": "Generated based on feedback from the first 11 cases",
+  "payload_sha256": "0fa85bff64d863b4795295101270d3e13dd565eb73dca2ce2823afa04ebd7a42",
+  "question": "Why can I only choose 12H or 24H while my phone is connected?",
+  "record_id": "GEN026",
+  "role": "author",
+  "source_limits": [],
+  "source_refs": [
+    {
+      "checked_span": "Royal Enfield Himalayan\n45\nOPERATION OF CONTROLS\n4. SYSTEM\n\nFrom the settings menu center press the joystick with\nthe my vehicle option selected to explore the options.\n\nThe following options are available in the system\nmenu.\ni. Clock\nii. Speed/Distance\niii. Fuel consumption\niv. Temperature\nv. Language\nvi. Factory reset\n\nThe options can be navigated by joystick up and down\npress and selected by joystick center press.\n\nPress the home button on the LH switch cube to go\nback.\ni. Clock\n\nCenter press the joystick with the clock option selected\nto explore the options.\n\nThe following options are available in the clock menu.\n\n24H\n1831km\nkm\n1\n2\n0\nClock\nSpeed/Distance\nSystem\n1831km\nkm\n1\n2\n0\nTemperature\nLanguage\nSystem\n1831km\nkm\n1\n2\n0\nFuel Cons.\nTemperature\nSystem\n1831km\nkm\n1\n2\n0\nLanguage\nFactory Reset\nSystem",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 47,
+      "printed_page": "45"
+    },
+    {
+      "checked_span": "Royal Enfield Himalayan\n46\nOPERATION OF CONTROLS\n\n12H\n\nSet time\n\nThe options can be navigated by joystick up and down\npress and selected by joystick center press.\n\nPress the home button on the LH switch cube to go\nback.\nNOTE\nIf the mobile phone is connected to the vehicle only the\nhour format (i.e. 24H & 12H) can be selected based on the\nrider preference.\nIf the mobile phone is not connected to the vehicle all the\noptions (i.e. 24H, 12H & Set Time) are selected.\n\nIn the set time option, time can be adjusted by joystick\nup, down, left & right press.\n\nJoystick up & down press is used to increase or\ndecrease the hour, minute & time format values, while\njoystick left & right is used to switch between hour,\nminute & time format selection.\n1831km\nkm\n1\n2\n0\n24h\nClock\n12h\n1831km\nkm\n1\n2\n0\nSet Time\nClock\n12h\n1831km\nkm\n1\n2\n0\nSet Time\nClock\n1831km\nkm\n1\n2\n0\n03 : 48 PM\nSet Time",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 48,
+      "printed_page": "46"
+    }
+  ],
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "stopping_rules": [
+    "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+    "Do not repeat attempted actions without a documented exception or superseding correction.",
+    "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+  ],
+  "turns": [
+    {
+      "speaker": "rider",
+      "text": "Why can I only choose 12H or 24H while my phone is connected?"
+    },
+    {
+      "speaker": "assistant",
+      "text": "The manual says that with a phone connected only the hour format is selectable. With the phone not connected, Set Time is also available."
+    }
+  ],
+  "version": 1,
+  "warnings": []
+}

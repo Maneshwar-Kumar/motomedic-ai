@@ -1,0 +1,35 @@
+{
+  "event_sha256": "3b071d453bc23e377111203f2ba78c03398fa3b905fb88873198da82da672ee4",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "da1ed84bbc6234b225d5f66a1fc2275d4d825410ead723a3dfba1242b91c022c",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "LONG TRIP PRECAUTIONS\nCHECKS PRIOR TO THE COMMENCEMENT OF A    ITEMS TO BE CARRIED\nLONG JOURNEY                               Tools kit.\n  Service the motorcycle at Royal Enfield Authorised                                First aid kit    Service Centre.\n  Ensure sufficient quantity of fuel is always available in    Trafficator light and fuse.\n    the fuel tank for the journey planned.           Accelerator and clutch cables.\n  Check and correct tyre pressure if necessary.        Spark plug, spark plug cap and fuel hose.\nCHECK ALL OF THESE ASPECTS BEFORE LONG\nRIDE\n  Any loose fasteners.\n  Condition of the tyres.\n  Correct engine oil level and coolant level.\n  Working of all lights and horn.\n  Proper drive chain tension.\n  Clutch cable free play.\n\n                                                              Royal Enfield Himalayan    113",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-115.png",
+        "pdf_page": 115,
+        "printed_page": "113"
+      }
+    ],
+    "payload_sha256": "2b373d8d81a70bbb8962e122d4a8047c2ea035ed7307a16765bab14eca5750d8",
+    "reason": "PDF115 printed113 explicitly calls for authorised pre-trip service and named fuel/pressure/condition checks. Pass applies to honest chat-can-not-substitute abstention; no actual service completion asserted. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN046",
+    "review_sha256": "73b86b9d53c7ad0e73873626cd3a329ef5c6b54cb65782cab371bf09a658cda2",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "528b7acd387af8b5413442a4da4360e3959dd0fc88f41db22ae392149579739e",
+  "recorded_at_utc": "2026-10-09T19:03:41.815673+00:00",
+  "sequence": 209
+}

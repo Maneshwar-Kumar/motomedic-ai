@@ -1,0 +1,29 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "0ffaf201cb9086e6576da32db7fa27e7796ec235030e6a60806351ef4b4ea605",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "Convex mirror caution; parked motorcycle theft/steering-lock instruction.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 13,
+      "printed_page": "11"
+    },
+    {
+      "checked_span": "Ignition key removable only OFF/steering locked; never ignitionOFF while riding; steering-lock extreme-left handlebar, OFF key.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 26,
+      "printed_page": "24"
+    }
+  ],
+  "payload_sha256": "82c80065a4f7ae7ea916153f62561c2b05c57688be2763699bda5fafa6ec5320",
+  "reason": "Parked steering-lock starting position accurate; intentionally not an incomplete full locking instruction. Only exact engineering candidate review, no formal source/human/release approval.",
+  "record_id": "GEN023",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

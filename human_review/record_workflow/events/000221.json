@@ -1,0 +1,39 @@
+{
+  "event_sha256": "19afb053dfc346646b43f865e739da892f35e8a7901c1df14c56821e7a5fa700",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "d85baac03e3b9906fb5a16f9c82938ae7917feaeaed2f3feb3b8ffdc3f8b30f0",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [
+      {
+        "consequence": "No concrete next rider observation supports resuming the diagnostic session.",
+        "correction": "Retain customer-reported resolution/history, then ask one focused question about the current returned symptom, or bound this as a completed policy-only response with a suitable non-AMBIGUOUS route.",
+        "id": "GEN058-F1",
+        "issue": "Recurrence is labeled AMBIGUOUS but answer stops without a focused question.",
+        "supporting_source": "TRDv0.4 sections5.2/6.1,SM10; original PDF121 basic-check context."
+      }
+    ],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "No-start symptom row dimlights/weakhorn => possible battery/charging circuit service; troubleshooting intro unresolved checks require authorised service; no explicit total diagnostic ordering.",
+        "inspection_method": "Independent original PDF text and full-page layout/footer checked; product policy separately checked in TRDv0.4.",
+        "pdf_page": 121,
+        "printed_page": "119"
+      }
+    ],
+    "payload_sha256": "b7bdbc99e2444a2e016f5448206beb17bf5665f8f513e3c31151c0139bd086c3",
+    "reason": "Reported resolution/recurrence history correctly separated, but AMBIGUOUS label has no focused question. Engineering policy/source candidate only; no actual infrastructure test, human/source/dependency/release approval.",
+    "record_id": "GEN058",
+    "role": "reviewer",
+    "verdict": "NEEDS_REVISION",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "1718fb25a675cf29c8b926852b1156bcade3377728fc337f582c109a4c1d7e46",
+  "recorded_at_utc": "2026-10-09T19:03:54.587711+00:00",
+  "sequence": 221
+}

@@ -1,0 +1,1705 @@
+{
+  "schema_version": "batch-grounding-readiness-v1",
+  "checked_at_utc": "2026-10-10T10:11:20.121293+00:00",
+  "completion_verified": true,
+  "completion_manifest_sha256": "4c332d1441417fe25caeadc3b0a83768f32622fd777f7cc9815ed3dca7111590",
+  "catalogue_sha256": "4ecb7515e9bd67a703174bfb78d9780c1f08c0486521922bc50fc6751a255cd1",
+  "catalogue_record_count": 161,
+  "grounding_fixture_count": 100,
+  "agent_terminal_counts": {
+    "PASS_AGENT_REVIEW": 100
+  },
+  "expected_route_counts": {
+    "SAFETY_STOP": 10,
+    "SUPPORTED": 36,
+    "UNSUPPORTED": 29,
+    "AMBIGUOUS": 10,
+    "SYSTEM_ERROR": 15
+  },
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "source_manifest_sha256": "3b38e5ead40555ba810e94ff758b0cd30e4c874642fe089b6ac52fe97b534e18",
+  "input_context_hashes": {
+    "AGENTS.md": "8bbc051ec3d2f4eb31cc420fe63006e7e4ee67c2ddbad884299b515ae9dd8710",
+    "source_manifest.json": "3b38e5ead40555ba810e94ff758b0cd30e4c874642fe089b6ac52fe97b534e18",
+    "GEMMA_CONTROLLER_HANDOFF.md": "e7c8b9937cb2de6df7c58878289d4cdb5b9ec3fb3fe36b0c2b371b9e33dbad7a",
+    "human_review/subagent_feedback.md": "ae663a289d0090c3d56fd4ee5826baf3212ec7a1fb2cc5a506427e2d35fede1c",
+    "human_review/record_id_verification.md": "44071c7815b604d981864d4f0149d10ca4a6f8566cdce5aa0a5d38f0870d64e9",
+    "human_review/blockers/WORKFLOW_INDEX.md": "0ea1a053bcee5a973adf018aed4d56ce1bd7adbd08da6486de64c147872e9d72",
+    "01_Concept_Architecture.docx": "8940ab41c88c721a8cacbdc2b77ddd0fe3ca273d2264edfd2839852e66577738",
+    "02_PRD.docx": "492ecbeb7e04e5eadba99121b28ec0cabf3293369f0f25595108bf69bac44fd0",
+    "03_TRD.docx": "aeedf6789ddfbddc674c1926c5d4441a27708bd260c673d876a5ff7fdb3792ac",
+    "04_To_Build_Evaluation_Decisions.docx": "94e2cee46ae936b2c34a914213531c53b143efa3844220ee6eff22d247d4cf4e",
+    "registry/review_decisions.json": "fc10069f947f166a24d00252adff530ab5dfd2b3895ef330dc2e49f3e11d021d",
+    "registry/reconciled-accepted-eleven/review_decisions.json": "fc10069f947f166a24d00252adff530ab5dfd2b3895ef330dc2e49f3e11d021d"
+  },
+  "audit_code_sha256": "382de4954e4634025a75cab4476e2f1d9049d42511d44dc022be4d692c15ae09",
+  "records": [
+    {
+      "record_id": "GEN001",
+      "version": 1,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        11
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        11
+      ],
+      "candidate_object_count": 6,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN002",
+      "version": 1,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        11
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        11
+      ],
+      "candidate_object_count": 6,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN003",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        13
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        13
+      ],
+      "candidate_object_count": 12,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN004",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        14,
+        15
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        14,
+        15
+      ],
+      "candidate_object_count": 20,
+      "blocker_card_paths": [
+        "human_review/blockers/GEN004_v1_documented_scope_limit_human_review.md"
+      ],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN005",
+      "version": 1,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        14,
+        15
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        14,
+        15
+      ],
+      "candidate_object_count": 20,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN006",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        9,
+        14,
+        15
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        9,
+        14,
+        15
+      ],
+      "candidate_object_count": 32,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN007",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        18
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        18
+      ],
+      "candidate_object_count": 8,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN008",
+      "version": 2,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        8,
+        18,
+        27
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        8,
+        18,
+        27
+      ],
+      "candidate_object_count": 36,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN009",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        18
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        18
+      ],
+      "candidate_object_count": 8,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN010",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        15,
+        20
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        15,
+        20
+      ],
+      "candidate_object_count": 26,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN011",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        20
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        20
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN012",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        16
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        16
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN013",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        16
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        16
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN014",
+      "version": 2,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        21
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        21
+      ],
+      "candidate_object_count": 9,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN015",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        17
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        17
+      ],
+      "candidate_object_count": 23,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN016",
+      "version": 2,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        19
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        19
+      ],
+      "candidate_object_count": 14,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN017",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        19,
+        65
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        19,
+        65
+      ],
+      "candidate_object_count": 24,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN018",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        65
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        65
+      ],
+      "candidate_object_count": 10,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN019",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        65
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        65
+      ],
+      "candidate_object_count": 10,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN020",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        64,
+        65
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        64,
+        65
+      ],
+      "candidate_object_count": 25,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN021",
+      "version": 2,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        64
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        64
+      ],
+      "candidate_object_count": 15,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN022",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        26
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        26
+      ],
+      "candidate_object_count": 17,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN023",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        13,
+        26
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        13,
+        26
+      ],
+      "candidate_object_count": 29,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN024",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        31
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        31
+      ],
+      "candidate_object_count": 10,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN025",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        32,
+        33
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        32,
+        33
+      ],
+      "candidate_object_count": 27,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN026",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        47,
+        48
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        47,
+        48
+      ],
+      "candidate_object_count": 32,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN027",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        60
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        60
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN028",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        49,
+        50
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        49,
+        50
+      ],
+      "candidate_object_count": 44,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN029",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        50,
+        121,
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        50,
+        121,
+        122
+      ],
+      "candidate_object_count": 27,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN030",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        50,
+        51
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        50,
+        51
+      ],
+      "candidate_object_count": 39,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN031",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        52,
+        53
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        52,
+        53
+      ],
+      "candidate_object_count": 34,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN032",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        54
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        54
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN033",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        55
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        55
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN034",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        56
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        56
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN035",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        57
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        57
+      ],
+      "candidate_object_count": 15,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN036",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        57
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        57
+      ],
+      "candidate_object_count": 15,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN037",
+      "version": 2,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        60
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        60
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN038",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        60,
+        124
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        60,
+        124
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN039",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        61
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        61
+      ],
+      "candidate_object_count": 11,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN040",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        44,
+        45
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        44,
+        45
+      ],
+      "candidate_object_count": 36,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN041",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        62
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        62
+      ],
+      "candidate_object_count": 14,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN042",
+      "version": 1,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        33
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        33
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN043",
+      "version": 1,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        33
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        33
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN044",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        71
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        71
+      ],
+      "candidate_object_count": 10,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN045",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        71
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        71
+      ],
+      "candidate_object_count": 10,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN046",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        115
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        115
+      ],
+      "candidate_object_count": 18,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN047",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        16
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        16
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [
+        "human_review/blockers/GEN047_v1_documented_scope_limit_human_review.md"
+      ],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN048",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        54
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        54
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [
+        "human_review/blockers/GEN048_v1_documented_scope_limit_human_review.md"
+      ],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN049",
+      "version": 1,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        9,
+        15
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        9,
+        15
+      ],
+      "candidate_object_count": 22,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN050",
+      "version": 1,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        11
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        11
+      ],
+      "candidate_object_count": 6,
+      "blocker_card_paths": [
+        "human_review/blockers/GEN050_v1_documented_scope_limit_human_review.md"
+      ],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN051",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        18
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        18
+      ],
+      "candidate_object_count": 8,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN052",
+      "version": 2,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        18
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        18
+      ],
+      "candidate_object_count": 8,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN053",
+      "version": 1,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        70
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        70
+      ],
+      "candidate_object_count": 15,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN054",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        122
+      ],
+      "candidate_object_count": 2,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN055",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        122
+      ],
+      "candidate_object_count": 2,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN056",
+      "version": 1,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN057",
+      "version": 2,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        32
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        32
+      ],
+      "candidate_object_count": 14,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN058",
+      "version": 2,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN059",
+      "version": 2,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN060",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN061",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        112
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        112
+      ],
+      "candidate_object_count": 11,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN062",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        83
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        83
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN063",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        21
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        21
+      ],
+      "candidate_object_count": 9,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN064",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        21
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        21
+      ],
+      "candidate_object_count": 9,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN065",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        35
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        35
+      ],
+      "candidate_object_count": 11,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN066",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN067",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        74
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        74
+      ],
+      "candidate_object_count": 9,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN068",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        21
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        21
+      ],
+      "candidate_object_count": 9,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN069",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        112
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        112
+      ],
+      "candidate_object_count": 11,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN070",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN071",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        18
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        18
+      ],
+      "candidate_object_count": 8,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN072",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        16
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        16
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN073",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        112
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        112
+      ],
+      "candidate_object_count": 11,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN074",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        122
+      ],
+      "candidate_object_count": 2,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN075",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN076",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        21
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        21
+      ],
+      "candidate_object_count": 9,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN077",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        18
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        18
+      ],
+      "candidate_object_count": 8,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN078",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        21
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        21
+      ],
+      "candidate_object_count": 9,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN079",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN080",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN081",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        112
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        112
+      ],
+      "candidate_object_count": 11,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN082",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        122
+      ],
+      "candidate_object_count": 2,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN083",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        62
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        62
+      ],
+      "candidate_object_count": 14,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN084",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        122
+      ],
+      "candidate_object_count": 2,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN085",
+      "version": 1,
+      "expected_route": "SYSTEM_ERROR",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN086",
+      "version": 2,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        63,
+        66
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        63,
+        66
+      ],
+      "candidate_object_count": 20,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN087",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        83
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        83
+      ],
+      "candidate_object_count": 13,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN088",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        122
+      ],
+      "candidate_object_count": 2,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN089",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        121
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        121
+      ],
+      "candidate_object_count": 3,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN090",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        16
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        16
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN091",
+      "version": 2,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        58,
+        59
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        58,
+        59
+      ],
+      "candidate_object_count": 45,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN092",
+      "version": 1,
+      "expected_route": "SUPPORTED",
+      "required_source_pages": [
+        7
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        7
+      ],
+      "candidate_object_count": 23,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN093",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        6
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        6
+      ],
+      "candidate_object_count": 10,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN094",
+      "version": 2,
+      "expected_route": "SAFETY_STOP",
+      "required_source_pages": [
+        67
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        67
+      ],
+      "candidate_object_count": 14,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN095",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        112
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        112
+      ],
+      "candidate_object_count": 11,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN096",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        16
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        16
+      ],
+      "candidate_object_count": 16,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN097",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        26
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        26
+      ],
+      "candidate_object_count": 17,
+      "blocker_card_paths": [
+        "human_review/blockers/GEN097_v1_documented_scope_limit_human_review.md"
+      ],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN098",
+      "version": 1,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        122
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        122
+      ],
+      "candidate_object_count": 2,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN099",
+      "version": 2,
+      "expected_route": "AMBIGUOUS",
+      "required_source_pages": [
+        62
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        62
+      ],
+      "candidate_object_count": 14,
+      "blocker_card_paths": [],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    },
+    {
+      "record_id": "GEN100",
+      "version": 1,
+      "expected_route": "UNSUPPORTED",
+      "required_source_pages": [
+        26
+      ],
+      "pages_without_candidate_objects": [],
+      "source_refs_without_exact_evidence_ids": [
+        26
+      ],
+      "candidate_object_count": 17,
+      "blocker_card_paths": [
+        "human_review/blockers/GEN100_v1_documented_scope_limit_human_review.md"
+      ],
+      "grounding_readiness": "BLOCKED_PENDING_FORMAL_SOURCE_AND_DEPENDENCY_REVIEW",
+      "live_calls": 0
+    }
+  ],
+  "provider_calls": 0,
+  "formal_approvals_created": 0,
+  "semantic_accuracy": "NOT_EVALUATED",
+  "complete_evidence_recall": "NOT_EVALUATED",
+  "retrieval_ranking": "NOT_EVALUATED_PAGE_OBJECT_MAPPING_ONLY",
+  "controller_grounding_for_new_ids": "PENDING_REFINEMENT_CHAT_TYPED_FIXTURES",
+  "release_approved": false,
+  "index_rebuilt": false,
+  "billing_or_deployment_changed": false,
+  "selected_model": "gemma-4-31b-it"
+}

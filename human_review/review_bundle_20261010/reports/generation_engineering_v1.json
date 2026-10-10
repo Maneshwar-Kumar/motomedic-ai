@@ -1,0 +1,180 @@
+{
+  "schema_version": "generation-engineering-evaluation-v1",
+  "commit": "12b57afa856c6fb4d63f621ff9031a9f57551987",
+  "source_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "registry_lock": "92744241c893ff1fcaf6a55f5c07bbf369b935f390f27114c46dcc8d2515ad32",
+  "runtime_versions": {
+    "generator_provider": "unconfigured",
+    "generator_model": "unconfigured",
+    "verifier_provider": "unconfigured",
+    "verifier_model": "unconfigured",
+    "provider_revision": "responses-rest-v1",
+    "max_input_bytes": 24000,
+    "max_output_tokens": 1800,
+    "timeout_seconds": 15,
+    "retries": 0,
+    "generator_version": "reviewed-composer-v1",
+    "prompt_version": "reviewed-composer-prompt-v1",
+    "verifier_version": "claim-entailment-v1",
+    "schema_version": "constrained-response-v1",
+    "prompt_hash": "c1e179d385c6b5a959ec34ed977de62b71042b35126d517e11ba217f99d7d88e"
+  },
+  "runtime_lock": "7c6d65f3785bfa582438c5fb7786c29264ca37699171b472ed7a70d1d3eb4a76",
+  "scenario_digest": "5fea7c7086390d06031ae8219692d958d8ee66a53a23d72a9db52f3f29beffb8",
+  "cases": [
+    {
+      "case_id": "AC-G013",
+      "mode": "direct",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    },
+    {
+      "case_id": "AC-G014",
+      "mode": "direct",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    },
+    {
+      "case_id": "AC-G016",
+      "mode": "direct",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    },
+    {
+      "case_id": "AC-G019",
+      "mode": "direct",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    },
+    {
+      "case_id": "AC-G020",
+      "mode": "direct",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    },
+    {
+      "case_id": "AC-D024",
+      "mode": "multi_turn",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [
+        {
+          "turn_index": 0,
+          "unissued_feedback_rejected": true
+        },
+        {
+          "turn_index": 1,
+          "unissued_feedback_rejected": true
+        },
+        {
+          "turn_index": 2,
+          "unissued_feedback_rejected": true
+        }
+      ],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    },
+    {
+      "case_id": "AC-D032",
+      "mode": "multi_turn",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [
+        {
+          "turn_index": 0,
+          "unissued_feedback_rejected": true
+        },
+        {
+          "turn_index": 1,
+          "unissued_feedback_rejected": true
+        }
+      ],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    },
+    {
+      "case_id": "AC-D027",
+      "mode": "multi_turn",
+      "route": "UNSUPPORTED",
+      "reason_codes": [
+        "SOURCE_METADATA_REVIEW_REQUIRED"
+      ],
+      "passed": true,
+      "followups": [
+        {
+          "turn_index": 0,
+          "unissued_feedback_rejected": true
+        },
+        {
+          "turn_index": 1,
+          "unissued_feedback_rejected": true
+        }
+      ],
+      "split": "REGRESSION_NOT_HELD_OUT",
+      "source_review": "DRAFT"
+    }
+  ],
+  "real_source_gate_passes": 8,
+  "real_source_generation_calls": 0,
+  "real_source_verification_calls": 0,
+  "synthetic_tests": {
+    "run": 15,
+    "failures": 0,
+    "errors": 0
+  },
+  "live_provider_calls": 0,
+  "provider_cost_usd": 0,
+  "ci_cost_usd": null,
+  "ci_cost_status": "NOT_MEASURED",
+  "semantic_accuracy": "NOT_EVALUATED",
+  "held_out_cases": 0,
+  "approved_real_steps": [],
+  "release_gate_passed": false,
+  "index_rebuilt": false,
+  "gcp_resources_or_billing_changed": false,
+  "hosted_run_id": 37926678059,
+  "hosted_run_url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/37926678059",
+  "hosted_conclusion": "success",
+  "combined_regressions": {
+    "run": 67,
+    "failures": 0,
+    "errors": 0
+  }
+}

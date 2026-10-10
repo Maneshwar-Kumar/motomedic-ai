@@ -1,0 +1,35 @@
+{
+  "event_sha256": "e28f2f2ea64d634bbf4ce0ac4b763f962f60058d0333ec1f66ffaaf6a0424a7d",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "0c8435f55372b661e7525215438cdfb445318510cf25950e906033340c8bc96d",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "TROUBLESHOOTING\n\n       Symptom                      Observations                     Check for/Remedy\n Engine starts but vehicle\n OFF’s automatically when     Side stand indicator is glowing in the cluster    Side stand should be kept up right\n apply the first gear\n                                               If any adulteration/water in fuel               Contact Authorised service center Engine misfires & runs\n                                                                       Switch OFF the engine and allow it to\n erratically/stops.                     If the engine is too hot                                                                            cool down\n                                               If engine RPM raises disproportionately to      Adjust the clutch free play and contact Poor pickup                             the vehicle speed                            Authorised service center\n ABS (Anti - lock Braking                                               If the ABS lamp continuously ON              Contact Authorised service center System)\n\n\n\n\n\n120   Royal Enfield Himalayan",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-122.png",
+        "pdf_page": 122,
+        "printed_page": "120"
+      }
+    ],
+    "payload_sha256": "afde20bd171cfdd38ad025cb53ae9b26b7e7de081b9adf9d81997937dc749838",
+    "reason": "Unconfirmed-transcript fixture asks confirmation/edit before symptom becomes typed fact. PDF122 misfire row is contextual source only; no unconfirmed diagnostic branch released. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN098",
+    "review_sha256": "d3f3d8fd2c7ca640ef88f1499c3f65e4b15d145bd2f4602d5268311e353065c9",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "11ae298125c55e01fe080724cf6a32d7e85805fa65557ceee2f3f5bae72c4e17",
+  "recorded_at_utc": "2026-10-10T08:20:34.847207+00:00",
+  "sequence": 321
+}

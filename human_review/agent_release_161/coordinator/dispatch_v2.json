@@ -1,0 +1,33 @@
+{
+  "schema_version": "coordinator-revision-dispatch-v2",
+  "source": "Root independent approval consumer rejected22 unbound conclusionclaims; no gate weakening",
+  "case_ids": [
+    "EXP007",
+    "EXP009",
+    "EXP016",
+    "EXP020",
+    "EXP023",
+    "EXP024",
+    "EXP043",
+    "EXP045",
+    "GEN003",
+    "GEN008",
+    "GEN009",
+    "GEN010",
+    "GEN011",
+    "GEN014",
+    "GEN015",
+    "GEN016",
+    "GEN018",
+    "GEN027",
+    "GEN031",
+    "GEN034",
+    "GEN044",
+    "GEN045"
+  ],
+  "revision_file": "human_review/agent_release_161/coordinator/approved_package_v2/conclusion_claim_repairs.json",
+  "revision_file_sha256": "7be71c7bcc7247673184084a0a1f12d72a097bfc525814b833708f944bede1aa",
+  "checker": "/root/source_checker",
+  "required_check": "Independently verify each yes/no conclusion against exactcasequestion and precise cited followingexplanation; attest finalv2packagebytes",
+  "prior_release_manifest_sha256": "1e8701224a5cd04ef3cf9a5d29b20d9bcab473952abd963e4e96251b927c7867"
+}

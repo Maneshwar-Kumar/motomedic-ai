@@ -1,0 +1,181 @@
+{
+  "records": [
+    {
+      "agent_review_complete": true,
+      "answer": "I will record that the control is not fitted, rather than treat it as a normal check, and withhold the action that depends on it. Can your motorcycle paperwork confirm it is a Himalayan BS6?",
+      "answer_sha256": "449fa28062ade53b4b73810ffa0cd2773d2416029c99889efd7a80c56986bd84",
+      "claims": [
+        {
+          "answer_span": [
+            0,
+            129
+          ],
+          "exact_claim_text": "I will record that the control is not fitted, rather than treat it as a normal check, and withhold the action that depends on it.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "policy_240aa9e9a20851d2f8253ffc",
+            "policy_9111e6e2299a2b15cf63eeb7"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "answer_span": [
+            130,
+            190
+          ],
+          "exact_claim_text": "Can your motorcycle paperwork confirm it is a Himalayan BS6?",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "policy_37f584879348266e8e42a675"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "formal_source_approval": false,
+      "producer_record_modified": false,
+      "record_id": "GEN057",
+      "runtime_authorized": false,
+      "supersedes_draft_sha256": "86873cdab1863138267c086327eab7fdc4d4bfe633467bd7940b828c1d4a66a8"
+    },
+    {
+      "agent_review_complete": true,
+      "answer": "Yesterday’s result was customer-reported resolution, not a verified repair. I will reopen the symptom you reported and retain the earlier attempt history; I will not automatically repeat that action.",
+      "answer_sha256": "c4dfda9b8ecc499fe329e5ef95f865a101a55d3d559e5209ec78ff65cdab7cac",
+      "claims": [
+        {
+          "answer_span": [
+            0,
+            75
+          ],
+          "exact_claim_text": "Yesterday’s result was customer-reported resolution, not a verified repair.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "policy_a582429020c644c2e81622ed"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "answer_span": [
+            76,
+            199
+          ],
+          "exact_claim_text": "I will reopen the symptom you reported and retain the earlier attempt history; I will not automatically repeat that action.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "policy_149ecd0806ed20f4941cdb11",
+            "policy_46f874c8ba7f9aaffdd16ed8",
+            "feedback_1a7731420c0717da45ae8302"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "formal_source_approval": false,
+      "producer_record_modified": false,
+      "record_id": "GEN058",
+      "runtime_authorized": false,
+      "supersedes_draft_sha256": "f4027e83989e164aba9e1df04ea95c6b73755b681d9257146865509d89ba0d89"
+    },
+    {
+      "agent_review_complete": true,
+      "answer": "The manual requires scheduled front/rear pad checks. Its printed replacement-threshold wording is unclear; have authorised service assess pad wear.",
+      "answer_sha256": "73170c4141fe0e01e18ea78785d92269c192edc5ab0cb202c8efbee8c04dcae1",
+      "claims": [
+        {
+          "answer_span": [
+            0,
+            52
+          ],
+          "exact_claim_text": "The manual requires scheduled front/rear pad checks.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "evidence_7cd1de903310b8e09d8a9d4e"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "answer_span": [
+            53,
+            147
+          ],
+          "exact_claim_text": "Its printed replacement-threshold wording is unclear; have authorised service assess pad wear.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "evidence_1fd98dd6ead9e18f957b54ed",
+            "policy_856cb9f6fbe76bd5e7103080",
+            "policy_5067c2fa98fb514fad94ddf7"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "formal_source_approval": false,
+      "producer_record_modified": false,
+      "record_id": "EXP027",
+      "runtime_authorized": false,
+      "supersedes_draft_sha256": "9dbf745c20a6b7b4ce22f2f6dfd15c2b0076b9fda795ec8565f9d806ac1ed2d9"
+    },
+    {
+      "agent_review_complete": true,
+      "answer": "No. The manual specifies DOT4 and says not to mix it with other brake fluid. Other fluid can deteriorate rubber seals, cause leakage or a harmful chemical reaction. If the fluid is already mixed or its type is uncertain, have authorised service assess it; this answer does not authorize topping up or flushing.",
+      "answer_sha256": "d3346c34f37d8160a1e89760f0a574a3559f071f557174c10c4aabb51793607d",
+      "claims": [
+        {
+          "answer_span": [
+            0,
+            3
+          ],
+          "exact_claim_text": "No.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [],
+          "verdict": "DISCOURSE"
+        },
+        {
+          "answer_span": [
+            4,
+            76
+          ],
+          "exact_claim_text": "The manual specifies DOT4 and says not to mix it with other brake fluid.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "evidence_a6950ea73293cda81e695ce1",
+            "evidence_36ee9102cfd9a8ef98c0466d",
+            "evidence_fdd616b47465a42cfd4f1c01"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "answer_span": [
+            77,
+            164
+          ],
+          "exact_claim_text": "Other fluid can deteriorate rubber seals, cause leakage or a harmful chemical reaction.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "evidence_fc08bdc40ab26a9700db87e5",
+            "evidence_16d0fa8780452cdc8c063917"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        },
+        {
+          "answer_span": [
+            165,
+            310
+          ],
+          "exact_claim_text": "If the fluid is already mixed or its type is uncertain, have authorised service assess it; this answer does not authorize topping up or flushing.",
+          "runtime_authorized": false,
+          "support_evidence_ids": [
+            "policy_240aa9e9a20851d2f8253ffc",
+            "policy_856cb9f6fbe76bd5e7103080",
+            "policy_5067c2fa98fb514fad94ddf7"
+          ],
+          "verdict": "SUPPORTED_AGENT_REVIEW"
+        }
+      ],
+      "formal_source_approval": false,
+      "producer_record_modified": false,
+      "record_id": "EXP024",
+      "runtime_authorized": false,
+      "supersedes_draft_sha256": "037d2b791030cd20269c7837dfbe77046bc58592c59f9d380e80f38aaceab3aa"
+    }
+  ],
+  "schema_version": "corrected-support-candidates-v1"
+}

@@ -1,0 +1,31 @@
+{
+  "event_sha256": "ba1bd0312cead8947b713e885a1979cf52aef5fceece7e8fa49562f215e2bf68",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "441eaa7915dd8299f61d3e51061d2e5ae958d3c6ee9ef20dc312f9ee958ba8bc",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "No-start symptom row dimlights/weakhorn => possible battery/charging circuit service; troubleshooting intro unresolved checks require authorised service; no explicit total diagnostic ordering.",
+        "inspection_method": "Independent original PDF text and full-page layout/footer checked; product policy separately checked in TRDv0.4.",
+        "pdf_page": 121,
+        "printed_page": "119"
+      }
+    ],
+    "payload_sha256": "25b5213888462ce41c521ceb745fa65f3a69272e577035ce09e0e88a5aa717e7",
+    "reason": "Unknown done response clarifies typed outcome and never supplies normal fact. Engineering policy/source candidate only; no actual infrastructure test, human/source/dependency/release approval.",
+    "record_id": "GEN056",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "f85470fdc4ff4ceca7b40a3f88f67ad28fe78775aa680ce6d4f2b178a3bfc5ed",
+  "recorded_at_utc": "2026-10-09T19:03:52.539452+00:00",
+  "sequence": 219
+}

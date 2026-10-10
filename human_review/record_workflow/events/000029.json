@@ -1,0 +1,37 @@
+{
+  "event_sha256": "34636b53ebc5ce5c499811c47fa6edb5e098b2188df4c671ae457e1347f45f2a",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "81f0077bf7a21f3e8f431bc8e60574aae8ef97d3f7537b0429b2a9143edf6a21",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "Incorrect loading affects stability/handling and risks serious injury/loss of life; respect model/design; pannier/top-box max payload is in GMA fitting instructions.",
+        "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+        "pdf_page": 15,
+        "printed_page": "13"
+      },
+      {
+        "checked_span": "WEIGHTS: kerb196 kg (90% fuel/oil), gross394 kg; do not exceed gross because tyres/suspension designed for maximum; guidance dimensions.",
+        "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+        "pdf_page": 20,
+        "printed_page": "18"
+      }
+    ],
+    "payload_sha256": "286984b36c34ea74fa5a78b0e653d157b0e379cc3ffc20a78f85319f02e3a79d",
+    "reason": "Gross394 kg correctly distinguished from accessory payload; maximum restriction and external fitting instruction scope preserved. Engineering candidate review only; no human acceptance, formal source/dependency approval or release.",
+    "record_id": "GEN010",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "70aea08c41e44db7078749071484a504d071ad561209d22d4acc983747889761",
+  "recorded_at_utc": "2026-10-09T18:56:23.612844+00:00",
+  "sequence": 29
+}

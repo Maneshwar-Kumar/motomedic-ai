@@ -1,0 +1,33 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "8ae8c721bf06d19f0595159867076f78d352cf2baa8e1338127db8aa045c2836",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "OPERATION OF CONTROLS\nii. Speed/Distance:                                                           iii. Fuel consumption\n  Center press the joystick with the speed/distance   Center press the joystick with the fuel consumption\n    option selected to explore the options.                     option selected to explore the options.\n                               The following options are available in the menu.  The following options are available in the menu.\n                                 km/l\n    Kilometers\n                                 L/100 km\n    Miles\n                                mpg (UK)\n  The options can be navigated by joystick up and down\n                                mpg (US)    press and selected by joystick center press.\n                               The options can be navigated by joystick up and down\n  Press the home button on the LH switch cube to go       press and selected by joystick center press.\n    back.                          Press the home button on the LH switch cube to go\n                                                              back.      2       0km 2       0km\n\n                                      1831km                             1831km        1                         1                  NOTE\n                         Speed/Distance                            Speed/Distance\n                     Kilometers                         Miles                               If the speed/distance is in km then either km/l or L/100 km\n                           Miles                                         options are available to select and the remaining options\n                                                          are grayed out.\n\n                                                               Royal Enfield Himalayan    47",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-049.png",
+      "pdf_page": 49,
+      "printed_page": "47"
+    },
+    {
+      "checked_span": "OPERATION OF CONTROLS\n       2       0km 2       0km                 2       0km 2       0km\n\n                                       1831km                             1831km                                                    1831km                             1831km\n         1                         1                                          1                         1\n                              Fuel Cons.                                   Fuel Cons.                                                        Temperature                            Temperature\n                    km/l                     mpg (UK)                                                        Celsius                           Fahrenheit\n                       L/100km                         mpg (US)                                                                  Fahrenheit\n\nIf the speed/distance is not in km (in mpg) then either mpg   Press the home button on the LH switch cube to go\n(UK) or mpg (US) options are available to select and the                                                              back.\nremaining options are grayed out.\n                                                          v. Languageiv. Temperature\n                               Center press the joystick with the language option  Center press the joystick with the temperature option\n                                                               selected to explore the options.    selected to explore the options.\n  The following options are available in the menu.       The following options are available in the menu.\n    Celsius                         English\n    Fahrenheit                        Italian\n  The options can be navigated by joystick up and down     Spanish\n    press and selected by joystick center press.           Portuguese\n48   Royal Enfield Himalayan",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-050.png",
+      "pdf_page": 50,
+      "printed_page": "48"
+    }
+  ],
+  "reason": "Original PDF49/50 printed47/48 notes km/l andL/100km availability under km setting with remaining options greyed. No firmware or unit conversion inference. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN028",
+  "review_sha256": "9a565c87deaf49a8960d7c019a31bfa74e81825613e30bbdbae440c7ef5c4fbe",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

@@ -1,0 +1,192 @@
+{
+  "schema_version": "independent-judge-deliverable-audit-v1",
+  "auditor": "/root/quality_auditor",
+  "created_at_utc": "2026-10-10T12:15:30.857086+00:00",
+  "audit_verdict": "PASS_REVIEW_DELIVERABLE_WITH_STATED_LIMITS",
+  "material_deliverable_inconsistencies": [],
+  "scope": "Independent audit of completeness, frozen bindings, aggregation, exact finding quotes, source/feedback samples and scope honesty of the static LLM-judge deliverable. Not a second source review of all 161 or release approval.",
+  "input_bindings": {
+    "corpus_sha256": "3ec75b47a0f2f8de5ee90273829d9673bec8c232a1e998bb2558fa9ed45ea7d8",
+    "feedback_sha256": "ae663a289d0090c3d56fd4ee5826baf3212ec7a1fb2cc5a506427e2d35fede1c",
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "results_sha256": "88db6d0a9c43ab83d0d23c90528d54b12537c64d1edccfe443bfeae3160b6e9a",
+    "report_sha256": "4a042908c35de8f44362d5d354a1c6282cad88e77b51caa2daaf6ab885dced4c",
+    "rubric_sha256": "902f2f1c7a9a6e353cb9342bc606f794baa84182b43b480db43f1aeed4ac33b1",
+    "shard_artifact_sha256": {
+      "original_exp/records.json": "6980cba59938e7fc5eb52114a4a9e02ba9ecb2888002b3fa2da7c5d3f64ad5f2",
+      "original_exp/REPORT.md": "eefad5ad7578703bd12ba6830ee8e9df043e080b017b1fbabb39c37229f535d1",
+      "gen_a/records.json": "ba9d71464ae4860da981e7b0043f08875a29b74d931b3cd8e39a92732b694d9c",
+      "gen_a/REPORT.md": "83416c4399de1b30032fd360d656eaa8f0279b5c3e91f92e141b977d48cdcd96",
+      "gen_b/records.json": "b150de5e5504ba5ac2cf6ae2ca55847660e4534d2a20d186d339bca77b6d9d84",
+      "gen_b/REPORT.md": "fab5277cde77a4fe17689ba9130b789b45b95ba5a6a91b2b91671f11b173c346"
+    }
+  },
+  "checks": {
+    "exact_corpus_and_rubric_ids": true,
+    "case_hashes_verified": 161,
+    "exact_disjoint_shard_counts": {
+      "original_exp": 61,
+      "gen_a": 50,
+      "gen_b": 50
+    },
+    "distinct_judge_actors": [
+      "/root/llm_judge_original_exp",
+      "/root/llm_judge_gen_a",
+      "/root/llm_judge_gen_b"
+    ],
+    "declared_shard_input_hash_entries_verified": 42,
+    "unique_declared_shard_input_files_verified": 23,
+    "declared_input_path_resolution": "gen_a basename paths resolve to frozen package; its PDF basename resolves to workspace. Other shard paths are workspace-relative.",
+    "finding_count": 45,
+    "affected_scope_quote_mismatches": [],
+    "case_specific_rationales": {
+      "original_exp": 61,
+      "gen_a": 50,
+      "gen_b": 50
+    },
+    "unique_rationales_total": 161,
+    "aggregate_matches_shards": true,
+    "report_case_rows_verified": 161,
+    "report_actionable_case_headings_verified": 12,
+    "report_scope_limits_present": true,
+    "manual_visual_spot_checks": [
+      "PDF23 / printed21",
+      "PDF29 / printed27"
+    ]
+  },
+  "recomputed_summary": {
+    "cases_reviewed": 161,
+    "dimensions": {
+      "initial_grounding": {
+        "FAIL": 1,
+        "PARTIAL": 1,
+        "PASS": 159
+      },
+      "dialogue_flow": {
+        "FAIL": 2,
+        "NOT_APPLICABLE": 129,
+        "NOT_VERIFIABLE": 1,
+        "PARTIAL": 5,
+        "PASS": 24
+      },
+      "feedback_alignment": {
+        "FAIL": 2,
+        "PARTIAL": 30,
+        "PASS": 129
+      },
+      "overall": {
+        "PASS": 149,
+        "REVISE": 12
+      }
+    },
+    "answer_quality_distribution": {
+      "2": 1,
+      "3": 8,
+      "4": 53,
+      "5": 99
+    },
+    "mean_answer_quality": 4.553,
+    "flow_pass_scope_counts": {
+      "LOCAL_SINGLE_TURN_CLARIFICATION_ONLY": 7,
+      "STATIC_AUTHORED_CONTEXT": 17
+    }
+  },
+  "finding_spot_checks": [
+    {
+      "case_id": "EXP001",
+      "scope": "current_response",
+      "result": "AGREE_HIGH_FACTUAL_ERROR",
+      "exact_quote": "The hazard button is the triangle-marked button on the left-hand handlebar control shown on PDF29.",
+      "basis": "Auditor visually inspected complete PDF23/PDF29 renders. PDF23 item6 is on the rider-right control beside item5; PDF29 drawings show that same right-hand hazard switch."
+    },
+    {
+      "case_id": "EXP002",
+      "scope": "authored_followup",
+      "result": "AGREE_HIGH_FACTUAL_ERROR",
+      "exact_quote": "If unsure: the source29 drawing shows the triangle-marked hazard button on the left-hand handlebar control.",
+      "basis": "The exact quote occurs in the retained producer full_record_text, not the current initial response. Same original PDF23/PDF29 visual basis. Initial grounding PASS and authored-flow FAIL are consistent."
+    },
+    {
+      "case_id": "a_refuel",
+      "scope": "current_response",
+      "result": "AGREE_COMPLETENESS_AND_ORDERING",
+      "basis": "Read frozen current response and PDF8/PDF27 text. Engine/device-OFF setup occurs after the first action; read-and-return is repeated; PDF27 flap/key/clockwise opening sequence is omitted while key-in-position closure is given."
+    },
+    {
+      "case_id": "a_switches_on",
+      "scope": "current_response",
+      "result": "AGREE_INTERNAL_CHECKLIST_REFERENCE",
+      "basis": "The exact quoted response requires a compact starting checklist without providing rider wording or the next missing observation. Full frozen feedback and accepted control-identification history call for practical compact setup, retaining known facts and correction of only the reported OFF switch."
+    },
+    {
+      "case_id": "a_reconnect",
+      "scope": "current_response",
+      "result": "AGREE_CLARITY_IMPROVEMENT",
+      "basis": "PDF121 names spark plug, cap and high tension cable, while the frozen response says only parts. Proposed naming retains source-limited service referral and invents no access procedure."
+    },
+    {
+      "case_id": "a_cool_engine",
+      "scope": "current_response",
+      "result": "AGREE_INTERNAL_POLICY_PROSE",
+      "basis": "PDF122 engine-too-hot row and PDF37/38 limit inspected in frozen source context; response ends in documented condition/eligibility language. Proposed wording keeps established-condition and service limits without inventing a restart threshold."
+    },
+    {
+      "case_id": "EXP030",
+      "scope": "current_response",
+      "result": "AGREE_PLAIN_LANGUAGE_IMPROVEMENT",
+      "basis": "Current RPM/disproportionately question matches the PDF122 observation but is harder for a rider to answer. Full feedback requests accessible observations. Suggested revs/speed paraphrase preserves the same observation and forbids a new road test."
+    },
+    {
+      "case_id": "EXP044",
+      "scope": "current_response",
+      "result": "AGREE_CURRENT_TASK_AND_UNKNOWN_HISTORY",
+      "basis": "PDF120 prefers authorised-service preparation for re-use and conditions voltage checks on battery refitting. Frozen answer presents retrospective removal/refit guidance without establishing removal history."
+    },
+    {
+      "case_id": "EXP049",
+      "scope": "authored_followup",
+      "result": "AGREE_MISSING_CONCRETE_CONTINUATION",
+      "basis": "Read current dim-lights/weak-horn question and all retained producer follow-up spans; they discuss photo uncertainty but contain no yes/no/unsure routing for that question. PDF121 supplies a source-bounded positive service route; a negative clue does not prove health."
+    },
+    {
+      "case_id": "GEN043",
+      "scope": "authored_followup",
+      "result": "AGREE_NOT_VERIFIABLE",
+      "basis": "Full frozen branch context has zero reviewed conditional spans; source33 supports current throttle/clutch-or-neutral/ABS conditions. Did you meet those conditions? has no authored replies; generic state dependencies are not concrete conversation paths."
+    },
+    {
+      "case_id": "GEN053",
+      "scope": "current_response",
+      "result": "AGREE_RIDER_SELECTION_SCOPE",
+      "basis": "Frozen source_manifest selection policy requires rider confirmation of Himalayan and BS6, with application choosing the manual. Response asks rider to confirm the applicable manual. Suggested question stays within owner selection scope."
+    },
+    {
+      "case_id": "GEN056",
+      "scope": "current_response",
+      "result": "AGREE_UNANCHORED_CLARIFICATION",
+      "basis": "The rider already states uncertainty about what was checked. Current generic normal/unresolved/unsure menu does not identify the prior check or criterion; TRD unknown-not-normal policy supports preserving UNCLEAR and one anchored observation."
+    },
+    {
+      "case_id": "GEN061/GEN087",
+      "scope": "runtime_measurement",
+      "result": "AGREE_CONDITIONAL_FIXTURE_LIMIT",
+      "basis": "Source-gap wording is judged within its trusted engineering fixture, with explicit notes that a fetch outage remains SYSTEM_ERROR. No live failure classification is claimed."
+    }
+  ],
+  "authority_handling": {
+    "no_additional_human_approval_required": true,
+    "latest_owner_delegation_respected": true,
+    "R001_recovery_wait_accepted": true,
+    "R002_separate_scope_preserved": true,
+    "legacy_human_signoff_fields_not_treated_as_a_blocker": true,
+    "approved_release_and_response_artifacts_modified_by_audit": false
+  },
+  "limitations": [
+    "One fresh LLM judge reviewed each case in disjoint 61/50/50 shards; these are not three independent ratings per case. The auditor checked artifact completeness and selected conclusions in addition.",
+    "Current_response is joined approved claim text or a canonical policy response, not observed Gemma/model/UI output. Static prose review cannot measure deployment behavior, response stability, actual citations, latency or cost.",
+    "Seventeen flow passes assess static authored branch context; seven pass only a local clarification. No complete adaptive runtime transition or retention behavior is certified.",
+    "The auditor read all material negative rationales and their finding fields and checked source/feedback context for substantial findings; only PDF23/PDF29 were freshly inspected visually by the auditor. Other visual inspection claims belong to named judge agents and their retained artifacts.",
+    "All findings are LLM judgments. Coverage, hashes and quote matches are mechanical checks; they are not measured production accuracy or proof of every semantic judgment.",
+    "This audit does not edit responses, change release approval, authorize undocumented repair, publish source material, validate general vision/voice performance or deploy anything."
+  ]
+}

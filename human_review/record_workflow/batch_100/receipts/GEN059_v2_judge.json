@@ -1,0 +1,27 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "b3a08ecaa016175008fdac8d2f59f2718ce3d36fa580507601d440fbed69b4c2",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "TROUBLESHOOTING\nWe have listed below a few basic checks in case your motorcycle is not functioning. If in case the problem is not rectified\nafter these checks, it is necessary to get the motorcycle checked by a Royal Enfield Authorised Dealer/ Service Centre to\nrectify the problem and to ensure trouble free performance.\n     Symptom                   Observations                       Check for/Remedy\n                                        If the ignition/Engine kill switch in OFF                                                                Switch ON ignition                           position\n                                        If inadequate fuel level in fuel tank         Top up the fuel\n                                                    Weak or discharged battery / problem in\n                                        If the lights are dim/weak horn sound        charging circuit Contact Authorised service\n Engine does not start                                              center\n                                                                                                      1. Replace the fuse with same rating\n                                        If fuse is blown                                 2. Contact Authorised service center if prob-\n                                                          lem persists\n                       Connection issue with spark plug, cap,      Reconnect spark plug, cap and high tension\n                         high tension cable                            cable.\n\n                                                               Royal Enfield Himalayan   119",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-121.png",
+      "pdf_page": 121,
+      "printed_page": "119"
+    }
+  ],
+  "payload_sha256": "8263157664cc0de7e2f8c98a3b23e7e9bbee8a23f9de4bd0eafb3ee093bde7c1",
+  "reason": "GEN059-F1 resolved: weak-horn and normal-lights remain separate, engine-fails-to-start question now establishes missing symptom before PDF121 no-start service row. RouteAMBIGUOUS correctly withholds row-based technical inference. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN059",
+  "review_sha256": "04759401d5c1728569d7041ad6beada5e6518d630fe13217c5c63656d32844ce",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 2
+}

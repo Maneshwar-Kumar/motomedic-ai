@@ -1,0 +1,35 @@
+{
+  "event_sha256": "270cbed32c3b56b4fe800fdb37832d709971fe24b5f09c5d7d20b0c0d0854361",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "597554ceb4eacf8cdeffccc3e428aab34286d8c3f08388e753df563e4d9a4d8f",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "SAFE RIDING TIPS / GUIDELINES\n  Avoid any contact with the exhaust system when hot.   Do not tow a motorcycle. The steering and handling of\n    Wear clothing that will completely cover the legs while       the towed motorcycle will be impaired due to the force\n     riding. The exhaust system gets very hot when the       of the towline. If a motorcycle must be transported,\n    engine is running and remains too hot to touch, even       use a truck or a trailer.\n     after the engine is turned OFF. Failure to wear proper   Do not pull a trailer behind a motorcycle. Towing a\n    or protective clothing could result in serious injury.              trailer may cause reduced braking eﬃciency, tyre over-\n  Motorcycle batteries contain lead, acids and chemicals       loading and unstable handling, as it may cause loss of\n   known to cause cancer, birth defects or other repro-       control of the motorcycle in the front, leading to an\n    ductive harm. Exercise extreme caution while handling       accident.\n    a battery, wash hands thoroughly whenever a battery\n      is handled.\n  Consult your Royal Enﬁeld Authorised Service Centre\n    regarding any questions or problems that occur in the\n    operation of your motorcycle. Failure to do so may\n    aggravate an initial problem, cause costly repairs and\n    jeopardize your personal safety.\n\n                                                               Royal Enfield Himalayan   9",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-011.png",
+        "pdf_page": 11,
+        "printed_page": "9"
+      }
+    ],
+    "payload_sha256": "d6e010b49188a82909a9477f8f6ba274672221180c0e8050d9f330a01481aa6a",
+    "reason": "Original PDF11 printed9 prohibits pulling a trailer and lists braking efficiency, tyre overload and unstable handling/loss-of-control risks. Candidate preserves the applicable warning. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN002",
+    "review_sha256": "665c4f4a8c8e460b67f0380c3c303832568f3e324e916d6360c2535e07174e95",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "44059382c3dff4bc8e74f9badbcca107efee7e77069b7c449afef44f8df66bf3",
+  "recorded_at_utc": "2026-10-09T18:58:45.193812+00:00",
+  "sequence": 71
+}

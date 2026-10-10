@@ -1,0 +1,27 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "a57397af5b26a95e2d78678437bfe698ae0bd43bd39b246e2069c907c3ebc6ae",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "TECHNICAL SPECIFICATIONS\n                                                            Steering lock....................... Inbuilt     Type of wheel              Tyre size\n                        90/90-21 M/C 54H CEAT        Fuel type............................. Unleaded gasoline          Front\n                           (Gripp RE F)                   Ethanol content.................. Up to E20\n                        140/80R17 M/C 69H CEAT      Induction ............................ Electronic fuel injection,          Rear\n                           (Gripp Rad steel RE)                               42 mm throttle body, ride by\n                                                                                   wire system\n     Type of wheel          Solo & With pillion\n                                                          Fuel tank capacity............... 17.0* L\n       Front & Rear                32 psi                                            Low fuel warning................ 3 L ± 0.5* L\nNOTE                                          Dead stock.......................... 0.95 L to 1.15* L\n  On tube type rim, fit the tyre with a tube.\n                                                                   * The above values are approximate and the actual fuel\n  On tubeless type rim, use tubeless type tyre only.                                                                                 filling capacity will vary from the values mentioned.\n\n\n\n\n16    Royal Enfield Himalayan",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-018.png",
+      "pdf_page": 18,
+      "printed_page": "16"
+    }
+  ],
+  "payload_sha256": "f10a90dfd7f7c274b4e5e36394abf39d63c17e629b7c542e8e45eaa7d8adf23b",
+  "reason": "Policy-only confirmed-model mismatch fixture correctly withholds PDF18 Himalayan fuel fact for Classic. Original source anchor identifies fixed Himalayan table; no other-model specification supplied. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN051",
+  "review_sha256": "3a0b21b47cbaeac31a3dd7f2b11e369a35861c4f3e80088094cb4ba8d90898e7",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

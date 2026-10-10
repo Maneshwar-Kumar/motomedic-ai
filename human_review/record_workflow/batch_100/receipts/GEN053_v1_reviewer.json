@@ -1,0 +1,23 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "c22287e352ce95e1610fecafed8c80b085cdb2e9cf1c5eac018b12542b3dc53b",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "Pre-operation checks for selected motorcycle; policy requires reselection/reconfirmation on model change.",
+      "inspection_method": "Independent original PDF text and full-page layout/footer checked; product policy separately checked in TRDv0.4.",
+      "pdf_page": 70,
+      "printed_page": "68"
+    }
+  ],
+  "payload_sha256": "090aef38bed126df09c7143c5fd41462954cfcd80d6ce3d07564ea599537446f",
+  "reason": "Model-change invalidates earlier branch applicability and prompts reconfirmation. Engineering policy/source candidate only; no actual infrastructure test, human/source/dependency/release approval.",
+  "record_id": "GEN053",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

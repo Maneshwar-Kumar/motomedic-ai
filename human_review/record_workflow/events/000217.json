@@ -1,0 +1,31 @@
+{
+  "event_sha256": "12eaa8c831e673021db695e6b576ada9934a88f4333f1e0b56331102871c3cb4",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "6a923956b56b505106d778d359813bb5e4323b1e42085b683146ebeaf681bdc0",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "Poorpickup disproportionate RPM=> clutchfreeplay+service; original high-level action does not approve draft/stale registry or failed processing.",
+        "inspection_method": "Independent original PDF text and full-page layout/footer checked; product policy separately checked in TRDv0.4.",
+        "pdf_page": 122,
+        "printed_page": "120"
+      }
+    ],
+    "payload_sha256": "f319568f5dc44c092f5a6a3f46cb6e9da8b9b8b33802829a3d8dc840328aa31e",
+    "reason": "Relevant draft rule cannot authorize action; engineering policy under TRD5.1/6.1, not OEM claim. Engineering policy/source candidate only; no actual infrastructure test, human/source/dependency/release approval.",
+    "record_id": "GEN054",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "4be56e0a2228488e4962f0c72e79770007865d7ffcea5266b208964b71587b21",
+  "recorded_at_utc": "2026-10-09T19:03:50.602569+00:00",
+  "sequence": 217
+}

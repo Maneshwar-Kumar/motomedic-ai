@@ -1,0 +1,155 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "EXP016",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/EXP016.json",
+  "plan_sha256": "627978c4f4ccaa6160c003fdf6c7f70acbe1328ffde7dcb02a5e33f590aaaa32",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "d215ce6a0aa0c05f25baa9108b21adfc73cfe9872550433ec19e495cdf226ca0",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04"
+  },
+  "final_step_sha256": "035e65ad84c6fd2946fc0794e400da3889415949c70c295b9dbdd9509ed74aa4",
+  "final_dependency_sha256": "751ee3d7b326191df02d0da2344df5fe3547ec563cb658185bdad5bb9ad62802",
+  "final_rules_sha256": "9f6f7d709c81e1ff285d3cac8100dbf75d1cafd574b163f1513a74446aca1fdc",
+  "final_route_sha256": "18cf6422383383b6734bdde199edaf66989abb9fe03bbdb89de3473f3f28a664",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "Can I sit on the bike when it is on its side stand?",
+  "claim_texts": [
+    "No.",
+    "The manual says the side stand is designed only for motorcycle weight.",
+    "Sitting on it may damage stand/frame and cause it to fall, injuring you or others and damaging the motorcycle.",
+    "Park on firm, flat ground, extend the side stand and lean left until supported firmly.",
+    "Both stands must be fully retracted before riding."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_192ac63ddb6af7c96dc2dbdb",
+      "source_sha256": "286f5dfede9b4898f3dd61427957638b4e94ee7658cbd805c3559c23bb32d6f8",
+      "text_sha256": "b28049e05784b54e5fe6be06396f01e0435992dde91c659a27c3f6afa9d41234",
+      "original_pdf_pages": [
+        80
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_2998102be40f6ca8bc594a02",
+      "source_sha256": "fe5ba76fdcbc9fad2580cccbb6b3a974a844c511a717c7f1f9c1c46c36e8f337",
+      "text_sha256": "43069820f3fdad4166ba0d31b353455176a38cd887aa149603c32335d5a091eb",
+      "original_pdf_pages": [
+        80
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_ca31580e0b4fd3c79c3f2cc8",
+      "source_sha256": "454ecb6600ff4b4a631ed12d3701dabcba53c14dffcca9b11f12a2d468e84ccb",
+      "text_sha256": "a0515aeb54b3e1025a4a5e7b0975a6fce488044f98cafe5e5ab29352f14efc7e",
+      "original_pdf_pages": [
+        79
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_d796e635f7ae49fde36677ea",
+      "source_sha256": "1e60c2e4d857f4e5b72254b9487ab3145c90290279e1161dc3c483eff1bd5eca",
+      "text_sha256": "fcfaa992e04525b6e7c394fa82cbdd4d2635f27aea083ad222be7076f1cea671",
+      "original_pdf_pages": [
+        79
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "originalpdf_841cf316b5e81906c2fab93d",
+      "source_sha256": "cb56ba6951c7c320497bf41d4796b668459ffed7d70a95e8a00c8ae08b3adb3e",
+      "text_sha256": "f062a391d9d46b123a4071f17d3137ad2bd535c07a8f27c0a0aedda8174890bf",
+      "original_pdf_pages": [
+        80
+      ],
+      "authority": "OEM_ORIGINAL_PDF_CANDIDATE",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    79,
+    80
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Checked exact initial claims: No. | The manual says the side stand is designed only for motorcycle weight. | Sitting on it may damage stand/frame and cause it to fall, injuring you or others and damaging the motorcycle. | Park on firm, flat ground, extend the side stand and lean left until supported firmly. | Both stands must be fully retracted before riding. Required predicates must be TRUE; applicable conditions/warnings stay with claims. No undocumented continuation or diagnosis from negative clues.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

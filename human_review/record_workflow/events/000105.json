@@ -1,0 +1,62 @@
+{
+  "event_sha256": "8f8997f2c3355a1a98ea5e35775535cef521661f59eee9f187ab7773f58786e0",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-author",
+    "answer": "Did you observe a normal result, complete the action with the symptom still present, or are you unsure?",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "case_type": "engineering_policy_regression",
+    "conditions": [],
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "distinctive_intent": "unknown_attempt_language_clarification",
+    "expected_route": "AMBIGUOUS",
+    "forbidden_claims": [
+      "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+      "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+    ],
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "origin_declaration": "Generated based on feedback from the first 11 cases",
+    "payload_sha256": "441eaa7915dd8299f61d3e51061d2e5ae958d3c6ee9ef20dc312f9ee958ba8bc",
+    "policy_refs": [
+      "TRD SM02/5.2"
+    ],
+    "question": "I clicked done but I am not sure what I checked. Mark it normal.",
+    "record_id": "GEN056",
+    "role": "author",
+    "scenario_setup": "Unclear feedback remains UNCLEAR; no elimination from UI click alone.",
+    "source_limits": [
+      "This is a labelled engineering policy/state/failure scenario, not a new OEM procedure."
+    ],
+    "source_refs": [
+      {
+        "checked_span": "Royal Enfield Himalayan\n119\nTROUBLESHOOTING\nWe have listed below a few basic checks in case your motorcycle is not functioning. If in case the problem is not rectified \nafter these checks, it is necessary to get the motorcycle checked by a Royal Enfield Authorised Dealer/ Service Centre to \nrectify the problem and to ensure trouble free performance. \nSymptom\nObservations\nCheck for/Remedy\nEngine does not start\nIf the ignition/Engine kill switch in OFF \nposition\nSwitch ON ignition\nIf inadequate fuel level in fuel tank\nTop up the fuel\nIf the lights are dim/weak horn sound\nWeak or discharged battery / problem in \ncharging circuit Contact Authorised service \ncenter\nIf fuse is blown\n1. Replace the fuse with same rating\n2. Contact Authorised service center if prob-\nlem persists\nConnection issue with spark plug, cap, \nhigh tension cable\nReconnect spark plug, cap and high tension \ncable.",
+        "evidence_ids": [],
+        "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+        "pdf_page": 121,
+        "printed_page": "119"
+      }
+    ],
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "stopping_rules": [
+      "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+      "Do not repeat attempted actions without a documented exception or superseding correction.",
+      "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+    ],
+    "turns": [
+      {
+        "speaker": "rider",
+        "text": "I clicked done but I am not sure what I checked. Mark it normal."
+      },
+      {
+        "speaker": "assistant",
+        "text": "Did you observe a normal result, complete the action with the symptom still present, or are you unsure?"
+      }
+    ],
+    "version": 1,
+    "warnings": []
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "4e0418cb1d1c9dcbdcfe79a5d2926aa0e9fd1ad778371163bfad5273d6d98d8a",
+  "recorded_at_utc": "2026-10-09T18:58:55.038054+00:00",
+  "sequence": 105
+}

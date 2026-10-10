@@ -1,0 +1,11 @@
+# Expanded refinement source-approval hold — OPEN
+
+Recorded 10 October 2026 by the grounding-refinement chat. This is an additive engineering handoff; existing human annotations and all prior blocker decisions remain unchanged. Delivery to the human-review chat is not claimed.
+
+Batch: `native-100-20261010`; completion-manifest SHA-256 `4c332d1441417fe25caeadc3b0a83768f32622fd777f7cc9815ed3dca7111590`; catalogue SHA-256 `4ecb7515e9bd67a703174bfb78d9780c1f08c0486521922bc50fc6751a255cd1`. Exact final author/reviewer/judge hashes and versions are in the completion manifest; exact legacy hashes and blocked statuses are in the workflow inventory. The sole manual SHA-256 remains `cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89`.
+
+The full 161-record corpus was tested for actual current source holds. Both active and reconciled registry review ledgers remain empty; all reconciled steps retain authoring holds. Agent-review passes and conversational acceptance cannot authorize claim/evidence/rule/dependency approval. No source-approved technical-answer or live model comparison can run yet. This is a review/assembly authorization hold, not a claim that the owner's manual lacks the subjects or a rider-resolvable observation.
+
+Human/source-review decision needed: finalize exact scoped claims/roles, original-page spans, mandatory warnings/prerequisites and table/figure associations; establish actual approved applicability/procedure/rule/dependency records, content-bound signoff and permitted display scope. Preserve accepted R001 recovery timing and pending R002 post-start scope. Do not bulk-approve the corpus from agent verdicts; approve the specific runtime objects needed for selected evaluation cases.
+
+Evidence: [refinement results](../grounding_refinement/RESULTS.md), [per-case source-hold comparisons](../grounding_refinement/corpus_results.json), [verified batch gate](../grounding_refinement/verified_gate.json). Keep existing [workflow blockers](WORKFLOW_INDEX.md) and their 21 source/binding/rights decisions separate. Proposed controller changes remain isolated, not adopted product behavior. No provider calls, deployment, billing or index changes follow from this card.

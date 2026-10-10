@@ -1,0 +1,52 @@
+{
+  "actor": "batch100-author",
+  "answer": "I cannot release that answer with an invalid citation. This is a citation-validation failure; the source link must be repaired and verified.",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "case_type": "engineering_policy_regression",
+  "conditions": [],
+  "distinctive_intent": "invalid_citation_target",
+  "expected_route": "SYSTEM_ERROR",
+  "forbidden_claims": [
+    "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+    "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "origin_declaration": "Generated based on feedback from the first 11 cases",
+  "policy_refs": [
+    "TRD6/12.1"
+  ],
+  "question": "The answer links to an evidence ID that does not exist. Can I trust its page number?",
+  "record_id": "GEN077",
+  "role": "author",
+  "scenario_setup": "Invalid generated evidence reference; immutable-ID validation fails.",
+  "source_limits": [
+    "This is a labelled engineering policy/state/failure scenario, not a new OEM procedure."
+  ],
+  "source_refs": [
+    {
+      "checked_span": "Royal Enfield Himalayan\n16\nTECHNICAL SPECIFICATIONS\nNOTE\n\nOn tube type rim, fit the tyre with a tube.\n\nOn tubeless type rim, use tubeless type tyre only.\nSteering lock....................... Inbuilt\nFuel type............................. Unleaded gasoline \nEthanol content.................. Up to E20\nInduction ............................ Electronic fuel injection, \n42 mm throttle body, ride by \nwire system\nFuel tank capacity............... 17.0* L\nLow fuel warning................ 3 L ± 0.5* L\nDead stock.......................... 0.95 L to 1.15* L\n* The above values are approximate and the actual fuel\nfilling capacity will vary from the values mentioned.\nType of wheel\nTyre size\nFront\n90/90-21 M/C 54H CEAT \n(Gripp RE F)\nRear\n140/80R17 M/C 69H CEAT \n(Gripp Rad steel RE) \nType of wheel\nSolo & With pillion\nFront & Rear\n32 psi",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 18,
+      "printed_page": "16"
+    }
+  ],
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "stopping_rules": [
+    "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+    "Do not repeat attempted actions without a documented exception or superseding correction.",
+    "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+  ],
+  "turns": [
+    {
+      "speaker": "rider",
+      "text": "The answer links to an evidence ID that does not exist. Can I trust its page number?"
+    },
+    {
+      "speaker": "assistant",
+      "text": "I cannot release that answer with an invalid citation. This is a citation-validation failure; the source link must be repaired and verified."
+    }
+  ],
+  "version": 1,
+  "warnings": []
+}

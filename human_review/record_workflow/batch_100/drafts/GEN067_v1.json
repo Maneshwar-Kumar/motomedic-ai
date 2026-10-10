@@ -1,0 +1,52 @@
+{
+  "actor": "batch100-author",
+  "answer": "No. Relevance confidence cannot waive a required prerequisite or source check. I must withhold the action until the applicable prerequisite is verified.",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "case_type": "engineering_policy_regression",
+  "conditions": [],
+  "distinctive_intent": "high_rerank_score_no_support",
+  "expected_route": "UNSUPPORTED",
+  "forbidden_claims": [
+    "No inferred hidden diagnosis, invented thresholds, repair instructions or OEM next-step order.",
+    "Agent consensus is not human acceptance, formal source approval, public display permission or release."
+  ],
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "origin_declaration": "Generated based on feedback from the first 11 cases",
+  "policy_refs": [
+    "TRD4.2/6"
+  ],
+  "question": "The reranker is 99% confident. Can that override a missing prerequisite?",
+  "record_id": "GEN067",
+  "role": "author",
+  "scenario_setup": "Source/prerequisite missing despite relevance score; no probability-as-support claim.",
+  "source_limits": [
+    "This is a labelled engineering policy/state/failure scenario, not a new OEM procedure."
+  ],
+  "source_refs": [
+    {
+      "checked_span": "Royal Enfield Himalayan\n72\nSTARTING\nNOTE\n\nIn case the engine does not start within 5 seconds,\nrelease starter switch and wait for about 5 seconds\nbefore attempting to start the engine again.\n\nIn case vehicle not starting on multiple continuous\nattempts, please turn OFF and turn ON ignition switch\nand then start again.\nPRECAUTIONS                                                                                                                                   \n\nVehicle may start with side stand condition but engine\nwill turn-off when gear is engaged, this side stand cut-\noff feature is provided for rider safety ensure side\nstand is retracted before vehicle moving / starting.\nCAUTION\n\nIf the engine does not start. Do not hold the starter\nswitch in depressed condition for long periods, this will\ncause the battery to drain below the threshold level of\n10 V. Please get the motorcycle checked through an\nRoyal Enfield Authorised Service Centre to identify and\ncorrect the reason for not starting.",
+      "evidence_ids": [],
+      "inspection_method": "Original PDF page text read independently by author; figures not used for an unverified procedural claim.",
+      "pdf_page": 74,
+      "printed_page": "72"
+    }
+  ],
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "stopping_rules": [
+    "Withhold runtime technical advice until actual applicability, independent source/dependency, rights and final claim gates pass.",
+    "Do not repeat attempted actions without a documented exception or superseding correction.",
+    "Escalate unsupported procedures to authorised Royal Enfield support; customer resolution is reported, not mechanically verified."
+  ],
+  "turns": [
+    {
+      "speaker": "rider",
+      "text": "The reranker is 99% confident. Can that override a missing prerequisite?"
+    },
+    {
+      "speaker": "assistant",
+      "text": "No. Relevance confidence cannot waive a required prerequisite or source check. I must withhold the action until the applicable prerequisite is verified."
+    }
+  ],
+  "version": 1,
+  "warnings": []
+}

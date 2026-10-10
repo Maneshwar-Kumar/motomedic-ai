@@ -1,0 +1,60 @@
+{
+  "edits_to_consumer": false,
+  "findings": [
+    {
+      "evidence": "check_bindings uses artifact_bindings.step_id; eligibility uses trusted_routes[record_id].step_id without equality check. Step canonical_record_id is not checked.",
+      "id": "C01",
+      "issue": "Validated step and evaluated step can differ",
+      "priority": 1,
+      "required_fix": "Require route.step_id == bound step_id, bound route_id==record_id, step.canonical_record_id==record_id and dependency.step_id==step.step_id. Reject mismatched route/step before eligibility."
+    },
+    {
+      "evidence": "checker_report bytes hash is verified, but checker_report_locator key is unused and per-case verdict/approved scopes/blocked scopes/final artifact attestation are not parsed.",
+      "id": "C02",
+      "issue": "Independent checker verdict and exact final artifact approval are not consumed",
+      "priority": 1,
+      "required_fix": "Resolve checker case using exact locator, require exactrecord ID and finalcase/step/rule/source/package hashes and allowedscopes. Approved scopes may not exceed checker-supported scopes; retained blocks take precedence."
+    },
+    {
+      "evidence": "Policy/source-limit routes source_support_ids are not required in bound source_sha256s. Eligibility rules source_evidence_ids/policy_source_ids/clarification_evidence_ids are not required in sourcebindings.",
+      "id": "C03",
+      "issue": "Source closure omissions for non-step routes and rules",
+      "priority": 1,
+      "required_fix": "Require every route and rule referenced source to be hashbound, correct manual whereOEM, and approved for this use. No broad policyroute can evade its own source references."
+    },
+    {
+      "evidence": "eligibility iterates applicability_rule_ids only, leaving safety_rule_ids and repeat_rule_ids unevaluated.",
+      "id": "C04",
+      "issue": "Safety and repeat bindings are verified but not evaluated",
+      "priority": 1,
+      "required_fix": "Either explicitly restrict returned eligibility to initial applicability-only with safety/repeat notestablished, or evaluate exact reviewed safety precedence and repeat rules. Cannot label a release step eligible when these required gates remain unchecked."
+    },
+    {
+      "evidence": "Claim refs checked, but unresolved_evidence_ids, parentprocedure sources, next_step_evidence_ids and claim source_spans offsets/text_sha256 are not checked against exact objects.",
+      "id": "C05",
+      "issue": "Additional step sources and source span integrity are omitted",
+      "priority": 2,
+      "required_fix": "For approvedscope include all applicable unresolved/procedure/next sources and hashbound objects. Validate 0<=start<=end<=len(exact_text), source.text_sha256 == SHA(exact_text), and each span text hash. Reject excluded adaptive scope instead of claiming it wasverified."
+    },
+    {
+      "evidence": "self.artifacts[Path(name).name] permits multiple approvedpaths with same basename; final one wins.",
+      "id": "C06",
+      "issue": "Artifact basename collision can override approved object selection",
+      "priority": 2,
+      "required_fix": "Reject duplicate artifact basenames or select explicit unique manifest role paths."
+    },
+    {
+      "evidence": "Exactly161 unique manifest records is checked, but equality with pinned plannerinventory and route/fixture IDsets is not.",
+      "id": "C07",
+      "issue": "Count-only coverage does not establish the intended161 IDs",
+      "priority": 2,
+      "required_fix": "Require all intended161 recordIDs equal approvedmanifest, finalroutes, finalfixtures and pinnedplanner inventory; reject substituted/dropped IDs."
+    }
+  ],
+  "independent_of_source_checker": true,
+  "recommendation": "Fix exactbinding and scopedgate omissions before announcing verified eligibility. User-delegated coordinator authority is valid; no human_signoff requirement should be reintroduced.",
+  "reviewed_file": "human_review/agent_release_161/approval_consumer.py",
+  "reviewed_file_sha256": "12cac2b6c2485bfbd36c0d6b911431825c67fc0b73f04f81600c0759b0b633c4",
+  "reviewer_actor": "check_planner",
+  "schema_version": "planner-consumer-review-v1"
+}

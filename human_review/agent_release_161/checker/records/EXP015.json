@@ -1,0 +1,168 @@
+{
+  "schema_version": "independent-agent-source-check-v1",
+  "record_id": "EXP015",
+  "checker_actor": "independent-source-checker",
+  "plan_path": "human_review/agent_release_161/planner/plans/EXP015.json",
+  "plan_sha256": "ad12af8213f1f6f8053d85a950cc414973ef4b44390312d2a820f84ac0d5ab3f",
+  "plan_inventory_sha256": "355d942b5eab39313e954e052419da3fa408cc7c4f9b18c08f5a359a0b84c154",
+  "package_outputs": {
+    "branch_dependencies.json": "e823426b664c5dc59214e62dd941fea71b229fff5c9e9147b242af7379fd2206",
+    "candidate_registry.json": "d215ce6a0aa0c05f25baa9108b21adfc73cfe9872550433ec19e495cdf226ca0",
+    "corrections.json": "8e04e90a56a56db7bdb7e043be6db1a6422fb5ab22d4305db7aa6a173b503ed9",
+    "execution_contract.json": "fc1d4f64ccb2113e5609aa5723ed32599c221c69708a9767b73233656602bb17",
+    "session_fixtures.json": "fd299f6a83105fb6c46e6d2f96ebacf6cf8a5624c96f4ec0411fd15e11f18323",
+    "source_objects.json": "994235b061278e6a1431842d68ef06c2be438f3b6fcb9c28da3051a187a16614",
+    "trusted_routes.json": "b5977dc06799788f85023890031dcdf8e2d62b9117c80054cc8a16522d5ff8e3",
+    "clarification_repairs.json": "9e9a8795127d340af82503a971f5afd9c72731ea224688370eb451fe1184c9cb",
+    "case_constraints.json": "80fd35500bb3d490d4c0de8ef80f7c335bf7d538b946a055799f4d6beee67f04"
+  },
+  "final_step_sha256": "9c7bc4d4834d37c0e7c8779d09baa8597f449f4035ad1a612c93949d5742f2f9",
+  "final_dependency_sha256": "0a75fe1588b8621a26bf4e50b556066faf4481c9776772cf603398b241e8ce4c",
+  "final_rules_sha256": "baac41b661631c5882011e5816f1f45de8b447fa4dc3f5e04c3c8f8f5ea4a02b",
+  "final_route_sha256": "30bfd1ee1bcab0b5a8037756e818913948aa5aae28a933a2a828c89608497d2f",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "candidate_question": "The bike fell on its side with the engine running in gear and then stopped.",
+  "claim_texts": [
+    "The manual describes roll-over-sensor shutdown in that situation.",
+    "Before its reset, the bike must be safely upright on its centre stand on firm flat ground, in neutral with the neutral lamp glowing.",
+    "Take extreme care: a fall can injure you or others and damage the bike.",
+    "Only do this once the motorcycle is already securely supported.",
+    "The reset guidance does not provide instructions for lifting a fallen bike or safely placing it on the stand.",
+    "If you can safely confirm those conditions, switch both ignition and stop switches OFF, wait a few seconds, then switch them ON.",
+    "This does not establish that the bike is undamaged or safe to ride; if condition after the fall is uncertain, have authorised service inspect it."
+  ],
+  "source_checks": [
+    {
+      "source_id": "evidence_2f417777d76e8dac7b58bb32",
+      "source_sha256": "5ad94976c31a6f556c494e5927172b0aa1d8fb667845a99dc94860ff932c21fe",
+      "text_sha256": "78ed39d83eca7adc1c1b4af2f58b1f138417f5d7b12412d81c0813b34a1fc4d5",
+      "original_pdf_pages": [
+        80
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_5c5167d58aed6b39fababe88",
+      "source_sha256": "38ae05409cf2d6d83d605922348e3dbcfa3376d92202f2b88391a2f852ea9aec",
+      "text_sha256": "4c5c0f93d8e3d31dd6993e9202e7335a55414d4a6c7b546e07d05322c4fc0be2",
+      "original_pdf_pages": [
+        68
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a190ffe4c326d969345887b7",
+      "source_sha256": "d1db60b1de6bb03c954e36133ebce0cd5cfd5c7570d01fd3a16bda38af27b890",
+      "text_sha256": "eff1b6f162470f0718c16e2675ba72a5db532cda2e38673e63f2785716169e51",
+      "original_pdf_pages": [
+        68
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_a6731e9ee9f7e4f534f0f447",
+      "source_sha256": "c1e24a3180528666467cc9cd10ebe5535042d2c5ee96bfa8066897b052680962",
+      "text_sha256": "1122c3ee8bd47ff09aea0254afd33e86af2d3325bedc0a58543a33caaff0cecc",
+      "original_pdf_pages": [
+        68
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "list_item",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "evidence_d55c89c874343898c01f8c86",
+      "source_sha256": "7f64bd3e815b90ef7e7ba6f12df8aae7ccc3dcd45507cb1d0eb08263cab42905",
+      "text_sha256": "2d2fae3dd65218267934deca553ed73b1fd8794e1a384f242c98d86d7035e548",
+      "original_pdf_pages": [
+        68
+      ],
+      "authority": "OEM_MANUAL",
+      "text_correspondence": true,
+      "figure_render_inspected": false,
+      "object_type": "text",
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_240aa9e9a20851d2f8253ffc",
+      "source_sha256": "82c3f1dd380662b5b05f3d8a12ddcec2d3e67e49fd0df2d946244e57827e2547",
+      "text_sha256": "3240ebabe8d80af3f809643a7d378c660d294cd5c8450c4ead1359c4c9f589c8",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_46f874c8ba7f9aaffdd16ed8",
+      "source_sha256": "08a1b8dc795d8a6bc403bcc6487b846597db894d0a33986bd2f17e19f8e4094d",
+      "text_sha256": "c5fdc9f0a3e31b5bb742b1f95eda1cb2c63dc72806fb2bed7f278c83bbfee0e0",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_680d331344f35db68e62a9cf",
+      "source_sha256": "07443f9af7e1559ef0170bcf704f6417336910f9a55d1733c9df4d51513f3562",
+      "text_sha256": "a487e8c72f29656528681e11cdbc44e6c915e6949ec6618d8ac46c5ec9812876",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    },
+    {
+      "source_id": "policy_856cb9f6fbe76bd5e7103080",
+      "source_sha256": "abef3936886be93d17ed17418589c5be4a36818f7438de5de7e7e7f9b0dffa5e",
+      "text_sha256": "754f87368772cb64c058b342a4721d1ef9b20d84fb52e1dfe0f69d97101e4d9e",
+      "original_pdf_pages": [],
+      "authority": "PRODUCT_POLICY",
+      "text_correspondence": false,
+      "figure_render_inspected": false,
+      "object_type": null,
+      "note": "Correspondence is integrity evidence, not semantic entailment; tables/figures adjudicated with original layout."
+    }
+  ],
+  "original_pdf_pages_checked_for_correspondence": [
+    68,
+    80
+  ],
+  "visual_pages_inspected": [],
+  "verdict": "PASS_SCOPED_INITIAL_HANDLING",
+  "feedback": "Reset scope only alreadysecurelyupright centrestand, firmflatground andneutral/lamp. No lifting-fallenbike procedure or postfall rideclearance inferred.",
+  "coordinator_dispositions_required": [
+    "Bind final exact hashes, not old generic holds",
+    "No invented adaptive edge or automatic repeat",
+    "Keep safety, unsupported, ambiguous and system error distinct"
+  ],
+  "approval_scope": "Exact initial eligible text/action under all predicates TRUE, or exact trusted scenario/abstention handling; unresolved paths refer service",
+  "exclusions": [
+    "General vision-model evaluation",
+    "Public PDF/excerpt/image display",
+    "Live provider invocation/deployment",
+    "Adaptive follow-up branches without approved edge",
+    "Mechanical repair verification from customer success"
+  ],
+  "independent_human_review": false,
+  "coordinator_final_approval_pending": true,
+  "structural_errors": []
+}

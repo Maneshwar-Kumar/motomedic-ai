@@ -1,0 +1,51 @@
+{
+  "event_sha256": "12f64f2fe80bf3f5173a449bd0036873adbc141df576608b105eb4b72bfa284d",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "9b61202ad1d585973ac7c37a58a7194d72c425706619dca062de2d4cfdada1b2",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [
+      {
+        "consequence": "A rider can act on the standalone answer without engine-OFF/ventilation/no-ignition-source setup.",
+        "correction": "Keep direct capacity answer, then prefix any filling action with one compact conditional checklist: engine off, ventilated area, no smoking/flames/sparks, handheld devices off, open cap slowly; include explosive vapour and immediate painted-surface spill cleanup. Repeat revised answer consistently in assistant turn.",
+        "id": "GEN008-F1",
+        "issue": "Answer says stop filling at anti-splash plate but the rider-facing turns omit the refuelling prerequisites and explosive-vapour/spill caution; they exist only in engineering conditions/warnings.",
+        "supporting_source": "Original PDF8 printed6 refuelling guidelines; PDF27 printed25 CAUTION/WARNING."
+      }
+    ],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "Refuelling guidelines: handheld devices OFF; no smoking/flames/sparks; engine off; ventilation; cap slowly; bottom of anti-splash plate for expansion.",
+        "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+        "pdf_page": 8,
+        "printed_page": "6"
+      },
+      {
+        "checked_span": "Fuel table: unleaded gasoline; ethanol up to E20; fuel capacity17.0 L, low-fuel3 L±0.5 L, dead stock0.95–1.15 L; starred values approximate and actual filling capacity varies.",
+        "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+        "pdf_page": 18,
+        "printed_page": "16"
+      },
+      {
+        "checked_span": "Fuel tank cap WARNING: bottom of anti-splash plate; overfill may damage EVAP. CAUTION explosive vapour, ventilation/no sparks/flames/smoking; avoid painted-surface spills, wipe immediately.",
+        "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+        "pdf_page": 27,
+        "printed_page": "25"
+      }
+    ],
+    "payload_sha256": "ebd11d16c066da2d2c041165358fcac0f700d8cc222960a1e6bec880769018ef",
+    "reason": "Refuelling action in rider-facing answer omits safety prerequisites captured only in engineering conditions; required correction below. Engineering candidate review only; no human acceptance, formal source/dependency approval or release.",
+    "record_id": "GEN008",
+    "role": "reviewer",
+    "verdict": "NEEDS_REVISION",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "e87fcab84c0e56fd23a0d78aeb6c026f7acdb33d912a4fed76792455cbf1771d",
+  "recorded_at_utc": "2026-10-09T18:56:23.231169+00:00",
+  "sequence": 27
+}

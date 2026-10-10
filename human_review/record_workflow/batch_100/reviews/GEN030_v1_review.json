@@ -1,0 +1,28 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "187c9a07daa159e75576058ed00de515a3f42bf279152ddf8aa1fc2ff60bfba3",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "Temperature Celsius/Fahrenheit display choices; language English/Italian/Spanish/Portuguese; non-km consumption mpgUK/US.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 50,
+      "printed_page": "48"
+    },
+    {
+      "checked_span": "Languages continuation German/French; menu navigation and factory-reset confirmation separate.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 51,
+      "printed_page": "49"
+    }
+  ],
+  "reason": "All six language labels accurately retained and firmware scope bounded. Only exact engineering candidate review, no formal source/human/release approval.",
+  "record_id": "GEN030",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

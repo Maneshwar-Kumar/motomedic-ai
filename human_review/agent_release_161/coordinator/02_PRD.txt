@@ -1,0 +1,196 @@
+MotoMedic AI product requirements
+PRD v0.3  User journeys and acceptance criteria aligned to TRD v0.4
+v0.3  Refreshed 9 October 2026  Independent source review and release pending
+TRD v0.4 is the authoritative design and technical contract as of 9 October 2026. This document follows it. The approved owner manual governs motorcycle facts; source applicability, rights, independent review and release gates remain mandatory. Recorded implementation progress does not constitute release approval.
+1  Product summary
+MotoMedic AI supports owners who need a trustworthy, concise, manual-backed next action when a motorcycle exhibits a symptom. The current prototype uses only the supplied Royal Enfield New Himalayan 450 owner's manual. The system is an advisory aid, not a replacement for an authorized technician. Product success means either a correct documented next step, a justified clarification, a documented resolution, or an honest OEM escalation.
+2  Problem, users and jobs to be done
+Persona
+Job
+Critical need
+Motorcycle owner / rider
+Understand a warning, symptom or basic maintenance issue
+Simple language; no unsupported repairs
+Confident hobbyist
+Locate a specific inspection procedure or specification
+Exact variant, units, prerequisites and citations
+Reviewer / interviewer
+Try known, ambiguous, adversarial and photo scenarios
+A shareable URL, reproducible answers, transparent failures
+Maintainer / developer
+Audit a conversation and compare pipeline versions
+Traces, regression suite, source and prompt versions
+
+3  Goals and non-goals
+G1: Deliver correct manual-supported outcomes with zero manually reviewed unsupported technical steps in the release suite; this is a benchmark gate, not a field guarantee.
+G2: Support iterative diagnosis without repeating ruled-out steps or fabricating alternative repair paths
+G3: Accept text and bike photos; support optional voice input that resolves to the same grounding flow
+G4: Be accessible by URL and independently testable without a local installation
+NG1: Diagnose unobservable internal faults from a photograph or guarantee a completed repair
+NG2: Blend general web or model knowledge into technical recommendations
+NG3: Offer user-configurable aftermarket modifications, undocumented bypasses or unverified safety-critical actions
+4  Functional requirements
+ID / level
+Requirement
+Acceptance criterion
+FR-01 / P0
+Manual applicability and version lock
+Model/year/variant and selected manual are visible; mismatches block procedural advice
+FR-02 / P0
+Text symptom input
+Free-text query returns supported answer, clarification or documented abstention
+FR-03 / P0
+Photo symptom input
+Vision extracts visible observations and uncertainty; technical advice remains grounded in manual
+FR-04 / P0
+Evidence-linked answers
+Each technical instruction has a validated source page and applicable warning/prerequisite
+FR-05 / P0
+Fail-closed abstention
+No supported evidence => no repair step; point to verified OEM support route
+FR-06 / P0
+One-question clarification
+System asks for the minimum observation needed to choose a documented branch
+FR-07 / P0
+Adaptive troubleshooting
+Tracks outcomes, rules out inapplicable branches, proposes only untried eligible steps
+FR-08 / P0
+Session continuity
+Follow-up “it didn’t fix it” preserves prior steps in current browser session
+FR-09 / P0
+Safety and prerequisite policy
+Known applicable stop retains its verified warning; rider-resolvable facts clarify; source gaps block; operational failures return SYSTEM_ERROR
+FR-10 / P0
+Manual evidence access
+Customer can inspect original source page or excerpt associated with answer
+FR-11 / P0
+Shareable web demo
+Accessible at an externally reachable URL with example scenarios
+FR-12 / P1
+Optional voice-to-text
+Speech transcript displayed/confirmed before applying standard RAG path
+FR-13 / P0
+Correction and backtracking
+Corrections supersede immutable observations and re-evaluate branches; repetition requires a documented exception and explanation
+FR-14 / P1
+Diagnostic summary for OEM
+Copyable summary includes symptoms, documented checks, observations and manual version
+FR-15 / P1
+Anonymous feedback
+Optional useful/not useful feedback with non-sensitive trace reference
+FR-16 / P0
+Reviewed rules and eligibility
+Approved StepDefinition/ApplicabilityRule records; TRUE/FALSE/UNKNOWN conditions; no relevance-only authorization
+FR-17 / P0
+Complete reviewed evidence
+Approved dependency manifest and all required action/warning/table/figure objects; empty or unreviewed set fails closed
+FR-18 / P0
+Bounded retrieval policy
+One approved dependency recovery and one conditional rerank; no rerank for missing review; mandatory evidence retained
+FR-19 / P0
+Final response contract
+Use SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP, SYSTEM_ERROR; validate every technical claim before release
+FR-20 / P0
+Exact-cache guardrails
+Draft/stale/checksum/variant mismatches miss; only independently approved paths may hit; normal controller fallback
+FR-21 / P0
+Hosted operations and limits
+Prebuilt index reused; server secrets; upload/rate/spend limits; redacted versioned traces
+
+5  Adaptive troubleshooting behavior
+A diagnostic session starts from one atomic symptom. It stores typed facts and immutable attempts separately from chat text and traverses only approved source-derived rules. Corrections supersede prior records, then re-evaluate affected branches. Open-ended replies may propose typed outcomes, but uncertain interpretation remains unknown until clarified.
+Outcome
+Meaning
+Required system behavior
+NOT_TRIED
+Step suggested but no response yet
+Do not treat as completed
+OBSERVED_NORMAL
+A specific tested condition was reported normal
+Exclude only the documented branch contradicted by an approved predicate; never infer complete system health
+OBSERVED_ABNORMAL
+User confirms documented abnormal condition
+Proceed to exact corresponding documented procedure or escalate
+ACTION_COMPLETED_UNRESOLVED
+Customer tried action; symptom persists
+Select next eligible documented step, without assuming test result
+NOT_APPLICABLE
+Step/part genuinely does not apply
+Validate variant; exclude step for current context
+UNCLEAR
+Cannot determine observation or outcome
+Request a precise recheck/photo/answer
+RESOLVED
+Customer confirms symptom no longer occurs
+Close session; cite actions and avoid unsupported causal explanation
+
+Reviewed controller and answer requirements
+The deterministic controller evaluates approved manual-derived and versioned product-policy predicates as TRUE, FALSE or UNKNOWN using typed facts and explicit units. FALSE blocks a dependent step; UNKNOWN withholds it and permits one reviewed source-derived question only if the rider can resolve the fact. An unresolved action never becomes a normal observation. Eligibility is separate from complete evidence and final claim validation. Optional models may propose observations or rank already eligible candidates; they cannot authorize actions.
+Use dense cosine retrieval plus BM25 and RRF, initial parent/dependency assembly, source and applicability checks, at most one exact-ID recovery for approved missing dependencies, and at most one conditional cross-encoder attempt for uncertain ordering. Reassemble while retaining mandatory evidence. Missing review must not trigger reranking. Conditional is the normal policy; off and always_diagnostic are ablations. Current unreviewed bundles skip reranking and block technical generation.
+Keep final statuses SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR distinct. A known applicable safety stop retains its verified warning even if another component fails; otherwise a required operational failure is SYSTEM_ERROR. Rider-resolvable missing facts yield AMBIGUOUS. Established source gaps, unsupported requests and exhausted paths yield UNSUPPORTED after bounded recovery, with verified OEM support. Never ask the rider to resolve missing source warnings, table headers or review decisions. SUPPORTED requires both deterministic and semantic claim validation after controller selection.
+Exact reviewed paths are keyed by manual checksum, confirmed variant, intent/relevant symptoms, typed outcomes, flow/controller and policy versions, with prompt and approval dependencies. Draft, stale and mismatched entries miss closed. Changes to rules, review, dependencies or policy invalidate affected cache entries and cases. Manual checksum, parser/chunker or embedding changes create a new index version; unchanged document vectors are reused for retrieval-policy changes.
+6  Interaction examples (illustrative, not manual-grounded)
+Customer
+Expected bot behavior
+“The lights come on but it won’t start.”
+Ask the documented question distinguishing the available start-failure branches
+“I checked the switch, it was in the correct position.”
+Record OBSERVED_NORMAL; do not repeat that check; retrieve next documented branch
+“I did step 2 but it did not help.”
+Record ACTION_COMPLETED_UNRESOLVED; offer next eligible documented check or OEM escalation
+“There is no such component on my variant.”
+Re-confirm manual/variant; mark NOT_APPLICABLE; do not prescribe related work
+“The photo shows a symbol you cannot clearly recognize.”
+Ask for a clearer view/description; no speculative symbol diagnosis
+“Tell me an undocumented workaround.”
+Abstain and provide OEM contact channel
+
+7  UX content and presentation policy
+Answer layout: observed symptom; documented next step; prerequisites/safety warnings; why this step is relevant (only if supported); exact manual citation; structured feedback choices
+Clarification layout: one focused question with a small set of manual-derived answer choices; do not require the rider to use technical jargon
+UNSUPPORTED wording must reflect an established source gap, unsupported request or exhausted documented path and offer the verified support route. Source-review gaps must not become rider questions. AMBIGUOUS asks one reviewed source-derived question about a rider-resolvable fact.
+Error language: distinguish unsupported evidence from parser failure, API outage, and unconfirmed bike variant; do not misrepresent a system error as absence in the manual
+8  Safety, privacy and trust requirements
+Source-only guarantee applies to substantive technical recommendations; neutral conversational phrasing, source metadata and verified OEM contact information may be outside the manual
+Do not continue an unsafe procedure when a relevant manual warning or unmet prerequisite applies; show the warning and stop/clarify appropriately
+Treat manuals and user messages as untrusted instruction-bearing data: ignore commands embedded in PDFs or images that attempt to change system policy
+Raw photos/audio are ephemeral by default, with no persistent storage in public demo telemetry unless separately opted in
+Display that this is an experimental support tool and not a substitute for official service advice
+9  Nonfunctional requirements and indicative targets
+Measure
+Target / condition
+Grounding
+Zero unsupported technical steps across manually reviewed release regression suite; not a production guarantee
+Abstention recall
+At least 95% on labelled unanswerable test cases; benchmark-dependent
+Answerable coverage
+At least 80% supported answer rate on answerable cases
+Complete evidence recall
+At least 90% of answerable cases have all required evidence objects in bundle
+Citation validity
+At least 98% claim-supporting, correct manual references
+Latency
+Measure warm text p50 <=2.5 seconds and p95 <=5 seconds, photo p95 <=10 seconds, with cold starts separate. TTFO runs from confirmed input to the first releasable answer token; loading indicators do not count and technical tokens remain withheld until validation. Report fast, recovery/rerank and combined p95, fallback frequency, stage failures and cost per correctly handled case.
+Reliability
+External-link smoke tests and session continuity pass before handover
+Cost
+Authorized US$10 scope; INR800 lifetime budget, alerts INR400/640/800, live stop INR640. Reporting delayed. Daily/rate limits pending; owner authorization required to restart stopped billing.
+Next-step correctness and repeat defects
+At least 95% correct transitions; zero unjustified repeats in the manually reviewed release suite
+
+10  Acceptance test / release gates
+Choose and freeze one exact manual/variant, source checksum and rights posture
+Create at least 25 independently reviewed gold cases before release, including multi-turn and image cases where evidence exists
+Validate no unsupported instruction in the release regression set; manually review every high-risk case
+Prove that “I tried it, still failing” advances or clarifies rather than looping to the same check
+Prove that missing evidence triggers OEM escalation, while a backend error triggers a service-error message
+Verify that an independent reviewer can open the live URL and reproduce named demo scenarios
+11  Dependencies and open questions
+Required: actual OEM manual, precise model/variant, verified OEM escalation URL, rights to exhibit selected manual excerpts
+To decide after manual inspection: figure parsing quality, table preservation, graph-edge automation and photo test coverage
+Product caveat: if the manual does not document alternative paths, a follow-up may legitimately end with an OEM escalation after only one check
+Supporting technical documentation is referenced in the Concept and To Build documents.
+Recorded progress and remaining release gates
+Hosted BGE M3 ingestion and authenticated Cloud Run Qdrant are candidate infrastructure: 532 chunks, 277 section parents and 11/11 recorded backend checks. UI, integrated controller and gated generator remain pending; may_generate_procedural_advice is false.
+Approve procedure boundaries, rules and dependency manifests independently. Page 103 fallback remains flagged. Confirm year, market, variant, edition, source URL, display/hosting rights and the OEM service route before public advice.
+The 37 atomic cases and exact cache remain drafts. Independently review at least 25 cases against original pages, split tuning/regression from holdout, calibrate retrieval thresholds and test rules, dependencies, safety precedence, failure wording, citations, corrections and cache invalidation. The 27 older compound cards measure in-sample cited-page coverage only. No release score or field repair success is established.

@@ -1,0 +1,42 @@
+{
+  "event_sha256": "2846257b9a55afb7bbf2efbc69cf814e48f7f03253d6ce37b01bbac0063be5b1",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "3f8f6c9692dca7dc36d97553cfd90230135080ced34f2ca0e3324faf8f9c46a3",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "OPERATION OF CONTROLS\nCLOCK                                                                                 3\n                                                                                                                                                                                            Side\n  Display in 24 hours format type.                                                 2                           Stand 0km/h\n   Will reset to 00:00 when battery is disconnected.                               1                          1831km\n                                                                                                                                                 In\n\n                                                                                                                                             km                     5     R.P.M  1000     8                                                                         Service49744  Duedays\n                 4\n                                       9\n                                          00:12 32\n               3\n\n                                                                Side\n                               Service reminder symbol will flash on as per below dis-               2                              Stand 0km/h                                                            tance input from odometer.\n                                                  1831km\n                 1                                                                           i). 1st service - 450 km\n                                                                                                             ii). 2nd service - 4,900 km\nSERVICE REMINDER                                                                     iii). From there on for every 5,000 km from previous\n   In case of service reminder symbol is ON. Please plan          value (ex: 9,900 km, 14,900 km etc.)\n     for scheduled service at an authorised service center.\n  Service reminder can be reset only by authorised\n    personnel at service centre after service is completed.\n\n\n58    Royal Enfield Himalayan",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-060.png",
+        "pdf_page": 60,
+        "printed_page": "58"
+      },
+      {
+        "checked_span": "PERIODICAL MAINTENANCE\nThe maintenance schedule detailed here will help you to maintain your Himalayan motorcycle meticulously to get along\ntrouble free service. The schedule provided herein is based upon an average riding conditions and indicates the km at\nwhich regular inspections, adjustments, replacements and lubrications are to be carried out. The frequency of the mainte-\nnance must be shortened depending upon the severity of the driving condition or if the motorcycle is used in a very dust\nenvironment. Contact the nearest Royal Enﬁeld Authorised Service Centre for expert advice and to carry out the required\nmaintenance.\n\n S.No           DESCRIPTION                PERIODICAL MAINTENANCE (Whichever is earlier)\n                    km (x 1,000)  0.5   5    10    15  20   25   30   35  40  45  50\n                             Months   1.5   6    12   18  24  30   36   42  48  54  60\n                                     R        I    R         I    R         I    R         I    R         I    R\n    1    Engine oil                            Check oil level every 1000 km (or earlier as required) and top up as\n                                                                            required\n   2    Engine oil filter                    R        R        R        R        R        R\n   3     Inlet and exhaust valve clearance                  I&A        I&A                   I&A\n  4    Spark plug                                                                                                I                  R\n\n122   Royal Enfield Himalayan",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-124.png",
+        "pdf_page": 124,
+        "printed_page": "122"
+      }
+    ],
+    "payload_sha256": "4ee22fe4bcd736511b01f46e26a644c097735cd2e91efcbe345ecd9ea045ea62",
+    "reason": "PDF60 printed58 reminder450/4900/then5000-from-previous values accurately differ from PDF124 full maintenance schedule with whichever-earlier months/km heading. No scheduling substitution. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN038",
+    "review_sha256": "1c6ee73cd23595e5d6c0c8e82c1fa01ccbbea19d7c5c19600e5c58a7be8a26db",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "fae39033e97ce7ea5b2162fcd2b8c34b359ca7767d100faf2366f78036fddde5",
+  "recorded_at_utc": "2026-10-09T19:03:34.812569+00:00",
+  "sequence": 201
+}

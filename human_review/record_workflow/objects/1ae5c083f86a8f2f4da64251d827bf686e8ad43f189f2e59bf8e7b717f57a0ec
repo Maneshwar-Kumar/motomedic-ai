@@ -1,0 +1,27 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "6bf50be775fe0ca4252e3272c945880533bd2ab85b9b8fb9dc5d109726c30ed6",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "RECOMMENDED LUBRICANTS\n\n                 ENGINE OIL                     COOLANT        FRONT FORK OIL    BRAKE FLUID\n\n                                                TOTAL COOLELF AUTO   Grade   10W40 API SN, JASO MA2, Semi Synthetic                                     SS-47G           DOT 4*                                              SUPRA -37 ºC\n\n                                                                 Radiator:\n                               1 st dry fill: 2.4 L                    Dry fill - 915 ml     RH fork: 589 ± 2.5 ml   Front - 90 ± 5 ml\n                                                                  Service fill - 815 ml  Capacity\n                            Refill: 2.1 L for oil service              Expansion Tank:                                                             LH fork: 507 ± 2.5 ml    Rear - 80 ± 5 ml                          (Including filter change)                      Fill to max mark - 200 ml\n* Do not mix DOT 4 or other brake fluid together.\nNOTE\n1. Coolant from is ready to use and does not require mixing.\n2. Recommendation subject to change without notice.\n3. The above values are approximate and the actual capacity will vary.\nCAUTION\nUse of wrong oil grade will reduce the life of the moving parts and seriously aﬀect performance.\n                                                               Royal Enfield Himalayan    19",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-021.png",
+      "pdf_page": 21,
+      "printed_page": "19"
+    }
+  ],
+  "payload_sha256": "d74602091b3e8d3ce71a7c9cb0b8d0acd6fc889487814894dc9061fa9b1bafd1",
+  "reason": "GEN014-J1 resolved with visible global wrong-oil-grade life/performance caution, exactSS-47G RH589 +/-2.5ml/LH507 +/-2.5ml and approximate-capacity note intact. Independent PDF21 table recheck adds no fork-service instruction. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN014",
+  "review_sha256": "767176e46576a67b16b2b5a86a1c3b1b25d2e737439625ef2b151efa9687e66f",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 2
+}

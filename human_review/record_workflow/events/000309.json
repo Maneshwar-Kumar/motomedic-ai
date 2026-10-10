@@ -1,0 +1,45 @@
+{
+  "event_sha256": "9e5ab9480407a37c5327f576f5e4a0fa065e883a9b7259fcf6b78c1e542c0d35",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "9f9eb199511b8e389e76793d6b73ce7c196b480807932798b8b0d426e9fc92cd",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {
+      "GEN086-F1": "ACCEPTED: independently checked against original page and exact candidate; correction remains required before agent closure."
+    },
+    "findings": [
+      {
+        "consequence": "Citation completeness fails for the released service instruction and its severity warning.",
+        "correction": "Add original PDF66 printed64 to source_refs and retain documented serious-injury/loss-of-life consequence with inspection/correction referral; keep known safety stop through outage and no road-test instruction.",
+        "id": "GEN086-F1",
+        "issue": "Answer claims authorised inspection/correction but cites only PDF63.",
+        "supporting_source": "Original PDF63 printed61 ABS CAUTION; PDF66 printed64 inspection/correction and failure consequence."
+      }
+    ],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "OPERATION OF CONTROLS\nABS INDICATOR LAMP                      FUEL GAUGE\n\n                                                                                                             7  When the ignition and engine kill switch are switched                               5     R.P.M6   1000\n     in “ON” position the ABS sign will glow and remain                          4                  8\n    “ON” till the motorcycle attains a speed of 5 km/h and                                                      00:12 329\n    turns “OFF”. If light up again in case of any ABS system                         3\n\n                                                                                                                                                                                  Stand    malfunction.                                                                         2                            Side                                     0km/h\n                                             9                                                                                             1831km\n                                                 00:12 32                                                  1                     3\n\n                                                                 Side\n                     2                          Stand 0km/h            Digital with 4 segment bar graph.\n                                                          1831km\n                       1                     Last segment blinking along with low fuel tell tale “ON”\n                                                                      for low fuel condition.\n                                     NOTE\nCAUTION                                        The fuel indicator in the instrument cluster will refresh after\n                                                                  refueling, once the side stand is retracted and the ignition is\n  Do not run motorcycle in case the ABS indicator lamp is   turned ON.\n    “ON” continuously above 5 km/h.\n                                                               Royal Enfield Himalayan    61",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-063.png",
+        "pdf_page": 63,
+        "printed_page": "61"
+      }
+    ],
+    "payload_sha256": "fcd866db3084edc765c0e6c46f0cf621bebb07baaa622037001d1ca0cbd51d27",
+    "reason": "AcceptGEN086-F1: originalPDF63 printed61 warning supports known stop above5km/h, but service inspection/correction and serious-injury/loss-of-life consequence are PDF66 printed64 and must be included as dependency. Keep verified safety precedence despite synthetic retrieval outage. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN086",
+    "review_sha256": "57a4494344532f3a767c0e5ebd233f60bcf06257de8034e3daf85c8979c52cb3",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "NEEDS_REVISION",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "ae9dd81a7435f2b5e313cb335a2e83eb7e66f634c0ca9594ad3927ce002f1f58",
+  "recorded_at_utc": "2026-10-10T02:25:44.869802+00:00",
+  "sequence": 309
+}

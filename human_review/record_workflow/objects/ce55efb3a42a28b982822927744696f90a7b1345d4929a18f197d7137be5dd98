@@ -1,0 +1,23 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "606fb7cbb8641381bc6e9c361e72c9080a3e86c9fda5fb9ee4832af6ed2d486c",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "Fuel table: unleaded gasoline; ethanol up to E20; fuel capacity17.0 L, low-fuel3 L±0.5 L, dead stock0.95–1.15 L; starred values approximate and actual filling capacity varies.",
+      "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+      "pdf_page": 18,
+      "printed_page": "16"
+    }
+  ],
+  "payload_sha256": "5d38ed99d1d743c3c2f7eb8913f26664646d88b309ee990ecf608a56381647b8",
+  "reason": "Exact approximate warning/dead-stock values and ranges preserved; no remaining range or road-test promise. Engineering candidate review only; no human acceptance, formal source/dependency approval or release.",
+  "record_id": "GEN009",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

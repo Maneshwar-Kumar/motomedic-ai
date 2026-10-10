@@ -1,0 +1,27 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "0781e76acaf096cf4475a44a5dc00907d25d7216516ef135fdffdaf58c3bfc77",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "TECHNICAL SPECIFICATIONS\n                                                     Turn signal.......................... Front - 12 V, 2 W x 1 no\nELECTRICALS                                                                              Rear - 12 V, 4.2 W x 1 no\nAlternator output ............... 280 W @ 1400 rpm            Hazard warning .................. Front - 12 V, 2 W x 2 nos\nGeneration.......................... Alternator, III Phase                                     Rear - 12 V, 4.2 W x 2 nos\nSystem................................ 12 V - DC                                     Horn.................................... 12 V, 2.5 A\nBattery................................ 12 V - 8 Ah VRLA                  Starter motor...................... 12 V - 0.7 kW\nHead lamp .......................... 12 V, FPL 1.5 W LED, low beam    Charger port. ....................... USB 2.0 Type C - 5 V, 2 A output\n                             12.12 W, high beam + low beam\n                          14.22 W                   WARNING\nBrake lamp ......................... 12 V, 1.4 W                     Using bulbs/electrical gadgets other than specified rating\n                                                                         will lead to overloading/erratic behavior/premature failureTail lamp............................. 12 V, 0.31 W\n                                                              of electrical system.\nLicense plate illuminator .... 12 V - LED                       Modifications or fitments which are not approved by Royal\nInstrument cluster.............. Colour TFT (Thin Film             Enfield, will seriously affect the performance of the vehicle\n                            Transistor)                   and will render the warranty void.\n\n                                                              Royal Enfield Himalayan     17",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-019.png",
+      "pdf_page": 19,
+      "printed_page": "17"
+    }
+  ],
+  "payload_sha256": "26bf39ebf67fac5f7076f4c23e1cee8ab45ebcf0524965801b5f16d90d6cac10",
+  "reason": "GEN016-F1 resolved: exact unsafe any-rating electrical request nowSAFETY_STOP; PDF19 rating/overload/erratic/premature-failure warning and fitment referral retained. Connector does not confer suitability. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN016",
+  "review_sha256": "1574d832381ba6a205d8569fbf6a45e93d26e903f45cd8eea8b20918ed3e53c6",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 2
+}

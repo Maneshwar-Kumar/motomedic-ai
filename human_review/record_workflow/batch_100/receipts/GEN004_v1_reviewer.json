@@ -1,0 +1,29 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "e8da3e2f1e52f60ec5991dd4536338ba960635caf89050522bf6eb0ae2482cce",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "ACCESSORIES AND LUGGAGE: accessory-equipped motorcycle 110 km/h ceiling solo/pillion/payload; keep luggage low/close/even; no weight on handlebars/front forks; model-specific genuine accessory installation.",
+      "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+      "pdf_page": 14,
+      "printed_page": "12"
+    },
+    {
+      "checked_span": "Incorrect loading affects stability/handling and risks serious injury/loss of life; respect model/design; pannier/top-box max payload is in GMA fitting instructions.",
+      "inspection_method": "Independent original PDF text and full-page layout read; printed label checked on original footer.",
+      "pdf_page": 15,
+      "printed_page": "13"
+    }
+  ],
+  "payload_sha256": "511117a5fc246adf3ab545ce808a716735b492e914f23e18a3b235e835c5d4a7",
+  "reason": "Pass applies only to honest source-limited abstention: original page13 explicitly refers accessory payload to external GMA fitting instructions. No kilogram limit or invented universal loading rule is supplied; separate formal source/rights gates remain pending. Engineering candidate review only; no human acceptance, formal source/dependency approval or release.",
+  "record_id": "GEN004",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

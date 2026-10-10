@@ -1,0 +1,37 @@
+{
+  "event_sha256": "d9b2d234a4c59d2d8ee98cacf61b8a55e19007677be1faddd69661fe5c80ca15",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-source-reviewer",
+    "author_sha256": "f61d72bcb46502503a3f88fe9c949c1a5f5e8debc5839d9a21e8f58fb0a2de13",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "USB2.0 TypeC5V2A output. WARNING other electrical gadget ratings overload/erratic behaviour/premature failure; unapproved fitment affects performance/warranty.",
+        "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+        "pdf_page": 19,
+        "printed_page": "17"
+      },
+      {
+        "checked_span": "Charging only/no data; constant not fast/dash; time varies capacity/SOC/circuitry; cap closed/locked; >2.5A shutdown; engine-running only; approved high-quality cable.",
+        "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+        "pdf_page": 65,
+        "printed_page": "63"
+      }
+    ],
+    "payload_sha256": "e994dff524c1054c7b5cce6f50d763530e6a0aa55da7c4518dc7ddc37aedeccf",
+    "reason": "Nominal output2A correctly distinct from >2.5A shutdown; engine-only qualification retained. Only exact engineering candidate review, no formal source/human/release approval.",
+    "record_id": "GEN017",
+    "role": "reviewer",
+    "verdict": "PASS",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "f980cb112391fd4b4a98f3b9952079714ee75af8cc77ad0d315263d886fb6ffd",
+  "recorded_at_utc": "2026-10-09T18:58:49.125182+00:00",
+  "sequence": 86
+}

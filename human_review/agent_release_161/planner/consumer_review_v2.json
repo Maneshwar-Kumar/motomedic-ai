@@ -1,0 +1,62 @@
+{
+  "final_source_review_not_replaced": true,
+  "human_review_reintroduced": false,
+  "observed_validation": {
+    "action_previously_attempted": "FALSE",
+    "action_without_attempt_history": "UNKNOWN",
+    "actual_manual_verified": true,
+    "case_source_step_rule_dependency_bindings_verified": true,
+    "code_unchanged_during_validation": true,
+    "constructor_succeeded": true,
+    "provider_calls": 0,
+    "records": 161,
+    "string_boolean": "UNKNOWN",
+    "unitless_number": "UNKNOWN"
+  },
+  "release_manifest_path": "human_review/agent_release_161/coordinator/release_manifest_v2.json",
+  "release_manifest_sha256": "8d9330c551777f764d35f01b05ab9822db208abd6ba3cda618ec3fe35121554f",
+  "remaining_material_findings": [],
+  "resolutions": [
+    {
+      "evidence": "Evaluatedroute step matches boundstep; step canonicalrecord identity and dependency step identity verified.",
+      "id": "C01",
+      "status": "RESOLVED"
+    },
+    {
+      "evidence": "Pinned finalmanifest/checker v2 inventory; percase checker actor/verdict/report SHA/final step anddependency androute hashes consumed. Whole finalpackage outputhash equality protects exact checkedbytes. No adaptive/provider execution authorized.",
+      "id": "C02",
+      "status": "RESOLVED_WITH_INITIAL_ONLY_SCOPE"
+    },
+    {
+      "evidence": "Route source_support_ids and rule source/policy/clarification references checked against exact bound sourceobjects.",
+      "id": "C03",
+      "status": "RESOLVED"
+    },
+    {
+      "evidence": "Safety-rule or repeat-rule presence returnsUNKNOWN; ACTION requires history and prior same-step attempt returnsFALSE. Explicitly no automaticfollowup or providerpermission.",
+      "id": "C04",
+      "status": "RESOLVED_WITH_INITIAL_ONLY_SCOPE"
+    },
+    {
+      "evidence": "Unresolved/next evidence closure, source-spans textSHA andbounds, parentprocedure objectSHA plus independentprocedure attestation checked; adaptive edges reject.",
+      "id": "C05",
+      "status": "RESOLVED"
+    },
+    {
+      "evidence": "Conflicting package basenames rejected; package manifest outputs match independently checked exactoutputs.",
+      "id": "C06",
+      "status": "RESOLVED"
+    },
+    {
+      "evidence": "All161 manifestIDs equal immutable dispatchedplanner inventory exactIDset; every row binds its source step ruledependency route andfixture.",
+      "id": "C07",
+      "status": "RESOLVED"
+    }
+  ],
+  "reviewed_file": "human_review/agent_release_161/approval_consumer.py",
+  "reviewed_file_sha256": "ba55865c38314afbbde4385f8f469de4f75f43207c85429cc627472e79f93cef",
+  "reviewer_actor": "check_planner",
+  "schema_version": "planner-consumer-review-v2",
+  "scope": "Offline exact approved INITIAL_ROUTE verification only; no adaptive followups, providercalls, deployedrunner changes or source-display grant.",
+  "verdict": "PASS_WITH_EXPLICIT_OFFLINE_INITIAL_SCOPE"
+}

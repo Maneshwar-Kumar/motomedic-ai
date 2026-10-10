@@ -1,0 +1,41 @@
+{
+  "schema_version": "root-agent-release-validation-v2",
+  "verified_at_utc": "2026-10-10T11:48:28.726848+00:00",
+  "release_manifest_path": "human_review/agent_release_161/coordinator/release_manifest_v2.json",
+  "release_manifest_sha256": "8d9330c551777f764d35f01b05ab9822db208abd6ba3cda618ec3fe35121554f",
+  "decision_authority": "OWNER_DELEGATED_AGENT_COORDINATOR",
+  "record_count": 161,
+  "counts": {
+    "APPROVED_AGENT_RELEASE": 161
+  },
+  "bound_output_file_count": 179,
+  "independent_case_source_step_rule_dependency_bindings": "PASS",
+  "source_manual_applicability": "APPROVED_SELECTED_MANUAL_HIMALAYAN_BS6_SCOPE",
+  "tests_passed": 15,
+  "test_command": "python -m unittest discover -s human_review/agent_release_161 -p 'test_approval_consumer.py' -v",
+  "consumer_sha256": "ba55865c38314afbbde4385f8f469de4f75f43207c85429cc627472e79f93cef",
+  "test_file_sha256": "b049fb0da0916d3b56282c85e2a3357af5f149b2ef6594f1a7e08b5805a1a554",
+  "human_review_required": false,
+  "provider_calls": 0,
+  "shared_runtime_installed": false,
+  "deployment_performed": false,
+  "approved_scopes": [
+    "SOURCE_MANUAL_APPLICABILITY",
+    "SOURCE_CONTENT",
+    "INITIAL_ROUTE"
+  ],
+  "excluded_scopes": [
+    "Unimplemented adaptive transitions",
+    "Public PDF/excerpt/figure delivery",
+    "General vision model validation",
+    "Measured live provider performance",
+    "Deployment"
+  ],
+  "superseded_version_preserved": true,
+  "independent_consumer_review": {
+    "path": "human_review/agent_release_161/planner/consumer_review_v2.json",
+    "sha256": "46593648d337c77e66765a21c1d6e6ea2353323e0398c4c2e7f2ccc56c9ddbd3",
+    "verdict": "PASS_WITHIN_OFFLINE_INITIAL_ROUTE_SCOPE",
+    "remaining_material_findings": 0
+  }
+}

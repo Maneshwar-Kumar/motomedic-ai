@@ -1,0 +1,29 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "4f729128c415a8a09ba2b621ba487da44b6e18ba0c0d4675564bde6cb975853f",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "CHARGER warning: rain damage, one mobile at a time/no other devices, wrong insertion, cap full closed, no conductive insertion.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 64,
+      "printed_page": "62"
+    },
+    {
+      "checked_span": "Charging only/no data; constant not fast/dash; time varies capacity/SOC/circuitry; cap closed/locked; >2.5A shutdown; engine-running only; approved high-quality cable.",
+      "inspection_method": "Independent original PDF text and full-page layout checked; footer label confirmed.",
+      "pdf_page": 65,
+      "printed_page": "63"
+    }
+  ],
+  "payload_sha256": "099be4734aade8a82c9485aa44719dfd2a8a3f7a81f8995a0a207679ce562e50",
+  "reason": "Rain warning and cap protection match source; no phone warranty adjudication. Only exact engineering candidate review, no formal source/human/release approval.",
+  "record_id": "GEN020",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 1
+}

@@ -1,0 +1,107 @@
+import unittest
+from approval_consumer import predicate, safe_path, object_hash, ApprovalConsumer
+import copy
+from pathlib import Path
+
+
+class EligibilityTests(unittest.TestCase):
+    def rule(self, kind="BOOLEAN", expected=True, op="EQ", unit=None):
+        return {"fact_key": "checked", "predicate_type": kind,
+                "expected_value": expected, "operator": op, "unit": unit}
+
+    def test_unknown_is_not_approval(self):
+        self.assertEqual(predicate(self.rule(), {}), "UNKNOWN")
+        self.assertEqual(predicate(self.rule(), {"checked": None}), "UNKNOWN")
+
+    def test_no_string_or_numeric_boolean_coercion(self):
+        for value in ("true", "yes", "normal", 1, 0):
+            self.assertEqual(predicate(self.rule(), {"checked": value}), "UNKNOWN")
+        self.assertEqual(predicate(self.rule(), {"checked": True}), "TRUE")
+        self.assertEqual(predicate(self.rule(), {"checked": False}), "FALSE")
+
+    def test_number_requires_matching_unit(self):
+        r = self.rule("NUMBER", 5, "LE", "seconds")
+        self.assertEqual(predicate(r, {"checked": 4}), "UNKNOWN")
+        self.assertEqual(predicate(r, {"checked": {"value": 4, "unit": "minutes"}}), "UNKNOWN")
+        self.assertEqual(predicate(r, {"checked": {"value": 4, "unit": "seconds"}}), "TRUE")
+        self.assertEqual(predicate(r, {"checked": {"value": 6, "unit": "seconds"}}), "FALSE")
+
+    def test_bool_cannot_be_number_and_nonfinite_is_unknown(self):
+        r = self.rule("NUMBER", 5, "LT")
+        for value in (True, "4", float("nan"), float("inf")):
+            self.assertEqual(predicate(r, {"checked": value}), "UNKNOWN")
+
+    def test_enum_does_not_infer_health(self):
+        r = self.rule("ENUM", "OBSERVED_NORMAL")
+        self.assertEqual(predicate(r, {"checked": "ACTION_COMPLETED_UNRESOLVED"}), "FALSE")
+        self.assertEqual(predicate(r, {"checked": "normal"}), "FALSE")
+
+    def test_unapproved_operators_are_unknown(self):
+        self.assertEqual(predicate(self.rule(op="EXEC"), {"checked": True}), "UNKNOWN")
+        self.assertEqual(predicate(self.rule(op="LT"), {"checked": True}), "UNKNOWN")
+
+    def test_artifact_paths_cannot_leave_workspace(self):
+        with self.assertRaises(ValueError):
+            safe_path(Path.cwd(), "../outside.json")
+
+    def test_content_hash_changes_for_warning_or_unit_mutation(self):
+        original = {"claim": "Keep the required warning", "unit": "seconds"}
+        self.assertNotEqual(object_hash(original), object_hash({**original, "claim": ""}))
+        self.assertNotEqual(object_hash(original), object_hash({**original, "unit": "minutes"}))
+
+
+class FinalPackageTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.consumer = ApprovalConsumer(Path(__file__).resolve().parents[2], "human_review/agent_release_161/coordinator/release_manifest_v2.json")
+
+    def test_exact_all_cases_and_scoped_authority(self):
+        result = self.consumer.check_bindings()
+        self.assertEqual(result["records"], 161)
+        self.assertFalse(result["human_review_required"])
+        for rid in self.consumer.records:
+            self.assertTrue(self.consumer.scope_ready(rid, "SOURCE_CONTENT"))
+            self.assertTrue(self.consumer.scope_ready(rid, "INITIAL_ROUTE"))
+            self.assertFalse(self.consumer.scope_ready(rid, "ADAPTIVE_TRANSITIONS"))
+            self.assertFalse(self.consumer.scope_ready(rid, "DISPLAY_FIGURES"))
+
+    def test_warning_mutation_rejected(self):
+        c = copy.deepcopy(self.consumer)
+        c.registry["steps"]["GEN001:candidate-v3"]["claims"][0]["text"] = "Proceed without the warning."
+        with self.assertRaises(ValueError):
+            c.check_bindings()
+
+    def test_existing_wrong_case_step_rejected(self):
+        c = copy.deepcopy(self.consumer)
+        c.routes["GEN001"]["step_id"] = "GEN003:candidate-v3"
+        with self.assertRaises(ValueError):
+            c.check_bindings()
+
+    def test_source_mutation_rejected(self):
+        c = copy.deepcopy(self.consumer)
+        source_id = next(iter(c.records["GEN001"]["artifact_bindings"]["source_sha256s"]))
+        c.sources[source_id]["exact_text"] = "Unsupported replacement source."
+        with self.assertRaises(ValueError):
+            c.check_bindings()
+
+    def test_cannot_fabricate_human_inspection(self):
+        c = copy.deepcopy(self.consumer)
+        c.records["GEN001"]["human_signoff"] = True
+        with self.assertRaises(ValueError):
+            c.check_bindings()
+
+    def test_empty_facts_cannot_seed_from_fixtures(self):
+        result = self.consumer.eligibility("GEN001", {})
+        self.assertEqual(result["eligibility"], "UNKNOWN")
+        self.assertEqual(self.consumer.eligibility("GEN001", {"bike_scope_confirmed": True})["eligibility"], "TRUE")
+
+    def test_attempted_action_is_not_normal_or_repeat_permission(self):
+        sid = next(k for k,v in self.consumer.registry["steps"].items() if v["kind"] == "ACTION")
+        rid = self.consumer.registry["steps"][sid]["canonical_record_id"]
+        result = self.consumer.eligibility(rid, {}, [{"step_id": sid, "outcome": "ACTION_COMPLETED_UNRESOLVED"}])
+        self.assertEqual(result["eligibility"], "FALSE")
+
+
+
+if __name__ == "__main__":
+    unittest.main()

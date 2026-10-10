@@ -1,0 +1,22 @@
+{
+  "actor": "batch100-source-reviewer",
+  "author_sha256": "f4027e83989e164aba9e1df04ea95c6b73755b681d9257146865509d89ba0d89",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "No-start symptom row dimlights/weakhorn => possible battery/charging circuit service; troubleshooting intro unresolved checks require authorised service; no explicit total diagnostic ordering.",
+      "inspection_method": "Independent original PDF text and full-page layout/footer checked; product policy separately checked in TRDv0.4.",
+      "pdf_page": 121,
+      "printed_page": "119"
+    }
+  ],
+  "reason": "Exact v2 preserves previous customer-reported resolution and attempt history and asks one current returned-symptom question; no repair verification, fault inference or automatic repeated action. Independently compared actual v2 answer/turn with original scope and TRD/manifest policy; no actual state execution, human/source/dependency/release approval.",
+  "record_id": "GEN058",
+  "role": "reviewer",
+  "verdict": "PASS",
+  "version": 2
+}

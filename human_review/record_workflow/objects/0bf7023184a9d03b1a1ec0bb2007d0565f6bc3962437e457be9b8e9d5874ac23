@@ -1,0 +1,26 @@
+{
+  "actor": "batch100-feedback-judge",
+  "author_sha256": "50ea2bddfa27883ea9a151f700dad0161872d8d75b452f763063139863a1639d",
+  "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+  "feedback_disposition": {},
+  "findings": [],
+  "independent_original_review": true,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_checks": [
+    {
+      "checked_span": "SAFE RIDING TIPS / GUIDELINES\n  Avoid any contact with the exhaust system when hot.   Do not tow a motorcycle. The steering and handling of\n    Wear clothing that will completely cover the legs while       the towed motorcycle will be impaired due to the force\n     riding. The exhaust system gets very hot when the       of the towline. If a motorcycle must be transported,\n    engine is running and remains too hot to touch, even       use a truck or a trailer.\n     after the engine is turned OFF. Failure to wear proper   Do not pull a trailer behind a motorcycle. Towing a\n    or protective clothing could result in serious injury.              trailer may cause reduced braking eﬃciency, tyre over-\n  Motorcycle batteries contain lead, acids and chemicals       loading and unstable handling, as it may cause loss of\n   known to cause cancer, birth defects or other repro-       control of the motorcycle in the front, leading to an\n    ductive harm. Exercise extreme caution while handling       accident.\n    a battery, wash hands thoroughly whenever a battery\n      is handled.\n  Consult your Royal Enﬁeld Authorised Service Centre\n    regarding any questions or problems that occur in the\n    operation of your motorcycle. Failure to do so may\n    aggravate an initial problem, cause costly repairs and\n    jeopardize your personal safety.\n\n                                                               Royal Enfield Himalayan   9",
+      "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+      "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-011.png",
+      "pdf_page": 11,
+      "printed_page": "9"
+    }
+  ],
+  "reason": "Original PDF11 printed9 explicitly prohibits towline motorcycle towing and names truck/trailer transport. The concise stop supplies no invented tie-down procedure. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+  "record_id": "GEN001",
+  "review_sha256": "d71884258b9d80dd7f041c0d27a3c3f7b47d96a0ce41a6c884477ea8e6a6c2e7",
+  "role": "judge",
+  "status": "DRAFT_ENGINEERING_ONLY",
+  "verdict": "PASS_AGENT_REVIEW",
+  "version": 1
+}

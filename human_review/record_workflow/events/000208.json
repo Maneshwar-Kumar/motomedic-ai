@@ -1,0 +1,35 @@
+{
+  "event_sha256": "528b7acd387af8b5413442a4da4360e3959dd0fc88f41db22ae392149579739e",
+  "kind": "SUBMISSION",
+  "payload": {
+    "actor": "batch100-feedback-judge",
+    "author_sha256": "4354442814aec3cc13f69c10388b4fd4f82e2b1836050744b74302739c088e32",
+    "batch_context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "context_sha256": "abc4c064bea2ae8df28d82f32462209e0f22c95ebfa58cda64444c45c7ba55bc",
+    "feedback_disposition": {},
+    "findings": [],
+    "independent_original_review": true,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_page_checks": [
+      {
+        "checked_span": "RUNNING IN PERIOD\nThe Royal Enfield motorcycle as you would be experiencing\n                                     NOTEis capable of consistent high speeds. However as with any\nnew motorcycle, a “RUNNING-IN PERIOD” procedure is  The below table indicates the recommended engine speed\nessential to help in proper “Bedding-in” of the various mov-   in rpm for optimum performance of the engine.\ning parts in your motorcycle and to achieve optimum per-\n                                                         Distance Covered       Max. Engine Speedformance like gear shifting subsequently.\n1. Do not exceed maximum specified pay load.                                              < 6000 rpm                                            0 to 500 km2. Warm up the engine for a few minutes at idling speed to                           No full throttle\n  allow engine oil to lubricate all the moving parts in the\n  engine before riding the motorcycle.                                                   Gradually increase to max.                                                          501 to 1500 km\n3. Avoid full throttle operation and do not ride at constant                           rpm for short periods\n   throttle continuously. Vary the speed by 10% while\n   riding.\n4. Ride at proper speed and avoid sudden accelerations and\n  braking.\n5. Avoid riding motorcycle continuously for over an hour, it\n   is recommended to take brief stop.\n\n                                                               Royal Enfield Himalayan   69",
+        "inspection_method": "Judge independently read original full-page text and inspected rendered layout, printed label, relevant warnings/table/figure and continuation scope. No retrieval evidence used as authority.",
+        "original_render": "human_review/record_workflow/batch_100/source_views/judge/original-071.png",
+        "pdf_page": 71,
+        "printed_page": "69"
+      }
+    ],
+    "payload_sha256": "a2cd0cba40169367b9b750e60753f83c50df32c7aadbe3fe3da850fe8cbdaf4c",
+    "reason": "PDF71 printed69 table501-1500km gradually maxrpm for short periods applies900km; no-full/constant-throttle general context prevents continuous maxrpm inference. No invented numeric maximum for second period. Agent adjudication only; human acceptance, formal source/rule/dependency approval, rights and release remain separate.",
+    "record_id": "GEN045",
+    "review_sha256": "5bf8394cbed6193950a4becd3902a5124dc27a8f154f1fec0763bad564d4e6e6",
+    "role": "judge",
+    "status": "DRAFT_ENGINEERING_ONLY",
+    "verdict": "PASS_AGENT_REVIEW",
+    "version": 1
+  },
+  "policy_version": "record-loop-v1",
+  "previous_event_sha256": "fed3957e92ceb8761549f6c42c935946487e74d83f082731c9d1bdfceebda7de",
+  "recorded_at_utc": "2026-10-09T19:03:40.908040+00:00",
+  "sequence": 208
+}
