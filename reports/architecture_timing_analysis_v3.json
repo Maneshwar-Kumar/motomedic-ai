@@ -1,0 +1,385 @@
+{
+  "schema_version": "architecture-v3-result-audit-v1",
+  "audited_at_utc": "2026-10-10T19:50:42.559337+00:00",
+  "run_id": "38080802638",
+  "source_report": "reports\\architecture_run_38080802638\\architecture_comparison.json",
+  "source_report_sha256": "05b9cde2ccb432946fc288731d2d5dcc08d9fa7b82a975af12cf293e1fe8fd28",
+  "model": "gemma-4-26b-a4b-it",
+  "audit_decision": "PASS_NINE_CELLS_ALL_ATTEMPTS_AND_ADMISSION_TIMINGS",
+  "provider_requests": 16,
+  "retry_attempts": 0,
+  "supported_responses": 8,
+  "http_status_counts": {
+    "200": 16
+  },
+  "minimum_request_start_spacing_seconds": 10.000103347999982,
+  "startup_seconds_excluded_from_turns": 42.37603493100001,
+  "pretrial_cooldown_seconds_excluded_from_turns": 60.00012409199999,
+  "pacing_policy": {
+    "version": "conservative-experimental-pacing-v1",
+    "active_project_quotas_verified": false,
+    "requests_per_rolling_minute": 6,
+    "minimum_request_spacing_seconds": 10,
+    "input_token_reservation_per_rolling_minute": 12000,
+    "token_reservation_method": "UTF8_JSON_BYTES_PLUS_1024_PROTOCOL_ALLOWANCE_NOT_TOKENIZER_COUNT",
+    "maximum_admission_wait_seconds": 125,
+    "pretrial_cooldown_seconds": 60,
+    "maximum_transient_retries_total": 2,
+    "maximum_retries_per_nonstream_call": 1,
+    "stream_retries": 0,
+    "daily_remaining_quota_verified": false,
+    "maximum_requests_this_run": 18,
+    "other_project_clients_coordinated": false
+  },
+  "rows": [
+    {
+      "record_id": "GEN003",
+      "architecture": "A_COMPONENT_SELECTION",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 1.877593064999985,
+      "generation_stage_wall_seconds": 1.8210910459999923,
+      "generation_provider_active_seconds_sum": 1.8210149139999885,
+      "verification_wall_seconds": 0,
+      "verification_seconds_sum": 0,
+      "session_and_delivery_commit_seconds": 0.0017043999999941661,
+      "admission_wait_seconds_sum": 8.110000067063083e-07,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 3.709429080999996,
+      "complete_response_seconds": 3.718097035999989,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 3.709429080999996,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "d709926fd4d1dd9f14d4ba2d80f38c4950cf5fc153fee217e5b03d5a1ed446c1"
+        }
+      ],
+      "admission_failures": []
+    },
+    {
+      "record_id": "GEN003",
+      "architecture": "B_SHORT_GENERATION",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 1.8837344320000113,
+      "generation_stage_wall_seconds": 7.424735965999986,
+      "generation_provider_active_seconds_sum": 1.2584628019999968,
+      "verification_wall_seconds": 1.050802946999994,
+      "verification_seconds_sum": 1.050802946999994,
+      "session_and_delivery_commit_seconds": 0.002023644999979979,
+      "admission_wait_seconds_sum": 14.907650451000023,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 19.11113763100002,
+      "complete_response_seconds": 19.119722470000028,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 19.11113763100002,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "21fb40163bf54528bed4be0a35df44998a6d894675317da6cf7a053ad644035b"
+        }
+      ],
+      "admission_failures": []
+    },
+    {
+      "record_id": "GEN003",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 1.885201338999991,
+      "generation_stage_wall_seconds": 8.426558706000009,
+      "generation_provider_active_seconds_sum": 1.4924122970000155,
+      "verification_wall_seconds": 1.0144060869999976,
+      "verification_seconds_sum": 1.0144060869999976,
+      "session_and_delivery_commit_seconds": 0.0022992909999857147,
+      "admission_wait_seconds_sum": 45.44661567699998,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 49.84408260599997,
+      "complete_response_seconds": 49.85308633599999,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 49.84408260599997,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "cdfc8487d2683931749ba2fce1454ee86ae612d7d3861f8f98b00e7efc141598"
+        }
+      ],
+      "admission_failures": []
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "B_SHORT_GENERATION",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 0.9635679240000172,
+      "generation_stage_wall_seconds": 9.583613607000018,
+      "generation_provider_active_seconds_sum": 1.718869610000013,
+      "verification_wall_seconds": 1.0265522059999626,
+      "verification_seconds_sum": 1.0265522059999626,
+      "session_and_delivery_commit_seconds": 0.0025230169999872487,
+      "admission_wait_seconds_sum": 16.145671788999948,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 19.895156466999993,
+      "complete_response_seconds": 19.933694606000017,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 19.895156466999993,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "b265367ba5deab80d7b277564a580cb6380c340cd118f7b1a454c6fc96c88b2d"
+        }
+      ],
+      "admission_failures": []
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 0.9549537049999799,
+      "generation_stage_wall_seconds": 39.69194485099996,
+      "generation_provider_active_seconds_sum": 1.8913648159999639,
+      "verification_wall_seconds": 1.0822701899999743,
+      "verification_seconds_sum": 1.0822701899999743,
+      "session_and_delivery_commit_seconds": 0.002502199999980803,
+      "admission_wait_seconds_sum": 45.91590930899997,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 49.87837801699999,
+      "complete_response_seconds": 49.91722346900002,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 49.87837801699999,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "689ee38c098905307ef184761a1118285461b736ddbe3fc84f29d756a3316b8a"
+        }
+      ],
+      "admission_failures": []
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "A_COMPONENT_SELECTION",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 0.9584768500000109,
+      "generation_stage_wall_seconds": 8.400210657999992,
+      "generation_provider_active_seconds_sum": 0.6594203430000221,
+      "verification_wall_seconds": 0,
+      "verification_seconds_sum": 0,
+      "session_and_delivery_commit_seconds": 0.00220984300000282,
+      "admission_wait_seconds_sum": 7.74070371199997,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 9.399114594000025,
+      "complete_response_seconds": 9.43767665300004,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 9.399114594000025,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "7e0973e9d765e66348d5f1a94d997976b81602c639b94c2a1a09baff23259ec0"
+        }
+      ],
+      "admission_failures": []
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "route": "SYSTEM_ERROR",
+      "controller_retrieval_assembly_seconds": 0.9936975509999684,
+      "generation_stage_wall_seconds": 9.55397718200004,
+      "generation_provider_active_seconds_sum": 1.4008018850000212,
+      "verification_wall_seconds": 1.891543567000042,
+      "verification_seconds_sum": 1.891543567000042,
+      "session_and_delivery_commit_seconds": 0,
+      "admission_wait_seconds_sum": 75.56311126700001,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": null,
+      "complete_response_seconds": null,
+      "failed_attempt_seconds": 50.11297191899996,
+      "failure_reason": "OUTPUT_SCHEMA",
+      "failure_class": "ValidationFailure",
+      "partial_verified_delivery_before_failure": false,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [],
+      "admission_failures": []
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "A_COMPONENT_SELECTION",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 0.9817821589999767,
+      "generation_stage_wall_seconds": 8.637525105000009,
+      "generation_provider_active_seconds_sum": 0.7016792489999943,
+      "verification_wall_seconds": 0,
+      "verification_seconds_sum": 0,
+      "session_and_delivery_commit_seconds": 0.0019933969999783585,
+      "admission_wait_seconds_sum": 7.9357599250000135,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 9.628087569999991,
+      "complete_response_seconds": 9.635295515999985,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 9.628087569999991,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "52b8facc88e506f806be261d3ca7965e71dd37332180897d0f6345a929bcdeea"
+        }
+      ],
+      "admission_failures": []
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "B_SHORT_GENERATION",
+      "route": "SUPPORTED",
+      "controller_retrieval_assembly_seconds": 0.981017109999982,
+      "generation_stage_wall_seconds": 11.77383860599997,
+      "generation_provider_active_seconds_sum": 3.5864094460000047,
+      "verification_wall_seconds": 1.0450880260000304,
+      "verification_seconds_sum": 1.0450880260000304,
+      "session_and_delivery_commit_seconds": 0.002184714999998505,
+      "admission_wait_seconds_sum": 34.60050038000003,
+      "retry_backoff_seconds_sum": 0,
+      "retry_attempts": 0,
+      "first_verified_output_seconds": 40.22276008,
+      "complete_response_seconds": 40.22986847999999,
+      "failed_attempt_seconds": null,
+      "failure_reason": null,
+      "failure_class": null,
+      "partial_verified_delivery_before_failure": null,
+      "generation_verification_overlap_seconds": 0,
+      "delivered_blocks": [
+        {
+          "block": 0,
+          "at_seconds": 40.22276008,
+          "claim_indices": [
+            0,
+            1
+          ],
+          "content_sha256": "4f02615efdf520e8269913d3fcd2dbb2780107a071a605865449a96e1a0a4aeb"
+        }
+      ],
+      "admission_failures": []
+    }
+  ],
+  "all_failures_including_recovered_attempts": [
+    {
+      "record_id": "GEN026",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "route": "SYSTEM_ERROR",
+      "failure_reason": "OUTPUT_SCHEMA",
+      "failed_attempt_seconds": 50.11297191899996,
+      "partial_verified_delivery": false,
+      "failed_requests": [],
+      "admission_failures": []
+    }
+  ],
+  "all_local_verifier_schema_failures_from_redacted_diagnostics": [
+    {
+      "record_id": "GEN026",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "call": 12,
+      "http_status": 200,
+      "failure_reason": "OUTPUT_SCHEMA",
+      "field": "unsupported_additions",
+      "required_type": "bool",
+      "observed_type": "list",
+      "derived_from_redacted_output_diagnostics": true,
+      "technical_text_released": false
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "call": 13,
+      "http_status": 200,
+      "failure_reason": "OUTPUT_SCHEMA",
+      "field": "unsupported_additions",
+      "required_type": "bool",
+      "observed_type": "list",
+      "derived_from_redacted_output_diagnostics": true,
+      "technical_text_released": false
+    }
+  ],
+  "prior_protocols_retained_separately": [
+    {
+      "run_id": "38078598648",
+      "protocol": "architecture-comparison-v1",
+      "raw_sha256": "470652477e6c1b790dac884d15aeef0913756f0bba1633d9f6e930324ed3dde4",
+      "provider_requests": 16,
+      "supported_responses": 4,
+      "not_pooled_with_v3": true
+    },
+    {
+      "run_id": "38079224669",
+      "protocol": "architecture-comparison-v2",
+      "raw_sha256": "3235026d9b8e7065c87d1e131f8efce412eb0884932f20ba6790bf6c52395e18",
+      "provider_requests": 11,
+      "supported_responses": 4,
+      "not_pooled_with_v3": true
+    }
+  ],
+  "browser_latency_measured": false,
+  "p95_established": false,
+  "stage_semantics": "Generation wall includes admission/retries; provider active intervals exclude waits. Verification wall is active interval union. Wait sums can overlap for C and are not additive stage budgets.",
+  "architectural_superiority_established": false,
+  "same_model_semantic_verifier": true,
+  "actual_account_numeric_quotas_verified": false
+}
