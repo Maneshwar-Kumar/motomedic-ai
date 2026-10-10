@@ -180,7 +180,7 @@ class GeminiJSONProvider:
             raise ValueError("Exact same allowlisted Gemma model required for both adapters")
         if type(authorized_calls) is not int or authorized_calls < 0:
             raise ValueError("Finite nonnegative call allocation required")
-        if config.provider_revision != "gemini-sse-json-models-utf8-diagnostics-v4":
+        if config.provider_revision != "gemini-sse-json-models-utf8-empty-thought-v5":
             raise ValueError("Gemini transport revision required")
         self.model, self.config = model, config
         self.enabled, self.remaining_calls = enabled, authorized_calls
@@ -227,7 +227,15 @@ class GeminiJSONProvider:
                     if candidate.get("finishReason"):
                         finish.append(candidate["finishReason"])
                     for part in candidate.get("content", {}).get("parts", []):
-                        if part.get("thought") or set(part) - {"text", "thought"} or type(part.get("text")) is not str:
+                        # Confirmed protocol marker carries no content. Normalize only
+                        # this exact shape; thought text, signatures and extras reject.
+                        if (isinstance(part, dict) and set(part) == {"text", "thought"}
+                                and part["text"] == "" and part["thought"] is True):
+                            continue
+                        if (not isinstance(part, dict) or
+                                ("thought" in part and type(part["thought"]) is not bool) or
+                                part.get("thought") or set(part) - {"text", "thought"} or
+                                type(part.get("text")) is not str):
                             raise ProviderFailure("PROVIDER_REFUSAL_OR_MALFORMED", trace)
                         fragments.append(part["text"])
                 if "usageMetadata" in chunk:
@@ -278,7 +286,7 @@ def gemma_runtime_config(model=GeminiJSONProvider.MODEL):
         raise ValueError("Unknown Gemma comparison model")
     return RuntimeConfig(generator_provider="gemini", generator_model=model,
                          verifier_provider="gemini", verifier_model=model,
-                         provider_revision="gemini-sse-json-models-utf8-diagnostics-v4", timeout_seconds=30)
+                         provider_revision="gemini-sse-json-models-utf8-empty-thought-v5", timeout_seconds=30)
 
 
 def configured_provider(name, model, config, **kwargs):

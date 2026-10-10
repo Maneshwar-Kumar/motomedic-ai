@@ -132,7 +132,7 @@ class GemmaProviderTests(unittest.TestCase):
         self.assertIn('POLICY_SENTINEL',body['systemInstruction']['parts'][0]['text'])
         self.assertEqual(body['systemInstruction']['role'],'user')
         self.assertEqual(body['contents'][0]['role'],'user')
-        self.assertEqual(self.config.provider_revision,'gemini-sse-json-models-utf8-diagnostics-v4')
+        self.assertEqual(self.config.provider_revision,'gemini-sse-json-models-utf8-empty-thought-v5')
         self.assertEqual(body['generationConfig']['thinkingConfig'],{'thinkingLevel':'minimal'})
         self.assertNotIn('tools',body)
         self.assertNotIn('SECRET_SENTINEL',json.dumps(result.telemetry))
@@ -165,10 +165,62 @@ class GemmaProviderTests(unittest.TestCase):
             p=GeminiJSONProvider('gemma-4-31b-it',self.config,enabled=True,authorized_calls=1,transport=transport)
             with self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED'):p.complete('policy',{}, {})
 
+    def test_confirmed_exact_empty_thought_marker_accepts_both_models(self):
+        for model in GeminiJSONProvider.ALLOWED_MODELS:
+            for reported in (None,0):
+                with self.subTest(model=model,reported=reported):
+                    chunks=events({'ok':True},model=model)
+                    chunks[0]['candidates'][0]['content']['parts'].insert(0,{'text':'','thought':True})
+                    if reported is not None:chunks[0]['usageMetadata']['thoughtsTokenCount']=reported
+                    p=GeminiJSONProvider(model,gemma_runtime_config(model),enabled=True,authorized_calls=1,
+                        transport=lambda *args:(chunks,{}))
+                    result=p.complete('policy',{}, {})
+                    self.assertEqual(result.output,{'ok':True})
+                    self.assertTrue(result.telemetry['usage_reported'])
+                    structure=result.telemetry['response_structure']
+                    self.assertEqual(structure['empty_thought_part_count'],1)
+                    self.assertEqual(structure['nonempty_thought_part_count'],0)
+                    self.assertEqual(structure['reported_thoughts_token_count'],reported if reported is not None else 'UNKNOWN')
+
+    def test_empty_thought_normalization_rejects_all_other_shapes_and_usage(self):
+        markers=[{'text':'PRIVATE_THOUGHT_SENTINEL','thought':True},
+                 {'text':' ','thought':True},
+                 {'text':'','thought':True,'thoughtSignature':'PRIVATE_SIGNATURE_SENTINEL'},
+                 {'text':'','thought':True,'PRIVATE_FIELD_KEY_SENTINEL':None},
+                 {'text':'','thought':1},{'text':'','thought':0},
+                 {'text':'','thought':'false'},{'text':'','thought':None},
+                 {'thought':True},{'text':None,'thought':True}]
+        for marker in markers:
+            chunks=events({'ok':True});chunks[0]['candidates'][0]['content']['parts'].insert(0,marker)
+            p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
+                transport=lambda *args:(chunks,{}))
+            with self.subTest(marker=marker),self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED'):
+                p.complete('policy',{}, {})
+            trace=json.dumps(p.last_telemetry)
+            for secret in ('PRIVATE_THOUGHT_SENTINEL','PRIVATE_SIGNATURE_SENTINEL','PRIVATE_FIELD_KEY_SENTINEL'):
+                self.assertNotIn(secret,trace)
+        for value in (1,True,-1,'0',None):
+            chunks=events({'ok':True});chunks[0]['candidates'][0]['content']['parts'].insert(0,{'text':'','thought':True})
+            chunks[0]['usageMetadata']['thoughtsTokenCount']=value
+            p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
+                transport=lambda *args:(chunks,{}))
+            with self.subTest(usage=value),self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED'):
+                p.complete('policy',{}, {})
+
+    def test_empty_thought_marker_does_not_bypass_json_model_stop_or_usage_gates(self):
+        for options in ({'model':'WRONG_MODEL'},{'finish':'MAX_TOKENS'},
+                        {'usage':{'promptTokenCount':1,'candidatesTokenCount':2,'totalTokenCount':0}}):
+            chunks=events({'ok':True},**options);chunks[0]['candidates'][0]['content']['parts'].insert(0,{'text':'','thought':True})
+            p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
+                transport=lambda *args:(chunks,{}))
+            with self.subTest(options=options),self.assertRaises(ProviderFailure):p.complete('policy',{}, {})
+        chunks=events({});chunks[0]['candidates'][0]['content']['parts']=[{'text':'','thought':True}]
+        p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
+            transport=lambda *args:(chunks,{}))
+        with self.assertRaisesRegex(ProviderFailure,'PROVIDER_REFUSAL_OR_MALFORMED'):p.complete('policy',{}, {})
+
     def test_response_structure_counts_rejected_parts_without_content(self):
         cases = [
-            ([{"text":"", "thought":True}, {"text":"REJECTED_TEXT_SENTINEL"}],
-             {"text_part_count":2, "thought_part_count":1, "empty_thought_part_count":1, "nonempty_thought_part_count":0}),
             ([{"text":"PRIVATE_THOUGHT_SENTINEL", "thought":True}],
              {"thought_part_count":1, "empty_thought_part_count":0, "nonempty_thought_part_count":1}),
             ([{"text":"REJECTED_TEXT_SENTINEL", "thoughtSignature":"PRIVATE_SIGNATURE_SENTINEL"}],
@@ -210,7 +262,7 @@ class GemmaProviderTests(unittest.TestCase):
 
     def test_reported_thought_tokens_are_strict_and_available_before_rejection(self):
         for value,expected in ((0,0),(3,3),(True,'UNKNOWN'),(-1,'UNKNOWN'),('PRIVATE_TOKEN_SENTINEL','UNKNOWN'),(None,'UNKNOWN')):
-            chunks=events({});chunks[0]['candidates'][0]['content']['parts']=[{'text':'','thought':True}]
+            chunks=events({});chunks[0]['candidates'][0]['content']['parts']=[{'text':'','thought':True,'extra':None}]
             if value is not None:chunks[0]['usageMetadata']['thoughtsTokenCount']=value
             p=GeminiJSONProvider(GeminiJSONProvider.MODEL,self.config,enabled=True,authorized_calls=1,
                 transport=lambda *args:(chunks,{}))

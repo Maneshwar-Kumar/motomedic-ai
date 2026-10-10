@@ -1,0 +1,143 @@
+{
+  "schema_version": "independent-bounded-runtime-transition-review-v6",
+  "reviewer_actor": "/root/approval_audit",
+  "reviewed_on": "2026-10-10",
+  "human_inspection_claimed": false,
+  "verdict": "PASS_EXACT_EMPTY_PROTOCOL_MARKER_NORMALIZATION",
+  "coordinator_decision_required": true,
+  "prior_review": {
+    "file": "human_review/agent_release_161/runtime_transition_review_v5.json",
+    "sha256": "2a4f274f3ac6d1d0f320922e72b2553adf7bf962808e1d3507507223f65e2d11",
+    "preserved_unchanged": true
+  },
+  "original_bounded_grounded_scope_review": {
+    "file": "human_review/agent_release_161/runtime_transition_review_v4.json",
+    "sha256": "4e2d1d53f3f5a44ab899c6cd9bd50f74821ae2206910362591e1d30c45b39905",
+    "preserved_unchanged": true
+  },
+  "code_sha256": {
+    "approved_registry.py": "f6b9afc769f2a49b65ba1de4e6030fc196e8a142848d322140e89b384886e78b",
+    "approved_runner.py": "8360c1b07665b9e28da6d6fe5707ead929b5c78b53d46ac423d4bc32142c1e83",
+    "reviewed_controller.py": "2fb26dba4f2d949df15f176da6b4082efeaa78c32d70358cfa748578b388b16b",
+    "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+    "diagnose.py": "07ac29d21b6776ef0f2e20cf7d9842cbfbe9badaf6e870ce9592e2157ef35813",
+    "session_store.py": "7c517d52b2efb59db37b939fc648d898b0455ca888efa58c7fdb72dae3e30a5e",
+    "constrained_generator.py": "cab83ece473e0b47f9ff2eb6b890fa3c051a46870655c0f35287b30b51bd9d87",
+    "generation_contracts.py": "4255a16ef30e2dcafa362495662c89c55f5103feb2b694a657a051dde12c61a8",
+    "approved_text_journeys.py": "7cc79cae951b45d7056a73cf6732e6986b675e60b75abb2128f6c26b1bce2f26",
+    "test_text_journeys.py": "8c287c98d2c0523a7d7d6e8cdb303e795fab5aaaf243bafc4ad9605f26376ed9",
+    "evidence_registry.py": "7df97bb5e500a1c009e21f2a721f5c24205c7e52a9f6371e369113f20f1b6ae4",
+    "human_review/grounding_refinement/case_suite.py": "a6f373b288e61e8eda49790947610fad7ec03e66601ddfc460432a7c55b923e1",
+    "generation_providers.py": "54cf14b8f2d20ac115078c239509e50369514ee53a53c274d844cf1ff141d9a8",
+    "gemini_transport.py": "579e852b9329277e3e85ad57a71a0ef51d6c5c8492519e246458f1cb578e3b2c",
+    "test_gemini_provider.py": "5ea0956a1b1e187d2c3e78b22f5410af2ca9dca87a35de053bfc6f747e3af87c",
+    "test_gemini_transport_bytes.py": "2e5061dde36b2087f64a6f5c468ce158c9635834897546e9252e80e945630ce3",
+    "provider_response_probe.py": "11261a23d29219b8542ba408e45337ce6158b1938cdb7106b940931642d6886e"
+  },
+  "changed_prior_runtime_files": [
+    "generation_providers.py",
+    "test_gemini_provider.py"
+  ],
+  "observed_diagnostic": {
+    "file": "build/provider-response-probe-38075235263/provider_response_probe.json",
+    "sha256": "2ce7328e14d98db8566284e384bf89266e72e22a40dc9a3f8b1beb38349d34d0",
+    "hosted_run_id": "38075235263",
+    "execution": "SYNTHETIC_NOT_GROUNDED_OR_RELEASE_ACCEPTANCE",
+    "http_status": 200,
+    "external_requests": 1,
+    "reason": "PROVIDER_REFUSAL_OR_MALFORMED",
+    "response_structure": {
+      "chunk_count": 3,
+      "candidate_count": 3,
+      "maximum_candidates_per_chunk": 1,
+      "candidate_index_valid": true,
+      "text_part_count": 3,
+      "thought_part_count": 1,
+      "empty_thought_part_count": 1,
+      "nonempty_thought_part_count": 0,
+      "thought_signature_present": false,
+      "thought_signature_part_count": 0,
+      "nontext_part_count": 0,
+      "known_nontext_field_count": 0,
+      "other_part_field_count": 0,
+      "invalid_structure_count": 0,
+      "prompt_block_reasons": [],
+      "usage_metadata_present": true,
+      "reported_thoughts_token_count": "UNKNOWN"
+    },
+    "raw_content_logged": false,
+    "mechanical_claims_sent": false,
+    "interpretation_limit": "Structural telemetry supports exact empty marker normalization; it is not proof of grounded answer quality or that HTTP500 is fixed"
+  },
+  "normalization_review": {
+    "provider_revision": "gemini-sse-json-models-utf8-empty-thought-v5",
+    "accepted_marker": {
+      "text": "",
+      "thought": true
+    },
+    "exact_keys_required": [
+      "text",
+      "thought"
+    ],
+    "thought_flag_exact_bool_true_required": true,
+    "empty_marker_is_discarded_not_used_as_answer": true,
+    "nonempty_whitespace_thoughts_rejected": true,
+    "signatures_extra_fields_nontext_malformed_flag_types_rejected": true,
+    "marker_without_visible_json_rejected": true,
+    "thought_false_or_missing_visible_text": "Existing visible-text protocol unchanged; no sentinel normalization applies",
+    "thoughts_token_count": "Existing exact integer zero-or-absent requirement preserved; absent telemetry stays UNKNOWN",
+    "model_finish_usage_json_duplicate_nonfinite_validation_preserved": true,
+    "policy_schema_untrusted_payload_separation_preserved": true,
+    "source_claim_evidence_citation_semantic_session_safety_gates_preserved": true,
+    "default_model": "gemma-4-31b-it",
+    "automatic_fallback": false,
+    "automatic_retries": 0
+  },
+  "runtime_checks": {
+    "command": "python -B -m unittest test_gemini_provider test_gemini_transport_bytes test_text_journeys -q",
+    "tests_run": 44,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 17.162,
+    "exit_code": 0,
+    "external_provider_calls": 0,
+    "actual_loopback_requests": 2,
+    "both_allowlisted_models_and_absent_or_zero_thoughts_tokens_checked": true,
+    "malformed_marker_shapes_and_nonzero_invalid_usage_rejected": true,
+    "marker_cannot_bypass_model_STOP_usage_or_JSON_checks": true
+  },
+  "source_review_boundary": "Exact original manual, approved source/initial scopes, immutable index and v4 GEN003/EXP003 transitions unchanged; source reinspection not repeated; no new mechanical claims, successor edges or generic human approval",
+  "coordinator_approval_recommendation": {
+    "decision_recommended": "APPROVE_EXACT_EMPTY_THOUGHT_V5_BOUNDED_26B_GROUNDED_RETEST",
+    "coordinator_actor": "/root",
+    "binding_requirement": "This review SHA plus all17 runtime/probe hashes; original v4 source bindings remain; fresh root model-bound budget/account proof required at dispatch",
+    "model": "gemma-4-26b-a4b-it",
+    "record_ids": [
+      "GEN003",
+      "EXP003"
+    ],
+    "maximum_composer_requests": 2,
+    "maximum_verifier_requests": 2,
+    "maximum_total_external_requests": 4,
+    "max_output_tokens_per_adapter_request": 1800,
+    "maximum_retries": 0,
+    "automatic_fallback": false,
+    "scope": [
+      "GEN003 approved lookup through mandatory evidence/composer/verifier/session gates",
+      "EXP003 exact approved clarification to explicit TRUE action then typed unresolved to verified support/no repeats"
+    ],
+    "unused_allocation_does_not_imply_request": true,
+    "fresh_preflight_requirement": "At most1800seconds old, explicit26B owner authorization, guard ready, main billing enabled and inference billing disabled/free-only; never re-enable stopped billing",
+    "does_not_approve": [
+      "Broader adaptive routes",
+      "New mechanical claims or OEM next-step order",
+      "Public deployment/content rights",
+      "Default model replacement",
+      "Relaxed substantive thought or malformed output acceptance",
+      "Live answer success without actual verified traces",
+      "Claim HTTP500 is fixed"
+    ]
+  },
+  "reviewer_external_provider_calls": 0,
+  "mechanical_repairs_verified": 0
+}

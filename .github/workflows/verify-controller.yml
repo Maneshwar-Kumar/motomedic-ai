@@ -126,7 +126,7 @@ jobs:
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
           MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
-          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/grounded_budget_preflight_26b_v1.json
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/grounded_budget_preflight_26b_v3.json
           MOTOMEDIC_GEMMA_COMPARISON_MODEL: ${{ inputs.gemma_model }}
         run: python human_review/grounding_refinement/case_suite.py --approved --live --model "$MOTOMEDIC_GEMMA_COMPARISON_MODEL" --output build/approved_live.json
       - uses: actions/upload-artifact@v4

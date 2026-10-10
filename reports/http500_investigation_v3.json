@@ -1,0 +1,43 @@
+{
+  "schema_version": "http500-investigation-v3",
+  "checked_at_utc": "2026-10-10T18:20:33.460628+00:00",
+  "independent_investigation": "reports/http500_investigation_v2.json",
+  "actual_synthetic_probe": {
+    "file": "reports/provider_response_probe_38075235263.json",
+    "sha256": "2ce7328e14d98db8566284e384bf89266e72e22a40dc9a3f8b1beb38349d34d0",
+    "run_id": 38075235263,
+    "requests": 1,
+    "http_status": 200,
+    "confirmed_empty_thought_parts": 1,
+    "nonempty_thought_parts": 0,
+    "signature_parts": 0,
+    "other_part_fields": 0,
+    "thoughts_token_count": "ABSENT_UNKNOWN"
+  },
+  "confirmed_client_findings": [
+    "Unicode curl-config serialization corrupted non-ASCII request bytes; corrected and byte-tested.",
+    "Strict parser rejected the exact empty thought protocol marker returned by26B; narrow normalization implemented."
+  ],
+  "31b_http500_root_cause": "UNCONFIRMED; model-specific serving hypothesis, no simultaneous controlled benchmark",
+  "grounded_26b_rerun_status": "PENDING_NEW_EXACT_RUNTIME_REVIEW",
+  "course_options": [
+    {
+      "priority": 1,
+      "course": "Continue explicit26B with exact protocol fix; test real retrieval, gated composer/verifier, persistence and citations before hosted UI acceptance."
+    },
+    {
+      "priority": 2,
+      "course": "Diagnose31B with minimal same-time nonstream versusstream controls; capped allocation, no automatic model fallback."
+    },
+    {
+      "priority": 3,
+      "course": "Consider capped transient retries only after validated response protocol and measured serving failures; include spend/latency limits."
+    },
+    {
+      "priority": 4,
+      "course": "If26B quality or availability fails, compare another hosted provider with an explicit budget and reviewed runtime version."
+    }
+  ],
+  "no_raw_content_or_secrets_logged": true,
+  "public_deployment_or_billing_changed": false
+}
