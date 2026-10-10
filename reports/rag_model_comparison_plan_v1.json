@@ -1,0 +1,94 @@
+{
+  "schema_version": "rag-model-comparison-plan-v1",
+  "created_at_utc": "2026-10-10T18:35:02.478489+00:00",
+  "owner_primary_model_selection": "gemma-4-26b-a4b-it",
+  "status": "PRICING_AND_EXISTING_LATENCY_ANALYZED_LIVE_COMPARISON_AWAITS_CREDENTIALS_AND_VERSIONED_ADAPTERS",
+  "source_manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "source_approval": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+  "baseline_report": "reports/approved_26b_run_38075531257/approved_live.json",
+  "initial_cases": [
+    "GEN003",
+    "EXP003"
+  ],
+  "models": [
+    {
+      "provider": "google",
+      "model": "gemma-4-26b-a4b-it",
+      "baseline_thinking": {
+        "thinkingLevel": "minimal"
+      },
+      "input_usd_per_million": 0,
+      "output_usd_per_million": 0,
+      "pricing_scope": "Current hosted Gemini API free-only offering",
+      "total_parameters_billion": 25.2,
+      "active_parameters_billion": 3.8
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "baseline_thinking": {
+        "type": "disabled"
+      },
+      "baseline_effort": "low",
+      "input_usd_per_million": 0.1,
+      "output_usd_per_million": 0.5,
+      "pricing_scope": "Standard direct API, prompt at most100K tokens, no cache discounts",
+      "parameter_count": "NOT_ESTABLISHED_BY_FETCHED_OFFICIAL_SOURCES"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "baseline_reasoning": {
+        "effort": "none"
+      },
+      "input_usd_per_million": 0.1,
+      "output_usd_per_million": 0.5,
+      "pricing_scope": "Standard direct API, short context, no cache/region/premium mode",
+      "parameter_count": "NOT_ESTABLISHED_BY_FETCHED_OFFICIAL_SOURCES"
+    }
+  ],
+  "comparison_controls": [
+    "Same approved case, manual, checksum, eligibility, evidence/dependency closure, wording choices, output schema, warning and citation requirements.",
+    "Keep input content and output requirements identical; log each provider tokenization separately.",
+    "Standard serving tiers, no tools/history, no retries/fallback; lowest reasoning modes differ and are explicitly recorded.",
+    "First isolate composer with a fixed verifier; separately compare complete generation/verifier pairs.",
+    "Use same-run interleaved model ordering with one request at a time; measure cold startup separately.",
+    "Keep current response schema for the model comparison; compact-schema optimization is a separate reviewed ablation.",
+    "Do not release streamed technical text before all gates and session save pass."
+  ],
+  "metrics": [
+    "First visible provider token",
+    "Approximate decode rate and output length",
+    "Composer and verifier time separately",
+    "Full time to releasable cited response",
+    "Schema, exact wording, entailment, citation closure, abstention and no-repeat gates",
+    "Input/output/thinking/cache tokens and per-provider list-price estimate versus verified bill",
+    "Error rate; descriptive timing only until enough representative observations supportp95"
+  ],
+  "initial_smoke_maximum_requests": 12,
+  "initial_smoke_maximum_requests_per_provider": 4,
+  "initial_smoke_automatic_retries": 0,
+  "proposed_paid_provider_test_limit_usd": 0.1,
+  "spending_limit_enforcement_status": "PLAN_ONLY_NOT_IMPLEMENTED_NOT_A_GUARANTEED_BILLING_CAP",
+  "next_effort_experiment": "After baseline and fresh allocation, compare Luna low and Haiku adaptive-low/medium verifier effort on exact reviewed difficult cases; Gemma high requires a new adapter/review because current adapter rejects substantive thinking.",
+  "credentials_available_by_name_only": [
+    "MOTOMEDIC_GEMINI_API_KEY"
+  ],
+  "credentials_missing": [
+    "MOTOMEDIC_ANTHROPIC_API_KEY",
+    "MOTOMEDIC_OPENAI_API_KEY"
+  ],
+  "no_billing_enabled_or_deployment_changed": true,
+  "shared_runtime_modified": false,
+  "sources_checked_on": "2026-10-11",
+  "official_sources": [
+    "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+    "https://ai.google.dev/gemma/docs/core/model_card_4",
+    "https://ai.google.dev/gemini-api/docs/pricing#gemma-4",
+    "https://www.anthropic.com/claude/haiku",
+    "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5",
+    "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "https://developers.openai.com/api/docs/guides/latency-optimization"
+  ]
+}
