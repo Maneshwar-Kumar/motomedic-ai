@@ -36,6 +36,20 @@ RATES = {
 }
 
 
+def safe_api_error(exc, key):
+    try:
+        body = json.loads(exc.read().decode("utf-8"))
+        error = body.get("error", {})
+        message = str(error.get("message", ""))
+        if key:
+            message = message.replace(key, "[REDACTED]")
+        import re
+        message = re.sub(r"sk-[A-Za-z0-9_-]+", "[REDACTED]", message)
+        return f"Claude HTTP {exc.code}: {error.get('type', 'unknown_error')}: {message[:300]}"
+    except Exception:
+        return f"Claude HTTP {exc.code}"
+
+
 def cost(model, usage):
     rates = RATES[model]
     keys = ["input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens", "output_tokens"]
@@ -65,8 +79,8 @@ class ClaudeTransport:
         try:
             return urllib.request.urlopen(req, timeout=90)
         except urllib.error.HTTPError as exc:
-            # Never include request headers or error bodies in reports.
-            raise RuntimeError(f"Claude HTTP {exc.code}") from None
+            # Only classified, redacted service message; no headers or raw body.
+            raise RuntimeError(safe_api_error(exc, self.key)) from None
 
     def system(self):
         # Neutral partition labels provide an independently cold cache for each arm.
@@ -139,8 +153,11 @@ def choose_model():
         raise RuntimeError("ANTHROPIC_API_KEY is not configured")
     req = urllib.request.Request(BASE + "/v1/models?limit=100", headers={
         "x-api-key": key, "anthropic-version": "2023-06-01"})
-    with urllib.request.urlopen(req, timeout=30) as response:
-        data = json.load(response)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as response:
+            data = json.load(response)
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError(safe_api_error(exc, key)) from None
     available = {m["id"] for m in data["data"]}
     for model in RATES:
         if model in available:
@@ -152,9 +169,9 @@ def preflight():
     model, available = choose_model()
     transport = ClaudeTransport(model)
     prefix_count = transport.count([{"role": "user", "content": "Count-only budget preflight; no inference."}])
-    # Four supported turns per pass need at most two composer/verifier calls in A;
-    # B has ten turns. Two passes: <=36 requests, no retry calls authorized.
-    maximum_requests, max_output_tokens, variable_input_cap = 36, 900, 12000
+    # Dry-run: A has two eligible supported turns (composer+verifier); B has ten
+    # turns. Two passes: <=28 requests. Input/output caps bound the projection.
+    maximum_requests, max_output_tokens, variable_input_cap = 28, 1800, 12000
     upper = maximum_requests * cost(model, {
         "cache_creation_input_tokens": prefix_count + variable_input_cap,
         "output_tokens": max_output_tokens})
