@@ -18,6 +18,7 @@ from session_store import SQLiteSessionStore
 class Judge:
     def __init__(self, output):
         self.output = output
+        self.last_telemetry = None
     def complete(self, policy, payload, schema):
         return ProviderResult(self.output, 2, 1, telemetry={"software_double": True})
 
@@ -149,6 +150,24 @@ class BenchmarkContracts(unittest.TestCase):
                 store.close()
 
 
+class RedactedDiagnostics(unittest.TestCase):
+    def test_diagnostics_never_record_strings_or_arbitrary_field_names(self):
+        from architecture_benchmark import output_diagnostics
+        out=output_diagnostics({"texts":["PRIVATE RAW TEXT"],"SECRET_UNKNOWN_FIELD":"PRIVATE", "supported":[True,"PRIVATE"], "choices":[0,1]})
+        self.assertNotIn("PRIVATE",str(out))
+        self.assertNotIn("SECRET_UNKNOWN_FIELD",str(out))
+        self.assertEqual(out["unknown_top_level_field_count"],1)
+        self.assertEqual(out["supported"]["boolean_values"],[True,None])
+        self.assertEqual(out["choices"]["integer_values"],[0,1])
+
+    def test_cardinality_schema_is_bounded_without_mutating_shared_schema(self):
+        from architecture_benchmark import sized_schema,CHECK_SCHEMA
+        schema=sized_schema(CHECK_SCHEMA,"supported",2)
+        self.assertEqual(schema["properties"]["supported"]["minItems"],2)
+        self.assertEqual(schema["properties"]["supported"]["maxItems"],2)
+        self.assertNotIn("minItems",CHECK_SCHEMA["properties"]["supported"])
+
+
 class StreamReleaseContracts(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -165,12 +184,12 @@ class StreamReleaseContracts(unittest.TestCase):
         class Provider:
             def __init__(self,*args,transport=None,**kwargs): self.transport=transport
             def complete(self,policy,payload,schema):
-                if schema == BLOCK_SCHEMA:
+                if "blocks" in schema["properties"]:
                     self.transport(MODEL,'fake-key',{},30)
                     if terminal_failure:
                         raise ProviderFailure('PROVIDER_SERVICE_ERROR')
                     return ProviderResult(streamed,2,10,telemetry={"software_double":True})
-                if schema == CHECK_SCHEMA:
+                if "supported" in schema["properties"]:
                     n=len(payload['claims'])
                     return ProviderResult({"supported":[not judge_reject]*n,
                                            "complete":[True]*n,"unsupported_additions":False},2,3,

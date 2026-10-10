@@ -41,7 +41,7 @@ jobs:
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
           MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
-          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/architecture_budget_preflight_v1.json
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/architecture_budget_preflight_v2.json
         run: python architecture_benchmark.py --index build/index --output build/architecture_comparison.json
       - uses: actions/upload-artifact@v4
         if: always()
