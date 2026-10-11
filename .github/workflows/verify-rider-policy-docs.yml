@@ -1,0 +1,30 @@
+name: Verify rider policy document
+on:
+  push:
+    paths:
+      - '04_To_Build_Evaluation_Decisions.docx'
+      - '.github/workflows/verify-rider-policy-docs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render-todo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install document rendering dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libreoffice-writer poppler-utils fonts-crosextra-carlito fonts-crosextra-caladea
+          python -m pip install pdf2image
+      - name: Render revised TODO register
+        run: python tools/render_docx.py 04_To_Build_Evaluation_Decisions.docx --output_dir reports/rider_policy_document_render --emit_pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rider-policy-document-render
+          path: reports/rider_policy_document_render/
+          retention-days: 7

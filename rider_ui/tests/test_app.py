@@ -42,6 +42,29 @@ class AppTests(unittest.TestCase):
                 self.assertEqual(count,3)
         finally:
             server.shutdown();server.server_close()
+    def test_reset_detaches_chat_and_diagnostic_context(self):
+        server=serve(0)
+        threading.Thread(target=server.serve_forever,daemon=True).start()
+        env={'MOTOMEDIC_RIDER_API_URL':'http://127.0.0.1:'+str(server.server_port),
+             'MOTOMEDIC_RIDER_API_TOKEN':'ui-test-only','MOTOMEDIC_UI_ENGINEERING_LOOPBACK':'1'}
+        try:
+            with patch.dict(os.environ,env):
+                at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=15).run()
+                at.checkbox[0].check().run()
+                at.selectbox[0].select_index(0).run()
+                at.chat_input[0].set_value('Engineering reset test').run()
+                old_id=at.session_state['view']['session_id']
+                next(x for x in at.button if x.label=='Start a new conversation').click().run()
+                self.assertFalse(at.exception)
+                self.assertIsNone(at.session_state['view'])
+                self.assertEqual(at.session_state['messages'],[])
+                self.assertIsNone(at.session_state['pending'])
+                self.assertIsNone(at.session_state['connection_error'])
+                self.assertIn(old_id,sessions)
+                self.assertTrue(at.checkbox[0].value)
+        finally:
+            server.shutdown();server.server_close()
+
     def test_failed_delivery_recovers_saved_operation_without_resending(self):
         server=serve(0)
         threading.Thread(target=server.serve_forever,daemon=True).start()

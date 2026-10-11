@@ -62,3 +62,15 @@ Run GEN003 lookup and EXP003 clarification/action/unresolved/referral in a fresh
 
 UI fixture tests or localhost screenshots do not meet this gate. The photo control remains disabled until this text gate passes and an observation-only vision path is implemented/evaluated.
 
+
+## Safeguards v1 serving integration
+
+Use SERVICE_SAFEGUARDS.md and the current TODO.md as the dated implementation/release register. Preserve API v1 response/choice semantics. Text is at most 2,000 Unicode characters and 8,000 UTF-8 bytes; streamed JSON body at most 16 KiB. The UI and client reject oversized text, but the hosted handler must repeat these checks before retrieval. Bind each browser to a server-verified visitor capability and its owned sessions; a shared API credential alone is insufficient. Visitor counters must survive new conversations. Add trusted edge IP/challenge and global spending controls for anonymous reset abuse.
+
+The managed transaction must reserve an operation against six turns per rolling minute, 30 turns per rolling 24 hours, and 20 turns per session. Same-operation replay returns its original reservation/view without another model call; a different payload hash conflicts. Retrieval/provider failures consume admitted slots. Counters and model-call/budget admission must be project-wide across workers. A caller must not provide usage counts. Admission-store outage blocks new inference with a sanitized operational error; preserve already established applicable safety-stop semantics.
+
+New serving context uses the complete deterministic active-outcome/fact projection. Fresh evidence plus trusted policy and schema must fit 8,192 exactly counted input tokens and 24,000 bytes; cap output at 1,800 tokens. Check both generation and verification requests before spending. Never trim warnings, prerequisites or unresolved attempts to fit. Missing token-count adapter, overflow or truncated model output gives SYSTEM_ERROR with no partial technical instruction. The existing approved runtime is unchanged; install the new prompt/context body only in a versioned reviewed runtime and invalidate affected caches.
+
+When the text gate passes, add a separately versioned authenticated multipart media endpoint: one JPEG/PNG/WebP per turn, 5 MiB/photo, three/session and six/visitor/day. Stream byte caps, decode actual MIME, reject animation/corruption/20-megapixel or 10,000-pixel-side violations, normalize to 1,600-pixel-side JPEG without metadata, and enforce worker resource limits. No client URL-fetch inputs. Raw and normalized media expire/delete within 15 minutes; session idle expiry 30 minutes and lifetime 24 hours. TTL/deletion evidence remains required before public release.
+
+Starting a new conversation detaches the old active session and clears displayed messages/attempt context; it is not a storage-delete request and cannot reset visitor counters. Retain scope confirmation if unchanged, create a fresh session for a new symptom, and never merge old observations automatically. Recovery reads are separately edge-rate-limited and do not count as a new model turn.

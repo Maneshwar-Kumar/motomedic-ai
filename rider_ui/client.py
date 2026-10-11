@@ -2,6 +2,7 @@
 import json
 import re
 import uuid
+from rider_ui.safeguards import LimitError, validate_message
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
@@ -129,6 +130,10 @@ class RiderAPI:
         return data
 
     def start(self, topic, query, request_id):
+        try:
+            query = validate_message(query)
+        except LimitError:
+            raise APIError('Enter a message of up to 2,000 characters.') from None
         return validate_view(self.request('POST', '/v1/sessions', {
             'topic_id': topic, 'query': query, 'bike_variant': 'Himalayan BS6',
             'manual_checksum': MANUAL_SHA, 'index_id': INDEX_ID,

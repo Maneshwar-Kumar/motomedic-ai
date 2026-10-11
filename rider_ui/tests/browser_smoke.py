@@ -37,6 +37,10 @@ def run():
             page.get_by_text('MotoMedic handles your routine queries for your Himalayan',exact=True).wait_for(timeout=30000)
             page.locator('.footer-note').wait_for(timeout=30000)
             page.get_by_role('textbox',name='Describe one symptom or ask a question…').wait_for(timeout=30000)
+            card = page.locator('[data-testid="stVerticalBlock"]').filter(has=page.get_by_role('heading', name='What are you noticing?', exact=True)).last
+            assert card.get_by_role('textbox',name='Describe one symptom or ask a question…').count() == 1
+            assert page.get_by_text('Available topics come from the hosted controller.',exact=False).count() == 0
+            checks.append({'name':'inline_symptom_input_and_no_category_help','passed':True})
             page.screenshot(path=str(out/'desktop.png'),full_page=True)
             page.get_by_text('My motorcycle is a Himalayan BS6',exact=True).click()
             page.get_by_role('checkbox',name='My motorcycle is a Himalayan BS6').wait_for()

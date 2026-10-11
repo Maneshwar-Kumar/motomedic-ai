@@ -20,7 +20,7 @@ Supply these **server-side** environment variables or Streamlit secrets:
 
 No API keys are requested from riders or entered in browser fields. Do not set MOTOMEDIC_UI_ENGINEERING_LOOPBACK in deployment. No env file, secret value or raw rider media belongs in Git.
 
-Build from the project root using `docker build -f rider_ui/Dockerfile -t motomedic-rider-ui .`. The image copies only rider_ui, copies only its four runtime files and excludes tests and project source assets, and listens on PORT (8080 by default). Deploy with XSRF/CORS protections enabled, an access-controlled smoke environment first, managed secrets, appropriate Streamlit websocket routing and existing approved project resource/spending limits. Inspect current billing/guard state before deployment; never re-enable stopped billing automatically.
+Build from the project root using `docker build -f rider_ui/Dockerfile -t motomedic-rider-ui .`. The image copies only rider_ui, copies only its presentation/client/safeguard runtime files and excludes tests and project source assets, and listens on PORT (8080 by default). Deploy with XSRF/CORS protections enabled, an access-controlled smoke environment first, managed secrets, appropriate Streamlit websocket routing and existing approved project resource/spending limits. Inspect current billing/guard state before deployment; never re-enable stopped billing automatically.
 
 No deployment command is automated by this package. A new hosted service and budget preflight need to be implemented alongside the backend's current runtime allocation. The UI container alone cannot turn a candidate retrieval service into a rider assistant.
 
@@ -28,7 +28,7 @@ No deployment command is automated by this package. A new hosted service and bud
 
 Install `rider_ui/requirements.txt` in an isolated environment; run `python -m unittest discover -s rider_ui/tests -p 'test_*.py' -v`. The dedicated Verify rider UI GitHub workflow runs the same tests in a hosted build environment.
 
-Local preview: `python -m streamlit run rider_ui/app.py`. Unconfigured preview visibly states that the hosted service is disconnected and disables symptom submission.
+Local preview: `python -m streamlit run rider_ui/app.py`. Unconfigured preview disables symptom submission. The owner removed the disconnected-service notice.
 
 Loopback fixture: `python -m rider_ui.tests.fixture_api` plus explicit engineering-only loopback URL/token settings. It serves neutral **engineering fixture** text, no motorcycle instructions, retrieval or provider calls. Its passes establish UI behavior only.
 
@@ -42,3 +42,5 @@ Loopback fixture: `python -m rider_ui.tests.fixture_api` plus explicit engineeri
 
 Rollback: disable the new UI connection or revert its container revision; preserve managed session histories and immutable backend source/index versions. Never roll back source approval bindings by changing UI configuration.
 
+
+The symptom input sits inside the entry card. Text maximum is 2,000 characters in both the widget and client. Photo support remains disabled with a visible one-photo/5-MB/three-per-conversation policy. Read SERVICE_SAFEGUARDS.md for the implemented validators and required managed enforcement, context admission, prompt versioning and retention. TODO.md tracks remaining live release gates.

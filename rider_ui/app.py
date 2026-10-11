@@ -5,6 +5,7 @@ import sys
 import streamlit as st
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from rider_ui.client import APIError, RiderAPI, operation_id
+from rider_ui.safeguards import LIMITS
 
 st.set_page_config(page_title='MotoMedic · Rider assistant', page_icon='🏍️', layout='wide')
 st.markdown(Path(__file__).with_name('theme.css').read_text(encoding='utf-8'), unsafe_allow_html=True)
@@ -43,7 +44,7 @@ def perform(kind, value):
     st.rerun()
 
 def reset():
-    for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None)]:
+    for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('topic_id', None)]:
         st.session_state[k] = v
 
 for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('catalogue', None)]:
@@ -64,7 +65,7 @@ with st.sidebar:
         st.write('This edition is selected for the Himalayan BS6 prototype. Citations identify the exact PDF page and evidence object.')
         st.caption('Manual pages and excerpts are not available for display in this demo.')
     st.divider()
-    st.button('Start a new conversation', on_click=reset, use_container_width=True, disabled=bool(st.session_state.pending))
+    st.button('Start a new conversation', on_click=reset, use_container_width=True, disabled=bool(st.session_state.pending), help='Clear this chat and begin a separate symptom. Previous checks will not carry over.')
     st.caption('Unable to find a resolution? Official service support remains available.')
     st.link_button('Contact Royal Enfield ↗', 'mailto:support@royalenfield.com', use_container_width=True)
 
@@ -98,7 +99,13 @@ if not st.session_state.messages:
         else:
             st.selectbox('Choose the closest topic', [], placeholder='Topics load when the service connects', disabled=True, label_visibility='collapsed')
             st.session_state.topic_id = None
-        st.caption('Available topics come from the hosted controller. Selecting a topic does not establish answer support.')
+        st.caption('Up to 2,000 characters per message.')
+        st.file_uploader('Add a bike photo · coming next', type=['jpg', 'jpeg', 'png', 'webp'], accept_multiple_files=False, max_upload_size=5, disabled=True)
+        st.caption('Photos: one per turn, up to 5 MB each; three per conversation. Photo support is coming next.')
+        query = st.chat_input('Describe one symptom or ask a question…', key='symptom_input', max_chars=LIMITS.message_characters,
+                              disabled=not ready or not st.session_state.get('topic_id') or bool(st.session_state.pending))
+        if query and query.strip():
+            perform('start', query.strip())
     cols = st.columns(3)
     for col, title, body in zip(cols, ['01 · Describe', '02 · Check', '03 · Report'],
                                ['Tell us what you can see or hear.', 'Read one supported question or step.', 'Share the result so the next turn remembers it.']):
@@ -170,14 +177,7 @@ if view and not st.session_state.pending:
             st.text(item['label'])
         st.caption('Reported success does not verify the repair or identify its cause.')
 
-st.caption('Photo observations become available after the live text flow passes its acceptance check.')
-st.button('Add a bike photo · coming next', disabled=True)
-if not view:
-    query = st.chat_input('Describe one symptom or ask a question…', max_chars=2000,
-                          disabled=not ready or not st.session_state.get('topic_id') or bool(st.session_state.pending))
-    if query and query.strip():
-        perform('start', query.strip())
-else:
+if view:
     st.caption('Use the current choices above, or start a new conversation for a different symptom.')
 st.markdown('<div class="footer-note">Built on the Owner\'s Manual, with no misleading instructions on the internet</div>', unsafe_allow_html=True)
 
