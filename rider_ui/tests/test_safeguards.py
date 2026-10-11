@@ -34,6 +34,15 @@ class SafeguardTests(unittest.TestCase):
         with Image.open(BytesIO(clean)) as image:
             self.assertEqual(image.format,'JPEG');self.assertEqual(image.width,1600)
             self.assertFalse(image.getexif());self.assertNotIn('comment',image.info)
+        private=BytesIO();exif=Image.Exif();exif[270]='PRIVATE_RIDER_METADATA';exif[274]=6
+        Image.new('RGB',(100,60),'red').save(private,'JPEG',exif=exif,comment=b'PRIVATE_RIDER_COMMENT')
+        self.assertIn(b'PRIVATE_RIDER_METADATA',private.getvalue())
+        sanitized=normalize_photo(private.getvalue(),'image/jpeg')
+        self.assertNotIn(b'PRIVATE_RIDER_METADATA',sanitized)
+        self.assertNotIn(b'PRIVATE_RIDER_COMMENT',sanitized)
+        with Image.open(BytesIO(sanitized)) as image:
+            self.assertFalse(image.getexif())
+            self.assertEqual(image.size,(60,100))
         for data,mime in [(raw,'image/jpeg'),(b'<svg/>','image/png'),(raw,'image/svg+xml'),
                           (b'x'*(LIMITS.photo_bytes+1),'image/jpeg'),(raw[:40],'image/png')]:
             with self.assertRaises(LimitError): normalize_photo(data,mime)
