@@ -1,0 +1,55 @@
+{
+  "schema_version": "repository-monitor-check-v1",
+  "trigger_utc": "2026-10-11T18:43:10.284Z",
+  "structure": {
+    "schema_version": "repository-structure-audit-v2",
+    "ok": true,
+    "unexpected_root_files": [],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "missing_critical_source_files": [],
+    "integrity_errors": [],
+    "local_links_checked": 85,
+    "root_file_count": 48,
+    "runtime_freeze_files_verified": 64,
+    "approved_output_files_verified": 187,
+    "note": "Canonical navigation and exact retained bytes only; historical links are not traversed. Not factual or deployment acceptance."
+  },
+  "polls": [
+    {
+      "thread_id": "01a12c11-9372-7e61-8283-02d780fe9232",
+      "status": "active",
+      "cursor": "847b25cf-0c79-4522-b1c2-ebca40389d7b:2"
+    },
+    {
+      "thread_id": "01a12bb1-3fda-7603-9dcf-a28efe202bbb",
+      "status": "idle"
+    },
+    {
+      "thread_id": "01a12739-844f-76f1-b4a1-e06df9109ff6",
+      "status": "notLoaded"
+    }
+  ],
+  "observations": [
+    "Owner-directed reset replaced superseded navigation with canonical Markdown design guides.",
+    "Old organization guides and logs removed by the active reset; recovery provenance retained in reports/reset/20261011/README.md and recovery_receipt.json.",
+    "New checker verifies retained source/runtime/approval bytes and current navigation.",
+    "Superseded documents were not restored."
+  ],
+  "new_actionable_organization_changes": [
+    "Updated monitor references to current canonical documents after reset."
+  ],
+  "automation_updated": true,
+  "automation_schedule_preserved": true,
+  "notification_policy_preserved": true,
+  "navigation_changed": [],
+  "moved_files": [],
+  "allowlist_changed": false,
+  "clean_consecutive_checks": 0,
+  "pause_eligible": false,
+  "pause_reason": "Relevant reset/review chat remains active.",
+  "provider_calls": 0,
+  "deployment_or_billing_changes": false,
+  "protected_paths_unchanged": true,
+  "monitor_status": "ACTIVE"
+}

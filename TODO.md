@@ -24,9 +24,9 @@ The first two hours are a repository and design reset. The owner clarified the d
 - [x] Step 3b: local active-tree cleanup completed with recovery preserved.
 - [x] Step 4a: links, dependency closure and appropriate checks passed or limitations recorded.
 - [x] Step 4b: GitHub update prepared against verified branch tips.
-- [ ] Step 5: GitHub cleanup and final comparison recorded.
+- [x] Step 5: GitHub cleanup and final comparison recorded.
 
-Reset evidence: [cleanup and validation receipt](reports/reset/20261011/README.md).
+Reset completed: 4,297 active files removed, the two superseded branches removed locally and remotely, main consolidated, exact bindings retained, and 103 hosted provider-free checks passed. See [cleanup and validation receipt](reports/reset/20261011/README.md). Runtime implementation steps below remain open.
 
 Timeboxes are estimates, not a promise of a deployable agent in two hours. This reset does not authorize provider spending, live-service changes, billing changes or public access. Check existing permissions against each exact subsequent action.
 

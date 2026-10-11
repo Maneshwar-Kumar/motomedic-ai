@@ -27,8 +27,10 @@ Original baseline: `997a21e22625ec5b972a66f38df898e2f41315bb`. Historical links 
 
 ## Checks and operating boundary
 
-The repository checker verifies current navigation, the PDF checksum, both pinned manifests, 64 runtime bindings and 187 approved outputs. Provider-free CI checks source approval, admission, provider adapters, fake managed state and UI streaming. Index-dependent semantic-composer tests and real quality/deployment remain separate gates. Validation and remote consolidation receipts are recorded alongside this report as work completes.
+The repository checker verifies current navigation, the PDF checksum, both pinned manifests, 64 runtime bindings and 187 approved outputs. Provider-free CI checks source approval, admission, provider adapters, fake managed state and UI streaming. Index-dependent semantic-composer tests and real quality/deployment remain separate gates. [Validation](validation.json) and [remote consolidation](remote_receipt.json) record completion. [Hosted CI](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38165030392) passed 17 approval and 86 synthetic contract tests, 103 total, without providers. The index-dependent composer suite is outside this hosted CI scope; local attempts were blocked by filesystem-inaccessible Flask installs and are not counted as passes.
 
 The real v8 run still released zero technical answers and answered 0/4 answerable or partial questions. This cleanup does not repair source admission, token packing, Qdrant serving, conditional scheduling or durable worker lifetime. TODO records those next actions.
+
+GitHub and local main now share the clean reset. Both superseded branches and PRs are closed. [Fifteen retired workflows](retired_workflows.json) were disabled; only current versioned ingestion and provider-free CI remain active. Required source history includes one original judge result retained for scoped quality provenance. The independent organization monitor has checked the new baseline and updated its existing references without restoring superseded files.
 
 No provider call, model activation, source-display change, service deployment or GCP billing change was made by this reset.
