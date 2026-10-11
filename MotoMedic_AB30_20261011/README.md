@@ -52,6 +52,8 @@ Automatic approval review rejected disabling workflow 381150456 because that per
 
 ## Evidence and continuation
 
+Owner follow-up: approved scope caveats are acceptable. Measured delivered frequency is A5/23 (21.7%) and B1/11 (9.1%); see `CAVEAT_FREQUENCY.md` and `.json` for definitions, cases and examples. Caveat presence alone is not an accuracy defect; historical runtime failures remain recorded.
+
 Hosted [run 38128714743](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38128714743) succeeded at runtime commit `8cb63185a782192d06db79917070998b6f1242da`. Model `gemma-4-26b-a4b-it`, minimal thinking, 400 output tokens, no fallback, alternate AB/BA order, fresh sessions and cache bypass. Sixty turns, 66 requests, zero retries. The first job 38128389193 was cancelled before provider access after a byte-normalization issue; zero model calls. The corrected exact review verified committed bytes before the successful run. Both histories are retained. The successful job passed 72 offline checks; four separate budget-policy tests also passed.
 
 - `ALL_OUTPUTS.md` / `.json`: all 60 actual delivered outputs, citations and explicit withheld failures.
