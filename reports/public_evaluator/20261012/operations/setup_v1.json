@@ -261,6 +261,24 @@
         "resourceId": "projects/_/buckets/motomedic-ai-20261009-indices",
         "version": 3
       }
+    },
+    {
+      "command": [
+        "run",
+        "services",
+        "add-iam-policy-binding",
+        "motomedic-answer-worker",
+        "--project=motomedic-ai-20261009",
+        "--region=us-central1",
+        "--member=serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/run.invoker",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "message": "Updated IAM policy for service [motomedic-answer-worker].\r\n{\r\n  \"bindings\": [\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/run.invoker\"\r\n    }\r\n  ],\r\n  \"etag\": \"BwZdlsIObjg=\",\r\n  \"version\": 1\r\n}"
+      },
+      "at_utc": "2026-10-11T20:52:23.0806438Z"
     }
   ],
   "readback": {
@@ -423,7 +441,7 @@
       "at_utc": "2026-10-11T20:29:37.9948420Z"
     }
   },
-  "worker_invoker": "PENDING_WORKER_DEPLOYMENT",
+  "worker_invoker": "VERIFIED_PRIVATE_TASK_ACCOUNT_ONLY",
   "provider_calls": 0,
   "billing_changes": 0,
   "secret_values_read": false,
@@ -446,8 +464,53 @@
     "snapshot_object_condition_exact": true,
     "main_billing_still_enabled": true,
     "inference_billing_still_disabled": true,
-    "all_recorded_mutations_succeeded": true
+    "all_recorded_mutations_succeeded": true,
+    "worker_grant_succeeded": true,
+    "worker_exact_task_invoker_only": true,
+    "worker_no_public_worker_principal": true,
+    "worker_worker_uses_backend_identity": true,
+    "worker_cleanup_ttl_active": true,
+    "worker_no_provider_or_secret_access": true
   },
-  "status": "PRIVATE_PREREQUISITES_READY_WORKER_BINDING_PENDING",
-  "task_service_agent_role_added_by_this_agent": false
+  "status": "PRIVATE_DURABLE_IAM_READY_WORKER_STARTUP_FAILURE_OBSERVED",
+  "task_service_agent_role_added_by_this_agent": false,
+  "worker_readback": {
+    "bindings": [
+      {
+        "role": "roles/run.invoker",
+        "condition": null,
+        "members": [
+          "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ]
+      }
+    ],
+    "etag": "BwZdlsIObjg=",
+    "at_utc": "2026-10-11T20:52:38.7347607Z"
+  },
+  "worker_runtime_observation": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-11T20:51:25.644262Z",
+        "message": "The user-provided container failed the configured startup probe checks. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=motomedic-ai-20261009&resource=cloud_run_revision/service_name/motomedic-answer-worker/revision_name/motomedic-answer-worker-00001-5vg&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22motomedic-answer-worker%22%0Aresource.labels.revision_name%3D%22motomedic-answer-worker-00001-5vg%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T20:51:25.574642Z",
+        "message": "The user-provided container failed the configured startup probe checks. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=motomedic-ai-20261009&resource=cloud_run_revision/service_name/motomedic-answer-worker/revision_name/motomedic-answer-worker-00001-5vg&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22motomedic-answer-worker%22%0Aresource.labels.revision_name%3D%22motomedic-answer-worker-00001-5vg%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "ConfigurationsReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T20:51:25.644262Z",
+        "message": "The user-provided container failed the configured startup probe checks. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=motomedic-ai-20261009&resource=cloud_run_revision/service_name/motomedic-answer-worker/revision_name/motomedic-answer-worker-00001-5vg&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22motomedic-answer-worker%22%0Aresource.labels.revision_name%3D%22motomedic-answer-worker-00001-5vg%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "RoutesReady"
+      }
+    ]
+  },
+  "worker_runtime_observation_at_utc": "2026-10-11T20:51:38.3092938Z"
 }

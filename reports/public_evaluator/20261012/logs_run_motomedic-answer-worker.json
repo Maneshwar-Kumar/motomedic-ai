@@ -1,0 +1,34 @@
+[
+  {
+    "timestamp": "2026-10-11T20:51:17.244187Z",
+    "message": "[2026-10-11 20:51:17 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-11T20:51:17.261739Z",
+    "message": "[2026-10-11 20:51:17 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-11T20:51:24.763937Z",
+    "message": "[2026-10-11 20:51:24 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-11T20:51:24.763997Z",
+    "startup_exception_tail": "            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/serving_artifacts.py\", line 284, in load_index\n    (reader or GCSReader()).fetch(reference, archive)\n  File \"/app/cloud/serving_artifacts.py\", line 127, in fetch\n    destination.parent.mkdir(parents=True, exist_ok=True)\n  File \"/usr/local/lib/python3.11/pathlib.py\", line 1116, in mkdir\n    os.mkdir(self, mode)\nPermissionError: [Errno 13] Permission denied: '/app/build/serving-artifacts'"
+  },
+  {
+    "timestamp": "2026-10-11T20:51:24.764003Z",
+    "message": "[2026-10-11 20:51:24 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-11T20:51:24.942284Z",
+    "message": "[2026-10-11 20:51:24 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-11T20:51:24.943199Z",
+    "message": "[2026-10-11 20:51:24 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-11T20:51:24.943252Z",
+    "message": "[2026-10-11 20:51:24 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  }
+]

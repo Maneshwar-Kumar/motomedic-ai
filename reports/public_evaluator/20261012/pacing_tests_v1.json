@@ -1,0 +1,52 @@
+{
+  "allocation_id_unchanged": "grounded-primary-nonrecurring-v1",
+  "allocation_version_unchanged": "whole-turn-capacity-v1",
+  "checks": [
+    "completed two-call turn seals six never-consumed future slots only",
+    "next turn actual permit is last actual permit plus61 seconds",
+    "all16 slots and159872 tokens remain reserved after two turns",
+    "uncertain consumed future slot stays active",
+    "duplicate old operation is forbidden",
+    "sealed slot cannot be consumed by restored stale worker",
+    "stale/overslept permits reposition before transport",
+    "sealing read/write failures retain active events and clear local state",
+    "original generation exception is not masked",
+    "shorter next turn preserves full24-hour future event retention",
+    "allocation cannot reset on another day or process"
+  ],
+  "classification": "SYNTHETIC_LOCAL_PROVIDER_FREE",
+  "cloud_mutations": 0,
+  "counts_overlap": true,
+  "date": "2026-10-12",
+  "file_sha256": {
+    "cloud/grounded_generation/test_whole_turn_admission.py": "4c903a04bf27a0fb9cba0f4fb7d34b0a083d94561f3bf310b40f9ae5d4e5e1ec",
+    "cloud/grounded_generation/whole_turn_admission.py": "9ed06924872e3e3f349e495f605d3b4d127f3c8cb85c74cfce6087cc20193aa4"
+  },
+  "limits": "Engineering checks do not establish live provider quality, cache savings, hosted pacing, public readiness or deployment acceptance.",
+  "maximum_attempts_unchanged": 100,
+  "maximum_tokens_unchanged": 999200,
+  "provider_calls": 0,
+  "runs": [
+    {
+      "modules": [
+        "cloud.grounded_generation.test_whole_turn_admission",
+        "cloud.grounded_generation.test_provider"
+      ],
+      "passed": 35,
+      "seconds": 1.299
+    },
+    {
+      "modules": [
+        "cloud.grounded_generation.test_whole_turn_admission",
+        "cloud.grounded_generation.test_provider",
+        "cloud.grounded_generation.test_verified_qa",
+        "cloud.grounded_generation.test_cached_verifier"
+      ],
+      "passed": 85,
+      "seconds": 36.788
+    }
+  ],
+  "runtime_pacing_version": "whole-turn-sealed-unused-pacing-v2",
+  "schema": "motomedic-public-evaluator-pacing-tests-v1",
+  "slot_spacing_seconds_unchanged": 61
+}

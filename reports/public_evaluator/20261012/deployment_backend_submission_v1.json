@@ -1,0 +1,260 @@
+{
+  "request": {
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a",
+    "template": {
+      "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "containers": [
+        {
+          "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:223d8f5270e1a8ae9e5eb0ff6ce9c1b1e2dbde61b4d99550c7c63a2dc52d21b0",
+          "ports": [
+            {
+              "containerPort": 8080
+            }
+          ],
+          "env": [
+            {
+              "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+              "value": "false"
+            },
+            {
+              "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+              "value": "false"
+            },
+            {
+              "name": "MOTOMEDIC_TASK_QUEUE",
+              "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+            },
+            {
+              "name": "MOTOMEDIC_TASK_WORKER_URL",
+              "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+            },
+            {
+              "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+              "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+            },
+            {
+              "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+              "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+            },
+            {
+              "name": "MOTOMEDIC_VISITOR_SECRET",
+              "valueSource": {
+                "secretKeyRef": {
+                  "secret": "motomedic-rider-visitor-v1",
+                  "version": "1"
+                }
+              }
+            },
+            {
+              "name": "MOTOMEDIC_GEMINI_API_KEY",
+              "valueSource": {
+                "secretKeyRef": {
+                  "secret": "motomedic-gemini-serving-v1",
+                  "version": "1"
+                }
+              }
+            },
+            {
+              "name": "ANTHROPIC_API_KEY",
+              "valueSource": {
+                "secretKeyRef": {
+                  "secret": "motomedic-evaluator-anthropic-v1",
+                  "version": "1"
+                }
+              }
+            }
+          ],
+          "resources": {
+            "limits": {
+              "cpu": "2",
+              "memory": "8Gi"
+            },
+            "startupCpuBoost": true,
+            "cpuIdle": true
+          },
+          "startupProbe": {
+            "httpGet": {
+              "path": "/healthz",
+              "port": 8080
+            },
+            "initialDelaySeconds": 0,
+            "periodSeconds": 10,
+            "timeoutSeconds": 5,
+            "failureThreshold": 24
+          }
+        }
+      ],
+      "scaling": {
+        "minInstanceCount": 1,
+        "maxInstanceCount": 1
+      },
+      "timeout": "1200s",
+      "maxInstanceRequestConcurrency": 6
+    },
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+        "percent": 100
+      }
+    ],
+    "ingress": "INGRESS_TRAFFIC_ALL",
+    "labels": {
+      "motomedic-release": "v10-2"
+    }
+  },
+  "operation": {
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/operations/f7fa0a7d-012a-4e68-a946-5d3920057d7d",
+    "metadata": {
+      "@type": "type.googleapis.com/google.cloud.run.v2.Service",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a",
+      "uid": "bc1b292b-3701-465d-abf1-6879aa6adf20",
+      "generation": "5",
+      "labels": {
+        "motomedic-release": "v10-2"
+      },
+      "createTime": "2026-10-11T11:06:18.539876Z",
+      "updateTime": "2026-10-11T20:51:16.890217Z",
+      "creator": "maneshwarkumar@gmail.com",
+      "lastModifier": "maneshwarkumar@gmail.com",
+      "client": "gcloud",
+      "clientVersion": "575.0.0",
+      "ingress": "INGRESS_TRAFFIC_ALL",
+      "launchStage": "GA",
+      "template": {
+        "scaling": {
+          "minInstanceCount": 1,
+          "maxInstanceCount": 1
+        },
+        "timeout": "1200s",
+        "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "containers": [
+          {
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:223d8f5270e1a8ae9e5eb0ff6ce9c1b1e2dbde61b4d99550c7c63a2dc52d21b0",
+            "env": [
+              {
+                "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_QUEUE",
+                "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_WORKER_URL",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "MOTOMEDIC_GEMINI_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-gemini-serving-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "ANTHROPIC_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-evaluator-anthropic-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              },
+              "cpuIdle": true,
+              "startupCpuBoost": true
+            },
+            "ports": [
+              {
+                "name": "http1",
+                "containerPort": 8080
+              }
+            ],
+            "startupProbe": {
+              "timeoutSeconds": 5,
+              "periodSeconds": 10,
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              }
+            }
+          }
+        ],
+        "maxInstanceRequestConcurrency": 6
+      },
+      "traffic": [
+        {
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+          "percent": 100
+        }
+      ],
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "urls": [
+        "https://motomedic-arm-a-279945185781.us-central1.run.app",
+        "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app"
+      ],
+      "sshEnabled": false,
+      "observedGeneration": "4",
+      "terminalCondition": {
+        "type": "Ready",
+        "state": "CONDITION_PENDING",
+        "lastTransitionTime": "2026-10-11T12:34:04.435292Z"
+      },
+      "conditions": [
+        {
+          "type": "RoutesReady",
+          "state": "CONDITION_SUCCEEDED",
+          "lastTransitionTime": "2026-10-11T12:34:04.397049Z"
+        },
+        {
+          "type": "ConfigurationsReady",
+          "state": "CONDITION_SUCCEEDED",
+          "lastTransitionTime": "2026-10-11T12:34:03.078045Z"
+        }
+      ],
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00003-gs2",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00003-gs2",
+      "trafficStatuses": [
+        {
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+          "revision": "motomedic-arm-a-00003-gs2",
+          "percent": 100
+        }
+      ],
+      "uri": "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app",
+      "reconciling": true,
+      "etag": "\"CMTtr9YGEKjEvqgD/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtYXJtLWE\""
+    }
+  },
+  "public_iam_changed": false
+}

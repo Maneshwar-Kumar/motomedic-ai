@@ -10,7 +10,7 @@ from evidence_registry import content_hash
 from controller_contracts import DiagnosticSession, Response, ResponseType
 import cloud.grounded_generation.test_verified_qa as verified
 from cloud.grounded_generation.whole_turn_admission import (WholeTurnAdmission, ALLOCATION,
-    operation_deadline, MAX_SLEEP_SECONDS)
+    operation_deadline, MAX_SLEEP_SECONDS, PACING_VERSION)
 from cloud.grounded_generation.provider import GemmaProvider, ProviderFailure
 from cloud.grounded_generation.fallback_provider import FallbackProvider
 from cloud.grounded_generation.claude_provider import ClaudeProvider, MAX_CALL_USD
@@ -156,10 +156,96 @@ class Tests(unittest.TestCase):
         self.client.documents[ALLOCATION]={'version':'changed'}
         with self.assertRaisesRegex(ProviderFailure,'BINDING_CHANGED'):self.admit.begin_turn('binding')
 
-    def test_future_slots_are_bounded_without_raising_existing_rate(self):
-        self.admit.begin_turn('first');self.admit.end_turn()
-        with self.assertRaisesRegex(ProviderFailure,'QUEUE_BOUND'):self.admit.begin_turn('second')
+    def test_active_future_slots_still_bound_a_different_worker(self):
+        self.admit.begin_turn('first')
+        other=WholeTurnAdmission(self.client,now=lambda:self.now,sleep=lambda _:None)
+        with self.assertRaisesRegex(ProviderFailure,'QUEUE_BOUND'):other.begin_turn('second')
         self.assertEqual(len(self.client.documents['grounded-provider-global-v1']['events']),8)
+
+    def test_completed_two_call_turn_releases_only_pacing_and_retains_sixteen_reserved_slots(self):
+        receipt=self.admit.begin_turn('first')
+        self.admit(9992,'generation');self.admit(9992,'generation')
+        last_actual=self.now
+        allocation_before=deepcopy(self.client.documents[ALLOCATION])
+        self.assertIs(self.admit.end_turn(),receipt)
+        self.assertEqual(receipt['pacing_version'],PACING_VERSION)
+        self.assertEqual(receipt['sealing_status'],'SEALED_UNUSED_CONFIRMED')
+        self.assertEqual(receipt['sealed_unused_slots'],6)
+        self.assertEqual(self.client.documents[ALLOCATION],allocation_before)
+        self.admit.begin_turn('second');self.admit(9992,'generation')
+        self.assertEqual((self.now-last_actual).total_seconds(),61)
+        events=self.client.documents['grounded-provider-global-v1']['events']
+        self.assertEqual(len(events),16)
+        self.assertEqual(sum(e.get('state')=='SEALED_UNUSED' for e in events),6)
+        self.assertEqual(sum(e['tokens'] for e in events),16*9992)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'],16)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'],16*9992)
+
+    def test_uncertain_consumed_future_permit_stays_active_after_turn_ends(self):
+        self.admit.begin_turn('interrupted');self.admit(9992,'generation')
+        def worker_interrupted(_):raise RuntimeError('synthetic worker interrupted before transport')
+        normal_sleep=self.admit.sleep;self.admit.sleep=worker_interrupted
+        with self.assertRaisesRegex(RuntimeError,'interrupted'):self.admit(9992,'generation')
+        self.assertEqual(self.now,datetime(2026,10,12,tzinfo=timezone.utc))
+        self.admit.end_turn();self.admit.sleep=normal_sleep
+        old=self.client.documents['grounded-provider-global-v1']['events']
+        self.assertTrue(old[1]['consumed'])
+        self.assertNotIn('state',old[1])
+        self.admit.begin_turn('next');self.admit(9992,'generation')
+        self.assertEqual(self.now,datetime(2026,10,12,tzinfo=timezone.utc)+timedelta(seconds=122))
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'],16)
+
+    def test_sealed_slot_cannot_be_consumed_even_if_a_stale_worker_restores_its_turn(self):
+        self.admit.begin_turn('sealed');self.admit(9992,'generation');self.admit(9992,'generation')
+        stale_turn=dict(self.admit.local.turn)
+        self.admit.end_turn()
+        before=deepcopy(self.client.documents)
+        self.admit.local.turn=stale_turn
+        with self.assertRaisesRegex(ProviderFailure,'SEALED_UNUSED_ATTEMPT_FORBIDDEN'):
+            self.admit(9992,'generation')
+        self.assertEqual(self.client.documents,before)
+
+    def test_sealing_outage_clears_thread_state_preserves_original_error_and_active_events(self):
+        receipt=self.admit.begin_turn('seal-outage');self.admit(9992,'generation')
+        before=deepcopy(self.client.documents);self.client.fail=True
+        with self.assertRaisesRegex(ProviderFailure,'ORIGINAL_GENERATION_ERROR'):
+            try:raise ProviderFailure('ORIGINAL_GENERATION_ERROR')
+            finally:self.admit.end_turn()
+        self.assertIsNone(self.admit.local.turn)
+        self.assertEqual(receipt['sealing_status'],'SEALING_UNCONFIRMED_ACTIVE_POLICY_RETAINED')
+        self.assertEqual(receipt['sealed_unused_slots'],0)
+        self.assertEqual(self.client.documents,before)
+        self.client.fail=False
+        with self.assertRaisesRegex(ProviderFailure,'QUEUE_BOUND'):self.admit.begin_turn('after-outage')
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'],8)
+
+    def test_failed_sealing_write_leaves_all_slots_active(self):
+        receipt=self.admit.begin_turn('write-outage');self.admit(9992,'generation')
+        before=deepcopy(self.client.documents)
+        def unavailable_set(ref,body):raise RuntimeError('synthetic failed commit')
+        self.client.set=unavailable_set
+        self.admit.end_turn()
+        self.assertEqual(self.client.documents,before)
+        self.assertEqual(receipt['sealed_unused_slots'],0)
+        self.assertEqual(receipt['sealing_status'],'SEALING_UNCONFIRMED_ACTIVE_POLICY_RETAINED')
+        self.assertIsNone(self.admit.local.turn)
+
+    def test_consumed_or_unproved_sealing_markers_fail_closed(self):
+        self.admit.begin_turn('original');self.admit(9992,'generation');self.admit.end_turn()
+        events=self.client.documents['grounded-provider-global-v1']['events']
+        events[0].update(state='SEALED_UNUSED',sealed_version=PACING_VERSION,sealed_at=self.now)
+        before=deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure,'STORE_INVALID'):self.admit.begin_turn('new')
+        self.assertEqual(self.client.documents,before)
+
+    def test_shorter_next_turn_does_not_shorten_retention_of_sealed_future_events(self):
+        self.admit.begin_turn('twelve',attempts=12);self.admit.end_turn()
+        old_last=self.client.documents['grounded-provider-global-v1']['events'][-1]['at']
+        self.admit.begin_turn('eight',attempts=8)
+        ledger=self.client.documents['grounded-provider-global-v1']
+        self.assertEqual(len(ledger['events']),20)
+        self.assertEqual(ledger['expires_at'],old_last+timedelta(hours=24))
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'],20)
 
     def test_unconfigured_primary_count_uses_native_fallback_counter(self):
         calls=[]
