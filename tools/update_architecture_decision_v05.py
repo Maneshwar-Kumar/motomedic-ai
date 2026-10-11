@@ -60,7 +60,8 @@ def main():
     d.tables[0].rows[6].cells[2].text='A exact reviewed selection checks; B semantic claim verification; fail-closed delivery'
     d.tables[3].rows[1].cells[1].text='Release only after applicability, complete dependencies, warnings, citations and method-specific claim validation under A or B pass.'
     d.tables[4].rows[4].cells[2].text='Approved paraphrase and immutable citation metadata only; no end-user PDF, excerpt or crop under current display policy'
-    d.add_page_break();heading(d,'14 Owner selected answer methods and delivery')
+    heading(d,'14 Owner selected answer methods and delivery')
+    d.paragraphs[-1].paragraph_format.page_break_before=True
     paragraph(d,'Decision recorded 11 October 2026. Retain A and B as the application methodologies. Use verified streaming delivery for A. Exclude C from the current UI path because it failed the clock case in both passes and took excessive paced time in the successful cases. This is the owner decision based on a bounded engineering comparison, not a general model quality or p95 finding.')
     table(d,['Method','Selected behavior','Release requirement'],[
         ['A component selection','Select among exact reviewed wording; deliver by streaming','Validate exact indices, scope, dependencies and session; emit the complete approved unit after durable save'],
