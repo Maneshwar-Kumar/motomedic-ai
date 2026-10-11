@@ -93,12 +93,12 @@ if not st.session_state.messages:
         st.markdown('### What are you noticing?')
         st.write('Start with one symptom or question. If you have performed a diagnostic, or checked a few things already, then tell MotoMedic to avoid false resolutions')
         st.caption('Up to 2,000 characters per message.')
-        st.file_uploader('Add a bike photo · coming next', type=['jpg', 'jpeg', 'png', 'webp'], accept_multiple_files=False, max_upload_size=5, disabled=True)
-        st.caption('Photos: one per turn, up to 5 MB each; three per conversation. Photo support is coming next.')
         query = st.chat_input('Describe one symptom or ask a question…', key='symptom_input', max_chars=LIMITS.message_characters,
                               disabled=not ready or bool(st.session_state.pending))
         if query and query.strip():
             perform('start', query.strip())
+        st.file_uploader('Add a bike photo · coming next', type=['jpg', 'jpeg', 'png', 'webp'], accept_multiple_files=False, max_upload_size=5, disabled=True)
+        st.caption('Photos: one per turn, up to 5 MB each; three per conversation. Photo support is coming next.')
     cols = st.columns(3)
     for col, title, body in zip(cols, ['01 · Describe', '02 · Check', '03 · Report'],
                                ['Tell us what you can see or hear.', 'Read one supported question or step.', 'Share the result so the next turn remembers it.']):

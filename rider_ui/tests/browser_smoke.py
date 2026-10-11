@@ -42,6 +42,7 @@ def run():
             assert page.get_by_text('Available topics come from the hosted controller.',exact=False).count() == 0
             assert page.get_by_role('combobox',name='Choose the closest topic').count() == 0
             assert page.get_by_text('Select a topic',exact=True).count() == 0
+            assert page.get_by_role('textbox',name='Describe one symptom or ask a question…').bounding_box()['y'] < page.locator('[data-testid="stFileUploader"]').bounding_box()['y']
             checks.append({'name':'inline_symptom_input_and_no_category_selector','passed':True})
             page.screenshot(path=str(out/'desktop.png'),full_page=True)
             page.get_by_text('My motorcycle is a Himalayan BS6',exact=True).click()
