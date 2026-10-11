@@ -76,6 +76,8 @@ jobs:
         run: ln -s index build/index-bge-final
       - name: Verify software before using the secret
         run: python -m unittest -v cloud.grounded_generation.test_claude_fallback cloud.grounded_generation.test_verified_qa cloud.grounded_generation.test_open_wiring rider_ui.tests.test_client rider_ui.tests.test_verified_sse rider_ui.tests.test_progress_stream cloud.arm_a.test_store
+      - name: Verify frozen Git and checkout bytes
+        run: python tools/check_frozen_git_blobs.py reports/grounded_generation/v8/runtime_freeze.json
       - name: Actual Haiku drafting and verification through bounded fallback
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

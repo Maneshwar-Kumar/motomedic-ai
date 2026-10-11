@@ -17,4 +17,4 @@ def check(path):
             errors.append({'path':name,'error':'CHECKOUT_BYTES_DIFFER_FROM_FREEZE'})
     return {'schema_version':'frozen-git-checkout-binding-v1','files':len(names),'ok':not errors,'errors':errors}
 if __name__=='__main__':
-    result=check(ROOT/sys.argv[1]);print(json.dumps(result,indent=2));sys.exit(0 if result['ok']else1)
+    result=check(ROOT/sys.argv[1]);print(json.dumps(result,indent=2));sys.exit(0 if result['ok'] else 1)
