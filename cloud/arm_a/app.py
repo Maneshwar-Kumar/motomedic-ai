@@ -114,14 +114,16 @@ def create_app(registry, retriever, state_factory, cases):
 
     @app.get('/healthz')
     def health():
-        return jsonify({'ready':True, 'architecture':'A_DETERMINISTIC_CANONICAL',
+        return jsonify({'ready':True, 'architecture':app.config.get('SERVING_ARCHITECTURE','A_DETERMINISTIC_CANONICAL'),
             'manual_checksum':registry.checksum, 'index_id':registry.index_id,
-            'provider_calls':0, 'benchmark_pacing':False,
+            'answer_provider':app.config.get('ANSWER_PROVIDER'), 'benchmark_pacing':False,
             'streaming':'VERIFIED_COMPLETE_UNIT_SSE',
             'reranking':'conditional-rerank-v1', 'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)})
 
     @app.get('/v1/initial-catalogue')
     def catalogue():
+        if app.config.get('GROUNDED_PRIMARY'):
+            return error('UNSUPPORTED','BENCHMARK_ENDPOINT_RETIRED',410)
         return jsonify({'schema_version':'motomedic-initial-arm-a-v1',
             'intent_resolution':'EXPLICIT_REVIEWED_RECORD_ONLY',
             'bike_variant':registry.source['variant'], 'manual_checksum':registry.checksum,
@@ -131,6 +133,8 @@ def create_app(registry, retriever, state_factory, cases):
     @app.post('/v1/initial-answer')
     @app.post('/v1/initial-answer/stream')
     def answer():
+        if app.config.get('GROUNDED_PRIMARY'):
+            return error('UNSUPPORTED','BENCHMARK_ENDPOINT_RETIRED',410)
         started = time.perf_counter()
         key = request.headers.get('Idempotency-Key','')
         if not re.fullmatch(r'[A-Za-z0-9_-]{16,100}', key):
@@ -249,7 +253,9 @@ def load_production():
     controlled_composer = Composer(GemmaProvider(ProviderAdmission(client),
         cache_capability=os.environ.get('MOTOMEDIC_PROVIDER_CACHE_CAPABILITY','unsupported')))
     state_factory = lambda owner:FirestoreState(client,owner)
-    app = create_app(registry, retriever, state_factory, cases)
+    app = create_app(registry, retriever, state_factory, [])
+    app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='MANUAL_EVIDENCE_GROUNDED_LLM',
+        ANSWER_PROVIDER='gemma-4-26b-a4b-it')
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
     if secret:

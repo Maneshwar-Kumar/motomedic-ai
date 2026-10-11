@@ -59,8 +59,9 @@ def check_output(draft, scopes, clarifications):
     selected=draft['scope_ids']
     if not selected or len(set(selected))!=len(selected) or not set(selected)<=set(scopes) or any(scopes[s]['kind']=='SAFETY_STOP' for s in selected): raise ValidationFailure('UNADMITTED_SCOPE')
     if draft['clarification_id'] or not 1<=len(draft['claims'])<=12: raise ValidationFailure('OUTPUT_SCHEMA')
-    actions=[sid for sid in selected if scopes[sid]['kind']=='ACTION']
-    if len(actions)>1 or draft['step_id']!=(actions[0] if actions else ''): raise ValidationFailure('UNPERMITTED_STEP')
+    actions=[draft['step_id']] if draft['step_id'] else []
+    if actions and (actions[0] not in selected or scopes[actions[0]]['kind']!='ACTION'):
+        raise ValidationFailure('UNPERMITTED_STEP')
     permitted=set(e for sid in selected for e in scopes[sid]['required_evidence_ids'])
     for claim in draft['claims']:
         if type(claim) is not dict or set(claim)!={'text','role','evidence_ids'}: raise ValidationFailure('OUTPUT_SCHEMA')
