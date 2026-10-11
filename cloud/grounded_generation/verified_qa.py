@@ -14,7 +14,7 @@ from evidence_registry import content_hash
 from cloud.grounded_generation.provider import ProviderFailure,MODEL
 from cloud.arm_a.rider_contract import saved_view as legacy_view
 
-VERSION='open-manual-draft-verify-v9'
+VERSION='open-manual-draft-verify-v10'
 FALLBACK_TEXT='I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
 SYSTEM_ERROR_TEXT='I couldn\u2019t check the answer right now. Please try again shortly.'
 DECISIONS=('RELEASE_COMPLETE','RELEASE_PARTIAL','SHOW_FALLBACK','RELEASE_CLARIFICATION','RELEASE_SAFETY_STOP')
@@ -95,22 +95,27 @@ DRAFT_POLICY_SHA256=hashlib.sha256(DRAFT_POLICY.encode()).hexdigest()
 
 class Config:
     controls_version=VERSION
-    def __init__(self,provider_contract=None):
+    def __init__(self,provider_contract=None,verifier_contract=None):
         from cloud.grounded_generation.fallback_provider import CONTRACT
+        from cloud.grounded_generation.cached_verifier import CONTRACT as VERIFIER_CONTRACT,DRAFT_CONTRACT
         if provider_contract is not None and provider_contract!=CONTRACT:
             raise ValidationFailure('UNRECOGNIZED_PROVIDER_CONTRACT')
+        if verifier_contract is not None and (verifier_contract!=VERIFIER_CONTRACT or provider_contract is not None):
+            raise ValidationFailure('UNRECOGNIZED_VERIFIER_CONTRACT')
         self.provider_contract=deepcopy(provider_contract)
+        self.verifier_contract=deepcopy(verifier_contract)
+        self.draft_contract=deepcopy(DRAFT_CONTRACT)
     def versions(self):
         root=Path(__file__).parent
-        code={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ('verified_qa.py','provider.py','claude_provider.py','fallback_provider.py','claude_budget.py','admission.py','whole_turn_admission.py','source_authority.py','open_questions.py','generic_runtime.py','runtime.py','source_context.py','fuse_refusal.py')}
+        code={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ('verified_qa.py','provider.py','cached_verifier.py','claude_provider.py','fallback_provider.py','claude_budget.py','admission.py','whole_turn_admission.py','source_authority.py','open_questions.py','generic_runtime.py','runtime.py','source_context.py','fuse_refusal.py')}
         for name in ('serving_retrieval.py','serving_source_authority.py','serving_questions.py','serving_context.py','serving_baseline.py','serving_safety.py'):
             if (root/name).is_file():code[name]=hashlib.sha256((root/name).read_bytes()).hexdigest()
         project=root.parents[1]
         for name in ('cloud/grounded_generation/delivery.py','cloud/arm_a/app.py','cloud/arm_a/rider_api.py','cloud/arm_a/store.py','cloud/arm_a/rider_contract.py','cloud/arm_a/runtime_controls.py','controller_contracts.py','reviewed_controller.py','approved_registry.py','evidence_registry.py','constrained_generator.py','human_review/agent_release_161/approval_consumer.py'):
             code[name]=hashlib.sha256((project/name).read_bytes()).hexdigest()
-        for name in ('cloud/arm_a/durable_dispatch.py','cloud/serving_artifacts.py'):
+        for name in ('cloud/arm_a/durable_dispatch.py','cloud/arm_a/public_admission.py','cloud/serving_artifacts.py'):
             if (project/name).is_file():code[name]=hashlib.sha256((project/name).read_bytes()).hexdigest()
-        return {'version':VERSION,'model':MODEL,'provider_contract':deepcopy(self.provider_contract),'draft_policy_sha256':hashlib.sha256(DRAFT_POLICY.encode()).hexdigest(),'verify_policy_sha256':hashlib.sha256(VERIFY_POLICY.encode()).hexdigest(),'draft_schema_sha256':content_hash(DRAFT_SCHEMA),'verify_schema_sha256':content_hash(VERIFY_SCHEMA),'code_sha256':code,'input_tokens':8192,'request_bytes':65536,'output_tokens':1800,'provider_concurrency':1,'provider_max_attempts':3 if self.provider_contract else 2,'provider_retry_rejections':[429,503],'max_corrections':1,'answer_cache':'DISABLED','provider_prompt_cache':'UNSUPPORTED','semantic_verification':'SEPARATE_EXACT_FINALIZED_RESPONSE','answer_admission':'APPLICABLE_IMMUTABLE_SOURCE_ONLY_NO_ACTION_ALLOWLIST'}
+        return {'version':VERSION,'model':MODEL,'draft_model_contract':deepcopy(self.draft_contract),'verifier_contract':deepcopy(self.verifier_contract),'provider_contract':deepcopy(self.provider_contract),'draft_policy_sha256':hashlib.sha256(DRAFT_POLICY.encode()).hexdigest(),'verify_policy_sha256':hashlib.sha256(VERIFY_POLICY.encode()).hexdigest(),'draft_schema_sha256':content_hash(DRAFT_SCHEMA),'verify_schema_sha256':content_hash(VERIFY_SCHEMA),'code_sha256':code,'input_tokens':8192,'request_bytes':65536,'output_tokens':1800,'provider_concurrency':1,'provider_max_attempts':3 if self.provider_contract else 2,'provider_retry_rejections':[429,503],'max_corrections':1,'answer_cache':'DISABLED','provider_prompt_cache':'EXPLICIT_VERIFIER_PREFIX' if self.verifier_contract else 'UNSUPPORTED','semantic_verification':'DIFFERENT_MODEL_EXACT_FINALIZED_RESPONSE' if self.verifier_contract else 'SEPARATE_EXACT_FINALIZED_RESPONSE','answer_admission':'APPLICABLE_IMMUTABLE_SOURCE_ONLY_NO_ACTION_ALLOWLIST'}
     @property
     def lock(self):return content_hash(self.versions())
 
@@ -184,8 +189,10 @@ def validate_verdict(verdict,binding,final,draft,required_route=None):
     return True
 
 class Composer:
-    def __init__(self,provider,source_authority=None):
-        self.provider=provider;self.source_authority=source_authority;self.config=Config(provider_contract=getattr(provider,'contract',None))
+    def __init__(self,provider,source_authority=None,*,verifier=None):
+        if verifier is provider:raise ValidationFailure('VERIFIER_MUST_BE_SEPARATE_PROVIDER')
+        if verifier is not None and getattr(verifier,'contract',None) is None:raise ValidationFailure('VERIFIER_CONTRACT_REQUIRED')
+        self.provider=provider;self.verifier=verifier if verifier is not None else provider;self.source_authority=source_authority;self.config=Config(provider_contract=getattr(provider,'contract',None),verifier_contract=getattr(verifier,'contract',None))
         self.last_trace=None;self.last_admitted=None;self.last_source_admission=None;self.last_private_attempts=[];self.query=''
     def _check_source(self,controller,session,admitted):
         if session.generation_lock!=self.config.lock:raise ValidationFailure('GENERATION_VERSION_RECONFIRM_REQUIRED')
@@ -193,6 +200,9 @@ class Composer:
         if self.source_authority is None:raise ValidationFailure('SOURCE_AUTHORITY_UNAVAILABLE')
         if getattr(self.provider,'contract',None)!=self.config.provider_contract:raise ValidationFailure('PROVIDER_CONTRACT_CHANGED')
         if getattr(self.provider,'cache_capability','unsupported')!='unsupported':raise ValidationFailure('INCOMPATIBLE_PROVIDER_CACHE')
+        if self.config.verifier_contract is not None:
+            if self.verifier is self.provider or getattr(self.verifier,'contract',None)!=self.config.verifier_contract:raise ValidationFailure('VERIFIER_CONTRACT_CHANGED')
+            if getattr(self.verifier,'cache_capability','unsupported')!='explicit':raise ValidationFailure('INCOMPATIBLE_VERIFIER_CACHE')
         self.source_authority.validate(admitted)
     def _finalize(self,controller,session,admitted,draft):
         used={e for c in draft['claims'] for e in c['evidence_ids']}
@@ -220,12 +230,12 @@ class Composer:
         return response,response_wire(response),selected
     def compose_open(self,controller,session,admitted,query,history,progress=None):
         started=time.monotonic();self.last_admitted=None;self.last_private_attempts=[]
-        trace={'version':VERSION,'provider_calls':0,'generation_calls':0,'draft_calls':0,'verification_calls':0,'correction_calls':0,'corrections':0,'answer_cache':'DISABLED','provider_prompt_cache':'UNSUPPORTED','verification_probabilistic':True,'verified_buffer_ready':False,'answer_exposed':False,'verifier_calls':0,'attempts':[]}
-        self.last_trace=trace;active_provider_call=False
+        trace={'version':VERSION,'provider_calls':0,'generation_calls':0,'draft_calls':0,'verification_calls':0,'correction_calls':0,'corrections':0,'answer_cache':'DISABLED','provider_prompt_cache':self.config.versions()['provider_prompt_cache'],'draft_model':MODEL,'verifier_model':self.config.verifier_contract['model'] if self.config.verifier_contract else MODEL,'verification_probabilistic':True,'verified_buffer_ready':False,'answer_exposed':False,'verifier_calls':0,'attempts':[]}
+        self.last_trace=trace;active_provider_call=False;active_provider=self.provider
         try:
             self._check_source(controller,session,admitted)
             frozen_history=deepcopy(history);initial_session=content_hash(asdict(session))
-            stable={'runtime_contract':{'version':VERSION,'runtime_lock':self.config.lock,'provider_contract':deepcopy(self.config.provider_contract)},'full_evidence_payload_sha256':admitted['payload_sha256'],'source_projection':'lossless-identical-orig-reference-v1','manual_checksum':controller.registry.checksum,'index_id':controller.registry.index_id,'source_authority_lock':admitted['authority_lock'],'evidence':compact_source_evidence(admitted['evidence']),'required_source_display':deepcopy(admitted['required_display']),'source_gaps':deepcopy(admitted['gaps']),'verified_oem_support':deepcopy(controller.registry.source.get('oem_service_route'))}
+            stable={'runtime_contract':{'version':VERSION,'runtime_lock':self.config.lock,'draft_model_contract':deepcopy(self.config.draft_contract),'verifier_contract':deepcopy(self.config.verifier_contract),'provider_contract':deepcopy(self.config.provider_contract)},'full_evidence_payload_sha256':admitted['payload_sha256'],'source_projection':'lossless-identical-orig-reference-v1','manual_checksum':controller.registry.checksum,'index_id':controller.registry.index_id,'source_authority_lock':admitted['authority_lock'],'evidence':compact_source_evidence(admitted['evidence']),'required_source_display':deepcopy(admitted['required_display']),'source_gaps':deepcopy(admitted['gaps']),'verified_oem_support':deepcopy(controller.registry.source.get('oem_service_route'))}
             dynamic={'question':query,'history':frozen_history};feedback=None
             # Exact counting of the complete first request precedes capacity
             # reservation. Remaining calls reserve maximum permitted inputs and
@@ -237,15 +247,20 @@ class Composer:
                 operation=frozen_history.get('operation_id') if type(frozen_history)is dict else None
                 if not operation:raise ProviderFailure('WHOLE_TURN_OPERATION_REQUIRED')
                 trace['whole_turn_reservation']=begin(content_hash({'session_id':session.session_id,'operation_id':operation}))
+            if self.verifier is not self.provider:
+                begin_verifier=getattr(self.verifier,'begin_turn',None)
+                if not callable(begin_verifier):raise ProviderFailure('VERIFIER_WHOLE_TURN_SPEND_GUARD_REQUIRED')
+                trace['verifier_spend_reservation']=begin_verifier()
             for revision in range(2):
                 self._check_source(controller,session,admitted)
                 if progress:progress('drafting')
                 call_started=time.monotonic()
-                active_provider_call=True;trace['draft_calls']+=1;trace['correction_calls']+=1 if revision else 0
+                active_provider=self.provider;active_provider_call=True;trace['draft_calls']+=1;trace['correction_calls']+=1 if revision else 0
                 result=self.provider.complete(DRAFT_POLICY,stable,{**dynamic,**({'correction_feedback':feedback} if feedback else {})},DRAFT_SCHEMA)
                 active_provider_call=False
                 attempt={'revision':revision,'draft_seconds':time.monotonic()-call_started,'draft_provider':deepcopy(result.telemetry or {})}
                 trace['generation_calls']+=(result.telemetry or {}).get('generation_calls',1);trace['provider_calls']=trace['generation_calls']
+                if self.config.verifier_contract and (result.telemetry or {}).get('model')!=MODEL:raise ProviderFailure('DRAFT_PROVIDER_MODEL_MISMATCH')
                 private={'revision':revision,'draft':deepcopy(result.output)};self.last_private_attempts.append(private)
                 draft=validate_draft(result.output,admitted['evidence'])
                 self._check_source(controller,session,admitted)
@@ -257,12 +272,13 @@ class Composer:
                     if not safety<=covered:raise ValidationFailure('REQUIRED_SAFETY_EVIDENCE_OMITTED')
                 if draft['route']=='SAFETY_STOP' and not any(c['role']in TECHNICAL and c['evidence_ids'] for c in final['claims']):raise ValidationFailure('UNCITED_SAFETY_STOP')
                 private['complete_proposed_response']=deepcopy(final)
-                binding={'version':VERSION,'runtime_lock':self.config.lock,'question_sha256':content_hash(query),'history_sha256':content_hash(frozen_history),'session_sha256':initial_session,'response_sha256':content_hash(final),'evidence_payload_sha256':admitted['payload_sha256'],'source_authority_lock':admitted['authority_lock'],'manual_checksum':controller.registry.checksum,'index_id':controller.registry.index_id,'operation_id':frozen_history.get('operation_id') if type(frozen_history)is dict else None}
+                binding={'version':VERSION,'runtime_lock':self.config.lock,'draft_model_contract_sha256':content_hash(self.config.draft_contract),'verifier_contract_sha256':content_hash(self.config.verifier_contract),'question_sha256':content_hash(query),'history_sha256':content_hash(frozen_history),'session_sha256':initial_session,'response_sha256':content_hash(final),'evidence_payload_sha256':admitted['payload_sha256'],'source_authority_lock':admitted['authority_lock'],'manual_checksum':controller.registry.checksum,'index_id':controller.registry.index_id,'operation_id':frozen_history.get('operation_id') if type(frozen_history)is dict else None}
                 if progress:progress('verifying')
                 call_started=time.monotonic()
-                active_provider_call=True;trace['verification_calls']+=1;trace['verifier_calls']+=1
-                verified=self.provider.complete(VERIFY_POLICY,stable,{'question':query,'history':frozen_history,'complete_proposed_response':final,'declared_question_coverage':draft['coverage'],'unanswered_parts':draft['unanswered_parts'],'binding':binding,'binding_sha256':content_hash(binding)},VERIFY_SCHEMA)
+                active_provider=self.verifier;active_provider_call=True;trace['verification_calls']+=1;trace['verifier_calls']+=1
+                verified=self.verifier.complete(VERIFY_POLICY,stable,{'question':query,'history':frozen_history,'complete_proposed_response':final,'declared_question_coverage':draft['coverage'],'unanswered_parts':draft['unanswered_parts'],'binding':binding,'binding_sha256':content_hash(binding)},VERIFY_SCHEMA)
                 active_provider_call=False;trace['generation_calls']+=(verified.telemetry or {}).get('generation_calls',1);trace['provider_calls']=trace['generation_calls']
+                if self.config.verifier_contract and (verified.telemetry or {}).get('model')!=self.config.verifier_contract['model']:raise ProviderFailure('VERIFIER_PROVIDER_MODEL_MISMATCH')
                 attempt.update(verification_seconds=time.monotonic()-call_started,verification_provider=deepcopy(verified.telemetry or {}),binding_sha256=content_hash(binding))
                 verdict=deepcopy(verified.output);private['verdict']=deepcopy(verdict)
                 accepted=validate_verdict(verdict,binding,final,draft,frozen_history.get('required_route') if type(frozen_history)is dict else None)
@@ -271,7 +287,7 @@ class Composer:
                 if content_hash(asdict(session))!=initial_session or content_hash(history)!=content_hash(frozen_history):raise ValidationFailure('VERIFIED_HISTORY_OR_SESSION_CHANGED')
                 if response_wire(response)!=final:raise ValidationFailure('VERIFIED_RESPONSE_CHANGED')
                 if accepted:
-                    self.last_admitted={'status':'ACCEPTED','source_payload':deepcopy(admitted),'selected_source':selected,'final_response':deepcopy(final),'binding':binding,'binding_sha256':content_hash(binding),'verdict':verdict,'verdict_sha256':content_hash(verdict),'runtime_lock':self.config.lock,'provider_contract':deepcopy(self.config.provider_contract)}
+                    self.last_admitted={'status':'ACCEPTED','source_payload':deepcopy(admitted),'selected_source':selected,'final_response':deepcopy(final),'binding':binding,'binding_sha256':content_hash(binding),'verdict':verdict,'verdict_sha256':content_hash(verdict),'runtime_lock':self.config.lock,'provider_contract':deepcopy(self.config.provider_contract),'verifier_contract':deepcopy(self.config.verifier_contract)}
                     trace.update(verified_buffer_ready=True,accepted_response_sha256=content_hash(final),accepted_binding_sha256=content_hash(binding))
                     return response
                 if revision==0 and verdict['correction_possible'] and admitted['evidence']:
@@ -286,7 +302,7 @@ class Composer:
         except (ValidationFailure,ProviderFailure) as exc:
             code=str(exc);trace['failure_code']=code
             if isinstance(exc,ProviderFailure):
-                failed=deepcopy(getattr(self.provider,'last_trace',None)) or {}
+                failed=deepcopy(getattr(active_provider,'last_trace',None)) or {}
                 trace['failed_provider_trace']=failed
                 trace['generation_calls']+=failed.get('generation_calls',0) if active_provider_call else 0;trace['provider_calls']=trace['generation_calls']
             return controller.response('SYSTEM_ERROR',SYSTEM_ERROR_TEXT,session,reason_codes=(code,))
@@ -296,6 +312,9 @@ class Composer:
         finally:
             end=getattr(self.provider,'end_turn',None)
             if callable(end):end()
+            if self.verifier is not self.provider:
+                end_verifier=getattr(self.verifier,'end_turn',None)
+                if callable(end_verifier):end_verifier()
             trace['total_private_pipeline_seconds']=time.monotonic()-started
 
 def saved_view(registry,session,response,authority,admitted=None,operation_id=None):
@@ -309,7 +328,8 @@ def saved_view(registry,session,response,authority,admitted=None,operation_id=No
     if not admitted or admitted.get('status')!='ACCEPTED':raise ValidationFailure('DELIVERY_ACCEPTANCE_MISSING')
     authority.validate(admitted['source_payload'])
     if admitted['selected_source']:authority.validate(admitted['selected_source'])
-    if (admitted['binding']['evidence_payload_sha256']!=admitted['source_payload']['payload_sha256'] or admitted['binding']['source_authority_lock']!=admitted['source_payload']['authority_lock'] or admitted['binding']['runtime_lock']!=admitted['runtime_lock'] or admitted['runtime_lock']!=Config(provider_contract=admitted.get('provider_contract')).lock):raise ValidationFailure('DELIVERY_EVIDENCE_OR_VERSION_CHANGED')
+    config=Config(provider_contract=admitted.get('provider_contract'),verifier_contract=admitted.get('verifier_contract'))
+    if (admitted['binding']['evidence_payload_sha256']!=admitted['source_payload']['payload_sha256'] or admitted['binding']['source_authority_lock']!=admitted['source_payload']['authority_lock'] or admitted['binding']['runtime_lock']!=admitted['runtime_lock'] or admitted['runtime_lock']!=config.lock or admitted['binding'].get('draft_model_contract_sha256')!=content_hash(config.draft_contract) or admitted['binding'].get('verifier_contract_sha256')!=content_hash(config.verifier_contract)):raise ValidationFailure('DELIVERY_EVIDENCE_OR_VERSION_CHANGED')
     final=response_wire(response);binding=admitted['binding'];verdict=admitted['verdict']
     if (binding['manual_checksum']!=registry.checksum or binding['index_id']!=registry.index_id):raise ValidationFailure('DELIVERY_MANUAL_VERSION_CHANGED')
     if (content_hash(binding)!=admitted['binding_sha256'] or content_hash(final)!=binding['response_sha256'] or final!=admitted['final_response'] or content_hash(verdict)!=admitted['verdict_sha256'] or verdict['binding_sha256']!=admitted['binding_sha256'] or verdict['decision'] not in ('RELEASE_COMPLETE','RELEASE_PARTIAL','RELEASE_CLARIFICATION','RELEASE_SAFETY_STOP') or not verdict['release_eligible'] or content_hash(asdict(session))!=binding['session_sha256']):raise ValidationFailure('DELIVERY_VERIFIED_BINDING_CHANGED')

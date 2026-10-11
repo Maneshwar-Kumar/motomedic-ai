@@ -1,0 +1,70 @@
+{
+  "schema_version": "public-evaluator-identity-readback-v1",
+  "secret_values_read": false,
+  "billing_changed": false,
+  "resources": {
+    "verifier_secret_version": {
+      "name": "projects/279945185781/secrets/motomedic-evaluator-anthropic-v1/versions/1",
+      "createTime": "2026-10-11T20:26:59.610685Z",
+      "state": "ENABLED",
+      "replicationStatus": {
+        "automatic": {}
+      },
+      "etag": "\"165d9667497c3d\""
+    },
+    "verifier_secret_iam": {
+      "version": 1,
+      "etag": "BwZdlmPjnyE=",
+      "bindings": [
+        {
+          "role": "roles/secretmanager.secretAccessor",
+          "members": [
+            "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+          ]
+        },
+        {
+          "role": "roles/secretmanager.secretVersionAdder",
+          "members": [
+            "serviceAccount:motomedic-gh-evaluator@motomedic-ai-20261009.iam.gserviceaccount.com"
+          ]
+        }
+      ]
+    },
+    "new_federation_provider": {
+      "name": "projects/279945185781/locations/global/workloadIdentityPools/motomedic-public-release/providers/github-secret-publisher",
+      "displayName": "Exact workflow secret publisher",
+      "state": "ACTIVE",
+      "attributeMapping": {
+        "attribute.repository_id": "assertion.repository_id",
+        "google.subject": "assertion.sub"
+      },
+      "attributeCondition": "assertion.repository_id == '1410890968' && assertion.repository_owner_id == '215264495' && assertion.repository == 'Maneshwar-Kumar/motomedic-ai' && assertion.event_name == 'workflow_dispatch' && assertion.runner_environment == 'github-hosted' && ((assertion.ref == 'refs/heads/codex/public-evaluator' && assertion.workflow_ref == 'Maneshwar-Kumar/motomedic-ai/.github/workflows/claude-evidence-fallback.yml@refs/heads/codex/public-evaluator') || (assertion.ref == 'refs/heads/main' && assertion.workflow_ref == 'Maneshwar-Kumar/motomedic-ai/.github/workflows/public-evaluator-secret.yml@refs/heads/main'))",
+      "oidc": {
+        "issuerUri": "https://token.actions.githubusercontent.com"
+      }
+    },
+    "retired_pool": {
+      "name": "projects/279945185781/locations/global/workloadIdentityPools/motomedic-secret-loader",
+      "displayName": "Private serving secret loader",
+      "state": "ACTIVE",
+      "disabled": true
+    }
+  },
+  "hosted_transfer": {
+    "github_run": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38172235081",
+    "commit": "327daae73466aad525bc616d4e320e93646fd4a5",
+    "job_status": "FAIL_RECEIPT_PROJECT_ID_ALIAS_CHECK",
+    "cloud_write_http_status": 200,
+    "recovered_version_metadata": {
+      "name": "projects/279945185781/secrets/motomedic-evaluator-anthropic-v1/versions/1",
+      "createTime": "2026-10-11T20:26:59.610685Z",
+      "state": "ENABLED",
+      "replicationStatus": {
+        "automatic": {}
+      },
+      "etag": "\"165d9667497c3d\""
+    },
+    "transfer_repeated": false,
+    "credential_egress_to_machine": false
+  }
+}

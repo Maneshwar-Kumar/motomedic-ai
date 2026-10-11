@@ -1,6 +1,7 @@
 """Raw-question HTTP boundary using the existing evidence/answer pipeline."""
 import hashlib
 import json
+import os
 import re
 
 from flask import jsonify, request, Response
@@ -18,6 +19,41 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
     def error(route, code, status, terminal=True):
         return jsonify({'type':route, 'error':code, 'technical_content':False,
                         'operation_terminal':terminal}), status
+
+    @app.post('/internal/visitors/reserve')
+    def reserve_public_visitor():
+        from cloud.arm_a.public_admission import (require_edge_identity, PublicAdmission,
+            AdmissionLimited, ProofReplay)
+        try:
+            require_edge_identity(request.headers, request.environ.get('arm_a_owner'),
+                os.environ.get('MOTOMEDIC_EDGE_SERVICE_ACCOUNT'))
+        except PermissionError:
+            return error('SYSTEM_ERROR', 'EDGE_IDENTITY_REQUIRED', 403)
+        if request.mimetype != 'application/json':
+            return error('SYSTEM_ERROR', 'JSON_REQUIRED', 415)
+        try:
+            from cloud.arm_a.app import unique_object
+            raw = request.stream.read(1025)
+            if len(raw) > 1024:
+                return error('SYSTEM_ERROR', 'REQUEST_TOO_LARGE', 413)
+            body = json.loads(raw.decode('utf-8'), object_pairs_hook=unique_object,
+                parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
+            if (type(body) is not dict or set(body) != {'proof_sha256'} or
+                    type(body['proof_sha256']) is not str or
+                    not re.fullmatch(r'[a-f0-9]{64}', body['proof_sha256'])):
+                raise ValueError()
+        except (ValueError, TypeError, KeyError, UnicodeError):
+            return error('SYSTEM_ERROR', 'INVALID_VISITOR_RESERVATION', 400)
+        try:
+            store = state_factory(request.environ['arm_a_owner'])
+            PublicAdmission(store.client, now=store.now).reserve(body['proof_sha256'])
+        except ProofReplay:
+            return error('SYSTEM_ERROR', 'VISITOR_PROOF_ALREADY_USED', 409)
+        except AdmissionLimited:
+            return error('SYSTEM_ERROR', 'VISITOR_CREATION_LIMIT', 429)
+        except Exception:
+            return error('SYSTEM_ERROR', 'VISITOR_ADMISSION_UNAVAILABLE', 503)
+        return jsonify({'ready': True})
 
     def state():
         owner = verify(visitor_secret, request.headers.get('X-MotoMedic-Visitor'), request.environ['arm_a_owner'])

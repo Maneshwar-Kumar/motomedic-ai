@@ -14,7 +14,7 @@ STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
-RUNTIME_POLICY = 'open-manual-draft-verify-v9'
+RUNTIME_POLICY = 'open-manual-draft-verify-v10'
 CHECK_ERROR_COPY = 'I couldn\u2019t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):
@@ -215,13 +215,14 @@ class RiderAPI:
             'confirmed_himalayan_bs6': True, 'cache_mode': self.cache_mode}
         path = '/v1/sessions'
         if view:
-            validate_view(view)
+            validate_view(view,expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
             path += '/'+view['session_id']+'/questions'
             payload['expected_version'] = view['version']
         return validate_view(self.request('POST',path,payload,request_id,
                                          stream=True,on_verified=on_verified,on_progress=on_progress,on_chunk=on_chunk))
 
     def feedback(self, view, choice_id, request_id, *, on_verified=None, on_progress=None, on_chunk=None):
+        validate_view(view,expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
         if not valid_id(view.get('session_id')):
             raise APIError('The session identifier is invalid.')
         return validate_view(self.request('POST', '/v1/sessions/' + view['session_id'] + '/feedback', {

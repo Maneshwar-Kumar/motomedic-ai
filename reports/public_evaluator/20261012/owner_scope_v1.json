@@ -1,0 +1,38 @@
+{
+  "schema_version": "motomedic-public-evaluator-owner-scope-v1",
+  "recorded_date": "2026-10-12",
+  "task_id": "01a12c4e-f3ef-7342-b33b-45cdb6511587",
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "instruction_source": "Current goal objective, retrieved by coordinator /root and relayed verbatim to /root/retrieval_evidence",
+  "exact_user_objective": "you can work until you give me a URL accessible to public for this bot, where i am able to share this with a human who evaluates what has been built. anyone shuld be able to open the link.\n\nmake sure Qdrant is hooked up, then retreival, cross ranking onditionally where dense and BM25 disagree on ranks, and that prompt caching is there. Answers are given by LLM, verified by another LLM, streamed. and that LLM should be able to handle follow ups on the response if rider asks anything more.",
+  "authorized_scope": {
+    "public_evaluator_frontend_deployment": true,
+    "private_authenticated_backend_and_worker": true,
+    "authenticated_qdrant_and_concurrent_bm25": true,
+    "conditional_reranking_on_rank_disagreement": true,
+    "gemma_private_draft": true,
+    "distinct_evidence_only_claude_haiku_verifier": true,
+    "anthropic_verifier_evidence_prefix_prompt_cache_5m": true,
+    "saved_verified_streaming_and_followups": true,
+    "necessary_managed_secret_bridge_and_service_identity": true,
+    "bounded_hosted_provider_validation_with_existing_spend_guard": true
+  },
+  "existing_budget_inr": 2700,
+  "existing_billing_disconnect_guard_inr": 2540,
+  "excluded_scope": {
+    "billing_restart": true,
+    "new_inference_billing": true,
+    "new_spend_allocation": true,
+    "availability_fallback_activation": true,
+    "whole_manual_claude": true,
+    "rider_facing_pdf_excerpts_or_figure_crops": true,
+    "blanket_source_or_adaptive_transition_approval": true
+  },
+  "interpretation": "The requested public URL authorizes necessary public frontend deployment and authenticated private backend/task, managed secret and identity wiring. The requested distinct LLM verifier and prompt caching select evidence-only Claude Haiku 5.5 verification with a bounded five-minute evidence-prefix cache. Provider validation must retain the existing durable admission/spend controls and budget. These are operational instruction scopes, separate from source approval and live acceptance.",
+  "human_factual_quality_approval": false,
+  "deployment_acceptance_demonstrated": false,
+  "live_runtime_quality_acceptance_demonstrated": false,
+  "original_source_approval_changed": false,
+  "billing_restart_authorized": false,
+  "source_display_policy_changed": false
+}

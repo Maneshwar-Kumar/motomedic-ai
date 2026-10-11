@@ -7,7 +7,7 @@ from urllib.error import HTTPError, URLError
 from rider_ui.client import APIError, RiderAPI, validate_view, MANUAL_SHA, INDEX_ID
 
 def view():
-    return {'runtime_policy':'open-manual-draft-verify-v9','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
+    return {'runtime_policy':'open-manual-draft-verify-v10','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
             'session_id':'a'*32,'version':1,'choices':[],'history':[],
             'response':{'type':'SUPPORTED','technical_content':True,'release_gate_passed':True,
                         'natural_language':'Engineering fixture only.',
@@ -32,6 +32,31 @@ class Transport:
         return Response(self.result)
 
 class ClientTests(unittest.TestCase):
+    def test_v10_policy_acceptance_rejects_v9_recovery_continuation_and_feedback(self):
+        from rider_ui.client import RUNTIME_POLICY
+        self.assertEqual(RUNTIME_POLICY,'open-manual-draft-verify-v10')
+        current=view();old=copy.deepcopy(current);old['runtime_policy']='open-manual-draft-verify-v9'
+        api=RiderAPI('https://example.com','engineering-fixture')
+        api.opener=Transport(result=json.dumps(current).encode())
+        self.assertEqual(api.recover_operation('c'*32),current)
+        api.opener=Transport(result=json.dumps(old).encode())
+        with self.assertRaises(APIError):api.recover_operation('c'*32)
+        api.opener=Transport(result=json.dumps(current).encode())
+        with self.assertRaises(APIError):api.start('Synthetic continuation','c'*32,view=old)
+        with self.assertRaises(APIError):api.feedback(old,'synthetic-feedback','c'*32)
+        self.assertEqual(api.opener.calls,0)
+
+    def test_retired_policy_only_allowed_by_explicit_engineering_loopback(self):
+        old=view();old['runtime_policy']='open-manual-draft-verify-v9'
+        api=RiderAPI('http://127.0.0.1:9999','engineering-fixture',allow_loopback=True)
+        api.opener=Transport(result=json.dumps(old).encode())
+        self.assertTrue(api.engineering_loopback)
+        self.assertEqual(api.recover_operation('c'*32),old)
+        remote=RiderAPI('https://example.com','engineering-fixture',allow_loopback=True)
+        remote.opener=Transport(result=json.dumps(old).encode())
+        self.assertFalse(remote.engineering_loopback)
+        with self.assertRaises(APIError):remote.recover_operation('c'*32)
+
     def test_real_stream_callback_refresh_credentials_and_question_continuation(self):
         from rider_ui.tests.test_verified_sse import frame
         from rider_ui.tests.test_progress_stream import accepted_frames

@@ -17,8 +17,35 @@ from online_ingest import stable_id, digest
 from online_retrieve import Retriever as FrozenRetriever, RetrievalSystemError
 from retrieval_policy import RetrievalPolicy, ranking_signals
 
-VERSION = 'authenticated-open-hybrid-retrieval-v2'
+VERSION = 'authenticated-open-hybrid-rank-disagreement-v3'
+RERANK_GATE_VERSION = 'ordered-distinct-parent-rank-disagreement-v1'
 QUERY_CONTEXT = ContextVar('motomedic_retrieval_history', default=())
+
+
+def conditional_rank_signals(dense_sections, sparse_sections, fused_sections, policy):
+    """Only observed differences between backend parent ranks trigger reranking.
+
+    Several sibling search chunks represent one section. Missing backend hits
+    and an unmatched trailing rank supply no contradictory ordering. RRF margin
+    is diagnostic: adjacent reciprocal ranks are intrinsically close even when
+    both backends agree, so margin alone cannot start cross-encoder inference.
+    """
+    signals = ranking_signals(dense_sections, sparse_sections, fused_sections, policy)
+    dense = list(dict.fromkeys(dense_sections))[:policy.disagreement_top_k]
+    sparse = list(dict.fromkeys(sparse_sections))[:policy.disagreement_top_k]
+    comparable = bool(dense and sparse)
+    differences = [rank for rank, (left, right) in enumerate(zip(dense, sparse), 1)
+                   if left != right] if comparable else []
+    signals.update(rerank_gate_version=RERANK_GATE_VERSION,
+        dense_top_distinct_parent_ids=dense, sparse_top_distinct_parent_ids=sparse,
+        rank_comparison_available=comparable,
+        compared_rank_positions=min(len(dense), len(sparse)) if comparable else 0,
+        disagreeing_rank_positions=differences,
+        dense_sparse_section_overlap=(len(set(dense) & set(sparse)) /
+            min(len(dense), len(sparse))) if comparable else None,
+        uncertainty_reasons=['DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT'] if differences else [],
+        ranking_uncertain=bool(differences), rrf_margin_is_diagnostic_only=True)
+    return signals
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -164,7 +191,7 @@ class Retriever(FrozenRetriever):
         for i in candidates:
             section = self.chunks[i]['parent_section_id']
             sections[section] = max(sections.get(section, 0), fused[i])
-        signals = ranking_signals(*([self.chunks[i]['parent_section_id'] for i in rank] for rank in rankings),
+        signals = conditional_rank_signals(*([self.chunks[i]['parent_section_id'] for i in rank] for rank in rankings),
             sorted(sections.items(), key=lambda x: (-x[1], x[0])), policy)
         return candidates, fused, signals
 
@@ -221,7 +248,10 @@ class Retriever(FrozenRetriever):
         telemetry = {'version': VERSION, 'policy': policy.to_dict(), 'recovery_attempts': 0,
             'rerank_attempts': 0, 'rerank_pair_count': 0, 'stages_seconds': {},
             'first_stage_execution': 'CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25',
-            'decisions': [], 'rerank_skip_reason': None, 'assembled_hit_limit': limit}
+            'decisions': [], 'rerank_skip_reason': None, 'assembled_hit_limit': limit,
+            'rerank_gate_version': RERANK_GATE_VERSION,
+            'rerank_mode': ('CONDITIONAL_RANK_DISAGREEMENT' if rerank is None else
+                            'ALWAYS_DIAGNOSTIC' if rerank else 'OFF_DIAGNOSTIC')}
         try:
             if not allowed:
                 raise RetrievalSystemError('SELECTED_SCOPE_HAS_NO_INDEXED_CHUNKS')
@@ -269,7 +299,9 @@ class Retriever(FrozenRetriever):
                 action = 'CONTINUE_GATES'
             else:
                 action = 'CONTINUE_GATES'
-                telemetry['rerank_skip_reason'] = 'RERANK_DISABLED' if rerank is False else 'CLEAR_RANKING'
+                telemetry['rerank_skip_reason'] = ('RERANK_DISABLED' if rerank is False else
+                    'DENSE_SPARSE_DISTINCT_PARENT_RANKS_AGREE' if signals['rank_comparison_available'] else
+                    'NO_COMPARABLE_DENSE_SPARSE_RANKS')
             telemetry.update(final_action=action, initial_ranking_signals=signals,
                              dense_rpc=deepcopy(getattr(self, 'last_dense_trace', None)))
             telemetry['decisions'].append(action)

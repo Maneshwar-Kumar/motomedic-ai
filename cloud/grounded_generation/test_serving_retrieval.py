@@ -6,7 +6,7 @@ import unittest
 import numpy as np
 from online_retrieve import RetrievalSystemError
 from cloud.grounded_generation.serving_retrieval import (
-    Retriever, QdrantTransport, QUERY_CONTEXT, retrieval_query)
+    Retriever, QdrantTransport, QUERY_CONTEXT, retrieval_query, conditional_rank_signals)
 from test_conditional_retrieval import fixture, Encoder, Reranker
 
 
@@ -26,7 +26,7 @@ class Authority:
             'source_review_required': self.gap}
 
 
-def serving(gap=False):
+def serving(gap=False, disagreement=False):
     old, _ = fixture()
     r = Retriever.__new__(Retriever)
     r.__dict__.update(old.__dict__)
@@ -37,6 +37,8 @@ def serving(gap=False):
     r.source_authority = Authority(gap)
     r.qdrant_transport = type('Remote', (), {'query': lambda _, vec, limit: [
         {'score': .99, 'payload': {'chunk_id': c['id'], 'source_sha256': 'sha'}} for c in r.chunks]})()
+    if disagreement:
+        r._sparse_scores = lambda query: (np.array([1., 2.]), 0.)
     return r
 
 
@@ -91,7 +93,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(list(dense), [.9, .8]); self.assertEqual(list(sparse), [1., 0.])
 
     def test_open_question_recovers_once_and_reranks_without_step_manifest(self):
-        r = serving()
+        r = serving(disagreement=True)
         b = r.search('check', limit=1, applicability_status='CONFIRMED')
         self.assertEqual(b['retrieval_policy']['recovery_attempts'], 1)
         self.assertEqual(b['retrieval_policy']['rerank_attempts'], 1)
@@ -100,14 +102,14 @@ class Tests(unittest.TestCase):
         self.assertEqual(r.reranker.calls, 1)
 
     def test_source_review_gap_skips_rerank_and_keeps_partial_anchors(self):
-        r = serving(gap=True)
+        r = serving(gap=True, disagreement=True)
         b = r.search('check', limit=1, applicability_status='CONFIRMED')
         self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
         self.assertEqual(r.reranker.calls, 0)
         self.assertFalse(b['source_gaps'][0]['rider_resolvable'])
 
     def test_rerank_query_bound_preserves_complete_full_query(self):
-        r = serving()
+        r = serving(disagreement=True)
         query = 'check ' * 150
         b = r.search(query, limit=1, applicability_status='CONFIRMED')
         self.assertEqual(b['query'], query)
@@ -152,6 +154,75 @@ class Tests(unittest.TestCase):
     def test_unrelated_substantive_question_keeps_own_retrieval_query(self):
         question = 'Please explain the details of the recommended motorcycle cleaning procedure including preparation conditions and warnings for riding afterwards.'
         self.assertEqual(retrieval_query(question, [{'question': 'Where is the USB socket?'}]), question)
+
+    def test_identical_backend_ranks_skip_despite_close_rrf_margin(self):
+        r = serving()
+        r._sparse_scores = lambda query: (np.array([2., 1.]), 0.)
+        bundle = r.search('check', limit=1, applicability_status='CONFIRMED')
+        trace = bundle['retrieval_policy']
+        signals = trace['initial_ranking_signals']
+        self.assertLess(signals['relative_rrf_section_margin'], .05)
+        self.assertFalse(signals['ranking_uncertain'])
+        self.assertEqual(trace['rerank_attempts'], 0)
+        self.assertEqual(r.reranker.calls, 0)
+        self.assertEqual(trace['rerank_skip_reason'], 'DENSE_SPARSE_DISTINCT_PARENT_RANKS_AGREE')
+        self.assertIn('warning', bundle['attached_evidence_ids'])
+
+    def test_missing_backend_rank_is_not_disagreement(self):
+        from retrieval_policy import RetrievalPolicy
+        for dense, sparse in ((['a', 'b'], []), ([], ['a', 'b'])):
+            signals = conditional_rank_signals(dense, sparse, [('a', 1.), ('b', .999)], RetrievalPolicy())
+            self.assertFalse(signals['rank_comparison_available'])
+            self.assertFalse(signals['ranking_uncertain'])
+            self.assertIsNone(signals['dense_sparse_section_overlap'])
+        r = serving()  # Its synthetic BM25 has no postings.
+        bundle = r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(bundle['retrieval_policy']['rerank_attempts'], 0)
+        self.assertEqual(bundle['retrieval_policy']['rerank_skip_reason'], 'NO_COMPARABLE_DENSE_SPARSE_RANKS')
+        self.assertEqual(r.reranker.calls, 0)
+        r = serving()
+        r.qdrant_transport.query = lambda *_: []
+        r._sparse_scores = lambda query: (np.array([2., 1.]), 0.)
+        bundle = r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(bundle['retrieval_policy']['rerank_attempts'], 0)
+        self.assertEqual(bundle['retrieval_policy']['rerank_skip_reason'], 'NO_COMPARABLE_DENSE_SPARSE_RANKS')
+        self.assertEqual(r.reranker.calls, 0)
+
+    def test_siblings_and_unmatched_trailing_depth_do_not_create_disagreement(self):
+        from retrieval_policy import RetrievalPolicy
+        signals = conditional_rank_signals(['a', 'a', 'b', 'c'], ['a', 'b'],
+            [('a', 1.), ('b', .999)], RetrievalPolicy())
+        self.assertEqual(signals['dense_top_distinct_parent_ids'], ['a', 'b', 'c'])
+        self.assertEqual(signals['compared_rank_positions'], 2)
+        self.assertFalse(signals['ranking_uncertain'])
+
+    def test_order_disagreement_reranks_once_even_when_parent_sets_overlap(self):
+        from retrieval_policy import RetrievalPolicy
+        signals = conditional_rank_signals(['a', 'b', 'c'], ['b', 'a', 'c'],
+            [('a', 1.), ('b', .999)], RetrievalPolicy())
+        self.assertEqual(signals['dense_sparse_section_overlap'], 1.)
+        self.assertEqual(signals['disagreeing_rank_positions'], [1, 2])
+        self.assertTrue(signals['ranking_uncertain'])
+        r = serving(disagreement=True)
+        bundle = r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(bundle['retrieval_policy']['rerank_attempts'], 1)
+        self.assertEqual(r.reranker.calls, 1)
+        self.assertTrue({'action', 'warning'} <= set(bundle['attached_evidence_ids']))
+
+    def test_conditional_reranker_failure_is_system_error_without_retry(self):
+        r = serving(disagreement=True)
+        r.reranker = Reranker(fail=True)
+        with self.assertRaises(RetrievalSystemError) as caught:
+            r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(caught.exception.status, 'SYSTEM_ERROR')
+        self.assertEqual(caught.exception.telemetry['rerank_attempts'], 1)
+        self.assertEqual(r.reranker.calls, 1)
+
+    def test_explicit_rerank_override_is_marked_diagnostic(self):
+        r = serving()
+        bundle = r.search('check', limit=1, applicability_status='CONFIRMED', rerank=True)
+        self.assertEqual(bundle['retrieval_policy']['rerank_mode'], 'ALWAYS_DIAGNOSTIC')
+        self.assertEqual(r.reranker.calls, 1)
 
 
 if __name__ == '__main__': unittest.main()

@@ -25,14 +25,15 @@ def client():
     url = setting('MOTOMEDIC_RIDER_API_URL')
     managed = setting('MOTOMEDIC_RIDER_AUTH') == 'cloud_run'
     credential = (lambda:cloud_run_token(url)) if managed else setting('MOTOMEDIC_RIDER_API_TOKEN')
-    anonymous = setting('MOTOMEDIC_RIDER_ACCESS') == 'anonymous_edge'
+    anonymous = setting('MOTOMEDIC_RIDER_ACCESS') in ('anonymous_edge', 'public_gateway')
     network = None
     if anonymous:
         try:
             capability = st.context.headers.get('X-MotoMedic-Edge-Visitor')
-            network = st.context.headers.get('X-MotoMedic-Edge-Network')
             verify(setting('MOTOMEDIC_VISITOR_SECRET'), capability, 'anonymous-edge-v1')
-            verify(setting('MOTOMEDIC_VISITOR_SECRET'), network, 'anonymous-network-v1')
+            if setting('MOTOMEDIC_RIDER_ACCESS') == 'anonymous_edge':
+                network = st.context.headers.get('X-MotoMedic-Edge-Network')
+                verify(setting('MOTOMEDIC_VISITOR_SECRET'), network, 'anonymous-network-v1')
             st.session_state.visitor_capability = capability
         except (PermissionError, ValueError):
             raise APIError('Please refresh to reconnect securely.') from None

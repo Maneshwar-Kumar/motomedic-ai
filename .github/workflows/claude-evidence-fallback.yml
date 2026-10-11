@@ -1,33 +1,45 @@
-name: Provision the selected evaluator verifier secret
+name: Validate retrieved-evidence Haiku fallback
 on:
   workflow_dispatch:
 permissions:
   contents: read
-  id-token: write
+  actions: read
 jobs:
-  provision:
+  validate:
     if: github.run_attempt == 1
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 35
+    env:
+      OMP_NUM_THREADS: '2'
+      TOKENIZERS_PARALLELISM: 'false'
+      MOTOMEDIC_TEST_INDEX: build/index
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - uses: google-github-actions/auth@v3
+          python-version: '3.11'
+      - name: Install existing hosted query runtime
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy==2.4.6 sentence-transformers==6.1.0 pypdfium2 Flask==3.1.2 google-cloud-firestore==2.21.0
+      - uses: actions/download-artifact@v4
         with:
-          workload_identity_provider: projects/279945185781/locations/global/workloadIdentityPools/motomedic-public-release/providers/github-secret-publisher
-          service_account: motomedic-gh-evaluator@motomedic-ai-20261009.iam.gserviceaccount.com
-      - name: Install managed authentication only
-        run: python -m pip install google-auth==2.40.3 requests==2.32.5
-      - name: Bind existing repository secret to the exact managed verifier resource
+          name: owner-manual-index-37908240500
+          run-id: '37908240500'
+          github-token: ${{ github.token }}
+          path: build/index
+      - name: Map historical test fixture
+        run: ln -s index build/index-bge-final
+      - name: Verify software before using the secret
+        run: python -m unittest -v cloud.grounded_generation.test_claude_fallback cloud.grounded_generation.test_verified_qa cloud.grounded_generation.test_open_wiring rider_ui.tests.test_client rider_ui.tests.test_verified_sse rider_ui.tests.test_progress_stream cloud.arm_a.test_store
+      - name: Actual Haiku drafting and verification through bounded fallback
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python tools/provision_evaluator_secret_hosted.py
+          MOTOMEDIC_CLAUDE_VALIDATION_AUTHORIZED: '1'
+        run: python tools/validate_claude_fallback.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: public-evaluator-secret-${{ github.run_id }}
-          path: build/public-evaluator-secret-receipt.json
+          name: claude-evidence-fallback-${{ github.run_id }}
+          path: build/claude-fallback-result.json
           retention-days: 14
-          if-no-files-found: warn

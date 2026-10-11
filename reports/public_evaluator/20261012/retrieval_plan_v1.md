@@ -1,0 +1,38 @@
+# Public evaluator retrieval: implementation and live validation plan
+
+Date: 12 October 2026. Actor: `/root/retrieval_evidence`. This is retrieval implementation evidence and a proposed live check sequence. It is not live-service, generated-answer, latency, or public quality acceptance. The coordinator owns deployments, provider calls, budget checks and release freezes.
+
+## Versioned change
+
+`cloud/grounded_generation/serving_retrieval.py` now reports `authenticated-open-hybrid-rank-disagreement-v3`. The v9.1 runtime and exact image/manifests remain recoverable from baseline commit `f2daacbb35cb4997bed7915336dfbdc1456c0ddc`; the coordinator will create a new scoped freeze. Existing source objects, review packages, index and API contracts are unchanged.
+
+The prior conditional gate could invoke the cross-encoder even when dense and BM25 gave exactly the same parent ranking: adjacent reciprocal-rank scores commonly have a margin below 0.05. It also treated a small fused margin as uncertainty when BM25 had no matches. Neither observation establishes disagreement between the backends.
+
+The new default gate compares ordered distinct parent ranks, to depth three, only where both backends provide actual ranks. Any differing compared position triggers at most one cross-encoder pass after source assembly/recovery. Multiple sibling chunks count as one parent. Unmatched trailing depth and an absent backend supply no contradictory ordering. RRF margin and parent-set overlap remain diagnostics, rather than inference triggers. Explicit always/off overrides remain labelled diagnostic modes; the rider cannot select them.
+
+This comparison uses source/index parent identities for ordering, not authored questions, StepDefinitions, expected answers or source-content approval. It does not claim OEM diagnostic order. The unchanged pinned index has 532 chunks and no missing parent IDs, so every compared parent identity is bound.
+
+Telemetry includes the exact gate version `ordered-distinct-parent-rank-disagreement-v1`, mode, both distinct parent rankings, compared/disagreeing positions, recovery/rerank attempts, skip reasons and stage timings. Normal mode is `CONDITIONAL_RANK_DISAGREEMENT`. Missing source/context review still prevents reranking. Complete required dependencies survive reranking; optional query/pair overflow skips inference without truncating the question or evidence. A reranker outage/malformed result is SYSTEM_ERROR.
+
+## Provider-free checks
+
+The 19 synthetic retrieval checks cover authenticated RPC/index/source membership, real concurrency through a two-party barrier, no local dense-vector substitute, no arbitrary zero-score candidates, history references, source-gap handling, exact dependency recovery, disagreement-driven reranking, retained mandatory warnings, query limits, and outages. New cases prove that identical ranks with close RRF scores, missing dense/sparse results, sibling multiplicity and unequal trailing depth do not invoke the cross-encoder; reordered ranks of the same parent set do invoke it once. A required reranker outage fails once without retry. These tests use injected synthetic encoders/transports and load no model or provider.
+
+The existing saved conversation schema is `{question, response, route}`. The API passes that conversation into durable work; `serving_questions` places it in the request-local retrieval context. Retrieval uses prior rider questions only, follows deictic references to the original topic, and never turns an assistant response or unresolved attempt into a new observed fact. The actual current question/full conversation still go to drafting and verification separately.
+
+The existing heuristic also supplies the prior question for any short current question. Therefore the live evaluation must include a short explicit topic switch, as well as implicit/deictic follow-ups. No new entity/intent/question catalogue was introduced to resolve that remaining quality question.
+
+## Live retrieval checks for the coordinator
+
+1. Bind the new committed runtime/freeze/image to the existing manual/index and private generation-pinned GCS snapshot. Confirm the exact pinned BGE query encoder and cross-encoder assets exist locally inside the hosted image; enforce offline loading. No ingestion or document embeddings may run. Retain page 103 and other scoped review gaps.
+2. Check private Qdrant readiness and immutable collection/source identity using the existing backend workload identity. The authenticated query must reach Qdrant, and every returned chunk/source/scope must match the snapshot. The evaluator URL may be public while Qdrant remains authenticated. Do not log identity tokens or raw request/response bodies.
+3. Run a small fresh source-reviewed direct/partial/follow-up suite outside held-out material. Record both first-stage timings, the combined retrieval time, authenticated dense trace, BM25 matches and exact chunk IDs. The code-level concurrency test is separate from this deployed evidence; timings alone do not establish concurrency or quality.
+4. Preserve actual live ranks. When observed distinct parent ranks agree, prove zero cross-encoder inference. When they disagree and usable complete reviewed evidence exists, prove one bounded inference and reassembly. Do not alter live ranks or enrich questions to manufacture a conditional success; any forced always-mode ablation must remain explicitly diagnostic.
+5. Check a source-context gap separately: a maintainer gap must skip reranking and never become a rider clarification. Confirm a complete admitted subset can support an explicitly partial answer, with exact warnings/conditions retained. Retrieval relevance/confidence cannot release the answer.
+6. In one owned session, test a direct question, a deictic follow-up, an implicit continuation, and an explicit short topic switch. Inspect the private query identity and retrieved object/page references; do not add raw transcripts to routine telemetry. Check that only the real current question/history/typed-state binding reaches the separate draft and verifier.
+7. For the end-to-end evaluator, bind actual draft/verifier provider identities, complete token/cost reservations and exact cache receipts independently of retrieval. Prompt caching must never substitute an answer or approval. Observe terminal save before technical streaming; after disconnect/recovery, replay the exact accepted response hash without repeating provider or query work.
+8. Record cold/warm retrieval, BM25, assembly, recovery, cross-encoder, draft, verification, save and delivery timings separately, with exact model/runtime/index/artifact identities. Evaluate source-supported direct/partial/follow-up coverage and unsupported/safety/error handling against original pages independently of both models. A working URL or passed synthetic suite does not close those acceptance gates.
+
+Suggested retrieval receipt fields: committed runtime/freeze/image SHA; manual/index/snapshot generation/hash; pinned query/reranker versions; query/history hashes; actual Qdrant backend and result identities; dense/BM25 durations and match counts; gate version and observed parent ranks; recovery/rerank attempt/pair counts and skip reason; admitted/required evidence IDs and payload hash; source gaps; independent source-review outcome. Keep raw source text, rider media, credentials and private drafts outside routine logs and rider display.
+
+This agent performed no live queries, provider calls, cloud mutation, model loading, re-embedding, source approval changes, billing action, deployment or source display.

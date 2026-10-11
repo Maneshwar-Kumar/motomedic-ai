@@ -120,7 +120,10 @@ def create_app(registry, retriever, state_factory, cases):
             'answer_provider':app.config.get('ANSWER_PROVIDER'), 'benchmark_pacing':False,
             'streaming':('DRAFT_VERIFY_STREAM' if app.config.get('GROUNDED_PRIMARY') else 'VERIFIED_COMPLETE_UNIT_SSE'),
             'durable_dispatch_configured': app.config.get('DURABLE_DISPATCH_CONFIGURED', False),
-            'reranking':'conditional-rerank-v1', 'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)}), (200 if ready else 503)
+            'reranking':'authenticated-open-hybrid-rank-disagreement-v3',
+            'verifier_provider':app.config.get('VERIFIER_PROVIDER'),
+            'prompt_cache':app.config.get('PROMPT_CACHE'),
+            'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)}), (200 if ready else 503)
 
     @app.get('/v1/initial-catalogue')
     def catalogue():
@@ -233,9 +236,15 @@ def load_production():
     for name, sha in lock['file_sha256'].items():
         if hashlib.sha256((ROOT/name).read_bytes()).hexdigest() != sha:
             raise RuntimeError('Production runtime binding mismatch')
-    if (lock.get('schema_version') != 'motomedic-serving-release-v9' or
+    from cloud.grounded_generation.cached_verifier import CONTRACT as VERIFIER_CONTRACT, DRAFT_CONTRACT
+    if (lock.get('schema_version') != 'motomedic-serving-release-v10' or
             lock.get('primary_model') != 'gemma-4-26b-a4b-it' or
-            lock.get('answer_cache_enabled') is not False):
+            lock.get('answer_cache_enabled') is not False or
+            lock.get('verifier_enabled') is not True or
+            lock.get('draft_model_contract') != DRAFT_CONTRACT or
+            lock.get('verifier_model') != 'claude-haiku-5-5' or
+            lock.get('verifier_contract') != VERIFIER_CONTRACT or
+            lock.get('prompt_cache') != 'ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M'):
         raise RuntimeError('Production serving policy mismatch')
     fallback_enabled = os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true'
     if fallback_enabled and lock.get('fallback_enabled') is not True:
@@ -268,8 +277,8 @@ def load_production():
     from cloud.grounded_generation.provider import GemmaProvider
     from cloud.grounded_generation.whole_turn_admission import WholeTurnAdmission
     client = firestore.Client(project='motomedic-ai-20261009')
-    # Prior exact-model/account probes returned 404. An environment switch is
-    # not evidence of cache support; fresh capability review is required.
+    # Gemma drafting has no demonstrated prompt cache support. The separately
+    # selected verifier owns its explicitly bound evidence-prefix cache policy.
     reserve_provider = WholeTurnAdmission(client)
     answer_provider = GemmaProvider(reserve_provider,cache_capability='unsupported')
     # Preparation only: deployment and secret access are separate release scopes.
@@ -282,12 +291,19 @@ def load_production():
             raise RuntimeError('Claude fallback requires its server-side secret')
         answer_provider = FallbackProvider(answer_provider,
             ClaudeProvider(reserve_provider,reserve_cost=ClaudeBudget(client)))
-    controlled_composer = Composer(answer_provider)
+    if fallback_enabled:
+        raise RuntimeError('The paired public evaluator does not activate availability fallback')
+    from cloud.grounded_generation.cached_verifier import CachedVerifier
+    from cloud.grounded_generation.claude_budget import ClaudeBudget
+    if not os.environ.get('ANTHROPIC_API_KEY'):
+        raise RuntimeError('The selected verifier requires its server-side managed secret')
+    verifier_provider = CachedVerifier(reserve_provider, reserve_cost=ClaudeBudget(client))
+    controlled_composer = Composer(answer_provider, verifier=verifier_provider)
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-        ANSWER_PROVIDER=('gemma-4-26b-a4b-it -> claude-haiku-5-5'
-            if fallback_enabled else 'gemma-4-26b-a4b-it'))
+        ANSWER_PROVIDER='gemma-4-26b-a4b-it', VERIFIER_PROVIDER='claude-haiku-5-5',
+        PROMPT_CACHE='ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M')
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
     if secret:

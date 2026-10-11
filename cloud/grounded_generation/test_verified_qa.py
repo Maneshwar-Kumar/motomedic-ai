@@ -145,7 +145,7 @@ class VerifiedTests(unittest.TestCase):
         self.assertEqual(SYSTEM_ERROR_TEXT,expected_error)
         self.assertEqual(FALLBACK_TEXT.encode('utf-8'),expected_fallback.encode('utf-8'))
         self.assertEqual(SYSTEM_ERROR_TEXT.encode('utf-8'),expected_error.encode('utf-8'))
-        self.assertEqual(VERSION,'open-manual-draft-verify-v9')
+        self.assertEqual(VERSION,'open-manual-draft-verify-v10')
     def test_runtime_source_is_ascii_and_apostrophe_is_source_escape(self):
         import cloud.grounded_generation.verified_qa as module
         from pathlib import Path
@@ -222,6 +222,166 @@ class VerifiedTests(unittest.TestCase):
                 self.assertEqual(c.last_trace['failure_code'],'SPECIAL_ROUTE_VERIFICATION_FAILED')
                 self.assertIsNone(c.last_admitted)
                 self.assertEqual(c.last_trace['provider_calls'],4 if correctable else 2)
+
+class PairedProviderTests(unittest.TestCase):
+    """Index-free engineering fixtures for separately selected model roles."""
+    def setUp(self):
+        from controller_contracts import DiagnosticSession,Response,ResponseType
+        from evidence_registry import content_hash
+        from cloud.grounded_generation.provider import MODEL
+        from cloud.grounded_generation.cached_verifier import CONTRACT
+        self.hash=content_hash
+        self.eid='synthetic-evidence-only'
+        evidence={self.eid:{'provenance':[{'page_no':1}],
+            'source_object':{'content':{'text':'Synthetic fixture, never serving authority.'}}}}
+        self.admitted={'payload_sha256':content_hash(evidence),'authority_lock':'synthetic-authority',
+            'evidence':evidence,'required_display':[],'gaps':[]}
+        self.expected=content_hash(self.admitted)
+        owner=self
+        class Authority:
+            def validate(self,value):
+                if value is owner.admitted and content_hash(value)!=owner.expected:
+                    raise ValidationFailure('SYNTHETIC_SOURCE_CHANGED')
+            def select(self,value,used):
+                return {'required_evidence_ids':list(used),'required_display':[{
+                    'claim_id':'fixture-warning','text':'Preserve the synthetic source condition.',
+                    'response_role':'WARNING','evidence_ids':[owner.eid]}]}
+        self.authority=Authority()
+        registry=SimpleNamespace(checksum='synthetic-manual',index_id='synthetic-index',
+            source={'pdf_pages':1},evidence=evidence,source_ready=lambda:True,support_uri=lambda:None)
+        self.controller=SimpleNamespace(registry=registry,scope_status=lambda s:'CONFIRMED',
+            response=lambda route,text,session,**kw:Response(ResponseType(route),text,**kw))
+        class RoleProvider(Provider):
+            def __init__(self,model,*,cached=False,**kw):
+                super().__init__(drafts=[draft(owner.eid,'Synthetic approved fixture.')],**kw)
+                self.model=model;self.lifecycle=[]
+                if cached:self.contract=deepcopy(CONTRACT);self.cache_capability='explicit'
+            def begin_turn(self,*args):
+                self.lifecycle.append(('begin',args));return {'engineering_fixture':True}
+            def end_turn(self):self.lifecycle.append(('end',()))
+            def complete(self,policy,stable,dynamic,schema):
+                if (self.model==MODEL)!=(schema==DRAFT_SCHEMA):
+                    raise AssertionError('Selected provider received the wrong role')
+                result=super().complete(policy,stable,dynamic,schema)
+                result.telemetry['model']=self.model
+                return result
+        self.draft=RoleProvider(MODEL)
+        self.verifier=RoleProvider(CONTRACT['model'],cached=True)
+        self.composer=Composer(self.draft,self.authority,verifier=self.verifier)
+        self.session=DiagnosticSession('synthetic-session','synthetic-manual-id','synthetic-manual',
+            'Himalayan BS6',None,(),'synthetic-selection',generation_lock=self.composer.config.lock)
+        self.history={'operation_id':'synthetic-operation','conversation':['private fixture history']}
+    def call(self):
+        return self.composer.compose_open(self.controller,self.session,self.admitted,
+            'Synthetic question only.',self.history)
+    def test_distinct_models_route_exact_finalized_response_including_server_warning(self):
+        response=self.call()
+        self.assertEqual(response.type.value,'SUPPORTED')
+        self.assertEqual(len(self.draft.calls),1);self.assertEqual(len(self.verifier.calls),1)
+        final=self.verifier.calls[0][2]['complete_proposed_response']
+        self.assertEqual(final['text'],response.natural_language)
+        self.assertIn('synthetic source condition',final['text'])
+        self.assertEqual(len(final['claims']),2)
+        stable=self.verifier.calls[0][1]
+        self.assertNotIn('question',stable);self.assertNotIn('history',stable)
+        self.assertNotIn('private fixture history',str(stable))
+        self.assertNotEqual(self.composer.last_trace['draft_model'],self.composer.last_trace['verifier_model'])
+        self.assertEqual(self.composer.last_trace['provider_calls'],2)
+        self.assertEqual([event[0] for event in self.draft.lifecycle],['begin','end'])
+        self.assertEqual([event[0] for event in self.verifier.lifecycle],['begin','end'])
+    def test_both_role_contracts_bound_to_verdict_and_saved_admission(self):
+        self.call()
+        admitted=self.composer.last_admitted
+        self.assertEqual(admitted['binding']['draft_model_contract_sha256'],self.hash(self.composer.config.draft_contract))
+        self.assertEqual(admitted['binding']['verifier_contract_sha256'],self.hash(self.composer.config.verifier_contract))
+        self.assertEqual(admitted['verifier_contract'],self.verifier.contract)
+        self.assertEqual(admitted['verdict']['binding_sha256'],admitted['binding_sha256'])
+        changed=deepcopy(self.verifier.contract);changed['cache_ttl']='1h'
+        from cloud.grounded_generation.verified_qa import Config
+        with self.assertRaisesRegex(ValidationFailure,'VERIFIER_CONTRACT'):
+            Config(verifier_contract=changed)
+    def test_delivery_requires_the_same_selected_verifier_contract(self):
+        from unittest.mock import patch
+        response=self.call()
+        with patch('cloud.grounded_generation.verified_qa.legacy_view',
+                   return_value=({'response':{},'manual_checksum':'synthetic-manual','index_id':'synthetic-index'},{})):
+            result,_=saved_view(self.controller.registry,self.session,response,self.authority,
+                               self.composer.last_admitted,'synthetic-operation')
+            self.assertEqual(result['response']['natural_language'],response.natural_language)
+            self.assertEqual(result['verified_delivery']['runtime_lock'],self.composer.config.lock)
+            changed=deepcopy(self.composer.last_admitted);changed['verifier_contract']=None
+            with self.assertRaisesRegex(ValidationFailure,'DELIVERY_EVIDENCE_OR_VERSION_CHANGED'):
+                saved_view(self.controller.registry,self.session,response,self.authority,changed,'synthetic-operation')
+    def test_reused_verdict_after_cached_prefix_cannot_authorize_another_question(self):
+        self.call()
+        previous=deepcopy(self.composer.last_admitted['verdict'])
+        self.verifier.verifier=lambda *args:deepcopy(previous)
+        response=self.composer.compose_open(self.controller,self.session,self.admitted,
+            'Another synthetic question.',self.history)
+        self.assertEqual(response.type.value,'SYSTEM_ERROR')
+        self.assertEqual(self.composer.last_trace['failure_code'],'VERIFIER_BINDING')
+        self.assertIsNone(self.composer.last_admitted)
+        self.assertEqual(len(self.draft.calls),2);self.assertEqual(len(self.verifier.calls),2)
+    def test_selected_verifier_contract_or_cache_change_blocks_before_paid_calls(self):
+        self.verifier.contract['model']='other'
+        self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
+        self.assertFalse(self.draft.calls);self.assertFalse(self.verifier.calls)
+    def test_shared_provider_and_unknown_verifier_forbidden(self):
+        with self.assertRaisesRegex(ValidationFailure,'SEPARATE_PROVIDER'):
+            Composer(self.draft,self.authority,verifier=self.draft)
+        with self.assertRaisesRegex(ValidationFailure,'CONTRACT_REQUIRED'):
+            Composer(self.draft,self.authority,verifier=Provider())
+    def test_verifier_wrong_model_withheld_after_exact_private_draft(self):
+        original=self.verifier.complete
+        def mismatch(*args):
+            result=original(*args);result.telemetry['model']='other';return result
+        self.verifier.complete=mismatch
+        self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
+        self.assertEqual(self.composer.last_trace['failure_code'],'VERIFIER_PROVIDER_MODEL_MISMATCH')
+        self.assertIsNone(self.composer.last_admitted)
+    def test_draft_wrong_model_cannot_reach_verifier(self):
+        original=self.draft.complete
+        def mismatch(*args):
+            result=original(*args);result.telemetry['model']='other';return result
+        self.draft.complete=mismatch
+        self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
+        self.assertEqual(self.composer.last_trace['failure_code'],'DRAFT_PROVIDER_MODEL_MISMATCH')
+        self.assertFalse(self.verifier.calls)
+    def test_verifier_uncertain_failure_has_own_trace_and_no_retry(self):
+        def failure(*args):
+            self.verifier.last_trace={'generation_calls':1,'model':self.verifier.model,'failure_code':'SYNTHETIC_TIMEOUT'}
+            raise ProviderFailure('SYNTHETIC_TIMEOUT')
+        self.verifier.complete=failure
+        self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
+        trace=self.composer.last_trace
+        self.assertEqual(trace['provider_calls'],2)
+        self.assertEqual(trace['failed_provider_trace']['model'],self.verifier.model)
+        self.assertEqual(len(self.draft.calls),1)
+        self.assertIsNone(self.composer.last_admitted)
+    def test_spend_guard_failure_prevents_any_generation_and_cleans_both_roles(self):
+        def failure():raise ProviderFailure('SYNTHETIC_COST_GUARD')
+        self.verifier.begin_turn=failure
+        self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
+        self.assertFalse(self.draft.calls);self.assertFalse(self.verifier.calls)
+        self.assertEqual(self.draft.lifecycle[-1][0],'end')
+        self.assertEqual(self.verifier.lifecycle[-1][0],'end')
+    def test_one_correction_goes_to_draft_and_fresh_verifier_binding(self):
+        def reject_first(verdict,dynamic,provider):
+            if len(provider.calls)==1:verdict.update(decision='SHOW_FALLBACK',release_eligible=False,correction_possible=True)
+            return verdict
+        self.verifier.verifier=reject_first
+        self.assertEqual(self.call().type.value,'SUPPORTED')
+        self.assertEqual(len(self.draft.calls),2);self.assertEqual(len(self.verifier.calls),2)
+        self.assertIn('correction_feedback',self.draft.calls[1][2])
+        self.assertEqual(self.composer.last_trace['corrections'],1)
+        self.assertEqual(self.composer.last_trace['provider_calls'],4)
+    def test_source_mutation_during_separate_verification_rejects(self):
+        def mutate(verdict,*args):
+            self.admitted['evidence'][self.eid]['source_object']['content']['text']='changed source'
+            return verdict
+        self.verifier.verifier=mutate
+        self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
+        self.assertIsNone(self.composer.last_admitted)
 
 del SourceTests
 if __name__=='__main__':unittest.main()

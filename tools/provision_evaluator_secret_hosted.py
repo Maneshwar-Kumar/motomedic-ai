@@ -11,6 +11,7 @@ import google.auth
 from google.auth.transport.requests import AuthorizedSession
 
 SECRET = 'projects/motomedic-ai-20261009/secrets/motomedic-evaluator-anthropic-v1'
+CANONICAL_SECRET = 'projects/279945185781/secrets/motomedic-evaluator-anthropic-v1'
 
 
 def main():
@@ -29,7 +30,8 @@ def main():
             raise RuntimeError('Managed secret write failed HTTP_' + str(response.status_code))
         result = response.json()
     name = result.get('name', '')
-    if not name.startswith(SECRET + '/versions/') or result.get('state') != 'ENABLED':
+    if (not any(name.startswith(prefix + '/versions/') for prefix in (SECRET, CANONICAL_SECRET)) or
+            result.get('state') != 'ENABLED'):
         raise RuntimeError('Managed secret receipt mismatch')
     receipt = {'schema_version': 'hosted-managed-verifier-secret-v1',
         'secret_version': name, 'source': 'EXISTING_GITHUB_ANTHROPIC_SECRET',
