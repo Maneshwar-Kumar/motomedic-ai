@@ -1,11 +1,15 @@
 name: Grounded generation held-out validation
 on:
   workflow_dispatch:
+  push:
+    branches: ['codex/reviewed-evidence-controller']
+    paths: ['.github/workflows/grounded-generation.yml']
 permissions:
   contents: read
   actions: read
 jobs:
   validate:
+    if: github.run_attempt == 1 && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[run-grounded-generation]'))
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
