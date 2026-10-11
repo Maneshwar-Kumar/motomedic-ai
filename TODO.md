@@ -32,6 +32,8 @@ Timeboxes are estimates, not a promise of a deployable agent in two hours. This 
 
 ## Implementation sequence after the reset
 
+The 12 October v9 candidate implements the code for steps 6–9 and adds provider-free checks, source-context review and frozen release inputs. See the [implementation receipt](reports/build/20261012/README.md) and [current status](docs/STATUS.md). The existing machine GCP identity and immutable snapshot generation are verified. The step exits below stay open where hosted loading, image provenance or live quality/operations evidence is still required. Synthetic checks do not close those gates; no deployment or provider-spending permission is inferred.
+
 ### 6. Establish one immutable serving baseline
 
 - [ ] **6a — Source and index:** validate manual checksum, scoped approvals, parser/chunk/index versions, evidence IDs and mandatory dependencies. Use durable GCS artifacts with generation/hash checks rather than expiring Actions artifacts. Exit: deterministic loading and an explicit review-gap inventory.

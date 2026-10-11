@@ -2,12 +2,11 @@
 from copy import deepcopy
 import hashlib
 import json
-from queue import Queue
-from threading import Thread
 import time
 from flask import Response
 
 STAGES = {'retrieving', 'drafting', 'verifying', 'displaying'}
+EVENT_PROTOCOL = 'operation-sequence-v1'
 
 
 def response_hash(view):
@@ -31,11 +30,12 @@ def bind_view(view, operation_id, runtime_lock):
         'response_sha256': response_hash(result), 'runtime_lock': runtime_lock,
         'manual_checksum': result['manual_checksum'], 'index_id': result['index_id'],
         'evidence_payload_sha256': (verified or {}).get('evidence_payload_sha256'),
-        'verification_binding_sha256': (verified or {}).get('binding_sha256')}
+        'verification_binding_sha256': (verified or {}).get('binding_sha256'),
+        'event_protocol': EVENT_PROTOCOL}
     return result
 
 
-def accepted_events(view, operation_id):
+def accepted_events(view, operation_id, start_sequence=0):
     binding = view.get('delivery', {})
     if (binding.get('operation_id') != operation_id or
         binding.get('response_sha256') != response_hash(view) or
@@ -43,6 +43,17 @@ def accepted_events(view, operation_id):
         binding.get('index_id') != view['index_id']):
         raise ValueError('DELIVERY_BINDING_CHANGED')
     body = view['response']
+    sequenced = binding.get('event_protocol') == EVENT_PROTOCOL
+    sequence = start_sequence
+    def event(kind, value):
+        nonlocal sequence
+        sequence += 1
+        if sequenced:
+            if kind == 'complete':
+                value = {'view': value, 'operation_id': operation_id,
+                         'response_sha256': binding['response_sha256']}
+            value = {**value, 'sequence': sequence}
+        return kind, value
     if body.get('release_gate_passed'):
         verified=view.get('verified_delivery',{})
         if (verified.get('operation_id')!=operation_id or
@@ -54,55 +65,62 @@ def accepted_events(view, operation_id):
             raise ValueError('ACCEPTED_BUFFER_BINDING_CHANGED')
         if body['type'] == 'SYSTEM_ERROR':
             raise ValueError('INVALID_ACCEPTED_SYSTEM_ERROR')
-        yield ('progress', {'operation_id': operation_id, 'stage': 'displaying'})
-        yield ('verified_block', {'operation_id': operation_id,
+        yield event('progress', {'operation_id': operation_id, 'stage': 'displaying'})
+        yield event('verified_block', {'operation_id': operation_id,
             'response_sha256': binding['response_sha256'], 'view': view})
         text = body['natural_language']
         for offset in range(0, len(text), 96):
-            yield ('answer_chunk', {'operation_id': operation_id,
+            yield event('answer_chunk', {'operation_id': operation_id,
                 'response_sha256': binding['response_sha256'],
                 'offset': offset, 'text': text[offset:offset+96]})
     elif body.get('technical_content'):
         raise ValueError('UNVERIFIED_TECHNICAL_DELIVERY')
-    yield ('complete', view)
+    yield event('complete', view)
 
 
-def stream_operation(work, operation_id):
-    """work emits stage IDs, returns the DURABLY SAVED view; no drafts accepted.
+def stream_operation(read_operation, operation_id, validate_saved=lambda view: view,
+                     *, poll_seconds=1, max_seconds=150, clock=time.monotonic, pause=time.sleep):
+    """Read durable progress and accepted buffers; never start provider work.
 
-    The independent worker continues to commit on a client disconnect. The
-    bounded queue holds at most a handful of stage events plus the saved view;
-    operation recovery never initiates generation again.
+    Cloud Tasks owns the worker lifetime. Disconnecting or exhausting this
+    bounded observation window has no effect on execution or saved recovery.
     """
-    messages = Queue()
-    def progress(stage):
-        if stage not in STAGES or stage == 'displaying':
-            raise ValueError('INVALID_PRIVATE_PROGRESS_STAGE')
-        messages.put(('progress', {'operation_id': operation_id, 'stage': stage}))
-    def run():
-        try:
-            messages.put(('saved', work(progress)))
-        except Exception:
-            messages.put(('error', {'type': 'SYSTEM_ERROR',
-                'error': 'OPERATION_NOT_COMMITTED', 'technical_content': False,
-                'operation_terminal': False, 'operation_id': operation_id}))
     def events():
-        # Start only when the response is consumed, after all admission checks.
-        Thread(target=run, daemon=True).start()
-        while True:
-            kind, body = messages.get()
-            if kind == 'saved':
-                try:
-                    for event, value in accepted_events(body, operation_id):
-                        yield encode(event, value)
-                except Exception:
+        sequence = 0
+        deadline = clock()+max_seconds
+        heartbeat = clock()+5
+        try:
+            while clock() < deadline:
+                operation = read_operation()
+                for row in operation.get('progress', []):
+                    if row['sequence'] <= sequence:
+                        continue
+                    if row['sequence'] != sequence+1 or row['stage'] not in STAGES-{'displaying'}:
+                        raise ValueError('INVALID_DURABLE_PROGRESS')
+                    sequence = row['sequence']
+                    yield encode('progress', {'operation_id': operation_id,
+                        'stage': row['stage'], 'sequence': sequence})
+                if operation['state'] == 'COMPLETE':
+                    saved = validate_saved(operation['view'])
+                    for kind, value in accepted_events(saved, operation_id, sequence):
+                        yield encode(kind, value)
+                    return
+                if operation['state'] == 'FAILED':
                     yield encode('error', {'type': 'SYSTEM_ERROR',
-                        'error': 'DELIVERY_BINDING_CHANGED', 'technical_content': False,
-                        'operation_terminal': False, 'operation_id': operation_id})
-                return
-            yield encode(kind, body)
-            if kind == 'error':
-                return
+                        'error': operation['error'], 'technical_content': False,
+                        'operation_terminal': True, 'operation_id': operation_id, 'sequence': sequence+1})
+                    return
+                if clock() >= heartbeat:
+                    yield ': keepalive\n\n'
+                    heartbeat = clock()+5
+                pause(poll_seconds)
+            yield encode('error', {'type': 'SYSTEM_ERROR', 'error': 'OPERATION_STILL_PROCESSING',
+                'technical_content': False, 'operation_terminal': False,
+                'operation_id': operation_id, 'sequence': sequence+1})
+        except Exception:
+            yield encode('error', {'type': 'SYSTEM_ERROR', 'error': 'OPERATION_STORE_UNAVAILABLE',
+                'technical_content': False, 'operation_terminal': False,
+                'operation_id': operation_id, 'sequence': sequence+1})
     return sse_response(events())
 
 

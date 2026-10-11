@@ -14,7 +14,7 @@ STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
-RUNTIME_POLICY = 'open-manual-draft-verify-v8'
+RUNTIME_POLICY = 'open-manual-draft-verify-v9'
 CHECK_ERROR_COPY = 'I couldn\u2019t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):
@@ -87,11 +87,13 @@ def validate_view(view, *, expected_policy=None):
         raise APIError('The service returned an invalid session history.')
     delivery = view.get('delivery')
     if delivery is not None:
-        if (type(delivery) is not dict or not {'operation_id','response_sha256','runtime_lock','manual_checksum','index_id'} <= set(delivery) or set(delivery)-{'operation_id','response_sha256','runtime_lock','manual_checksum','index_id','evidence_payload_sha256','verification_binding_sha256'} or
+        if (type(delivery) is not dict or not {'operation_id','response_sha256','runtime_lock','manual_checksum','index_id'} <= set(delivery) or set(delivery)-{'operation_id','response_sha256','runtime_lock','manual_checksum','index_id','evidence_payload_sha256','verification_binding_sha256','event_protocol'} or
                 type(delivery.get('operation_id')) is not str or not re.fullmatch(r'[a-f0-9]{32}',delivery['operation_id']) or
                 type(delivery.get('runtime_lock')) is not str or not re.fullmatch(r'[a-f0-9]{64}',delivery['runtime_lock']) or
                 delivery.get('manual_checksum') != MANUAL_SHA or delivery.get('index_id') != INDEX_ID):
             raise APIError('The saved response bindings could not be verified.')
+        if delivery.get('event_protocol') not in (None, 'operation-sequence-v1'):
+            raise APIError('The saved event bindings could not be verified.')
         digest = hashlib.sha256(json.dumps(response,sort_keys=True,separators=(',',':'),
             ensure_ascii=False,allow_nan=False).encode('utf-8')).hexdigest()
         for key in ('evidence_payload_sha256','verification_binding_sha256'):

@@ -17,11 +17,25 @@ class FallbackProvider:
     contract=CONTRACT
     def __init__(self,primary,fallback):
         self.primary=primary;self.fallback=fallback;self.last_trace=None;self.lock=threading.Lock()
+    def begin_turn(self, operation_id):
+        reservation=self.primary.begin_turn(operation_id,availability_fallback=True)
+        try:self.fallback.begin_turn()
+        except Exception:
+            self.primary.end_turn()
+            raise
+        return reservation
+    def end_turn(self):
+        self.primary.end_turn();self.fallback.end_turn()
     def count(self,body):
         try:return self.primary.count(body)
         except ProviderFailure as exc:
             if str(exc)not in AVAILABILITY_FAILURES:raise
             return self.fallback.count(body)
+    def context(self,policy,evidence,dynamic,schema):
+        try:return self.primary.context(policy,evidence,dynamic,schema)
+        except ProviderFailure as exc:
+            if str(exc)not in AVAILABILITY_FAILURES:raise
+            return self.fallback.context(policy,evidence,dynamic,schema)
     def complete(self,policy,evidence,dynamic,schema):
         if not self.lock.acquire(blocking=False):raise ProviderFailure('PROVIDER_CONCURRENCY_LIMIT')
         trace={'model':PRIMARY_MODEL,'generation_calls':0,'fallback_used':False,'attempts':[]}

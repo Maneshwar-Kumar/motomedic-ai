@@ -5,6 +5,7 @@ The current design is in [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architec
 | Record | Why retained |
 | --- | --- |
 | [Reset receipt](reset/20261011/README.md) | What was removed, what was preserved, recovery and validation. |
+| [v9 implementation receipt](build/20261012/README.md) | Current code, frozen historical bytes, synthetic checks and remaining hosted build/acceptance gates. |
 | [v8 runtime/provider evidence](grounded_generation/v8/REPORT.md) | Exact runtime, failed real answer coverage, independent source adjudication and packaging preparation. |
 | [Code review](code_review/20261011/README.md) | Concrete departures that informed the fresh specifications; dated before the reset. |
 | [Source context](grounded_generation/source_context_v1/) | Pinned original-object context and source-specific safety authority. |

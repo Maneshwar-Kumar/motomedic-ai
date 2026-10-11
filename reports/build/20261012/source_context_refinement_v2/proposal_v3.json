@@ -1,0 +1,515 @@
+{
+  "version": "source-component-context-refinement-v2",
+  "decision": "PROPOSED_REQUIRES_INDEPENDENT_ORIGINAL_PAGE_REVIEW",
+  "authority": "AGENT_SOURCE_CONTEXT_REVIEW",
+  "reviewer": null,
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "immutable_evidence_sha256": "792408e533d68f99b0787056e02c4a9f2edf6ea1e06b4b0591b743753a6bc2c8",
+  "source_object_review_sha256": "e8763b1a4e1f99f6efca0885eb62f832d0938837e4495a2c0a23ba3e8b988fb4",
+  "prior_structural_review_sha256": "2fb64c8a642c4ef25494c4baa1f80adc8392de50dcbb3eeb50222da69513d725",
+  "parent_text_authorized": false,
+  "action_authority": false,
+  "questions_or_expected_answers_included": false,
+  "original_pdf_pages": {
+    "18": {
+      "path": "tmp/source-context-refinement-v2/original-018.png",
+      "sha256": "88b3ab834178de8c927768eea395fa4cf1f53711d8d9742cd3768b2a286639ed"
+    },
+    "64": {
+      "path": "tmp/source-context-refinement-v2/original-064.png",
+      "sha256": "65d108debc4a04c9afccf1fb2dd037ea0bad93b776b37e7317a80a2cb918b0df"
+    }
+  },
+  "bindings": {
+    "evidence_3f8de8466049af12783de7d0": {
+      "evidence_id": "evidence_3f8de8466049af12783de7d0",
+      "raw_object_sha256": "c61bd078d5d75b31506465831cb3a51dfe1eb1cbf4570d3a6486d2ffb2a93dfe",
+      "provenance_sha256": "f1c803472e96879284a462fa863ae67373ee8910d4e20349a09eb141d5bfcb80",
+      "indexed_object_sha256": "32429ac1518a714f307fc7c8c28e1b5f0c91ca49c5d562a30ad503c62cac95c9",
+      "type": "table",
+      "source_object": {
+        "authority": "OEM_MANUAL_AGENT_READ_ONLY_V1",
+        "evidence_id": "evidence_3f8de8466049af12783de7d0",
+        "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "object_type": "table",
+        "exact_text": "r0c0: Steering lock.......................\nr0c1: Inbuilt\nr1c0: Fuel type.............................\nr1c1: Unleaded gasoline\nr2c0: Ethanol content..................\nr2c1: Up to E20\nr3c0: Induction ............................\nr3c1: Electronic fuel injection, 42 mm throttle body, ride by wire system\nr4c0: Fuel tank capacity...............\nr4c1: 17.0* L\nr5c0: Low fuel warning................\nr5c1: 3 L ± 0.5* L\nr6c0: Dead stock..........................\nr6c1: 0.95 L to 1.15* L",
+        "provenance": [
+          {
+            "page_no": 18,
+            "bbox": {
+              "l": 223.82451332785865,
+              "t": 211.87501675953584,
+              "r": 412.7410536887429,
+              "b": 97.58518997012868,
+              "coord_origin": "BOTTOMLEFT"
+            },
+            "charspan": [
+              0,
+              0
+            ]
+          }
+        ],
+        "raw_object_sha256": "c61bd078d5d75b31506465831cb3a51dfe1eb1cbf4570d3a6486d2ffb2a93dfe",
+        "review_status": "APPROVED_AGENT_READ_ONLY_FACTS_ONLY",
+        "context_sha256": "c354d31ebf26fce1f5474dd3c7260bab1dfb07225f7bf5fd80c23307fd65f850",
+        "requires_visual_verification": false,
+        "index_membership": true,
+        "table_cells": [
+          {
+            "bbox": {
+              "l": 225.02779999999998,
+              "t": 45.627099999999984,
+              "r": 314.3070000000004,
+              "b": 52.304981244109314,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Steering lock.......................",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 316.4678000000004,
+              "t": 45.627099999999984,
+              "r": 337.6830000000004,
+              "b": 52.304981244109314,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "Inbuilt",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 225.02779999999998,
+              "t": 59.627099999999984,
+              "r": 314.2182000000004,
+              "b": 66.30498124410931,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Fuel type.............................",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 316.4678000000004,
+              "t": 59.627099999999984,
+              "r": 376.8342000000005,
+              "b": 66.30498124410931,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "Unleaded gasoline",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 225.02779999999998,
+              "t": 73.62709999999998,
+              "r": 314.3070000000003,
+              "b": 80.30498124410931,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Ethanol content..................",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 316.4758000000003,
+              "t": 73.62709999999998,
+              "r": 349.77100000000024,
+              "b": 80.30498124410931,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "Up to E20",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 225.0358,
+              "t": 87.62709999999998,
+              "r": 314.3222000000006,
+              "b": 94.30498124410931,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Induction ............................",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 316.47580000000056,
+              "t": 87.62709999999998,
+              "r": 411.34539999999987,
+              "b": 114.30498124410931,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "Electronic fuel injection, 42 mm throttle body, ride by wire system",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 225.0358,
+              "t": 121.62709999999998,
+              "r": 314.1150000000002,
+              "b": 128.30498124410934,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Fuel tank capacity...............",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 316.47580000000016,
+              "t": 121.62709999999998,
+              "r": 338.93900000000025,
+              "b": 128.30498124410934,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 4,
+            "end_row_offset_idx": 5,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "17.0* L",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 225.0358,
+              "t": 135.62709999999998,
+              "r": 314.2590000000003,
+              "b": 142.30498124410934,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Low fuel warning................",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 316.4758000000003,
+              "t": 135.62709999999998,
+              "r": 353.2998,
+              "b": 142.70859707602338,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 5,
+            "end_row_offset_idx": 6,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "3 L ± 0.5* L",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 225.0358,
+              "t": 149.62709999999998,
+              "r": 314.27420000000035,
+              "b": 156.30498124410934,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 6,
+            "end_row_offset_idx": 7,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Dead stock..........................",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 316.4838000000004,
+              "t": 149.62709999999998,
+              "r": 367.98620000000045,
+              "b": 156.30498124410934,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 6,
+            "end_row_offset_idx": 7,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "0.95 L to 1.15* L",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          }
+        ]
+      },
+      "source_object_sha256": "674aff42dd8da31812c81f712198970623b6a9a3d35c3f22120f4021bb7e7f3e",
+      "section_path": [
+        "TECHNICAL SPECIFICATIONS",
+        "FUEL SPECIFICATIONS AND APPROXIMATION"
+      ],
+      "required_evidence_ids": [
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_a03ccd44ab2d6b5db6bab123",
+        "evidence_c5bacd3bd5b428c8950b0ce1"
+      ],
+      "parent_text_authorized": false,
+      "context_authority": "PROPOSED_EXACT_COMPONENT_CONTEXT_REFINEMENT",
+      "source_pages": [
+        18
+      ]
+    },
+    "evidence_64de3cc72b85735055b58fec": {
+      "evidence_id": "evidence_64de3cc72b85735055b58fec",
+      "raw_object_sha256": "0d70f9556c85929d55612403cbba7272245934bbf4a5feb19cc6ab73c510a05a",
+      "provenance_sha256": "3814554b59ce5e70b1f85eb10a36701dd891e51ddc80aaf0acc22f8ee6c4dbfd",
+      "indexed_object_sha256": "4d2dbd067dd3db783243f0374f0b410e16507cf82c36a1d50c3b331a6b7474e4",
+      "type": "footnote",
+      "source_object": {
+        "authority": "OEM_MANUAL_AGENT_READ_ONLY_V1",
+        "evidence_id": "evidence_64de3cc72b85735055b58fec",
+        "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "object_type": "footnote",
+        "exact_text": "* The above values are approximate and the actual fuel filling capacity will vary from the values mentioned.",
+        "provenance": [
+          {
+            "page_no": 18,
+            "bbox": {
+              "l": 225.0438,
+              "t": 91.25290000000001,
+              "r": 418.5590000000003,
+              "b": 74.57501875589065,
+              "coord_origin": "BOTTOMLEFT"
+            },
+            "charspan": [
+              0,
+              108
+            ]
+          }
+        ],
+        "raw_object_sha256": "0d70f9556c85929d55612403cbba7272245934bbf4a5feb19cc6ab73c510a05a",
+        "review_status": "APPROVED_AGENT_READ_ONLY_FACTS_ONLY",
+        "context_sha256": "9f26f1b8e10a12e206ad587031c7ef08491edf7cadfa977bb1ec7300d20c23e2",
+        "requires_visual_verification": false,
+        "index_membership": true
+      },
+      "source_object_sha256": "4654d0ddc7e7ba7cbac5a8774bef182a402fb883f59b2e5159e9ca9d48302472",
+      "section_path": [
+        "TECHNICAL SPECIFICATIONS",
+        "FUEL SPECIFICATIONS AND APPROXIMATION"
+      ],
+      "required_evidence_ids": [
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_a03ccd44ab2d6b5db6bab123",
+        "evidence_c5bacd3bd5b428c8950b0ce1"
+      ],
+      "parent_text_authorized": false,
+      "context_authority": "PROPOSED_EXACT_COMPONENT_CONTEXT_REFINEMENT",
+      "source_pages": [
+        18
+      ]
+    },
+    "evidence_a03ccd44ab2d6b5db6bab123": {
+      "evidence_id": "evidence_a03ccd44ab2d6b5db6bab123",
+      "raw_object_sha256": "5c4725940d06833ac275503f832c1280796b8fb0c0a95b6b76df3ad0432773d9",
+      "provenance_sha256": "f3100df1bce1b571f95fcac1018d81e071a3c1b49311491f843e9f69062083d6",
+      "indexed_object_sha256": "f799b3f4d7372f800c986c918a4a1d35ac43694383e271f554c8d1ca73ab2343",
+      "type": "list_item",
+      "source_object": null,
+      "source_object_sha256": null,
+      "section_path": [
+        "OPERATION OF CONTROLS",
+        "LOW-FUEL WARNING"
+      ],
+      "required_evidence_ids": [
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_a03ccd44ab2d6b5db6bab123",
+        "evidence_c5bacd3bd5b428c8950b0ce1"
+      ],
+      "parent_text_authorized": false,
+      "context_authority": "PROPOSED_EXACT_COMPONENT_CONTEXT_REFINEMENT",
+      "source_pages": [
+        64
+      ]
+    },
+    "evidence_c5bacd3bd5b428c8950b0ce1": {
+      "evidence_id": "evidence_c5bacd3bd5b428c8950b0ce1",
+      "raw_object_sha256": "fed28ae492d3fe228ba7ceabc26ba26f8bc269ccd3f9dd77fd1cc458e60ebb4b",
+      "provenance_sha256": "709c5ce93f092177bb03b26d1da9887ff9372a5167813e4d78b6195d12d7e406",
+      "indexed_object_sha256": "e48ec0eaff2d5f4d21949afa913fdcc1508178c64bc6af99a7a9fa4fa78c388a",
+      "type": "list_item",
+      "source_object": null,
+      "source_object_sha256": null,
+      "section_path": [
+        "OPERATION OF CONTROLS",
+        "LOW-FUEL WARNING"
+      ],
+      "required_evidence_ids": [
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_a03ccd44ab2d6b5db6bab123",
+        "evidence_c5bacd3bd5b428c8950b0ce1"
+      ],
+      "parent_text_authorized": false,
+      "context_authority": "PROPOSED_EXACT_COMPONENT_CONTEXT_REFINEMENT",
+      "source_pages": [
+        64
+      ]
+    }
+  },
+  "required_display": [
+    {
+      "claim_id": "source-refinement-fuel-approximation",
+      "text": "The stated fuel values are approximate; actual filling capacity varies.",
+      "response_role": "WARNING",
+      "evidence_ids": [
+        "evidence_64de3cc72b85735055b58fec"
+      ],
+      "presentation_mode": "REVIEWED_PARAPHRASE"
+    },
+    {
+      "claim_id": "source-refinement-refuel-earliest",
+      "text": "Do not use the motorcycle for long with the last fuel-indicator segment blinking; refuel at the earliest.",
+      "response_role": "WARNING",
+      "evidence_ids": [
+        "evidence_a03ccd44ab2d6b5db6bab123"
+      ],
+      "presentation_mode": "REVIEWED_PARAPHRASE"
+    },
+    {
+      "claim_id": "source-refinement-fuel-pump-warning",
+      "text": "Failure to refuel can leave the motorcycle out of fuel and stranded and cause serious fuel-pump damage.",
+      "response_role": "WARNING",
+      "evidence_ids": [
+        "evidence_c5bacd3bd5b428c8950b0ce1"
+      ],
+      "presentation_mode": "REVIEWED_PARAPHRASE"
+    }
+  ],
+  "excluded_context": {
+    "evidence_ids": [
+      "evidence_1fe8af98a9e6d6027d12f8c8",
+      "evidence_a5b62eee4c0caf239437fa68",
+      "evidence_5b6388c083677b5d5cd6ad4a",
+      "evidence_dd285d8b6e6a1682de0e10f0",
+      "evidence_c762ef2c61505dc7ac7c01d8",
+      "evidence_cb7062b4cec26700e3ae1185",
+      "evidence_f1b023ea7924903fed5dfe5f",
+      "evidence_f3dd00ecbff8fd98a8c32736"
+    ],
+    "reason": "PDF18 visually separates left tyre-size/pressure and rim notes from the right fuel specification table and its asterisk note. PDF64 visually separates the top-left low-fuel warning from CHARGER PORT and right-column USB warnings. Exclusion applies only to these four exact fuel source objects; all tyre/USB dependencies stay unchanged."
+  },
+  "scope": [
+    "EXACT_SOURCE_OBJECTS",
+    "EXACT_FUEL_COMPONENT_CONTEXT"
+  ],
+  "excluded_scopes": [
+    "Whole parent bodies",
+    "Unreviewed tyre source content",
+    "New authored procedures",
+    "General vision",
+    "Public source display",
+    "Answer-quality release",
+    "Deployment"
+  ]
+}

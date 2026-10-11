@@ -30,9 +30,11 @@ Some compatibility modules implement earlier methods because current imports and
 
 ## Current acceptance
 
-The candidate index exists: index_a3282c4d98cf54595e4ba168, with 532 BGE M3 search chunks, 277 parents and BM25. The current answer runtime still bypasses Qdrant for dense search, misses conditional retrieval scheduling for ordinary Q&A, can exceed input limits, and needs durable worker completion.
+The candidate index exists: index_a3282c4d98cf54595e4ba168, with 532 BGE M3 search chunks, 277 parents and BM25. The v9 implementation connects authenticated Qdrant with concurrent BM25, reviewed dependency recovery, compact complete evidence, whole-turn admission and durable Cloud Tasks execution. Separate verification and exact saved-buffer streaming remain mandatory for generated answers. These changes have synthetic checks; hosted artifact, model and deployed-service acceptance remain open.
 
 The last real Haiku validation released **zero technical answers** and answered **0 of 4** clearly answerable or partially answerable turns. Passing software checks establish boundaries, not answer coverage or deployed release acceptance. [Current status](docs/STATUS.md) and the [v8 report](reports/grounded_generation/v8/REPORT.md) explain the remaining work.
+
+The [v9 implementation receipt](reports/build/20261012/README.md) records current code, exact historical preservation and hosted image results. The existing GCP login and immutable index generation were verified before build preparation. Real-provider answer acceptance and deployment remain open.
 
 Claude is an optional retrieved-evidence availability fallback, disabled by default. The full-manual Claude alternative is retired. Prompt caching has no demonstrated support for the current exact primary configuration. Photo and voice follow text acceptance.
 

@@ -73,6 +73,25 @@ class BlockingState(FirestoreState):
         if not self.release.wait(5):raise RuntimeError('Test commit blocked')
         return super().commit_answer(*args,**kwargs)
 
+class SyntheticTaskDispatcher:
+    """Test-only task executor with its own HTTP request and non-daemon lifetime."""
+    def __init__(self):
+        self.app=None;self.threads=[];self.keys=set();self.lock=threading.Lock()
+    def authenticate(self,headers):
+        if headers.get('Authorization')!='Bearer synthetic-task-identity':raise PermissionError()
+    def enqueue(self,owner,key,payload_hash):
+        with self.lock:
+            if (owner,key) in self.keys:return
+            self.keys.add((owner,key))
+            def execute():
+                with self.app.test_client() as client:
+                    client.post('/internal/operations/run',json={'owner':owner,'operation_id':key,'payload_hash':payload_hash},
+                        headers={'Authorization':'Bearer synthetic-task-identity'})
+            thread=threading.Thread(target=execute)
+            self.threads.append(thread);thread.start()
+    def join(self):
+        for thread in self.threads:thread.join(6)
+
 class OpenWiringTests(unittest.TestCase):
     def setUp(self):
         google=types.ModuleType('google');cloud=types.ModuleType('google.cloud')
@@ -88,18 +107,20 @@ class OpenWiringTests(unittest.TestCase):
         def private_fixture_identity():
             from flask import request
             request.environ['arm_a_owner']='synthetic-platform-verified-owner'
-        install(self.app,self.questions,self.factory,self.secret)
+        self.dispatcher=SyntheticTaskDispatcher();self.dispatcher.app=self.app
+        install(self.app,self.questions,self.factory,self.secret,dispatcher=self.dispatcher)
         self.client=self.app.test_client()
         self.headers={'X-MotoMedic-Visitor':self.capability,'Idempotency-Key':OP,'Accept':'text/event-stream'}
         self.body={'query':'Synthetic unseen question without catalogue entry','bike_variant':'Himalayan BS6',
             'confirmed_himalayan_bs6':True,'manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,'cache_mode':'enabled'}
     def tearDown(self):
-        self.questions.release();self.release_commit.set();self.modules.stop()
+        self.questions.release();self.release_commit.set();self.dispatcher.join();self.modules.stop()
     def post(self):return self.client.post('/v1/sessions',json=self.body,headers=self.headers,buffered=False)
-    def recover(self):return self.client.get('/v1/operations/'+OP,headers=self.headers)
+    def recover(self):return self.client.get('/v1/operations/'+OP,headers={**self.headers,'Accept':'application/json'})
     def event(self,raw):
         text=raw.decode();kind=text.split('event: ')[1].split('\n')[0]
-        return kind,json.loads(text.split('data: ')[1])
+        body=json.loads(text.split('data: ')[1]);body.pop('sequence',None)
+        return kind,body
 
     def test_prompt_progress_private_verifier_and_commit_barriers_then_exact_recovery(self):
         response=self.post();self.assertEqual(response.status_code,200)
@@ -174,7 +195,10 @@ class OpenWiringTests(unittest.TestCase):
                    lambda v:v['response'].update(semantic_verification_passed=False),
                    lambda v:v['delivery'].update(runtime_lock='f'*64),
                    lambda v:v['verified_delivery'].update(operation_id='d'*32),
-                   lambda v:v['verified_delivery'].update(source_authority_lock='4'*64))
+                   lambda v:v['verified_delivery'].update(source_authority_lock='4'*64),
+                   lambda v:v['verified_delivery'].update(verification_method='UNREVIEWED_SAFETY'),
+                   lambda v:v['verified_delivery'].update(
+                       verification_method='COORDINATOR_APPROVED_EXACT_SAFETY_INITIAL_SCOPE'))
         for mutate in mutations:
             for key,original in records:
                 forged=deepcopy(original);mutate(forged['view']);self.database.data[key]=forged

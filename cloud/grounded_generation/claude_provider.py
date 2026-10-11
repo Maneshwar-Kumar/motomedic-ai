@@ -38,6 +38,13 @@ class ClaudeProvider:
         self.reserve=reserve;self.reserve_cost=reserve_cost
         self.transport=transport or HTTP();self.key=key or os.environ.get('ANTHROPIC_API_KEY')
         self.lock=threading.Lock();self.last_trace=None
+        self.turn=threading.local()
+    def begin_turn(self):
+        if not callable(self.reserve_cost):raise ProviderFailure('CLAUDE_SPEND_GUARD_UNCONFIGURED')
+        self.reserve_cost(4*MAX_CALL_USD,MODEL)
+        self.turn.remaining=4
+    def end_turn(self):
+        self.turn.remaining=None
     def _count(self,body):
         if not self.key:raise ProviderFailure('CLAUDE_UNCONFIGURED')
         counted={k:deepcopy(v) for k,v in body.items() if k not in ('max_tokens','stream')}
@@ -70,7 +77,10 @@ class ClaudeProvider:
         try:
             body,count=self.context(policy,evidence,dynamic,schema)
             trace['input_tokens_counted']=count
-            self.reserve_cost(MAX_CALL_USD,MODEL)
+            remaining=getattr(self.turn,'remaining',None)
+            if remaining is None:self.reserve_cost(MAX_CALL_USD,MODEL)
+            elif remaining<=0:raise ProviderFailure('CLAUDE_UNRESERVED_ATTEMPT')
+            else:self.turn.remaining=remaining-1
             self.reserve(count+OUTPUT_TOKENS,'generation')
             trace['reserved_maximum_cost_usd']=MAX_CALL_USD
             started=time.monotonic();trace['generation_calls']=1

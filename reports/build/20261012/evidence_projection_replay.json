@@ -1,0 +1,654 @@
+{
+  "schema_version": "provider-free-recorded-evidence-replay-v1",
+  "label": "SYNTHETIC_LOCAL_PROJECTION_AND_ADMISSION_REGRESSION",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "original_v8_result_sha256": "51dfb305db78ba0b176d15dc5f62d989e1e7225588d36ab1c257289ab19638b9",
+  "source_authority_lock": "ae8dded87afe2424d83f4c13420d1c84fb21f4f53e383b62c01865b2bde28617",
+  "source_bound_files": {
+    "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent\\reports\\grounded_generation\\source_context_v1\\context_bindings.json": "7f414ce70696a1e60f97655c577ae2556b8b09f99989af2a747fdb72e73d4aed",
+    "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent\\reports\\grounded_generation\\read_only_scopes_v1\\scopes.json": "e8763b1a4e1f99f6efca0885eb62f832d0938837e4495a2c0a23ba3e8b988fb4",
+    "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent\\reports\\grounded_generation\\generic_source_v1\\structural_review.json": "2fb64c8a642c4ef25494c4baa1f80adc8392de50dcbb3eeb50222da69513d725",
+    "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent\\reports\\build\\20261012\\source_context_refinement_v2\\proposal_v3.json": "405269fa7d31274a1e5c6260bbee3e762c8cf2898a5401a4f71e97e155afa1f0",
+    "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent\\reports\\build\\20261012\\source_context_refinement_v2\\independent_review_v3.json": "ebfb2c39cea8d7d980a32325bc1db85448208d0e3d9dcd242eb4043f991d179d"
+  },
+  "prompt_or_retrieval_tuning_performed": false,
+  "heldout_questions_used_as_prompt_enrichment": false,
+  "provider_calls": 0,
+  "model_loaded": false,
+  "index_rebuilt": false,
+  "factual_answer_acceptance": false,
+  "latency_acceptance": false,
+  "limits": "Evidence wire sizes exclude complete runtime/schema/history/final response overhead. Exact authorized provider counting remains necessary and fail-closed in the request path.",
+  "rows": [
+    {
+      "case_id": "H801",
+      "turn_number": 2,
+      "recorded_immutable_chunk_ids": [
+        "chunk_7326caba6175a0e77bb8cc73",
+        "chunk_f5edca9e614cec39c892da64",
+        "chunk_f9a61def31f22f89056b1ee8",
+        "chunk_faae704f97e2fa75512f5d8a",
+        "chunk_f672b8fe35727f87d3d25d29",
+        "chunk_aa814d09365c961ccd434d70"
+      ],
+      "prior_admitted_objects": 5,
+      "current_admitted_objects": 6,
+      "prior_compact_evidence_bytes": 8884,
+      "current_compact_evidence_bytes": 6863,
+      "current_admitted_evidence_ids": [
+        "evidence_37c6c31f5700495414de1101",
+        "evidence_83a88ebb31e7e605c31f08e4",
+        "evidence_91ac5ade2895a493bbab1583",
+        "evidence_a6950ea73293cda81e695ce1",
+        "evidence_bab06f99aa13ab1578a152a0",
+        "evidence_fdd616b47465a42cfd4f1c01"
+      ],
+      "current_source_gaps": [
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_faae704f97e2fa75512f5d8a",
+          "evidence_ids": [
+            "evidence_19466e6264cba31b9148066c"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_faae704f97e2fa75512f5d8a",
+          "evidence_ids": [
+            "evidence_436176ca24953c494cf78f03"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_faae704f97e2fa75512f5d8a",
+          "evidence_ids": [
+            "evidence_4632b1e6c87b504a33b83110"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_faae704f97e2fa75512f5d8a",
+          "evidence_ids": [
+            "evidence_811a469947b84f2c69db18fb"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_faae704f97e2fa75512f5d8a",
+          "evidence_ids": [
+            "evidence_c9c77d066e7149b42883c323"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_f672b8fe35727f87d3d25d29",
+          "evidence_ids": [
+            "evidence_d6ae12d562fda72cd97f73d7"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_aa814d09365c961ccd434d70",
+          "evidence_ids": [
+            "evidence_8e1dfabe9f50a1a1b6d184cf"
+          ],
+          "rider_resolvable": false
+        }
+      ],
+      "exact_model_token_count": null,
+      "exact_count_pending_hosted_provider_scope": true
+    },
+    {
+      "case_id": "H802",
+      "turn_number": 1,
+      "recorded_immutable_chunk_ids": [
+        "chunk_1db5c7901af2cf565fd97f01",
+        "chunk_c63548d2d0eea40969f5a02c",
+        "chunk_1750fde3d783557c2f8c58d1",
+        "chunk_f80dfec47c9c6d5eff6fd776",
+        "chunk_b620d86495ce81ca63b12755",
+        "chunk_20ef9013cd5ec3dc4614e73c"
+      ],
+      "prior_admitted_objects": 12,
+      "current_admitted_objects": 34,
+      "prior_compact_evidence_bytes": 12367,
+      "current_compact_evidence_bytes": 32350,
+      "current_admitted_evidence_ids": [
+        "evidence_001335e5b633008075189f76",
+        "evidence_00497a5a6998712d564a2df2",
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_0c58e6021490c80a7a7f8d99",
+        "evidence_13ff401422c8fc0d784d7e92",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_1b6ac29f7d67b8a68c57a1d0",
+        "evidence_272bd86a27fe5489e66a4af6",
+        "evidence_283ac900b5a9b700969e4d34",
+        "evidence_2da295467109e2ffd40840cf",
+        "evidence_32cf970fdb9c163e0de21c1a",
+        "evidence_3a585b9acb43c05172e95624",
+        "evidence_3ab349b8b479f442a8c6f618",
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_467855effee5419bd63fb826",
+        "evidence_4e1a61e411e2b752c1a8716b",
+        "evidence_533bb7ef741105dc8ee7cdf1",
+        "evidence_590e7744c6d77b972e3950ee",
+        "evidence_634643c9be7de4d37ee7b5a2",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_8b5ef092d20493cd2b9b58b8",
+        "evidence_90b50d7059435c1578fd7d12",
+        "evidence_a03ccd44ab2d6b5db6bab123",
+        "evidence_a5bb5d14fd332f16c381c1b7",
+        "evidence_a66e862d634c23573bb30c90",
+        "evidence_a798d3ba95cd9f9440be754a",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_b1e9bacad4e60cf54b0a3aa2",
+        "evidence_b42c533d2f90267c01b12bb6",
+        "evidence_c5bacd3bd5b428c8950b0ce1",
+        "evidence_d11ae7cb778df64207e63d04",
+        "evidence_e43f21422e7fcda50e76c4bb",
+        "evidence_f4dbcfa8fd37b20ab295e5a1",
+        "evidence_f4ee929e545ef669fdb494a1"
+      ],
+      "current_source_gaps": [
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_20ef9013cd5ec3dc4614e73c",
+          "evidence_ids": [
+            "evidence_01bb03a17dcd0490c911475a"
+          ],
+          "rider_resolvable": false
+        }
+      ],
+      "exact_model_token_count": null,
+      "exact_count_pending_hosted_provider_scope": true
+    },
+    {
+      "case_id": "H803",
+      "turn_number": 1,
+      "recorded_immutable_chunk_ids": [
+        "chunk_978068c2e079d4865ba1f8da",
+        "chunk_8105564d21681a7b4bc8728b",
+        "chunk_c9262bc554f6a06dc1e93ab9",
+        "chunk_e0136c37004bf0f014e82ba5",
+        "chunk_a876019bc141a9d47934e87a",
+        "chunk_72359a9cd785d431f09da027"
+      ],
+      "prior_admitted_objects": 23,
+      "current_admitted_objects": 23,
+      "prior_compact_evidence_bytes": 23784,
+      "current_compact_evidence_bytes": 18152,
+      "current_admitted_evidence_ids": [
+        "evidence_081f245f33f1dec5cb06a080",
+        "evidence_13dac6aaee2fcbdd57618d29",
+        "evidence_2e67c4cc94e9a302ba9a6822",
+        "evidence_31f9ffe7f325a580f7c58947",
+        "evidence_3f0254b2230794cc5e25393b",
+        "evidence_46ea7e82545c259cf4ed23b3",
+        "evidence_5547cca73df703b2d779755c",
+        "evidence_5560e923c89c184bddf2414f",
+        "evidence_662d4a163d504cc62ff5147e",
+        "evidence_6a7eba4e0fa3ae46308ea11c",
+        "evidence_82764faca7aa6cec43f2eeb3",
+        "evidence_87d7aaf9a6f68c203a240607",
+        "evidence_a35159dd2d88b584ad319de1",
+        "evidence_a4a384cb8cd1cd437ac00907",
+        "evidence_b345d26bcf46960f7125d8d8",
+        "evidence_bcc2ecdbee298a98332e9c23",
+        "evidence_cb5d01a60a05ab5e91447f30",
+        "evidence_d312aaa5aca85242f73bec26",
+        "evidence_da497f5f0bbf1c24b8f93714",
+        "evidence_e5038680f235054234151f44",
+        "evidence_ea69e5fbd3ff27f1dd159960",
+        "evidence_f4f3ea7f748d6732d21cae42",
+        "evidence_f5f14378db31693f76bd2a81"
+      ],
+      "current_source_gaps": [
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_e0136c37004bf0f014e82ba5",
+          "evidence_ids": [
+            "evidence_45e01fb1becff7605de0f33d"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_a876019bc141a9d47934e87a",
+          "evidence_ids": [
+            "evidence_4cf04dc20e51ea99b2f65f8a"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_a876019bc141a9d47934e87a",
+          "evidence_ids": [
+            "evidence_8cf19b0f3aa83fe252f906cc"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_a876019bc141a9d47934e87a",
+          "evidence_ids": [
+            "evidence_ca19a0798d747387ac97d08b"
+          ],
+          "rider_resolvable": false
+        }
+      ],
+      "exact_model_token_count": null,
+      "exact_count_pending_hosted_provider_scope": true
+    },
+    {
+      "case_id": "H804",
+      "turn_number": 1,
+      "recorded_immutable_chunk_ids": [
+        "chunk_b71d9400b2aa65edb4facaa1",
+        "chunk_1c2990f676e324a8387a7635",
+        "chunk_f6bb9e264a079f438c42d5e0",
+        "chunk_6edb3e8b28e5d6deb92df266",
+        "chunk_9e4c720cd28f2feb357fb2ef",
+        "chunk_1b38ebac9833f1d9f7cde732"
+      ],
+      "prior_admitted_objects": 0,
+      "current_admitted_objects": 25,
+      "prior_compact_evidence_bytes": 2,
+      "current_compact_evidence_bytes": 24975,
+      "current_admitted_evidence_ids": [
+        "evidence_001335e5b633008075189f76",
+        "evidence_00497a5a6998712d564a2df2",
+        "evidence_017a78d6fdfd30389967f3c9",
+        "evidence_0c58e6021490c80a7a7f8d99",
+        "evidence_157a86dd6fd9f3a9d4c3fc0d",
+        "evidence_15e1ce067b76cc524a0448d2",
+        "evidence_272bd86a27fe5489e66a4af6",
+        "evidence_3ab349b8b479f442a8c6f618",
+        "evidence_3f8de8466049af12783de7d0",
+        "evidence_4e1a61e411e2b752c1a8716b",
+        "evidence_4e632b1b7a18bb739a61c9fd",
+        "evidence_5034a983959e52887c0072bf",
+        "evidence_512f860518ee9abe0ced1fd4",
+        "evidence_533bb7ef741105dc8ee7cdf1",
+        "evidence_590e7744c6d77b972e3950ee",
+        "evidence_634643c9be7de4d37ee7b5a2",
+        "evidence_64de3cc72b85735055b58fec",
+        "evidence_8555b50f22af8eabcabb0b76",
+        "evidence_8b5ef092d20493cd2b9b58b8",
+        "evidence_90b50d7059435c1578fd7d12",
+        "evidence_a03ccd44ab2d6b5db6bab123",
+        "evidence_a66e862d634c23573bb30c90",
+        "evidence_a7a5ea8352d16679e89780fb",
+        "evidence_c5bacd3bd5b428c8950b0ce1",
+        "evidence_f4dbcfa8fd37b20ab295e5a1"
+      ],
+      "current_source_gaps": [
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_b71d9400b2aa65edb4facaa1",
+          "evidence_ids": [
+            "evidence_89df36871a133bec8f13011f"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_1c2990f676e324a8387a7635",
+          "evidence_ids": [
+            "evidence_0b48ffd32b845515249840ab"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_1c2990f676e324a8387a7635",
+          "evidence_ids": [
+            "evidence_4f71b1bc4982bd7bf3489ad6"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_1c2990f676e324a8387a7635",
+          "evidence_ids": [
+            "evidence_77c44249cc8a5f046b6a7798"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_1c2990f676e324a8387a7635",
+          "evidence_ids": [
+            "evidence_cb9f15f609f419b604bb2029"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_1c2990f676e324a8387a7635",
+          "evidence_ids": [
+            "evidence_f60c90aae28918d4c8ffa07e"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_f6bb9e264a079f438c42d5e0",
+          "evidence_ids": [
+            "evidence_524af4df0cb19477470c5d9e"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_f6bb9e264a079f438c42d5e0",
+          "evidence_ids": [
+            "evidence_6b5735e11152c574268529f6"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_f6bb9e264a079f438c42d5e0",
+          "evidence_ids": [
+            "evidence_84f6791f2601d09593f38288"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_1b38ebac9833f1d9f7cde732",
+          "evidence_ids": [
+            "evidence_954bc918ef81aedd2b5130d8"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_1b38ebac9833f1d9f7cde732",
+          "evidence_ids": [
+            "evidence_d0f109db43f33dc54278c060"
+          ],
+          "rider_resolvable": false
+        }
+      ],
+      "exact_model_token_count": null,
+      "exact_count_pending_hosted_provider_scope": true
+    },
+    {
+      "case_id": "H805",
+      "turn_number": 1,
+      "recorded_immutable_chunk_ids": [
+        "chunk_457f54942b5cdfc5f3567a5e",
+        "chunk_15cbb7b30425b6c15895e00a",
+        "chunk_82b0e9e97e2a7a01dda81597",
+        "chunk_6317b5d3d3a0d64d8ae04914",
+        "chunk_2989c7e5544df8a5e447ef09",
+        "chunk_687abece774054f96d18aa8b"
+      ],
+      "prior_admitted_objects": 0,
+      "current_admitted_objects": 0,
+      "prior_compact_evidence_bytes": 2,
+      "current_compact_evidence_bytes": 2,
+      "current_admitted_evidence_ids": [],
+      "current_source_gaps": [
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_457f54942b5cdfc5f3567a5e",
+          "evidence_ids": [
+            "evidence_263235a7812c9c3cbe043bc2"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_457f54942b5cdfc5f3567a5e",
+          "evidence_ids": [
+            "evidence_985e54c3294c58ea6931c656"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_457f54942b5cdfc5f3567a5e",
+          "evidence_ids": [
+            "evidence_9ba59edaf298afa400a86369"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_457f54942b5cdfc5f3567a5e",
+          "evidence_ids": [
+            "evidence_ba7578409a4ddc7d61657b62"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_3120bcd439aece853998339b"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_37fc5c901372acceb2ee4bf0"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_423ad61a550cf44744fbddce"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_5ea527f85bd6be10142add02"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_651a7cb3537d4da07eb2c68d"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_7e121f58503f86ab3d59dee0"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_adfe7c84462c1795501fa2f6"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_b8d10b6608a7b3dc8f3819aa"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_d0ddd010293973bc1751d9e2"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_ea92fce7689b120c6dc52302"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_ecf5e0204b81c45a6a56c3ff"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_ecf9b550d62b6653fa07fa75"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+          "evidence_ids": [
+            "evidence_faa8fcb755f9e2daef0188bd"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_82b0e9e97e2a7a01dda81597",
+          "evidence_ids": [
+            "evidence_c325e296ecf4d0a2efa7a83c"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_6317b5d3d3a0d64d8ae04914",
+          "evidence_ids": [
+            "evidence_0d736282641c562d2c255d0b"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_6317b5d3d3a0d64d8ae04914",
+          "evidence_ids": [
+            "evidence_2186a9b29aec6734f2d21bc9"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_6317b5d3d3a0d64d8ae04914",
+          "evidence_ids": [
+            "evidence_49372cea7bfe5b9b1ddae2d8"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_6317b5d3d3a0d64d8ae04914",
+          "evidence_ids": [
+            "evidence_616cc341bbe04f9888c86def"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_6317b5d3d3a0d64d8ae04914",
+          "evidence_ids": [
+            "evidence_99fca0acfd9070356901ccbb"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+          "evidence_ids": [
+            "evidence_5885925bcab58f1cbf4cbffe"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+          "evidence_ids": [
+            "evidence_5fb8fcd4406106f304075a9f"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+          "evidence_ids": [
+            "evidence_70e02ab5236b658fe930211f"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+          "evidence_ids": [
+            "evidence_97b0434cf83e0d8cb30f74dc"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+          "evidence_ids": [
+            "evidence_a0c9f726de9a1339e0d7901e"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+          "evidence_ids": [
+            "evidence_c70a4424a106dfe38f5dbcb5"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+          "evidence_ids": [
+            "evidence_eabf626cfe7ee0c33398edb9"
+          ],
+          "rider_resolvable": false
+        },
+        {
+          "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+          "chunk_id": "chunk_687abece774054f96d18aa8b",
+          "evidence_ids": [
+            "evidence_d7a652798d09d99c53935544"
+          ],
+          "rider_resolvable": false
+        }
+      ],
+      "exact_model_token_count": null,
+      "exact_count_pending_hosted_provider_scope": true
+    }
+  ]
+}

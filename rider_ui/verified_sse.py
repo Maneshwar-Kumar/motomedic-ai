@@ -30,6 +30,8 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
     text,total,verified,complete='',0,None,None
     digest,streamed,displaying=None,'',False
     frames=0
+    sequenced=None
+    last_sequence=0
 
     def fail(message='The service stream could not be verified. Retrieve the saved result.'):
         raise APIError(message)
@@ -39,7 +41,7 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
             fail()
 
     def event(frame):
-        nonlocal verified,complete,digest,streamed,displaying,frames
+        nonlocal verified,complete,digest,streamed,displaying,frames,sequenced,last_sequence
         fields={}
         for line in frame.splitlines():
             if not line or line.startswith(':'):continue
@@ -52,6 +54,14 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
         try:data=json.loads(fields['data'])
         except (ValueError,RecursionError):fail()
         kind=fields['event']
+        has_sequence=type(data) is dict and 'sequence' in data
+        if sequenced is None:sequenced=has_sequence
+        if has_sequence != sequenced:fail()
+        if has_sequence:
+            data=dict(data)
+            sequence=data.pop('sequence')
+            if type(sequence) is not int or sequence != last_sequence+1:fail()
+            last_sequence=sequence
         if kind=='progress':
             bound(data,{'operation_id','stage'})
             stage=data['stage']
@@ -76,6 +86,7 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
                     fail('The streamed answer has not passed the display gate.')
                 binding=verified.get('delivery')
                 if not binding or binding['operation_id']!=operation_id or binding['response_sha256']!=digest:fail()
+                if (binding.get('event_protocol')=='operation-sequence-v1') != bool(sequenced):fail()
             elif (response['type'] not in {'SUPPORTED','SAFETY_STOP'} or
                     response.get('release_gate_passed') is not True or
                     response.get('technical_content') is not True):
@@ -91,7 +102,13 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
             streamed+=data['text']
             if on_chunk:on_chunk(data['text'])
         elif kind=='complete':
+            if sequenced:
+                bound(data,{'view','operation_id','response_sha256'})
+                if data['response_sha256']!=response_hash(data['view']):fail()
+                data=data['view']
             complete=validate_view(data,expected_policy=expected_policy)
+            if (complete.get('delivery',{}).get('event_protocol')=='operation-sequence-v1') != bool(sequenced):fail()
+            if operation_id is not None and complete.get('delivery') and complete['delivery']['operation_id']!=operation_id:fail()
             if verified is not None:
                 if verified!=complete:fail('The service stream changed. Retrieve the saved result.')
                 if operation_id is not None and (response_hash(complete)!=digest or
@@ -101,7 +118,8 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
                     response.get('technical_content') is True and verified is None):
                 fail('The service did not deliver a verified answer unit.')
         elif kind=='error':
-            fail(CHECK_ERROR_COPY)
+            if type(data) is not dict or data.get('operation_id') != operation_id:fail()
+            raise APIError(CHECK_ERROR_COPY, terminal=data.get('operation_terminal') is True)
         else:fail('The service returned an unsupported stream event.')
 
     try:

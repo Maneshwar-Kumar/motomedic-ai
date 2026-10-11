@@ -33,8 +33,12 @@ jobs:
         run: python human_review/agent_release_161/approval_consumer.py
       - name: Test approval consumption without an index or provider
         run: python -m unittest discover -s human_review/agent_release_161 -p 'test_approval_consumer.py' -v
-      - name: Install only the HTTP framework used by software doubles
-        run: python -m pip install Flask==3.1.2
+      - name: Verify the current complete serving inventory and committed bytes
+        run: python tools/serving_release.py verify --committed-revision '${{ github.sha }}'
+      - name: Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests
+        run: |
+          python -m pip install --require-hashes -r rider_ui/requirements-linux-amd64-py312.lock.txt
+          python -m pip install Flask==3.1.2
       - name: Test quota, availability fallback, managed-store and saved delivery boundaries
         run: >-
           python -m unittest -v
@@ -42,11 +46,17 @@ jobs:
           cloud.grounded_generation.test_admission
           cloud.grounded_generation.test_claude_fallback
           cloud.grounded_generation.test_open_wiring
+          cloud.grounded_generation.test_whole_turn_admission
+          cloud.grounded_generation.test_serving_retrieval
           cloud.arm_a.test_store
-          rider_ui.tests.test_client
-          rider_ui.tests.test_verified_sse
-          rider_ui.tests.test_progress_stream
+          cloud.arm_a.test_durable_operations
+          cloud.test_serving_artifacts
+          tools.test_serving_release
+          tools.test_bind_serving_images
+      - name: Test the complete rider UI against engineering-only loopback HTTP fixtures
+        run: python -m unittest discover -s rider_ui/tests -p 'test_*.py' -v
       - name: Record scope of these checks
         run: |
           echo 'These checks use synthetic provider/store/HTTP doubles and do not request provider secrets or cloud credentials.'
-          echo 'Index-dependent composer tests, real-provider quality, deployed Qdrant/Firestore, live browser recovery and release acceptance remain separate gates.'
+          echo 'These checks also reject altered release, source, index, artifact generation, runtime, image provenance and saved-response bindings.'
+          echo 'Real-provider quality, deployed Qdrant/Firestore, live browser recovery and release acceptance remain separate gates.'

@@ -1,11 +1,8 @@
-FROM python:3.11-slim
-ENV PYTHONUNBUFFERED=1 OMP_NUM_THREADS=2 TOKENIZERS_PARALLELISM=false HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
-WORKDIR /app
-COPY cloud/arm_a/requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu && pip install --no-cache-dir -r /tmp/requirements.txt
-COPY . /app
-# Hosted build downloads the exact pinned query model; no manual ingestion or embedding.
-RUN HF_HUB_OFFLINE=0 TRANSFORMERS_OFFLINE=0 python cloud/arm_a/package_models.py
-RUN useradd --uid 10001 --create-home motomedic && chown -R motomedic:motomedic /app
+# Build only the backend context prepared by tools/serving_release.py.
+# Inherit exact packaged model/dependency assets; never ingest the manual.
+FROM us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4
+USER root
+COPY --chown=motomedic:motomedic . /app
+RUN python -B tools/check_installed_serving_release.py /app
 USER motomedic
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "1", "--timeout", "180", "--access-logfile", "-", "cloud.arm_a.app:load_production()"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "4", "--timeout", "1200", "--access-logfile", "-", "cloud.arm_a.app:load_production()"]

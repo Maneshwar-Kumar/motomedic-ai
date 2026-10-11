@@ -197,6 +197,8 @@ if st.session_state.connection_error:
             remember(view, rider_text)
             st.rerun()
         except APIError as exc:
+            if exc.terminal:
+                st.session_state.pending = None
             st.session_state.connection_error = str(exc)
             st.error(str(exc))
 

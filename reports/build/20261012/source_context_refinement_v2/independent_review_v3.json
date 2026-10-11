@@ -1,0 +1,127 @@
+{
+  "version": "independent-component-context-review-v3",
+  "decision": "APPROVED_EXACT_SOURCE_OBJECT_CONTEXT_ONLY",
+  "authority": "AGENT_SOURCE_CONTEXT_REVIEW",
+  "reviewer": "/root",
+  "proposer": "/root/retrieval_evidence",
+  "reviewed_on": "2026-10-12",
+  "proposal_sha256": "405269fa7d31274a1e5c6260bbee3e762c8cf2898a5401a4f71e97e155afa1f0",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "original_pdf_pages": {
+    "18": {
+      "path": "tmp/source-context-refinement-v2/original-018.png",
+      "sha256": "88b3ab834178de8c927768eea395fa4cf1f53711d8d9742cd3768b2a286639ed"
+    },
+    "64": {
+      "path": "tmp/source-context-refinement-v2/original-064.png",
+      "sha256": "65d108debc4a04c9afccf1fb2dd037ea0bad93b776b37e7317a80a2cb918b0df"
+    }
+  },
+  "approved_evidence_ids": [
+    "evidence_3f8de8466049af12783de7d0",
+    "evidence_64de3cc72b85735055b58fec",
+    "evidence_a03ccd44ab2d6b5db6bab123",
+    "evidence_c5bacd3bd5b428c8950b0ce1"
+  ],
+  "new_source_objects": {
+    "evidence_a03ccd44ab2d6b5db6bab123": {
+      "authority": "OEM_MANUAL_AGENT_COMPONENT_CONTEXT_V2",
+      "evidence_id": "evidence_a03ccd44ab2d6b5db6bab123",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "object_type": "list_item",
+      "exact_text": "\uf0a2 Do not use the motorcycle for long duration with the fuel indication in last segment blinking. Refuel at the earliest.",
+      "provenance": [
+        {
+          "page_no": 64,
+          "bbox": {
+            "l": 21.5718,
+            "t": 188.25330000000002,
+            "r": 215.0149999999999,
+            "b": 165.5754187558907,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            120
+          ]
+        }
+      ],
+      "raw_object_sha256": "5c4725940d06833ac275503f832c1280796b8fb0c0a95b6b76df3ad0432773d9",
+      "review_status": "APPROVED_AGENT_EXACT_SOURCE_CONTENT",
+      "requires_visual_verification": false,
+      "index_membership": true
+    },
+    "evidence_c5bacd3bd5b428c8950b0ce1": {
+      "authority": "OEM_MANUAL_AGENT_COMPONENT_CONTEXT_V2",
+      "evidence_id": "evidence_c5bacd3bd5b428c8950b0ce1",
+      "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "object_type": "list_item",
+      "exact_text": "\uf0a2 Failure to do so will cause the motorcycle to run out of fuel and get stranded in addition to causing serious damage to the fuel pump.",
+      "provenance": [
+        {
+          "page_no": 64,
+          "bbox": {
+            "l": 21.571799999999996,
+            "t": 164.25330000000002,
+            "r": 215.03899999999996,
+            "b": 141.5754187558907,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            136
+          ]
+        }
+      ],
+      "raw_object_sha256": "fed28ae492d3fe228ba7ceabc26ba26f8bc269ccd3f9dd77fd1cc458e60ebb4b",
+      "review_status": "APPROVED_AGENT_EXACT_SOURCE_CONTENT",
+      "requires_visual_verification": false,
+      "index_membership": true
+    }
+  },
+  "approved_scopes": [
+    "EXACT_SOURCE_CONTENT_FOR_TWO_PDF64_WARNING_OBJECTS",
+    "EXACT_FOUR_OBJECT_COMPONENT_CONTEXT_REFINEMENT"
+  ],
+  "inspection": {
+    "full_original_pages_visually_inspected": [
+      18,
+      64
+    ],
+    "printed_labels": [
+      16,
+      62
+    ],
+    "manual_and_index_hashes_checked": true,
+    "raw_provenance_and_object_hashes_checked": true,
+    "complete_table_headers_units_rows_and_approximation_preserved": true,
+    "all_three_warning_paraphrases_checked_against_original_pages": true,
+    "fuel_component_separated_from_unrelated_tyre_and_charger_context": true,
+    "raw_plus_minus_glyph_valid_no_index_correction": true
+  },
+  "context_reason": "PDF18 places tyre tables and rim notes in the left column and the fuel specifications with their asterisk approximation in the right. PDF64 has the fuel warning above CHARGER PORT in the left column; USB warnings belong to the charger section. The four exact fuel objects retain both fuel warnings and the approximation. This refinement changes only their source-context closure; all other dependency scopes retain the frozen packages.",
+  "human_signoff": false,
+  "existing_161_approval_changed": false,
+  "parent_text_authorized": false,
+  "new_authored_action_authority": false,
+  "excluded_scopes": [
+    "Whole parent bodies",
+    "Unreviewed tyre source content",
+    "New authored procedures",
+    "General vision",
+    "Public source display",
+    "Answer-quality release",
+    "Deployment"
+  ],
+  "provider_calls": 0,
+  "answer_quality_acceptance": false,
+  "deployment_authorized": false,
+  "supersedes": {
+    "review_path": "reports/build/20261012/source_context_refinement_v2/independent_review.json",
+    "review_sha256": "1a48941c62bc7e614d2b598a87f3a93ec0e02bd270f269c0826eae70d894fd94",
+    "reason": "The v2 draft embedded two descriptors decoded through Windows cp1252. The current scoped review cross-checks exact descriptor contents against original UTF-8 source authority. Raw source/index objects and reviewed page meaning are unchanged."
+  }
+}
