@@ -2,7 +2,7 @@
   "schema_version": "independent-a-exact-output-verifier-engineering-review-v1",
   "decision": "APPROVED_EXACT_ENGINEERING_AUDIT",
   "reviewer_actor": "/root/audit_engineering_review",
-  "reviewed_at_utc": "2026-10-11T08:52:44.847455+00:00",
+  "reviewed_at_utc": "2026-10-11T08:54:18.393310+00:00",
   "human_inspection_claimed": false,
   "authority": "Independent agent review explicitly permitted by TRD_UI_FOLLOWUP_HANDOFF.md; coordinator separately approves fresh budget-bound one-run allocation.",
   "file_sha256": {
@@ -239,7 +239,8 @@
     "reports/architecture_run_38122505406/architecture_comparison.json": "bfd7603c1dccb84d99613c8de647de9475da4f9675d75ccdfb583c915583ac83",
     "reports/architecture_benchmark_review_v4.json": "f94d01bb437ee9737646aa26d54f5725696cafacda26ffe3c6fc99b895f55849",
     "human_review/agent_release_161/root_validation_v3.json": "f460ef690e06ed814b59f8b9449e6953cda5623158b99c9a14cc1c7942403a75",
-    "reports/a_semantic_audit_v1_protocol.json": "84c56bd9dde5353169f1b2882195684df13d1933c3f59ddcc1bc773e5982f66b"
+    "reports/a_semantic_audit_v1_protocol.json": "84c56bd9dde5353169f1b2882195684df13d1933c3f59ddcc1bc773e5982f66b",
+    ".gitattributes": "6435be34ba09bfee2be83b673fd10e9d2e473646a67434b0d139ac6aea65a953"
   },
   "verifier_input_sha256": [
     "ae3982a70536a65afc50baff90faac999ec831fc1ad53e2af4e93520ed609bdf",
@@ -300,7 +301,8 @@
     "PASS: fresh review decision, review/runtime/input hashes, budget/approval hashes and exact allocation are required before provider construction.",
     "PASS: 48 offline strict audit/provider/byte-transport/pacing tests; no real provider calls.",
     "PASS: separate fresh verifier-only protocol matches exact three reconstructed inputs, 400 output tokens, one hosted run, zero retries/fallback and scope limitations.",
-    "PASS: branch/path filtered push runs audit only when head commit carries [run-a-semantic-audit] and run_attempt1; dispatch remains available as an alternative. Exactly one coordinator marker push consumes the allocation; both triggers must not be used."
+    "PASS: branch/path filtered push runs audit only when head commit carries [run-a-semantic-audit] and run_attempt1; dispatch remains available as an alternative. Exactly one coordinator marker push consumes the allocation; both triggers must not be used.",
+    "PASS: single .gitattributes rule .github/workflows/a-semantic-audit.yml -text preserves the exact reviewed tracked workflow bytes through Git; existing source/runtime rules unchanged. .gitattributes itself is now exact-bound; coordinator must verify all235 committed blobs before the one marker push."
   ],
   "findings_resolved": [
     {
@@ -322,6 +324,11 @@
       "severity": "CROSS_PLATFORM_BINDING",
       "finding": "Instruction-only handoff differs by CRLF working bytes versus committed LF.",
       "resolution": "Remove only its runtime file_sha256 gate; retain read provenance and canonical LF digest in instruction_context. All code/source/protocol/payload bindings retained."
+    },
+    {
+      "severity": "CROSS_PLATFORM_BINDING",
+      "finding": "Git normalizes tracked workflow CRLF to LF despite raw-byte approval.",
+      "resolution": "Explicit workflow -text attribute preserves exact audited workflow bytes; bind .gitattributes and require committed batch comparison. No workflow execution logic or request bounds changed."
     }
   ],
   "cases": [
