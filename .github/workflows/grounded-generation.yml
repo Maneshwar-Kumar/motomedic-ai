@@ -16,7 +16,7 @@ jobs:
       OMP_NUM_THREADS: '2'
       TOKENIZERS_PARALLELISM: 'false'
       MOTOMEDIC_TEST_INDEX: build/index
-      MOTOMEDIC_EVAL_MANIFEST: reports/grounded_generation/v2/runtime_manifest.json
+      MOTOMEDIC_EVAL_MANIFEST: reports/grounded_generation/v3/runtime_manifest.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,7 +33,7 @@ jobs:
           github-token: ${{ github.token }}
           path: build/index
       - name: Software boundaries before provider access
-        run: python -m unittest -v cloud.grounded_generation.test_provider cloud.grounded_generation.test_runtime cloud.grounded_generation.test_feedback cloud.grounded_generation.test_context cloud.arm_a.test_composer cloud.arm_a.test_api cloud.arm_a.test_question_wiring cloud.arm_a.test_store test_approved_integration
+        run: python -m unittest -v cloud.grounded_generation.test_provider cloud.grounded_generation.test_runtime cloud.grounded_generation.test_feedback cloud.grounded_generation.test_context cloud.grounded_generation.test_admission cloud.grounded_generation.test_scope cloud.arm_a.test_composer cloud.arm_a.test_api cloud.arm_a.test_question_wiring cloud.arm_a.test_store test_approved_integration
       - name: Frozen held-out real retrieval and Gemma generation
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}

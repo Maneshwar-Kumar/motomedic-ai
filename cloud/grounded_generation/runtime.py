@@ -8,7 +8,7 @@ from dataclasses import dataclass, replace
 import re
 import time
 from controller_contracts import ResponseType, Truth, Outcome
-from constrained_generator import ValidationFailure, envelope
+from constrained_generator import ValidationFailure, citations
 from evidence_registry import content_hash
 from reviewed_controller import ReviewedController, start_session, append_attempt
 from cloud.arm_a.runtime_controls import diagnostic_projection
@@ -24,6 +24,7 @@ class Config:
             'input_tokens':8192,'request_bytes':24000,'output_tokens':1800,
             'context_projection':CONTEXT_VERSION,
             'question_admission':'RETRIEVED_REVIEWED_EVIDENCE_NOT_QUESTION_WORDING',
+            'admission_contract':'SOURCE_AND_MANDATORY_DISPLAY_ONLY_V2',
             'retrieved_scope_limit':4,'retrieved_scope_ranking':'DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1',
             'response_cache':'REVIEWED_EXACT_QUERY_SCOPE_STATE_ONLY_V1',
             'prompt_cache':'CAPABILITY_GATED_VERSIONED_EVIDENCE_PREFIX_V1',
@@ -32,15 +33,36 @@ class Config:
     def lock(self): return content_hash(self.versions())
 
 def scope_payload(controller, session, sid):
-    # Reuse binding/eligibility/dependency/mandatory-role checks. Exact wording
-    # membership is deliberately NOT applied to generated technical claims.
-    allowed=envelope(controller,session,sid,allow_approved_policy_caveats=True)
-    step=controller.registry.step(sid)
-    required=[deepcopy(c) for c in step.claims if c['response_role'] in ('WARNING','PREREQUISITE')
-              or not c['evidence_ids']]
+    r=controller.registry
+    if not r.source_ready() or not r.step_ready(sid): raise ValidationFailure('SOURCE_REVIEW_REQUIRED')
+    if controller.eligible(session,sid).eligibility_status!=Truth.TRUE: raise ValidationFailure('STEP_NOT_ELIGIBLE')
+    step=r.step(sid)
+    categories=r.candidate['dependencies'][sid]['categories']
+    if categories.get('figures') or any(r.evidence[e].get('type') in ('picture','figure','image') for e in step.required_evidence_ids):
+        raise ValidationFailure('FIGURE_SEMANTIC_ADAPTER_UNAVAILABLE')
+    if not step.claims or len(step.claims)>64: raise ValidationFailure('CLAIM_BOUND_OR_EMPTY')
+    if len({c['claim_id'] for c in step.claims})!=len(step.claims): raise ValidationFailure('DUPLICATE_CLAIM_ID')
+    if sum(c['response_role']=='ACTION' for c in step.claims)!=(1 if step.kind=='ACTION' else 0):
+        raise ValidationFailure('ONE_STEP_DISCIPLINE')
+    for claim in step.claims:
+        if claim['response_role'] not in ('FACT','ACTION','WARNING','PREREQUISITE'):
+            raise ValidationFailure('CLAIM_ROLE_REVIEW_REQUIRED')
+        if claim['evidence_ids']:
+            if not set(claim['evidence_ids'])<=set(step.required_evidence_ids): raise ValidationFailure('INVALID_CLAIM_CITATION')
+        elif not r.approved_policy_caveat(sid,claim): raise ValidationFailure('INVALID_POLICY_CAVEAT')
+    required=[deepcopy(c) for c in step.claims if c['response_role'] in ('WARNING','PREREQUISITE') or not c['evidence_ids']]
+    for claim in required:
+        if (type(claim['text']) is not str or not claim['text'] or len(claim['text'])>8000 or '?' in claim['text'] or
+            claim.get('verbatim_warning') or claim.get('presentation_mode')!='REVIEWED_PARAPHRASE'):
+            raise ValidationFailure('MANDATORY_DISPLAY_REVIEW_REQUIRED')
+    for category,role in [('warnings','WARNING'),('prerequisites','PREREQUISITE')]:
+        covered={e for c in required if c['response_role']==role for e in c['evidence_ids']}
+        if not set(categories.get(category,[]))<=covered: raise ValidationFailure('MANDATORY_WARNING_OR_CONDITION_OMITTED')
+    # Authored FACT/ACTION wording and variants are not admission predicates.
+    # Only required server display text retains an exact wording check.
     return {'scope_id':sid,'kind':step.kind,'required_evidence_ids':list(step.required_evidence_ids),
         'permitted_action_evidence_ids':list(step.action_evidence_ids) if step.kind=='ACTION' else [],
-        'required_display':required,'citation_mapping':allowed['citations']}
+        'required_display':required,'citation_mapping':citations(r,step)}
 
 def check_output(draft, scopes, clarifications):
     if type(draft) is not dict or set(draft)!=set(SCHEMA['properties']): raise ValidationFailure('OUTPUT_SCHEMA')
