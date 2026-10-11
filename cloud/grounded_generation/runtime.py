@@ -15,14 +15,18 @@ from cloud.arm_a.runtime_controls import diagnostic_projection
 from cloud.grounded_generation.policy import VERSION, POLICY, POLICY_SHA256, SCHEMA
 from cloud.grounded_generation.provider import GemmaProvider, ProviderFailure, MODEL
 from cloud.grounded_generation.context import project, VERSION as CONTEXT_VERSION
+from cloud.grounded_generation.source_context import context_for, BINDING_SHA256
+from cloud.grounded_generation.fuse_refusal import detect_refusal, SCOPE_SHA as REFUSAL_SHA
+from cloud.grounded_generation.admission import VERSION as ADMISSION_VERSION
 
 @dataclass(frozen=True)
 class Config:
     controls_version: str = VERSION
     def versions(self):
         return {'version':VERSION,'model':MODEL,'policy_sha256':POLICY_SHA256,
-            'input_tokens':8192,'request_bytes':24000,'output_tokens':1800,
-            'context_projection':CONTEXT_VERSION,
+            'input_tokens':8192,'request_bytes':24000,'output_tokens':1800,'provider_allowances':ADMISSION_VERSION,
+            'reserved_tokens_per_minute':10000,
+            'context_projection':CONTEXT_VERSION,'source_context_binding':BINDING_SHA256,'refusal_scope_binding':REFUSAL_SHA,
             'question_admission':'RETRIEVED_REVIEWED_EVIDENCE_NOT_QUESTION_WORDING',
             'admission_contract':'SOURCE_AND_MANDATORY_DISPLAY_ONLY_V2',
             'retrieved_scope_limit':4,'retrieved_scope_ranking':'DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1',
@@ -37,6 +41,7 @@ def scope_payload(controller, session, sid):
     if not r.source_ready() or not r.step_ready(sid): raise ValidationFailure('SOURCE_REVIEW_REQUIRED')
     if controller.eligible(session,sid).eligibility_status!=Truth.TRUE: raise ValidationFailure('STEP_NOT_ELIGIBLE')
     step=r.step(sid)
+    for eid in step.required_evidence_ids: context_for(r,eid)
     categories=r.candidate['dependencies'][sid]['categories']
     if categories.get('figures') or any(r.evidence[e].get('type') in ('picture','figure','image') for e in step.required_evidence_ids):
         raise ValidationFailure('FIGURE_SEMANTIC_ADAPTER_UNAVAILABLE')
@@ -124,6 +129,7 @@ class Composer:
         trace={'runtime_lock':self.config.lock,'generation_calls':0,'verifier_calls':0,
             'response_cache':'MISS','deterministic_checks_prove_semantics':False}
         self.last_trace=trace
+        if hasattr(self.provider,'last_trace'): self.provider.last_trace=None
         try:
             if session.generation_lock!=self.config.lock: raise ValidationFailure('GENERATION_VERSION_RECONFIRM_REQUIRED')
             r=controller.registry
@@ -131,6 +137,7 @@ class Composer:
             required=set(e for s in scopes.values() for e in s['required_evidence_ids'])
             evidence={eid:{'type':r.evidence[eid].get('type'),
                 'source_object':project(r.evidence[eid]['raw_object']),
+                'reviewed_source_context':context_for(r,eid),
                 'provenance':deepcopy(r.evidence[eid]['provenance'])} for eid in sorted(required)}
             stable={'contract':self.config.versions(),'manual_checksum':r.checksum,
                 'index_id':r.index_id,'registry_lock':r.lock,'variant':session.bike_variant,
@@ -196,8 +203,8 @@ class Composer:
             if isinstance(exc,ProviderFailure): trace.update(getattr(self.provider,'last_trace',None) or {})
             code=str(exc)
             trace['failure_code']=code
-            return controller.response('UNSUPPORTED' if code=='SOURCE_REVIEW_REQUIRED' else 'SYSTEM_ERROR',
-                'The source scope needs review.' if code=='SOURCE_REVIEW_REQUIRED' else
+            return controller.response('UNSUPPORTED' if code in ('SOURCE_REVIEW_REQUIRED','SOURCE_CONTEXT_REVIEW_REQUIRED') else 'SYSTEM_ERROR',
+                'The source scope needs review.' if code in ('SOURCE_REVIEW_REQUIRED','SOURCE_CONTEXT_REVIEW_REQUIRED') else
                 'I am temporarily unable to generate a validated answer.',session,reason_codes=(code,))
         except Exception:
             trace['failure_code']='GROUNDED_GENERATION_FAILURE'
@@ -250,6 +257,10 @@ class Questions:
             return session,view,choices
         try:
             if c.scope_status(session)!='CONFIRMED': raise ValidationFailure('SCOPE_NOT_CONFIRMED')
+            refusal=detect_refusal(r,query)
+            if refusal:
+                from cloud.grounded_generation.presentation import refusal_view
+                return session,refusal_view(r,session,c,query,refusal),{}
             bundle=self.retriever.search(query,limit=6,scope=self.scope(),applicability_status='CONFIRMED')
             if bundle.get('manual_checksum')!=r.checksum or bundle.get('index_id')!=r.index_id:
                 raise ValidationFailure('INVALID_BUNDLE_IDENTITY')
@@ -268,6 +279,11 @@ class Questions:
                 admitted=[];clarifications={}
                 for decision in decisions:
                     sid=decision.step_id
+                    try:
+                        for eid in r.step(sid).required_evidence_ids: context_for(r,eid)
+                    except ValidationFailure as exc:
+                        if str(exc)=='SOURCE_CONTEXT_REVIEW_REQUIRED': continue
+                        raise
                     if decision.eligibility_status==Truth.UNKNOWN:
                         for row in decision.condition_results:
                             rule=r.rule(row['rule_id'])

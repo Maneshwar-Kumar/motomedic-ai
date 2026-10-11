@@ -3,6 +3,7 @@ from cloud.arm_a.rider_contract import saved_view as legacy_view
 from cloud.grounded_generation.feedback import issue_choices
 from evidence_registry import content_hash
 from controller_contracts import ResponseType
+from cloud.grounded_generation.source_context import context_for
 
 def saved_view(registry, session, response):
     if response.type!=ResponseType.SUPPORTED or not response.claim_evidence_map:
@@ -19,6 +20,7 @@ def saved_view(registry, session, response):
     for sid in sids:
         if not registry.step_ready(sid): raise ValueError('SCOPE_BINDING')
         step=registry.step(sid)
+        for eid in step.required_evidence_ids: context_for(registry,eid)
         required.update(step.required_evidence_ids)
         mandatory.update({c['claim_id']:c for c in step.claims if c['response_role'] in ('WARNING','PREREQUISITE') or not c['evidence_ids']})
     expected={(eid,p.get('page_no',p.get('pdf_page'))) for eid in required for p in registry.evidence[eid]['provenance']}
@@ -45,3 +47,18 @@ def saved_view(registry, session, response):
         'semantic_support_proven':False,'cited_pages':[dict(c) for c in response.cited_pages],
         'trace_id':response.trace_id}
     return view,private
+
+
+def refusal_view(registry,session,controller,query,refusal):
+    """Fresh source refusal binding; no new positive action or wording authority."""
+    from cloud.grounded_generation.fuse_refusal import detect_refusal
+    if detect_refusal(registry,query)!=refusal: raise ValueError('REFUSAL_PRESENTATION_BINDING')
+    neutral=controller.response('UNSUPPORTED','',session)
+    view,_=legacy_view(registry,session,neutral)
+    view.update(runtime_policy=refusal['runtime_version'],provider_calls=0,choices=[])
+    view['response']={'type':'SAFETY_STOP','natural_language':refusal['natural_language'],
+        'technical_content':True,'release_gate_passed':True,'semantic_support_proven':False,
+        'cited_pages':refusal['citation_mapping'],'trace_id':neutral.trace_id}
+    view['runtime_controls']={'refusal_scope_sha256':refusal['scope_sha256'],
+        'refusal_scope_id':refusal['scope_id'],'permitted_positive_step_ids':[]}
+    return view

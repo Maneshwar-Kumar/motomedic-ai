@@ -7,6 +7,8 @@ No price inference: bound paid token volume; existing project billing guard stay
 from datetime import datetime,timedelta,timezone
 from generation_providers import ProviderFailure
 
+VERSION='provider-reservations-v2-conservative-token-minute'
+
 class ProviderAdmission:
     def __init__(self,client,now=None):
         self.client=client;self.now=now or (lambda:datetime.now(timezone.utc))
@@ -23,10 +25,11 @@ class ProviderAdmission:
             # Maximum 100 attempts/day and 999,200 reserved tokens/day. Gemma
             # account quota and the unchanged project budget can stop earlier.
             if (len(events)>=120 or len(generated)>=100 or sum(e['tokens'] for e in events)+tokens>999200 or
-                sum(e['at']>now-timedelta(minutes=1) for e in generated)>=6):
+                sum(e['at']>now-timedelta(minutes=1) for e in generated)>=6 or
+                sum(e['tokens'] for e in events if e['at']>now-timedelta(minutes=1))+tokens>10000):
                 raise ProviderFailure('PROVIDER_DAILY_OR_RATE_LIMIT')
             tx.set(ref,{'events':events+[{'at':now,'tokens':tokens,'kind':kind}],
-                'expires_at':now+timedelta(hours=24)})
+                'expires_at':now+timedelta(hours=24),'controls_version':VERSION})
         try: reserve(self.client.transaction())
         except ProviderFailure: raise
         except Exception: raise ProviderFailure('PROVIDER_ADMISSION_STORE_UNAVAILABLE') from None

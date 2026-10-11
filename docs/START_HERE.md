@@ -4,7 +4,7 @@ MotoMedic helps a rider take a concise next step supported by the selected Royal
 
 ## Choose what you need
 
-| I want to… | Open | What it contains |
+| I want toâ€¦ | Open | What it contains |
 | --- | --- | --- |
 | Understand the product | [Planning documents](planning/README.md) | Concept, requirements, authoritative TRD and build checklist |
 | See the rider interface | [Rider UI](../rider_ui/README.md) | UI setup, API boundary and design review |
@@ -17,6 +17,8 @@ MotoMedic helps a rider take a concise next step supported by the selected Royal
 | Find a particular root file | [File guide](ROOT_FILE_GUIDE.md) | Every compatibility-root file grouped by purpose |
 
 ## Read the status correctly
+
+The [owner amendment restoring grounded generation](architecture/TRD_V05_GROUNDED_GENERATION_AMENDMENT_20261011.md) supersedes the earlier exact-wording-only method. Consult its runtime and evaluation records for current validation; historical method descriptions remain dated records.
 
 The current architecture is TRD v0.5: versioned Docling ingestion, BGE M3 plus BM25 retrieval, deterministic state/evidence gates, A exact reviewed selection with verified streaming and B short generation with semantic verification. C is excluded from the current UI.
 

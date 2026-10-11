@@ -27,14 +27,22 @@ def main():
     assert sha(dataset_path)==manifest['heldout_sha256']
     r=ApprovedEvidenceRegistry.load(ROOT,ROOT/'build/index')
     retriever=Retriever(ROOT/'build/index',rerank=True)
-    calls=[];last=[0.0]
+    calls=[];last=[0.0];window=[]
     def reserve(tokens,kind):
         assert len(calls)<40 and sum(x['tokens'] for x in calls)+tokens<=399680
         # Evaluation pacing models the documented 6/minute bound. It is not
         # added to production's request path or excluded from timing claims.
         wait=max(0,11-(time.monotonic()-last[0]))
+        while window and window[0][0]<=time.monotonic()-60: window.pop(0)
+        if sum(n for _,n in window)+tokens>10000 and window:
+            wait=max(wait,60-(time.monotonic()-window[0][0]))
         if wait:time.sleep(wait)
+        while window and window[0][0]<=time.monotonic()-60: window.pop(0)
+        while window and sum(n for _,n in window)+tokens>10000:
+            time.sleep(max(0.01,60-(time.monotonic()-window[0][0])))
+            while window and window[0][0]<=time.monotonic()-60: window.pop(0)
         calls.append({'tokens':tokens,'kind':kind});last[0]=time.monotonic()
+        window.append((last[0],tokens))
     outputs=[]
     class RecordingHTTP(HTTP):
         def __call__(self,method,path,body,key):

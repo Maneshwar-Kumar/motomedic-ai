@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from pathlib import Path
 import os
 import unittest
+from unittest.mock import patch
 from cloud.grounded_generation.runtime import scope_payload
 from constrained_generator import ValidationFailure
 from controller_contracts import Truth
@@ -29,6 +30,8 @@ class SyntheticScope:
 
 class Tests(unittest.TestCase):
     def setUp(self):
+        self.context_patch=patch("cloud.grounded_generation.runtime.context_for",return_value={"section_path":["Synthetic source boundary"]})
+        self.context_patch.start();self.addCleanup(self.context_patch.stop)
         self.registry=SyntheticScope();self.truth=Truth.TRUE
         self.controller=SimpleNamespace(registry=self.registry,eligible=lambda *args:SimpleNamespace(eligibility_status=self.truth))
     def call(self):return scope_payload(self.controller,None,'s')

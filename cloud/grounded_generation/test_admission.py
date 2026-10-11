@@ -34,14 +34,20 @@ class Tests(unittest.TestCase):
     def event(self,kind='generation',tokens=9992,age=120):
         return {'at':self.now-timedelta(seconds=age),'tokens':tokens,'kind':kind}
     def test_each_attempt_and_cache_prefix_reserves_tokens_and_ttl(self):
-        self.admit(9000,'generation');self.admit(8000,'prompt_cache')
+        self.admit(9000,'generation');self.now+=timedelta(seconds=61);self.admit(8000,'prompt_cache')
         self.assertEqual(sum(e['tokens'] for e in self.client.body['events']),17000)
         self.assertEqual(self.client.body['expires_at'],self.now+timedelta(hours=24))
     def test_six_per_minute_then_reopens_without_resetting_day(self):
-        for _ in range(6):self.admit(9992,'generation')
+        for _ in range(6):self.admit(1000,'generation')
         with self.assertRaises(ProviderFailure):self.admit(9992,'generation')
         self.now+=timedelta(seconds=61);self.admit(9992,'generation')
         self.assertEqual(len(self.client.body['events']),7)
+    def test_reserved_token_minute_includes_cache_and_reopens(self):
+        self.admit(8000,'generation')
+        with self.assertRaises(ProviderFailure):self.admit(3000,'prompt_cache')
+        self.admit(2000,'prompt_cache')
+        self.now+=timedelta(seconds=61);self.admit(9992,'generation')
+        self.assertEqual(len(self.client.body['events']),3)
     def test_daily_generation_and_all_event_caps(self):
         self.seed([self.event(tokens=1) for _ in range(100)])
         with self.assertRaises(ProviderFailure):self.admit(1,'generation')
@@ -64,7 +70,7 @@ class Tests(unittest.TestCase):
     def test_concurrent_transaction_reservations_do_not_overadmit(self):
         results=[]
         def call():
-            try:self.admit(9992,'generation');results.append('accepted')
+            try:self.admit(1000,'generation');results.append('accepted')
             except ProviderFailure:results.append('limited')
         workers=[threading.Thread(target=call) for _ in range(20)]
         for worker in workers:worker.start()

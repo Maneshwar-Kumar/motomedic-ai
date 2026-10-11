@@ -1,5 +1,7 @@
 # Architecture and implementation
 
+The [grounded-generation amendment](TRD_V05_GROUNDED_GENERATION_AMENDMENT_20261011.md) records the authorized replacement of exact-only serving with evidence-grounded LLM generation. The primary implementation is [cloud/grounded_generation](../../cloud/grounded_generation/runtime.py); historical generators below remain compatibility and experiment code.
+
 ## Retrieval
 
 - [Hosted index decision](HOSTED_INDEX_DECISION.md): selected BGE M3 snapshot and measured alternatives.
