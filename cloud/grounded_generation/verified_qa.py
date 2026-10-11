@@ -14,7 +14,7 @@ from evidence_registry import content_hash
 from cloud.grounded_generation.provider import ProviderFailure,MODEL
 from cloud.arm_a.rider_contract import saved_view as legacy_view
 
-VERSION='open-manual-draft-verify-v8'
+VERSION='open-manual-draft-verify-v9'
 FALLBACK_TEXT='I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
 SYSTEM_ERROR_TEXT='I couldn\u2019t check the answer right now. Please try again shortly.'
 DECISIONS=('RELEASE_COMPLETE','RELEASE_PARTIAL','SHOW_FALLBACK','RELEASE_CLARIFICATION','RELEASE_SAFETY_STOP')
@@ -83,6 +83,14 @@ SHOW_FALLBACK with release_eligible false. No model-written fallback is displaye
 manual evidence can support a corrected response; never seek nonexistent evidence.
 Verification is probabilistic; do not report confidence or silently rewrite.'''
 
+TABLE_PROJECTION_POLICY=''' Source tables retain fields and positional rows:
+each row value corresponds to the field at the same index. A missing map lists
+absent field indexes per row; an explicit null is different from an absent cell.
+Preserve all fields, row values, units, headers and original section context.
+Original object hashes and full provenance remain bound on the server.'''
+DRAFT_POLICY+=TABLE_PROJECTION_POLICY
+VERIFY_POLICY+=TABLE_PROJECTION_POLICY
+
 DRAFT_POLICY_SHA256=hashlib.sha256(DRAFT_POLICY.encode()).hexdigest()
 
 class Config:
@@ -94,10 +102,14 @@ class Config:
         self.provider_contract=deepcopy(provider_contract)
     def versions(self):
         root=Path(__file__).parent
-        code={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ('verified_qa.py','provider.py','claude_provider.py','fallback_provider.py','claude_budget.py','admission.py','source_authority.py','open_questions.py','generic_runtime.py','runtime.py','source_context.py','fuse_refusal.py')}
+        code={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ('verified_qa.py','provider.py','claude_provider.py','fallback_provider.py','claude_budget.py','admission.py','whole_turn_admission.py','source_authority.py','open_questions.py','generic_runtime.py','runtime.py','source_context.py','fuse_refusal.py')}
+        for name in ('serving_retrieval.py','serving_source_authority.py','serving_questions.py','serving_context.py','serving_baseline.py','serving_safety.py'):
+            if (root/name).is_file():code[name]=hashlib.sha256((root/name).read_bytes()).hexdigest()
         project=root.parents[1]
         for name in ('cloud/grounded_generation/delivery.py','cloud/arm_a/app.py','cloud/arm_a/rider_api.py','cloud/arm_a/store.py','cloud/arm_a/rider_contract.py','cloud/arm_a/runtime_controls.py','controller_contracts.py','reviewed_controller.py','approved_registry.py','evidence_registry.py','constrained_generator.py','human_review/agent_release_161/approval_consumer.py'):
             code[name]=hashlib.sha256((project/name).read_bytes()).hexdigest()
+        for name in ('cloud/arm_a/durable_dispatch.py','cloud/serving_artifacts.py'):
+            if (project/name).is_file():code[name]=hashlib.sha256((project/name).read_bytes()).hexdigest()
         return {'version':VERSION,'model':MODEL,'provider_contract':deepcopy(self.provider_contract),'draft_policy_sha256':hashlib.sha256(DRAFT_POLICY.encode()).hexdigest(),'verify_policy_sha256':hashlib.sha256(VERIFY_POLICY.encode()).hexdigest(),'draft_schema_sha256':content_hash(DRAFT_SCHEMA),'verify_schema_sha256':content_hash(VERIFY_SCHEMA),'code_sha256':code,'input_tokens':8192,'request_bytes':65536,'output_tokens':1800,'provider_concurrency':1,'provider_max_attempts':3 if self.provider_contract else 2,'provider_retry_rejections':[429,503],'max_corrections':1,'answer_cache':'DISABLED','provider_prompt_cache':'UNSUPPORTED','semantic_verification':'SEPARATE_EXACT_FINALIZED_RESPONSE','answer_admission':'APPLICABLE_IMMUTABLE_SOURCE_ONLY_NO_ACTION_ALLOWLIST'}
     @property
     def lock(self):return content_hash(self.versions())
@@ -215,6 +227,16 @@ class Composer:
             frozen_history=deepcopy(history);initial_session=content_hash(asdict(session))
             stable={'runtime_contract':{'version':VERSION,'runtime_lock':self.config.lock,'provider_contract':deepcopy(self.config.provider_contract)},'full_evidence_payload_sha256':admitted['payload_sha256'],'source_projection':'lossless-identical-orig-reference-v1','manual_checksum':controller.registry.checksum,'index_id':controller.registry.index_id,'source_authority_lock':admitted['authority_lock'],'evidence':compact_source_evidence(admitted['evidence']),'required_source_display':deepcopy(admitted['required_display']),'source_gaps':deepcopy(admitted['gaps']),'verified_oem_support':deepcopy(controller.registry.source.get('oem_service_route'))}
             dynamic={'question':query,'history':frozen_history};feedback=None
+            # Exact counting of the complete first request precedes capacity
+            # reservation. Remaining calls reserve maximum permitted inputs and
+            # outputs, including one correction and explicit rejection retries.
+            context=getattr(self.provider,'context',None)
+            if callable(context):context(DRAFT_POLICY,stable,dynamic,DRAFT_SCHEMA)
+            begin=getattr(self.provider,'begin_turn',None)
+            if callable(begin):
+                operation=frozen_history.get('operation_id') if type(frozen_history)is dict else None
+                if not operation:raise ProviderFailure('WHOLE_TURN_OPERATION_REQUIRED')
+                trace['whole_turn_reservation']=begin(content_hash({'session_id':session.session_id,'operation_id':operation}))
             for revision in range(2):
                 self._check_source(controller,session,admitted)
                 if progress:progress('drafting')
@@ -271,7 +293,10 @@ class Composer:
         except Exception:
             trace['failure_code']='VERIFIED_QA_SYSTEM_FAILURE'
             return controller.response('SYSTEM_ERROR',SYSTEM_ERROR_TEXT,session,reason_codes=('VERIFIED_QA_SYSTEM_FAILURE',))
-        finally:trace['total_private_pipeline_seconds']=time.monotonic()-started
+        finally:
+            end=getattr(self.provider,'end_turn',None)
+            if callable(end):end()
+            trace['total_private_pipeline_seconds']=time.monotonic()-started
 
 def saved_view(registry,session,response,authority,admitted=None,operation_id=None):
     """Build a buffer only; API must durable-save before releasing any answer bytes."""

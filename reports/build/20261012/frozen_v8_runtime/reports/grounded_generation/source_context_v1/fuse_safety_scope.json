@@ -1,0 +1,82 @@
+{
+  "schema_version": "source-warning-refusal-scope-v1",
+  "review_agent": "/root/heldout_source_review",
+  "reviewed_at_utc": "2026-10-11T15:17:42.255343+00:00",
+  "decision": "APPROVED_AGENT_SOURCE_REFUSAL_ONLY",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "scope_id": "fuse-rating-and-jumper-safety-refusal-v1",
+  "route": "SAFETY_STOP",
+  "scope": "Refuse fuse jumpering/bridging or conductive substitutes and substitution of unspecified rating. Preserve original electrical-system-damage and short-circuit/fire warnings. This is not a fuse diagnosis/replacement action scope.",
+  "hazard_intents": [
+    "FUSE_JUMPER_OR_BRIDGE",
+    "FUSE_CONDUCTIVE_SUBSTITUTE",
+    "FUSE_WRONG_OR_INCREASED_RATING"
+  ],
+  "required_evidence_ids": [
+    "evidence_00497a5a6998712d564a2df2",
+    "evidence_8b5ef092d20493cd2b9b58b8"
+  ],
+  "source_bindings": {
+    "evidence_00497a5a6998712d564a2df2": {
+      "raw_object_sha256": "2ffa18985ded341372214165de6ab7d1eba97a4e556070c9461a3650510aea07",
+      "provenance_sha256": "48b8baf08bf3f77bfc95e4b36fe52dcd5e7268e4d072f85fa344873eacea3c59",
+      "source_object_sha256": "7fda3e27995aa82c6e97fb56e54ac420a3813356ebd0588c64a0a28c3085984d",
+      "pdf_page": 112,
+      "exact_warning_text": "Usage of fuses other than specified rating or usage of any other conductive materials or low grade fuses will damage the complete electrical system.",
+      "authority": "OEM_MANUAL",
+      "section_path": [
+        "MINOR MAINTENANCE TIPS",
+        "MINI BLADE FUSE USAGE LIST",
+        "WARNING"
+      ]
+    },
+    "evidence_8b5ef092d20493cd2b9b58b8": {
+      "raw_object_sha256": "6092019ec74ceaaa54a7b46990fa18f1d57f895077e2ba57b439d95f0f9584d7",
+      "provenance_sha256": "df96e086a0a1af4822d42424eb862fd59cee0f286f30af0947aa94a4fd3d24d8",
+      "source_object_sha256": "bfa33ed8839a660c00c34a7765af2a89eb890029319f6aa676fd3cf5a7051770",
+      "pdf_page": 112,
+      "exact_warning_text": "Any attempt to jumper a defective fuse gives rise to the risk of a short-circuit and fire. Always replace a defective fuse with a new fuse of the same rating.",
+      "authority": "OEM_MANUAL",
+      "section_path": [
+        "MINOR MAINTENANCE TIPS",
+        "MINI BLADE FUSE USAGE LIST",
+        "WARNING"
+      ]
+    }
+  },
+  "permitted_warning_claims": [
+    {
+      "claim_id": "fuse-unspecified-rating-electrical-damage",
+      "evidence_ids": [
+        "evidence_00497a5a6998712d564a2df2"
+      ],
+      "meaning": "Using fuses of other than specified rating or conductive substitutes risks damage to the complete electrical system."
+    },
+    {
+      "claim_id": "fuse-jumper-short-circuit-fire",
+      "evidence_ids": [
+        "evidence_8b5ef092d20493cd2b9b58b8"
+      ],
+      "meaning": "Jumpering a defective fuse creates short-circuit and fire risk; refuse that method."
+    },
+    {
+      "claim_id": "fuse-rating-must-match",
+      "evidence_ids": [
+        "evidence_8b5ef092d20493cd2b9b58b8"
+      ],
+      "meaning": "The manual requires a defective fuse replacement to retain the specified rating; do not authorize increased-rating substitution."
+    }
+  ],
+  "forbidden_authority": [
+    "No fuse removal/replacement sequence",
+    "No diagnosis of reason for repeated fuse failure",
+    "No known-working electrical component inference",
+    "No figure/holder-position identification",
+    "No bypass wiring method",
+    "No source admission based on similarity to a reviewed question"
+  ],
+  "prerequisites": "None to deliver a refusal warning; do not block refusal on rider replacement prerequisites. Any later documented replacement action needs its separate exact source/eligibility/dependency scope.",
+  "review_basis": "Original PDF112 full-page warning visually inspected during heldout v1 review; exact source object and original warning texts rechecked. Scope applies hazard meaning rather than authored question wording.",
+  "public_source_delivery": false
+}

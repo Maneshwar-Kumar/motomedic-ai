@@ -32,9 +32,11 @@ Timeboxes are estimates, not a promise of a deployable agent in two hours. This 
 
 ## Implementation sequence after the reset
 
+The 12 October v9.1 candidate implements the code for steps 6–9, freezes 341 direct inputs and completes hosted backend/UI image builds with exact provenance. Hosted CI passed 198 provider-free tests. See the [build receipt](reports/build/20261012/README.md) and [current status](docs/STATUS.md). The existing machine GCP identity and immutable snapshot generation are verified. The step exits below stay open where hosted loading, rollback or live quality/operations evidence is still required. Synthetic checks do not close those gates; no deployment or provider-spending permission is inferred.
+
 ### 6. Establish one immutable serving baseline
 
-- [ ] **6a — Source and index:** validate manual checksum, scoped approvals, parser/chunk/index versions, evidence IDs and mandatory dependencies. Use durable GCS artifacts with generation/hash checks rather than expiring Actions artifacts. Exit: deterministic loading and an explicit review-gap inventory.
+- [x] **6a — Source and index:** validate manual checksum, scoped approvals, parser/chunk/index versions, evidence IDs and mandatory dependencies. Use durable GCS artifacts with generation/hash checks rather than expiring Actions artifacts. Exit recorded in [hosted source validation](reports/build/20261012/hosted_source_validation_v9_1.json): exact generation/SHA, all 212 original index hashes, original scoped source reload and 36 synthetic checks. Page 103 and unapproved context gaps remain explicitly flagged maintainer work.
 - [ ] **6b — Runtime and CI:** select one serving package/version manifest, add provider-free PR checks, bind container inputs and image digests to the release, and document exact rollback. Exit: reproducible build-input receipt and CI rejection of altered bindings.
 
 **Concurrency:** 6a and 6b run together after step 5 and join before step 7. Reuse unchanged immutable artifacts; do not reparse or re-embed per rider request.

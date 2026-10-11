@@ -1,8 +1,9 @@
-"""Managed transactional sessions and idempotent initial-answer operations."""
+"""Owned durable operations, bounded leases and immutable session transactions."""
 from dataclasses import asdict
 from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+from evidence_registry import content_hash
 from session_store import decode, SessionConflict
 
 
@@ -12,6 +13,56 @@ class Limited(Exception):
 
 class OperationConflict(Exception):
     pass
+
+
+OPERATION_SECONDS = 1200
+LEASE_SECONDS = 1200
+PRIVATE_STAGES = {'retrieving', 'drafting', 'verifying'}
+
+
+def _source_scope_context(view, key):
+    """Private hashes for a separately approved exact safety buffer."""
+    from cloud.grounded_generation.serving_safety import METHOD
+    from cloud.grounded_generation.delivery import response_hash
+    body = view.get('response', {})
+    verified = view.get('verified_delivery', {})
+    if (verified.get('verification_method') != METHOD and
+            body.get('verification_method') != METHOD and 'source_scope_verification' not in view):
+        return None
+    proof = view.get('source_scope_verification', {})
+    if (verified.get('verification_method') != METHOD or body.get('verification_method') != METHOD or
+            proof.get('verification_method') != METHOD or body.get('type') != 'SAFETY_STOP' or
+            body.get('technical_content') is not True or body.get('release_gate_passed') is not True or
+            body.get('source_scope_verification_passed') is not True or
+            body.get('semantic_verification_passed') is not False or body.get('semantic_support_proven') is not False or
+            not key or proof.get('operation_id') != key or verified.get('operation_id') != key or
+            verified.get('binding_sha256') != content_hash(proof) or
+            verified.get('presentation_sha256') != response_hash(view) or
+            verified.get('evidence_payload_sha256') != proof.get('evidence_payload_sha256') or
+            content_hash(proof.get('session_snapshot')) != proof.get('session_sha256')):
+        raise OperationConflict()
+    fields = ('question_sha256', 'history_sha256', 'session_sha256')
+    if any(type(proof.get(field)) is not str or len(proof[field]) != 64 or
+            any(c not in '0123456789abcdef' for c in proof[field]) for field in fields):
+        raise OperationConflict()
+    payload_hash = verified.get('evidence_payload_sha256')
+    if type(payload_hash) is not str or len(payload_hash) != 64 or any(c not in '0123456789abcdef' for c in payload_hash):
+        raise OperationConflict()
+    return {**{field: proof[field] for field in fields}, 'operation_id': key,
+            'verification_method': METHOD, 'verification_binding_sha256': verified['binding_sha256'],
+            'evidence_payload_sha256': verified['evidence_payload_sha256'],
+            'response_sha256': response_hash(view)}
+
+
+def _check_saved_context(body, key):
+    if body.get('view') is None:
+        return
+    expected = _source_scope_context(body['view'], key)
+    if body.get('accepted_source_scope_context') != expected:
+        raise OperationConflict()
+    if expected is not None and body.get('snapshot') is not None:
+        if content_hash(json.loads(body['snapshot'])) != expected['session_sha256']:
+            raise OperationConflict()
 
 
 class FirestoreState:
@@ -24,7 +75,41 @@ class FirestoreState:
         return self.client.collection('arm_a_operations').document(
             hashlib.sha256((self.owner+':'+key).encode()).hexdigest())
 
-    def begin(self, key, payload_hash):
+    def _session_operation(self, session_id):
+        return self.client.collection('arm_a_session_operations').document(session_id)
+
+    def _reconcile(self, tx, ref, body, now):
+        """An expired worker never resumes inference, even before paid-call proof.
+
+        We cannot distinguish a crash before transmission from a crash after
+        transmission. Releasing a lease therefore cannot authorize paid replay.
+        Reservations remain the provider ledger's reconciliation responsibility.
+        """
+        if body['state'] not in ('QUEUED', 'RUNNING'):
+            return body
+        deadline = body.get('deadline_at')
+        lease = body.get('lease_expires_at')
+        code = None
+        if deadline and deadline <= now:
+            code = 'OPERATION_DEADLINE_EXCEEDED'
+        elif body['state'] == 'RUNNING' and lease and lease <= now:
+            code = ('PROVIDER_RESULT_UNCERTAIN' if body.get('provider_may_have_run')
+                    else 'WORKER_LEASE_EXPIRED')
+        if code:
+            update = {'state': 'FAILED', 'error': code, 'http_status': 503,
+                      'completed_at': now, 'work': None, 'operation_terminal': True}
+            tx.update(ref, update)
+            self._release_session(tx, body)
+            body = {**body, **update}
+        return body
+
+    def _release_session(self, tx, body):
+        if body.get('session_id'):
+            tx.set(self._session_operation(body['session_id']), {
+                'owner': self.owner, 'operation_key': body.get('operation_key'),
+                'active': False, 'expires_at': body['expires_at']})
+
+    def begin(self, key, payload_hash, work=None):
         from google.cloud import firestore
         op = self._operation(key)
         usage = self.client.collection('arm_a_usage').document(self.owner)
@@ -39,7 +124,28 @@ class FirestoreState:
                     raise OperationConflict()
                 if body['expires_at'] <= now:
                     raise OperationConflict()
-                return body
+                if body['state'] == 'COMPLETE':
+                    _check_saved_context(body, key)
+                return self._reconcile(tx, op, body, now)
+            session_lock = None
+            abandoned = None
+            if work is not None:
+                session_id = work['session_id']
+                session_lock = self._session_operation(session_id)
+                active = session_lock.get(transaction=tx)
+                current = self.client.collection('arm_a_sessions').document(session_id).get(transaction=tx)
+                if active.exists and active.to_dict().get('active') and active.to_dict()['deadline_at'] > now:
+                    raise SessionConflict('A session turn is already processing')
+                if active.exists and active.to_dict().get('active'):
+                    abandoned_ref = self._operation(active.to_dict()['operation_key'])
+                    abandoned_snap = abandoned_ref.get(transaction=tx)
+                    if abandoned_snap.exists:
+                        abandoned = (abandoned_ref, abandoned_snap.to_dict())
+                saved = current.to_dict() if current.exists else None
+                if (saved['version'] if saved else None) != work['expected_version']:
+                    raise SessionConflict('Concurrent or stale session update')
+                if saved and (saved['owner'] != self.owner or saved['expires_at'] <= now or saved['idle_expires_at'] <= now):
+                    raise SessionConflict('Session ownership or expiry')
             own = usage.get(transaction=tx)
             global_usage = shared.get(transaction=tx)
             buckets = [(usage, own, 6, 30), (shared, global_usage, 60, 250)]
@@ -55,11 +161,97 @@ class FirestoreState:
                 pending.append((ref, times+[now]))
             body = {'owner':self.owner, 'payload_hash':payload_hash, 'state':'RUNNING',
                     'created_at':now, 'expires_at':now+timedelta(hours=24)}
+            if work is not None:
+                body.update(state='QUEUED', operation_key=key, work=work,
+                    session_id=work['session_id'], dispatch_state='PENDING',
+                    work_sha256=hashlib.sha256(json.dumps(work, sort_keys=True,
+                        separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()).hexdigest(),
+                    deadline_at=now+timedelta(seconds=OPERATION_SECONDS),
+                    provider_may_have_run=False, progress=[])
+            if abandoned:
+                self._reconcile(tx, abandoned[0], abandoned[1], now)
             tx.create(op, body)
+            if session_lock:
+                tx.set(session_lock, {'owner': self.owner, 'operation_key': key,
+                    'active': True, 'deadline_at': body['deadline_at'], 'expires_at': body['expires_at']})
             for ref, times in pending:
                 tx.set(ref, {'turns':times, 'expires_at':now+timedelta(hours=24)})
             return None
         return reserve(self.client.transaction())
+
+    def mark_dispatched(self, key):
+        from google.cloud import firestore
+        ref = self._operation(key)
+        @firestore.transactional
+        def mark(tx):
+            snap = ref.get(transaction=tx)
+            if not snap.exists or snap.to_dict()['owner'] != self.owner:
+                raise OperationConflict()
+            if snap.to_dict()['state'] == 'QUEUED':
+                tx.update(ref, {'dispatch_state': 'DISPATCHED'})
+        return mark(self.client.transaction())
+
+    def claim_operation(self, key, payload_hash, lease_token):
+        """At most one worker may execute a durable operation."""
+        from google.cloud import firestore
+        ref = self._operation(key)
+        @firestore.transactional
+        def claim(tx):
+            now = self.now()
+            snap = ref.get(transaction=tx)
+            if not snap.exists:
+                raise KeyError(key)
+            body = snap.to_dict()
+            if body['owner'] != self.owner or body['payload_hash'] != payload_hash or body['expires_at'] <= now:
+                raise OperationConflict()
+            # Read all records before reconciliation/lease writes (Firestore).
+            lock = self._session_operation(body['session_id']).get(transaction=tx)
+            saved = self.client.collection('arm_a_sessions').document(body['session_id']).get(transaction=tx)
+            body = self._reconcile(tx, ref, body, now)
+            if body['state'] != 'QUEUED':
+                return None
+            work = body['work']
+            digest = hashlib.sha256(json.dumps(work, sort_keys=True, separators=(',', ':'),
+                ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+            head = saved.to_dict() if saved.exists else None
+            if (digest != body['work_sha256'] or not lock.exists or
+                    lock.to_dict().get('operation_key') != key or
+                    lock.to_dict().get('owner') != self.owner or not lock.to_dict().get('active') or
+                    (head['version'] if head else None) != work['expected_version'] or
+                    (head and (head['owner'] != self.owner or head['expires_at'] <= now or head['idle_expires_at'] <= now))):
+                raise OperationConflict()
+            tx.update(ref, {'state': 'RUNNING', 'started_at': now,
+                'lease_token': lease_token, 'lease_expires_at': min(body['deadline_at'], now+timedelta(seconds=LEASE_SECONDS))})
+            return work
+        return claim(self.client.transaction())
+
+    def progress_operation(self, key, lease_token, stage):
+        if stage not in PRIVATE_STAGES:
+            raise ValueError('INVALID_PRIVATE_PROGRESS_STAGE')
+        from google.cloud import firestore
+        ref = self._operation(key)
+        @firestore.transactional
+        def progress(tx):
+            now = self.now()
+            snap = ref.get(transaction=tx)
+            body = snap.to_dict() if snap.exists else {}
+            self._require_lease(body, lease_token, now)
+            events = body.get('progress', [])
+            if len(events) >= 8:
+                raise OperationConflict()
+            # The pre-provider drafting receipt is durable before transport.
+            tx.update(ref, {'progress': events+[{'stage': stage, 'sequence': len(events)+1}],
+                'provider_may_have_run': body.get('provider_may_have_run', False) or stage in ('drafting','verifying'),
+                'lease_expires_at': min(body['deadline_at'], now+timedelta(seconds=LEASE_SECONDS))})
+        return progress(self.client.transaction())
+
+    def _require_lease(self, body, lease_token, now):
+        if (body.get('owner') != self.owner or body.get('state') != 'RUNNING' or
+                body.get('expires_at', now) <= now):
+            raise OperationConflict()
+        if body.get('work_sha256') and (lease_token != body.get('lease_token') or
+                body.get('lease_expires_at', now) <= now or body['deadline_at'] <= now):
+            raise OperationConflict()
 
     def finish(self, key, view):
         from google.cloud import firestore
@@ -70,18 +262,29 @@ class FirestoreState:
             if not snap.exists or snap.to_dict()['owner'] != self.owner:
                 raise OperationConflict()
             if snap.to_dict()['state'] == 'COMPLETE':
+                _check_saved_context(snap.to_dict(), key)
                 return snap.to_dict()['view']
+            self._require_lease(snap.to_dict(), None, self.now())
             tx.update(ref, {'state':'COMPLETE', 'view':view})
             return view
         return commit(self.client.transaction())
 
     def operation(self, key):
-        snap = self._operation(key).get()
-        if not snap.exists or snap.to_dict()['expires_at'] <= self.now():
-            raise KeyError(key)
-        return snap.to_dict()
+        from google.cloud import firestore
+        ref = self._operation(key)
+        @firestore.transactional
+        def read(tx):
+            snap = ref.get(transaction=tx)
+            now = self.now()
+            if not snap.exists or snap.to_dict()['expires_at'] <= now or snap.to_dict()['owner'] != self.owner:
+                raise KeyError(key)
+            body = self._reconcile(tx, ref, snap.to_dict(), now)
+            if body['state'] == 'COMPLETE':
+                _check_saved_context(body, key)
+            return body
+        return read(self.client.transaction())
 
-    def fail_operation(self, key, code, status):
+    def fail_operation(self, key, code, status, lease_token=None):
         from google.cloud import firestore
         ref=self._operation(key)
         @firestore.transactional
@@ -91,7 +294,14 @@ class FirestoreState:
                 raise OperationConflict()
             if snap.to_dict()['state']=='COMPLETE':
                 return False
-            tx.update(ref,{'state':'FAILED','error':code,'http_status':status})
+            body = snap.to_dict()
+            if body['state'] == 'FAILED':
+                return False
+            if body.get('work_sha256') and body['state'] == 'RUNNING' and body.get('lease_token') != lease_token:
+                raise OperationConflict()
+            tx.update(ref,{'state':'FAILED','error':code,'http_status':status,
+                'completed_at':self.now(),'work':None,'operation_terminal':True})
+            self._release_session(tx, body)
             return True
         return fail(self.client.transaction())
 
@@ -110,9 +320,10 @@ class FirestoreState:
         body = self.client.collection('arm_a_sessions').document(session_id).get().to_dict()
         if body['owner'] != self.owner or body['expires_at'] <= self.now() or body['idle_expires_at'] <= self.now():
             raise KeyError(session_id)
+        _check_saved_context(body, body.get('view', {}).get('delivery', {}).get('operation_id'))
         return body
 
-    def commit_answer(self, key, session, view, choices, expected_version=None, query=None):
+    def commit_answer(self, key, session, view, choices, expected_version=None, query=None, lease_token=None):
         """Atomically commit session, immutable snapshot and completed operation.
 
         No technical stream is constructed before this transaction succeeds.
@@ -128,7 +339,29 @@ class FirestoreState:
             if not op.exists or op.to_dict()['owner'] != self.owner or op.to_dict()['expires_at'] <= now:
                 raise OperationConflict()
             if op.to_dict()['state'] == 'COMPLETE':
+                _check_saved_context(op.to_dict(), key)
                 return op.to_dict()['view']
+            self._require_lease(op.to_dict(), lease_token, now)
+            operation_body = op.to_dict()
+            source_context = _source_scope_context(view, key)
+            if operation_body.get('work_sha256'):
+                from cloud.grounded_generation.delivery import response_hash
+                work = operation_body['work']
+                if (content_hash(work) != operation_body['work_sha256'] or query != work['query'] or
+                        session.session_id != operation_body['session_id'] or
+                        expected_version != operation_body['work']['expected_version'] or
+                        view.get('session_id') != session.session_id or view.get('version') != session.version or
+                        view.get('delivery', {}).get('operation_id') != key or
+                        view['delivery'].get('runtime_lock') != session.generation_lock or
+                        view['delivery'].get('response_sha256') != response_hash(view)):
+                    raise OperationConflict()
+                if source_context is not None and (
+                        source_context['question_sha256'] != content_hash(work['query']) or
+                        source_context['history_sha256'] != content_hash(work['history']) or
+                        source_context['session_sha256'] != content_hash(asdict(session))):
+                    raise OperationConflict()
+            elif source_context is not None:
+                raise OperationConflict()
             old = old_head.to_dict() if old_head.exists else None
             if (old['version'] if old else None) != expected_version:
                 raise SessionConflict('Concurrent or stale session update')
@@ -153,10 +386,14 @@ class FirestoreState:
                         ([{'question':query, 'response':view['response']['natural_language'],
                            'route':view['response']['type']}] if query is not None else [])),
                     'expires_at':expiry, 'idle_expires_at':min(expiry, now+timedelta(minutes=30))}
+            context_record = ({'accepted_source_scope_context': source_context}
+                              if source_context is not None else {})
+            body.update(context_record)
             tx.set(head, body)
             tx.create(head.collection('arm_a_session_versions').document(str(session.version)),
-                      {'snapshot':snapshot, 'view':view, 'expires_at':expiry})
-            tx.update(operation, {'state':'COMPLETE', 'view':view})
+                      {'snapshot':snapshot, 'view':view, 'expires_at':expiry, **context_record})
+            tx.update(operation, {'state':'COMPLETE', 'view':view, 'completed_at':now, 'work':None, **context_record})
+            self._release_session(tx, op.to_dict())
             return view
         return commit(self.client.transaction())
 

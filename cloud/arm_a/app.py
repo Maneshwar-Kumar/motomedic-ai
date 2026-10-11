@@ -114,11 +114,13 @@ def create_app(registry, retriever, state_factory, cases):
 
     @app.get('/healthz')
     def health():
-        return jsonify({'ready':True, 'architecture':app.config.get('SERVING_ARCHITECTURE','A_DETERMINISTIC_CANONICAL'),
+        ready = not app.config.get('GROUNDED_PRIMARY') or app.config.get('DURABLE_DISPATCH_CONFIGURED') is True
+        return jsonify({'ready':ready, 'architecture':app.config.get('SERVING_ARCHITECTURE','A_DETERMINISTIC_CANONICAL'),
             'manual_checksum':registry.checksum, 'index_id':registry.index_id,
             'answer_provider':app.config.get('ANSWER_PROVIDER'), 'benchmark_pacing':False,
             'streaming':('DRAFT_VERIFY_STREAM' if app.config.get('GROUNDED_PRIMARY') else 'VERIFIED_COMPLETE_UNIT_SSE'),
-            'reranking':'conditional-rerank-v1', 'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)})
+            'durable_dispatch_configured': app.config.get('DURABLE_DISPATCH_CONFIGURED', False),
+            'reranking':'conditional-rerank-v1', 'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)}), (200 if ready else 503)
 
     @app.get('/v1/initial-catalogue')
     def catalogue():
@@ -231,33 +233,48 @@ def load_production():
     for name, sha in lock['file_sha256'].items():
         if hashlib.sha256((ROOT/name).read_bytes()).hexdigest() != sha:
             raise RuntimeError('Production runtime binding mismatch')
+    if (lock.get('schema_version') != 'motomedic-serving-release-v9' or
+            lock.get('primary_model') != 'gemma-4-26b-a4b-it' or
+            lock.get('answer_cache_enabled') is not False):
+        raise RuntimeError('Production serving policy mismatch')
+    fallback_enabled = os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true'
+    if fallback_enabled and lock.get('fallback_enabled') is not True:
+        raise RuntimeError('Claude fallback serving activation is not authorized by the exact release')
     from google.cloud import firestore
-    index = ROOT/'build/index'
+    from cloud.serving_artifacts import load_index
+    index = load_index(lock, ROOT/'build/serving-artifacts')
     registry = ApprovedEvidenceRegistry.load(ROOT, index)
     # Load both pinned query and cross-encoder models once per hosted worker.
-    from cloud.arm_a.runtime_controls import GuardedRetriever, TokenBudget, VERSION
+    from cloud.grounded_generation.serving_retrieval import GuardedRetriever
+    from cloud.arm_a.runtime_controls import TokenBudget, VERSION
     from cloud.grounded_generation.verified_qa import DRAFT_POLICY as POLICY, DRAFT_POLICY_SHA256 as POLICY_SHA256
-    retriever = GuardedRetriever(index, rerank=True)
+    from sentence_transformers import SentenceTransformer, CrossEncoder
+    packaged = ROOT/'build/index'
+    if not (packaged/'embedding_model').is_dir() or not (packaged/'reranker_model').is_dir():
+        raise RuntimeError('Pinned query model assets are unavailable')
+    inherited_manifest = json.loads((packaged/'manifest.json').read_text(encoding='utf-8'))
+    if inherited_manifest['embedding'] != lock['index']['embedding']:
+        raise RuntimeError('Inherited query model identity differs from the selected index')
+    embedding = SentenceTransformer(str(packaged/'embedding_model'), device='cpu', local_files_only=True)
+    reranker = CrossEncoder(str(packaged/'reranker_model'), device='cpu', local_files_only=True)
+    retriever = GuardedRetriever(index, rerank=True, embedding_model=embedding, cross_encoder=reranker)
     budget = TokenBudget(retriever.model, retriever.manifest['embedding'],
         POLICY, POLICY_SHA256)
     retriever.install_controls(budget)
     # The owner clarified that A must retain an answer LLM. The historical
     # exact-wording composer is kept only for old regression fixtures.
     from cloud.grounded_generation.verified_qa import Composer
-    from cloud.grounded_generation.open_questions import Questions
+    from cloud.grounded_generation.serving_questions import Questions
     from cloud.grounded_generation.provider import GemmaProvider
-    from cloud.grounded_generation.admission import ProviderAdmission
-    cases = json.loads((ROOT/'reports/ab30_v1_cases.json').read_text(encoding='utf-8'))
-    if isinstance(cases, dict):
-        cases = cases['cases']
+    from cloud.grounded_generation.whole_turn_admission import WholeTurnAdmission
     client = firestore.Client(project='motomedic-ai-20261009')
     # Prior exact-model/account probes returned 404. An environment switch is
     # not evidence of cache support; fresh capability review is required.
-    reserve_provider = ProviderAdmission(client)
+    reserve_provider = WholeTurnAdmission(client)
     answer_provider = GemmaProvider(reserve_provider,cache_capability='unsupported')
     # Preparation only: deployment and secret access are separate release scopes.
     # Disabled by default; a quota/schema/source failure never selects this fallback.
-    if os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true':
+    if fallback_enabled:
         from cloud.grounded_generation.claude_provider import ClaudeProvider
         from cloud.grounded_generation.claude_budget import ClaudeBudget
         from cloud.grounded_generation.fallback_provider import FallbackProvider
@@ -270,11 +287,15 @@ def load_production():
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
         ANSWER_PROVIDER=('gemma-4-26b-a4b-it -> claude-haiku-5-5'
-            if os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true' else 'gemma-4-26b-a4b-it'))
+            if fallback_enabled else 'gemma-4-26b-a4b-it'))
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
     if secret:
         from cloud.arm_a.rider_api import install
+        from cloud.arm_a.durable_dispatch import configured_dispatcher
+        dispatcher = configured_dispatcher()
+        app.config['DURABLE_DISPATCH_CONFIGURED'] = dispatcher is not None
         install(app, Questions(registry,retriever,composer=controlled_composer), state_factory, secret,
-            network_required=os.environ.get('MOTOMEDIC_PUBLIC_NETWORK_REQUIRED') == 'true')
+            network_required=os.environ.get('MOTOMEDIC_PUBLIC_NETWORK_REQUIRED') == 'true',
+            dispatcher=dispatcher)
     return app

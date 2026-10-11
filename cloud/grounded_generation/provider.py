@@ -31,7 +31,7 @@ def unique(pairs):
 
 class HTTP:
     def __call__(self, method, path, body, key):
-        raw = None if body is None else json.dumps(body, ensure_ascii=False, allow_nan=False).encode()
+        raw = None if body is None else json.dumps(body, ensure_ascii=False, allow_nan=False,separators=(',',':')).encode()
         request = Request('https://generativelanguage.googleapis.com/v1beta/'+path,
             data=raw, method=method, headers={'Content-Type':'application/json','x-goog-api-key':key})
         try:
@@ -59,20 +59,31 @@ class GemmaProvider:
         self.last_trace=None
 
     def count(self, body):
+        if not self.key: raise ProviderFailure('PROVIDER_UNCONFIGURED')
         result=self.transport('POST','models/'+MODEL+':countTokens',
             {'generateContentRequest':{'model':'models/'+MODEL,**body}},self.key)
         n=result.get('totalTokens')
         if type(n) is not int or n<1: raise ProviderFailure('EXACT_TOKEN_COUNT_UNAVAILABLE')
         return n
 
+    def begin_turn(self, operation_id, *, availability_fallback=False):
+        begin=getattr(self.reserve,'begin_turn',None)
+        if not callable(begin):
+            raise ProviderFailure('WHOLE_TURN_ADMISSION_UNCONFIGURED')
+        return begin(operation_id,attempts=12 if availability_fallback else 8)
+
+    def end_turn(self):
+        end=getattr(self.reserve,'end_turn',None)
+        if callable(end):end()
+
     def context(self,policy,evidence,dynamic,schema):
         body={'systemInstruction':{'parts':[{'text':policy}]},
-            'contents':[{'role':'user','parts':[{'text':json.dumps(evidence,sort_keys=True,ensure_ascii=False)}]},
-                {'role':'user','parts':[{'text':json.dumps(dynamic,sort_keys=True,ensure_ascii=False)}]}],
+            'contents':[{'role':'user','parts':[{'text':json.dumps(evidence,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]},
+                {'role':'user','parts':[{'text':json.dumps(dynamic,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]}],
             'generationConfig':{'maxOutputTokens':OUTPUT_TOKENS,'temperature':0,
                 'responseMimeType':'application/json','responseJsonSchema':deepcopy(schema),
                 'thinkingConfig':{'thinkingLevel':'minimal'}}}
-        if len(json.dumps(body,ensure_ascii=False).encode())>REQUEST_BYTES:
+        if len(json.dumps(body,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode())>REQUEST_BYTES:
             raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
         count=self.count(body)
         if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')

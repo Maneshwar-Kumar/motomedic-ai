@@ -7,7 +7,7 @@ from urllib.error import HTTPError, URLError
 from rider_ui.client import APIError, RiderAPI, validate_view, MANUAL_SHA, INDEX_ID
 
 def view():
-    return {'runtime_policy':'open-manual-draft-verify-v8','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
+    return {'runtime_policy':'open-manual-draft-verify-v9','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
             'session_id':'a'*32,'version':1,'choices':[],'history':[],
             'response':{'type':'SUPPORTED','technical_content':True,'release_gate_passed':True,
                         'natural_language':'Engineering fixture only.',

@@ -32,7 +32,7 @@ Feedback request: expected_version, choice_id, cache_mode=bypass. **No client-su
 
 ## Saved view
 
-Required top-level fields: schema_version, manual_checksum, index_id, session_id (opaque identifier), version (nonnegative integer), response. Production additionally requires runtime_policy=`open-manual-draft-verify-v8` on every route, including neutral fallback/errors and JSON recovery; older or missing policy receipts are rejected.
+Required top-level fields: schema_version, manual_checksum, index_id, session_id (opaque identifier), version (nonnegative integer), response. Production additionally requires runtime_policy=`open-manual-draft-verify-v9` on every route, including neutral fallback/errors and JSON recovery; older or missing policy receipts are rejected.
 
 Response fields:
 - type: exactly SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP or SYSTEM_ERROR.
@@ -51,19 +51,21 @@ No evidence_uri, source text/excerpt, crops, raw source objects, provider bodies
 
 ## Progress and accepted-answer delivery
 
-Mutations request `Accept: text/event-stream`. All current v8 events bind to the mutation's 32-hex operation ID:
+Mutations request `Accept: text/event-stream`. Current v9 operations are committed to Firestore, dispatched as named Cloud Tasks and processed on an authenticated worker request. SSE observes durable progress; closing the browser stream does not terminate the task. Every event binds to the operation's 32-hex ID and consecutive integer sequence, starting at one:
 
 | Event | Payload and rule |
 | --- | --- |
-| progress | Exactly operation_id and stage. Stage is retrieving, drafting, verifying or displaying. Constant client labels are shown only when the backend emits a real stage. |
-| verified_block | operation_id, response_sha256 and the complete saved view. The persisted delivery binding, selected source, response hash and release gate must validate before any answer callback. |
-| answer_chunk | operation_id, response_sha256, offset and text. Offset counts Python Unicode codepoints; text must be the exact next slice of the buffered accepted response. |
-| complete | The identical saved view. Its full text must equal concatenated chunks and the accepted response hash. |
+| progress | operation_id, sequence and stage. Stage is retrieving, drafting, verifying or displaying. Constant client labels are shown only when the backend records a real stage. |
+| verified_block | operation_id, sequence, response_sha256 and the complete saved view. The persisted delivery binding, selected source, response hash and release gate must validate before any answer callback. |
+| answer_chunk | operation_id, sequence, response_sha256, offset and text. Offset counts Python Unicode codepoints; text must be the exact next slice of the buffered accepted response. |
+| complete | operation_id, sequence, response_sha256 and the identical saved view. Its full text must equal concatenated chunks and the accepted response hash. |
 | error | Sanitized operational failure; private drafts and verifier output are never displayed. |
 
 Displaying is emitted only after verification, final integrity checks and durable save. Progress contains no technical text, private drafts, chain-of-thought, confidence, percentages or simulated timing. A correction can emit drafting/verifying again, with no private answer token release. SYSTEM_ERROR uses neutral completion without accepted-answer chunks. Verified clarifications, supported partial responses and refusals retain their distinct routes.
 
-Persisted `delivery` contains operation_id, response_sha256, runtime_lock, manual_checksum and index_id. The response hash is SHA-256 of UTF-8 JSON for the complete response object with sorted keys, compact separators, no non-finite values and Unicode preserved. The client checks these bindings during streaming and recovery. A disconnect retains the entire accepted view, then retrieves the original operation; any changed saved view is blocked. Replay streams the existing buffer and starts no drafting or verification call.
+Persisted `delivery` contains operation_id, response_sha256, runtime_lock, manual_checksum, index_id and `event_protocol: operation-sequence-v1`, plus the semantic verification and evidence payload hashes. The response hash is SHA-256 of UTF-8 JSON for the complete response object with sorted keys, compact separators, no non-finite values and Unicode preserved. The client checks these bindings during streaming and recovery. A disconnect retains the entire accepted view, then retrieves the original operation; any changed saved view is blocked. Replay streams the existing buffer and starts no drafting or verification call. Neutral fallback/error buffers emit completion without a verified block or answer chunks.
+
+The observation stream polls once per second and stops after 150 seconds with a recoverable operational error if work is still active. Recovery reads the same operation. Proven terminal failures clear the UI's pending request; an uncertain store or transport failure preserves it. Operations have a 1,200-second deadline and fenced worker lease. Admission reads that exact durable deadline and rechecks it after bounded pacing waits before paid transmission. Delayed permits are atomically repositioned to preserve the existing rolling rate limits; expired or uncertain slots remain reserved. An expired or abandoned worker is terminally reconciled on task redelivery, status read or the next session turn; it is never allowed to retry an uncertain paid call. A pending dispatch uses the same hashed task name after an uncertain create response.
 
 ## Hosted implementation obligations
 
@@ -73,9 +75,9 @@ Use managed transactional session storage with immutable attempt snapshots and c
 
 Enforce authenticated ownership/capability on session and operation reads. Shared UI-to-API authentication alone is not a substitute for per-session authorization. Apply global and per-session rate/call limits, provider spending reservations and a fresh budget/guard preflight under the existing project authorization. Respond 429 when limited; no fallback after quota/rate failure and no automatic retries. Redact query text and credentials from logs. Expire sessions and operation records under a published retention policy.
 
-The optional server-controlled Gemma-to-Haiku availability chain is disabled by default. Enable only through backend `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true`, managed `ANTHROPIC_API_KEY` and a configured non-recurring cost reservation guard. Primary HTTP 500/502/503/504 or unconfigured failures allow one fallback attempt per call. Schema/integrity/source failures, quota exhaustion and a semantic rejection never authorize provider switching. The fallback uses the same retrieved evidence, schemas, independent verification and durable delivery checks. Provider configuration and private telemetry remain server-side; the product UI exposes no model selector.
+The optional server-controlled Gemma-to-Haiku availability chain is disabled in the current immutable release. Activation requires its existing owner permission and a scoped release that permits fallback, followed by backend `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true`, managed `ANTHROPIC_API_KEY` and a configured non-recurring cost reservation guard. The environment switch alone cannot override the release policy. Primary HTTP 500/502/503/504 or unconfigured failures allow one fallback attempt per call. Schema/integrity/source failures, quota exhaustion and a semantic rejection never authorize provider switching. The fallback uses the same retrieved evidence, schemas, independent verification and durable delivery checks. Provider configuration and private telemetry remain server-side; the product UI exposes no model selector.
 
-Before connecting a UI revision, authenticated `/healthz` must report the intended open-manual serving architecture, `streaming=DRAFT_VERIFY_STREAM`, and the configured provider chain. `/v1/catalogue` must report open questions and the same streaming capability. Current catalogue provider metadata identifies the primary; health reports the configured chain. Validate a saved v8 view and recover its unchanged operation through the client. See [connection handover](../reports/grounded_generation/v8/ui_wiring/CONNECTION_HANDOVER.md) and [v8 software receipt](../reports/grounded_generation/v8/ui_streaming/REPORT.md). These checks do not constitute hosted browser acceptance or authorize deployment.
+Before connecting a UI revision, authenticated `/healthz` must report the intended open-manual serving architecture, `streaming=DRAFT_VERIFY_STREAM`, and the configured provider chain. `/v1/catalogue` must report open questions and the same streaming capability. Current catalogue provider metadata identifies the primary; health reports the configured chain. Validate a saved current v9 view and recover its unchanged operation through the client. Historical checks remain in [connection handover](../reports/grounded_generation/v8/ui_wiring/CONNECTION_HANDOVER.md) and [v8 software receipt](../reports/grounded_generation/v8/ui_streaming/REPORT.md). These checks do not constitute hosted browser acceptance or authorize deployment.
 
 ## Live acceptance (pending)
 

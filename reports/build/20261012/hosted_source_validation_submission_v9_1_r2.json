@@ -1,0 +1,133 @@
+{
+  "schema_version": "hosted-source-validation-submission-v1",
+  "source_commit": "2c29f1f4797fd55bdbf3b1300b3258782db232d2",
+  "serving_manifest_sha256": "474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d",
+  "source_archive": {
+    "uri": "gs://motomedic-ai-20261009-indices/serving/v9_1/536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf/source-validation-0ffac87349ac4860ee1e6e66c12746ae4ba62e586dcfd75ada34c2a0d1fae7a2.tar.gz",
+    "generation": "1791748353015251",
+    "sha256": "0ffac87349ac4860ee1e6e66c12746ae4ba62e586dcfd75ada34c2a0d1fae7a2",
+    "maximum_bytes": 26685440
+  },
+  "script_sha256": "9fb95a32b69b8bd1f976f5b4ac29088f8f63891cf855f01dfae049bb8af939c2",
+  "committed_files_verified": 409,
+  "config": {
+    "source": {
+      "storageSource": {
+        "bucket": "motomedic-ai-20261009-indices",
+        "object": "serving/v9_1/536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf/source-validation-0ffac87349ac4860ee1e6e66c12746ae4ba62e586dcfd75ada34c2a0d1fae7a2.tar.gz",
+        "generation": "1791748353015251"
+      }
+    },
+    "steps": [
+      {
+        "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+        "entrypoint": "python",
+        "args": [
+          "-m",
+          "pip",
+          "install",
+          "--no-cache-dir",
+          "--target=/workspace/validation-deps",
+          "google-auth==2.40.3",
+          "requests==2.32.5",
+          "Flask==3.1.2",
+          "numpy==2.4.6"
+        ]
+      },
+      {
+        "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+        "entrypoint": "python",
+        "args": [
+          "-B",
+          "tmp/validate_cloudbuild_source.py",
+          "--source-commit",
+          "2c29f1f4797fd55bdbf3b1300b3258782db232d2",
+          "--expected-manifest-sha256",
+          "474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d"
+        ],
+        "env": [
+          "PYTHONPATH=/workspace/validation-deps:/workspace",
+          "PYTHONDONTWRITEBYTECODE=1",
+          "HF_HUB_OFFLINE=1",
+          "TRANSFORMERS_OFFLINE=1"
+        ]
+      }
+    ],
+    "options": {
+      "logging": "CLOUD_LOGGING_ONLY"
+    },
+    "timeout": "1200s"
+  },
+  "provider_calls": 0,
+  "deployment_changed": false,
+  "operation": {
+    "name": "operations/build/motomedic-ai-20261009/YjU2YzdiMjMtYTU3Zi00ODcwLWIwNDAtYzdlOWI0NzRhMGI4",
+    "metadata": {
+      "@type": "type.googleapis.com/google.devtools.cloudbuild.v1.BuildOperationMetadata",
+      "build": {
+        "id": "b56c7b23-a57f-4870-b040-c7e9b474a0b8",
+        "status": "QUEUED",
+        "source": {
+          "storageSource": {
+            "bucket": "motomedic-ai-20261009-indices",
+            "object": "serving/v9_1/536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf/source-validation-0ffac87349ac4860ee1e6e66c12746ae4ba62e586dcfd75ada34c2a0d1fae7a2.tar.gz",
+            "generation": "1791748353015251"
+          }
+        },
+        "createTime": "2026-10-11T19:52:47.329706999Z",
+        "steps": [
+          {
+            "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+            "args": [
+              "-m",
+              "pip",
+              "install",
+              "--no-cache-dir",
+              "--target=/workspace/validation-deps",
+              "google-auth==2.40.3",
+              "requests==2.32.5",
+              "Flask==3.1.2",
+              "numpy==2.4.6"
+            ],
+            "entrypoint": "python"
+          },
+          {
+            "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+            "env": [
+              "PYTHONPATH=/workspace/validation-deps:/workspace",
+              "PYTHONDONTWRITEBYTECODE=1",
+              "HF_HUB_OFFLINE=1",
+              "TRANSFORMERS_OFFLINE=1"
+            ],
+            "args": [
+              "-B",
+              "tmp/validate_cloudbuild_source.py",
+              "--source-commit",
+              "2c29f1f4797fd55bdbf3b1300b3258782db232d2",
+              "--expected-manifest-sha256",
+              "474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d"
+            ],
+            "entrypoint": "python"
+          }
+        ],
+        "timeout": "1200s",
+        "projectId": "motomedic-ai-20261009",
+        "sourceProvenance": {
+          "resolvedStorageSource": {
+            "bucket": "motomedic-ai-20261009-indices",
+            "object": "serving/v9_1/536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf/source-validation-0ffac87349ac4860ee1e6e66c12746ae4ba62e586dcfd75ada34c2a0d1fae7a2.tar.gz",
+            "generation": "1791748353015251"
+          }
+        },
+        "options": {
+          "logging": "CLOUD_LOGGING_ONLY",
+          "pool": {}
+        },
+        "logUrl": "https://console.cloud.google.com/cloud-build/builds/b56c7b23-a57f-4870-b040-c7e9b474a0b8?project=279945185781",
+        "queueTtl": "3600s",
+        "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+        "name": "projects/279945185781/locations/global/builds/b56c7b23-a57f-4870-b040-c7e9b474a0b8"
+      }
+    }
+  }
+}

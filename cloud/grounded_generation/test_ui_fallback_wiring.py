@@ -19,7 +19,18 @@ from cloud.grounded_generation.claude_provider import ClaudeProvider, MODEL
 from cloud.grounded_generation.fallback_provider import FallbackProvider
 from cloud.grounded_generation.verified_qa import Composer, DRAFT_SCHEMA
 from cloud.grounded_generation.open_questions import Questions
+from cloud.grounded_generation.test_open_wiring import SyntheticTaskDispatcher
 from rider_ui.client import RiderAPI
+from generation_providers import ProviderFailure
+
+
+class TurnPrimary(Primary):
+    """Availability fixture implements the new whole-turn reservation contract."""
+    def context(self,*args):
+        raise ProviderFailure(self.failure)
+    def begin_turn(self,operation_id,availability_fallback=False):
+        return {'operation_id':operation_id,'synthetic':True,'availability_fallback':availability_fallback}
+    def end_turn(self):pass
 
 
 class ScriptedHTTP:
@@ -80,7 +91,7 @@ class UIFallbackWiringTests(unittest.TestCase):
         self.source_setup()
         transport = ScriptedHTTP(reject, malformed)
         reservations = []; costs = []
-        primary = Primary('PROVIDER_HTTP_500')
+        primary = TurnPrimary('PROVIDER_HTTP_500')
         fallback = ClaudeProvider(lambda n, k: reservations.append((n, k)),
             reserve_cost=lambda n, m: costs.append((n, m)), transport=transport, key='offline-fixture-only')
         chain = FallbackProvider(primary, fallback)
@@ -96,7 +107,8 @@ class UIFallbackWiringTests(unittest.TestCase):
             def identity():
                 request.environ['arm_a_owner'] = 'synthetic-platform-owner'
             secret = 'offline-test-only-'+'x'*40
-            install(app, questions, lambda owner: FirestoreState(database, owner), secret)
+            dispatcher = SyntheticTaskDispatcher(); dispatcher.app = app
+            install(app, questions, lambda owner: FirestoreState(database, owner), secret, dispatcher=dispatcher)
             client = RiderAPI('https://offline.invalid', 'offline-token', visitor=issue(secret))
             client.opener = FlaskTransport(app)
             self.assertFalse(client.engineering_loopback)
@@ -114,7 +126,9 @@ class UIFallbackWiringTests(unittest.TestCase):
             self.assertEqual(client.start('How wide is the cylinder bore?', op), view)
             self.assertEqual(len(transport.paths), call_count)
             self.assertEqual(len(reservations), 2)
-            self.assertEqual(len(costs), 2)
+            self.assertEqual(len(costs), 1)
+            from cloud.grounded_generation.claude_provider import MAX_CALL_USD
+            self.assertEqual(costs[0], (4*MAX_CALL_USD, MODEL))
             self.assertEqual(primary.calls, 2)
             self.assertEqual(len(transport.script.calls), 2)
             self.assertTrue(chain.last_trace['fallback_used'])
@@ -126,6 +140,7 @@ class UIFallbackWiringTests(unittest.TestCase):
             self.assertNotIn('complete_proposed_response', json.dumps(view))
             self.assertNotIn('per_claim_support', json.dumps(view))
             self.assertNotIn(MODEL, view['response']['natural_language'])
+            dispatcher.join()
             return view, accepted, pieces, stages
 
     def test_actual_composer_haiku_adapter_saved_stream_and_ui_recovery(self):

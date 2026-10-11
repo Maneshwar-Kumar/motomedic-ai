@@ -1,0 +1,52 @@
+{
+  "schema_version": "completed-hosted-build-v9_1-v1",
+  "source_commit": "2c29f1f4797fd55bdbf3b1300b3258782db232d2",
+  "manifest_sha256": "474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d",
+  "input_tree_sha256": "536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf",
+  "ci": {
+    "run_id": 38169499339,
+    "url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38169499339",
+    "head_sha": "2c29f1f4797fd55bdbf3b1300b3258782db232d2",
+    "conclusion": "success",
+    "test_counts": {
+      "approval": 17,
+      "backend_contracts": 121,
+      "rider_ui": 60
+    },
+    "total_tests": 198
+  },
+  "images": {
+    "backend": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:2ab065f473969a2993890ba0cbba8d183c8ae3b65eb6407c88b821036102e2b7",
+    "ui": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:b7693580a6437ad22e995764bde88e92ceda7fc8115f8a444ff8e28f8fad732e"
+  },
+  "build_ids": {
+    "backend": "305f96df-1ca1-48f1-bb8d-3fff2d1d73af",
+    "ui": "fd422afa-7ba7-4b77-a570-60e254adcb64"
+  },
+  "image_binding_sha256": "ce9decaaf458dc3c1d0d913c568a436cc0604f7145a53571dee387dae2d5e9a4",
+  "source_index_validation": {
+    "receipt": "hosted_source_validation_v9_1.json",
+    "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+    "status": "PASS",
+    "index_hashes_verified": 212,
+    "synthetic_tests": 36,
+    "provider_calls": 0
+  },
+  "scope": "COMPLETED_HOSTED_IMAGE_BUILDS_AND_SYNTHETIC_CI",
+  "provider_calls": 0,
+  "deployment_changed": false,
+  "quality_acceptance": false,
+  "rollback_verified": false,
+  "retained_first_candidate": {
+    "manifest": "serving_manifest_v9.json",
+    "ci_failure": "hosted_ci_failed_v9.log",
+    "image_binding": "hosted_image_binding_v9.json"
+  },
+  "operating_settings": {
+    "main_project_billing": "ALREADY_ENABLED_UNCHANGED",
+    "inference_project_billing": "NOT_CHANGED",
+    "build_service_account": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+    "machine_type": "EXISTING_DEFAULT",
+    "cloud_logging": "CLOUD_LOGGING_ONLY"
+  }
+}

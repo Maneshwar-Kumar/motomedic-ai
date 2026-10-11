@@ -1,0 +1,57 @@
+name: Hosted read-only serving artifact validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  immutable-artifacts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+      MOTOMEDIC_TEST_INDEX: build/hosted-serving-validation/cache/index_a3282c4d98cf54595e4ba168
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify source and complete committed serving bindings before credentials
+        run: python tools/serving_release.py verify --committed-revision '${{ github.sha }}'
+      - name: Require an already-configured managed read-only identity
+        env:
+          IDENTITY_PROVIDER: ${{ vars.MOTOMEDIC_GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          READONLY_ACCOUNT: ${{ vars.MOTOMEDIC_GCP_READONLY_SERVICE_ACCOUNT }}
+        run: |
+          test -n "$IDENTITY_PROVIDER" && test -n "$READONLY_ACCOUNT" || {
+            echo '::error::Managed read-only GCS identity is not configured; no credentials, cloud writes or providers were used.'
+            exit 1
+          }
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.MOTOMEDIC_GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.MOTOMEDIC_GCP_READONLY_SERVICE_ACCOUNT }}
+      - name: Install the existing pinned managed auth dependency
+        run: python -m pip install google-auth==2.40.3 requests==2.32.5 Flask==3.1.2 numpy==2.4.6
+      - name: Capture exact generation and validate durable snapshot plus scoped source assembly
+        run: python tools/validate_serving_artifacts_hosted.py --committed-revision '${{ github.sha }}'
+      - name: Exercise integrated real-source boundaries with synthetic providers
+        run: >-
+          python -m unittest -v
+          cloud.grounded_generation.test_serving_context
+          cloud.grounded_generation.test_serving_source_authority
+          cloud.grounded_generation.test_serving_safety
+          tools.test_build_candidate
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: read-only-artifact-validation-${{ github.run_id }}
+          path: build/hosted-serving-validation/*.json
+          retention-days: 14
+          if-no-files-found: warn

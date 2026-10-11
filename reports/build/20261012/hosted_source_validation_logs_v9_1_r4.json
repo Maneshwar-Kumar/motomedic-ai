@@ -1,0 +1,1969 @@
+[
+  {
+    "insertId": "dx2a65dz2k6",
+    "logName": "projects/motomedic-ai-20261009/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "operations/build/motomedic-ai-20261009/ZDBkZDFlODEtZmYyZS00MzFkLTg0MjEtNzBiYjBmZDQ0MmUy",
+      "last": true,
+      "producer": "cloudbuild.googleapis.com"
+    },
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "oauthInfo": {
+          "oauthClientId": "32555940559.apps.googleusercontent.com"
+        },
+        "principalEmail": "maneshwarkumar@gmail.com",
+        "principalSubject": "user:maneshwarkumar@gmail.com"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "cloudbuild.builds.create",
+          "permissionType": "ADMIN_WRITE",
+          "resource": "projects/motomedic-ai-20261009",
+          "resourceAttributes": {
+            "name": "projects/motomedic-ai-20261009/locations/global/builds",
+            "service": "cloudbuild.googleapis.com",
+            "type": "cloudbuild.googleapis.com/Build"
+          }
+        }
+      ],
+      "methodName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuild",
+      "requestMetadata": {
+        "destinationAttributes": {},
+        "requestAttributes": {}
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "global"
+        ]
+      },
+      "resourceName": "projects/motomedic-ai-20261009/builds",
+      "serviceName": "cloudbuild.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-10-11T19:59:50.326699785Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "NOTICE",
+    "timestamp": "2026-10-11T19:59:50.235439Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-96",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:59:48.478640753Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "DONE",
+    "timestamp": "2026-10-11T19:59:48.261043201Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-95",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:59:48.478640753Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "PUSH",
+    "timestamp": "2026-10-11T19:59:48.260975997Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-94",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:59:48.478640753Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Finished Step #1",
+    "timestamp": "2026-10-11T19:59:48.260752292Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-93",
+    "labels": {
+      "build_step": "Step #1"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:59:48.056478084Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #1: {\"cloud_mutations\": 0, \"committed_blob_check\": \"PRECHECKED_OUTSIDE_HOSTED_JOB\", \"deployed_request_acceptance\": false, \"duration_seconds\": 64.447, \"frozen_inputs_verified\": 341, \"historical_inputs_verified\": 64, \"index_files_verified\": 212, \"index_id\": \"index_a3282c4d98cf54595e4ba168\", \"index_manifest_sha256\": \"665121e286a22881803ec181597e860cdec8024412dbd334b2774b509cbabfde\", \"index_rebuilt\": false, \"input_tree_sha256\": \"536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf\", \"label\": \"HOSTED_GCS_SOURCE_RELOAD_WITH_SYNTHETIC_PROVIDER_FREE_TESTS\", \"latency_acceptance\": false, \"local_artifact_recovery\": {\"byte_length\": 12, \"dependency\": {\"qdrant-client\": \"1.19.1\"}, \"origin_receipt\": \"reports/build/20261012/qdrant_lock_recovery.json\", \"original_manifest_sha256\": \"665121e286a22881803ec181597e860cdec8024412dbd334b2774b509cbabfde\", \"path\": \"qdrant/.lock\", \"schema_version\": \"qdrant-client-1.19.1-exact-lock-recovery-v1\", \"scope\": \"Only missing deterministic process-lock bytes; never source/index content or a checksum exclusion.\", \"sha256\": \"67a987c432005e3afcc13a871b3ddabaeee0f4504058da65b0769016d3083b44\", \"utf8_content\": \"tmp lock file\"}, \"manual_checksum\": \"cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89\", \"models_loaded\": false, \"parser_gap_pages\": [103], \"provider_calls\": 0, \"quality_acceptance\": false, \"real_provider_construction_guard\": \"ENFORCED\", \"schema_version\": \"cloudbuild-read-only-source-validation-v1\", \"serving_manifest_sha256\": \"474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d\", \"snapshot\": {\"generation\": \"1791537775184836\", \"maximum_bytes\": 1073741824, \"sha256\": \"4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc\", \"uri\": \"gs://motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz\"}, \"source_authority_lock\": \"b1ab34b76fc1ec61f53f4b9788e428623ecad4e22951976f9612bddeecf5b21f\", \"source_commit\": \"2c29f1f4797fd55bdbf3b1300b3258782db232d2\", \"status\": \"PASS\", \"synthetic_test_errors\": [], \"synthetic_test_failures\": [], \"synthetic_test_skips\": 0, \"synthetic_tests_run\": 36, \"test_modules\": [\"cloud.grounded_generation.test_serving_retrieval\", \"cloud.grounded_generation.test_serving_context\", \"cloud.grounded_generation.test_serving_source_authority\", \"cloud.grounded_generation.test_serving_safety\", \"tools.test_build_candidate\"], \"test_output_sha256\": \"0c5faaac5607021593fc1d495632a8c3d761678b087667d04b0d939b99c09f2b\", \"validation_script_sha256\": \"f0e9ba07e1f0fca744ff5988e4d9cc61cd829cb6320537bf3b2171d499102931\"}",
+    "timestamp": "2026-10-11T19:59:47.406171441Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-92",
+    "labels": {
+      "build_step": "Step #1"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:42.148256104Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #1: Already have image (with digest): docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+    "timestamp": "2026-10-11T19:58:41.574634630Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-91",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:42.148256104Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Starting Step #1",
+    "timestamp": "2026-10-11T19:58:41.572677346Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-90",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:42.148256104Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Finished Step #0",
+    "timestamp": "2026-10-11T19:58:41.572302360Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-89",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:41.135149440Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: [notice] To update, run: pip install --upgrade pip",
+    "timestamp": "2026-10-11T19:58:40.787740650Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-88",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:41.135149440Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: [notice] A new release of pip is available: 25.0.1 -> 26.2.1",
+    "timestamp": "2026-10-11T19:58:40.787739340Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-87",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:41.135149440Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: ",
+    "timestamp": "2026-10-11T19:58:40.787727440Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-86",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:41.135149440Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.",
+    "timestamp": "2026-10-11T19:58:40.645457596Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-85",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:41.135149440Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Successfully installed Flask-3.1.2 blinker-1.9.0 cachetools-5.5.2 certifi-2026.7.22 charset_normalizer-3.5.2 click-8.5.0 google-auth-2.40.3 idna-3.20 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 numpy-2.4.6 pyasn1-0.6.4 pyasn1-modules-0.4.2 requests-2.32.5 rsa-4.9.1 urllib3-2.8.0 werkzeug-3.1.9",
+    "timestamp": "2026-10-11T19:58:40.194985671Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-84",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Installing collected packages: urllib3, pyasn1, numpy, markupsafe, itsdangerous, idna, click, charset_normalizer, certifi, cachetools, blinker, werkzeug, rsa, requests, pyasn1-modules, jinja2, google-auth, Flask",
+    "timestamp": "2026-10-11T19:58:35.704489374Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-83",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading pyasn1-0.6.4-py3-none-any.whl (84 kB)",
+    "timestamp": "2026-10-11T19:58:35.557820321Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-82",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)",
+    "timestamp": "2026-10-11T19:58:35.524944435Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-81",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)",
+    "timestamp": "2026-10-11T19:58:35.489815257Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-80",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading rsa-4.9.1-py3-none-any.whl (34 kB)",
+    "timestamp": "2026-10-11T19:58:35.457625575Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-79",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)",
+    "timestamp": "2026-10-11T19:58:35.424731728Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-78",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)",
+    "timestamp": "2026-10-11T19:58:35.392098094Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-77",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)",
+    "timestamp": "2026-10-11T19:58:35.358800644Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-76",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)",
+    "timestamp": "2026-10-11T19:58:35.327384283Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-75",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading idna-3.20-py3-none-any.whl (69 kB)",
+    "timestamp": "2026-10-11T19:58:35.294452361Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-74",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading click-8.5.0-py3-none-any.whl (125 kB)",
+    "timestamp": "2026-10-11T19:58:35.261735466Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-73",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (257 kB)",
+    "timestamp": "2026-10-11T19:58:35.229123971Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-72",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)",
+    "timestamp": "2026-10-11T19:58:35.196404889Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-71",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading cachetools-5.5.2-py3-none-any.whl (10 kB)",
+    "timestamp": "2026-10-11T19:58:35.163676338Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-70",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)",
+    "timestamp": "2026-10-11T19:58:35.131272333Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-69",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:36.148632080Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:    ???????????????????????????????????????? 16.6/16.6 MB 99.2 MB/s eta 0:00:00",
+    "timestamp": "2026-10-11T19:58:35.096847637Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-68",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)",
+    "timestamp": "2026-10-11T19:58:34.925986314Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-67",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading flask-3.1.2-py3-none-any.whl (103 kB)",
+    "timestamp": "2026-10-11T19:58:34.884648672Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-66",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading requests-2.32.5-py3-none-any.whl (64 kB)",
+    "timestamp": "2026-10-11T19:58:34.851566651Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-65",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Downloading google_auth-2.40.3-py2.py3-none-any.whl (216 kB)",
+    "timestamp": "2026-10-11T19:58:34.803984522Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-64",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading pyasn1-0.6.4-py3-none-any.whl.metadata (8.4 kB)",
+    "timestamp": "2026-10-11T19:58:34.758148585Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-63",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth==2.40.3)",
+    "timestamp": "2026-10-11T19:58:34.726715249Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-62",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)",
+    "timestamp": "2026-10-11T19:58:34.666222992Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-61",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting werkzeug>=3.1.0 (from Flask==3.1.2)",
+    "timestamp": "2026-10-11T19:58:34.634910634Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-60",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)",
+    "timestamp": "2026-10-11T19:58:34.582553661Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-59",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting markupsafe>=2.1.1 (from Flask==3.1.2)",
+    "timestamp": "2026-10-11T19:58:34.551378554Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-58",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)",
+    "timestamp": "2026-10-11T19:58:34.460982086Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-57",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting jinja2>=3.1.2 (from Flask==3.1.2)",
+    "timestamp": "2026-10-11T19:58:34.429712945Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-56",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)",
+    "timestamp": "2026-10-11T19:58:34.388519535Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-55",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting itsdangerous>=2.2.0 (from Flask==3.1.2)",
+    "timestamp": "2026-10-11T19:58:34.356807292Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-54",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)",
+    "timestamp": "2026-10-11T19:58:34.320271253Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-53",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting click>=8.1.3 (from Flask==3.1.2)",
+    "timestamp": "2026-10-11T19:58:34.288687690Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-52",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)",
+    "timestamp": "2026-10-11T19:58:34.243956350Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-51",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting blinker>=1.9.0 (from Flask==3.1.2)",
+    "timestamp": "2026-10-11T19:58:34.212390986Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-50",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)",
+    "timestamp": "2026-10-11T19:58:34.175890037Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-49",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting certifi>=2017.4.17 (from requests==2.32.5)",
+    "timestamp": "2026-10-11T19:58:34.144256359Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-48",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)",
+    "timestamp": "2026-10-11T19:58:34.091551596Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-47",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting urllib3<3,>=1.21.1 (from requests==2.32.5)",
+    "timestamp": "2026-10-11T19:58:34.060295125Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-46",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)",
+    "timestamp": "2026-10-11T19:58:33.995912038Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-45",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:35.154924195Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting idna<4,>=2.5 (from requests==2.32.5)",
+    "timestamp": "2026-10-11T19:58:33.964555892Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-44",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)",
+    "timestamp": "2026-10-11T19:58:33.908058158Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-43",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting charset_normalizer<4,>=2 (from requests==2.32.5)",
+    "timestamp": "2026-10-11T19:58:33.875702872Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-42",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)",
+    "timestamp": "2026-10-11T19:58:33.682706441Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-41",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting rsa<5,>=3.1.4 (from google-auth==2.40.3)",
+    "timestamp": "2026-10-11T19:58:33.650260522Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-40",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)",
+    "timestamp": "2026-10-11T19:58:33.607991339Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-39",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting pyasn1-modules>=0.2.1 (from google-auth==2.40.3)",
+    "timestamp": "2026-10-11T19:58:33.574131418Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-38",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading cachetools-5.5.2-py3-none-any.whl.metadata (5.4 kB)",
+    "timestamp": "2026-10-11T19:58:33.522343967Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-37",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting cachetools<6.0,>=2.0.0 (from google-auth==2.40.3)",
+    "timestamp": "2026-10-11T19:58:33.489572306Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-36",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)",
+    "timestamp": "2026-10-11T19:58:33.436427979Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-35",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting numpy==2.4.6",
+    "timestamp": "2026-10-11T19:58:33.404141284Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-34",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)",
+    "timestamp": "2026-10-11T19:58:33.077896930Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-33",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting Flask==3.1.2",
+    "timestamp": "2026-10-11T19:58:33.045262720Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-32",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)",
+    "timestamp": "2026-10-11T19:58:32.998762396Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-31",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:34.161374294Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting requests==2.32.5",
+    "timestamp": "2026-10-11T19:58:32.965697939Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-30",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:33.160582707Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0:   Downloading google_auth-2.40.3-py2.py3-none-any.whl.metadata (6.2 kB)",
+    "timestamp": "2026-10-11T19:58:32.882044772Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-29",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:33.160582707Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Collecting google-auth==2.40.3",
+    "timestamp": "2026-10-11T19:58:32.807353430Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-28",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:30.150557252Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+    "timestamp": "2026-10-11T19:58:29.163018795Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-27",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:30.150557252Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Status: Downloaded newer image for python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+    "timestamp": "2026-10-11T19:58:29.153843671Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-26",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:30.150557252Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Digest: sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+    "timestamp": "2026-10-11T19:58:29.150256452Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-25",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:30.150557252Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: bbc5a1223747: Pull complete",
+    "timestamp": "2026-10-11T19:58:29.132873880Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-24",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:30.150557252Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 6912e23eb445: Pull complete",
+    "timestamp": "2026-10-11T19:58:29.047945802Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-23",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:29.163936412Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 75b6a36c64a1: Pull complete",
+    "timestamp": "2026-10-11T19:58:28.196974019Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-22",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:29.163936412Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: ecc510c1e359: Pull complete",
+    "timestamp": "2026-10-11T19:58:27.984645946Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-21",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:27.164041969Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: ecc510c1e359: Download complete",
+    "timestamp": "2026-10-11T19:58:26.314087552Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-20",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:27.164041969Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: ecc510c1e359: Verifying Checksum",
+    "timestamp": "2026-10-11T19:58:26.313593167Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-19",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:27.164041969Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 6912e23eb445: Download complete",
+    "timestamp": "2026-10-11T19:58:26.209303908Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-18",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:27.164041969Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 6912e23eb445: Verifying Checksum",
+    "timestamp": "2026-10-11T19:58:26.209292009Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-17",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 75b6a36c64a1: Download complete",
+    "timestamp": "2026-10-11T19:58:25.923769584Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-16",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 75b6a36c64a1: Verifying Checksum",
+    "timestamp": "2026-10-11T19:58:25.923656707Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-15",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: bbc5a1223747: Download complete",
+    "timestamp": "2026-10-11T19:58:25.887351391Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-14",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: bbc5a1223747: Verifying Checksum",
+    "timestamp": "2026-10-11T19:58:25.887328830Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-13",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: bbc5a1223747: Pulling fs layer",
+    "timestamp": "2026-10-11T19:58:25.424387097Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-12",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 6912e23eb445: Pulling fs layer",
+    "timestamp": "2026-10-11T19:58:25.424386521Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-11",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: 75b6a36c64a1: Pulling fs layer",
+    "timestamp": "2026-10-11T19:58:25.424385020Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-10",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:26.166576690Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: ecc510c1e359: Pulling fs layer",
+    "timestamp": "2026-10-11T19:58:25.424370560Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-9",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:25.171259583Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1: Pulling from library/python",
+    "timestamp": "2026-10-11T19:58:24.923584022Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-8",
+    "labels": {
+      "build_step": "Step #0"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:24.168238421Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Step #0: Pulling image: docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+    "timestamp": "2026-10-11T19:58:23.566840043Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-7",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:24.168238421Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Starting Step #0",
+    "timestamp": "2026-10-11T19:58:23.565759496Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-6",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:23.171298679Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "BUILD",
+    "timestamp": "2026-10-11T19:58:22.832495883Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-5",
+    "labels": {
+      "build_step": "gsutil:STDERR"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:21.174763078Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Operation completed over 1 objects/28.1 MiB.                                     ",
+    "timestamp": "2026-10-11T19:58:20.387540861Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-4",
+    "labels": {
+      "build_step": "gsutil:STDERR"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:21.174763078Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "/ [0 files][    0.0 B/ 28.1 MiB]                                                \r-\r- [1 files][ 28.1 MiB/ 28.1 MiB]                                                \r",
+    "timestamp": "2026-10-11T19:58:20.387523134Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-3",
+    "labels": {
+      "build_step": "gsutil:STDERR"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:20.181066793Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Copying gs://motomedic-ai-20261009-indices/serving/v9_1/536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf/source-validation-93f742307d9a6dee8e44a0ebc9e753669f54c3d88756aae3885146e94297674e.tar.gz#1791748684998326...",
+    "timestamp": "2026-10-11T19:58:19.630147499Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-2",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:19.277459765Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "Fetching storage object: gs://motomedic-ai-20261009-indices/serving/v9_1/536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf/source-validation-93f742307d9a6dee8e44a0ebc9e753669f54c3d88756aae3885146e94297674e.tar.gz#1791748684998326",
+    "timestamp": "2026-10-11T19:58:17.961532263Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-1",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:19.277459765Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "FETCHSOURCE",
+    "timestamp": "2026-10-11T19:58:17.960650253Z"
+  },
+  {
+    "insertId": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2-0",
+    "labels": {
+      "build_step": "MAIN"
+    },
+    "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+    "receiveTimestamp": "2026-10-11T19:58:19.277459765Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "INFO",
+    "textPayload": "starting build \"d0dd1e81-ff2e-431d-8421-70bb0fd442e2\"\n",
+    "timestamp": "2026-10-11T19:58:17.959748908Z"
+  },
+  {
+    "insertId": "6p1iqve2aygs",
+    "logName": "projects/motomedic-ai-20261009/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "first": true,
+      "id": "operations/build/motomedic-ai-20261009/ZDBkZDFlODEtZmYyZS00MzFkLTg0MjEtNzBiYjBmZDQ0MmUy",
+      "producer": "cloudbuild.googleapis.com"
+    },
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "oauthInfo": {
+          "oauthClientId": "32555940559.apps.googleusercontent.com"
+        },
+        "principalEmail": "maneshwarkumar@gmail.com",
+        "principalSubject": "user:maneshwarkumar@gmail.com"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "cloudbuild.builds.create",
+          "permissionType": "ADMIN_WRITE",
+          "resource": "projects/motomedic-ai-20261009",
+          "resourceAttributes": {
+            "name": "projects/motomedic-ai-20261009/locations/global/builds",
+            "service": "cloudbuild.googleapis.com",
+            "type": "cloudbuild.googleapis.com/Build"
+          }
+        }
+      ],
+      "methodName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuild",
+      "request": {
+        "@type": "type.googleapis.com/google.devtools.cloudbuild.v1.CreateBuildRequest",
+        "build": {
+          "timeout": "1200s"
+        },
+        "projectId": "motomedic-ai-20261009"
+      },
+      "requestMetadata": {
+        "callerIp": "167.103.4.191",
+        "callerSuppliedUserAgent": "Python-urllib/3.12,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-10-11T19:58:18.165438Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "global"
+        ]
+      },
+      "resourceName": "projects/motomedic-ai-20261009/builds",
+      "serviceName": "cloudbuild.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-10-11T19:58:18.617848155Z",
+    "resource": {
+      "labels": {
+        "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+        "build_trigger_id": "",
+        "project_id": "motomedic-ai-20261009"
+      },
+      "type": "build"
+    },
+    "severity": "NOTICE",
+    "timestamp": "2026-10-11T19:58:16.838461Z"
+  }
+]

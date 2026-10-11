@@ -1,7 +1,7 @@
-FROM python:3.12-slim AS dependencies
+FROM docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1 AS dependencies
 WORKDIR /app
-COPY rider_ui/requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+COPY rider_ui/requirements-linux-amd64-py312.lock.txt /app/requirements.txt
+RUN pip install --no-cache-dir --require-hashes -r /app/requirements.txt
 FROM dependencies AS verified
 COPY rider_ui /app/rider_ui
 COPY controller_contracts.py /app/controller_contracts.py

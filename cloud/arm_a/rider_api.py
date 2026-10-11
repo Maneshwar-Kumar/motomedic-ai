@@ -12,7 +12,7 @@ from session_store import SessionConflict
 from rider_ui.safeguards import validate_message, LimitError
 
 
-def install(app, questions, state_factory, visitor_secret, network_required=False):
+def install(app, questions, state_factory, visitor_secret, network_required=False, dispatcher=None):
     registry = questions.registry
 
     def error(route, code, status, terminal=True):
@@ -50,8 +50,14 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
                 verified.get('presentation_sha256')!=response_hash(view) or
                 verified.get('evidence_payload_sha256')!=binding.get('evidence_payload_sha256') or
                 verified.get('binding_sha256')!=binding.get('verification_binding_sha256') or
-                verified.get('text_sha256')!=hashlib.sha256(view['response']['natural_language'].encode()).hexdigest() or
-                view['response'].get('semantic_verification_passed') is not True):
+                verified.get('text_sha256')!=hashlib.sha256(view['response']['natural_language'].encode()).hexdigest()):
+                raise ValueError('PRE_VERIFIER_SAVED_ANSWER_RETIRED')
+            method = verified.get('verification_method')
+            if method == 'COORDINATOR_APPROVED_EXACT_SAFETY_INITIAL_SCOPE':
+                # This finite initial response has its own immutable scoped
+                # approval. It never represents a model verification verdict.
+                questions.check_saved_safety_view(view)
+            elif method is not None or view['response'].get('semantic_verification_passed') is not True:
                 raise ValueError('PRE_VERIFIER_SAVED_ANSWER_RETIRED')
         return view
 
@@ -77,6 +83,49 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
             result.headers['X-Operation-Replay'] = 'true'
         return result
 
+    def processing(store, key, operation):
+        if operation['state'] == 'QUEUED' and operation.get('dispatch_state') == 'PENDING':
+            if dispatcher is None:
+                return error('SYSTEM_ERROR','DURABLE_DISPATCH_UNCONFIGURED',503,terminal=False)
+            dispatcher.enqueue(store.owner, key, operation['payload_hash'])
+            store.mark_dispatched(key)
+        if getattr(questions, 'open_verification', False) and 'text/event-stream' in request.headers.get('Accept', ''):
+            from cloud.grounded_generation.delivery import stream_operation
+            result = stream_operation(lambda: store.operation(key), key, current_view)
+            result.headers['X-Operation-Id'] = key
+            return result
+        return jsonify({'status': 'RUNNING', 'operation_id': key}), 202
+
+    @app.post('/internal/operations/run')
+    def durable_worker():
+        if not getattr(questions, 'open_verification', False) or dispatcher is None:
+            return error('SYSTEM_ERROR', 'DURABLE_DISPATCH_UNCONFIGURED', 503)
+        try:
+            dispatcher.authenticate(request.headers)
+        except PermissionError:
+            return error('SYSTEM_ERROR', 'WORKER_IDENTITY_REQUIRED', 403)
+        from cloud.arm_a.app import unique_object
+        try:
+            if request.mimetype != 'application/json':
+                raise ValueError()
+            raw = request.stream.read(2049)
+            if len(raw) > 2048:
+                raise ValueError()
+            body = json.loads(raw.decode('utf-8'), object_pairs_hook=unique_object,
+                parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
+            if (type(body) is not dict or set(body) != {'owner','operation_id','payload_hash'} or
+                    not all(type(v) is str for v in body.values()) or
+                    not re.fullmatch(r'[a-f0-9]{64}', body['owner']) or
+                    not re.fullmatch(r'[a-f0-9]{32}', body['operation_id']) or
+                    not re.fullmatch(r'[a-f0-9]{64}', body['payload_hash'])):
+                raise ValueError()
+        except (ValueError, TypeError, KeyError, UnicodeError):
+            return error('SYSTEM_ERROR', 'INVALID_WORKER_REQUEST', 400)
+        from cloud.arm_a.durable_dispatch import DurableWorker
+        status = DurableWorker(questions, state_factory, current_view).run(
+            body['owner'], body['operation_id'], body['payload_hash'])
+        return ('', status)
+
     @app.get('/v1/catalogue')
     def rider_catalogue():
         try:
@@ -96,6 +145,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
     @app.post('/v1/sessions/<session_id>/feedback')
     def rider_question(session_id=None):
         from cloud.arm_a.app import unique_object
+        began = False
         try:
             store = state()
         except PermissionError:
@@ -154,7 +204,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
                     return deliver(existing['view'],replay=True)
                 if existing['state']=='FAILED':
                     return error('SYSTEM_ERROR',existing['error'],existing['http_status'])
-                return jsonify({'status':'RUNNING','operation_id':key}),202
+                return processing(store, key, existing)
             old = store.saved(session_id) if session_id else None
             if old and old['version'] != body['expected_version']:
                 raise SessionConflict('Stale session')
@@ -165,29 +215,24 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
                 raise SessionConflict('Concurrent session')
             if feedback:
                 outcome, fact = consume_choice(registry,session,old['choices'],body['choice_id'],body['expected_version'])
-            prior = store.begin(key,digest)
+            work = None
+            if getattr(questions, 'open_verification', False):
+                if dispatcher is None:
+                    return error('SYSTEM_ERROR','DURABLE_DISPATCH_UNCONFIGURED',503)
+                from cloud.arm_a.durable_dispatch import make_work
+                current = questions.controller.feedback(session,outcome,key,fact=fact) if feedback else session
+                work = make_work(current, old['query'] if feedback else query,
+                    (old or {}).get('conversation', []), old['version'] if old else None, questions)
+            prior = store.begin(key,digest,work=work) if work is not None else store.begin(key,digest)
+            began = prior is None
             if prior:
                 if prior['state']=='COMPLETE':
                     return deliver(prior['view'], replay=True)
                 if prior['state']=='FAILED':
                     return error('SYSTEM_ERROR',prior['error'],prior['http_status'])
-                return jsonify({'status':'RUNNING','operation_id':key}),202
+                return processing(store, key, prior)
             if getattr(questions, 'open_verification', False):
-                from cloud.grounded_generation.delivery import bind_view, stream_operation
-                actual_query = old['query'] if feedback else query
-                history = (old or {}).get('conversation', [])
-                expected = old['version'] if old else None
-                def work(progress=None):
-                    current = questions.controller.feedback(session,outcome,key,fact=fact) if feedback else session
-                    updated,view,choices = questions.answer(current,actual_query,
-                        history=history,progress=progress,operation_id=key)
-                    view = bind_view(view,key,updated.generation_lock)
-                    saved=store.commit_answer(key,updated,view,choices,
-                        expected_version=expected,query=actual_query)
-                    return current_view(saved)
-                if 'text/event-stream' in request.headers.get('Accept',''):
-                    return stream_operation(work,key)
-                return deliver(work())
+                return processing(store, key, store.operation(key))
             if feedback:
                 session = questions.controller.feedback(session,outcome,key,fact=fact)
                 if hasattr(questions,'feedback'):
@@ -206,10 +251,11 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
         except Limited:
             return error('SYSTEM_ERROR','APPLICATION_USAGE_LIMIT',429)
         except (SessionConflict,OperationConflict,ValueError):
-            try:
-                store.fail_operation(key,'OPERATION_OR_SESSION_CONFLICT',409)
-            except Exception:
-                pass
+            if began and not getattr(questions, 'open_verification', False):
+                try:
+                    store.fail_operation(key,'OPERATION_OR_SESSION_CONFLICT',409)
+                except Exception:
+                    pass
             return error('SYSTEM_ERROR','OPERATION_OR_SESSION_CONFLICT',409)
         except Exception:
             # An uncertain commit may already have completed. Keep it recoverable
@@ -234,11 +280,14 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
         if not re.fullmatch(r'[a-f0-9]{32}',key):
             return error('SYSTEM_ERROR','INVALID_OPERATION_KEY',400)
         try:
-            result = state().operation(key)
+            store = state()
+            result = store.operation(key)
             if result['state']=='FAILED':
                 return error('SYSTEM_ERROR',result['error'],result['http_status'])
-            return jsonify(current_view(result['view'])) if result['state']=='COMPLETE' else (
-                jsonify({'status':'RUNNING','operation_id':key}),202)
+            if result['state']=='COMPLETE':
+                return (deliver(result['view'], replay=True) if getattr(questions, 'open_verification', False)
+                        else jsonify(current_view(result['view'])))
+            return processing(store, key, result)
         except PermissionError:
             return error('SYSTEM_ERROR','VISITOR_CAPABILITY_REQUIRED',401)
         except KeyError:

@@ -145,7 +145,7 @@ class VerifiedTests(unittest.TestCase):
         self.assertEqual(SYSTEM_ERROR_TEXT,expected_error)
         self.assertEqual(FALLBACK_TEXT.encode('utf-8'),expected_fallback.encode('utf-8'))
         self.assertEqual(SYSTEM_ERROR_TEXT.encode('utf-8'),expected_error.encode('utf-8'))
-        self.assertEqual(VERSION,'open-manual-draft-verify-v8')
+        self.assertEqual(VERSION,'open-manual-draft-verify-v9')
     def test_runtime_source_is_ascii_and_apostrophe_is_source_escape(self):
         import cloud.grounded_generation.verified_qa as module
         from pathlib import Path

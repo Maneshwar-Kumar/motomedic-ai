@@ -12,10 +12,14 @@ import sys
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 MANUAL = "royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf"
 MANUAL_SHA = "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
 FREEZE = "reports/grounded_generation/v8/runtime_freeze.json"
 FREEZE_SHA = "d7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0"
+HISTORICAL_RUNTIME = "reports/build/20261012/frozen_v8_runtime"
+CURRENT_FREEZE = "reports/build/20261012/serving_manifest_v9_1.json"
 RELEASE = "human_review/agent_release_161/coordinator/release_manifest_v3.json"
 RELEASE_SHA = "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298"
 
@@ -31,7 +35,8 @@ CRITICAL = (
     "human_review/agent_release_161/approval_consumer.py",
     "human_review/agent_release_161/test_approval_consumer.py",
     "human_review/agent_release_161/root_validation_v3.json",
-    "cloud/deployment_status.json", "cloud/live_smoke.json",
+    "cloud/deployment_status.json", "cloud/live_smoke.json", CURRENT_FREEZE,
+    "reports/build/20261012/v8_preservation.json",
 )
 # Root runtime paths are compatibility inputs, not a template for new files.
 ROOT_FILES = frozenset("""
@@ -104,7 +109,10 @@ def audit():
             if not isinstance(bindings, dict) or len(bindings) != required_count:
                 raise ValueError("Unexpected binding inventory")
             for name, sha in bindings.items():
-                bound = (ROOT / name).resolve()
+                # v8 remains exact historical evidence. Current serving inputs
+                # are independently checked below against the v9 inventory.
+                resolved_name = (HISTORICAL_RUNTIME + "/" + name) if field == "file_sha256" else name
+                bound = (ROOT / resolved_name).resolve()
                 if not bound.is_relative_to(ROOT) or not bound.is_file():
                     integrity.append({"path": name, "reason": "BOUND_FILE_MISSING_OR_OUTSIDE_ROOT"})
                 elif digest(bound) != sha:
@@ -116,9 +124,17 @@ def audit():
         except (OSError, UnicodeError, KeyError, TypeError, ValueError) as error:
             integrity.append({"path": relative, "reason": "INVALID_BINDING_MANIFEST", "detail": str(error)})
 
+    current_count = 0
+    try:
+        from tools.serving_release import verify
+        current = verify(ROOT)
+        current_count = len(current["file_sha256"])
+    except (OSError, UnicodeError, KeyError, TypeError, ValueError, RuntimeError) as error:
+        integrity.append({"path": CURRENT_FREEZE, "reason": "CURRENT_SERVING_BINDING_FAILED", "detail": str(error)})
+
     unexpected = sorted(actual - ROOT_FILES)
     return {
-        "schema_version": "repository-structure-audit-v2",
+        "schema_version": "repository-structure-audit-v3",
         "ok": not (unexpected or missing or broken or missing_critical or integrity),
         "unexpected_root_files": unexpected,
         "missing_navigation_files": missing,
@@ -128,8 +144,9 @@ def audit():
         "local_links_checked": checked,
         "root_file_count": len(actual),
         "runtime_freeze_files_verified": runtime_count,
+        "current_serving_files_verified": current_count,
         "approved_output_files_verified": approved_count,
-        "note": "Canonical navigation and exact retained bytes only; historical links are not traversed. Not factual or deployment acceptance.",
+        "note": "Canonical navigation, byte-exact historical v8 snapshots, current v9 inputs and original scoped approval paths. Not factual or deployment acceptance.",
     }
 
 

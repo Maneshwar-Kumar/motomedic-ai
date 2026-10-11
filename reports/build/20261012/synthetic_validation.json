@@ -1,0 +1,50 @@
+{
+  "schema_version": "build-synthetic-validation-v1",
+  "checks": {
+    "backend_contracts": {
+      "count": 115,
+      "seconds": 19.369,
+      "log": "reports/build/20261012/backend_contracts_synthetic.log"
+    },
+    "rider_ui": {
+      "count": 60,
+      "seconds": 13.501,
+      "log": "reports/build/20261012/rider_ui_synthetic.log"
+    },
+    "verified_qa": {
+      "count": 21,
+      "seconds": 46.143,
+      "log": "reports/build/20261012/verified_qa_synthetic.log"
+    },
+    "approval_consumer": {
+      "count": 17,
+      "seconds": 15.882,
+      "log": "reports/build/20261012/approval_consumer_synthetic.log"
+    },
+    "release_artifact_image": {
+      "count": 25,
+      "status": "PASS",
+      "receipt": "reports/build/20261012/release_ci.md"
+    },
+    "retrieval_source_candidate": {
+      "count": 36,
+      "seconds": 39.221,
+      "status": "PASS",
+      "receipt": "reports/build/20261012/retrieval_evidence_tests.log"
+    }
+  },
+  "scope": "LOCAL_SYNTHETIC_PROVIDER_HTTP_STORE_DOUBLES_AND_READ_ONLY_ORIGINAL_INDEX",
+  "provider_calls": 0,
+  "real_quality_acceptance": false,
+  "structure": {
+    "historical_v8_files": 64,
+    "current_serving_files": 341,
+    "original_approval_files": 187,
+    "status": "PASS"
+  },
+  "manifest_sha256": "a5604aaa277b4095fb3aebc95703cfd7c128e1d609cde80965c18d1791b98a84",
+  "notes": [
+    "Counts overlap and must not be summed as unique tests.",
+    "Windows synthetic UI numerical dependency differs from the Linux hosted hash lock; hosted CI and Docker check the exact Linux lock."
+  ]
+}
