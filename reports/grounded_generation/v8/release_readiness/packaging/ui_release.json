@@ -1,0 +1,46 @@
+{
+  "file_sha256": {
+    "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+    "rider_ui/Dockerfile": "9339e27b0cef213d901b63e848c97034964b4bf239c74f7c82c210c678a268a2",
+    "rider_ui/__init__.py": "a494babcfa18918399ebd324349f9ad0de5e9cc0a9db5d6488d2e960160fad20",
+    "rider_ui/app.py": "c62544114641f133d5e2f48dadc4d2fb089149ad8c6c30195ec3f0c5c59f4025",
+    "rider_ui/client.py": "a7840c289598498cf5fccc979803e44578e3e0f3a01c13109f7821392c79165c",
+    "rider_ui/identity.py": "b11b6cde8ed18fdf898182879757ef6c5623c3b365cf8a8c3f1db8693587287e",
+    "rider_ui/requirements.txt": "99a76d3f92083d8bfe4a1fdeaa6b542e1ace2a0c7b2a6d869e5c427feaa191fc",
+    "rider_ui/safeguards.py": "d6df3de2777dcde6534f2af706bb16c93c3eced8fe9036cf0dd6e6ea183393e6",
+    "rider_ui/tests/__init__.py": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+    "rider_ui/tests/fixture_api.py": "2755f84eec6fd9adfa17e03a2a28852e320ae916d3adee8e28c098369bba09e7",
+    "rider_ui/tests/test_app.py": "31d4c443d35dccab2823bf837240f84a6d5475ef4d4fa8eaa443cdad4ca348be",
+    "rider_ui/tests/test_client.py": "debde7edb12fd5ccfbce8da60f4192e6e0ec279132fe4f4125c0ec972d78c223",
+    "rider_ui/tests/test_identity.py": "8f41728e1c780b59955a0996dcfbe58b488b91d3a5bc3f77ffcd6bda2235f079",
+    "rider_ui/tests/test_progress_stream.py": "2ffa61e606a362b2b94a9b740a774f1de289b6ea5c36bca5cae481d02eb4b60f",
+    "rider_ui/tests/test_safeguards.py": "ccf8b6386b5b3c9292061ef8a7b534ee1a0f5bbe34b4ee295fec7424622e977c",
+    "rider_ui/tests/test_verified_sse.py": "027671c2b85502eec83ba61325dc365e0482636aa42f7ba64f12ffeae2e253a1",
+    "rider_ui/theme.css": "b86e4f90c4e06e63c457992d6f944fe0691b7bc4c8b6c1653648bbe25b720137",
+    "rider_ui/verified_sse.py": "a1858c4800dfedcdaf593a7e4f8971bcb832ece90b5ee5b872ad26d0f1b0de4f"
+  },
+  "prepared_only": true,
+  "provider_keys_in_ui": false,
+  "runtime_image_files": [
+    "rider_ui/__init__.py",
+    "rider_ui/app.py",
+    "rider_ui/client.py",
+    "rider_ui/safeguards.py",
+    "rider_ui/identity.py",
+    "rider_ui/verified_sse.py",
+    "rider_ui/theme.css",
+    "rider_ui/requirements.txt"
+  ],
+  "runtime_policy": "open-manual-draft-verify-v8",
+  "schema_version": "draft-verify-stream-ui-prepared-v8",
+  "test_files_only_in_build_stage": [
+    "rider_ui/tests/__init__.py",
+    "rider_ui/tests/test_client.py",
+    "rider_ui/tests/test_identity.py",
+    "rider_ui/tests/test_safeguards.py",
+    "rider_ui/tests/test_verified_sse.py",
+    "rider_ui/tests/test_progress_stream.py",
+    "rider_ui/tests/test_app.py",
+    "rider_ui/tests/fixture_api.py"
+  ]
+}

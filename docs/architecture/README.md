@@ -2,6 +2,8 @@
 
 The current [draft, verify, stream decision](DRAFT_VERIFY_STREAM_DECISION_20261011.md) supersedes the earlier [grounded-generation amendment](TRD_V05_GROUNDED_GENERATION_AMENDMENT_20261011.md). Implementation and validation are tracked in the [integration report](../../reports/grounded_generation/draft_verify_stream_v1/README.md). Runtime code is grouped in [cloud/grounded_generation](../../cloud/grounded_generation/); the code map below retains historical compatibility and experiment paths.
 
+The optional [Haiku availability fallback](HAIKU_EVIDENCE_FALLBACK_20261011.md) retains the same evidence, verifier and application delivery gates. [V8 results](../../reports/grounded_generation/v8/REPORT.md) distinguish passing software/UI checks from failed real answer coverage and pending live activation.
+
 ## Retrieval
 
 - [Hosted index decision](HOSTED_INDEX_DECISION.md): selected BGE M3 snapshot and measured alternatives.

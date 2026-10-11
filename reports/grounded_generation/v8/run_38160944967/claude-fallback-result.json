@@ -1,0 +1,2005 @@
+{
+  "schema_version": "claude-fallback-hosted-execution-v8",
+  "runtime_manifest_sha256": "5652716e84077fdaccd476a61edb1bcd47c50801a95baac524925497f7179650",
+  "heldout_sha256": "e989392aa6de7e3804917e76c8ba964574a1d43993cabd420e07dd4c9a730656",
+  "model": "claude-haiku-5-5",
+  "primary_availability_fault": "SYNTHETIC_NO_PAID_GEMMA_CALL",
+  "fallback_calls": "ACTUAL_ANTHROPIC",
+  "maximum_validation_cost_usd": 1,
+  "maximum_generation_attempts": 24,
+  "maximum_reserved_tokens": 239808,
+  "retrieval_execution": "HOSTED_IMMUTABLE_INDEX_SNAPSHOT_BGE_M3_BM25",
+  "durable_store": "HOSTED_FSYNC_NOT_FIRESTORE",
+  "latency_scope": "HOSTED_HARNESS_NOT_DEPLOYED_CLOUD_RUN",
+  "deployment_changed": false,
+  "billing_changed": false,
+  "acceptance": "PENDING_INDEPENDENT_ORIGINAL_PAGE_REVIEW",
+  "rows": [
+    {
+      "case_id": "H801",
+      "turn_number": 1,
+      "rider_question": "Where should my right foot be to operate the rear brake?",
+      "actual_rider_output": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+      "view": {
+        "schema_version": "motomedic-rider-api-v1",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "session_id": "00ab88ffddb84ec1a16fddbf16496e54",
+        "version": 1,
+        "response": {
+          "type": "UNSUPPORTED",
+          "natural_language": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+          "technical_content": false,
+          "release_gate_passed": false,
+          "cited_pages": [],
+          "trace_id": "b449d421c6ea434c80399920d6345902",
+          "reason_codes": [
+            "MISSING_SUPPORT"
+          ]
+        },
+        "choices": [],
+        "history": [],
+        "escalation_uri": "mailto:support@royalenfield.com",
+        "runtime_policy": "open-manual-draft-verify-v8",
+        "provider_calls": 2,
+        "runtime_controls": {
+          "composition": {
+            "version": "open-manual-draft-verify-v8",
+            "provider_calls": 2,
+            "generation_calls": 2,
+            "draft_calls": 1,
+            "verification_calls": 1,
+            "correction_calls": 0,
+            "corrections": 0,
+            "answer_cache": "DISABLED",
+            "provider_prompt_cache": "UNSUPPORTED",
+            "verification_probabilistic": true,
+            "verified_buffer_ready": false,
+            "answer_exposed": false,
+            "verifier_calls": 1,
+            "attempts": [
+              {
+                "revision": 0,
+                "draft_seconds": 4.310743027000001,
+                "draft_provider": {
+                  "model": "claude-haiku-5-5",
+                  "generation_calls": 1,
+                  "fallback_used": true,
+                  "attempts": [
+                    {
+                      "provider": "gemma",
+                      "failure_code": "PROVIDER_HTTP_500",
+                      "trace": {
+                        "model": "gemma-4-26b-a4b-it",
+                        "generation_calls": 0,
+                        "synthetic_availability_failure": true
+                      }
+                    },
+                    {
+                      "provider": "anthropic",
+                      "trace": {
+                        "model": "claude-haiku-5-5",
+                        "provider": "anthropic",
+                        "generation_calls": 1,
+                        "retry_count": 0,
+                        "cached_tokens": 0,
+                        "provider_cache": "DISABLED",
+                        "raw_content_logged": false,
+                        "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                        "token_counter_is_estimate": true,
+                        "input_tokens_counted": 3574,
+                        "reserved_maximum_cost_usd": 0.0017192,
+                        "provider_seconds": 3.3946361960000218,
+                        "input_tokens": 3574,
+                        "output_tokens": 165,
+                        "estimated_cost_usd": 0.0004399
+                      }
+                    }
+                  ],
+                  "successful_provider": "anthropic"
+                },
+                "verification_seconds": 59.746524007000005,
+                "verification_provider": {
+                  "model": "claude-haiku-5-5",
+                  "generation_calls": 1,
+                  "fallback_used": true,
+                  "attempts": [
+                    {
+                      "provider": "gemma",
+                      "failure_code": "PROVIDER_HTTP_500",
+                      "trace": {
+                        "model": "gemma-4-26b-a4b-it",
+                        "generation_calls": 0,
+                        "synthetic_availability_failure": true
+                      }
+                    },
+                    {
+                      "provider": "anthropic",
+                      "trace": {
+                        "model": "claude-haiku-5-5",
+                        "provider": "anthropic",
+                        "generation_calls": 1,
+                        "retry_count": 0,
+                        "cached_tokens": 0,
+                        "provider_cache": "DISABLED",
+                        "raw_content_logged": false,
+                        "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                        "token_counter_is_estimate": true,
+                        "input_tokens_counted": 4860,
+                        "reserved_maximum_cost_usd": 0.0017192,
+                        "provider_seconds": 4.500417292000009,
+                        "input_tokens": 4860,
+                        "output_tokens": 493,
+                        "estimated_cost_usd": 0.0007325
+                      }
+                    }
+                  ],
+                  "successful_provider": "anthropic"
+                },
+                "binding_sha256": "e2316dbb5e4ab72ff45102b7400a26d2c5e09214602f36206706afb4a1c889cc",
+                "verdict_summary": {
+                  "decision": "SHOW_FALLBACK",
+                  "question_coverage": "UNANSWERABLE",
+                  "supported_claims": 1,
+                  "total_claims": 2,
+                  "omission_count": 1,
+                  "conflict_count": 0,
+                  "release_eligible": false
+                }
+              }
+            ],
+            "failure_code": "MISSING_SUPPORT",
+            "total_private_pipeline_seconds": 64.94745883000002
+          },
+          "retrieval": null,
+          "source_admission": {
+            "authority_lock": "ca7be74ae95471ab99f59ecc2eade76fdb6cbbf068046c64baa6829a79252fa2",
+            "chunk_ids": [
+              "chunk_c193aeefd8fcfc5e74353f6c",
+              "chunk_f147a8d445cf90c3e8da0a9e",
+              "chunk_8da593dcccaaf3885290163f",
+              "chunk_a71908eb694f68573e953403",
+              "chunk_c99f7f195b3356bde86aaef8",
+              "chunk_a0161069cb21ab51426112b6"
+            ],
+            "admitted_evidence_ids": [],
+            "gaps": [
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_c193aeefd8fcfc5e74353f6c",
+                "evidence_ids": [
+                  "evidence_93cbd62fe74a02124aa01cee",
+                  "evidence_d1161450f964512259fa2fa1",
+                  "evidence_f7b05bf4db96825aa12f64b9"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_f147a8d445cf90c3e8da0a9e",
+                "evidence_ids": [
+                  "evidence_089040136a6db1c19ac52301",
+                  "evidence_30d064e1a6d7e61e9dc06aea",
+                  "evidence_40f5d4a6e5e699d3d33fb221",
+                  "evidence_735a698d8fa26bc86a15147b",
+                  "evidence_a4c23eab770893c1787fe4c2",
+                  "evidence_b086cd26086432cc959c001b",
+                  "evidence_d53ed6e570d1fc50c7ba77ca",
+                  "evidence_e6ff253420ce2be0cd628b54"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_8da593dcccaaf3885290163f",
+                "evidence_ids": [
+                  "evidence_1a82cf26b849ca133426ddd6",
+                  "evidence_47326c51fe8937a4241d9643"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_a71908eb694f68573e953403",
+                "evidence_ids": [
+                  "evidence_3a355912cf7780e1b00fc073"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_c99f7f195b3356bde86aaef8",
+                "evidence_ids": [
+                  "evidence_1a4a9e4835fa45cb47a8e2b7",
+                  "evidence_36aab971d5f3d1296a230e74",
+                  "evidence_7b9eea396ec339b418e255da",
+                  "evidence_8646abf0089d63326da579aa",
+                  "evidence_e43a7f9abaac69664886ff35"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_a0161069cb21ab51426112b6",
+                "evidence_ids": [
+                  "evidence_7cd1de903310b8e09d8a9d4e"
+                ],
+                "rider_resolvable": false
+              }
+            ],
+            "retrieval_assembly_seconds": 0.852519755000003
+          }
+        },
+        "delivery": {
+          "operation_id": "H801:1",
+          "response_sha256": "09006eba0347470ddfb4db8c74b9fcfd722a2dec15b67ade78506bb4b00a6485",
+          "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "evidence_payload_sha256": null,
+          "verification_binding_sha256": null
+        }
+      },
+      "progress_events": [
+        {
+          "stage": "retrieving",
+          "seconds": 0.003030393999978287
+        },
+        {
+          "stage": "drafting",
+          "seconds": 0.8742498149999847
+        },
+        {
+          "stage": "verifying",
+          "seconds": 6.04703572599999
+        }
+      ],
+      "private_drafts_and_verifier_decisions": [
+        {
+          "revision": 0,
+          "draft": {
+            "route": "UNSUPPORTED",
+            "coverage": "NONE",
+            "claims": [
+              {
+                "text": "The retrieved manual evidence available for this request does not establish where the rider's right foot should be placed to operate the rear brake, so this question cannot be answered from the admitted source material.",
+                "role": "LIMITATION",
+                "evidence_ids": []
+              }
+            ],
+            "unanswered_parts": [
+              "Where the right foot should be positioned to operate the rear brake pedal"
+            ],
+            "clarification_question": "",
+            "rider_resolvable": false
+          },
+          "complete_proposed_response": {
+            "route": "UNSUPPORTED",
+            "text": "The retrieved manual evidence available for this request does not establish where the rider's right foot should be placed to operate the rear brake, so this question cannot be answered from the admitted source material. Kindly write to Royal Enfield at support@royalenfield.com",
+            "claims": [
+              {
+                "claim_id": "draft:0",
+                "text": "The retrieved manual evidence available for this request does not establish where the rider's right foot should be placed to operate the rear brake, so this question cannot be answered from the admitted source material.",
+                "role": "LIMITATION",
+                "evidence_ids": [],
+                "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+                "origin": "DRAFT"
+              },
+              {
+                "claim_id": "server:support-route",
+                "text": "Kindly write to Royal Enfield at support@royalenfield.com",
+                "role": "SUPPORT_ROUTE",
+                "evidence_ids": [],
+                "presentation_mode": "VERIFIED_SUPPORT_ROUTE",
+                "origin": "VERIFIED_SERVICE_METADATA"
+              }
+            ],
+            "citations": [],
+            "clarification_question": null,
+            "escalation_uri": "mailto:support@royalenfield.com",
+            "trace_id": "ba7207204f9b4c3fb97ef24a707a6e96",
+            "session_status": "OPEN"
+          },
+          "verdict": {
+            "binding_sha256": "e2316dbb5e4ab72ff45102b7400a26d2c5e09214602f36206706afb4a1c889cc",
+            "decision": "SHOW_FALLBACK",
+            "question_coverage": "UNANSWERABLE",
+            "per_claim_support": [
+              {
+                "claim_id": "draft:0",
+                "supported": false,
+                "supported_evidence_ids": [],
+                "reason": "The claim is an honest limitation statement that the admitted evidence does not establish rear brake foot placement; it cites no evidence, which is consistent with the empty evidence set, but the limitation is a non-technical statement about evidence availability rather than a technical claim requiring citation support. Given the route is UNSUPPORTED with no clarification and the support route is metadata-verified, the response does not release, so this claim is not supported for release."
+              },
+              {
+                "claim_id": "server:support-route",
+                "supported": true,
+                "supported_evidence_ids": [],
+                "reason": "Verified OEM support wording and email are supplied as verified service metadata for an unsupported route, so the routing claim is supported by the supplied metadata."
+              }
+            ],
+            "omissions": [
+              "The evidence payload is empty, so the response does not establish whether the manual contains any rear brake pedal or rider foot positioning content; the response does not claim a specific manual section was searched, which is acceptable only because it states the limitation."
+            ],
+            "conflicts": [],
+            "coverage_limitation_clear": true,
+            "clarification_is_rider_resolvable": false,
+            "release_eligible": false,
+            "correction_possible": false
+          }
+        }
+      ],
+      "first_progress_seconds": 0.003030393999978287,
+      "first_verified_answer_seconds_including_evaluation_pacing": null,
+      "full_completion_seconds_including_evaluation_pacing": 65.804114997,
+      "durable_save_seconds": 0.0005608939999888207,
+      "private_pipeline_seconds_excluding_evaluation_pacing": 11.636950171999985,
+      "accepted_streamed_recovered_equal": true,
+      "event_types": [
+        "complete"
+      ],
+      "original_pages_for_independent_review": [
+        88,
+        89
+      ],
+      "expected_route": "SUPPORTED",
+      "expected_coverage": null,
+      "semantic_claim_review": "PENDING",
+      "question_coverage_review": "PENDING"
+    },
+    {
+      "case_id": "H801",
+      "turn_number": 2,
+      "rider_question": "For that brake, which brake-fluid grade does the manual specify?",
+      "actual_rider_output": "I couldn’t check the answer right now. Please try again shortly.",
+      "view": {
+        "schema_version": "motomedic-rider-api-v1",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "session_id": "00ab88ffddb84ec1a16fddbf16496e54",
+        "version": 2,
+        "response": {
+          "type": "SYSTEM_ERROR",
+          "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+          "technical_content": false,
+          "release_gate_passed": false,
+          "cited_pages": [],
+          "trace_id": "3360aee7cd2e4862be684507ba28c422",
+          "reason_codes": [
+            "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+          ]
+        },
+        "choices": [],
+        "history": [],
+        "escalation_uri": "mailto:support@royalenfield.com",
+        "runtime_policy": "open-manual-draft-verify-v8",
+        "provider_calls": 0,
+        "runtime_controls": {
+          "composition": {
+            "version": "open-manual-draft-verify-v8",
+            "provider_calls": 0,
+            "generation_calls": 0,
+            "draft_calls": 1,
+            "verification_calls": 0,
+            "correction_calls": 0,
+            "corrections": 0,
+            "answer_cache": "DISABLED",
+            "provider_prompt_cache": "UNSUPPORTED",
+            "verification_probabilistic": true,
+            "verified_buffer_ready": false,
+            "answer_exposed": false,
+            "verifier_calls": 0,
+            "attempts": [],
+            "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+            "failed_provider_trace": {
+              "model": "gemma-4-26b-a4b-it",
+              "generation_calls": 0,
+              "fallback_used": true,
+              "attempts": [
+                {
+                  "provider": "gemma",
+                  "failure_code": "PROVIDER_HTTP_500",
+                  "trace": {
+                    "model": "gemma-4-26b-a4b-it",
+                    "generation_calls": 0,
+                    "synthetic_availability_failure": true
+                  }
+                },
+                {
+                  "provider": "anthropic",
+                  "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+                  "trace": {
+                    "model": "claude-haiku-5-5",
+                    "provider": "anthropic",
+                    "generation_calls": 0,
+                    "retry_count": 0,
+                    "cached_tokens": 0,
+                    "provider_cache": "DISABLED",
+                    "raw_content_logged": false,
+                    "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                    "token_counter_is_estimate": true
+                  }
+                }
+              ]
+            },
+            "total_private_pipeline_seconds": 0.20713265000000547
+          },
+          "retrieval": null,
+          "source_admission": {
+            "authority_lock": "ca7be74ae95471ab99f59ecc2eade76fdb6cbbf068046c64baa6829a79252fa2",
+            "chunk_ids": [
+              "chunk_7326caba6175a0e77bb8cc73",
+              "chunk_f5edca9e614cec39c892da64",
+              "chunk_f9a61def31f22f89056b1ee8",
+              "chunk_faae704f97e2fa75512f5d8a",
+              "chunk_f672b8fe35727f87d3d25d29",
+              "chunk_aa814d09365c961ccd434d70"
+            ],
+            "admitted_evidence_ids": [
+              "evidence_37c6c31f5700495414de1101",
+              "evidence_83a88ebb31e7e605c31f08e4",
+              "evidence_91ac5ade2895a493bbab1583",
+              "evidence_a6950ea73293cda81e695ce1",
+              "evidence_bab06f99aa13ab1578a152a0"
+            ],
+            "gaps": [
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_faae704f97e2fa75512f5d8a",
+                "evidence_ids": [
+                  "evidence_19466e6264cba31b9148066c",
+                  "evidence_436176ca24953c494cf78f03",
+                  "evidence_4632b1e6c87b504a33b83110",
+                  "evidence_811a469947b84f2c69db18fb",
+                  "evidence_c9c77d066e7149b42883c323"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_f672b8fe35727f87d3d25d29",
+                "evidence_ids": [
+                  "evidence_d6ae12d562fda72cd97f73d7"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_aa814d09365c961ccd434d70",
+                "evidence_ids": [
+                  "evidence_8e1dfabe9f50a1a1b6d184cf"
+                ],
+                "rider_resolvable": false
+              }
+            ],
+            "retrieval_assembly_seconds": 0.2644845009999983
+          }
+        },
+        "delivery": {
+          "operation_id": "H801:2",
+          "response_sha256": "21b16e63c37304aef51f696b360308cc51a77b2e3e40543d6f03658e9d2a50c0",
+          "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "evidence_payload_sha256": null,
+          "verification_binding_sha256": null
+        }
+      },
+      "progress_events": [
+        {
+          "stage": "retrieving",
+          "seconds": 0.0009161750000146185
+        },
+        {
+          "stage": "drafting",
+          "seconds": 0.29177121500001135
+        }
+      ],
+      "private_drafts_and_verifier_decisions": [],
+      "first_progress_seconds": 0.0009161750000146185,
+      "first_verified_answer_seconds_including_evaluation_pacing": null,
+      "full_completion_seconds_including_evaluation_pacing": 0.47352268800000274,
+      "durable_save_seconds": 0.0004970479999997224,
+      "private_pipeline_seconds_excluding_evaluation_pacing": 0.4728160030000197,
+      "accepted_streamed_recovered_equal": true,
+      "event_types": [
+        "complete"
+      ],
+      "original_pages_for_independent_review": [
+        21,
+        88
+      ],
+      "expected_route": "SUPPORTED",
+      "expected_coverage": null,
+      "semantic_claim_review": "PENDING",
+      "question_coverage_review": "PENDING"
+    },
+    {
+      "case_id": "H802",
+      "turn_number": 1,
+      "rider_question": "Please give the engine bore and stroke as two separate measurements with units.",
+      "actual_rider_output": "I couldn’t check the answer right now. Please try again shortly.",
+      "view": {
+        "schema_version": "motomedic-rider-api-v1",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "session_id": "a41e334bb2a04df6a489d81466eab018",
+        "version": 1,
+        "response": {
+          "type": "SYSTEM_ERROR",
+          "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+          "technical_content": false,
+          "release_gate_passed": false,
+          "cited_pages": [],
+          "trace_id": "a963c5873fd64747a5e00bb3d9734f32",
+          "reason_codes": [
+            "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+          ]
+        },
+        "choices": [],
+        "history": [],
+        "escalation_uri": "mailto:support@royalenfield.com",
+        "runtime_policy": "open-manual-draft-verify-v8",
+        "provider_calls": 0,
+        "runtime_controls": {
+          "composition": {
+            "version": "open-manual-draft-verify-v8",
+            "provider_calls": 0,
+            "generation_calls": 0,
+            "draft_calls": 1,
+            "verification_calls": 0,
+            "correction_calls": 0,
+            "corrections": 0,
+            "answer_cache": "DISABLED",
+            "provider_prompt_cache": "UNSUPPORTED",
+            "verification_probabilistic": true,
+            "verified_buffer_ready": false,
+            "answer_exposed": false,
+            "verifier_calls": 0,
+            "attempts": [],
+            "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+            "failed_provider_trace": {
+              "model": "gemma-4-26b-a4b-it",
+              "generation_calls": 0,
+              "fallback_used": true,
+              "attempts": [
+                {
+                  "provider": "gemma",
+                  "failure_code": "PROVIDER_HTTP_500",
+                  "trace": {
+                    "model": "gemma-4-26b-a4b-it",
+                    "generation_calls": 0,
+                    "synthetic_availability_failure": true
+                  }
+                },
+                {
+                  "provider": "anthropic",
+                  "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+                  "trace": {
+                    "model": "claude-haiku-5-5",
+                    "provider": "anthropic",
+                    "generation_calls": 0,
+                    "retry_count": 0,
+                    "cached_tokens": 0,
+                    "provider_cache": "DISABLED",
+                    "raw_content_logged": false,
+                    "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                    "token_counter_is_estimate": true
+                  }
+                }
+              ]
+            },
+            "total_private_pipeline_seconds": 0.20075276400001485
+          },
+          "retrieval": null,
+          "source_admission": {
+            "authority_lock": "ca7be74ae95471ab99f59ecc2eade76fdb6cbbf068046c64baa6829a79252fa2",
+            "chunk_ids": [
+              "chunk_1db5c7901af2cf565fd97f01",
+              "chunk_c63548d2d0eea40969f5a02c",
+              "chunk_1750fde3d783557c2f8c58d1",
+              "chunk_f80dfec47c9c6d5eff6fd776",
+              "chunk_b620d86495ce81ca63b12755",
+              "chunk_20ef9013cd5ec3dc4614e73c"
+            ],
+            "admitted_evidence_ids": [
+              "evidence_13ff401422c8fc0d784d7e92",
+              "evidence_283ac900b5a9b700969e4d34",
+              "evidence_32cf970fdb9c163e0de21c1a",
+              "evidence_3a585b9acb43c05172e95624",
+              "evidence_467855effee5419bd63fb826",
+              "evidence_a5bb5d14fd332f16c381c1b7",
+              "evidence_a798d3ba95cd9f9440be754a",
+              "evidence_b1e9bacad4e60cf54b0a3aa2",
+              "evidence_b42c533d2f90267c01b12bb6",
+              "evidence_d11ae7cb778df64207e63d04",
+              "evidence_e43f21422e7fcda50e76c4bb",
+              "evidence_f4ee929e545ef669fdb494a1"
+            ],
+            "gaps": [
+              {
+                "type": "SOURCE_OBJECT_OR_CONTEXT_REVIEW_REQUIRED",
+                "chunk_id": "chunk_f80dfec47c9c6d5eff6fd776",
+                "evidence_ids": [
+                  "evidence_c762ef2c61505dc7ac7c01d8",
+                  "evidence_cb7062b4cec26700e3ae1185",
+                  "evidence_f1b023ea7924903fed5dfe5f",
+                  "evidence_f3dd00ecbff8fd98a8c32736"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_20ef9013cd5ec3dc4614e73c",
+                "evidence_ids": [
+                  "evidence_01bb03a17dcd0490c911475a"
+                ],
+                "rider_resolvable": false
+              }
+            ],
+            "retrieval_assembly_seconds": 0.2598134170000037
+          }
+        },
+        "delivery": {
+          "operation_id": "H802:1",
+          "response_sha256": "cbfd2287492307b9b121c123d8b85288a1555b520dda299aef794bff9f341ac2",
+          "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "evidence_payload_sha256": null,
+          "verification_binding_sha256": null
+        }
+      },
+      "progress_events": [
+        {
+          "stage": "retrieving",
+          "seconds": 0.0008502660000146989
+        },
+        {
+          "stage": "drafting",
+          "seconds": 0.28599416900001984
+        }
+      ],
+      "private_drafts_and_verifier_decisions": [],
+      "first_progress_seconds": 0.0008502660000146989,
+      "first_verified_answer_seconds_including_evaluation_pacing": null,
+      "full_completion_seconds_including_evaluation_pacing": 0.4622427220000134,
+      "durable_save_seconds": 0.0004512779999856775,
+      "private_pipeline_seconds_excluding_evaluation_pacing": 0.46162254899999766,
+      "accepted_streamed_recovered_equal": true,
+      "event_types": [
+        "complete"
+      ],
+      "original_pages_for_independent_review": [
+        16
+      ],
+      "expected_route": "SUPPORTED",
+      "expected_coverage": null,
+      "semantic_claim_review": "PENDING",
+      "question_coverage_review": "PENDING"
+    },
+    {
+      "case_id": "H803",
+      "turn_number": 1,
+      "rider_question": "What voltage and current are specified for the USB socket, and may I use it for fast charging?",
+      "actual_rider_output": "I couldn’t check the answer right now. Please try again shortly.",
+      "view": {
+        "schema_version": "motomedic-rider-api-v1",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "session_id": "5b0510f5d05b49cd901f151b65816055",
+        "version": 1,
+        "response": {
+          "type": "SYSTEM_ERROR",
+          "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+          "technical_content": false,
+          "release_gate_passed": false,
+          "cited_pages": [],
+          "trace_id": "b07a43eb53674d55a5213727d95f1dad",
+          "reason_codes": [
+            "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+          ]
+        },
+        "choices": [],
+        "history": [],
+        "escalation_uri": "mailto:support@royalenfield.com",
+        "runtime_policy": "open-manual-draft-verify-v8",
+        "provider_calls": 0,
+        "runtime_controls": {
+          "composition": {
+            "version": "open-manual-draft-verify-v8",
+            "provider_calls": 0,
+            "generation_calls": 0,
+            "draft_calls": 1,
+            "verification_calls": 0,
+            "correction_calls": 0,
+            "corrections": 0,
+            "answer_cache": "DISABLED",
+            "provider_prompt_cache": "UNSUPPORTED",
+            "verification_probabilistic": true,
+            "verified_buffer_ready": false,
+            "answer_exposed": false,
+            "verifier_calls": 0,
+            "attempts": [],
+            "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+            "failed_provider_trace": {
+              "model": "gemma-4-26b-a4b-it",
+              "generation_calls": 0,
+              "fallback_used": true,
+              "attempts": [
+                {
+                  "provider": "gemma",
+                  "failure_code": "PROVIDER_HTTP_500",
+                  "trace": {
+                    "model": "gemma-4-26b-a4b-it",
+                    "generation_calls": 0,
+                    "synthetic_availability_failure": true
+                  }
+                },
+                {
+                  "provider": "anthropic",
+                  "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+                  "trace": {
+                    "model": "claude-haiku-5-5",
+                    "provider": "anthropic",
+                    "generation_calls": 0,
+                    "retry_count": 0,
+                    "cached_tokens": 0,
+                    "provider_cache": "DISABLED",
+                    "raw_content_logged": false,
+                    "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                    "token_counter_is_estimate": true
+                  }
+                }
+              ]
+            },
+            "total_private_pipeline_seconds": 0.23407964599999787
+          },
+          "retrieval": null,
+          "source_admission": {
+            "authority_lock": "ca7be74ae95471ab99f59ecc2eade76fdb6cbbf068046c64baa6829a79252fa2",
+            "chunk_ids": [
+              "chunk_978068c2e079d4865ba1f8da",
+              "chunk_8105564d21681a7b4bc8728b",
+              "chunk_c9262bc554f6a06dc1e93ab9",
+              "chunk_e0136c37004bf0f014e82ba5",
+              "chunk_a876019bc141a9d47934e87a",
+              "chunk_72359a9cd785d431f09da027"
+            ],
+            "admitted_evidence_ids": [
+              "evidence_081f245f33f1dec5cb06a080",
+              "evidence_13dac6aaee2fcbdd57618d29",
+              "evidence_2e67c4cc94e9a302ba9a6822",
+              "evidence_31f9ffe7f325a580f7c58947",
+              "evidence_3f0254b2230794cc5e25393b",
+              "evidence_46ea7e82545c259cf4ed23b3",
+              "evidence_5547cca73df703b2d779755c",
+              "evidence_5560e923c89c184bddf2414f",
+              "evidence_662d4a163d504cc62ff5147e",
+              "evidence_6a7eba4e0fa3ae46308ea11c",
+              "evidence_82764faca7aa6cec43f2eeb3",
+              "evidence_87d7aaf9a6f68c203a240607",
+              "evidence_a35159dd2d88b584ad319de1",
+              "evidence_a4a384cb8cd1cd437ac00907",
+              "evidence_b345d26bcf46960f7125d8d8",
+              "evidence_bcc2ecdbee298a98332e9c23",
+              "evidence_cb5d01a60a05ab5e91447f30",
+              "evidence_d312aaa5aca85242f73bec26",
+              "evidence_da497f5f0bbf1c24b8f93714",
+              "evidence_e5038680f235054234151f44",
+              "evidence_ea69e5fbd3ff27f1dd159960",
+              "evidence_f4f3ea7f748d6732d21cae42",
+              "evidence_f5f14378db31693f76bd2a81"
+            ],
+            "gaps": [
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_e0136c37004bf0f014e82ba5",
+                "evidence_ids": [
+                  "evidence_45e01fb1becff7605de0f33d"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_a876019bc141a9d47934e87a",
+                "evidence_ids": [
+                  "evidence_4cf04dc20e51ea99b2f65f8a",
+                  "evidence_8cf19b0f3aa83fe252f906cc",
+                  "evidence_ca19a0798d747387ac97d08b"
+                ],
+                "rider_resolvable": false
+              }
+            ],
+            "retrieval_assembly_seconds": 0.31291028200001847
+          }
+        },
+        "delivery": {
+          "operation_id": "H803:1",
+          "response_sha256": "a6bf18cddf6d90781c82332bf71d41ca910f5c88fee48610a51a1f1c7fb0e1b4",
+          "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "evidence_payload_sha256": null,
+          "verification_binding_sha256": null
+        }
+      },
+      "progress_events": [
+        {
+          "stage": "retrieving",
+          "seconds": 0.000850205000006099
+        },
+        {
+          "stage": "drafting",
+          "seconds": 0.3491392450000035
+        }
+      ],
+      "private_drafts_and_verifier_decisions": [],
+      "first_progress_seconds": 0.000850205000006099,
+      "first_verified_answer_seconds_including_evaluation_pacing": null,
+      "full_completion_seconds_including_evaluation_pacing": 0.5488291329999981,
+      "durable_save_seconds": 0.0004432839999992666,
+      "private_pipeline_seconds_excluding_evaluation_pacing": 0.5481714440000189,
+      "accepted_streamed_recovered_equal": true,
+      "event_types": [
+        "complete"
+      ],
+      "original_pages_for_independent_review": [
+        19,
+        64,
+        65
+      ],
+      "expected_route": "SUPPORTED",
+      "expected_coverage": null,
+      "semantic_claim_review": "PENDING",
+      "question_coverage_review": "PENDING"
+    },
+    {
+      "case_id": "H804",
+      "turn_number": 1,
+      "rider_question": "How much fuel remains at the low-fuel warning, and what safe travel distance does the manual guarantee from there?",
+      "actual_rider_output": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+      "view": {
+        "schema_version": "motomedic-rider-api-v1",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "session_id": "6cd44c447025481eb6db4b0006097335",
+        "version": 1,
+        "response": {
+          "type": "UNSUPPORTED",
+          "natural_language": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+          "technical_content": false,
+          "release_gate_passed": false,
+          "cited_pages": [],
+          "trace_id": "d778a8bab12a4dd3b4feeef9790bcf26",
+          "reason_codes": [
+            "MISSING_SUPPORT"
+          ]
+        },
+        "choices": [],
+        "history": [],
+        "escalation_uri": "mailto:support@royalenfield.com",
+        "runtime_policy": "open-manual-draft-verify-v8",
+        "provider_calls": 2,
+        "runtime_controls": {
+          "composition": {
+            "version": "open-manual-draft-verify-v8",
+            "provider_calls": 2,
+            "generation_calls": 2,
+            "draft_calls": 1,
+            "verification_calls": 1,
+            "correction_calls": 0,
+            "corrections": 0,
+            "answer_cache": "DISABLED",
+            "provider_prompt_cache": "UNSUPPORTED",
+            "verification_probabilistic": true,
+            "verified_buffer_ready": false,
+            "answer_exposed": false,
+            "verifier_calls": 1,
+            "attempts": [
+              {
+                "revision": 0,
+                "draft_seconds": 55.74476987500003,
+                "draft_provider": {
+                  "model": "claude-haiku-5-5",
+                  "generation_calls": 1,
+                  "fallback_used": true,
+                  "attempts": [
+                    {
+                      "provider": "gemma",
+                      "failure_code": "PROVIDER_HTTP_500",
+                      "trace": {
+                        "model": "gemma-4-26b-a4b-it",
+                        "generation_calls": 0,
+                        "synthetic_availability_failure": true
+                      }
+                    },
+                    {
+                      "provider": "anthropic",
+                      "trace": {
+                        "model": "claude-haiku-5-5",
+                        "provider": "anthropic",
+                        "generation_calls": 1,
+                        "retry_count": 0,
+                        "cached_tokens": 0,
+                        "provider_cache": "DISABLED",
+                        "raw_content_logged": false,
+                        "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                        "token_counter_is_estimate": true,
+                        "input_tokens_counted": 3552,
+                        "reserved_maximum_cost_usd": 0.0017192,
+                        "provider_seconds": 2.0840635640000187,
+                        "input_tokens": 3552,
+                        "output_tokens": 180,
+                        "estimated_cost_usd": 0.00044520000000000003
+                      }
+                    }
+                  ],
+                  "successful_provider": "anthropic"
+                },
+                "verification_seconds": 61.118792928000005,
+                "verification_provider": {
+                  "model": "claude-haiku-5-5",
+                  "generation_calls": 1,
+                  "fallback_used": true,
+                  "attempts": [
+                    {
+                      "provider": "gemma",
+                      "failure_code": "PROVIDER_HTTP_500",
+                      "trace": {
+                        "model": "gemma-4-26b-a4b-it",
+                        "generation_calls": 0,
+                        "synthetic_availability_failure": true
+                      }
+                    },
+                    {
+                      "provider": "anthropic",
+                      "trace": {
+                        "model": "claude-haiku-5-5",
+                        "provider": "anthropic",
+                        "generation_calls": 1,
+                        "retry_count": 0,
+                        "cached_tokens": 0,
+                        "provider_cache": "DISABLED",
+                        "raw_content_logged": false,
+                        "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                        "token_counter_is_estimate": true,
+                        "input_tokens_counted": 4863,
+                        "reserved_maximum_cost_usd": 0.0017192,
+                        "provider_seconds": 3.373811087999968,
+                        "input_tokens": 4863,
+                        "output_tokens": 455,
+                        "estimated_cost_usd": 0.0007138
+                      }
+                    }
+                  ],
+                  "successful_provider": "anthropic"
+                },
+                "binding_sha256": "33c42bbec8fdb721e5df6e92f36148a5772f4bc811c378e9274e32f5baa8c56c",
+                "verdict_summary": {
+                  "decision": "SHOW_FALLBACK",
+                  "question_coverage": "UNANSWERABLE",
+                  "supported_claims": 1,
+                  "total_claims": 2,
+                  "omission_count": 1,
+                  "conflict_count": 0,
+                  "release_eligible": false
+                }
+              }
+            ],
+            "failure_code": "MISSING_SUPPORT",
+            "total_private_pipeline_seconds": 117.065708153
+          },
+          "retrieval": null,
+          "source_admission": {
+            "authority_lock": "ca7be74ae95471ab99f59ecc2eade76fdb6cbbf068046c64baa6829a79252fa2",
+            "chunk_ids": [
+              "chunk_b71d9400b2aa65edb4facaa1",
+              "chunk_1c2990f676e324a8387a7635",
+              "chunk_f6bb9e264a079f438c42d5e0",
+              "chunk_6edb3e8b28e5d6deb92df266",
+              "chunk_9e4c720cd28f2feb357fb2ef",
+              "chunk_1b38ebac9833f1d9f7cde732"
+            ],
+            "admitted_evidence_ids": [],
+            "gaps": [
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_b71d9400b2aa65edb4facaa1",
+                "evidence_ids": [
+                  "evidence_89df36871a133bec8f13011f"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_1c2990f676e324a8387a7635",
+                "evidence_ids": [
+                  "evidence_0b48ffd32b845515249840ab",
+                  "evidence_4f71b1bc4982bd7bf3489ad6",
+                  "evidence_77c44249cc8a5f046b6a7798",
+                  "evidence_cb9f15f609f419b604bb2029",
+                  "evidence_f60c90aae28918d4c8ffa07e"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_f6bb9e264a079f438c42d5e0",
+                "evidence_ids": [
+                  "evidence_524af4df0cb19477470c5d9e",
+                  "evidence_6b5735e11152c574268529f6",
+                  "evidence_84f6791f2601d09593f38288"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_6edb3e8b28e5d6deb92df266",
+                "evidence_ids": [
+                  "evidence_a03ccd44ab2d6b5db6bab123",
+                  "evidence_c5bacd3bd5b428c8950b0ce1"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_OBJECT_OR_CONTEXT_REVIEW_REQUIRED",
+                "chunk_id": "chunk_9e4c720cd28f2feb357fb2ef",
+                "evidence_ids": [
+                  "evidence_c762ef2c61505dc7ac7c01d8",
+                  "evidence_cb7062b4cec26700e3ae1185",
+                  "evidence_f1b023ea7924903fed5dfe5f",
+                  "evidence_f3dd00ecbff8fd98a8c32736"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_1b38ebac9833f1d9f7cde732",
+                "evidence_ids": [
+                  "evidence_954bc918ef81aedd2b5130d8",
+                  "evidence_d0f109db43f33dc54278c060"
+                ],
+                "rider_resolvable": false
+              }
+            ],
+            "retrieval_assembly_seconds": 0.31470676200001435
+          }
+        },
+        "delivery": {
+          "operation_id": "H804:1",
+          "response_sha256": "d14e0ea8953a5bace39879a524975560988b6518d6f9c61093fcbc11ed8b9036",
+          "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "evidence_payload_sha256": null,
+          "verification_binding_sha256": null
+        }
+      },
+      "progress_events": [
+        {
+          "stage": "retrieving",
+          "seconds": 0.0008709669999973357
+        },
+        {
+          "stage": "drafting",
+          "seconds": 0.3380607900000143
+        },
+        {
+          "stage": "verifying",
+          "seconds": 56.25415908599999
+        }
+      ],
+      "private_drafts_and_verifier_decisions": [
+        {
+          "revision": 0,
+          "draft": {
+            "route": "UNSUPPORTED",
+            "coverage": "NONE",
+            "claims": [
+              {
+                "text": "The retrieved manual evidence does not establish how much fuel remains at the low-fuel warning or any guaranteed safe travel distance from that point.",
+                "role": "LIMITATION",
+                "evidence_ids": []
+              }
+            ],
+            "unanswered_parts": [
+              "Amount of fuel remaining when the low-fuel warning illuminates",
+              "Safe travel distance guaranteed from the low-fuel warning point"
+            ],
+            "clarification_question": "",
+            "rider_resolvable": false
+          },
+          "complete_proposed_response": {
+            "route": "UNSUPPORTED",
+            "text": "The retrieved manual evidence does not establish how much fuel remains at the low-fuel warning or any guaranteed safe travel distance from that point. Kindly write to Royal Enfield at support@royalenfield.com",
+            "claims": [
+              {
+                "claim_id": "draft:0",
+                "text": "The retrieved manual evidence does not establish how much fuel remains at the low-fuel warning or any guaranteed safe travel distance from that point.",
+                "role": "LIMITATION",
+                "evidence_ids": [],
+                "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+                "origin": "DRAFT"
+              },
+              {
+                "claim_id": "server:support-route",
+                "text": "Kindly write to Royal Enfield at support@royalenfield.com",
+                "role": "SUPPORT_ROUTE",
+                "evidence_ids": [],
+                "presentation_mode": "VERIFIED_SUPPORT_ROUTE",
+                "origin": "VERIFIED_SERVICE_METADATA"
+              }
+            ],
+            "citations": [],
+            "clarification_question": null,
+            "escalation_uri": "mailto:support@royalenfield.com",
+            "trace_id": "dc6ec947ec7342479d38ef59d3a5762f",
+            "session_status": "OPEN"
+          },
+          "verdict": {
+            "binding_sha256": "33c42bbec8fdb721e5df6e92f36148a5772f4bc811c378e9274e32f5baa8c56c",
+            "decision": "SHOW_FALLBACK",
+            "question_coverage": "UNANSWERABLE",
+            "per_claim_support": [
+              {
+                "claim_id": "draft:0",
+                "supported": false,
+                "supported_evidence_ids": [],
+                "reason": "Claim is a nontechnical limitation statement and is honest in that it says the retrieved evidence does not establish the fuel quantity or guaranteed distance; however it cites no evidence and the evidence payload is empty, so it is not independently verified as a manual-sourced limitation, and the release route is UNSUPPORTED with no supporting evidence present."
+              },
+              {
+                "claim_id": "server:support-route",
+                "supported": true,
+                "supported_evidence_ids": [],
+                "reason": "Verified OEM support metadata (support@royalenfield.com, checked against the official contact page) supports the routing statement."
+              }
+            ],
+            "omissions": [
+              "The response does not explicitly state the manual evidence set was empty and that the question's unanswered parts (fuel remaining at low-fuel warning, guaranteed safe distance) were not retrieved from the manual."
+            ],
+            "conflicts": [],
+            "coverage_limitation_clear": true,
+            "clarification_is_rider_resolvable": false,
+            "release_eligible": false,
+            "correction_possible": false
+          }
+        }
+      ],
+      "first_progress_seconds": 0.0008709669999973357,
+      "first_verified_answer_seconds_including_evaluation_pacing": null,
+      "full_completion_seconds_including_evaluation_pacing": 117.38218894299999,
+      "durable_save_seconds": 0.00047157799997421534,
+      "private_pipeline_seconds_excluding_evaluation_pacing": 6.3607223090000105,
+      "accepted_streamed_recovered_equal": true,
+      "event_types": [
+        "complete"
+      ],
+      "original_pages_for_independent_review": [
+        18,
+        64
+      ],
+      "expected_route": "SUPPORTED",
+      "expected_coverage": "PARTIAL",
+      "semantic_claim_review": "PENDING",
+      "question_coverage_review": "PENDING"
+    },
+    {
+      "case_id": "H805",
+      "turn_number": 1,
+      "rider_question": "Give me the internal repair procedure for the fuel-pump relay, including which contacts to bridge.",
+      "actual_rider_output": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+      "view": {
+        "schema_version": "motomedic-rider-api-v1",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "session_id": "1b1ecfdafc0e46a0ac9cc8f5c6a91e8d",
+        "version": 1,
+        "response": {
+          "type": "UNSUPPORTED",
+          "natural_language": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+          "technical_content": false,
+          "release_gate_passed": false,
+          "cited_pages": [],
+          "trace_id": "9bb3bf04f9654d6f9bc006d5a2d59042",
+          "reason_codes": [
+            "MISSING_SUPPORT"
+          ]
+        },
+        "choices": [],
+        "history": [],
+        "escalation_uri": "mailto:support@royalenfield.com",
+        "runtime_policy": "open-manual-draft-verify-v8",
+        "provider_calls": 2,
+        "runtime_controls": {
+          "composition": {
+            "version": "open-manual-draft-verify-v8",
+            "provider_calls": 2,
+            "generation_calls": 2,
+            "draft_calls": 1,
+            "verification_calls": 1,
+            "correction_calls": 0,
+            "corrections": 0,
+            "answer_cache": "DISABLED",
+            "provider_prompt_cache": "UNSUPPORTED",
+            "verification_probabilistic": true,
+            "verified_buffer_ready": false,
+            "answer_exposed": false,
+            "verifier_calls": 1,
+            "attempts": [
+              {
+                "revision": 0,
+                "draft_seconds": 58.34678208099996,
+                "draft_provider": {
+                  "model": "claude-haiku-5-5",
+                  "generation_calls": 1,
+                  "fallback_used": true,
+                  "attempts": [
+                    {
+                      "provider": "gemma",
+                      "failure_code": "PROVIDER_HTTP_500",
+                      "trace": {
+                        "model": "gemma-4-26b-a4b-it",
+                        "generation_calls": 0,
+                        "synthetic_availability_failure": true
+                      }
+                    },
+                    {
+                      "provider": "anthropic",
+                      "trace": {
+                        "model": "claude-haiku-5-5",
+                        "provider": "anthropic",
+                        "generation_calls": 1,
+                        "retry_count": 0,
+                        "cached_tokens": 0,
+                        "provider_cache": "DISABLED",
+                        "raw_content_logged": false,
+                        "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                        "token_counter_is_estimate": true,
+                        "input_tokens_counted": 3832,
+                        "reserved_maximum_cost_usd": 0.0017192,
+                        "provider_seconds": 2.0326521379999463,
+                        "input_tokens": 3832,
+                        "output_tokens": 238,
+                        "estimated_cost_usd": 0.0005022000000000001
+                      }
+                    }
+                  ],
+                  "successful_provider": "anthropic"
+                },
+                "verification_seconds": 60.720719118999966,
+                "verification_provider": {
+                  "model": "claude-haiku-5-5",
+                  "generation_calls": 1,
+                  "fallback_used": true,
+                  "attempts": [
+                    {
+                      "provider": "gemma",
+                      "failure_code": "PROVIDER_HTTP_500",
+                      "trace": {
+                        "model": "gemma-4-26b-a4b-it",
+                        "generation_calls": 0,
+                        "synthetic_availability_failure": true
+                      }
+                    },
+                    {
+                      "provider": "anthropic",
+                      "trace": {
+                        "model": "claude-haiku-5-5",
+                        "provider": "anthropic",
+                        "generation_calls": 1,
+                        "retry_count": 0,
+                        "cached_tokens": 0,
+                        "provider_cache": "DISABLED",
+                        "raw_content_logged": false,
+                        "token_counter": "ANTHROPIC_COUNT_TOKENS",
+                        "token_counter_is_estimate": true,
+                        "input_tokens_counted": 5299,
+                        "reserved_maximum_cost_usd": 0.0017192,
+                        "provider_seconds": 2.9398323760000267,
+                        "input_tokens": 5299,
+                        "output_tokens": 486,
+                        "estimated_cost_usd": 0.0007729
+                      }
+                    }
+                  ],
+                  "successful_provider": "anthropic"
+                },
+                "binding_sha256": "528453d7373538392a7c13cae07cb48f14db3ee8eead88b9fb897ad6d54348f2",
+                "verdict_summary": {
+                  "decision": "SHOW_FALLBACK",
+                  "question_coverage": "UNANSWERABLE",
+                  "supported_claims": 2,
+                  "total_claims": 3,
+                  "omission_count": 2,
+                  "conflict_count": 0,
+                  "release_eligible": false
+                }
+              }
+            ],
+            "failure_code": "MISSING_SUPPORT",
+            "total_private_pipeline_seconds": 119.28209437600003
+          },
+          "retrieval": null,
+          "source_admission": {
+            "authority_lock": "ca7be74ae95471ab99f59ecc2eade76fdb6cbbf068046c64baa6829a79252fa2",
+            "chunk_ids": [
+              "chunk_457f54942b5cdfc5f3567a5e",
+              "chunk_15cbb7b30425b6c15895e00a",
+              "chunk_82b0e9e97e2a7a01dda81597",
+              "chunk_6317b5d3d3a0d64d8ae04914",
+              "chunk_2989c7e5544df8a5e447ef09",
+              "chunk_687abece774054f96d18aa8b"
+            ],
+            "admitted_evidence_ids": [],
+            "gaps": [
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_457f54942b5cdfc5f3567a5e",
+                "evidence_ids": [
+                  "evidence_263235a7812c9c3cbe043bc2",
+                  "evidence_985e54c3294c58ea6931c656",
+                  "evidence_9ba59edaf298afa400a86369",
+                  "evidence_ba7578409a4ddc7d61657b62"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_15cbb7b30425b6c15895e00a",
+                "evidence_ids": [
+                  "evidence_3120bcd439aece853998339b",
+                  "evidence_37fc5c901372acceb2ee4bf0",
+                  "evidence_423ad61a550cf44744fbddce",
+                  "evidence_5ea527f85bd6be10142add02",
+                  "evidence_651a7cb3537d4da07eb2c68d",
+                  "evidence_7e121f58503f86ab3d59dee0",
+                  "evidence_adfe7c84462c1795501fa2f6",
+                  "evidence_b8d10b6608a7b3dc8f3819aa",
+                  "evidence_d0ddd010293973bc1751d9e2",
+                  "evidence_ea92fce7689b120c6dc52302",
+                  "evidence_ecf5e0204b81c45a6a56c3ff",
+                  "evidence_ecf9b550d62b6653fa07fa75",
+                  "evidence_faa8fcb755f9e2daef0188bd"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_82b0e9e97e2a7a01dda81597",
+                "evidence_ids": [
+                  "evidence_c325e296ecf4d0a2efa7a83c"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_6317b5d3d3a0d64d8ae04914",
+                "evidence_ids": [
+                  "evidence_0d736282641c562d2c255d0b",
+                  "evidence_2186a9b29aec6734f2d21bc9",
+                  "evidence_49372cea7bfe5b9b1ddae2d8",
+                  "evidence_616cc341bbe04f9888c86def",
+                  "evidence_99fca0acfd9070356901ccbb"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_2989c7e5544df8a5e447ef09",
+                "evidence_ids": [
+                  "evidence_5885925bcab58f1cbf4cbffe",
+                  "evidence_5fb8fcd4406106f304075a9f",
+                  "evidence_70e02ab5236b658fe930211f",
+                  "evidence_97b0434cf83e0d8cb30f74dc",
+                  "evidence_a0c9f726de9a1339e0d7901e",
+                  "evidence_c70a4424a106dfe38f5dbcb5",
+                  "evidence_eabf626cfe7ee0c33398edb9"
+                ],
+                "rider_resolvable": false
+              },
+              {
+                "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED",
+                "chunk_id": "chunk_687abece774054f96d18aa8b",
+                "evidence_ids": [
+                  "evidence_d7a652798d09d99c53935544"
+                ],
+                "rider_resolvable": false
+              }
+            ],
+            "retrieval_assembly_seconds": 0.2804386919999615
+          }
+        },
+        "delivery": {
+          "operation_id": "H805:1",
+          "response_sha256": "86d55d67e9f329b49859d90d90344280206e2622fa4d153a3843164a2d787799",
+          "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "evidence_payload_sha256": null,
+          "verification_binding_sha256": null
+        }
+      },
+      "progress_events": [
+        {
+          "stage": "retrieving",
+          "seconds": 0.0008508349999942766
+        },
+        {
+          "stage": "drafting",
+          "seconds": 0.300744184999985
+        },
+        {
+          "stage": "verifying",
+          "seconds": 58.83418895599999
+        }
+      ],
+      "private_drafts_and_verifier_decisions": [
+        {
+          "revision": 0,
+          "draft": {
+            "route": "UNSUPPORTED",
+            "coverage": "NONE",
+            "claims": [
+              {
+                "text": "The retrieved manual information does not establish an internal repair procedure for the fuel-pump relay, including which contacts to bridge, so I cannot provide that procedure from this source.",
+                "role": "LIMITATION",
+                "evidence_ids": []
+              },
+              {
+                "text": "For this repair, contact Royal Enfield at support@royalenfield.com or consult a qualified motorcycle technician.",
+                "role": "LIMITATION",
+                "evidence_ids": []
+              }
+            ],
+            "unanswered_parts": [
+              "Internal repair procedure for the fuel-pump relay",
+              "Which relay contacts to bridge"
+            ],
+            "clarification_question": "",
+            "rider_resolvable": false
+          },
+          "complete_proposed_response": {
+            "route": "UNSUPPORTED",
+            "text": "The retrieved manual information does not establish an internal repair procedure for the fuel-pump relay, including which contacts to bridge, so I cannot provide that procedure from this source. For this repair, contact Royal Enfield at support@royalenfield.com or consult a qualified motorcycle technician. Kindly write to Royal Enfield at support@royalenfield.com",
+            "claims": [
+              {
+                "claim_id": "draft:0",
+                "text": "The retrieved manual information does not establish an internal repair procedure for the fuel-pump relay, including which contacts to bridge, so I cannot provide that procedure from this source.",
+                "role": "LIMITATION",
+                "evidence_ids": [],
+                "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+                "origin": "DRAFT"
+              },
+              {
+                "claim_id": "draft:1",
+                "text": "For this repair, contact Royal Enfield at support@royalenfield.com or consult a qualified motorcycle technician.",
+                "role": "LIMITATION",
+                "evidence_ids": [],
+                "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+                "origin": "DRAFT"
+              },
+              {
+                "claim_id": "server:support-route",
+                "text": "Kindly write to Royal Enfield at support@royalenfield.com",
+                "role": "SUPPORT_ROUTE",
+                "evidence_ids": [],
+                "presentation_mode": "VERIFIED_SUPPORT_ROUTE",
+                "origin": "VERIFIED_SERVICE_METADATA"
+              }
+            ],
+            "citations": [],
+            "clarification_question": null,
+            "escalation_uri": "mailto:support@royalenfield.com",
+            "trace_id": "7683bfab8d7944fd9a189800db2ffe18",
+            "session_status": "OPEN"
+          },
+          "verdict": {
+            "binding_sha256": "528453d7373538392a7c13cae07cb48f14db3ee8eead88b9fb897ad6d54348f2",
+            "decision": "SHOW_FALLBACK",
+            "question_coverage": "UNANSWERABLE",
+            "per_claim_support": [
+              {
+                "claim_id": "draft:0",
+                "supported": true,
+                "supported_evidence_ids": [],
+                "reason": "Honest limitation stating the manual does not establish the internal relay repair procedure or contacts to bridge; nontechnical and consistent with empty evidence set."
+              },
+              {
+                "claim_id": "draft:1",
+                "supported": false,
+                "supported_evidence_ids": [],
+                "reason": "Recommends contacting Royal Enfield or a qualified technician; the support email is only supported by verified service metadata, and the 'qualified technician' route is a nontechnical referral without source support in the supplied evidence, so it is not fully verified as a source-backed claim."
+              },
+              {
+                "claim_id": "server:support-route",
+                "supported": true,
+                "supported_evidence_ids": [],
+                "reason": "Verified OEM support route from service metadata; nontechnical support-route claim."
+              }
+            ],
+            "omissions": [
+              "Relevant safety warning about working on fuel-system electrical components is not addressed",
+              "Source-gap review required for multiple retrieved chunks was not disclosed to the user"
+            ],
+            "conflicts": [],
+            "coverage_limitation_clear": true,
+            "clarification_is_rider_resolvable": false,
+            "release_eligible": false,
+            "correction_possible": false
+          }
+        }
+      ],
+      "first_progress_seconds": 0.0008508349999942766,
+      "first_verified_answer_seconds_including_evaluation_pacing": null,
+      "full_completion_seconds_including_evaluation_pacing": 119.56431506399997,
+      "durable_save_seconds": 0.00048198299998603034,
+      "private_pipeline_seconds_excluding_evaluation_pacing": 5.870348000999911,
+      "accepted_streamed_recovered_equal": true,
+      "event_types": [
+        "complete"
+      ],
+      "original_pages_for_independent_review": [
+        112,
+        121,
+        122
+      ],
+      "expected_route": "UNSUPPORTED",
+      "expected_coverage": null,
+      "semantic_claim_review": "PENDING",
+      "question_coverage_review": "PENDING"
+    }
+  ],
+  "runtime_versions": {
+    "version": "open-manual-draft-verify-v8",
+    "model": "gemma-4-26b-a4b-it",
+    "provider_contract": {
+      "version": "gemma-haiku-availability-fallback-v1",
+      "primary_model": "gemma-4-26b-a4b-it",
+      "fallback": {
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5",
+        "version": "haiku-evidence-json-v1",
+        "input_tokens": 8192,
+        "output_tokens": 1800,
+        "request_bytes": 65536,
+        "native_json_schema": true,
+        "thinking": "disabled",
+        "automatic_retries": 0,
+        "input_usd_per_million": 0.1,
+        "output_usd_per_million": 0.5,
+        "pricing_checked_date": "2026-10-11",
+        "prompt_cache": "DISABLED"
+      },
+      "eligible_failures": [
+        "PROVIDER_HTTP_500",
+        "PROVIDER_HTTP_502",
+        "PROVIDER_HTTP_503",
+        "PROVIDER_HTTP_504",
+        "PROVIDER_UNCONFIGURED"
+      ],
+      "fallback_attempts_per_call": 1,
+      "fallback_after_semantic_rejection": false,
+      "fallback_after_quota_schema_integrity_or_source_failure": false
+    },
+    "draft_policy_sha256": "20b7ee9f71fe7682cda3d3b723e0207377dd75ef5f57b420b632285b99e81d05",
+    "verify_policy_sha256": "0c63579572bcc6d6aa9e4c9fe2714ee3547335c3a356f0fd2fb7133b9cd789d0",
+    "draft_schema_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+    "verify_schema_sha256": "de5ad9929c54e7df5d81ff2fbb22717b6ee2a548c7ed8f3e3b5eb3c384b8a8bd",
+    "code_sha256": {
+      "verified_qa.py": "ddd9522f7fc009130ed6e4760eb9b6dffe33237bee3fe6aaeb7b8d854cd152f2",
+      "provider.py": "80b130326430c9a43515853c9f834515ed11f46c35b93b2ea37d772083aec075",
+      "claude_provider.py": "24e4efeb688d4f0236841d07505df3c2974c15bd15e044550c4f89d652505971",
+      "fallback_provider.py": "793551d36b3e4987e6efcb7ab9e832ba03755c7cb1279150ee7e7f1f58373b52",
+      "claude_budget.py": "0cffa1ab12f11d35877affc2c512479fb4ab7d1079eb90280f3dc8f269a39b8f",
+      "admission.py": "bf0042a70539d2345c908a9ab5001a10f7d18db30f6fc4696cb8dbe0e69bd664",
+      "source_authority.py": "f17920691136a08fb911ed63cd89d05d991329584ad39c328974160a2d5e8a5a",
+      "open_questions.py": "22b03674a6b3d584f1bf15a9a5ec7aaedc06bdfb959992aaac3d37b4557cc552",
+      "generic_runtime.py": "3c1647a5546ced78dc586feacc92c685dd04ab50e65d20061e674901ca4ee6b1",
+      "runtime.py": "66f6c49985807544753cc2569a3c6dc3c1c7c3214e0d2960d6c9b7c2befee71b",
+      "source_context.py": "08cc57185f8c3ec8029a72f0de9dd1c07a5b8f409ed7f7d62012f1ec2d615a45",
+      "fuse_refusal.py": "a99702dd2bdaa568cdcc7365323d8649ba86b5ad2acdc1d333daf38bf285b8f0",
+      "cloud/grounded_generation/delivery.py": "932eb671fa738987ef9c5b5733ac3bddc1f1a54c55b1632c8f16b3836aef32c2",
+      "cloud/arm_a/app.py": "31210f87c69623798fb8901d964c0a5c535e5f45c5cdeed02b95f36f8b179864",
+      "cloud/arm_a/rider_api.py": "0d09b75b2a7da9a593909c1e230835fbacff0835e51d925283fee55a356aacdc",
+      "cloud/arm_a/store.py": "dea1fe904aa19ad74ace20ce4dcf44fdf1c4f65bc261c27023a0da0dd2f5b0b6",
+      "cloud/arm_a/rider_contract.py": "11a558fe20a08d27a6bf7447dc7cce37c5644c3250cb9a46d8140efe9502c30e",
+      "cloud/arm_a/runtime_controls.py": "e3c251f1dd7549af23ca912a4e89b09dfef97f2a6828df7367e2a9beeef7d105",
+      "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+      "reviewed_controller.py": "1250ff0aec16b134d3807332f0fc6c7933139edcf5bdd589b7a9f76b45c96db5",
+      "approved_registry.py": "0b469c3883391b391f597677261809a6409255a0f98305c24ec9cb2b23843fc5",
+      "evidence_registry.py": "7df97bb5e500a1c009e21f2a721f5c24205c7e52a9f6371e369113f20f1b6ae4",
+      "constrained_generator.py": "29af3862a20fa49c8fd49cfdd71e79f87f4cb82a96f9deedf7c4ccd7367a0fbd",
+      "human_review/agent_release_161/approval_consumer.py": "58e29397d5606b2385720248d6ce28afc1fe7b13f0f39a3b93ce2ddff2270e24"
+    },
+    "input_tokens": 8192,
+    "request_bytes": 65536,
+    "output_tokens": 1800,
+    "provider_concurrency": 1,
+    "provider_max_attempts": 3,
+    "provider_retry_rejections": [
+      429,
+      503
+    ],
+    "max_corrections": 1,
+    "answer_cache": "DISABLED",
+    "provider_prompt_cache": "UNSUPPORTED",
+    "semantic_verification": "SEPARATE_EXACT_FINALIZED_RESPONSE",
+    "answer_admission": "APPLICABLE_IMMUTABLE_SOURCE_ONLY_NO_ACTION_ALLOWLIST"
+  },
+  "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+  "worker_initialization_seconds": 41.209119128,
+  "provider_transports": [
+    {
+      "case_turn": "H801:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 3574,
+      "seconds": 0.23144731599998636
+    },
+    {
+      "case_turn": "H801:1",
+      "path": "messages",
+      "pipeline_role": "DRAFTING",
+      "actual_model_output": {
+        "model": "claude-haiku-5-5",
+        "id": "msg_011CfvsLv3oNKq9X8WTXcfc9",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"route\":\"UNSUPPORTED\",\"coverage\":\"NONE\",\"claims\":[{\"text\":\"The retrieved manual evidence available for this request does not establish where the rider's right foot should be placed to operate the rear brake, so this question cannot be answered from the admitted source material.\",\"role\":\"LIMITATION\",\"evidence_ids\":[]}],\"unanswered_parts\":[\"Where the right foot should be positioned to operate the rear brake pedal\"],\"clarification_question\":\"\",\"rider_resolvable\":false}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 3574,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 165,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      },
+      "seconds": 3.009812145000012
+    },
+    {
+      "case_turn": "H801:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 85,
+      "seconds": 0.2009647550000011
+    },
+    {
+      "case_turn": "H801:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 4860,
+      "seconds": 0.20840545600000837
+    },
+    {
+      "case_turn": "H801:1",
+      "path": "messages",
+      "pipeline_role": "VERIFICATION",
+      "actual_model_output": {
+        "model": "claude-haiku-5-5",
+        "id": "msg_011CfvsRHpMngaeB2B38Lz52",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"binding_sha256\":\"e2316dbb5e4ab72ff45102b7400a26d2c5e09214602f36206706afb4a1c889cc\",\"decision\":\"SHOW_FALLBACK\",\"question_coverage\":\"UNANSWERABLE\",\"per_claim_support\":[{\"claim_id\":\"draft:0\",\"supported\":false,\"supported_evidence_ids\":[],\"reason\":\"The claim is an honest limitation statement that the admitted evidence does not establish rear brake foot placement; it cites no evidence, which is consistent with the empty evidence set, but the limitation is a non-technical statement about evidence availability rather than a technical claim requiring citation support. Given the route is UNSUPPORTED with no clarification and the support route is metadata-verified, the response does not release, so this claim is not supported for release.\"},{\"claim_id\":\"server:support-route\",\"supported\":true,\"supported_evidence_ids\":[],\"reason\":\"Verified OEM support wording and email are supplied as verified service metadata for an unsupported route, so the routing claim is supported by the supplied metadata.\"}],\"omissions\":[\"The evidence payload is empty, so the response does not establish whether the manual contains any rear brake pedal or rider foot positioning content; the response does not claim a specific manual section was searched, which is acceptable only because it states the limitation.\"],\"conflicts\":[],\"coverage_limitation_clear\":true,\"clarification_is_rider_resolvable\":false,\"release_eligible\":false,\"correction_possible\":false}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 4860,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 493,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      },
+      "seconds": 4.499477331999998
+    },
+    {
+      "case_turn": "H801:2",
+      "path": "messages/count_tokens",
+      "input_tokens": 8769,
+      "seconds": 0.17885233999999173
+    },
+    {
+      "case_turn": "H802:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 9249,
+      "seconds": 0.1735572940000054
+    },
+    {
+      "case_turn": "H803:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 18255,
+      "seconds": 0.19622065899997665
+    },
+    {
+      "case_turn": "H804:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 3552,
+      "seconds": 0.20163634500002559
+    },
+    {
+      "case_turn": "H804:1",
+      "path": "messages",
+      "pipeline_role": "DRAFTING",
+      "actual_model_output": {
+        "model": "claude-haiku-5-5",
+        "id": "msg_011CfvsViUHXv8mvuYhNpRam",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"route\":\"UNSUPPORTED\",\"coverage\":\"NONE\",\"claims\":[{\"text\":\"The retrieved manual evidence does not establish how much fuel remains at the low-fuel warning or any guaranteed safe travel distance from that point.\",\"role\":\"LIMITATION\",\"evidence_ids\":[]}],\"unanswered_parts\":[\"Amount of fuel remaining when the low-fuel warning illuminates\",\"Safe travel distance guaranteed from the low-fuel warning point\"],\"clarification_question\":\"\",\"rider_resolvable\":false}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 3552,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 180,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      },
+      "seconds": 2.0822789860000057
+    },
+    {
+      "case_turn": "H804:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 76,
+      "seconds": 0.16117319799997176
+    },
+    {
+      "case_turn": "H804:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 4863,
+      "seconds": 0.17177228000002742
+    },
+    {
+      "case_turn": "H804:1",
+      "path": "messages",
+      "pipeline_role": "VERIFICATION",
+      "actual_model_output": {
+        "model": "claude-haiku-5-5",
+        "id": "msg_011Cfvsa9K8vfWea4ZUQUgBq",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"binding_sha256\":\"33c42bbec8fdb721e5df6e92f36148a5772f4bc811c378e9274e32f5baa8c56c\",\"decision\":\"SHOW_FALLBACK\",\"question_coverage\":\"UNANSWERABLE\",\"per_claim_support\":[{\"claim_id\":\"draft:0\",\"supported\":false,\"supported_evidence_ids\":[],\"reason\":\"Claim is a nontechnical limitation statement and is honest in that it says the retrieved evidence does not establish the fuel quantity or guaranteed distance; however it cites no evidence and the evidence payload is empty, so it is not independently verified as a manual-sourced limitation, and the release route is UNSUPPORTED with no supporting evidence present.\"},{\"claim_id\":\"server:support-route\",\"supported\":true,\"supported_evidence_ids\":[],\"reason\":\"Verified OEM support metadata (support@royalenfield.com, checked against the official contact page) supports the routing statement.\"}],\"omissions\":[\"The response does not explicitly state the manual evidence set was empty and that the question's unanswered parts (fuel remaining at low-fuel warning, guaranteed safe distance) were not retrieved from the manual.\"],\"conflicts\":[],\"coverage_limitation_clear\":true,\"clarification_is_rider_resolvable\":false,\"release_eligible\":false,\"correction_possible\":false}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 4863,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 455,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      },
+      "seconds": 3.3716940150000028
+    },
+    {
+      "case_turn": "H805:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 3832,
+      "seconds": 0.1830960230000187
+    },
+    {
+      "case_turn": "H805:1",
+      "path": "messages",
+      "pipeline_role": "DRAFTING",
+      "actual_model_output": {
+        "model": "claude-haiku-5-5",
+        "id": "msg_011CfvseZJ8wDbjkXTSNQ6Q2",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"route\":\"UNSUPPORTED\",\"coverage\":\"NONE\",\"claims\":[{\"text\":\"The retrieved manual information does not establish an internal repair procedure for the fuel-pump relay, including which contacts to bridge, so I cannot provide that procedure from this source.\",\"role\":\"LIMITATION\",\"evidence_ids\":[]},{\"text\":\"For this repair, contact Royal Enfield at support@royalenfield.com or consult a qualified motorcycle technician.\",\"role\":\"LIMITATION\",\"evidence_ids\":[]}],\"unanswered_parts\":[\"Internal repair procedure for the fuel-pump relay\",\"Which relay contacts to bridge\"],\"clarification_question\":\"\",\"rider_resolvable\":false}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 3832,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 238,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      },
+      "seconds": 2.030346855999994
+    },
+    {
+      "case_turn": "H805:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 124,
+      "seconds": 0.1749503309999909
+    },
+    {
+      "case_turn": "H805:1",
+      "path": "messages/count_tokens",
+      "input_tokens": 5299,
+      "seconds": 0.2047577120000028
+    },
+    {
+      "case_turn": "H805:1",
+      "path": "messages",
+      "pipeline_role": "VERIFICATION",
+      "actual_model_output": {
+        "model": "claude-haiku-5-5",
+        "id": "msg_011CfvsizCSioYPUvitTZ5Ub",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"binding_sha256\":\"528453d7373538392a7c13cae07cb48f14db3ee8eead88b9fb897ad6d54348f2\",\"decision\":\"SHOW_FALLBACK\",\"question_coverage\":\"UNANSWERABLE\",\"per_claim_support\":[{\"claim_id\":\"draft:0\",\"supported\":true,\"supported_evidence_ids\":[],\"reason\":\"Honest limitation stating the manual does not establish the internal relay repair procedure or contacts to bridge; nontechnical and consistent with empty evidence set.\"},{\"claim_id\":\"draft:1\",\"supported\":false,\"supported_evidence_ids\":[],\"reason\":\"Recommends contacting Royal Enfield or a qualified technician; the support email is only supported by verified service metadata, and the 'qualified technician' route is a nontechnical referral without source support in the supplied evidence, so it is not fully verified as a source-backed claim.\"},{\"claim_id\":\"server:support-route\",\"supported\":true,\"supported_evidence_ids\":[],\"reason\":\"Verified OEM support route from service metadata; nontechnical support-route claim.\"}],\"omissions\":[\"Relevant safety warning about working on fuel-system electrical components is not addressed\",\"Source-gap review required for multiple retrieved chunks was not disclosed to the user\"],\"conflicts\":[],\"coverage_limitation_clear\":true,\"clarification_is_rider_resolvable\":false,\"release_eligible\":false,\"correction_possible\":false}"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 5299,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 486,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      },
+      "seconds": 2.9374545379999972
+    }
+  ],
+  "provider_reservations": [
+    {
+      "case_turn": "H801:1",
+      "tokens": 5374,
+      "kind": "generation",
+      "evaluation_pacing_seconds": 0.0
+    },
+    {
+      "case_turn": "H801:1",
+      "tokens": 6660,
+      "kind": "generation",
+      "evaluation_pacing_seconds": 54.166380153000006
+    },
+    {
+      "case_turn": "H804:1",
+      "tokens": 5352,
+      "kind": "generation",
+      "evaluation_pacing_seconds": 53.45325137399999
+    },
+    {
+      "case_turn": "H804:1",
+      "tokens": 6663,
+      "kind": "generation",
+      "evaluation_pacing_seconds": 57.567525321999995
+    },
+    {
+      "case_turn": "H805:1",
+      "tokens": 5632,
+      "kind": "generation",
+      "evaluation_pacing_seconds": 56.12403250800003
+    },
+    {
+      "case_turn": "H805:1",
+      "tokens": 7099,
+      "kind": "generation",
+      "evaluation_pacing_seconds": 57.569214603000034
+    }
+  ],
+  "cost_reservations": [
+    {
+      "case_turn": "H801:1",
+      "reserved_usd": 0.0017192,
+      "model": "claude-haiku-5-5"
+    },
+    {
+      "case_turn": "H801:1",
+      "reserved_usd": 0.0017192,
+      "model": "claude-haiku-5-5"
+    },
+    {
+      "case_turn": "H804:1",
+      "reserved_usd": 0.0017192,
+      "model": "claude-haiku-5-5"
+    },
+    {
+      "case_turn": "H804:1",
+      "reserved_usd": 0.0017192,
+      "model": "claude-haiku-5-5"
+    },
+    {
+      "case_turn": "H805:1",
+      "reserved_usd": 0.0017192,
+      "model": "claude-haiku-5-5"
+    },
+    {
+      "case_turn": "H805:1",
+      "reserved_usd": 0.0017192,
+      "model": "claude-haiku-5-5"
+    }
+  ],
+  "completed_at_utc": "2026-10-11T17:52:08.101333+00:00"
+}

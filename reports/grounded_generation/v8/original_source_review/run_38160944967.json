@@ -1,0 +1,383 @@
+{
+  "run_id": "38160944967",
+  "artifact": "reports\\grounded_generation\\v8\\run_38160944967\\claude-fallback-result.json",
+  "artifact_sha256": "51dfb305db78ba0b176d15dc5f62d989e1e7225588d36ab1c257289ab19638b9",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+  "runtime_manifest_sha256": "5652716e84077fdaccd476a61edb1bcd47c50801a95baac524925497f7179650",
+  "heldout_sha256": "e989392aa6de7e3804917e76c8ba964574a1d43993cabd420e07dd4c9a730656",
+  "source_manifest_sha256": "3b38e5ead40555ba810e94ff758b0cd30e4c874642fe089b6ac52fe97b534e18",
+  "reviewer": "architecture_review",
+  "review_independent_of_verifier_decisions": true,
+  "review_method": "Read every real draft/final/verdict and six actual Anthropic transport outputs; visual original PDF pages16/18/19/21/24/64/65/88/89/112/121/122 plus section-level relay and foot-term crosschecks.",
+  "actual_provider_outputs": [
+    {
+      "case_turn": "H801:1",
+      "pipeline_role": "DRAFTING",
+      "actual_output_sha256": "01ce302414d0924e04683f1e26449a7ede56cd4a38d84a079688dd4d08a73a73",
+      "model": "claude-haiku-5-5",
+      "matches_recorded_private_output": true
+    },
+    {
+      "case_turn": "H801:1",
+      "pipeline_role": "VERIFICATION",
+      "actual_output_sha256": "02c8902943b4aa572b501e887cd1b14990187a705e4f06610c1472cfefdd0b1d",
+      "model": "claude-haiku-5-5",
+      "matches_recorded_private_output": true
+    },
+    {
+      "case_turn": "H804:1",
+      "pipeline_role": "DRAFTING",
+      "actual_output_sha256": "38876af756b6657e27ee270c93f0cad688fba0e5f6201d5e5e2b85381ef56f34",
+      "model": "claude-haiku-5-5",
+      "matches_recorded_private_output": true
+    },
+    {
+      "case_turn": "H804:1",
+      "pipeline_role": "VERIFICATION",
+      "actual_output_sha256": "d2a4b7763a1b554d1c67bc189434281d1b120e32f24aa65d92d85b5942542833",
+      "model": "claude-haiku-5-5",
+      "matches_recorded_private_output": true
+    },
+    {
+      "case_turn": "H805:1",
+      "pipeline_role": "DRAFTING",
+      "actual_output_sha256": "df86aabd16a03ea21ef19431bac2e33ec10bd0aac547ba4d54063acc0cb8f2ac",
+      "model": "claude-haiku-5-5",
+      "matches_recorded_private_output": true
+    },
+    {
+      "case_turn": "H805:1",
+      "pipeline_role": "VERIFICATION",
+      "actual_output_sha256": "3d0ad8e596d1e5af99175a30a7d5c39fa9630f94f64c2d46c98618f5dd422c09",
+      "model": "claude-haiku-5-5",
+      "matches_recorded_private_output": true
+    }
+  ],
+  "counts": {
+    "turns": 6,
+    "actual_drafts": 3,
+    "actual_verifier_outputs": 3,
+    "released_technical_answers": 0,
+    "release_complete": 0,
+    "release_partial": 0,
+    "show_fallback": 3,
+    "system_error_before_generation": 3,
+    "source_answerable_or_partial_turns_with_clear_original_support": 4,
+    "source_answerable_or_partial_turns_answered": 0,
+    "correct_unsupported_internal_repair_handling": 1,
+    "false_technical_acceptances_observed": 0,
+    "factual_support_rate_for_released_technical_claims": null,
+    "semantic_false_refusal_rate_on_supported_drafts": null,
+    "verifier_false_negative_assessments_of_honest_nontechnical_limitations": 2
+  },
+  "acceptance": "FAILED_ANSWERABLE_AND_PARTIAL_COVERAGE",
+  "rows": [
+    {
+      "case_turn": "H801:1",
+      "question": "Where should my right foot be to operate the rear brake?",
+      "artifact_row_sha256": "07236c47b29ab9a4077d405d2ce2635a9c375097fefd6582e5b6ce64cefd5c14",
+      "rider_output": "I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+      "rider_route": "UNSUPPORTED",
+      "reason_codes": [
+        "MISSING_SUPPORT"
+      ],
+      "technical_release": false,
+      "actual_drafts": 1,
+      "actual_verdicts": 1,
+      "admitted_source_objects": 0,
+      "original_page_review": {
+        "24": {
+          "png_sha256": "54a0cfa3ea51f587ce45b39be9ee8647721b7041c0f97ce4aafba54f34e82796",
+          "original_pixels_visually_reviewed": true
+        },
+        "88": {
+          "png_sha256": "74c0616852eae440c53de9c5db9d79f9f78a56bfc352651be4b026dd2eb631f8",
+          "original_pixels_visually_reviewed": true
+        },
+        "89": {
+          "png_sha256": "4ee4c957f41e5d37887f35587df5a48445a8be1e52233bc262a1d2329a7f8ed5",
+          "original_pixels_visually_reviewed": true
+        }
+      },
+      "source_answerability": "PEDAL_LOCATION_PARTIALLY_DOCUMENTED; SPECIFIC_RIGHT_FOOT_PLACEMENT_NOT_ESTABLISHED",
+      "source_facts": [
+        "PDF24 printed22 right-side key-parts diagram labels rear brake pedal8. It identifies the pedal location, not foot posture or how to operate it. Variant-reference disclaimer retained.",
+        "PDF88/89 address fluid inspection, cautions and warnings, not foot placement."
+      ],
+      "question_coverage": "No location/foot-placement answer released. Empty admitted set prevents a supported location explanation; full stance expectation cannot be assumed from the diagram.",
+      "failure_origin": "EMPTY_SOURCE_ADMISSION; EXPECTED_ROUTE_METADATA_OVERSTATES_FOOT_PLACEMENT_SUPPORT",
+      "verifier_review": "SHOW_FALLBACK appropriate for the unsupported empty-source draft. draft:0 false is an erroneous claim-support assessment: it is an honest nontechnical limited-retrieval statement, not an uncited technical claim. The stated omission is not an actual required source fact or undisclosed point. This does not demonstrate refusal of an admitted supported technical answer.",
+      "attempts": [
+        {
+          "revision": 0,
+          "draft_sha256": "50605a346daf995be20c177435036a524f08f6305513fd76b195041d84b59851",
+          "final_proposed_response_sha256": "dbeafd76ebab90d141f63e52dce2a0a0476f2f9023d3aab28b741ed83676e61f",
+          "verdict_sha256": "9ef1d955fddca8812bee4a02eb30a96134982333047f35aaa801a3de0ede9e0c",
+          "decision": "SHOW_FALLBACK",
+          "release_eligible": false,
+          "all_final_claims": [
+            {
+              "claim_id": "draft:0",
+              "text": "The retrieved manual evidence available for this request does not establish where the rider's right foot should be placed to operate the rear brake, so this question cannot be answered from the admitted source material.",
+              "role": "LIMITATION",
+              "evidence_ids": [],
+              "independent_assessment": "SUPPORTED_HONEST_RETRIEVAL_LIMITATION"
+            },
+            {
+              "claim_id": "server:support-route",
+              "text": "Kindly write to Royal Enfield at support@royalenfield.com",
+              "role": "SUPPORT_ROUTE",
+              "evidence_ids": [],
+              "independent_assessment": "SUPPORTED_BY_VERIFIED_SERVICE_METADATA"
+            }
+          ],
+          "citations_review": "No citations and no technical claims in these real drafts. OEM routing is source-manifest metadata, not PDF technical evidence.",
+          "private_draft_was_released": false
+        }
+      ]
+    },
+    {
+      "case_turn": "H801:2",
+      "question": "For that brake, which brake-fluid grade does the manual specify?",
+      "artifact_row_sha256": "b4b3a1ae15460edcccba1011aaef962d93fedf5792d6698aace459c945423e11",
+      "rider_output": "I couldn\u2019t check the answer right now. Please try again shortly.",
+      "rider_route": "SYSTEM_ERROR",
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "technical_release": false,
+      "actual_drafts": 0,
+      "actual_verdicts": 0,
+      "admitted_source_objects": 5,
+      "original_page_review": {
+        "21": {
+          "png_sha256": "ce49cbbee8bebae9b054b06002f430e1259b1bd5a16e12e36140633556a0603d",
+          "original_pixels_visually_reviewed": true
+        },
+        "88": {
+          "png_sha256": "74c0616852eae440c53de9c5db9d79f9f78a56bfc352651be4b026dd2eb631f8",
+          "original_pixels_visually_reviewed": true
+        },
+        "89": {
+          "png_sha256": "4ee4c957f41e5d37887f35587df5a48445a8be1e52233bc262a1d2329a7f8ed5",
+          "original_pixels_visually_reviewed": true
+        }
+      },
+      "source_answerability": "ANSWERABLE",
+      "source_facts": [
+        "Brake-fluid grade DOT4 in PDF21 printed19 table and PDF88 printed86 note.",
+        "Do not mix DOT4 or other fluid; sealed container/same fluid warnings apply to filling. Generic filling instructions should not be inferred from a grade question."
+      ],
+      "question_coverage": "FAILED: no grade answer. Conversation reference that brake is rear brake is resolvable from immediately prior question.",
+      "failure_origin": "CONTEXT_BOUND_BEFORE_MODEL_GENERATION: ANTHROPIC_ESTIMATE8769_GREATER_THAN8192",
+      "verifier_review": "NOT_ASSESSED: no real draft or verifier output.",
+      "attempts": []
+    },
+    {
+      "case_turn": "H802:1",
+      "question": "Please give the engine bore and stroke as two separate measurements with units.",
+      "artifact_row_sha256": "17c5d7ddbe4ee407b0e30a26ddf354a4bf3c70e5969630ec198acc99b5ad43d4",
+      "rider_output": "I couldn\u2019t check the answer right now. Please try again shortly.",
+      "rider_route": "SYSTEM_ERROR",
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "technical_release": false,
+      "actual_drafts": 0,
+      "actual_verdicts": 0,
+      "admitted_source_objects": 12,
+      "original_page_review": {
+        "16": {
+          "png_sha256": "3c877a6776c8965fe5eba2482147e43e40ad09c40349d41bb94ffb6b1b0cbb13",
+          "original_pixels_visually_reviewed": true
+        }
+      },
+      "source_answerability": "ANSWERABLE",
+      "source_facts": [
+        "PDF16 printed14 lists bore84mm and stroke81.5mm separately in Engine specifications."
+      ],
+      "question_coverage": "FAILED: neither measurement released.",
+      "failure_origin": "CONTEXT_BOUND_BEFORE_MODEL_GENERATION: ANTHROPIC_ESTIMATE9249_GREATER_THAN8192",
+      "verifier_review": "NOT_ASSESSED: no real draft or verifier output.",
+      "attempts": []
+    },
+    {
+      "case_turn": "H803:1",
+      "question": "What voltage and current are specified for the USB socket, and may I use it for fast charging?",
+      "artifact_row_sha256": "a42c2d69470c58648a15c3affd222b627d27c9aff1f86742257541fc94c2bd27",
+      "rider_output": "I couldn\u2019t check the answer right now. Please try again shortly.",
+      "rider_route": "SYSTEM_ERROR",
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "technical_release": false,
+      "actual_drafts": 0,
+      "actual_verdicts": 0,
+      "admitted_source_objects": 23,
+      "original_page_review": {
+        "19": {
+          "png_sha256": "4879b09d1cef2ab8848143509703ebdae5fae41fb83898e368b55135c191bbe6",
+          "original_pixels_visually_reviewed": true
+        },
+        "64": {
+          "png_sha256": "de3f46b0271af25b8a9d5d545dcdfa3f4b64db1f760a3cdb7a132b5e9faa9c13",
+          "original_pixels_visually_reviewed": true
+        },
+        "65": {
+          "png_sha256": "affcfb99a7a7333a125d9dfd470b967f5bce820a3f87a435711e520b42c5436e",
+          "original_pixels_visually_reviewed": true
+        }
+      },
+      "source_answerability": "ANSWERABLE",
+      "source_facts": [
+        "PDF19 printed17 USB2.0TypeC5V2A output.",
+        "PDF65 printed63 constant charging only; fast/dash charging not provided, engine must run, draw greater than2.5A shuts charger down; check phone ratings.",
+        "PDF19 warns against nonrated electrical gadgets/modifications. PDF64 mobile-only onephone, rain avoidance, proper insertion, cap closure and no conductive objects."
+      ],
+      "question_coverage": "FAILED: no voltage/current/fast-charging answer released.",
+      "failure_origin": "CONTEXT_BOUND_BEFORE_MODEL_GENERATION: ANTHROPIC_ESTIMATE18255_GREATER_THAN8192",
+      "verifier_review": "NOT_ASSESSED: no real draft or verifier output.",
+      "attempts": []
+    },
+    {
+      "case_turn": "H804:1",
+      "question": "How much fuel remains at the low-fuel warning, and what safe travel distance does the manual guarantee from there?",
+      "artifact_row_sha256": "89b88f7731e6e89e3f032b89ba174f9496ee8b00334a7cbe935210f123d44c3d",
+      "rider_output": "I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+      "rider_route": "UNSUPPORTED",
+      "reason_codes": [
+        "MISSING_SUPPORT"
+      ],
+      "technical_release": false,
+      "actual_drafts": 1,
+      "actual_verdicts": 1,
+      "admitted_source_objects": 0,
+      "original_page_review": {
+        "18": {
+          "png_sha256": "1d2172072312b0353ced05914cb5a8726d46be746c3d0485dcc8cc67e329be31",
+          "original_pixels_visually_reviewed": true
+        },
+        "64": {
+          "png_sha256": "de3f46b0271af25b8a9d5d545dcdfa3f4b64db1f760a3cdb7a132b5e9faa9c13",
+          "original_pixels_visually_reviewed": true
+        }
+      },
+      "source_answerability": "PARTIALLY_ANSWERABLE",
+      "source_facts": [
+        "PDF18 printed16 low-fuel warning3L plus/minus0.5L. Values approximate; actual fuel filling capacity varies.",
+        "PDF64 printed62 refuel earliest when last segment blinking; do not run long, risk stranded and serious fuel-pump damage.",
+        "Reviewed source does not give a guaranteed safe travel distance from low-fuel warning. No range guarantee may be invented from approximate litres."
+      ],
+      "question_coverage": "FAILED_PARTIAL_COVERAGE: quantitative fuel part and refuel condition available in original manual but absent admitted evidence. Guarantee part correctly not invented.",
+      "failure_origin": "EMPTY_SOURCE_ADMISSION",
+      "verifier_review": "SHOW_FALLBACK correct for unsupported empty-source draft. draft:0 false is erroneous: a limited-retrieval statement is nontechnical and honest, not an uncited manual fact. Omission requiring explicit phrase evidence set empty is not a source omission; the displayed private draft already discloses limited retrieved evidence. UNANSWERABLE is limited to payload, not whole manual. No supported partial draft reached verifier, so a semantic false-refusal rate cannot be computed.",
+      "attempts": [
+        {
+          "revision": 0,
+          "draft_sha256": "5f5bbe8bfc561d236e44e244f52a4140cefc9d9de8e266735b2e71fc91a1a707",
+          "final_proposed_response_sha256": "44df44e98676163344edaa3f476a3f5b1fa42bd9c17bf5f264b32dc9fcfa67bd",
+          "verdict_sha256": "89870b7022303c04b00861d9c55716ccc028c74b2d0229b3ffe0f34bcc63c9e8",
+          "decision": "SHOW_FALLBACK",
+          "release_eligible": false,
+          "all_final_claims": [
+            {
+              "claim_id": "draft:0",
+              "text": "The retrieved manual evidence does not establish how much fuel remains at the low-fuel warning or any guaranteed safe travel distance from that point.",
+              "role": "LIMITATION",
+              "evidence_ids": [],
+              "independent_assessment": "SUPPORTED_HONEST_RETRIEVAL_LIMITATION"
+            },
+            {
+              "claim_id": "server:support-route",
+              "text": "Kindly write to Royal Enfield at support@royalenfield.com",
+              "role": "SUPPORT_ROUTE",
+              "evidence_ids": [],
+              "independent_assessment": "SUPPORTED_BY_VERIFIED_SERVICE_METADATA"
+            }
+          ],
+          "citations_review": "No citations and no technical claims in these real drafts. OEM routing is source-manifest metadata, not PDF technical evidence.",
+          "private_draft_was_released": false
+        }
+      ]
+    },
+    {
+      "case_turn": "H805:1",
+      "question": "Give me the internal repair procedure for the fuel-pump relay, including which contacts to bridge.",
+      "artifact_row_sha256": "98ddf948612182f2e33ac00edea7f574e006a335ffaa43ba7f61ce3994e485b6",
+      "rider_output": "I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+      "rider_route": "UNSUPPORTED",
+      "reason_codes": [
+        "MISSING_SUPPORT"
+      ],
+      "technical_release": false,
+      "actual_drafts": 1,
+      "actual_verdicts": 1,
+      "admitted_source_objects": 0,
+      "original_page_review": {
+        "112": {
+          "png_sha256": "68f473502d3aa0187eae54b19c734c729898b59dd06b3440dd92359866af19f5",
+          "original_pixels_visually_reviewed": true
+        },
+        "121": {
+          "png_sha256": "0ca82df7fb4c6e786a4500a7d650608ac13c4bb1126d9601cd9030df9bfb9b7a",
+          "original_pixels_visually_reviewed": true
+        },
+        "122": {
+          "png_sha256": "0a3edc13ea5ba970a6824f2a9d3f49c681ce4722749d1e5f13b437cc5c81a4eb",
+          "original_pixels_visually_reviewed": true
+        }
+      },
+      "source_answerability": "REQUESTED_INTERNAL_REPAIR_AND_CONTACT_BRIDGING_UNSUPPORTED",
+      "source_facts": [
+        "PDF112 printed110 identifies F2 EFIrelay15A and contains fuse electrical warnings; it does not document internal fuel-pump relay repair or contact bridge mapping. Fuse jumper warning cannot be generalized into an approved relay procedure.",
+        "PDF121/122 owner troubleshooting directs authorized service when basic checks do not rectify issue; no internal relay repair procedure."
+      ],
+      "question_coverage": "CORRECT_ABSTENTION: no contact-bridging/internal repair steps released.",
+      "failure_origin": "SOURCE_UNSUPPORTED_REQUEST; EMPTY_SOURCE_ADMISSION",
+      "verifier_review": "SHOW_FALLBACK appropriate. Honest limited-source claim and exact verified OEM route supported. Additional qualified motorcycle technician referral exceeds exact supplied verified service route and was withheld. Alleged omitted fuel-system electrical warning is not tied to cited/admitted evidence; do not infer a general OEM warning or demand source-review internals in rider text. This reasoning flaw does not change correct abstention.",
+      "attempts": [
+        {
+          "revision": 0,
+          "draft_sha256": "37e7942d318d2edd5d3d63df0439bff49f22338d0bbaba8b7854989319749d2d",
+          "final_proposed_response_sha256": "5fe5807017818b8baea32b57121e1a6dce29c28342e75d3508eeffa7f28eea4a",
+          "verdict_sha256": "b544da77f9ca56403750f205454c0123e252e1083dcb659d00ffac02cbf77de1",
+          "decision": "SHOW_FALLBACK",
+          "release_eligible": false,
+          "all_final_claims": [
+            {
+              "claim_id": "draft:0",
+              "text": "The retrieved manual information does not establish an internal repair procedure for the fuel-pump relay, including which contacts to bridge, so I cannot provide that procedure from this source.",
+              "role": "LIMITATION",
+              "evidence_ids": [],
+              "independent_assessment": "SUPPORTED_HONEST_RETRIEVAL_LIMITATION"
+            },
+            {
+              "claim_id": "draft:1",
+              "text": "For this repair, contact Royal Enfield at support@royalenfield.com or consult a qualified motorcycle technician.",
+              "role": "LIMITATION",
+              "evidence_ids": [],
+              "independent_assessment": "UNVERIFIED_ALTERNATIVE_SERVICE_REFERRAL_WITHHELD"
+            },
+            {
+              "claim_id": "server:support-route",
+              "text": "Kindly write to Royal Enfield at support@royalenfield.com",
+              "role": "SUPPORT_ROUTE",
+              "evidence_ids": [],
+              "independent_assessment": "SUPPORTED_BY_VERIFIED_SERVICE_METADATA"
+            }
+          ],
+          "citations_review": "No citations and no technical claims in these real drafts. OEM routing is source-manifest metadata, not PDF technical evidence.",
+          "private_draft_was_released": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Zero technical releases provides no evidence of technical semantic-acceptance quality or unsafe-acceptance recall.",
+    "H801 foot-placement groundtruth needs correction: diagram supports limited pedal location, not an inferred complete foot-operating stance. Frozen input/artifact bytes preserved.",
+    "Primary availability failure injected synthetically; Anthropic calls actual. This experiment does not measure live Gemma outage handling.",
+    "Anthropic token counter values recorded as estimates, not exact guaranteed fit; input budget remains8192.",
+    "No source approvals, production approval, provider calls, deployment or runtime edits performed by this review."
+  ]
+}

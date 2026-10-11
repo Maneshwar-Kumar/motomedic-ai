@@ -1,0 +1,17 @@
+# Prepared v8 backend and UI packaging
+
+Offline preparation only. No image build/run, provider request, deployment, billing mutation or secret transfer was performed. The frozen serving runtime and exact source approvals remain unchanged.
+
+Run `python tools/prepare_draft_verify_stream_deployment.py` from the repository root to reconstruct the ignored contexts in a fresh checkout. It verifies all 64 v8 frozen objects against committed Git blobs and workspace bytes. Existing build contexts are never overwritten; saved preparation records may be reused only when their bytes match exactly.
+
+The generated contexts are `build/draft-verify-stream-backend-v8` and `build/draft-verify-stream-ui-v8`. The adjacent backend/UI Dockerfiles and Cloud Build JSON are review copies of those contexts' recipes. They are not deployment commands. Backend `backend_release.json` is copied as `/app/arm_a_release.json`, which `load_production` consumes before initializing the service.
+
+The backend overlays 44 exact runtime/source objects onto immutable image digest `a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4`. Its manifest preserves 405 inherited source/index/model and original runtime bindings. New Haiku adapter, fallback selection, non-recurring monetary reservation and token admission modules are included. The build recipe runs a complete installed release hash check before it can succeed. Offline checks establish overlay hashes and manifest consistency; they do **not** establish the inherited base-image filesystem. That check remains pending a separately authorized image build.
+
+The UI context includes 18 explicit inputs and uses the existing multi-stage UI recipe. Provider adapters, manual evidence, held-out questions/answers and model keys are absent from the final UI image. Supplemental UI dependencies are copied from clean committed Git blobs, including canonical line endings, and their exact hashes are recorded separately. The final stage contains only the allowlisted presentation/client/identity/style files and requirements.
+
+Five offline integrity tests passed. `offline_validation.json` binds helper/test/release hashes and records complete overlay checks, UI checks, Python syntax checks and comparison with the production release-hash loop. No serving version change was needed for preparation.
+
+Default backend configuration keeps Haiku disabled. Future authorized activation needs managed backend references for `MOTOMEDIC_GEMINI_API_KEY` and `ANTHROPIC_API_KEY`, `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true`, existing Firestore permissions and the shared visitor signing secret. The GitHub secret used for validation is not a Cloud Run secret reference, and this package does not transfer it. UI configuration needs the compatible rider backend HTTPS URL, `MOTOMEDIC_RIDER_AUTH=cloud_run` for the existing private route, the same visitor secret and `MOTOMEDIC_CACHE_MODE=bypass`; preserve any separately managed existing edge identity configuration. No engineering loopback switch belongs in a live revision.
+
+Image build, secret activation, backend/UI service revisions and live browser acceptance remain separate work. Before a live claim, check current runtime/provider health metadata, actual private draft and separate verification, commit-before-stream behavior and exact recovery without additional inference. Existing historical deployment receipts do not establish v8 activation.

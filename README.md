@@ -22,6 +22,8 @@ A motorcycle troubleshooting assistant that offers a concise next step only when
 
 The current owner decision is [open manual Q&A through draft, verify, stream](docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md). It supersedes the earlier exact-answer and no-online-verifier methods. Versioned Docling/BGE M3 + BM25 retrieval feeds a private draft and separate semantic verification before answer delivery. See the [integration and validation record](reports/grounded_generation/draft_verify_stream_v1/README.md) for implementation status; the decision does not establish public release acceptance. The retired full-manual Claude design stays archived.
 
+The [v8 pipeline and UI wiring report](reports/grounded_generation/v8/REPORT.md) records passing software checks and the separately authorized, backend-only Haiku fallback. Real Haiku validation failed answerable/partial coverage; live activation remains pending. The implementation is saved on `codex/reviewed-evidence-controller` without a new deployment or GCP billing change.
+
 The hosted candidate index is `index_a3282c4d98cf54595e4ba168`. Ingestion runs once per source/pipeline/model version; rider requests reuse its evidence and vectors. The exact 161-case v3 approval covers defined source-content and initial-response scopes, including selected-manual Himalayan + BS6 applicability. It does not establish blanket adaptive, vision or public deployment acceptance. See the [approval scope](human_review/agent_release_161/README.md).
 
 The rider UI is under active development; live browser-to-hosted acceptance remains a release gate. End-user PDF, excerpts and figure delivery are prohibited by the current display policy. This is an advisory prototype, not proof of a verified repair.

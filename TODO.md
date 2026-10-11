@@ -36,3 +36,10 @@ Latest validation: [preserved 161-case baseline](reports/arm_a/golden161_validat
 
 The current open manual Q&A method is [draft, verify, stream](docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md). It supersedes exact-answer-only, catalogue/action allowlists and the no-online-verifier amendment. Implementation and test status are recorded in [the integration report](reports/grounded_generation/draft_verify_stream_v1/README.md). Existing source restrictions, model and spending/deployment authorizations still apply. No public release follows from the decision.
 
+### V8 implementation and UI wiring
+
+- [x] Implement private drafting, the strict complete/partial/fallback verifier result, one correction, exact fixed messages, separate safety/clarification handling, final integrity checks and durable accepted-buffer delivery. Software evidence is in [the v8 report](reports/grounded_generation/v8/REPORT.md).
+- [x] Wire new questions and follow-ups through the strict rider UI client, truthful progress, accepted streaming and operation recovery; keep the optional Haiku provider and secrets on the backend.
+- [x] Commit the frozen pipeline and record real Haiku outputs with independent original-page review. The run failed answerable/partial coverage; passing workflow execution is not release acceptance.
+- [ ] Improve source admission and bounded complete-context representation in a new version, then evaluate fresh cases. Preserve original approvals, held-out history and mandatory source context.
+- [ ] After quality gates and separate deployment authorization, activate reviewed backend/UI images and managed provider references; record actual browser, Firestore, stream and disconnection recovery acceptance.

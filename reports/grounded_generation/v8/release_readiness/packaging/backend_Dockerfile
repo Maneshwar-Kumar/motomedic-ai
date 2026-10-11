@@ -1,0 +1,5 @@
+FROM us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4
+USER root
+COPY --chown=motomedic:motomedic . /app
+RUN python -B /app/verify_installed_release.py
+USER motomedic

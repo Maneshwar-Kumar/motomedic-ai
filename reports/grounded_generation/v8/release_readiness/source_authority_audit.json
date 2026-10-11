@@ -1,0 +1,90 @@
+{
+  "schema_version": "v8-read-only-release-readiness-review-v1",
+  "reviewer": "source_authority",
+  "checked_at_utc": "2026-10-11T17:52:47.175462+00:00",
+  "git_head": "09faf7dfe1865dda0a2155bb06f67fdc4fdfdbbd",
+  "origin_branch": "codex/reviewed-evidence-controller",
+  "origin_matches_local_head": true,
+  "frozen_objects_verified_against_worktree_and_git_HEAD": 64,
+  "frozen_object_failures": [],
+  "status": "SOFTWARE_CONNECTION_PREPARED_LIVE_ACTIVATION_PENDING",
+  "scope": "Read-only persistence, production wiring and historical deployment receipt audit; no new cloud queries, provider calls, deployment, billing or secret transfer.",
+  "findings": [],
+  "production_wiring": {
+    "default": "GemmaProvider",
+    "enabled_switch": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true",
+    "enabled_chain": "FallbackProvider(GemmaProvider, ClaudeProvider)",
+    "secret": "ANTHROPIC_API_KEY backend environment only",
+    "primary_secret": "MOTOMEDIC_GEMINI_API_KEY backend environment only",
+    "cost_guard": "ClaudeBudget persistent non-recurring US$1 allocation; no TTL or refund",
+    "token_guard": "Shared ProviderAdmission transactional token/call reservations",
+    "authority": "Questions initializes SourceAuthority and attaches it to Composer",
+    "provider_identity": "Composer Config binds provider contract and code; response model validated per paid call; saved generation_lock/runtime bindings",
+    "durability": "FirestoreState.commit_answer atomically saves session, immutable version and completed owner-bound operation before accepted stream; replay retrieves saved view",
+    "ui_policy": "open-manual-draft-verify-v8 enforced including neutral responses",
+    "ui_only": "Provider choice remains on backend; browser receives no model credentials or private draft"
+  },
+  "reviewable_configuration": {
+    "backend": [
+      "Reviewed image-root arm_a_release.json matching all current overlay bytes",
+      "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true only for authorized fallback activation",
+      "Managed ANTHROPIC_API_KEY and MOTOMEDIC_GEMINI_API_KEY references with backend service-account access",
+      "Existing Firestore IAM and same MOTOMEDIC_VISITOR_SECRET signing resource"
+    ],
+    "ui": [
+      "MOTOMEDIC_RIDER_API_URL=https://<current-v8-rider-backend>",
+      "MOTOMEDIC_RIDER_AUTH=cloud_run for existing private route",
+      "MOTOMEDIC_CACHE_MODE=bypass",
+      "Same managed visitor signing resource",
+      "Preserve existing private IAM or separately managed anonymous edge identity; do not set engineering loopback"
+    ]
+  },
+  "historical_live_receipts": {
+    "backend_revision": "motomedic-arm-a-00003-gs2",
+    "ui_revision": "motomedic-rider-ui-00001-wg9",
+    "receipt": "reports/arm_a/ui_wiring_v1/completion.json",
+    "provider_calls": 0,
+    "v8_live_activation_proven": false,
+    "qdrant_receipt": "cloud/deployment_status.json",
+    "qdrant_is_rider_api": false
+  },
+  "remaining_steps": [
+    {
+      "step": "Review v8 image packaging and release manifest",
+      "reason": "load_production requires image-root arm_a_release.json; repository root lacks it. Existing prepare_grounded_deployment supports only v4/v5 and stamps no-verifier architecture; cannot release v8 unchanged."
+    },
+    {
+      "step": "Authorize and configure managed provider-secret activation and service revisions",
+      "reason": "GitHub secret authorizes hosted validation, not evidence of a Cloud Run secret resource/reference. Latest request wires UI preparation but contains no explicit new deployment or secret-transfer authorization."
+    },
+    {
+      "step": "Connect compatible backend and UI revisions",
+      "reason": "Historical receipts bind older images. Setting a UI URL does not upgrade backend; current strict client rejects retired runtime policy."
+    },
+    {
+      "step": "Record actual v8 authenticated service and browser acceptance after output review",
+      "reason": "Verify health architecture/provider chain, catalogue manual/index, real accepted streaming after durable commit, exact recovery with zero new inference. Hosted fixture/fsync evidence does not prove deployed Firestore/RPC/browser behavior."
+    }
+  ],
+  "source_approval": "Exact existing source approvals remain valid and unchanged; no new human-source blocker. Source-specific held gaps and display restrictions remain enforced.",
+  "report_file_sha256": {
+    "reports/grounded_generation/v8/runtime_manifest.json": "5652716e84077fdaccd476a61edb1bcd47c50801a95baac524925497f7179650",
+    "cloud/arm_a/app.py": "31210f87c69623798fb8901d964c0a5c535e5f45c5cdeed02b95f36f8b179864",
+    "cloud/grounded_generation/verified_qa.py": "ddd9522f7fc009130ed6e4760eb9b6dffe33237bee3fe6aaeb7b8d854cd152f2",
+    "cloud/grounded_generation/open_questions.py": "22b03674a6b3d584f1bf15a9a5ec7aaedc06bdfb959992aaac3d37b4557cc552",
+    "cloud/grounded_generation/generic_runtime.py": "3c1647a5546ced78dc586feacc92c685dd04ab50e65d20061e674901ca4ee6b1",
+    "cloud/grounded_generation/claude_provider.py": "24e4efeb688d4f0236841d07505df3c2974c15bd15e044550c4f89d652505971",
+    "cloud/grounded_generation/fallback_provider.py": "793551d36b3e4987e6efcb7ab9e832ba03755c7cb1279150ee7e7f1f58373b52",
+    "cloud/grounded_generation/claude_budget.py": "0cffa1ab12f11d35877affc2c512479fb4ab7d1079eb90280f3dc8f269a39b8f",
+    "cloud/grounded_generation/admission.py": "bf0042a70539d2345c908a9ab5001a10f7d18db30f6fc4696cb8dbe0e69bd664",
+    "cloud/arm_a/store.py": "dea1fe904aa19ad74ace20ce4dcf44fdf1c4f65bc261c27023a0da0dd2f5b0b6",
+    "cloud/arm_a/rider_api.py": "0d09b75b2a7da9a593909c1e230835fbacff0835e51d925283fee55a356aacdc",
+    "rider_ui/client.py": "a7840c289598498cf5fccc979803e44578e3e0f3a01c13109f7821392c79165c",
+    "rider_ui/app.py": "c62544114641f133d5e2f48dadc4d2fb089149ad8c6c30195ec3f0c5c59f4025",
+    "reports/arm_a/ui_wiring_v1/completion.json": "663281120a20a47364a9d778cefb299b723b0b25a5856d4991b4e0089573975b",
+    "reports/arm_a/ui_wiring_v1/managed_connection.json": "1b1746bd3f12d3a1eb2467de7cb6852b03bf2122ee96c2996bdd365c6bcc4492",
+    "reports/arm_a/public_deployment_v1/preparation.json": "6497288f2d8e9605500bbf0e6ba0d25d819c4c344aa7e9ed5f58dace722b393c",
+    "reports/grounded_generation/v4/deployment_preparation.json": "01f8112a442b8c82b814253acfdcf2f8088248672b5ce3ae77eb82348ddf5959",
+    "tools/prepare_grounded_deployment.py": "f3d373968c6050a207ef65d015944108560aa8fd80d3e04e9b68942cad66b17b"
+  }
+}

@@ -32,7 +32,7 @@ Feedback request: expected_version, choice_id, cache_mode=bypass. **No client-su
 
 ## Saved view
 
-Required top-level fields: schema_version, manual_checksum, index_id, session_id (opaque identifier), version (nonnegative integer), response.
+Required top-level fields: schema_version, manual_checksum, index_id, session_id (opaque identifier), version (nonnegative integer), response. Production additionally requires runtime_policy=`open-manual-draft-verify-v8` on every route, including neutral fallback/errors and JSON recovery; older or missing policy receipts are rejected.
 
 Response fields:
 - type: exactly SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP or SYSTEM_ERROR.
@@ -51,7 +51,7 @@ No evidence_uri, source text/excerpt, crops, raw source objects, provider bodies
 
 ## Progress and accepted-answer delivery
 
-Mutations request `Accept: text/event-stream`. All v6 events bind to the mutation's 32-hex operation ID:
+Mutations request `Accept: text/event-stream`. All current v8 events bind to the mutation's 32-hex operation ID:
 
 | Event | Payload and rule |
 | --- | --- |
@@ -71,7 +71,11 @@ Use the exact source-approved registry, immutable BGE/BM25 chunks, source-linked
 
 Use managed transactional session storage with immutable attempt snapshots and compare-and-swap versions. SQLite/local Streamlit state is not the production store. Atomically reserve and deduplicate operation IDs before model calls; persist/retrieve the final response and choices. A concurrent or stale feedback returns 409. Repeated same operation returns the original response without another model call. An operation still executing should report a recoverable status, not re-execute it.
 
-Enforce authenticated ownership/capability on session and operation reads. Shared UI-to-API authentication alone is not a substitute for per-session authorization. Apply global and per-session rate/call limits, provider spending reservations and a fresh budget/guard preflight under the existing project authorization. Respond 429 when limited; no fallback model or automatic retries. Redact query text and credentials from logs. Expire sessions and operation records under a published retention policy.
+Enforce authenticated ownership/capability on session and operation reads. Shared UI-to-API authentication alone is not a substitute for per-session authorization. Apply global and per-session rate/call limits, provider spending reservations and a fresh budget/guard preflight under the existing project authorization. Respond 429 when limited; no fallback after quota/rate failure and no automatic retries. Redact query text and credentials from logs. Expire sessions and operation records under a published retention policy.
+
+The optional server-controlled Gemma-to-Haiku availability chain is disabled by default. Enable only through backend `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true`, managed `ANTHROPIC_API_KEY` and a configured non-recurring cost reservation guard. Primary HTTP 500/502/503/504 or unconfigured failures allow one fallback attempt per call. Schema/integrity/source failures, quota exhaustion and a semantic rejection never authorize provider switching. The fallback uses the same retrieved evidence, schemas, independent verification and durable delivery checks. Provider configuration and private telemetry remain server-side; the product UI exposes no model selector.
+
+Before connecting a UI revision, authenticated `/healthz` must report the intended open-manual serving architecture, `streaming=DRAFT_VERIFY_STREAM`, and the configured provider chain. `/v1/catalogue` must report open questions and the same streaming capability. Current catalogue provider metadata identifies the primary; health reports the configured chain. Validate a saved v8 view and recover its unchanged operation through the client. See [connection handover](../reports/grounded_generation/v8/ui_wiring/CONNECTION_HANDOVER.md) and [v8 software receipt](../reports/grounded_generation/v8/ui_streaming/REPORT.md). These checks do not constitute hosted browser acceptance or authorize deployment.
 
 ## Live acceptance (pending)
 

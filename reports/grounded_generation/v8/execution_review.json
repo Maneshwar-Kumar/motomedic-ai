@@ -1,0 +1,96 @@
+{
+  "schema_version": "v8-independent-hosted-execution-recount-v1",
+  "checked_at_utc": "2026-10-11T17:58:14.426143+00:00",
+  "reviewer": "root",
+  "run_id": "38160944967",
+  "run_url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38160944967",
+  "run_commit": "09faf7dfe1865dda0a2155bb06f67fdc4fdfdbbd",
+  "workflow_conclusion": "success",
+  "release_acceptance": "FAILED_ANSWERABLE_AND_PARTIAL_COVERAGE",
+  "artifact_sha256": "51dfb305db78ba0b176d15dc5f62d989e1e7225588d36ab1c257289ab19638b9",
+  "runtime_manifest_sha256": "5652716e84077fdaccd476a61edb1bcd47c50801a95baac524925497f7179650",
+  "runtime_lock": "cb3ae7b2ece4086b50c5bd2c6d23f3a149e779ebb3ed16a877ef2d91bb1a8d78",
+  "model": "claude-haiku-5-5",
+  "primary_fault": "Synthetic Gemma HTTP500; zero paid Gemma calls",
+  "actual_generation_calls": 6,
+  "actual_count_token_calls": 12,
+  "actual_drafts": 3,
+  "actual_verifier_decisions": 3,
+  "actual_corrections": 0,
+  "released_technical_answers": 0,
+  "show_fallback": 3,
+  "system_error_context_bound": 3,
+  "input_tokens": 25980,
+  "output_tokens": 2017,
+  "cache_tokens": 0,
+  "reserved_tokens": 36780,
+  "reserved_usd": 0.0103152,
+  "estimated_usage_cost_usd": 0.0036065,
+  "pricing_basis": "Adapter pricing snapshot; reported token usage; estimate, not invoice or balance verification",
+  "evaluation_pacing_seconds": 278.8804039600001,
+  "worker_initialization_seconds": 41.209119128,
+  "progress": {
+    "count": 6,
+    "median_seconds": 0.0008609009999958062,
+    "maximum_seconds": 0.003030393999978287
+  },
+  "private_pipeline_excluding_evaluation_pacing": {
+    "count": 6,
+    "median_seconds": 3.209259722499965,
+    "maximum_seconds": 11.636950171999985
+  },
+  "full_completion_including_evaluation_pacing": {
+    "count": 6,
+    "median_seconds": 33.176472065,
+    "maximum_seconds": 119.56431506399997
+  },
+  "first_verified_technical_answer": {
+    "count": 0,
+    "median_seconds": null,
+    "maximum_seconds": null
+  },
+  "durable_save": {
+    "count": 6,
+    "median_seconds": 0.00047678049998012284,
+    "maximum_seconds": 0.0005608939999888207
+  },
+  "neutral_view_stream_recovery_parity": {
+    "passed": 6,
+    "total": 6
+  },
+  "technical_accepted_stream_recovery_parity": {
+    "passed": null,
+    "total": 0,
+    "status": "UNMEASURED_NO_TECHNICAL_RELEASE"
+  },
+  "private_rejected_draft_answer_events": 0,
+  "clear_original_source_answerable_or_partial_turns": 4,
+  "clear_original_source_answerable_or_partial_turns_answered": 0,
+  "correct_unsupported_internal_repair_turns": 1,
+  "ambiguous_evaluation_metadata_turns": 1,
+  "technical_false_acceptance_rate": null,
+  "cost_per_correctly_answered_technical_turn": null,
+  "deployment_changed": false,
+  "new_project_billing_changed": false,
+  "limitations": [
+    "Real Anthropic calls with synthetic primary outage; not measured primary-to-fallback outage recovery.",
+    "Immutable hosted BGE/BM25 snapshot; not live Qdrant request latency.",
+    "Hosted fsync operation harness; not deployed Firestore/browser/Cloud Run disconnect acceptance.",
+    "Six fresh wordings after freeze use known source facts; not a blinded source holdout.",
+    "All rider outputs neutral. Complete and partial release, correction and accepted technical equality are software-tested but unmeasured with this real provider.",
+    "Four source-answerable or partial turns received no useful answer. Context bounds and source admission need a new separately versioned improvement and fresh evaluation.",
+    "Original foot-placement expected route/pages metadata is overbroad; independently corrected in review only, frozen dataset retained."
+  ],
+  "preceding_software_failure": {
+    "run_id": "38160630087",
+    "commit": "abeb3f220821e812779bf3aa5a48654259ccd7d9",
+    "cause": "Missing frozen rider_ui/verified_sse.py change in pushed commit caused unexpected expected_policy argument on hosted tests",
+    "stage": "Software checks before provider secret step",
+    "paid_provider_calls": 0,
+    "fixed_by": [
+      "6e84d56",
+      "09faf7d"
+    ],
+    "preventive_check": "Compare all64 frozen objects to gitHEAD and worktree before provider step"
+  }
+}
