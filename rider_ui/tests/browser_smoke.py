@@ -11,7 +11,7 @@ from playwright.sync_api import sync_playwright
 from rider_ui.tests.fixture_api import serve
 
 def run():
-    out=Path('reports/rider_ui');out.mkdir(parents=True,exist_ok=True)
+    out=Path(os.environ.get('MOTOMEDIC_UI_SMOKE_OUTPUT','reports/rider_ui'));out.mkdir(parents=True,exist_ok=True)
     server=serve(0);threading.Thread(target=server.serve_forever,daemon=True).start()
     env=dict(os.environ,MOTOMEDIC_RIDER_API_URL='http://127.0.0.1:'+str(server.server_port),
              MOTOMEDIC_RIDER_API_TOKEN='ui-test-only',MOTOMEDIC_UI_ENGINEERING_LOOPBACK='1',
@@ -34,13 +34,20 @@ def run():
             page=browser.new_page(viewport={'width':1440,'height':1100},device_scale_factor=1)
             errors=[];page.on('pageerror',lambda err:errors.append(str(err)))
             page.goto('http://127.0.0.1:8767',wait_until='networkidle')
-            page.get_by_text('A clearer next step.',exact=True).wait_for(timeout=30000)
+            page.get_by_text('MotoMedic handles your routine queries for your Himalayan',exact=True).wait_for(timeout=30000)
+            page.locator('.footer-note').wait_for(timeout=30000)
+            page.get_by_role('textbox',name='Describe one symptom or ask a question…').wait_for(timeout=30000)
+            card = page.locator('[data-testid="stVerticalBlock"]').filter(has=page.get_by_role('heading', name='What are you noticing?', exact=True)).last
+            assert card.get_by_role('textbox',name='Describe one symptom or ask a question…').count() == 1
+            assert page.get_by_text('Available topics come from the hosted controller.',exact=False).count() == 0
+            assert page.get_by_role('combobox',name='Choose the closest topic').count() == 0
+            assert page.get_by_text('Select a topic',exact=True).count() == 0
+            assert page.get_by_role('textbox',name='Describe one symptom or ask a question…').bounding_box()['y'] < page.locator('[data-testid="stFileUploader"]').bounding_box()['y']
+            checks.append({'name':'inline_symptom_input_and_no_category_selector','passed':True})
             page.screenshot(path=str(out/'desktop.png'),full_page=True)
             page.get_by_text('My motorcycle is a Himalayan BS6',exact=True).click()
             page.get_by_role('checkbox',name='My motorcycle is a Himalayan BS6').wait_for()
             page.screenshot(path=str(out/'scope_confirmed.png'),full_page=True)
-            page.get_by_role('combobox',name='Choose the closest topic').click()
-            page.get_by_text('Engineering fixture · interface test',exact=True).click()
             entry=page.get_by_role('textbox',name='Describe one symptom or ask a question…')
             entry.fill('Engineering fixture only')
             entry.press('Enter')
@@ -57,9 +64,11 @@ def run():
             checks.append({'name':'no_horizontal_overflow_desktop','passed':page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')})
             mobile=browser.new_page(viewport={'width':390,'height':844},device_scale_factor=1)
             mobile.goto('http://127.0.0.1:8767',wait_until='networkidle')
-            mobile.get_by_text('A clearer next step.',exact=True).wait_for(timeout=30000)
-            mobile.get_by_text('A clearer next step.',exact=True).scroll_into_view_if_needed()
+            mobile.get_by_text('MotoMedic handles your routine queries for your Himalayan',exact=True).wait_for(timeout=30000)
+            mobile.get_by_text('MotoMedic handles your routine queries for your Himalayan',exact=True).scroll_into_view_if_needed()
             mobile.screenshot(path=str(out/'mobile.png'),full_page=True)
+            mobile.get_by_role('textbox',name='Describe one symptom or ask a question…').scroll_into_view_if_needed()
+            mobile.screenshot(path=str(out/'mobile_input.png'),full_page=True)
             checks.append({'name':'no_horizontal_overflow_mobile','passed':mobile.evaluate('document.documentElement.scrollWidth <= window.innerWidth')})
             browser.close()
         report={'schema_version':'rider-ui-engineering-smoke-v1','checks':checks,

@@ -51,7 +51,7 @@ def citations(registry, step):
     return refs
 
 
-def envelope(controller, session, sid):
+def envelope(controller, session, sid, *, allow_approved_policy_caveats=False):
     r, step = controller.registry, controller.registry.step(sid)
     if not r.step_ready(sid) or not r.source_ready():
         raise ValidationFailure("SOURCE_REVIEW_REQUIRED")
@@ -91,8 +91,13 @@ def envelope(controller, session, sid):
         covered = {e for c in claims if c["role"] == role for e in c["evidence_ids"]}
         if not set(categories.get(category, [])) <= covered:
             raise ValidationFailure("MANDATORY_WARNING_OR_CONDITION_OMITTED")
-    if any(not c["evidence_ids"] or not set(c["evidence_ids"]) <= set(step.required_evidence_ids) for c in claims):
-        raise ValidationFailure("INVALID_CLAIM_CITATION")
+    for raw, claim in zip(step.claims, claims):
+        if claim['evidence_ids']:
+            if not set(claim['evidence_ids']) <= set(step.required_evidence_ids):
+                raise ValidationFailure('INVALID_CLAIM_CITATION')
+        elif not (allow_approved_policy_caveats and
+                  getattr(r, 'approved_policy_caveat', lambda *_: False)(sid, raw)):
+            raise ValidationFailure('INVALID_CLAIM_CITATION')
     # No raw rider text, media, observation values or free-form attempted details.
     # Claim choice needs no chat transcript; typed history only describes attempts.
     return {"schema_version": SCHEMA_VERSION, "route": "SUPPORTED", "step_id": sid,

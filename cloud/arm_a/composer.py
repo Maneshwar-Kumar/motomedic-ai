@@ -18,11 +18,11 @@ class ArmAConfig:
 
     def versions(self):
         return {'architecture': 'A_DETERMINISTIC_CANONICAL',
-                'generator_version': 'arm-a-canonical-v1',
+                'generator_version': 'arm-a-canonical-policy-caveats-v2',
                 'selection': 'FIRST_EXACT_REVIEWED_CANONICAL_WORDING',
                 'verifier': 'EXACT_APPROVED_SCOPE_BINDINGS_AND_DETERMINISTIC_GATES',
                 'max_input_bytes': self.max_input_bytes, 'provider_calls': 0,
-                'benchmark_pacing': False, 'cache': 'DISABLED'}
+                'benchmark_pacing': False, 'cache': 'DISABLED', 'policy_caveat_validation': 'EXACT_RECORD_BOUND_PRODUCT_POLICY_V1'}
 
     @property
     def lock(self):
@@ -49,7 +49,7 @@ class ArmAComposer:
                 raise ValidationFailure('GENERATION_VERSION_RECONFIRM_REQUIRED')
             if cache_draft is not None:
                 raise ValidationFailure('ARM_A_CACHE_NOT_ENABLED')
-            allowed = envelope(controller, session, sid)
+            allowed = envelope(controller, session, sid, allow_approved_policy_caveats=True)
             if len(json.dumps(allowed, allow_nan=False, ensure_ascii=False).encode('utf-8')) > self.config.max_input_bytes:
                 raise ValidationFailure('CONTEXT_BOUND_NO_TRUNCATION')
             draft = {key: deepcopy(allowed[key]) for key in
@@ -59,12 +59,13 @@ class ArmAComposer:
                                for c in allowed['claims']]
             validate_output(draft, allowed)
             # Re-read authority, eligibility, conditions, warnings and citations.
-            current = envelope(controller, session, sid)
+            current = envelope(controller, session, sid, allow_approved_policy_caveats=True)
             if current != allowed:
                 raise ValidationFailure('ARM_A_ENVELOPE_CHANGED')
             validate_output(draft, current)
             step = controller.registry.step(sid)
-            claim_map = tuple({**claim, 'presentation_mode': step.claims[i].get('presentation_mode')}
+            claim_map = tuple({**claim, 'presentation_mode': step.claims[i].get('presentation_mode'),
+                                **({'policy_support_ids': list(step.claims[i]['policy_support_ids'])} if not claim['evidence_ids'] else {})}
                               for i, claim in enumerate(draft['claims']))
             pages = tuple({**page, 'manual_checksum': controller.registry.checksum,
                            'index_id': controller.registry.index_id,

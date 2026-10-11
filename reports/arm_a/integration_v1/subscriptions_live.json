@@ -1,0 +1,29 @@
+[
+  {
+    "ackDeadlineSeconds": 600,
+    "expirationPolicy": {},
+    "labels": {
+      "goog-drz-eventarc-location": "us-central1",
+      "goog-drz-eventarc-uuid": "ee644a40-2c75-4a6e-a4ee-d51beaf00127",
+      "goog-eventarc": ""
+    },
+    "messageRetentionDuration": "86400s",
+    "name": "projects/motomedic-ai-20261009/subscriptions/eventarc-us-central1-motomedic-budget-guard-783707-sub-374",
+    "pushConfig": {
+      "attributes": {
+        "x-goog-version": "v1"
+      },
+      "oidcToken": {
+        "audience": "https://motomedic-budget-guard-5uyul6ay6a-uc.a.run.app",
+        "serviceAccountEmail": "motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com"
+      },
+      "pushEndpoint": "https://motomedic-budget-guard-5uyul6ay6a-uc.a.run.app?__GCP_CloudEventsMode=CUSTOM_PUBSUB_projects%2Fmotomedic-ai-20261009%2Ftopics%2Fmotomedic-budget"
+    },
+    "retryPolicy": {
+      "maximumBackoff": "600s",
+      "minimumBackoff": "10s"
+    },
+    "state": "ACTIVE",
+    "topic": "projects/motomedic-ai-20261009/topics/motomedic-budget"
+  }
+]

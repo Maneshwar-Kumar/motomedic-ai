@@ -12,14 +12,15 @@ class Handler(BaseHTTPRequestHandler):
     fail_next_response=False
     def log_message(self,*args): pass
     def reply(self, data, status=200):
-        raw=json.dumps(data).encode()
-        self.send_response(status);self.send_header('Content-Type','application/json')
+        stream=status==200 and self.command=='POST' and 'text/event-stream' in self.headers.get('Accept','')
+        raw=(('event: complete\ndata: '+json.dumps(data)+'\n\n').encode() if stream else json.dumps(data).encode())
+        self.send_response(status);self.send_header('Content-Type','text/event-stream' if stream else 'application/json')
         self.send_header('Content-Length',str(len(raw)));self.end_headers();self.wfile.write(raw)
     def do_GET(self):
         if self.headers.get('Authorization')!='Bearer ui-test-only':
             self.reply({},401);return
         if self.path=='/v1/catalogue':
-            self.reply({**BASE,'topics':[{'id':'ui-fixture','label':'Engineering fixture · interface test'}]});return
+            self.reply({**BASE,'question_input':'open'});return
         if self.path.startswith('/v1/operations/'):
             v=operations.get(self.path.rsplit('/',1)[1]);self.reply(v or {},200 if v else 404);return
         v=sessions.get(self.path.rsplit('/',1)[1]);self.reply(v or {},200 if v else 404)

@@ -1,0 +1,13 @@
+{
+  "base_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:9d92653a7984cea1a21f132752d961dbd1eb79140380d6d30773ea5ae3cf0969",
+  "runner_sha256": "d6b246c150aaa41dd0fa6e3954907253871d16ac50f174c0fbfec2c023166c91",
+  "golden_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+  "case_count": 161,
+  "interval_seconds": 7,
+  "provider_calls": 0,
+  "retries": 0,
+  "production_changed": false,
+  "rider_quota_changed": false,
+  "failure_injection": false,
+  "scope": "Hosted real-retrieval question-core regression against frozen golden initial routes; typed-policy fixtures reported separately"
+}

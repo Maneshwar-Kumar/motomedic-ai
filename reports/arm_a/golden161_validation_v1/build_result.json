@@ -1,0 +1,89 @@
+{
+  "createTime": "2026-10-11T12:57:39.721958536Z",
+  "finishTime": "2026-10-11T13:22:35.874887Z",
+  "id": "7e96828b-60e4-49fc-84db-af4cdf85f953",
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds;region=us-central1/7e96828b-60e4-49fc-84db-af4cdf85f953?project=279945185781",
+  "name": "projects/279945185781/locations/us-central1/builds/7e96828b-60e4-49fc-84db-af4cdf85f953",
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "machineType": "E2_HIGHCPU_8",
+    "pool": {},
+    "workerRelease": "legacy"
+  },
+  "projectId": "motomedic-ai-20261009",
+  "queueTtl": "3600s",
+  "results": {
+    "buildStepImages": [
+      "sha256:40c2fb4fcd0ad51376eef166c2e7b2b40a3508d5776e2bf33db3783ab39d0f2e"
+    ],
+    "buildStepOutputs": [
+      ""
+    ]
+  },
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+  "source": {
+    "storageSource": {
+      "bucket": "motomedic-ai-20261009_cloudbuild",
+      "generation": "1791723457972708",
+      "object": "source/1791723456.293723-58450d7a8cc3424996a5b1ba22dae70b.tgz"
+    }
+  },
+  "sourceProvenance": {
+    "fileHashes": {
+      "gs://motomedic-ai-20261009_cloudbuild/source/1791723456.293723-58450d7a8cc3424996a5b1ba22dae70b.tgz#1791723457972708": {
+        "fileHash": [
+          {
+            "type": "MD5",
+            "value": "YjTvWRSDPDDZuKieNKp66w=="
+          },
+          {
+            "type": "SHA256",
+            "value": "2mb8aSScCNh9brwzXSugijh2Dm71KPwdiUAwX5JFIGc="
+          }
+        ]
+      }
+    },
+    "resolvedStorageSource": {
+      "bucket": "motomedic-ai-20261009_cloudbuild",
+      "generation": "1791723457972708",
+      "object": "source/1791723456.293723-58450d7a8cc3424996a5b1ba22dae70b.tgz"
+    }
+  },
+  "startTime": "2026-10-11T12:58:47.275641228Z",
+  "status": "SUCCESS",
+  "steps": [
+    {
+      "args": [
+        "build",
+        "-t",
+        "golden161-validation:v1",
+        "."
+      ],
+      "name": "gcr.io/cloud-builders/docker",
+      "pullTiming": {
+        "endTime": "2026-10-11T12:58:53.508620891Z",
+        "startTime": "2026-10-11T12:58:53.502070927Z"
+      },
+      "status": "SUCCESS",
+      "timing": {
+        "endTime": "2026-10-11T13:22:35.510453271Z",
+        "startTime": "2026-10-11T12:58:53.502070927Z"
+      }
+    }
+  ],
+  "timeout": "3600s",
+  "timing": {
+    "BUILD": {
+      "endTime": "2026-10-11T13:22:35.511963102Z",
+      "startTime": "2026-10-11T12:58:52.927087400Z"
+    },
+    "FETCHSOURCE": {
+      "endTime": "2026-10-11T12:58:52.926921376Z",
+      "startTime": "2026-10-11T12:58:49.203874400Z"
+    },
+    "STORAGE_SOURCE": {
+      "endTime": "2026-10-11T12:58:52.926921376Z",
+      "startTime": "2026-10-11T12:58:49.203874400Z"
+    }
+  }
+}

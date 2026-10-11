@@ -107,4 +107,15 @@ class StoreTests(unittest.TestCase):
         self.assertEqual(sum(result is None for result in results),1)
         self.assertEqual(len(self.client.data['arm_a_usage/owner']['turns']),1)
 
+    def test_snapshots_use_dedicated_group_and_fixed_24h_expiry(self):
+        self.state.save(self.session)
+        self.now += timedelta(minutes=10)
+        self.state.save(replace(self.session,version=1), expected_version=0)
+        snapshots = {k:v for k,v in self.client.data.items() if '/arm_a_session_versions/' in k}
+        self.assertEqual(len(snapshots),2)
+        self.assertFalse(any('/versions/' in k for k in self.client.data))
+        expiry = self.client.data['arm_a_sessions/session']['expires_at']
+        self.assertTrue(all(v['expires_at']==expiry for v in snapshots.values()))
+        self.assertEqual(expiry, datetime(2026,10,12,tzinfo=timezone.utc))
+
 if __name__=='__main__': unittest.main()

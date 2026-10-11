@@ -71,20 +71,20 @@ Assistant response: unavailable (reference `21711494-118d-435d-929b-9c5b03a2e316
 
 The project owner supplied these four draft v0.2 documents in the workspace. They are the best available record of the resulting plan:
 
-1. [Concept design and architecture](01_Concept_Architecture.docx): product boundary, logical architecture, adaptive feedback, user experience, staged capabilities.
-2. [Product requirements](02_PRD.docx): functional requirements, user journeys, acceptance criteria, indicative targets.
-3. [Technical requirements](03_TRD.docx): ingestion, evidence contracts, retrieval, state machine, validation, interfaces, telemetry, deployment.
-4. [To build and evaluation decisions](04_To_Build_Evaluation_Decisions.docx): scenarios, design options, golden-case schema, KPIs, source inventory, work plan, release checks.
+1. [Concept design and architecture](../../01_Concept_Architecture.docx): product boundary, logical architecture, adaptive feedback, user experience, staged capabilities.
+2. [Product requirements](../../02_PRD.docx): functional requirements, user journeys, acceptance criteria, indicative targets.
+3. [Technical requirements](../../03_TRD.docx): ingestion, evidence contracts, retrieval, state machine, validation, interfaces, telemetry, deployment.
+4. [To build and evaluation decisions](../../04_To_Build_Evaluation_Decisions.docx): scenarios, design options, golden-case schema, KPIs, source inventory, work plan, release checks.
 
 These documents say manual-specific rules and golden answers are pending review of the actual OEM manual. Their architecture choices and numerical targets are provisional until tested on that source and a reviewed evaluation set.
 
 ## Source PDF currently in the workspace
 
-The folder now also contains a [149-page Royal Enfield New Himalayan 450 owner's manual](royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf), SHA-256 `CF221A29E2F9CD5AF6E80A99774A697C814E8EDA661C27D72E519D8A7E80DA89`. The project owner confirmed that this owner's manual is the source for both embeddings and the cited Q&A set; no service manual will be supplied. The provisional outputs are documented in [the index guide](INDEX_README.md). Applicability and source rights still need checking before a public demo.
+The folder now also contains a [149-page Royal Enfield New Himalayan 450 owner's manual](../../royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf), SHA-256 `CF221A29E2F9CD5AF6E80A99774A697C814E8EDA661C27D72E519D8A7E80DA89`. The project owner confirmed that this owner's manual is the source for both embeddings and the cited Q&A set; no service manual will be supplied. The provisional outputs are documented in [the index guide](../architecture/LOCAL_INDEX_BASELINE.md). Applicability and source rights still need checking before a public demo.
 
 ## Current owner-manual retrieval decision
 
-On 2026-10-09 the project owner reiterated that only the owner's manual is in scope and asked for retrieval plus evidence assembly, including checked cross-references and the reranking step discussed in the design, before building generative answering. The current implementation is [retrieve_evidence.py](retrieve_evidence.py): dense LSA plus BM25 retrieval, a provisional local term-coverage reranker, and bounded one-hop expansion through agent-checked topic links. It returns page-linked candidate evidence and unresolved applicability and layout-review gates; it does not generate rider instructions. The proposed cross-encoder and full typed procedure, warning, table and figure graph remain unimplemented pending model selection, source inspection and independent review. The [index guide](INDEX_README.md) records the current evaluation result and limitations.
+On 2026-10-09 the project owner reiterated that only the owner's manual is in scope and asked for retrieval plus evidence assembly, including checked cross-references and the reranking step discussed in the design, before building generative answering. The current implementation is [retrieve_evidence.py](../../retrieve_evidence.py): dense LSA plus BM25 retrieval, a provisional local term-coverage reranker, and bounded one-hop expansion through agent-checked topic links. It returns page-linked candidate evidence and unresolved applicability and layout-review gates; it does not generate rider instructions. The proposed cross-encoder and full typed procedure, warning, table and figure graph remain unimplemented pending model selection, source inspection and independent review. The [index guide](../architecture/LOCAL_INDEX_BASELINE.md) records the current evaluation result and limitations.
 
 The project owner then required the build and operating environment to be online and asked for a build approach following the TRD. This changes the intended deployment of the current local prototype.
 

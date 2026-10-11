@@ -1,0 +1,170 @@
+[
+  {
+    "indexConfig": {
+      "ancestorField": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/__default__/fields/*",
+      "indexes": [
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "ASCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "DESCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "arrayConfig": "CONTAINS",
+              "fieldPath": "expires_at"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        }
+      ],
+      "usesAncestorConfig": true
+    },
+    "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_operations/fields/expires_at",
+    "ttlConfig": {
+      "state": "ACTIVE"
+    }
+  },
+  {
+    "indexConfig": {
+      "ancestorField": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/__default__/fields/*",
+      "indexes": [
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "ASCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "DESCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "arrayConfig": "CONTAINS",
+              "fieldPath": "expires_at"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        }
+      ],
+      "usesAncestorConfig": true
+    },
+    "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_session_versions/fields/expires_at",
+    "ttlConfig": {
+      "state": "ACTIVE"
+    }
+  },
+  {
+    "indexConfig": {
+      "ancestorField": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/__default__/fields/*",
+      "indexes": [
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "ASCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "DESCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "arrayConfig": "CONTAINS",
+              "fieldPath": "expires_at"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        }
+      ],
+      "usesAncestorConfig": true
+    },
+    "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_sessions/fields/expires_at",
+    "ttlConfig": {
+      "state": "ACTIVE"
+    }
+  },
+  {
+    "indexConfig": {
+      "ancestorField": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/__default__/fields/*",
+      "indexes": [
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "ASCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "fieldPath": "expires_at",
+              "order": "DESCENDING"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        },
+        {
+          "fields": [
+            {
+              "arrayConfig": "CONTAINS",
+              "fieldPath": "expires_at"
+            }
+          ],
+          "queryScope": "COLLECTION",
+          "state": "READY"
+        }
+      ],
+      "usesAncestorConfig": true
+    },
+    "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_usage/fields/expires_at",
+    "ttlConfig": {
+      "state": "ACTIVE"
+    }
+  }
+]

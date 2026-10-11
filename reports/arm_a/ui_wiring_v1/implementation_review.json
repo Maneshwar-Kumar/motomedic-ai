@@ -1,0 +1,67 @@
+{
+  "schema_version": "arm-a-private-ui-wiring-independent-review-v1",
+  "reviewer": "/root/integration_review",
+  "review_date": "2026-10-11",
+  "verdict": "REVISIONS_REQUIRED_QUERY_PROPOSITION_SCOPE",
+  "scope": "Private IAM-protected UI and private backend implementation only; no deployment, public UI or frozen-context approval",
+  "snapshot_sha256": {
+    "cloud/arm_a/questions.py": "1c475352e01dcb7fe56bf3230e48144850a84c8163b41ccba186e2fdcb4562af",
+    "cloud/arm_a/rider_api.py": "3c24a08cd9cafd16660cdf2e0d182b75198e85efc841af44323960e176fc6c1a",
+    "cloud/arm_a/store.py": "d66c2326ce41edf17f661d31d67e9a90ea75159a12eacd4e9371a62d01285d44",
+    "cloud/arm_a/app.py": "e8f9f2a0572d885805d59453dbc4441ed715a43373311d4ccdd8a9b582b8cd18",
+    "rider_ui/identity.py": "b11b6cde8ed18fdf898182879757ef6c5623c3b365cf8a8c3f1db8693587287e",
+    "rider_ui/client.py": "35b153d115f06ff34e9a314d46647ccf0791ce802c751a6d9adc32d66c4164d7",
+    "rider_ui/app.py": "ff4a0ed724e9d9abd91e645b62d2d39d0b9772f7dd79c1a4355079f1cd74bed3",
+    "rider_ui/verified_sse.py": "6e9355391789a612b43ef9bc7aac07eea17aa6cc6a1ce31d66a2fcf52c6af191"
+  },
+  "blocking_findings": [
+    {
+      "priority": 1,
+      "file": "cloud/arm_a/questions.py",
+      "finding": "Bag-of-terms scope check discards relational subjects and comparators. A matching evidence topic and word set authorize canonical affirmative wording for a different proposition.",
+      "reproduction": [
+        "With only GEN003 retrieval hit, query Are mirrors smaller than vehicles? returns SUPPORTED beginning Yes.",
+        "Query Are mirrors farther away than vehicles? returns the same affirmative SUPPORTED wording.",
+        "Query Do smaller mirrors look farther away? also returns SUPPORTED."
+      ],
+      "source_supported_predicate": "Vehicles or objects seen in convex mirrors look smaller and farther away compared with a flat mirror; original PDF13.",
+      "required_fix": "Guard full proposition roles and request operation, particularly leading Yes/No canonical answers. Use reviewed narrow relation patterns or independently review neutral declarative alternatives; word overlap and reranker rank cannot establish answer/query support.",
+      "gate_limit": "Existing exact claim/source checks validate the frozen component's meaning, but do not validate the new affirmative implication created by attaching it to arbitrary input."
+    }
+  ],
+  "positive_findings": [
+    "Raw arbitrary query reaches candidate and selected dependency retrieval unchanged; no client record or symptom category required.",
+    "Singleton selected record retains existing source/applicability/eligibility/dependency/warning/citation and Arm A exact-wording gates; no paid provider calls introduced.",
+    "Atomic commit_answer writes session, immutable MotoMedic-specific snapshot and complete operation together before technical SSE is constructed; fixed24h lifetime retained.",
+    "Signed high-entropy visitor capability plus backend IAM principal produces distinct owner keys; stable private UI principal-derived nonce preserves counters across new conversations and refreshes.",
+    "Identity token is fetched server-side for each request; browser does not receive managed credentials or signing secret.",
+    "SSE client checks full saved view before callback, requires complete-event parity, caps aggregate bytes and refuses raw tokens/partial warnings and redirects.",
+    "Normal chat input remains available after completed response; typed choices are optional and no diagnostic wizard is required."
+  ],
+  "concurrent_fixes_rechecked": [
+    "Session20 precheck added before retrieval; synthetic accepted_turns20 probe returned429 with0 additional retrieval calls.",
+    "Operation replay now precedes session saved-view/idle validation; completed initial operation replay remains200 independently of expired session idle deadline.",
+    "Stale/invalid choice checks now precede reservation, terminal conflict tracking and operation_terminal error classification added; uncertain commit remains recoverable rather than auto-reexecuted."
+  ],
+  "independent_validation": {
+    "command": "python -m unittest cloud.arm_a.test_question_wiring rider_ui.tests.test_client rider_ui.tests.test_verified_sse rider_ui.tests.test_identity -v",
+    "dependency_setup": "Existing build/arm-a-test-dependencies supplied through PYTHONPATH",
+    "execution": "SYNTHETIC_RETRIEVAL_AND_STORE_NO_PROVIDER_OR_CLOUD_CALLS",
+    "tests_passed": 37,
+    "seconds": 10.332,
+    "source_snapshot_note": "Coordinator applied fixes during review. This initial37-test run and later targeted probes are not frozen-context closure; rerun latest full suite after scope fix.",
+    "false_proposition_probes": "Three unsupported affirmative results reproduced despite suite passing.",
+    "new_runtime_approval_granted": false
+  },
+  "remaining_limitations": [
+    "Private UI IAM with invoker checking must be independently verified at deployment; platform_subject decoding does not validate signature itself and cannot authorize a public UI.",
+    "Visitor identity is stable per verified private principal, not anonymous-public browser identity; public reset-abuse protection is outside this review.",
+    "Admission precheck plus transactional final count protects current single-worker policy; concurrent requests at session quota boundary can still do work before one loses CAS. Broader concurrency needs atomic per-session reservations.",
+    "Saved query text is now retained in private session head for feedback; publish that24h retention behavior and keep it out of routine telemetry.",
+    "Retained capability expires after24h; ongoing UI session needs clear renewal/reload handling rather than silently resetting visitor counters.",
+    "Candidate search with no dependency manifest remains candidate-only and skips conditional reranking for missing review; selected step's dependency retrieval retains original conditional policy.",
+    "Conservative arbitrary-input coverage and calibrated query/answer relevance remain unmeasured on independently reviewed heldout queries.",
+    "Prepared immutable context, hosted suite, live real retrieval/Firestore/visitor/SSE and fresh-browser acceptance remain required after changes."
+  ],
+  "reviewer_actions": {"runtime_modified": false, "frozen_source_modified": false, "cloud_mutations": 0, "provider_calls": 0}
+}

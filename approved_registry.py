@@ -221,6 +221,30 @@ class ApprovedEvidenceRegistry(EvidenceRegistry):
                            'extraction_check_status': 'PASSED' if ready else 'PENDING'}
         return result
 
+    def approved_policy_caveat(self, sid, claim):
+        """Exact record-bound policy wording; never permission for a technical claim."""
+        try:
+            if not self.source_ready() or not self.step_ready(sid):
+                return False
+            refs = claim.get('policy_support_ids', [])
+            if (claim.get('evidence_ids') or not refs or len(refs) != len(set(refs))
+                    or claim.get('response_role') not in ('FACT', 'WARNING')
+                    or claim.get('presentation_mode') != 'REVIEWED_PARAPHRASE'
+                    or claim.get('verbatim_warning') or claim.get('reviewed_wording_variants')):
+                return False
+            matches = [c for c in self.step(sid).claims if c['claim_id'] == claim.get('claim_id')]
+            if len(matches) != 1 or dict(matches[0]) != dict(claim):
+                return False
+            rid = self.candidate['steps'][sid]['canonical_record_id']
+            if not self._scope_intact(rid):
+                return False
+            return all(ref in self._bound[rid]['source_sha256s'] and
+                       self.approved_sources[ref].get('authority') == 'PRODUCT_POLICY' and
+                       object_hash(self.approved_sources[ref]) == self._bound[rid]['source_sha256s'][ref]
+                       for ref in refs)
+        except (KeyError, TypeError, ValueError):
+            return False
+
     def verified_safety_claims(self, sid):
         """Finite approved warning text only; never a general generator bypass.
 
@@ -235,7 +259,7 @@ class ApprovedEvidenceRegistry(EvidenceRegistry):
             if not step.claims or any(c.get('response_role') not in ('FACT', 'WARNING', 'PREREQUISITE')
                                       or c.get('presentation_mode') != 'REVIEWED_PARAPHRASE'
                                       or c.get('verbatim_warning')
-                                      or not c.get('evidence_ids')
+                                      or (not c.get('evidence_ids') and not self.approved_policy_caveat(sid, c))
                                       or not set(c['evidence_ids']) <= required for c in step.claims):
                 return False
             categories = self.candidate['dependencies'][sid]['categories']

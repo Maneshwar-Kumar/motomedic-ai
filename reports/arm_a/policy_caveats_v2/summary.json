@@ -1,0 +1,47 @@
+{
+  "event": "golden161_summary",
+  "run_id": "golden161-policy-caveats-20261011-v2",
+  "record_count": 14,
+  "passed": 14,
+  "failed": 0,
+  "route_matches": 14,
+  "actual_routes": {
+    "SUPPORTED": 13,
+    "SAFETY_STOP": 1
+  },
+  "expected_routes": {
+    "SUPPORTED": 13,
+    "SAFETY_STOP": 1
+  },
+  "confusion": [
+    {
+      "expected": "SAFETY_STOP",
+      "actual": "SAFETY_STOP",
+      "count": 1
+    },
+    {
+      "expected": "SUPPORTED",
+      "actual": "SUPPORTED",
+      "count": 13
+    }
+  ],
+  "source_step": {
+    "count": 14,
+    "passed": 14
+  },
+  "trusted_policy_fixture": {
+    "count": 0,
+    "raw_prompt_route_matches": 0,
+    "failure_injection_tested": false
+  },
+  "technical_releases": 14,
+  "wrong_scope_technical_releases": 0,
+  "system_errors": 0,
+  "uncaught_exceptions": 0,
+  "minimum_gap_seconds": 7.000212179000016,
+  "elapsed_seconds": 135.143941918,
+  "provider_calls": 0,
+  "retries": 0,
+  "held_out": false,
+  "production_http_latency_measured": false
+}

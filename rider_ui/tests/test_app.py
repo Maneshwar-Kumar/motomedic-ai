@@ -13,7 +13,7 @@ class AppTests(unittest.TestCase):
             at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=15).run()
             self.assertFalse(at.exception)
             self.assertTrue(at.chat_input[0].disabled)
-            self.assertTrue(any('not connected' in x.value for x in at.info))
+            self.assertFalse(any('not connected' in x.value for x in at.info))
     def test_confirmation_feedback_and_no_duplicate_rerun(self):
         server=serve(0)
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
@@ -26,7 +26,6 @@ class AppTests(unittest.TestCase):
                 self.assertFalse(at.exception)
                 self.assertTrue(at.chat_input[0].disabled)
                 at.checkbox[0].check().run()
-                at.selectbox[0].select_index(0).run()
                 self.assertFalse(at.chat_input[0].disabled)
                 at.chat_input[0].set_value('Engineering test only').run()
                 self.assertFalse(at.exception)
@@ -42,6 +41,50 @@ class AppTests(unittest.TestCase):
                 self.assertEqual(count,3)
         finally:
             server.shutdown();server.server_close()
+    def test_reset_detaches_chat_and_diagnostic_context(self):
+        server=serve(0)
+        threading.Thread(target=server.serve_forever,daemon=True).start()
+        env={'MOTOMEDIC_RIDER_API_URL':'http://127.0.0.1:'+str(server.server_port),
+             'MOTOMEDIC_RIDER_API_TOKEN':'ui-test-only','MOTOMEDIC_UI_ENGINEERING_LOOPBACK':'1'}
+        try:
+            with patch.dict(os.environ,env):
+                at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=15).run()
+                at.checkbox[0].check().run()
+                at.chat_input[0].set_value('Engineering reset test').run()
+                old_id=at.session_state['view']['session_id']
+                next(x for x in at.button if x.label=='Start a new conversation').click().run()
+                self.assertFalse(at.exception)
+                self.assertIsNone(at.session_state['view'])
+                self.assertEqual(at.session_state['messages'],[])
+                self.assertIsNone(at.session_state['pending'])
+                self.assertIsNone(at.session_state['connection_error'])
+                self.assertIn(old_id,sessions)
+                self.assertTrue(at.checkbox[0].value)
+        finally:
+            server.shutdown();server.server_close()
+
+    def test_chat_input_remains_available_for_arbitrary_followup_questions(self):
+        server=serve(0)
+        threading.Thread(target=server.serve_forever,daemon=True).start()
+        requests.clear();sessions.clear();operations.clear()
+        env={'MOTOMEDIC_RIDER_API_URL':'http://127.0.0.1:'+str(server.server_port),
+             'MOTOMEDIC_RIDER_API_TOKEN':'ui-test-only','MOTOMEDIC_UI_ENGINEERING_LOOPBACK':'1'}
+        try:
+            with patch.dict(os.environ,env):
+                at=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=15).run()
+                at.checkbox[0].check().run()
+                at.chat_input[0].set_value('First engineering question').run()
+                self.assertFalse(at.exception)
+                self.assertFalse(at.chat_input[0].disabled)
+                sid=at.session_state['view']['session_id']
+                at.chat_input[0].set_value('Another unrelated engineering question').run()
+                self.assertFalse(at.exception)
+                self.assertEqual(requests[-1]['path'],'/v1/sessions/'+sid+'/questions')
+                self.assertEqual(requests[-1]['payload']['query'],'Another unrelated engineering question')
+                self.assertNotIn('intent_mode',requests[-1]['payload'])
+        finally:
+            server.shutdown();server.server_close()
+
     def test_failed_delivery_recovers_saved_operation_without_resending(self):
         server=serve(0)
         threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -52,7 +95,6 @@ class AppTests(unittest.TestCase):
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=15).run()
                 at.checkbox[0].check().run()
-                at.selectbox[0].select_index(0).run()
                 Handler.fail_next_response=True
                 at.chat_input[0].set_value('Engineering timeout recovery').run()
                 self.assertFalse(at.exception)

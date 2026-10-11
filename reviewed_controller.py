@@ -88,7 +88,8 @@ class ReviewedController:
                                claim_evidence_map=(), cited_pages=(), suggested_step_id=None,
                                reason_codes=response.reason_codes + ("END_USER_EXCERPT_DISPLAY_PROHIBITED",))
         return replace(response, cited_pages=citations,
-                       claim_evidence_map=tuple({"claim_id": c["claim_id"], "evidence_ids": c["evidence_ids"]}
+                       claim_evidence_map=tuple({"claim_id": c["claim_id"], "evidence_ids": c["evidence_ids"],
+                                                  **({"policy_support_ids": list(c["policy_support_ids"])} if c.get("policy_support_ids") and not c["evidence_ids"] else {})}
                                                 for c in response.claim_evidence_map))
 
     def scope_status(self, session):
@@ -255,7 +256,7 @@ class ReviewedController:
         attached = set(bundle["attached_evidence_ids"]) if bundle else required
         for claim in s.claims:
             ids = set(claim.get("evidence_ids", []))
-            if not claim.get("claim_id") or not claim.get("text") or not ids or not ids <= required & attached:
+            if not claim.get("claim_id") or not claim.get("text") or (not ids and not (safety and getattr(r, "approved_policy_caveat", lambda *_: False)(sid, claim))) or not ids <= required & attached:
                 return self.response("SYSTEM_ERROR", "I am temporarily unable to validate citations.", session,
                                      reason_codes=("INVALID_CLAIM_CITATION",))
             claims.append(dict(claim))

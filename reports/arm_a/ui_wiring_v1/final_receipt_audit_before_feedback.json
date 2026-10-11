@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "review_id": "arm_a_private_ui_wiring_final_receipt_audit_v1",
+  "reviewer": "independent_agent_integration_review",
+  "date": "2026-10-11",
+  "verdict": "PASS_PRIVATE_BUILD_DEPLOYMENT_AND_RECORDED_LIVE_QUESTION_UI_ACCEPTANCE",
+  "build_deployment_conditions_closed": true,
+  "all_possible_live_scenarios_proven": false,
+  "evidence_sha256": {
+    "context_review.json": "f21fdde0284df2d5d847302a8fc7eb5a0cd3f1cdab8b9f9ec3bacc555d5a88e9",
+    "preparation_v2.json": "138f83e2604f57920bfc30c865c088802051e1152bffb140c5029ee0da153c38",
+    "backend_deployment.json": "525f55d05c576d753e16d02a41842bd27bbbd789bf43b986cccbc650115a192d",
+    "ui_deployment.json": "259b60069ea12ce5cd1c6386fd6ede73b15931db3f038d4e100c6e80a9700466",
+    "hosted_test_counts.json": "d0a70b59e9db5edac72bdcbb3c3ea7b469493d920e09b0300ef6d04bb817a9e8",
+    "live_question_acceptance.json": "847886071656be73ee833626ea22ab6d8e6d806bb5156c020d9187aec0b67930",
+    "live_browser_acceptance.json": "21b67850c5d8a5a2a133831925e50810e72c2a53e577bbd3bdcece4eaa960c62",
+    "managed_connection.json": "1b1746bd3f12d3a1eb2467de7cb6852b03bf2122ee96c2996bdd365c6bcc4492",
+    "completion.json": "e60239e4592a0c470bbd9df4eb1f20f314d06e3f9de251849602ee711a7c4a1d",
+    "private_ui_proxy.json": "21b6f682c3916b54019ff5f56a97f7d67c2c19809798eb797904903c5e78997e"
+  },
+  "receipt_binding_mismatches": [],
+  "backend": {
+    "build_id": "f0a95be2-a89d-4d83-a582-81cc6d9319ec",
+    "build_status": "SUCCESS",
+    "revision": "motomedic-arm-a-00003-gs2",
+    "digest": "sha256:9d92653a7984cea1a21f132752d961dbd1eb79140380d6d30773ea5ae3cf0969",
+    "tests_passed": 117,
+    "test_seconds": 77.372
+  },
+  "ui": {
+    "build_id": "afa32ce8-06a0-4fae-ac20-6206ea267d8c",
+    "build_status": "SUCCESS",
+    "revision": "motomedic-rider-ui-00001-wg9",
+    "digest": "sha256:1776769d01193a1c2522fb745e5adcd10063756fa6e3d0c1da96cff8d06ba202",
+    "tests_passed": 44,
+    "test_seconds": 4.021
+  },
+  "audit_findings": [
+    "All completion-record evidence hashes match current receipts; preparation hash matches the independent context review. Successful build result digests equal deployed container digests and both named revisions are Ready.",
+    "Both service IAM receipts contain no allUsers or allAuthenticatedUsers member and no disabled invoker-IAM annotation. Backend invoker is the exact managed UI service account; UI IAM receipt is empty at service level. This is a receipt audit, not a new full project IAM enumeration.",
+    "UI environment uses managed cloud_run authentication, exact backend canonical URL and server-side Secret Manager reference shared with backend. No secret value is included in these receipts.",
+    "Backend runtime verifies every release file hash before startup. Successful live installed endpoints therefore close the inherited index/reranker binding gate for the exact release. Source/manual/index identities are also retained in live catalogue.",
+    "Deployed services retain maximum one instance. Reviewed fixed session retention and quota enforcement runtime bytes are unchanged; physical TTL timing is not tested by these receipts.",
+    "Raw GEN007 request yielded exact supported source-linked complete-unit SSE, saved operation recovery returned same view without re-execution, and GEN003 outside initial30 succeeded in the same session. Different proposition and unsupported fuel requests abstained.",
+    "Managed browser UI-to-backend identity, supported input, follow-up abstention, refresh connection, desktop/mobile overflow and absence of page errors passed recorded live checks.",
+    "The localhost127.0.0.1:8787 operator proxy forwards authenticated traffic to the hosted private UI; it does not grant public access or move app/model execution locally."
+  ],
+  "live_scenarios_not_explicit_in_current_receipts": [
+    "Cross-visitor denial of saved-session and operation reads",
+    "Typed issued-feedback action in the deployed question API"
+  ],
+  "coverage_note": "Ownership and typed feedback have source-reviewed implementation and passing synthetic/hosted tests. The current live receipts do not explicitly exercise these two scenarios mentioned in the context review; do not describe every live scenario as proven. These are coverage limitations, not failed observations.",
+  "limitations": [
+    "Conservative canonical proposition and six reviewed-paraphrase admission; unmatched questions can abstain.",
+    "No photo, public source excerpt/image delivery, public/anonymous UI or general semantic generation approval.",
+    "Single-run latency measurements do not establish p95 or production performance.",
+    "No general full adaptive release acceptance or physical TTL deletion timing claim."
+  ],
+  "provider_calls_by_reviewer": 0,
+  "cloud_mutations_by_reviewer": 0,
+  "runtime_edits_by_reviewer": 0,
+  "public_release_approval": false
+}

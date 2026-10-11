@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "images": [
+      "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:auth-retention-v2"
+    ]
+  },
+  "createTime": "2026-10-11T11:25:18.153227197Z",
+  "id": "c545b12f-227b-4adc-a9ea-33dff255a621",
+  "images": [
+    "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:auth-retention-v2"
+  ],
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds;region=us-central1/c545b12f-227b-4adc-a9ea-33dff255a621?project=279945185781",
+  "name": "projects/279945185781/locations/us-central1/builds/c545b12f-227b-4adc-a9ea-33dff255a621",
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "machineType": "E2_HIGHCPU_8",
+    "pool": {},
+    "workerRelease": "legacy"
+  },
+  "projectId": "motomedic-ai-20261009",
+  "queueTtl": "3600s",
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+  "source": {
+    "storageSource": {
+      "bucket": "motomedic-ai-20261009_cloudbuild",
+      "generation": "1791717916398132",
+      "object": "source/1791717914.392598-2f09ae62e5454515b6c7cea26e96e065.tgz"
+    }
+  },
+  "sourceProvenance": {
+    "resolvedStorageSource": {
+      "bucket": "motomedic-ai-20261009_cloudbuild",
+      "generation": "1791717916398132",
+      "object": "source/1791717914.392598-2f09ae62e5454515b6c7cea26e96e065.tgz"
+    }
+  },
+  "status": "QUEUED",
+  "steps": [
+    {
+      "args": [
+        "build",
+        "-t",
+        "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:auth-retention-v2",
+        "."
+      ],
+      "name": "gcr.io/cloud-builders/docker"
+    }
+  ],
+  "timeout": "900s"
+}

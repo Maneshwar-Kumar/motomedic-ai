@@ -1,0 +1,70 @@
+{
+  "schema_version": "arm-a-hosted-initial-acceptance-v1",
+  "url": "https://motomedic-arm-a-279945185781.us-central1.run.app",
+  "operation_id": "8a4d817737f744f382821ff8a00bc090",
+  "session_id": "f396d8592e4f40058ffa4d2ff87b5883",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "events": [
+    "verified_block",
+    "complete"
+  ],
+  "technical_events": 1,
+  "response_sha256": "ee5fd67a233b7d281ec1d63a013c68b19a61bb2d833b6d641fa6a2eaf5ba095b",
+  "technical_text_sha256": "7533a95e485a560f6ce56a5a991c798b4220bdd8b766bf275e20afc8418faeda",
+  "initial_timing": {
+    "first_verified_text_seconds": 32.57024569995701,
+    "completion_seconds": 32.58319340005983,
+    "replay": false
+  },
+  "replay_timing": {
+    "first_verified_text_seconds": 0.5526532999938354,
+    "completion_seconds": 0.5677365999436006,
+    "replay": true
+  },
+  "recovery_timing": {
+    "first_verified_text_seconds": null,
+    "completion_seconds": 0.5152369999559596,
+    "replay": false
+  },
+  "firestore_operation_complete": true,
+  "firestore_session_version": 1,
+  "replay_exact": true,
+  "conflicting_replay_rejected": true,
+  "scope_rejections": [
+    {
+      "changed_fields": [
+        "bike_variant"
+      ],
+      "status": 400,
+      "route": "UNSUPPORTED"
+    },
+    {
+      "changed_fields": [
+        "manual_checksum"
+      ],
+      "status": 400,
+      "route": "UNSUPPORTED"
+    },
+    {
+      "changed_fields": [
+        "confirmed_himalayan_bs6"
+      ],
+      "status": 400,
+      "route": "AMBIGUOUS"
+    },
+    {
+      "changed_fields": [
+        "record_id"
+      ],
+      "status": 400,
+      "route": "UNSUPPORTED"
+    }
+  ],
+  "provider_calls": 0,
+  "p95_established": false,
+  "cold_path_classification": "UNCLASSIFIED",
+  "ttl_physical_deletion_verified": false,
+  "owner_isolation_second_principal_verified": false,
+  "full_rider_api_acceptance": false
+}

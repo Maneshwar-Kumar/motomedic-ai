@@ -1,0 +1,42 @@
+{
+  "amount": {
+    "specifiedAmount": {
+      "currencyCode": "INR",
+      "units": "2700"
+    }
+  },
+  "budgetFilter": {
+    "creditTypesTreatment": "INCLUDE_ALL_CREDITS",
+    "customPeriod": {
+      "startDate": {
+        "day": 9,
+        "month": 10,
+        "year": 2026
+      }
+    },
+    "projects": [
+      "projects/279945185781"
+    ]
+  },
+  "displayName": "MotoMedic lifetime INR2700",
+  "etag": "1791710337481247",
+  "name": "billingAccounts/013BB2-A5996E-B48AB5/budgets/381ad343-2da4-4676-b9a3-f180783b26d1",
+  "notificationsRule": {
+    "pubsubTopic": "projects/motomedic-ai-20261009/topics/motomedic-budget",
+    "schemaVersion": "1.0"
+  },
+  "thresholdRules": [
+    {
+      "spendBasis": "CURRENT_SPEND",
+      "thresholdPercent": 0.5
+    },
+    {
+      "spendBasis": "CURRENT_SPEND",
+      "thresholdPercent": 0.8
+    },
+    {
+      "spendBasis": "CURRENT_SPEND",
+      "thresholdPercent": 1.0
+    }
+  ]
+}

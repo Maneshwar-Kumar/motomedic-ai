@@ -1,0 +1,115 @@
+{
+  "apiVersion": "serving.knative.dev/v1",
+  "kind": "Service",
+  "metadata": {
+    "annotations": {
+      "run.googleapis.com/client-name": "gcloud",
+      "run.googleapis.com/client-version": "575.0.0",
+      "run.googleapis.com/ingress": "all",
+      "run.googleapis.com/ingress-status": "all",
+      "run.googleapis.com/maxScale": "1",
+      "run.googleapis.com/operation-id": "f31d9786-ba01-4c4c-96e8-58d04c147222",
+      "run.googleapis.com/urls": "[\"https://motomedic-arm-a-279945185781.us-central1.run.app\",\"https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app\"]",
+      "serving.knative.dev/creator": "maneshwarkumar@gmail.com",
+      "serving.knative.dev/lastModifier": "maneshwarkumar@gmail.com"
+    },
+    "creationTimestamp": "2026-10-11T11:06:18.539876Z",
+    "generation": 3,
+    "labels": {
+      "cloud.googleapis.com/location": "us-central1"
+    },
+    "name": "motomedic-arm-a",
+    "namespace": "279945185781",
+    "resourceVersion": "AAZdjwYiNI0",
+    "selfLink": "/apis/serving.knative.dev/v1/namespaces/279945185781/services/motomedic-arm-a",
+    "uid": "bc1b292b-3701-465d-abf1-6879aa6adf20"
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "annotations": {
+          "autoscaling.knative.dev/maxScale": "1",
+          "autoscaling.knative.dev/minScale": "1",
+          "run.googleapis.com/client-name": "gcloud",
+          "run.googleapis.com/client-version": "575.0.0",
+          "run.googleapis.com/cpu-throttling": "true",
+          "run.googleapis.com/startup-cpu-boost": "true"
+        },
+        "labels": {
+          "client.knative.dev/nonce": "nozpmvkzzl",
+          "run.googleapis.com/startupProbeType": "Custom"
+        }
+      },
+      "spec": {
+        "containerConcurrency": 1,
+        "containers": [
+          {
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:32bdd105dcee611002240ec86ab7d3f78ce1b3e882bc23f7c7d89c75082b4f96",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              }
+            },
+            "startupProbe": {
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              },
+              "periodSeconds": 10,
+              "timeoutSeconds": 5
+            }
+          }
+        ],
+        "serviceAccountName": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "timeoutSeconds": 180
+      }
+    },
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100
+      }
+    ]
+  },
+  "status": {
+    "address": {
+      "url": "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app"
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-11T11:38:44.875405Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T11:38:43.551764Z",
+        "status": "True",
+        "type": "ConfigurationsReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T11:38:44.821171Z",
+        "status": "True",
+        "type": "RoutesReady"
+      }
+    ],
+    "latestCreatedRevisionName": "motomedic-arm-a-00002-jh2",
+    "latestReadyRevisionName": "motomedic-arm-a-00002-jh2",
+    "observedGeneration": 3,
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100,
+        "revisionName": "motomedic-arm-a-00002-jh2"
+      }
+    ],
+    "url": "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app"
+  }
+}

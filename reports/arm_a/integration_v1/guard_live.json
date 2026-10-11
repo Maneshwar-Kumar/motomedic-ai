@@ -1,0 +1,155 @@
+{
+  "apiVersion": "serving.knative.dev/v1",
+  "kind": "Service",
+  "metadata": {
+    "annotations": {
+      "cloudfunctions.googleapis.com/function-id": "motomedic-budget-guard",
+      "run.googleapis.com/build-base-image": "us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/python311",
+      "run.googleapis.com/build-enable-automatic-updates": "true",
+      "run.googleapis.com/build-function-target": "stop_billing",
+      "run.googleapis.com/build-image-uri": "us-central1-docker.pkg.dev/motomedic-ai-20261009/gcf-artifacts/motomedic--ai--20261009__us--central1__motomedic--budget--guard:version_1",
+      "run.googleapis.com/build-name": "projects/279945185781/locations/us-central1/builds/f6b2935b-ada6-4db9-b5db-0fbc28ea2c24",
+      "run.googleapis.com/build-service-account": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+      "run.googleapis.com/build-source-location": "gs://gcf-v2-sources-279945185781-us-central1/motomedic-budget-guard/function-source.zip#1791710248259848",
+      "run.googleapis.com/client-name": "gcloud",
+      "run.googleapis.com/custom-audiences": "[\"https://us-central1-motomedic-ai-20261009.cloudfunctions.net/motomedic-budget-guard\"]",
+      "run.googleapis.com/ingress": "all",
+      "run.googleapis.com/ingress-status": "all",
+      "run.googleapis.com/maxScale": "100",
+      "run.googleapis.com/operation-id": "a3521ecf-3453-4f54-919b-fbbe310bec09",
+      "run.googleapis.com/urls": "[\"https://motomedic-budget-guard-279945185781.us-central1.run.app\",\"https://us-central1-motomedic-ai-20261009.cloudfunctions.net/motomedic-budget-guard\",\"https://motomedic-budget-guard-5uyul6ay6a-uc.a.run.app\"]",
+      "serving.knative.dev/creator": "service-279945185781@gcf-admin-robot.iam.gserviceaccount.com",
+      "serving.knative.dev/lastModifier": "service-279945185781@gcf-admin-robot.iam.gserviceaccount.com"
+    },
+    "creationTimestamp": "2026-10-09T08:41:47.156946Z",
+    "generation": 3,
+    "labels": {
+      "cloud.googleapis.com/location": "us-central1",
+      "goog-cloudfunctions-runtime": "python311",
+      "goog-drz-cloudfunctions-id": "motomedic-budget-guard",
+      "goog-drz-cloudfunctions-location": "us-central1",
+      "goog-managed-by": "cloudfunctions"
+    },
+    "name": "motomedic-budget-guard",
+    "namespace": "279945185781",
+    "resourceVersion": "AAZdjQ/hItU",
+    "selfLink": "/apis/serving.knative.dev/v1/namespaces/279945185781/services/motomedic-budget-guard",
+    "uid": "6e631ecf-423d-4e9b-92e7-4898e0bf2695"
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "annotations": {
+          "autoscaling.knative.dev/maxScale": "1",
+          "cloudfunctions.googleapis.com/trigger-type": "google.cloud.pubsub.topic.v1.messagePublished",
+          "run.googleapis.com/base-images": "{\"worker\":\"us-central1-docker.pkg.dev/serverless-runtimes/google-22-full/runtimes/python311\"}",
+          "run.googleapis.com/client-name": "gcloud",
+          "run.googleapis.com/startup-cpu-boost": "true"
+        },
+        "labels": {
+          "goog-drz-cloudfunctions-id": "motomedic-budget-guard",
+          "goog-drz-cloudfunctions-location": "us-central1",
+          "run.googleapis.com/startupProbeType": "Default"
+        },
+        "name": "motomedic-budget-guard-00003-qax"
+      },
+      "spec": {
+        "containerConcurrency": 1,
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "--update-env-vars",
+                "value": "BUDGET_DISPLAY_NAME='MotoMediclifetimeINR2700'"
+              },
+              {
+                "name": "BUDGET_DISPLAY_NAME",
+                "value": "MotoMedic lifetime INR2700"
+              },
+              {
+                "name": "BUDGET_INR",
+                "value": "2700"
+              },
+              {
+                "name": "LOG_EXECUTION_ID",
+                "value": "true"
+              },
+              {
+                "name": "SIMULATE",
+                "value": "false"
+              },
+              {
+                "name": "STOP_INR",
+                "value": "2540"
+              }
+            ],
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/gcf-artifacts/motomedic--ai--20261009__us--central1__motomedic--budget--guard:version_1",
+            "name": "worker",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "0.1666",
+                "memory": "256Mi"
+              }
+            },
+            "startupProbe": {
+              "failureThreshold": 1,
+              "periodSeconds": 240,
+              "tcpSocket": {
+                "port": 8080
+              },
+              "timeoutSeconds": 240
+            }
+          }
+        ],
+        "runtimeClassName": "run.googleapis.com/linux-base-image-update",
+        "serviceAccountName": "motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "timeoutSeconds": 60
+      }
+    },
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100
+      }
+    ]
+  },
+  "status": {
+    "address": {
+      "url": "https://motomedic-budget-guard-5uyul6ay6a-uc.a.run.app"
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-11T09:18:18.448597Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T09:18:13.161064Z",
+        "status": "True",
+        "type": "ConfigurationsReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T09:18:18.382564Z",
+        "status": "True",
+        "type": "RoutesReady"
+      }
+    ],
+    "latestCreatedRevisionName": "motomedic-budget-guard-00003-qax",
+    "latestReadyRevisionName": "motomedic-budget-guard-00003-qax",
+    "observedGeneration": 3,
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100,
+        "revisionName": "motomedic-budget-guard-00003-qax"
+      }
+    ],
+    "url": "https://motomedic-budget-guard-5uyul6ay6a-uc.a.run.app"
+  }
+}

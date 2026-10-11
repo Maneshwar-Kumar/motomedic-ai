@@ -1,0 +1,26 @@
+{
+  "schema_version": "arm-a-patch-preparation-v2",
+  "base_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:69111a77da8a045b5b870e95ed2305c63d8c26cac2732a1a33a515489ef7bad6",
+  "context": "build/arm-a-auth-retention-v2",
+  "patch_file_sha256": {
+    "cloud/arm_a/app.py": "5fff89e22d3ff1f78636cc829390a710a472865dbba401bc080719318d1701c3",
+    "cloud/arm_a/store.py": "e38b9f90e6ebc20c27f1d67f6c90cc5da21ff21f4fc8a6b7a0b1ae5c59b36f0f",
+    "cloud/arm_a/test_api.py": "d2a7094a2f49fc4494826731b7fe4405c58c8d1948a3699235689062538a0308",
+    "cloud/arm_a/test_store.py": "3af7c210097c5f8e44997b2ffca2f7ea101c1887522b25519ca4166f16b5887b",
+    "cloud/arm_a/test_composer.py": "2c93057c3e255caa6f893ceb69f2462c039fbb70835813e3c39870a6db65d82d",
+    "test_approved_integration.py": "6b7442c333ffe81383e603c44cdb0ce5d06f1f5852b6877e8a53a1c563a9fd4e",
+    "test_text_journeys.py": "8c287c98d2c0523a7d7d6e8cdb303e795fab5aaaf243bafc4ad9605f26376ed9",
+    "test_constrained_generator.py": "256b63a287daf7a23d5c1e700f1f8d2b97dff5572e923f2873394e6710764389"
+  },
+  "release_sha256": "9628e9baa95ea19ecc4ee0913c4ad515360a7c728d8639c720c85602634929df",
+  "recipe_sha256": "9fb11c5ca3eadba84f6b3216a0d2f347712ad6b967b7e0c7f43e471ed07a6851",
+  "cloudbuild_sha256": "3d45defb755d1b5d9b8d1919aecf8a4d5a81efb8b7a29f4338a406472fc76ef7",
+  "scope": "Sanitized auth rejection diagnostics and RFC case-insensitive bearer scheme; dedicated24h snapshot namespace; initial30 only",
+  "provider_calls": 0,
+  "source_scope_changed": false,
+  "shared_versions_ttl": false,
+  "new_private_rollout_authorized_by_original_integration_instruction": true,
+  "independent_review_status": "PENDING",
+  "hosted_tests": "PENDING",
+  "deployed": false
+}

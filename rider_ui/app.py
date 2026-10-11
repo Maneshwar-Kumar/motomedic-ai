@@ -5,6 +5,8 @@ import sys
 import streamlit as st
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from rider_ui.client import APIError, RiderAPI, operation_id
+from rider_ui.safeguards import LIMITS
+from rider_ui.identity import issue, cloud_run_token, platform_subject
 
 st.set_page_config(page_title='MotoMedic · Rider assistant', page_icon='🏍️', layout='wide')
 st.markdown(Path(__file__).with_name('theme.css').read_text(encoding='utf-8'), unsafe_allow_html=True)
@@ -19,8 +21,18 @@ def setting(name):
         return ''
 
 def client():
-    return RiderAPI(setting('MOTOMEDIC_RIDER_API_URL'), setting('MOTOMEDIC_RIDER_API_TOKEN'),
-                    allow_loopback=setting('MOTOMEDIC_UI_ENGINEERING_LOOPBACK') == '1')
+    url = setting('MOTOMEDIC_RIDER_API_URL')
+    managed = setting('MOTOMEDIC_RIDER_AUTH') == 'cloud_run'
+    credential = (lambda:cloud_run_token(url)) if managed else setting('MOTOMEDIC_RIDER_API_TOKEN')
+    if 'visitor_capability' not in st.session_state and setting('MOTOMEDIC_VISITOR_SECRET'):
+        try:
+            principal = platform_subject(st.context.headers) if managed and os.environ.get('K_SERVICE') else None
+            st.session_state.visitor_capability = issue(setting('MOTOMEDIC_VISITOR_SECRET'),principal=principal)
+        except (PermissionError,ValueError):
+            raise APIError('Sign in to the private demo before continuing.') from None
+    return RiderAPI(url, credential,
+                    allow_loopback=setting('MOTOMEDIC_UI_ENGINEERING_LOOPBACK') == '1',
+                    visitor=st.session_state.get('visitor_capability'))
 
 def remember(view, rider_text=None):
     if rider_text:
@@ -36,9 +48,17 @@ def perform(kind, value):
     try:
         with st.spinner('Checking the applicable manual evidence…'):
             api = client()
-            view = api.start(st.session_state.topic_id, value, pending['id']) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'])
+            slot = st.empty()
+            def verified(view):
+                st.session_state.pending['verified'] = view
+                with slot.container():
+                    st.caption('Manual-backed response')
+                    st.text(view['response']['natural_language'])
+            view = api.start(value, pending['id'], view=st.session_state.view, on_verified=verified) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'],on_verified=verified)
         remember(view, value if kind == 'start' else value['label'])
     except APIError as exc:
+        if exc.terminal:
+            st.session_state.pending = None
         st.session_state.connection_error = str(exc)
     st.rerun()
 
@@ -49,10 +69,12 @@ def reset():
 for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('catalogue', None)]:
     if k not in st.session_state:
         st.session_state[k] = v
-configured = bool(setting('MOTOMEDIC_RIDER_API_URL') and setting('MOTOMEDIC_RIDER_API_TOKEN'))
+configured = bool(setting('MOTOMEDIC_RIDER_API_URL') and
+                  (setting('MOTOMEDIC_RIDER_API_TOKEN') or
+                   (setting('MOTOMEDIC_RIDER_AUTH')=='cloud_run' and setting('MOTOMEDIC_VISITOR_SECRET'))))
 
 with st.sidebar:
-    st.markdown('<div class="brand-mark">M<span>+</span></div><h2>MotoMedic</h2><p class="sidebar-subtitle">Your next step, backed by the manual.</p>', unsafe_allow_html=True)
+    st.markdown('<div class="brand-mark">M<span>+</span></div><h2>MotoMedic</h2><p class="sidebar-subtitle">Your questions answered, backed by the manual.</p>', unsafe_allow_html=True)
     st.divider()
     st.caption('YOUR MOTORCYCLE')
     st.selectbox('Motorcycle', ['Royal Enfield Himalayan 450'], disabled=True)
@@ -64,22 +86,20 @@ with st.sidebar:
         st.write('This edition is selected for the Himalayan BS6 prototype. Citations identify the exact PDF page and evidence object.')
         st.caption('Manual pages and excerpts are not available for display in this demo.')
     st.divider()
-    st.button('Start a new conversation', on_click=reset, use_container_width=True, disabled=bool(st.session_state.pending))
-    st.caption('Experimental advisory aid. Official service support remains available.')
+    st.button('Start a new conversation', on_click=reset, use_container_width=True, disabled=bool(st.session_state.pending), help='Clear this chat and start a new conversation.')
+    st.caption('Unable to find a resolution? Official service support remains available.')
     st.link_button('Contact Royal Enfield ↗', 'mailto:support@royalenfield.com', use_container_width=True)
 
 left, right = st.columns([5, 2])
 with left:
     st.markdown('<div class="eyebrow">MOTOMEDIC / RIDER SUPPORT</div>', unsafe_allow_html=True)
-    st.title('A clearer next step.')
-    st.write('Describe what you notice. We’ll work through one documented question or step at a time.')
+    st.title('MotoMedic handles your routine queries for your Himalayan')
+    st.write('Ask a question about your motorcycle. MotoMedic answers when the selected manual supports it, and tells you when it cannot.')
 with right:
     st.markdown('<div class="source-pill">●&nbsp; Himalayan BS6<br><small>Owner’s manual · 2025 edition</small></div>', unsafe_allow_html=True)
 st.divider()
 
-if not configured:
-    st.info('The rider interface is ready. The hosted troubleshooting service is not connected yet.')
-elif not st.session_state.catalogue:
+if configured and not st.session_state.catalogue:
     try:
         st.session_state.catalogue = client().catalogue()
     except APIError as exc:
@@ -91,26 +111,25 @@ catalogue = st.session_state.catalogue
 ready = configured and bool(catalogue) and confirmed
 if not st.session_state.messages:
     with st.container(border=True):
-        st.markdown('### What are you noticing?')
-        st.write('Start with one symptom or question. Include what you have already checked.')
-        if catalogue:
-            topic = st.selectbox('Choose the closest topic', catalogue['topics'], index=None,
-                                 placeholder='Select a topic', format_func=lambda t: t['label'], disabled=not ready)
-            st.session_state.topic_id = topic['id'] if topic else None
-        else:
-            st.selectbox('Choose the closest topic', [], placeholder='Topics load when the service connects', disabled=True)
-            st.session_state.topic_id = None
-        st.caption('Available topics come from the hosted controller. Selecting a topic does not establish answer support.')
+        st.markdown('### What would you like to know?')
+        st.write('Ask your question in your own words. Include relevant details and anything you have already checked.')
+        st.caption('Up to 2,000 characters per message.')
+        query = st.chat_input('Ask a question…', key='symptom_input', max_chars=LIMITS.message_characters,
+                              disabled=not ready or bool(st.session_state.pending))
+        if query and query.strip():
+            perform('start', query.strip())
+        st.file_uploader('Add a bike photo · coming next', type=['jpg', 'jpeg', 'png', 'webp'], accept_multiple_files=False, max_upload_size=5, disabled=True)
+        st.caption('Photos: one per turn, up to 5 MB each; three per conversation. Photo support is coming next.')
     cols = st.columns(3)
-    for col, title, body in zip(cols, ['01 · Describe', '02 · Check', '03 · Report'],
-                               ['Tell us what you can see or hear.', 'Read one supported question or step.', 'Share the result so the next turn remembers it.']):
+    for col, title, body in zip(cols, ['01 · Ask', '02 · Read', '03 · Continue'],
+                               ['Ask about your motorcycle.', 'Read a supported answer with source references.', 'Ask another question when you are ready.']):
         with col:
             with st.container(border=True):
                 st.markdown('**' + title + '**')
                 st.write(body)
 
 labels = {'SUPPORTED': 'Manual-backed response', 'AMBIGUOUS': 'One detail to confirm',
-          'UNSUPPORTED': 'No supported next step', 'SAFETY_STOP': 'Safety stop', 'SYSTEM_ERROR': 'Unable to verify right now'}
+          'UNSUPPORTED': 'No supported answer', 'SAFETY_STOP': 'Safety stop', 'SYSTEM_ERROR': 'Unable to verify right now'}
 for index, (role, value) in enumerate(st.session_state.messages):
     with st.chat_message('user' if role == 'rider' else 'assistant', avatar='🏍️' if role == 'rider' else '🛠️'):
         if role == 'rider':
@@ -142,9 +161,13 @@ for index, (role, value) in enumerate(st.session_state.messages):
             st.caption('Response reference: ' + response['trace_id'])
 
 if st.session_state.connection_error:
+    if st.session_state.pending and st.session_state.pending.get('verified'):
+        retained = st.session_state.pending['verified']
+        st.caption('Verified response received; completion is being recovered')
+        st.text(retained['response']['natural_language'])
     st.warning(st.session_state.connection_error)
     st.caption('The request may already be saved. Retrieve its result before sending more feedback.')
-    if st.button('Reconnect and retrieve result', type='primary'):
+    if st.session_state.pending and st.button('Reconnect and retrieve result', type='primary'):
         try:
             pending = st.session_state.pending
             with st.spinner('Retrieving the saved response…'):
@@ -172,14 +195,10 @@ if view and not st.session_state.pending:
             st.text(item['label'])
         st.caption('Reported success does not verify the repair or identify its cause.')
 
-st.caption('Photo observations become available after the live text flow passes its acceptance check.')
-st.button('Add a bike photo · coming next', disabled=True)
-if not view:
-    query = st.chat_input('Describe one symptom or ask a question…', max_chars=2000,
-                          disabled=not ready or not st.session_state.get('topic_id') or bool(st.session_state.pending))
+if view:
+    query = st.chat_input('Ask another question…',key='followup_input',max_chars=LIMITS.message_characters,
+                          disabled=not ready or bool(st.session_state.pending))
     if query and query.strip():
-        perform('start', query.strip())
-else:
-    st.caption('Use the current choices above, or start a new conversation for a different symptom.')
-st.markdown('<div class="footer-note">OEM evidence first. One step at a time.</div>', unsafe_allow_html=True)
+        perform('start',query.strip())
+st.markdown('<div class="footer-note">Built on the Owner\'s Manual, with no misleading instructions on the internet</div>', unsafe_allow_html=True)
 

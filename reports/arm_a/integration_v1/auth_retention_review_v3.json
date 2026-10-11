@@ -1,0 +1,79 @@
+{
+  "schema_version": "arm-a-auth-retention-independent-review-v3",
+  "reviewer": "/root/integration_review",
+  "review_date": "2026-10-11",
+  "human_inspection_claimed": false,
+  "verdict": "PASS_EXACT_V3_PATCH_ENGINEERING_HOSTED_68_TEST_GATE_REQUIRED",
+  "coordinator_decision_required": true,
+  "context": "build/arm-a-auth-retention-v3",
+  "base_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:69111a77da8a045b5b870e95ed2305c63d8c26cac2732a1a33a515489ef7bad6",
+  "release_sha256": "15e0786b62bf09e453f384b9b32edf71431c93c3987d7a3c411a5d45b1bf8a4f",
+  "recipe_sha256": "d54f336fe77fd1fbaae578dc6b6a698dfebb9e33c6a9d0b0b6f2771dd7c19534",
+  "cloudbuild_sha256": "924f52d489bb36a51dbc24897ed9f0e9a4347b0e7c1db1ac4b4d8b97bc297b93",
+  "prior_exact_review": {
+    "path": "reports/arm_a/integration_v1/auth_retention_review_v2.json",
+    "sha256": "9921a59dd05fb4fd5be09a345e7729cf4279227c325368f7db3bc64667fb10ad",
+    "all_eight_prior_context_files_byte_unchanged": true,
+    "auth_and_retention_review_findings_retained": true,
+    "independent_local_api_store_tests": "14 passed in16.517s; synthetic retrieval/store only"
+  },
+  "patch_file_sha256": {
+    "cloud/arm_a/app.py": "5fff89e22d3ff1f78636cc829390a710a472865dbba401bc080719318d1701c3",
+    "cloud/arm_a/store.py": "e38b9f90e6ebc20c27f1d67f6c90cc5da21ff21f4fc8a6b7a0b1ae5c59b36f0f",
+    "cloud/arm_a/test_api.py": "d2a7094a2f49fc4494826731b7fe4405c58c8d1948a3699235689062538a0308",
+    "cloud/arm_a/test_store.py": "3af7c210097c5f8e44997b2ffca2f7ea101c1887522b25519ca4166f16b5887b",
+    "cloud/arm_a/test_composer.py": "2c93057c3e255caa6f893ceb69f2462c039fbb70835813e3c39870a6db65d82d",
+    "test_approved_integration.py": "6b7442c333ffe81383e603c44cdb0ce5d06f1f5852b6877e8a53a1c563a9fd4e",
+    "test_text_journeys.py": "8c287c98d2c0523a7d7d6e8cdb303e795fab5aaaf243bafc4ad9605f26376ed9",
+    "test_constrained_generator.py": "256b63a287daf7a23d5c1e700f1f8d2b97dff5572e923f2873394e6710764389",
+    "verify_controller.py": "1ec27b3cb5363ac573a0655462a80b2597d131b2b01a37c9b0f9e594873a3b24",
+    "reports/ab30_v2_source_assessment_baseline.json": "6248642ca3d45b436e6f7d3b951b66d5016369366add53e29baa6627d74fa2bb"
+  },
+  "v3_changes_checked": [
+    "Adds exact baseline JSON required by test_30_frozen_lookup_cases_preserve_source_bound_outputs; this is a test fixture, not new release source approval.",
+    "Adds exact verify_controller.py required for importing NoInferenceEncoder in index-integrity test; importing module performs no inference and __main__ is not executed by tests.",
+    "Only these two file bindings are added relative to v2; no v2 bindings removed or modified. Release now binds404 files.",
+    "Docker recipe remains pinned to same immutable base image; COPY --chown owns only copied files and removes recursive chown of inherited base contents.",
+    "Build retains same six unittest modules and exits nonzero for any test failure; final image returns to USER motomedic.",
+    "Cloud Build targets auth-retention-v3 under authorized project/repository; no deployment step, inference call, ingestion or embedding job in this build recipe."
+  ],
+  "hosted_v2_failure_evidence": {
+    "path": "reports/arm_a/integration_v1/patch_build_log_v2.txt",
+    "tests_run": 68,
+    "passed": 66,
+    "errors": 2,
+    "error_causes": [
+      "Missing /app/reports/ab30_v2_source_assessment_baseline.json",
+      "Missing verify_controller import for NoInferenceEncoder"
+    ],
+    "runtime_assertion_failures_observed": 0,
+    "v2_result_does_not_establish_v3_hosted_pass": true
+  },
+  "ttl_configuration_evidence": {
+    "path": "reports/arm_a/integration_v1/ttl_live_owner_approved.json",
+    "inspected_states": {
+      "arm_a_operations/expires_at": "ACTIVE",
+      "arm_a_session_versions/expires_at": "ACTIVE",
+      "arm_a_sessions/expires_at": "ACTIVE",
+      "arm_a_usage/expires_at": "ACTIVE"
+    },
+    "generic_versions_policy_present_in_receipt": false,
+    "physical_deletion_verified": false,
+    "collection_specific_retention_authorization": "Coordinator reports explicit owner authorization for24h session retention and deletion confined to MotoMedic-specific collections"
+  },
+  "deployment_gate": {
+    "hosted_v3_status": "PENDING_AT_REVIEW",
+    "required_before_rollout": "Successful hosted build with68 tests passing for exact v3 release/context; bind resulting immutable image digest and successful result",
+    "private_iam_required": true,
+    "post_rollout_required": "Authenticated live initial SSE, durable state and idempotent recovery acceptance; separately verify physical TTL deletion",
+    "reviewer_cloud_mutations": 0,
+    "reviewer_provider_calls": 0
+  },
+  "scope_limitations": [
+    "Production app/store bytes are exactly v2-reviewed; fixed24h session/snapshot expiry and bounded sliding30min idle are unchanged.",
+    "No rider endpoint, adaptive, photo, public source delivery, eligibility bypass or billing-change authority introduced.",
+    "Review does not assert hosted68pass, deployment completion, real ownership acceptance, latency SLO or physical deletion.",
+    "TTL ACTIVE is configuration evidence only; asynchronous physical deletion must be measured separately.",
+    "Changed context or runtime bytes require a new exact review rather than reusing this verdict."
+  ]
+}

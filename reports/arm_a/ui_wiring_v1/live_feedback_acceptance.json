@@ -1,0 +1,28 @@
+{
+  "schema_version": "private-arm-a-feedback-acceptance-v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "other_visitor_denied_session",
+      "status": 404
+    },
+    {
+      "name": "other_visitor_denied_operation",
+      "status": 404
+    },
+    {
+      "name": "exact_scoped_EXP003_clarification_action_unresolved",
+      "routes": [
+        "AMBIGUOUS",
+        "SUPPORTED",
+        "UNSUPPORTED"
+      ],
+      "no_repeated_step_or_inferred_normal": true,
+      "source_pages": [
+        31
+      ]
+    }
+  ],
+  "scope": "Only previously reviewed EXP003 exact issued choices; no broad adaptive release",
+  "provider_calls": 0
+}

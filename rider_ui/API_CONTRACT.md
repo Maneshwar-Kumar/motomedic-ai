@@ -1,6 +1,6 @@
 # Rider API v1 integration contract
 
-The Streamlit server calls this authenticated hosted API. The browser receives presentation only. The UI is implemented; this API is a required integration boundary, **not an existing deployed endpoint**. Do not point the UI at the Qdrant URL: that service is candidate retrieval only.
+The Streamlit server calls this authenticated hosted API. The browser receives presentation only. The UI is implemented; this API is a required integration boundary, implemented in cloud/arm_a/rider_api.py, with separate hosted acceptance in reports/arm_a/ui_wiring_v1/. Do not point the UI at the Qdrant URL: that service is candidate retrieval only.
 
 Source locks:
 - Schema: `motomedic-rider-api-v1`
@@ -15,15 +15,18 @@ Every request has a server-side `Authorization: Bearer ...` credential. Every mu
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| GET | /v1/catalogue | Source locks and available approved topics |
-| POST | /v1/sessions | Confirm scope, resolve selected intent, create and run initial turn |
+| GET | /v1/catalogue | Source locks and open-question capability |
+| POST | /v1/sessions | Confirm scope and retrieve for raw question |
+| POST | /v1/sessions/{id}/questions | Ask another question using expected_version |
 | POST | /v1/sessions/{id}/feedback | Apply exactly one issued server choice and run next turn |
 | GET | /v1/sessions/{id} | Retrieve latest saved view |
 | GET | /v1/operations/{idempotency_key} | Recover a mutation's committed response without executing it again |
 
-Catalogue: schema_version, manual_checksum, index_id, topics (list of id/label objects). Labels and IDs are sourced by the hosted controller; the client has no case registry or answer library. Initially expose only journeys whose installed runtime scope and quality checks are ready. Do not use draft fixtures as rider facts.
+Catalogue: schema_version, manual_checksum, index_id, question_input=open, diagnostic_wizard=false, streaming=VERIFIED_COMPLETE_UNIT_SSE. The UI exposes no topic selector or symptom routing.
 
-Create request: topic_id, query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. A topic is explicit intent selection, not proof that arbitrary input is supported. Backend must reconcile topic/text conflicts and unsafe or unsupported requests using the existing policy; never answer the selected topic while ignoring a contradictory rider request.
+Create request: query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. Continued questions add expected_version. Raw text reaches the existing hybrid retriever without a record ID or canonical-query substitution. Arm A emits only exact reviewed components after scope, eligibility, dependency, warning and citation checks, with zero answer-provider calls. Scope admission currently accepts ordered bound question propositions and a small explicitly reviewed paraphrase set. It can abstain on otherwise answerable paraphrases; accepting arbitrary input does not establish unrestricted manual coverage. It considers the full approved registry, rather than the original 30 benchmark requests. Missing support abstains; retrieval/system failure stays SYSTEM_ERROR. Source-derived clarification and typed feedback are optional.
+
+The private UI uses managed audience-bound tokens and a signed X-MotoMedic-Visitor capability. Its IAM-verified principal derives a stable keyed visitor nonce across refresh/reset. Backend ownership binds the UI service principal and visitor nonce. Anonymous public access is outside this design. Every mutation uses a 32-hex operation key. Complete technical answer units stream only after their operation/session view is atomically committed; disconnected delivery retrieves the saved operation without rerunning it.
 
 Feedback request: expected_version, choice_id, cache_mode=bypass. **No client-supplied fact, approval, evidence, or model output.** Server looks up the choice previously issued for this exact session version, validates its reviewed typed binding, then applies ReviewedService.feedback and the next turn. Unresolved action never seeds an observation.
 
@@ -62,3 +65,15 @@ Run GEN003 lookup and EXP003 clarification/action/unresolved/referral in a fresh
 
 UI fixture tests or localhost screenshots do not meet this gate. The photo control remains disabled until this text gate passes and an observation-only vision path is implemented/evaluated.
 
+
+## Safeguards v1 serving integration
+
+Use SERVICE_SAFEGUARDS.md and the current TODO.md as the dated implementation/release register. Preserve API v1 response/choice semantics. Text is at most 2,000 Unicode characters and 8,000 UTF-8 bytes; streamed JSON body at most 16 KiB. The UI and client reject oversized text, but the hosted handler must repeat these checks before retrieval. Bind each browser to a server-verified visitor capability and its owned sessions; a shared API credential alone is insufficient. Visitor counters must survive new conversations. Add trusted edge IP/challenge and global spending controls for anonymous reset abuse.
+
+The managed transaction must reserve an operation against six turns per rolling minute, 30 turns per rolling 24 hours, and 20 turns per session. Same-operation replay returns its original reservation/view without another model call; a different payload hash conflicts. Retrieval/provider failures consume admitted slots. Counters and model-call/budget admission must be project-wide across workers. A caller must not provide usage counts. Admission-store outage blocks new inference with a sanitized operational error; preserve already established applicable safety-stop semantics.
+
+New serving context uses the complete deterministic active-outcome/fact projection. Fresh evidence plus trusted policy and schema must fit 8,192 exactly counted input tokens and 24,000 bytes; cap output at 1,800 tokens. Check both generation and verification requests before spending. Never trim warnings, prerequisites or unresolved attempts to fit. Missing token-count adapter, overflow or truncated model output gives SYSTEM_ERROR with no partial technical instruction. The existing approved runtime is unchanged; install the new prompt/context body only in a versioned reviewed runtime and invalidate affected caches.
+
+When the text gate passes, add a separately versioned authenticated multipart media endpoint: one JPEG/PNG/WebP per turn, 5 MiB/photo, three/session and six/visitor/day. Stream byte caps, decode actual MIME, reject animation/corruption/20-megapixel or 10,000-pixel-side violations, normalize to 1,600-pixel-side JPEG without metadata, and enforce worker resource limits. No client URL-fetch inputs. Raw and normalized media expire/delete within 15 minutes; session idle expiry 30 minutes and lifetime 24 hours. TTL/deletion evidence remains required before public release.
+
+Starting a new conversation detaches the old active session and clears displayed messages/attempt context; it is not a storage-delete request and cannot reset visitor counters. Retain scope confirmation if unchanged, create a fresh session for a new symptom, and never merge old observations automatically. Recovery reads are separately edge-rate-limited and do not count as a new model turn.

@@ -1,0 +1,93 @@
+{
+  "event": "golden161_summary",
+  "run_id": "golden161-ui-arm-a-20261011-v1",
+  "record_count": 161,
+  "passed": 102,
+  "failed": 59,
+  "route_matches": 102,
+  "actual_routes": {
+    "SAFETY_STOP": 9,
+    "SUPPORTED": 40,
+    "UNSUPPORTED": 86,
+    "SYSTEM_ERROR": 14,
+    "AMBIGUOUS": 12
+  },
+  "expected_routes": {
+    "SAFETY_STOP": 13,
+    "SUPPORTED": 60,
+    "UNSUPPORTED": 41,
+    "AMBIGUOUS": 31,
+    "SYSTEM_ERROR": 16
+  },
+  "confusion": [
+    {
+      "expected": "AMBIGUOUS",
+      "actual": "AMBIGUOUS",
+      "count": 12
+    },
+    {
+      "expected": "AMBIGUOUS",
+      "actual": "UNSUPPORTED",
+      "count": 19
+    },
+    {
+      "expected": "SAFETY_STOP",
+      "actual": "SAFETY_STOP",
+      "count": 9
+    },
+    {
+      "expected": "SAFETY_STOP",
+      "actual": "SYSTEM_ERROR",
+      "count": 1
+    },
+    {
+      "expected": "SAFETY_STOP",
+      "actual": "UNSUPPORTED",
+      "count": 3
+    },
+    {
+      "expected": "SUPPORTED",
+      "actual": "SUPPORTED",
+      "count": 40
+    },
+    {
+      "expected": "SUPPORTED",
+      "actual": "SYSTEM_ERROR",
+      "count": 13
+    },
+    {
+      "expected": "SUPPORTED",
+      "actual": "UNSUPPORTED",
+      "count": 7
+    },
+    {
+      "expected": "SYSTEM_ERROR",
+      "actual": "UNSUPPORTED",
+      "count": 16
+    },
+    {
+      "expected": "UNSUPPORTED",
+      "actual": "UNSUPPORTED",
+      "count": 41
+    }
+  ],
+  "source_step": {
+    "count": 92,
+    "passed": 61
+  },
+  "trusted_policy_fixture": {
+    "count": 69,
+    "raw_prompt_route_matches": 41,
+    "failure_injection_tested": false
+  },
+  "technical_releases": 49,
+  "wrong_scope_technical_releases": 0,
+  "system_errors": 14,
+  "uncaught_exceptions": 0,
+  "minimum_gap_seconds": 7.000207849999981,
+  "elapsed_seconds": 1279.0722637019999,
+  "provider_calls": 0,
+  "retries": 0,
+  "held_out": false,
+  "production_http_latency_measured": false
+}

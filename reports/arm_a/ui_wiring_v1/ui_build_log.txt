@@ -1,0 +1,71 @@
+
+starting build "8daea372-5fbd-49ab-aa3c-621b5b2f56e2" using release legacy
+
+FETCHSOURCE
+Fetching storage object: gs://motomedic-ai-20261009_cloudbuild/source/1791721365.702668-a78ab0091f824e0ea12b8ba0703ecb39.tgz#1791721367593516
+Copying gs://motomedic-ai-20261009_cloudbuild/source/1791721365.702668-a78ab0091f824e0ea12b8ba0703ecb39.tgz#1791721367593516...
+/ [0 files][    0.0 B/ 26.2 KiB]                                                / [1 files][ 26.2 KiB/ 26.2 KiB]                                                
+Operation completed over 1 objects/26.2 KiB.                                     
+BUILD
+Already have image (with digest): gcr.io/cloud-builders/docker
+Sending build context to Docker daemon  106.5kB
+Step 1/15 : FROM python:3.12-slim AS dependencies
+3.12-slim: Pulling from library/python
+ecc510c1e359: Pulling fs layer
+75b6a36c64a1: Pulling fs layer
+6912e23eb445: Pulling fs layer
+bbc5a1223747: Pulling fs layer
+bbc5a1223747: Verifying Checksum
+bbc5a1223747: Download complete
+75b6a36c64a1: Verifying Checksum
+75b6a36c64a1: Download complete
+6912e23eb445: Verifying Checksum
+6912e23eb445: Download complete
+ecc510c1e359: Verifying Checksum
+ecc510c1e359: Download complete
+ecc510c1e359: Pull complete
+75b6a36c64a1: Pull complete
+6912e23eb445: Pull complete
+bbc5a1223747: Pull complete
+Digest: sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
+Status: Downloaded newer image for python:3.12-slim
+ ---> df18428df8a0
+Step 2/15 : WORKDIR /app
+ ---> Running in c1cb16f3fd8e
+Removing intermediate container c1cb16f3fd8e
+ ---> 19a7f51acc4e
+Step 3/15 : COPY rider_ui/requirements.txt /app/requirements.txt
+ ---> 27b25027db7b
+Step 4/15 : RUN pip install --no-cache-dir -r /app/requirements.txt
+ ---> Running in 2a5f50fb08e3
+Collecting streamlit==1.65.0 (from -r /app/requirements.txt (line 1))
+  Downloading streamlit-1.65.0-py3-none-any.whl.metadata (10 kB)
+Collecting google-auth==2.40.3 (from -r /app/requirements.txt (line 2))
+  Downloading google_auth-2.40.3-py2.py3-none-any.whl.metadata (6.2 kB)
+Collecting requests==2.32.5 (from -r /app/requirements.txt (line 3))
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting altair!=5.4.0,!=5.4.1,<7,>=5.0.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading altair-6.3.0-py3-none-any.whl.metadata (11 kB)
+Collecting click<9,>=7.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting numpy<3,>=1.23 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting packaging>=20 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pandas<4,>=1.4.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading pandas-3.0.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+Collecting pillow<13,>=7.1.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting pydeck<1,>=0.8.0b4 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading pydeck-0.9.3-py2.py3-none-any.whl.metadata (4.2 kB)
+Collecting protobuf<8,>=5.26.1 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+Collecting pyarrow!=25.0.0,<26,>=7.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading pyarrow-25.0.1-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+Collecting toml<2,>=0.10.1 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+Collecting typing-extensions<5,>=4.10.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting starlette<2,>=0.46.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))
+  Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting uvicorn<1,>=0.30.0 (from streamlit==1.65.0->-r /app/requirements.txt (line 1))

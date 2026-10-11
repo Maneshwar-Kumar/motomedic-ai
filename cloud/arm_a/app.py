@@ -3,6 +3,7 @@ import base64
 from dataclasses import asdict
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -24,22 +25,29 @@ def cloud_run_owner(headers):
     # Cloud Run IAM MUST remain enabled. Prefer the platform-verified header
     # when both are present; arbitrary client Authorization must not override it.
     value = headers.get('X-Serverless-Authorization') or headers.get('Authorization', '')
-    if not value.startswith('Bearer ') or len(value) > 16000:
+    def reject(reason):
+        # Operational reason only: no header, token, subject, query or media.
+        print(json.dumps({'event':'arm_a_auth_rejected','reason':reason}), flush=True)
         raise PermissionError()
-    parts = value[7:].split('.')
+    scheme, separator, credential = value.partition(' ')
+    if not separator or scheme.casefold() != 'bearer' or len(value) > 16000:
+        reject('BEARER_HEADER_REQUIRED')
+    parts = credential.split('.')
     if len(parts) != 3:
-        raise PermissionError()
+        reject('JWT_SHAPE_INVALID')
     try:
         body = json.loads(base64.urlsafe_b64decode(parts[1]+'='*(-len(parts[1])%4)))
-        if body['iss'] not in ('https://accounts.google.com','accounts.google.com'):
-            raise ValueError()
-        if type(body['exp']) not in (int,float) or body['exp'] <= time.time():
-            raise ValueError()
-        if not isinstance(body['sub'], str) or not 1 <= len(body['sub']) <= 200:
-            raise ValueError()
-        return hashlib.sha256(('motomedic-arm-a-initial-v1:'+body['sub']).encode()).hexdigest()
     except Exception:
-        raise PermissionError() from None
+        reject('JWT_PAYLOAD_INVALID')
+    if not isinstance(body, dict) or body.get('iss') not in ('https://accounts.google.com','accounts.google.com'):
+        reject('ISSUER_INVALID')
+    if type(body.get('exp')) not in (int,float) or not math.isfinite(body['exp']):
+        reject('EXPIRY_FORMAT_INVALID')
+    if body['exp'] <= time.time():
+        reject('TOKEN_EXPIRED')
+    if not isinstance(body.get('sub'), str) or not 1 <= len(body['sub']) <= 200:
+        reject('SUBJECT_FORMAT_INVALID')
+    return hashlib.sha256(('motomedic-arm-a-initial-v1:'+body['sub']).encode()).hexdigest()
 
 
 def unique_object(pairs):
@@ -226,4 +234,11 @@ def load_production():
     if isinstance(cases, dict):
         cases = cases['cases']
     client = firestore.Client(project='motomedic-ai-20261009')
-    return create_app(registry, retriever, lambda owner:FirestoreState(client,owner), cases)
+    state_factory = lambda owner:FirestoreState(client,owner)
+    app = create_app(registry, retriever, state_factory, cases)
+    secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
+    if secret:
+        from cloud.arm_a.questions import Questions
+        from cloud.arm_a.rider_api import install
+        install(app, Questions(registry,retriever), state_factory, secret)
+    return app

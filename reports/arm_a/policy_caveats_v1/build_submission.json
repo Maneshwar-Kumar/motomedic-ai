@@ -1,0 +1,42 @@
+{
+  "createTime": "2026-10-11T13:24:22.303314988Z",
+  "id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds;region=us-central1/75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49?project=279945185781",
+  "name": "projects/279945185781/locations/us-central1/builds/75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "machineType": "E2_HIGHCPU_8",
+    "pool": {},
+    "workerRelease": "legacy"
+  },
+  "projectId": "motomedic-ai-20261009",
+  "queueTtl": "3600s",
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+  "source": {
+    "storageSource": {
+      "bucket": "motomedic-ai-20261009_cloudbuild",
+      "generation": "1791725060596394",
+      "object": "source/1791725058.577994-bb1f1264f77c48c8a4529f6ed9e04d5f.tgz"
+    }
+  },
+  "sourceProvenance": {
+    "resolvedStorageSource": {
+      "bucket": "motomedic-ai-20261009_cloudbuild",
+      "generation": "1791725060596394",
+      "object": "source/1791725058.577994-bb1f1264f77c48c8a4529f6ed9e04d5f.tgz"
+    }
+  },
+  "status": "QUEUED",
+  "steps": [
+    {
+      "args": [
+        "build",
+        "-t",
+        "arm-a-policy-caveats:v1",
+        "."
+      ],
+      "name": "gcr.io/cloud-builders/docker"
+    }
+  ],
+  "timeout": "2400s"
+}

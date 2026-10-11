@@ -70,7 +70,7 @@ class ComposerTests(unittest.TestCase):
 
     def test_30_frozen_lookup_cases_preserve_source_bound_outputs(self):
         baseline = json.loads((ROOT/'reports/ab30_v2_source_assessment_baseline.json').read_text(encoding='utf-8'))
-        blocked = {'GEN025','GEN027','GEN030','GEN039','EXP024','EXP010'}
+        blocked = set()
         for case in baseline['cases']:
             with self.subTest(case=case['record_id']):
                 c = self.controller()

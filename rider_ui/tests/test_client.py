@@ -1,5 +1,6 @@
 import copy
 import io
+import json
 import unittest
 from email.message import Message
 from urllib.error import HTTPError, URLError
@@ -31,6 +32,40 @@ class Transport:
         return Response(self.result)
 
 class ClientTests(unittest.TestCase):
+    def test_real_stream_callback_refresh_credentials_and_question_continuation(self):
+        from rider_ui.tests.test_verified_sse import frame
+        v=view(); raw=frame('verified_block',{'view':v})+frame('complete',v)
+        transport=Transport(result=raw)
+        original=transport.open
+        def streaming(request,timeout):
+            result=original(request,timeout)
+            result.headers.replace_header('Content-Type','text/event-stream')
+            return result
+        transport.open=streaming
+        tokens=[]
+        def credential():
+            tokens.append(True)
+            return 'managed-token-'+str(len(tokens))
+        api=RiderAPI('https://example.com',credential,visitor='signed-visitor')
+        api.opener=transport
+        received=[]
+        self.assertEqual(api.start('A raw question','c'*32,on_verified=received.append),v)
+        self.assertEqual(received,[v])
+        api.start('Another raw question','d'*32,view=v)
+        self.assertEqual(transport.request.full_url,'https://example.com/v1/sessions/'+'a'*32+'/questions')
+        self.assertEqual(json.loads(transport.request.data)['expected_version'],1)
+        self.assertEqual(tokens,[True,True])
+        self.assertEqual(transport.request.get_header('X-motomedic-visitor'),'signed-visitor')
+
+    def test_processing_operation_remains_pending_without_retry(self):
+        api=RiderAPI('https://example.com','secret')
+        transport=Transport(result=b'{}'); original=transport.open
+        def processing(request,timeout):
+            result=original(request,timeout);result.status=202;return result
+        transport.open=processing;api.opener=transport
+        with self.assertRaisesRegex(APIError,'still processing'):
+            api.recover_operation('c'*32)
+        self.assertEqual(transport.calls,1)
     def test_supported_requires_gate_and_citations(self):
         for key, val in [('release_gate_passed',False),('cited_pages',[])]:
             with self.subTest(key=key):
@@ -92,6 +127,24 @@ class ClientTests(unittest.TestCase):
         self.assertEqual(json.loads(req.data),{'expected_version':1,'choice_id':'unresolved','cache_mode':'bypass'})
         self.assertNotIn(b'fact',req.data)
         self.assertEqual(req.get_header('Idempotency-key'),'b'*32)
+    def test_start_sends_raw_question_without_category_or_record(self):
+        import json
+        api=RiderAPI('https://example.com','secret');api.opener=Transport(result=json.dumps(view()).encode())
+        api.start('My question is an engineering fixture','c'*32)
+        payload=json.loads(api.opener.request.data)
+        self.assertNotIn('intent_mode',payload)
+        self.assertNotIn('record_id',payload)
+        self.assertNotIn('topic_id',payload)
+        self.assertEqual(payload['query'],'My question is an engineering fixture')
+
+    def test_catalogue_requires_open_question_capability(self):
+        api=RiderAPI('https://example.com','secret')
+        base={'schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID}
+        api.opener=Transport(result=json.dumps(base).encode())
+        with self.assertRaises(APIError): api.catalogue()
+        api.opener=Transport(result=json.dumps({**base,'question_input':'open'}).encode())
+        self.assertEqual(api.catalogue()['question_input'],'open')
+
     def test_session_identifiers_cannot_inject_path(self):
         api=RiderAPI('https://example.com','secret')
         with self.assertRaises(APIError): api.recover('../other')

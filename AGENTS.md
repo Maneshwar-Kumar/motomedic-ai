@@ -14,14 +14,14 @@ The project owner has since confirmed that the owner's manual is publicly availa
 
 TRD v0.5 is the authoritative design and technical contract from 11 October 2026. It preserves the owner-confirmed v0.4 contracts and adds the A/B methodology decision and A streaming. The concept, PRD, design notes and TODO register are reconciled to it. Manual facts, applicability, safety and usage rights still govern release. The before/after design record is in section Reconciliation change record of `04_To_Build_Evaluation_Decisions.docx`.
 
-- [Conversation context](conversation_context.md) records the retrievable user requests and the limits of the chat export.
+- [Conversation context](docs/history/CONVERSATION_CONTEXT.md) records the retrievable user requests and the limits of the chat export.
 - [Concept and architecture](01_Concept_Architecture.docx) defines the product promise and high level flow.
 - [PRD](02_PRD.docx) defines behavior, priorities, and acceptance criteria.
 - [TRD](03_TRD.docx) defines the provisional technical contracts.
 - [To build and evaluation decisions](04_To_Build_Evaluation_Decisions.docx) contains scenarios, alternatives, metrics, and work phases.
 - [Owner's manual](royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf) is the approved source PDF for this prototype. Verify applicability and usage rights before a public demo.
 - [Source manifest](source_manifest.json) records the checksum and unresolved edition, variant, source URL, rights, and service route fields.
-- [Provisional index guide](INDEX_README.md) explains the generated search vectors, graph, limitations, and rebuild commands.
+- [Provisional index guide](docs/architecture/LOCAL_INDEX_BASELINE.md) explains the generated search vectors, graph, limitations, and rebuild commands.
 - [Evidence assembler](retrieve_evidence.py) ranks owner-manual chunks and attaches provisional checked topic pages. Its bundles remain candidate evidence and explicitly block procedural generation pending applicability and source review.
 - [Atomic golden dialogues](golden_dialogues.md) are the primary provisional evaluation cases: each symptom begins as a single observation and unfolds through one question or action at a time. [Structured cases](golden_dialogues.json), [diagnostic flow](diagnosis_flow.json), and [prototype controller](diagnose.py) are the runnable counterparts.
 - [Reference answer cards](golden_qa.md) preserve the earlier 27 cited terminal-answer and retrieval probes. Their compound prompts are **not** entry prompts or an approved release golden set.
@@ -171,7 +171,7 @@ The drafts propose Docling, hierarchical parent-child chunks, dense plus BM25 re
 
 The owner authorized the private GitHub repository `Maneshwar-Kumar/motomedic-ai` and separate GCP project `motomedic-ai-20261009`, with a US$10 project limit. Billing uses INR. A non-recurring INR800 budget starts 9 October 2026; alerts are at INR400/640/800. The simulation-checked live guard disables this project's billing at INR640 with retry delivery. Delayed reporting prevents an exact instantaneous US$10 cap. Do not re-enable billing after an actual budget stop without owner authorization.
 
-Hosted ingestion and both embedding comparisons succeeded. Current candidate index `index_a3282c4d98cf54595e4ba168` uses BGE M3, 1,024-token budgets, 532 search chunks, 277 section parents, BM25, Qdrant and a lightweight provenance graph. The optional cross-encoder is off by default: BGE hybrid assembled all cited pages in 23/27 draft cards versus 22/27 with reranking. These are in-sample page-coverage diagnostics, not evidence sufficiency or release acceptance. Remaining misses and reversal triggers are in `HOSTED_INDEX_DECISION.md` and `index_benchmark.json`.
+Hosted ingestion and both embedding comparisons succeeded. Current candidate index `index_a3282c4d98cf54595e4ba168` uses BGE M3, 1,024-token budgets, 532 search chunks, 277 section parents, BM25, Qdrant and a lightweight provenance graph. The optional cross-encoder is off by default: BGE hybrid assembled all cited pages in 23/27 draft cards versus 22/27 with reranking. These are in-sample page-coverage diagnostics, not evidence sufficiency or release acceptance. Remaining misses and reversal triggers are in `docs/architecture/HOSTED_INDEX_DECISION.md` and `index_benchmark.json`.
 
 `motomedic-qdrant` serves immutable vectors on authenticated Cloud Run, with min zero/max one instance and private Cloud Storage backing. Cold starts reload stored vectors. They do not parse or embed the manual again. Consult `cloud/deployment_status.json` and `cloud/live_smoke.json` before deployment changes. The rider UI and gated generator remain pending.
 
@@ -208,3 +208,8 @@ The owner rejected the cached full-owner-manual Claude alternative after the eig
 ## Owner answer methodology decision 11 October 2026
 
 TRD v0.5 section 14 and `03_TRD_Architecture_Decision_Note.docx` record the owner decision: keep A exact reviewed component selection and B short generation with semantic verification; deliver A through verified streaming; exclude C from the current UI. A retains deterministic source, scope, eligibility, warning, dependency and citation gates and may release only exact reviewed wording. It does not permit unverified free generation. The requested follow-up is post facto semantic verification of the existing three A outputs and investigation of minimum-instance pricing and startup CPU boost. Read `TRD_UI_FOLLOWUP_HANDOFF.md`. No deployment or billing change is authorized by this design decision. Earlier v0.4 references are historical where this amendment supersedes method-specific validation.
+
+
+## Human navigation and repository organization, 11 October 2026
+
+Start humans at README.md and docs/START_HERE.md. Follow CONTRIBUTING.md and docs/REPOSITORY_ORGANIZATION.md for new file placement. New reports belong in reports/<work-area>/<version-or-run>/; new decision narratives belong in docs/architecture/, historical narratives in docs/history/, and maintenance tools in tools/. Preserve exact approval paths/bytes and active chats' inputs. Root runtime/test/Word/handoff paths are explicit compatibility exceptions, not a pattern for new outputs. Run python tools/check_repository_structure.py after navigation/layout changes. Do not move another chat's active files or rewrite frozen bindings merely to satisfy a layout preference.

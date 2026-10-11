@@ -1,0 +1,66 @@
+{
+  "schema_version": "repository-monitor-check-v1",
+  "trigger_utc": "2026-10-11T12:42:37.512Z",
+  "structure": {
+    "schema_version": "repository-structure-audit-v1",
+    "ok": false,
+    "unexpected_root_files": [
+      "ab30_benchmark.py",
+      "test_ab30_benchmark.py"
+    ],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "local_links_checked": 257,
+    "root_file_count": 94,
+    "note": "Existing compatibility paths are allowlisted; this is not a source or runtime approval check."
+  },
+  "polls": [
+    {
+      "thread_id": "01a12a93-4ab3-7301-843e-04db7bca5630",
+      "status": "active",
+      "cursor": "86dab02b-8487-4aec-83b9-d5c07fa4a581:5",
+      "work_area": "cloud/arm_a/, rider_ui/, reports/arm_a/ui_wiring_v1/"
+    },
+    {
+      "thread_id": "01a12739-844f-76f1-b4a1-e06df9109ff6",
+      "status": "idle",
+      "cursor": "39dacc3b-f7a8-43f2-9110-7d6be75605af:4"
+    },
+    {
+      "thread_id": "01a12a1a-49d2-7013-a635-be3eb287807d",
+      "status": "not_listed"
+    },
+    {
+      "thread_id": "01a1274e-904b-77b0-bd0d-4333b9b30acb",
+      "status": "not_listed"
+    }
+  ],
+  "observations": [
+    {
+      "path": "docs/architecture/UI_WIRING_20261011.md",
+      "placement": "Expected architecture area; already linked by peer from architecture README."
+    },
+    {
+      "path": "tools/README.md",
+      "placement": "Peer added private integration utilities to existing navigation."
+    },
+    {
+      "path": "reports/arm_a/ui_wiring_v1/",
+      "placement": "Active acceptance artifacts correctly grouped; do not relocate or add competing handoff."
+    }
+  ],
+  "known_warnings_unchanged": true,
+  "new_actionable_organization_changes": [],
+  "notification": "Suppressed: no new organization drift, repair or user action. Existing protected benchmark root warnings remain unchanged.",
+  "moved_files": [],
+  "navigation_changed": [],
+  "allowlist_changed": false,
+  "clean_consecutive_checks": 0,
+  "pause_eligible": false,
+  "reason": "Active integration continuation; known protected root-placement warnings retained.",
+  "provider_calls": 0,
+  "deployment_or_billing_changes": false,
+  "approval_requests_sent": 0,
+  "protected_paths_unchanged": true,
+  "monitor_status": "ACTIVE"
+}

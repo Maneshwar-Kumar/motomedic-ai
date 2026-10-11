@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "review_id": "arm_a_private_ui_wiring_implementation_v2",
+  "reviewer": "independent_agent_integration_review",
+  "review_date": "2026-10-11",
+  "verdict": "PASS_BOUNDED_PRIVATE_ENGINEERING_SCOPE",
+  "policy_version": "open-question-exact-components-v2",
+  "scope": "Independent source and runtime review of exact question admission, existing retrieval/controller gates, private visitor ownership, session commit and replay, and complete-unit verified SSE UI wiring. This is not a hosted build or deployment acceptance.",
+  "supersedes_findings_from": "reports/arm_a/ui_wiring_v1/implementation_review.json",
+  "bindings": {
+    "cloud/arm_a/questions.py": "932b22b877f612e5c55b3e16df39a5effbdc42583c29b5a68767bc702b826187",
+    "cloud/arm_a/rider_api.py": "3c24a08cd9cafd16660cdf2e0d182b75198e85efc841af44323960e176fc6c1a",
+    "cloud/arm_a/visitor.py": "83b788078140c92d14aad064a624a4ea406463f7035af010a553754c27812d57",
+    "cloud/arm_a/store.py": "d66c2326ce41edf17f661d31d67e9a90ea75159a12eacd4e9371a62d01285d44",
+    "cloud/arm_a/app.py": "e8f9f2a0572d885805d59453dbc4441ed715a43373311d4ccdd8a9b582b8cd18",
+    "cloud/arm_a/rider_contract.py": "fe118629fe5600a5d966ccc606670a2affb78d15c768f745ea6c6c21e76209d9",
+    "cloud/arm_a/composer.py": "12d68be15209c66bbac79588cb6e4fc3ed210775979b1ad7d2fc90a9d03c3323",
+    "rider_ui/identity.py": "b11b6cde8ed18fdf898182879757ef6c5623c3b365cf8a8c3f1db8693587287e",
+    "rider_ui/client.py": "35b153d115f06ff34e9a314d46647ccf0791ce802c751a6d9adc32d66c4164d7",
+    "rider_ui/app.py": "ff4a0ed724e9d9abd91e645b62d2d39d0b9772f7dd79c1a4355079f1cd74bed3",
+    "rider_ui/verified_sse.py": "6e9355391789a612b43ef9bc7aac07eea17aa6cc6a1ce31d66a2fcf52c6af191",
+    "cloud/arm_a/test_question_wiring.py": "cb6337b2dae5959b5033775fe848ddcbe0b1d9957124400b7758ebfed604cd00"
+  },
+  "original_source": {
+    "file": "royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf",
+    "sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "method": "Independent original PDF text inspection with PyMuPDF, separate from retrieval results and planner assertions.",
+    "GEN003": {
+      "pdf_page": 13,
+      "printed_page": 11,
+      "source_scope": "Convex mirror view makes viewed objects appear smaller and farther away than a flat mirror, with care when judging distance.",
+      "approved_additional_question_scopes": [
+        "Why do vehicles look farther in my mirrors?",
+        "Do vehicles in mirrors look smaller and farther away?"
+      ],
+      "assessment": "Both ask about apparent vehicles or objects in mirrors. Neither asks whether the mirror itself is smaller or farther away. Exact approved canonical response retains the distance caution. The why-question receives a slightly awkward opening Yes, but its complete canonical explanation answers the requested source-backed scope."
+    },
+    "GEN007": {
+      "pdf_page": 18,
+      "printed_page": 16,
+      "source_scope": "Fuel specification is unleaded gasoline with ethanol content up to E20.",
+      "approved_additional_question_scopes": [
+        "Can I use E20 petrol?",
+        "Is E20 permitted?",
+        "Can I use E20 fuel?",
+        "Is E20 fuel allowed?"
+      ],
+      "assessment": "The four permission questions are supported by the up-to-E20 specification. The complete unchanged canonical response retains unleaded gasoline and explicitly does not approve fuel above E20."
+    }
+  },
+  "closed_findings": [
+    {
+      "prior_issue": "Bag-of-words admission affirmed different subjects and relations with a canonical Yes response.",
+      "resolution": "An ordered Unicode proposition key is now mandatory before term or relevance checks. Negation, clauses, comparison symbols and all other punctuation except a single trailing question mark remain significant. Only explicit spelling/fuel-name substitutions and versioned reviewed paraphrases are admitted.",
+      "independent_negative_probes": [
+        "Are mirrors smaller than vehicles?",
+        "Are mirrors farther away than vehicles?",
+        "Do smaller mirrors look farther away?",
+        "Can I not use E20 fuel?",
+        "Can I use > E20 fuel?",
+        "Can I use E20 fuel? followed by an additional Chinese-script repair clause"
+      ],
+      "result": "All six returned UNSUPPORTED even with synthetic retrieved evidence for GEN003 and GEN007. All six approved additional question scopes returned SUPPORTED with PDF pages 13 or 18 respectively."
+    },
+    {
+      "prior_issue": "Session quota could be discovered only after retrieval work.",
+      "resolution": "The 20-turn limit is checked before retrieval and also enforced at atomic commit. Independent targeted probe confirmed no extra retrieval at the limit."
+    },
+    {
+      "prior_issue": "Idle-expired session blocked replay of a completed operation still inside operation retention.",
+      "resolution": "Operation replay occurs before session idle validation and remains owner- and payload-bound."
+    },
+    {
+      "prior_issue": "Known feedback conflicts could leave an operation indefinitely pending.",
+      "resolution": "Choice validation precedes reservation; known post-reservation conflicts are terminal failures, and the client clears pending operation state on terminal responses. Uncertain commit failures remain recoverable."
+    }
+  ],
+  "runtime_assessment": [
+    "Raw question text reaches the existing hybrid retriever unchanged; no answer provider is called, no mandatory symptom wizard is introduced, and selection examines the registry rather than the initial30 subset.",
+    "Retrieved relevance and term coverage are only ranking or exclusion signals. Selection requires an exact bound canonical proposition or one of the six reviewed paraphrases, a direct action-evidence hit, singleton controller eligibility and the original source/dependency/warning/citation gates.",
+    "Question scope reads verify bound planner file hashes. Technical output remains exact reviewed canonical wording through ArmAComposer and the internal saved_view provenance gate.",
+    "Private authenticated UI principal produces the stable signed visitor capability. Backend owner includes the verified backend principal and visitor identity. Backend identity tokens refresh per request; visitor signing secret stays server-side.",
+    "Session version, parent head, preserved immutable attempt prefix, scope locks, quota, snapshot view and operation completion are committed together under existing transaction/CAS semantics. Retention stays fixed at 24 hours, with idle activity bounded by that fixed expiry and snapshots confined to arm_a_session_versions.",
+    "Completed operation replay preserves saved output without retrieval or generation reruns. Complete technical units are streamed only after gates and persistence; SSE validation rejects malformed, duplicated, mismatched or incomplete final output."
+  ],
+  "validation": {
+    "command": "python -m unittest cloud.arm_a.test_question_wiring rider_ui.tests.test_client rider_ui.tests.test_verified_sse rider_ui.tests.test_identity -v",
+    "environment": "Default Python with existing isolated build/arm-a-test-dependencies on PYTHONPATH; no global package installation.",
+    "tests": 39,
+    "passed": 39,
+    "duration_seconds": 24.937,
+    "synthetic_only": true,
+    "additional_probes": "Six approved paraphrase source/page probes and six independent negative scope probes, plus Unicode and slash-symbol proposition inequality probes.",
+    "provider_calls": 0,
+    "cloud_mutations": 0
+  },
+  "open_findings": [],
+  "limitations_and_remaining_gates": [
+    "Arbitrary input is accepted, but answer admission is intentionally limited to ordered bound canonical questions and six reviewed additional scopes. Unmatched paraphrases abstain; this review does not establish broad semantic question coverage or retrieval calibration.",
+    "The PASS verdict requires private IAM on both UI and backend. Anonymous or public UI identity, abuse controls and public release are outside this reviewed scope.",
+    "Frozen build contexts, exact Docker/build recipe and full hosted suite closure must be reviewed before deployment. This report does not approve a deployment or assert live acceptance of this new question/UI runtime.",
+    "Public PDF/excerpt/image delivery, general multimodal interpretation, and expanded adaptive source transitions remain outside this verdict.",
+    "Existing live initial API acceptance does not prove the newly wired question/UI path, physical TTL deletion timing or p95 performance.",
+    "Any changed bound runtime or source bytes require a new scoped independent review/version."
+  ]
+}

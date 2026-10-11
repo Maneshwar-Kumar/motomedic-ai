@@ -1,0 +1,16 @@
+{
+  "schema_version": "motomedic-owner-retention-decision-v1",
+  "owner_instruction": "Keep session data for 24 hours and auto deletion applied to motomedic sepcific colletions.",
+  "decision_date": "2026-10-11",
+  "timezone": "Asia/Calcutta",
+  "project": "motomedic-ai-20261009",
+  "session_lifetime_hours": 24,
+  "extend_session_lifetime_on_activity": false,
+  "ttl_field": "expires_at",
+  "approved_dedicated_collection_groups": [
+    "arm_a_sessions", "arm_a_session_versions", "arm_a_operations", "arm_a_usage"
+  ],
+  "generic_versions_ttl_authorized": false,
+  "physical_deletion_exactly_at_24h_guaranteed": false,
+  "note": "Application expiry and asynchronous Firestore physical deletion are separate. Dedicated snapshot namespace requires the reviewed runtime patch; TTL does not cascade to subcollections."
+}

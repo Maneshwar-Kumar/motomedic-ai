@@ -1,0 +1,120 @@
+{
+  "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+  "log_entries": [
+    {
+      "insertId": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49-224",
+      "labels": {
+        "build_step": "MAIN"
+      },
+      "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+      "receiveTimestamp": "2026-10-11T13:28:34.755983422Z",
+      "resource": {
+        "labels": {
+          "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+          "build_trigger_id": "",
+          "project_id": "motomedic-ai-20261009"
+        },
+        "type": "build"
+      },
+      "severity": "INFO",
+      "textPayload": "ERROR: build step 0 \"gcr.io/cloud-builders/docker\" failed: step exited with non-zero status: 1",
+      "timestamp": "2026-10-11T13:28:34.423471006Z"
+    },
+    {
+      "insertId": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49-221",
+      "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+      "receiveTimestamp": "2026-10-11T13:28:34.241648560Z",
+      "resource": {
+        "labels": {
+          "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+          "build_trigger_id": "",
+          "project_id": "motomedic-ai-20261009"
+        },
+        "type": "build"
+      },
+      "severity": "INFO",
+      "textPayload": "FAILED (failures=1)",
+      "timestamp": "2026-10-11T13:28:33.359612898Z"
+    },
+    {
+      "insertId": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49-219",
+      "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+      "receiveTimestamp": "2026-10-11T13:28:34.241648560Z",
+      "resource": {
+        "labels": {
+          "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+          "build_trigger_id": "",
+          "project_id": "motomedic-ai-20261009"
+        },
+        "type": "build"
+      },
+      "severity": "INFO",
+      "textPayload": "Ran 124 tests in 93.623s",
+      "timestamp": "2026-10-11T13:28:33.359612389Z"
+    },
+    {
+      "insertId": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49-174",
+      "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+      "receiveTimestamp": "2026-10-11T13:28:32.236406432Z",
+      "resource": {
+        "labels": {
+          "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+          "build_trigger_id": "",
+          "project_id": "motomedic-ai-20261009"
+        },
+        "type": "build"
+      },
+      "severity": "INFO",
+      "textPayload": "test_failed_retrieval_preserves_system_error_not_unsupported (cloud.arm_a.test_question_wiring.WiringTests.test_failed_retrieval_preserves_system_error_not_unsupported) ... \u001b[0m\u001b[91mok",
+      "timestamp": "2026-10-11T13:28:31.765350866Z"
+    },
+    {
+      "insertId": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49-173",
+      "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+      "receiveTimestamp": "2026-10-11T13:28:32.236406432Z",
+      "resource": {
+        "labels": {
+          "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+          "build_trigger_id": "",
+          "project_id": "motomedic-ai-20261009"
+        },
+        "type": "build"
+      },
+      "severity": "INFO",
+      "textPayload": "test_failed_atomic_commit_never_streams_technical_text (cloud.arm_a.test_question_wiring.WiringTests.test_failed_atomic_commit_never_streams_technical_text) ... \u001b[0m\u001b[91mok",
+      "timestamp": "2026-10-11T13:28:31.587657868Z"
+    },
+    {
+      "insertId": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49-134",
+      "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+      "receiveTimestamp": "2026-10-11T13:28:15.171323793Z",
+      "resource": {
+        "labels": {
+          "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+          "build_trigger_id": "",
+          "project_id": "motomedic-ai-20261009"
+        },
+        "type": "build"
+      },
+      "severity": "INFO",
+      "textPayload": "\u001b[0m\u001b[91mtest_failed_action_state_save_withholds_generated_technical_text (test_text_journeys.TextJourneyTests.test_failed_action_state_save_withholds_generated_technical_text) ... \u001b[0m\u001b[91mok",
+      "timestamp": "2026-10-11T13:28:14.488515759Z"
+    },
+    {
+      "insertId": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49-88",
+      "logName": "projects/motomedic-ai-20261009/logs/cloudbuild",
+      "receiveTimestamp": "2026-10-11T13:27:05.075452650Z",
+      "resource": {
+        "labels": {
+          "build_id": "75426ba9-a0d5-4a9c-a3b7-3d6fa0234a49",
+          "build_trigger_id": "",
+          "project_id": "motomedic-ai-20261009"
+        },
+        "type": "build"
+      },
+      "severity": "INFO",
+      "textPayload": "test_no_streamed_technical_text_on_failed_commit (cloud.arm_a.test_api.APITests.test_no_streamed_technical_text_on_failed_commit) ... \u001b[0m\u001b[91mok",
+      "timestamp": "2026-10-11T13:27:04.125731964Z"
+    }
+  ]
+}
