@@ -40,6 +40,7 @@ flowchart TB
         DENSE[Dense search RPC]
         SPARSE[BM25 search]
         FUSE[Rank fusion: RRF]
+        INITIAL[Source and applicability checks; initial evidence assembly]
         SCHEDULE[Bounded recovery and conditional reranking]
         ASSEMBLE[Approved assembly: required context and citations]
         BOUND[Count complete context; reserve whole-turn capacity]
@@ -57,7 +58,7 @@ flowchart TB
         CONTEXT --> SPARSE
         DENSE --> FUSE
         SPARSE --> FUSE
-        FUSE --> SCHEDULE --> ASSEMBLE --> BOUND --> DRAFT
+        FUSE --> INITIAL --> SCHEDULE --> ASSEMBLE --> BOUND --> DRAFT
         DRAFT --> FINALIZE --> VERIFY
         VERIFY -->|correctable rejection| CORRECT --> FINALIZE
         VERIFY -->|eligible verdict| GUARD --> SAVE --> STATE
@@ -70,9 +71,11 @@ flowchart TB
 
     QDRANT --> DENSE
     OBJECTS --> SPARSE
+    OBJECTS --> INITIAL
     OBJECTS --> ASSEMBLE
     INDEX --> ASSEMBLE
     SOURCE --> ASSEMBLE
+    SOURCE --> INITIAL
 
     subgraph CONTROLS[Shared controls]
         PROVIDER[Authorized primary and optional Claude availability fallback]
