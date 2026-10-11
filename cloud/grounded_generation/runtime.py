@@ -188,10 +188,35 @@ class Questions:
     def new_session(self):
         return replace(start_session(self.registry,(),self.registry.source['variant'],self.registry.source['edition']),
             generation_lock=self.controller.response_generator.config.lock)
+    def known_safety(self,session):
+        """Only confirmed non-policy hazard predicates establish pre-retrieval stops."""
+        c,r=self.controller,self.registry
+        from reviewed_controller import compare
+        facts=session.known_observations()
+        for sid,raw in sorted(r.candidate['steps'].items()):
+            if raw['kind']!='SAFETY_STOP' or not r.step_ready(sid):continue
+            step=r.step(sid)
+            hazard=False
+            for rid in step.applicability_rule_ids:
+                rule=r.rule(rid)
+                if rule.fact_key not in facts:continue
+                manual_refs=[eid for eid in rule.source_evidence_ids if
+                    r.approved_sources.get(eid,{}).get('authority') in ('OEM_MANUAL','OEM_ORIGINAL_PDF_CANDIDATE')]
+                if manual_refs and compare(rule,facts[rule.fact_key])==Truth.TRUE:hazard=True
+            scoped=replace(session,current_symptoms=tuple(step.symptom_tags))
+            if hazard and c.eligible(scoped,sid).eligibility_status==Truth.TRUE:
+                return scoped,c.render(scoped,sid,safety=True)
+        return None
     def answer(self,session,query):
         c,r=self.controller,self.registry
         composer=c.response_generator
         composer.last_trace=None;composer.query=query;composer.scopes=();composer.clarifications={}
+        safety=self.known_safety(session)
+        if safety:
+            from cloud.grounded_generation.presentation import saved_view
+            session,response=safety
+            view,choices=saved_view(r,session,response)
+            return session,view,choices
         session=replace(session,version=session.version+1,pending_step_id=None,pending_rule_id=None)
         try:
             if c.scope_status(session)!='CONFIRMED': raise ValidationFailure('SCOPE_NOT_CONFIRMED')
@@ -222,7 +247,9 @@ class Questions:
                     assembled=self.retriever.search(query,dependency_manifest=r.retrieval_manifest(sid),
                         step_id=sid,scope=self.scope(),applicability_status='CONFIRMED')
                     if (assembled.get('manual_checksum')!=r.checksum or assembled.get('index_id')!=r.index_id): raise ValidationFailure('INVALID_BUNDLE_IDENTITY')
-                    if (assembled.get('conflicts') or assembled.get('source_review_required') or not assembled.get('evidence_sufficient') or
+                    if assembled.get('retrieval_action')!='CONTINUE_GATES':
+                        raise ValidationFailure('RETRIEVAL_SCHEDULING_UNRESOLVED')
+                    if (assembled.get('conflicts') or assembled.get('source_review_required') or not assembled.get('coverage_established') or
                         not set(r.step(sid).required_evidence_ids)<=set(assembled.get('attached_evidence_ids',[]))): continue
                     admitted.append(sid)
                 # One action per turn; deterministic stable product ordering, not
@@ -259,6 +286,17 @@ class Questions:
     def feedback(self,session,query):
         composer=self.controller.response_generator
         composer.query=query;composer.scopes=();composer.clarifications={};composer.last_trace=None
+        safety=self.known_safety(session)
+        if safety:
+            session,response=safety
+            from cloud.grounded_generation.presentation import saved_view
+            view,choices=saved_view(self.registry,session,response)
+            return session,view,choices
+        # Feedback resumes the actual issued action scope, not all incidental
+        # scopes that appeared among the previous query's retrieval hits.
+        prior=next((a for a in reversed(session.active_attempts()) if a.step_id in self.registry.candidate['steps']),None)
+        if prior:
+            session=replace(session,current_symptoms=tuple(self.registry.step(prior.step_id).symptom_tags))
         session,response,_=self.controller.next(session,query)
         from cloud.grounded_generation.presentation import saved_view
         view,choices=saved_view(self.registry,session,response)
