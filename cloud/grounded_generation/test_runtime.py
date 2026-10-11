@@ -83,5 +83,19 @@ class Tests(unittest.TestCase):
         s=replace(self.q.new_session(),status='CUSTOMER_REPORTED_RESOLVED')
         with self.app.test_request_context():s,_,_=self.q.answer(s,'fuel question')
         self.assertEqual(s.status,'CUSTOMER_REPORTED_RESOLVED')
+    def test_known_safety_advances_version_without_retrieval_or_provider(self):
+        def known(session):
+            return session,self.q.controller.response('SAFETY_STOP','Stop and seek authorised service support.',session)
+        self.q.known_safety=known
+        def outage(*args,**kwargs):raise AssertionError('Known hazard must precede retrieval')
+        self.retriever.search=outage
+        session=replace(self.q.new_session(),version=7)
+        with self.app.test_request_context():updated,view,_=self.q.answer(session,'another question')
+        self.assertEqual(updated.version,8);self.assertEqual(view['version'],8)
+        self.assertEqual(view['response']['type'],'SAFETY_STOP');self.assertEqual(self.provider.calls,0)
+    def test_policy_only_scope_cannot_be_known_hazard_from_retrieval_tags(self):
+        safety=next(sid for sid,raw in self.r.candidate['steps'].items() if raw['kind']=='SAFETY_STOP')
+        session=replace(self.q.new_session(),current_symptoms=tuple(self.r.step(safety).symptom_tags))
+        self.assertIsNone(self.q.known_safety(session))
 
 if __name__=='__main__':unittest.main()

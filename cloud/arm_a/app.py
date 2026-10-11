@@ -234,12 +234,10 @@ def load_production():
     registry = ApprovedEvidenceRegistry.load(ROOT, index)
     # Load both pinned query and cross-encoder models once per hosted worker.
     from cloud.arm_a.runtime_controls import GuardedRetriever, TokenBudget, VERSION
-    from rider_ui.prompt_policy import load_role_policy
-    from cloud.arm_a.composer import ArmAConfig
+    from cloud.grounded_generation.policy import POLICY, POLICY_SHA256
     retriever = GuardedRetriever(index, rerank=True)
-    role_policy, role_lock = load_role_policy('generator')
     budget = TokenBudget(retriever.model, retriever.manifest['embedding'],
-        role_policy, hashlib.sha256(role_policy.encode('utf-8')).hexdigest())
+        POLICY, POLICY_SHA256)
     retriever.install_controls(budget)
     # The owner clarified that A must retain an answer LLM. The historical
     # exact-wording composer is kept only for old regression fixtures.

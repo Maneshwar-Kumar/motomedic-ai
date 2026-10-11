@@ -1,0 +1,1131 @@
+{
+  "version": "source-bound-boolean-clarification-v1",
+  "authority": "INDEPENDENT_AGENT_REVIEW",
+  "review_agent": "/root/heldout_source_review",
+  "date": "2026-10-11",
+  "release_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "decision": "APPROVED_EXACT_RULE_POLARITIES_ONLY",
+  "scope": "Runtime answers to already-issued exact source-authored clarification questions. Does not admit initial questions, authorize an action, lift source/dependency/quality holds or infer health.",
+  "consumer_binding": "Verify raw rule SHA against ApprovalConsumer and projected rule SHA against live ApprovedEvidenceRegistry; require exact question, rule ID, owner step and pending issued question before accepting one-use answer capability.",
+  "bindings": [
+    {
+      "rule_id": "EXP001:rule:hazard_button_identified",
+      "raw_rule_sha256": "cd989e0539f3b4cce899882bd1577dfe5f5c3389b73971137199a3458d079d50",
+      "projected_rule_sha256": "e117a5f9645a6d0958ae8c842e09bba67b5d550e4be173dc8c92527ea872de1d",
+      "clarification_question": "Can you match that button on your bike?",
+      "question_sha256": "668b0b96ef93db32a1b35faea750a45a52c0fe92e9dcdf6145716d9eb23ec0f1",
+      "fact_key": "hazard_button_identified",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP001"
+      ],
+      "source_sha256s": {
+        "evidence_44a2b6212ef27400fd09bff2": "c7892a2ac1260122f256ce1bfc22d84265f74413b3fec7fd1d0356e4103e6efa",
+        "evidence_48b61228a98a05869c70a4f1": "15971d004185145a2bd9bd765e415227aa849b89406bf373aef95e7546fca644",
+        "evidence_588e414b95e547c434f207d6": "bddc5bcc292703a3bed5bf3d1f6b3e97338b028944bbe8fda8175be904da9f18",
+        "evidence_68cab1ad40962f1c5dad77f6": "59946cdd66acda6909a758d1e5867ab1d250eb0476d9beec791c035dae882d0c",
+        "evidence_73d44fec8ee6bd655c1f278c": "a9fd982cbf903d964e166508ccf72372c4edfa17aec7b093a96aeb0804089f2d",
+        "evidence_7936d013ddebf1f7cfa4b218": "7f73c901e49d0d547c91a20c9880848829f3432521c175d2f3f555498e0c396a",
+        "evidence_8ee409a6e58bad5ea0f5ab2c": "622d8eebdd324978f4b4277a213a9b78ccde485c40f300722efe09717c4fa9b5",
+        "originalpdf_979bc0c9bccf9767693d4b4b": "b90772af53fe5e93b0774b8fc06f0795f247776e1d96ec918be4ae35160a162d",
+        "originalpdf_df6fa2efc886debc48c819f8": "6ad29ee0e8747bb712732b06d48932bb98b916f7c1e9d15be0b5f19ce45d029a"
+      },
+      "original_pdf_pages_inspected": [
+        23,
+        29,
+        30
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP002:rule:hazards_on",
+      "raw_rule_sha256": "325c349d415ac191060567e5e19da2a4dfc5a45e10c9a296ee84b76e7083265e",
+      "projected_rule_sha256": "de1aa1c53b7922f47a16e2204afd737cf07d7b599c3fa992e256a0c9966f094a",
+      "clarification_question": "Are the hazard lights switched ON?",
+      "question_sha256": "1d9b3f5613fcd9405daab099dc332c2dff1ccb74ee4ca9082cb528baf0c13337",
+      "fact_key": "hazards_on",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP002"
+      ],
+      "source_sha256s": {
+        "evidence_3106be2805197091e9f489ba": "820854ac81b8a2cea70b140b7f2688cbb69207f0d707307b1b96048d4a199842",
+        "evidence_7936d013ddebf1f7cfa4b218": "7f73c901e49d0d547c91a20c9880848829f3432521c175d2f3f555498e0c396a",
+        "evidence_8ee409a6e58bad5ea0f5ab2c": "622d8eebdd324978f4b4277a213a9b78ccde485c40f300722efe09717c4fa9b5"
+      },
+      "original_pdf_pages_inspected": [
+        29,
+        30
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP003:rule:turn_switch_centred",
+      "raw_rule_sha256": "e67a397bd91b251036841cd53db8da2261a2a44847a4f782012294e752b18b74",
+      "projected_rule_sha256": "59714c63474c0babf91abbeb071ac288d9897f5b69e0da424c9fb83a121948f2",
+      "clarification_question": "Can you confirm turn switch centred?",
+      "question_sha256": "59666b8c8c81f82d7732e88a3f7e5342b5182f609e429ce5a2acb195a2840bd7",
+      "fact_key": "turn_switch_centred",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP003"
+      ],
+      "source_sha256s": {
+        "evidence_15eb4675b3a42a8864b7a47c": "50ce0f7c327bb6cbbb242d4bf6d271357c9d8ebd9f68ab3f0b9ff2d7c011d0e3",
+        "evidence_3504f3277a6948b68f8943b9": "6b80ba41d65de7249ed815ab10fe461f44b3fcb53fd177a5c59ad43bfa16ff97",
+        "evidence_b1d134b17438c0640f467fe4": "72bb039b984f2120d3a1dd1d31013bd481288a9eece98b8eae54febd069074be",
+        "evidence_e02c649cb7e2569a32dbe4c4": "5fca4ed3c9ba74008a1e75b9603ed89f7e9ef096dea0e76e5f51374389110ba8"
+      },
+      "original_pdf_pages_inspected": [
+        31
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP005:rule:home_button_identified",
+      "raw_rule_sha256": "20e1ec13d6ee0140e4ca07daf0ad90086fa2812478285ae7d8bfec91cfa484ae",
+      "projected_rule_sha256": "6c94cda8a1619fc433088ad5dacfec0ec0db4b89df9d957bc0ac2635eb2661f0",
+      "clarification_question": "Can you identify the Home/go-back button on the left-hand handlebar control?",
+      "question_sha256": "5b21b7873994082d411fc9c404ee11ede01a1f2df5fdda95c17194b71114a43b",
+      "fact_key": "home_button_identified",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP005"
+      ],
+      "source_sha256s": {},
+      "original_pdf_pages_inspected": [
+        23,
+        32
+      ],
+      "origin": "PRODUCT_POLICY",
+      "policy_condition": true,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP006:rule:safely_stopped",
+      "raw_rule_sha256": "796cd20b06de6bccb8b14479a7fe9a9c6145f5e7ca252c5230383f4052845b3f",
+      "projected_rule_sha256": "484b2a381265c94f441c217fed646092cb9b1f8854639811b78f754cf49f6305",
+      "clarification_question": "Can you confirm safely stopped?",
+      "question_sha256": "0d14b22bba007615774686418fd588764c9d90775acace0986faa4c99020bc60",
+      "fact_key": "safely_stopped",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP006"
+      ],
+      "source_sha256s": {},
+      "original_pdf_pages_inspected": [
+        26
+      ],
+      "origin": "PRODUCT_POLICY",
+      "policy_condition": true,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP007:rule:mode_button_identified",
+      "raw_rule_sha256": "19c6a3330ebaebb5320af3bfebbe06a7330754b1d55dde10d037bd6497e45844",
+      "projected_rule_sha256": "a46d702a881ef48c9d36a2412df5274efb4bfd601081010551f4c29c9b4e5ac6",
+      "clarification_question": "Can you identify the M-marked Mode button on the right-hand handlebar control?",
+      "question_sha256": "dbc9af7558122acf75b8a8b96368db5b426c869b4308b683061b842e111fd721",
+      "fact_key": "mode_button_identified",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP007"
+      ],
+      "source_sha256s": {
+        "evidence_25ed21bb128f803a5eb599e5": "d8241e5044a90a918ab6438cc3ab4ce498df42db82d7c63c4f1b7a8e02d0ac08",
+        "originalpdf_b1369235b129116248bb9fce": "8fb842b33b67a21f4b59018cb9715985255d45aac6eccdaad4f78debe47ae5e6"
+      },
+      "original_pdf_pages_inspected": [
+        23,
+        32
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP008:rule:safely_stopped",
+      "raw_rule_sha256": "7cf7076ee3cf3579184dcb0696e62933059425527205f0ffd06a513e5b1fa42a",
+      "projected_rule_sha256": "12572a31862eaa1792b9779323171c32e8e886fe192dc2f465e93a391ca906a5",
+      "clarification_question": "Can you confirm safely stopped?",
+      "question_sha256": "0d14b22bba007615774686418fd588764c9d90775acace0986faa4c99020bc60",
+      "fact_key": "safely_stopped",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP008"
+      ],
+      "source_sha256s": {},
+      "original_pdf_pages_inspected": [
+        26
+      ],
+      "origin": "PRODUCT_POLICY",
+      "policy_condition": true,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP008:rule:trip1_reset_intended",
+      "raw_rule_sha256": "5f29572e20c29cde192790461121a91137c26838fbf98216f59def3ee0f919cd",
+      "projected_rule_sha256": "c0b8b9a950ab209f3bfa74151da5e2044b2fe1568cf27ca4c0cc19c16b5544dd",
+      "clarification_question": "Can you confirm trip1 reset intended?",
+      "question_sha256": "c4812f8cfa9a43b74779d638a75fcd859ddcdaa25fe694488efffd48ac1b858a",
+      "fact_key": "trip1_reset_intended",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP008"
+      ],
+      "source_sha256s": {},
+      "original_pdf_pages_inspected": [
+        43,
+        44
+      ],
+      "origin": "PRODUCT_POLICY",
+      "policy_condition": true,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP012:rule:hard_emergency_braking_pulsations",
+      "raw_rule_sha256": "13cfaeb0f7bfd1b0332bc80763bb7f8a343758e9c7c6521ce02794f1d644366a",
+      "projected_rule_sha256": "2a7beef5bedaced8990c30c4c8f6ef277897227260a4f1e7720b42fff5cc9f8d",
+      "clarification_question": "Can you confirm hard emergency braking pulsations?",
+      "question_sha256": "30e52cac6913f72113a5ec1f536442a175187db6e1cf93c996757a6161529ff9",
+      "fact_key": "hard_emergency_braking_pulsations",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP012"
+      ],
+      "source_sha256s": {
+        "evidence_283ac900b5a9b700969e4d34": "38ef94cda61bbcbcfb7601bb84f437c67bbab776203666c0b509e5011db66aad",
+        "evidence_5026a190286d576b63ebe758": "7c73cb21d177e1afaea9c19e564d5fc7a82c1bd74f0baa1f77c482ac1472d083",
+        "evidence_64caf7a71add8e75e276e6a4": "02217f6987cf583d426baaefe8e9277f3bdb3f76358f6c5115c36270afc9a9bb",
+        "evidence_77205abc626e0865ca538de9": "7866bc89b738fc4d76b4efb1ca258a1bcaa8d85b0a2d1d5e6c9b5259d3358668",
+        "evidence_85291feab6dfd884bfac9cb5": "7d4208e3c73593d37416750563b4931e6256bab875d01cb9f81f9739d0efbdea",
+        "evidence_a798d3ba95cd9f9440be754a": "64b550a0359543768bab0649e478e23c53325224847075df3066fc7a7b9e5f5c",
+        "evidence_abe1b8160322c6bc0012983d": "243e25d6d47ab542e5aeb063ab13f0b8582d4c83aae0efb4d910315888a50c7d",
+        "evidence_fa53b5e9f3db1a2d294ef94f": "bd7c64aef2271981a3deffbffd338f00e4dcfea9bc4b51e0d25d59ef5d5f8a70"
+      },
+      "original_pdf_pages_inspected": [
+        69
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP015:rule:already_securely_upright_on_centre_stand",
+      "raw_rule_sha256": "d7947fef07e0a021415f2608ab7056c06973ceda7461f493f5d935f9762c33f5",
+      "projected_rule_sha256": "1a8f923646528738e7b28ddc0de61b816dc02ebad280e6939cbeb103211be3da",
+      "clarification_question": "Can you confirm already securely upright on centre stand?",
+      "question_sha256": "728c8a20285db3174a3b5c7fc5a571e1e5f2e6d96c21a991d574dcada25489a4",
+      "fact_key": "already_securely_upright_on_centre_stand",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP015"
+      ],
+      "source_sha256s": {
+        "evidence_2f417777d76e8dac7b58bb32": "5ad94976c31a6f556c494e5927172b0aa1d8fb667845a99dc94860ff932c21fe",
+        "evidence_5c5167d58aed6b39fababe88": "38ae05409cf2d6d83d605922348e3dbcfa3376d92202f2b88391a2f852ea9aec",
+        "evidence_a190ffe4c326d969345887b7": "d1db60b1de6bb03c954e36133ebce0cd5cfd5c7570d01fd3a16bda38af27b890",
+        "evidence_a6731e9ee9f7e4f534f0f447": "c1e24a3180528666467cc9cd10ebe5535042d2c5ee96bfa8066897b052680962",
+        "evidence_d55c89c874343898c01f8c86": "7f64bd3e815b90ef7e7ba6f12df8aae7ccc3dcd45507cb1d0eb08263cab42905"
+      },
+      "original_pdf_pages_inspected": [
+        68
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP015:rule:firm_flat_ground",
+      "raw_rule_sha256": "bc1ac535f5c282cc15f2ad79c915a870c5109b2c24b8bb0a04f74fe02ec68c8c",
+      "projected_rule_sha256": "7cefab4eb604f9087bd9c67932ac6c43b4befd3e506f84a838390c8e0c24bafe",
+      "clarification_question": "Can you confirm firm flat ground?",
+      "question_sha256": "7b996421f1b2651a72fbf30365c8393396d734c5508d1033b42342f84aefe918",
+      "fact_key": "firm_flat_ground",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP015"
+      ],
+      "source_sha256s": {
+        "evidence_2f417777d76e8dac7b58bb32": "5ad94976c31a6f556c494e5927172b0aa1d8fb667845a99dc94860ff932c21fe",
+        "evidence_5c5167d58aed6b39fababe88": "38ae05409cf2d6d83d605922348e3dbcfa3376d92202f2b88391a2f852ea9aec",
+        "evidence_a190ffe4c326d969345887b7": "d1db60b1de6bb03c954e36133ebce0cd5cfd5c7570d01fd3a16bda38af27b890",
+        "evidence_a6731e9ee9f7e4f534f0f447": "c1e24a3180528666467cc9cd10ebe5535042d2c5ee96bfa8066897b052680962",
+        "evidence_d55c89c874343898c01f8c86": "7f64bd3e815b90ef7e7ba6f12df8aae7ccc3dcd45507cb1d0eb08263cab42905"
+      },
+      "original_pdf_pages_inspected": [
+        79,
+        80
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP015:rule:neutral_and_lamp",
+      "raw_rule_sha256": "27ad65863570ad3255326d5aa819b85fd4b70ce3e30de0ed0eff3794493d1135",
+      "projected_rule_sha256": "892a0417eef1e0baabb365a4f34a4f6b0b70e3cf94c313cd9a5aef250db48b6c",
+      "clarification_question": "Can you confirm neutral and lamp?",
+      "question_sha256": "bc57c1ee4db5222e94ca293916c6dfefc70c796ec23b7f97846ee6f146632cde",
+      "fact_key": "neutral_and_lamp",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP015"
+      ],
+      "source_sha256s": {
+        "evidence_2f417777d76e8dac7b58bb32": "5ad94976c31a6f556c494e5927172b0aa1d8fb667845a99dc94860ff932c21fe",
+        "evidence_5c5167d58aed6b39fababe88": "38ae05409cf2d6d83d605922348e3dbcfa3376d92202f2b88391a2f852ea9aec",
+        "evidence_a190ffe4c326d969345887b7": "d1db60b1de6bb03c954e36133ebce0cd5cfd5c7570d01fd3a16bda38af27b890",
+        "evidence_a6731e9ee9f7e4f534f0f447": "c1e24a3180528666467cc9cd10ebe5535042d2c5ee96bfa8066897b052680962",
+        "evidence_d55c89c874343898c01f8c86": "7f64bd3e815b90ef7e7ba6f12df8aae7ccc3dcd45507cb1d0eb08263cab42905"
+      },
+      "original_pdf_pages_inspected": [
+        68
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP017:rule:firm_flat_ground",
+      "raw_rule_sha256": "583adfb3e9aaea68e927ef519e16f74187590c16bab0686f804dfcfe8bdab2d0",
+      "projected_rule_sha256": "904fafd6cb48c21da35ced4376d0f01cb0a9fcecba09df68712ac74dd440868e",
+      "clarification_question": "Can you confirm firm flat ground?",
+      "question_sha256": "7b996421f1b2651a72fbf30365c8393396d734c5508d1033b42342f84aefe918",
+      "fact_key": "firm_flat_ground",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP017"
+      ],
+      "source_sha256s": {
+        "evidence_192ac63ddb6af7c96dc2dbdb": "286f5dfede9b4898f3dd61427957638b4e94ee7658cbd805c3559c23bb32d6f8",
+        "evidence_2d101f84dd55e5abfdae904f": "bd8e237d31b35508806db97f94768b07f0ed85e2f4845c44eaf341db973d6733",
+        "evidence_2f417777d76e8dac7b58bb32": "5ad94976c31a6f556c494e5927172b0aa1d8fb667845a99dc94860ff932c21fe",
+        "evidence_34895162a5eb84de2a987c24": "72b4319503284dbfc298967f2aeb5b000b081a84780af657138839a0f1b996dc",
+        "evidence_b0880521408d333258b3d92b": "397e1607235924d2656b470d6063e76fe0f56e1b4be2dacf8a31933122c1899a",
+        "evidence_ca31580e0b4fd3c79c3f2cc8": "454ecb6600ff4b4a631ed12d3701dabcba53c14dffcca9b11f12a2d468e84ccb",
+        "evidence_ffa4f2ef6061942ac1744edc": "cb553fe4ba55ba14136d6f7f191701771446117789c49bf1a0292e0014243972"
+      },
+      "original_pdf_pages_inspected": [
+        79,
+        80
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP025:rule:bike_upright",
+      "raw_rule_sha256": "2c9c6b81941c2fd975ad5744a88ef798298adc5c704ef0d5f3e4d517f0f862b6",
+      "projected_rule_sha256": "c88cb51c1299bdb5a4a24760e7256e598d65efac21d49a554edc4ed44721c373",
+      "clarification_question": "Can you confirm bike upright?",
+      "question_sha256": "5aedf50ed672a8a826419aec28c44b55014c4b663198fb6aa0470dbf88113185",
+      "fact_key": "bike_upright",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP025"
+      ],
+      "source_sha256s": {
+        "evidence_636a0212b65da61d01bc5ff0": "51b5d53ba26f5375c1d2bccf613d8e4a821b45b12a037cc1f53df4e3d5f9e2e4",
+        "evidence_83a88ebb31e7e605c31f08e4": "52e609cd7e1fb34d52b45dc3cf6f9a78a119f6a7b5148354945a4999b3aab836",
+        "evidence_bab06f99aa13ab1578a152a0": "4f75f34f91ba75607f6a287c72651f0bc25d4aa176a761159c5cbba787eb95ce"
+      },
+      "original_pdf_pages_inspected": [
+        88
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP025:rule:firm_level_surface",
+      "raw_rule_sha256": "5d4db090352a4a217397e1775451935309b8bd060c984123ab4d83726e907f21",
+      "projected_rule_sha256": "2e7101634ab613f5bd501c9e57521ce09e4a4f5fb69c82a1dea2d3ca203adda7",
+      "clarification_question": "Can you confirm firm level surface?",
+      "question_sha256": "c975c12110a3d21109a6506449bbf33bdd54baf8da953ff96ee9563e5e4a79ee",
+      "fact_key": "firm_level_surface",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP025"
+      ],
+      "source_sha256s": {
+        "evidence_636a0212b65da61d01bc5ff0": "51b5d53ba26f5375c1d2bccf613d8e4a821b45b12a037cc1f53df4e3d5f9e2e4",
+        "evidence_83a88ebb31e7e605c31f08e4": "52e609cd7e1fb34d52b45dc3cf6f9a78a119f6a7b5148354945a4999b3aab836",
+        "evidence_bab06f99aa13ab1578a152a0": "4f75f34f91ba75607f6a287c72651f0bc25d4aa176a761159c5cbba787eb95ce"
+      },
+      "original_pdf_pages_inspected": [
+        88
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP025:rule:rear_reservoir_horizontal",
+      "raw_rule_sha256": "057b59d41cf11fa8574c976761c12eb83454656a7a64a4aa9eec9977e8aa47d5",
+      "projected_rule_sha256": "8d144608f3ddc5cb392d69554fe73c18fb34d67608ba26ee718433ac3a877b8e",
+      "clarification_question": "Can you confirm rear reservoir horizontal?",
+      "question_sha256": "bda1aa44f7611c995287b5505dcb3ecac5a79a120345cec26e679c88a98f3f15",
+      "fact_key": "rear_reservoir_horizontal",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP025"
+      ],
+      "source_sha256s": {
+        "evidence_636a0212b65da61d01bc5ff0": "51b5d53ba26f5375c1d2bccf613d8e4a821b45b12a037cc1f53df4e3d5f9e2e4",
+        "evidence_83a88ebb31e7e605c31f08e4": "52e609cd7e1fb34d52b45dc3cf6f9a78a119f6a7b5148354945a4999b3aab836",
+        "evidence_bab06f99aa13ab1578a152a0": "4f75f34f91ba75607f6a287c72651f0bc25d4aa176a761159c5cbba787eb95ce"
+      },
+      "original_pdf_pages_inspected": [
+        88
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP030:rule:rpm_disproportionate",
+      "raw_rule_sha256": "a8e1790d21d6a448a7727a15905ec70065aef3142d7d9aac33b75d2caffef599",
+      "projected_rule_sha256": "42a96d1b5afc7021322aa9cae8524f93b75e4f675f6f3671c10af14f4ca714ca",
+      "clarification_question": "Does engine RPM rise disproportionately to vehicle speed?",
+      "question_sha256": "7db325304f8cc09e8d1ee6f36d08edaf21256a42c8a8d8eaee6ee6aa8755bcf1",
+      "fact_key": "rpm_disproportionate",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP030"
+      ],
+      "source_sha256s": {
+        "evidence_3ab349b8b479f442a8c6f618": "2fbfa78e9713518585b35accfd6ecd9194c458fe28292c9273e74562c25eeb2f"
+      },
+      "original_pdf_pages_inspected": [
+        122
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP047:rule:dim_lights_or_weak_horn",
+      "raw_rule_sha256": "872c79c0268380850d4dae80933606b0e6a6c351f628d63dfe18910c66e5a915",
+      "projected_rule_sha256": "c64533fb67d8639efbbbb7941073e950a6abc1a27913d231d571f194e5c8c1d3",
+      "clarification_question": "Are the lights dim or is the horn weak?",
+      "question_sha256": "203b3a508cb3a619be03820b17d9599576a082fe18a57221376ba2c026f87875",
+      "fact_key": "dim_lights_or_weak_horn",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP047"
+      ],
+      "source_sha256s": {
+        "evidence_15e1ce067b76cc524a0448d2": "4648b82a5c5906a043265394bb412bd28b8aa29132eff232ca6f46bf95722175"
+      },
+      "original_pdf_pages_inspected": [
+        121
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "EXP049:rule:dim_lights_or_weak_horn",
+      "raw_rule_sha256": "8dbac7080d1a2154852edfeb8a4de24b442b9e8c141f977f066421759d19e775",
+      "projected_rule_sha256": "bc63559481944197669f488cf4564674e7d8992889508e00abf9e0a01b60d427",
+      "clarification_question": "Are the lights dim or is the horn weak?",
+      "question_sha256": "203b3a508cb3a619be03820b17d9599576a082fe18a57221376ba2c026f87875",
+      "fact_key": "dim_lights_or_weak_horn",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "EXP049"
+      ],
+      "source_sha256s": {
+        "evidence_15e1ce067b76cc524a0448d2": "4648b82a5c5906a043265394bb412bd28b8aa29132eff232ca6f46bf95722175",
+        "evidence_45e01fb1becff7605de0f33d": "77cbac11dc6d1455725bdad0ce02a0cb755b8cc088cc83549cd1add2856337b5"
+      },
+      "original_pdf_pages_inspected": [
+        121
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_fuse:rule:fuse_defective_confirmed",
+      "raw_rule_sha256": "6b0b14388a5fc2da34026c98a4fb66f12d914a371b938fcf9a5149aaedb5be5c",
+      "projected_rule_sha256": "72c0fffa5dc8d50d03935e99b34efab99452080e1e80711ccf2d32ed7e56ab59",
+      "clarification_question": "Have you already confirmed that the identified fuse is defective?",
+      "question_sha256": "86dd9bc656b1ff6434dc21a9b6987610f1ae170128913cb1aaad3ea39b15bd2b",
+      "fact_key": "fuse_defective_confirmed",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_fuse"
+      ],
+      "source_sha256s": {
+        "evidence_00497a5a6998712d564a2df2": "7fda3e27995aa82c6e97fb56e54ac420a3813356ebd0588c64a0a28c3085984d",
+        "evidence_0c58e6021490c80a7a7f8d99": "7fbc1c5bebd02a03109ca466581e220138c639852bba02e5ff357fd8a0ac7e4b",
+        "evidence_15e1ce067b76cc524a0448d2": "4648b82a5c5906a043265394bb412bd28b8aa29132eff232ca6f46bf95722175",
+        "evidence_4e1a61e411e2b752c1a8716b": "d0fc91c944d4608da1510afda84d734dcf1b1b4b67a80e5f424170545003da38",
+        "evidence_590e7744c6d77b972e3950ee": "b7d77196865280a01b3323ab1dae49653afd619d543c410452df3d0eb9dae6b0",
+        "evidence_8b5ef092d20493cd2b9b58b8": "bfa33ed8839a660c00c34a7765af2a89eb890029319f6aa676fd3cf5a7051770"
+      },
+      "original_pdf_pages_inspected": [
+        112,
+        121
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_fuse:rule:ignition_off",
+      "raw_rule_sha256": "5263a120dc5cd6037dba8458d23a36e7465e8632b55184e1238f62b15a326208",
+      "projected_rule_sha256": "e9133738f94671ac57c571928611afdda390c287259ab7ffbedafe20f43df5c4",
+      "clarification_question": "Can you confirm ignition off?",
+      "question_sha256": "3ad348b31f4095ddaf6748975a6802a8a72af7ccc6af1fc4d145991834684260",
+      "fact_key": "ignition_off",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_fuse"
+      ],
+      "source_sha256s": {
+        "evidence_00497a5a6998712d564a2df2": "7fda3e27995aa82c6e97fb56e54ac420a3813356ebd0588c64a0a28c3085984d",
+        "evidence_0c58e6021490c80a7a7f8d99": "7fbc1c5bebd02a03109ca466581e220138c639852bba02e5ff357fd8a0ac7e4b",
+        "evidence_15e1ce067b76cc524a0448d2": "4648b82a5c5906a043265394bb412bd28b8aa29132eff232ca6f46bf95722175",
+        "evidence_4e1a61e411e2b752c1a8716b": "d0fc91c944d4608da1510afda84d734dcf1b1b4b67a80e5f424170545003da38",
+        "evidence_590e7744c6d77b972e3950ee": "b7d77196865280a01b3323ab1dae49653afd619d543c410452df3d0eb9dae6b0",
+        "evidence_8b5ef092d20493cd2b9b58b8": "bfa33ed8839a660c00c34a7765af2a89eb890029319f6aa676fd3cf5a7051770"
+      },
+      "original_pdf_pages_inspected": [
+        112
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_raise_stand:rule:stand_down",
+      "raw_rule_sha256": "3769bd68b873849a341cd2f5767cc9b678ba7f971846914951ec3db65f27921d",
+      "projected_rule_sha256": "5b0e506bb8afec4c684b27a327b94b474f7070a7e833b568cbedafe65ff8a8c4",
+      "clarification_question": "Is the side stand physically down?",
+      "question_sha256": "8aaf8837a77928e9626dbe26b23efce511750eac12b11314e7006b40a1f9d847",
+      "fact_key": "stand_down",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_raise_stand"
+      ],
+      "source_sha256s": {
+        "evidence_3ab349b8b479f442a8c6f618": "2fbfa78e9713518585b35accfd6ecd9194c458fe28292c9273e74562c25eeb2f",
+        "evidence_a7a5ea8352d16679e89780fb": "dee8b1e17c133c8bf63d551303a358a7942e067230edaeddcbab4a7481860308"
+      },
+      "original_pdf_pages_inspected": [
+        74,
+        122
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_raise_stand:rule:stand_indicator_shows",
+      "raw_rule_sha256": "d5f34fa55ef4662b691db77b1299db00af16d2eb3baca7d1e30e8a5f20dfd151",
+      "projected_rule_sha256": "9350e73ecaac1f141f7d4930fd87bbe213cdd35401b71c88835c6fb6635dd24a",
+      "clarification_question": "Is the side-stand indicator showing on the display?",
+      "question_sha256": "c61594284d3549496fd242897803982b8f32593fc537332802f71498d2f7802f",
+      "fact_key": "stand_indicator_shows",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_raise_stand"
+      ],
+      "source_sha256s": {
+        "evidence_3ab349b8b479f442a8c6f618": "2fbfa78e9713518585b35accfd6ecd9194c458fe28292c9273e74562c25eeb2f",
+        "evidence_a7a5ea8352d16679e89780fb": "dee8b1e17c133c8bf63d551303a358a7942e067230edaeddcbab4a7481860308"
+      },
+      "original_pdf_pages_inspected": [
+        74,
+        122
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_refuel:rule:engine_off",
+      "raw_rule_sha256": "3c08f6a0842be2015ee980e6c0284534386fa95b7b51a7fa71de4b9c5865ee5c",
+      "projected_rule_sha256": "984e2d62b1cd59115da62c4d33b4c5ff5f72ac3cbb9e3b15c03e4dc59df5c3a4",
+      "clarification_question": "Can you confirm engine off?",
+      "question_sha256": "a0402a7a5ec687a4690473cba943028141e32a5d2a756514c77dea3914147130",
+      "fact_key": "engine_off",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_refuel"
+      ],
+      "source_sha256s": {
+        "evidence_2a4402c7fa3a280cff8e7923": "bb7d3b05a61a7e374305028aadd383acfb93ce37a69754aacae209c503fb35e2",
+        "evidence_3b85a6b930363f5bd9ce3f4e": "1bedf45a2721126866d205854c1ec2ef1987e119c56c23d0ad9eabe241e4959e",
+        "evidence_430d1ff1fa68dbcabfbbb0cf": "5a3255862468c53de4bfa5223ce38bca38b4750d50b6a82be62602d54f1d935d",
+        "evidence_5034a983959e52887c0072bf": "6ca34d5e838b85b1ec1093c8f9f98f571bdcb8931e20c6f6442e5f2abc7b7c58",
+        "evidence_59184c3d66b4b2a53143442e": "13c6e2174c949f94e8ac26ec908ac080217bf40a380675b417ade03f20eb3853",
+        "evidence_99063aa16735b277a9cb4fb3": "4611a0640919b626fc1e13bde3fe5103c4333b7285ae4b0921097b095bb7dc81",
+        "evidence_a509149b220b562583a4cf2d": "9048c8e30a7fcd2b3bd0c7cfd0ba4abea82e65fe700e414ca00bd608fd8dac7e",
+        "evidence_a66e862d634c23573bb30c90": "0e41e6634fc194b23366477ea20d7a96e7f27fd063364499c93c6c4a6f1dbc1e",
+        "evidence_b02f383c70aefc628503f3ce": "476bb6e43e1895da10202a8a3c666868f12ee98e552c23c95a2fbc0d896cfa2b",
+        "evidence_b57860aec348c8aefa09d0e3": "df36b1849922f29f586c21b9b3f91eb3325bfeb7af3f9cdeeb5c455c0fb11a2c",
+        "evidence_fd5a9183e18775af14291d97": "ef85c6d0704725cf78495305b80a0dfeb4608e18b383548ba74ede0f1c3f2d80",
+        "evidence_ff04ce4096a0444b874929b5": "47f6b41c39d8cd245c72c55c9fee90cf17611b7cb3b162e047db1480ca1da45a"
+      },
+      "original_pdf_pages_inspected": [
+        8
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_refuel:rule:handheld_devices_off",
+      "raw_rule_sha256": "5d8a56d82939b5172244c97a13f8f7109c200b2766eeedefd179664e63306362",
+      "projected_rule_sha256": "a32ad0c4385c56d33f2c84ff84c14bb16eee4cab23e1526d0c5b22f38e257c0b",
+      "clarification_question": "Can you confirm handheld devices off?",
+      "question_sha256": "14ac0a1386f98b343aed1152fc5ae0cb7036288b896383b1589b5633b706ff01",
+      "fact_key": "handheld_devices_off",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_refuel"
+      ],
+      "source_sha256s": {
+        "evidence_2a4402c7fa3a280cff8e7923": "bb7d3b05a61a7e374305028aadd383acfb93ce37a69754aacae209c503fb35e2",
+        "evidence_3b85a6b930363f5bd9ce3f4e": "1bedf45a2721126866d205854c1ec2ef1987e119c56c23d0ad9eabe241e4959e",
+        "evidence_430d1ff1fa68dbcabfbbb0cf": "5a3255862468c53de4bfa5223ce38bca38b4750d50b6a82be62602d54f1d935d",
+        "evidence_5034a983959e52887c0072bf": "6ca34d5e838b85b1ec1093c8f9f98f571bdcb8931e20c6f6442e5f2abc7b7c58",
+        "evidence_59184c3d66b4b2a53143442e": "13c6e2174c949f94e8ac26ec908ac080217bf40a380675b417ade03f20eb3853",
+        "evidence_99063aa16735b277a9cb4fb3": "4611a0640919b626fc1e13bde3fe5103c4333b7285ae4b0921097b095bb7dc81",
+        "evidence_a509149b220b562583a4cf2d": "9048c8e30a7fcd2b3bd0c7cfd0ba4abea82e65fe700e414ca00bd608fd8dac7e",
+        "evidence_a66e862d634c23573bb30c90": "0e41e6634fc194b23366477ea20d7a96e7f27fd063364499c93c6c4a6f1dbc1e",
+        "evidence_b02f383c70aefc628503f3ce": "476bb6e43e1895da10202a8a3c666868f12ee98e552c23c95a2fbc0d896cfa2b",
+        "evidence_b57860aec348c8aefa09d0e3": "df36b1849922f29f586c21b9b3f91eb3325bfeb7af3f9cdeeb5c455c0fb11a2c",
+        "evidence_fd5a9183e18775af14291d97": "ef85c6d0704725cf78495305b80a0dfeb4608e18b383548ba74ede0f1c3f2d80",
+        "evidence_ff04ce4096a0444b874929b5": "47f6b41c39d8cd245c72c55c9fee90cf17611b7cb3b162e047db1480ca1da45a"
+      },
+      "original_pdf_pages_inspected": [
+        8
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_refuel:rule:low_fuel_condition",
+      "raw_rule_sha256": "b06d42992cde930dadd0a594244e6960f41e13aff1595d8ab5550e16e324b29d",
+      "projected_rule_sha256": "ae639170d1dabbbdaed9dd0ba61e609a3d7dd29cd2997d188a769ab46cc69f20",
+      "clarification_question": "Is the final fuel bar continuously blinking, or have you already confirmed inadequate fuel?",
+      "question_sha256": "2a891a65b10392c5874a5754a124222fc29a135ed4e5c79e78e5614eb5c986cf",
+      "fact_key": "low_fuel_condition",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_refuel"
+      ],
+      "source_sha256s": {
+        "evidence_2a4402c7fa3a280cff8e7923": "bb7d3b05a61a7e374305028aadd383acfb93ce37a69754aacae209c503fb35e2",
+        "evidence_3b85a6b930363f5bd9ce3f4e": "1bedf45a2721126866d205854c1ec2ef1987e119c56c23d0ad9eabe241e4959e",
+        "evidence_430d1ff1fa68dbcabfbbb0cf": "5a3255862468c53de4bfa5223ce38bca38b4750d50b6a82be62602d54f1d935d",
+        "evidence_5034a983959e52887c0072bf": "6ca34d5e838b85b1ec1093c8f9f98f571bdcb8931e20c6f6442e5f2abc7b7c58",
+        "evidence_59184c3d66b4b2a53143442e": "13c6e2174c949f94e8ac26ec908ac080217bf40a380675b417ade03f20eb3853",
+        "evidence_99063aa16735b277a9cb4fb3": "4611a0640919b626fc1e13bde3fe5103c4333b7285ae4b0921097b095bb7dc81",
+        "evidence_a509149b220b562583a4cf2d": "9048c8e30a7fcd2b3bd0c7cfd0ba4abea82e65fe700e414ca00bd608fd8dac7e",
+        "evidence_a66e862d634c23573bb30c90": "0e41e6634fc194b23366477ea20d7a96e7f27fd063364499c93c6c4a6f1dbc1e",
+        "evidence_b02f383c70aefc628503f3ce": "476bb6e43e1895da10202a8a3c666868f12ee98e552c23c95a2fbc0d896cfa2b",
+        "evidence_b57860aec348c8aefa09d0e3": "df36b1849922f29f586c21b9b3f91eb3325bfeb7af3f9cdeeb5c455c0fb11a2c",
+        "evidence_fd5a9183e18775af14291d97": "ef85c6d0704725cf78495305b80a0dfeb4608e18b383548ba74ede0f1c3f2d80",
+        "evidence_ff04ce4096a0444b874929b5": "47f6b41c39d8cd245c72c55c9fee90cf17611b7cb3b162e047db1480ca1da45a"
+      },
+      "original_pdf_pages_inspected": [
+        63,
+        73,
+        121
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_refuel:rule:no_flames_smoking_sparks",
+      "raw_rule_sha256": "ae25241cb57f60f1b86fc95e813604595eb0c8f8664a2dc6339c841d42b1bdc1",
+      "projected_rule_sha256": "6bd07399514559ebbf52a1c69b16adb3114acd54f0fa1412ce679c7794daa304",
+      "clarification_question": "Can you confirm no flames smoking sparks?",
+      "question_sha256": "08141da8b01a46890109e4482418c0e875aaac06b69d90750968946fefafc926",
+      "fact_key": "no_flames_smoking_sparks",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_refuel"
+      ],
+      "source_sha256s": {
+        "evidence_2a4402c7fa3a280cff8e7923": "bb7d3b05a61a7e374305028aadd383acfb93ce37a69754aacae209c503fb35e2",
+        "evidence_3b85a6b930363f5bd9ce3f4e": "1bedf45a2721126866d205854c1ec2ef1987e119c56c23d0ad9eabe241e4959e",
+        "evidence_430d1ff1fa68dbcabfbbb0cf": "5a3255862468c53de4bfa5223ce38bca38b4750d50b6a82be62602d54f1d935d",
+        "evidence_5034a983959e52887c0072bf": "6ca34d5e838b85b1ec1093c8f9f98f571bdcb8931e20c6f6442e5f2abc7b7c58",
+        "evidence_59184c3d66b4b2a53143442e": "13c6e2174c949f94e8ac26ec908ac080217bf40a380675b417ade03f20eb3853",
+        "evidence_99063aa16735b277a9cb4fb3": "4611a0640919b626fc1e13bde3fe5103c4333b7285ae4b0921097b095bb7dc81",
+        "evidence_a509149b220b562583a4cf2d": "9048c8e30a7fcd2b3bd0c7cfd0ba4abea82e65fe700e414ca00bd608fd8dac7e",
+        "evidence_a66e862d634c23573bb30c90": "0e41e6634fc194b23366477ea20d7a96e7f27fd063364499c93c6c4a6f1dbc1e",
+        "evidence_b02f383c70aefc628503f3ce": "476bb6e43e1895da10202a8a3c666868f12ee98e552c23c95a2fbc0d896cfa2b",
+        "evidence_b57860aec348c8aefa09d0e3": "df36b1849922f29f586c21b9b3f91eb3325bfeb7af3f9cdeeb5c455c0fb11a2c",
+        "evidence_fd5a9183e18775af14291d97": "ef85c6d0704725cf78495305b80a0dfeb4608e18b383548ba74ede0f1c3f2d80",
+        "evidence_ff04ce4096a0444b874929b5": "47f6b41c39d8cd245c72c55c9fee90cf17611b7cb3b162e047db1480ca1da45a"
+      },
+      "original_pdf_pages_inspected": [
+        8,
+        27
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    },
+    {
+      "rule_id": "a_refuel:rule:ventilated_area",
+      "raw_rule_sha256": "99ed378409a0b9c790fdece8cad0e733e96479b9ca2f2a04586d413e03ea363b",
+      "projected_rule_sha256": "11acb47aaaced3e1d66b83329447ba9eeef48a72d056f07b84989162b1b5eae1",
+      "clarification_question": "Can you confirm ventilated area?",
+      "question_sha256": "6feeedaf76cccbb60260f89e990dfd4beb17e3ee10afb4decd1517601aa05435",
+      "fact_key": "ventilated_area",
+      "operator": "EQ",
+      "expected_value": true,
+      "answer_values": {
+        "yes": true,
+        "no": false,
+        "unsure": null
+      },
+      "answer_labels": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "answer_contract": "Yes confirms exactly the displayed proposition; No negates exactly that proposition; Unsure does not set or supersede a Boolean fact. No component health or action outcome is inferred.",
+      "owners": [
+        "a_refuel"
+      ],
+      "source_sha256s": {
+        "evidence_2a4402c7fa3a280cff8e7923": "bb7d3b05a61a7e374305028aadd383acfb93ce37a69754aacae209c503fb35e2",
+        "evidence_3b85a6b930363f5bd9ce3f4e": "1bedf45a2721126866d205854c1ec2ef1987e119c56c23d0ad9eabe241e4959e",
+        "evidence_430d1ff1fa68dbcabfbbb0cf": "5a3255862468c53de4bfa5223ce38bca38b4750d50b6a82be62602d54f1d935d",
+        "evidence_5034a983959e52887c0072bf": "6ca34d5e838b85b1ec1093c8f9f98f571bdcb8931e20c6f6442e5f2abc7b7c58",
+        "evidence_59184c3d66b4b2a53143442e": "13c6e2174c949f94e8ac26ec908ac080217bf40a380675b417ade03f20eb3853",
+        "evidence_99063aa16735b277a9cb4fb3": "4611a0640919b626fc1e13bde3fe5103c4333b7285ae4b0921097b095bb7dc81",
+        "evidence_a509149b220b562583a4cf2d": "9048c8e30a7fcd2b3bd0c7cfd0ba4abea82e65fe700e414ca00bd608fd8dac7e",
+        "evidence_a66e862d634c23573bb30c90": "0e41e6634fc194b23366477ea20d7a96e7f27fd063364499c93c6c4a6f1dbc1e",
+        "evidence_b02f383c70aefc628503f3ce": "476bb6e43e1895da10202a8a3c666868f12ee98e552c23c95a2fbc0d896cfa2b",
+        "evidence_b57860aec348c8aefa09d0e3": "df36b1849922f29f586c21b9b3f91eb3325bfeb7af3f9cdeeb5c455c0fb11a2c",
+        "evidence_fd5a9183e18775af14291d97": "ef85c6d0704725cf78495305b80a0dfeb4608e18b383548ba74ede0f1c3f2d80",
+        "evidence_ff04ce4096a0444b874929b5": "47f6b41c39d8cd245c72c55c9fee90cf17611b7cb3b162e047db1480ca1da45a"
+      },
+      "original_pdf_pages_inspected": [
+        8,
+        27
+      ],
+      "origin": "MANUAL",
+      "policy_condition": false,
+      "scope": "APPROVED_AGENT_CLARIFICATION_POLARITY_ONLY",
+      "quality_holds_unchanged": true
+    }
+  ],
+  "excluded": [
+    {
+      "rule_id": "EXP006:rule:controls_identified",
+      "rule_sha256": "560908047de3721afe593d4b73de9401c455e8b66c2a2d7a28614cfbd1c7999f",
+      "clarification_question": "Can you confirm controls identified?",
+      "reason": "Question does not name the controls to identify; bare Yes cannot establish the specific control set."
+    },
+    {
+      "rule_id": "EXP011:rule:abs_continuous_above_5",
+      "rule_sha256": "f1046046c7b36f96604ceb77863cbce29d716bb1c8fdc8a261e1adb33b9f4159",
+      "clarification_question": "Is it only ON while stationary/below 5 km/h, or did it remain continuously ON above 5 km/h?",
+      "reason": "Alternative question compares below-speed ON with above-speed continuously ON; bare Yes/No is polarity ambiguous."
+    },
+    {
+      "rule_id": "EXP028:rule:noise_only",
+      "rule_sha256": "213ca5393b0841b447152a872708966a00646b1f07d0f4cbe0f0e9240d09ec98",
+      "clarification_question": "Are you reporting mild noise only, or also reduced braking or another symptom?",
+      "reason": "Alternative question contrasts noise-only and additional symptoms; bare Yes/No is polarity ambiguous."
+    },
+    {
+      "rule_id": "GEN043:rule:dynamic_conditions_met",
+      "rule_sha256": "3ec7f805d5cfa8adc8b69e2b4ff274995e473936fb51d1fd97a4639102e9da91",
+      "clarification_question": "Did you meet those conditions?",
+      "reason": "Those conditions is context-dependent and quality-held; bare Yes cannot verify the unnamed complete set."
+    },
+    {
+      "rule_id": "a_fuse:rule:fuse_identity_and_same_rating_confirmed",
+      "rule_sha256": "8c502f7abc5693b53268fa365943e31ca1459ed853d0fab83888c8f51f598cae",
+      "clarification_question": "What position and sticker label identify this fuse, and what rating is specified?",
+      "reason": "Open-ended request needs actual fuse position, sticker identity and specified rating; Yes is not an answer."
+    },
+    {
+      "rule_id": "a_switches_on:rule:reported_switch_off",
+      "rule_sha256": "993939d2e5a241a9e68a786fe6f0bb908666c70ce61c9ab5291a76b49c11c00d",
+      "clarification_question": "Is the ignition key OFF, the right-hand engine kill switch OFF, or neither?",
+      "reason": "Three-way ignition/kill/neither question; bare Yes/No cannot identify which position was reported."
+    },
+    {
+      "rule_id": "a_switches_on:rule:switch_identified",
+      "rule_sha256": "f593f9603a79762f3117e36cbb68ab5e8f2f64d68ad680d6a2e8343c58c3aeb4",
+      "clarification_question": "Can you confirm switch identified?",
+      "reason": "Question does not name which switch; bare Yes cannot establish the required specific switch identity."
+    }
+  ],
+  "safe_binding_count": 28,
+  "excluded_count": 7
+}

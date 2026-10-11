@@ -20,9 +20,10 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     assert os.environ.get('MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED')=='1'
-    manifest=json.loads((ROOT/'reports/grounded_generation/v1/runtime_manifest.json').read_bytes())
+    manifest_path=ROOT/os.environ.get('MOTOMEDIC_EVAL_MANIFEST','reports/grounded_generation/v1/runtime_manifest.json')
+    manifest=json.loads(manifest_path.read_bytes())
     for path,digest in manifest['file_sha256'].items():assert sha(ROOT/path)==digest,path
-    dataset_path=ROOT/'reports/grounded_generation/v1/heldout_cases.json'
+    dataset_path=ROOT/manifest.get('heldout_path','reports/grounded_generation/v1/heldout_cases.json')
     assert sha(dataset_path)==manifest['heldout_sha256']
     r=ApprovedEvidenceRegistry.load(ROOT,ROOT/'build/index')
     retriever=Retriever(ROOT/'build/index',rerank=True)
@@ -34,7 +35,14 @@ def main():
         wait=max(0,11-(time.monotonic()-last[0]))
         if wait:time.sleep(wait)
         calls.append({'tokens':tokens,'kind':kind});last[0]=time.monotonic()
-    provider=GemmaProvider(reserve)
+    outputs=[]
+    class RecordingHTTP(HTTP):
+        def __call__(self,method,path,body,key):
+            value=super().__call__(method,path,body,key)
+            if path.endswith(':generateContent'):
+                outputs.append({'evaluation_response':value})
+            return value
+    provider=GemmaProvider(reserve,transport=RecordingHTTP())
     app=Flask(__name__)
     q=Questions(r,retriever,Composer(provider))
     key=os.environ['MOTOMEDIC_GEMINI_API_KEY']
@@ -53,13 +61,14 @@ def main():
         http('DELETE',cached['name'],None,key)
     except ProviderFailure as exc:capabilities['explicit_cache_probe']=str(exc)
     result={'schema_version':'grounded-generation-heldout-v1','runtime_lock':Config().lock,
-        'runtime_manifest_sha256':sha(ROOT/'reports/grounded_generation/v1/runtime_manifest.json'),
+        'runtime_manifest_sha256':sha(manifest_path),
         'heldout_sha256':sha(dataset_path),'provider_capabilities':capabilities,
         'manual_checksum':r.checksum,'index_id':r.index_id,'rows':[],
         'semantic_verifier_calls':0,'public_access_opened':False,
         'raw_rider_data':'ONLY_AUTHORED_EVALUATION_QUESTIONS','claim_review_status':'PENDING_INDEPENDENT_ORIGINAL_PAGE_CHECK'}
     def save():
         result['provider_reservations']=calls
+        result['evaluation_only_provider_outputs']=outputs
         OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
     save()
     original_complete=provider.complete;original_count=provider.count

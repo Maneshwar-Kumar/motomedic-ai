@@ -1,11 +1,15 @@
 """Server-owned citation presentation; free wording is not a semantic certificate."""
-from cloud.arm_a.rider_contract import saved_view as legacy_view, issue_choices
+from cloud.arm_a.rider_contract import saved_view as legacy_view
+from cloud.grounded_generation.feedback import issue_choices
 from evidence_registry import content_hash
 from controller_contracts import ResponseType
 
 def saved_view(registry, session, response):
     if response.type!=ResponseType.SUPPORTED or not response.claim_evidence_map:
-        return legacy_view(registry,session,response)
+        view,_=legacy_view(registry,session,response)
+        choices,private=issue_choices(registry,session,response)
+        view['choices']=choices
+        return view,private
     if 'GROUNDED_GENERATION_DETERMINISTIC_CHECKED' not in response.reason_codes:
         return legacy_view(registry,session,response)
     sids=[code[6:] for code in response.reason_codes if code.startswith('scope:')]

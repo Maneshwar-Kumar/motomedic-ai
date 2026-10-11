@@ -22,6 +22,7 @@ class Config:
         return {'version':VERSION,'model':MODEL,'policy_sha256':POLICY_SHA256,
             'input_tokens':8192,'request_bytes':24000,'output_tokens':1800,
             'question_admission':'RETRIEVED_REVIEWED_EVIDENCE_NOT_QUESTION_WORDING',
+            'retrieved_scope_limit':4,'retrieved_scope_ranking':'DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1',
             'response_cache':'REVIEWED_EXACT_QUERY_SCOPE_STATE_ONLY_V1',
             'prompt_cache':'CAPABILITY_GATED_VERSIONED_EVIDENCE_PREFIX_V1',
             'verifier_calls':0,'validation':'DETERMINISTIC_NOT_SEMANTIC_PROOF'}
@@ -110,6 +111,8 @@ class Composer:
             stable={'contract':self.config.versions(),'manual_checksum':r.checksum,
                 'index_id':r.index_id,'registry_lock':r.lock,'variant':session.bike_variant,
                 'edition':session.edition,'scopes':scopes,'evidence':evidence}
+            trace.update(admitted_scope_ids=list(scopes),complete_evidence_count=len(required),
+                admitted_context_sha256=content_hash(stable))
             clarifications=clarifications or self.clarifications
             dynamic={'question':query,'typed_state':diagnostic_projection(session),
                 'rider_resolvable_clarifications':clarifications}
@@ -168,10 +171,12 @@ class Composer:
         except (ProviderFailure,ValidationFailure) as exc:
             if isinstance(exc,ProviderFailure): trace.update(getattr(self.provider,'last_trace',None) or {})
             code=str(exc)
+            trace['failure_code']=code
             return controller.response('UNSUPPORTED' if code=='SOURCE_REVIEW_REQUIRED' else 'SYSTEM_ERROR',
                 'The source scope needs review.' if code=='SOURCE_REVIEW_REQUIRED' else
                 'I am temporarily unable to generate a validated answer.',session,reason_codes=(code,))
         except Exception:
+            trace['failure_code']='GROUNDED_GENERATION_FAILURE'
             return controller.response('SYSTEM_ERROR','I am temporarily unable to generate a validated answer.',
                 session,reason_codes=('GROUNDED_GENERATION_FAILURE',))
         finally: trace['server_composition_seconds']=time.monotonic()-started
@@ -212,13 +217,13 @@ class Questions:
         c,r=self.controller,self.registry
         composer=c.response_generator
         composer.last_trace=None;composer.query=query;composer.scopes=();composer.clarifications={}
+        session=replace(session,version=session.version+1,pending_step_id=None,pending_rule_id=None)
         safety=self.known_safety(session)
         if safety:
             from cloud.grounded_generation.presentation import saved_view
             session,response=safety
             view,choices=saved_view(r,session,response)
             return session,view,choices
-        session=replace(session,version=session.version+1,pending_step_id=None,pending_rule_id=None)
         try:
             if c.scope_status(session)!='CONFIRMED': raise ValidationFailure('SCOPE_NOT_CONFIRMED')
             bundle=self.retriever.search(query,limit=6,scope=self.scope(),applicability_status='CONFIRMED')
@@ -255,8 +260,13 @@ class Questions:
                     admitted.append(sid)
                 # One action per turn; deterministic stable product ordering, not
                 # a claim about OEM ranking. All admitted factual scopes can combine.
-                actions=sorted(sid for sid in admitted if r.step(sid).kind=='ACTION')
-                admitted=sorted(sid for sid in admitted if r.step(sid).kind in ('LOOKUP','SAFETY_STOP'))+actions[:1]
+                hits=bundle.get('hits',[])
+                def rank(sid):
+                    core=set(r.step(sid).action_evidence_ids)
+                    positions=[i for i,hit in enumerate(hits) if core&set(hit.get('evidence_ids',[]))]
+                    return (min(positions) if positions else len(hits),-len(core&ids)/len(core),sid)
+                actions=sorted((sid for sid in admitted if r.step(sid).kind=='ACTION'),key=rank)
+                admitted=sorted((sid for sid in admitted if r.step(sid).kind in ('LOOKUP','SAFETY_STOP')),key=rank)[:3]+actions[:1]
                 composer.scopes=tuple(admitted);composer.clarifications=clarifications
                 if admitted:
                     response=composer.compose_many(c,session,admitted,query,clarifications)

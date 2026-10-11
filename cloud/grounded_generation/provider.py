@@ -126,11 +126,21 @@ class GemmaProvider:
                         continue
                     raise
             trace['provider_seconds']=time.monotonic()-started
+            trace['model_version_matches']=response.get('modelVersion')==MODEL
             if response.get('modelVersion')!=MODEL: raise ProviderFailure('PROVIDER_MODEL_MISMATCH')
             candidates=response.get('candidates',[])
+            trace['candidate_count']=len(candidates)
+            if candidates:
+                finish=candidates[0].get('finishReason')
+                trace['finish_reason']=finish if finish in ('STOP','MAX_TOKENS','SAFETY','RECITATION','OTHER') else 'UNRECOGNIZED'
             if len(candidates)!=1 or candidates[0].get('finishReason')!='STOP':
                 raise ProviderFailure('PROVIDER_INCOMPLETE_OR_REFUSED')
             parts=candidates[0].get('content',{}).get('parts',[])
+            # Gemma's confirmed empty thought marker carries no reasoning or
+            # answer text. Match this exact shape only; real thought content fails.
+            markers=sum(p=={'text':'','thought':True} for p in parts)
+            parts=[p for p in parts if p!={'text':'','thought':True}]
+            trace['empty_thought_markers']=markers
             if not parts or any(type(p.get('text')) is not str or p.get('thought') or
                 set(p)-{'text','thought'} for p in parts): raise ProviderFailure('PROVIDER_INVALID_PARTS')
             usage=response.get('usageMetadata',{})

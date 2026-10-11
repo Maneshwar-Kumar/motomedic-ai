@@ -6,7 +6,7 @@ import re
 from flask import jsonify, request, Response
 from cloud.arm_a.visitor import verify
 from cloud.arm_a.store import Limited, OperationConflict
-from cloud.arm_a.rider_contract import consume_choice
+from cloud.grounded_generation.feedback import consume_choice
 from cloud.grounded_generation.presentation import saved_view
 from session_store import SessionConflict
 from rider_ui.safeguards import validate_message, LimitError
@@ -129,7 +129,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
             if old and session.version!=old['version']:
                 raise SessionConflict('Concurrent session')
             if feedback:
-                outcome, fact = consume_choice(session,old['choices'],body['choice_id'],body['expected_version'])
+                outcome, fact = consume_choice(registry,session,old['choices'],body['choice_id'],body['expected_version'])
             prior = store.begin(key,digest)
             if prior:
                 if prior['state']=='COMPLETE':
