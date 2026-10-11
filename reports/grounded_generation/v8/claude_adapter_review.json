@@ -1,0 +1,18 @@
+{
+  "schema_version": "claude-adapter-software-review-v1",
+  "tests": 13,
+  "exit_code": 0,
+  "seconds": 1.3370672999881208,
+  "bindings_stable": true,
+  "file_sha256": {
+    "cloud/grounded_generation/claude_provider.py": "24e4efeb688d4f0236841d07505df3c2974c15bd15e044550c4f89d652505971",
+    "cloud/grounded_generation/fallback_provider.py": "793551d36b3e4987e6efcb7ab9e832ba03755c7cb1279150ee7e7f1f58373b52",
+    "cloud/grounded_generation/claude_budget.py": "0cffa1ab12f11d35877affc2c512479fb4ab7d1079eb90280f3dc8f269a39b8f",
+    "cloud/grounded_generation/test_claude_fallback.py": "e31f46b68479b239f1a76a1f0beed7759fb79041de8a450e1b8580397165bb88",
+    "cloud/arm_a/app.py": "31210f87c69623798fb8901d964c0a5c535e5f45c5cdeed02b95f36f8b179864"
+  },
+  "actual_model_calls": 0,
+  "deployment_changed": false,
+  "monetary_allowance_usd": 1,
+  "key_location": "GitHub Actions secret ANTHROPIC_API_KEY"
+}

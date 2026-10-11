@@ -14,7 +14,8 @@ STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
-CHECK_ERROR_COPY = 'I couldn’t check the answer right now. Please try again shortly.'
+RUNTIME_POLICY = 'open-manual-draft-verify-v8'
+CHECK_ERROR_COPY = 'I couldn\u2019t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):
     """Sanitized message, never provider bodies or credentials."""
@@ -32,9 +33,11 @@ def operation_id():
 def valid_id(value):
     return isinstance(value, str) and re.fullmatch(r'[a-zA-Z0-9_-]{16,128}', value)
 
-def validate_view(view):
+def validate_view(view, *, expected_policy=None):
     if not isinstance(view, dict) or view.get('schema_version') != 'motomedic-rider-api-v1':
         raise APIError('The service returned an incompatible response.')
+    if expected_policy is not None and view.get('runtime_policy') != expected_policy:
+        raise APIError(CHECK_ERROR_COPY)
     if view.get('manual_checksum') != MANUAL_SHA or view.get('index_id') != INDEX_ID:
         raise APIError('The service manual does not match the selected source.')
     if not valid_id(view.get('session_id')) or type(view.get('version')) is not int or view['version'] < 0:
@@ -160,13 +163,17 @@ class RiderAPI:
                                 break
                             yield data
                     return read_verified_stream(chunks(),on_verified,operation_id=request_id,
-                                                on_progress=on_progress,on_chunk=on_chunk)
+                                                on_progress=on_progress,on_chunk=on_chunk,
+                                                expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
                 if res.headers.get_content_type() != 'application/json':
                     raise APIError('The service returned an unexpected response format.')
                 data = res.read(MAX_BYTES + 1)
                 if len(data) > MAX_BYTES:
                     raise APIError('The service response exceeded the display limit.')
-                return json.loads(data)
+                result=json.loads(data)
+                if path != '/v1/catalogue':
+                    validate_view(result,expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
+                return result
         except HTTPError as exc:
             terminal=False
             try:

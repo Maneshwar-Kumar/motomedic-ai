@@ -127,7 +127,8 @@ class VerifiedTests(unittest.TestCase):
         q,p,c,s=self.setup_runtime(Provider([d],dishonest));_,v,_=q.answer(s,'Bore and undocumented repair?')
         self.assertEqual(v['response']['type'],'SYSTEM_ERROR');self.assertIsNone(c.last_admitted)
     def test_fallback_and_system_error_exact_owner_wording_without_extra_text(self):
-        from cloud.grounded_generation.verified_qa import FALLBACK_TEXT,SYSTEM_ERROR_TEXT
+        FALLBACK_TEXT='I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
+        SYSTEM_ERROR_TEXT='I couldn\u2019t check the answer right now. Please try again shortly.'
         def reject(o,*args):o.update(decision='SHOW_FALLBACK',release_eligible=False,question_coverage='IRRELEVANT');return o
         q,p,c,s=self.setup_runtime(Provider(verifier=reject));_,v,_=q.answer(s,'query')
         self.assertEqual(v['response']['natural_language'],FALLBACK_TEXT)
@@ -136,6 +137,21 @@ class VerifiedTests(unittest.TestCase):
         def outage(*args):raise ProviderFailure('PROVIDER_DAILY_OR_RATE_LIMIT')
         q,p,c,s=self.setup_runtime(Provider(verifier=outage));_,v,_=q.answer(s,'query')
         self.assertEqual(v['response']['natural_language'],SYSTEM_ERROR_TEXT)
+    def test_fixed_copy_constants_have_exact_independent_unicode_bytes(self):
+        from cloud.grounded_generation.verified_qa import FALLBACK_TEXT,SYSTEM_ERROR_TEXT,VERSION
+        expected_fallback='I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
+        expected_error='I couldn\u2019t check the answer right now. Please try again shortly.'
+        self.assertEqual(FALLBACK_TEXT,expected_fallback)
+        self.assertEqual(SYSTEM_ERROR_TEXT,expected_error)
+        self.assertEqual(FALLBACK_TEXT.encode('utf-8'),expected_fallback.encode('utf-8'))
+        self.assertEqual(SYSTEM_ERROR_TEXT.encode('utf-8'),expected_error.encode('utf-8'))
+        self.assertEqual(VERSION,'open-manual-draft-verify-v8')
+    def test_runtime_source_is_ascii_and_apostrophe_is_source_escape(self):
+        import cloud.grounded_generation.verified_qa as module
+        from pathlib import Path
+        source=Path(module.__file__).read_text(encoding='utf-8')
+        self.assertTrue(source.isascii())
+        self.assertIn('couldn\\u2019t',source)
     def test_delivery_rejects_text_session_and_operation_mutations(self):
         q,p,c,s=self.setup_runtime();a=self.authority.assemble(q.retriever.search('query'))
         r=c.compose_open(q.controller,s,a,'query',{'operation_id':'original'})
@@ -148,5 +164,64 @@ class VerifiedTests(unittest.TestCase):
         def wrong(o,*args):o['question_coverage']='IRRELEVANT';return o
         q,p,c,s=self.setup_runtime(Provider(verifier=wrong));_,v,_=q.answer(s,'Actual query')
         self.assertEqual(v['response']['type'],'SYSTEM_ERROR');self.assertIsNone(c.last_admitted)
+
+    def test_compact_projection_restores_every_original_source_content_field(self):
+        from cloud.grounded_generation.verified_qa import compact_source_evidence
+        q,p,c,s=self.setup_runtime(Provider([draft(LOCATION,'The socket is in the centre of the handlebar.')]),eid=LOCATION)
+        admitted=self.authority.assemble(q.retriever.search('USB'))
+        original=deepcopy(admitted)
+        compact=compact_source_evidence(admitted['evidence'])
+        def restore(value):
+            if type(value)is list:return [restore(x) for x in value]
+            if type(value)is not dict:return value
+            result={k:restore(v) for k,v in value.items()}
+            if result.pop('orig_same_as_text',False):result['orig']=result['text']
+            return result
+        for eid,row in admitted['evidence'].items():
+            self.assertEqual(restore(compact[eid]['source_object']['content']),row['source_object']['content'])
+            self.assertEqual(compact[eid]['provenance'],row['provenance'])
+            for key,value in row['reviewed_source_context'].items():
+                if key not in ('original_object_sha256','original_raw_object_sha256'):
+                    self.assertEqual(compact[eid]['reviewed_source_context'][key],value)
+        self.assertEqual(admitted,original)
+        _,view,_=q.answer(s,'Where is my socket?')
+        self.assertNotIn('code_sha256',p.calls[0][1]['runtime_contract'])
+        self.assertEqual(p.calls[0][1]['full_evidence_payload_sha256'],c.last_admitted['source_payload']['payload_sha256'])
+        self.assertNotIn('claim_to_evidence_map',p.calls[1][2])
+    def test_enabled_provider_contract_is_exactly_bound_through_delivery(self):
+        from cloud.grounded_generation.fallback_provider import CONTRACT
+        from cloud.grounded_generation.verified_qa import Config
+        p=Provider();p.contract=deepcopy(CONTRACT)
+        q,p,c,s=self.setup_runtime(p)
+        self.assertNotEqual(c.config.lock,Config().lock)
+        self.assertEqual(c.config.versions()['provider_max_attempts'],3)
+        _,view,_=q.answer(s,'How wide is the bore?')
+        self.assertEqual(view['response']['type'],'SUPPORTED')
+        self.assertEqual(view['verified_delivery']['runtime_lock'],c.config.lock)
+        self.assertEqual(c.last_admitted['provider_contract'],CONTRACT)
+        p.contract['fallback']['model']='other'
+        self.assertEqual(c.config.provider_contract,CONTRACT)
+        with self.assertRaises(ValidationFailure):Config(provider_contract=p.contract)
+
+
+    def test_special_route_rejection_never_becomes_ordinary_fallback(self):
+        for route,correctable in [('SAFETY_STOP',False),('SAFETY_STOP',True),('AMBIGUOUS',False)]:
+            with self.subTest(route=route,correctable=correctable):
+                proposal=draft(route=route)
+                if route=='AMBIGUOUS':
+                    proposal=draft(text='Is the displayed value readable?',role='CLARIFICATION',route=route)
+                    proposal.update(clarification_question=proposal['claims'][0]['text'],rider_resolvable=True)
+                def reject(o,*args):
+                    o.update(decision='SHOW_FALLBACK',release_eligible=False,correction_possible=correctable)
+                    return o
+                q,p,c,s=self.setup_runtime(Provider([proposal],reject))
+                a=self.authority.assemble(q.retriever.search('query'))
+                history={'required_route':'SAFETY_STOP','required_safety_evidence_ids':[BORE]} if route=='SAFETY_STOP' else {}
+                response=c.compose_open(q.controller,s,a,'query',history)
+                self.assertEqual(response.type.value,'SYSTEM_ERROR')
+                self.assertEqual(c.last_trace['failure_code'],'SPECIAL_ROUTE_VERIFICATION_FAILED')
+                self.assertIsNone(c.last_admitted)
+                self.assertEqual(c.last_trace['provider_calls'],4 if correctable else 2)
+
 del SourceTests
 if __name__=='__main__':unittest.main()

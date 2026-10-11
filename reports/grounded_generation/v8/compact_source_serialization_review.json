@@ -1,0 +1,48 @@
+{
+  "version": "v8",
+  "changes": [
+    "Identical orig=text represented by orig_same_as_text marker; no source passage removed",
+    "Only duplicate proofhash metadata omitted from model evidence, full source assembly remains server bound",
+    "Runtime codehash metadata represented by exact runtime_lock",
+    "Duplicate finalized claim map omitted; full exact finalized response retains all claims/citations"
+  ],
+  "cases": [
+    {
+      "case_id": "N601",
+      "cached_full_assembly_file_sha256": "9cbbc38e8be6cf3c263712735be31416ddbcc690f8fe6dae66cef8eb637b8298",
+      "source_objects": 23,
+      "before_evidence_bytes": 29907,
+      "after_evidence_bytes": 23784,
+      "reduction_bytes": 6123,
+      "all_source_content_reversibly_retained": true,
+      "context_and_provenance_retained": true
+    },
+    {
+      "case_id": "N602",
+      "cached_full_assembly_file_sha256": "c35e43000673e3189e5d19ae9e748aa030ce32535ed332cfd2f91759cbcbab09",
+      "source_objects": 10,
+      "before_evidence_bytes": 11568,
+      "after_evidence_bytes": 9221,
+      "reduction_bytes": 2347,
+      "all_source_content_reversibly_retained": true,
+      "context_and_provenance_retained": true
+    },
+    {
+      "case_id": "N607",
+      "cached_full_assembly_file_sha256": "da5a7c54f1161af1a2faac407797336b69ad312d5e15c4614083cfc2c5f057ea",
+      "source_objects": 6,
+      "before_evidence_bytes": 8186,
+      "after_evidence_bytes": 6639,
+      "reduction_bytes": 1547,
+      "all_source_content_reversibly_retained": true,
+      "context_and_provenance_retained": true
+    }
+  ],
+  "provider_calls": 0,
+  "token_fit": "UNMEASURED: exact model count and input/byte limits remain enforced; offline bytes are not token measurements",
+  "remaining_blockers": [
+    "N603 full original manual contains passenger tyre pressure but source admission empty",
+    "Provider HTTP500 not repaired by serialization",
+    "Semantic acceptance failed in v6: no verifier output and no released answer"
+  ]
+}

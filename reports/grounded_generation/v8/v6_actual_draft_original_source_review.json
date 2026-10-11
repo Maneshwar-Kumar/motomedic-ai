@@ -1,0 +1,47 @@
+{
+  "artifact_sha256": "51588c3d5cb5937ddc66d7e53f249bf3e339bc0e0e588edefd6bb7f02d048bd4",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "independent_original_page_review": true,
+  "actual_model_drafts": 2,
+  "released_answers": 0,
+  "semantic_acceptance": "FAILED",
+  "rows": [
+    {
+      "case_id": "N603",
+      "question": "With a passenger aboard, what pressure is specified for each tyre?",
+      "actual_draft_sha256": "19a66633760dca6e2ad638063d9f1e561e5de0ecebc97618d8078df8cc2e8874",
+      "final_proposed_response_sha256": "3d332a73fb06d92b741958a178271cda559f25d8f6e7862f1de8136d6e5ce153",
+      "original_pdf_pages": [
+        18
+      ],
+      "original_page_png_sha256": {
+        "18": "1d2172072312b0353ced05914cb5a8726d46be746c3d0485dcc8cc67e329be31"
+      },
+      "claim_review": "Nontechnical limitation accurately restricts absence to retrieved information. No citation or invented pressure. Original page18 explicitly lists front32psi/rear32psi for Solo and With pillion, so source admission empty is a missed answer, not absent manual coverage.",
+      "question_coverage": "FAILED_RETRIEVAL_OR_SOURCE_ADMISSION",
+      "verifier_result": "NO_SEMANTIC_VERDICT",
+      "released": false,
+      "failure": "VERIFIER_HTTP500"
+    },
+    {
+      "case_id": "N607",
+      "question": "What position should the motorcycle and rear brake-fluid reservoir be in when checking the level?",
+      "actual_draft_sha256": "715e0120da1cb0e485776fa1b311575f1b170ab148b308f8d1d6ce51f6d09277",
+      "final_proposed_response_sha256": "59cea0dcf0011125ba1df1765c8ec45f3dcbae680c5d42aceb63235c518d8eec",
+      "original_pdf_pages": [
+        88,
+        89
+      ],
+      "original_page_png_sha256": {
+        "88": "74c0616852eae440c53de9c5db9d79f9f78a56bfc352651be4b026dd2eb631f8",
+        "89": "4ee4c957f41e5d37887f35587df5a48445a8be1e52233bc262a1d2329a7f8ed5"
+      },
+      "claim_review": "All three drafted technical claims match page88 printed86: upright motorcycle on firm level surface; horizontal rear reservoir; MAX/Min level marks. Added insufficient-fluid brake failure warning supported page89 printed87. Citations pages88/89 exact. No inferred repair, mixing or filling advice.",
+      "question_coverage": "SUPPORTED_BY_ORIGINAL_PAGES",
+      "verifier_result": "NO_SEMANTIC_VERDICT",
+      "released": false,
+      "failure": "VERIFIER_INPUT9351_EXCEEDS8192"
+    }
+  ],
+  "limits": "Original-page review validates draft claims offline; it is not a completed runtime verifier verdict or release approval."
+}

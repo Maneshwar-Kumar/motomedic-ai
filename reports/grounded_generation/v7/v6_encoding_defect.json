@@ -1,0 +1,11 @@
+{
+  "schema_version": "fixed-copy-independent-check-v1",
+  "previous_runtime": "open-manual-draft-verify-v6",
+  "finding": "MULTIPLY_MOJIBAKE_APOSTROPHE_IN_FIXED_FALLBACK_AND_SYSTEM_ERROR",
+  "independent_check": "Imported constants inspected with ascii(); expected U+2019; v6 contained many additional characters",
+  "impact": "Fixed rider messages did not equal owner exact wording. Semantic/delivery checks compared same constants and did not catch it.",
+  "v6_frozen_run": "38158688412",
+  "corrective_version": "open-manual-draft-verify-v7",
+  "new_provider_spending_authorized": false,
+  "v6_freeze_preserved": true
+}

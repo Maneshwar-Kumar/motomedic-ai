@@ -49,10 +49,10 @@ class ScriptedQuestions:
         v['response']['natural_language']='Synthetic accepted wording only. '+('Exact buffered text. '*12)+'café.'
         if self.fail_verifier:
             v['response'].update(type='SYSTEM_ERROR',technical_content=False,release_gate_passed=False,cited_pages=[])
-            v['response']['natural_language']='I couldn’t check the answer right now. Please try again shortly.'
+            v['response']['natural_language']='I couldn\u2019t check the answer right now. Please try again shortly.'
         elif self.show_fallback:
             v['response'].update(type='UNSUPPORTED',technical_content=False,release_gate_passed=False,cited_pages=[])
-            v['response']['natural_language']='I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
+            v['response']['natural_language']='I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
             v['escalation_uri']='mailto:support@royalenfield.com'
         else:
             from cloud.grounded_generation.verified_qa import VERSION
@@ -158,6 +158,7 @@ class OpenWiringTests(unittest.TestCase):
         labels=[];published=[];parts=[]
         result=read_verified_stream(frames,published.append,operation_id=OP,on_progress=labels.append,on_chunk=parts.append)
         self.assertEqual(result['response']['type'],'UNSUPPORTED')
+        self.assertEqual(result['response']['natural_language'],'I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.')
         self.assertEqual(result['response']['technical_content'],False)
         self.assertNotIn('displaying',labels);self.assertEqual(published,[]);self.assertEqual(parts,[])
         self.assertEqual(self.recover().get_json(),result)
@@ -169,6 +170,7 @@ class OpenWiringTests(unittest.TestCase):
                  if key.startswith(('arm_a_operations/','arm_a_sessions/')) and 'view' in record]
         self.assertTrue(records)
         mutations=(lambda v:v.update(runtime_policy='GROUNDED_PRIMARY'),
+                   lambda v:v.update(runtime_policy='open-manual-draft-verify-v7'),
                    lambda v:v['response'].update(semantic_verification_passed=False),
                    lambda v:v['delivery'].update(runtime_lock='f'*64),
                    lambda v:v['verified_delivery'].update(operation_id='d'*32),
@@ -206,6 +208,7 @@ class OpenWiringTests(unittest.TestCase):
         self.assertEqual(kinds,['progress','progress','progress','complete'])
         result=read_verified_stream(frames,operation_id=OP)
         self.assertEqual(result['response']['type'],'SYSTEM_ERROR')
+        self.assertEqual(result['response']['natural_language'],'I couldn\u2019t check the answer right now. Please try again shortly.')
         self.assertEqual(result['response']['technical_content'],False)
         self.assertEqual(self.recover().get_json(),result)
 

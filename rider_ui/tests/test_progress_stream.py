@@ -142,7 +142,7 @@ class ProgressStreamTests(unittest.TestCase):
 
     def test_fixed_fallback_is_neutral_complete_only_with_no_verified_label_or_chunks(self):
         v=view();v['response'].update(type='UNSUPPORTED',technical_content=False,release_gate_passed=False,cited_pages=[])
-        v['response']['natural_language']='I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
+        v['response']['natural_language']='I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
         v['escalation_uri']='mailto:support@royalenfield.com'
         received=[];parts=[];stages=[]
         frames=[frame('progress',{'operation_id':OP,'stage':stage}) for stage in ('retrieving','drafting','verifying')]+[frame('complete',v)]
@@ -154,7 +154,39 @@ class ProgressStreamTests(unittest.TestCase):
         from rider_ui.client import CHECK_ERROR_COPY
         with self.assertRaises(APIError) as raised:
             read_verified_stream([frame('error',{'type':'SYSTEM_ERROR','error':'OPERATION_NOT_COMMITTED','operation_id':OP})],operation_id=OP)
-        self.assertEqual(str(raised.exception),CHECK_ERROR_COPY)
+        self.assertEqual(str(raised.exception),'I couldn\u2019t check the answer right now. Please try again shortly.')
+
+    def test_v8_production_policy_rejects_retired_neutral_or_technical_copy(self):
+        import json
+        from rider_ui.client import RiderAPI,RUNTIME_POLICY
+        from rider_ui.tests.test_client import Transport
+        for route in ('SUPPORTED','AMBIGUOUS','UNSUPPORTED','SAFETY_STOP','SYSTEM_ERROR'):
+            for policy in (None,'open-manual-draft-verify-v6','open-manual-draft-verify-v7'):
+                v=view();v['response'].update(type=route,technical_content=False,release_gate_passed=False,cited_pages=[])
+                if policy is None:v.pop('runtime_policy')
+                else:v['runtime_policy']=policy
+                api=RiderAPI('https://example.com','synthetic-test');api.opener=Transport(result=json.dumps(v).encode())
+                with self.assertRaises(APIError):api.recover_operation(OP)
+                published=[];parts=[]
+                with self.assertRaises(APIError):
+                    read_verified_stream([frame('complete',v)],published.append,operation_id=OP,
+                                         on_chunk=parts.append,expected_policy=RUNTIME_POLICY)
+                self.assertEqual(published,[]);self.assertEqual(parts,[])
+        v=view();v['runtime_policy']='open-manual-draft-verify-v7';published=[];parts=[]
+        with self.assertRaises(APIError):
+            read_verified_stream(accepted_frames(v),published.append,operation_id=OP,
+                                 on_chunk=parts.append,expected_policy=RUNTIME_POLICY)
+        self.assertEqual(published,[]);self.assertEqual(parts,[])
+
+    def test_owner_neutral_copy_is_exact_unicode_and_ascii_authored(self):
+        from pathlib import Path
+        from rider_ui.client import CHECK_ERROR_COPY
+        expected='I couldn’t check the answer right now. Please try again shortly.'
+        self.assertEqual(CHECK_ERROR_COPY,expected)
+        self.assertEqual(ord(CHECK_ERROR_COPY[8]),0x2019)
+        source=Path('rider_ui/client.py').read_text(encoding='utf-8')
+        line=next(line for line in source.splitlines() if line.startswith('CHECK_ERROR_COPY ='))
+        self.assertTrue(line.isascii())
 
     def test_failure_progress_then_system_error_releases_no_technical_text(self):
         v=view();v['response'].update(type='SYSTEM_ERROR',technical_content=False,release_gate_passed=False,cited_pages=[])

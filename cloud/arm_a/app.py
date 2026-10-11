@@ -253,11 +253,24 @@ def load_production():
     client = firestore.Client(project='motomedic-ai-20261009')
     # Prior exact-model/account probes returned 404. An environment switch is
     # not evidence of cache support; fresh capability review is required.
-    controlled_composer = Composer(GemmaProvider(ProviderAdmission(client),cache_capability='unsupported'))
+    reserve_provider = ProviderAdmission(client)
+    answer_provider = GemmaProvider(reserve_provider,cache_capability='unsupported')
+    # Preparation only: deployment and secret access are separate release scopes.
+    # Disabled by default; a quota/schema/source failure never selects this fallback.
+    if os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true':
+        from cloud.grounded_generation.claude_provider import ClaudeProvider
+        from cloud.grounded_generation.claude_budget import ClaudeBudget
+        from cloud.grounded_generation.fallback_provider import FallbackProvider
+        if not os.environ.get('ANTHROPIC_API_KEY'):
+            raise RuntimeError('Claude fallback requires its server-side secret')
+        answer_provider = FallbackProvider(answer_provider,
+            ClaudeProvider(reserve_provider,reserve_cost=ClaudeBudget(client)))
+    controlled_composer = Composer(answer_provider)
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-        ANSWER_PROVIDER='gemma-4-26b-a4b-it')
+        ANSWER_PROVIDER=('gemma-4-26b-a4b-it -> claude-haiku-5-5'
+            if os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true' else 'gemma-4-26b-a4b-it'))
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
     if secret:

@@ -1,0 +1,52 @@
+{
+  "schema_version": "draft-verify-stream-private-ui-software-v8",
+  "reviewer_agent": "/root/acceptance_preparation",
+  "checked_at_utc": "2026-10-11T17:34:03.106379+00:00",
+  "runtime_policy": "open-manual-draft-verify-v8",
+  "tests": [
+    {
+      "command": "\"C:\\Users\\kumar maneshwar\\AppData\\Local\\Programs\\Python\\Python314\\python.exe\" -c \"import sys;sys.path.extend(['build/arm-a-ui-test-dependencies','build/arm-a-test-dependencies']);import unittest;unittest.main(module=None,argv=['unittest']+sys.argv[1:])\" discover -s rider_ui/tests -p test_*.py -v",
+      "exit_code": 0,
+      "test_count": 60,
+      "unittest_seconds": 13.658,
+      "wall_seconds": 16.81191500008572,
+      "log": "reports/grounded_generation/v8/ui_streaming/ui_tests.log"
+    },
+    {
+      "command": "\"C:\\Users\\kumar maneshwar\\AppData\\Local\\Programs\\Python\\Python314\\python.exe\" -c \"import sys;sys.path.extend(['build/arm-a-ui-test-dependencies','build/arm-a-test-dependencies']);import unittest;unittest.main(module=None,argv=['unittest']+sys.argv[1:])\" cloud.grounded_generation.test_open_wiring -v",
+      "exit_code": 0,
+      "test_count": 6,
+      "unittest_seconds": 0.801,
+      "wall_seconds": 2.614946899935603,
+      "log": "reports/grounded_generation/v8/ui_streaming/backend_client_tests.log"
+    }
+  ],
+  "file_sha256": {
+    "rider_ui/app.py": "c62544114641f133d5e2f48dadc4d2fb089149ad8c6c30195ec3f0c5c59f4025",
+    "rider_ui/client.py": "a7840c289598498cf5fccc979803e44578e3e0f3a01c13109f7821392c79165c",
+    "rider_ui/verified_sse.py": "a1858c4800dfedcdaf593a7e4f8971bcb832ece90b5ee5b872ad26d0f1b0de4f",
+    "rider_ui/tests/test_client.py": "debde7edb12fd5ccfbce8da60f4192e6e0ec279132fe4f4125c0ec972d78c223",
+    "rider_ui/tests/test_progress_stream.py": "2ffa61e606a362b2b94a9b740a774f1de289b6ea5c36bca5cae481d02eb4b60f",
+    "cloud/grounded_generation/test_open_wiring.py": "0fba36bd0c7aa50fd7dd174c20af2a7bcbede934ed57d085e6784605ebb68b73",
+    "cloud/grounded_generation/delivery.py": "932eb671fa738987ef9c5b5733ac3bddc1f1a54c55b1632c8f16b3836aef32c2",
+    "cloud/arm_a/rider_api.py": "0d09b75b2a7da9a593909c1e230835fbacff0835e51d925283fee55a356aacdc",
+    "cloud/grounded_generation/verified_qa.py": "7a06e4cd13eebce6f693c173caf6023a79650e66a1e7dc6b5c0e83d374d8474d"
+  },
+  "files_changed_during_tests": [],
+  "provider_calls": 0,
+  "real_retrieval_calls": 0,
+  "deployment_changes": 0,
+  "spending_changes": 0,
+  "semantics_or_public_acceptance": false,
+  "claims": [
+    "Strict currentv8 productionpolicy on all neutral/technical streamed and JSON responses before rendering",
+    "Retired v6/v7 neutral messages and technical buffers blocked",
+    "Owner exact Unicode copy independently authored usingASCIIescapes",
+    "Truthful progress, private draft/verifier and durable commit barriers, exact accepted/chunk/recovery equality remain tested"
+  ],
+  "limitations": [
+    "Synthetic software checks only; actual hosted v8 provider output review separate",
+    "Not a frozen servingmanifest; coordinator binds final freeze",
+    "V6/V7 records preserved"
+  ]
+}
