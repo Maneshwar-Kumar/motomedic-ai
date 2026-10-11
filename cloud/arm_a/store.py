@@ -15,8 +15,9 @@ class OperationConflict(Exception):
 
 
 class FirestoreState:
-    def __init__(self, client, owner, now=None):
+    def __init__(self, client, owner, now=None, network_owner=None):
         self.client, self.owner = client, owner
+        self.network_owner = network_owner
         self.now = now or (lambda: datetime.now(timezone.utc))
 
     def _operation(self, key):
@@ -41,8 +42,12 @@ class FirestoreState:
                 return body
             own = usage.get(transaction=tx)
             global_usage = shared.get(transaction=tx)
+            buckets = [(usage, own, 6, 30), (shared, global_usage, 60, 250)]
+            if self.network_owner:
+                network = self.client.collection('arm_a_usage').document('network-'+self.network_owner)
+                buckets.append((network, network.get(transaction=tx), 6, 30))
             pending = []
-            for ref, snap, minute_cap, day_cap in ((usage, own, 6, 30), (shared, global_usage, 60, 250)):
+            for ref, snap, minute_cap, day_cap in buckets:
                 times = [t for t in (snap.to_dict().get('turns', []) if snap.exists else [])
                          if t > now-timedelta(hours=24)]
                 if len(times) >= day_cap or sum(t > now-timedelta(minutes=1) for t in times) >= minute_cap:

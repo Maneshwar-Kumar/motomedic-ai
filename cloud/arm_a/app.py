@@ -118,7 +118,7 @@ def create_app(registry, retriever, state_factory, cases):
             'manual_checksum':registry.checksum, 'index_id':registry.index_id,
             'provider_calls':0, 'benchmark_pacing':False,
             'streaming':'VERIFIED_COMPLETE_UNIT_SSE',
-            'reranking':'conditional-rerank-v1', 'runtime_lock':ArmAComposer().config.lock})
+            'reranking':'conditional-rerank-v1', 'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)})
 
     @app.get('/v1/initial-catalogue')
     def catalogue():
@@ -229,16 +229,31 @@ def load_production():
     index = ROOT/'build/index'
     registry = ApprovedEvidenceRegistry.load(ROOT, index)
     # Load both pinned query and cross-encoder models once per hosted worker.
-    retriever = Retriever(index, rerank=True)
+    from cloud.arm_a.runtime_controls import GuardedRetriever, TokenBudget, VERSION
+    from rider_ui.prompt_policy import load_role_policy
+    from cloud.arm_a.composer import ArmAConfig
+    retriever = GuardedRetriever(index, rerank=True)
+    role_policy, role_lock = load_role_policy('generator')
+    budget = TokenBudget(retriever.model, retriever.manifest['embedding'],
+        role_policy, hashlib.sha256(role_policy.encode('utf-8')).hexdigest())
+    retriever.install_controls(budget)
+    # The owner clarified that A must retain an answer LLM. The historical
+    # exact-wording composer is kept only for old regression fixtures.
+    from cloud.grounded_generation.runtime import Composer, Questions
+    from cloud.grounded_generation.provider import GemmaProvider
+    from cloud.grounded_generation.admission import ProviderAdmission
     cases = json.loads((ROOT/'reports/ab30_v1_cases.json').read_text(encoding='utf-8'))
     if isinstance(cases, dict):
         cases = cases['cases']
     client = firestore.Client(project='motomedic-ai-20261009')
+    controlled_composer = Composer(GemmaProvider(ProviderAdmission(client),
+        cache_capability=os.environ.get('MOTOMEDIC_PROVIDER_CACHE_CAPABILITY','unsupported')))
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, cases)
+    app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
     if secret:
-        from cloud.arm_a.questions import Questions
         from cloud.arm_a.rider_api import install
-        install(app, Questions(registry,retriever), state_factory, secret)
+        install(app, Questions(registry,retriever,composer=controlled_composer), state_factory, secret,
+            network_required=os.environ.get('MOTOMEDIC_PUBLIC_NETWORK_REQUIRED') == 'true')
     return app

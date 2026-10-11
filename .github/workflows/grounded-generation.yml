@@ -1,0 +1,42 @@
+name: Grounded generation held-out validation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: '2'
+      TOKENIZERS_PARALLELISM: 'false'
+      MOTOMEDIC_TEST_INDEX: build/index
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install hosted query runtime
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy==2.4.6 sentence-transformers==6.1.0 pypdfium2 Flask==3.1.2 google-cloud-firestore==2.21.0
+      - uses: actions/download-artifact@v4
+        with:
+          name: owner-manual-index-37908240500
+          run-id: '37908240500'
+          github-token: ${{ github.token }}
+          path: build/index
+      - name: Software boundaries before provider access
+        run: python -m unittest -v cloud.grounded_generation.test_provider cloud.grounded_generation.test_runtime cloud.arm_a.test_composer cloud.arm_a.test_api cloud.arm_a.test_question_wiring cloud.arm_a.test_store test_approved_registry
+      - name: Frozen held-out real retrieval and Gemma generation
+        env:
+          MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
+          MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
+        run: python tools/validate_grounded_generation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: grounded-generation-${{ github.run_id }}
+          path: build/grounded-generation-result.json
+          retention-days: 14

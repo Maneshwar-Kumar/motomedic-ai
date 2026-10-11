@@ -6,12 +6,13 @@ import re
 from flask import jsonify, request, Response
 from cloud.arm_a.visitor import verify
 from cloud.arm_a.store import Limited, OperationConflict
-from cloud.arm_a.rider_contract import saved_view, consume_choice
+from cloud.arm_a.rider_contract import consume_choice
+from cloud.grounded_generation.presentation import saved_view
 from session_store import SessionConflict
 from rider_ui.safeguards import validate_message, LimitError
 
 
-def install(app, questions, state_factory, visitor_secret):
+def install(app, questions, state_factory, visitor_secret, network_required=False):
     registry = questions.registry
 
     def error(route, code, status, terminal=True):
@@ -20,7 +21,12 @@ def install(app, questions, state_factory, visitor_secret):
 
     def state():
         owner = verify(visitor_secret, request.headers.get('X-MotoMedic-Visitor'), request.environ['arm_a_owner'])
-        return state_factory(owner)
+        network = request.headers.get('X-MotoMedic-Network')
+        network_owner = (verify(visitor_secret, network, request.environ['arm_a_owner'])
+                         if network_required or network else None)
+        store = state_factory(owner)
+        store.network_owner = network_owner
+        return store
 
     def deliver(view, replay=False):
         if 'text/event-stream' not in request.headers.get('Accept',''):
@@ -46,8 +52,10 @@ def install(app, questions, state_factory, visitor_secret):
         return jsonify({'schema_version':'motomedic-rider-api-v1',
             'manual_checksum':registry.checksum, 'index_id':registry.index_id,
             'question_input':'open', 'streaming':'VERIFIED_COMPLETE_UNIT_SSE',
-            'question_scope_policy':questions.descriptors and 'CONSERVATIVE_REVIEWED_COMPONENT_SCOPE',
-            'diagnostic_wizard':False, 'photos':False, 'provider_calls':0})
+            'question_scope_policy':('ADMITTED_MANUAL_EVIDENCE_GROUNDED_LLM' if hasattr(questions,'feedback') else
+                'CONSERVATIVE_REVIEWED_COMPONENT_SCOPE'),
+            'diagnostic_wizard':False, 'photos':False,
+            'answer_provider':('gemma-4-26b-a4b-it' if hasattr(questions,'feedback') else None)})
 
     @app.post('/v1/sessions')
     @app.post('/v1/sessions/<session_id>/questions')
@@ -90,8 +98,9 @@ def install(app, questions, state_factory, visitor_secret):
                 if (body['bike_variant'] != registry.source['variant'] or
                         body['manual_checksum'] != registry.checksum or body['index_id'] != registry.index_id):
                     return error('UNSUPPORTED','SOURCE_OR_VARIANT_MISMATCH',400)
-            if body.get('cache_mode','bypass') != 'bypass':
+            if body.get('cache_mode','bypass') not in ('bypass','enabled'):
                 raise ValueError()
+            request.environ['arm_a_cache_enabled'] = body.get('cache_mode','bypass') == 'enabled'
             digest = hashlib.sha256(json.dumps({'path':request.path,'body':body},
                 sort_keys=True,ensure_ascii=False).encode()).hexdigest()
         except (ValueError, TypeError, KeyError, UnicodeError, LimitError):
@@ -130,8 +139,11 @@ def install(app, questions, state_factory, visitor_secret):
                 return jsonify({'status':'RUNNING','operation_id':key}),202
             if feedback:
                 session = questions.controller.feedback(session,outcome,key,fact=fact)
-                session,response,_ = questions.controller.next(session,old['query'])
-                view, choices = saved_view(registry,session,response)
+                if hasattr(questions,'feedback'):
+                    session,view,choices=questions.feedback(session,old['query'])
+                else:
+                    session,response,_ = questions.controller.next(session,old['query'])
+                    view, choices = saved_view(registry,session,response)
                 query = old['query']
             else:
                 session,view,choices = questions.answer(session,query)
