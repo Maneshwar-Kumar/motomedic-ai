@@ -12,7 +12,7 @@ The project owner has since confirmed that the owner's manual is publicly availa
 
 ## Source of truth
 
-TRD v0.4 is the authoritative design and technical contract, as confirmed by the owner on 9 October 2026. The concept, PRD, design notes and TODO register are reconciled to it. Manual facts, applicability, safety and usage rights still govern release. The before/after design record is in section Reconciliation change record of `04_To_Build_Evaluation_Decisions.docx`.
+TRD v0.5 is the authoritative design and technical contract from 11 October 2026. It preserves the owner-confirmed v0.4 contracts and adds the A/B methodology decision and A streaming. The concept, PRD, design notes and TODO register are reconciled to it. Manual facts, applicability, safety and usage rights still govern release. The before/after design record is in section Reconciliation change record of `04_To_Build_Evaluation_Decisions.docx`.
 
 - [Conversation context](conversation_context.md) records the retrievable user requests and the limits of the chat export.
 - [Concept and architecture](01_Concept_Architecture.docx) defines the product promise and high level flow.
@@ -203,3 +203,8 @@ Version 3 corrects EXP001 hazard identification and EXP002 retained authored uns
 ## Retired full-manual Claude design, 11 October 2026
 
 The owner rejected the cached full-owner-manual Claude alternative after the eight-case experiment. Its code, converted source, raw outputs, metrics and disabled workflows are archived in `outdated_design_choices/claude_full_manual/`. Read `DECISION.md` and `decision_record.json` for the failure reasons and measured contrasts with the original architecture. Do not restore or rerun this alternative without fresh owner authorization. Continue with TRD v0.4 versioned Docling/BGE M3 + BM25 evidence retrieval and deterministic state/evidence gates. Original strict handling scores were 45% (cached manual plus controller) and 25% (Claude managed), not pure factual accuracy: the owner accepts a concise manual-backed checklist. Preserve that correction and do not equate original static judge or retrieval metrics with a matched end-to-end accuracy score. Existing exact source approvals and unresolved release scopes remain unchanged.
+
+
+## Owner answer methodology decision 11 October 2026
+
+TRD v0.5 section 14 and `03_TRD_Architecture_Decision_Note.docx` record the owner decision: keep A exact reviewed component selection and B short generation with semantic verification; deliver A through verified streaming; exclude C from the current UI. A retains deterministic source, scope, eligibility, warning, dependency and citation gates and may release only exact reviewed wording. It does not permit unverified free generation. The requested follow-up is post facto semantic verification of the existing three A outputs and investigation of minimum-instance pricing and startup CPU boost. Read `TRD_UI_FOLLOWUP_HANDOFF.md`. No deployment or billing change is authorized by this design decision. Earlier v0.4 references are historical where this amendment supersedes method-specific validation.

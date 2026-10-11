@@ -8,6 +8,7 @@ on:
       - test_conditional_retrieval.py
       - test_online_assembly.py
       - 03_TRD.docx
+      - 03_TRD_Architecture_Decision_Note.docx
       - tools/render_docx.py
       - .github/workflows/verify-retrieval.yml
 permissions:
@@ -40,11 +41,15 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends libreoffice-writer poppler-utils fonts-liberation
       - name: Render updated TRD with the packaged document renderer
-        run: python tools/render_docx.py 03_TRD.docx --output_dir build/trd-render --emit_pdf
+        run: |
+          python tools/render_docx.py 03_TRD.docx --output_dir build/trd-render --emit_pdf
+          python tools/render_docx.py 03_TRD_Architecture_Decision_Note.docx --output_dir build/note-render --emit_pdf
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: retrieval-policy-verification-${{ github.run_id }}
-          path: build/trd-render/
+          path: |
+            build/trd-render/
+            build/note-render/
           retention-days: 7
           if-no-files-found: warn
