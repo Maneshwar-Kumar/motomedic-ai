@@ -14,6 +14,7 @@ def main():
     assert len(raw['rows']) == 60
     assert len({(r['record_id'], r['architecture']) for r in raw['rows']}) == 60
     OUT.mkdir(exist_ok=True)
+    (OUT / '.gitattributes').write_text('* -text\n', encoding='utf-8')
     shutil.copy2(RAW, OUT / 'raw_result.json')
     names = ['ab30_v1_cases.json', 'ab30_v2_protocol.json', 'ab30_v2_review.json',
              'ab30_v2_approval.json', 'ab30_v2_budget.json', 'ab30_v1_cancelled_job.json',
