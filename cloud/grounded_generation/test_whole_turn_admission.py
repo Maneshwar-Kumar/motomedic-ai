@@ -189,9 +189,10 @@ class Tests(unittest.TestCase):
 class AdmissionIdentityTests(unittest.TestCase):
     def setup_runtime(self,p):
         """Exercise real composition/delivery with synthetic source boundaries only."""
-        config=types.SimpleNamespace(lock=content_hash({'fixture':'synthetic-generation'}),provider_contract=None)
-        config_patch=patch('cloud.grounded_generation.verified_qa.Config',return_value=config)
-        config_patch.start();self.addCleanup(config_patch.stop)
+        # Exercise the real bound model/prompt contract with synthetic sources
+        # and providers. A partial Config double cannot represent v10 binding.
+        from cloud.grounded_generation.verified_qa import Config
+        config=Config()
         eid='synthetic-evidence'
         registry=types.SimpleNamespace(checksum=content_hash({'fixture':'synthetic-manual'}),
             index_id='synthetic-index',source={'pdf_pages':1},source_ready=lambda:True,

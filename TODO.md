@@ -32,34 +32,36 @@ Timeboxes are estimates, not a promise of a deployable agent in two hours. This 
 
 ## Implementation sequence after the reset
 
-The 12 October v9.1 candidate implements the code for steps 6–9, freezes 341 direct inputs and completes hosted backend/UI image builds with exact provenance. Hosted CI passed 198 provider-free tests. See the [build receipt](reports/build/20261012/README.md) and [current status](docs/STATUS.md). The existing machine GCP identity and immutable snapshot generation are verified. The step exits below stay open where hosted loading, rollback or live quality/operations evidence is still required. Synthetic checks do not close those gates; no deployment or provider-spending permission is inferred.
+The 12 October v10 public evaluator supersedes v9.1 as the current candidate. Its current build revision v10.2 freezes 523 direct inputs, preserving the earlier v10/v10.1 manifests. It implements authenticated Qdrant/BM25 retrieval, distinct-parent rank-disagreement reranking, Gemma drafting, a different cached Haiku verifier, follow-ups, dedicated-worker durable processing and a public signed-cookie/proof gateway. [Current status](docs/STATUS.md) separates code from acceptance. The [exact public-evaluator scope](reports/public_evaluator/20261012/owner_scope_v1.json) and [credential approval](reports/public_evaluator/20261012/owner_credential_scope_v1.json) authorize necessary deployment, identity/secret setup and bounded hosted validation; billing, allocations, fallback and source-display restrictions stay unchanged.
+
+The v9.1 [build receipt](reports/build/20261012/README.md) preserves its 341 inputs, hosted backend/UI builds and 198 provider-free CI checks. Those results do not validate changed v10 inputs. V10's hosted builds, cache proof, fresh quality, public-browser operations and rollback remain pending. Implementation notes below do not check off their live exit gates.
 
 ### 6. Establish one immutable serving baseline
 
 - [x] **6a — Source and index:** validate manual checksum, scoped approvals, parser/chunk/index versions, evidence IDs and mandatory dependencies. Use durable GCS artifacts with generation/hash checks rather than expiring Actions artifacts. Exit recorded in [hosted source validation](reports/build/20261012/hosted_source_validation_v9_1.json): exact generation/SHA, all 212 original index hashes, original scoped source reload and 36 synthetic checks. Page 103 and unapproved context gaps remain explicitly flagged maintainer work.
-- [ ] **6b — Runtime and CI:** select one serving package/version manifest, add provider-free PR checks, bind container inputs and image digests to the release, and document exact rollback. Exit: reproducible build-input receipt and CI rejection of altered bindings.
+- [ ] **6b — Runtime and CI:** current v10.2 freezes 523 inputs; provider-free PR checks, dependency locks and strict build/promotion binders are implemented. Complete hosted image/provenance checks and exact compatible backend/UI/worker rollback. Exit: reproducible build receipt, CI rejection of altered bindings and rollback receipt for the same release.
 
 **Concurrency:** 6a and 6b run together after step 5 and join before step 7. Reuse unchanged immutable artifacts; do not reparse or re-embed per rider request.
 
 ### 7. Repair retrieval and operation state
 
-- [ ] **7a — Hybrid retrieval:** connect authenticated Qdrant dense search and concurrent BM25; filter selected manual/version before ranking; preserve history in the retrieval query; fuse with RRF; implement bounded dependency recovery and conditional reranking for ordinary Q&A. Exit: approved direct/follow-up evidence is retrieved, and source-review gaps trigger neither reranking nor rider questions.
-- [ ] **7b — Durable state:** implement owned sessions, optional typed outcomes, request deduplication, operation leases, terminal reconciliation and exact saved-response recovery. Processing must survive browser disconnection. Exit: duplicates/disconnects do not repeat paid calls or leave operations indefinitely `RUNNING`.
+- [ ] **7a — Hybrid retrieval:** code connects authenticated Qdrant dense search and concurrent BM25, filters source/index, retains follow-up topic, uses RRF and bounded dependency recovery, and conditionally reranks observed ordered distinct-parent rank disagreement. Complete hosted direct/follow-up/RPC acceptance. Exit: applicable evidence is retrieved; matching/missing ranks and source-review gaps cause no false rerank or rider question.
+- [ ] **7b — Durable state:** code implements owned sessions, optional typed outcomes, deduplication, named tasks, fenced leases, terminal reconciliation and exact saved-response recovery. Deploy a dedicated private worker separate from API/SSE capacity. Exit: hosted duplicates/disconnects do not repeat paid calls or strand `RUNNING` work.
 
 **Concurrency:** 7a and 7b run together after step 6. Keep `ACTION_COMPLETED_UNRESOLVED` distinct from observed normality. StepDefinitions and authored question IDs are not general Q&A prerequisites.
 
 ### 8. Admit complete evidence within the budget
 
-- [ ] Version a compact approved-anchor/dependency assembler. Preserve conditions, warnings, units, table headers, references and server page metadata at reviewed scopes; exclude unapproved parent bodies.
-- [ ] Count the complete projected request with the exact provider's mechanism, including question, relevant history, evidence and schema overhead. If complete context does not fit, return `SYSTEM_ERROR`; never silently discard mandatory evidence.
-- [ ] Reserve whole-turn token/rate/monetary capacity, including maximum permitted correction and authorized availability fallback. Retain uncertain reservations. Validation allocations are non-recurring across runs.
+- [ ] Accept the implemented compact approved-anchor/dependency assembler against hosted source-reviewed cases. Preserve conditions, warnings, units, table headers, references and server page metadata at reviewed scopes; exclude unapproved parent bodies.
+- [ ] Verify complete native-counted Gemma and Haiku requests on the hosted account, including policy/schema, question, relevant history and evidence. Overflow is `SYSTEM_ERROR`; never silently discard mandatory context.
+- [ ] Verify implemented persistent whole-turn pacing/monetary admission on the hosted store. The existing 100-slot allocation admits at most 12 conservative eight-slot turns from a fresh ledger, shared with validation; it never resets or refunds unused/uncertain slots. Haiku uses the unchanged USD1 guard. Availability fallback remains disabled.
 
 **Depends on:** 7a and 7b. **Exit:** separately versioned repairs for the recorded v8 brake-fluid, bore/stroke, USB and low-fuel failures, with independently checked complete evidence and bounded prompts. Quota failure is never described as missing manual information.
 
 ### 9. Integrate drafting, verification and saved delivery
 
-- [ ] **9a — Answer path:** privately draft from actual question, relevant history and assembled evidence. Finalize warnings, limitations, citations and service wording before a separate verifier. Require strict question coverage, all-claim support, omissions/conflicts and exact response/evidence/history/runtime bindings. Permit one corrective draft plus re-verification.
-- [ ] **9b — Delivery and provider path:** show operational progress, then stream only a durably saved accepted buffer. Keep fixed fallback/error messages outside technical-answer streaming. Bind token counts and budgets to the actual model; keep Claude disabled until serving activation is authorized, and allow it only for eligible primary availability failures. Validate UI recovery and ownership.
+- [ ] **9a — Answer path:** validate implemented Gemma drafts against the distinct Haiku verifier over actual question/history/evidence. Finalize warnings, limitations, citations and service wording before verification. Bind both model contracts and exact response/evidence/history/runtime identities; permit one correction plus fresh verification. Exit requires independently adjudicated useful complete/partial/follow-up answers.
+- [ ] **9b — Delivery and provider path:** validate implemented progress, saved accepted-buffer streaming, recovery and ownership on deployed v10. Prove five-minute policy/evidence cache creation then positive cache reads with the hosted exact-schema probe; question/history/answer remain dynamic, no padding or answer caching. Fixed fallback/errors carry no technical chunks. Selecting Haiku as verifier does not activate the separate disabled availability fallback.
 
 **Concurrency:** 9a and 9b run together after step 8. **Joint exit:** accepted/saved/streamed/recovered hashes match; no rejected tokens escape; malformed/outage/quota/integrity failures are `SYSTEM_ERROR`; unsupported, safety and ambiguity remain distinct.
 
@@ -70,18 +72,18 @@ The 12 October v9.1 candidate implements the code for steps 6–9, freezes 341 d
 
 **Concurrency:** 10a and 10b run together after step 9. **Exit:** explicit quality/operational acceptance for the same frozen runtime. Zero unsupported released technical steps is mandatory. A run releasing zero technical answers cannot establish factual-support accuracy.
 
-### 11. Deploy an accepted text candidate
+### 11. Complete the authorized public text evaluator
 
-- [ ] Confirm current deployment/provider/IAM/spending authorization for the exact candidate. Preserve budget-stop behavior and never re-enable stopped billing without permission.
-- [ ] Build immutable backend/UI images from the accepted manifest, bind secrets to managed identities, verify Qdrant readiness and Firestore permissions, and deploy compatible revisions with rollback recorded.
-- [ ] Test a fresh authenticated browser: direct, partial, follow-up, unsupported, safety/ambiguity, operational error and disconnect/recovery. Verify deployed image/runtime/index bindings.
-- [ ] Review public identity/access, abuse/rate/per-day spend controls, retention/deletion and display restrictions separately before publishing a rider URL.
+- [x] Exact public frontend/private backend/worker, credential setup and bounded hosted validation authorization recorded in the two owner receipts above. Preserve INR2,700/INR2,540 guards, disabled inference billing, existing allocations, source display and disabled fallback.
+- [ ] Build immutable v10 backend/UI images, bind managed secrets/identities, verify private Qdrant and Firestore readiness, and deploy compatible UI/backend/dedicated-worker revisions with exact rollback recorded.
+- [ ] Test a fresh public browser: challenge/cookie/WebSocket access, direct and partial answer, streamed follow-up, unsupported, safety/ambiguity, operational error and disconnect/recovery. Verify deployed image/runtime/index and both model bindings.
+- [ ] Verify persistent private visitor/global issuance, proof replay rejection, request/provider limits, retention/deletion and display restrictions; record the public evaluator URL and remaining limitations.
 
-**Depends on:** successful 10a and 10b plus applicable authorization. **Exit:** reproducible live acceptance, measured latency/cost, rollback and an approved access scope. Existing private retrieval deployment does not establish new-answer-pipeline acceptance.
+**Depends on:** successful 10a and 10b for the frozen candidate; authorization is recorded. Private deployment may be staged for hosted validation before publishing the completed evaluator. **Exit:** reproducible public-browser acceptance, measured latency/cost, rollback and the working public URL within its recorded scope. Existing private retrieval deployment does not establish v10 acceptance.
 
 ### 12. Add optional optimizations and modalities
 
-- [ ] **12a — Caching and tuning:** establish caching support for the exact authorized model/account. Preserve source/verification gates; measure reported cached tokens and paired latency/cost. Compare reranking thresholds and retrieval variants on held-out cases. Unsupported caching remains an explicit capability gap with no claimed savings.
+- [ ] **12a — Optimization and tuning:** after the required v10 caching proof in step 9b, measure paired latency/cost savings without changing answer authority. Compare reranking variants on separate tuning/held-out cases. Gemma cache support remains unsupported; no unmeasured savings claim.
 - [ ] **12b — Photo, then voice:** add bounded ephemeral uploads and observation-only vision with uncertainty; exclude hidden-fault diagnosis. Reuse text evidence/verification. Add voice only with editable transcript confirmation. Verify privacy/deletion and modality quality before activation.
 
-**Concurrency:** 12a and 12b may run together after accepted text release in step 11, under separately confirmed scope and spending. They are not prerequisites for fixing the current text-answer coverage failure.
+**Concurrency:** optional optimization and modalities may run together after accepted text in step 11 under their applicable scope/spending. The owner's requested verifier caching is already a required evaluator gate in step 9b; photo/voice remain separate.

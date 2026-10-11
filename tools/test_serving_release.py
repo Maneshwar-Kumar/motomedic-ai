@@ -187,19 +187,23 @@ class ReleaseTests(unittest.TestCase):
             manifest['index'] = {'snapshot': {'uri': 'gs://private/immutable.tar.gz',
                 'generation': '123', 'sha256': 'a' * 64, 'maximum_bytes': 1024}}
             blobs = {'rider_ui/Dockerfile': b'FROM pinned-ui-base\nCMD ["public_edge"]\n',
-                'rider_ui/public_edge.py': b'public edge code', 'controller_contracts.py': b'contracts',
+                'rider_ui/public_edge.py': b'public edge code',
+                'rider_ui/public_gateway.py': b'public gateway code', 'controller_contracts.py': b'contracts',
                 release.MANUAL: b'synthetic source PDF', 'runtime.py': b'candidate-runtime',
                 release.OWNER_SCOPE: (release.ROOT / release.OWNER_SCOPE).read_bytes()}
             manifest['file_sha256'] = {n: hashlib.sha256(v).hexdigest() for n, v in blobs.items()}
             with patch.object(release, 'verify', return_value=manifest), patch.object(release, 'git_blobs', return_value=blobs):
                 receipt = release.prepare(root, committed_revision='c' * 40)
-            self.assertEqual(receipt['runtime_revision'], 'v10')
+            revision = Path(release.CURRENT).stem.removeprefix('serving_manifest_')
+            self.assertEqual(receipt['runtime_revision'], revision)
             self.assertEqual(receipt['schema_version'], 'serving-v10-hosted-build-preparation-v1')
-            self.assertTrue((root / 'build/serving-v10/ui/rider_ui/public_edge.py').exists())
-            self.assertFalse((root / 'build/serving-v10/ui' / release.MANUAL).exists())
-            self.assertTrue((root / 'build/serving-v10/backend' / release.MANUAL).exists())
-            self.assertIn('"--threads", "8"', (root / 'build/serving-v10/backend/Dockerfile').read_text())
-            self.assertIn(':serving-v10-', receipt['contexts']['ui']['image_tag'])
+            output = root / 'build' / ('serving-' + revision)
+            self.assertTrue((output / 'ui/rider_ui/public_edge.py').exists())
+            self.assertTrue((output / 'ui/rider_ui/public_gateway.py').exists())
+            self.assertFalse((output / 'ui' / release.MANUAL).exists())
+            self.assertTrue((output / 'backend' / release.MANUAL).exists())
+            self.assertIn('"--threads", "8"', (output / 'backend/Dockerfile').read_text())
+            self.assertIn(':serving-' + revision + '-', receipt['contexts']['ui']['image_tag'])
             self.assertFalse(receipt['quality_acceptance'])
             self.assertFalse(receipt['hosted_operations_acceptance'])
 

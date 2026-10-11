@@ -1,8 +1,9 @@
 # Rider API v1 integration contract
 
-The Streamlit server calls this authenticated hosted API. The browser receives presentation only. The UI is implemented; this API is a required integration boundary, implemented in cloud/arm_a/rider_api.py, with separate hosted acceptance in reports/arm_a/ui_wiring_v1/. Do not point the UI at the Qdrant URL: that service is candidate retrieval only.
+The selected v10 public gateway hosts Streamlit and calls the private IAM-protected API implemented in `cloud/arm_a/rider_api.py`. The browser receives presentation, progress and a signed visitor cookie; provider credentials stay server-side. Backend/worker/Qdrant remain private. See [current status](../docs/STATUS.md) and the [recorded operational scope](../reports/public_evaluator/20261012/owner_scope_v1.json); v10 hosted/browser acceptance is pending. Do not point the UI at the retrieval-only Qdrant URL.
 
 Source locks:
+
 - Schema: `motomedic-rider-api-v1`
 - Manual SHA-256: `cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89`
 - Index: `index_a3282c4d98cf54595e4ba168`
@@ -11,7 +12,7 @@ Source locks:
 
 ## HTTP boundary
 
-Every request has a server-side `Authorization: Bearer ...` credential. Every mutation also has a unique `Idempotency-Key`. Transport uses HTTPS and rejects redirects. No automatic mutation retry. JSON responses are capped at 256 KiB; request text at 2,000 characters.
+Every UI-to-backend request has a managed audience-bound `Authorization: Bearer ...` service identity and its owned signed visitor capability. Every rider mutation also has a unique `Idempotency-Key`. Transport uses HTTPS and rejects redirects. No automatic mutation retry. JSON responses are capped at 256 KiB; request text at 2,000 characters.
 
 | Method | Path | Purpose |
 | --- | --- | --- |
@@ -24,17 +25,18 @@ Every request has a server-side `Authorization: Bearer ...` credential. Every mu
 
 Catalogue: schema_version, manual_checksum, index_id, question_input=open, diagnostic_wizard=false, streaming=DRAFT_VERIFY_STREAM for the current open-verification service. Hosted UI capability checks reject the retired complete-unit service; neutral explicit engineering loopback fixtures remain available. The UI exposes no topic selector or symptom routing.
 
-Create request: query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. Continued questions add expected_version. The actual rider question and relevant saved conversation reach the applicable immutable source-evidence pipeline. Source-supported factual and procedural answers require no canonical question, authored answer scope or registered diagnostic action. A complete private draft is followed by a separate question-coverage and claim-support verifier call. Code retains source/version integrity, applicability, schema/citation limits, ownership and delivery checks. All final technical content, server-added conditions/warnings and citations are finalized before verification. A rejected draft is withheld; at most one correctable revision is verified again. Incompatible Arm A and exact-answer cache shortcuts are disabled. No new model call occurs while displaying accepted text.
+Create request: query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. Continued questions add expected_version. Actual question and relevant saved history reach authenticated Qdrant + concurrent BM25, RRF, reviewed dependency assembly and conditional distinct-parent rank-disagreement reranking. Ordinary questions require no canonical question, authored answer scope or registered action. Pinned Gemma drafts privately; the distinct pinned Claude Haiku verifier checks question coverage and claims over the exact finalized response. Both model contracts bind the verdict and saved admission. All conditions/warnings/citations are finalized before verification; at most one correction and fresh verification is permitted. Answer-cache shortcuts stay disabled. Display/recovery causes no generation call.
 
-The private UI uses managed audience-bound tokens and a signed X-MotoMedic-Visitor capability. Its IAM-verified principal derives a stable keyed visitor nonce across refresh/reset. Backend ownership binds the UI service principal and visitor nonce. Anonymous public access is outside this design. Every mutation uses a 32-hex operation key. Complete technical answer units stream only after their operation/session view is atomically committed; disconnected delivery retrieves the saved operation without rerunning it.
+The direct public gateway signs a secure HttpOnly SameSite 24-hour cookie after a 14-bit proof challenge and private visitor reservation. Challenge validity is 120 seconds. `/internal/visitors/reserve` accepts only the exact IAM-authenticated UI service account and one proof SHA; task/other callers cannot issue visitors. Firestore atomically rejects spent proofs and bounds issuance to ten/minute and 60/rolling day. The UI forwards its signed `X-MotoMedic-Visitor` capability; backend ownership binds the UI principal and cookie nonce. No client or forwarded IP is trusted. A cookie identifies the visitor across refresh/new conversations; replacing it creates a new subject but cannot reset persistent global issuance/request or provider budgets. Every mutation uses a 32-hex key. Technical text streams only after durable commit; disconnect recovery reads that operation without rerunning it.
 
 Feedback request: expected_version, choice_id, cache_mode=bypass. **No client-supplied fact, approval, evidence, or model output.** Server looks up the choice previously issued for this exact session version, validates its reviewed typed binding, then applies ReviewedService.feedback and the next turn. Unresolved action never seeds an observation.
 
 ## Saved view
 
-Required top-level fields: schema_version, manual_checksum, index_id, session_id (opaque identifier), version (nonnegative integer), response. Production additionally requires runtime_policy=`open-manual-draft-verify-v9` on every route, including neutral fallback/errors and JSON recovery; older or missing policy receipts are rejected.
+Required top-level fields: schema_version, manual_checksum, index_id, session_id (opaque identifier), version (nonnegative integer), response. Production requires runtime_policy=`open-manual-draft-verify-v10` on every route, including neutral fallback/errors and JSON recovery. V9, older and missing policies are rejected before display, continuation or feedback. Explicit engineering loopback fixtures remain separate; enabling loopback does not relax a remote HTTPS service.
 
 Response fields:
+
 - type: exactly SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP or SYSTEM_ERROR.
 - natural_language: the complete gated rider text, including mandatory conditions and warnings. UI displays it literally.
 - technical_content: boolean, default true. False only for nontechnical acknowledgments such as customer-reported resolution, independently controlled by the server.
@@ -43,6 +45,7 @@ Response fields:
 - trace_id: redacted correlated response identifier.
 
 Optional top-level fields:
+
 - choices: at most eight id/label/outcome objects. Canonical outcome enums are unchanged. These are exact issued choices bound on the server to typed facts when needed. Do not invent generic Yes/No controls for ambiguous numeric or enum rules.
 - history: list of label objects describing server-recorded attempts. Keep unresolved vs normal distinct; corrections supersede previous observations.
 - escalation_uri: null or the verified `mailto:support@royalenfield.com`.
@@ -51,7 +54,7 @@ No evidence_uri, source text/excerpt, crops, raw source objects, provider bodies
 
 ## Progress and accepted-answer delivery
 
-Mutations request `Accept: text/event-stream`. Current v9 operations are committed to Firestore, dispatched as named Cloud Tasks and processed on an authenticated worker request. SSE observes durable progress; closing the browser stream does not terminate the task. Every event binds to the operation's 32-hex ID and consecutive integer sequence, starting at one:
+Mutations request `Accept: text/event-stream`. V10 operations are committed to Firestore and dispatched as named authenticated Cloud Tasks to a dedicated private worker service. The worker has separate capacity from the private API/SSE service. SSE observes durable progress; closing the browser stream does not terminate generation. Every event binds to the operation's 32-hex ID and consecutive integer sequence, starting at one:
 
 | Event | Payload and rule |
 | --- | --- |
@@ -69,19 +72,19 @@ The observation stream polls once per second and stops after 150 seconds with a 
 
 ## Hosted implementation obligations
 
-Use the exact source-approved registry, immutable BGE/BM25 chunks, source-linked complete assembly and current open drafting/verification runtime. Do not import test fixtures, rebuild embeddings, silently switch provider models, or bypass applicability, rights, source warning/condition or claim checks. Registered legacy action eligibility does not restrict ordinary manual Q&A. The UI contains no model selection; the other implementation chat owns this configuration.
+Use the exact source-approved registry, immutable BGE/BM25 chunks, complete reviewed source assembly and selected v10 model contracts. Do not import test fixtures, rebuild embeddings, silently switch models or bypass applicability, rights, context or claim checks. Registered legacy action eligibility does not restrict ordinary manual Q&A. Model roles are server-controlled; the UI contains no selector.
 
 Use managed transactional session storage with immutable attempt snapshots and compare-and-swap versions. SQLite/local Streamlit state is not the production store. Atomically reserve and deduplicate operation IDs before model calls; persist/retrieve the final response and choices. A concurrent or stale feedback returns 409. Repeated same operation returns the original response without another model call. An operation still executing should report a recoverable status, not re-execute it.
 
 Enforce authenticated ownership/capability on session and operation reads. Shared UI-to-API authentication alone is not a substitute for per-session authorization. Apply global and per-session rate/call limits, provider spending reservations and a fresh budget/guard preflight under the existing project authorization. Respond 429 when limited; no fallback after quota/rate failure and no automatic retries. Redact query text and credentials from logs. Expire sessions and operation records under a published retention policy.
 
-The optional server-controlled Gemma-to-Haiku availability chain is disabled in the current immutable release. Activation requires its existing owner permission and a scoped release that permits fallback, followed by backend `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true`, managed `ANTHROPIC_API_KEY` and a configured non-recurring cost reservation guard. The environment switch alone cannot override the release policy. Primary HTTP 500/502/503/504 or unconfigured failures allow one fallback attempt per call. Schema/integrity/source failures, quota exhaustion and a semantic rejection never authorize provider switching. The fallback uses the same retrieved evidence, schemas, independent verification and durable delivery checks. Provider configuration and private telemetry remain server-side; the product UI exposes no model selector.
+The selected Haiku verifier caches only the exact policy/source-evidence prefix for five minutes. Question/history/finalized response and verdict bindings remain dynamic. Hosted cache creation followed by positive reads is required; configured caching alone proves no savings. No answer or verdict cache is permitted. The separate optional Gemma-to-Haiku availability chain remains disabled; selecting Haiku as verifier does not activate it, and an environment switch cannot override frozen policy. Source/integrity failures, quota, malformed output and semantic rejection never authorize switching. Whole-manual Claude remains retired.
 
-Before connecting a UI revision, authenticated `/healthz` must report the intended open-manual serving architecture, `streaming=DRAFT_VERIFY_STREAM`, and the configured provider chain. `/v1/catalogue` must report open questions and the same streaming capability. Current catalogue provider metadata identifies the primary; health reports the configured chain. Validate a saved current v9 view and recover its unchanged operation through the client. Historical checks remain in [connection handover](../reports/grounded_generation/v8/ui_wiring/CONNECTION_HANDOVER.md) and [v8 software receipt](../reports/grounded_generation/v8/ui_streaming/REPORT.md). These checks do not constitute hosted browser acceptance or authorize deployment.
+Before connecting a UI revision, authenticated `/healthz` must report the intended architecture, `streaming=DRAFT_VERIFY_STREAM`, exact draft/verifier providers and selected prefix-cache policy. `/v1/catalogue` must report open questions and the same streaming capability. Validate a saved v10 view and recover its unchanged operation through the production client. Historical [v8 handover](../reports/grounded_generation/v8/ui_wiring/CONNECTION_HANDOVER.md) and [software receipt](../reports/grounded_generation/v8/ui_streaming/REPORT.md) remain evidence of older revisions. Recorded operational authorization permits this evaluator; live acceptance is separate.
 
 ## Live acceptance (pending)
 
-Browser → hosted session/controller → actual BGE + BM25 retrieval → verified graph/dependency assembly → private draft → separate online verification → final checks and durable save → exact buffered answer streaming → saved cited response.
+Public browser → cookie/proof gateway → private owned API → dedicated task worker → authenticated Qdrant + concurrent BM25 → conditional rank-disagreement reranking/complete source assembly → private Gemma draft → distinct cached Haiku verification → final checks/durable save → exact streamed cited response and follow-up/recovery.
 
 Run fresh ordinary questions, a useful partial answer, follow-up, fixed fallback, and verifier failure in a fresh browser. Answer caching remains disabled. Retain correlated redacted browser/service traces, immutable version bindings, actual provider execution, rendered matching citations, no-repeat results and browser-to-complete-response timings. Warm/cold p95 needs a suitable sample size; three samples do not establish p95.
 
@@ -90,9 +93,11 @@ UI fixture tests or localhost screenshots do not meet this gate. The photo contr
 
 ## Safeguards v1 serving integration
 
-Use SERVICE_SAFEGUARDS.md and the current TODO.md as the dated implementation/release register. Preserve API v1 response/choice semantics. Text is at most 2,000 Unicode characters and 8,000 UTF-8 bytes; streamed JSON body at most 16 KiB. The UI and client reject oversized text, but the hosted handler must repeat these checks before retrieval. Bind each browser to a server-verified visitor capability and its owned sessions; a shared API credential alone is insufficient. Visitor counters must survive new conversations. Add trusted edge IP/challenge and global spending controls for anonymous reset abuse.
+Use [SERVICE_SAFEGUARDS.md](SERVICE_SAFEGUARDS.md) and [TODO](../TODO.md) as the implementation/release register. Preserve API v1 response/choice semantics. Text is at most 2,000 Unicode characters and 8,000 UTF-8 bytes; request JSON at most 16 KiB. Hosted handlers repeat bounds before retrieval. Bind browsers to signed visitors and owned sessions; service IAM alone is insufficient. Counters survive new conversations, and persistent proof/issuance/global/provider controls bound cookie reset abuse without a trusted-IP claim.
 
 The managed transaction must reserve an operation against six turns per rolling minute, 30 turns per rolling 24 hours, and 20 turns per session. Same-operation replay returns its original reservation/view without another model call; a different payload hash conflicts. Retrieval/provider failures consume admitted slots. Counters and model-call/budget admission must be project-wide across workers. A caller must not provide usage counts. Admission-store outage blocks new inference with a sanitized operational error; preserve already established applicable safety-stop semantics.
+
+The existing 100-slot non-recurring provider allocation supports at most 12 conservative eight-slot turns from a fresh ledger, including hosted validation usage. It never resets or refunds unused/uncertain reservations. Gemma uses the existing free primary configuration with unsupported cache capability; paid Haiku uses the unchanged persistent USD1 guard. INR2,700/INR2,540 limits and disabled inference billing remain unchanged. This evaluator offers bounded remaining capacity, not unlimited public use.
 
 The current open-Q&A serving context uses bounded conversation history and freshly retrieved manual evidence. Fresh evidence plus trusted policy and schema must fit 8,192 exactly counted input tokens and 65,536 bytes; cap output at 1,800 tokens. Check both generation and verification requests before spending. Never trim warnings, prerequisites or unresolved attempts to fit. Missing token-count adapter, overflow or truncated model output gives SYSTEM_ERROR with no partial technical instruction. Bind draft, verifier, accepted presentation and stored response to the current runtime, source and evidence payload; retired runtime receipts cannot authorize recovery.
 

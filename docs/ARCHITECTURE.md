@@ -1,8 +1,8 @@
 # MotoMedic architecture
 
-Fresh baseline: 11 October 2026. [PRD.md](PRD.md) defines product behavior; [TRD.md](TRD.md) defines implementation contracts. [TODO.md](../TODO.md) gives the execution sequence.
+Selected v10 public evaluator: 12 October 2026, following the 11 October reset. [PRD.md](PRD.md) defines product behavior; [TRD.md](TRD.md) defines implementation contracts. [TODO.md](../TODO.md) gives the execution sequence.
 
-Build a small, hosted question-answering assistant for the selected Royal Enfield Himalayan BS6 owner's manual. Ingest and embed the immutable manual once. For each rider turn, retrieve applicable evidence, privately draft a concise answer, separately verify that exact answer, save the accepted response, and stream the saved text.
+Build a hosted question-answering assistant with a public evaluator URL for the selected Royal Enfield Himalayan BS6 owner's manual. Reuse its immutable hosted index. Retrieve applicable evidence, privately draft with Gemma, verify that exact finalized answer with Claude Haiku, save the accepted response, and stream the saved text. Only the frontend is public; backend, worker and Qdrant remain IAM-protected.
 
 This diagram describes the required architecture. It does not claim that every connection is deployed or accepted.
 
@@ -31,28 +31,33 @@ flowchart TB
     end
 
     subgraph SERVE[Hosted serving: one operation per rider turn]
-        UI[Browser: selected manual, question, optional typed outcomes]
-        API[Authenticated API: ownership, input, rate and spend checks]
+        UI[Public browser: selected manual, question, optional typed outcomes]
+        GATEWAY[Public Cloud Run gateway: signed cookie and 14-bit proof]
+        ISSUE[Private visitor issuance: exact UI service identity and persistent quotas]
+        API[Private API: ownership, input, rate and spend checks]
         STATE[(Firestore: sessions, operations, leases, accepted responses)]
-        DISPATCH[Durable authenticated worker dispatch]
+        DISPATCH[Cloud Tasks: named task and exact OIDC audience]
+        WORKER[Dedicated private worker: independent of browser SSE capacity]
         CONTEXT[Relevant question and history projection]
         QEMBED[Embed retrieval query]
         DENSE[Dense search RPC]
         SPARSE[BM25 search]
         FUSE[Rank fusion: RRF]
         INITIAL[Source and applicability checks; initial evidence assembly]
-        SCHEDULE[Bounded recovery and conditional reranking]
+        SCHEDULE[Bounded recovery; rerank observed distinct-parent rank disagreement]
         ASSEMBLE[Approved assembly: required context and citations]
         BOUND[Count complete context; reserve whole-turn capacity]
-        DRAFT[Private answer draft]
+        DRAFT[Gemma: private answer draft]
         FINALIZE[Finalize warnings, limitations and server citations]
-        VERIFY[Separate verification of exact response and claims]
+        VERIFY[Claude Haiku: exact finalized response and claim verification]
         CORRECT[At most one corrective draft]
         GUARD[Final schema, source, history and binding checks]
         SAVE[Durably save accepted buffer or fixed terminal message]
         STREAM[Stream exact saved text; recover by operation ID]
-        UI --> API --> STATE
-        API --> DISPATCH --> CONTEXT
+        UI --> GATEWAY
+        GATEWAY -->|service-account IAM| ISSUE --> STATE
+        GATEWAY -->|owned signed visitor and service-account IAM| API --> STATE
+        API --> DISPATCH --> WORKER --> CONTEXT
         STATE --> CONTEXT
         CONTEXT --> QEMBED --> DENSE
         CONTEXT --> SPARSE
@@ -65,7 +70,7 @@ flowchart TB
         VERIFY -->|unsupported after allowed correction| SAVE
         BOUND -->|operational failure| SAVE
         GUARD -->|integrity failure| SAVE
-        STATE --> STREAM --> UI
+        STATE --> STREAM --> GATEWAY --> UI
         API -->|progress events| STREAM
     end
 
@@ -78,28 +83,32 @@ flowchart TB
     SOURCE --> INITIAL
 
     subgraph CONTROLS[Shared controls]
-        PROVIDER[Authorized primary and optional Claude availability fallback]
+        PROVIDER[Exact Gemma draft and Haiku verifier contracts; fallback disabled]
+        CACHE[Haiku 5-minute policy and source-evidence prefix cache]
         BUDGET[Atomic token and monetary reservations]
         TRACE[Redacted traces: versions, retrieval, verdicts, latency, cost]
     end
     PROVIDER -.-> BOUND
     PROVIDER -.-> DRAFT
     PROVIDER -.-> VERIFY
+    CACHE -.-> VERIFY
     BUDGET -.-> BOUND
     STATE -.-> TRACE
     SCHEDULE -.-> TRACE
     VERIFY -.-> TRACE
 ```
 
-Dense search and BM25 execute concurrently after a history-aware retrieval query is prepared. Their ranks are fused; relevance alone never authorizes an answer. Conditional reranking resolves uncertain ordering of usable candidates. One bounded recovery may retrieve missing, reviewed dependencies. Missing source approval is a review problem, not a reranking trigger or a question for the rider.
+Dense Qdrant RPC and BM25 execute concurrently after a history-aware retrieval query is prepared. RRF fuses their ranks; relevance alone never authorizes an answer. Runtime retrieval v3 compares ordered top-three distinct parent ranks and reranks once only when observed comparable positions differ. Sibling chunks, absent backend ranks, unmatched trailing depth and close RRF margins do not create disagreement. One bounded recovery may retrieve missing reviewed dependencies. Missing source approval is a maintainer problem, not a reranking trigger or rider question.
 
 Evidence assembly retains immutable evidence IDs, original page metadata, applicable conditions, warnings, specifications, units, table headers and verified references. Admit reviewed objects at their approved scope. A reviewed heading does not approve its entire parent body. Assemble compact complete context around approved evidence and mandatory dependencies; never omit required context to fit the model.
 
-The current authorized primary model remains the default. Optional Claude receives only assembled evidence and relevant history, under its recorded authorization and budget. Only explicitly eligible primary availability failures can select it. Semantic rejection, invalid JSON, exhausted quota, source defects and integrity failure keep their original failure paths. The retired full-manual Claude method is excluded. Fallback remains disabled unless serving activation is authorized.
+Runtime `open-manual-draft-verify-v10` selects Gemma `gemma-4-26b-a4b-it` for drafting and Claude `claude-haiku-5-5` as a distinct evidence-only verifier. Both exact model contracts are bound through the verdict and saved delivery. Two five-minute verifier cache breakpoints cover policy and exact source-evidence prefix; question/history/final response remain uncached. No cached answer or prior verdict can replace fresh verification. The separate availability fallback remains disabled, and whole-manual Claude remains retired.
 
 Drafting and verification are separate calls. Verification binds the exact finalized response, claims, question, relevant history, evidence and runtime versions. A partial answer states its limitation before verification. At most one correction and re-verification is allowed. Verification cannot cure wrong applicability, missing mandatory context or invalid citations.
 
-Save only after final checks pass. Progress may be displayed while work proceeds; unchecked drafting tokens are private. Stream slices of the saved accepted buffer, never regenerate it for delivery. Recovery returns the same response and hashes. Processing must survive browser disconnection independently of the SSE connection. Authenticated Cloud Tasks dispatch to a Cloud Run worker is a proposed implementation, not a deployed fact. Leases and terminal reconciliation prevent indefinitely `RUNNING` operations. An uncertain provider completion must not trigger automatic paid replay.
+Save only after final checks pass. Progress may be displayed while work proceeds; unchecked drafting tokens stay private. Stream slices of the saved accepted buffer; recovery returns the same response and hashes. Named authenticated Cloud Tasks dispatch to a dedicated private worker, separate from API/SSE request capacity, with fenced leases and a 1,200-second operation deadline. An uncertain provider completion cannot trigger automatic paid replay. Code is implemented; hosted worker/disconnect acceptance remains pending.
+
+The direct public gateway signs a secure HttpOnly 24-hour visitor cookie after a 14-bit proof challenge and successful private visitor reservation. Challenges expire in 120 seconds, spent proofs are rejected atomically, and issuance is bounded globally at ten/minute and 60/rolling day. Only the exact UI service identity may reserve a visitor. The gateway makes no trusted client-IP claim; browser forwarding headers supply no authority. A signed nonce preserves visitor identity across refresh/new conversations; cookie replacement creates a new subject but cannot reset persistent global issuance/request or non-recurring provider ledgers.
 
 | Rider outcome | Meaning and delivery |
 | --- | --- |
@@ -124,20 +133,19 @@ Fallback does not assert that the entire manual has no answer. Neither fixed mes
 | Managed secrets | Provider credentials available only to authorized backend identities. |
 | Redacted telemetry | Stage timing, verdicts, error categories, exact versions and estimated cost; no raw rider media or routine transcript copies. |
 
-`ACTION_COMPLETED_UNRESOLVED` remains distinct from an observed normal component. Ordinary questions require neither authored question IDs nor diagnostic StepDefinitions. Prompt caching, if supported by the exact authorized model/account, is a cost/latency optimization separate from answer permission. Current validation recorded zero cached tokens. Exact-answer shortcuts are disabled for this integration.
+`ACTION_COMPLETED_UNRESOLVED` remains distinct from an observed normal component. Ordinary questions require neither authored question IDs nor diagnostic StepDefinitions. Selected verifier prompt caching remains separate from answer authority and needs a hosted creation/read receipt; savings need paired measurements. Historical Gemma/v8 cache evidence does not establish this new capability. Exact-answer shortcuts remain disabled.
 
 ## Current baseline and gaps
 
 The 149-page owner's manual has SHA-256 `CF221A29E2F9CD5AF6E80A99774A697C814E8EDA661C27D72E519D8A7E80DA89`. Existing candidate index `index_a3282c4d98cf54595e4ba168` contains BGE M3 vectors, 532 search chunks, 277 parents and BM25, with private Qdrant infrastructure. Exact owner-delegated source approvals remain version- and scope-bound; they do not automatically approve general generation or public display.
 
-| Area | Evidence before this reset | Required next change |
+| Area | Implemented v10 candidate | Remaining acceptance |
 | --- | --- | --- |
-| Retrieval | Dense/BM25 concurrency and RRF exist; serving searches NumPy vectors instead of the hosted Qdrant RPC. | Connect and measure the actual Qdrant request path against the immutable index. |
-| Reranking | Open questions reach legacy missing-step review gates, bypassing conditional scheduling. | Use approved source dependencies and rank uncertainty without a step allowlist. |
-| Source admission | Low-fuel evidence was not admitted; other approved contexts became too large. | Version a compact approved-object/dependency representation and check completeness independently. |
-| Real answer coverage | v8 Haiku run `38160944967` released zero technical answers and answered zero of four clearly answerable or partially answerable turns; three contexts exceeded 8,192 tokens. | Fix admission/context and evaluate fresh source-reviewed cases before release. |
-| Provider capacity | Drafting plus separate verification can exceed existing per-minute admission capacity. | Reserve and schedule a complete bounded turn, including possible correction and fallback. |
-| History and delivery | Short follow-ups can lose retrieval topic; detached work can strand operations. | Preserve topic/outcomes and add durable execution, reconciliation and exact replay. |
-| DevOps | Expiring Actions artifacts, competing runtime paths and weak image bindings remain. | Durable GCS inputs, one release manifest, provider-free PR checks, immutable images and rollback. |
+| Retrieval/ranking | Authenticated Qdrant + concurrent BM25, RRF and finite distinct-parent disagreement gate. | Actual RPC identity/readiness, direct/follow-up evidence recall and measured conditional reranking. |
+| Source admission | Exact reviewed-object closure and compact complete evidence retain warnings, references, headers and units. | Useful bounded complete/partial answers independently checked against original pages. |
+| Models/cache | Separate Gemma draft and Haiku verifier; exact role bindings and bounded five-minute prefix cache. | Hosted model/account/schema proof, positive cache reads and fresh answer-quality adjudication. |
+| History/delivery | Follow-up topic projection, durable task/operation fencing and exact saved streaming/recovery. | Dedicated-worker IAM, browser disconnect/recovery and cold/warm timings. |
+| Public controls | Signed cookie/proof gateway with private visitor admission; private backend/worker/Qdrant. | Public-browser challenge/cookie/WebSocket flow, persistent quotas, retention and redaction. |
+| DevOps | Current v10.2 build revision freezes 523 inputs and preserves earlier manifests; immutable GCS generation/hash loading, locked dependencies and strict build/promotion binding. | Hosted image builds, compatible revisions and exact rollback. |
 
-Software tests establish boundary behavior, not factual coverage, deployed Qdrant/Firestore answering, live browser recovery, public readiness or production latency. Existing private services and their spending controls are unchanged by these documents. Photo and voice follow text acceptance.
+The v8 Haiku run `38160944967` released zero technical answers and answered 0/4 clearly answerable or partial turns; three contexts exceeded 8,192 tokens. Preserve that failed baseline. Current software tests do not establish factual quality or live readiness. [Exact operational scope](../reports/public_evaluator/20261012/owner_scope_v1.json) and [credential approval](../reports/public_evaluator/20261012/owner_credential_scope_v1.json) authorize this evaluator's deployment and bounded validation within existing limits, separate from source approval and acceptance. INR2,700/INR2,540 guards and disabled inference billing remain unchanged. Photo and voice follow text acceptance.
