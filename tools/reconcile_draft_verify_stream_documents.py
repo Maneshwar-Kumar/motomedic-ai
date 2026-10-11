@@ -1,0 +1,186 @@
+"""Reconcile the five planning documents to the owner's draft verify stream decision.
+
+Run with the bundled Python runtime. Preserve original bytes and all unrelated
+source, retrieval, privacy and evaluation detail. Rendering is a separate gate.
+"""
+from pathlib import Path
+from copy import deepcopy
+import hashlib,json,re,shutil
+from docx import Document
+from docx.shared import RGBColor
+from docx.oxml import OxmlElement
+from docx.text.paragraph import Paragraph
+
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'reports/grounded_generation/draft_verify_stream_v1/documents'
+NAMES=['01_Concept_Architecture.docx','02_PRD.docx','03_TRD.docx','03_TRD_Architecture_Decision_Note.docx','04_To_Build_Evaluation_Decisions.docx']
+AUTH='TRD v0.6 records the owner decision of 11 October 2026: open manual question answering through DRAFT, a separate online semantic VERIFY call, and delivery of the saved buffered response through STREAM. This supersedes A/B selection, exact-answer-only restrictions, universal StepDefinition or diagnostic-path gates, and the later no-online-verifier amendment. Source integrity, selected-manual applicability, privacy, limits and source display restrictions remain binding. This design decision does not authorize new spending, billing changes or deployment.'
+STATE='Relevant typed facts and immutable outcomes remain separate from conversational wording. ACTION_COMPLETED_UNRESOLVED never becomes OBSERVED_NORMAL. Optional legacy troubleshooting flows may retain reviewed StepDefinition and ApplicabilityRule records, but they cannot restrict ordinary manual Q&A or source-supported questions about documented procedures. Source-derived prerequisites and warnings must be satisfied, clarified when rider-resolvable, or explicitly handled in the verified answer.'
+ROUTES='Keep SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR distinct. A supported partial answer states what the evidence supports and what remains unanswered. Ask one focused question only for a rider-resolvable ambiguity needed for the actual question. Source gaps or review decisions are maintainer issues. Malformed output, timeout, outage, exhausted quota or integrity failure is SYSTEM_ERROR, never acceptance or proof of absence from the manual. Preserve verified safety-stop precedence; technical safety wording is also covered by verification before delivery.'
+CACHE='Disable old Arm A and exact-response shortcuts in the initial integration; they cannot bypass the new verification call. Index reuse and provider prompt caching are separate optimizations. Future verified-response reuse needs exact source, query, state, response and runtime bindings plus separate evaluation. Similarity alone never authorizes reuse. Count complete requests and all draft, verify, correction and re-verification attempts against existing token, byte, output, concurrency, quota, retention and spending limits; never silently truncate mandatory evidence.'
+SOURCE='Preserve exact immutable source IDs, original-page provenance and approved source-object bindings. Source-integrity review is distinct from authored-answer approval; the frozen 161-case v3 package and its exact bytes remain unchanged. Parent labels do not authorize whole parent bodies. Restore applicable warnings, prerequisites, table headers, units and referenced context only through reviewed source relationships. Page 103 fallback and unresolved source-specific limitations remain explicit. Rider PDF, excerpt and figure-crop delivery remains prohibited under source_manifest.json; use verified paraphrases and server-derived citation metadata.'
+CURRENT=[
+('Current answer architecture','Heading 1'),
+('The rider may ask any question about the selected motorcycle and manual, including a documented procedure. No predefined question, canonical response, intent catalogue, fact group, answer scope or registered action is required for an otherwise source-supported answer. The applicable manual evidence is the knowledge authority. Give concise useful information, state partial support clearly, and provide the verified OEM support route where appropriate. Do not invent diagnosis, repairs, conditions or OEM ordering. Rider usefulness feedback does not establish technical correctness or a verified repair.','Normal'),
+('Reuse versioned hosted Docling ingestion, BGE M3 plus BM25 and Qdrant. Retrieve and assemble relevant immutable passages through hybrid search, bounded recovery and conditional reranking. Do not parse or embed the manual per request. A high relevance score does not establish support; failure to retrieve an answer is not proof of absence throughout the manual.','Normal'),
+('DRAFT privately using the actual question, relevant conversation history and outcomes, assembled applicable evidence and citation IDs, and the source-only policy. Produce the complete proposed answer with claim mappings, conditions, warnings and any limits. There is no separate assess-evidence-first LLM call. Allow new wording and combinations of supported facts; never expose private drafting tokens.','Normal'),
+('VERIFY in a separate LLM call against the exact question, relevant history, complete proposed response, claim mappings and source passages. Check meaningful question coverage and every technical claim, including applicability, conditions, warnings, prerequisites, units and specifications. Record strict structured coverage, per-claim support, omissions, conflicts and release eligibility, bound to exact response and evidence hashes. Confidence is not acceptance. The verifier evaluates and does not rewrite an accepted answer.','Normal'),
+('Finalize all server-added technical text, warnings and citations before verification. Withhold rejected drafts. Permit at most one evidence-supported correction and a new verification call; any changed response must be verified again. Verification remains probabilistic; evaluate false acceptance and false refusal independently against original pages.','Normal'),
+('Show the operational labels Retrieving manual information, Drafting your answer, Checking the answer against the manual, and Displaying the verified answer when the backend actually enters each stage. Open the progress channel promptly, without chain-of-thought, fake percentages or simulated timing. Release answer content only after whole-response verification, final integrity checks and durable save. Stream the exact buffered accepted response without another model call. Bind delivery to accepted response hash, evidence and runtime versions, and operation ID; preserve complete saved answers and idempotent recovery after disconnects.','Normal'),
+(STATE,'Normal'),(ROUTES,'Normal'),(CACHE,'Normal'),(SOURCE,'Normal'),
+('This is the current design contract, not a deployment or semantic-correctness claim. The new draft, verifier, buffered delivery and progress boundary need fresh runtime tests and independent real-output evaluation. Preserve failed prior runs. Use the currently authorized gemma-4-26b-a4b-it model unless the owner approves a change. Consult current deployment, evaluation and budget receipts; the design decision grants no new provider-spending authority.','Normal')]
+
+MAPS={
+'01_Concept_Architecture.docx':{
+1:'Manual question answering with private drafting semantic verification and buffered delivery',2:'Version 04 reconciled 11 October 2026 with TRD v0.6',3:AUTH,
+6:'Product thesis  Retrieval locates applicable source evidence. A drafting LLM answers the actual question privately; a separate verifier evaluates question coverage and source support before the exact saved answer is streamed.',
+12:'Both build and runtime are hosted. Versioned ingestion parses, chunks and embeds the approved manual ahead of requests. Serving reuses the immutable dense/BM25 index, reviewed source context, bounded recovery and conditional reranking, then privately drafts, separately verifies, validates, saves and streams the accepted response. Optional diagnostic paths are separate product features, not admission gates for ordinary Q&A.',
+13:'Relevant feedback and optional legacy troubleshooting',30:CACHE,37:'The supplied Himalayan BS6 owner manual is the approved prototype source. Edition RAM00818/A dated 4 November 2025 and the owner-selected applicability policy are recorded in source_manifest.json. Exact source approvals remain scope-bound; market fit and redistribution rights are separate limitations. End-user PDF, excerpt and crop delivery is prohibited.',42:'Source applicability conversation history and release policy',43:STATE,44:ROUTES,45:CACHE,
+47:'Hosted ingestion and embedding comparisons are complete. Candidate index index_a3282c4d98cf54595e4ba168 has 532 search chunks and 277 section parents at a 1,024-token budget. Private Cloud Run Qdrant restores stored immutable vectors on cold start, without reparsing or re-embedding. Historical backend smoke passed 11/11. These results do not validate the new draft verify stream pipeline or public release.',48:SOURCE},
+'02_PRD.docx':{1:'PRD version 04 user journeys and acceptance criteria aligned with TRD version 06',2:'Reconciled 11 October 2026 current design implemented status requires fresh evidence',3:AUTH,5:'MotoMedic answers natural rider questions about the selected motorcycle using the supplied Royal Enfield New Himalayan 450 owner manual. Success is a concise supported complete or explicitly partial answer, a needed focused clarification, a verified safety stop, or an honest source limitation with OEM support. The assistant is an advisory aid; it does not verify repairs.',18:'5  Conversation history and optional troubleshooting',19:STATE,21:'Source support and answer release requirements',22:STATE,24:ROUTES,25:CACHE,29:'Answer layout addresses the actual question first, followed by applicable conditions and safety warnings, citations, and clearly stated limits. Structured feedback is available when useful; an ordinary factual answer need not select a diagnostic step.',31:ROUTES,45:'Prove that unresolved attempts remain unresolved in relevant follow-ups and do not become normal observations or unjustified repeats; ordinary Q&A must remain available without registered branches.',49:'Required: exact OEM source identity, selected-manual applicability, preserved source-only authority, verified OEM route, and enforcement of current source display restrictions. Public source redistribution remains prohibited unless rights change explicitly.',54:'Hosted BGE M3/Qdrant candidate infrastructure records 532 chunks, 277 parents and historical 11/11 backend checks. The new private draft, separate verifier, truthful progress, save and buffered stream boundary requires fresh integration and real-output acceptance; historical infrastructure checks do not establish that result.',55:SOURCE,56:'Keep the approved 161-case v3 source/initial-response scopes exact and preserve provisional cases as evaluation history. Create fresh unseen rider-style held-out questions after the new runtime freeze; keep expected facts and original pages in test metadata, not rider wording or serving prompts. Evaluate question coverage, completeness and claim support separately, including false verifier acceptance and refusal.'},
+'03_TRD.docx':{0:'MotoMedic AI technical requirements',1:'TRD version 06 reference design and implementation contracts',2:'Updated 11 October 2026 owner decision draft verify stream',3:AUTH,
+6:'This specification describes versioned layout-aware manual retrieval and open question answering. The drafting LLM privately answers the rider question from applicable assembled evidence. A separate verifier evaluates meaningful question coverage and technical claim support; application checks and durable save precede buffered delivery. No answer catalogue or registered step is a universal admission condition.',
+28:'During versioned ingestion, bind searchable children to traceable source objects and reviewed section or procedure context. Preserve conditions, prerequisites, warnings, table headers and units, variant labels and referenced figures or sections needed to answer. Source-dependent context completeness is reviewed independently of authored questions or answer scopes. Optional legacy step manifests may remain; they are not universal Q&A gates.',
+29:'The assembler returns required, attached and missing immutable evidence IDs together with exact source/context versions and review status. Missing required source context blocks the affected claim or limits the supported answer. A table object alone is insufficient when headers, units or applicable variant context are missing. Whole-source or parent-body authority is never inferred from a label, ranking score or authored answer approval.',
+34:'Apply source applicability, source integrity and evidence-context controls before drafting. Known errors remain SYSTEM_ERROR; source-review gaps cannot become rider questions. Preserve verified safety-stop precedence and source restrictions. One approved missing dependency may trigger exact-ID recovery and one bounded retrieval expansion. Uncertain candidate ordering may trigger one permitted conditional rerank. No pre-draft assess-evidence-first model call is added.',
+35:'Reassemble after reranking and retain applicable mandatory warnings, prerequisites, headers, units, specifications and referenced context. Reranking does not select a diagnostic action or infer OEM ordering. The private draft and separate verifier address the actual question; optional legacy controller eligibility is not a universal Q&A release gate.',
+38:SOURCE,41:'5  Typed history and optional legacy troubleshooting',42:STATE,
+44:'Optional legacy troubleshooting may retain source-reviewed StepDefinition and ApplicabilityRule records. Their fields and authoring rules below describe that optional feature only. Open manual Q&A, including supported procedure questions, does not require these records or their action scopes. Applicable source conditions, prerequisites and warnings still govern the answer and are checked by the verifier.',
+49:'Within the optional legacy flow, a step becomes eligible only when its reviewed manual conditions, warnings and attempt history permit it. Ordinary manual Q&A uses source applicability, source context, private drafting, separate semantic verification and application integrity checks without fabricating or requiring a step record.',
+54:'6  Private drafting separate verification and output validation',55:'Draft the complete response privately. Finalize server-added technical wording, warnings and citations before a separate verifier evaluates the exact question, relevant history, complete final response, claim-to-evidence map and assembled sources. Require strict structured question coverage, per-claim support, omissions, conflicts and release eligibility bound to exact response/evidence hashes. Existing citation IDs alone do not prove support. No exact wording, answer scope or registered action is required for ordinary supported answers.',57:ROUTES,
+58:'Release a SUPPORTED complete or explicitly partial answer only after whole-response verification, final deterministic integrity checks and durable save. All displayed technical text is within the verified response. The verifier cannot silently rewrite accepted text. Withhold rejected drafts; permit at most one evidence-supported revision followed by verification again. Malformed verifier output, timeout, provider outage, quota exhaustion or binding failure is SYSTEM_ERROR.',
+71:'Measure time to first progress separately from time to first verified answer token. Record retrieval, assembly, reranking, draft completion, verification, correction/re-verification, final validation/save, first verified token and full completion, with calls, tokens, errors and cost. Private draft tokens and progress events do not count as an answer. Report real warm/cold measurements; historical text p95 under five seconds and photo under ten seconds are unproven targets for this two-call pipeline.',84:'12 1 Open question verification and history regression cases',85:'Add unseen supported questions without catalogue entries; complete, partial and unsupported answers; relevant passages that fail to answer; valid citations with unsupported claims; missing conditions, warnings, units or table context; unresolved follow-ups; injection; verifier rejection, malformed output and outages; zero answer leakage before acceptance; and equality of accepted, streamed and recovered text.',87:'Application checks validate immutable source/version, selected-manual applicability, schemas, citation membership and server-derived pages, session ownership, limits, quotas and delivery bindings. These controls are not an answer allowlist or a substitute for semantic verification. Legacy rule/cache restrictions do not gate open Q&A.',88:'A relevant passage with missing required prerequisite, warning, table header, units or referenced context cannot support the affected technical claim. The draft must acknowledge partial support or limitations; the verifier checks omissions and prevents a partial answer being presented as complete.',90:'Report question coverage/completeness and per-claim support separately, plus verifier false acceptance/refusal and repeat-history defects. Independently review actual outputs against original manual pages; synthetic tests, existing citation IDs and old runtime approvals do not establish semantic correctness.',101:'Versioned hosted ingestion and private retrieval infrastructure remain available. Historical A/B/C experiments and no-online-verifier generic experiments are preserved as measurements of superseded runtimes. The new draft verify stream architecture requires a fresh frozen runtime, independent review and real-output evaluation before release.',103:'Use current exact owner-authorized budget and provider-spend records. The latest owner handoff records INR2700 project budget and guard stop INR2540; earlier INR800/INR640 records are historical. This document grants no new spending, billing restart, model substitution or deployment authorization.',104:'Existing private deployments and failed candidate images remain separate from this current design. Do not promote an old fixed-answer or no-online-verifier runtime. New private/public deployment requires successful fresh acceptance and exact release authorization.',105:'14  Owner selected draft verify stream delivery',106:AUTH,108:CURRENT[6][0],109:'14 1 Historical comparison measurements',112:'Historical candidate-cache experiment: three A repeats hit exact reviewed wording; B/C repeats missed. Those reuse results and the dense/BM25 paired controls remain historical evidence. Current integration disables incompatible Arm A and exact-response shortcuts and always applies the new verification requirement.',113:'14 2 Work for the current pipeline',114:'Integrate private whole-answer drafting, separate strict semantic verification, at most one evidence-supported correction, truthful backend progress, final integrity/save and exact buffered streaming. Freeze fresh prompt/runtime/verifier/delivery contracts and test independent rider-style held-out cases against original pages. Old post facto audits do not authorize the new serving path.',116:'The companion architecture decision note and build/evaluation register are reconciled to TRD v0.6. Historical A/B, exact-selection and no-online-verifier decisions and measured results remain preserved, including exact prior-document bytes under reports/grounded_generation/draft_verify_stream_v1/documents/prior_documents.'},
+'04_To_Build_Evaluation_Decisions.docx':{2:'Version 04 reconciled 11 October 2026 with TRD v0.6',3:AUTH,5:'This register preserves the source, implementation, design and evaluation inventory while adopting TRD v0.6 open manual Q&A through private draft, separate semantic verification, final save and buffered stream. Ingestion progress and historical runtime approvals do not validate the new pipeline.',22:'Answer spans record source admission, question coverage, per-claim support, omissions, conflicts, revision count, accepted response/evidence hashes, final save and delivery operation ID. Typed history preserves unresolved outcomes. Optional legacy step spans remain separate from ordinary Q&A.',32:'Ask an unseen natural manual question and inspect the actual verified response and server-derived citations; follow up naturally and confirm relevant history and unresolved attempts are preserved.',46:'G-03  Preserve source applicability, reviewed context and immutable citations; draft privately and separately verify actual question coverage plus every technical claim. No StepDefinition, answer scope, authored response or canonical question is required for ordinary source-supported Q&A.',47:STATE,50:'G-07  Disable incompatible Arm A/exact-response shortcuts in initial integration. Future verified reuse needs exact query/state/version/accepted-response bindings and separate evaluation; similarity is never authorization.',52:'G-09  Test unseen questions, partial support, irrelevant-but-relevant-looking passages, valid-but-unsupportive citations, omissions, history, injection, verifier failures, no leakage, and exact accepted/streamed/recovered equality. Independent source evaluation and fresh runtime review remain required.'}}
+
+def set_text(p,text):
+    # Preserve paragraph properties; changed wording has one consistently styled run.
+    for child in list(p._p):
+        if child.tag.endswith('}r') or child.tag.endswith('}hyperlink'):
+            p._p.remove(child)
+    p.add_run(text)
+
+def insert_before(anchor,text,style):
+    element=OxmlElement('w:p');anchor._p.addprevious(element)
+    p=Paragraph(element,anchor._parent);p.style=style;p.add_run(text)
+    return p
+
+def cell(doc,table,row,col,text):
+    target=doc.tables[table].rows[row].cells[col]
+    set_text(target.paragraphs[0],text)
+    for p in target.paragraphs[1:]:
+        p._p.getparent().remove(p._p)
+
+def main():
+    OUT.mkdir(parents=True,exist_ok=True);prior=OUT/'prior_documents';prior.mkdir(exist_ok=True)
+    records=[]
+    for name in NAMES:
+        path=ROOT/name; original=path.read_bytes(); backup=prior/name
+        if backup.exists():
+            original=backup.read_bytes()
+        else:
+            backup.write_bytes(original)
+        doc=Document(backup);before_paras=[p.text for p in doc.paragraphs]
+        for i,text in MAPS.get(name,{}).items():set_text(doc.paragraphs[i],text)
+        if name=='03_TRD_Architecture_Decision_Note.docx':
+            set_text(doc.paragraphs[1],'Companion to TRD version 06 current owner decision 11 October 2026')
+            set_text(doc.paragraphs[2],AUTH)
+            for p in doc.paragraphs[3:]:
+                if p.style.name.startswith('Heading'):
+                    set_text(p,'Historical '+p.text)
+            insert_before(doc.paragraphs[3],'The earlier A/B/C selection, cache, timing and post facto audit text below is a historical record. It does not define current serving methods. The current draft verify stream contract above supersedes those methodology and cache decisions; measured results and failure accounting are retained without relabeling them as new-pipeline performance.','Normal')
+        if name=='04_To_Build_Evaluation_Decisions.docx':
+            for paragraph in doc.paragraphs:
+                if paragraph.text in ('Reconciliation change record 9 October 2026','Rider UI and safeguards reconciliation 11 October 2026'):
+                    set_text(paragraph,'Historical '+paragraph.text)
+        anchor=doc.paragraphs[4] if name!='03_TRD_Architecture_Decision_Note.docx' else doc.paragraphs[3]
+        for text,style in CURRENT:insert_before(anchor,text,style)
+        # Keep numbered source/retrieval/state tables; mark legacy controller
+        # records optional and replace only current method/release/cache cells.
+        if name=='01_Concept_Architecture.docx':
+            cell(doc,0,1,0,'Open manual questions, useful partial answers and relevant multi-turn history')
+            cell(doc,1,2,2,'Preserve unresolved outcome; answer the follow-up only from applicable evidence without inferring normality or OEM order')
+            cell(doc,2,3,0,'Verified answer');cell(doc,2,3,1,'Concise answer to the actual question, applicable conditions and warnings, citations, and explicit partial-support limits')
+            cell(doc,2,5,1,'Immutable evidence ID and server-derived original page metadata; no rider PDF, excerpt or crop')
+            cell(doc,3,1,1,'Hosted source retrieval, private draft, separate verifier, typed history, progress, saved buffered streaming and controls')
+            cell(doc,3,2,1,'Optional vision/voice and verified-response reuse only after separate evaluation')
+        if name=='02_PRD.docx':
+            cell(doc,1,1,2,'Confirmed Himalayan BS6 selection and exact immutable manual metadata are visible; follow owner applicability policy without inventing a model-year requirement')
+            cell(doc,1,6,2,'Ask only the focused rider-resolvable clarification needed to answer the actual question; no branch selection required')
+            cell(doc,1,10,2,'Show immutable evidence ID and server-derived page metadata; rider PDF, excerpt and figure-crop delivery remains prohibited')
+            cell(doc,1,7,1,'Relevant history and optional guided troubleshooting');cell(doc,1,7,2,STATE)
+            cell(doc,1,16,1,'Source-derived conditions and warnings');cell(doc,1,16,2,'No universal StepDefinition gate; handle applicable prerequisites in the answer and verify them against source and history')
+            cell(doc,1,17,2,'Reviewed source context, required warnings/prerequisites, units, headers and references; no authored answer-scope gate')
+            cell(doc,1,20,1,'Verification and cache controls');cell(doc,1,20,2,CACHE)
+            cell(doc,4,8,1,'Follow current exact authorized budget/spend ledger; historical INR800/640 figures are superseded. No new spending or billing change is authorized here.')
+        if name=='03_TRD.docx':
+            cell(doc,0,6,2,'Complete private draft followed by separate strict question-coverage and claim-support verifier; fail closed')
+            cell(doc,0,7,0,'Optional legacy state machine');cell(doc,0,7,1,'Optional documented diagnostic flow; never a gate for ordinary manual Q&A')
+            cell(doc,1,9,0,'Legacy optional StepDefinition');cell(doc,1,10,0,'Legacy optional ApplicabilityRule')
+            cell(doc,2,0,1,'Optional legacy controller behavior')
+            cell(doc,3,1,1,'Whole final response passes semantic verification, application checks and durable save; explicit supported partial answers permitted')
+            cell(doc,5,3,0,'Verified-response reuse future work');cell(doc,5,3,1,'Disabled in initial integration');cell(doc,5,3,2,'No old Arm A/exact-response bypass; future exact bound reuse requires separate evaluation')
+            cell(doc,7,5,1,'Verifier coverage/support alternatives evaluated offline; current serving always includes a separate verifier')
+            cell(doc,8,0,1,'Historical method behavior');cell(doc,8,0,2,'Historical release requirement superseded by section 14')
+            for row in [1,2,3]:cell(doc,8,row,0,'Historical '+doc.tables[8].rows[row].cells[0].text)
+        if name=='04_To_Build_Evaluation_Decisions.docx':
+            cell(doc,0,1,1,'RECONCILED v0.4');cell(doc,0,1,2,'TRD v0.6 governs; exact source approvals preserved; new verification/delivery acceptance pending')
+            cell(doc,0,2,1,'RECONCILED v0.4');cell(doc,0,2,2,'Open Q&A, semantic verification, progress, buffered delivery and failure requirements')
+            cell(doc,0,3,1,'AUTHORITATIVE v0.6');cell(doc,0,3,2,'New draft verify stream contract with preserved source/retrieval/privacy details')
+            cell(doc,2,7,1,'Source-context integrity plus private drafting and separate online question-coverage/claim-support verification');cell(doc,2,7,2,'No answer-scope catalogue; measure false acceptance/refusal independently against original pages')
+            cell(doc,2,8,1,'Relevant typed history; optional legacy deterministic diagnostic flows');cell(doc,2,8,2,'Open Q&A including supported procedures must not require registered action or branch records')
+            cell(doc,3,8,0,'expected_followup_behavior');cell(doc,3,8,1,'Relevant unresolved outcomes retained; source-supported continuation, focused ambiguity or explicit limit; no invented OEM order')
+            cell(doc,6,3,1,'Preserve typed history and optional legacy flows without universal Q&A gates');cell(doc,6,3,2,'Natural follow-ups preserve unresolved attempts and avoid unjustified repeats')
+            cell(doc,6,4,1,'Integrate strict verifier, bounded revision, source/application checks, no-leakage progress and delivery integrity');cell(doc,6,4,2,'Unseen questions, verification failures and exact saved/streamed/recovered output regressions pass; old caches disabled')
+        if name=='03_TRD_Architecture_Decision_Note.docx':
+            doc.add_heading('Historical failed generation candidates',level=1)
+            doc.add_paragraph('The v3 real-model run 38150080278 produced complete answers for only two of six answerable questions. Independent original-page review found one unsupported contextual technical claim among fourteen released claims despite valid citations. The v4 run 38151571898 served zero supported answers for six answerable questions and failed acceptance despite software execution passing. These are separate question-coverage and claim-support findings, not evidence that the manual lacked answers.')
+            doc.add_paragraph('Retain reports/grounded_generation/v3 and reports/grounded_generation/v4/run_38151571898, including exact outputs, withholding reasons and independent claim reviews. These superseded candidates cannot validate the new separate-verifier and delivery architecture. Fresh real-output original-page evaluation and measured warm/cold latency remain required.')
+        # Preserve earlier raster flow figures with explicit historical labels.
+        for paragraph in list(doc.paragraphs):
+            if paragraph._p.xpath('.//w:drawing'):
+                insert_before(paragraph,'Historical flow illustration retained for provenance. This drawing predates the current draft verify stream decision; the current architecture text governs.','Normal')
+        if name=='03_TRD.docx':
+            cell(doc,1,5,0,'ConversationSession legacy diagnostic fields optional')
+            cell(doc,1,7,1,'query_id, manual_checksum, immutable source IDs, required/attached/missing context, source review/version, conflicts, applicability, completeness; legacy step dependency fields optional')
+            cell(doc,1,8,1,'type, response text, claim_evidence_map, server citations, partial-support limits, accepted_response_hash, evidence_binding_hash, operation_id; legacy step/clarification fields optional')
+            cell(doc,1,11,0,'Legacy optional EligibilityDecision')
+            row=doc.tables[1].add_row();row.cells[0].text='VerificationVerdict';row.cells[1].text='question_coverage, per_claim_support, omissions, conflicts, release_eligible, exact_response_hash, evidence_binding_hash, verifier/prompt/schema versions'
+            row=doc.tables[1].add_row();row.cells[0].text='DeliveryOperation';row.cells[1].text='operation_id, session/version ownership, accepted response/evidence/version hashes, saved buffered response, actual progress stage, delivery cursor, idempotent recovery'
+            cell(doc,4,3,1,'observation or attempted-action reference, typed outcome, observed_details; no StepDefinition required for ordinary Q&A')
+            cell(doc,4,3,2,'updated typed history and session version')
+        if name=='02_PRD.docx':
+            for identifier,label,requirement in [
+                ('FR-22 / P0','Private complete draft','Actual question, relevant history and complete assembled applicable evidence; no assess-first LLM call and no private token leakage'),
+                ('FR-23 / P0','Separate semantic verification','Strict bound verdict for question coverage and every technical claim; valid citation IDs alone do not establish support'),
+                ('FR-24 / P0','Bounded correction','At most one evidence-supported revision with new verification; malformed output/outage/quota failures are SYSTEM_ERROR'),
+                ('FR-25 / P0','Truthful progress and buffered delivery','Backend stage events only; release after verification/integrity/save; stream exactly accepted response and recover saved full text'),
+                ('FR-26 / P0','Independent acceptance','Unseen rider questions, supported partial answers, false verifier acceptance/refusal, no leakage and accepted/streamed/recovered equality')]:
+                row=doc.tables[1].add_row()
+                for target,text in zip(row.cells,(identifier,label,requirement)):target.text=text
+        if name=='04_To_Build_Evaluation_Decisions.docx':
+            for metric,definition,target in [
+                ('Question coverage and completeness','Actual question answered completely or supported part explicitly limited','Report separately from claim support on fresh held-out rider questions'),
+                ('Verifier false acceptance and refusal','Unsupported/irrelevant draft accepted or supported answer withheld','Independent original-page adjudication; do not infer from model confidence'),
+                ('Verified delivery equality','Accepted response text equals streamed and recovered saved text','No answer leakage before acceptance; exact hash/text equality'),
+                ('Stage timing and cost','Progress, retrieval/assembly/rerank, draft, verify, revision/reverify, validate/save, verified token and completion','Actual warm/cold results, calls/tokens/errors and cost; old latency targets not promises')]:
+                row=doc.tables[4].add_row()
+                for target_cell,text in zip(row.cells,(metric,definition,target)):target_cell.text=text
+        # Black title/heading styling, no decorative title rule; preserve body,
+        # table and image geometry rather than broadly restyling the documents.
+        for style in doc.styles:
+            if style.name in ('Title','Subtitle') or style.name.startswith('Heading'):
+                style.font.color.rgb=RGBColor(0,0,0)
+                if style._element.pPr is not None:
+                    for element in list(style._element.pPr):
+                        if element.tag.endswith('}pBdr'):style._element.pPr.remove(element)
+        for p in doc.paragraphs:
+            if p.style.name in ('Title','Subtitle') or p.style.name.startswith('Heading'):
+                for run in p.runs:run.font.color.rgb=RGBColor(0,0,0)
+                if p._p.pPr is not None:
+                    for el in list(p._p.pPr):
+                        if el.tag.endswith('}pBdr'):p._p.pPr.remove(el)
+        doc.save(path)
+        records.append({'file':name,'prior_sha256':hashlib.sha256(original).hexdigest(),'new_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'prior_paragraph_count':len(before_paras),'new_paragraph_count':len(doc.paragraphs),'preserved_table_count':len(doc.tables),'prior_snapshot':str(backup.relative_to(ROOT)),'targeted_existing_paragraph_changes':sorted(MAPS.get(name,{})),'images_preserved':len(doc.inline_shapes)})
+    (OUT/'reconciliation_record.json').write_text(json.dumps({'decision':'OWNER_DRAFT_SEPARATE_VERIFY_SAVED_BUFFERED_STREAM','documents':records,'visual_qa':'PENDING_RENDER','historical_measurements_and_exact_source_approvals_preserved':True},indent=2),encoding='utf-8')
+    print(json.dumps(records,indent=2))
+if __name__=='__main__':main()

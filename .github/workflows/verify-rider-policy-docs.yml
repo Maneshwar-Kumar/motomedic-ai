@@ -1,7 +1,11 @@
-name: Verify rider policy document
+name: Verify five MotoMedic planning documents
 on:
   push:
     paths:
+      - '01_Concept_Architecture.docx'
+      - '02_PRD.docx'
+      - '03_TRD.docx'
+      - '03_TRD_Architecture_Decision_Note.docx'
       - '04_To_Build_Evaluation_Decisions.docx'
       - '.github/workflows/verify-rider-policy-docs.yml'
   workflow_dispatch:
@@ -21,10 +25,10 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq libreoffice-writer poppler-utils fonts-crosextra-carlito fonts-crosextra-caladea
           python -m pip install pdf2image
-      - name: Render revised TODO register
-        run: python tools/render_docx.py 04_To_Build_Evaluation_Decisions.docx --output_dir reports/rider_policy_document_render --emit_pdf
+      - name: Render current planning documents
+        run: python tools/render_draft_verify_stream_documents.py --renderer tools/render_docx.py --soffice /usr/lib/libreoffice/program/soffice --runtime-root /usr/lib/libreoffice --output-dir reports/grounded_generation/draft_verify_stream_v1/documents/hosted_render
       - uses: actions/upload-artifact@v4
         with:
-          name: rider-policy-document-render
-          path: reports/rider_policy_document_render/
+          name: draft-verify-stream-document-render
+          path: reports/grounded_generation/draft_verify_stream_v1/documents/hosted_render/
           retention-days: 7
