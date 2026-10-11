@@ -37,7 +37,7 @@ jobs:
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
           MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
-          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/ab30_v1_budget.json
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/ab30_v2_budget.json
         run: python ab30_benchmark.py --index build/index --output build/ab30_v1_result.json
       - uses: actions/upload-artifact@v4
         if: always()

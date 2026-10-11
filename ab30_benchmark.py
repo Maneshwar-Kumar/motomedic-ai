@@ -16,7 +16,7 @@ from architecture_measurement import measured_sse_turn
 
 ROOT = Path(__file__).resolve().parent
 MAX_CALLS = 90
-ALLOCATION = 'owner-ab30-initial-matched-v1'
+ALLOCATION = 'owner-ab30-initial-matched-v2'
 
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -30,9 +30,9 @@ def validate_authority():
     proofpath = Path(os.environ['MOTOMEDIC_BUDGET_PREFLIGHT_FILE'])
     proof = read(proofpath)
     preflight = require_live_preflight(base.MODEL)
-    reviewpath = ROOT / 'reports/ab30_v1_review.json'
+    reviewpath = ROOT / 'reports/ab30_v2_review.json'
     review = read(reviewpath)
-    approval = read(ROOT / 'reports/ab30_v1_approval.json')
+    approval = read(ROOT / 'reports/ab30_v2_approval.json')
     if (review['decision'] != 'APPROVED_EXACT_AB30_ENGINEERING_RUN' or
         approval['review_sha256'] != sha(reviewpath) or
         approval['budget_sha256'] != sha(proofpath) or
@@ -79,8 +79,8 @@ def evaluate(index, output):
     report = {'schema_version': 'ab30-matched-result-v1', 'model': base.MODEL,
         'runtime_config': config.versions(), 'manual_checksum': registry.checksum,
         'index_id': registry.index_id, 'release_manifest_sha256': RELEASE_SHA,
-        'registry_lock': registry.lock, 'review_sha256': sha(ROOT/'reports/ab30_v1_review.json'),
-        'approval_sha256': sha(ROOT/'reports/ab30_v1_approval.json'),
+        'registry_lock': registry.lock, 'review_sha256': sha(ROOT/'reports/ab30_v2_review.json'),
+        'approval_sha256': sha(ROOT/'reports/ab30_v2_approval.json'),
         'cases_sha256': sha(ROOT/'reports/ab30_v1_cases.json'), 'budget_preflight': preflight,
         'maximum_provider_calls': 90, 'retries': 0, 'cache': 'BYPASS_EVERY_TURN',
         'architectures': ['A_COMPONENT_SELECTION', 'B_SHORT_GENERATION'],
