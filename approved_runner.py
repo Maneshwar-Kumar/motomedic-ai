@@ -11,6 +11,7 @@ from constrained_generator import build_generator
 from generation_providers import gemma_runtime_config
 from online_retrieve import Retriever
 from reviewed_controller import ReviewedController, start_session
+from cloud.arm_a.composer import ArmAComposer
 
 
 def build_approved_runner(index, *, root=None, retriever=None, generator=None,
@@ -19,8 +20,9 @@ def build_approved_runner(index, *, root=None, retriever=None, generator=None,
     registry = ApprovedEvidenceRegistry.load(root, index)
     if generator is not None and runtime_config is not None and generator.config != runtime_config:
         raise ValueError("Supplied generator and selected runtime configuration differ")
-    pipeline = generator or build_generator(runtime_config or gemma_runtime_config(), live_enabled=live,
-                                            authorized_calls_per_adapter=calls_per_adapter)
+    if generator is None and runtime_config is not None:
+        raise ValueError('Provider configuration requires an explicitly supplied historical generator')
+    pipeline = generator or ArmAComposer()
     controller = ReviewedController(registry, retriever or Retriever(index),
                                     response_generator=pipeline)
     controller.audience = audience

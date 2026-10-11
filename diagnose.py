@@ -283,8 +283,8 @@ class ReviewedService:
         self.trace_sink = trace_sink
         self.last_trace = None
         self.controller = retriever.reviewed_controller(registry, semantic_verifier)
-        from constrained_generator import ConstrainedGenerator
-        self.controller.response_generator = response_generator or ConstrainedGenerator()
+        from cloud.arm_a.composer import ArmAComposer
+        self.controller.response_generator = response_generator or ArmAComposer()
         self.controller.audience = audience
         self.store = store
 
