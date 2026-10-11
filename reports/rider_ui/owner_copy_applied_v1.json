@@ -1,0 +1,77 @@
+{
+  "schema_version": "motomedic-ui-copy-applied-v1",
+  "edited_file": "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent\\motomedic-edited.html",
+  "original_html_sha256": "b9017c3c4b414c29b78736b334e91f7540b76441d5d33695ca47e1d3e1d3d297",
+  "edited_html_sha256": "d2a6a9fa46549d17b3ed8a773b03d13aa593fe26afa3110bf9041363b895edce",
+  "remove_blocks": [],
+  "remove_fields": [
+    {
+      "field_id": "service.disconnected",
+      "block_id": "disconnected-notice",
+      "before": "The rider interface is ready. The hosted troubleshooting service is not connected yet."
+    },
+    {
+      "field_id": "topic.label",
+      "block_id": "symptom-entry",
+      "before": "Choose the closest topic"
+    }
+  ],
+  "text_changes": [
+    {
+      "field_id": "brand.tagline",
+      "block_id": "brand",
+      "before": "Your next step, backed by the manual.",
+      "after": "Your questions answered, backed by the manual.",
+      "applied_text": "Your questions answered, backed by the manual."
+    },
+    {
+      "field_id": "advisory.text",
+      "block_id": "advisory-notice",
+      "before": "Experimental advisory aid. Official service support remains available.",
+      "after": "Unable to find a resolution? Official service support remains available.",
+      "applied_text": "Unable to find a resolution? Official service support remains available."
+    },
+    {
+      "field_id": "welcome.title",
+      "block_id": "welcome",
+      "before": "A clearer next step.",
+      "after": "MotoMedic handles your routine queries for your Himalayan",
+      "applied_text": "MotoMedic handles your routine queries for your Himalayan"
+    },
+    {
+      "field_id": "welcome.description",
+      "block_id": "welcome",
+      "before": "Describe what you notice. We\u2019ll work through one documented question or step at a time.",
+      "after": "Describe what you notice. It will walk you through a resolution.If it is a complex case, it routes you to Royal Enfield Support",
+      "applied_text": "Describe what you notice. It will walk you through a resolution. If it is a complex case, it routes you to Royal Enfield Support"
+    },
+    {
+      "field_id": "entry.description",
+      "block_id": "symptom-entry",
+      "before": "Start with one symptom or question. Include what you have already checked.",
+      "after": "Start with one symptom or question. If you have performed a diagnostic, or checked a few things already, then tell MotoMedic to avoid false resolutions",
+      "applied_text": "Start with one symptom or question. If you have performed a diagnostic, or checked a few things already, then tell MotoMedic to avoid false resolutions"
+    },
+    {
+      "field_id": "footer.text",
+      "block_id": "footer",
+      "before": "OEM evidence first. One step at a time.",
+      "after": "Built on the Owner's Manual, with no misleading instructions on the internet",
+      "applied_text": "Built on the Owner's Manual, with no misleading instructions on the internet"
+    }
+  ],
+  "unmapped_fields": [],
+  "app_modified": true,
+  "github_pushed": false,
+  "removal_behavior": {
+    "service.disconnected": "Notice removed; disconnected input remains disabled.",
+    "topic.label": "Visible label collapsed; accessible dropdown retained."
+  },
+  "validation": {
+    "unit_and_interaction_tests": 16,
+    "passed": true,
+    "browser_report": "reports/rider_ui/owner_copy/browser_smoke.json",
+    "provider_calls": 0,
+    "real_retrieval_calls": 0
+  }
+}

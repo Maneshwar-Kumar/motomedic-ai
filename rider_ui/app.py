@@ -52,7 +52,7 @@ for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_e
 configured = bool(setting('MOTOMEDIC_RIDER_API_URL') and setting('MOTOMEDIC_RIDER_API_TOKEN'))
 
 with st.sidebar:
-    st.markdown('<div class="brand-mark">M<span>+</span></div><h2>MotoMedic</h2><p class="sidebar-subtitle">Your next step, backed by the manual.</p>', unsafe_allow_html=True)
+    st.markdown('<div class="brand-mark">M<span>+</span></div><h2>MotoMedic</h2><p class="sidebar-subtitle">Your questions answered, backed by the manual.</p>', unsafe_allow_html=True)
     st.divider()
     st.caption('YOUR MOTORCYCLE')
     st.selectbox('Motorcycle', ['Royal Enfield Himalayan 450'], disabled=True)
@@ -65,21 +65,19 @@ with st.sidebar:
         st.caption('Manual pages and excerpts are not available for display in this demo.')
     st.divider()
     st.button('Start a new conversation', on_click=reset, use_container_width=True, disabled=bool(st.session_state.pending))
-    st.caption('Experimental advisory aid. Official service support remains available.')
+    st.caption('Unable to find a resolution? Official service support remains available.')
     st.link_button('Contact Royal Enfield ↗', 'mailto:support@royalenfield.com', use_container_width=True)
 
 left, right = st.columns([5, 2])
 with left:
     st.markdown('<div class="eyebrow">MOTOMEDIC / RIDER SUPPORT</div>', unsafe_allow_html=True)
-    st.title('A clearer next step.')
-    st.write('Describe what you notice. We’ll work through one documented question or step at a time.')
+    st.title('MotoMedic handles your routine queries for your Himalayan')
+    st.write('Describe what you notice. It will walk you through a resolution. If it is a complex case, it routes you to Royal Enfield Support')
 with right:
     st.markdown('<div class="source-pill">●&nbsp; Himalayan BS6<br><small>Owner’s manual · 2025 edition</small></div>', unsafe_allow_html=True)
 st.divider()
 
-if not configured:
-    st.info('The rider interface is ready. The hosted troubleshooting service is not connected yet.')
-elif not st.session_state.catalogue:
+if configured and not st.session_state.catalogue:
     try:
         st.session_state.catalogue = client().catalogue()
     except APIError as exc:
@@ -92,13 +90,13 @@ ready = configured and bool(catalogue) and confirmed
 if not st.session_state.messages:
     with st.container(border=True):
         st.markdown('### What are you noticing?')
-        st.write('Start with one symptom or question. Include what you have already checked.')
+        st.write('Start with one symptom or question. If you have performed a diagnostic, or checked a few things already, then tell MotoMedic to avoid false resolutions')
         if catalogue:
             topic = st.selectbox('Choose the closest topic', catalogue['topics'], index=None,
-                                 placeholder='Select a topic', format_func=lambda t: t['label'], disabled=not ready)
+                                 placeholder='Select a topic', format_func=lambda t: t['label'], disabled=not ready, label_visibility='collapsed')
             st.session_state.topic_id = topic['id'] if topic else None
         else:
-            st.selectbox('Choose the closest topic', [], placeholder='Topics load when the service connects', disabled=True)
+            st.selectbox('Choose the closest topic', [], placeholder='Topics load when the service connects', disabled=True, label_visibility='collapsed')
             st.session_state.topic_id = None
         st.caption('Available topics come from the hosted controller. Selecting a topic does not establish answer support.')
     cols = st.columns(3)
@@ -181,5 +179,5 @@ if not view:
         perform('start', query.strip())
 else:
     st.caption('Use the current choices above, or start a new conversation for a different symptom.')
-st.markdown('<div class="footer-note">OEM evidence first. One step at a time.</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer-note">Built on the Owner\'s Manual, with no misleading instructions on the internet</div>', unsafe_allow_html=True)
 

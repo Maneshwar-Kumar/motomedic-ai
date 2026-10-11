@@ -13,7 +13,7 @@ class AppTests(unittest.TestCase):
             at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=15).run()
             self.assertFalse(at.exception)
             self.assertTrue(at.chat_input[0].disabled)
-            self.assertTrue(any('not connected' in x.value for x in at.info))
+            self.assertFalse(any('not connected' in x.value for x in at.info))
     def test_confirmation_feedback_and_no_duplicate_rerun(self):
         server=serve(0)
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
