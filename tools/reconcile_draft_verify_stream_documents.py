@@ -7,7 +7,7 @@ from pathlib import Path
 from copy import deepcopy
 import hashlib,json,re,shutil
 from docx import Document
-from docx.shared import RGBColor
+from docx.shared import RGBColor, Pt
 from docx.oxml import OxmlElement
 from docx.text.paragraph import Paragraph
 
@@ -55,6 +55,7 @@ MAPS={
 71:'Measure time to first progress separately from time to first verified answer token. Record retrieval, assembly, reranking, draft completion, verification, correction/re-verification, final validation/save, first verified token and full completion, with calls, tokens, errors and cost. Private draft tokens and progress events do not count as an answer. Report real warm/cold measurements; historical text p95 under five seconds and photo under ten seconds are unproven targets for this two-call pipeline.',84:'12 1 Open question verification and history regression cases',85:'Add unseen supported questions without catalogue entries; complete, partial and unsupported answers; relevant passages that fail to answer; valid citations with unsupported claims; missing conditions, warnings, units or table context; unresolved follow-ups; injection; verifier rejection, malformed output and outages; zero answer leakage before acceptance; and equality of accepted, streamed and recovered text.',87:'Application checks validate immutable source/version, selected-manual applicability, schemas, citation membership and server-derived pages, session ownership, limits, quotas and delivery bindings. These controls are not an answer allowlist or a substitute for semantic verification. Legacy rule/cache restrictions do not gate open Q&A.',88:'A relevant passage with missing required prerequisite, warning, table header, units or referenced context cannot support the affected technical claim. The draft must acknowledge partial support or limitations; the verifier checks omissions and prevents a partial answer being presented as complete.',90:'Report question coverage/completeness and per-claim support separately, plus verifier false acceptance/refusal and repeat-history defects. Independently review actual outputs against original manual pages; synthetic tests, existing citation IDs and old runtime approvals do not establish semantic correctness.',101:'Versioned hosted ingestion and private retrieval infrastructure remain available. Historical A/B/C experiments and no-online-verifier generic experiments are preserved as measurements of superseded runtimes. The new draft verify stream architecture requires a fresh frozen runtime, independent review and real-output evaluation before release.',103:'Use current exact owner-authorized budget and provider-spend records. The latest owner handoff records INR2700 project budget and guard stop INR2540; earlier INR800/INR640 records are historical. This document grants no new spending, billing restart, model substitution or deployment authorization.',104:'Existing private deployments and failed candidate images remain separate from this current design. Do not promote an old fixed-answer or no-online-verifier runtime. New private/public deployment requires successful fresh acceptance and exact release authorization.',105:'14  Owner selected draft verify stream delivery',106:AUTH,108:CURRENT[6][0],109:'14 1 Historical comparison measurements',112:'Historical candidate-cache experiment: three A repeats hit exact reviewed wording; B/C repeats missed. Those reuse results and the dense/BM25 paired controls remain historical evidence. Current integration disables incompatible Arm A and exact-response shortcuts and always applies the new verification requirement.',113:'14 2 Work for the current pipeline',114:'Integrate private whole-answer drafting, separate strict semantic verification, at most one evidence-supported correction, truthful backend progress, final integrity/save and exact buffered streaming. Freeze fresh prompt/runtime/verifier/delivery contracts and test independent rider-style held-out cases against original pages. Old post facto audits do not authorize the new serving path.',116:'The companion architecture decision note and build/evaluation register are reconciled to TRD v0.6. Historical A/B, exact-selection and no-online-verifier decisions and measured results remain preserved, including exact prior-document bytes under reports/grounded_generation/draft_verify_stream_v1/documents/prior_documents.'},
 '04_To_Build_Evaluation_Decisions.docx':{2:'Version 04 reconciled 11 October 2026 with TRD v0.6',3:AUTH,5:'This register preserves the source, implementation, design and evaluation inventory while adopting TRD v0.6 open manual Q&A through private draft, separate semantic verification, final save and buffered stream. Ingestion progress and historical runtime approvals do not validate the new pipeline.',22:'Answer spans record source admission, question coverage, per-claim support, omissions, conflicts, revision count, accepted response/evidence hashes, final save and delivery operation ID. Typed history preserves unresolved outcomes. Optional legacy step spans remain separate from ordinary Q&A.',32:'Ask an unseen natural manual question and inspect the actual verified response and server-derived citations; follow up naturally and confirm relevant history and unresolved attempts are preserved.',46:'G-03  Preserve source applicability, reviewed context and immutable citations; draft privately and separately verify actual question coverage plus every technical claim. No StepDefinition, answer scope, authored response or canonical question is required for ordinary source-supported Q&A.',47:STATE,50:'G-07  Disable incompatible Arm A/exact-response shortcuts in initial integration. Future verified reuse needs exact query/state/version/accepted-response bindings and separate evaluation; similarity is never authorization.',52:'G-09  Test unseen questions, partial support, irrelevant-but-relevant-looking passages, valid-but-unsupportive citations, omissions, history, injection, verifier failures, no leakage, and exact accepted/streamed/recovered equality. Independent source evaluation and fresh runtime review remain required.'}}
 
+MAPS['04_To_Build_Evaluation_Decisions.docx'][47]='G-04  '+STATE
 MAPS['03_TRD.docx'][55]=CURRENT[4][0]+' Finalize every technical addition before this call. Citation membership alone does not establish claim support; no registered action or authored answer scope is required.'
 MAPS['03_TRD.docx'][58]=CURRENT[5][0]+' RELEASE_COMPLETE and RELEASE_PARTIAL map to SUPPORTED only after final application integrity checks and durable save. SHOW_FALLBACK maps to the fixed neutral UNSUPPORTED message. Malformed verifier output, provider failure, quota exhaustion or integrity failure maps to the fixed neutral SYSTEM_ERROR message without requiring LLM success.'
 MAPS['03_TRD.docx'][112]=MAPS['03_TRD.docx'][112].replace('always applies the new verification requirement','applies the new verification requirement to every technical answer; fixed neutral fallback and error messages require no LLM success')
@@ -76,6 +77,55 @@ def cell(doc,table,row,col,text):
     set_text(target.paragraphs[0],text)
     for p in target.paragraphs[1:]:
         p._p.getparent().remove(p._p)
+
+def polish_layout(doc,name):
+    # Current revision labels do not modify historical body records or snapshots.
+    label='TRD v0.6 | DRAFT VERIFY STREAM | 11 OCTOBER 2026 | '
+    seen=set()
+    for section in doc.sections:
+        for footer in (section.footer,section.first_page_footer,section.even_page_footer):
+            if id(footer._element) in seen:continue
+            seen.add(id(footer._element))
+            paragraph=footer.paragraphs[0]
+            texts=footer._element.xpath('.//w:t')
+            for element in texts:element.text=''
+            if texts:texts[0].text=label
+            else:paragraph.add_run(label)
+            if not footer._element.xpath('.//w:instrText') and not footer._element.xpath('.//w:fldSimple'):
+                field=OxmlElement('w:fldSimple');field.set('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}instr','PAGE');paragraph._p.append(field)
+            for run in paragraph.runs:run.font.size=Pt(8)
+    if name=='02_PRD.docx':
+        criteria={
+            'FR-07':'Preserve typed unresolved outcomes and corrections; ordinary Q&A has no required branch. See current architecture and typed-history policy.',
+            'FR-20':'Old Arm A/exact shortcuts remain disabled; all draft/verify/correction work counts against existing controls. See verification and cache policy.',
+            'FR-27':'Use exact neutral messages and manifest contact URI from current policy; no successful LLM call required. Keep fallback and SYSTEM_ERROR distinct.'}
+        for row_index,row in enumerate(doc.tables[1].rows):
+            key=row.cells[0].text.split(' /')[0]
+            if key in criteria:cell(doc,1,row_index,2,criteria[key])
+    # Updated/new cells inherit Normal unless explicit table sizing is restored.
+    # Choose the existing table's most common explicit size, retaining bold labels.
+    from collections import Counter
+    for table in doc.tables:
+        sizes=[r.font.size.pt for row in table.rows for c in row.cells for p in c.paragraphs for r in p.runs if r.font.size]
+        size=Counter(sizes).most_common(1)[0][0] if sizes else 9
+        for row in table.rows:
+            prop=row._tr.get_or_add_trPr()
+            if not prop.xpath('./w:cantSplit'):prop.append(OxmlElement('w:cantSplit'))
+            for c in row.cells:
+                for paragraph in c.paragraphs:
+                    for run in paragraph.runs:run.font.size=Pt(size)
+    for i,paragraph in enumerate(doc.paragraphs):
+        if paragraph.text.startswith('Historical flow illustration retained'):
+            paragraph.paragraph_format.keep_with_next=True
+            paragraph.paragraph_format.keep_together=True
+        if paragraph._p.xpath('.//w:drawing'):
+            paragraph.paragraph_format.keep_together=True
+        if name=='04_To_Build_Evaluation_Decisions.docx' and not paragraph.text:
+            # Only remove the historical section's obsolete empty explicit break.
+            for br in paragraph._p.xpath('.//w:br[@w:type="page"]'):br.getparent().remove(br)
+        if name=='03_TRD_Architecture_Decision_Note.docx' and paragraph.text=='Historical failed generation candidates':
+            for member in doc.paragraphs[i:i+3]:member.paragraph_format.keep_together=True
+            for member in doc.paragraphs[i:i+2]:member.paragraph_format.keep_with_next=True
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True);prior=OUT/'prior_documents';prior.mkdir(exist_ok=True)
@@ -192,6 +242,7 @@ def main():
                 if p._p.pPr is not None:
                     for el in list(p._p.pPr):
                         if el.tag.endswith('}pBdr'):p._p.pPr.remove(el)
+        polish_layout(doc,name)
         doc.save(path)
         records.append({'file':name,'prior_sha256':hashlib.sha256(original).hexdigest(),'new_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'prior_paragraph_count':len(before_paras),'new_paragraph_count':len(doc.paragraphs),'preserved_table_count':len(doc.tables),'prior_snapshot':str(backup.relative_to(ROOT)),'targeted_existing_paragraph_changes':sorted(MAPS.get(name,{})),'images_preserved':len(doc.inline_shapes)})
     (OUT/'reconciliation_record.json').write_text(json.dumps({'decision':'OWNER_DRAFT_SEPARATE_VERIFY_SAVED_BUFFERED_STREAM','documents':records,'visual_qa':'PENDING_RENDER','historical_measurements_and_exact_source_approvals_preserved':True},indent=2),encoding='utf-8')
