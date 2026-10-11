@@ -149,6 +149,9 @@ class FirestoreState:
             body = {'owner':self.owner, 'version':session.version, 'snapshot':snapshot,
                     'view':view, 'choices':choices, 'accepted_turns':count+1,
                     'query':query if query is not None else (old or {}).get('query'),
+                    'conversation': ((old or {}).get('conversation', []) +
+                        ([{'question':query, 'response':view['response']['natural_language'],
+                           'route':view['response']['type']}] if query is not None else [])),
                     'expires_at':expiry, 'idle_expires_at':min(expiry, now+timedelta(minutes=30))}
             tx.set(head, body)
             tx.create(head.collection('arm_a_session_versions').document(str(session.version)),

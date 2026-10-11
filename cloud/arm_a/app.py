@@ -117,7 +117,7 @@ def create_app(registry, retriever, state_factory, cases):
         return jsonify({'ready':True, 'architecture':app.config.get('SERVING_ARCHITECTURE','A_DETERMINISTIC_CANONICAL'),
             'manual_checksum':registry.checksum, 'index_id':registry.index_id,
             'answer_provider':app.config.get('ANSWER_PROVIDER'), 'benchmark_pacing':False,
-            'streaming':'VERIFIED_COMPLETE_UNIT_SSE',
+            'streaming':('DRAFT_VERIFY_STREAM' if app.config.get('GROUNDED_PRIMARY') else 'VERIFIED_COMPLETE_UNIT_SSE'),
             'reranking':'conditional-rerank-v1', 'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)})
 
     @app.get('/v1/initial-catalogue')
@@ -209,6 +209,8 @@ def create_app(registry, retriever, state_factory, cases):
 
     @app.get('/v1/initial-operations/<key>')
     def recover(key):
+        if app.config.get('GROUNDED_PRIMARY'):
+            return error('UNSUPPORTED','BENCHMARK_ENDPOINT_RETIRED',410)
         if not re.fullmatch(r'[A-Za-z0-9_-]{16,100}', key):
             return error('SYSTEM_ERROR','INVALID_OPERATION_KEY',400)
         try:
@@ -234,14 +236,15 @@ def load_production():
     registry = ApprovedEvidenceRegistry.load(ROOT, index)
     # Load both pinned query and cross-encoder models once per hosted worker.
     from cloud.arm_a.runtime_controls import GuardedRetriever, TokenBudget, VERSION
-    from cloud.grounded_generation.generic_policy import POLICY, POLICY_SHA256
+    from cloud.grounded_generation.verified_qa import DRAFT_POLICY as POLICY, DRAFT_POLICY_SHA256 as POLICY_SHA256
     retriever = GuardedRetriever(index, rerank=True)
     budget = TokenBudget(retriever.model, retriever.manifest['embedding'],
         POLICY, POLICY_SHA256)
     retriever.install_controls(budget)
     # The owner clarified that A must retain an answer LLM. The historical
     # exact-wording composer is kept only for old regression fixtures.
-    from cloud.grounded_generation.generic_runtime import Composer, Questions
+    from cloud.grounded_generation.verified_qa import Composer
+    from cloud.grounded_generation.open_questions import Questions
     from cloud.grounded_generation.provider import GemmaProvider
     from cloud.grounded_generation.admission import ProviderAdmission
     cases = json.loads((ROOT/'reports/ab30_v1_cases.json').read_text(encoding='utf-8'))
@@ -253,7 +256,7 @@ def load_production():
     controlled_composer = Composer(GemmaProvider(ProviderAdmission(client),cache_capability='unsupported'))
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
-    app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='MANUAL_EVIDENCE_GROUNDED_LLM',
+    app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
         ANSWER_PROVIDER='gemma-4-26b-a4b-it')
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')

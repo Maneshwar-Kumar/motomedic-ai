@@ -22,9 +22,9 @@ Every request has a server-side `Authorization: Bearer ...` credential. Every mu
 | GET | /v1/sessions/{id} | Retrieve latest saved view |
 | GET | /v1/operations/{idempotency_key} | Recover a mutation's committed response without executing it again |
 
-Catalogue: schema_version, manual_checksum, index_id, question_input=open, diagnostic_wizard=false, streaming=VERIFIED_COMPLETE_UNIT_SSE. The UI exposes no topic selector or symptom routing.
+Catalogue: schema_version, manual_checksum, index_id, question_input=open, diagnostic_wizard=false, streaming=DRAFT_VERIFY_STREAM for the current open-verification service. Hosted UI capability checks reject the retired complete-unit service; neutral explicit engineering loopback fixtures remain available. The UI exposes no topic selector or symptom routing.
 
-Create request: query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. Continued questions add expected_version. Raw text reaches the existing hybrid retriever without a record ID or canonical-query substitution. Arm A emits only exact reviewed components after scope, eligibility, dependency, warning and citation checks, with zero answer-provider calls. Scope admission currently accepts ordered bound question propositions and a small explicitly reviewed paraphrase set. It can abstain on otherwise answerable paraphrases; accepting arbitrary input does not establish unrestricted manual coverage. It considers the full approved registry, rather than the original 30 benchmark requests. Missing support abstains; retrieval/system failure stays SYSTEM_ERROR. Source-derived clarification and typed feedback are optional.
+Create request: query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. Continued questions add expected_version. The actual rider question and relevant saved conversation reach the applicable immutable source-evidence pipeline. Source-supported factual and procedural answers require no canonical question, authored answer scope or registered diagnostic action. A complete private draft is followed by a separate question-coverage and claim-support verifier call. Code retains source/version integrity, applicability, schema/citation limits, ownership and delivery checks. All final technical content, server-added conditions/warnings and citations are finalized before verification. A rejected draft is withheld; at most one correctable revision is verified again. Incompatible Arm A and exact-answer cache shortcuts are disabled. No new model call occurs while displaying accepted text.
 
 The private UI uses managed audience-bound tokens and a signed X-MotoMedic-Visitor capability. Its IAM-verified principal derives a stable keyed visitor nonce across refresh/reset. Backend ownership binds the UI service principal and visitor nonce. Anonymous public access is outside this design. Every mutation uses a 32-hex operation key. Complete technical answer units stream only after their operation/session view is atomically committed; disconnected delivery retrieves the saved operation without rerunning it.
 
@@ -49,9 +49,25 @@ Optional top-level fields:
 
 No evidence_uri, source text/excerpt, crops, raw source objects, provider bodies, secret values or raw media. Stopped/error paths issue no action feedback choices. A known applicable verified safety stop retains precedence even when optional storage/telemetry fails, consistent with existing controller semantics.
 
+## Progress and accepted-answer delivery
+
+Mutations request `Accept: text/event-stream`. All v6 events bind to the mutation's 32-hex operation ID:
+
+| Event | Payload and rule |
+| --- | --- |
+| progress | Exactly operation_id and stage. Stage is retrieving, drafting, verifying or displaying. Constant client labels are shown only when the backend emits a real stage. |
+| verified_block | operation_id, response_sha256 and the complete saved view. The persisted delivery binding, selected source, response hash and release gate must validate before any answer callback. |
+| answer_chunk | operation_id, response_sha256, offset and text. Offset counts Python Unicode codepoints; text must be the exact next slice of the buffered accepted response. |
+| complete | The identical saved view. Its full text must equal concatenated chunks and the accepted response hash. |
+| error | Sanitized operational failure; private drafts and verifier output are never displayed. |
+
+Displaying is emitted only after verification, final integrity checks and durable save. Progress contains no technical text, private drafts, chain-of-thought, confidence, percentages or simulated timing. A correction can emit drafting/verifying again, with no private answer token release. SYSTEM_ERROR uses neutral completion without accepted-answer chunks. Verified clarifications, supported partial responses and refusals retain their distinct routes.
+
+Persisted `delivery` contains operation_id, response_sha256, runtime_lock, manual_checksum and index_id. The response hash is SHA-256 of UTF-8 JSON for the complete response object with sorted keys, compact separators, no non-finite values and Unicode preserved. The client checks these bindings during streaming and recovery. A disconnect retains the entire accepted view, then retrieves the original operation; any changed saved view is blocked. Replay streams the existing buffer and starts no drafting or verification call.
+
 ## Hosted implementation obligations
 
-Use the installed ApprovedEvidenceRegistry and ReviewedService, real immutable BGE/BM25 retrieval and reviewed dependency assembly. Do not import test fixtures, rebuild embeddings, silently switch provider models, or bypass eligibility, rights, warning or claim gates. The UI contains no model selection; the other implementation chat owns this configuration.
+Use the exact source-approved registry, immutable BGE/BM25 chunks, source-linked complete assembly and current open drafting/verification runtime. Do not import test fixtures, rebuild embeddings, silently switch provider models, or bypass applicability, rights, source warning/condition or claim checks. Registered legacy action eligibility does not restrict ordinary manual Q&A. The UI contains no model selection; the other implementation chat owns this configuration.
 
 Use managed transactional session storage with immutable attempt snapshots and compare-and-swap versions. SQLite/local Streamlit state is not the production store. Atomically reserve and deduplicate operation IDs before model calls; persist/retrieve the final response and choices. A concurrent or stale feedback returns 409. Repeated same operation returns the original response without another model call. An operation still executing should report a recoverable status, not re-execute it.
 
@@ -59,9 +75,9 @@ Enforce authenticated ownership/capability on session and operation reads. Share
 
 ## Live acceptance (pending)
 
-Browser → hosted session/controller → actual BGE + BM25 retrieval → verified graph/dependency assembly → selected gated generation/verifier → saved cited response.
+Browser → hosted session/controller → actual BGE + BM25 retrieval → verified graph/dependency assembly → private draft → separate online verification → final checks and durable save → exact buffered answer streaming → saved cited response.
 
-Run GEN003 lookup and EXP003 clarification/action/unresolved/referral in a fresh browser. Cache remains bypassed. Retain correlated redacted browser/service traces, immutable version bindings, actual provider execution, rendered matching citations, no-repeat results and browser-to-complete-response timings. Warm/cold p95 needs a suitable sample size; three samples do not establish p95.
+Run fresh ordinary questions, a useful partial answer, follow-up, fixed fallback, and verifier failure in a fresh browser. Answer caching remains disabled. Retain correlated redacted browser/service traces, immutable version bindings, actual provider execution, rendered matching citations, no-repeat results and browser-to-complete-response timings. Warm/cold p95 needs a suitable sample size; three samples do not establish p95.
 
 UI fixture tests or localhost screenshots do not meet this gate. The photo control remains disabled until this text gate passes and an observation-only vision path is implemented/evaluated.
 
@@ -72,7 +88,7 @@ Use SERVICE_SAFEGUARDS.md and the current TODO.md as the dated implementation/re
 
 The managed transaction must reserve an operation against six turns per rolling minute, 30 turns per rolling 24 hours, and 20 turns per session. Same-operation replay returns its original reservation/view without another model call; a different payload hash conflicts. Retrieval/provider failures consume admitted slots. Counters and model-call/budget admission must be project-wide across workers. A caller must not provide usage counts. Admission-store outage blocks new inference with a sanitized operational error; preserve already established applicable safety-stop semantics.
 
-New serving context uses the complete deterministic active-outcome/fact projection. Fresh evidence plus trusted policy and schema must fit 8,192 exactly counted input tokens and 24,000 bytes; cap output at 1,800 tokens. Check both generation and verification requests before spending. Never trim warnings, prerequisites or unresolved attempts to fit. Missing token-count adapter, overflow or truncated model output gives SYSTEM_ERROR with no partial technical instruction. The existing approved runtime is unchanged; install the new prompt/context body only in a versioned reviewed runtime and invalidate affected caches.
+The current open-Q&A serving context uses bounded conversation history and freshly retrieved manual evidence. Fresh evidence plus trusted policy and schema must fit 8,192 exactly counted input tokens and 65,536 bytes; cap output at 1,800 tokens. Check both generation and verification requests before spending. Never trim warnings, prerequisites or unresolved attempts to fit. Missing token-count adapter, overflow or truncated model output gives SYSTEM_ERROR with no partial technical instruction. Bind draft, verifier, accepted presentation and stored response to the current runtime, source and evidence payload; retired runtime receipts cannot authorize recovery.
 
 When the text gate passes, add a separately versioned authenticated multipart media endpoint: one JPEG/PNG/WebP per turn, 5 MiB/photo, three/session and six/visitor/day. Stream byte caps, decode actual MIME, reject animation/corruption/20-megapixel or 10,000-pixel-side violations, normalize to 1,600-pixel-side JPEG without metadata, and enforce worker resource limits. No client URL-fetch inputs. Raw and normalized media expire/delete within 15 minutes; session idle expiry 30 minutes and lifetime 24 hours. TTL/deletion evidence remains required before public release.
 

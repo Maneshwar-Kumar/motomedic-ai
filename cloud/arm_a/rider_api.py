@@ -28,10 +28,44 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
         store.network_owner = network_owner
         return store
 
+    def current_view(view):
+        if getattr(questions,'open_verification',False) and view['response'].get('technical_content'):
+            from cloud.grounded_generation.verified_qa import VERSION
+            from cloud.grounded_generation.delivery import response_hash
+            lock=questions.controller.response_generator.config.lock
+            questions.source_authority.check()
+            if not registry.source_ready():
+                raise ValueError('RECOVERY_SOURCE_IDENTITY_CHANGED')
+            binding=view.get('delivery',{})
+            verified=view.get('verified_delivery',{})
+            if (view.get('runtime_policy')!=VERSION or
+                view.get('manual_checksum')!=registry.checksum or
+                view.get('index_id')!=registry.index_id or
+                verified.get('manual_checksum')!=registry.checksum or
+                verified.get('index_id')!=registry.index_id or
+                verified.get('source_authority_lock')!=questions.source_authority.lock or
+                binding.get('runtime_lock')!=lock or verified.get('runtime_lock')!=lock or
+                binding.get('response_sha256')!=response_hash(view) or
+                verified.get('operation_id')!=binding.get('operation_id') or
+                verified.get('presentation_sha256')!=response_hash(view) or
+                verified.get('evidence_payload_sha256')!=binding.get('evidence_payload_sha256') or
+                verified.get('binding_sha256')!=binding.get('verification_binding_sha256') or
+                verified.get('text_sha256')!=hashlib.sha256(view['response']['natural_language'].encode()).hexdigest() or
+                view['response'].get('semantic_verification_passed') is not True):
+                raise ValueError('PRE_VERIFIER_SAVED_ANSWER_RETIRED')
+        return view
+
     def deliver(view, replay=False):
+        current_view(view)
         if 'text/event-stream' not in request.headers.get('Accept',''):
             result = jsonify(view)
         else:
+            if getattr(questions, 'open_verification', False):
+                from cloud.grounded_generation.delivery import replay_stream
+                result = replay_stream(view, view['delivery']['operation_id'])
+                if replay:
+                    result.headers['X-Operation-Replay'] = 'true'
+                return result
             def events():
                 response = view['response']
                 if response.get('technical_content') and response.get('release_gate_passed'):
@@ -51,7 +85,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
             return error('SYSTEM_ERROR','VISITOR_CAPABILITY_REQUIRED',401)
         return jsonify({'schema_version':'motomedic-rider-api-v1',
             'manual_checksum':registry.checksum, 'index_id':registry.index_id,
-            'question_input':'open', 'streaming':'VERIFIED_COMPLETE_UNIT_SSE',
+            'question_input':'open', 'streaming':('DRAFT_VERIFY_STREAM' if getattr(questions,'open_verification',False) else 'VERIFIED_COMPLETE_UNIT_SSE'),
             'question_scope_policy':('ADMITTED_MANUAL_EVIDENCE_GROUNDED_LLM' if hasattr(questions,'feedback') else
                 'CONSERVATIVE_REVIEWED_COMPONENT_SCOPE'),
             'diagnostic_wizard':False, 'photos':False,
@@ -100,7 +134,8 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
                     return error('UNSUPPORTED','SOURCE_OR_VARIANT_MISMATCH',400)
             if body.get('cache_mode','bypass') not in ('bypass','enabled'):
                 raise ValueError()
-            request.environ['arm_a_cache_enabled'] = body.get('cache_mode','bypass') == 'enabled'
+            request.environ['arm_a_cache_enabled'] = (not getattr(questions, 'open_verification', False) and
+                body.get('cache_mode','bypass') == 'enabled')
             digest = hashlib.sha256(json.dumps({'path':request.path,'body':body},
                 sort_keys=True,ensure_ascii=False).encode()).hexdigest()
         except (ValueError, TypeError, KeyError, UnicodeError, LimitError):
@@ -137,6 +172,22 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
                 if prior['state']=='FAILED':
                     return error('SYSTEM_ERROR',prior['error'],prior['http_status'])
                 return jsonify({'status':'RUNNING','operation_id':key}),202
+            if getattr(questions, 'open_verification', False):
+                from cloud.grounded_generation.delivery import bind_view, stream_operation
+                actual_query = old['query'] if feedback else query
+                history = (old or {}).get('conversation', [])
+                expected = old['version'] if old else None
+                def work(progress=None):
+                    current = questions.controller.feedback(session,outcome,key,fact=fact) if feedback else session
+                    updated,view,choices = questions.answer(current,actual_query,
+                        history=history,progress=progress,operation_id=key)
+                    view = bind_view(view,key,updated.generation_lock)
+                    saved=store.commit_answer(key,updated,view,choices,
+                        expected_version=expected,query=actual_query)
+                    return current_view(saved)
+                if 'text/event-stream' in request.headers.get('Accept',''):
+                    return stream_operation(work,key)
+                return deliver(work())
             if feedback:
                 session = questions.controller.feedback(session,outcome,key,fact=fact)
                 if hasattr(questions,'feedback'):
@@ -170,7 +221,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
         if not re.fullmatch(r'[a-f0-9]{32}',session_id):
             return error('SYSTEM_ERROR','INVALID_SESSION_KEY',400)
         try:
-            return jsonify(state().saved(session_id)['view'])
+            return jsonify(current_view(state().saved(session_id)['view']))
         except PermissionError:
             return error('SYSTEM_ERROR','VISITOR_CAPABILITY_REQUIRED',401)
         except KeyError:
@@ -186,7 +237,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
             result = state().operation(key)
             if result['state']=='FAILED':
                 return error('SYSTEM_ERROR',result['error'],result['http_status'])
-            return jsonify(result['view']) if result['state']=='COMPLETE' else (
+            return jsonify(current_view(result['view'])) if result['state']=='COMPLETE' else (
                 jsonify({'status':'RUNNING','operation_id':key}),202)
         except PermissionError:
             return error('SYSTEM_ERROR','VISITOR_CAPABILITY_REQUIRED',401)

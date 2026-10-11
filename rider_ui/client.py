@@ -1,5 +1,6 @@
 """Hosted API client. Keys stay on the UI server; no model or retrieval here."""
 import json
+import hashlib
 import re
 import uuid
 from rider_ui.safeguards import LimitError, validate_message
@@ -13,6 +14,7 @@ STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
+CHECK_ERROR_COPY = 'I couldn’t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):
     """Sanitized message, never provider bodies or credentials."""
@@ -80,10 +82,35 @@ def validate_view(view):
     history = view.get('history', [])
     if not isinstance(history, list) or any(not isinstance(h, dict) or not isinstance(h.get('label'), str) for h in history):
         raise APIError('The service returned an invalid session history.')
+    delivery = view.get('delivery')
+    if delivery is not None:
+        if (type(delivery) is not dict or not {'operation_id','response_sha256','runtime_lock','manual_checksum','index_id'} <= set(delivery) or set(delivery)-{'operation_id','response_sha256','runtime_lock','manual_checksum','index_id','evidence_payload_sha256','verification_binding_sha256'} or
+                type(delivery.get('operation_id')) is not str or not re.fullmatch(r'[a-f0-9]{32}',delivery['operation_id']) or
+                type(delivery.get('runtime_lock')) is not str or not re.fullmatch(r'[a-f0-9]{64}',delivery['runtime_lock']) or
+                delivery.get('manual_checksum') != MANUAL_SHA or delivery.get('index_id') != INDEX_ID):
+            raise APIError('The saved response bindings could not be verified.')
+        digest = hashlib.sha256(json.dumps(response,sort_keys=True,separators=(',',':'),
+            ensure_ascii=False,allow_nan=False).encode('utf-8')).hexdigest()
+        for key in ('evidence_payload_sha256','verification_binding_sha256'):
+            value=delivery.get(key)
+            if value is not None and (type(value) is not str or not re.fullmatch(r'[a-f0-9]{64}',value)):
+                raise APIError('The saved verification bindings could not be verified.')
+        verified=view.get('verified_delivery')
+        if verified is not None:
+            if (type(verified) is not dict or verified.get('operation_id')!=delivery['operation_id'] or
+                    verified.get('runtime_lock')!=delivery['runtime_lock'] or
+                    verified.get('manual_checksum')!=MANUAL_SHA or verified.get('index_id')!=INDEX_ID or
+                    verified.get('presentation_sha256')!=digest or
+                    verified.get('evidence_payload_sha256')!=delivery.get('evidence_payload_sha256') or
+                    verified.get('binding_sha256')!=delivery.get('verification_binding_sha256') or
+                    verified.get('text_sha256')!=hashlib.sha256(response['natural_language'].encode('utf-8')).hexdigest()):
+                raise APIError('The saved verification bindings could not be verified.')
+        if delivery.get('response_sha256') != digest:
+            raise APIError('The saved response changed. Retrieve the original operation.')
     return view
 
 class RiderAPI:
-    def __init__(self, base_url, token, *, timeout=180, allow_loopback=False, visitor=None):
+    def __init__(self, base_url, token, *, timeout=180, allow_loopback=False, visitor=None, cache_mode='bypass', network=None):
         p = urlsplit(base_url)
         local = allow_loopback and p.hostname in {'127.0.0.1', 'localhost'}
         if not p.hostname or (p.scheme != 'https' and not (local and p.scheme == 'http')):
@@ -93,10 +120,15 @@ class RiderAPI:
         if not callable(token) and (not isinstance(token, str) or not token or '\r' in token or '\n' in token):
             raise APIError('The service connection is not configured.')
         self.base_url, self.token, self.timeout = base_url.rstrip('/'), token, timeout
+        self.engineering_loopback = local
+        if cache_mode not in ('bypass', 'enabled'):
+            raise APIError('Invalid cache mode.')
+        self.cache_mode = cache_mode
         self.visitor = visitor
+        self.network = network
         self.opener = build_opener(NoRedirect())
 
-    def request(self, method, path, payload=None, request_id=None, *, on_verified=None, stream=False):
+    def request(self, method, path, payload=None, request_id=None, *, on_verified=None, on_progress=None, on_chunk=None, stream=False):
         try:
             credential = self.token() if callable(self.token) else self.token
         except Exception:
@@ -107,6 +139,8 @@ class RiderAPI:
                    'Accept': 'text/event-stream' if stream else 'application/json'}
         if self.visitor:
             headers['X-MotoMedic-Visitor'] = self.visitor
+        if self.network:
+            headers['X-MotoMedic-Network'] = self.network
         if request_id:
             headers['Idempotency-Key'] = request_id
         raw = None if payload is None else json.dumps(payload, allow_nan=False).encode('utf-8')
@@ -125,7 +159,8 @@ class RiderAPI:
                             if not data:
                                 break
                             yield data
-                    return read_verified_stream(chunks(),on_verified)
+                    return read_verified_stream(chunks(),on_verified,operation_id=request_id,
+                                                on_progress=on_progress,on_chunk=on_chunk)
                 if res.headers.get_content_type() != 'application/json':
                     raise APIError('The service returned an unexpected response format.')
                 data = res.read(MAX_BYTES + 1)
@@ -142,12 +177,12 @@ class RiderAPI:
                 pass
             exc.close()
             messages = {409: 'This session changed. Reconnect to retrieve the latest step.',
-                        429: 'The demo reached its request limit. Please try again later.',
+                        429: CHECK_ERROR_COPY,
                         401: 'The service connection needs to be refreshed.',
                         403: 'The service connection needs to be refreshed.'}
-            raise APIError(messages.get(exc.code, 'The service is temporarily unavailable. Reconnect before continuing.'),terminal=terminal) from None
+            raise APIError(messages.get(exc.code, CHECK_ERROR_COPY),terminal=terminal) from None
         except (URLError, TimeoutError, OSError, ValueError):
-            raise APIError('The service is temporarily unavailable. Reconnect before continuing.') from None
+            raise APIError(CHECK_ERROR_COPY) from None
 
     def catalogue(self):
         data = self.request('GET', '/v1/catalogue')
@@ -156,9 +191,11 @@ class RiderAPI:
             raise APIError('The service manual does not match the selected source.')
         if data.get('question_input') != 'open':
             raise APIError('The service cannot yet accept rider questions. Please reconnect later.')
+        if not self.engineering_loopback and data.get('streaming') != 'DRAFT_VERIFY_STREAM':
+            raise APIError('The service cannot yet check and stream rider answers. Please reconnect later.')
         return data
 
-    def start(self, query, request_id, *, view=None, on_verified=None):
+    def start(self, query, request_id, *, view=None, on_verified=None, on_progress=None, on_chunk=None):
         try:
             query = validate_message(query)
         except LimitError:
@@ -166,21 +203,21 @@ class RiderAPI:
         payload = {
             'query': query, 'bike_variant': 'Himalayan BS6',
             'manual_checksum': MANUAL_SHA, 'index_id': INDEX_ID,
-            'confirmed_himalayan_bs6': True, 'cache_mode': 'bypass'}
+            'confirmed_himalayan_bs6': True, 'cache_mode': self.cache_mode}
         path = '/v1/sessions'
         if view:
             validate_view(view)
             path += '/'+view['session_id']+'/questions'
             payload['expected_version'] = view['version']
         return validate_view(self.request('POST',path,payload,request_id,
-                                         stream=True,on_verified=on_verified))
+                                         stream=True,on_verified=on_verified,on_progress=on_progress,on_chunk=on_chunk))
 
-    def feedback(self, view, choice_id, request_id, *, on_verified=None):
+    def feedback(self, view, choice_id, request_id, *, on_verified=None, on_progress=None, on_chunk=None):
         if not valid_id(view.get('session_id')):
             raise APIError('The session identifier is invalid.')
         return validate_view(self.request('POST', '/v1/sessions/' + view['session_id'] + '/feedback', {
             'expected_version': view['version'], 'choice_id': choice_id,
-            'cache_mode': 'bypass'}, request_id,stream=True,on_verified=on_verified))
+            'cache_mode': self.cache_mode}, request_id,stream=True,on_verified=on_verified,on_progress=on_progress,on_chunk=on_chunk))
 
     def recover(self, session_id):
         if not valid_id(session_id):
@@ -190,5 +227,8 @@ class RiderAPI:
     def recover_operation(self, request_id):
         if not re.fullmatch(r'[a-f0-9]{32}', request_id):
             raise APIError('The request identifier is invalid.')
-        return validate_view(self.request('GET', '/v1/operations/' + request_id))
+        view = validate_view(self.request('GET', '/v1/operations/' + request_id))
+        if view.get('delivery') and view['delivery']['operation_id'] != request_id:
+            raise APIError('The saved response belongs to another request.')
+        return view
 

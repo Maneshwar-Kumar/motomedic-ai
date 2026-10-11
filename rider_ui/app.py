@@ -6,7 +6,8 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from rider_ui.client import APIError, RiderAPI, operation_id
 from rider_ui.safeguards import LIMITS
-from rider_ui.identity import issue, cloud_run_token, platform_subject
+from rider_ui.verified_sse import PROGRESS_LABELS
+from rider_ui.identity import issue, verify, cloud_run_token, platform_subject
 
 st.set_page_config(page_title='MotoMedic · Rider assistant', page_icon='🏍️', layout='wide')
 st.markdown(Path(__file__).with_name('theme.css').read_text(encoding='utf-8'), unsafe_allow_html=True)
@@ -24,7 +25,18 @@ def client():
     url = setting('MOTOMEDIC_RIDER_API_URL')
     managed = setting('MOTOMEDIC_RIDER_AUTH') == 'cloud_run'
     credential = (lambda:cloud_run_token(url)) if managed else setting('MOTOMEDIC_RIDER_API_TOKEN')
-    if 'visitor_capability' not in st.session_state and setting('MOTOMEDIC_VISITOR_SECRET'):
+    anonymous = setting('MOTOMEDIC_RIDER_ACCESS') == 'anonymous_edge'
+    network = None
+    if anonymous:
+        try:
+            capability = st.context.headers.get('X-MotoMedic-Edge-Visitor')
+            network = st.context.headers.get('X-MotoMedic-Edge-Network')
+            verify(setting('MOTOMEDIC_VISITOR_SECRET'), capability, 'anonymous-edge-v1')
+            verify(setting('MOTOMEDIC_VISITOR_SECRET'), network, 'anonymous-network-v1')
+            st.session_state.visitor_capability = capability
+        except (PermissionError, ValueError):
+            raise APIError('Please refresh to reconnect securely.') from None
+    if not anonymous and 'visitor_capability' not in st.session_state and setting('MOTOMEDIC_VISITOR_SECRET'):
         try:
             principal = platform_subject(st.context.headers) if managed and os.environ.get('K_SERVICE') else None
             st.session_state.visitor_capability = issue(setting('MOTOMEDIC_VISITOR_SECRET'),principal=principal)
@@ -32,7 +44,8 @@ def client():
             raise APIError('Sign in to the private demo before continuing.') from None
     return RiderAPI(url, credential,
                     allow_loopback=setting('MOTOMEDIC_UI_ENGINEERING_LOOPBACK') == '1',
-                    visitor=st.session_state.get('visitor_capability'))
+                    visitor=st.session_state.get('visitor_capability'),
+                    cache_mode=setting('MOTOMEDIC_CACHE_MODE') or 'bypass', network=network)
 
 def remember(view, rider_text=None):
     if rider_text:
@@ -46,15 +59,21 @@ def perform(kind, value):
     pending = {'id': operation_id(), 'kind': kind, 'value': value}
     st.session_state.pending = pending
     try:
-        with st.spinner('Checking the applicable manual evidence…'):
+        with st.spinner('Connecting to MotoMedic...'):
             api = client()
-            slot = st.empty()
+            progress_slot = st.empty()
+            answer_slot = st.empty()
+            displayed = ['']
+            def progress(stage):
+                # Backend stages are operational events, never simulated timing.
+                progress_slot.caption(PROGRESS_LABELS[stage])
             def verified(view):
                 st.session_state.pending['verified'] = view
-                with slot.container():
-                    st.caption('Manual-backed response')
-                    st.text(view['response']['natural_language'])
-            view = api.start(value, pending['id'], view=st.session_state.view, on_verified=verified) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'],on_verified=verified)
+            def chunk(text):
+                displayed[0] += text
+                answer_slot.text(displayed[0])
+            callbacks = {'on_verified':verified,'on_progress':progress,'on_chunk':chunk}
+            view = api.start(value, pending['id'], view=st.session_state.view, **callbacks) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'], **callbacks)
         remember(view, value if kind == 'start' else value['label'])
     except APIError as exc:
         if exc.terminal:
@@ -128,7 +147,7 @@ if not st.session_state.messages:
                 st.markdown('**' + title + '**')
                 st.write(body)
 
-labels = {'SUPPORTED': 'Manual-backed response', 'AMBIGUOUS': 'One detail to confirm',
+labels = {'SUPPORTED': 'Answer', 'AMBIGUOUS': 'One detail to confirm',
           'UNSUPPORTED': 'No supported answer', 'SAFETY_STOP': 'Safety stop', 'SYSTEM_ERROR': 'Unable to verify right now'}
 for index, (role, value) in enumerate(st.session_state.messages):
     with st.chat_message('user' if role == 'rider' else 'assistant', avatar='🏍️' if role == 'rider' else '🛠️'):
@@ -172,6 +191,8 @@ if st.session_state.connection_error:
             pending = st.session_state.pending
             with st.spinner('Retrieving the saved response…'):
                 view = client().recover_operation(pending['id']) if pending else client().recover(st.session_state.view['session_id'])
+            if pending and pending.get('verified') and view != pending['verified']:
+                raise APIError('The saved response changed. Keep this request pending and reconnect.')
             rider_text = None if not pending else pending['value'] if pending['kind'] == 'start' else pending['value']['label']
             remember(view, rider_text)
             st.rerun()
@@ -190,7 +211,7 @@ if view and not st.session_state.pending:
                 perform('feedback', choice)
     with st.expander('What this conversation remembers'):
         if not view.get('history'):
-            st.caption('No step results have been recorded yet.')
+            st.caption('No previous checks have been recorded yet.')
         for item in view.get('history', []):
             st.text(item['label'])
         st.caption('Reported success does not verify the repair or identify its cause.')

@@ -34,7 +34,8 @@ class Transport:
 class ClientTests(unittest.TestCase):
     def test_real_stream_callback_refresh_credentials_and_question_continuation(self):
         from rider_ui.tests.test_verified_sse import frame
-        v=view(); raw=frame('verified_block',{'view':v})+frame('complete',v)
+        from rider_ui.tests.test_progress_stream import accepted_frames
+        v=view(); raw=b''.join(accepted_frames(v))
         transport=Transport(result=raw)
         original=transport.open
         def streaming(request,timeout):
@@ -48,9 +49,12 @@ class ClientTests(unittest.TestCase):
             return 'managed-token-'+str(len(tokens))
         api=RiderAPI('https://example.com',credential,visitor='signed-visitor')
         api.opener=transport
-        received=[]
-        self.assertEqual(api.start('A raw question','c'*32,on_verified=received.append),v)
+        received=[];stages=[];parts=[]
+        self.assertEqual(api.start('A raw question','c'*32,on_verified=received.append,on_progress=stages.append,on_chunk=parts.append),v)
+        self.assertEqual(stages,['retrieving','drafting','verifying','displaying'])
+        self.assertEqual(''.join(parts),v['response']['natural_language'])
         self.assertEqual(received,[v])
+        transport.result=b''.join(accepted_frames(v,key='d'*32))
         api.start('Another raw question','d'*32,view=v)
         self.assertEqual(transport.request.full_url,'https://example.com/v1/sessions/'+'a'*32+'/questions')
         self.assertEqual(json.loads(transport.request.data)['expected_version'],1)
@@ -142,8 +146,10 @@ class ClientTests(unittest.TestCase):
         base={'schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID}
         api.opener=Transport(result=json.dumps(base).encode())
         with self.assertRaises(APIError): api.catalogue()
-        api.opener=Transport(result=json.dumps({**base,'question_input':'open'}).encode())
+        api.opener=Transport(result=json.dumps({**base,'question_input':'open','streaming':'DRAFT_VERIFY_STREAM'}).encode())
         self.assertEqual(api.catalogue()['question_input'],'open')
+        api.opener=Transport(result=json.dumps({**base,'question_input':'open','streaming':'VERIFIED_COMPLETE_UNIT_SSE'}).encode())
+        with self.assertRaises(APIError):api.catalogue()
 
     def test_session_identifiers_cannot_inject_path(self):
         api=RiderAPI('https://example.com','secret')

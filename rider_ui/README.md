@@ -2,13 +2,13 @@
 
 A Streamlit interface built separately from the ongoing controller/model experiments. It uses a server-to-server hosted API, with no manual, index, embedding model, provider key or local authoritative session store in the UI image.
 
-Implemented: Himalayan BS6 confirmation and manual identity; free-text questions and ordinary follow-up questions; one server-issued clarification/action at a time; full gated text and warnings; structured server-issued feedback; five distinct response states; citation metadata; remembered outcomes; verified support link; safe operation recovery after transport failures; desktop/mobile layout.
+Implemented: Himalayan BS6 confirmation and manual identity; free-text questions and ordinary follow-up questions; source-grounded answers, including partial answers and rider-resolvable clarifications; full checked text and warnings; structured server-issued feedback; five distinct response states; citation metadata; remembered outcomes; verified support link; safe operation recovery after transport failures; desktop/mobile layout.
 
-Photos remain disabled under the required text-first acceptance sequence. Optional voice is not implemented. Citation expansion shows metadata because end-user PDF/excerpt/crop display is prohibited. Topic coverage and adaptive transitions are supplied by the installed hosted controller, not enlarged by the UI.
+Photos remain disabled under the required text-first acceptance sequence. Optional voice is not implemented. Citation expansion shows metadata because end-user PDF/excerpt/crop display is prohibited. The backend supplies source-grounded answers and retains relevant typed outcomes; the UI adds no technical advice.
 
 ## Status
 
-UI code, contract tests and container packaging are implemented. The question-driven API adapter and verified SSE connection are implemented; hosted acceptance is recorded separately in reports/arm_a/ui_wiring_v1/. No live rider/provider call, source approval, index rebuild, billing change or production deployment follows from this UI work.
+The latest [draft–verify–stream decision](../docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md) governs the client. Backend progress stages show retrieval, private drafting, separate checking and display. The complete answer must pass verification and durable save before accepted wording is delivered. Each displayed chunk must match the saved response, operation and response hash. Recovery retrieves that same answer without repeating inference. Private synthetic checks are recorded in [the UI streaming report](../reports/grounded_generation/v6/ui_streaming/REPORT.md); real-model quality, hosted browser acceptance and deployment remain pending. Historical hosted wiring receipts remain in reports/arm_a/ui_wiring_v1/.
 
 Read [API_CONTRACT.md](API_CONTRACT.md) for the exact required endpoints and integration obligations. It includes transaction/idempotency, per-session authorization, rate/spending and full browser acceptance requirements. The authenticated candidate Qdrant service is not a compatible rider API.
 
@@ -40,7 +40,7 @@ Loopback fixture: `python -m rider_ui.tests.fixture_api` plus explicit engineeri
 1. Install the API contract over the existing reviewed service using durable managed sessions, source/model/version locks, actual retrieval and required answer gates.
 2. Issue only reviewed, version-bound choices; retain unresolved outcomes and immutable corrections.
 3. Enable secret-backed UI-to-API connection, authenticated session ownership, idempotent operation recovery, upload/rate/spending controls and redacted traces.
-4. Smoke-test the deployed text interface with a fresh browser and real retrieval and scoped Arm A checks, with cache bypassed and citations displayed.
+4. Smoke-test the deployed text interface with a fresh browser, real retrieval, separate drafting/verification, truthful progress, committed answer streaming and citations. Incompatible answer-cache shortcuts stay disabled.
 5. Record a live acceptance report. Only then extend to evaluated photo observations and optional voice.
 
 Rollback: disable the new UI connection or revert its container revision; preserve managed session histories and immutable backend source/index versions. Never roll back source approval bindings by changing UI configuration.
@@ -50,6 +50,4 @@ The symptom input sits inside the entry card. Text maximum is 2,000 characters i
 
 ## Saved UI chat outcome
 
-Read [CHAT_OUTCOME_20261011.md](CHAT_OUTCOME_20261011.md) for the owner-approved copy/layout decisions, reset and context behavior, limits, prompt and test evidence, publication details and exact continuation instructions. [TODO.md](../TODO.md) contains only pending UI integration, guardrails and photo handling. TRD v0.5 governs concurrent hybrid retrieval and Option A complete-unit streaming. The UI client now consumes verified complete-unit SSE. Arm A uses zero answer-provider calls; provider prompt-prefix caching is not part of this wiring. Existing approved response reuse must not be described as provider prompt caching.
-
-Current connection and limitations: [private question UI wiring](../docs/architecture/UI_WIRING_20261011.md). The initial 30-case service is a compatibility benchmark endpoint; the UI sends raw questions to the new session API. Other paraphrases may abstain under the conservative source-scope gate.
+Read [CHAT_OUTCOME_20261011.md](CHAT_OUTCOME_20261011.md) for the owner-approved copy/layout, reset and privacy decisions. Its Arm A and exact-response method descriptions are historical; the later draft–verify–stream decision supersedes them. Provider prompt caching remains distinct from answer authorization, with no established savings for the current exact model. Existing public/private deployment records are historical receipts, not approval to release this changed pipeline.
