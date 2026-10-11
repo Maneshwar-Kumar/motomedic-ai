@@ -10,6 +10,7 @@ from docx import Document
 from docx.shared import RGBColor, Pt
 from docx.oxml import OxmlElement
 from docx.text.paragraph import Paragraph
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'reports/grounded_generation/draft_verify_stream_v1/documents'
@@ -87,13 +88,17 @@ def polish_layout(doc,name):
             if id(footer._element) in seen:continue
             seen.add(id(footer._element))
             paragraph=footer.paragraphs[0]
-            texts=footer._element.xpath('.//w:t')
-            for element in texts:element.text=''
-            if texts:texts[0].text=label
-            else:paragraph.add_run(label)
-            if not footer._element.xpath('.//w:instrText') and not footer._element.xpath('.//w:fldSimple'):
-                field=OxmlElement('w:fldSimple');field.set('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}instr','PAGE');paragraph._p.append(field)
-            for run in paragraph.runs:run.font.size=Pt(8)
+            # Rebuild the small footer instead of retaining old tab-stop/run or
+            # field-result layouts, which LibreOffice can clip on page variants.
+            paragraph.clear()
+            paragraph.paragraph_format.tab_stops.clear_all()
+            paragraph.paragraph_format.left_indent=Pt(0)
+            paragraph.paragraph_format.right_indent=Pt(0)
+            paragraph.alignment=WD_ALIGN_PARAGRAPH.RIGHT
+            run=paragraph.add_run(label);run.font.size=Pt(8)
+            field=OxmlElement('w:fldSimple');field.set('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}instr','PAGE')
+            field_run=OxmlElement('w:r');props=OxmlElement('w:rPr');size=OxmlElement('w:sz');size.set('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val','16');props.append(size);field_run.append(props)
+            text=OxmlElement('w:t');text.text='1';field_run.append(text);field.append(field_run);paragraph._p.append(field)
     if name=='02_PRD.docx':
         criteria={
             'FR-07':'Preserve typed unresolved outcomes and corrections; ordinary Q&A has no required branch. See current architecture and typed-history policy.',
