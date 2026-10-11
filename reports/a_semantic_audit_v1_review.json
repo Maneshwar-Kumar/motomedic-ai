@@ -2,7 +2,7 @@
   "schema_version": "independent-a-exact-output-verifier-engineering-review-v1",
   "decision": "APPROVED_EXACT_ENGINEERING_AUDIT",
   "reviewer_actor": "/root/audit_engineering_review",
-  "reviewed_at_utc": "2026-10-11T08:47:23.745606+00:00",
+  "reviewed_at_utc": "2026-10-11T08:52:44.847455+00:00",
   "human_inspection_claimed": false,
   "authority": "Independent agent review explicitly permitted by TRD_UI_FOLLOWUP_HANDOFF.md; coordinator separately approves fresh budget-bound one-run allocation.",
   "file_sha256": {
@@ -234,9 +234,8 @@
     "human_review/agent_release_161/planner/runtime_correction_proposals_v2.json": "56e322996b48fbb13ef151c8a79ad5734f6a1726e288f3ee0caaa3af1fe219ce",
     "audit_a_semantic.py": "aec4365c0fd84699aaac613d51bdc2b2f49868b294cf93e8a4bfb850c2132f12",
     "test_a_semantic_audit.py": "9dc51b1ff67b1bc267d9a11015775914490489f716a3dba7d20419467cf433ff",
-    ".github/workflows/a-semantic-audit.yml": "286cf47e7e938b3f46949f17f50166f09f199718584c9b8bc210ffdea3311eab",
+    ".github/workflows/a-semantic-audit.yml": "14ae47b6eeed1b6cb80afd1355303ed0d4bdad8c8f162ddf77fcad963e119920",
     "tools/prepare_a_audit_budget.py": "f58d8538ad1fa070cd659eee1b620ebcf6e7284d7fef0bbb1d004c60e4cca652",
-    "TRD_UI_FOLLOWUP_HANDOFF.md": "a96c8da50be770b9f21ac9091101b2487ce9dc429faaafa16af3935f797adbc6",
     "reports/architecture_run_38122505406/architecture_comparison.json": "bfd7603c1dccb84d99613c8de647de9475da4f9675d75ccdfb583c915583ac83",
     "reports/architecture_benchmark_review_v4.json": "f94d01bb437ee9737646aa26d54f5725696cafacda26ffe3c6fc99b895f55849",
     "human_review/agent_release_161/root_validation_v3.json": "f460ef690e06ed814b59f8b9449e6953cda5623158b99c9a14cc1c7942403a75",
@@ -300,7 +299,8 @@
     "PASS: malformed flat-array/scalar schema cannot pass; valid rejection differs from operational failure; admission errors consume no provider request.",
     "PASS: fresh review decision, review/runtime/input hashes, budget/approval hashes and exact allocation are required before provider construction.",
     "PASS: 48 offline strict audit/provider/byte-transport/pacing tests; no real provider calls.",
-    "PASS: separate fresh verifier-only protocol matches exact three reconstructed inputs, 400 output tokens, one hosted run, zero retries/fallback and scope limitations."
+    "PASS: separate fresh verifier-only protocol matches exact three reconstructed inputs, 400 output tokens, one hosted run, zero retries/fallback and scope limitations.",
+    "PASS: branch/path filtered push runs audit only when head commit carries [run-a-semantic-audit] and run_attempt1; dispatch remains available as an alternative. Exactly one coordinator marker push consumes the allocation; both triggers must not be used."
   ],
   "findings_resolved": [
     {
@@ -317,6 +317,11 @@
       "severity": "ACCOUNTING",
       "finding": "Admission failure escaped per-case report.",
       "resolution": "Catch AdmissionFailure as OPERATIONAL_FAILURE before provider; increment actual attempts only from adapter allocation consumption."
+    },
+    {
+      "severity": "CROSS_PLATFORM_BINDING",
+      "finding": "Instruction-only handoff differs by CRLF working bytes versus committed LF.",
+      "resolution": "Remove only its runtime file_sha256 gate; retain read provenance and canonical LF digest in instruction_context. All code/source/protocol/payload bindings retained."
     }
   ],
   "cases": [
@@ -454,18 +459,40 @@
     "command": "python -m unittest -v test_a_semantic_audit test_gemini_provider test_gemini_transport_bytes test_benchmark_pacing",
     "tests_passed": 48,
     "tests_failed": 0,
-    "provider_calls": 0
+    "provider_calls": 0,
+    "post_workflow_change_command": "python -m unittest -v test_a_semantic_audit",
+    "post_workflow_change_tests_passed": 9,
+    "post_workflow_change_tests_failed": 0
   },
   "limitations": [
     "Engineering approval only; no fresh hosted semantic acceptance is claimed. Coordinator-owned budget and exact approval are separate required artifacts.",
     "Invalid JSON/duplicate keys/Markdown fail at provider parser as OPERATIONAL_FAILURE(PROVIDER_REFUSAL_OR_MALFORMED); a parsed JSON object violating CHECK_SCHEMA is MALFORMED_SCHEMA. Neither can establish acceptance.",
     "Original redacted run retains delivered content hashes, citation count and citation-validation flags, rather than full emitted citation records. Exact required citations are reconstructed from unchanged signed registry/source.",
     "Three source-backed boolean claim checks do not constitute whole-corpus approval, general vision evaluation, independent model calibration, deployment or adaptive-path approval.",
-    "Workflow run_attempt1 prevents automatic rerun of a job; fresh allocation is operationally limited to one coordinator dispatch and not a globally atomic spent-allocation store.",
+    "Workflow run_attempt1 prevents automatic rerun of a job; fresh allocation is operationally limited to one coordinator marker push (or one alternative dispatch) and not a globally atomic spent-allocation store.",
     "Pacing reservations are conservative byte accounting, not verified account quota; global provider traffic and instantaneous GCP spend remain externally uncertain."
   ],
   "deployment_authorized": false,
   "billing_change_authorized": false,
   "ui_modified": false,
-  "fresh_protocol_sha256": "84c56bd9dde5353169f1b2882195684df13d1933c3f59ddcc1bc773e5982f66b"
+  "fresh_protocol_sha256": "84c56bd9dde5353169f1b2882195684df13d1933c3f59ddcc1bc773e5982f66b",
+  "instruction_context": {
+    "path": "TRD_UI_FOLLOWUP_HANDOFF.md",
+    "read_for_review": true,
+    "runtime_byte_gate": false,
+    "local_read_sha256": "a96c8da50be770b9f21ac9091101b2487ce9dc429faaafa16af3935f797adbc6",
+    "canonical_lf_sha256": "0b90ee59d646fbb2a8e6b87444d53cbe3e0ea54f93de9a3332d2422e8d193e4e",
+    "reason": "Instruction-only handoff has Windows CRLF working bytes and committed LF; exact runtime/source/protocol/payload bindings remain mandatory and unchanged."
+  },
+  "single_execution_authority": {
+    "maximum_live_runs": 1,
+    "selected_execution": "ONE_COORDINATOR_MARKER_PUSH",
+    "branch": "codex/reviewed-evidence-controller",
+    "path_filter": ".github/workflows/a-semantic-audit.yml",
+    "head_commit_marker": "[run-a-semantic-audit]",
+    "alternative_workflow_dispatch_retained": true,
+    "dispatch_and_push_both_authorized": false,
+    "github_run_attempt": 1,
+    "same_three_call_allocation": true
+  }
 }

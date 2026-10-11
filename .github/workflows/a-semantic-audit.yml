@@ -1,12 +1,15 @@
 name: Exact A post facto semantic audit
 on:
   workflow_dispatch:
+  push:
+    branches: [codex/reviewed-evidence-controller]
+    paths: [.github/workflows/a-semantic-audit.yml]
 permissions:
   contents: read
   actions: read
 jobs:
   audit:
-    if: github.run_attempt == 1
+    if: github.run_attempt == 1 && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[run-a-semantic-audit]')))
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
