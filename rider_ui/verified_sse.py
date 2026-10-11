@@ -19,7 +19,7 @@ def response_hash(view):
     return hashlib.sha256(json.dumps(view['response'],sort_keys=True,
         separators=(',',':'),ensure_ascii=False,allow_nan=False).encode('utf-8')).hexdigest()
 
-def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress=None,on_chunk=None):
+def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress=None,on_chunk=None,expected_policy=None):
     """Publish only an accepted whole view and slices of that exact saved text.
 
     A disconnect preserves the complete accepted view through on_verified;
@@ -64,12 +64,12 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
             if operation_id is not None:
                 bound(data,{'view','operation_id','response_sha256'})
                 if not displaying:fail()
-                verified=validate_view(data['view'])
+                verified=validate_view(data['view'],expected_policy=expected_policy)
                 digest=response_hash(verified)
                 if data['response_sha256']!=digest:fail()
             else:
                 if type(data) is not dict or set(data)!={'view'}:fail()
-                verified=validate_view(data['view'])
+                verified=validate_view(data['view'],expected_policy=expected_policy)
             response=verified['response']
             if operation_id is not None:
                 if response['type']=='SYSTEM_ERROR' or response.get('release_gate_passed') is not True:
@@ -91,7 +91,7 @@ def read_verified_stream(chunks,on_verified=None,*,operation_id=None,on_progress
             streamed+=data['text']
             if on_chunk:on_chunk(data['text'])
         elif kind=='complete':
-            complete=validate_view(data)
+            complete=validate_view(data,expected_policy=expected_policy)
             if verified is not None:
                 if verified!=complete:fail('The service stream changed. Retrieve the saved result.')
                 if operation_id is not None and (response_hash(complete)!=digest or
