@@ -1,0 +1,166 @@
+{
+  "schema_version": "ab30-measurements-v1",
+  "case_count": 30,
+  "method_turns": 60,
+  "quantile_method": "linear interpolation at (n-1)*p",
+  "interval": "Wilson95percent binomial interval; regression set not a population random sample",
+  "timing_boundary": "HOSTED_WARM_QUERY_WORKER_ACTUAL_LOOPBACK_HTTP_SSE_NOT_PUBLIC_CLOUD_RUN_APP",
+  "startup_excluded": 38.245553703,
+  "pretrial_cooldown_excluded": 60.000117001999996,
+  "provider_requests": 66,
+  "methods": {
+    "A_COMPONENT_SELECTION": {
+      "turn_count": 30,
+      "correctly_delivered": 23,
+      "not_delivered": 7,
+      "delivery_success_fraction": 0.7666666666666667,
+      "delivery_success_wilson95": [
+        0.5907167384187784,
+        0.8820761185551049
+      ],
+      "routes": {
+        "SUPPORTED": 23,
+        "SYSTEM_ERROR": 7
+      },
+      "successful_latency_denominator": 23,
+      "latency": {
+        "client_first_safe_output_seconds": {
+          "n": 23,
+          "p50": 9.873708463000185,
+          "p95": 29.592828591900023,
+          "min": 1.9590443360000052,
+          "max": 29.623214269000073
+        },
+        "client_complete_seconds": {
+          "n": 23,
+          "p50": 9.884086501000183,
+          "p95": 29.59462496190006,
+          "min": 1.9761382160000096,
+          "max": 29.633319518000008
+        },
+        "retrieval_gate_seconds": {
+          "n": 23,
+          "p50": 2.093795484999987,
+          "p95": 3.0927279269000336,
+          "min": 0.7086592730000234,
+          "max": 4.213587079999996
+        },
+        "provider_active_seconds": {
+          "n": 23,
+          "p50": 0.6554379539999786,
+          "p95": 0.853462215199994,
+          "min": 0.5434092640000472,
+          "max": 0.9818868149999957
+        },
+        "idle_pacing_seconds": {
+          "n": 23,
+          "p50": 7.788415196000074,
+          "p95": 26.67134515609996,
+          "min": 3.553700000225035e-05,
+          "max": 26.918713706000062
+        },
+        "server_full_excluding_idle_pacing_arithmetic_seconds": {
+          "n": 23,
+          "p50": 2.7801951080000435,
+          "p95": 3.9471353912000064,
+          "min": 1.3420477720000576,
+          "max": 5.28465526399998
+        },
+        "generator_provider_ttft_seconds": {
+          "n": 23,
+          "p50": 0.647033,
+          "p95": 0.8083453999999999,
+          "min": 0.535369,
+          "max": 0.973378
+        }
+      },
+      "provider_requests": 24,
+      "actual_retries": 0
+    },
+    "B_SHORT_GENERATION": {
+      "turn_count": 30,
+      "correctly_delivered": 11,
+      "not_delivered": 19,
+      "delivery_success_fraction": 0.36666666666666664,
+      "delivery_success_wilson95": [
+        0.21873920806100708,
+        0.5448643634520511
+      ],
+      "routes": {
+        "SYSTEM_ERROR": 19,
+        "SUPPORTED": 11
+      },
+      "successful_latency_denominator": 11,
+      "latency": {
+        "client_first_safe_output_seconds": {
+          "n": 11,
+          "p50": 30.309124064000002,
+          "p95": 50.225491598500014,
+          "min": 20.335501846999932,
+          "max": 60.11704084999997
+        },
+        "client_complete_seconds": {
+          "n": 11,
+          "p50": 30.309356765000018,
+          "p95": 50.23101972400002,
+          "min": 20.335716643999945,
+          "max": 60.128062495999984
+        },
+        "retrieval_gate_seconds": {
+          "n": 11,
+          "p50": 2.093077292000089,
+          "p95": 2.9223120289999827,
+          "min": 0.7432071629999655,
+          "max": 3.0036491509999905
+        },
+        "provider_active_seconds": {
+          "n": 11,
+          "p50": 2.6351187900000923,
+          "p95": 3.593337588499992,
+          "min": 2.078332940999985,
+          "max": 3.7526677979999477
+        },
+        "idle_pacing_seconds": {
+          "n": 11,
+          "p50": 25.909524817999966,
+          "p95": 45.66236327349998,
+          "min": 17.20906327099999,
+          "max": 54.51843080499998
+        },
+        "server_full_excluding_idle_pacing_arithmetic_seconds": {
+          "n": 11,
+          "p50": 4.820978254000011,
+          "p95": 6.204309019499988,
+          "min": 3.0008500289999347,
+          "max": 6.803589256999999
+        },
+        "generator_provider_ttft_seconds": {
+          "n": 11,
+          "p50": 0.742123,
+          "p95": 0.8437095,
+          "min": 0.68581,
+          "max": 0.871913
+        }
+      },
+      "provider_requests": 42,
+      "actual_retries": 0
+    }
+  },
+  "claim_scope": "Reviewed initial LOOKUP/preselected intent regression; delivery success is not independent semantic accuracy",
+  "model": "gemma-4-26b-a4b-it",
+  "library_versions": {
+    "torch": "2.14.1+cpu",
+    "numpy": "2.4.6",
+    "sentence-transformers": "6.1.0",
+    "pypdfium2": "5.14.0"
+  },
+  "paired_B_minus_A_client_complete_seconds": {
+    "n_both_successful": 11,
+    "p50": 20.30782141200001,
+    "p95": 43.74081952899985,
+    "A_faster_pairs": 11,
+    "B_faster_pairs": 0
+  },
+  "known_input_tokens": 26971,
+  "known_output_tokens": 1842
+}
