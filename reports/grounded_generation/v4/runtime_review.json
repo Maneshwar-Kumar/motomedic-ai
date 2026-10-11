@@ -1,0 +1,280 @@
+{
+  "schema_version": "grounded-runtime-scoped-review-v4",
+  "status": "APPROVED_SCOPED_DETERMINISTIC_SOFTWARE_ARCHITECTURE",
+  "public_release_approved": false,
+  "reviewer": "/root/runtime_review",
+  "scope": "Independent review of parent integration: source-context filtering/presentation, refusal-only fuse routing and conservative provider token-minute accounting; carries forward unchanged deterministic controller/citation/provider/cache boundaries. No semantic or public deployment approval.",
+  "files": {
+    "cloud/grounded_generation/admission.py": "bf0042a70539d2345c908a9ab5001a10f7d18db30f6fc4696cb8dbe0e69bd664",
+    "cloud/grounded_generation/policy.py": "0398f1d8e778fe03f1b530b57e85ebecde5dc0ef4162207d5a2fc9243440961b",
+    "cloud/grounded_generation/presentation.py": "edec2c7ef8fc89936b34a9fa86062b20ce8c34f909b146464e0dc59688ba5b80",
+    "cloud/grounded_generation/provider.py": "d1bd3769bdc130afe6555b440cb9f1f3aa58507a408b9882d3287d42008b870d",
+    "cloud/grounded_generation/response_cache.py": "2a3cdda78278d3201e2654dac033bf46cbabf3c79f207adf0a521c2a0a51478d",
+    "cloud/grounded_generation/runtime.py": "f284afd45fcb405f6eebed92e9d87a07d1477d99268b90220c1fed3a53f9c737",
+    "cloud/grounded_generation/test_provider.py": "6aab47e4fb4603755dac46a17536fec1eb29e995de4945c8794e555ee2a23c6d",
+    "cloud/grounded_generation/test_runtime.py": "13626377cc96d98b7869e2157b281784269b95e174b4ded39cfa153e72df85a7",
+    "cloud/grounded_generation/__init__.py": "883ad628573b45c505cffe99b92370e05f20872f1f31c1e4a295b2e62119787d",
+    "cloud/arm_a/app.py": "c82128e25e6ed52fcbaace573fef31873ecc778619c345aba74f731e60e44ccf",
+    "cloud/arm_a/rider_api.py": "5037ac94c93458b68aaec2a9f5c91ce285689e315b8e2b61ce61a86ada6704af",
+    "cloud/arm_a/store.py": "34186fca9c4832bc5198072746f827a546fad4365374b3b615eaffe537ffdba1",
+    "cloud/arm_a/runtime_controls.py": "e3c251f1dd7549af23ca912a4e89b09dfef97f2a6828df7367e2a9beeef7d105",
+    "tools/validate_grounded_generation.py": "3141140dd1e96f74e0e31c0b8d49d62befd24624d4077f53d69a0cea160ba644",
+    "cloud/grounded_generation/feedback.py": "658f019e96ccc427682590975066f4d2ac9c79bfb96b095bd8b91bbddd8522ca",
+    "reports/grounded_generation/prerequisite_review_v1/answer_bindings.json": "f198399fcaf1b43ddd6b7bbcf03514a11caaea987cc7eb6f28293c6e3c810a9a",
+    "cloud/grounded_generation/test_feedback.py": "d8b8af6e292ea4f05263f3f1828a4380c045f63428049d99a4a7b52e914e6cdb",
+    "cloud/grounded_generation/context.py": "10748eebd61a8340294b11fddfc2648036ee146e683c3bcfa0cda4f0f2803074",
+    "cloud/grounded_generation/test_context.py": "fa98e663d0d2ca8facdd47768cdc47d7afca2b4ee2e9bfaf29926c8d94ac5a73",
+    "cloud/grounded_generation/test_admission.py": "c4767620e071b67318391b4f26cfa6523d96aac525d5084df8e319a73a97c9b9",
+    "cloud/grounded_generation/test_scope.py": "c26b6920521763cbfeba13bc8be223df513cb2f72686bb02fea9cee77c3182fc",
+    "cloud/grounded_generation/source_context.py": "74c9219660266f8d996bf389c9cebf217aae34043328bd92ff78d1d260fbf091",
+    "cloud/grounded_generation/test_source_context.py": "8ceae874388a19ef501e2c6971fcde0d26dba31d2bc98f369d6a631689ddbae1",
+    "cloud/grounded_generation/fuse_refusal.py": "a99702dd2bdaa568cdcc7365323d8649ba86b5ad2acdc1d333daf38bf285b8f0",
+    "cloud/grounded_generation/test_fuse_refusal.py": "31f11fb980386e6cebc047175dc7f713a3903365eb64b596e92574ee11a7c704",
+    "reports/grounded_generation/source_context_v1/context_bindings.json": "7f414ce70696a1e60f97655c577ae2556b8b09f99989af2a747fdb72e73d4aed",
+    "reports/grounded_generation/source_context_v1/fuse_safety_scope.json": "1a9a27d561e59613b2df875600d3fc2f4e904f2a4bcafbcbaa57dbe6f2508bb6"
+  },
+  "checks": {
+    "provider_boundary_tests": {
+      "command": "python -m unittest cloud.grounded_generation.test_provider -v",
+      "passed": 13,
+      "transport": "mock",
+      "semantic_evidence": false
+    },
+    "new_generation_path_separate_semantic_verifier_calls": 0,
+    "generated_wording_membership_checked": false,
+    "runtime_manifest_file_bindings": "ALL_MATCH",
+    "independent_feedback_boundary_tests": {
+      "command": "python -m unittest cloud.grounded_generation.test_feedback -v",
+      "passed": 14,
+      "source": "Actual content-bound coordinator registry and exact clarification approval JSON; mocked provider thought boundary",
+      "semantic_evidence": false
+    },
+    "runtime_regression_local": {
+      "command": "python -m unittest cloud.grounded_generation.test_runtime -v",
+      "status": "UNAVAILABLE_LOCAL_DEPENDENCY",
+      "cause": "Flask not installed; requires hosted receipt"
+    },
+    "bounded_retrieval_scopes": {
+      "maximum_non_action": 3,
+      "maximum_action": 1,
+      "ranking": "DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1",
+      "mandatory_evidence": "Complete required set retained for every selected scope; overflow fails explicitly"
+    },
+    "known_safety": "Confirmed source-backed non-policy typed observations only; no hazard inferred from retrieval tags",
+    "mandatory_display": "Required reviewed warning, prerequisite and policy wording appended server-side and exact-bound at presentation",
+    "exact_response_cache": "No semantic lookup, no automatic insertion of generated misses, current approved canonical planner bytes and admitted scope revalidated",
+    "complete_content_projection": {
+      "tests": 8,
+      "passed": 8,
+      "command": "python -m unittest cloud.grounded_generation.test_context -v",
+      "approved_objects_checked": 518,
+      "approved_tables_checked": 11,
+      "separate_provenance_mismatches": 0,
+      "losslessness_scope": "Every original content field except duplicate provenance supplied separately and cell bbox retained in immutable registry. Grid removed only when cells are exact duplicates; nonredundant grids fully retained with row lengths.",
+      "round_trip": "Independent decoder exact equality; preserves missing fields vs null/false, spans/header flags/text, units and all nested references/images/annotations/captions metadata; original hashes and deep-copy source immutability verified.",
+      "semantic_evidence": false
+    },
+    "schema_prompt_v2": "Explicit route enum SUPPORTED/AMBIGUOUS/UNSUPPORTED/SAFETY_STOP and claim role enum FACT/ACTION, plus generic columnar interpretation instructions; no held-out expected facts incorporated into serving.",
+    "managed_provider_allowance": {
+      "tests": 8,
+      "passed": 8,
+      "command": "python -m unittest cloud.grounded_generation.test_admission -v",
+      "source_file_sha256": "cfa7b0c71d3b3f03ebb4598bb5db57ee469bb365bb363118409a9eca8390dee1",
+      "receipt_scope": "Local mocked transaction tests, frozen v4 exact test bytes; live hosted receipt remains separate.",
+      "checks": [
+        "6 generation reservations/minute",
+        "100 generations/day",
+        "120 all events/day",
+        "999200 worst-case reserved tokens/day including cache prefixes",
+        "24h expiry",
+        "invalid type/token/kind rejection",
+        "store outage fails closed",
+        "20 competing threads admit exactly6 under simulated transaction lock"
+      ]
+    },
+    "source_only_admission": {
+      "tests": 8,
+      "passed": 8,
+      "command": "python -m unittest cloud.grounded_generation.test_scope -v",
+      "boundary": "Unused authored FACT/ACTION text and variants never enter provider scope payload and no longer gate admission; exact source object authority remains required.",
+      "authority_tests": "Synthetic approved-boundary predicate isolation plus actual ApprovedEvidenceRegistry mutation rejection; no test fixture grants approval.",
+      "retained_gates": [
+        "source_ready",
+        "content-bound step_ready",
+        "TRUE typed eligibility",
+        "figure hold",
+        "reviewed roles and one permitted action",
+        "unique immutable claim IDs",
+        "claim evidence IDs within full required set",
+        "approved policy caveats",
+        "complete mandatory warning/prerequisite evidence coverage",
+        "reviewed exact mandatory display format",
+        "server-owned original citations"
+      ]
+    },
+    "runtime_freeze_file_bindings": "ALL_MATCH",
+    "source_context_integration": {
+      "approved_label_count": 184,
+      "held_count": 334,
+      "admission": "All required evidence has approved context before candidate generation admission. SOURCE_CONTEXT_REVIEW_REQUIRED alone skips candidate and its clarifications; integrity exceptions bubble to SYSTEM_ERROR.",
+      "composition": "Approved labels and immutable membership only accompany every complete source object/provenance; scopes/context eligibility rechecked after provider call and again at presentation.",
+      "source_integrity": "No parent text, new positive action authority, or context approval bypass of existing r.evidence_ready/step_ready gates."
+    },
+    "refusal_only_fuse_safety": {
+      "tests": 8,
+      "passed": 8,
+      "command": "python -m unittest cloud.grounded_generation.test_fuse_refusal -v",
+      "authority": "Fresh exact source-refusal scope SHA plus source_ready, evidence_ready and raw/provenance/approved-source hash matches.",
+      "routes": "Hazard-pattern match can only serve reviewed source warnings as SAFETY_STOP; permitted_positive_step_ids always empty.",
+      "presentation": "detect_refusal result freshly rederived and equality-bound before presentation; citations server-owned PDF112 metadata; no provider or semantic verifier call."
+    },
+    "token_minute_accounting": {
+      "tests": 8,
+      "passed": 8,
+      "command": "python -m unittest cloud.grounded_generation.test_admission -v",
+      "limits": "10000 worst-case generation plus prompt-cache prefix tokens per rolling minute; existing 6 generations/minute,100 generations/day,120 all events/day,999200 reserved tokens/day remain enforced.",
+      "transaction": "Local mocked Firestore transactional boundary, including concurrent contenders; no live IAM or budget receipt claimed.",
+      "version": "provider-reservations-v2-conservative-token-minute"
+    },
+    "source_only_admission_regression": {
+      "tests": 8,
+      "passed": 8,
+      "command": "python -m unittest cloud.grounded_generation.test_scope -v"
+    },
+    "exact_wording_admission": "No canonical question/paraphrase allowlist; authored FACT/ACTION text format is not admission predicate. Mandatory server warnings/prerequisites/policy display retain exact review binding.",
+    "separate_online_semantic_verifier_calls": 0,
+    "generated_presentation_semantic_support_proven": false
+  },
+  "findings": [
+    {
+      "id": "RR001",
+      "severity": "high",
+      "status": "CLOSED",
+      "location": "cloud/arm_a/rider_api.py:rider_catalogue",
+      "finding": "New Questions lacks descriptors; catalogue still reports zero provider calls and old conservative component policy.",
+      "resolution": "Catalogue reflects open admitted-evidence LLM policy and avoids descriptors dependency."
+    },
+    {
+      "id": "RR002",
+      "severity": "high",
+      "status": "CLOSED",
+      "location": "cloud/arm_a/rider_api.py:feedback / Composer.compose",
+      "finding": "Feedback uses controller.next and mutable Composer.query/scopes from previous call, risking stale context rather than current selected step and retrieval.",
+      "resolution": "Feedback clears stale mutable context and composes only the freshly selected sid/current query."
+    },
+    {
+      "id": "RR003",
+      "severity": "high",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/runtime.py:Questions.answer",
+      "finding": "Already-known applicable safety stops depend on successful new retrieval; retrieval failure returns SYSTEM_ERROR before independent safety routing.",
+      "resolution": "Confirmed non-policy source-backed typed hazard predicates route before retrieval; retrieval tags alone do not establish a known hazard."
+    },
+    {
+      "id": "RR004",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/runtime.py:Questions.answer",
+      "finding": "Session status unconditionally resets OPEN, including customer-reported resolved state; preserve resolution and pending typed semantics explicitly.",
+      "resolution": "Answer preserves customer-reported resolved status and advances version without rewriting typed history."
+    },
+    {
+      "id": "RR005",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/provider.py:cachedContents",
+      "finding": "Prompt-cache creation reserves zero tokens; paid prefix storage/context must have explicit bounded spend allowance or disabled unsupported capability.",
+      "resolution": "Supported explicit prompt cache reserves provider-counted stable-prefix tokens; creation count, lifetime and retained entries are bounded; unsupported exact-model capability remains explicit."
+    },
+    {
+      "id": "RR006",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/runtime.py:Composer.compose_many",
+      "finding": "Eligible exact-response hits skip complete admitted-context byte/token budget checks owned by provider.complete.",
+      "resolution": "Exact reviewed response hits pass whole-context byte and provider token counting with no mandatory-evidence truncation."
+    },
+    {
+      "id": "RR007",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/arm_a/app.py:production Composer construction",
+      "finding": "No reviewed exact-cache loader is configured; eligible response caching is an empty hook.",
+      "resolution": "Reviewed responses derive exact bound planner questions and canonical approved claims, fresh admitted scope and empty active state; arbitrary supplied cache dictionaries are prohibited."
+    },
+    {
+      "id": "RR008",
+      "severity": "high",
+      "status": "CLOSED",
+      "finding": "Known-safety new-question return initially kept old version and would fail durable commit.",
+      "resolution": "Version advances before known-safety routing; regression checks 7 to 8 with retrieval unavailable."
+    },
+    {
+      "id": "RR009",
+      "severity": "high",
+      "status": "CLOSED",
+      "finding": "Clarification owners use canonical records rather than runtime step IDs.",
+      "resolution": "Compare current step canonical_record_id to bound owners, retain step/source/rule hash checks."
+    },
+    {
+      "id": "RR010",
+      "severity": "medium",
+      "status": "CLOSED",
+      "finding": "EXP003 legacy fallback could issue Boolean capabilities for mismatched displayed question.",
+      "resolution": "Reviewed ambiguity requires exact question text; mismatch or absent reviewed binding yields no Boolean choices."
+    },
+    {
+      "id": "RR011",
+      "severity": "medium",
+      "status": "CLOSED",
+      "finding": "Python equality could normalize numeric thought=1 as empty True marker.",
+      "resolution": "Exact dictionary keys plus thought is True; all remaining thought flags require Boolean type, nonempty thoughts and paid thought tokens are rejected."
+    },
+    {
+      "id": "RR012",
+      "severity": "medium",
+      "status": "CLOSED",
+      "finding": "Initial table projection failed on two approved tables with unmatched grid cells.",
+      "resolution": "Retain all nonredundant grid cells and row lengths; reversible columnar encoding preserves every non-bbox field, missing/null/false distinction and value. Independent whole-corpus round-trip tests pass."
+    },
+    {
+      "id": "RR013",
+      "severity": "high",
+      "status": "CLOSED",
+      "finding": "Inherited legacy envelope applied exact-answer text/variant format restrictions to unused authored FACT/ACTION text, blocking evidence-admitted generation.",
+      "resolution": "Replace envelope call with explicit source/step authority, TRUE eligibility, figure hold, reviewed roles/action count, immutable claim IDs/evidence membership, approved policy caveats and complete mandatory coverage. Apply exact display format only to server-appended warnings/prerequisites/caveats. Version admission contract SOURCE_AND_MANDATORY_DISPLAY_ONLY_V2."
+    }
+  ],
+  "limitations": [
+    "Approval is exact-byte scoped software review; any serving/prompt/cache/source-binding change needs a new review and manifest.",
+    "Deterministic citation membership, roles and step/schema checks are not semantic entailment proof; generated FACT text may still misstate evidence or disguise a procedure. Original-PDF claim evaluation remains mandatory.",
+    "No separate final semantic-verifier provider call is introduced.",
+    "Question wording is not an admission allowlist. Coverage remains limited to approved evidence scopes and retained retrieval candidates; it is not whole-manual answerability.",
+    "Bounded ranking may omit a useful lower-ranked factual scope or safety scope for an initial raw question; model interpretation of raw hazards and relevance requires held-out evaluation.",
+    "Provider prompt-cache code is capability gated; mocked explicit-cache tests do not prove exact selected-model support or real savings.",
+    "The 28 clarification polarity bindings have separate source review authority; this review validates capability integrity and typed mapping, not their original-page semantic correctness.",
+    "Hosted runtime/full regression receipts, freshly authored held-out generated-claim/original-page review, deployed privacy/ownership/durable-streaming acceptance and budget receipts are outside this approval and still govern public release.",
+    "Projection round-trip preservation does not establish correct original PDF extraction, OCR, table interpretation, warning scope or generated claim support. Coordinate metadata remains server-owned in original objects; compact provider encoding may affect model interpretation and must be evaluated on fresh held-out claims.",
+    "Active provider account token-per-minute quota and transient HTTP429 availability are not established by the project reservation caps. At most one explicitly rejected retry remains bounded and uncertainty fails closed as SYSTEM_ERROR; measured served coverage must report provider failures separately.",
+    "Live v3 hosted run and its original-page generated-claim adjudication are not evidence in this software-only approval. Neither prior successful generated routes nor authored regression answers prove new runtime release acceptance.",
+    "Fuse refusal recognizer uses conservative English lexical patterns, not semantic equivalence or a comprehensive hazard classifier; false positives, omissions and mixed-intent questions require held-out evaluation. A pattern match only refuses and cannot authorize a positive technical step.",
+    "The10000 reserved token-minute cap is a configured protective ceiling, not proof of the provider account actual TPM quota or freedom from429 failures. Explicitly rejected retries consume additional reservations and may be denied by the cap.",
+    "Fresh source-context label holds reduce supported coverage. Omitted or HELD contexts abstain rather than become rider questions; approval of labels is not proof generated claims remain within the governing procedure.",
+    "No new hosted full-regression, original-PDF generated-claim result, public access test, spend receipt or live deployment is credited by this exact software review."
+  ],
+  "frozen_commit": "d56e24f8b782de6914a5349051af5d83753676ce",
+  "authority": "OWNER_REQUESTED_FRESH_SCOPED_AGENT_REVIEW",
+  "preceding_scoped_review_sha256": "b5f5d75cd8b6e8286b2e753b95039208af29f8140ae2aaafe78278860a056457",
+  "runtime_freeze_sha256": "ac91ceae3847f006c6c35fce908849adc6058851a41dec4f57ab570957707e93",
+  "component_review_separation": {
+    "independently_reviewed_parent_files": [
+      "cloud/grounded_generation/runtime.py",
+      "cloud/grounded_generation/presentation.py",
+      "cloud/grounded_generation/policy.py",
+      "cloud/grounded_generation/admission.py",
+      "cloud/grounded_generation/fuse_refusal.py"
+    ],
+    "source_context_loader": "Implemented by this agent; parent coordinator separately reviewed loader per task handoff. This review independently audits its parent integration, not a second-author review of the loader.",
+    "manual_context_and_refusal_source_authority": "Separate exact packages issued by /root/heldout_source_review; this software review does not recreate original-page adjudication."
+  }
+}
