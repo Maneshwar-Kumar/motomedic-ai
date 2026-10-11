@@ -1,8 +1,12 @@
 """Synthetic trust and hosted visitor boundary checks; no cloud/providers."""
 import os
+import json
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch, MagicMock
-from rider_ui.public_gateway import configured, reserve_visitor, POLICY
+from tornado.testing import AsyncHTTPTestCase
+import tornado.web
+from rider_ui.public_gateway import configured, reserve_visitor, health_routes, POLICY
 
 
 class PublicGatewayTests(unittest.TestCase):
@@ -41,6 +45,52 @@ class PublicGatewayTests(unittest.TestCase):
             with patch('rider_ui.public_gateway.cloud_run_token', return_value='synthetic'), \
                     patch('requests.post', return_value=response), self.assertRaises(PermissionError):
                 reserve_visitor(self.env()['MOTOMEDIC_RIDER_API_URL'], 'a' * 64)
+
+
+class GatewayHealthTests(AsyncHTTPTestCase):
+    """Real loopback HTTP exercises health routing with an in-memory upstream."""
+
+    def get_app(self):
+        self.worker = MagicMock()
+        self.worker.poll.return_value = None
+        self.calls = []
+        self.upstream_code = 200
+        self.upstream_error = None
+
+        async def fetch(url, **kwargs):
+            self.calls.append((url, kwargs))
+            if self.upstream_error:
+                raise self.upstream_error
+            return SimpleNamespace(code=self.upstream_code, body=b'private-upstream-state')
+
+        return tornado.web.Application(health_routes(
+            self.worker, SimpleNamespace(fetch=fetch), 'http://127.0.0.1:8501'))
+
+    def assert_health(self, path, code, ready):
+        response = self.fetch(path)
+        self.assertEqual(response.code, code)
+        self.assertEqual(json.loads(response.body), {'ready': ready})
+        self.assertNotIn('Set-Cookie', response.headers)
+        self.assertNotIn(b'private-upstream-state', response.body)
+
+    def test_external_and_internal_health_paths_report_live_upstream(self):
+        for path in ('/health', '/healthz'):
+            self.assert_health(path, 200, True)
+        self.assertEqual(self.calls, [
+            ('http://127.0.0.1:8501/_stcore/health', {'request_timeout': 2}),
+            ('http://127.0.0.1:8501/_stcore/health', {'request_timeout': 2})])
+
+    def test_exited_streamlit_is_unready_without_querying_upstream(self):
+        self.worker.poll.return_value = 1
+        self.assert_health('/health', 503, False)
+        self.assert_health('/healthz', 503, False)
+        self.assertEqual(self.calls, [])
+
+    def test_unhealthy_or_unreachable_upstream_returns_sanitized_unready(self):
+        self.upstream_code = 503
+        self.assert_health('/health', 503, False)
+        self.upstream_error = RuntimeError('private-upstream-state')
+        self.assert_health('/health', 503, False)
 
 
 if __name__ == '__main__':

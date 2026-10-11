@@ -51,6 +51,24 @@ def reserve_visitor(backend, proof):
             raise PermissionError('PUBLIC_VISITOR_ADMISSION_UNAVAILABLE')
 
 
+def health_routes(worker, client, upstream):
+    """Expose routable readiness and retain the internal startup-probe alias."""
+    import tornado.web
+
+    class Health(tornado.web.RequestHandler):
+        async def get(self):
+            try:
+                if worker.poll() is not None:
+                    raise RuntimeError()
+                response = await client.fetch(upstream + '/_stcore/health', request_timeout=2)
+                self.set_status(200 if response.code == 200 else 503)
+            except Exception:
+                self.set_status(503)
+            self.finish({'ready': self.get_status() == 200})
+
+    return [(r'/health', Health), (r'/healthz', Health)]
+
+
 def main():
     import logging
     import tornado.httpclient
@@ -98,17 +116,6 @@ def main():
             headers['Host'] = host
             headers['X-MotoMedic-Edge-Visitor'] = self.visitor
             return headers
-
-    class Health(tornado.web.RequestHandler):
-        async def get(self):
-            try:
-                if worker.poll() is not None:
-                    raise RuntimeError()
-                response = await client.fetch(upstream + '/_stcore/health', request_timeout=2)
-                self.set_status(200 if response.code == 200 else 503)
-            except Exception:
-                self.set_status(503)
-            self.finish({'ready': self.get_status() == 200})
 
     class Entry(Gate, tornado.web.RequestHandler):
         async def get(self):
@@ -234,8 +241,8 @@ document.getElementById('status').textContent='Unable to connect right now. Plea
             if self.reader:
                 self.reader.cancel()
 
-    application = tornado.web.Application([
-        (r'/healthz', Health), (r'/', Entry), (r'/_visitor', Visitor),
+    application = tornado.web.Application(health_routes(worker, client, upstream) + [
+        (r'/', Entry), (r'/_visitor', Visitor),
         (r'/_stcore/stream', Socket), (r'/(?:_stcore/(?!upload)|static/|media/).*', Assets)],
         websocket_max_message_size=16384, websocket_ping_interval=30, websocket_ping_timeout=30)
     server = tornado.httpserver.HTTPServer(application, max_body_size=16384, max_buffer_size=32768)

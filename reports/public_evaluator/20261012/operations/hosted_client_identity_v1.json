@@ -1,0 +1,309 @@
+{
+  "schema_version": "private-hosted-client-identity-setup-v1",
+  "project_id": "motomedic-ai-20261009",
+  "authorization": "Owner-approved public evaluator bounded hosted six-case validation; backend-SA self audience-bound ID tokens and private backend invocation only; later owner-scoped storage.objects.create only under engineering-acceptance/public-v10_3 prefix",
+  "prior": {
+    "backend_service_account_bindings": [],
+    "backend_service_bindings": [
+      {
+        "role": "roles/run.invoker",
+        "condition": null,
+        "members": [
+          "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ]
+      }
+    ],
+    "worker_service_bindings": [
+      {
+        "role": "roles/run.invoker",
+        "condition": null,
+        "members": [
+          "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ]
+      }
+    ],
+    "at_utc": "2026-10-11T20:58:51.0753387Z",
+    "acceptance_create_role": {
+      "exists": false
+    }
+  },
+  "actions": [
+    {
+      "command": [
+        "iam",
+        "service-accounts",
+        "add-iam-policy-binding",
+        "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/iam.serviceAccountOpenIdTokenCreator",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "bindings": [
+          {
+            "role": "roles/iam.serviceAccountOpenIdTokenCreator",
+            "condition": null,
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ],
+        "etag": "BwZdltzeXwc=",
+        "version": 1
+      },
+      "at_utc": "2026-10-11T20:59:52.8768726Z"
+    },
+    {
+      "command": [
+        "run",
+        "services",
+        "add-iam-policy-binding",
+        "motomedic-arm-a",
+        "--project=motomedic-ai-20261009",
+        "--region=us-central1",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/run.invoker",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "bindings": [
+          {
+            "role": "roles/run.invoker",
+            "condition": null,
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+              "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ],
+        "etag": "BwZdlt1u1OM=",
+        "version": 1
+      },
+      "at_utc": "2026-10-11T21:00:02.6133737Z"
+    },
+    {
+      "command": [
+        "iam",
+        "roles",
+        "create",
+        "motomedicAcceptanceObjectCreate",
+        "--project=motomedic-ai-20261009",
+        "--title=MotoMedic acceptance object create only",
+        "--description=Create private engineering acceptance objects only",
+        "--permissions=storage.objects.create",
+        "--stage=GA",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "description": "Create private engineering acceptance objects only",
+        "etag": "BwZdlt69HjU=",
+        "includedPermissions": [
+          "storage.objects.create"
+        ],
+        "name": "projects/motomedic-ai-20261009/roles/motomedicAcceptanceObjectCreate",
+        "stage": "GA",
+        "title": "MotoMedic acceptance object create only"
+      },
+      "at_utc": "2026-10-11T21:00:24.1973935Z"
+    },
+    {
+      "command": [
+        "storage",
+        "buckets",
+        "add-iam-policy-binding",
+        "gs://motomedic-ai-20261009-indices",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=projects/motomedic-ai-20261009/roles/motomedicAcceptanceObjectCreate",
+        "--condition=expression=resource.name.startsWith('projects/_/buckets/motomedic-ai-20261009-indices/objects/engineering-acceptance/public-v10_3/'),title=motomedic-backend-create-acceptance-v10-3,description=Create only private hosted engineering acceptance artifacts in the authorized prefix",
+        "--format=json"
+      ],
+      "exit_code": 1,
+      "metadata": {
+        "message": "ERROR: (gcloud.storage.buckets.add-iam-policy-binding) HTTPError 400: Role (projects/motomedic-ai-20261009/roles/motomedicAcceptanceObjectCreate) does not exist in the resource's hierarchy."
+      },
+      "at_utc": "2026-10-11T21:00:32.2051597Z"
+    },
+    {
+      "command": [
+        "storage",
+        "buckets",
+        "add-iam-policy-binding",
+        "gs://motomedic-ai-20261009-indices",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=projects/motomedic-ai-20261009/roles/motomedicAcceptanceObjectCreate",
+        "--condition=expression=resource.name.startsWith('projects/_/buckets/motomedic-ai-20261009-indices/objects/engineering-acceptance/public-v10_3/'),title=motomedic-backend-create-acceptance-v10-3,description=Create only private hosted engineering acceptance artifacts in the authorized prefix",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "bindings": [
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicAcceptanceObjectCreate",
+            "condition": {
+              "description": "Create only private hosted engineering acceptance artifacts in the authorized prefix",
+              "expression": "resource.name.startsWith('projects/_/buckets/motomedic-ai-20261009-indices/objects/engineering-acceptance/public-v10_3/')",
+              "title": "motomedic-backend-create-acceptance-v10-3"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+            "condition": {
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+              "title": "motomedic-backend-exact-index-snapshot"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+            "condition": {
+              "description": "Read only the exact authorized hosted probe source archive",
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz'",
+              "title": "motomedic-backend-exact-cache-probe-v10-3"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "roles/storage.legacyBucketOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyBucketReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.objectViewer",
+            "condition": null,
+            "members": [
+              "serviceAccount:motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ],
+        "etag": "CAc=",
+        "kind": "storage#policy",
+        "resourceId": "projects/_/buckets/motomedic-ai-20261009-indices",
+        "version": 3
+      },
+      "at_utc": "2026-10-11T21:02:07.3594757Z",
+      "retry_reason": "New role exists with exact create-only permission after IAM readback; identical prefix grant retried after propagation interval"
+    }
+  ],
+  "readback": {
+    "acceptance_create_role": {
+      "description": "Create private engineering acceptance objects only",
+      "etag": "BwZdlt69HjU=",
+      "includedPermissions": [
+        "storage.objects.create"
+      ],
+      "name": "projects/motomedic-ai-20261009/roles/motomedicAcceptanceObjectCreate",
+      "stage": "GA",
+      "title": "MotoMedic acceptance object create only"
+    },
+    "backend_service_account_bindings": [
+      {
+        "role": "roles/iam.serviceAccountOpenIdTokenCreator",
+        "condition": null,
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ]
+      }
+    ],
+    "backend_service_bindings": [
+      {
+        "role": "roles/run.invoker",
+        "condition": null,
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+          "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ]
+      }
+    ],
+    "worker_service_bindings": [
+      {
+        "role": "roles/run.invoker",
+        "condition": null,
+        "members": [
+          "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ]
+      }
+    ],
+    "at_utc": "2026-10-11T21:01:33.4210085Z",
+    "bucket_backend_bindings": [
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicAcceptanceObjectCreate",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "description": "Create only private hosted engineering acceptance artifacts in the authorized prefix",
+          "expression": "resource.name.startsWith('projects/_/buckets/motomedic-ai-20261009-indices/objects/engineering-acceptance/public-v10_3/')",
+          "title": "motomedic-backend-create-acceptance-v10-3"
+        }
+      },
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+          "title": "motomedic-backend-exact-index-snapshot"
+        }
+      },
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "description": "Read only the exact authorized final hosted engineering client archive",
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/engineering-clients/v10_3/0541ee9d5783478d4a0fbfa328caacd80d8d11f66a42868e36ec0c04e953fbf6.tar.gz'",
+          "title": "motomedic-backend-exact-evaluator-client-v10-3-v2"
+        }
+      }
+    ],
+    "bucket_readback_at_utc": "2026-10-11T21:04:44.5875833Z"
+  },
+  "provider_calls": 0,
+  "secret_values_read": false,
+  "billing_changes": 0,
+  "status": "HOSTED_CLIENT_IDENTITIES_AND_ARTIFACT_PREFIX_VERIFIED",
+  "checks": {
+    "self_openid_token_creator_only": true,
+    "private_backend_invokers_backend_and_existing_ui": true,
+    "worker_invoker_still_task_only": true,
+    "no_public_backend_or_worker": true,
+    "acceptance_role_exactly_objects_create": true,
+    "acceptance_prefix_binding_present": true,
+    "only_exact_get_and_prefix_create_bucket_permissions": true,
+    "initial_role_propagation_failure_preserved": true,
+    "identical_prefix_retry_succeeded": true,
+    "no_broad_token_creator_grant": true,
+    "no_agent_provider_secret_or_billing_changes": true
+  },
+  "final_client_source_grant": "reports/public_evaluator/20261012/operations/client_source_grant_v2.json"
+}

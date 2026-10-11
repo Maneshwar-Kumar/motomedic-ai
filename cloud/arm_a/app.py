@@ -112,6 +112,9 @@ def create_app(registry, retriever, state_factory, cases):
     def oversized(_):
         return error('SYSTEM_ERROR','REQUEST_TOO_LARGE',413)
 
+    # Cloud Run reserves /healthz at external ingress; retain it for the
+    # container startup probe and expose an ordinary IAM-protected API path.
+    @app.get('/v1/health')
     @app.get('/healthz')
     def health():
         ready = not app.config.get('GROUNDED_PRIMARY') or app.config.get('DURABLE_DISPATCH_CONFIGURED') is True

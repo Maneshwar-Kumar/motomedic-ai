@@ -1,0 +1,129 @@
+{
+  "id": "e1f920ae-8612-4d3a-a564-7ebae4149514",
+  "status": "SUCCESS",
+  "source": {
+    "storageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "object": "serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz",
+      "generation": "1791752146855315"
+    }
+  },
+  "createTime": "2026-10-11T20:59:20.626834785Z",
+  "startTime": "2026-10-11T20:59:21.522497844Z",
+  "finishTime": "2026-10-11T21:04:41.060779Z",
+  "results": {
+    "buildStepImages": [
+      "sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "sha256:d2b8417a1bccc97a1ba05bf2f71b0ae4f3aff4052f69ab5bdbe00a606507ba25"
+    ],
+    "buildStepOutputs": [
+      "",
+      ""
+    ]
+  },
+  "steps": [
+    {
+      "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "args": [
+        "-c",
+        "from pathlib import Path; p=Path(\"/workspace/build\"); p.mkdir(exist_ok=True); p.chmod(0o777)"
+      ],
+      "entrypoint": "python",
+      "timing": {
+        "startTime": "2026-10-11T20:59:30.812426902Z",
+        "endTime": "2026-10-11T20:59:37.464280036Z"
+      },
+      "status": "SUCCESS",
+      "pullTiming": {
+        "startTime": "2026-10-11T20:59:30.812426902Z",
+        "endTime": "2026-10-11T20:59:36.565995660Z"
+      }
+    },
+    {
+      "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d2b8417a1bccc97a1ba05bf2f71b0ae4f3aff4052f69ab5bdbe00a606507ba25",
+      "env": [
+        "PYTHONPATH=/workspace",
+        "MOTOMEDIC_HOSTED_PROVIDER_VALIDATION=true",
+        "MOTOMEDIC_CLOUD_BUILD_ID=e1f920ae-8612-4d3a-a564-7ebae4149514"
+      ],
+      "args": [
+        "-B",
+        "tools/probe_cached_verifier_hosted.py",
+        "--project",
+        "motomedic-ai-20261009",
+        "--operation-id",
+        "public-cache-capability-v10_3-002",
+        "--release",
+        "reports/public_evaluator/20261012/serving_manifest_v10_3.json",
+        "--output",
+        "build/cached-verifier-capability.json"
+      ],
+      "entrypoint": "python",
+      "secretEnv": [
+        "ANTHROPIC_API_KEY"
+      ],
+      "timing": {
+        "startTime": "2026-10-11T20:59:37.464516142Z",
+        "endTime": "2026-10-11T21:04:39.785555630Z"
+      },
+      "status": "SUCCESS",
+      "pullTiming": {
+        "startTime": "2026-10-11T20:59:37.464516142Z",
+        "endTime": "2026-10-11T21:03:16.128260163Z"
+      }
+    }
+  ],
+  "timeout": "1200s",
+  "projectId": "motomedic-ai-20261009",
+  "sourceProvenance": {
+    "resolvedStorageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "object": "serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz",
+      "generation": "1791752146855315"
+    },
+    "fileHashes": {
+      "gs://motomedic-ai-20261009-indices/serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz#1791752146855315": {
+        "fileHash": [
+          {
+            "type": "MD5",
+            "value": "fiqDRbgRNCgF/Y0yPHgWWw=="
+          },
+          {
+            "type": "SHA256",
+            "value": "AqoSVuqrPvs24cRtoA+SQuYBUVtKzt1x+XUmY++FZ38="
+          }
+        ]
+      }
+    }
+  },
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "pool": {}
+  },
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds/e1f920ae-8612-4d3a-a564-7ebae4149514?project=279945185781",
+  "timing": {
+    "BUILD": {
+      "startTime": "2026-10-11T20:59:30.164208550Z",
+      "endTime": "2026-10-11T21:04:39.785769994Z"
+    },
+    "STORAGE_SOURCE": {
+      "startTime": "2026-10-11T20:59:25.304207450Z",
+      "endTime": "2026-10-11T20:59:30.164023121Z"
+    },
+    "FETCHSOURCE": {
+      "startTime": "2026-10-11T20:59:25.304207450Z",
+      "endTime": "2026-10-11T20:59:30.164023121Z"
+    }
+  },
+  "queueTtl": "3600s",
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+  "name": "projects/279945185781/locations/global/builds/e1f920ae-8612-4d3a-a564-7ebae4149514",
+  "availableSecrets": {
+    "secretManager": [
+      {
+        "versionName": "projects/motomedic-ai-20261009/secrets/motomedic-evaluator-anthropic-v1/versions/1",
+        "env": "ANTHROPIC_API_KEY"
+      }
+    ]
+  }
+}

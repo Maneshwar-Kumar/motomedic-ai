@@ -32,7 +32,132 @@
       "exit_code": 0,
       "at_utc": "2026-10-11T20:46:24.2511452Z",
       "metadata": {
-        "message": "Updated IAM policy for project [motomedic-ai-20261009].\r\n{\r\n  \"bindings\": [\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@gcp-sa-artifactregistry.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/artifactregistry.serviceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/billing.projectManager\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/browser\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:279945185781@cloudbuild.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/cloudbuild.builds.builder\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@gcp-sa-cloudbuild.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/cloudbuild.serviceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@gcf-admin-robot.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/cloudfunctions.standardServiceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@gcp-sa-cloudtasks.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/cloudtasks.serviceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:279945185781@cloudservices.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/compute.instanceGroupManagerServiceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@compute-system.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/compute.serviceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@containerregistry.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/containerregistry.ServiceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/datastore.user\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:279945185781-compute@developer.gserviceaccount.com\",\r\n        \"serviceAccount:motomedic-ai-20261009@appspot.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/editor\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/eventarc.eventReceiver\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@gcp-sa-eventarc.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/eventarc.serviceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@firebase-rules.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/firebaserules.system\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@gcp-sa-firestore.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/firestore.serviceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/logging.logWriter\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"user:maneshwarkumar@gmail.com\"\r\n      ],\r\n      \"role\": \"roles/owner\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@gcp-sa-pubsub.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/pubsub.serviceAgent\"\r\n    },\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:service-279945185781@serverless-robot-prod.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/run.serviceAgent\"\r\n    }\r\n  ],\r\n  \"etag\": \"BwZdlqyk860=\",\r\n  \"version\": 1\r\n}"
+        "cli_notice": "Updated IAM policy for project [motomedic-ai-20261009].",
+        "policy": {
+          "bindings": [
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+              ],
+              "role": "roles/artifactregistry.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/billing.projectManager"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/browser"
+            },
+            {
+              "members": [
+                "serviceAccount:279945185781@cloudbuild.gserviceaccount.com"
+              ],
+              "role": "roles/cloudbuild.builds.builder"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+              ],
+              "role": "roles/cloudbuild.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcf-admin-robot.iam.gserviceaccount.com"
+              ],
+              "role": "roles/cloudfunctions.standardServiceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-cloudtasks.iam.gserviceaccount.com"
+              ],
+              "role": "roles/cloudtasks.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:279945185781@cloudservices.gserviceaccount.com"
+              ],
+              "role": "roles/compute.instanceGroupManagerServiceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@compute-system.iam.gserviceaccount.com"
+              ],
+              "role": "roles/compute.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@containerregistry.iam.gserviceaccount.com"
+              ],
+              "role": "roles/containerregistry.ServiceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/datastore.user"
+            },
+            {
+              "members": [
+                "serviceAccount:279945185781-compute@developer.gserviceaccount.com",
+                "serviceAccount:motomedic-ai-20261009@appspot.gserviceaccount.com"
+              ],
+              "role": "roles/editor"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/eventarc.eventReceiver"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-eventarc.iam.gserviceaccount.com"
+              ],
+              "role": "roles/eventarc.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@firebase-rules.iam.gserviceaccount.com"
+              ],
+              "role": "roles/firebaserules.system"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-firestore.iam.gserviceaccount.com"
+              ],
+              "role": "roles/firestore.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/logging.logWriter"
+            },
+            {
+              "members": [],
+              "role": "roles/owner"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-pubsub.iam.gserviceaccount.com"
+              ],
+              "role": "roles/pubsub.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@serverless-robot-prod.iam.gserviceaccount.com"
+              ],
+              "role": "roles/run.serviceAgent"
+            }
+          ],
+          "etag": "BwZdlqyk860=",
+          "version": 1
+        }
       }
     },
     {
@@ -50,7 +175,19 @@
       "exit_code": 0,
       "at_utc": "2026-10-11T20:46:32.8746884Z",
       "metadata": {
-        "message": "Updated IAM policy for repository [motomedic].\r\n{\r\n  \"bindings\": [\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/artifactregistry.reader\"\r\n    }\r\n  ],\r\n  \"etag\": \"BwZdlq0nLHg=\",\r\n  \"version\": 1\r\n}"
+        "cli_notice": "Updated IAM policy for repository [motomedic].",
+        "policy": {
+          "bindings": [
+            {
+              "members": [
+                "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/artifactregistry.reader"
+            }
+          ],
+          "etag": "BwZdlq0nLHg=",
+          "version": 1
+        }
       }
     },
     {

@@ -18,7 +18,19 @@
     ],
     "exit_code": 0,
     "metadata": {
-      "message": "Updated IAM policy for service [motomedic-answer-worker].\r\n{\r\n  \"bindings\": [\r\n    {\r\n      \"members\": [\r\n        \"serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com\"\r\n      ],\r\n      \"role\": \"roles/run.invoker\"\r\n    }\r\n  ],\r\n  \"etag\": \"BwZdlsIObjg=\",\r\n  \"version\": 1\r\n}"
+      "cli_notice": "Updated IAM policy for service [motomedic-answer-worker].",
+      "policy": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/run.invoker"
+          }
+        ],
+        "etag": "BwZdlsIObjg=",
+        "version": 1
+      }
     },
     "at_utc": "2026-10-11T20:52:23.0806438Z"
   },

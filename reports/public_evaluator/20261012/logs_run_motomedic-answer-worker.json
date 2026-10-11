@@ -30,5 +30,21 @@
   {
     "timestamp": "2026-10-11T20:51:24.943252Z",
     "message": "[2026-10-11 20:51:24 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-11T21:04:25.033096Z",
+    "message": "[2026-10-11 21:04:25 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-11T21:04:25.048330Z",
+    "message": "[2026-10-11 21:04:25 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-11T21:06:17.303081Z",
+    "status": 400,
+    "method": "POST",
+    "latency": "0.061053464s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00002-fbw"
   }
 ]
