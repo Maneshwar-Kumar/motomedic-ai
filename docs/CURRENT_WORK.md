@@ -49,3 +49,8 @@ The new runtime and evidence work is grouped under cloud/arm_a/ and reports/arm_
 The visible Arm A continuation and UI chats are idle. New rollout and retention evidence is grouped in the [Arm A integration run guide](../reports/arm_a/integration_v1/README.md). That guide and its dated records supersede the earlier preparation-only snapshot for rollout status. The latest continuation reports completed dedicated-namespace retention work; use its records for exact scope and remaining acceptance limits. This organization pass does not certify the rollout or alter resources.
 
 The integration run keeps its own README, reviews, test logs and deployment records together. The two previously reported benchmark root-path conflicts remain unchanged and require coordinated migration; no automatic allowlist exception was added.
+
+## Owner decision: draft, verify, stream (11 October 2026)
+
+The current open manual Q&A method is [draft, verify, stream](../docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md). It supersedes exact-answer-only, catalogue/action allowlists and the no-online-verifier amendment. Implementation and test status are recorded in [the integration report](../reports/grounded_generation/draft_verify_stream_v1/README.md). Existing source restrictions, model and spending/deployment authorizations still apply. No public release follows from the decision.
+

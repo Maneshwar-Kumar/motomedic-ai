@@ -31,3 +31,8 @@ Latest validation: [preserved 161-case baseline](reports/arm_a/golden161_validat
 - [ ] After hosted text acceptance, connect an authenticated, byte-bounded multipart endpoint to the existing decoder/normalizer: JPEG/PNG/WebP only, one photo/turn, 5 MiB/photo, 20 megapixels, 10,000 pixels/side; reject corrupt/animated/mismatched media and URL fetches. Enforce worker resources; rotate from EXIF then strip metadata and normalize to at most 1,600 pixels/side.
 - [ ] Atomically enforce three photos/conversation and six/visitor/rolling day across workers and resets. Verify actual raw and normalized media deletion within 15 minutes; no raw media in repository or routine logs.
 - [ ] Integrate separately versioned observation-only vision with uncertainty and focused clarification, then use the same source/applicability/controller gates. Do not infer hidden faults from photos. Evaluate image injection, unclear images, unsupported observations, wrong-bike inputs and grounded follow-ups before enabling the uploader.
+
+## Owner decision: draft, verify, stream (11 October 2026)
+
+The current open manual Q&A method is [draft, verify, stream](docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md). It supersedes exact-answer-only, catalogue/action allowlists and the no-online-verifier amendment. Implementation and test status are recorded in [the integration report](reports/grounded_generation/draft_verify_stream_v1/README.md). Existing source restrictions, model and spending/deployment authorizations still apply. No public release follows from the decision.
+

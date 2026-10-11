@@ -20,7 +20,7 @@ A motorcycle troubleshooting assistant that offers a concise next step only when
 
 ## Current design and release status
 
-The [11 October owner amendment](docs/architecture/TRD_V05_GROUNDED_GENERATION_AMENDMENT_20261011.md) supersedes TRD v0.5 section 14's exact-wording-only restriction: versioned Docling/BGE M3 + BM25 retrieval and deterministic evidence/state gates feed a grounded answer LLM. Unseen questions are admitted by applicable evidence; canonical wording is only eligible for exact response-cache hits. Citation/step/warning checks are deterministic, with no separate final semantic-verifier call. The retired full-manual Claude design stays archived.
+The current owner decision is [open manual Q&A through draft, verify, stream](docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md). It supersedes the earlier exact-answer and no-online-verifier methods. Versioned Docling/BGE M3 + BM25 retrieval feeds a private draft and separate semantic verification before answer delivery. See the [integration and validation record](reports/grounded_generation/draft_verify_stream_v1/README.md) for implementation status; the decision does not establish public release acceptance. The retired full-manual Claude design stays archived.
 
 The hosted candidate index is `index_a3282c4d98cf54595e4ba168`. Ingestion runs once per source/pipeline/model version; rider requests reuse its evidence and vectors. The exact 161-case v3 approval covers defined source-content and initial-response scopes, including selected-manual Himalayan + BS6 applicability. It does not establish blanket adaptive, vision or public deployment acceptance. See the [approval scope](human_review/agent_release_161/README.md).
 

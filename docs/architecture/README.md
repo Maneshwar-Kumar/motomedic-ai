@@ -1,6 +1,6 @@
 # Architecture and implementation
 
-The [grounded-generation amendment](TRD_V05_GROUNDED_GENERATION_AMENDMENT_20261011.md) records the authorized replacement of exact-only serving with evidence-grounded LLM generation. The primary implementation is [cloud/grounded_generation](../../cloud/grounded_generation/runtime.py); historical generators below remain compatibility and experiment code.
+The current [draft, verify, stream decision](DRAFT_VERIFY_STREAM_DECISION_20261011.md) supersedes the earlier [grounded-generation amendment](TRD_V05_GROUNDED_GENERATION_AMENDMENT_20261011.md). Implementation and validation are tracked in the [integration report](../../reports/grounded_generation/draft_verify_stream_v1/README.md). Runtime code is grouped in [cloud/grounded_generation](../../cloud/grounded_generation/); the code map below retains historical compatibility and experiment paths.
 
 ## Retrieval
 
