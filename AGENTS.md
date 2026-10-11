@@ -198,3 +198,8 @@ Approval remains exact-version and scope-bound: typed eligibility, warnings, man
 
 
 Version 3 corrects EXP001 hazard identification and EXP002 retained authored unsure identification to the right-hand control, independently checked against original PDF pages 23, 29 and 30. It preserves the 159 unaffected cases, versions 1 and 2, and the frozen LLM-judge history. The two exact authored identification scopes have coordinator approval; the ten other judge quality revisions remain tracked separately. The current consumer verifies 187 bound files and passes 17 tests. This correction does not claim whole-corpus quality completion or shared-runner installation.
+
+
+## Retired full-manual Claude design, 11 October 2026
+
+The owner rejected the cached full-owner-manual Claude alternative after the eight-case experiment. Its code, converted source, raw outputs, metrics and disabled workflows are archived in `outdated_design_choices/claude_full_manual/`. Read `DECISION.md` and `decision_record.json` for the failure reasons and measured contrasts with the original architecture. Do not restore or rerun this alternative without fresh owner authorization. Continue with TRD v0.4 versioned Docling/BGE M3 + BM25 evidence retrieval and deterministic state/evidence gates. Original strict handling scores were 45% (cached manual plus controller) and 25% (Claude managed), not pure factual accuracy: the owner accepts a concise manual-backed checklist. Preserve that correction and do not equate original static judge or retrieval metrics with a matched end-to-end accuracy score. Existing exact source approvals and unresolved release scopes remain unchanged.

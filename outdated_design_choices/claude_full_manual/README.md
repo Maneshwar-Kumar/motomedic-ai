@@ -1,5 +1,15 @@
 # Cached full-manual Claude experiment
 
+**OUTDATED / REJECTED BY OWNER — 11 October 2026.** This directory preserves a
+historical experiment, not an active architecture candidate. Start with
+[DECISION.md](DECISION.md) for the rejection, metrics and original-architecture
+comparison. Raw results and source bindings remain unchanged. Workflow files were
+moved out of `.github/workflows` into `workflows/*.yml.disabled`; do not run the
+archived scripts or restore those workflows without fresh owner authorization.
+
+The descriptions below record the experiment as it was executed. Original
+`experiments/claude_full_manual` paths in evidence are historical provenance.
+
 Private engineering experiment requested by the owner. Both arms use the same
 immutable owner's manual converted by Microsoft MarkItDown, the same cheapest
 supported Claude model, and the same cached full-Markdown source.

@@ -1,0 +1,402 @@
+{
+  "schema_version": "retired-design-choice-v1",
+  "design_id": "cached-full-owner-manual-claude",
+  "status": "OUTDATED_REJECTED_BY_OWNER",
+  "decision_date": "2026-10-11",
+  "timezone": "Asia/Calcutta",
+  "authority": "Direct owner instruction in chat",
+  "reason": "Observed handling quality, physical-citation reliability, extraction fidelity and next-step consistency were insufficient; owner chose not to proceed.",
+  "active_architecture": "TRD_v0.4_VERSIONED_DOCLING_BGE_M3_BM25_REVIEWED_EVIDENCE_DETERMINISTIC_CONTROLLER",
+  "archive_directory": "outdated_design_choices/claude_full_manual",
+  "previous_directory": "experiments/claude_full_manual",
+  "automatic_workflows_retired": [
+    "claude-manual-experiment.yml",
+    "claude-manual-preflight.yml",
+    "convert-manual-markitdown.yml"
+  ],
+  "fresh_owner_authorization_required_to_resume": true,
+  "new_provider_calls": 0,
+  "deployment_changed": false,
+  "credentials_changed": false,
+  "original_experiment_run_id": "38083290522",
+  "experiment_model": "claude-haiku-5-5",
+  "regression_cases": 8,
+  "passes": 2,
+  "independent_case_count": 8,
+  "strict_rubric_results": [
+    {
+      "arm": "A_DETERMINISTIC_CONTROLLER",
+      "turns": 20,
+      "route_matches": 13,
+      "complete_golden_handling": 9,
+      "source_safe_handling": 20,
+      "all_claims_and_constraints_supported": 20,
+      "citation_applicable_outputs": 5,
+      "citation_supported_outputs": 5,
+      "warning_applicable_outputs": 5,
+      "warning_complete_outputs": 5,
+      "adaptive_turns": 6,
+      "adaptive_complete_turns": 6,
+      "unjustified_repeat_turns": 0,
+      "unresolved_inferred_normal_turns": 0
+    },
+    {
+      "arm": "B_CLAUDE_MANAGED",
+      "turns": 20,
+      "route_matches": 11,
+      "complete_golden_handling": 5,
+      "source_safe_handling": 12,
+      "all_claims_and_constraints_supported": 13,
+      "citation_applicable_outputs": 20,
+      "citation_supported_outputs": 7,
+      "warning_applicable_outputs": 10,
+      "warning_complete_outputs": 7,
+      "adaptive_turns": 6,
+      "adaptive_complete_turns": 0,
+      "unjustified_repeat_turns": 0,
+      "unresolved_inferred_normal_turns": 0
+    }
+  ],
+  "scoring_clarification": {
+    "concise_manual_backed_checklist_accepted_by_owner": true,
+    "multi_step_format_alone_is_not_factual_error": true,
+    "strict_scores_are_contract_compliance_not_factual_accuracy": true,
+    "checklist_aware_rescoring_performed": false,
+    "original_scores_preserved": true
+  },
+  "experiment_timing_and_cost": {
+    "model": "claude-haiku-5-5",
+    "cost_basis": "PROVIDER_REPORTED_TOKENS_TIMES_PUBLISHED_RATES_NOT_BILLING_RECONCILIATION",
+    "total_estimated_cost_usd": 0.0527319,
+    "same_usage_no_cache_cost_counterfactual_usd": 0.2144288,
+    "cost_reduction_against_same_usage_counterfactual_percent": 75.40820076407647,
+    "cache_states": {
+      "MISS": 2,
+      "HIT": 26
+    },
+    "token_totals": {
+      "input_tokens": 23123,
+      "cache_creation_input_tokens": 141220,
+      "cache_read_input_tokens": 1835860,
+      "output_tokens": 28817
+    },
+    "arms": [
+      {
+        "arm": "A",
+        "rider_turns": 20,
+        "route_matches": 13,
+        "provider_requests": 8,
+        "estimated_cost_usd": 0.017612449999999998,
+        "all_model_generated_complete_response": {
+          "n": 4,
+          "median_seconds": 7.095463799999997,
+          "min_seconds": 5.271955564999985,
+          "max_seconds": 8.196355575000005
+        },
+        "warm_model_generated_complete_response": {
+          "n": 3,
+          "median_seconds": 6.172694343000003,
+          "min_seconds": 5.271955564999985,
+          "max_seconds": 8.018233256999991
+        },
+        "cold_model_generated_complete_response": {
+          "n": 1,
+          "median_seconds": 8.196355575000005,
+          "min_seconds": 8.196355575000005,
+          "max_seconds": 8.196355575000005
+        },
+        "zero_call_response": {
+          "n": 16,
+          "median_seconds": 0.005414491499998064,
+          "min_seconds": 0.0001459119999935865,
+          "max_seconds": 0.045031799000000206
+        },
+        "warm_provider_ttft": {
+          "n": 7,
+          "median_seconds": 2.3248293670000066,
+          "min_seconds": 0.7635631560000036,
+          "max_seconds": 4.144592306
+        }
+      },
+      {
+        "arm": "B",
+        "rider_turns": 20,
+        "route_matches": 11,
+        "provider_requests": 20,
+        "estimated_cost_usd": 0.03511945,
+        "all_model_generated_complete_response": {
+          "n": 20,
+          "median_seconds": 6.165151825999999,
+          "min_seconds": 3.9746063559999953,
+          "max_seconds": 8.809091956999993
+        },
+        "warm_model_generated_complete_response": {
+          "n": 19,
+          "median_seconds": 6.158330355000004,
+          "min_seconds": 3.9746063559999953,
+          "max_seconds": 8.809091956999993
+        },
+        "cold_model_generated_complete_response": {
+          "n": 1,
+          "median_seconds": 6.215280433000004,
+          "min_seconds": 6.215280433000004,
+          "max_seconds": 6.215280433000004
+        },
+        "zero_call_response": {
+          "n": 0,
+          "median_seconds": null,
+          "min_seconds": null,
+          "max_seconds": null
+        },
+        "warm_provider_ttft": {
+          "n": 19,
+          "median_seconds": 4.53988114500001,
+          "min_seconds": 2.8573970580000037,
+          "max_seconds": 6.321689836999994
+        }
+      }
+    ],
+    "latency_limits": [
+      "Complete response includes free token-count request overhead.",
+      "No partial unvalidated output is displayed; provider TTFT is separate.",
+      "A generated turns include composer and verifier; B has one request.",
+      "Only one cold rider response per arm; no causal latency improvement or stable p95 is established.",
+      "No uncached latency control was run."
+    ]
+  },
+  "original_architecture": {
+    "retrieval": [
+      {
+        "model": "MiniLM",
+        "mode": "hybrid_only",
+        "complete_cited_page_cases": 21,
+        "total": 27,
+        "p95_retrieval_seconds": 0.0209131440000192,
+        "chunks": 608,
+        "index_id": "index_d0bf77c0f752da4053cd6534",
+        "graph_nodes": 2725,
+        "graph_edges": 3546
+      },
+      {
+        "model": "MiniLM",
+        "mode": "cross_encoder",
+        "complete_cited_page_cases": 22,
+        "total": 27,
+        "p95_retrieval_seconds": 1.2182920609999996,
+        "chunks": 608,
+        "index_id": "index_d0bf77c0f752da4053cd6534",
+        "graph_nodes": 2725,
+        "graph_edges": 3546
+      },
+      {
+        "model": "BGE M3",
+        "mode": "hybrid_only",
+        "complete_cited_page_cases": 23,
+        "total": 27,
+        "p95_retrieval_seconds": 0.3898775039999691,
+        "chunks": 532,
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "graph_nodes": 2649,
+        "graph_edges": 3393
+      },
+      {
+        "model": "BGE M3",
+        "mode": "cross_encoder",
+        "complete_cited_page_cases": 22,
+        "total": 27,
+        "p95_retrieval_seconds": 2.997048654000082,
+        "chunks": 532,
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "graph_nodes": 2649,
+        "graph_edges": 3393
+      }
+    ],
+    "retrieval_measure": "DRAFT_IN_SAMPLE_CITED_PAGE_COVERAGE_NOT_ANSWER_ACCURACY",
+    "frozen_161_case_judge_summary": {
+      "cases_reviewed": 161,
+      "dimensions": {
+        "initial_grounding": {
+          "FAIL": 1,
+          "PARTIAL": 1,
+          "PASS": 159
+        },
+        "dialogue_flow": {
+          "FAIL": 2,
+          "NOT_APPLICABLE": 129,
+          "NOT_VERIFIABLE": 1,
+          "PARTIAL": 5,
+          "PASS": 24
+        },
+        "feedback_alignment": {
+          "FAIL": 2,
+          "PARTIAL": 30,
+          "PASS": 129
+        },
+        "overall": {
+          "PASS": 149,
+          "REVISE": 12
+        }
+      },
+      "answer_quality_distribution": {
+        "2": 1,
+        "3": 8,
+        "4": 53,
+        "5": 99
+      },
+      "mean_answer_quality": 4.553,
+      "flow_pass_scope_counts": {
+        "LOCAL_SINGLE_TURN_CLARIFICATION_ONLY": 7,
+        "STATIC_AUTHORED_CONTEXT": 17
+      },
+      "groups": {
+        "original_11": {
+          "case_count": 11,
+          "mean_answer_quality": 3.909,
+          "initial_grounding": {
+            "PARTIAL": 1,
+            "PASS": 10
+          },
+          "dialogue_flow": {
+            "NOT_APPLICABLE": 4,
+            "PARTIAL": 1,
+            "PASS": 6
+          },
+          "feedback_alignment": {
+            "PARTIAL": 5,
+            "PASS": 6
+          },
+          "overall": {
+            "PASS": 7,
+            "REVISE": 4
+          },
+          "answer_quality_distribution": {
+            "3": 4,
+            "4": 4,
+            "5": 3
+          }
+        },
+        "expanded_50": {
+          "case_count": 50,
+          "mean_answer_quality": 4.44,
+          "initial_grounding": {
+            "FAIL": 1,
+            "PASS": 49
+          },
+          "dialogue_flow": {
+            "FAIL": 2,
+            "NOT_APPLICABLE": 35,
+            "PARTIAL": 2,
+            "PASS": 11
+          },
+          "feedback_alignment": {
+            "FAIL": 2,
+            "PARTIAL": 8,
+            "PASS": 40
+          },
+          "overall": {
+            "PASS": 45,
+            "REVISE": 5
+          },
+          "answer_quality_distribution": {
+            "2": 1,
+            "3": 2,
+            "4": 21,
+            "5": 26
+          }
+        },
+        "generated_100": {
+          "case_count": 100,
+          "mean_answer_quality": 4.68,
+          "initial_grounding": {
+            "PASS": 100
+          },
+          "dialogue_flow": {
+            "NOT_APPLICABLE": 90,
+            "NOT_VERIFIABLE": 1,
+            "PARTIAL": 2,
+            "PASS": 7
+          },
+          "feedback_alignment": {
+            "PARTIAL": 17,
+            "PASS": 83
+          },
+          "overall": {
+            "PASS": 97,
+            "REVISE": 3
+          },
+          "answer_quality_distribution": {
+            "3": 2,
+            "4": 28,
+            "5": 70
+          }
+        }
+      },
+      "findings_by_scope": {
+        "current_response": 38,
+        "runtime_measurement": 4,
+        "authored_followup": 3
+      },
+      "findings_by_severity": {
+        "LOW": 33,
+        "MEDIUM": 10,
+        "HIGH": 2
+      }
+    },
+    "judge_measure": "HISTORICAL_STATIC_SOURCE_AUTHORED_RESPONSE_QUALITY_NOT_RUNTIME",
+    "runtime_run_id": "38080802638",
+    "runtime_model": "gemma-4-26b-a4b-it",
+    "runtime_supported_cells": 8,
+    "runtime_total_cells": 9,
+    "runtime_system_errors": 1,
+    "runtime_variants": [
+      {
+        "architecture": "A_COMPONENT_SELECTION",
+        "cells": 3,
+        "supported_cells": 3,
+        "successful_complete_response_median_seconds": 9.43767665300004,
+        "timing_includes_admission_waits": true,
+        "not_semantic_accuracy": true
+      },
+      {
+        "architecture": "B_SHORT_GENERATION",
+        "cells": 3,
+        "supported_cells": 3,
+        "successful_complete_response_median_seconds": 19.933694606000017,
+        "timing_includes_admission_waits": true,
+        "not_semantic_accuracy": true
+      },
+      {
+        "architecture": "C_VERIFIED_STREAM_BLOCKS",
+        "cells": 3,
+        "supported_cells": 2,
+        "successful_complete_response_median_seconds": 49.885154902500005,
+        "timing_includes_admission_waits": true,
+        "not_semantic_accuracy": true
+      }
+    ],
+    "runtime_measure": "SUPPORTED_STATUS_NOT_INDEPENDENT_SEMANTIC_ACCURACY",
+    "runtime_cost": "NOT_VERIFIED",
+    "matched_eight_case_comparison_available": false
+  },
+  "comparison_limits": [
+    "Different samples, models, evidence inputs, denominators and rubric.",
+    "No original architecture end-to-end 98.8 percent accuracy claim.",
+    "No retrieval-latency versus complete-response-latency comparison.",
+    "No uncached causal latency improvement or stable p95 established.",
+    "Scoped source approvals are not runtime accuracy.",
+    "Historical frozen judge results remain distinct from later two hazard corrections."
+  ],
+  "evidence_sha256": {
+    "outdated_design_choices/claude_full_manual/experiment_results.json": "604b6feddb9c2f1cf9043964a4996dc1946baaf544de8ed62d90082f89ff04b4",
+    "outdated_design_choices/claude_full_manual/output_adjudication.json": "a8825ae7b6935f45af7992576d6a61eebfeb1888f5ea1f2f17f9f2c2d49321f8",
+    "outdated_design_choices/claude_full_manual/comparison_metrics.json": "1bbfd5aaa4c16b47fd85ec9012dc531d90761a01213ba56880a8d8164e3e2602",
+    "outdated_design_choices/claude_full_manual/request_ledger.json": "04e96d633f85a4f0cba770dbc4d64027258b4bc868c7b27115e40bcde3232c9e",
+    "outdated_design_choices/claude_full_manual/evaluator_goldens.json": "5ac125f554907ca6039464bee13f1c52d5f088d1f8a9b0c8a45bd7ddc9b5de5c",
+    "outdated_design_choices/claude_full_manual/royal-enfield-himalayan-450-owner-manual.md": "a0e33d2fc89623425f9777c4acfff6ce1dfe5426df2fe25fae84e60c212c9e29",
+    "index_benchmark.json": "f0a0bfbd52ac13191a84a6b82cd6b9595bc8b7a327eb7a1dddb673154ad3e32e",
+    "human_review/llm_judge_161/results.json": "88db6d0a9c43ab83d0d23c90528d54b12537c64d1edccfe443bfeae3160b6e9a",
+    "reports/architecture_run_38080802638/architecture_comparison.json": "05b9cde2ccb432946fc288731d2d5dcc08d9fa7b82a975af12cf293e1fe8fd28",
+    "reports/architecture_result_independent_audit_v3.json": "e6ab26e20329c587aa46f003af4e69b65b8eff54e9a666081e19fe80ca23f8e6",
+    "reports/architecture_timing_analysis_v3.json": "e68c681a2596b2610777de92c72df64f4921d97b6915f7d3719816a4e7afa043"
+  }
+}

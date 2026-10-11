@@ -1,5 +1,11 @@
 # Cached full-manual Claude: eight-case experiment
 
+> **Historical report — design rejected by owner on 11 October 2026.** The
+> recommendation below to retain this as a candidate is superseded by
+> [DECISION.md](DECISION.md). The original strict scores are preserved; the owner
+> subsequently accepted a concise manual-backed checklist, so multi-step format
+> alone must not be called factual inaccuracy. No revised-score run was made.
+
 The hosted experiment completed using Claude Haiku 5.5: eight existing cases,
 two architectures, two passes, 40 rider responses and 28 inference requests.
 Estimated Claude cost from complete provider usage was **$0.0527319**. Caching

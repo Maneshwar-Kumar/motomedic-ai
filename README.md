@@ -1,5 +1,16 @@
 # MotoMedic AI
 
+## Retired design choices
+
+On 11 October 2026, the owner rejected the cached full-owner-manual Claude
+architecture after its eight-case experiment. Its source conversion, code, raw
+results and disabled workflows are preserved in
+[outdated_design_choices/claude_full_manual](outdated_design_choices/claude_full_manual).
+See the [decision and metric comparison](outdated_design_choices/claude_full_manual/DECISION.md).
+Continue with the versioned Docling/BGE M3 hybrid-retrieval architecture and
+deterministic state, evidence and citation gates. The archived Claude experiment
+is not an active build option and must not be rerun without owner authorization.
+
 Owner-manual-grounded motorcycle troubleshooting prototype. The sole source is the supplied 149-page Royal Enfield New Himalayan 450 owner's manual, checksum `CF221A29E2F9CD5AF6E80A99774A697C814E8EDA661C27D72E519D8A7E80DA89`.
 
 ## Online index build
