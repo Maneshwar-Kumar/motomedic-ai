@@ -1,0 +1,14 @@
+{
+  "corrects": "reports/grounded_generation/draft_verify_stream_v1/documents/visual_qa/source_authority_run_38159373946.json",
+  "original_report_sha256": "3ae039629442a7ee9138da905e1a1319ca2d386f4f590fa94454dfcaea5b0128",
+  "finding_withdrawn": "Footer label truncated",
+  "reason": "Reviewer misread the full-page display. Native pixel inspection and PDF text/glyph geometry demonstrate the complete footer. No actual clipping was established.",
+  "historical_report_preserved": true,
+  "previous_pdf": "reports/grounded_generation/draft_verify_stream_v1/documents/run_38159373946/01_Concept_Architecture/01_Concept_Architecture.pdf",
+  "previous_pdf_sha256": "47b970fdb8e08bde987767a31b56f7bdf83cfd4b94ef4d47af7a668508529257",
+  "diagnostic_crop": "reports/grounded_generation/draft_verify_stream_v1/documents/visual_qa/concept_footer_diagnostic.png",
+  "diagnostic_crop_sha256": "4c3225e2f625ca10fb69306872fa904d6b56e81e9376d04fffe6c5c866923d5b",
+  "current_final_review": "reports/grounded_generation/draft_verify_stream_v1/documents/visual_qa/source_authority_run_38159695364.json",
+  "current_final_review_sha256": "46374938f81a4224c41d7d6fd6ea4a6201c5b1a88b65f01b6936a5678c88029d",
+  "canonical_footer_refactor": "Commit 2c0c3b4 is valid layout normalization; do not describe it as fixing a proven clipping defect."
+}
