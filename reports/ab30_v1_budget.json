@@ -1,0 +1,22 @@
+{
+  "schema_version": "ab30-budget-v1",
+  "checked_at_utc": "2026-10-11T09:22:37.785702+00:00",
+  "project_id": "motomedic-ai-20261009",
+  "main_billing_enabled": true,
+  "inference_billing_enabled": false,
+  "billing_stop_guard_ready": true,
+  "guard_live_simulate_false_observed": true,
+  "guard_retry_policy": "ACTIVE_PUBSUB_RETRY_10S_TO_600S",
+  "live_calls_authorized": true,
+  "maximum_provider_calls": 90,
+  "retries": 0,
+  "main_lifetime_budget_inr": 2700,
+  "main_billing_stop_inr": 2540,
+  "instantaneous_spend_known": false,
+  "inference_cost_basis": "FREE_ONLY_BILLING_DISABLED",
+  "selected_comparison_model": "gemma-4-26b-a4b-it",
+  "owner_authorized_model_comparison": true,
+  "allocation_id": "owner-ab30-initial-matched-v1",
+  "maximum_live_runs": 1,
+  "old_allocations_reused": false
+}

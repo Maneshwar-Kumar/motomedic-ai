@@ -1,8 +1,11 @@
 from decimal import Decimal
+import os
 
-BUDGET_NAME = "MotoMedic lifetime INR800"
-BUDGET_INR = Decimal("800")
-STOP_INR = Decimal("640")
+BUDGET_NAME = os.environ.get("BUDGET_DISPLAY_NAME", "MotoMedic lifetime INR800")
+BUDGET_INR = Decimal(os.environ.get("BUDGET_INR", "800"))
+STOP_INR = Decimal(os.environ.get("STOP_INR", "640"))
+if not (BUDGET_INR.is_finite() and STOP_INR.is_finite() and 0 < STOP_INR < BUDGET_INR):
+    raise ValueError("Invalid configured budget stop")
 
 
 def should_stop(message):
