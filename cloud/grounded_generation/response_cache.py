@@ -13,7 +13,9 @@ class ReviewedResponses:
         self.registry=registry;self.runtime_lock=runtime_lock;self.entries={}
         for sid,raw in registry.candidate['steps'].items():
             if raw['kind'] not in ('LOOKUP','ACTION') or not registry.step_ready(sid): continue
-            rid=raw['canonical_record_id'];binding=registry._consumer.records[rid]
+            rid=raw['canonical_record_id']
+            if rid not in registry._consumer.records:continue
+            binding=registry._consumer.records[rid]
             path=registry._consumer.root/binding['planner_file']
             data=path.read_bytes()
             if hashlib.sha256(data).hexdigest()!=binding['planner_file_sha256']: raise ValueError('CACHE_SOURCE_BINDING')

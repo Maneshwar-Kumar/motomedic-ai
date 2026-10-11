@@ -18,18 +18,19 @@ from cloud.grounded_generation.context import project, VERSION as CONTEXT_VERSIO
 from cloud.grounded_generation.source_context import context_for, BINDING_SHA256
 from cloud.grounded_generation.fuse_refusal import detect_refusal, SCOPE_SHA as REFUSAL_SHA
 from cloud.grounded_generation.admission import VERSION as ADMISSION_VERSION
+from cloud.grounded_generation.transitions import exhausted_after_unresolved, VERSION as TRANSITION_VERSION
 
 @dataclass(frozen=True)
 class Config:
     controls_version: str = VERSION
     def versions(self):
         return {'version':VERSION,'model':MODEL,'policy_sha256':POLICY_SHA256,
-            'input_tokens':8192,'request_bytes':24000,'output_tokens':1800,'provider_allowances':ADMISSION_VERSION,
+            'input_tokens':8192,'request_bytes':65536,'output_tokens':1800,'provider_allowances':ADMISSION_VERSION,
             'reserved_tokens_per_minute':10000,
-            'context_projection':CONTEXT_VERSION,'source_context_binding':BINDING_SHA256,'refusal_scope_binding':REFUSAL_SHA,
+            'context_projection':CONTEXT_VERSION,'source_context_binding':BINDING_SHA256,'transitions':TRANSITION_VERSION,'refusal_scope_binding':REFUSAL_SHA,
             'question_admission':'RETRIEVED_REVIEWED_EVIDENCE_NOT_QUESTION_WORDING',
             'admission_contract':'SOURCE_AND_MANDATORY_DISPLAY_ONLY_V2',
-            'retrieved_scope_limit':4,'retrieved_scope_ranking':'DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1',
+            'output_schema_sha256':content_hash(SCHEMA),'native_structured_output':True,'retrieved_scope_limit':4,'retrieved_scope_ranking':'DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1',
             'response_cache':'REVIEWED_EXACT_QUERY_SCOPE_STATE_ONLY_V1',
             'prompt_cache':'CAPABILITY_GATED_VERSIONED_EVIDENCE_PREFIX_V1',
             'verifier_calls':0,'validation':'DETERMINISTIC_NOT_SEMANTIC_PROOF'}
@@ -87,7 +88,7 @@ def check_output(draft, scopes, clarifications):
         elif draft['clarification_id']: raise ValidationFailure('OUTPUT_SCHEMA')
         return draft
     selected=draft['scope_ids']
-    if not selected or len(set(selected))!=len(selected) or not set(selected)<=set(scopes) or any(scopes[s]['kind']=='SAFETY_STOP' for s in selected): raise ValidationFailure('UNADMITTED_SCOPE')
+    if not selected or len(set(selected))!=len(selected) or not set(selected)<=set(scopes): raise ValidationFailure('UNADMITTED_SCOPE')
     if draft['clarification_id'] or not 1<=len(draft['claims'])<=12: raise ValidationFailure('OUTPUT_SCHEMA')
     actions=[draft['step_id']] if draft['step_id'] else []
     if actions and (actions[0] not in selected or scopes[actions[0]]['kind']!='ACTION'):
@@ -288,7 +289,9 @@ class Questions:
                         for row in decision.condition_results:
                             rule=r.rule(row['rule_id'])
                             if row['result']=='UNKNOWN' and rule.rider_resolvable and rule.clarification_question and all(r.evidence_ready(e) for e in rule.clarification_evidence_ids):
-                                clarifications[rule.rule_id]={'question':rule.clarification_question,'step_id':sid}
+                                clarifications[rule.rule_id]={'question':rule.clarification_question,'step_id':sid,
+                                    'scope_kind':r.step(sid).kind,'condition_fact_key':rule.fact_key,
+                                    'condition_evidence_ids':list(rule.source_evidence_ids)}
                     if decision.eligibility_status!=Truth.TRUE: continue
                     assembled=self.retriever.search(query,dependency_manifest=r.retrieval_manifest(sid),
                         step_id=sid,scope=self.scope(),applicability_status='CONFIRMED')
@@ -305,6 +308,10 @@ class Questions:
                     core=set(r.step(sid).action_evidence_ids)
                     positions=[i for i,hit in enumerate(hits) if core&set(hit.get('evidence_ids',[]))]
                     return (min(positions) if positions else len(hits),-len(core&ids)/len(core),sid)
+                read_only=[sid for sid in admitted if sid.startswith('readonly_')]
+                covered={e for sid in read_only for e in r.step(sid).required_evidence_ids}
+                admitted=[sid for sid in admitted if sid in read_only or r.step(sid).kind=='ACTION' or
+                    not set(r.step(sid).required_evidence_ids)<=covered]
                 actions=sorted((sid for sid in admitted if r.step(sid).kind=='ACTION'),key=rank)
                 admitted=sorted((sid for sid in admitted if r.step(sid).kind in ('LOOKUP','SAFETY_STOP')),key=rank)[:3]+actions[:1]
                 composer.scopes=tuple(admitted);composer.clarifications=clarifications
@@ -340,6 +347,23 @@ class Questions:
         safety=self.known_safety(session)
         if safety:
             session,response=safety
+            from cloud.grounded_generation.presentation import saved_view
+            view,choices=saved_view(self.registry,session,response)
+            return session,view,choices
+        if session.status=='CUSTOMER_REPORTED_RESOLVED':
+            response=self.controller.response('SUPPORTED','You reported the symptom resolved; the repair and cause have not been mechanically verified.',session)
+            from cloud.grounded_generation.presentation import saved_view
+            view,choices=saved_view(self.registry,session,response)
+            return session,view,choices
+        try:
+            exhausted=exhausted_after_unresolved(self.registry,session)
+        except ValidationFailure as exc:
+            response=self.controller.response('SYSTEM_ERROR','I am temporarily unable to verify the documented transition.',session,reason_codes=(str(exc),))
+            from cloud.grounded_generation.presentation import saved_view
+            view,choices=saved_view(self.registry,session,response)
+            return session,view,choices
+        if exhausted:
+            response=self.controller.response('UNSUPPORTED','The documented action remains unresolved. No further approved step is available in this path; contact OEM or authorised service support.',session,reason_codes=('NO_APPROVED_NEXT_STEP_AFTER_UNRESOLVED_ACTION',))
             from cloud.grounded_generation.presentation import saved_view
             view,choices=saved_view(self.registry,session,response)
             return session,view,choices

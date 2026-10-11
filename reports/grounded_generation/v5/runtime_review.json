@@ -1,0 +1,55 @@
+{
+  "reviewer": "/root/architecture_review",
+  "date": "2026-10-11",
+  "decision": "SOFTWARE_REVIEW_PASS_RELEASE_HELD",
+  "file_sha256": {
+    "cloud/grounded_generation/generic_runtime.py": "3c1647a5546ced78dc586feacc92c685dd04ab50e65d20061e674901ca4ee6b1",
+    "cloud/grounded_generation/generic_policy.py": "03577b3baf0ff77daa7b2faaa86b541528dc74497db341ad2a9c10f0cb571787",
+    "cloud/grounded_generation/generic_output.py": "9e5100b2b027ef6819c263957162daa3f71727e37ec2bd8262ed0f5dce1865b0",
+    "cloud/grounded_generation/generic_presentation.py": "920fcf9cf2c8b80ac4199cf38c3fba311df225a12c271f0c6d97047e1f682b64",
+    "cloud/grounded_generation/source_authority.py": "f17920691136a08fb911ed63cd89d05d991329584ad39c328974160a2d5e8a5a",
+    "cloud/grounded_generation/provider.py": "80b130326430c9a43515853c9f834515ed11f46c35b93b2ea37d772083aec075",
+    "cloud/grounded_generation/admission.py": "bf0042a70539d2345c908a9ab5001a10f7d18db30f6fc4696cb8dbe0e69bd664",
+    "cloud/grounded_generation/transitions.py": "54eb458e735ae29db554bf86191d7008c15b2345412edc34b949300e18c5b19a",
+    "cloud/grounded_generation/source_context.py": "08cc57185f8c3ec8029a72f0de9dd1c07a5b8f409ed7f7d62012f1ec2d615a45",
+    "cloud/grounded_generation/runtime.py": "66f6c49985807544753cc2569a3c6dc3c1c7c3214e0d2960d6c9b7c2befee71b",
+    "cloud/grounded_generation/feedback.py": "658f019e96ccc427682590975066f4d2ac9c79bfb96b095bd8b91bbddd8522ca",
+    "cloud/grounded_generation/response_cache.py": "d632c309920f87694a6ac345ef1c5faf63e23c4c9525d87753e66b4499a1f66c",
+    "cloud/arm_a/app.py": "54e1d071b95e52da8e385904dc5528998227171d64d85ec74748143ec157f3c3",
+    "cloud/arm_a/rider_api.py": "5037ac94c93458b68aaec2a9f5c91ce285689e315b8e2b61ce61a86ada6704af",
+    "cloud/grounded_generation/test_generic_runtime.py": "02c296856707f80490338d6961feb0f7f2e4701ee6f986d72eefdfb44370a78d",
+    "reports/grounded_generation/generic_source_v1/structural_review.json": "2fb64c8a642c4ef25494c4baa1f80adc8392de50dcbb3eeb50222da69513d725"
+  },
+  "bindings_unchanged_during_test": true,
+  "test_command": "PYTHONPATH=build/arm-a-test-dependencies python -m unittest cloud.grounded_generation.test_generic_runtime -v",
+  "test_count": 11,
+  "test_failures": 0,
+  "test_errors": 0,
+  "test_seconds": 27.619,
+  "test_log": "reports/grounded_generation/v5/generic_runtime_tests.log",
+  "provider_in_tests": "SCRIPTED_FAKE_ONLY",
+  "immutable_source_index_in_tests": "index_a3282c4d98cf54595e4ba168",
+  "findings_resolved": [
+    "Factual source admission independent of authored steps and question wording",
+    "All exact source children may carry complete reviewed source context, not only authored action cores",
+    "Empty factual citation selection does not reject an independent eligible action",
+    "Known-observation safety corruption raises SYSTEM_ERROR before false step_ready suppresses hazard",
+    "Historical unresolved attempts survive superseding corrections and block procedural actions and diagnostic clarifications",
+    "Source raw/provenance/type/id corruption raises SYSTEM_ERROR",
+    "Server-owned immutable citations and mandatory warnings revalidated"
+  ],
+  "remaining_blockers": [
+    "Real provider full-schema held-out rider acceptance and original-page generated-claim review remain required before release"
+  ],
+  "limitations": [
+    "Citation validity, role labels and deterministic checks do not prove semantic support",
+    "ACTION language disguised as FACT remains a semantic generation risk to assess offline; no separate online verifier call is added",
+    "Source-only structural review approves descriptive context, never positive procedures or source display rights",
+    "Scripted software tests do not demonstrate real-model answer quality, p95 latency or cost",
+    "Provider quota is conservative application admission, not verified Google account entitlement",
+    "Explicit provider prompt cache unsupported for tested exact model/account; no caching savings established"
+  ],
+  "public_release_approved": false,
+  "deployment_approved_by_this_review": false,
+  "source_approval_bytes_modified": false
+}

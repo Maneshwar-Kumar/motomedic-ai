@@ -24,6 +24,9 @@ class Tests(unittest.TestCase):
     def call(self): return self.provider.complete('stable policy',{'version':'v1','evidence':{}},{'question':'unseen'},SCHEMA)
     def test_actual_counter_and_no_semantic_call(self):
         result=self.call();self.assertEqual(result.telemetry['generation_calls'],1)
+        body=self.transport.calls[-1][1]
+        self.assertEqual(body['generationConfig']['responseMimeType'],'application/json')
+        self.assertEqual(body['generationConfig']['responseJsonSchema'],SCHEMA)
         self.assertEqual(result.telemetry['verifier_calls'],0);self.assertEqual(self.reservations,[(1900,'generation')])
     def test_overflow_no_generation_no_truncation(self):
         self.transport.count=8193
@@ -31,7 +34,7 @@ class Tests(unittest.TestCase):
         self.assertFalse(self.reservations)
     def test_byte_bound_keeps_mandatory_bundle(self):
         with self.assertRaisesRegex(ProviderFailure,'BYTE_BOUND'):
-            self.provider.complete('policy',{'mandatory':'x'*24000},{},SCHEMA)
+            self.provider.complete('policy',{'mandatory':'x'*65536},{},SCHEMA)
         self.assertFalse(self.transport.calls)
     def test_single_retry_only_explicit_rejection(self):
         self.transport.fail=['PROVIDER_HTTP_429'];result=self.call()

@@ -234,22 +234,23 @@ def load_production():
     registry = ApprovedEvidenceRegistry.load(ROOT, index)
     # Load both pinned query and cross-encoder models once per hosted worker.
     from cloud.arm_a.runtime_controls import GuardedRetriever, TokenBudget, VERSION
-    from cloud.grounded_generation.policy import POLICY, POLICY_SHA256
+    from cloud.grounded_generation.generic_policy import POLICY, POLICY_SHA256
     retriever = GuardedRetriever(index, rerank=True)
     budget = TokenBudget(retriever.model, retriever.manifest['embedding'],
         POLICY, POLICY_SHA256)
     retriever.install_controls(budget)
     # The owner clarified that A must retain an answer LLM. The historical
     # exact-wording composer is kept only for old regression fixtures.
-    from cloud.grounded_generation.runtime import Composer, Questions
+    from cloud.grounded_generation.generic_runtime import Composer, Questions
     from cloud.grounded_generation.provider import GemmaProvider
     from cloud.grounded_generation.admission import ProviderAdmission
     cases = json.loads((ROOT/'reports/ab30_v1_cases.json').read_text(encoding='utf-8'))
     if isinstance(cases, dict):
         cases = cases['cases']
     client = firestore.Client(project='motomedic-ai-20261009')
-    controlled_composer = Composer(GemmaProvider(ProviderAdmission(client),
-        cache_capability=os.environ.get('MOTOMEDIC_PROVIDER_CACHE_CAPABILITY','unsupported')))
+    # Prior exact-model/account probes returned 404. An environment switch is
+    # not evidence of cache support; fresh capability review is required.
+    controlled_composer = Composer(GemmaProvider(ProviderAdmission(client),cache_capability='unsupported'))
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='MANUAL_EVIDENCE_GROUNDED_LLM',

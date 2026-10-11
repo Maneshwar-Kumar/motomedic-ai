@@ -1,0 +1,85 @@
+{
+  "schema_version": "generic-rider-acceptance-methodology-v5-draft",
+  "status": "PRE_FREEZE_METHODOLOGY_ONLY_FINAL_HELDOUT_NOT_AUTHORED",
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "serving_exclusion": "Held-out questions, expected facts, pages, scoring and provider outputs are evaluation-only; never import them in serving prompts, cache, retrieval, assembly, source authority or runtime image.",
+  "freeze_sequence": [
+    "Record exact runtime/source-authority/prompt file hashes before final dataset authoring.",
+    "Author new short rider questions and multi-turn wording only after the recorded freeze.",
+    "Bind dataset hash in evaluation manifest without modifying frozen runtime files.",
+    "Execute real immutable-index retrieval and exact Gemma provider in hosted environment.",
+    "Independently compare every released technical claim with complete original PDF pages, including conditions, warnings, table headers and source procedure context."
+  ],
+  "cohorts": {
+    "owner_examples": "User-specified natural questions and follow-ups; known scenarios, regression examples rather than fresh holdout.",
+    "fresh_holdout": "New natural wording and fact combinations authored after runtime freeze. Source facts may overlap reviewed source; not a held-out source or representative blinded benchmark.",
+    "synthetic_faults": "Provider transport, output citation and context/reservation failures injected through normal runtime boundaries; separate from natural answerable coverage."
+  },
+  "metrics": {
+    "answerable_route_coverage": "SUPPORTED turns divided by all manual-answerable fact/action turns; source review and retrieval misses stay in denominator.",
+    "answerable_complete_coverage": "Turns with complete expected source-backed answer and mandatory conditions/warnings divided by manual-answerable turns. Partial answers counted separately.",
+    "released_claim_support": "Original-page supported released technical claim units / all released technical claim units; warnings and server-appended text are included. Model-generated claims also reported separately.",
+    "unsupported_claims": "Absolute released unsupported claim count and rate; zero is required in this acceptance sample. Citation-ID validity is separate.",
+    "evidence_completeness": "Complete original-page mandatory evidence available to composition / eligible tested turns; retrieval misses, assembly omissions and source-authority holds separately attributed.",
+    "state_correctness": "Unresolved outcomes retained, no normal inference or unjustified repeats; natural dialogue transitions and trusted fixtures distinguished.",
+    "fault_handling": "SYSTEM_ERROR and no technical release on tested operational failures, bounded provider attempts, no context truncation and no generation transport call after budget reservation rejection.",
+    "latency": "Per turn end-to-end wall time and provider time; evaluation quota pacing recorded separately. Small sample cannot establish production p95.",
+    "cost": "Actual provider usage and conservative reservation counters; no prompt-cache savings assumed."
+  },
+  "acceptance_thresholds": {
+    "unsupported_released_technical_claims": 0,
+    "unjustified_repeat_steps": 0,
+    "answerable_complete_coverage_minimum": 0.8,
+    "citation_support_minimum": 0.98,
+    "fault_cases_all_correct": true,
+    "unseen_supported_reaches_answer_llm_required": true,
+    "public_access": "CLOSED_PENDING_QUALITY_REVIEW"
+  },
+  "failure_attribution": [
+    "retrieval_missing_relevant_immutable_objects",
+    "assembly_missing_source_context_or_dependencies",
+    "source_authority_review_gap",
+    "applicability_or_rider_prerequisite",
+    "historical_action_exhaustion",
+    "provider_failure",
+    "input_context_budget",
+    "reservation_budget",
+    "output_structure_or_citation",
+    "semantic_quality"
+  ],
+  "source_preparation": {
+    "agent": "/root/acceptance_preparation",
+    "original_pdf_text_checked_pages": [
+      16,
+      18,
+      19,
+      20,
+      64,
+      65,
+      71,
+      74,
+      75,
+      88,
+      89,
+      104,
+      112,
+      121,
+      122
+    ],
+    "original_pdf_visually_checked_pages": [
+      18,
+      19,
+      20,
+      64,
+      65,
+      74,
+      88,
+      89,
+      112,
+      121,
+      122
+    ],
+    "scope": "Expected evaluation facts only; no serving evidence authority or repair authorization."
+  }
+}

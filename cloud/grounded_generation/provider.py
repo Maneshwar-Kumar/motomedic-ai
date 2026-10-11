@@ -16,7 +16,7 @@ from generation_providers import ProviderFailure, ProviderResult
 MODEL = 'gemma-4-26b-a4b-it'
 INPUT_TOKENS = 8192
 OUTPUT_TOKENS = 1800
-REQUEST_BYTES = 24000
+REQUEST_BYTES = 65536
 
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
@@ -66,10 +66,11 @@ class GemmaProvider:
         return n
 
     def context(self,policy,evidence,dynamic,schema):
-        body={'systemInstruction':{'parts':[{'text':policy+'\nOutput schema: '+json.dumps(schema,sort_keys=True)}]},
+        body={'systemInstruction':{'parts':[{'text':policy}]},
             'contents':[{'role':'user','parts':[{'text':json.dumps(evidence,sort_keys=True,ensure_ascii=False)}]},
                 {'role':'user','parts':[{'text':json.dumps(dynamic,sort_keys=True,ensure_ascii=False)}]}],
             'generationConfig':{'maxOutputTokens':OUTPUT_TOKENS,'temperature':0,
+                'responseMimeType':'application/json','responseJsonSchema':deepcopy(schema),
                 'thinkingConfig':{'thinkingLevel':'minimal'}}}
         if len(json.dumps(body,ensure_ascii=False).encode())>REQUEST_BYTES:
             raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
@@ -89,7 +90,7 @@ class GemmaProvider:
             system=body['systemInstruction'];stable,varying=body['contents']
             trace['input_tokens_counted']=count
             if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
-            cache_key=hashlib.sha256(json.dumps({'model':MODEL,'system':system,'stable':stable},sort_keys=True).encode()).hexdigest()
+            cache_key=hashlib.sha256(json.dumps({'model':MODEL,'system':system,'stable':stable,'schema':schema},sort_keys=True).encode()).hexdigest()
             if self.cache_capability=='explicit':
                 entry=self.cache.get(cache_key)
                 if entry and entry[1]<=self.clock(): entry=None; self.cache.pop(cache_key,None)
