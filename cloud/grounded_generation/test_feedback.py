@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import unittest
+import os
 from unittest.mock import patch
 from approved_registry import ApprovedEvidenceRegistry
 from controller_contracts import ResponseType
@@ -12,7 +13,7 @@ from reviewed_controller import start_session
 from cloud.grounded_generation import feedback
 
 ROOT=Path(__file__).resolve().parents[2]
-INDEX=ROOT/'build/index-bge-final'
+INDEX=Path(os.environ.get('MOTOMEDIC_TEST_INDEX',str(ROOT/'build/index-bge-final')))
 
 class Tests(unittest.TestCase):
     @classmethod

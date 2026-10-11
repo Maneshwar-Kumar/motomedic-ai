@@ -1,0 +1,156 @@
+{
+  "schema_version": "grounded-runtime-scoped-review-v1",
+  "status": "APPROVED_SCOPED_DETERMINISTIC_SOFTWARE_ARCHITECTURE",
+  "public_release_approved": false,
+  "reviewer": "/root/runtime_review",
+  "scope": "Deterministic evidence admission, typed feedback/eligibility, citation/mandatory display, response-cache authority, provider request controls and rider serving integration. Does not approve generated claims, source semantics or public deployment.",
+  "files": {
+    "cloud/grounded_generation/admission.py": "b85210b7eee467a57632b050875907aacc19e92f09e36290315aabc8bbd7393b",
+    "cloud/grounded_generation/policy.py": "283d3740b51d8012c343f6992e97df677f19cd4acc48c8a33ca843678911859d",
+    "cloud/grounded_generation/presentation.py": "f633b491ee53a164b0d2c3fc0eb1d6cc065abd1f6caa3fa63123ec1bb65809d1",
+    "cloud/grounded_generation/provider.py": "d1bd3769bdc130afe6555b440cb9f1f3aa58507a408b9882d3287d42008b870d",
+    "cloud/grounded_generation/response_cache.py": "2a3cdda78278d3201e2654dac033bf46cbabf3c79f207adf0a521c2a0a51478d",
+    "cloud/grounded_generation/runtime.py": "22b9fa7cc1a3a290430dad4967168901fd40a1d770f487b339abfc883d568f70",
+    "cloud/grounded_generation/test_provider.py": "6aab47e4fb4603755dac46a17536fec1eb29e995de4945c8794e555ee2a23c6d",
+    "cloud/grounded_generation/test_runtime.py": "13626377cc96d98b7869e2157b281784269b95e174b4ded39cfa153e72df85a7",
+    "cloud/grounded_generation/__init__.py": "883ad628573b45c505cffe99b92370e05f20872f1f31c1e4a295b2e62119787d",
+    "cloud/arm_a/app.py": "c82128e25e6ed52fcbaace573fef31873ecc778619c345aba74f731e60e44ccf",
+    "cloud/arm_a/rider_api.py": "5037ac94c93458b68aaec2a9f5c91ce285689e315b8e2b61ce61a86ada6704af",
+    "cloud/arm_a/store.py": "34186fca9c4832bc5198072746f827a546fad4365374b3b615eaffe537ffdba1",
+    "cloud/arm_a/runtime_controls.py": "e3c251f1dd7549af23ca912a4e89b09dfef97f2a6828df7367e2a9beeef7d105",
+    "tools/validate_grounded_generation.py": "0065618e8797de522a3acdd3784c7bf64e5f66c6bafa6387498aeb9887930efe",
+    "cloud/grounded_generation/feedback.py": "658f019e96ccc427682590975066f4d2ac9c79bfb96b095bd8b91bbddd8522ca",
+    "reports/grounded_generation/prerequisite_review_v1/answer_bindings.json": "f198399fcaf1b43ddd6b7bbcf03514a11caaea987cc7eb6f28293c6e3c810a9a",
+    "cloud/grounded_generation/test_feedback.py": "2bc4eba38f279089df664f97c3e6986447d098adb4df8b73387dd720bbcf0ff3"
+  },
+  "checks": {
+    "provider_boundary_tests": {
+      "command": "python -m unittest cloud.grounded_generation.test_provider -v",
+      "passed": 11,
+      "transport": "mock",
+      "semantic_evidence": false
+    },
+    "new_generation_path_separate_semantic_verifier_calls": 0,
+    "generated_wording_membership_checked": false,
+    "runtime_manifest_file_bindings": "ALL_MATCH",
+    "independent_feedback_boundary_tests": {
+      "command": "python -m unittest cloud.grounded_generation.test_feedback -v",
+      "passed": 14,
+      "source": "Actual content-bound coordinator registry and exact clarification approval JSON; mocked provider thought boundary",
+      "semantic_evidence": false
+    },
+    "runtime_regression_local": {
+      "command": "python -m unittest cloud.grounded_generation.test_runtime -v",
+      "status": "UNAVAILABLE_LOCAL_DEPENDENCY",
+      "cause": "Flask not installed; requires hosted receipt"
+    },
+    "bounded_retrieval_scopes": {
+      "maximum_non_action": 3,
+      "maximum_action": 1,
+      "ranking": "DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1",
+      "mandatory_evidence": "Complete required set retained for every selected scope; overflow fails explicitly"
+    },
+    "known_safety": "Confirmed source-backed non-policy typed observations only; no hazard inferred from retrieval tags",
+    "mandatory_display": "Required reviewed warning, prerequisite and policy wording appended server-side and exact-bound at presentation",
+    "exact_response_cache": "No semantic lookup, no automatic insertion of generated misses, current approved canonical planner bytes and admitted scope revalidated"
+  },
+  "findings": [
+    {
+      "id": "RR001",
+      "severity": "high",
+      "status": "CLOSED",
+      "location": "cloud/arm_a/rider_api.py:rider_catalogue",
+      "finding": "New Questions lacks descriptors; catalogue still reports zero provider calls and old conservative component policy.",
+      "resolution": "Catalogue reflects open admitted-evidence LLM policy and avoids descriptors dependency."
+    },
+    {
+      "id": "RR002",
+      "severity": "high",
+      "status": "CLOSED",
+      "location": "cloud/arm_a/rider_api.py:feedback / Composer.compose",
+      "finding": "Feedback uses controller.next and mutable Composer.query/scopes from previous call, risking stale context rather than current selected step and retrieval.",
+      "resolution": "Feedback clears stale mutable context and composes only the freshly selected sid/current query."
+    },
+    {
+      "id": "RR003",
+      "severity": "high",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/runtime.py:Questions.answer",
+      "finding": "Already-known applicable safety stops depend on successful new retrieval; retrieval failure returns SYSTEM_ERROR before independent safety routing.",
+      "resolution": "Confirmed non-policy source-backed typed hazard predicates route before retrieval; retrieval tags alone do not establish a known hazard."
+    },
+    {
+      "id": "RR004",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/runtime.py:Questions.answer",
+      "finding": "Session status unconditionally resets OPEN, including customer-reported resolved state; preserve resolution and pending typed semantics explicitly.",
+      "resolution": "Answer preserves customer-reported resolved status and advances version without rewriting typed history."
+    },
+    {
+      "id": "RR005",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/provider.py:cachedContents",
+      "finding": "Prompt-cache creation reserves zero tokens; paid prefix storage/context must have explicit bounded spend allowance or disabled unsupported capability.",
+      "resolution": "Supported explicit prompt cache reserves provider-counted stable-prefix tokens; creation count, lifetime and retained entries are bounded; unsupported exact-model capability remains explicit."
+    },
+    {
+      "id": "RR006",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/grounded_generation/runtime.py:Composer.compose_many",
+      "finding": "Eligible exact-response hits skip complete admitted-context byte/token budget checks owned by provider.complete.",
+      "resolution": "Exact reviewed response hits pass whole-context byte and provider token counting with no mandatory-evidence truncation."
+    },
+    {
+      "id": "RR007",
+      "severity": "medium",
+      "status": "CLOSED",
+      "location": "cloud/arm_a/app.py:production Composer construction",
+      "finding": "No reviewed exact-cache loader is configured; eligible response caching is an empty hook.",
+      "resolution": "Reviewed responses derive exact bound planner questions and canonical approved claims, fresh admitted scope and empty active state; arbitrary supplied cache dictionaries are prohibited."
+    },
+    {
+      "id": "RR008",
+      "severity": "high",
+      "status": "CLOSED",
+      "finding": "Known-safety new-question return initially kept old version and would fail durable commit.",
+      "resolution": "Version advances before known-safety routing; regression checks 7 to 8 with retrieval unavailable."
+    },
+    {
+      "id": "RR009",
+      "severity": "high",
+      "status": "CLOSED",
+      "finding": "Clarification owners use canonical records rather than runtime step IDs.",
+      "resolution": "Compare current step canonical_record_id to bound owners, retain step/source/rule hash checks."
+    },
+    {
+      "id": "RR010",
+      "severity": "medium",
+      "status": "CLOSED",
+      "finding": "EXP003 legacy fallback could issue Boolean capabilities for mismatched displayed question.",
+      "resolution": "Reviewed ambiguity requires exact question text; mismatch or absent reviewed binding yields no Boolean choices."
+    },
+    {
+      "id": "RR011",
+      "severity": "medium",
+      "status": "CLOSED",
+      "finding": "Python equality could normalize numeric thought=1 as empty True marker.",
+      "resolution": "Exact dictionary keys plus thought is True; all remaining thought flags require Boolean type, nonempty thoughts and paid thought tokens are rejected."
+    }
+  ],
+  "limitations": [
+    "Approval is exact-byte scoped software review; any serving/prompt/cache/source-binding change needs a new review and manifest.",
+    "Deterministic citation membership, roles and step/schema checks are not semantic entailment proof; generated FACT text may still misstate evidence or disguise a procedure. Original-PDF claim evaluation remains mandatory.",
+    "No separate final semantic-verifier provider call is introduced.",
+    "Question wording is not an admission allowlist. Coverage remains limited to approved evidence scopes and retained retrieval candidates; it is not whole-manual answerability.",
+    "Bounded ranking may omit a useful lower-ranked factual scope or safety scope for an initial raw question; model interpretation of raw hazards and relevance requires held-out evaluation.",
+    "Provider prompt-cache code is capability gated; mocked explicit-cache tests do not prove exact selected-model support or real savings.",
+    "The 28 clarification polarity bindings have separate source review authority; this review validates capability integrity and typed mapping, not their original-page semantic correctness.",
+    "Hosted runtime/full regression receipts, freshly authored held-out generated-claim/original-page review, deployed privacy/ownership/durable-streaming acceptance and budget receipts are outside this approval and still govern public release."
+  ],
+  "frozen_commit": "f03bb214d005e5143ef09657bc85fe70f1b67f91",
+  "runtime_manifest_sha256": "8d2719efe4b4811cf42945ae0865941884a31df2126894ffd2011a0e619123e1",
+  "authority": "OWNER_REQUESTED_FRESH_SCOPED_AGENT_REVIEW"
+}

@@ -14,6 +14,7 @@ from reviewed_controller import ReviewedController, start_session, append_attemp
 from cloud.arm_a.runtime_controls import diagnostic_projection
 from cloud.grounded_generation.policy import VERSION, POLICY, POLICY_SHA256, SCHEMA
 from cloud.grounded_generation.provider import GemmaProvider, ProviderFailure, MODEL
+from cloud.grounded_generation.context import project, VERSION as CONTEXT_VERSION
 
 @dataclass(frozen=True)
 class Config:
@@ -21,6 +22,7 @@ class Config:
     def versions(self):
         return {'version':VERSION,'model':MODEL,'policy_sha256':POLICY_SHA256,
             'input_tokens':8192,'request_bytes':24000,'output_tokens':1800,
+            'context_projection':CONTEXT_VERSION,
             'question_admission':'RETRIEVED_REVIEWED_EVIDENCE_NOT_QUESTION_WORDING',
             'retrieved_scope_limit':4,'retrieved_scope_ranking':'DIRECT_HIT_RANK_THEN_CORE_COVERAGE_V1',
             'response_cache':'REVIEWED_EXACT_QUERY_SCOPE_STATE_ONLY_V1',
@@ -106,7 +108,7 @@ class Composer:
             scopes={sid:scope_payload(controller,session,sid) for sid in sids}
             required=set(e for s in scopes.values() for e in s['required_evidence_ids'])
             evidence={eid:{'type':r.evidence[eid].get('type'),
-                'raw_object':deepcopy(r.evidence[eid]['raw_object']),
+                'source_object':project(r.evidence[eid]['raw_object']),
                 'provenance':deepcopy(r.evidence[eid]['provenance'])} for eid in sorted(required)}
             stable={'contract':self.config.versions(),'manual_checksum':r.checksum,
                 'index_id':r.index_id,'registry_lock':r.lock,'variant':session.bike_variant,
