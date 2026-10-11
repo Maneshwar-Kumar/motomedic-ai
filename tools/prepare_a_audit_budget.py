@@ -25,7 +25,7 @@ retry = any('motomedic-budget-guard' in s.get('pushConfig', {}).get('pushEndpoin
 if not (main['billingEnabled'] is True and infer['billingEnabled'] is False and ready and live_guard and retry):
     raise RuntimeError('Preflight denied; no billing or settings changes permitted')
 stamp = datetime.now(timezone.utc).isoformat()
-proof = dict(schema_version='a-verifier-only-budget-v1', checked_at_utc=stamp,
+proof = dict(schema_version='a-verifier-only-budget-v2', checked_at_utc=stamp,
              project_id='motomedic-ai-20261009', inference_project_id='motomedic-inference-20261009',
              main_billing_enabled=True, inference_billing_enabled=False,
              billing_stop_guard_ready=True, guard_live_simulate_false_observed=True,
@@ -34,9 +34,9 @@ proof = dict(schema_version='a-verifier-only-budget-v1', checked_at_utc=stamp,
              main_lifetime_budget_inr=800, main_billing_stop_inr=640,
              instantaneous_spend_known=False, inference_cost_basis='FREE_ONLY_BILLING_DISABLED',
              selected_comparison_model='gemma-4-26b-a4b-it', owner_authorized_model_comparison=True,
-             allocation_id='owner-a-exact-output-post-facto-verifier-v1', maximum_live_runs=1,
-             old_v4_allocation_reused=False, billing_changes=False, deployment_changes=False)
-Path('reports/a_semantic_audit_v1_budget.json').write_text(json.dumps(proof, indent=2), encoding='utf-8')
+             allocation_id='owner-a-exact-output-post-facto-verifier-v2', maximum_live_runs=1,
+             previous_audit_run='38126540537', previous_audit_provider_calls=0, old_v4_allocation_reused=False, billing_changes=False, deployment_changes=False)
+Path('reports/a_semantic_audit_v2_budget.json').write_text(json.dumps(proof, indent=2), encoding='utf-8')
 template = qdrant['spec']['template']
 anno = template['metadata']['annotations']
 spec = template['spec']

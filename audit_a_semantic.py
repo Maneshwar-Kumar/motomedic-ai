@@ -21,7 +21,7 @@ from generation_providers import GeminiJSONProvider, gemma_runtime_config, Provi
 RUN = 'reports/architecture_run_38122505406/architecture_comparison.json'
 RUN_SHA = 'bfd7603c1dccb84d99613c8de647de9475da4f9675d75ccdfb583c915583ac83'
 IDS = ('GEN003', 'EXP003', 'GEN026')
-PREFIX = 'reports/a_semantic_audit_v1'
+PREFIX = 'reports/a_semantic_audit_v2'
 
 
 def sha(path):
@@ -121,7 +121,7 @@ def classify(output, count):
 def run(index, output, live=False):
     registry = ApprovedEvidenceRegistry.load('.', index)
     bundles = recover(registry)
-    report = {'schema_version': 'a-post-facto-semantic-audit-v1',
+    report = {'schema_version': 'a-post-facto-semantic-audit-v2',
               'original_run_id': '38122505406', 'original_run_sha256': RUN_SHA,
               'registry_lock': registry.lock, 'model': MODEL, 'runtime_config': asdict(audit_config()),
               'generation_calls': 0,
@@ -145,8 +145,8 @@ def run(index, output, live=False):
         if [x['verifier_input_sha256'] for x in bundles] != review['verifier_input_sha256']:
             raise ValueError('Exact verifier inputs changed')
         budget = json.loads(Path(PREFIX + '_budget.json').read_text(encoding='utf-8-sig'))
-        expected_budget = {'schema_version': 'a-verifier-only-budget-v1',
-                           'allocation_id': 'owner-a-exact-output-post-facto-verifier-v1',
+        expected_budget = {'schema_version': 'a-verifier-only-budget-v2',
+                           'allocation_id': 'owner-a-exact-output-post-facto-verifier-v2',
                            'maximum_provider_calls': 3, 'retries': 0, 'maximum_live_runs': 1,
                            'old_v4_allocation_reused': False}
         if any(type(budget.get(k)) is not type(v) or budget[k] != v

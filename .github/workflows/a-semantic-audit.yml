@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install original NumPy import dependency; no model load
+        run: pip install numpy==2.4.6
       - name: Reuse immutable evidence snapshot; no model or ingestion
         uses: actions/download-artifact@v4
         with:
@@ -30,11 +32,11 @@ jobs:
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
           MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
-          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/a_semantic_audit_v1_budget.json
-        run: python audit_a_semantic.py --index build/index --output build/a_semantic_audit_v1_result.json --live
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/a_semantic_audit_v2_budget.json
+        run: python audit_a_semantic.py --index build/index --output build/a_semantic_audit_v2_result.json --live
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: a-semantic-audit-${{ github.run_id }}
-          path: build/a_semantic_audit_v1_result.json
+          path: build/a_semantic_audit_v2_result.json
           retention-days: 7
