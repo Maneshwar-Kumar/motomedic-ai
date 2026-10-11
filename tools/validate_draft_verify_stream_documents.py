@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,zipfile
 from docx import Document
 from lxml import etree
-from tools.reconcile_draft_verify_stream_documents import NAMES,MAPS,OUT
+from tools.reconcile_draft_verify_stream_documents import NAMES,MAPS,OUT,FALLBACK_TEXT,SYSTEM_ERROR_TEXT
 
 def main():
  records=[]
@@ -14,6 +14,7 @@ def main():
   retained=[p.text for i,p in enumerate(old.paragraphs) if i not in skip and p.text];missing=[p for p in retained if p not in [x.text for x in doc.paragraphs]]
   texts='\n'.join(p.text for p in doc.paragraphs)+'\n'+'\n'.join(c.text for t in doc.tables for r in t.rows for c in r.cells)
   required=['DRAFT','VERIFY','STREAM','separate','actual question','partial','operation ID','durable save','ACTION_COMPLETED_UNRESOLVED','SYSTEM_ERROR','No predefined question','private drafting tokens','at most one','not authorize new spending']
+  required+=['RELEASE_COMPLETE','RELEASE_PARTIAL','SHOW_FALLBACK','RELEASE_CLARIFICATION','RELEASE_SAFETY_STOP','IRRELEVANT_ANSWER','MISSING_SUPPORT','CORRECTION_UNSUCCESSFUL',FALLBACK_TEXT,SYSTEM_ERROR_TEXT,'partial-answer limitation before verification','require no successful LLM','source_manifest.json','AMBIGUOUS','SAFETY_STOP','not a verified technical answer']
   absent=[x for x in required if x not in texts]
   with zipfile.ZipFile(path) as z:
    for n in z.namelist():
@@ -22,6 +23,11 @@ def main():
   with zipfile.ZipFile(prior) as z:oldmedia={n:hashlib.sha256(z.read(n)).hexdigest() for n in z.namelist() if n.startswith('word/media/')}
   result={'file':name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'prior_sha256':hashlib.sha256(prior.read_bytes()).hexdigest(),'unrelated_existing_nonempty_paragraphs_checked':len(retained),'missing_unrelated_paragraphs':missing,'missing_current_requirements':absent,'original_tables_preserved':len(doc.tables)==len(old.tables),'original_media_byte_identical':media==oldmedia,'ooxml_parse_ok':True,'structural_result':'PASS' if not missing and not absent and media==oldmedia else 'FAIL','visual_qa':'PENDING_MANAGED_RENDER_AND_ALL_PAGE_INSPECTION'}
   if name=='03_TRD_Architecture_Decision_Note.docx':result['historical_numeric_comparison_table_content_identical']=[[c.text for c in r.cells] for r in doc.tables[1].rows]==[[c.text for c in r.cells] for r in old.tables[1].rows]
+  if name=='03_TRD.docx':
+   verdict=[r.cells[1].text for r in doc.tables[1].rows if r.cells[0].text=='VerificationVerdict']
+   schema_fields=['binding_sha256','decision','question_coverage','per_claim_support','omissions','conflicts','coverage_limitation_clear','clarification_is_rider_resolvable','release_eligible','correction_possible']
+   result['verifier_schema_fields_match_current_contract']=len(verdict)==1 and all(f in verdict[0] for f in schema_fields) and 'Application metadata separately records fallback reason' in verdict[0]
+   if not result['verifier_schema_fields_match_current_contract']:result['structural_result']='FAIL'
   if name=='02_PRD.docx':
    ids=[r.cells[0].text for r in doc.tables[1].rows[1:]];result['unique_functional_ids']=len(ids)==len(set(ids))
   records.append(result)

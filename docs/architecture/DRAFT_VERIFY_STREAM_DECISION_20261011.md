@@ -23,3 +23,11 @@ Validation separately measures question coverage, claim support, false acceptanc
 This decision authorizes implementation and document reconciliation within existing permissions. It is not new deployment, billing or provider-spending authorization. Public access remains closed pending recorded acceptance and the applicable deployment authorization.
 
 Implementation and validation: [current work](../../reports/grounded_generation/draft_verify_stream_v1/README.md). Frozen prior generic version: [v5 runtime freeze](../../reports/grounded_generation/v5/runtime_freeze.json). Source manifest: [source restrictions](../../source_manifest.json).
+
+## Decision and application delivery clarification
+
+Ordinary verifier decisions are RELEASE_COMPLETE, RELEASE_PARTIAL and SHOW_FALLBACK. They are strict structured results, not direct access to rider delivery. Releases still require question coverage, all claim support, no missing mandatory conditions/warnings, exact evidence/history/runtime bindings and final application checks. RELEASE_PARTIAL includes its checked limitation in the proposed response before verification. An undisclosed gap rejects the draft; at most one corrective draft and re-verification may follow. Rider-resolvable AMBIGUOUS and verified SAFETY_STOP retain separate release decisions and precedence.
+
+SHOW_FALLBACK discards rejected content and uses this fixed nontechnical application message: “I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.” The verified manifest support URI is retained. Internal codes distinguish relevant-but-non-answering drafts, missing support and unsuccessful correction. The wording makes no assertion that an answer is absent throughout the manual. Fallback is not labelled as a verified technical answer.
+
+Verifier timeout, malformed output, provider outage, quota exhaustion and integrity failure are SYSTEM_ERROR. The fixed application message is: “I couldn’t check the answer right now. Please try again shortly.” Neither fixed message depends on a successful model call. No failed operational check becomes a fallback.
