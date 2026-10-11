@@ -1,6 +1,8 @@
 """Record the owner's 11 October 2026 A/B decision without changing runtime."""
 from pathlib import Path
 import json
+import io
+import subprocess
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.oxml import OxmlElement
@@ -41,7 +43,7 @@ def table(doc, headers, rows, widths=None):
 def heading(doc,text): doc.add_heading(text,1)
 
 def main():
-    d=Document(ROOT/'03_TRD.docx')
+    d=Document(io.BytesIO(subprocess.check_output(['git','show','adea3d6:03_TRD.docx'],cwd=ROOT)))
     replacements={
         1:'TRD v0.5  Reference design and implementation contracts',
         2:'v0.5  Updated 11 October 2026  Owner decision selects A and B with streaming for A',
@@ -52,7 +54,7 @@ def main():
         58:'SUPPORTED requires an eligible action or applicable factual answer, complete approved dependencies, valid citations, satisfied safety and prerequisite checks and successful method-specific claim validation. A requires exact reviewed wording and valid allowlisted selections; B requires deterministic checks plus successful semantic verification. Both release only after validation and durable session save. Rejected drafts remain withheld. Bounded operational generation/verification failures return SYSTEM_ERROR; established source gaps yield UNSUPPORTED. A post facto audit does not retroactively authorize unsafe output.',
         101:'Recorded implementation: hosted BGE M3 candidate index index_a3282c4d98cf54595e4ba168 has 532 children and 277 section parents; authenticated Cloud Run Qdrant restores immutable private vectors on cold start. The historical backend smoke passed 11/11. Isolated A/B/C experiments and verified delivery hooks are measured; the A/B production service and browser/UI delivery boundary require integration and separate validation.',
         102:'The exact 161 source-content/initial-response scopes have coordinator approval under owner delegation in release_manifest_v3.json, checksum b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298. The 17-test approval consumer validates 187 bound files. Remaining limitations include full adaptive transitions, general vision, changed runtime objects and source-specific gaps outside those scopes. End-user PDF, excerpt and figure delivery remain prohibited by source_manifest.json; approved paraphrases and citation metadata are the UI content boundary.',
-        104:'The deployed retrieval record retains the TRD v0.3 candidate assembly boundary. Repository v0.4 retrieval scheduling and isolated answer experiments do not establish a deployed rider service. This v0.5 document selects A/B and A streaming prospectively, with follow-up audit and hosting work in section 14. Progress references remain cloud/deployment_status.json, cloud/live_smoke.json, the exact approval package and the architecture v4 reports.'
+        104:'Deployment remains the recorded v0.3 candidate boundary. Repository retrieval scheduling and isolated experiments do not establish a deployed rider service. This v0.5 amendment governs A/B and A streaming; consult section 14 and the deployment, smoke, source and v4 result records.'
     }
     for i,text in replacements.items(): d.paragraphs[i].text=text
     d.tables[0].rows[6].cells[2].text='A exact reviewed selection checks; B semantic claim verification; fail-closed delivery'
@@ -74,6 +76,13 @@ def main():
     paragraph(d,'First, run the removed semantic verifier post facto on the exact A outputs from all three cases, with repeat provenance retained. Bind the audited wording, claims, warnings and citations to the approved source and existing run. Record valid acceptance, valid rejection, invalid schema and provider/system failure separately; do not regenerate the answers or infer approval from a schema failure. This task is a new audit, not permission to alter old results or widen A beyond approved wording.')
     paragraph(d,'Second, investigate current Cloud Run minimum-instance pricing for the actual region, CPU, memory and billing mode, including idle cost, free tier and existing budget impact. Check current startup CPU boost settings and pricing and propose a controlled benchmark. Fresh-worker readiness was 56.64 seconds excluding controls, including 38.25 seconds for dense model/index load; this is not measured Cloud Run request cold latency. Do not change deployment, minimum instances, boost or billing as part of research.')
     paragraph(d,'The companion 03_TRD_Architecture_Decision_Note.docx records selected and rejected answer methods, measured retrieval/cache/streaming controls and broader design alternatives, distinguishing completed comparisons from options merely considered. Preserve the v4 raw results and independent audit as evidence. The concept, PRD and evaluation documents dated 9 October retain historical v0.4 language; this v0.5 amendment takes precedence for A/B method-specific validation and A streaming.')
+    for sec in d.sections:
+        for footer in [sec.footer,sec.first_page_footer,sec.even_page_footer]:
+            for p in footer.paragraphs:
+                for r in p.runs:
+                    if 'DRAFT v0.4' in r.text:
+                        r.text=r.text.replace('DRAFT v0.4  |  SOURCE REVIEW PENDING  |  09 OCTOBER 2026','TRD v0.5  |  OWNER A B DECISION  |  11 OCTOBER 2026')
+                    r.font.color.rgb=RGBColor(0,0,0)
     d.save(ROOT/'03_TRD.docx')
 
     n=Document();sec=n.sections[0];sec.top_margin=sec.bottom_margin=Inches(.65);sec.left_margin=sec.right_margin=Inches(.7)
@@ -143,6 +152,12 @@ def main():
     heading(n,'Evidence record')
     paragraph(n,'Hosted run: https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38122505406\nReviewed runtime commit: e910c86d2fb8a0a2f955bbea4fa4cbedbe64d82d\nRaw results: reports/architecture_run_38122505406/architecture_comparison.json\nTiming summary: reports/architecture_owner_measurement_summary_v4.json\nIndependent audit: reports/architecture_result_independent_audit_v4.json\nRaw SHA256: bfd7603c1dccb84d99613c8de647de9475da4f9675d75ccdfb583c915583ac83')
     paragraph(n,'Earlier v3 run 38080802638 and the original comparison reports remain preserved. The v4 independent audit confirms all 18 cells, provider accounting and client timing arithmetic; it does not certify broad rider release. Current minimum-instance and CPU-boost reference pages are https://docs.cloud.google.com/run/docs/configuring/min-instances and https://docs.cloud.google.com/run/docs/configuring/services/cpu. Pricing will be checked afresh in the follow-up.')
+    for st in n.styles:
+        for border in list(st.element.xpath('.//w:pBdr')):
+            border.getparent().remove(border)
+    for p in n.paragraphs:
+        for border in list(p._p.xpath('.//w:pBdr')):
+            border.getparent().remove(border)
     n.save(ROOT/NOTE)
 
 if __name__=='__main__':main()
