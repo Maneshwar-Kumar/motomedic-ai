@@ -1,0 +1,2020 @@
+{
+  "schema_version": "architecture-v4-result-audit-v1",
+  "run_id": "38122505406",
+  "source_report_sha256": "bfd7603c1dccb84d99613c8de647de9475da4f9675d75ccdfb583c915583ac83",
+  "audited_at_utc": "2026-10-11T07:58:39.480260+00:00",
+  "audit_decision": "PASS_18_CELLS_ALL_ATTEMPTS_AND_CLIENT_TIMINGS",
+  "provider_calls": 27,
+  "http_status_counts": {
+    "200": 26,
+    "None": 1
+  },
+  "retry_attempts": 0,
+  "initial_supported": 8,
+  "repeat_supported": 8,
+  "cache_repeat_hits": 3,
+  "worker_startup_seconds": 63.480691689000025,
+  "startup_stages": {
+    "registry_source_validation": 2.8816321539999876,
+    "dense_model_and_index_load": 38.251948314,
+    "reranker_load": 0.2795328380000228,
+    "query_warmup_and_retrieval_controls": 22.06752290899999,
+    "allocation_and_output_path_setup": 5.547400002114955e-05
+  },
+  "retrieval_control_seconds": 6.838372292999907,
+  "cooldown_seconds": 60.000140106,
+  "rows": [
+    {
+      "record_id": "GEN003",
+      "architecture": "A_COMPONENT_SELECTION",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.24111800800000083,
+      "cache_store_result": "REVIEWED_WORDING_CANDIDATE_STORED",
+      "failure_reason": null,
+      "provider_requests": 1,
+      "timing": {
+        "retrieval_wall_seconds": 1.7085176879999722,
+        "ttft_from_turn_start_seconds": 2.6087539159999578,
+        "generator_provider_ttft_seconds": 0.658345,
+        "ttft_provider_call": 1,
+        "ttfo_verified_sink_seconds": 2.72961937499997,
+        "full_response_seconds": 2.736385003999999,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 3.223799996021626e-05,
+        "provider_active_union_seconds": 0.7709671710000521,
+        "pacing_idle_only_seconds": 3.223799996021626e-05,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 2.6087216779999975,
+        "ttfo_excluding_idle_pacing_seconds": 2.72958713700001,
+        "full_excluding_idle_pacing_seconds": 2.7363527660000386,
+        "ttft_from_client_request_seconds": 2.747839053999999
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 2.876340899000013,
+        "last_verified_block_seconds": 2.876340899000013,
+        "complete_response_seconds": 2.8765359220000164,
+        "terminal_event_seconds": 2.8765359220000164,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.000914914000020417,
+        "answer_turn_started_at_client_seconds": 0.1390851380000413,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 2.876340899000013,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 2.8765359220000164,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 21,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.24156100200002584,
+          "bm25_scoring": 0.00029591399999162604,
+          "first_retrieval": 0.24348395900000241,
+          "initial_assembly": 0.0010947740000233352,
+          "reranking": 1.4467766350000488,
+          "post_rerank_assembly": 0.001123457000005601
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 1.0,
+          "relative_rrf_section_margin": 0.038833746898263063,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN003",
+      "architecture": "B_SHORT_GENERATION",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.2395409399999835,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 1.707436247999965,
+        "ttft_from_turn_start_seconds": 7.657619130999992,
+        "generator_provider_ttft_seconds": 0.670007,
+        "ttft_provider_call": 2,
+        "ttfo_verified_sink_seconds": 18.033706385000016,
+        "full_response_seconds": 18.040576681999994,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 13.511011824999969,
+        "provider_active_union_seconds": 2.5653685220000284,
+        "pacing_idle_only_seconds": 13.511011824999969,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 2.617203566999992,
+        "ttfo_excluding_idle_pacing_seconds": 4.522694560000048,
+        "full_excluding_idle_pacing_seconds": 4.529564857000025,
+        "ttft_from_client_request_seconds": 7.744796210000006
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 18.128034882999998,
+        "last_verified_block_seconds": 18.128034882999998,
+        "complete_response_seconds": 18.128226771000016,
+        "terminal_event_seconds": 18.128226771000016,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0008996210000304927,
+        "answer_turn_started_at_client_seconds": 0.08717707900001415,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 18.128034882999998,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 18.128226771000016,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 21,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.23896112099998845,
+          "bm25_scoring": 0.0004145230000176525,
+          "first_retrieval": 0.24367195400003538,
+          "initial_assembly": 0.0010572070000307576,
+          "reranking": 1.446246791999954,
+          "post_rerank_assembly": 0.0011114289999909488
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 1.0,
+          "relative_rrf_section_margin": 0.038833746898263063,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN003",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.23932680699999764,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 1.6991276500000367,
+        "ttft_from_turn_start_seconds": 9.44999180100001,
+        "generator_provider_ttft_seconds": 0.6891965489999734,
+        "ttft_provider_call": 6,
+        "ttfo_verified_sink_seconds": 19.72641488900001,
+        "full_response_seconds": 19.732756941000048,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 14.983452220000004,
+        "provider_active_union_seconds": 2.8017126430000303,
+        "pacing_idle_only_seconds": 14.975901211000007,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 2.6286272929999654,
+        "ttfo_excluding_idle_pacing_seconds": 4.750513678000004,
+        "full_excluding_idle_pacing_seconds": 4.756855730000041,
+        "ttft_from_client_request_seconds": 9.537198675000013
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 19.81383383100001,
+        "last_verified_block_seconds": 19.81383383100001,
+        "complete_response_seconds": 19.820385579000003,
+        "terminal_event_seconds": 19.820385579000003,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.000922795999997561,
+        "answer_turn_started_at_client_seconds": 0.08720687400000315,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 19.81383383100001,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 19.820385579000003,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 21,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.24407909499996094,
+          "bm25_scoring": 0.005177253999988807,
+          "first_retrieval": 0.24565986799996153,
+          "initial_assembly": 0.0010835170000405014,
+          "reranking": 1.435803926999995,
+          "post_rerank_assembly": 0.001111770000022716
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 1.0,
+          "relative_rrf_section_margin": 0.038833746898263063,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "B_SHORT_GENERATION",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.24087368499999684,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 0.8436791390000735,
+        "ttft_from_turn_start_seconds": 9.587121781999981,
+        "generator_provider_ttft_seconds": 0.697738,
+        "ttft_provider_call": 10,
+        "ttfo_verified_sink_seconds": 49.871842786,
+        "full_response_seconds": 49.90157487600004,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 46.25240567499998,
+        "provider_active_union_seconds": 2.5017808330001117,
+        "pacing_idle_only_seconds": 46.25240567499998,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.7825037730000712,
+        "ttfo_excluding_idle_pacing_seconds": 3.6194371110000247,
+        "full_excluding_idle_pacing_seconds": 3.6491692010000634,
+        "ttft_from_client_request_seconds": 9.696638432999903
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 49.982484247,
+        "last_verified_block_seconds": 49.982484247,
+        "complete_response_seconds": 50.01154451699995,
+        "terminal_event_seconds": 50.01154451699995,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0007494349999888072,
+        "answer_turn_started_at_client_seconds": 0.1095166509999217,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 49.982484247,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 50.01154451699995,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.24092705500004286,
+          "bm25_scoring": 0.0005357539999977234,
+          "first_retrieval": 0.2431266379999215,
+          "initial_assembly": 0.0010652500000105647,
+          "reranking": 0.5252587280000398,
+          "post_rerank_assembly": 0.0011315189999550057
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.3333333333333333,
+          "relative_rrf_section_margin": 0.12116500829187399,
+          "uncertainty_reasons": [
+            "DENSE_SPARSE_DISAGREEMENT"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.24029123399998298,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 0.840372069999944,
+        "ttft_from_turn_start_seconds": 39.492192164000016,
+        "generator_provider_ttft_seconds": 0.6932083240000111,
+        "ttft_provider_call": 14,
+        "ttfo_verified_sink_seconds": 49.821876035999935,
+        "full_response_seconds": 49.851663867999946,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 45.842811181,
+        "provider_active_union_seconds": 2.8707570459998806,
+        "pacing_idle_only_seconds": 45.836071589000085,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.774341044000039,
+        "ttfo_excluding_idle_pacing_seconds": 3.9858044469998504,
+        "full_excluding_idle_pacing_seconds": 4.015592278999861,
+        "ttft_from_client_request_seconds": 39.600038072000075
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 49.93041891100006,
+        "last_verified_block_seconds": 49.93041891100006,
+        "complete_response_seconds": 49.95996400900003,
+        "terminal_event_seconds": 49.95996400900003,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0008277330000510119,
+        "answer_turn_started_at_client_seconds": 0.10784590800005844,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 49.93041891100006,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 49.95996400900003,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.24012690699998984,
+          "bm25_scoring": 0.0006415340000103242,
+          "first_retrieval": 0.24175486100000398,
+          "initial_assembly": 0.0010757759999933114,
+          "reranking": 0.5234949190000862,
+          "post_rerank_assembly": 0.0011123500000849162
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.3333333333333333,
+          "relative_rrf_section_margin": 0.12116500829187399,
+          "uncertainty_reasons": [
+            "DENSE_SPARSE_DISAGREEMENT"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "A_COMPONENT_SELECTION",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.23747601799993845,
+      "cache_store_result": "REVIEWED_WORDING_CANDIDATE_STORED",
+      "failure_reason": null,
+      "provider_requests": 1,
+      "timing": {
+        "retrieval_wall_seconds": 0.8357266399999617,
+        "ttft_from_turn_start_seconds": 9.390125437999982,
+        "generator_provider_ttft_seconds": 0.624977,
+        "ttft_provider_call": 18,
+        "ttfo_verified_sink_seconds": 9.43010673699996,
+        "full_response_seconds": 9.461291104999987,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 7.691721423999979,
+        "provider_active_union_seconds": 0.633105885999953,
+        "pacing_idle_only_seconds": 7.691721423999979,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.698404014000003,
+        "ttfo_excluding_idle_pacing_seconds": 1.7383853129999807,
+        "full_excluding_idle_pacing_seconds": 1.7695696810000072,
+        "ttft_from_client_request_seconds": 9.496880597000027
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 9.538517624000065,
+        "last_verified_block_seconds": 9.538517624000065,
+        "complete_response_seconds": 9.569084604000068,
+        "terminal_event_seconds": 9.569084604000068,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0007230749999962427,
+        "answer_turn_started_at_client_seconds": 0.10675515900004484,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 9.538517624000065,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 9.569084604000068,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.23810801799993442,
+          "bm25_scoring": 0.0005670510000754803,
+          "first_retrieval": 0.23978395599999658,
+          "initial_assembly": 0.0010641779999787104,
+          "reranking": 0.5207171719999906,
+          "post_rerank_assembly": 0.0011829669999769976
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.3333333333333333,
+          "relative_rrf_section_margin": 0.12116500829187399,
+          "uncertainty_reasons": [
+            "DENSE_SPARSE_DISAGREEMENT"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SYSTEM_ERROR",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.21485788999996203,
+      "cache_store_result": null,
+      "failure_reason": "EXPERIMENT_GATE_FAILED",
+      "provider_requests": 1,
+      "timing": {
+        "retrieval_wall_seconds": 0.8666543319999391,
+        "ttft_from_turn_start_seconds": 8.572346092999851,
+        "generator_provider_ttft_seconds": 0.7123380979999183,
+        "ttft_provider_call": 19,
+        "ttfo_verified_sink_seconds": null,
+        "full_response_seconds": null,
+        "failed_turn_seconds": 9.538888595000003,
+        "provider_pacing_wait_union_seconds": 6.778030081999987,
+        "provider_active_union_seconds": 1.6789002799999935,
+        "pacing_idle_only_seconds": 6.778030081999987,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.7943160109998644,
+        "ttfo_excluding_idle_pacing_seconds": null,
+        "full_excluding_idle_pacing_seconds": null,
+        "ttft_from_client_request_seconds": 8.659088372999918
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": null,
+        "last_verified_block_seconds": null,
+        "complete_response_seconds": null,
+        "terminal_event_seconds": 9.625878236000062,
+        "terminal_event": "error",
+        "engine_started_at_client_seconds": 0.0007315490000792124,
+        "answer_turn_started_at_client_seconds": 0.08674228000006678,
+        "received_verified_blocks": 0,
+        "events": [
+          {
+            "event": "error",
+            "at_seconds": 9.625878236000062,
+            "block": null,
+            "route": "SYSTEM_ERROR"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.21514895600000727,
+          "bm25_scoring": 0.00031201800004510005,
+          "first_retrieval": 0.2201700709999841,
+          "initial_assembly": 0.0010564979999116986,
+          "reranking": 0.6314174919999687,
+          "post_rerank_assembly": 0.0010963170000195532
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.6666666666666666,
+          "relative_rrf_section_margin": 0.0076864919354838425,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "A_COMPONENT_SELECTION",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.2148854570000367,
+      "cache_store_result": "REVIEWED_WORDING_CANDIDATE_STORED",
+      "failure_reason": null,
+      "provider_requests": 1,
+      "timing": {
+        "retrieval_wall_seconds": 0.8638350960000025,
+        "ttft_from_turn_start_seconds": 9.573655772999953,
+        "generator_provider_ttft_seconds": 0.609745,
+        "ttft_provider_call": 23,
+        "ttfo_verified_sink_seconds": 9.592061268999942,
+        "full_response_seconds": 9.597360648999938,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 7.884973664999961,
+        "provider_active_union_seconds": 0.6208005770000682,
+        "pacing_idle_only_seconds": 7.884973664999961,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.6886821079999912,
+        "ttfo_excluding_idle_pacing_seconds": 1.7070876039999803,
+        "full_excluding_idle_pacing_seconds": 1.712386983999977,
+        "ttft_from_client_request_seconds": 9.662089500000004
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 9.686778834000052,
+        "last_verified_block_seconds": 9.686778834000052,
+        "complete_response_seconds": 9.686799575000009,
+        "terminal_event_seconds": 9.686799575000009,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0008830960000523191,
+        "answer_turn_started_at_client_seconds": 0.08843372700005148,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 9.686778834000052,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 9.686799575000009,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.21510638799998105,
+          "bm25_scoring": 0.00040316600006917724,
+          "first_retrieval": 0.21793726100008826,
+          "initial_assembly": 0.0010429059999523815,
+          "reranking": 0.630792778,
+          "post_rerank_assembly": 0.0011002219999909357
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.6666666666666666,
+          "relative_rrf_section_margin": 0.0076864919354838425,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "B_SHORT_GENERATION",
+      "phase": "INITIAL_EMPTY_CACHE",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.21591597600001933,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 0.8630866429999742,
+        "ttft_from_turn_start_seconds": 8.887622041000036,
+        "generator_provider_ttft_seconds": 0.854126,
+        "ttft_provider_call": 24,
+        "ttfo_verified_sink_seconds": 39.02587075700001,
+        "full_response_seconds": 39.03119695700002,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 35.549767226000085,
+        "provider_active_union_seconds": 2.389334857000108,
+        "pacing_idle_only_seconds": 35.549767226000085,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.9333571819999449,
+        "ttfo_excluding_idle_pacing_seconds": 3.4761035309999215,
+        "full_excluding_idle_pacing_seconds": 3.4814297309999347,
+        "ttft_from_client_request_seconds": 8.975559312000023
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 39.11950090899995,
+        "last_verified_block_seconds": 39.11950090899995,
+        "complete_response_seconds": 39.119509200999914,
+        "terminal_event_seconds": 39.119509200999914,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0007670219999909023,
+        "answer_turn_started_at_client_seconds": 0.08793727099998705,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 39.11950090899995,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 39.119509200999914,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.2151494409999941,
+          "bm25_scoring": 0.00024375600003168074,
+          "first_retrieval": 0.2166916770000853,
+          "initial_assembly": 0.0010715189999928043,
+          "reranking": 0.631436616999963,
+          "post_rerank_assembly": 0.0011044990000073085
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.6666666666666666,
+          "relative_rrf_section_margin": 0.0076864919354838425,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN003",
+      "architecture": "A_COMPONENT_SELECTION",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "EXACT_AUTHORITY_VALIDATED_CANDIDATE_HIT",
+      "cache_lookup_seconds": 0.23907604100003255,
+      "cache_store_result": "REVIEWED_WORDING_CANDIDATE_STORED",
+      "failure_reason": null,
+      "provider_requests": 0,
+      "timing": {
+        "retrieval_wall_seconds": 1.690267547000019,
+        "ttft_from_turn_start_seconds": null,
+        "generator_provider_ttft_seconds": null,
+        "ttft_provider_call": null,
+        "ttfo_verified_sink_seconds": 1.9378230510000094,
+        "full_response_seconds": 1.9445615189999899,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 0,
+        "provider_active_union_seconds": 0,
+        "pacing_idle_only_seconds": 0,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": null,
+        "ttfo_excluding_idle_pacing_seconds": 1.9378230510000094,
+        "full_excluding_idle_pacing_seconds": 1.9445615189999899,
+        "ttft_from_client_request_seconds": null
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 2.033344695999972,
+        "last_verified_block_seconds": 2.033344695999972,
+        "complete_response_seconds": 2.0336444459999825,
+        "terminal_event_seconds": 2.0336444459999825,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0009500369999955183,
+        "answer_turn_started_at_client_seconds": 0.08812534999998434,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 2.033344695999972,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 2.0336444459999825,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 21,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.2426309490000449,
+          "bm25_scoring": 0.0003045579999820802,
+          "first_retrieval": 0.24466245000002118,
+          "initial_assembly": 0.00110398799995437,
+          "reranking": 1.427837669999974,
+          "post_rerank_assembly": 0.0011256899999807501
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 1.0,
+          "relative_rrf_section_margin": 0.038833746898263063,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN003",
+      "architecture": "B_SHORT_GENERATION",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.23847326899999644,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 1.688523588999999,
+        "ttft_from_turn_start_seconds": 9.442085898999983,
+        "generator_provider_ttft_seconds": 0.656241,
+        "ttft_provider_call": 4,
+        "ttfo_verified_sink_seconds": 49.87694663000002,
+        "full_response_seconds": 49.88382990500003,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 45.31392151399996,
+        "provider_active_union_seconds": 2.5773249239999814,
+        "pacing_idle_only_seconds": 45.31392151399996,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 2.583457638000004,
+        "ttfo_excluding_idle_pacing_seconds": 4.5630251160000626,
+        "full_excluding_idle_pacing_seconds": 4.5699083910000695,
+        "ttft_from_client_request_seconds": 9.549820902999988
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 49.99186160400001,
+        "last_verified_block_seconds": 49.99186160400001,
+        "complete_response_seconds": 49.992028344999994,
+        "terminal_event_seconds": 49.992028344999994,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0009327509999934591,
+        "answer_turn_started_at_client_seconds": 0.10773500400000557,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 49.99186160400001,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 49.992028344999994,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 21,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.23996794300001056,
+          "bm25_scoring": 0.00038099199997532196,
+          "first_retrieval": 0.24157632699996157,
+          "initial_assembly": 0.0010986799999841423,
+          "reranking": 1.4291057909999836,
+          "post_rerank_assembly": 0.0011328209999987848
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 1.0,
+          "relative_rrf_section_margin": 0.038833746898263063,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN003",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.2781274189999863,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 1.6998459370000205,
+        "ttft_from_turn_start_seconds": 39.59668232899992,
+        "generator_provider_ttft_seconds": 0.711101241999927,
+        "ttft_provider_call": 8,
+        "ttfo_verified_sink_seconds": 49.875955230000045,
+        "full_response_seconds": 49.88253183699999,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 45.5434809919999,
+        "provider_active_union_seconds": 2.352117071000066,
+        "pacing_idle_only_seconds": 45.5360883699999,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 2.689544774999945,
+        "ttfo_excluding_idle_pacing_seconds": 4.339866860000143,
+        "full_excluding_idle_pacing_seconds": 4.3464434670000855,
+        "ttft_from_client_request_seconds": 39.68501551999992
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 49.966741815000034,
+        "last_verified_block_seconds": 49.966741815000034,
+        "complete_response_seconds": 49.97118976600001,
+        "terminal_event_seconds": 49.97118976600001,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0008303070000010848,
+        "answer_turn_started_at_client_seconds": 0.08833319100000381,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 49.966741815000034,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 49.97118976600001,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 21,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.2390968000000271,
+          "bm25_scoring": 0.0003751930000248649,
+          "first_retrieval": 0.2422404420000248,
+          "initial_assembly": 0.0010973479999734082,
+          "reranking": 1.4390085,
+          "post_rerank_assembly": 0.0011382089999756317
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 1.0,
+          "relative_rrf_section_margin": 0.038833746898263063,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "B_SHORT_GENERATION",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.23919612899999265,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 0.8426376920000394,
+        "ttft_from_turn_start_seconds": 9.915725570999996,
+        "generator_provider_ttft_seconds": 1.090035,
+        "ttft_provider_call": 12,
+        "ttfo_verified_sink_seconds": 19.833297827000024,
+        "full_response_seconds": 19.8631839950001,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 15.787642794000021,
+        "provider_active_union_seconds": 2.930055755999888,
+        "pacing_idle_only_seconds": 15.787642794000021,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 2.172081359999936,
+        "ttfo_excluding_idle_pacing_seconds": 4.045655033000003,
+        "full_excluding_idle_pacing_seconds": 4.075541201000078,
+        "ttft_from_client_request_seconds": 10.022737030999963
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 19.94200089700007,
+        "last_verified_block_seconds": 19.94200089700007,
+        "complete_response_seconds": 19.97072687299999,
+        "terminal_event_seconds": 19.97072687299999,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0009125500000664033,
+        "answer_turn_started_at_client_seconds": 0.10701145999996697,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 19.94200089700007,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 19.97072687299999,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.23933863499996733,
+          "bm25_scoring": 0.0005550529999709397,
+          "first_retrieval": 0.2409885019999365,
+          "initial_assembly": 0.001109435999978814,
+          "reranking": 0.5253090730000167,
+          "post_rerank_assembly": 0.0011447199999565782
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.3333333333333333,
+          "relative_rrf_section_margin": 0.12116500829187399,
+          "uncertainty_reasons": [
+            "DENSE_SPARSE_DISAGREEMENT"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.2404972980000366,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 0.8432382820000157,
+        "ttft_from_turn_start_seconds": 9.458046989000081,
+        "generator_provider_ttft_seconds": 0.6739471570000433,
+        "ttft_provider_call": 16,
+        "ttfo_verified_sink_seconds": 49.82593642799998,
+        "full_response_seconds": 49.855873989999964,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 46.39291522099995,
+        "provider_active_union_seconds": 2.3206964109999717,
+        "pacing_idle_only_seconds": 46.38557184199999,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.75815126100008,
+        "ttfo_excluding_idle_pacing_seconds": 3.440364585999987,
+        "full_excluding_idle_pacing_seconds": 3.4703021479999734,
+        "ttft_from_client_request_seconds": 9.565422802000057
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 49.934541276999994,
+        "last_verified_block_seconds": 49.934541276999994,
+        "complete_response_seconds": 49.96369353,
+        "terminal_event_seconds": 49.96369353,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0008088949999773831,
+        "answer_turn_started_at_client_seconds": 0.107375812999976,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 49.934541276999994,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 49.96369353,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.24114688299994214,
+          "bm25_scoring": 0.0006409129999838115,
+          "first_retrieval": 0.2428166610000062,
+          "initial_assembly": 0.00109866000002512,
+          "reranking": 0.5256737659999544,
+          "post_rerank_assembly": 0.001148094999962268
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.3333333333333333,
+          "relative_rrf_section_margin": 0.12116500829187399,
+          "uncertainty_reasons": [
+            "DENSE_SPARSE_DISAGREEMENT"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "EXP003",
+      "architecture": "A_COMPONENT_SELECTION",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "EXACT_AUTHORITY_VALIDATED_CANDIDATE_HIT",
+      "cache_lookup_seconds": 0.23862039599998752,
+      "cache_store_result": "REVIEWED_WORDING_CANDIDATE_STORED",
+      "failure_reason": null,
+      "provider_requests": 0,
+      "timing": {
+        "retrieval_wall_seconds": 0.8349828829999524,
+        "ttft_from_turn_start_seconds": null,
+        "generator_provider_ttft_seconds": null,
+        "ttft_provider_call": null,
+        "ttfo_verified_sink_seconds": 1.106156053999939,
+        "full_response_seconds": 1.1361019510000006,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 0,
+        "provider_active_union_seconds": 0,
+        "pacing_idle_only_seconds": 0,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": null,
+        "ttfo_excluding_idle_pacing_seconds": 1.106156053999939,
+        "full_excluding_idle_pacing_seconds": 1.1361019510000006,
+        "ttft_from_client_request_seconds": null
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 1.2139749250000023,
+        "last_verified_block_seconds": 1.2139749250000023,
+        "complete_response_seconds": 1.2437132200000178,
+        "terminal_event_seconds": 1.2437132200000178,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0009214350000092963,
+        "answer_turn_started_at_client_seconds": 0.10669326000004276,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 1.2139749250000023,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 1.2437132200000178,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.2395845549999649,
+          "bm25_scoring": 0.0006083630000830453,
+          "first_retrieval": 0.24122716299996227,
+          "initial_assembly": 0.0011030470000150672,
+          "reranking": 0.5176677189999737,
+          "post_rerank_assembly": 0.0011429470000621222
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.3333333333333333,
+          "relative_rrf_section_margin": 0.12116500829187399,
+          "uncertainty_reasons": [
+            "DENSE_SPARSE_DISAGREEMENT"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "C_VERIFIED_STREAM_BLOCKS",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SYSTEM_ERROR",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.21612707299993872,
+      "cache_store_result": null,
+      "failure_reason": "OUTPUT_SCHEMA",
+      "provider_requests": 3,
+      "timing": {
+        "retrieval_wall_seconds": 0.8655468189999738,
+        "ttft_from_turn_start_seconds": 8.930865786000027,
+        "generator_provider_ttft_seconds": 0.7541485430000421,
+        "ttft_provider_call": 20,
+        "ttfo_verified_sink_seconds": null,
+        "full_response_seconds": null,
+        "failed_turn_seconds": 49.06709955200006,
+        "provider_pacing_wait_union_seconds": 45.84237651900003,
+        "provider_active_union_seconds": 3.3295547979997764,
+        "pacing_idle_only_seconds": 44.655383210000196,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.8363283740000043,
+        "ttfo_excluding_idle_pacing_seconds": null,
+        "full_excluding_idle_pacing_seconds": null,
+        "ttft_from_client_request_seconds": 9.018573844000002
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": null,
+        "last_verified_block_seconds": null,
+        "complete_response_seconds": null,
+        "terminal_event_seconds": 49.155245068,
+        "terminal_event": "error",
+        "engine_started_at_client_seconds": 0.0008271529999319682,
+        "answer_turn_started_at_client_seconds": 0.08770805799997561,
+        "received_verified_blocks": 0,
+        "events": [
+          {
+            "event": "error",
+            "at_seconds": 49.155245068,
+            "block": null,
+            "route": "SYSTEM_ERROR"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.21558587900005932,
+          "bm25_scoring": 0.0003348230000028707,
+          "first_retrieval": 0.21866571499992915,
+          "initial_assembly": 0.001078139000014744,
+          "reranking": 0.6311285840000664,
+          "post_rerank_assembly": 0.0011193619999403381
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.6666666666666666,
+          "relative_rrf_section_margin": 0.0076864919354838425,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "A_COMPONENT_SELECTION",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "EXACT_AUTHORITY_VALIDATED_CANDIDATE_HIT",
+      "cache_lookup_seconds": 0.2145243869999831,
+      "cache_store_result": "REVIEWED_WORDING_CANDIDATE_STORED",
+      "failure_reason": null,
+      "provider_requests": 0,
+      "timing": {
+        "retrieval_wall_seconds": 0.8647999959999879,
+        "ttft_from_turn_start_seconds": null,
+        "generator_provider_ttft_seconds": null,
+        "ttft_provider_call": null,
+        "ttfo_verified_sink_seconds": 1.0867922099999987,
+        "full_response_seconds": 1.0923053910000817,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 0,
+        "provider_active_union_seconds": 0,
+        "pacing_idle_only_seconds": 0,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": null,
+        "ttfo_excluding_idle_pacing_seconds": 1.0867922099999987,
+        "full_excluding_idle_pacing_seconds": 1.0923053910000817,
+        "ttft_from_client_request_seconds": null
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 1.1800390849999758,
+        "last_verified_block_seconds": 1.1800390849999758,
+        "complete_response_seconds": 1.180066987000032,
+        "terminal_event_seconds": 1.180066987000032,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0006635370000367402,
+        "answer_turn_started_at_client_seconds": 0.08681300199998532,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 1.1800390849999758,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 1.180066987000032,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.21528962699994736,
+          "bm25_scoring": 0.0003354929999659362,
+          "first_retrieval": 0.21883614399996532,
+          "initial_assembly": 0.0010843679999652522,
+          "reranking": 0.6307461760000024,
+          "post_rerank_assembly": 0.001134043999968526
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.6666666666666666,
+          "relative_rrf_section_margin": 0.0076864919354838425,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    },
+    {
+      "record_id": "GEN026",
+      "architecture": "B_SHORT_GENERATION",
+      "phase": "IMMEDIATE_REPEAT",
+      "route": "SUPPORTED",
+      "semantic_cache": "MISS",
+      "cache_lookup_seconds": 0.21473055000001295,
+      "cache_store_result": "UNREVIEWED_PARAPHRASE_NOT_CACHED",
+      "failure_reason": null,
+      "provider_requests": 2,
+      "timing": {
+        "retrieval_wall_seconds": 0.8628951389999884,
+        "ttft_from_turn_start_seconds": 9.51975666300001,
+        "generator_provider_ttft_seconds": 0.664738,
+        "ttft_provider_call": 26,
+        "ttfo_verified_sink_seconds": 19.854651469000032,
+        "full_response_seconds": 19.860008945000004,
+        "failed_turn_seconds": null,
+        "provider_pacing_wait_union_seconds": 16.326726270999984,
+        "provider_active_union_seconds": 2.441231216999995,
+        "pacing_idle_only_seconds": 16.326726270999984,
+        "pacing_included_in_observed_times": true,
+        "adjusted_times_are_arithmetic_not_observed_unpaced": true,
+        "ttft_excluding_idle_pacing_seconds": 1.7425724730000525,
+        "ttfo_excluding_idle_pacing_seconds": 3.527925198000048,
+        "full_excluding_idle_pacing_seconds": 3.53328267400002,
+        "ttft_from_client_request_seconds": 9.60883291600004
+      },
+      "client": {
+        "measurement": "ACTUAL_LOCALHOST_HTTP_SSE_NOT_BROWSER_OR_PUBLIC_NETWORK",
+        "first_verified_output_seconds": 19.94946160400002,
+        "last_verified_block_seconds": 19.94946160400002,
+        "complete_response_seconds": 19.94946982600004,
+        "terminal_event_seconds": 19.94946982600004,
+        "terminal_event": "complete",
+        "engine_started_at_client_seconds": 0.0008094959999880302,
+        "answer_turn_started_at_client_seconds": 0.08907625300003019,
+        "received_verified_blocks": 1,
+        "events": [
+          {
+            "event": "verified_block",
+            "at_seconds": 19.94946160400002,
+            "block": 0,
+            "route": null
+          },
+          {
+            "event": "complete",
+            "at_seconds": 19.94946982600004,
+            "block": null,
+            "route": "SUPPORTED"
+          }
+        ],
+        "raw_content_logged": false
+      },
+      "retrieval_trace": {
+        "mode": "conditional",
+        "policy": {
+          "version": "conditional-rerank-v1",
+          "calibration_status": "PROVISIONAL_UNCALIBRATED",
+          "candidate_limit": 20,
+          "expanded_candidate_limit": 40,
+          "maximum_dependency_ids": 256,
+          "maximum_rerank_pairs": 100,
+          "disagreement_top_k": 3,
+          "minimum_section_overlap": 0.5,
+          "maximum_relative_rrf_margin": 0.05
+        },
+        "recovery_attempts": 0,
+        "rerank_attempts": 1,
+        "rerank_pair_count": 20,
+        "rerank_skip_reason": null,
+        "stages_seconds": {
+          "dense_embedding_and_scoring": 0.21502268400001867,
+          "bm25_scoring": 0.00023230900001180999,
+          "first_retrieval": 0.21720947799997248,
+          "initial_assembly": 0.0011116200000742538,
+          "reranking": 0.6305991609999637,
+          "post_rerank_assembly": 0.0011217249999617707
+        },
+        "decisions": [
+          "RERANK_CANDIDATES",
+          "CONTINUE_GATES"
+        ],
+        "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+        "initial_ranking_signals": {
+          "dense_sparse_section_overlap": 0.6666666666666666,
+          "relative_rrf_section_margin": 0.0076864919354838425,
+          "uncertainty_reasons": [
+            "COMPETING_SECTION_RANKS"
+          ],
+          "ranking_uncertain": true
+        },
+        "final_action": "CONTINUE_GATES"
+      }
+    }
+  ],
+  "retrieval_paired_controls": [
+    {
+      "record_id": "GEN003",
+      "paired_controls": [
+        {
+          "mode": "SEQUENTIAL",
+          "wall_seconds": 1.7008081779999884,
+          "retrieval_trace": {
+            "mode": "conditional",
+            "policy": {
+              "version": "conditional-rerank-v1",
+              "calibration_status": "PROVISIONAL_UNCALIBRATED",
+              "candidate_limit": 20,
+              "expanded_candidate_limit": 40,
+              "maximum_dependency_ids": 256,
+              "maximum_rerank_pairs": 100,
+              "disagreement_top_k": 3,
+              "minimum_section_overlap": 0.5,
+              "maximum_relative_rrf_margin": 0.05
+            },
+            "recovery_attempts": 0,
+            "rerank_attempts": 1,
+            "rerank_pair_count": 21,
+            "rerank_skip_reason": null,
+            "stages_seconds": {
+              "dense_embedding_and_scoring": 0.23830638100002943,
+              "bm25_scoring": 0.0004350539999791181,
+              "first_retrieval": 0.23987373599999273,
+              "initial_assembly": 0.0011032570000111264,
+              "reranking": 1.4426008350000075,
+              "post_rerank_assembly": 0.0011043289999861372
+            },
+            "decisions": [
+              "RERANK_CANDIDATES",
+              "CONTINUE_GATES"
+            ],
+            "first_stage_execution": "SEQUENTIAL_DENSE_THEN_BM25_CONTROL_V1",
+            "initial_ranking_signals": {
+              "dense_sparse_section_overlap": 1.0,
+              "relative_rrf_section_margin": 0.038833746898263063,
+              "uncertainty_reasons": [
+                "COMPETING_SECTION_RANKS"
+              ],
+              "ranking_uncertain": true
+            },
+            "final_action": "CONTINUE_GATES"
+          },
+          "provider_calls": 0
+        },
+        {
+          "mode": "CONCURRENT",
+          "wall_seconds": 1.7147687980000228,
+          "retrieval_trace": {
+            "mode": "conditional",
+            "policy": {
+              "version": "conditional-rerank-v1",
+              "calibration_status": "PROVISIONAL_UNCALIBRATED",
+              "candidate_limit": 20,
+              "expanded_candidate_limit": 40,
+              "maximum_dependency_ids": 256,
+              "maximum_rerank_pairs": 100,
+              "disagreement_top_k": 3,
+              "minimum_section_overlap": 0.5,
+              "maximum_relative_rrf_margin": 0.05
+            },
+            "recovery_attempts": 0,
+            "rerank_attempts": 1,
+            "rerank_pair_count": 21,
+            "rerank_skip_reason": null,
+            "stages_seconds": {
+              "dense_embedding_and_scoring": 0.24073731200002157,
+              "bm25_scoring": 0.00029968000001190376,
+              "first_retrieval": 0.2432147640000153,
+              "initial_assembly": 0.0011244680000004337,
+              "reranking": 1.4541666370000144,
+              "post_rerank_assembly": 0.0011188809999680416
+            },
+            "decisions": [
+              "RERANK_CANDIDATES",
+              "CONTINUE_GATES"
+            ],
+            "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+            "initial_ranking_signals": {
+              "dense_sparse_section_overlap": 1.0,
+              "relative_rrf_section_margin": 0.038833746898263063,
+              "uncertainty_reasons": [
+                "COMPETING_SECTION_RANKS"
+              ],
+              "ranking_uncertain": true
+            },
+            "final_action": "CONTINUE_GATES"
+          },
+          "provider_calls": 0
+        }
+      ],
+      "evidence_envelope_identical": true
+    },
+    {
+      "record_id": "EXP003",
+      "paired_controls": [
+        {
+          "mode": "CONCURRENT",
+          "wall_seconds": 0.8417279469999812,
+          "retrieval_trace": {
+            "mode": "conditional",
+            "policy": {
+              "version": "conditional-rerank-v1",
+              "calibration_status": "PROVISIONAL_UNCALIBRATED",
+              "candidate_limit": 20,
+              "expanded_candidate_limit": 40,
+              "maximum_dependency_ids": 256,
+              "maximum_rerank_pairs": 100,
+              "disagreement_top_k": 3,
+              "minimum_section_overlap": 0.5,
+              "maximum_relative_rrf_margin": 0.05
+            },
+            "recovery_attempts": 0,
+            "rerank_attempts": 1,
+            "rerank_pair_count": 20,
+            "rerank_skip_reason": null,
+            "stages_seconds": {
+              "dense_embedding_and_scoring": 0.24212569799999528,
+              "bm25_scoring": 0.0005083639999838852,
+              "first_retrieval": 0.2441462529999967,
+              "initial_assembly": 0.0010675340000148026,
+              "reranking": 0.5221690999999851,
+              "post_rerank_assembly": 0.0011081950000288998
+            },
+            "decisions": [
+              "RERANK_CANDIDATES",
+              "CONTINUE_GATES"
+            ],
+            "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+            "initial_ranking_signals": {
+              "dense_sparse_section_overlap": 0.3333333333333333,
+              "relative_rrf_section_margin": 0.12116500829187399,
+              "uncertainty_reasons": [
+                "DENSE_SPARSE_DISAGREEMENT"
+              ],
+              "ranking_uncertain": true
+            },
+            "final_action": "CONTINUE_GATES"
+          },
+          "provider_calls": 0
+        },
+        {
+          "mode": "SEQUENTIAL",
+          "wall_seconds": 0.8368410559999688,
+          "retrieval_trace": {
+            "mode": "conditional",
+            "policy": {
+              "version": "conditional-rerank-v1",
+              "calibration_status": "PROVISIONAL_UNCALIBRATED",
+              "candidate_limit": 20,
+              "expanded_candidate_limit": 40,
+              "maximum_dependency_ids": 256,
+              "maximum_rerank_pairs": 100,
+              "disagreement_top_k": 3,
+              "minimum_section_overlap": 0.5,
+              "maximum_relative_rrf_margin": 0.05
+            },
+            "recovery_attempts": 0,
+            "rerank_attempts": 1,
+            "rerank_pair_count": 20,
+            "rerank_skip_reason": null,
+            "stages_seconds": {
+              "dense_embedding_and_scoring": 0.23966950799996312,
+              "bm25_scoring": 0.0007006829999909314,
+              "first_retrieval": 0.24156310200004327,
+              "initial_assembly": 0.0010584199999925659,
+              "reranking": 0.5188725479999903,
+              "post_rerank_assembly": 0.0011199819999774263
+            },
+            "decisions": [
+              "RERANK_CANDIDATES",
+              "CONTINUE_GATES"
+            ],
+            "first_stage_execution": "SEQUENTIAL_DENSE_THEN_BM25_CONTROL_V1",
+            "initial_ranking_signals": {
+              "dense_sparse_section_overlap": 0.3333333333333333,
+              "relative_rrf_section_margin": 0.12116500829187399,
+              "uncertainty_reasons": [
+                "DENSE_SPARSE_DISAGREEMENT"
+              ],
+              "ranking_uncertain": true
+            },
+            "final_action": "CONTINUE_GATES"
+          },
+          "provider_calls": 0
+        }
+      ],
+      "evidence_envelope_identical": true
+    },
+    {
+      "record_id": "GEN026",
+      "paired_controls": [
+        {
+          "mode": "SEQUENTIAL",
+          "wall_seconds": 0.8751437109999642,
+          "retrieval_trace": {
+            "mode": "conditional",
+            "policy": {
+              "version": "conditional-rerank-v1",
+              "calibration_status": "PROVISIONAL_UNCALIBRATED",
+              "candidate_limit": 20,
+              "expanded_candidate_limit": 40,
+              "maximum_dependency_ids": 256,
+              "maximum_rerank_pairs": 100,
+              "disagreement_top_k": 3,
+              "minimum_section_overlap": 0.5,
+              "maximum_relative_rrf_margin": 0.05
+            },
+            "recovery_attempts": 0,
+            "rerank_attempts": 1,
+            "rerank_pair_count": 20,
+            "rerank_skip_reason": null,
+            "stages_seconds": {
+              "dense_embedding_and_scoring": 0.2170781510000097,
+              "bm25_scoring": 0.0003206920000025093,
+              "first_retrieval": 0.2185028920000036,
+              "initial_assembly": 0.0010615260000008675,
+              "reranking": 0.6415733750000072,
+              "post_rerank_assembly": 0.0010924919999979466
+            },
+            "decisions": [
+              "RERANK_CANDIDATES",
+              "CONTINUE_GATES"
+            ],
+            "first_stage_execution": "SEQUENTIAL_DENSE_THEN_BM25_CONTROL_V1",
+            "initial_ranking_signals": {
+              "dense_sparse_section_overlap": 0.6666666666666666,
+              "relative_rrf_section_margin": 0.0076864919354838425,
+              "uncertainty_reasons": [
+                "COMPETING_SECTION_RANKS"
+              ],
+              "ranking_uncertain": true
+            },
+            "final_action": "CONTINUE_GATES"
+          },
+          "provider_calls": 0
+        },
+        {
+          "mode": "CONCURRENT",
+          "wall_seconds": 0.8690826029999812,
+          "retrieval_trace": {
+            "mode": "conditional",
+            "policy": {
+              "version": "conditional-rerank-v1",
+              "calibration_status": "PROVISIONAL_UNCALIBRATED",
+              "candidate_limit": 20,
+              "expanded_candidate_limit": 40,
+              "maximum_dependency_ids": 256,
+              "maximum_rerank_pairs": 100,
+              "disagreement_top_k": 3,
+              "minimum_section_overlap": 0.5,
+              "maximum_relative_rrf_margin": 0.05
+            },
+            "recovery_attempts": 0,
+            "rerank_attempts": 1,
+            "rerank_pair_count": 20,
+            "rerank_skip_reason": null,
+            "stages_seconds": {
+              "dense_embedding_and_scoring": 0.21540425499995308,
+              "bm25_scoring": 0.0005006019999882483,
+              "first_retrieval": 0.2189273800000251,
+              "initial_assembly": 0.0010508789999903456,
+              "reranking": 0.635347118000027,
+              "post_rerank_assembly": 0.0010986009999669477
+            },
+            "decisions": [
+              "RERANK_CANDIDATES",
+              "CONTINUE_GATES"
+            ],
+            "first_stage_execution": "CONCURRENT_DENSE_AND_BM25_V1",
+            "initial_ranking_signals": {
+              "dense_sparse_section_overlap": 0.6666666666666666,
+              "relative_rrf_section_margin": 0.0076864919354838425,
+              "uncertainty_reasons": [
+                "COMPETING_SECTION_RANKS"
+              ],
+              "ranking_uncertain": true
+            },
+            "final_action": "CONTINUE_GATES"
+          },
+          "provider_calls": 0
+        }
+      ],
+      "evidence_envelope_identical": true
+    }
+  ],
+  "actual_browser_or_public_network_measured": false,
+  "p95_established": false,
+  "latency_improvement_statistically_established": false,
+  "adjusted_times_are_not_unpaced_measurements": true
+}
