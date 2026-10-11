@@ -1,0 +1,69 @@
+{
+  "cloud_mutations": 0,
+  "committed_blob_check": "PRECHECKED_OUTSIDE_HOSTED_JOB",
+  "deployed_request_acceptance": false,
+  "duration_seconds": 64.447,
+  "frozen_inputs_verified": 341,
+  "historical_inputs_verified": 64,
+  "index_files_verified": 212,
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "index_manifest_sha256": "665121e286a22881803ec181597e860cdec8024412dbd334b2774b509cbabfde",
+  "index_rebuilt": false,
+  "input_tree_sha256": "536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf",
+  "label": "HOSTED_GCS_SOURCE_RELOAD_WITH_SYNTHETIC_PROVIDER_FREE_TESTS",
+  "latency_acceptance": false,
+  "local_artifact_recovery": {
+    "byte_length": 12,
+    "dependency": {
+      "qdrant-client": "1.19.1"
+    },
+    "origin_receipt": "reports/build/20261012/qdrant_lock_recovery.json",
+    "original_manifest_sha256": "665121e286a22881803ec181597e860cdec8024412dbd334b2774b509cbabfde",
+    "path": "qdrant/.lock",
+    "schema_version": "qdrant-client-1.19.1-exact-lock-recovery-v1",
+    "scope": "Only missing deterministic process-lock bytes; never source/index content or a checksum exclusion.",
+    "sha256": "67a987c432005e3afcc13a871b3ddabaeee0f4504058da65b0769016d3083b44",
+    "utf8_content": "tmp lock file"
+  },
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "models_loaded": false,
+  "parser_gap_pages": [
+    103
+  ],
+  "provider_calls": 0,
+  "quality_acceptance": false,
+  "real_provider_construction_guard": "ENFORCED",
+  "schema_version": "cloudbuild-read-only-source-validation-v1",
+  "serving_manifest_sha256": "474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d",
+  "snapshot": {
+    "generation": "1791537775184836",
+    "maximum_bytes": 1073741824,
+    "sha256": "4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc",
+    "uri": "gs://motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz"
+  },
+  "source_authority_lock": "b1ab34b76fc1ec61f53f4b9788e428623ecad4e22951976f9612bddeecf5b21f",
+  "source_commit": "2c29f1f4797fd55bdbf3b1300b3258782db232d2",
+  "status": "PASS",
+  "synthetic_test_errors": [],
+  "synthetic_test_failures": [],
+  "synthetic_test_skips": 0,
+  "synthetic_tests_run": 36,
+  "test_modules": [
+    "cloud.grounded_generation.test_serving_retrieval",
+    "cloud.grounded_generation.test_serving_context",
+    "cloud.grounded_generation.test_serving_source_authority",
+    "cloud.grounded_generation.test_serving_safety",
+    "tools.test_build_candidate"
+  ],
+  "test_output_sha256": "0c5faaac5607021593fc1d495632a8c3d761678b087667d04b0d939b99c09f2b",
+  "validation_script_sha256": "f0e9ba07e1f0fca744ff5988e4d9cc61cd829cb6320537bf3b2171d499102931",
+  "build_id": "d0dd1e81-ff2e-431d-8421-70bb0fd442e2",
+  "build_log_url": "https://console.cloud.google.com/cloud-build/builds/d0dd1e81-ff2e-431d-8421-70bb0fd442e2?project=279945185781",
+  "source_archive": {
+    "uri": "gs://motomedic-ai-20261009-indices/serving/v9_1/536d3388d971af9fc64620186e5763b069e0bd147d4de03d4a270ec85600d9bf/source-validation-93f742307d9a6dee8e44a0ebc9e753669f54c3d88756aae3885146e94297674e.tar.gz",
+    "generation": "1791748684998326",
+    "sha256": "93f742307d9a6dee8e44a0ebc9e753669f54c3d88756aae3885146e94297674e",
+    "maximum_bytes": 29479140
+  },
+  "build_service_account": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com"
+}
