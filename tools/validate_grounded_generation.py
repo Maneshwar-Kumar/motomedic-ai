@@ -98,18 +98,24 @@ def main():
             provider.complete=invalid
         if fault.get('context_budget'):
             provider.count=lambda body:8193
+        before_outputs=len(outputs)
         started=time.monotonic()
         with app.test_request_context(environ_overrides={'arm_a_cache_enabled':False}):
             updated,view,_=q.answer(session,case['rider_question'])
         row={'case_id':case['case_id'],'view':view,'wall_seconds':time.monotonic()-started,
             'route_matches':view['response']['type']==case['expected_route'],
+            'expected_route':case['expected_route'],'coverage_denominator':case.get('coverage_denominator',False),
+            'evaluation_only_provider_outputs':outputs[before_outputs:],
             'source_claim_review':'PENDING','typed_outcomes':[a.outcome_enum.value for a in updated.active_attempts()]}
         result['rows'].append(row);save()
         provider.complete=original_complete;provider.count=original_count
     result['completed_at']=datetime.now(timezone.utc).isoformat()
     result['route_matches']=sum(row['route_matches'] for row in result['rows'])
     result['unseen_supported_reached_llm']=any(row['view']['response']['type']=='SUPPORTED' and
-        row['view']['provider_calls']>0 for row in result['rows'][:6])
+        row['view']['provider_calls']>0 and row['coverage_denominator'] for row in result['rows'])
+    answerable=[r for r in result['rows'] if r['coverage_denominator']]
+    result['answerable_coverage']={'supported':sum(r['view']['response']['type']=='SUPPORTED' for r in answerable),
+        'total':len(answerable),'source_review_pending':True}
     save()
     print(json.dumps({'completed':True,'cases':len(result['rows']),
         'route_matches':result['route_matches'],'unseen_supported_reached_llm':result['unseen_supported_reached_llm'],

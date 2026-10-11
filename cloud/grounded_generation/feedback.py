@@ -31,7 +31,7 @@ def issue_choices(registry,session,response):
         return legacy_issue(registry,session,response)
     row=binding_for(registry,session)
     if not row or response.natural_language!=row['clarification_question']:
-        return legacy_issue(registry,session,response)
+        return [],{}
     public,private=[],{}
     for answer,outcome in [('yes',Outcome.OBSERVED_NORMAL),('no',Outcome.OBSERVED_ABNORMAL),('unsure',Outcome.UNCLEAR)]:
         value=row['answer_values'][answer]

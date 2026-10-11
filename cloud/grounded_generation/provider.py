@@ -138,10 +138,13 @@ class GemmaProvider:
             parts=candidates[0].get('content',{}).get('parts',[])
             # Gemma's confirmed empty thought marker carries no reasoning or
             # answer text. Match this exact shape only; real thought content fails.
-            markers=sum(p=={'text':'','thought':True} for p in parts)
-            parts=[p for p in parts if p!={'text':'','thought':True}]
+            def empty_marker(p):
+                return type(p) is dict and set(p)=={'text','thought'} and p['text']=='' and p['thought'] is True
+            markers=sum(empty_marker(p) for p in parts)
+            parts=[p for p in parts if not empty_marker(p)]
             trace['empty_thought_markers']=markers
             if not parts or any(type(p.get('text')) is not str or p.get('thought') or
+                ('thought' in p and type(p['thought']) is not bool) or
                 set(p)-{'text','thought'} for p in parts): raise ProviderFailure('PROVIDER_INVALID_PARTS')
             usage=response.get('usageMetadata',{})
             for field in ('promptTokenCount','candidatesTokenCount','totalTokenCount'):
