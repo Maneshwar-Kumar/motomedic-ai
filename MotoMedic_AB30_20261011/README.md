@@ -2,6 +2,8 @@
 
 Completed 11 October 2026. A is the stronger choice in this tested scope: it delivered more complete answers and was faster in all 11 pairs where both methods delivered. Preserve A's deterministic gates. Reliability gaps remain before wider release.
 
+Latest owner decision: **Arm A is selected.** See `ARM_A_SELECTION.md` and `ARM_A_LATENCY.md` for the recorded choice, measured time breakdown and optimization candidates. B remains comparison history. No new runtime deployment or provider calls were made for this analysis.
+
 ## Results
 
 | Metric | A: exact reviewed selection | B: short generation + verification |
