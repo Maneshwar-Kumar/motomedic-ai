@@ -37,14 +37,14 @@ def perform(kind, value):
     try:
         with st.spinner('Checking the applicable manual evidence…'):
             api = client()
-            view = api.start(st.session_state.topic_id, value, pending['id']) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'])
+            view = api.start(value, pending['id']) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'])
         remember(view, value if kind == 'start' else value['label'])
     except APIError as exc:
         st.session_state.connection_error = str(exc)
     st.rerun()
 
 def reset():
-    for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('topic_id', None)]:
+    for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None)]:
         st.session_state[k] = v
 
 for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('catalogue', None)]:
@@ -92,18 +92,11 @@ if not st.session_state.messages:
     with st.container(border=True):
         st.markdown('### What are you noticing?')
         st.write('Start with one symptom or question. If you have performed a diagnostic, or checked a few things already, then tell MotoMedic to avoid false resolutions')
-        if catalogue:
-            topic = st.selectbox('Choose the closest topic', catalogue['topics'], index=None,
-                                 placeholder='Select a topic', format_func=lambda t: t['label'], disabled=not ready, label_visibility='collapsed')
-            st.session_state.topic_id = topic['id'] if topic else None
-        else:
-            st.selectbox('Choose the closest topic', [], placeholder='Topics load when the service connects', disabled=True, label_visibility='collapsed')
-            st.session_state.topic_id = None
         st.caption('Up to 2,000 characters per message.')
         st.file_uploader('Add a bike photo · coming next', type=['jpg', 'jpeg', 'png', 'webp'], accept_multiple_files=False, max_upload_size=5, disabled=True)
         st.caption('Photos: one per turn, up to 5 MB each; three per conversation. Photo support is coming next.')
         query = st.chat_input('Describe one symptom or ask a question…', key='symptom_input', max_chars=LIMITS.message_characters,
-                              disabled=not ready or not st.session_state.get('topic_id') or bool(st.session_state.pending))
+                              disabled=not ready or bool(st.session_state.pending))
         if query and query.strip():
             perform('start', query.strip())
     cols = st.columns(3)

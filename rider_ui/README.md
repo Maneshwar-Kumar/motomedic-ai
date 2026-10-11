@@ -2,7 +2,7 @@
 
 A Streamlit interface built separately from the ongoing controller/model experiments. It uses a server-to-server hosted API, with no manual, index, embedding model, provider key or local authoritative session store in the UI image.
 
-Implemented: Himalayan BS6 confirmation and manual identity; symptom text and hosted topic selection; one server-issued clarification/action at a time; full gated text and warnings; structured server-issued feedback; five distinct response states; citation metadata; remembered outcomes; verified support link; safe operation recovery after transport failures; desktop/mobile layout.
+Implemented: Himalayan BS6 confirmation and manual identity; symptom text and hosted intent resolution; one server-issued clarification/action at a time; full gated text and warnings; structured server-issued feedback; five distinct response states; citation metadata; remembered outcomes; verified support link; safe operation recovery after transport failures; desktop/mobile layout.
 
 Photos remain disabled under the required text-first acceptance sequence. Optional voice is not implemented. Citation expansion shows metadata because end-user PDF/excerpt/crop display is prohibited. Topic coverage and adaptive transitions are supplied by the installed hosted controller, not enlarged by the UI.
 

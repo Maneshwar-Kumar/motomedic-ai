@@ -122,20 +122,17 @@ class RiderAPI:
         if (not isinstance(data, dict) or data.get('schema_version') != 'motomedic-rider-api-v1'
                 or data.get('manual_checksum') != MANUAL_SHA or data.get('index_id') != INDEX_ID):
             raise APIError('The service manual does not match the selected source.')
-        topics = data.get('topics')
-        if (not isinstance(topics, list) or not topics or len(topics) > 200
-                or any(not isinstance(t, dict) or not isinstance(t.get('id'), str) or not isinstance(t.get('label'), str) for t in topics)
-                or len({t['id'] for t in topics}) != len(topics)):
-            raise APIError('The service could not load the available topics.')
+        if data.get('intent_resolution') != 'hosted':
+            raise APIError('The service cannot yet interpret symptom text. Please reconnect later.')
         return data
 
-    def start(self, topic, query, request_id):
+    def start(self, query, request_id):
         try:
             query = validate_message(query)
         except LimitError:
             raise APIError('Enter a message of up to 2,000 characters.') from None
         return validate_view(self.request('POST', '/v1/sessions', {
-            'topic_id': topic, 'query': query, 'bike_variant': 'Himalayan BS6',
+            'query': query, 'intent_mode': 'infer', 'bike_variant': 'Himalayan BS6',
             'manual_checksum': MANUAL_SHA, 'index_id': INDEX_ID,
             'confirmed_himalayan_bs6': True, 'cache_mode': 'bypass'}, request_id))
 

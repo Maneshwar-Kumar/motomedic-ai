@@ -21,7 +21,7 @@ class SafeguardTests(unittest.TestCase):
     def test_direct_client_rejects_before_transport(self):
         api=RiderAPI('https://example.com','secret')
         api.request=lambda *args: self.fail('Invalid text reached transport')
-        with self.assertRaises(APIError): api.start('topic','x'*2001,'a'*32)
+        with self.assertRaises(APIError): api.start('x'*2001,'a'*32)
 
     def test_json_body_depth_duplicate_and_byte_bounds(self):
         self.assertEqual(validate_request_body(b'{"query":"hello"}'),{'query':'hello'})

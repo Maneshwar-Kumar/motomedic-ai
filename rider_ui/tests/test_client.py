@@ -1,5 +1,6 @@
 import copy
 import io
+import json
 import unittest
 from email.message import Message
 from urllib.error import HTTPError, URLError
@@ -92,6 +93,23 @@ class ClientTests(unittest.TestCase):
         self.assertEqual(json.loads(req.data),{'expected_version':1,'choice_id':'unresolved','cache_mode':'bypass'})
         self.assertNotIn(b'fact',req.data)
         self.assertEqual(req.get_header('Idempotency-key'),'b'*32)
+    def test_start_sends_symptom_for_hosted_intent_without_category(self):
+        import json
+        api=RiderAPI('https://example.com','secret');api.opener=Transport(result=json.dumps(view()).encode())
+        api.start('My question is an engineering fixture','c'*32)
+        payload=json.loads(api.opener.request.data)
+        self.assertEqual(payload['intent_mode'],'infer')
+        self.assertNotIn('topic_id',payload)
+        self.assertEqual(payload['query'],'My question is an engineering fixture')
+
+    def test_catalogue_requires_hosted_intent_capability(self):
+        api=RiderAPI('https://example.com','secret')
+        base={'schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID}
+        api.opener=Transport(result=json.dumps(base).encode())
+        with self.assertRaises(APIError): api.catalogue()
+        api.opener=Transport(result=json.dumps({**base,'intent_resolution':'hosted'}).encode())
+        self.assertEqual(api.catalogue()['intent_resolution'],'hosted')
+
     def test_session_identifiers_cannot_inject_path(self):
         api=RiderAPI('https://example.com','secret')
         with self.assertRaises(APIError): api.recover('../other')

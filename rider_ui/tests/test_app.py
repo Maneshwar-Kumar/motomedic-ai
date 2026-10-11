@@ -26,7 +26,6 @@ class AppTests(unittest.TestCase):
                 self.assertFalse(at.exception)
                 self.assertTrue(at.chat_input[0].disabled)
                 at.checkbox[0].check().run()
-                at.selectbox[0].select_index(0).run()
                 self.assertFalse(at.chat_input[0].disabled)
                 at.chat_input[0].set_value('Engineering test only').run()
                 self.assertFalse(at.exception)
@@ -51,7 +50,6 @@ class AppTests(unittest.TestCase):
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=15).run()
                 at.checkbox[0].check().run()
-                at.selectbox[0].select_index(0).run()
                 at.chat_input[0].set_value('Engineering reset test').run()
                 old_id=at.session_state['view']['session_id']
                 next(x for x in at.button if x.label=='Start a new conversation').click().run()
@@ -75,7 +73,6 @@ class AppTests(unittest.TestCase):
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=15).run()
                 at.checkbox[0].check().run()
-                at.selectbox[0].select_index(0).run()
                 Handler.fail_next_response=True
                 at.chat_input[0].set_value('Engineering timeout recovery').run()
                 self.assertFalse(at.exception)

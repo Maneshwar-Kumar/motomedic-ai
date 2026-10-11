@@ -19,7 +19,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.headers.get('Authorization')!='Bearer ui-test-only':
             self.reply({},401);return
         if self.path=='/v1/catalogue':
-            self.reply({**BASE,'topics':[{'id':'ui-fixture','label':'Engineering fixture · interface test'}]});return
+            self.reply({**BASE,'intent_resolution':'hosted'});return
         if self.path.startswith('/v1/operations/'):
             v=operations.get(self.path.rsplit('/',1)[1]);self.reply(v or {},200 if v else 404);return
         v=sessions.get(self.path.rsplit('/',1)[1]);self.reply(v or {},200 if v else 404)

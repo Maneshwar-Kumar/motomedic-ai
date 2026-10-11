@@ -6,7 +6,7 @@ Reconciled 11 October 2026 against the project objective, 01 Concept Architectur
 
 - [x] Build the rider UI separately from model/architecture experiments; confirm Himalayan BS6, show selected source, full gated response, structured feedback, citation metadata and remembered outcomes.
 - [x] Apply the owner's saved HTML copy review with field-level removal and preserve original/saved review hashes.
-- [x] Place the text chat input inside What are you noticing; remove category help text while retaining the topic dropdown.
+- [x] Place the text chat input inside What are you noticing; remove the whole category dropdown and submit symptoms for hosted intent resolution.
 - [x] Make conversation reset clear displayed chat and active diagnostic context, preserve selected bike scope, and disable reset while recovering an unresolved operation.
 - [x] Enforce 2,000-character text input in both the UI and client request path; provide reusable hosted UTF-8/JSON request checks.
 - [x] Implement actual photo type/decode/animation/pixel/byte validation and metadata-free bounded normalization; keep rider uploads disabled pending the text-first gate.
@@ -21,6 +21,7 @@ Evidence: rider_ui/tests, reports/rider_ui/safeguards_test_log_v1.txt, reports/r
 
 ## Required to close hosted text release
 
+- [ ] Implement hosted symptom-to-intent interpretation with ambiguity clarification, unsupported handling and relevance checks before eligible evidence selection.
 - [ ] Install the authenticated rider session/catalogue/feedback/recovery API over the approved registry/controller and real immutable index; durable managed sessions with ownership, CAS and operation dedupe.
 - [ ] Implement production atomic visitor/session counters, trusted edge IP/challenge controls, project-wide provider admission and per-day spend reservations. Verify reset/cookie rotation cannot reset limits. UI checks alone cannot stop abuse.
 - [ ] Install the new system/role policy and context-admission body in a new reviewed runtime/prompt version; invalidate affected caches. Validate exact hosted model countTokens/tokenizer support. Preserve source approvals and signed bytes.

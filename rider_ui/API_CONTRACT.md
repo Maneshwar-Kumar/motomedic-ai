@@ -15,15 +15,15 @@ Every request has a server-side `Authorization: Bearer ...` credential. Every mu
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| GET | /v1/catalogue | Source locks and available approved topics |
-| POST | /v1/sessions | Confirm scope, resolve selected intent, create and run initial turn |
+| GET | /v1/catalogue | Source locks and hosted intent-resolution capability |
+| POST | /v1/sessions | Confirm scope, infer intent from symptom, create and run initial turn |
 | POST | /v1/sessions/{id}/feedback | Apply exactly one issued server choice and run next turn |
 | GET | /v1/sessions/{id} | Retrieve latest saved view |
 | GET | /v1/operations/{idempotency_key} | Recover a mutation's committed response without executing it again |
 
-Catalogue: schema_version, manual_checksum, index_id, topics (list of id/label objects). Labels and IDs are sourced by the hosted controller; the client has no case registry or answer library. Initially expose only journeys whose installed runtime scope and quality checks are ready. Do not use draft fixtures as rider facts.
+Catalogue: schema_version, manual_checksum, index_id, intent_resolution=hosted. The client requires this capability before enabling symptom submission; an older topic-selection-only backend fails closed. The UI exposes no category dropdown and contains no local intent classifier or answer library.
 
-Create request: topic_id, query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. A topic is explicit intent selection, not proof that arbitrary input is supported. Backend must reconcile topic/text conflicts and unsafe or unsupported requests using the existing policy; never answer the selected topic while ignoring a contradictory rider request.
+Create request: query, intent_mode=infer, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. The hosted service interprets the raw rider symptom against allowed intents after scope/input/admission checks. Interpretation proposes a candidate; it does not approve an answer or a cached repair. Do not use nearest semantic similarity as permission to serve technical advice. Validate relevance, applicability, prerequisites, warnings and claim support for the selected route. If multiple intents remain plausible, ask one focused source-derived rider-resolvable question using version-bound issued choices. Unsupported requests abstain; provider/retrieval interpretation failures remain SYSTEM_ERROR. Unsafe input must retain verified safety-stop precedence. Never silently route a contradictory request into an unrelated known case.
 
 Feedback request: expected_version, choice_id, cache_mode=bypass. **No client-supplied fact, approval, evidence, or model output.** Server looks up the choice previously issued for this exact session version, validates its reviewed typed binding, then applies ReviewedService.feedback and the next turn. Unresolved action never seeds an observation.
 
