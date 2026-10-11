@@ -44,3 +44,7 @@ Rollback: disable the new UI connection or revert its container revision; preser
 
 
 The symptom input sits inside the entry card. Text maximum is 2,000 characters in both the widget and client. Photo support remains disabled with a visible one-photo/5-MB/three-per-conversation policy. Read SERVICE_SAFEGUARDS.md for the implemented validators and required managed enforcement, context admission, prompt versioning and retention. TODO.md tracks remaining live release gates.
+
+## Saved UI chat outcome
+
+Read [CHAT_OUTCOME_20261011.md](CHAT_OUTCOME_20261011.md) for the owner-approved copy/layout decisions, reset and context behavior, limits, prompt and test evidence, publication details and exact continuation instructions. [TODO.md](../TODO.md) contains only pending UI integration, guardrails and photo handling. TRD v0.5 governs concurrent hybrid retrieval and Option A complete-unit streaming. The current UI client uses JSON responses; connecting verified SSE and provider prompt-prefix caching remains pending. Existing approved response reuse must not be described as provider prompt caching.

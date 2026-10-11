@@ -1,45 +1,26 @@
-# MotoMedic current TODO register
+# MotoMedic pending work
 
-Reconciled 11 October 2026 against the project objective, 01 Concept Architecture, 02 PRD, authoritative TRD v0.4, 04 To Build Evaluation Decisions, source_manifest.json, the exact v3 coordinator approval and implementation evidence. This current repository tracker updates the dated planning TODO statuses. The Word To Build register has also been updated with current statuses and this dated reconciliation; the other planning documents remain the design record. Historical progress statements are not current release claims. TRD safety/evidence contracts and exact source approval scopes remain authoritative.
+Updated 11 October 2026. This register contains only unfinished UI integration, guardrails and photo handling. Completed work, owner decisions, tests and continuation instructions are preserved in [the UI chat outcome](rider_ui/CHAT_OUTCOME_20261011.md). TRD v0.5 governs Option A/B and safe A streaming; historical Word status tables are the dated design record.
 
-## Implemented and checked
+## UI integration
 
-- [x] Build the rider UI separately from model/architecture experiments; confirm Himalayan BS6, show selected source, full gated response, structured feedback, citation metadata and remembered outcomes.
-- [x] Apply the owner's saved HTML copy review with field-level removal and preserve original/saved review hashes.
-- [x] Place the text chat input inside What are you noticing; remove the whole category dropdown and submit symptoms for hosted intent resolution.
-- [x] Make conversation reset clear displayed chat and active diagnostic context, preserve selected bike scope, and disable reset while recovering an unresolved operation.
-- [x] Enforce 2,000-character text input in both the UI and client request path; provide reusable hosted UTF-8/JSON request checks.
-- [x] Implement actual photo type/decode/animation/pixel/byte validation and metadata-free bounded normalization; keep rider uploads disabled pending the text-first gate.
-- [x] Implement visitor/session quota checks and an atomic managed-store admission interface, with identity/dedupe/outage safeguards and tested limits. Production counter integration remains open below.
-- [x] Implement deterministic diagnostic projection without dropping active attempts; add full-request token/byte/output admission checks that refuse overflow or unavailable counting.
-- [x] Author a project-derived versioned system policy and role policies for generator, verifier, interpreter and observation-only vision; bind policy bytes in a manifest. Serving installation remains open below.
-- [x] Retain existing source/applicability/mandatory-evidence/warning/claim/citation/rights gates, five route states, no-repeat semantics and exact cache rejection.
-- [x] Accept the exact coordinator-approved 161 source/initial scopes and selected Himalayan BS6 scope; do not reinstate generic human-only blockers. Approval does not cover new prompt/runtime bindings or general adaptive/photo quality.
-- [x] Retain real bounded 26B text-journey successes as Step 2 evidence. Architecture timing comparisons, provider pacing and model choice continue separately; three samples do not prove p95.
+- [ ] Connect the UI to the authenticated hosted catalogue/session/feedback/recovery API; infer intent from the symptom, ask one documented clarification when needed, and preserve typed attempts, corrections, ownership, CAS and operation deduplication in managed storage.
+- [ ] Wire the existing concurrent dense BGE M3 + BM25 retrieval, RRF, conditional recovery/reranking and verified dependency assembly into Option A's exact reviewed-component selection. Retain immutable source/index/runtime bindings and all eligibility, evidence, warning, prerequisite and citation gates. No new manual ingestion or embedding per request.
+- [ ] Connect Option A's verified HTTP/SSE delivery to the UI: release a complete approved answer unit only after gates and durable session save; handle complete/error events and recovery without duplicating a model call. Do not render raw model tokens or partial warnings. Preserve B as the separately specified alternative; no C fallback.
+- [ ] Integrate the existing approved-wording candidate/response cache with exact source, version, prompt, typed-state and allowed-envelope bindings. Similarity may locate a candidate but cannot authorize reuse. Test stale, changed-state, changed-prompt and draft entries miss closed; run initial live acceptance with caches bypassed.
+- [ ] Complete the separately requested provider prompt-prefix caching integration: establish support for the exact hosted Gemma 26B API/model, install only a supported mechanism under a fresh reviewed runtime/allocation, and record provider-reported cached tokens. Existing response reuse is not provider prompt caching; do not pad prompts or silently substitute models to obtain caching. If unsupported, retain a documented capability result and explicit owner decision before claiming this requirement closed.
+- [ ] Demonstrate a fresh-browser text journey through real concurrent dense/BM25 retrieval, evidence/controller gates, Option A selection, session save and safe streaming; verify citations and unresolved/non-repeat behavior. Deploy the shareable UI under existing project/budget constraints and record correlated redacted traces, warm/cold completion latency and cost. Localhost/fixtures do not establish public deployment or p95.
 
-Evidence: rider_ui/tests, reports/rider_ui/safeguards_test_log_v1.txt, reports/rider_ui/inline_input/browser_smoke.json, rider_ui/prompt_manifest_v1.json, IMPLEMENTATION_PROGRESS.md and the exact source release manifest. Synthetic UI/model-adapter checks establish software behavior only.
+## Guardrails
 
-## Required to close hosted text release
+- [ ] Install the versioned project system/role policy and complete deterministic context projection in a newly reviewed serving runtime; preserve every active outcome/fact and mandatory warning. Invalidate affected caches and verify exact-model token counting. Enforce 8,192 input tokens, 24,000 request bytes and 1,800 output tokens; refuse overflow/truncation rather than dropping required context. Apply the A-specific exact-wording gates; B retains its semantic verifier.
+- [ ] Enforce 2,000-character/8,000-byte text and 16-KiB JSON bounds in the hosted handler before retrieval; validate trusted visitor capabilities, session ownership, duplicate/conflicting payloads and deadlines.
+- [ ] Connect atomic managed admission counters: six accepted turns/minute, 30/rolling day, 20/conversation; quotas survive new conversations. Add trusted edge IP/challenge controls, global provider reservations and per-day spending limits; fail closed on admission outages and never re-enable stopped billing without authorization.
+- [ ] Implement and verify 30-minute idle/24-hour session expiry, published record retention and actual deletion jobs. Keep secrets server-side, user media and raw rider text out of routine telemetry, and preserve redacted version/source/index traceability.
+- [ ] Pass hosted adversarial/failure tests for injection, wrong scope, missing warnings/dependencies, unsupported claims, unsafe requests, invalid citations, stale/replayed/concurrent operations, typed unresolved outcomes, context overflow, partial streams, provider/store failures and reset abuse. Preserve distinct SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR routes and applicable safety precedence. Review changed runtime bindings without reinstating a generic human-only blocker for the exact approved 161 scopes.
 
-- [ ] Implement hosted symptom-to-intent interpretation with ambiguity clarification, unsupported handling and relevance checks before eligible evidence selection.
-- [ ] Install the authenticated rider session/catalogue/feedback/recovery API over the approved registry/controller and real immutable index; durable managed sessions with ownership, CAS and operation dedupe.
-- [ ] Implement production atomic visitor/session counters, trusted edge IP/challenge controls, project-wide provider admission and per-day spend reservations. Verify reset/cookie rotation cannot reset limits. UI checks alone cannot stop abuse.
-- [ ] Install the new system/role policy and context-admission body in a new reviewed runtime/prompt version; invalidate affected caches. Validate exact hosted model countTokens/tokenizer support. Preserve source approvals and signed bytes.
-- [ ] Enforce request streaming/body caps, deadlines, raw/normalized media TTL, idle/session expiry and actual deletion jobs. Do not call retention configured until verified.
-- [ ] Pass hostile-input, ownership, concurrent-operation, duplicate/stale-feedback, wrong-variant, missing-warning, injection, citation, context-overflow, truncated-output and system-outage tests in the hosted service. Known applicable safety stop keeps precedence.
-- [ ] Demonstrate Browser → hosted session/controller → real BGE + BM25 → graph/dependency assembly → gated generation/verifier → complete cited response, cache bypassed. Retain one correlated redacted trace and exact runtime/source/index locks.
-- [ ] Measure browser-to-complete-response warm/cold latency, error rates and cost on a suitable sample. Five-second p95 remains the target, not a proven result.
-- [ ] Deploy a shareable text URL under existing budget/guard authorization and test from a fresh logged-out browser. No billing restart or new provider budget is authorized by this tracker.
+## Photo handling
 
-## Required to close photo release and handover
-
-- [ ] After text acceptance, connect bounded photo upload to observation-only vision, clarify uncertainty and route through the same evidence gate. Review visible-observation accuracy and prompt injection in images; never infer hidden faults.
-- [ ] Verify one photo/turn, 5 MiB/photo, three/session and six/visitor/day in the actual hosted path; reject unsupported media and URL input; use bounded decode workers.
-- [ ] Complete held-out, multi-turn, safety, photo, unsupported and failure evaluation with versioned adjudication. Initial source approval does not cover arbitrary adaptive transitions.
-- [ ] Publish verified support/source-display policy, deployment/rollback/retention notes, reproducible browser demo script and known limitations. Optional voice remains later work.
-
-## Decisions recorded today
-
-Text maximum 2,000 characters and 8,000 UTF-8 bytes. JSON body maximum 16 KiB. Photos maximum one/turn, 5 MiB, JPEG/PNG/WebP, single-frame, 20 megapixels, 10,000 pixels/side; normalized to at most 1,600 pixels/side without metadata. Conversation maximum 20 accepted rider turns and three photos. Visitor maximum six turns/minute and 30 turns/six photos per rolling 24 hours; reset does not clear these counters. Model input maximum 8,192 counted tokens plus 24,000 request bytes, output maximum 1,800 tokens. Session idle expiry 30 minutes, lifetime 24 hours; media deletion maximum 15 minutes. These are initial application choices to measure and tune, not provider quotas or deployed guarantees.
-
-There is no automatic LLM compaction today. Current composition requests do not accumulate chat. The controller uses complete typed state; its model envelope includes only the last 12 active attempt IDs/outcomes. The new projection preserves every active outcome/fact and fails closed if the complete required request exceeds its budget. No fixed turn count predicts context-window exhaustion. The 20-turn conversation cap is an abuse bound, not the model's context capacity.
+- [ ] After hosted text acceptance, connect an authenticated, byte-bounded multipart endpoint to the existing decoder/normalizer: JPEG/PNG/WebP only, one photo/turn, 5 MiB/photo, 20 megapixels, 10,000 pixels/side; reject corrupt/animated/mismatched media and URL fetches. Enforce worker resources; rotate from EXIF then strip metadata and normalize to at most 1,600 pixels/side.
+- [ ] Atomically enforce three photos/conversation and six/visitor/rolling day across workers and resets. Verify actual raw and normalized media deletion within 15 minutes; no raw media in repository or routine logs.
+- [ ] Integrate separately versioned observation-only vision with uncertainty and focused clarification, then use the same source/applicability/controller gates. Do not infer hidden faults from photos. Evaluate image injection, unclear images, unsupported observations, wrong-bike inputs and grounded follow-ups before enabling the uploader.
