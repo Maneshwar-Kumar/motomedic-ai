@@ -1,0 +1,557 @@
+contracts	Set up job	﻿2026-10-11T19:42:26.6394452Z Current runner version: '2.337.0'
+contracts	Set up job	2026-10-11T19:42:26.6432554Z ##[group]Runner Image Provisioner
+contracts	Set up job	2026-10-11T19:42:26.6434072Z Hosted Compute Agent
+contracts	Set up job	2026-10-11T19:42:26.6435144Z Version: 20261002.596
+contracts	Set up job	2026-10-11T19:42:26.6436415Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+contracts	Set up job	2026-10-11T19:42:26.6438012Z Build Date: 2026-10-02T22:28:27Z
+contracts	Set up job	2026-10-11T19:42:26.6439432Z Worker ID: {611d0aff-91cf-4b11-975a-a1fc0f7ad3fa}
+contracts	Set up job	2026-10-11T19:42:26.6440791Z Region: westus2
+contracts	Set up job	2026-10-11T19:42:26.6441790Z Cloud: Azure
+contracts	Set up job	2026-10-11T19:42:26.6442950Z ##[endgroup]
+contracts	Set up job	2026-10-11T19:42:26.6445418Z ##[group]Operating System
+contracts	Set up job	2026-10-11T19:42:26.6446616Z Ubuntu
+contracts	Set up job	2026-10-11T19:42:26.6447852Z 24.04.5
+contracts	Set up job	2026-10-11T19:42:26.6448740Z LTS
+contracts	Set up job	2026-10-11T19:42:26.6449743Z ##[endgroup]
+contracts	Set up job	2026-10-11T19:42:26.6450725Z ##[group]Runner Image
+contracts	Set up job	2026-10-11T19:42:26.6451898Z Image: ubuntu-24.04
+contracts	Set up job	2026-10-11T19:42:26.6453009Z Version: 20261004.327.1
+contracts	Set up job	2026-10-11T19:42:26.6454910Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+contracts	Set up job	2026-10-11T19:42:26.6458492Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+contracts	Set up job	2026-10-11T19:42:26.6460476Z ##[endgroup]
+contracts	Set up job	2026-10-11T19:42:26.6462394Z ##[group]GITHUB_TOKEN Permissions
+contracts	Set up job	2026-10-11T19:42:26.6465244Z Contents: read
+contracts	Set up job	2026-10-11T19:42:26.6466426Z Metadata: read
+contracts	Set up job	2026-10-11T19:42:26.6467680Z ##[endgroup]
+contracts	Set up job	2026-10-11T19:42:26.6470872Z Secret source: Actions
+contracts	Set up job	2026-10-11T19:42:26.6472384Z Cache mode: write
+contracts	Set up job	2026-10-11T19:42:26.6473619Z Prepare workflow directory
+contracts	Set up job	2026-10-11T19:42:26.7255294Z Prepare all required actions
+contracts	Set up job	2026-10-11T19:42:26.7330640Z Getting action download info
+contracts	Set up job	2026-10-11T19:42:27.9061143Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+contracts	Set up job	2026-10-11T19:42:28.0088398Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+contracts	Set up job	2026-10-11T19:42:28.2217891Z Complete job name: contracts
+contracts	Run actions/checkout@v4	﻿2026-10-11T19:42:28.3367394Z ##[group]Run actions/checkout@v4
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3369776Z with:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3371399Z   repository: Maneshwar-Kumar/motomedic-ai
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3390239Z   token: ***
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3391772Z   ssh-strict: true
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3393285Z   ssh-user: git
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3394817Z   persist-credentials: true
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3396460Z   clean: true
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3398216Z   sparse-checkout-cone-mode: true
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3400145Z   fetch-depth: 1
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3401740Z   fetch-tags: false
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3403345Z   show-progress: true
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3404952Z   lfs: false
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3406495Z   submodules: false
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3408410Z   set-safe-directory: true
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3410227Z   allow-unsafe-pr-checkout: false
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3412508Z env:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3414065Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3415896Z   HF_HUB_OFFLINE: 1
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3417781Z   TRANSFORMERS_OFFLINE: 1
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3419621Z   TOKENIZERS_PARALLELISM: false
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.3421606Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.4679898Z Syncing repository: Maneshwar-Kumar/motomedic-ai
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.4684507Z ##[group]Getting Git version info
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.4687230Z Working directory is '/home/runner/work/motomedic-ai/motomedic-ai'
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.4693523Z [command]/usr/bin/git version
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.4929240Z git version 2.55.0
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.4953847Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.4970188Z Temporarily overriding HOME='/home/runner/work/_temp/71032def-606e-47fb-9c06-693c05225dbf' before making global git config changes
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5009908Z Adding repository directory to the temporary git global config as a safe directory
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5013070Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/motomedic-ai/motomedic-ai
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5106406Z Deleting the contents of '/home/runner/work/motomedic-ai/motomedic-ai'
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5111393Z ##[group]Initializing the repository
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5118749Z [command]/usr/bin/git init /home/runner/work/motomedic-ai/motomedic-ai
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5261350Z hint: Using 'master' as the name for the initial branch. This default branch name
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5279968Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5322985Z hint: to use in all of your new repositories, which will suppress this warning,
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5326191Z hint: call:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5330752Z hint:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5345469Z hint: 	git config --global init.defaultBranch <name>
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5347856Z hint:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5349846Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5353155Z hint: 'development'. The just-created branch can be renamed via this command:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5356333Z hint:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5370297Z hint: 	git branch -m <name>
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5371974Z hint:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5374110Z hint: Disable this message with "git config set advice.defaultBranchName false"
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5378116Z Initialized empty Git repository in /home/runner/work/motomedic-ai/motomedic-ai/.git/
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5384003Z [command]/usr/bin/git remote add origin https://github.com/Maneshwar-Kumar/motomedic-ai
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5401658Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5404668Z ##[group]Disabling automatic garbage collection
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5407865Z [command]/usr/bin/git config --local gc.auto 0
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5527277Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5530859Z ##[group]Setting up auth
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5548835Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.5572139Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6155279Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6213647Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6459317Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6501625Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6751253Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6796189Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6799702Z ##[group]Fetching the repository
+contracts	Run actions/checkout@v4	2026-10-11T19:42:28.6809088Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +978a3c248b7169e903e33eacd47f08a6ba203ad9:refs/remotes/pull/3/merge
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.6946478Z From https://github.com/Maneshwar-Kumar/motomedic-ai
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.6948608Z  * [new ref]         978a3c248b7169e903e33eacd47f08a6ba203ad9 -> pull/3/merge
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.6951230Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.6952508Z ##[group]Determining the checkout info
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.6953721Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.6957966Z [command]/usr/bin/git sparse-checkout disable
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.7012095Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.7058901Z ##[group]Checking out the ref
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.7062987Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/3/merge
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8518114Z Note: switching to 'refs/remotes/pull/3/merge'.
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8519385Z 
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8520073Z You are in 'detached HEAD' state. You can look around, make experimental
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8521369Z changes and commit them, and you can discard any commits you make in this
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8522596Z state without impacting any branches by switching back to a branch.
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8523820Z 
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8524352Z If you want to create a new branch to retain commits you create, you may
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8525409Z do so (now or later) by using -c with the switch command. Example:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8526077Z 
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8526427Z   git switch -c <new-branch-name>
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8527265Z 
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8546436Z Or undo this operation with:
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8548478Z 
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8557684Z   git switch -
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8558512Z 
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8559251Z Turn off this advice by setting config variable advice.detachedHead to false
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8560041Z 
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8560937Z HEAD is now at 978a3c2 Merge 9f24917e30a433cc9c65fef9fa06f06549717244 into 7cd58405e5e8a98abc0c272336249443d231d7ad
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8563929Z ##[endgroup]
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8600254Z [command]/usr/bin/git log -1 --format=%H
+contracts	Run actions/checkout@v4	2026-10-11T19:42:29.8633388Z 978a3c248b7169e903e33eacd47f08a6ba203ad9
+contracts	Run actions/setup-python@v5	﻿2026-10-11T19:42:29.8992994Z ##[group]Run actions/setup-python@v5
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8993409Z with:
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8993665Z   python-version: 3.12
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8993953Z   check-latest: false
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8996763Z   token: ***
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8997272Z   update-environment: true
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8997581Z   allow-prereleases: false
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8997867Z   freethreaded: false
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8998129Z env:
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8998381Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8998683Z   HF_HUB_OFFLINE: 1
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8998949Z   TRANSFORMERS_OFFLINE: 1
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8999246Z   TOKENIZERS_PARALLELISM: false
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:29.8999536Z ##[endgroup]
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:30.0403100Z ##[group]Installed versions
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:30.0509810Z (node:2077) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:30.0511506Z Successfully set up CPython (3.12.15)
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:30.0512690Z (Use `node --trace-deprecation ...` to show where the warning was created)
+contracts	Run actions/setup-python@v5	2026-10-11T19:42:30.0537535Z ##[endgroup]
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	﻿2026-10-11T19:42:30.0797387Z ##[group]Run python tools/check_repository_structure.py
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.0798292Z ^[[36;1mpython tools/check_repository_structure.py^[[0m
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1209241Z shell: /usr/bin/bash -e {0}
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1209694Z env:
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1209979Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1210297Z   HF_HUB_OFFLINE: 1
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1210575Z   TRANSFORMERS_OFFLINE: 1
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1210876Z   TOKENIZERS_PARALLELISM: false
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1211250Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1211754Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1212266Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1212720Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1213172Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1213632Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.1214102Z ##[endgroup]
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5437152Z {
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5438326Z   "schema_version": "repository-structure-audit-v3",
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5439254Z   "ok": true,
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5440003Z   "unexpected_root_files": [],
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5440767Z   "missing_navigation_files": [],
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5441540Z   "broken_navigation_links": [],
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5442296Z   "missing_critical_source_files": [],
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5443060Z   "integrity_errors": [],
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5443751Z   "local_links_checked": 94,
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5444434Z   "root_file_count": 48,
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5445129Z   "runtime_freeze_files_verified": 64,
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5445890Z   "current_serving_files_verified": 341,
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5446695Z   "approved_output_files_verified": 187,
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5448345Z   "note": "Canonical navigation, byte-exact historical v8 snapshots, current v9 inputs and original scoped approval paths. Not factual or deployment acceptance."
+contracts	Check navigation, manual, approvals and all frozen runtime bytes	2026-10-11T19:42:30.5450168Z }
+contracts	Verify exact scoped source approvals	﻿2026-10-11T19:42:30.5610470Z ##[group]Run python human_review/agent_release_161/approval_consumer.py
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5611096Z ^[[36;1mpython human_review/agent_release_161/approval_consumer.py^[[0m
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5679567Z shell: /usr/bin/bash -e {0}
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5679893Z env:
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5680162Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5680475Z   HF_HUB_OFFLINE: 1
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5680753Z   TRANSFORMERS_OFFLINE: 1
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5681064Z   TOKENIZERS_PARALLELISM: false
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5681452Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5681961Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5682461Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5682912Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5683356Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5683822Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:30.5684255Z ##[endgroup]
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8562826Z {
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8563711Z   "records": 161,
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8564530Z   "file_hashes_verified": true,
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8565424Z   "case_source_step_rule_dependency_bindings_verified": true,
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8566248Z   "manual_verified": true,
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8568786Z   "human_review_required": false,
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8569430Z   "provider_calls": 0,
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8570086Z   "deployed_runner_changed": false
+contracts	Verify exact scoped source approvals	2026-10-11T19:42:32.8570749Z }
+contracts	Test approval consumption without an index or provider	﻿2026-10-11T19:42:32.8671226Z ##[group]Run python -m unittest discover -s human_review/agent_release_161 -p 'test_approval_consumer.py' -v
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8672025Z ^[[36;1mpython -m unittest discover -s human_review/agent_release_161 -p 'test_approval_consumer.py' -v^[[0m
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8734498Z shell: /usr/bin/bash -e {0}
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8734755Z env:
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8734983Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8735234Z   HF_HUB_OFFLINE: 1
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8735442Z   TRANSFORMERS_OFFLINE: 1
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8735684Z   TOKENIZERS_PARALLELISM: false
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8735995Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8736427Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8737119Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8737573Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8737955Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8738370Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.8738684Z ##[endgroup]
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9857863Z test_artifact_paths_cannot_leave_workspace (test_approval_consumer.EligibilityTests.test_artifact_paths_cannot_leave_workspace) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9860377Z test_bool_cannot_be_number_and_nonfinite_is_unknown (test_approval_consumer.EligibilityTests.test_bool_cannot_be_number_and_nonfinite_is_unknown) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9862941Z test_content_hash_changes_for_warning_or_unit_mutation (test_approval_consumer.EligibilityTests.test_content_hash_changes_for_warning_or_unit_mutation) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9865085Z test_enum_does_not_infer_health (test_approval_consumer.EligibilityTests.test_enum_does_not_infer_health) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9867186Z test_no_string_or_numeric_boolean_coercion (test_approval_consumer.EligibilityTests.test_no_string_or_numeric_boolean_coercion) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9869135Z test_number_requires_matching_unit (test_approval_consumer.EligibilityTests.test_number_requires_matching_unit) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9870976Z test_unapproved_operators_are_unknown (test_approval_consumer.EligibilityTests.test_unapproved_operators_are_unknown) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:32.9872645Z test_unknown_is_not_approval (test_approval_consumer.EligibilityTests.test_unknown_is_not_approval) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:34.0208825Z test_attempted_action_is_not_normal_or_repeat_permission (test_approval_consumer.FinalPackageTests.test_attempted_action_is_not_normal_or_repeat_permission) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:34.1007736Z test_cannot_fabricate_human_inspection (test_approval_consumer.FinalPackageTests.test_cannot_fabricate_human_inspection) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:34.1009890Z test_empty_facts_cannot_seed_from_fixtures (test_approval_consumer.FinalPackageTests.test_empty_facts_cannot_seed_from_fixtures) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:34.9781015Z test_exact_all_cases_and_scoped_authority (test_approval_consumer.FinalPackageTests.test_exact_all_cases_and_scoped_authority) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.0621047Z test_existing_wrong_case_step_rejected (test_approval_consumer.FinalPackageTests.test_existing_wrong_case_step_rejected) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.0632996Z test_hazard_location_and_authored_unsure_branch (test_approval_consumer.FinalPackageTests.test_hazard_location_and_authored_unsure_branch) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.0647389Z test_retired_release_cannot_be_used_as_current (test_approval_consumer.FinalPackageTests.test_retired_release_cannot_be_used_as_current) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.1456803Z test_source_mutation_rejected (test_approval_consumer.FinalPackageTests.test_source_mutation_rejected) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.2297830Z test_warning_mutation_rejected (test_approval_consumer.FinalPackageTests.test_warning_mutation_rejected) ... ok
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.2299173Z 
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.2299728Z ----------------------------------------------------------------------
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.2300647Z Ran 17 tests in 2.244s
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.2301856Z 
+contracts	Test approval consumption without an index or provider	2026-10-11T19:42:35.2302194Z OK
+contracts	Verify the current complete serving inventory and committed bytes	﻿2026-10-11T19:42:35.2548818Z ##[group]Run python tools/serving_release.py verify --committed-revision '978a3c248b7169e903e33eacd47f08a6ba203ad9'
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2549697Z ^[[36;1mpython tools/serving_release.py verify --committed-revision '978a3c248b7169e903e33eacd47f08a6ba203ad9'^[[0m
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2611470Z shell: /usr/bin/bash -e {0}
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2611749Z env:
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2611957Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2612204Z   HF_HUB_OFFLINE: 1
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2612468Z   TRANSFORMERS_OFFLINE: 1
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2612714Z   TOKENIZERS_PARALLELISM: false
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2613041Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2613473Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2613895Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2614270Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2614649Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2615075Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.2615394Z ##[endgroup]
+contracts	Verify the current complete serving inventory and committed bytes	2026-10-11T19:42:35.5956305Z {"files_verified": 341, "provider_calls": 0}
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	﻿2026-10-11T19:42:35.6166151Z ##[group]Run python -m pip install --require-hashes -r rider_ui/requirements-linux-amd64-py312.lock.txt
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6167997Z ^[[36;1mpython -m pip install --require-hashes -r rider_ui/requirements-linux-amd64-py312.lock.txt^[[0m
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6168956Z ^[[36;1mpython -m pip install Flask==3.1.2^[[0m
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6257751Z shell: /usr/bin/bash -e {0}
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6258184Z env:
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6258544Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6259034Z   HF_HUB_OFFLINE: 1
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6259400Z   TRANSFORMERS_OFFLINE: 1
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6259801Z   TOKENIZERS_PARALLELISM: false
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6260342Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6261080Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6261875Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6262605Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6263337Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6264425Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:35.6265041Z ##[endgroup]
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.5524504Z Collecting altair==6.3.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 5))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.6158556Z   Downloading altair-6.3.0-py3-none-any.whl (797 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.6948598Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 797.2/797.2 kB 13.7 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.7201165Z Collecting anyio==4.15.1 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 6))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.7272078Z   Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.7530957Z Collecting attrs==26.1.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 7))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.7577361Z   Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.7785435Z Collecting cachetools==5.5.2 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 8))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.7857489Z   Downloading cachetools-5.5.2-py3-none-any.whl (10 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.8048882Z Collecting certifi==2026.7.22 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 9))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.8125056Z   Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.9644630Z Collecting charset-normalizer==3.5.2 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 10))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:36.9716825Z   Downloading charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (257 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.0040725Z Collecting click==8.5.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 11))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.0109341Z   Downloading click-8.5.0-py3-none-any.whl (125 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.0442677Z Collecting google-auth==2.40.3 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 12))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.0513999Z   Downloading google_auth-2.40.3-py2.py3-none-any.whl (216 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.0795318Z Collecting h11==0.16.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 13))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.0865995Z   Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.1242707Z Collecting httptools==0.9.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 14))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.1312948Z   Downloading httptools-0.9.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (552 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.1532428Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 552.8/552.8 kB 27.6 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.1679652Z Collecting idna==3.20 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 15))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.1748537Z   Downloading idna-3.20-py3-none-any.whl (69 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.1905591Z Collecting itsdangerous==2.2.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 16))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.1973119Z   Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.2135556Z Collecting jinja2==3.1.6 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 17))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.2203797Z   Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.2450560Z Collecting jsonschema==4.26.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 18))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.2518927Z   Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.2709613Z Collecting jsonschema-specifications==2025.9.1 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 19))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.2782238Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.3350216Z Collecting markupsafe==3.0.4 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 20))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.3424107Z   Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.3810420Z Collecting narwhals==2.27.1 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 21))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.3879043Z   Downloading narwhals-2.27.1-py3-none-any.whl (483 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.6038004Z Collecting numpy==2.4.6 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 22))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.6099491Z   Downloading numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.8010509Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 89.7 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.8351425Z Collecting packaging==26.3 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 23))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.8421589Z   Downloading packaging-26.3-py3-none-any.whl (129 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.9569985Z Collecting pandas==3.0.6 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 24))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:37.9643849Z   Downloading pandas-3.0.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (10.8 MB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.0205110Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.8/10.8 MB 197.4 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.2329974Z Collecting pillow==12.3.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 25))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.2403437Z   Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.2714116Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 234.6 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.4224367Z Collecting protobuf==7.36.2 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 26))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.4305465Z   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.5165784Z Collecting pyarrow==25.0.1 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 27))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.5244193Z   Downloading pyarrow-25.0.1-cp312-cp312-manylinux_2_28_x86_64.whl (50.1 MB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.6899931Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.1/50.1 MB 306.8 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.7508613Z Collecting pyasn1==0.6.4 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 28))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.7577940Z   Downloading pyasn1-0.6.4-py3-none-any.whl (84 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.7788316Z Collecting pyasn1-modules==0.4.2 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 29))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.7873314Z   Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.8101295Z Collecting pydeck==0.9.3 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 30))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.8179022Z   Downloading pydeck-0.9.3-py2.py3-none-any.whl (11.4 MB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.8707643Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.4/11.4 MB 223.7 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.8942735Z Collecting python-dateutil==2.9.0.post0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 31))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.9007981Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.9173467Z Collecting python-multipart==0.0.32 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 32))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.9266939Z   Downloading python_multipart-0.0.32-py3-none-any.whl (30 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.9485512Z Collecting referencing==0.37.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 33))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.9556971Z   Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.9780526Z Collecting requests==2.32.5 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 34))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:38.9855800Z   Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.2482860Z Collecting rpds-py==2026.9.1 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 35))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.2562030Z   Downloading rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (371 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.2740100Z Collecting rsa==4.9.1 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 36))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.2808478Z   Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.2960835Z Collecting six==1.17.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 37))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.3036359Z   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.3269711Z Collecting starlette==1.7.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 38))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.3356024Z   Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.3711362Z Collecting streamlit==1.65.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 39))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.3811576Z   Downloading streamlit-1.65.0-py3-none-any.whl (10.3 MB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.4341649Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.3/10.3 MB 206.2 MB/s  0:00:00
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.4599622Z Collecting toml==0.10.2 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 40))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.4673728Z   Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.4889254Z Collecting typing-extensions==4.16.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 41))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.4959893Z   Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.5403751Z Collecting urllib3==2.8.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 42))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.5476804Z   Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.5738496Z Collecting uvicorn==0.54.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 43))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.5806765Z   Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.6263727Z Collecting watchdog==6.0.0 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 44))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.6340593Z   Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.7509518Z Collecting websockets==17.2 (from -r rider_ui/requirements-linux-amd64-py312.lock.txt (line 45))
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.7591537Z   Downloading websockets-17.2-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (225 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:39.9341128Z Installing collected packages: websockets, watchdog, urllib3, typing-extensions, toml, six, rpds-py, python-multipart, pyasn1, pyarrow, protobuf, pillow, packaging, numpy, narwhals, markupsafe, itsdangerous, idna, httptools, h11, click, charset-normalizer, certifi, cachetools, attrs, uvicorn, rsa, requests, referencing, python-dateutil, pyasn1-modules, jinja2, anyio, starlette, pydeck, pandas, jsonschema-specifications, google-auth, jsonschema, altair, streamlit
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:51.5599971Z 
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:51.5640057Z Successfully installed altair-6.3.0 anyio-4.15.1 attrs-26.1.0 cachetools-5.5.2 certifi-2026.7.22 charset-normalizer-3.5.2 click-8.5.0 google-auth-2.40.3 h11-0.16.0 httptools-0.9.0 idna-3.20 itsdangerous-2.2.0 jinja2-3.1.6 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 markupsafe-3.0.4 narwhals-2.27.1 numpy-2.4.6 packaging-26.3 pandas-3.0.6 pillow-12.3.0 protobuf-7.36.2 pyarrow-25.0.1 pyasn1-0.6.4 pyasn1-modules-0.4.2 pydeck-0.9.3 python-dateutil-2.9.0.post0 python-multipart-0.0.32 referencing-0.37.0 requests-2.32.5 rpds-py-2026.9.1 rsa-4.9.1 six-1.17.0 starlette-1.7.0 streamlit-1.65.0 toml-0.10.2 typing-extensions-4.16.0 urllib3-2.8.0 uvicorn-0.54.0 watchdog-6.0.0 websockets-17.2
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.0707987Z Collecting Flask==3.1.2
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1298842Z   Downloading flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1458124Z Collecting blinker>=1.9.0 (from Flask==3.1.2)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1530328Z   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1565753Z Requirement already satisfied: click>=8.1.3 in /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages (from Flask==3.1.2) (8.5.0)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1575425Z Requirement already satisfied: itsdangerous>=2.2.0 in /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages (from Flask==3.1.2) (2.2.0)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1579856Z Requirement already satisfied: jinja2>=3.1.2 in /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages (from Flask==3.1.2) (3.1.6)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1585468Z Requirement already satisfied: markupsafe>=2.1.1 in /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages (from Flask==3.1.2) (3.0.4)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1815382Z Collecting werkzeug>=3.1.0 (from Flask==3.1.2)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.1891110Z   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.2062855Z Downloading flask-3.1.2-py3-none-any.whl (103 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.2310891Z Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.2442534Z Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.3281756Z Installing collected packages: werkzeug, blinker, Flask
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.5251138Z 
+contracts	Install pinned dependencies for synthetic HTTP, numeric and Streamlit tests	2026-10-11T19:42:52.5288741Z Successfully installed Flask-3.1.2 blinker-1.9.0 werkzeug-3.1.9
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	﻿2026-10-11T19:42:52.5805772Z ##[group]Run python -m unittest -v cloud.grounded_generation.test_provider cloud.grounded_generation.test_admission cloud.grounded_generation.test_claude_fallback cloud.grounded_generation.test_open_wiring cloud.grounded_generation.test_whole_turn_admission cloud.grounded_generation.test_serving_retrieval cloud.arm_a.test_store cloud.arm_a.test_durable_operations cloud.test_serving_artifacts tools.test_serving_release tools.test_bind_serving_images
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5811176Z ^[[36;1mpython -m unittest -v cloud.grounded_generation.test_provider cloud.grounded_generation.test_admission cloud.grounded_generation.test_claude_fallback cloud.grounded_generation.test_open_wiring cloud.grounded_generation.test_whole_turn_admission cloud.grounded_generation.test_serving_retrieval cloud.arm_a.test_store cloud.arm_a.test_durable_operations cloud.test_serving_artifacts tools.test_serving_release tools.test_bind_serving_images^[[0m
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5874797Z shell: /usr/bin/bash -e {0}
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5875049Z env:
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5875321Z   PYTHONDONTWRITEBYTECODE: 1
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5875569Z   HF_HUB_OFFLINE: 1
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5875779Z   TRANSFORMERS_OFFLINE: 1
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5876011Z   TOKENIZERS_PARALLELISM: false
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5876337Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5876766Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5877665Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5878065Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5878458Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5878852Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:52.5879170Z ##[endgroup]
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2789952Z test_actual_counter_and_no_semantic_call (cloud.grounded_generation.test_provider.Tests.test_actual_counter_and_no_semantic_call) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2808192Z test_byte_bound_keeps_mandatory_bundle (cloud.grounded_generation.test_provider.Tests.test_byte_bound_keeps_mandatory_bundle) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2819665Z test_concurrency_rejected (cloud.grounded_generation.test_provider.Tests.test_concurrency_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2836876Z test_exact_empty_thought_marker_only (cloud.grounded_generation.test_provider.Tests.test_exact_empty_thought_marker_only) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2838880Z test_output_bound (cloud.grounded_generation.test_provider.Tests.test_output_bound) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2840574Z test_overflow_no_generation_no_truncation (cloud.grounded_generation.test_provider.Tests.test_overflow_no_generation_no_truncation) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2842431Z test_real_thought_content_fails (cloud.grounded_generation.test_provider.Tests.test_real_thought_content_fails) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2844056Z test_retry_exhaustion (cloud.grounded_generation.test_provider.Tests.test_retry_exhaustion) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2845823Z test_single_retry_only_explicit_rejection (cloud.grounded_generation.test_provider.Tests.test_single_retry_only_explicit_rejection) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2848017Z test_store_failure_blocks_provider (cloud.grounded_generation.test_provider.Tests.test_store_failure_blocks_provider) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2857238Z test_supported_cache_prefix_versioning (cloud.grounded_generation.test_provider.Tests.test_supported_cache_prefix_versioning) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2860912Z test_uncertain_timeout_never_retried (cloud.grounded_generation.test_provider.Tests.test_uncertain_timeout_never_retried) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2870103Z test_unsupported_cache_has_no_creation_or_claimed_savings (cloud.grounded_generation.test_provider.Tests.test_unsupported_cache_has_no_creation_or_claimed_savings) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2930335Z test_concurrent_transaction_reservations_do_not_overadmit (cloud.grounded_generation.test_admission.Tests.test_concurrent_transaction_reservations_do_not_overadmit) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2950604Z test_daily_generation_and_all_event_caps (cloud.grounded_generation.test_admission.Tests.test_daily_generation_and_all_event_caps) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2953741Z test_each_attempt_and_cache_prefix_reserves_tokens_and_ttl (cloud.grounded_generation.test_admission.Tests.test_each_attempt_and_cache_prefix_reserves_tokens_and_ttl) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2965779Z test_expired_reservations_drop_after_full_day (cloud.grounded_generation.test_admission.Tests.test_expired_reservations_drop_after_full_day) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2968410Z test_invalid_bounds_and_store_outage_fail_closed (cloud.grounded_generation.test_admission.Tests.test_invalid_bounds_and_store_outage_fail_closed) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2973337Z test_reserved_token_minute_includes_cache_and_reopens (cloud.grounded_generation.test_admission.Tests.test_reserved_token_minute_includes_cache_and_reopens) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2984477Z test_six_per_minute_then_reopens_without_resetting_day (cloud.grounded_generation.test_admission.Tests.test_six_per_minute_then_reopens_without_resetting_day) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.2997270Z test_worst_case_tokens_include_cache_prefix (cloud.grounded_generation.test_admission.Tests.test_worst_case_tokens_include_cache_prefix) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3021409Z test_atomic_nonrecurring_cost_cap_survives_recreation_and_concurrency (cloud.grounded_generation.test_claude_fallback.Tests.test_atomic_nonrecurring_cost_cap_survives_recreation_and_concurrency) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3024551Z test_availability_fallback_keeps_both_attempts (cloud.grounded_generation.test_claude_fallback.Tests.test_availability_fallback_keeps_both_attempts) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3027189Z test_context_overflow_has_no_paid_call_or_fallback (cloud.grounded_generation.test_claude_fallback.Tests.test_context_overflow_has_no_paid_call_or_fallback) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3029486Z test_cost_rounds_up_and_rejects_invalid (cloud.grounded_generation.test_claude_fallback.Tests.test_cost_rounds_up_and_rejects_invalid) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3031880Z test_failed_fallback_retains_primary_attempt_count (cloud.grounded_generation.test_claude_fallback.Tests.test_failed_fallback_retains_primary_attempt_count) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3034516Z test_full_request_schema_counted_and_reserved_before_generation (cloud.grounded_generation.test_claude_fallback.Tests.test_full_request_schema_counted_and_reserved_before_generation) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3036857Z test_no_claude_retry_after_500 (cloud.grounded_generation.test_claude_fallback.Tests.test_no_claude_retry_after_500) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3038980Z test_no_secret_no_transport (cloud.grounded_generation.test_claude_fallback.Tests.test_no_secret_no_transport) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3045320Z test_provider_errors_model_finish_thinking_and_json_fail_closed (cloud.grounded_generation.test_claude_fallback.Tests.test_provider_errors_model_finish_thinking_and_json_fail_closed) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3048183Z test_quota_or_cost_rejection_does_not_transmit (cloud.grounded_generation.test_claude_fallback.Tests.test_quota_or_cost_rejection_does_not_transmit) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3050539Z test_required_cost_guard_fail_closed (cloud.grounded_generation.test_claude_fallback.Tests.test_required_cost_guard_fail_closed) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3069005Z test_schema_integrity_quota_and_context_never_select_fallback (cloud.grounded_generation.test_claude_fallback.Tests.test_schema_integrity_quota_and_context_never_select_fallback) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3071650Z test_successful_primary_never_calls_claude (cloud.grounded_generation.test_claude_fallback.Tests.test_successful_primary_never_calls_claude) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.3648265Z test_changed_source_authority_or_version_blocks_saved_technical_response (cloud.grounded_generation.test_open_wiring.OpenWiringTests.test_changed_source_authority_or_version_blocks_saved_technical_response) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.4102042Z test_disconnected_progress_worker_saves_for_idempotent_recovery (cloud.grounded_generation.test_open_wiring.OpenWiringTests.test_disconnected_progress_worker_saves_for_idempotent_recovery) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:53.4567572Z test_fixed_fallback_stays_neutral_with_no_displaying_or_answer_events (cloud.grounded_generation.test_open_wiring.OpenWiringTests.test_fixed_fallback_stays_neutral_with_no_displaying_or_answer_events) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:56.5029187Z test_prompt_progress_private_verifier_and_commit_barriers_then_exact_recovery (cloud.grounded_generation.test_open_wiring.OpenWiringTests.test_prompt_progress_private_verifier_and_commit_barriers_then_exact_recovery) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:56.5701858Z test_retired_or_forged_saved_answer_cannot_recover_or_replay (cloud.grounded_generation.test_open_wiring.OpenWiringTests.test_retired_or_forged_saved_answer_cannot_recover_or_replay) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:56.6184932Z test_verifier_outage_neutral_complete_no_answer_chunks (cloud.grounded_generation.test_open_wiring.OpenWiringTests.test_verifier_outage_neutral_complete_no_answer_chunks) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6151484Z setUpClass (cloud.grounded_generation.test_whole_turn_admission.AdmissionIdentityTests) ... ERROR
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6197697Z test_deadline_binds_capacity_and_blocks_expired_turn_before_reserving (cloud.grounded_generation.test_whole_turn_admission.Tests.test_deadline_binds_capacity_and_blocks_expired_turn_before_reserving) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6209517Z test_delayed_attempts_still_obey_rolling_minute (cloud.grounded_generation.test_whole_turn_admission.Tests.test_delayed_attempts_still_obey_rolling_minute) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6218837Z test_duplicate_and_uncertain_calls_do_not_reopen_reservations (cloud.grounded_generation.test_whole_turn_admission.Tests.test_duplicate_and_uncertain_calls_do_not_reopen_reservations) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6222810Z test_enabled_fallback_reserves_all_cost_before_primary_generation (cloud.grounded_generation.test_whole_turn_admission.Tests.test_enabled_fallback_reserves_all_cost_before_primary_generation) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6229093Z test_future_slots_are_bounded_without_raising_existing_rate (cloud.grounded_generation.test_whole_turn_admission.Tests.test_future_slots_are_bounded_without_raising_existing_rate) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6255828Z test_lifetime_allocation_survives_new_days_and_instances (cloud.grounded_generation.test_whole_turn_admission.Tests.test_lifetime_allocation_survives_new_days_and_instances) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6268464Z test_oversleep_past_deadline_stops_paid_transport_and_retains_reservation (cloud.grounded_generation.test_whole_turn_admission.Tests.test_oversleep_past_deadline_stops_paid_transport_and_retains_reservation) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6277166Z test_oversleep_queue_bound_never_restarts_the_wait_budget (cloud.grounded_generation.test_whole_turn_admission.Tests.test_oversleep_queue_bound_never_restarts_the_wait_budget) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6290510Z test_oversleep_repositions_consumed_permit_before_paid_transmission (cloud.grounded_generation.test_whole_turn_admission.Tests.test_oversleep_repositions_consumed_permit_before_paid_transmission) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6329524Z test_reserves_correction_and_retry_capacity_before_first_call (cloud.grounded_generation.test_whole_turn_admission.Tests.test_reserves_correction_and_retry_capacity_before_first_call) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6337883Z test_slow_commit_rechecks_before_returning_a_stale_permit (cloud.grounded_generation.test_whole_turn_admission.Tests.test_slow_commit_rechecks_before_returning_a_stale_permit) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6347214Z test_store_outage_after_wait_keeps_slot_consumed_without_paid_call (cloud.grounded_generation.test_whole_turn_admission.Tests.test_store_outage_after_wait_keeps_slot_consumed_without_paid_call) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6350055Z test_store_outage_or_entire_turn_limit_blocks_first_generation (cloud.grounded_generation.test_whole_turn_admission.Tests.test_store_outage_or_entire_turn_limit_blocks_first_generation) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6352725Z test_unconfigured_primary_count_uses_native_fallback_counter (cloud.grounded_generation.test_whole_turn_admission.Tests.test_unconfigured_primary_count_uses_native_fallback_counter) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6357801Z test_actual_saved_history_schema_and_reference_chain (cloud.grounded_generation.test_serving_retrieval.Tests.test_actual_saved_history_schema_and_reference_chain) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6364420Z test_dense_rpc_and_bm25_are_concurrent (cloud.grounded_generation.test_serving_retrieval.Tests.test_dense_rpc_and_bm25_are_concurrent) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6377912Z test_followup_retrieval_retains_rider_topic_and_does_not_invent_outcome (cloud.grounded_generation.test_serving_retrieval.Tests.test_followup_retrieval_retains_rider_topic_and_does_not_invent_outcome) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6380635Z test_missing_remote_points_do_not_become_arbitrary_dense_ranks (cloud.grounded_generation.test_serving_retrieval.Tests.test_missing_remote_points_do_not_become_arbitrary_dense_ranks) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6389255Z test_no_local_dense_similarity_and_unknown_remote_ids_rejected (cloud.grounded_generation.test_serving_retrieval.Tests.test_no_local_dense_similarity_and_unknown_remote_ids_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6391913Z test_open_question_recovers_once_and_reranks_without_step_manifest (cloud.grounded_generation.test_serving_retrieval.Tests.test_open_question_recovers_once_and_reranks_without_step_manifest) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6394985Z test_outage_is_system_error (cloud.grounded_generation.test_serving_retrieval.Tests.test_outage_is_system_error) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6402927Z test_rerank_query_bound_preserves_complete_full_query (cloud.grounded_generation.test_serving_retrieval.Tests.test_rerank_query_bound_preserves_complete_full_query) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6405276Z test_rpc_rejects_identity_malformed_and_missing_token (cloud.grounded_generation.test_serving_retrieval.Tests.test_rpc_rejects_identity_malformed_and_missing_token) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6418214Z test_rpc_uses_iam_token_and_exact_source_index_body (cloud.grounded_generation.test_serving_retrieval.Tests.test_rpc_uses_iam_token_and_exact_source_index_body) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6420433Z test_source_review_gap_skips_rerank_and_keeps_partial_anchors (cloud.grounded_generation.test_serving_retrieval.Tests.test_source_review_gap_skips_rerank_and_keeps_partial_anchors) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6428361Z test_unrelated_substantive_question_keeps_own_retrieval_query (cloud.grounded_generation.test_serving_retrieval.Tests.test_unrelated_substantive_question_keeps_own_retrieval_query) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6429767Z test_wrong_source_selection_rejected_before_rpc (cloud.grounded_generation.test_serving_retrieval.Tests.test_wrong_source_selection_rejected_before_rpc) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6450132Z test_admission_is_atomic_and_limits_without_waiting (cloud.arm_a.test_store.StoreTests.test_admission_is_atomic_and_limits_without_waiting) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6464402Z test_cas_owner_scope_expiry_and_immutable_attempts (cloud.arm_a.test_store.StoreTests.test_cas_owner_scope_expiry_and_immutable_attempts) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6485640Z test_concurrent_same_key_admits_once (cloud.arm_a.test_store.StoreTests.test_concurrent_same_key_admits_once) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6529878Z test_operation_replay_conflict_and_expiry (cloud.arm_a.test_store.StoreTests.test_operation_replay_conflict_and_expiry) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6535332Z test_snapshots_use_dedicated_group_and_fixed_24h_expiry (cloud.arm_a.test_store.StoreTests.test_snapshots_use_dedicated_group_and_fixed_24h_expiry) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6556402Z test_dispatch_failure_sanitizes_and_incomplete_config_fails_closed (cloud.arm_a.test_durable_operations.DispatcherTests.test_dispatch_failure_sanitizes_and_incomplete_config_fails_closed) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6559249Z test_task_uses_oidc_named_dedup_and_no_rider_query (cloud.arm_a.test_durable_operations.DispatcherTests.test_task_uses_oidc_named_dedup_and_no_rider_query) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6561870Z test_worker_uses_verified_dedicated_identity_not_tasks_header (cloud.arm_a.test_durable_operations.DispatcherTests.test_worker_uses_verified_dedicated_identity_not_tasks_header) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6586456Z test_abandoned_queue_and_running_state_deadlines_are_terminal (cloud.arm_a.test_durable_operations.DurableOperationTests.test_abandoned_queue_and_running_state_deadlines_are_terminal) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6662493Z test_completed_worker_saved_streamed_and_recovered_hashes_are_equal (cloud.arm_a.test_durable_operations.DurableOperationTests.test_completed_worker_saved_streamed_and_recovered_hashes_are_equal) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6678048Z test_concurrent_turn_and_conflicting_payload_do_not_cancel_owner_operation (cloud.arm_a.test_durable_operations.DurableOperationTests.test_concurrent_turn_and_conflicting_payload_do_not_cancel_owner_operation) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6694602Z test_deadline_expiring_during_startup_stops_worker_before_generation (cloud.arm_a.test_durable_operations.DurableOperationTests.test_deadline_expiring_during_startup_stops_worker_before_generation) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6755377Z test_exact_safety_commit_preserves_private_context_in_all_three_records (cloud.arm_a.test_durable_operations.DurableOperationTests.test_exact_safety_commit_preserves_private_context_in_all_three_records) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.6771008Z test_expired_lease_cannot_commit_an_answer (cloud.arm_a.test_durable_operations.DurableOperationTests.test_expired_lease_cannot_commit_an_answer) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7270427Z test_missing_dispatch_configuration_rejects_before_admission_or_work (cloud.arm_a.test_durable_operations.DurableOperationTests.test_missing_dispatch_configuration_rejects_before_admission_or_work) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7283597Z test_old_terminal_reconciliation_cannot_clear_a_new_session_turn (cloud.arm_a.test_durable_operations.DurableOperationTests.test_old_terminal_reconciliation_cannot_clear_a_new_session_turn) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7334699Z test_post_claim_work_tamper_and_changed_commit_query_fail_atomically (cloud.arm_a.test_durable_operations.DurableOperationTests.test_post_claim_work_tamper_and_changed_commit_query_fail_atomically) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7484028Z test_rebound_safety_proof_cannot_change_original_work_or_session (cloud.arm_a.test_durable_operations.DurableOperationTests.test_rebound_safety_proof_cannot_change_original_work_or_session) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7548196Z test_saved_safety_context_blocks_rebound_recovery_and_duplicate_replay (cloud.arm_a.test_durable_operations.DurableOperationTests.test_saved_safety_context_blocks_rebound_recovery_and_duplicate_replay) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7610384Z test_sse_is_observation_only_and_sequence_reordering_is_rejected (cloud.arm_a.test_durable_operations.DurableOperationTests.test_sse_is_observation_only_and_sequence_reordering_is_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7647603Z test_store_outage_retains_lease_and_redelivery_only_reconciles (cloud.arm_a.test_durable_operations.DurableOperationTests.test_store_outage_retains_lease_and_redelivery_only_reconciles) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7688622Z test_task_claim_is_atomic_and_redelivery_never_calls_provider_twice (cloud.arm_a.test_durable_operations.DurableOperationTests.test_task_claim_is_atomic_and_redelivery_never_calls_provider_twice) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.7748648Z test_transactions_read_all_records_before_first_write (cloud.arm_a.test_durable_operations.DurableOperationTests.test_transactions_read_all_records_before_first_write) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8220435Z test_uncertain_named_dispatch_recovers_outbox_without_paid_replay (cloud.arm_a.test_durable_operations.DurableOperationTests.test_uncertain_named_dispatch_recovers_outbox_without_paid_replay) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8238789Z test_uncertain_provider_lease_expires_terminal_without_replay (cloud.arm_a.test_durable_operations.DurableOperationTests.test_uncertain_provider_lease_expires_terminal_without_replay) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8308771Z test_uncertain_successful_commit_is_preserved_and_never_regenerated (cloud.arm_a.test_durable_operations.DurableOperationTests.test_uncertain_successful_commit_is_preserved_and_never_regenerated) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8323874Z test_work_tamper_or_wrong_worker_runtime_fails_before_provider (cloud.arm_a.test_durable_operations.DurableOperationTests.test_work_tamper_or_wrong_worker_runtime_fails_before_provider) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8388081Z test_worker_admission_uses_exact_stored_deadline_and_resets_scope (cloud.arm_a.test_durable_operations.DurableOperationTests.test_worker_admission_uses_exact_stored_deadline_and_resets_scope) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8412747Z test_exact_deterministic_lock_recovery_retains_every_original_hash (cloud.test_serving_artifacts.ArtifactTests.test_exact_deterministic_lock_recovery_retains_every_original_hash) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8441044Z test_exact_generation_hash_download_and_reuse (cloud.test_serving_artifacts.ArtifactTests.test_exact_generation_hash_download_and_reuse) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8443612Z test_generation_required_and_no_alternate_protocol (cloud.test_serving_artifacts.ArtifactTests.test_generation_required_and_no_alternate_protocol) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8463816Z test_index_manifest_source_version_and_each_file_checked (cloud.test_serving_artifacts.ArtifactTests.test_index_manifest_source_version_and_each_file_checked) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8578471Z test_recovery_rejects_missing_source_altered_existing_lock_or_policy (cloud.test_serving_artifacts.ArtifactTests.test_recovery_rejects_missing_source_altered_existing_lock_or_policy) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8598262Z test_safe_archive_and_exact_bound_inventory (cloud.test_serving_artifacts.ArtifactTests.test_safe_archive_and_exact_bound_inventory) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8716832Z test_startup_recovers_lock_only_after_snapshot_and_manifest_verification (cloud.test_serving_artifacts.ArtifactTests.test_startup_recovers_lock_only_after_snapshot_and_manifest_verification) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8785859Z test_traversal_link_duplicate_and_expansion_rejected (cloud.test_serving_artifacts.ArtifactTests.test_traversal_link_duplicate_and_expansion_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8789289Z test_unbound_generation_prevents_startup_before_network (cloud.test_serving_artifacts.ArtifactTests.test_unbound_generation_prevents_startup_before_network) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8806115Z test_wrong_generation_hash_or_size_never_installed (cloud.test_serving_artifacts.ArtifactTests.test_wrong_generation_hash_or_size_never_installed) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8829532Z test_activation_requires_new_explicit_scope_not_refrozen_hashes (tools.test_serving_release.ReleaseTests.test_activation_requires_new_explicit_scope_not_refrozen_hashes) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8982092Z test_all_historical_snapshots_still_match_immutable_v8 (tools.test_serving_release.ReleaseTests.test_all_historical_snapshots_still_match_immutable_v8) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.8984379Z test_build_context_requires_committed_revision (tools.test_serving_release.ReleaseTests.test_build_context_requires_committed_revision) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9012020Z test_changed_current_runtime_rejected (tools.test_serving_release.ReleaseTests.test_changed_current_runtime_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9014741Z test_hosted_validation_cannot_replace_frozen_generation_with_same_hash (tools.test_serving_release.ReleaseTests.test_hosted_validation_cannot_replace_frozen_generation_with_same_hash) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9036169Z test_manifest_digest_changed_rejected (tools.test_serving_release.ReleaseTests.test_manifest_digest_changed_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9058760Z test_missing_or_extra_binding_rejected_even_with_new_manifest_digest (tools.test_serving_release.ReleaseTests.test_missing_or_extra_binding_rejected_even_with_new_manifest_digest) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9066243Z test_versioned_receipts_never_overwritten (tools.test_serving_release.ReleaseTests.test_versioned_receipts_never_overwritten) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9087633Z test_worktree_matching_but_commit_changed_rejected (tools.test_serving_release.ReleaseTests.test_worktree_matching_but_commit_changed_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9091489Z test_altered_source_commit_manifest_tree_or_generation_rejected (tools.test_bind_serving_images.ImageBindingTests.test_altered_source_commit_manifest_tree_or_generation_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9096582Z test_build_only_rejects_every_altered_build_binding (tools.test_bind_serving_images.ImageBindingTests.test_build_only_rejects_every_altered_build_binding) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9100400Z test_build_only_requires_no_fictional_rollback_and_cannot_claim_promotion (tools.test_bind_serving_images.ImageBindingTests.test_build_only_requires_no_fictional_rollback_and_cannot_claim_promotion) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9103164Z test_exact_pair_bound_without_promotion_claim (tools.test_bind_serving_images.ImageBindingTests.test_exact_pair_bound_without_promotion_claim) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9108605Z test_failed_build_mutable_digest_or_duplicate_digest_rejected (tools.test_bind_serving_images.ImageBindingTests.test_failed_build_mutable_digest_or_duplicate_digest_rejected) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9112866Z test_rollback_requires_both_images_revisions_and_state_schema (tools.test_bind_serving_images.ImageBindingTests.test_rollback_requires_both_images_revisions_and_state_schema) ... ok
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9114313Z 
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9114786Z ======================================================================
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9115801Z ERROR: setUpClass (cloud.grounded_generation.test_whole_turn_admission.AdmissionIdentityTests)
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9116823Z ----------------------------------------------------------------------
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9117921Z Traceback (most recent call last):
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9124999Z   File "/home/runner/work/motomedic-ai/motomedic-ai/cloud/grounded_generation/test_generic_runtime.py", line 44, in setUpClass
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9126543Z     cls.original=ApprovedEvidenceRegistry.load(ROOT,INDEX)
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9127509Z                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9128503Z   File "/home/runner/work/motomedic-ai/motomedic-ai/approved_registry.py", line 36, in load
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9129460Z     manifest = read_json(index / 'manifest.json')
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9130113Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9131064Z   File "/home/runner/work/motomedic-ai/motomedic-ai/evidence_registry.py", line 29, in read_json
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9132101Z     return json.loads(Path(path).read_text(encoding="utf-8-sig"))
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9132853Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9133810Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/pathlib.py", line 1027, in read_text
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9134842Z     with self.open(mode='r', encoding=encoding, errors=errors) as f:
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9135566Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9136442Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/pathlib.py", line 1013, in open
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9137643Z     return io.open(self, mode, buffering, encoding, errors, newline)
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9138414Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9139830Z FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/motomedic-ai/motomedic-ai/build/index-bge-final/manifest.json'
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9140795Z 
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9141191Z ----------------------------------------------------------------------
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9141949Z Ran 120 tests in 4.633s
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9142339Z 
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9142630Z FAILED (errors=1)
+contracts	Test quota, availability fallback, managed-store and saved delivery boundaries	2026-10-11T19:42:57.9595156Z ##[error]Process completed with exit code 1.
+contracts	Post Run actions/checkout@v4	﻿2026-10-11T19:42:57.9741049Z Post job cleanup.
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.0710378Z [command]/usr/bin/git version
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.0770834Z git version 2.55.0
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.0841355Z Temporarily overriding HOME='/home/runner/work/_temp/1761bd8d-3b87-4f61-a703-c6ff58a69fe0' before making global git config changes
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.0855173Z Adding repository directory to the temporary git global config as a safe directory
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.0856625Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/motomedic-ai/motomedic-ai
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.0907479Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.0955711Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.1472401Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.1547266Z http.https://github.com/.extraheader
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.1588432Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.1666638Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.2299072Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+contracts	Post Run actions/checkout@v4	2026-10-11T19:42:58.2408335Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+contracts	Complete job	﻿2026-10-11T19:42:58.3010272Z Cleaning up orphan processes
+contracts	Complete job	2026-10-11T19:42:58.3301514Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

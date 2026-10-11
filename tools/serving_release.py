@@ -27,7 +27,7 @@ HISTORICAL = 'reports/grounded_generation/v8/runtime_freeze.json'
 HISTORICAL_SHA = 'd7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0'
 PRESERVED = 'reports/build/20261012/frozen_v8_runtime'
 MIGRATION = 'reports/build/20261012/v8_preservation.json'
-CURRENT = 'reports/build/20261012/serving_manifest_v9.json'
+CURRENT = 'reports/build/20261012/serving_manifest_v9_1.json'
 INDEX = 'index_a3282c4d98cf54595e4ba168'
 MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
 APPROVAL = 'human_review/agent_release_161/coordinator/release_manifest_v3.json'
@@ -255,7 +255,11 @@ def prepare(root=ROOT, manifest_path=CURRENT, *, committed_revision=None):
     manifest = verify(root, manifest_path, committed_revision=committed_revision)
     ObjectReference(**manifest['index']['snapshot'])
     root = Path(root)
-    output = root / 'build/serving-v9'
+    revision = re.fullmatch(r'serving_manifest_(v9(?:_[1-9][0-9]*)?)', Path(manifest_path).stem)
+    if revision is None:
+        raise ValueError('VERSIONED_V9_SERVING_MANIFEST_NAME_REQUIRED')
+    revision = revision.group(1)
+    output = root / 'build' / ('serving-' + revision)
     if output.exists():
         raise ValueError('NEVER_OVERWRITE_PREPARED_BUILD_CONTEXT')
     blobs = git_blobs(root, manifest['file_sha256'], committed_revision)
@@ -325,7 +329,7 @@ def prepare(root=ROOT, manifest_path=CURRENT, *, committed_revision=None):
             'Independent original-page and hosted private service acceptance',
             'Compatible backend/UI revisions and preserved rollback images',
             'Exact deployment and spending authorization']}
-    dump(root / 'reports/build/20261012/hosted_build_preparation_v9.json', receipt)
+    dump(root / 'reports/build/20261012' / ('hosted_build_preparation_' + revision + '.json'), receipt)
     return receipt
 
 

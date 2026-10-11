@@ -1,0 +1,82 @@
+{
+  "base_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4",
+  "build_executed": false,
+  "contexts": {
+    "backend": {
+      "build_options": {
+        "logging": "CLOUD_LOGGING_ONLY",
+        "substitutionOption": "ALLOW_LOOSE"
+      },
+      "build_steps": [
+        {
+          "args": [
+            "build",
+            "--platform=linux/amd64",
+            "--label",
+            "org.motomedic.serving-manifest-sha256=a5604aaa277b4095fb3aebc95703cfd7c128e1d609cde80965c18d1791b98a84",
+            "--label",
+            "org.motomedic.input-tree-sha256=e3eaa12a2ab06298f108039b84af458fd52d0041890f10b3a304f3d23ad6b1e1",
+            "--label",
+            "org.opencontainers.image.revision=9f24917e30a433cc9c65fef9fa06f06549717244",
+            "-t",
+            "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v9-e3eaa12a2ab0",
+            "."
+          ],
+          "name": "gcr.io/cloud-builders/docker"
+        }
+      ],
+      "build_timeout": "1800s",
+      "cloudbuild_sha256": "d3da72bc7814e14e9b5988e1e3ecfa4f3f0517d03e002cd6187632c9af3fc3a7",
+      "dockerfile_sha256": "5f8df504d4267077d39761b3cd2d4bc72aeca296061dc13ad5563596a4bc9206",
+      "image_tag": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v9-e3eaa12a2ab0",
+      "installed_manifest_sha256": "4538d4fc7ba49aab2788b1fca5d2f4034b3362ac444be9a6d335bba2a7cb57f2",
+      "path": "build/serving-v9/backend",
+      "source_archive": "build/serving-v9/backend.tar.gz",
+      "source_archive_sha256": "3a7c3b53352d4c6287b0b19c95afcd92fadb309ae7717050675c114b7db73432"
+    },
+    "ui": {
+      "build_options": {
+        "logging": "CLOUD_LOGGING_ONLY",
+        "substitutionOption": "ALLOW_LOOSE"
+      },
+      "build_steps": [
+        {
+          "args": [
+            "build",
+            "--platform=linux/amd64",
+            "--label",
+            "org.motomedic.serving-manifest-sha256=a5604aaa277b4095fb3aebc95703cfd7c128e1d609cde80965c18d1791b98a84",
+            "--label",
+            "org.motomedic.input-tree-sha256=e3eaa12a2ab06298f108039b84af458fd52d0041890f10b3a304f3d23ad6b1e1",
+            "--label",
+            "org.opencontainers.image.revision=9f24917e30a433cc9c65fef9fa06f06549717244",
+            "-t",
+            "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v9-e3eaa12a2ab0",
+            "."
+          ],
+          "name": "gcr.io/cloud-builders/docker"
+        }
+      ],
+      "build_timeout": "1800s",
+      "cloudbuild_sha256": "ff96f208db8dcb449371f4462dcc84b1f0b86a947157e597c03f3cd75d5eb22b",
+      "dockerfile_sha256": "e015e83a6bccbe0ed6e68e06c4de2b7882b9993fb621fbbaa9c126a37435ba48",
+      "image_tag": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v9-e3eaa12a2ab0",
+      "installed_manifest_sha256": "7cd9c5e862e5c7e58e948aa98db07f31b30220eba2005a340a8da9c78f8350e9",
+      "path": "build/serving-v9/ui",
+      "source_archive": "build/serving-v9/ui.tar.gz",
+      "source_archive_sha256": "c24674127f0ad22057f97c8e56731574b1573766dfb227546c1a04b41c9781e2"
+    }
+  },
+  "deployment_changed": false,
+  "input_tree_sha256": "e3eaa12a2ab06298f108039b84af458fd52d0041890f10b3a304f3d23ad6b1e1",
+  "provider_calls": 0,
+  "required_future_receipts": [
+    "Cloud Build image digests and exact source/context receipts",
+    "Independent original-page and hosted private service acceptance",
+    "Compatible backend/UI revisions and preserved rollback images",
+    "Exact deployment and spending authorization"
+  ],
+  "schema_version": "serving-v9-hosted-build-preparation-v1",
+  "serving_manifest_sha256": "a5604aaa277b4095fb3aebc95703cfd7c128e1d609cde80965c18d1791b98a84",
+  "source_commit": "9f24917e30a433cc9c65fef9fa06f06549717244"
+}

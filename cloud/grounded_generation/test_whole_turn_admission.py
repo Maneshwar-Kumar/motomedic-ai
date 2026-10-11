@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 from dataclasses import replace
 from evidence_registry import content_hash
+from controller_contracts import DiagnosticSession, Response, ResponseType
 import cloud.grounded_generation.test_verified_qa as verified
 from cloud.grounded_generation.whole_turn_admission import (WholeTurnAdmission, ALLOCATION,
     operation_deadline, MAX_SLEEP_SECONDS)
@@ -186,23 +187,48 @@ class Tests(unittest.TestCase):
 
 
 class AdmissionIdentityTests(unittest.TestCase):
-    setUpClass=classmethod(verified.VerifiedTests.setUpClass.__func__)
-    setUp=verified.VerifiedTests.setUp
-    chunk=verified.VerifiedTests.chunk
-    setup_runtime=verified.VerifiedTests.setup_runtime
+    def setup_runtime(self,p):
+        """Exercise real composition/delivery with synthetic source boundaries only."""
+        config=types.SimpleNamespace(lock=content_hash({'fixture':'synthetic-generation'}),provider_contract=None)
+        config_patch=patch('cloud.grounded_generation.verified_qa.Config',return_value=config)
+        config_patch.start();self.addCleanup(config_patch.stop)
+        eid='synthetic-evidence'
+        registry=types.SimpleNamespace(checksum=content_hash({'fixture':'synthetic-manual'}),
+            index_id='synthetic-index',source={'pdf_pages':1},source_ready=lambda:True,
+            support_uri=lambda:None,evidence={eid:{'provenance':[{'page_no':1}]}})
+        admitted={'authority_lock':content_hash({'fixture':'synthetic-authority'}),
+            'evidence':{eid:{'source_object':{'content':{'text':'Synthetic fixture value is 7 units.'}}}},
+            'required_evidence_ids':[eid],'required_display':[],'gaps':[]}
+        admitted['payload_sha256']=content_hash(admitted)
+        def select(payload,ids):
+            self.assertEqual(ids,{eid});self.assertEqual(payload,admitted)
+            return deepcopy(admitted)
+        authority=types.SimpleNamespace(validate=lambda payload:self.assertEqual(payload,admitted),select=select)
+        composer=verified.Composer(p,authority)
+        controller=types.SimpleNamespace(registry=registry,scope_status=lambda session:'CONFIRMED',
+            response=lambda kind,text,session,**kwargs:Response(ResponseType(kind),text,
+                trace_id='synthetic-trace',session_status=session.status,**kwargs))
+        session=DiagnosticSession('a'*32,'synthetic-manual',registry.checksum,
+            'synthetic-variant','synthetic-edition',(),'synthetic-source-lock',generation_lock=config.lock)
+        def run(current,query,*,operation_id):
+            response=composer.compose_open(controller,current,admitted,query,{'operation_id':operation_id})
+            view,choices=verified.saved_view(registry,current,response,authority,composer.last_admitted,operation_id)
+            return current,view,choices
+        return types.SimpleNamespace(answer=run),p,composer,session
 
     def test_same_rider_key_in_distinct_sessions_has_distinct_admission_and_same_proof_identity(self):
-        identities=[];p=verified.Provider()
+        identities=[];p=verified.Provider([verified.draft('synthetic-evidence','Synthetic fixture value is 7 units.')])
         p.begin_turn=lambda identity:identities.append(identity) or {'synthetic':True}
         q,p,composer,session=self.setup_runtime(p)
         for session_id in ('a'*32,'b'*32):
             current=replace(session,session_id=session_id)
-            _,view,_=q.answer(current,'How wide is the bore?',operation_id='c'*32)
+            _,view,_=q.answer(current,'What is the synthetic fixture value?',operation_id='c'*32)
             self.assertEqual(view['response']['type'],'SUPPORTED')
             self.assertEqual(composer.last_admitted['binding']['operation_id'],'c'*32)
             self.assertEqual(view['verified_delivery']['operation_id'],'c'*32)
         self.assertEqual(identities,[content_hash({'session_id':sid,'operation_id':'c'*32}) for sid in ('a'*32,'b'*32)])
         self.assertNotEqual(*identities)
+        self.assertEqual([call[0] for call in p.calls],[verified.DRAFT_SCHEMA,verified.VERIFY_SCHEMA]*2)
 
 
 if __name__=='__main__':unittest.main()
