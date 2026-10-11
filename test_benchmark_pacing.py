@@ -45,7 +45,7 @@ class Scheduling(unittest.TestCase):
                          'INPUT_RESERVATION_EXCEEDS_EXPERIMENT_LIMIT')
         self.assertFalse(allocation.admission_failures[0]['external_request_sent'])
 
-    def test_two_global_retries_leave_sixteen_base_attempts(self):
+    def test_two_global_retries_leave_thirty_two_base_attempts(self):
         class Provider:
             last_telemetry = {'http_status': 500}
             def complete(self, *args): raise ProviderFailure('PROVIDER_SERVICE_ERROR')
@@ -53,16 +53,16 @@ class Scheduling(unittest.TestCase):
         allocation = Allocation(paced=True)
         allocation.admission = Admission(clock.clock, clock.sleep)
         with patch('architecture_benchmark.time.sleep', clock.sleep):
-            for _ in range(16):
+            for _ in range(32):
                 with self.assertRaises(ProviderFailure):
                     allocation.invoke(Provider(), WRITE_POLICY, {}, {})
-        self.assertEqual(allocation.calls, 18)
+        self.assertEqual(allocation.calls, 34)
         self.assertEqual(allocation.retry_used, 2)
         self.assertEqual(sum(r['attempt_index'] == 1 for r in allocation.records), 2)
         self.assertTrue(all('admission_wait_seconds' in r for r in allocation.records))
         with self.assertRaises(ProviderFailure):
             allocation.invoke(Provider(), WRITE_POLICY, {}, {})
-        self.assertEqual(allocation.calls, 18)
+        self.assertEqual(allocation.calls, 34)
 
     def test_stream_or_protocol_failures_never_retry(self):
         class Provider:

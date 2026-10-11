@@ -34,7 +34,8 @@ from session_store import SQLiteSessionStore
 
 MODEL = "gemma-4-26b-a4b-it"
 VERSION = "architecture-comparison-v4"
-MAX_CALLS = 18
+MAX_CALLS = 34
+PACED_RUN_POLICY = {**PACING_POLICY, "maximum_requests_this_run": MAX_CALLS}
 SAMPLES = (
     ("GEN003", "Cars in my mirrors look farther away than they really are. Is that described?"),
     ("EXP003", "I can see that the turn switch has returned to centre. How do I cancel the signal?"),
@@ -220,10 +221,13 @@ class Allocation:
                 with self.lock:
                     self.admission_failures.append({"kind": kind, "attempt_index": attempt,
                         "external_request_sent": False, "failure_reason": reason,
+                        "admission_started_at_seconds": admission_started - (self.sample_started or admission_started),
+                        "admission_finished_at_seconds": time.perf_counter() - (self.sample_started or admission_started),
                         "admission_wait_seconds": time.perf_counter() - admission_started})
                 raise
             begin = time.perf_counter()
             record = self.reserve(kind, attempt, admission, backoff, begin)
+            record["admission_started_at_seconds"] = admission_started - (self.sample_started or admission_started)
             try:
                 result = provider.complete(policy, payload, schema)
                 record.update(transport=result.telemetry, output_diagnostics=output_diagnostics(result.output),
@@ -254,7 +258,10 @@ class Allocation:
                               elapsed_seconds=finish - begin)
                 with self.lock:
                     self.records.append(record)
+            backoff_started = time.perf_counter()
             time.sleep(backoff)
+            record.update(retry_backoff_started_at_seconds=backoff_started-(self.sample_started or backoff_started),
+                          retry_backoff_finished_at_seconds=time.perf_counter()-(self.sample_started or backoff_started))
 
     def reserve(self, kind, attempt, admission, backoff, begin):
         with self.lock:
@@ -274,8 +281,19 @@ class Allocation:
 
 class BoundedProvider:
     def __init__(self, allocation, config, transport=None):
+        from gemini_transport import stream_request as default_transport, TransportFailure
+        underlying = transport or default_transport
+        def timed_transport(*args):
+            begin = time.perf_counter() - allocation.sample_started if allocation.sample_started is not None else None
+            try:
+                chunks, trace = underlying(*args)
+                trace["provider_transport_started_at_seconds"] = begin
+                return chunks, trace
+            except TransportFailure as exc:
+                exc.telemetry["provider_transport_started_at_seconds"] = begin
+                raise
         self.provider = GeminiJSONProvider(MODEL, config, enabled=True, authorized_calls=MAX_CALLS,
-                                           transport=transport)
+                                           transport=timed_transport)
         self.allocation = allocation
 
     def complete(self, policy, payload, schema):
@@ -284,6 +302,7 @@ class BoundedProvider:
 
 def run_sample(registry, retriever, config, allocation, store, rid, query, architecture, *,
                delivery_stream=None, semantic_cache=None, cache_encoder=None, cache_bypass=True):
+    request_started = time.perf_counter()
     capture = Capture(config)
     controller = ReviewedController(registry, retriever, response_generator=capture)
     controller.audience = "end_user"
@@ -299,6 +318,8 @@ def run_sample(registry, retriever, config, allocation, store, rid, query, archi
     admission_failure_start = len(allocation.admission_failures)
     allocation.sample_started = started
     row = {"record_id": rid, "architecture": architecture, "route": "SYSTEM_ERROR",
+           "server_request_setup_seconds": started - request_started,
+           "answer_turn_started_monotonic_seconds": started,
            "first_verified_output_seconds": None, "complete_response_seconds": None,
            "generation_seconds": None, "verification_wall_seconds": 0,
            "session_and_delivery_commit_seconds": 0, "delivered_blocks": [], "verification_calls": [],
@@ -606,12 +627,17 @@ def evaluate(index, output):
             raise ValueError("Reviewed benchmark code changed")
     started = time.perf_counter()
     registry = ApprovedEvidenceRegistry.load(root, index)
+    registry_loaded = time.perf_counter()
     # Warm query runtime and pinned reranker at worker startup. Startup is separately measured.
-    retriever = Retriever(index, rerank=True)
+    retriever = Retriever(index, rerank=False)
+    embedding_loaded = time.perf_counter()
+    retriever._load_reranker()
+    reranker_loaded = time.perf_counter()
     config = replace(gemma_runtime_config(MODEL), max_output_tokens=400)
     # Execute first query and reranker inference during recorded worker startup.
     # This is explicit warmup, not cached answer/retrieval results.
     warmups = []
+    controls = []
     for rid,query in SAMPLES:
         warm_capture = Capture(config)
         warm_controller = ReviewedController(registry,retriever,response_generator=warm_capture)
@@ -626,11 +652,38 @@ def evaluate(index, output):
             raise ValueError("Warmup evidence/applicability gate failed")
         warmups.append({"record_id":rid,"seconds":time.perf_counter()-warm_started,
                         "retrieval_trace":warm_controller.last_retrieval_trace,"provider_calls":0})
+        # Paired source-gated query-only controls on the same warmed worker.
+        # One pair per case is descriptive evidence, not a tail-latency study.
+        def sequential_first_stage(query):
+            dense,dt=retriever._dense_scores(query)
+            sparse,st=retriever._sparse_scores(query)
+            return dense,sparse,dt,st
+        from unittest.mock import patch
+        control_rows=[]
+        order=('SEQUENTIAL','CONCURRENT') if rid!='EXP003' else ('CONCURRENT','SEQUENTIAL')
+        for mode in order:
+            control_capture=Capture(config)
+            control_controller=ReviewedController(registry,retriever,response_generator=control_capture)
+            control_controller.audience='end_user'
+            control_start=time.perf_counter()
+            if mode=='SEQUENTIAL':
+                with patch.object(retriever,'_first_stage',sequential_first_stage):
+                    control_controller.next(warm_session,query)
+            else: control_controller.next(warm_session,query)
+            elapsed=time.perf_counter()-control_start
+            if control_capture.allowed!=warm_capture.allowed:
+                raise ValueError('Retrieval control changed allowed envelope')
+            control_controller.last_retrieval_trace['first_stage_execution']=(
+                'SEQUENTIAL_DENSE_THEN_BM25_CONTROL_V1' if mode=='SEQUENTIAL' else 'CONCURRENT_DENSE_AND_BM25_V1')
+            control_rows.append({'mode':mode,'wall_seconds':elapsed,
+                'retrieval_trace':control_controller.last_retrieval_trace,'provider_calls':0})
+        controls.append({'record_id':rid,'paired_controls':control_rows,'evidence_envelope_identical':True})
+    warmup_finished = time.perf_counter()
     allocation = Allocation(paced=True)
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    store = SQLiteSessionStore(output.with_suffix(".sessions.sqlite"))
-    store.db.execute("CREATE TABLE IF NOT EXISTS benchmark_deliveries (session_id TEXT, block INTEGER, session_version INTEGER, content_sha256 TEXT, evidence_ids TEXT, PRIMARY KEY(session_id,block))")
+    # Each HTTP producer thread owns its own SQLite connection, as required.
+    store_path = output.with_suffix(".sessions.sqlite")
     startup = time.perf_counter() - started
     report = {"schema_version": VERSION, "execution": "REAL_GEMMA26B_HOSTED_BUILD_ENGINEERING_BENCHMARK",
               "model": MODEL, "thinking": "minimal", "automatic_retry": "AT_MOST_ONE_NONSTREAM_TRANSIENT_RETRY_TWO_TOTAL",
@@ -643,9 +696,20 @@ def evaluate(index, output):
               "review_sha256": digest(review_path),
               "approval_sha256": digest(approval_path), "preflight": preflight,
               "startup_seconds_excluded_from_turns": startup, "rows": [], "retrieval_warmups": warmups,
-              "prior_runs_retained": ["38078598648", "38079224669"], "prior_run_failures_not_removed": True,
-              "pacing_policy": PACING_POLICY,
-              "comparison_protocol_changed": "Shared request/input reservation admission; absolute starts/waits; bounded nonstream transient retries; explicit per-claim allowed indices",
+              "startup_measurement_boundary":"FRESH_HOSTED_WORKER_INITIALIZATION_NOT_DEPLOYED_CLOUD_RUN_COLD_REQUEST",
+              "retrieval_control_seconds_excluded_from_readiness":sum(c['wall_seconds'] for x in controls for c in x['paired_controls']),
+              "cache_repeat_rows": [], "retrieval_paired_controls": controls,
+              "startup_stages_seconds": {"registry_source_validation": registry_loaded-started,
+                  "dense_model_and_index_load":embedding_loaded-registry_loaded,
+                  "reranker_load":reranker_loaded-embedding_loaded,
+                  "query_warmup_and_retrieval_controls":warmup_finished-reranker_loaded,
+                  "allocation_and_output_path_setup":startup-(warmup_finished-started)},
+              "prior_runs_retained": ["38078598648", "38079224669", "38080802638"], "prior_run_failures_not_removed": True,
+              "pacing_policy": PACED_RUN_POLICY,
+              "comparison_protocol_changed": "Concurrent retrieval, empty-cache initial and immediate same-scope repeat, actual loopback SSE delivery and token/wait intervals",
+              "initial_cells":9, "immediate_repeat_cells":9, "maximum_baseline_provider_calls":32,
+              "cache_settings":{"ttl_seconds":300,"max_entries":64,"cosine_threshold":0.95,
+                  "fresh_retrieval_and_b_c_verification":True,"raw_query_persisted":False},
               "browser_latency_measured": False, "hosted_durable_storage_measured": False,
               "storage": "SQLite engineering harness on hosted build worker",
               "intent_selection": "EXPLICIT_PRESELECTED_REVIEWED_INTENTS_NOT_FREE_TEXT_INTENT_BENCHMARK",
@@ -664,18 +728,56 @@ def evaluate(index, output):
         for sample_index, (rid, query) in enumerate(SAMPLES):
             order = architectures[sample_index:] + architectures[:sample_index]
             for architecture in order:
-                row = run_sample(registry, retriever, config, allocation, store, rid, query, architecture)
-                row["sample_order"] = len(report["rows"]) + 1
-                report["rows"].append(row)
-                report["external_provider_attempts"] = allocation.calls
-                output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-                print(json.dumps({"sample": rid, "architecture": architecture, "route": row["route"],
-                                  "first_verified": row["first_verified_output_seconds"],
-                                  "complete": row["complete_response_seconds"], "calls": allocation.calls}), flush=True)
+                from architecture_measurement import measured_sse_turn
+                from semantic_candidate_cache import SemanticCandidateCache
+                cache = SemanticCandidateCache(embedding_revision=retriever.manifest['embedding']['revision'])
+                def produce(stream):
+                    store=SQLiteSessionStore(store_path)
+                    store.db.execute("CREATE TABLE IF NOT EXISTS benchmark_deliveries (session_id TEXT, block INTEGER, session_version INTEGER, content_sha256 TEXT, evidence_ids TEXT, PRIMARY KEY(session_id,block))")
+                    producer_started=time.perf_counter()
+                    producer_call_start=allocation.calls
+                    try:
+                        return run_sample(registry,retriever,config,allocation,store,rid,query,architecture,
+                            delivery_stream=stream,semantic_cache=cache,cache_bypass=False,
+                            cache_encoder=lambda q:retriever.model.encode(q,normalize_embeddings=True))
+                    except Exception as exc:
+                        # Setup/receiver-boundary failures also retain spent attempts.
+                        row={'record_id':rid,'architecture':architecture,'route':'SYSTEM_ERROR',
+                             'complete_response_seconds':None,'first_verified_output_seconds':None,
+                             'server_request_setup_seconds':0.,'failed_attempt_seconds':time.perf_counter()-producer_started,
+                             'provider_attempts':deepcopy([c for c in allocation.records if c['call']>producer_call_start]),
+                             'failure_class':type(exc).__name__,'failure_reason':'ENGINE_SETUP_FAILED',
+                             'semantic_cache':'NOT_REACHED'}
+                        if not stream.closed: stream.finish(row)
+                        return row
+                    finally: store.close()
+                for phase in ('INITIAL_EMPTY_CACHE','IMMEDIATE_REPEAT'):
+                    phase_call_start=allocation.calls
+                    phase_admission_start=len(allocation.admission_failures)
+                    row=measured_sse_turn(produce)
+                    row.setdefault('record_id',rid)
+                    row.setdefault('architecture',architecture)
+                    row.setdefault('semantic_cache','NOT_REACHED')
+                    row.setdefault('first_verified_output_seconds',None)
+                    row.setdefault('cache_lookup_seconds',None)
+                    row.setdefault('stream_event_count',0)
+                    if not row.get('provider_attempts') and allocation.calls>phase_call_start:
+                        row['provider_attempts']=deepcopy([c for c in allocation.records if c['call']>phase_call_start])
+                        from architecture_measurement import summarize
+                        row['timing_measurement'].update(summarize(row))
+                    row.setdefault('admission_failures',deepcopy(allocation.admission_failures[phase_admission_start:]))
+                    row['phase']=phase
+                    row['sample_order']=len(report['rows'])+len(report['cache_repeat_rows'])+1
+                    report['rows' if phase=='INITIAL_EMPTY_CACHE' else 'cache_repeat_rows'].append(row)
+                    report['external_provider_attempts']=allocation.calls
+                    output.write_text(json.dumps(report,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+                    print(json.dumps({'sample':rid,'architecture':architecture,'phase':phase,'route':row['route'],
+                        'cache':row['semantic_cache'],'ttfo_client':row['loopback_client_delivery']['first_verified_output_seconds'],
+                        'complete_client':row['loopback_client_delivery']['complete_response_seconds'],'calls':allocation.calls}),flush=True)
     finally:
-        store.close()
         report["external_provider_attempts"] = allocation.calls
         report["successful_supported_responses"] = sum(r["route"] == "SUPPORTED" for r in report["rows"])
+        report['successful_repeat_responses']=sum(r['route']=='SUPPORTED' for r in report['cache_repeat_rows'])
         report["finished_at_utc"] = datetime.now(timezone.utc).isoformat()
         output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     return report

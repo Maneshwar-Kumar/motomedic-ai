@@ -14,7 +14,7 @@ jobs:
   benchmark:
     if: github.run_attempt == 1 && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[run-architecture-benchmark]'))
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       OMP_NUM_THREADS: '2'
       TOKENIZERS_PARALLELISM: 'false'
@@ -36,12 +36,12 @@ jobs:
           github-token: ${{ github.token }}
           path: build/index
       - name: Verify experimental contracts before provider access
-        run: python -m unittest -v test_architecture_benchmark test_benchmark_pacing test_gemini_provider test_gemini_transport_bytes
-      - name: Nine bounded grounded architecture samples, shared pacing and at most two retries
+        run: python -m unittest -v test_architecture_measurement test_architecture_features test_architecture_benchmark test_conditional_retrieval test_benchmark_pacing test_gemini_provider test_gemini_transport_bytes
+      - name: Nine initial and nine repeat cells, bounded34requests including at most two retries
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
           MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
-          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/architecture_budget_preflight_v3.json
+          MOTOMEDIC_BUDGET_PREFLIGHT_FILE: reports/architecture_budget_preflight_v4.json
         run: python architecture_benchmark.py --index build/index --output build/architecture_comparison.json
       - uses: actions/upload-artifact@v4
         if: always()
