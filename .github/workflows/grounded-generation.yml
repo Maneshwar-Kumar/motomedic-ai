@@ -11,12 +11,12 @@ jobs:
   validate:
     if: github.run_attempt == 1 && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[run-grounded-generation]'))
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       OMP_NUM_THREADS: '2'
       TOKENIZERS_PARALLELISM: 'false'
       MOTOMEDIC_TEST_INDEX: build/index
-      MOTOMEDIC_EVAL_MANIFEST: reports/grounded_generation/v4/runtime_manifest.json
+      MOTOMEDIC_EVAL_MANIFEST: reports/grounded_generation/v5/runtime_manifest.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,15 +33,17 @@ jobs:
           github-token: ${{ github.token }}
           path: build/index
       - name: Software boundaries before provider access
-        run: python -m unittest -v cloud.grounded_generation.test_provider cloud.grounded_generation.test_runtime cloud.grounded_generation.test_feedback cloud.grounded_generation.test_context cloud.grounded_generation.test_admission cloud.grounded_generation.test_scope cloud.grounded_generation.test_source_context cloud.grounded_generation.test_fuse_refusal cloud.arm_a.test_composer cloud.arm_a.test_api cloud.arm_a.test_question_wiring cloud.arm_a.test_store test_approved_integration
+        run: python -m unittest -v cloud.grounded_generation.test_provider cloud.grounded_generation.test_runtime cloud.grounded_generation.test_feedback cloud.grounded_generation.test_context cloud.grounded_generation.test_admission cloud.grounded_generation.test_scope cloud.grounded_generation.test_source_context cloud.grounded_generation.test_fuse_refusal cloud.grounded_generation.test_source_authority cloud.grounded_generation.test_generic_runtime cloud.grounded_generation.test_transitions cloud.arm_a.test_composer cloud.arm_a.test_api cloud.arm_a.test_question_wiring cloud.arm_a.test_store test_approved_integration
       - name: Frozen held-out real retrieval and Gemma generation
         env:
           MOTOMEDIC_GEMINI_API_KEY: ${{ secrets.MOTOMEDIC_GEMINI_API_KEY }}
           MOTOMEDIC_GROUNDED_LIVE_AUTHORIZED: '1'
-        run: python tools/validate_grounded_generation.py
+        run: python tools/validate_generic_generation.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: grounded-generation-${{ github.run_id }}
-          path: build/grounded-generation-result.json
+          path: |
+            build/generic-generation-result.json
+            build/generic-generation-report.md
           retention-days: 14
