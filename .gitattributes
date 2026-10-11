@@ -1,29 +1,4 @@
-# Exact-version approvals bind raw bytes, including source metadata line endings.
-human_review/** -text
-*.py -text
-.github/workflows/verify-controller.yml -text
-.github/workflows/a-semantic-audit.yml -text
-reports/approved* -text
-reports/grounded* -text
-source_manifest.json -text
-NEXT_CHAT_HANDOFF.txt -text
-NEXT_CHAT_HANDOFF_RECEIPT.json -text
+# Immutable source/runtime bindings include exact bytes on every platform.
+# CRLF is a valid existing line ending; still reject actual trailing whitespace.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.pdf binary
-*.docx binary
-
-reports/** -text
-experiments/claude_full_manual/** -text
-outdated_design_choices/** -text
-
-.github/workflows/ab30-benchmark.yml -text
-ab30_benchmark.py -text
-test_ab30_benchmark.py -text
-reports/ab30_v1_cases.json -text
-reports/ab30_v1_protocol.json -text
-cloud/budget_guard/policy.py -text
-
-.gitattributes -text
-cloud/arm_a/** -text
-
-# Preserve the frozen deployment snapshot on every checkout.
-MotoMedic_ArmA_Production_20261011/** -text

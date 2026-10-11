@@ -1,0 +1,44 @@
+{
+  "synthetic_local_provider_free_tests": {
+    "tests": 80,
+    "failed": 0,
+    "provider_calls": 0,
+    "passed": true
+  },
+  "exact_approval_consumer_tests": {
+    "tests": 17,
+    "failed": 0,
+    "provider_calls": 0,
+    "passed": true
+  },
+  "source_approval_consumer": {
+    "records": 161,
+    "outputs": 187,
+    "bindings_verified": true,
+    "manual_verified": true
+  },
+  "navigation_integrity": {
+    "schema_version": "repository-structure-audit-v2",
+    "ok": true,
+    "unexpected_root_files": [],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "missing_critical_source_files": [],
+    "integrity_errors": [],
+    "local_links_checked": 84,
+    "root_file_count": 48,
+    "runtime_freeze_files_verified": 64,
+    "approved_output_files_verified": 187,
+    "note": "Canonical navigation and exact retained bytes only; historical links are not traversed. Not factual or deployment acceptance."
+  },
+  "additional_flask_dependent_local_tests": {
+    "passed": false,
+    "reason": "Installed dependency directories are filesystem-inaccessible even after escalation; new provider-free hosted CI installs Flask in its own environment.",
+    "index_composer_tests_attempted": 21,
+    "do_not_claim_pass": true
+  },
+  "routine_ci_expected_tests": 103,
+  "routine_ci_uses_providers": false,
+  "real_provider_calls_by_reset": 0,
+  "runtime_release_acceptance": false
+}

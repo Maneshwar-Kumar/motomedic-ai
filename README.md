@@ -1,41 +1,46 @@
 # MotoMedic AI
 
-A motorcycle troubleshooting assistant that offers a concise next step only when the selected Royal Enfield owner's manual supports it.
+A manual-grounded question-answering assistant for the Royal Enfield New Himalayan 450. The selected source is the supplied **owner's manual**. The runtime privately drafts from retrieved evidence, separately verifies the finalized answer, saves it, then streams that exact verified text.
 
-**[Start here: product, code, source and results](docs/START_HERE.md)**
+## Read these four documents
 
-## Find your way
-
-| What you need | Where to go |
+| Document | Purpose |
 | --- | --- |
-| Product design and build checklist | [Planning](docs/planning/README.md), [current TODO](TODO.md) |
-| System architecture and code map | [Architecture](docs/architecture/README.md) |
-| Rider interface | [Rider UI](rider_ui/README.md) |
-| Manual, applicability and permissions | [Source](docs/source/README.md) |
-| Cases, approvals and evaluation | [Evaluation](docs/evaluation/README.md) |
-| Hosted resources and spending controls | [Cloud](cloud/README.md) |
-| Benchmark results and screenshots | [Reports](reports/README.md) |
-| Active chats and continuation handoffs | [Current work](docs/CURRENT_WORK.md) |
-| Older decisions and retired alternatives | [History](docs/history/README.md) |
+| [PRD](docs/PRD.md) | Product scope, rider behavior and acceptance criteria. |
+| [TRD](docs/TRD.md) | Component, evidence, retrieval, provider and delivery contracts. |
+| [Architecture diagram](docs/ARCHITECTURE.md) | Versioned ingestion and the online answer pipeline. |
+| [TODO](TODO.md) | Ordered delivery steps, paired concurrent work and completion evidence. |
 
-## Current design and release status
+These Markdown documents are the current design baseline. Superseded Word drafts, experiments and handoffs remain in Git history.
 
-The current owner decision is [open manual Q&A through draft, verify, stream](docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md). It supersedes the earlier exact-answer and no-online-verifier methods. Versioned Docling/BGE M3 + BM25 retrieval feeds a private draft and separate semantic verification before answer delivery. See the [integration and validation record](reports/grounded_generation/draft_verify_stream_v1/README.md) for implementation status; the decision does not establish public release acceptance. The retired full-manual Claude design stays archived.
+## What is present
 
-The [v8 pipeline and UI wiring report](reports/grounded_generation/v8/REPORT.md) records passing software checks and the separately authorized, backend-only Haiku fallback. Real Haiku validation failed answerable/partial coverage; live activation remains pending. The implementation is saved on `codex/reviewed-evidence-controller` without a new deployment or GCP billing change.
+| Area | Location |
+| --- | --- |
+| Hosted ingestion and hybrid retrieval | online_ingest.py, online_retrieve.py, retrieval_policy.py |
+| Drafting, separate verification and delivery | cloud/grounded_generation/ |
+| API, durable state and compatibility dependencies | cloud/arm_a/ and retained root modules |
+| Rider interface | [rider_ui/README.md](rider_ui/README.md) |
+| Qdrant, infrastructure and billing guard | [cloud/README.md](cloud/README.md) |
+| Manual identity and display restrictions | [source_manifest.json](source_manifest.json) |
+| Exact source approval authority | [human_review/agent_release_161/README.md](human_review/agent_release_161/README.md) |
+| Retained evidence and cleanup receipt | [reports/README.md](reports/README.md) |
 
-The hosted candidate index is `index_a3282c4d98cf54595e4ba168`. Ingestion runs once per source/pipeline/model version; rider requests reuse its evidence and vectors. The exact 161-case v3 approval covers defined source-content and initial-response scopes, including selected-manual Himalayan + BS6 applicability. It does not establish blanket adaptive, vision or public deployment acceptance. See the [approval scope](human_review/agent_release_161/README.md).
+Some compatibility modules implement earlier methods because current imports and exact approval bindings still need them. Their presence does not select those methods for ordinary Q&A. Future changes follow the fresh TRD; remove a dependency only after replacing and verifying its consumers.
 
-The rider UI is under active development; live browser-to-hosted acceptance remains a release gate. End-user PDF, excerpts and figure delivery are prohibited by the current display policy. This is an advisory prototype, not proof of a verified repair.
+## Current acceptance
 
-## Working on the project
+The candidate index exists: index_a3282c4d98cf54595e4ba168, with 532 BGE M3 search chunks, 277 parents and BM25. The current answer runtime still bypasses Qdrant for dense search, misses conditional retrieval scheduling for ordinary Q&A, can exceed input limits, and needs durable worker completion.
 
-Use [CONTRIBUTING.md](CONTRIBUTING.md) for file placement and concurrent work, and [AGENTS.md](AGENTS.md) for detailed project contracts. Root runtime/test files and current Word documents retain compatibility paths; the [file guide](docs/ROOT_FILE_GUIDE.md) groups them by purpose.
+The last real Haiku validation released **zero technical answers** and answered **0 of 4** clearly answerable or partially answerable turns. Passing software checks establish boundaries, not answer coverage or deployed release acceptance. [Current status](docs/STATUS.md) and the [v8 report](reports/grounded_generation/v8/REPORT.md) explain the remaining work.
 
-Run the read-only organization check from the repository root:
+Claude is an optional retrieved-evidence availability fallback, disabled by default. The full-manual Claude alternative is retired. Prompt caching has no demonstrated support for the current exact primary configuration. Photo and voice follow text acceptance.
 
-```bash
+## Working checks
+
+```sh
 python tools/check_repository_structure.py
+python human_review/agent_release_161/approval_consumer.py
 ```
 
-Use the relevant existing private GitHub verification workflow for implementation changes. Builds and provider runs remain hosted; credentials stay server-side. Organization work does not authorize deployment or billing changes. See the [organization decision and references](docs/REPOSITORY_ORGANIZATION.md).
+[CONTRIBUTING.md](CONTRIBUTING.md) explains placement and checks. [AGENTS.md](AGENTS.md) records the working constraints. Builds, ingestion and real-provider evaluation run in the hosted environment. Existing source, access, provider, budget and deployment permissions continue to apply.

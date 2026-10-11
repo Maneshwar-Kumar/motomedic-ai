@@ -1,0 +1,52 @@
+name: Provider-free contract checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contracts-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check navigation, manual, approvals and all frozen runtime bytes
+        run: python tools/check_repository_structure.py
+      - name: Verify exact scoped source approvals
+        run: python human_review/agent_release_161/approval_consumer.py
+      - name: Test approval consumption without an index or provider
+        run: python -m unittest discover -s human_review/agent_release_161 -p 'test_approval_consumer.py' -v
+      - name: Install only the HTTP framework used by software doubles
+        run: python -m pip install Flask==3.1.2
+      - name: Test quota, availability fallback, managed-store and saved delivery boundaries
+        run: >-
+          python -m unittest -v
+          cloud.grounded_generation.test_provider
+          cloud.grounded_generation.test_admission
+          cloud.grounded_generation.test_claude_fallback
+          cloud.grounded_generation.test_open_wiring
+          cloud.arm_a.test_store
+          rider_ui.tests.test_client
+          rider_ui.tests.test_verified_sse
+          rider_ui.tests.test_progress_stream
+      - name: Record scope of these checks
+        run: |
+          echo 'These checks use synthetic provider/store/HTTP doubles and do not request provider secrets or cloud credentials.'
+          echo 'Index-dependent composer tests, real-provider quality, deployed Qdrant/Firestore, live browser recovery and release acceptance remain separate gates.'

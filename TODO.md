@@ -1,45 +1,85 @@
-# MotoMedic pending work
+# MotoMedic execution plan
 
-Updated 11 October 2026. This register contains only unfinished UI integration, guardrails and photo handling. Completed work, owner decisions, tests and continuation instructions are preserved in [the UI chat outcome](rider_ui/CHAT_OUTCOME_20261011.md). TRD v0.5 governs Option A/B and safe A streaming; historical Word status tables are the dated design record.
+Fresh baseline: 11 October 2026. Follow [PRD](docs/PRD.md), [TRD](docs/TRD.md) and the [architecture diagram](docs/ARCHITECTURE.md). Check an item only after recording its result. Parallel work is explicitly paired as `a` and `b`; each pair joins before the next numbered step.
 
-Latest owner correction: [open question answering](docs/architecture/OPEN_QUESTION_SCOPE_20261011.md). Accept arbitrary rider questions; answer from supported manual evidence or abstain. No mandatory symptom routing or diagnostic flow. The deployed 30-case allowlist is a benchmark endpoint, not product scope. This correction supersedes symptom/intent-routing and mandatory action-feedback requirements below; preserve their historical implementation evidence.
+The first two hours are a repository and design reset. The owner clarified the deliverables as fresh PRD, TRD, architecture diagram and step sequence. Runtime replacement and live answer acceptance are subsequent gates.
 
-Completed private wiring evidence: [runbook](docs/architecture/UI_WIRING_20261011.md), [exact context review](reports/arm_a/ui_wiring_v1/context_review.json), [hosted question acceptance](reports/arm_a/ui_wiring_v1/live_question_acceptance.json). Hosted builds passed 117 backend/source/client checks and 44 UI checks. Question coverage remains conservative; arbitrary input does not imply unrestricted semantic interpretation.
+## First two hours
 
-Latest validation: [preserved 161-case baseline](reports/arm_a/golden161_validation_v1/README.md) and [approved policy-caveat candidate](reports/arm_a/policy_caveats_v2/README.md). The baseline passed 61/92 source-backed initial questions; 69 trusted policy/failure fixtures were evaluated as raw text rather than injected events. The candidate passed all 14 targeted caveat failures and 125 software checks, with seven-second evaluation gaps. Technical evidence gates remain intact. Seventeen other baseline source failures remain open. The candidate is validated but not yet deployed; its exact inputs are preserved in reports/arm_a/policy_caveats_v2/frozen_context/.
+| Step | Time from start | Work | Depends on | Exit evidence |
+| --- | --- | --- | --- | --- |
+| 1 | 0–20 min | Inventory local changes, remote/default branches, dependencies, exact source approvals and other active work. Save recoverable dirty/untracked work and branch tips. | None | Snapshot path/hash, inventory and cleanup retention rules. |
+| 2a | 20–55 min | Write fresh PRD: manual-only open Q&A, useful complete/partial answers, separate verification, fallback/error messages and measurable acceptance. | 1 | Reviewable `docs/PRD.md` separating evidence from requirements. |
+| 2b | 20–55 min | Write fresh TRD: versions, Qdrant/BM25 concurrency, reranking, complete evidence, provider capacity, verification and durable streaming. | 1; runs with 2a | Reviewable `docs/TRD.md` with data/API/failure contracts. |
+| 3a | 55–80 min | Produce the diagram and ordered checklist; reconcile PRD/TRD terminology and decisions. | 2a and 2b | Diagram and sequence agree with the fresh contracts. |
+| 3b | 55–80 min | Remove obsolete active files and unsupported branches using the retention inventory; preserve manual/source approvals and current failure evidence. | 1; runs with 3a | Cleanup diff and retention receipt; recovery preserved. |
+| 4a | 80–105 min | Validate links, retained dependencies, baseline checks and absence of active retired-architecture references. | 3a and 3b | Passed checks and explicit remaining runtime limitations. |
+| 4b | 80–105 min | Prepare one coherent GitHub default-branch update with exact inputs and recovery information. | 3a and 3b; runs with 4a | Reviewable commit/diff and verified remote tips. |
+| 5 | 105–120 min | Publish authorized cleanup/design changes, remove obsolete remote branches, verify local/remote equality and hand over implementation steps. | 4a and 4b | Commit URL, branch receipt and explained remaining changes. |
 
-## UI integration
+- [x] Step 1: recovery and retention evidence recorded.
+- [x] Step 2a: fresh PRD completed and reconciled.
+- [x] Step 2b: fresh TRD completed and reconciled.
+- [x] Step 3a: diagram and sequence validated against fresh contracts.
+- [x] Step 3b: local active-tree cleanup completed with recovery preserved.
+- [x] Step 4a: links, dependency closure and appropriate checks passed or limitations recorded.
+- [x] Step 4b: GitHub update prepared against verified branch tips.
+- [ ] Step 5: GitHub cleanup and final comparison recorded.
 
-- [x] Replace the deployed benchmark-question allowlist with an authenticated open-question API; retrieve evidence for the rider's raw question, select supported reviewed answer components or abstain, and connect conversational sessions/recovery to the UI. Do not require a symptom route, record ID or diagnostic flow. Preserve ownership, CAS, operation deduplication and the 24-hour retention policy.
-- [x] Wire the existing concurrent dense BGE M3 + BM25 retrieval, RRF, conditional recovery/reranking and verified dependency assembly into Option A's exact reviewed-component selection. Retain immutable source/index/runtime bindings and all eligibility, evidence, warning, prerequisite and citation gates. No new manual ingestion or embedding per request.
-- [x] Connect Option A's verified HTTP/SSE delivery to the UI: release a complete approved answer unit only after gates and durable session save; handle complete/error events and recovery without duplicating a model call. Do not render raw model tokens or partial warnings. Preserve B as the separately specified alternative; no C fallback.
-- [ ] Integrate the existing approved-wording candidate/response cache with exact source, version, prompt, typed-state and allowed-envelope bindings. Similarity may locate a candidate but cannot authorize reuse. Test stale, changed-state, changed-prompt and draft entries miss closed; run initial live acceptance with caches bypassed.
-- [ ] Complete the separately requested provider prompt-prefix caching integration: establish support for the exact hosted Gemma 26B API/model, install only a supported mechanism under a fresh reviewed runtime/allocation, and record provider-reported cached tokens. Existing response reuse is not provider prompt caching; do not pad prompts or silently substitute models to obtain caching. If unsupported, retain a documented capability result and explicit owner decision before claiming this requirement closed.
-- [x] Demonstrate a fresh private-browser question journey through actual retrieval, evidence/controller gates, exact Arm A selection, durable session save and verified streaming; follow-up abstention, refresh and desktop/mobile checks passed. Evidence: reports/arm_a/ui_wiring_v1/live_browser_acceptance.json. Private UI and backend are deployed with managed identities and preserved budget controls.
-- [ ] Complete public-access identity/admission review and independently measure warm/cold p95 and cost. A private acceptance run does not establish public shareability, general paraphrase coverage, full adaptive transitions or photo performance.
+Reset evidence: [cleanup and validation receipt](reports/reset/20261011/README.md).
 
-## Guardrails
+Timeboxes are estimates, not a promise of a deployable agent in two hours. This reset does not authorize provider spending, live-service changes, billing changes or public access. Check existing permissions against each exact subsequent action.
 
-- [ ] Install the versioned project system/role policy and complete deterministic context projection in a newly reviewed serving runtime; preserve every active outcome/fact and mandatory warning. Invalidate affected caches and verify exact-model token counting. Enforce 8,192 input tokens, 24,000 request bytes and 1,800 output tokens; refuse overflow/truncation rather than dropping required context. Apply the A-specific exact-wording gates; B retains its semantic verifier.
-- [ ] Enforce 2,000-character/8,000-byte text and 16-KiB JSON bounds in the hosted handler before retrieval; validate trusted visitor capabilities, session ownership, duplicate/conflicting payloads and deadlines.
-- [ ] Connect atomic managed admission counters: six accepted turns/minute, 30/rolling day, 20/conversation; quotas survive new conversations. Add trusted edge IP/challenge controls, global provider reservations and per-day spending limits; fail closed on admission outages and never re-enable stopped billing without authorization.
-- [ ] Implement and verify 30-minute idle/24-hour session expiry, published record retention and actual deletion jobs. Keep secrets server-side, user media and raw rider text out of routine telemetry, and preserve redacted version/source/index traceability.
-- [ ] Pass hosted adversarial/failure tests for injection, wrong scope, missing warnings/dependencies, unsupported claims, unsafe requests, invalid citations, stale/replayed/concurrent operations, typed unresolved outcomes, context overflow, partial streams, provider/store failures and reset abuse. Preserve distinct SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR routes and applicable safety precedence. Review changed runtime bindings without reinstating a generic human-only blocker for the exact approved 161 scopes.
+## Implementation sequence after the reset
 
-## Photo handling
+### 6. Establish one immutable serving baseline
 
-- [ ] After hosted text acceptance, connect an authenticated, byte-bounded multipart endpoint to the existing decoder/normalizer: JPEG/PNG/WebP only, one photo/turn, 5 MiB/photo, 20 megapixels, 10,000 pixels/side; reject corrupt/animated/mismatched media and URL fetches. Enforce worker resources; rotate from EXIF then strip metadata and normalize to at most 1,600 pixels/side.
-- [ ] Atomically enforce three photos/conversation and six/visitor/rolling day across workers and resets. Verify actual raw and normalized media deletion within 15 minutes; no raw media in repository or routine logs.
-- [ ] Integrate separately versioned observation-only vision with uncertainty and focused clarification, then use the same source/applicability/controller gates. Do not infer hidden faults from photos. Evaluate image injection, unclear images, unsupported observations, wrong-bike inputs and grounded follow-ups before enabling the uploader.
+- [ ] **6a — Source and index:** validate manual checksum, scoped approvals, parser/chunk/index versions, evidence IDs and mandatory dependencies. Use durable GCS artifacts with generation/hash checks rather than expiring Actions artifacts. Exit: deterministic loading and an explicit review-gap inventory.
+- [ ] **6b — Runtime and CI:** select one serving package/version manifest, add provider-free PR checks, bind container inputs and image digests to the release, and document exact rollback. Exit: reproducible build-input receipt and CI rejection of altered bindings.
 
-## Owner decision: draft, verify, stream (11 October 2026)
+**Concurrency:** 6a and 6b run together after step 5 and join before step 7. Reuse unchanged immutable artifacts; do not reparse or re-embed per rider request.
 
-The current open manual Q&A method is [draft, verify, stream](docs/architecture/DRAFT_VERIFY_STREAM_DECISION_20261011.md). It supersedes exact-answer-only, catalogue/action allowlists and the no-online-verifier amendment. Implementation and test status are recorded in [the integration report](reports/grounded_generation/draft_verify_stream_v1/README.md). Existing source restrictions, model and spending/deployment authorizations still apply. No public release follows from the decision.
+### 7. Repair retrieval and operation state
 
-### V8 implementation and UI wiring
+- [ ] **7a — Hybrid retrieval:** connect authenticated Qdrant dense search and concurrent BM25; filter selected manual/version before ranking; preserve history in the retrieval query; fuse with RRF; implement bounded dependency recovery and conditional reranking for ordinary Q&A. Exit: approved direct/follow-up evidence is retrieved, and source-review gaps trigger neither reranking nor rider questions.
+- [ ] **7b — Durable state:** implement owned sessions, optional typed outcomes, request deduplication, operation leases, terminal reconciliation and exact saved-response recovery. Processing must survive browser disconnection. Exit: duplicates/disconnects do not repeat paid calls or leave operations indefinitely `RUNNING`.
 
-- [x] Implement private drafting, the strict complete/partial/fallback verifier result, one correction, exact fixed messages, separate safety/clarification handling, final integrity checks and durable accepted-buffer delivery. Software evidence is in [the v8 report](reports/grounded_generation/v8/REPORT.md).
-- [x] Wire new questions and follow-ups through the strict rider UI client, truthful progress, accepted streaming and operation recovery; keep the optional Haiku provider and secrets on the backend.
-- [x] Commit the frozen pipeline and record real Haiku outputs with independent original-page review. The run failed answerable/partial coverage; passing workflow execution is not release acceptance.
-- [ ] Improve source admission and bounded complete-context representation in a new version, then evaluate fresh cases. Preserve original approvals, held-out history and mandatory source context.
-- [ ] After quality gates and separate deployment authorization, activate reviewed backend/UI images and managed provider references; record actual browser, Firestore, stream and disconnection recovery acceptance.
+**Concurrency:** 7a and 7b run together after step 6. Keep `ACTION_COMPLETED_UNRESOLVED` distinct from observed normality. StepDefinitions and authored question IDs are not general Q&A prerequisites.
+
+### 8. Admit complete evidence within the budget
+
+- [ ] Version a compact approved-anchor/dependency assembler. Preserve conditions, warnings, units, table headers, references and server page metadata at reviewed scopes; exclude unapproved parent bodies.
+- [ ] Count the complete projected request with the exact provider's mechanism, including question, relevant history, evidence and schema overhead. If complete context does not fit, return `SYSTEM_ERROR`; never silently discard mandatory evidence.
+- [ ] Reserve whole-turn token/rate/monetary capacity, including maximum permitted correction and authorized availability fallback. Retain uncertain reservations. Validation allocations are non-recurring across runs.
+
+**Depends on:** 7a and 7b. **Exit:** separately versioned repairs for the recorded v8 brake-fluid, bore/stroke, USB and low-fuel failures, with independently checked complete evidence and bounded prompts. Quota failure is never described as missing manual information.
+
+### 9. Integrate drafting, verification and saved delivery
+
+- [ ] **9a — Answer path:** privately draft from actual question, relevant history and assembled evidence. Finalize warnings, limitations, citations and service wording before a separate verifier. Require strict question coverage, all-claim support, omissions/conflicts and exact response/evidence/history/runtime bindings. Permit one corrective draft plus re-verification.
+- [ ] **9b — Delivery and provider path:** show operational progress, then stream only a durably saved accepted buffer. Keep fixed fallback/error messages outside technical-answer streaming. Bind token counts and budgets to the actual model; keep Claude disabled until serving activation is authorized, and allow it only for eligible primary availability failures. Validate UI recovery and ownership.
+
+**Concurrency:** 9a and 9b run together after step 8. **Joint exit:** accepted/saved/streamed/recovered hashes match; no rejected tokens escape; malformed/outage/quota/integrity failures are `SYSTEM_ERROR`; unsupported, safety and ambiguity remain distinct.
+
+### 10. Independently evaluate quality and operations
+
+- [ ] **10a — Answer quality:** review fresh direct, partial, follow-up, table/unit, warning, unsupported and safety cases against original pages independently of serving models. Separate tuning/held-out cases. Measure question coverage, all-claim support, false acceptance/refusal, complete-evidence recall and citation support. Workflow success is not answer-quality success.
+- [ ] **10b — Failure, latency and cost:** test injection, wrong selection, missing dependencies, overflow, provider/store outage, replay, concurrent turns and disconnects. Separate cold/warm timings, especially first verified answer. Record retrieval, draft, verification, correction, save and completion, provider usage, estimated cost and cost per correctly handled case.
+
+**Concurrency:** 10a and 10b run together after step 9. **Exit:** explicit quality/operational acceptance for the same frozen runtime. Zero unsupported released technical steps is mandatory. A run releasing zero technical answers cannot establish factual-support accuracy.
+
+### 11. Deploy an accepted text candidate
+
+- [ ] Confirm current deployment/provider/IAM/spending authorization for the exact candidate. Preserve budget-stop behavior and never re-enable stopped billing without permission.
+- [ ] Build immutable backend/UI images from the accepted manifest, bind secrets to managed identities, verify Qdrant readiness and Firestore permissions, and deploy compatible revisions with rollback recorded.
+- [ ] Test a fresh authenticated browser: direct, partial, follow-up, unsupported, safety/ambiguity, operational error and disconnect/recovery. Verify deployed image/runtime/index bindings.
+- [ ] Review public identity/access, abuse/rate/per-day spend controls, retention/deletion and display restrictions separately before publishing a rider URL.
+
+**Depends on:** successful 10a and 10b plus applicable authorization. **Exit:** reproducible live acceptance, measured latency/cost, rollback and an approved access scope. Existing private retrieval deployment does not establish new-answer-pipeline acceptance.
+
+### 12. Add optional optimizations and modalities
+
+- [ ] **12a — Caching and tuning:** establish caching support for the exact authorized model/account. Preserve source/verification gates; measure reported cached tokens and paired latency/cost. Compare reranking thresholds and retrieval variants on held-out cases. Unsupported caching remains an explicit capability gap with no claimed savings.
+- [ ] **12b — Photo, then voice:** add bounded ephemeral uploads and observation-only vision with uncertainty; exclude hidden-fault diagnosis. Reuse text evidence/verification. Add voice only with editable transcript confirmation. Verify privacy/deletion and modality quality before activation.
+
+**Concurrency:** 12a and 12b may run together after accepted text release in step 11, under separately confirmed scope and spending. They are not prerequisites for fixing the current text-answer coverage failure.

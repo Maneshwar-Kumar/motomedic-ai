@@ -1,21 +1,20 @@
-# Hosting and spending controls
+# Hosted components
 
-| Area | Entry point |
+Follow the current [TRD](../docs/TRD.md) and [TODO](../TODO.md).
+
+| Area | Location |
 | --- | --- |
+| Candidate Qdrant restoration service | [qdrant/](qdrant/) |
+| Billing stop guard | [budget_guard/](budget_guard/) |
 | Recorded deployed resources | [deployment_status.json](deployment_status.json) |
-| Backend live smoke results | [live_smoke.json](live_smoke.json) |
-| Qdrant restoration service | [qdrant](qdrant/) |
-| Project billing guard | [budget_guard](budget_guard/) |
-| Vector export and smoke utilities | [export_qdrant.py](export_qdrant.py), [smoke_test.py](smoke_test.py) |
+| Retrieval-only smoke results | [live_smoke.json](live_smoke.json) |
+| Current candidate answer pipeline | [grounded_generation/](grounded_generation/) |
+| API, store and compatibility imports | [arm_a/](arm_a/) |
 
-Deployment records are snapshots; check actual settings read-only before proposing changes. Qdrant restores immutable stored vectors on startup; it does not ingest/embed the PDF per rider request. The recorded service is authenticated and scales to zero.
+Qdrant reloads immutable stored vectors; it does not parse or embed the manual on cold start. The latest deployment receipt records min one/max one instance and startup CPU boost. The current answer path still needs to call that Qdrant service.
 
-The project limit is US$10 with an INR800 lifetime budget and INR640 automated billing stop. Reporting delay prevents an instantaneous cap. Do not re-enable stopped billing without owner authorization. The [warm-instance investigation handoff](../TRD_UI_FOLLOWUP_HANDOFF.md) authorizes research, not settings or billing changes.
+The recorded lifetime allocation is INR2,700, with alerts at INR1,350/2,160/2,700 and billing disconnection at INR2,540. Treat receipts as snapshots, retain the guard and verify current state before operational changes. Never restart stopped billing without owner authorization.
 
+The candidate draft/verify runtime has failed real answer coverage. [The v8 evidence](../reports/grounded_generation/v8/REPORT.md) and [status](../docs/STATUS.md) explain its limits. Source approval, packaging preparation and historical deployed revisions do not approve this changed pipeline for live use.
 
-## Arm A preparation
-
-The [private initial-answer package](arm_a/README.md) is a separate work area. Its [preparation receipt](../reports/arm_a/implementation_receipt_v1.json) currently records implementation tested with deployment pending. See the [local handover](../MotoMedic_ArmA_Production_20261011/README.md). The package has a bounded initial-lookup scope; it is not yet the complete rider UI API. The organization monitor does not authorize IAM or resource changes.
-
-
-For subsequent rollout and retention evidence, use the [Arm A integration run guide](../reports/arm_a/integration_v1/README.md). The earlier preparation receipt remains a dated historical snapshot; it is not the latest deployment status.
+No repository reset change deploys a service, activates Claude, transfers a secret or changes billing. Current build recipes are retained compatibility inputs; the next release must use explicit approved inputs and image bindings.

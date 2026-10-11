@@ -1,0 +1,94 @@
+{
+  "review_date": "2026-10-11",
+  "timezone": "Asia/Calcutta",
+  "repository": "Maneshwar-Kumar/motomedic-ai",
+  "branches": [
+    {
+      "name": "main",
+      "sha": "d46f856cd04ab7b173591526a9fb21e235559506",
+      "tracked_files": 61,
+      "role": "default branch"
+    },
+    {
+      "name": "codex/rider-ui-20261011",
+      "sha": "aed6f4ce5399aee4a16e4d4f7ef7b7ba1f16ab71",
+      "tracked_files": 585
+    },
+    {
+      "name": "codex/reviewed-evidence-controller",
+      "sha": "09faf7dfe1865dda0a2155bb06f67fdc4fdfdbbd",
+      "tracked_files": 4567,
+      "local_head_matches": true
+    }
+  ],
+  "reviewed_vs_main": {
+    "ahead": 83,
+    "behind": 0
+  },
+  "reviewed_vs_rider": {
+    "ahead": 56,
+    "behind": 7
+  },
+  "initial_tracked_working_changes": [
+    "TODO.md",
+    "cloud/arm_a/composer.py",
+    "cloud/arm_a/questions.py",
+    "docs/CURRENT_WORK.md",
+    "docs/ROOT_FILE_GUIDE.md",
+    "docs/START_HERE.md",
+    "docs/repository_layout.json",
+    "rider_ui/API_CONTRACT.md",
+    "rider_ui/README.md",
+    "tools/validate_grounded_generation.py"
+  ],
+  "source": {
+    "sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "authoritative_contract": "TRD v0.6 and DRAFT_VERIFY_STREAM_DECISION_20261011"
+  },
+  "validation": {
+    "targeted_tests": 45,
+    "targeted_result": "PASS",
+    "broader_tests": 69,
+    "broader_failures": 7,
+    "broader_errors": 5,
+    "broader_limitation": "Bundled Python lacks Flask; successful source fixtures fail at delivery import, API fixtures cannot import. Additional untracked read-only overlay fixture failed. Not treated as deployed regressions.",
+    "frozen_v8_bound_files": 64,
+    "frozen_v8_mismatches": 0
+  },
+  "provider_record": {
+    "run_id": 38160944967,
+    "head_sha": "09faf7dfe1865dda0a2155bb06f67fdc4fdfdbbd",
+    "haiku_job": "SUCCESS",
+    "gemma_job": "SKIPPED",
+    "turns": 6,
+    "technical_accepted": 0,
+    "routes": {
+      "UNSUPPORTED": 3,
+      "SYSTEM_ERROR": 3
+    },
+    "expected_supported": 5,
+    "semantic_acceptance": "PENDING_INDEPENDENT_ORIGINAL_PAGE_REVIEW",
+    "result_path": "reports/grounded_generation/v8/run_38160944967/claude-fallback-result.json",
+    "result_sha256": "51dfb305db78ba0b176d15dc5f62d989e1e7225588d36ab1c257289ab19638b9"
+  },
+  "artifact": {
+    "run_id": 37908240500,
+    "id": 11606137154,
+    "name": "owner-manual-index-37908240500",
+    "expires_utc": "2026-10-16T09:09:02Z",
+    "expires_ist": "2026-10-16 14:39:02"
+  },
+  "review_actions": {
+    "runtime_changed": false,
+    "source_approval_changed": false,
+    "provider_calls": false,
+    "deployment_changed": false,
+    "billing_changed": false,
+    "artifacts_added": [
+      "reports/code_review/20261011/README.md",
+      "reports/code_review/20261011/review_snapshot.json"
+    ]
+  },
+  "live_gcp_settings_queried": false
+}

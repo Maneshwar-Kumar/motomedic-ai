@@ -1,17 +1,29 @@
-# Contributing to MotoMedic
+# Working on MotoMedic
 
-Read [the human starting guide](docs/START_HERE.md), [folder contract](docs/REPOSITORY_ORGANIZATION.md) and [AGENTS.md](AGENTS.md) before changing behavior.
+Start with [README](README.md), [PRD](docs/PRD.md), [TRD](docs/TRD.md), [architecture](docs/ARCHITECTURE.md) and [TODO](TODO.md). Keep one current specification. Reconcile it whenever a decision changes it.
 
-## Where to work
+## Placement
 
-Keep new code, documents and results in their work area's folder. New reports belong in `reports/<work-area>/<version-or-run>/`; include a short README identifying the question, inputs/version, result and limitations. Existing root modules, tests, Word documents and handoffs are compatibility paths. Do not silently relocate them or edit frozen approval bundles.
+- Current product and technical documentation: docs/.
+- Answer pipeline: cloud/grounded_generation/; API/store compatibility: cloud/arm_a/.
+- Rider presentation/client: rider_ui/.
+- Maintenance and evaluation commands: tools/.
+- New execution evidence: reports/<work-area>/<version-or-run>/.
+- Exact source approvals: existing human_review/, grounding_bindings/ and pinned source-context paths. Preserve required bytes and paths.
+- Generated environments, caches, index copies and temporary output: ignored build/ or tmp/. Keep credentials and raw rider media out of Git.
 
-## Concurrent work
+Retained root Python modules are compatibility dependencies. Replace consumers and create new versioned review bindings before moving or changing frozen objects.
 
-Inspect `git status` and relevant chats before shared edits. Use `codex/` branches and reviewable diffs. Do not switch the shared checkout beneath another active chat, stage everything, reset others' edits or move another chat's active inputs. Stage only owned files. Read-only polling does not authorize messaging other chats.
+## Change and verification
 
-## Review and validation
+Use a short-lived codex/<change> branch for subsequent implementation. Keep commits focused, merge the checked result into main, and delete the finished branch. Do not restore superseded experiment branches or planning documents as the active design.
 
-Run `python tools/check_repository_structure.py` after navigation or layout changes. Run the relevant existing subsystem checks for behavior changes; preserve manual checksums, evidence IDs, warnings, applicability, typed outcomes and five response states. Changed exact runtime/source objects require updated scoped review bindings. Preserve the owner-delegated v3 authority; do not invent human signoff.
+Run provider-free hosted CI and relevant contract tests. Source/retrieval changes also require immutable index loading, approval validation and independent original-page checks. Real-provider evaluation requires recorded scope and a persistent spending ledger; routine CI must not spend provider credits.
 
-Keep provider calls and ingestion hosted and versioned. Organization changes do not authorize deployment, provider spending, billing mutation or public manual redistribution. Do not commit credentials, raw rider media, environment files or temporary artifacts. No new license is assigned to the OEM manual or project through this organization work.
+Before promotion, bind the source commit, runtime inputs, index generation/hash, exact source approvals, model/prompt policy and image digest. Record compatible backend/UI revisions and rollback. A successful build alone is not answer-quality acceptance.
+
+Current rights prohibit rider-facing PDF, excerpts and figure crops. Keep provider credentials server-side and preserve the billing guard. A repository/design change does not authorize deploying, opening public access or restarting billing.
+
+## Recovering the reset
+
+Older tracked files remain available in Git history. The ignored local recovery bundle also preserves pre-reset branch tips and uncommitted files. See [the reset receipt](reports/reset/20261011/README.md) before restoring anything. Restore only necessary objects into a new reviewed version.
