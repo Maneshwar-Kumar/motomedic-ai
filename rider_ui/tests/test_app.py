@@ -8,7 +8,7 @@ from streamlit.testing.v1 import AppTest
 from rider_ui.tests.fixture_api import serve, requests, operations, sessions, Handler
 
 class AppTests(unittest.TestCase):
-    def test_preview_disables_input_without_checkbox_and_creates_no_operation(self):
+    def test_preview_disables_input_after_confirmation_and_creates_no_operation(self):
         server=serve(0)
         threading.Thread(target=server.serve_forever,daemon=True).start()
         requests.clear();sessions.clear();operations.clear()
@@ -19,7 +19,8 @@ class AppTests(unittest.TestCase):
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=15).run()
                 self.assertFalse(at.exception)
-                self.assertFalse(at.checkbox)
+                at.checkbox[0].check().run()
+                self.assertFalse(at.exception)
                 self.assertTrue(at.chat_input[0].disabled)
                 self.assertIn('Answering is paused while we finish checking the demo.',[item.value for item in at.info])
                 # Force a widget return independently of the browser's disabled
@@ -40,7 +41,7 @@ class AppTests(unittest.TestCase):
         finally:
             server.shutdown();server.server_close()
 
-    def show_saved_notice_fixture(self, *, state='SUPPORTED', composition=None, source_admission=None, reasons=None, verified=True):
+    def show_saved_notice_fixture(self, *, state='SUPPORTED', composition=None, reasons=None, verified=True):
         """Render only a saved synthetic view; no request or model call."""
         with patch.dict(os.environ, {'MOTOMEDIC_RIDER_API_URL': '', 'MOTOMEDIC_RIDER_API_TOKEN': ''}):
             at = AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=15).run()
@@ -48,64 +49,12 @@ class AppTests(unittest.TestCase):
                 'technical_content': False, 'cited_pages': [], 'reason_codes': reasons or [],
                 'release_gate_passed': verified, 'semantic_verification_passed': verified}
             view = {'session_id': 'e' * 32, 'version': 1, 'response': response,
-                'choices': [], 'history': [], 'runtime_controls': {'composition': composition or {},
-                    'source_admission': source_admission or {}}}
+                'choices': [], 'history': [], 'runtime_controls': {'composition': composition or {}}}
             at.session_state['messages'] = [('rider', 'Synthetic question'), ('assistant', view)]
             at.session_state['view'] = view
             at.run()
             self.assertFalse(at.exception)
             return at, view
-
-    def test_recorded_timings_are_separate_from_saved_answer_and_missing_stream_is_honest(self):
-        # Scalar projection from the real private v14 Service Reminder receipt;
-        # rendering this fixture performs no retrieval or provider request.
-        at, view = self.show_saved_notice_fixture(
-            source_admission={'retrieval_assembly_seconds': 2.3623035379998782,
-                'retrieval_policy': {'rerank_attempts': 1, 'stages_seconds': {
-                    'dense_query_embedding_and_qdrant_rpc': 0.5988896799999566,
-                    'bm25_scoring': 0.0007435039999563742,
-                    'reranking': 1.6348707170000125}}},
-            composition={'draft_calls': 1, 'verifier_calls': 1,
-                'attempts': [{'draft_seconds': 22.88393380399998,
-                'verification_seconds': 60.75883190799982}]})
-        self.assertIn('Timings · Retrieval: 2.36 s · Ranking: 1.63 s · '
-            'Generation: 22.88 s · Verification: 60.76 s · Streaming: Not recorded',
-            [item.value for item in at.caption])
-        self.assertIn('Exact synthetic saved answer.', [item.value for item in at.text])
-        self.assertEqual(at.session_state['view'], view)
-        self.assertNotIn('delivery_timings', view)
-        at.run()
-        self.assertEqual(at.session_state['view'], view)
-
-    def test_invalid_or_absent_timings_are_not_shown_as_zero_or_private_metadata(self):
-        at, view = self.show_saved_notice_fixture(
-            source_admission={'retrieval_assembly_seconds': float('nan'),
-                'retrieval_policy': {'stages_seconds': {'reranking': -1}}},
-            composition={'attempts': [{'draft_seconds': True,
-                'verification_seconds': float('inf'), 'private_draft': 'NEVER DISPLAY THIS'}]})
-        self.assertIn('Timings · Retrieval: Not recorded · Ranking: Not recorded · '
-            'Generation: Not recorded · Verification: Not recorded · Streaming: Not recorded',
-            [item.value for item in at.caption])
-        self.assertNotIn('NEVER DISPLAY THIS', '\n'.join(item.value for item in at.caption))
-        self.assertEqual(at.session_state['view'], view)
-
-    def test_delivery_timing_is_detached_and_bound_to_the_saved_operation(self):
-        at, view = self.show_saved_notice_fixture()
-        view['delivery'] = {'operation_id': 'a' * 32}
-        at.session_state['view'] = view
-        at.session_state['messages'] = [('rider', 'Synthetic question'), ('assistant', view)]
-        measured = {'operation_id': 'a' * 32, 'origin': 'UI_CLIENT_MONOTONIC',
-                    'transport': 'sse', 'stream_complete': True, 'streaming_seconds': 0.041}
-        at.session_state['delivery_timings'] = {1: measured}
-        at.run()
-        self.assertFalse(at.exception)
-        self.assertTrue(any(item.value.endswith('Streaming: 0.04 s') for item in at.caption))
-        self.assertEqual(at.session_state['view'], view)
-        self.assertNotIn('streaming_seconds', view['delivery'])
-        at.session_state['delivery_timings'] = {1: {**measured, 'operation_id': 'b' * 32}}
-        at.run()
-        self.assertTrue(any(item.value.endswith('Streaming: Not recorded') for item in at.caption))
-        self.assertEqual(at.session_state['view'], view)
 
     def test_large_verified_context_notice_is_separate_and_reset_requires_user_action(self):
         at, view = self.show_saved_notice_fixture(composition={'start_new_conversation_required': True})
@@ -153,7 +102,7 @@ class AppTests(unittest.TestCase):
             self.assertFalse(at.exception)
             self.assertTrue(at.chat_input[0].disabled)
             self.assertFalse(any('not connected' in x.value for x in at.info))
-    def test_immediate_question_feedback_and_no_duplicate_rerun(self):
+    def test_confirmation_feedback_and_no_duplicate_rerun(self):
         server=serve(0)
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
         requests.clear();sessions.clear();operations.clear()
@@ -163,11 +112,9 @@ class AppTests(unittest.TestCase):
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=15).run()
                 self.assertFalse(at.exception)
-                self.assertFalse(at.checkbox)
+                self.assertTrue(at.chat_input[0].disabled)
+                at.checkbox[0].check().run()
                 self.assertFalse(at.chat_input[0].disabled)
-                self.assertEqual(at.selectbox[0].value,'Royal Enfield Himalayan 450')
-                self.assertTrue(at.selectbox[0].disabled)
-                self.assertIn('RAM00818/A · 4 November 2025',[item.value for item in at.caption])
                 at.chat_input[0].set_value('Engineering test only').run()
                 self.assertFalse(at.exception)
                 self.assertTrue(any(x.label=='Yes' for x in at.button))
@@ -190,6 +137,7 @@ class AppTests(unittest.TestCase):
         try:
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=15).run()
+                at.checkbox[0].check().run()
                 at.chat_input[0].set_value('Engineering reset test').run()
                 old_id=at.session_state['view']['session_id']
                 next(x for x in at.button if x.label=='Start a new conversation').click().run()
@@ -198,10 +146,8 @@ class AppTests(unittest.TestCase):
                 self.assertEqual(at.session_state['messages'],[])
                 self.assertIsNone(at.session_state['pending'])
                 self.assertIsNone(at.session_state['connection_error'])
-                self.assertEqual(at.session_state['delivery_timings'], {})
                 self.assertIn(old_id,sessions)
-                self.assertFalse(at.checkbox)
-                self.assertFalse(at.chat_input[0].disabled)
+                self.assertTrue(at.checkbox[0].value)
         finally:
             server.shutdown();server.server_close()
 
@@ -214,6 +160,7 @@ class AppTests(unittest.TestCase):
         try:
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=15).run()
+                at.checkbox[0].check().run()
                 at.chat_input[0].set_value('First engineering question').run()
                 self.assertFalse(at.exception)
                 self.assertFalse(at.chat_input[0].disabled)
@@ -235,6 +182,7 @@ class AppTests(unittest.TestCase):
         try:
             with patch.dict(os.environ,env):
                 at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'),default_timeout=15).run()
+                at.checkbox[0].check().run()
                 Handler.fail_next_response=True
                 at.chat_input[0].set_value('Engineering timeout recovery').run()
                 self.assertFalse(at.exception)

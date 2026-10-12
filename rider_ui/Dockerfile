@@ -8,8 +8,7 @@ COPY controller_contracts.py /app/controller_contracts.py
 RUN python -B -m unittest discover -s rider_ui/tests -p 'test_*.py' -v
 FROM dependencies AS runtime
 COPY --from=verified /app/requirements.txt /app/requirements.txt
-COPY rider_ui/__init__.py rider_ui/app.py rider_ui/client.py rider_ui/render.py rider_ui/timings.py rider_ui/safeguards.py rider_ui/identity.py rider_ui/verified_sse.py rider_ui/public_gateway.py rider_ui/public_edge.py rider_ui/theme.css /app/rider_ui/
-RUN python -B -c "from rider_ui.render import timing_caption; from rider_ui.client import RiderAPI"
+COPY rider_ui/__init__.py rider_ui/app.py rider_ui/client.py rider_ui/safeguards.py rider_ui/identity.py rider_ui/verified_sse.py rider_ui/public_gateway.py rider_ui/public_edge.py rider_ui/theme.css /app/rider_ui/
 RUN useradd --uid 10001 --create-home rider
 USER rider
 ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false

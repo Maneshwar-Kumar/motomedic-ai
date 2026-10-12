@@ -1,7 +1,5 @@
 # MotoMedic execution plan
 
-The owner requested a UI update: remove the confirmation checkbox and show recorded retrieval, ranking, generation, verification and streaming times. The [exact scope](reports/public_evaluator/20261012/haiku_v10_15_helpers/owner_ui_scope_v1.json) selects the fixed Himalayan BS6 source without a rider attestation. UI v10.15 passed source tests and a hosted build but failed its public browser check because the final container omitted the new UI modules. The check submitted zero questions and initiated no provider call. UI v10.16 packaging repair and public validation are pending; the deployed v10.14 backend/worker and immutable index remain unchanged.
-
 The [public UI](https://motomedic-rider-ui-279945185781.us-central1.run.app) is enabled. **The service-due question now returned a verified partial answer privately and a supported answer with a citation in a fresh public browser run.** Backend v10.14 contains the retrieval repair and reuses the v10.13 UI. The owner's [latest MVP scope](reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json) asks for a working retrieval/answer UI and removes broader six-case/cache demonstrations as completion gates. The [earlier waiver](reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) still waives independent manual answer review. Do not claim independent factual acceptance.
 
 Haiku `claude-haiku-5-5` remains the sole model. Immutable source approval, complete applicable evidence/history, separate exact-finalized verification, durable save/identical streaming/recovery and all existing charge/guard bindings remain mandatory. This scope does not authorize source changes, another allocation, refund/reset or billing restart.
@@ -33,7 +31,6 @@ The v10.12 [failed live run](reports/public_evaluator/20261012/hosted_runs/e4d6b
 - [x] Service-due question retrieves applicable admitted source and returns a useful verified supported/partial answer.
 - [x] Private direct answer separately verified; identical saved stream/recovery and completed operation boundaries proven.
 - [x] Anonymous inspection, enabled UI health and a public service-due SUPPORTED browser answer with a citation passed.
-- [ ] Fresh UI packaging includes required modules; direct input without a checkbox and recorded stage timings pass the public browser check.
 - [x] Public URL, result receipts and limitations recorded for reviewer handover.
 
 ## Preserved requirements

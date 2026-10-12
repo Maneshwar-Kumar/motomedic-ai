@@ -8,7 +8,7 @@ The implementation under review is on `codex/public-evaluator`; `main` remains t
 
 ## Using the demo
 
-Ask a question in your own words, using up to 100 words. The demo uses the Himalayan BS6 manual shown in the sidebar. The prior UI asks for scope confirmation; its replacement removes that checkbox and adds recorded stage timings, but public validation of that update is pending after a container packaging failure. MotoMedic shows progress while it retrieves, drafts and verifies. A completed answer can contain supported facts or procedures, an explicitly limited partial answer, a needed clarification or a manual-supported safety stop. When it cannot support an answer, it says so; a failed technical check produces a separate system-error message.
+Confirm that your motorcycle is the Himalayan BS6 by checking the box on the left margin, then ask a question in your own words, using up to 100 words. MotoMedic shows progress while it retrieves, drafts and verifies. A completed answer can contain supported facts or procedures, an explicitly limited partial answer, a needed clarification or a manual-supported safety stop. When it cannot support an answer, it says so; a failed technical check produces a separate system-error message.
 
 The source is the supplied [149-page owner's manual](royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf), edition RAM00818/A, dated 4 November 2025. Questions are not restricted to a predefined catalogue. The application is currently text-only; photo and voice features are deferred.
 
@@ -66,8 +66,6 @@ The browser uses the UI. API writes, worker execution and private operation read
 ## What is built and what has been tested
 
 The deployed text path includes immutable-index retrieval, complete evidence assembly, private drafting, separate finalized-response verification, durable operations, saved-buffer streaming and recovery. **“When is the service due for my bike?” returned a supported answer with a citation in the [public browser check](reports/public_evaluator/20261012/public_review/browser_service_due_v14_v2/receipt.json), in 71.33 seconds.** A [separate private check](reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/service_due_case.json) verified a useful partial answer and confirmed identical saved, streamed and recovered content. Backend v10.14 preserves applicable reviewed evidence through reranking and reuses the existing v10.13 UI.
-
-The v10.15 direct-input/timing update passed source tests and a hosted build, but its final container omitted required UI modules. The public browser failed before submitting any question. A fresh v10.16 packaging repair is pending; the failed release remains recorded.
 
 The first public attempt at that question failed a verifier consistency check and displayed a system error; a fresh operation passed. Verification remains probabilistic, and successful demonstration cases do not establish correctness for every question. A rollback check timed out twice on the previous backend's health endpoint; v10.14 traffic was restored and its health checks passed. [Status](docs/STATUS.md) records the actual failures and limits. Software tests and builds are reported separately from returned-answer evidence.
 

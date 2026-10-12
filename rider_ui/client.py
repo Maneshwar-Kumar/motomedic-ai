@@ -2,7 +2,6 @@
 import json
 import hashlib
 import re
-import time
 import uuid
 from rider_ui.safeguards import LimitError, validate_message
 from urllib.error import HTTPError, URLError
@@ -134,13 +133,8 @@ class RiderAPI:
         self.network = network
         self.answers_enabled=answers_enabled is True
         self.opener = build_opener(NoRedirect())
-        # Local presentation telemetry stays outside the immutable saved view.
-        self.last_delivery_timing = None
 
     def request(self, method, path, payload=None, request_id=None, *, on_verified=None, on_progress=None, on_chunk=None, stream=False):
-        started = time.monotonic()
-        verified_at, chunk_count, stream_complete, transport = None, 0, False, 'not_received'
-        self.last_delivery_timing = None
         if method!='GET' and not self.answers_enabled:
             from rider_ui.public_gateway import PREVIEW_MESSAGE
             raise APIError(PREVIEW_MESSAGE,terminal=True)
@@ -166,7 +160,6 @@ class RiderAPI:
                 if getattr(res,'status',200) == 202:
                     raise APIError('This request is still processing. Retrieve its saved result shortly.')
                 if stream and res.headers.get_content_type() == 'text/event-stream':
-                    transport = 'sse'
                     from rider_ui.verified_sse import read_verified_stream
                     def chunks():
                         reader = getattr(res,'read1',res.read)
@@ -175,24 +168,11 @@ class RiderAPI:
                             if not data:
                                 break
                             yield data
-                    def accepted(view):
-                        nonlocal verified_at
-                        verified_at = time.monotonic()
-                        if on_verified:
-                            on_verified(view)
-                    def delivered(text):
-                        nonlocal chunk_count
-                        chunk_count += 1
-                        if on_chunk:
-                            on_chunk(text)
-                    result = read_verified_stream(chunks(),accepted,operation_id=request_id,
-                                                  on_progress=on_progress,on_chunk=delivered,
-                                                  expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
-                    stream_complete = True
-                    return result
+                    return read_verified_stream(chunks(),on_verified,operation_id=request_id,
+                                                on_progress=on_progress,on_chunk=on_chunk,
+                                                expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
                 if res.headers.get_content_type() != 'application/json':
                     raise APIError('The service returned an unexpected response format.')
-                transport = 'json'
                 data = res.read(MAX_BYTES + 1)
                 if len(data) > MAX_BYTES:
                     raise APIError('The service response exceeded the display limit.')
@@ -216,17 +196,6 @@ class RiderAPI:
             raise APIError(messages.get(exc.code, CHECK_ERROR_COPY),terminal=terminal) from None
         except (URLError, TimeoutError, OSError, ValueError):
             raise APIError(CHECK_ERROR_COPY) from None
-        finally:
-            ended = time.monotonic()
-            elapsed = None if verified_at is None else ended - verified_at
-            self.last_delivery_timing = {
-                'origin': 'UI_CLIENT_MONOTONIC', 'operation_id': request_id,
-                'transport': transport, 'request_seconds': ended - started,
-                'waiting_for_verified_seconds': None if verified_at is None else verified_at - started,
-                'streaming_elapsed_seconds': elapsed,
-                'streaming_seconds': elapsed if stream_complete and chunk_count else None,
-                'stream_complete': stream_complete,
-            }
 
     def catalogue(self):
         data = self.request('GET', '/v1/catalogue')
@@ -250,7 +219,6 @@ class RiderAPI:
         payload = {
             'query': query, 'bike_variant': 'Himalayan BS6',
             'manual_checksum': MANUAL_SHA, 'index_id': INDEX_ID,
-            # Owner-selected manual scope; this is not a rider attestation.
             'confirmed_himalayan_bs6': True, 'cache_mode': self.cache_mode}
         path = '/v1/sessions'
         if view:
