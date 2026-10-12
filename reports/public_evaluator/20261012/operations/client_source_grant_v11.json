@@ -1,0 +1,120 @@
+{
+  "schema_version": "hosted-evaluator-client-source-grant-v11",
+  "project_id": "motomedic-ai-20261009",
+  "source": {
+    "schema": "hosted-original-page-client-source-v1",
+    "uri": "gs://motomedic-ai-20261009-indices/serving/engineering-clients/v10_13/2df3ae94b4e5b4fbb6d797ca4f014cbc9785e25f935ba552e1fac4428057f7c2.tar.gz",
+    "object": "serving/engineering-clients/v10_13/2df3ae94b4e5b4fbb6d797ca4f014cbc9785e25f935ba552e1fac4428057f7c2.tar.gz",
+    "generation": "1791803899063146",
+    "sha256": "2df3ae94b4e5b4fbb6d797ca4f014cbc9785e25f935ba552e1fac4428057f7c2",
+    "bytes": 54424,
+    "files": {
+      "rider_ui/__init__.py": "a494babcfa18918399ebd324349f9ad0de5e9cc0a9db5d6488d2e960160fad20",
+      "rider_ui/identity.py": "b11b6cde8ed18fdf898182879757ef6c5623c3b365cf8a8c3f1db8693587287e",
+      "rider_ui/client.py": "9c7942d0875b4432ae05aef7e99209864d44396c86def1f26f0b637a076dd401",
+      "rider_ui/safeguards.py": "5645d6d725797b4157e1db8cc630d5b20b9936a37d4b22d515ede56848a37d9b",
+      "rider_ui/verified_sse.py": "107b6d9a81727736f0fbb7a372e87c7814a58eba7ec845120c71c692d0185a68",
+      "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+      "tmp/public_evaluator/hosted_client_v10_13_v2.py": "176038cdbd9dd0d707ff64d24e040ba7d2519783e3fabcbe39344c07d9a18566",
+      "tmp/public_evaluator/count_only_context_v10_13_v2.py": "f0626c2316a17303167582d7a2b19fdd46f74f2f9ca1e418c0b6859710b5d55a",
+      "tmp/public_evaluator/phase_budget_v10_13_v2.py": "88f9af4cda2359300064d9ac4165d7ea7c6a94f601259090ea98f117f4e191eb",
+      "tmp/public_evaluator/count_history_v1.json": "a3ca21d4aaf5ff9d14afd1bb4f5d82bdc50094cf6b9a5ef55cb8e6833721a998",
+      "reports/public_evaluator/20261012/owner_model_scope_v3.json": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f",
+      "reports/public_evaluator/20261012/haiku_v10_12/owner_anthropic_payload_scope_v2.json": "cf469c78449b70bba8cfc245cbb6ed5f3cf301e56102e1fe7fc2f1c415d189e9",
+      "cloud/grounded_generation/token_ceiling.py": "b46386b6058abc3820776dbe3467437e401067a97cef1850e99458457915cd9f",
+      "cloud/grounded_generation/__init__.py": "883ad628573b45c505cffe99b92370e05f20872f1f31c1e4a295b2e62119787d",
+      "cloud/grounded_generation/claude_budget.py": "dd04199ecfe0d24817e1a5a4ef08e4485de4f511a13edbf2a3feb852dc81e226",
+      "evidence_registry.py": "7df97bb5e500a1c009e21f2a721f5c24205c7e52a9f6371e369113f20f1b6ae4",
+      "generation_providers.py": "54cf14b8f2d20ac115078c239509e50369514ee53a53c274d844cf1ff141d9a8",
+      "generation_contracts.py": "4255a16ef30e2dcafa362495662c89c55f5103feb2b694a657a051dde12c61a8",
+      "reports/public_evaluator/20261012/original_page_evaluator_plan_v2.json": "a7dc784be633c14accdff256e57abb784a486076da07b149c6f2e04096ee5541",
+      "tmp/public_evaluator/client_inputs_v10_13_v2.json": "a0407c597ffc6edc98779d5b07a6d5e6eea48640759900ee42e21a7c9723b0df",
+      "tmp/public_evaluator/client_inputs_v10_13.json": "a0407c597ffc6edc98779d5b07a6d5e6eea48640759900ee42e21a7c9723b0df"
+    },
+    "service_account": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716",
+    "count_module_origin_policy": "ACTUAL_FROZEN_APP_IMAGE_ONLY",
+    "expected_frozen_runtime_module_origins": {
+      "tools.check_installed_serving_release": {
+        "app_relative_path": "tools/check_installed_serving_release.py",
+        "sha256": "b47b4db523395b95a2e505f873a3fd65bd5a4fed400993aebc7766589014dc98"
+      },
+      "cloud.serving_artifacts": {
+        "app_relative_path": "cloud/serving_artifacts.py",
+        "sha256": "f4ec53ec61a2c513cdc57527d4da6842860314369d1dcf84749d6e099f96b79f"
+      },
+      "cloud.grounded_generation.cached_verifier": {
+        "app_relative_path": "cloud/grounded_generation/cached_verifier.py",
+        "sha256": "aeb31d99994fad00ca94569b69c7862dbf7e9578a0db8d6fd7f688993c7221c0"
+      },
+      "cloud.grounded_generation.role_router": {
+        "app_relative_path": "cloud/grounded_generation/role_router.py",
+        "sha256": "8ab8f609f1d1423e5e2dd17cdf39d49a222676621269302b95c5c032a5054538"
+      },
+      "cloud.grounded_generation.verified_qa": {
+        "app_relative_path": "cloud/grounded_generation/verified_qa.py",
+        "sha256": "996e4f964e7625e547480ede4f4ae730a8e1dc7fe6cd37d673425583fcf26402"
+      },
+      "cloud.grounded_generation.serving_source_authority": {
+        "app_relative_path": "cloud/grounded_generation/serving_source_authority.py",
+        "sha256": "563faf17d093e0b11afa19622b1d5da594c71cd3f67d7c7bbfc2bde2f7d2ab5f"
+      }
+    },
+    "client_image_scope": "PINNED_V10_3_UI_TRANSPORT_LIBRARIES_ONLY_NOT_SERVING_RUNTIME",
+    "count_backend_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+    "count_image_scope": "CURRENT_V10_13_BACKEND_ACTUAL_RETRIEVAL_NATIVE_COUNTERS_ONLY",
+    "source_inventory_sha256": "a0407c597ffc6edc98779d5b07a6d5e6eea48640759900ee42e21a7c9723b0df",
+    "provider_calls": 0,
+    "model_execution": "PRIVATE_CLOUD_RUN_WORKER_ONLY",
+    "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+    "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+    "model_routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+    "owner_anthropic_payload_scope_sha256": "cf469c78449b70bba8cfc245cbb6ed5f3cf301e56102e1fe7fc2f1c415d189e9",
+    "artifact_prefix": "engineering-acceptance/public-v10_3/",
+    "exact_byte_inventory_alias": {
+      "original_path": "tmp/public_evaluator/client_inputs_v10_13_v2.json",
+      "alias_path": "tmp/public_evaluator/client_inputs_v10_13.json",
+      "sha256": "a0407c597ffc6edc98779d5b07a6d5e6eea48640759900ee42e21a7c9723b0df",
+      "byte_identical": true,
+      "all_source10_file_bytes_preserved": true,
+      "paid_client_bytes_changed": false,
+      "count_script_history_runtime_and_role_bytes_changed": false
+    },
+    "derived_from_source10": {
+      "path": "reports/public_evaluator/20261012/evaluator_client_source_v10.json",
+      "sha256": "777687c1abb5c45afb5894020e5a9714e5e481a1d97fcf9c15cc474055500ec0"
+    }
+  },
+  "prior_receipt": "reports/public_evaluator/20261012/operations/client_source_grant_v10.json",
+  "authorization": "Owner-approved v10_13 private hosted client; replace only exact prior source get condition",
+  "removed_binding": {
+    "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+    "members": [
+      "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+    ],
+    "condition": {
+      "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/engineering-clients/v10_13/07d7d6a976350065d92f385a75de037cf6260dcf92858291e2a1f09ce3546280.tar.gz'",
+      "title": "motomedic-backend-exact-evaluator-client-v10-13-v10",
+      "description": "Read only the exact authorized v10_13 hosted engineering client archive"
+    }
+  },
+  "added_binding": {
+    "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+    "members": [
+      "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+    ],
+    "condition": {
+      "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/engineering-clients/v10_13/2df3ae94b4e5b4fbb6d797ca4f014cbc9785e25f935ba552e1fac4428057f7c2.tar.gz'",
+      "title": "motomedic-backend-exact-evaluator-client-v10-13-v11",
+      "description": "Read only the exact authorized v10_13 hosted engineering client archive"
+    }
+  },
+  "unrelated_bindings_unchanged": true,
+  "prior_policy_sha256": "45c8c02810bbd963f6d7cf580cd97bed6eded156a8d0c92ab802d7eedd5aa382",
+  "result_policy_sha256": "94898e8ba5e250653187f732e9df3061906db49ff01938b95a97efc6dba9beac",
+  "readback_policy_sha256": "94898e8ba5e250653187f732e9df3061906db49ff01938b95a97efc6dba9beac",
+  "public_iam_changed": false,
+  "artifact_create_prefix_changed": false,
+  "provider_key_payload_read": false,
+  "provider_calls": 0
+}

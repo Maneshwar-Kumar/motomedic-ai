@@ -1,0 +1,199 @@
+[
+  {
+    "timestamp": "2026-10-12T11:19:51.720226223Z",
+    "message": "Fetching storage object: gs://motomedic-ai-20261009-indices/serving/engineering-clients/v10_13/2df3ae94b4e5b4fbb6d797ca4f014cbc9785e25f935ba552e1fac4428057f7c2.tar.gz#1791803899063146"
+  },
+  {
+    "timestamp": "2026-10-12T11:19:53.317955296Z",
+    "message": "Copying gs://motomedic-ai-20261009-indices/serving/engineering-clients/v10_13/2df3ae94b4e5b4fbb6d797ca4f014cbc9785e25f935ba552e1fac4428057f7c2.tar.gz#1791803899063146..."
+  },
+  {
+    "timestamp": "2026-10-12T11:19:55.501390042Z",
+    "message": "Step #0: Pulling image: docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1"
+  },
+  {
+    "timestamp": "2026-10-12T11:19:56.739044873Z",
+    "message": "Step #0: docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1: Pulling from library/python"
+  },
+  {
+    "timestamp": "2026-10-12T11:19:57.249056358Z",
+    "message": "Step #0: ecc510c1e359: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:19:57.249106388Z",
+    "message": "Step #0: 75b6a36c64a1: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:19:57.249107968Z",
+    "message": "Step #0: 6912e23eb445: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:19:57.249108576Z",
+    "message": "Step #0: bbc5a1223747: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:01.155243125Z",
+    "message": "Step #0: Digest: sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:01.700793098Z",
+    "message": "Step #1: Pulling image: us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.767957032Z",
+    "message": "Step #1: us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716: Pulling from motomedic-ai-20261009/motomedic/rider-ui"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.768641235Z",
+    "message": "Step #1: 304074f06047: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.768649818Z",
+    "message": "Step #1: 75b6a36c64a1: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770389299Z",
+    "message": "Step #1: 6912e23eb445: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770395938Z",
+    "message": "Step #1: bbc5a1223747: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770396797Z",
+    "message": "Step #1: c2aff86fa1a7: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770397385Z",
+    "message": "Step #1: d3d081f4d6fc: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770397972Z",
+    "message": "Step #1: 402a2d64395e: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770398672Z",
+    "message": "Step #1: 558e39392c72: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770399544Z",
+    "message": "Step #1: 8e05a2d82118: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:02.770400030Z",
+    "message": "Step #1: 9b48e877c739: Pulling fs layer"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:15.130213406Z",
+    "message": "Step #1: Digest: sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:15.133657702Z",
+    "message": "Step #1: Status: Downloaded newer image for us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:15.139564109Z",
+    "message": "Step #1: us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716"
+  },
+  {
+    "timestamp": "2026-10-12T11:20:19.987775954Z",
+    "scalars": {
+      "case_id": "EVAL_DIRECT_01",
+      "operation_id": "f00fbe5c04e745e09339dc28e31162e0",
+      "request_sha256": "778c21f378e87a67232ba50963e5c59397dfa1401f1de0214bd11b811c6b1cef",
+      "status": "POST_NOT_RETRIED"
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:23:13.123972089Z",
+    "scalars": {
+      "case_id": "EVAL_DIRECT_01",
+      "operation_id": "f00fbe5c04e745e09339dc28e31162e0",
+      "request_sha256": "778c21f378e87a67232ba50963e5c59397dfa1401f1de0214bd11b811c6b1cef",
+      "status": "SAVED_STREAMED_RECOVERED",
+      "route": "SUPPORTED",
+      "error": null,
+      "response_sha256": "ddb51e611922eb1ef2955f983e057d5b730875467ece4a621d1cda6b56b4c564",
+      "exact_saved_stream": true,
+      "exact_recovered_view": true,
+      "total_seconds": 173.84497125500002
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:23:13.784418777Z",
+    "scalars": {
+      "case_id": "EVAL_USB_02",
+      "operation_id": "74b6311d95f64cb1ad5b2c7c84594302",
+      "request_sha256": "5875648b6cb300f64a03cd5b9f82105fd796b6398a1e0fd718496c40052634e1",
+      "status": "POST_NOT_RETRIED"
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:25:22.797277522Z",
+    "scalars": {
+      "case_id": "EVAL_USB_02",
+      "operation_id": "74b6311d95f64cb1ad5b2c7c84594302",
+      "request_sha256": "5875648b6cb300f64a03cd5b9f82105fd796b6398a1e0fd718496c40052634e1",
+      "status": "SAVED_STREAMED_RECOVERED",
+      "route": "SYSTEM_ERROR",
+      "error": null,
+      "response_sha256": "a1e21228e7a7e63bea40fabb65eef0a8a6a11d7f4fc9301dd387f5c43b6ce894",
+      "exact_saved_stream": true,
+      "exact_recovered_view": true,
+      "total_seconds": 129.67146161200003
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:25:23.432285001Z",
+    "scalars": {
+      "receipt_sha256": "450196dfccfa5b7192e1db8b5687c482131d463244df6dbde87f66a415b2adc4",
+      "case_count": 2,
+      "engineering_completed_cases": 1,
+      "independent_factual_review_pending": true
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:25:23.722575839Z",
+    "scalars": {
+      "artifact_file": "EVAL_DIRECT_01.json",
+      "generation": "1791804324122489",
+      "sha256": "bc9075a8daef6c3152b8fee70f471ffe780d9fd9a66f597bf282b4f56e9421a0",
+      "credential_logged": false
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:25:23.925300185Z",
+    "scalars": {
+      "artifact_file": "EVAL_USB_02.json",
+      "generation": "1791804324320299",
+      "sha256": "b6dbb08e6b18c902d71f04f775e1b5c148617bbfb5d2dc84cb85560f67fa6879",
+      "credential_logged": false
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:25:24.174834654Z",
+    "scalars": {
+      "artifact_file": "exit_status.json",
+      "generation": "1791804324559547",
+      "sha256": "9a67ec260d0f6db735238a06df43f555024e78ca9a05125dd92fd6069e80201c",
+      "credential_logged": false
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:25:24.457911906Z",
+    "scalars": {
+      "artifact_file": "receipt.json",
+      "generation": "1791804324819490",
+      "sha256": "450196dfccfa5b7192e1db8b5687c482131d463244df6dbde87f66a415b2adc4",
+      "credential_logged": false
+    }
+  },
+  {
+    "timestamp": "2026-10-12T11:25:24.794435832Z",
+    "message": "ERROR"
+  },
+  {
+    "timestamp": "2026-10-12T11:25:24.794487741Z",
+    "message": "ERROR: build step 1 \"us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716\" failed: step exited with non-zero status: 1"
+  }
+]

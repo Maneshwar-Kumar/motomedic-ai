@@ -1,0 +1,32 @@
+{
+  "actual_archived_client_source_and_budget_statements_passed_before_transport": true,
+  "classification": "SYNTHETIC_PROVIDER_FREE_ARCHIVE_AND_STARTUP_CHECKS",
+  "cloud_calls": 0,
+  "file_sha256": {
+    "tmp/prepare_evaluator_v10_13_v3.py": "21cf5a90f102d1ca285af868dce98af7b3490cc9680eb5418842934c1ff2df0b",
+    "tmp/private_acceptance_console_v10_13_v4.py": "f92d2324802212cf5e18a55102bc2893ffa04f029f71891d0a256ebc6af583c6",
+    "tmp/test_source11_inventory_alias.py": "8022efa59931f1455a0c223a133cb07e18a5fc3d1d77aee277f4917114316458"
+  },
+  "frozen_runtime_edits": 0,
+  "functional_acceptance": false,
+  "helper_archive": {
+    "path": "reports/public_evaluator/20261012/haiku_v10_13_runtime/source11_alias_helpers_v1.zip",
+    "sha256": "824fd93a135bb3d91592df7f7696dc1117c6f491c5aaebc055369ff99e20ebcb"
+  },
+  "limits": [
+    "Startup tests execute actual archived SOURCE_INVENTORY and MEASURED_BUDGET_BINDING statements via AST in an isolated extracted archive; hosted context/identity/transport are not simulated as live success.",
+    "Actual source11 upload, conditional source grant and paid submission are root-only next actions."
+  ],
+  "original_count2_config_and_receipt_validated": true,
+  "original_local_v1_inventory_overwritten": false,
+  "original_missing_alias_failure_reproduced": true,
+  "original_paid_source10_preserved": true,
+  "original_source10_client_and_count_bytes_unchanged": true,
+  "provider_calls": 0,
+  "recorded_at_utc": "2026-10-12T11:17:32.557297+00:00",
+  "schema": "motomedic-source11-inventory-alias-engineering-repair-v1",
+  "source11_adds_only_exact_inventory_alias": true,
+  "synthetic_archived_startup_transport_calls": 0,
+  "test_command": "python tmp/test_source11_inventory_alias.py",
+  "tests_passed": 7
+}

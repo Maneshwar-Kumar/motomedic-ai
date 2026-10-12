@@ -1,0 +1,73 @@
+{
+  "browser_receipt_path": "tmp/public_evaluator/functional-v13-enabled-browser-v1/receipt.json",
+  "browser_receipt_sha256": "229b96eab912c6a93828f940c0b610adb2a5a76dacdb22e1f991734633efa014",
+  "core_and_public_iam_unchanged_after_browser": true,
+  "human_signoff": false,
+  "independent_factual_quality_acceptance": false,
+  "mode": "enabled",
+  "provider_counts_for_enabled_browser_require_correlated_operation_audit": true,
+  "provider_ledger_after": {
+    "full_document_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "3e136020a5a9aba7afd39310490f37f95ce37f10e7a07e214c23bbc824405774",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "ff1a85a42893ffbfb0204f3ff8069863015263c4a67b75b184b6076a70026deb",
+      "owner-haiku-fallback-20261011-validation-v1": "583a4fd9185bd2c8ef963203052d59f5ec89a325eeab74a6c7ebac172e51a13e"
+    },
+    "immutable_non_charge_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "e029cbd37abbd6dafc48ebcd748442f3cf4efc38bd21503e6f850e699997ff32",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "9e0d5b18c1ad0b9cbc7fda54427a5000708e847be21334afef29af643d064783",
+      "owner-haiku-fallback-20261011-validation-v1": "daadac75082af4bb53a05e7ab2155aaaa396f0afb2768da52ee3a1cc6128c2b4"
+    },
+    "maximum_tokens": 2000000,
+    "reservation_count": 8,
+    "reserved_attempts": 34,
+    "reserved_nanodollars": 56954750,
+    "reserved_tokens": 549094,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "provider_ledger_before": {
+    "full_document_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "576393951cf8a0a75bbee65f1110a7571370910996f7d01640d526ab79971e8d",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "5ddb991baa9a46230b99ba7a81ee60e5fbf08d70d9e2e698d51d6783fb5631a0",
+      "owner-haiku-fallback-20261011-validation-v1": "79ee13be702e8b83acb8bd7e1885155c8ca422cb26b39ad2e7207cb84ae15299"
+    },
+    "immutable_non_charge_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "e029cbd37abbd6dafc48ebcd748442f3cf4efc38bd21503e6f850e699997ff32",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "9e0d5b18c1ad0b9cbc7fda54427a5000708e847be21334afef29af643d064783",
+      "owner-haiku-fallback-20261011-validation-v1": "daadac75082af4bb53a05e7ab2155aaaa396f0afb2768da52ee3a1cc6128c2b4"
+    },
+    "maximum_tokens": 2000000,
+    "reservation_count": 7,
+    "reserved_attempts": 32,
+    "reserved_nanodollars": 48535000,
+    "reserved_tokens": 492536,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "provider_work_forbidden": false,
+  "public_browser_passed": true,
+  "routed_ui_after_browser": {
+    "revision": "motomedic-rider-ui-v10-13-functional-enabled",
+    "revision_configuration_sha256": "c06c68929838694a3bb61efa68f3f11ff9cc440971040a7f645fc7c238d2376b"
+  },
+  "schema": "motomedic-functional-ui-browser-evidence-v1",
+  "script_sha256": "24e2ea53d9b390a1a2ffa34f70ff5519d4c573fd37ffb12ebc9d29ca51b4e8f1"
+}
