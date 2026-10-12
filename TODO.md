@@ -32,6 +32,8 @@ Timeboxes are estimates, not a promise of a deployable agent in two hours. This 
 
 ## Implementation sequence after the reset
 
+Current candidate v10.10 addresses a real native-count blocker with reversible JSON formatting only. The v10.8 follow-up's complete-source verifier prefix counted 17,318 tokens against Google's 16,000 input TPM; the hosted check made no generation or reservation and retained the ledgers. V10.9 CI, images and private API/worker/UI readiness passed after the startup fix, but its unchanged prompt representation cannot resolve that count failure. Preserve both versions. The new codec must retain every source/history value and relationship, pass exact roundtrip checks, then receive fresh hosted counts and useful-answer acceptance before public opening.
+
 Current candidate v10.9 corrects only the startup cache-label/routing guard after8backend/worker failed before index/models/providers. Preserve8CI/build/deployment/count/source receipts; model/source/index/budget behavior is unchanged. New9freeze/build and exactprivate readiness precede useful-answer/rollback/public gates; uploaded8source_v5 is preserved and9uses source_v6/grant_v6.
 
 Current candidate v10.8 repairs only CI test selection after v10.7's missing original-index fixtures; serving behavior is unchanged. Preserve the7freeze/build/failure receipts and do not deploy7images. OrdinaryCI selects explicit index-free paired/routed/projection classes; full original-index checks and live source-reviewed acceptance remain required. New8freeze/builds/native counts/quality/rollback/public gates are pending.

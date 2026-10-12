@@ -509,32 +509,38 @@ class SharedProjectionTests(unittest.TestCase):
                'long_position_field_name':i} for i in range(12)]
         packed=compact(rows)
         self.assertEqual(expand(packed),rows)
-        self.assertTrue(any(type(value)is list and 'long_warning_field_name' in value
-                            for value in packed['shared']))
+        self.assertIn('long_warning_field_name',packed['shared'])
+        self.assertTrue(any(type(value)is list for value in packed['shared']))
         self.assertTrue(any(type(value)is str and 'Complete synthetic warning text.' in value
                             for value in packed['shared']))
 
     def test_reserved_source_field_names_are_escaped_without_semantic_changes(self):
         compact,expand=self.helpers()
         source={'$ref':0,'$literal':{'$record':2,'values':['literal source list']},
-                'nested':[{'$ref':True},{'$literal':{'$ref':4}}]}
+                'nested':[{'$ref':True},{'$literal':{'$ref':4}},['@ref',0],
+                          ['@record',0,[None]],['@literal',['@ref',2]]]}
         self.assertEqual(expand(compact(source)),source)
 
     def test_cyclic_boolean_unknown_and_out_of_range_refs_fail_closed(self):
         _,expand=self.helpers()
         from cloud.grounded_generation.verified_qa import CONTEXT_ENCODING
-        fixtures=[{'shared':[],'value':{'$ref':0}},
-                  {'shared':['text'],'value':{'$ref':True}},
-                  {'shared':['text'],'value':{'$ref':-1}},
-                  {'shared':[{'$ref':0}],'value':{'$ref':0}},
-                  {'shared':[['field','field']],'value':{'$record':0,'values':[1,2]}},
-                  {'shared':[['field']],'value':{'$record':0,'values':[]}},
-                  {'shared':[],'value':{'$ref':0,'other':'unescaped'}}]
+        fixtures=[{'shared':[],'value':['@ref',0]},
+                  {'shared':['text'],'value':['@ref',True]},
+                  {'shared':['text'],'value':['@ref',-1]},
+                  {'shared':[['@ref',0]],'value':['@ref',0]},
+                  {'shared':[['field','field']],'value':['@record',0,[1,2]]},
+                  {'shared':[['field']],'value':['@record',0,[]]},
+                  {'shared':[],'value':['@ref',0,'unescaped']},
+                  {'shared':[],'value':['@literal',{'wrong':'shape'}]},
+                  {'shared':[],'value':{'bad':(1,2)}},
+                  {'shared':[],'value':{1:'non-string key'}},
+                  {'shared':[],'value':float('nan')}]
         for fixture in fixtures:
             with self.subTest(fixture=fixture),self.assertRaises(ValidationFailure):
                 expand({'encoding':CONTEXT_ENCODING,**fixture})
 
     def test_citation_ids_and_hash_echo_remain_literal_and_alias_outputs_are_rejected(self):
+        import json
         compact,expand=self.helpers()
         from cloud.grounded_generation.verified_qa import validate_draft
         eid='evidence_'+'a'*24;sha='b'*64
@@ -542,7 +548,9 @@ class SharedProjectionTests(unittest.TestCase):
                 'same_id':[eid]*8,'binding_sha256':sha,'binding':{'sha':sha}}
         packed=compact(source)
         self.assertEqual(expand(packed),source)
-        self.assertNotIn(eid,packed['shared']);self.assertNotIn(sha,packed['shared'])
+        self.assertIn(eid,packed['shared'])
+        self.assertEqual(packed['value']['binding_sha256'],sha)
+        self.assertIn(eid,json.dumps(packed))
         for alias in ('0','$ref:0'):
             with self.assertRaisesRegex(ValidationFailure,'INVALID_DRAFT_CITATION'):
                 validate_draft(draft(alias),{eid:source['evidence'][eid]})

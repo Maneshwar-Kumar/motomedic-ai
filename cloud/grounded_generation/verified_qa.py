@@ -92,20 +92,22 @@ Original object hashes and full provenance remain bound on the server.'''
 DRAFT_POLICY+=TABLE_PROJECTION_POLICY
 VERIFY_POLICY+=TABLE_PROJECTION_POLICY
 
-CONTEXT_ENCODING='lossless-shared-json-v1'
-REFERENCE_PROJECTION_POLICY=''' Context JSON uses lossless-shared-json-v1.
+CONTEXT_ENCODING='lossless-shared-json-v2'
+REFERENCE_PROJECTION_POLICY=''' Context JSON uses lossless-shared-json-v2.
 All source text/values remain readable; no facts are removed or summarized.
 In stable evidence, source_projection.shared is the common value dictionary for
 evidence, required_source_display and source_gaps. In a dynamic request envelope,
 shared is its own dictionary and value is the complete original request.
-An object containing only "$ref":n means shared[n], recursively expanded.
-An object with "$record":n and "values":[...] is an original object: shared[n]
+An array ["@ref",n] means shared[n], recursively expanded.
+An array ["@record",n,[...]] is an original object: shared[n]
 is its ordered list of field names, paired with values at matching positions.
+Field names can themselves reference full literal names in the shared dictionary.
 Every value position is present; do not infer or invent omitted defaults.
-An object containing only "$literal" wraps an original object whose field names
-collide with this encoding; expand its field values, then retain those field names.
+An array ["@literal",[...]] wraps an original array whose first value
+collides with these tags; expand its elements, retaining that original first value.
 These references are representation only, never citation or claim identifiers.
-Cite only full immutable evidence IDs, never reference numbers or field indexes.
+Cite only full immutable evidence IDs defined literally in the dictionary or
+source values, never reference arrays, numbers or field indexes.
 After expansion apply every original field, table header/unit/span, warning,
 dependency, source gap, history item, complete displayed claim and binding.
 Echo the literal supplied binding_sha256 exactly. Cache includes stable sources
@@ -193,49 +195,47 @@ def _context_wire(value):
 
 
 def compact_model_context(value):
-    """Reversible exact-value/field-name sharing; no source selection or aliases.
-
-    Every definition is ordinary readable JSON. Citation IDs and SHA-256 values
-    stay literal, and original reserved field names are explicitly escaped.
-    """
+    """Readable exact-value/key sharing, preserving every original JSON value."""
     counts,shapes=Counter(),Counter()
     def inspect(node):
         if type(node)is dict:
             if any(type(k)is not str for k in node):raise ValidationFailure('CONTEXT_JSON_KEY')
             shapes[tuple(sorted(node))]+=1
-            for child in node.values():inspect(child)
+            for key,child in node.items():inspect(key);inspect(child)
         elif type(node)is list:
             for child in node:inspect(child)
         elif type(node)not in (str,int,float,bool,type(None)):
             raise ValidationFailure('CONTEXT_JSON_VALUE')
         raw=_context_wire(node)
-        if type(node)in (dict,list,str) and len(raw)>=(24 if type(node)is str else 64):
-            if type(node)is not str or not re.fullmatch(r'(?:evidence|chunk|section|policy)_[A-Za-z0-9_:-]+|[a-fA-F0-9]{64}',node):
-                counts[raw]+=1
+        if type(node)in (dict,list,str) and len(raw)>=(16 if type(node)is str else 64):
+            counts[raw]+=1
     inspect(value)
-    candidates={raw for raw,count in counts.items() if count>=2 and (count-1)*len(raw)>count*16+4}
-    schema_candidates={keys for keys,count in shapes.items() if count>=2 and len(keys)>=2 and
-        (count-1)*len(_context_wire(list(keys)))>count*26+4 and
-        not set(keys)&{'$ref','$record','$literal'}}
+    candidates={raw for raw,count in counts.items() if count>=2 and (count-1)*len(raw)>count*10+4}
+    schema_candidates={keys for keys,count in shapes.items() if keys and (
+        count>=2 and (count-1)*len(_context_wire(list(keys)))>count*15+4 or
+        any(re.fullmatch(r'(?:evidence|chunk|section|policy)_[A-Za-z0-9_:-]+',key) for key in keys))}
     shared,positions=[],{}
     def remember(key,make):
         if key not in positions:
             positions[key]=len(shared);shared.append(None)
             shared[positions[key]]=make()
         return positions[key]
-    def encode(node,share=True,record=True):
+    def encode(node,share=True,record=True,key=None):
+        if key=='binding_sha256':return deepcopy(node)
         raw=_context_wire(node)
         if share and raw in candidates:
-            return {'$ref':remember(('value',raw),lambda:encode(node,False))}
-        if type(node)is list:return [encode(x) for x in node]
+            return ['@ref',remember(('value',raw),lambda:encode(node,False))]
+        if type(node)is list:
+            result=[encode(x) for x in node]
+            if node and type(node[0])is str and node[0] in ('@ref','@record','@literal'):
+                return ['@literal',result]
+            return result
         if type(node)is not dict:return deepcopy(node)
-        if set(node)&{'$ref','$record','$literal'}:
-            return {'$literal':{k:encode(v) for k,v in sorted(node.items())}}
         keys=tuple(sorted(node))
         if record and keys in schema_candidates:
-            return {'$record':remember(('fields',keys),lambda:list(keys)),
-                    'values':[encode(node[k]) for k in keys]}
-        return {k:encode(v) for k,v in sorted(node.items())}
+            return ['@record',remember(('fields',keys),lambda:[encode(k) for k in keys]),
+                    [encode(node[k],key=k) for k in keys]]
+        return {k:encode(v,key=k) for k,v in sorted(node.items())}
     result={'encoding':CONTEXT_ENCODING,'shared':shared,'value':encode(value,record=False)}
     # A compression bug must block before any provider count/generation.
     if _context_wire(expand_model_context(result))!=_context_wire(value):
@@ -256,21 +256,28 @@ def expand_model_context(envelope):
             active.add(index);memo[index]=decode(shared[index]);active.remove(index)
         return deepcopy(memo[index])
     def decode(node):
-        if type(node)is list:return [decode(x) for x in node]
-        if type(node)is not dict:return deepcopy(node)
-        if set(node)=={'$ref'}:return reference(node['$ref'])
-        if set(node)=={'$literal'}:
-            literal=node['$literal']
-            if type(literal)is not dict:raise ValidationFailure('CONTEXT_PROJECTION_LITERAL')
-            return {k:decode(v) for k,v in literal.items()}
-        if set(node)=={'$record','values'}:
-            keys=reference(node['$record']);values=node['values']
-            if (type(keys)is not list or any(type(k)is not str for k in keys) or
-                    len(keys)!=len(set(keys)) or type(values)is not list or len(keys)!=len(values)):
-                raise ValidationFailure('CONTEXT_PROJECTION_RECORD')
-            return {k:decode(v) for k,v in zip(keys,values)}
-        if set(node)&{'$ref','$record','$literal'}:
-            raise ValidationFailure('CONTEXT_PROJECTION_UNESCAPED')
+        if type(node)is list:
+            tagged=node and type(node[0])is str and node[0] in ('@ref','@record','@literal')
+            if tagged:
+                if node[0]=='@ref' and len(node)==2:return reference(node[1])
+                if node[0]=='@literal' and len(node)==2 and type(node[1])is list:
+                    return [decode(v) for v in node[1]]
+                if node[0]=='@record' and len(node)==3:
+                    keys=reference(node[1]);values=node[2]
+                    if (type(keys)is not list or any(type(k)is not str for k in keys) or
+                            len(keys)!=len(set(keys)) or type(values)is not list or len(keys)!=len(values)):
+                        raise ValidationFailure('CONTEXT_PROJECTION_RECORD')
+                    return {k:decode(v) for k,v in zip(keys,values)}
+                raise ValidationFailure('CONTEXT_PROJECTION_UNESCAPED')
+            return [decode(x) for x in node]
+        if type(node)is not dict:
+            if type(node)not in (str,int,float,bool,type(None)):
+                raise ValidationFailure('CONTEXT_JSON_VALUE')
+            if type(node)is float:
+                try:_context_wire(node)
+                except ValueError:raise ValidationFailure('CONTEXT_JSON_VALUE') from None
+            return deepcopy(node)
+        if any(type(k)is not str for k in node):raise ValidationFailure('CONTEXT_JSON_KEY')
         return {k:decode(v) for k,v in node.items()}
     return decode(envelope['value'])
 
