@@ -1,0 +1,258 @@
+{
+  "name": "projects/motomedic-ai-20261009/locations/us-central1/operations/70625cb6-b1ed-41ec-a150-57839bb545f0",
+  "metadata": {
+    "@type": "type.googleapis.com/google.cloud.run.v2.Service",
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui",
+    "uid": "53be46e3-ab16-4139-9fa9-ad77826e7121",
+    "generation": "10",
+    "labels": {
+      "motomedic-release": "v10-8"
+    },
+    "createTime": "2026-10-11T12:34:17.705769Z",
+    "updateTime": "2026-10-12T06:32:05.015527Z",
+    "creator": "maneshwarkumar@gmail.com",
+    "lastModifier": "maneshwarkumar@gmail.com",
+    "client": "gcloud",
+    "clientVersion": "575.0.0",
+    "ingress": "INGRESS_TRAFFIC_ALL",
+    "launchStage": "GA",
+    "template": {
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "timeout": "1200s",
+      "serviceAccount": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "containers": [
+        {
+          "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:2888002632623c411e031515d7521d2f2d2228b0312fd309a4b312b47be21fea",
+          "env": [
+            {
+              "name": "MOTOMEDIC_RIDER_API_URL",
+              "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_PUBLIC_HOST",
+              "value": "motomedic-rider-ui-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_EDGE_POLICY",
+              "value": "gcp-public-cloud-run-cookie-v2"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_ACCESS",
+              "value": "public_gateway"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_AUTH",
+              "value": "cloud_run"
+            },
+            {
+              "name": "MOTOMEDIC_VISITOR_SECRET",
+              "valueSource": {
+                "secretKeyRef": {
+                  "secret": "motomedic-rider-visitor-v1",
+                  "version": "1"
+                }
+              }
+            }
+          ],
+          "resources": {
+            "limits": {
+              "cpu": "1",
+              "memory": "512Mi"
+            },
+            "cpuIdle": true,
+            "startupCpuBoost": true
+          },
+          "ports": [
+            {
+              "name": "http1",
+              "containerPort": 8080
+            }
+          ],
+          "startupProbe": {
+            "timeoutSeconds": 5,
+            "periodSeconds": 10,
+            "failureThreshold": 24,
+            "httpGet": {
+              "path": "/health",
+              "port": 8080
+            }
+          }
+        }
+      ],
+      "maxInstanceRequestConcurrency": 4
+    },
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+        "percent": 100
+      }
+    ],
+    "scaling": {
+      "maxInstanceCount": 1
+    },
+    "urls": [
+      "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+      "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app"
+    ],
+    "sshEnabled": false,
+    "observedGeneration": "10",
+    "terminalCondition": {
+      "type": "Ready",
+      "state": "CONDITION_SUCCEEDED",
+      "lastTransitionTime": "2026-10-12T06:32:38.772737Z"
+    },
+    "conditions": [
+      {
+        "type": "RoutesReady",
+        "state": "CONDITION_SUCCEEDED",
+        "lastTransitionTime": "2026-10-12T06:32:38.732173Z"
+      },
+      {
+        "type": "ConfigurationsReady",
+        "state": "CONDITION_SUCCEEDED",
+        "lastTransitionTime": "2026-10-12T06:32:33.973202Z"
+      }
+    ],
+    "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00009-s9f",
+    "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00009-s9f",
+    "trafficStatuses": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+        "revision": "motomedic-rider-ui-00009-s9f",
+        "percent": 100
+      }
+    ],
+    "uri": "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app",
+    "etag": "\"COX9sdYGENjYswc/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtcmlkZXItdWk\""
+  },
+  "done": true,
+  "response": {
+    "@type": "type.googleapis.com/google.cloud.run.v2.Service",
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui",
+    "uid": "53be46e3-ab16-4139-9fa9-ad77826e7121",
+    "generation": "10",
+    "labels": {
+      "motomedic-release": "v10-8"
+    },
+    "createTime": "2026-10-11T12:34:17.705769Z",
+    "updateTime": "2026-10-12T06:32:05.015527Z",
+    "creator": "maneshwarkumar@gmail.com",
+    "lastModifier": "maneshwarkumar@gmail.com",
+    "client": "gcloud",
+    "clientVersion": "575.0.0",
+    "ingress": "INGRESS_TRAFFIC_ALL",
+    "launchStage": "GA",
+    "template": {
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "timeout": "1200s",
+      "serviceAccount": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "containers": [
+        {
+          "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:2888002632623c411e031515d7521d2f2d2228b0312fd309a4b312b47be21fea",
+          "env": [
+            {
+              "name": "MOTOMEDIC_RIDER_API_URL",
+              "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_PUBLIC_HOST",
+              "value": "motomedic-rider-ui-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_EDGE_POLICY",
+              "value": "gcp-public-cloud-run-cookie-v2"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_ACCESS",
+              "value": "public_gateway"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_AUTH",
+              "value": "cloud_run"
+            },
+            {
+              "name": "MOTOMEDIC_VISITOR_SECRET",
+              "valueSource": {
+                "secretKeyRef": {
+                  "secret": "motomedic-rider-visitor-v1",
+                  "version": "1"
+                }
+              }
+            }
+          ],
+          "resources": {
+            "limits": {
+              "cpu": "1",
+              "memory": "512Mi"
+            },
+            "cpuIdle": true,
+            "startupCpuBoost": true
+          },
+          "ports": [
+            {
+              "name": "http1",
+              "containerPort": 8080
+            }
+          ],
+          "startupProbe": {
+            "timeoutSeconds": 5,
+            "periodSeconds": 10,
+            "failureThreshold": 24,
+            "httpGet": {
+              "path": "/health",
+              "port": 8080
+            }
+          }
+        }
+      ],
+      "maxInstanceRequestConcurrency": 4
+    },
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+        "percent": 100
+      }
+    ],
+    "scaling": {
+      "maxInstanceCount": 1
+    },
+    "urls": [
+      "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+      "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app"
+    ],
+    "sshEnabled": false,
+    "observedGeneration": "10",
+    "terminalCondition": {
+      "type": "Ready",
+      "state": "CONDITION_SUCCEEDED",
+      "lastTransitionTime": "2026-10-12T06:32:38.772737Z"
+    },
+    "conditions": [
+      {
+        "type": "RoutesReady",
+        "state": "CONDITION_SUCCEEDED",
+        "lastTransitionTime": "2026-10-12T06:32:38.732173Z"
+      },
+      {
+        "type": "ConfigurationsReady",
+        "state": "CONDITION_SUCCEEDED",
+        "lastTransitionTime": "2026-10-12T06:32:33.973202Z"
+      }
+    ],
+    "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00009-s9f",
+    "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00009-s9f",
+    "trafficStatuses": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+        "revision": "motomedic-rider-ui-00009-s9f",
+        "percent": 100
+      }
+    ],
+    "uri": "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app",
+    "etag": "\"COX9sdYGENjYswc/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtcmlkZXItdWk\""
+  }
+}

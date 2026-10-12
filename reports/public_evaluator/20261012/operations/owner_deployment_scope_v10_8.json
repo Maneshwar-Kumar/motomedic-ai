@@ -1,0 +1,20 @@
+{
+  "schema": "motomedic-exact-hosted-action-owner-scope-v1",
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "recorded_date": "2026-10-12",
+  "exact_question": "Approve deploying the built v10.8 backend, worker and UI to project motomedic-ai-20261009, running the bounded hosted checks, then opening only the UI publicly after those checks pass? Existing credentials, INR2,700 budget, INR2,540 guard and provider allocations stay unchanged; backend, worker and Qdrant stay private. Automatic approval review requires this fresh, exact approval before deployment.",
+  "exact_user_answer": "Approve deployment, checks and public UI",
+  "project": "motomedic-ai-20261009",
+  "runtime_revision": "v10_8",
+  "serving_manifest_sha256": "7e5896add721d18ec186f272dda481a6aedc475c0274bf9281cf1802bb7510d0",
+  "build_image_binding_sha256": "3e06d57f19321492a80ca389b642e469c856684a5ef844d2daecef5d82cbd892",
+  "authorized": ["PRIVATE_BACKEND_DEPLOYMENT", "PRIVATE_WORKER_DEPLOYMENT", "UI_DEPLOYMENT", "BOUNDED_HOSTED_VALIDATION", "NECESSARY_EXACT_ENGINEERING_CLIENT_SOURCE_ACCESS_REPLACEMENT", "COMPATIBLE_PRIVATE_ROLLBACK_AND_RESTORE", "UI_PUBLIC_OPENING_AFTER_ACCEPTANCE"],
+  "project_budget_inr": 2700,
+  "billing_disconnect_guard_inr": 2540,
+  "provider_allocations_changed": false,
+  "billing_restart_authorized": false,
+  "private_backend_worker_qdrant_must_remain_private": true,
+  "source_display_authorization_changed": false,
+  "human_factual_quality_signoff": false,
+  "prior_automatic_review_rejections_preserved": true
+}

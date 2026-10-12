@@ -1,0 +1,110 @@
+[
+  {
+    "timestamp": "2026-10-12T04:24:37.957628Z",
+    "status": 204,
+    "method": "POST",
+    "latency": "27.017447049s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00003-9vr"
+  },
+  {
+    "timestamp": "2026-10-12T04:25:10.075554Z",
+    "status": 204,
+    "method": "POST",
+    "latency": "2.141323859s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00003-9vr"
+  },
+  {
+    "timestamp": "2026-10-12T04:25:16.311680Z",
+    "status": 204,
+    "method": "POST",
+    "latency": "2.169306116s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00003-9vr"
+  },
+  {
+    "timestamp": "2026-10-12T04:25:22.402740Z",
+    "status": 204,
+    "method": "POST",
+    "latency": "5.224899238s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00003-9vr"
+  },
+  {
+    "timestamp": "2026-10-12T04:25:33.397169Z",
+    "status": 204,
+    "method": "POST",
+    "latency": "1.796250824s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00003-9vr"
+  },
+  {
+    "timestamp": "2026-10-12T04:25:39.180082Z",
+    "status": 204,
+    "method": "POST",
+    "latency": "49.263462262s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00003-9vr"
+  },
+  {
+    "timestamp": "2026-10-12T04:41:33.387564Z",
+    "message": "[2026-10-12 04:41:33 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T05:12:39.251159Z",
+    "message": "[2026-10-12 05:12:39 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T05:12:39.263288Z",
+    "message": "[2026-10-12 05:12:39 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T05:25:44.010411Z",
+    "status": 200,
+    "method": "GET",
+    "latency": "0.002908070s",
+    "path": "https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app/v1/health",
+    "revision": "motomedic-answer-worker-00005-b49"
+  },
+  {
+    "timestamp": "2026-10-12T05:40:47.292033Z",
+    "message": "[2026-10-12 05:40:47 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:06.955870Z",
+    "message": "[2026-10-12 06:32:06 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:06.968781Z",
+    "message": "[2026-10-12 06:32:06 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:11.302986Z",
+    "message": "[2026-10-12 06:32:11 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:11.303050Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:11.303050Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:11.303318Z",
+    "message": "[2026-10-12 06:32:11 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:11.366436Z",
+    "message": "[2026-10-12 06:32:11 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:11.367594Z",
+    "message": "[2026-10-12 06:32:11 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:11.369707Z",
+    "message": "[2026-10-12 06:32:11 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  }
+]

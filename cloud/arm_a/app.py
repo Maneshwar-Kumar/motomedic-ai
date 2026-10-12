@@ -233,6 +233,22 @@ def create_app(registry, retriever, state_factory, cases):
     return app
 
 
+def validate_production_policy(lock):
+    """Check the installed role policy before models, providers or stores load."""
+    from cloud.grounded_generation.cached_verifier import CONTRACT as VERIFIER_CONTRACT, DRAFT_CONTRACT
+    from cloud.grounded_generation.role_router import ROUTING_CONTRACT
+    if (type(lock) is not dict or lock.get('schema_version') != 'motomedic-serving-release-v10' or
+            lock.get('primary_model') != 'gemma-4-26b-a4b-it' or
+            lock.get('answer_cache_enabled') is not False or
+            lock.get('verifier_enabled') is not True or
+            lock.get('draft_model_contract') != DRAFT_CONTRACT or
+            lock.get('verifier_model') != 'claude-haiku-5-5' or
+            lock.get('verifier_contract') != VERIFIER_CONTRACT or
+            lock.get('prompt_cache') != 'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M' or
+            lock.get('model_routing_contract') != ROUTING_CONTRACT):
+        raise RuntimeError('Production serving policy mismatch')
+
+
 def load_production():
     if not os.environ.get('K_SERVICE'):
         raise RuntimeError('Production app requires Cloud Run IAM environment')
@@ -240,16 +256,7 @@ def load_production():
     for name, sha in lock['file_sha256'].items():
         if hashlib.sha256((ROOT/name).read_bytes()).hexdigest() != sha:
             raise RuntimeError('Production runtime binding mismatch')
-    from cloud.grounded_generation.cached_verifier import CONTRACT as VERIFIER_CONTRACT, DRAFT_CONTRACT
-    if (lock.get('schema_version') != 'motomedic-serving-release-v10' or
-            lock.get('primary_model') != 'gemma-4-26b-a4b-it' or
-            lock.get('answer_cache_enabled') is not False or
-            lock.get('verifier_enabled') is not True or
-            lock.get('draft_model_contract') != DRAFT_CONTRACT or
-            lock.get('verifier_model') != 'claude-haiku-5-5' or
-            lock.get('verifier_contract') != VERIFIER_CONTRACT or
-            lock.get('prompt_cache') != 'ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M'):
-        raise RuntimeError('Production serving policy mismatch')
+    validate_production_policy(lock)
     fallback_enabled = os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true'
     if fallback_enabled and lock.get('fallback_enabled') is not True:
         raise RuntimeError('Claude fallback serving activation is not authorized by the exact release')

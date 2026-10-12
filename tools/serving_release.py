@@ -28,12 +28,14 @@ HISTORICAL = 'reports/grounded_generation/v8/runtime_freeze.json'
 HISTORICAL_SHA = 'd7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0'
 PRESERVED = 'reports/build/20261012/frozen_v8_runtime'
 MIGRATION = 'reports/build/20261012/v8_preservation.json'
-CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_8.json'
+CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_9.json'
 SCHEMA = 'motomedic-serving-release-v10'
 SOURCE_BASELINE = 'f2daacbb35cb4997bed7915336dfbdc1456c0ddc'
 OWNER_SCOPE = 'reports/public_evaluator/20261012/owner_scope_v1.json'
 OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v1.json'
 HISTORICAL_SERVING = {
+    'reports/public_evaluator/20261012/serving_manifest_v10_8.json':
+        '7e5896add721d18ec186f272dda481a6aedc475c0274bf9281cf1802bb7510d0',
     'reports/public_evaluator/20261012/serving_manifest_v10_7.json':
         '27510150635230629284f0c6ae89d36a6beb546695b94a4da63e47c67387826d',
     'reports/public_evaluator/20261012/serving_manifest_v10_6.json':
