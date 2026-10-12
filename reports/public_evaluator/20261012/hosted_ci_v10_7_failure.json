@@ -1,0 +1,20 @@
+{
+  "schema": "motomedic-hosted-ci-result-v1",
+  "source_commit": "06688542cb9ecedb913d39a52b8ac0e50406b2b3",
+  "serving_manifest_sha256": "27510150635230629284f0c6ae89d36a6beb546695b94a4da63e47c67387826d",
+  "run_id": 38211600628,
+  "url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38211600628",
+  "result": "FAILED",
+  "executed_tests": 260,
+  "setup_errors": [
+    "cloud.grounded_generation.test_verified_qa.VerifiedTests",
+    "cloud.arm_a.test_question_wiring.WiringTests"
+  ],
+  "cause": "The two source-backed fixture groups require build/index-bge-final/manifest.json, which is ignored and unavailable on the provider-free GitHub runner.",
+  "source_and_freeze_validation": "PASS",
+  "repaired_in_same_freeze": false,
+  "v10_7_deployed": false,
+  "next_candidate": "v10_8",
+  "remaining_validation": "The original-index fixture groups passed locally and remain distinct from hosted factual acceptance. The next candidate uses explicit index-free GitHub selectors and retains actual authenticated source/retrieval and real-answer acceptance gates.",
+  "provider_generation_calls": 0
+}
