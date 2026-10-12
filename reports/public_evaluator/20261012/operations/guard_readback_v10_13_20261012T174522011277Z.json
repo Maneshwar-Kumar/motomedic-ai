@@ -1,0 +1,39 @@
+{
+  "schema_version": "private-v10_13-guard-readback-v1",
+  "read_at_utc": "2026-10-12T17:45:22.011277+00:00",
+  "project_id": "motomedic-ai-20261009",
+  "guard_revision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-budget-guard/revisions/motomedic-budget-guard-00003-qax",
+  "guard_settings": {
+    "BUDGET_DISPLAY_NAME": "MotoMedic lifetime INR2700",
+    "BUDGET_INR": "2700",
+    "SIMULATE": "false",
+    "STOP_INR": "2540"
+  },
+  "billing_enabled": {
+    "motomedic-ai-20261009": true,
+    "motomedic-inference-20261009": false
+  },
+  "latest_guard_log_scalars": [
+    {
+      "timestamp": "2026-10-12T17:26:59.386255Z",
+      "cost_inr": 370.88,
+      "stop": false
+    },
+    {
+      "timestamp": "2026-10-12T16:45:59.013956Z",
+      "cost_inr": 370.88,
+      "stop": false
+    },
+    {
+      "timestamp": "2026-10-12T16:05:03.396080Z",
+      "cost_inr": 339.03,
+      "stop": false
+    }
+  ],
+  "recorded_scope_matches": true,
+  "delayed_reporting_prevents_instantaneous_cap": true,
+  "cloud_writes": 0,
+  "billing_changed": false,
+  "provider_calls": 0,
+  "raw_logs_or_request_bodies_saved": false
+}
