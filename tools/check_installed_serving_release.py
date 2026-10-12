@@ -7,11 +7,11 @@ import sys
 SCHEMA = 'motomedic-serving-release-v10'
 OWNER_SCOPE = 'reports/public_evaluator/20261012/owner_scope_v1.json'
 OWNER_SCOPE_SHA = '65c42d40b4a882972570e377b4a314abd2767be7fb8fb8129e7bfe9c2a436b0d'
-PRIMARY_MODEL = 'gemma-4-26b-a4b-it'
+PRIMARY_MODEL = 'gemini-2.5-flash-lite'
 VERIFIER_MODEL = 'claude-haiku-5-5'
 PROMPT_CACHE = 'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M'
-OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v1.json'
-OWNER_MODEL_SCOPE_SHA = '05145aff6facd33a6e22c86696bf9a4c16a15ae08bd5b28b9706358b69b08cfb'
+OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v2.json'
+OWNER_MODEL_SCOPE_SHA = 'e0b27ce5c620d29d30e6ad4942c17d0ad6b1282f344bf22cc50a3e1b6c271ea4'
 MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
 INDEX = 'index_a3282c4d98cf54595e4ba168'
 APPROVAL = 'human_review/agent_release_161/coordinator/release_manifest_v3.json'
@@ -65,7 +65,7 @@ def validate_policy(release, root):
         raise ValueError('SERVING_AUTHORIZATION_SCOPE_CHANGED')
     expected_model_scope = {'path': OWNER_MODEL_SCOPE, 'sha256': OWNER_MODEL_SCOPE_SHA,
         'authority': 'DIRECT_USER_INSTRUCTION',
-        'scope': 'USER_QUESTION_LIMIT_AND_LARGE_CONTEXT_DISTINCT_MODEL_ROUTING'}
+        'scope': 'PAID_FLASH_LITE_PRIMARY_AND_DISTINCT_HAIKU_VERIFIER'}
     if release.get('owner_model_authorization') != expected_model_scope:
         raise ValueError('SERVING_MODEL_AUTHORIZATION_BINDING_CHANGED')
     model_scope_path = confined(root, OWNER_MODEL_SCOPE)
@@ -79,9 +79,22 @@ def validate_policy(release, root):
             or model_scope.get('source_display_policy_changed') is not False
             or model_scope.get('human_factual_quality_approval') is not False):
         raise ValueError('SERVING_MODEL_AUTHORIZATION_SCOPE_CHANGED')
-    quota_path = confined(root, model_scope['quota_summary_path'])
-    if digest(quota_path) != model_scope['quota_summary_sha256']:
-        raise ValueError('SERVING_MODEL_QUOTA_BINDING_CHANGED')
+    interpretation=model_scope.get('interpretation',{})
+    if (interpretation.get('draft_model')!=PRIMARY_MODEL or
+            interpretation.get('verifier_model')!=VERIFIER_MODEL or
+            interpretation.get('fixed_distinct_model_pair') is not True or
+            interpretation.get('paid_primary_requests_authorized_within_retained_allocation') is not True or
+            interpretation.get('native_context_and_provider_quota_limits_remain') is not True or
+            interpretation.get('complete_evidence_history_final_response_preserved') is not True or
+            interpretation.get('new_chat_preserves_visitor_and_global_budgets') is not True or
+            model_scope.get('whole_manual_claude_authorized') is not False or
+            model_scope.get('source_approval_changed') is not False or
+            model_scope.get('retained_budget')!={
+                'billing_disconnect_inr':2540,'haiku_lifetime_usd':1,
+                'maximum_primary_usd_if_all_lifetime_tokens_are_output_at_published_rate':0.39968,
+                'no_reservation_refunds_or_resets':True,'primary_lifetime_attempts':100,
+                'primary_lifetime_tokens':999200,'project_lifetime_inr':2700}):
+        raise ValueError('SERVING_PAID_MODEL_OR_RETAINED_BUDGET_SCOPE_CHANGED')
     return True
 
 

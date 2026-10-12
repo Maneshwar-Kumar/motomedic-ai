@@ -24,15 +24,12 @@ class ReleaseTests(unittest.TestCase):
         authority.write_bytes((release.ROOT / release.OWNER_SCOPE).read_bytes())
         model_authority = root / release.OWNER_MODEL_SCOPE
         model_authority.write_bytes((release.ROOT / release.OWNER_MODEL_SCOPE).read_bytes())
-        model_scope = json.loads(model_authority.read_bytes())
-        quota = root / model_scope['quota_summary_path']
-        quota.write_bytes((release.ROOT / model_scope['quota_summary_path']).read_bytes())
         manifest = {'schema_version': release.SCHEMA,
             'file_sha256': bindings, 'manual_checksum': release.MANUAL_SHA,
             'index_id': release.INDEX, 'source_approval': {'path': release.APPROVAL, 'sha256': release.APPROVAL_SHA},
             'source_baseline_commit': release.SOURCE_BASELINE,
             'historical_serving_manifests': dict(release.HISTORICAL_SERVING),
-            'primary_model': 'gemma-4-26b-a4b-it', 'draft_model_contract': deepcopy(DRAFT_CONTRACT),
+            'primary_model': DRAFT_CONTRACT['model'], 'draft_model_contract': deepcopy(DRAFT_CONTRACT),
             'verifier_model': 'claude-haiku-5-5', 'verifier_contract': deepcopy(CONTRACT),
             'model_routing_contract': deepcopy(ROUTING_CONTRACT),
             'verifier_enabled': True,
@@ -42,7 +39,7 @@ class ReleaseTests(unittest.TestCase):
                 'authority': 'DIRECT_USER_INSTRUCTION', 'scope': 'PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION'},
             'owner_model_authorization': {'path': release.OWNER_MODEL_SCOPE,
                 'sha256': OWNER_MODEL_SCOPE_SHA, 'authority': 'DIRECT_USER_INSTRUCTION',
-                'scope': 'USER_QUESTION_LIMIT_AND_LARGE_CONTEXT_DISTINCT_MODEL_ROUTING'},
+                'scope': 'PAID_FLASH_LITE_PRIMARY_AND_DISTINCT_HAIKU_VERIFIER'},
             'deployment_authorized': True, 'public_opening_authorized': True,
             'public_release_approved': False, 'billing_changed': False,
             'acceptance': {'source_approval': 'EXACT_UNCHANGED_SCOPED_SOURCE_APPROVAL',
@@ -192,16 +189,17 @@ class ReleaseTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'SERVING_OWNER_AUTHORIZATION_CHANGED'):
                 validate_policy(manifest, root)
 
-    def test_owner_model_scope_and_live_quota_snapshot_are_exact_bindings(self):
-        for changed in ('scope', 'quota', 'routing'):
+    def test_owner_model_scope_and_native_window_are_exact_bindings(self):
+        for changed in ('scope', 'native_window', 'routing'):
             with self.subTest(changed=changed), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 _, manifest = self.fixture(root)
                 if changed == 'scope':
                     (root / release.OWNER_MODEL_SCOPE).write_text('{}')
-                elif changed == 'quota':
+                elif changed == 'native_window':
                     scope = json.loads((root / release.OWNER_MODEL_SCOPE).read_bytes())
-                    (root / scope['quota_summary_path']).write_text('{}')
+                    scope['published_native_context']['gemini']['input_limit_tokens']=16000
+                    (root / release.OWNER_MODEL_SCOPE).write_text(json.dumps(scope))
                 else:
                     manifest['model_routing_contract'] = {'allowed': 'same-model-verification'}
                 with self.assertRaises(ValueError):

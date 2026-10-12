@@ -1,0 +1,76 @@
+{
+  "config": {
+    "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "steps": [
+      {
+        "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a04a94caa5f6c485204916f1a824cc49ebfbc2e7802ef680a2c51b03091ebd48",
+        "entrypoint": "python",
+        "args": [
+          "-B",
+          "-c",
+          "import json,os,urllib.request,urllib.error\nkey=os.environ.get('MOTOMEDIC_GEMINI_API_KEY')\nresult={'schema':'motomedic-hosted-flash-lite-access-v1','model':'gemini-2.5-flash-lite','generation_calls':0,'provider_reservations':0,'credentials_logged':False}\nif not key: raise SystemExit('PROVIDER_UNCONFIGURED')\nbase='https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite'\nfor kind in ('metadata','count'):\n body=None if kind=='metadata' else json.dumps({'contents':[{'parts':[{'text':'Hosted model-access check.'}]}]}).encode()\n request=urllib.request.Request(base if kind=='metadata' else base+':countTokens',data=body,headers={'x-goog-api-key':key,'Content-Type':'application/json'},method='GET' if kind=='metadata' else 'POST')\n try:\n  with urllib.request.urlopen(request,timeout=25) as response: value=json.load(response)\n  result[kind]={'status':'SUCCESS',**({name:value.get(name) for name in ('name','version','inputTokenLimit','outputTokenLimit','supportedGenerationMethods')} if kind=='metadata' else {'totalTokens':value.get('totalTokens')})}\n except urllib.error.HTTPError as error: result[kind]={'status':'HTTP_'+str(error.code)}\n except Exception:result[kind]={'status':'TRANSPORT_OR_SCHEMA_FAILURE'}\nprint(json.dumps(result,sort_keys=True))\nif any(result[kind]['status']!='SUCCESS' for kind in ('metadata','count')):raise SystemExit(1)\n"
+        ],
+        "secretEnv": [
+          "MOTOMEDIC_GEMINI_API_KEY"
+        ]
+      }
+    ],
+    "availableSecrets": {
+      "secretManager": [
+        {
+          "versionName": "projects/motomedic-ai-20261009/secrets/motomedic-gemini-serving-v1/versions/1",
+          "env": "MOTOMEDIC_GEMINI_API_KEY"
+        }
+      ]
+    },
+    "options": {
+      "logging": "CLOUD_LOGGING_ONLY"
+    },
+    "timeout": "300s"
+  },
+  "operation": {
+    "name": "operations/build/motomedic-ai-20261009/MTUwZDBhODgtODMyMS00OGQyLTk0M2EtNWFjN2I1NmI2NjVj",
+    "metadata": {
+      "@type": "type.googleapis.com/google.devtools.cloudbuild.v1.BuildOperationMetadata",
+      "build": {
+        "id": "150d0a88-8321-48d2-943a-5ac7b56b665c",
+        "status": "QUEUED",
+        "createTime": "2026-10-12T07:30:03.501068692Z",
+        "steps": [
+          {
+            "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a04a94caa5f6c485204916f1a824cc49ebfbc2e7802ef680a2c51b03091ebd48",
+            "args": [
+              "-B",
+              "-c",
+              "import json,os,urllib.request,urllib.error\nkey=os.environ.get('MOTOMEDIC_GEMINI_API_KEY')\nresult={'schema':'motomedic-hosted-flash-lite-access-v1','model':'gemini-2.5-flash-lite','generation_calls':0,'provider_reservations':0,'credentials_logged':False}\nif not key: raise SystemExit('PROVIDER_UNCONFIGURED')\nbase='https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite'\nfor kind in ('metadata','count'):\n body=None if kind=='metadata' else json.dumps({'contents':[{'parts':[{'text':'Hosted model-access check.'}]}]}).encode()\n request=urllib.request.Request(base if kind=='metadata' else base+':countTokens',data=body,headers={'x-goog-api-key':key,'Content-Type':'application/json'},method='GET' if kind=='metadata' else 'POST')\n try:\n  with urllib.request.urlopen(request,timeout=25) as response: value=json.load(response)\n  result[kind]={'status':'SUCCESS',**({name:value.get(name) for name in ('name','version','inputTokenLimit','outputTokenLimit','supportedGenerationMethods')} if kind=='metadata' else {'totalTokens':value.get('totalTokens')})}\n except urllib.error.HTTPError as error: result[kind]={'status':'HTTP_'+str(error.code)}\n except Exception:result[kind]={'status':'TRANSPORT_OR_SCHEMA_FAILURE'}\nprint(json.dumps(result,sort_keys=True))\nif any(result[kind]['status']!='SUCCESS' for kind in ('metadata','count')):raise SystemExit(1)\n"
+            ],
+            "entrypoint": "python",
+            "secretEnv": [
+              "MOTOMEDIC_GEMINI_API_KEY"
+            ]
+          }
+        ],
+        "timeout": "300s",
+        "projectId": "motomedic-ai-20261009",
+        "options": {
+          "logging": "CLOUD_LOGGING_ONLY",
+          "pool": {}
+        },
+        "logUrl": "https://console.cloud.google.com/cloud-build/builds/150d0a88-8321-48d2-943a-5ac7b56b665c?project=279945185781",
+        "queueTtl": "3600s",
+        "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "name": "projects/279945185781/locations/global/builds/150d0a88-8321-48d2-943a-5ac7b56b665c",
+        "availableSecrets": {
+          "secretManager": [
+            {
+              "versionName": "projects/motomedic-ai-20261009/secrets/motomedic-gemini-serving-v1/versions/1",
+              "env": "MOTOMEDIC_GEMINI_API_KEY"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "generation_calls": 0,
+  "billing_changes": 0
+}

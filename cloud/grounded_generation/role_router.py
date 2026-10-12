@@ -10,11 +10,12 @@ import threading
 from evidence_registry import content_hash
 from generation_providers import ProviderFailure
 from cloud.grounded_generation.provider import GemmaProvider
+from cloud.grounded_generation.flash_lite_provider import FlashLiteProvider
 from cloud.grounded_generation.cached_verifier import CachedDraft,CachedVerifier
 from cloud.grounded_generation.role_contracts import (CONTRACT as ROUTING_CONTRACT,
-    GEMMA,HAIKU,GEMMA_DRAFT,GEMMA_VERIFIER,HAIKU_DRAFT,HAIKU_VERIFIER,
+    GEMMA,FLASH,HAIKU,GEMMA_DRAFT,GEMMA_VERIFIER,FLASH_DRAFT,HAIKU_VERIFIER,
     OUTPUT_TOKENS,OUTPUT_JSON_BYTES,GEMMA_INPUT_TPM,ROUTING_THRESHOLD,
-    HAIKU_CONTEXT_TOKENS,haiku_maximum_nanodollars)
+    FLASH_INPUT_TOKENS,FLASH_INPUT_TPM,HAIKU_CONTEXT_TOKENS,haiku_maximum_nanodollars)
 
 
 class GemmaRole(GemmaProvider):
@@ -54,7 +55,7 @@ class RolePlan:
     def binding(self):
         return {'version':ROUTING_CONTRACT['version'],'route':self.name,
             'routing_contract_sha256':content_hash(ROUTING_CONTRACT),
-            'gemma_routing_input_tokens':self.routing_count,
+            'primary_input_tokens_counted':self.routing_count,
             'selected_draft_input_tokens':self.initial_input_tokens,
             'initial_draft_request_sha256':self.initial_request_sha256,
             'stable_context_sha256':self.stable_sha256,
@@ -64,12 +65,11 @@ class RolePlan:
 
 class RoleRouter:
     contract=ROUTING_CONTRACT
-    def __init__(self,gemma_draft,haiku_draft,gemma_verifier,haiku_verifier,admission):
-        self.gemma_draft,self.haiku_draft=gemma_draft,haiku_draft
-        self.gemma_verifier,self.haiku_verifier=gemma_verifier,haiku_verifier
+    def __init__(self,draft,verifier,admission):
+        self.draft,self.verifier=draft,verifier
+        self.gemma_draft,self.haiku_verifier=draft,verifier
         self.admission=admission
-        for provider,expected in ((gemma_draft,GEMMA_DRAFT),(haiku_draft,HAIKU_DRAFT),
-            (gemma_verifier,GEMMA_VERIFIER),(haiku_verifier,HAIKU_VERIFIER)):
+        for provider,expected in ((draft,FLASH_DRAFT),(verifier,HAIKU_VERIFIER)):
             if getattr(provider,'contract',None)!=expected:raise ProviderFailure('ROUTER_MODEL_ROLE_CONTRACT_CHANGED')
         self.last_plan=None
         self.last_count_provider=None
@@ -85,17 +85,14 @@ class RoleRouter:
     def select(self,stable,dynamic):
         from cloud.grounded_generation.verified_qa import DRAFT_POLICY,DRAFT_SCHEMA,compact_model_context
         encoded=compact_model_context(dynamic)
-        self.last_count_provider=self.gemma_draft
-        body,count=self.gemma_draft.context(DRAFT_POLICY,stable,encoded,DRAFT_SCHEMA,_sizing=True)
-        name='HAIKU_DRAFT_GEMMA_VERIFY' if count>ROUTING_THRESHOLD else 'GEMMA_DRAFT_HAIKU_VERIFY'
-        draft,verifier=((self.haiku_draft,self.gemma_verifier) if count>ROUTING_THRESHOLD else
-                        (self.gemma_draft,self.haiku_verifier))
+        name='FLASH_LITE_DRAFT_HAIKU_VERIFY'
+        draft,verifier=self.draft,self.verifier
         chosen=deepcopy(stable)
         chosen['runtime_contract']['draft_model_contract']=deepcopy(draft.contract)
         chosen['runtime_contract']['verifier_contract']=deepcopy(verifier.contract)
         self.last_count_provider=draft
         body,selected_count=draft.context(DRAFT_POLICY,chosen,encoded,DRAFT_SCHEMA)
-        plan=RolePlan(name,count,selected_count,content_hash(body),content_hash(chosen),draft,verifier,
+        plan=RolePlan(name,selected_count,selected_count,content_hash(body),content_hash(chosen),draft,verifier,
                       content_hash(draft.contract),content_hash(verifier.contract))
         self.validate(plan);self.last_plan=plan
         return plan,chosen
@@ -129,7 +126,7 @@ class RoleRouter:
             'unanswered_parts':[],'binding':binding,'binding_sha256':'0'*64}
         def counted(provider,policy,payload,schema,*,sizing=False):
             self.last_count_provider=provider
-            kwargs={'_sizing':True} if sizing and provider.contract['model']==GEMMA else {}
+            kwargs={'_sizing':True} if sizing and provider.contract['model']==FLASH else {}
             return provider.context(policy,stable,compact_model_context(payload),schema,**kwargs)[1]
         verify_fixed=counted(plan.verifier,VERIFY_POLICY,verification,VERIFY_SCHEMA,sizing=True)
         base_verification=deepcopy(verification)
@@ -149,13 +146,12 @@ class RoleRouter:
         unknown_verify=2*OUTPUT_JSON_BYTES+512
         unknown_correction=3*OUTPUT_JSON_BYTES+512
         def future(provider,fixed,unknown):
-            if provider.contract['model']==GEMMA:return GEMMA_INPUT_TPM
+            if provider.contract['model']==FLASH:return min(FLASH_INPUT_TPM,fixed+unknown)
             value=fixed+unknown
             if value>HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS:
                 raise ProviderFailure('ROLE_FUTURE_FORECAST_EXCEEDS_NATIVE_WINDOW')
             return value
-        initial_limit=(min(HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS,plan.initial_input_tokens+512)
-                       if plan.draft.contract['model']==HAIKU else plan.initial_input_tokens)
+        initial_limit=min(FLASH_INPUT_TPM,plan.initial_input_tokens+512)
         limits={'draft':initial_limit,'verify':future(plan.verifier,verify_fixed,unknown_verify),
                 'correction':future(plan.draft,correction_fixed,unknown_correction),
                 'reverify':future(plan.verifier,verify_fixed,unknown_verify)}
@@ -172,7 +168,8 @@ class RoleRouter:
             'fixed_verifier_native_tokens':verify_fixed,'fixed_correction_native_tokens':correction_fixed,
             'known_verifier_prefix_native_tokens':verify_base,
             'unknown_verifier_byte_allowance':unknown_verify,'unknown_correction_byte_allowance':unknown_correction,
-            'initial_haiku_counter_headroom_tokens':initial_limit-plan.initial_input_tokens}
+            'initial_haiku_counter_headroom_tokens':0,
+            'initial_primary_counter_headroom_tokens':initial_limit-plan.initial_input_tokens}
 
     def begin(self,operation_id,plan,stable,dynamic,admitted,session):
         self.validate(plan)
@@ -199,13 +196,12 @@ class RoleRouter:
         body,count=plan.draft.context(DRAFT_POLICY,stable,compact_model_context({**dynamic,
             'correction_feedback':feedback}),DRAFT_SCHEMA)
         reservation=self.reservation_plan(plan,stable,dynamic,admitted,session)
-        for key in ('initial_haiku_counter_headroom_tokens','known_verifier_prefix_native_tokens'):
+        for key in ('initial_haiku_counter_headroom_tokens','initial_primary_counter_headroom_tokens','known_verifier_prefix_native_tokens'):
             reservation[key]=initial[key]
         reservation['slots']=reservation['slots'][3:]
         for slot in reservation['slots']:
             if slot['stage']=='correction':
-                slot['input_tokens']=(min(HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS,count+512)
-                                      if slot['model']==HAIKU else count)
+                slot['input_tokens']=min(FLASH_INPUT_TPM,count+512)
                 if slot['model']==HAIKU:slot['maximum_nanodollars']=haiku_maximum_nanodollars(slot['input_tokens'])
         reservation.update(correction_request_sha256=content_hash(body),
             rejected_binding_sha256=content_hash(rejected_binding),verdict_sha256=content_hash(feedback['verdict']))
@@ -216,31 +212,31 @@ class RoleRouter:
     def end(self):
         self.admission.end_turn()
         self.local.initial_forecast=None;self.local.operation_id=None
-        for provider in (self.gemma_draft,self.gemma_verifier,self.haiku_draft,self.haiku_verifier):
+        for provider in (self.draft,self.verifier):
             provider.expect_initial_context(None)
 
 
 def production_router(admission):
-    return RoleRouter(GemmaRole(admission.for_model(GEMMA),role='private_draft',pre_reserved=True),
-        CachedDraft(admission.for_model(HAIKU),pre_reserved=True),
-        GemmaRole(admission.for_model(GEMMA),role='semantic_verifier',pre_reserved=True),
+    return RoleRouter(FlashLiteProvider(admission.for_model(FLASH),pre_reserved=True),
         CachedVerifier(admission.for_model(HAIKU),pre_reserved=True),admission)
 
 
 def validate_role_plan_binding(value):
-    keys={'version','route','routing_contract_sha256','gemma_routing_input_tokens',
+    keys={'version','route','routing_contract_sha256','primary_input_tokens_counted',
           'selected_draft_input_tokens','initial_draft_request_sha256','stable_context_sha256',
           'draft_model_contract_sha256','verifier_contract_sha256'}
     if type(value)is not dict or set(value)!=keys:raise ProviderFailure('ROUTER_ROLE_PLAN_SCHEMA_CHANGED')
     pair=ROUTING_CONTRACT['roles'].get(value['route'])
     if (not pair or value['version']!=ROUTING_CONTRACT['version'] or
         value['routing_contract_sha256']!=content_hash(ROUTING_CONTRACT) or
-        type(value['gemma_routing_input_tokens'])is not int or value['gemma_routing_input_tokens']<1 or
+        type(value['primary_input_tokens_counted'])is not int or value['primary_input_tokens_counted']<1 or
         type(value['selected_draft_input_tokens'])is not int or value['selected_draft_input_tokens']<1 or
         any(type(value[k])is not str or not re.fullmatch('[0-9a-f]{64}',value[k]) for k in keys if k.endswith('sha256')) or
         value['draft_model_contract_sha256']!=content_hash(pair['draft']) or
         value['verifier_contract_sha256']!=content_hash(pair['verifier']) or
-        (value['gemma_routing_input_tokens']>ROUTING_THRESHOLD)!= (value['route']=='HAIKU_DRAFT_GEMMA_VERIFY') or
+        value['route']!='FLASH_LITE_DRAFT_HAIKU_VERIFY' or
+        value['primary_input_tokens_counted']!=value['selected_draft_input_tokens'] or
+        value['selected_draft_input_tokens']>FLASH_INPUT_TPM or
         value['selected_draft_input_tokens']>pair['draft']['input_tokens']):
         raise ProviderFailure('ROUTER_SELECTED_ROLE_BINDING_CHANGED')
     return pair

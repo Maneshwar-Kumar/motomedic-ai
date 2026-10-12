@@ -1,0 +1,274 @@
+{
+  "actual_count10_closure_reconstructed": false,
+  "candidate_rules": [
+    "Only factor complete uniform fields/rows arrays; retain every original field name, order, value, missing map and row_lengths metadata.",
+    "Only share a column constant when canonical typed JSON values match and every row declares that field present.",
+    "Only derive end_col_offset_idx from start_col_offset_idx+col_span or end_row_offset_idx from start_row_offset_idx+row_span when all original values are integers and every original equality holds.",
+    "Keep every other table/source property unchanged. Restore all values and canonical original source fields before any model or generation.",
+    "Any unfamiliar schema, absent field, noninteger offset, unequal derived relation or larger representation uses original complete table."
+  ],
+  "classification": "READ_ONLY_OFFLINE_PRIOR_SAVED_SOURCE_FIXTURES",
+  "codec_sha256": "f23c2ae08bf8bde9964b202ace397389dea433e10777a2b84e18a572cb7138db",
+  "limits": [
+    "Prior fixtures are not the actual hosted10 closure; no actual native-count result or finalized response fit is inferred.",
+    "Prototype inverse would require strict schema/index/collision validation and bound version before production; it is not installed."
+  ],
+  "models_or_retrieval_executed": false,
+  "native_token_savings_demonstrated": false,
+  "production_edits": false,
+  "prototype_sha256": "27984c5b67e5ae791727fa0c16b33855d537c29a12444fbbcfc01bef925b7fcb",
+  "provider_calls": 0,
+  "rows": [
+    {
+      "additional_saved_bytes": 1617,
+      "additional_saved_percent": 6.85,
+      "canonical_roundtrip": true,
+      "case_id": "EVAL_DIRECT_01",
+      "factored_tables": [
+        {
+          "constant_fields": [
+            "col_span",
+            "fillable",
+            "row_header",
+            "row_section"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 1078,
+          "fields": 11,
+          "raw_bytes": 1283,
+          "rows": 14,
+          "varying_fields": 5
+        },
+        {
+          "constant_fields": [
+            "col_span",
+            "fillable",
+            "row_header",
+            "row_section"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 1205,
+          "fields": 11,
+          "raw_bytes": 1482,
+          "rows": 17,
+          "varying_fields": 5
+        },
+        {
+          "constant_fields": [
+            "col_span",
+            "column_header",
+            "fillable",
+            "row_header",
+            "row_section",
+            "row_span"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 844,
+          "fields": 11,
+          "raw_bytes": 1149,
+          "rows": 14,
+          "varying_fields": 3
+        },
+        {
+          "constant_fields": [
+            "fillable",
+            "row_header"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 1868,
+          "fields": 11,
+          "raw_bytes": 2580,
+          "rows": 51,
+          "varying_fields": 7
+        }
+      ],
+      "fixture_display_count": 14,
+      "fixture_sha256": "88735e16a5cae3c73c5115aaf0b722d043fdc6de135d964e15af081a9ac3e0c9",
+      "fixture_source_count": 30,
+      "table_factored_v2_source_bytes": 21987,
+      "v2_source_bytes": 23604
+    },
+    {
+      "additional_saved_bytes": 21,
+      "additional_saved_percent": 0.15,
+      "canonical_roundtrip": true,
+      "case_id": "EVAL_FOLLOWUP_03",
+      "factored_tables": [
+        {
+          "constant_fields": [
+            "col_span",
+            "fillable",
+            "row_header",
+            "row_section",
+            "row_span"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 548,
+          "fields": 11,
+          "raw_bytes": 569,
+          "rows": 6,
+          "varying_fields": 4
+        }
+      ],
+      "fixture_display_count": 12,
+      "fixture_sha256": "448bd135ef038e6f2cdf4213cfc5a2f47c2663742d26bdc879275d118583ce8d",
+      "fixture_source_count": 20,
+      "table_factored_v2_source_bytes": 13788,
+      "v2_source_bytes": 13809
+    },
+    {
+      "additional_saved_bytes": 305,
+      "additional_saved_percent": 2.33,
+      "canonical_roundtrip": true,
+      "case_id": "EVAL_PARTIAL_05",
+      "factored_tables": [
+        {
+          "constant_fields": [
+            "col_span",
+            "column_header",
+            "fillable",
+            "row_header",
+            "row_section",
+            "row_span"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 844,
+          "fields": 11,
+          "raw_bytes": 1149,
+          "rows": 14,
+          "varying_fields": 3
+        }
+      ],
+      "fixture_display_count": 15,
+      "fixture_sha256": "a6afb5ed2b1e59e964bc36458227231db05dfc1f05ddc0384b28bd581c80a0b0",
+      "fixture_source_count": 17,
+      "table_factored_v2_source_bytes": 12780,
+      "v2_source_bytes": 13085
+    },
+    {
+      "additional_saved_bytes": 0,
+      "additional_saved_percent": 0.0,
+      "canonical_roundtrip": true,
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "factored_tables": [],
+      "fixture_display_count": 12,
+      "fixture_sha256": "54edb8fac7857e4775248f126fba0bfdcb77f9be6db195cd02f6c535839feec5",
+      "fixture_source_count": 15,
+      "table_factored_v2_source_bytes": 10792,
+      "v2_source_bytes": 10792
+    },
+    {
+      "additional_saved_bytes": 0,
+      "additional_saved_percent": 0.0,
+      "canonical_roundtrip": true,
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "factored_tables": [],
+      "fixture_display_count": 0,
+      "fixture_sha256": "b374589caa252266de0d4806c80f8cc34195e1b4d42df18b28c8a30303a8e36d",
+      "fixture_source_count": 10,
+      "table_factored_v2_source_bytes": 5068,
+      "v2_source_bytes": 5068
+    },
+    {
+      "additional_saved_bytes": 1616,
+      "additional_saved_percent": 5.58,
+      "canonical_roundtrip": true,
+      "case_id": "EVAL_USB_02",
+      "factored_tables": [
+        {
+          "constant_fields": [
+            "col_span",
+            "fillable",
+            "row_header",
+            "row_section"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 1078,
+          "fields": 11,
+          "raw_bytes": 1283,
+          "rows": 14,
+          "varying_fields": 5
+        },
+        {
+          "constant_fields": [
+            "col_span",
+            "fillable",
+            "row_header",
+            "row_section"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 1205,
+          "fields": 11,
+          "raw_bytes": 1482,
+          "rows": 17,
+          "varying_fields": 5
+        },
+        {
+          "constant_fields": [
+            "col_span",
+            "column_header",
+            "fillable",
+            "row_header",
+            "row_section",
+            "row_span"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 844,
+          "fields": 11,
+          "raw_bytes": 1149,
+          "rows": 14,
+          "varying_fields": 3
+        },
+        {
+          "constant_fields": [
+            "fillable",
+            "row_header"
+          ],
+          "derived_fields": [
+            "end_col_offset_idx",
+            "end_row_offset_idx"
+          ],
+          "factored_bytes": 1868,
+          "fields": 11,
+          "raw_bytes": 2580,
+          "rows": 51,
+          "varying_fields": 7
+        }
+      ],
+      "fixture_display_count": 26,
+      "fixture_sha256": "493a0acfad5972355717d104c6cc7dea5b0bf0ad3c527ca7af727565cb71752c",
+      "fixture_source_count": 34,
+      "table_factored_v2_source_bytes": 27356,
+      "v2_source_bytes": 28972
+    }
+  ],
+  "schema": "motomedic-lossless-table-factoring-contingency-v1",
+  "semantic_fields_removed": false
+}

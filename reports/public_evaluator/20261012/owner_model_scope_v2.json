@@ -1,0 +1,81 @@
+{
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "availability_fallback_enabled": false,
+  "billing_restart_authorized": false,
+  "coordinator": "/root",
+  "exact_user_instructions": [
+    "Use Gemini  2.5 Flash Lite. Even though it is paid i think it solves out issue. I just need to get the demo out, instead of  worrying about handling token windows.",
+    "It is okay to tell the customer to start a new chat, that context limit reached, if it is about excessive round trips adding context. I cant build a compaction layer, unless there is something prebuilt with Gemma or Haiku",
+    "For oversized retreived evidence, let it answer once and ask the rider to start a new chat once the first answer is served. I am assuming the evidence chunks are not bigger than the context allowed in the models"
+  ],
+  "human_factual_quality_approval": false,
+  "interpretation": {
+    "compaction_layer_requested": false,
+    "complete_evidence_history_final_response_preserved": true,
+    "draft_model": "gemini-2.5-flash-lite",
+    "fixed_distinct_model_pair": true,
+    "history_or_native_context_overflow": "FIXED_OPERATIONAL_ERROR_AND_SEPARATE_NEW_CHAT_NOTICE_NO_TRUNCATION",
+    "large_context_notice_threshold_fraction_of_smaller_native_input_allowance": 0.8,
+    "large_successful_context": "SERVE_VERIFIED_SAVED_ANSWER_THEN_SEPARATE_NEW_CHAT_NOTICE",
+    "native_context_and_provider_quota_limits_remain": true,
+    "new_chat_preserves_visitor_and_global_budgets": true,
+    "no_pdf_or_raw_rider_media_sent": true,
+    "paid_primary_requests_authorized_within_retained_allocation": true,
+    "provider_destinations": [
+      "https://generativelanguage.googleapis.com",
+      "https://api.anthropic.com"
+    ],
+    "provider_payloads": [
+      "retrieved approved manual evidence",
+      "engineering questions and relevant history",
+      "proposed finalized answers"
+    ],
+    "question_overflow": "REJECT_WITH_CLEAR_MESSAGE_NEVER_TRUNCATE",
+    "remove_artificial_assembled_input_8192_token_cap": true,
+    "remove_artificial_assembled_input_byte_cap": true,
+    "rider_question_word_limit": 100,
+    "superseded_size_role_flip": true,
+    "verifier_model": "claude-haiku-5-5"
+  },
+  "live_acceptance_demonstrated": false,
+  "new_spend_allocation_authorized": false,
+  "pricing_source": "https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-flash-lite",
+  "prior_model_api_scope_path": "reports/public_evaluator/20261012/owner_model_api_scope_v1.json",
+  "prior_model_api_scope_sha256": "0d4108530aaf7ff424701fdbdbebf84e415cca063ec3f607d5b23e54774fd306",
+  "prior_owner_scope_path": "reports/public_evaluator/20261012/owner_scope_v1.json",
+  "prior_owner_scope_sha256": "65c42d40b4a882972570e377b4a314abd2767be7fb8fb8129e7bfe9c2a436b0d",
+  "published_native_context": {
+    "gemini": {
+      "api_metadata_readback_pending": true,
+      "input_limit_tokens": 1048576,
+      "model": "gemini-2.5-flash-lite",
+      "output_limit_tokens": 65536,
+      "source": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite"
+    },
+    "haiku": {
+      "model": "claude-haiku-5-5",
+      "published_window_tokens": 1000000,
+      "source": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+    }
+  },
+  "published_primary_text_pricing_usd_per_million": {
+    "input": 0.1,
+    "output": 0.4
+  },
+  "recorded_date": "2026-10-12",
+  "retained_budget": {
+    "billing_disconnect_inr": 2540,
+    "haiku_lifetime_usd": 1,
+    "maximum_primary_usd_if_all_lifetime_tokens_are_output_at_published_rate": 0.39968,
+    "no_reservation_refunds_or_resets": true,
+    "primary_lifetime_attempts": 100,
+    "primary_lifetime_tokens": 999200,
+    "project_lifetime_inr": 2700
+  },
+  "schema": "motomedic-public-evaluator-owner-model-scope-v2",
+  "source_approval_changed": false,
+  "source_display_policy_changed": false,
+  "supersedes_model_selection_path": "reports/public_evaluator/20261012/owner_model_scope_v1.json",
+  "supersedes_model_selection_sha256": "05145aff6facd33a6e22c86696bf9a4c16a15ae08bd5b28b9706358b69b08cfb",
+  "whole_manual_claude_authorized": false
+}

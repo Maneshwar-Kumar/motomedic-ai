@@ -14,12 +14,12 @@ from generation_providers import ProviderFailure, ProviderResult
 from evidence_registry import content_hash
 from cloud.grounded_generation.claude_provider import HTTP
 from cloud.grounded_generation.provider import OUTPUT_TOKENS, unique
-from cloud.grounded_generation.role_contracts import (GEMMA_DRAFT,HAIKU_DRAFT,HAIKU_VERIFIER,
+from cloud.grounded_generation.role_contracts import (FLASH_DRAFT,HAIKU_DRAFT,HAIKU_VERIFIER,
     HAIKU_CONTEXT_TOKENS,OUTPUT_JSON_BYTES,haiku_maximum_nanodollars,haiku_actual_cost)
 
 MODEL = 'claude-haiku-5-5'
 INPUT_TOKENS=HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS
-DRAFT_CONTRACT=GEMMA_DRAFT
+DRAFT_CONTRACT=FLASH_DRAFT
 CONTRACT=HAIKU_VERIFIER
 # Retained isolated two-call fixture admission; production uses an atomic
 # counted role plan, not this historical default forecast.

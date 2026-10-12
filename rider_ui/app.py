@@ -56,6 +56,22 @@ def remember(view, rider_text=None):
     st.session_state.pending = None
     st.session_state.connection_error = None
 
+def conversation_notice(view):
+    """Operational guidance beside the unchanged, durably saved answer."""
+    response = view.get('response', {})
+    if (response.get('type') == 'SYSTEM_ERROR' and
+            type(response.get('reason_codes')) is list and
+            'COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION' in response['reason_codes']):
+        return 'This chat is too large to process. Start a new conversation for your next question.'
+    controls = view.get('runtime_controls')
+    composition = controls.get('composition') if type(controls) is dict else None
+    if (type(composition) is dict and composition.get('start_new_conversation_required') is True and
+            response.get('type') in ('SUPPORTED', 'AMBIGUOUS', 'SAFETY_STOP') and
+            response.get('release_gate_passed') is True and
+            response.get('semantic_verification_passed') is True):
+        return 'This chat used a large amount of context. Start a new conversation before your next question.'
+    return None
+
 def perform(kind, value):
     pending = {'id': operation_id(), 'kind': kind, 'value': value}
     st.session_state.pending = pending
@@ -165,6 +181,9 @@ for index, (role, value) in enumerate(st.session_state.messages):
             st.warning('Unable to verify right now'); st.text(response['natural_language'])
         else:
             st.text(response['natural_language'])
+        notice = conversation_notice(value)
+        if notice:
+            st.info(notice)
         citations = response.get('cited_pages', [])
         if citations:
             pages = sorted({c['pdf_page'] for c in citations})

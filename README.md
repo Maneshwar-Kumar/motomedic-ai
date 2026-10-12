@@ -1,6 +1,10 @@
 # MotoMedic AI
 
+**Latest owner direction: Haiku only.** Use `claude-haiku-5-5` for drafting and a separate verification call, with different role policies/schemas. This supersedes Gemini and the different-model requirement. The session is stopped; the Haiku-only migration is the first next-chat TODO. Frozen v10.11 is superseded, unbuilt WIP and must not be deployed. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
+
 A manual-grounded question-answering assistant for the Royal Enfield New Himalayan 450. The selected source is the supplied **owner's manual**. The runtime privately drafts from retrieved evidence, separately verifies the finalized answer, saves it, then streams that exact verified text.
+
+The owner stopped this build for a fresh-chat handoff. Start with the [handoff summary](reports/handoff/20261012/SUMMARY.md) and [ordered continuation TODO](reports/handoff/20261012/TODO.md). The saved work is unfinished; the UI is private and the Haiku-only migration remains pending.
 
 ## Read these four documents
 
@@ -30,13 +34,11 @@ Some compatibility modules implement earlier methods because current imports and
 
 ## Current acceptance
 
-The candidate index exists: index_a3282c4d98cf54595e4ba168, with 532 BGE M3 search chunks, 277 parents and BM25. The v9 implementation connects authenticated Qdrant with concurrent BM25, reviewed dependency recovery, compact complete evidence, whole-turn admission and durable Cloud Tasks execution. Separate verification and exact saved-buffer streaming remain mandatory for generated answers. These changes have synthetic checks; hosted artifact, model and deployed-service acceptance remain open.
+The selected index `index_a3282c4d98cf54595e4ba168` has 532 BGE M3 chunks, 277 parents and BM25. Runtime retrieval uses authenticated Qdrant concurrently with BM25, RRF and conditional reranking. Accepted answers require separate model verification and exact saved-buffer streaming.
 
-The last real Haiku validation released **zero technical answers** and answered **0 of 4** clearly answerable or partially answerable turns. Passing software checks establish boundaries, not answer coverage or deployed release acceptance. [Current status](docs/STATUS.md) and the [v8 report](reports/grounded_generation/v8/REPORT.md) explain the remaining work.
+The owner selected Haiku only for drafting and separate finalized-response verification. The saved v10.11 Gemini WIP is superseded, unbuilt and must not be deployed. Haiku-only runtime/fixtures/admission remain the first next-chat work. The session stopped; UI remains private. [Current status](docs/STATUS.md) preserves results and failures.
 
-The [v9 implementation receipt](reports/build/20261012/README.md) records current code, exact historical preservation and hosted image results. The existing GCP login and immutable index generation were verified before build preparation. Real-provider answer acceptance and deployment remain open.
-
-Claude is an optional retrieved-evidence availability fallback, disabled by default. The full-manual Claude alternative is retired. Prompt caching has no demonstrated support for the current exact primary configuration. Photo and voice follow text acceptance.
+Haiku policy/evidence-prefix caching is required; primary caching optimization, photo and voice are deferred. The availability fallback and whole-manual Claude route remain disabled. Existing source-display restrictions and spending guards stay in force.
 
 ## Working checks
 

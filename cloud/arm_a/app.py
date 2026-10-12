@@ -238,7 +238,7 @@ def validate_production_policy(lock):
     from cloud.grounded_generation.cached_verifier import CONTRACT as VERIFIER_CONTRACT, DRAFT_CONTRACT
     from cloud.grounded_generation.role_router import ROUTING_CONTRACT
     if (type(lock) is not dict or lock.get('schema_version') != 'motomedic-serving-release-v10' or
-            lock.get('primary_model') != 'gemma-4-26b-a4b-it' or
+            lock.get('primary_model') != 'gemini-2.5-flash-lite' or
             lock.get('answer_cache_enabled') is not False or
             lock.get('verifier_enabled') is not True or
             lock.get('draft_model_contract') != DRAFT_CONTRACT or
@@ -314,7 +314,7 @@ def load_production():
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-        ANSWER_PROVIDER='gemma-4-26b-a4b-it', VERIFIER_PROVIDER='claude-haiku-5-5',
+        ANSWER_PROVIDER='gemini-2.5-flash-lite', VERIFIER_PROVIDER='claude-haiku-5-5',
         PROMPT_CACHE='ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',
         MODEL_ROUTING_CONTRACT=ROUTING_CONTRACT)
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock

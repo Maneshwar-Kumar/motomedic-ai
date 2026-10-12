@@ -1,0 +1,144 @@
+{
+  "id": "b9c6b217-c03b-4ded-a2b9-d8d93af52021",
+  "status": "FAILURE",
+  "source": {
+    "storageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "object": "serving/engineering-clients/v10_10/44c390dcadb55cc18f6e16ce2a4a2ab8ad3148d5fcf50d936f01ca56de4930ee.tar.gz",
+      "generation": "1791788810119400"
+    }
+  },
+  "createTime": "2026-10-12T07:17:56.857808666Z",
+  "startTime": "2026-10-12T07:17:57.758409831Z",
+  "finishTime": "2026-10-12T07:18:36.771763Z",
+  "results": {
+    "buildStepImages": [
+      "sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716"
+    ],
+    "buildStepOutputs": [
+      "",
+      ""
+    ]
+  },
+  "steps": [
+    {
+      "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "args": [
+        "-c",
+        "from pathlib import Path; p=Path(\"/workspace/tmp/public_evaluator/hosted-run-v6\"); p.mkdir(parents=True,exist_ok=True); p.chmod(0o777)"
+      ],
+      "entrypoint": "python",
+      "timing": {
+        "startTime": "2026-10-12T07:18:00.266651704Z",
+        "endTime": "2026-10-12T07:18:07.502217525Z"
+      },
+      "status": "SUCCESS",
+      "pullTiming": {
+        "startTime": "2026-10-12T07:18:00.266651704Z",
+        "endTime": "2026-10-12T07:18:06.588581013Z"
+      }
+    },
+    {
+      "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716",
+      "env": [
+        "PYTHONPATH=/workspace",
+        "MOTOMEDIC_HOSTED_PROVIDER_VALIDATION=true",
+        "MOTOMEDIC_CLOUD_BUILD_ID=b9c6b217-c03b-4ded-a2b9-d8d93af52021"
+      ],
+      "args": [
+        "-B",
+        "-c",
+        "import base64,gzip,runpy,sys; budget=gzip.decompress(base64.b64decode(sys.argv[1],validate=True)).decode(\"utf-8\"); sys.argv=sys.argv[2:]+[\"--measured-phase-budget-json\",budget]; runpy.run_path(sys.argv[0],run_name=\"__main__\")",
+        "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",
+        "tmp/public_evaluator/hosted_client_v10_10.py",
+        "--backend",
+        "https://motomedic-arm-a-279945185781.us-central1.run.app",
+        "--runtime-lock",
+        "b59c7eac02bcf9efdf729a3e846d7c4f87f15d88336f8292af187924c7c83fbc",
+        "--allocated-job-id",
+        "b9c6b217-c03b-4ded-a2b9-d8d93af52021",
+        "--output",
+        "/workspace/tmp/public_evaluator/hosted-run-v6",
+        "--artifact-uri",
+        "gs://motomedic-ai-20261009-indices/engineering-acceptance/public-v10_3/b9c6b217-c03b-4ded-a2b9-d8d93af52021",
+        "--project",
+        "motomedic-ai-20261009",
+        "--read-ledger",
+        "--stop-on-system-error",
+        "--check-completed-boundaries"
+      ],
+      "entrypoint": "python",
+      "secretEnv": [
+        "MOTOMEDIC_VISITOR_SECRET"
+      ],
+      "timing": {
+        "startTime": "2026-10-12T07:18:07.502391947Z",
+        "endTime": "2026-10-12T07:18:25.647756578Z"
+      },
+      "status": "FAILURE",
+      "pullTiming": {
+        "startTime": "2026-10-12T07:18:07.502391947Z",
+        "endTime": "2026-10-12T07:18:23.895436205Z"
+      },
+      "exitCode": 1
+    }
+  ],
+  "timeout": "1800s",
+  "projectId": "motomedic-ai-20261009",
+  "sourceProvenance": {
+    "resolvedStorageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "object": "serving/engineering-clients/v10_10/44c390dcadb55cc18f6e16ce2a4a2ab8ad3148d5fcf50d936f01ca56de4930ee.tar.gz",
+      "generation": "1791788810119400"
+    },
+    "fileHashes": {
+      "gs://motomedic-ai-20261009-indices/serving/engineering-clients/v10_10/44c390dcadb55cc18f6e16ce2a4a2ab8ad3148d5fcf50d936f01ca56de4930ee.tar.gz#1791788810119400": {
+        "fileHash": [
+          {
+            "type": "MD5",
+            "value": "JSn0Btzp/eBIbrznX1lnHA=="
+          },
+          {
+            "type": "SHA256",
+            "value": "RMOQ3K21XMGPbhbOKkoquK0xSNX89Q2TbwHKVt5JMO4="
+          }
+        ]
+      }
+    }
+  },
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "pool": {}
+  },
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds/b9c6b217-c03b-4ded-a2b9-d8d93af52021?project=279945185781",
+  "timing": {
+    "STORAGE_SOURCE": {
+      "startTime": "2026-10-12T07:17:56.700929502Z",
+      "endTime": "2026-10-12T07:17:59.643530274Z"
+    },
+    "FETCHSOURCE": {
+      "startTime": "2026-10-12T07:17:56.700929502Z",
+      "endTime": "2026-10-12T07:17:59.643530274Z"
+    },
+    "BUILD": {
+      "startTime": "2026-10-12T07:17:59.643728077Z",
+      "endTime": "2026-10-12T07:18:25.647931747Z"
+    }
+  },
+  "queueTtl": "3600s",
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+  "name": "projects/279945185781/locations/global/builds/b9c6b217-c03b-4ded-a2b9-d8d93af52021",
+  "availableSecrets": {
+    "secretManager": [
+      {
+        "versionName": "projects/motomedic-ai-20261009/secrets/motomedic-rider-visitor-v1/versions/1",
+        "env": "MOTOMEDIC_VISITOR_SECRET"
+      }
+    ]
+  },
+  "failureInfo": {
+    "type": "USER_BUILD_STEP",
+    "detail": "Build step failure: build step 1 \"us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716\" failed: step exited with non-zero status: 1"
+  }
+}

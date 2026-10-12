@@ -26,9 +26,11 @@ MAX_TOKENS = 999200
 MAX_ATTEMPTS = 100
 CALL_TOKENS = 9992
 GEMMA = 'gemma-4-26b-a4b-it'
+FLASH = 'gemini-2.5-flash-lite'
 HAIKU = 'claude-haiku-5-5'
 GEMMA_INPUT_TPM = 16000
-MODEL_INPUT_LIMITS = {GEMMA: 256000 - 1800, HAIKU: 1000000 - 1800}
+FLASH_INPUT_TPM = 250000
+MODEL_INPUT_LIMITS = {GEMMA: 256000 - 1800, FLASH:1048576, HAIKU: 1000000 - 1800}
 MAX_OUTPUT_TOKENS = 1800
 STAGES = ('draft', 'verify', 'correction', 'reverify')
 SLOT_SECONDS = 61
@@ -80,8 +82,9 @@ def _events(data):
 def _role_identity(plan, entries, verifier_stage):
     from evidence_registry import content_hash
     if 'role_plan' in plan:
-        return content_hash({key: plan[key] for key in ('role_plan',
-            'initial_haiku_counter_headroom_tokens', 'known_verifier_prefix_native_tokens')})
+        keys=['role_plan','initial_haiku_counter_headroom_tokens','known_verifier_prefix_native_tokens']
+        if 'initial_primary_counter_headroom_tokens' in plan:keys.append('initial_primary_counter_headroom_tokens')
+        return content_hash({key:plan[key] for key in keys})
     return content_hash([entries[0]['model'], next(
         row['model'] for row in entries if row.get('stage') == verifier_stage)])
 
@@ -113,6 +116,9 @@ def _plan(plan, attempts, phase='initial'):
         'fixed_verifier_native_tokens', 'fixed_correction_native_tokens',
         'unknown_verifier_byte_allowance', 'unknown_correction_byte_allowance',
         'initial_haiku_counter_headroom_tokens', 'known_verifier_prefix_native_tokens'}
+    if (type(plan)is dict and type(plan.get('slots'))is list and plan['slots'] and
+            type(plan['slots'][0])is dict and plan['slots'][0].get('model')==FLASH):
+        metadata_keys.add('initial_primary_counter_headroom_tokens')
     correction_bindings = {'correction_request_sha256', 'rejected_binding_sha256', 'verdict_sha256'}
     if (type(plan) is not dict or not set(plan) <= {'slots'} | metadata_keys | correction_bindings or
             (set(plan) - correction_bindings) not in ({'slots'}, {'slots'} | metadata_keys) or
@@ -130,6 +136,8 @@ def _plan(plan, attempts, phase='initial'):
             raise ProviderFailure('WHOLE_TURN_NATIVE_PLAN_INVALID')
         if row['model'] == GEMMA and row['input_tokens'] > GEMMA_INPUT_TPM:
             raise ProviderFailure('PROVIDER_MODEL_INPUT_RATE_LIMIT')
+        if row['model'] == FLASH and row['input_tokens'] > FLASH_INPUT_TPM:
+            raise ProviderFailure('PROVIDER_MODEL_INPUT_RATE_LIMIT')
         row['tokens'] = row['input_tokens'] + row['output_tokens']
         if row['model'] == HAIKU:
             # Maximum5m cache-write plus output price at the selected native
@@ -143,10 +151,10 @@ def _plan(plan, attempts, phase='initial'):
         elif type(row.get('maximum_nanodollars', 0)) is not int or row.get('maximum_nanodollars', 0) != 0:
             raise ProviderFailure('CLAUDE_COST_MODEL_MISMATCH')
     drafter = rows[0]['model']
-    verifier = HAIKU if drafter == GEMMA else GEMMA
+    verifier = HAIKU if drafter in (GEMMA,FLASH) else GEMMA
     expected = [(model, stage, attempt) for stage, model in
         (('draft', drafter), ('verify', verifier), ('correction', drafter), ('reverify', verifier))
-        for attempt in range(1, 3 if model == GEMMA else 2)]
+        for attempt in range(1, 2 if model == HAIKU else 3)]
     if len(rows) == 3:
         expected = expected[:3] if phase == 'initial' else expected[3:]
     if [(row['model'], row['stage'], row['attempt']) for row in rows] != expected:
@@ -162,24 +170,32 @@ def _plan(plan, attempts, phase='initial'):
         raise ProviderFailure('WHOLE_TURN_CORRECTION_BINDING_REQUIRED')
     if 'role_plan' in plan:
         from evidence_registry import content_hash
-        from cloud.grounded_generation.role_contracts import CONTRACT, ROUTING_THRESHOLD
+        from cloud.grounded_generation.role_contracts import CONTRACT, LEGACY_CONTRACT, ROUTING_THRESHOLD
         role = plan['role_plan']
+        active_flash=drafter==FLASH
+        selected_contract=CONTRACT if active_flash else LEGACY_CONTRACT
+        count_key='primary_input_tokens_counted' if active_flash else 'gemma_routing_input_tokens'
         role_keys = {'version', 'route', 'routing_contract_sha256', 'gemma_routing_input_tokens',
             'selected_draft_input_tokens', 'initial_draft_request_sha256', 'stable_context_sha256',
             'draft_model_contract_sha256', 'verifier_contract_sha256'}
-        route = 'GEMMA_DRAFT_HAIKU_VERIFY' if drafter == GEMMA else 'HAIKU_DRAFT_GEMMA_VERIFY'
-        selected = CONTRACT['roles'][route]
-        if (type(role) is not dict or set(role) != role_keys or role.get('version') != CONTRACT['version'] or
-                role.get('route') != route or role.get('routing_contract_sha256') != content_hash(CONTRACT) or
+        if active_flash:
+            role_keys.remove('gemma_routing_input_tokens');role_keys.add(count_key)
+        route = 'FLASH_LITE_DRAFT_HAIKU_VERIFY' if active_flash else 'GEMMA_DRAFT_HAIKU_VERIFY' if drafter == GEMMA else 'HAIKU_DRAFT_GEMMA_VERIFY'
+        selected = selected_contract['roles'][route]
+        if (type(role) is not dict or set(role) != role_keys or role.get('version') != selected_contract['version'] or
+                role.get('route') != route or role.get('routing_contract_sha256') != content_hash(selected_contract) or
                 role.get('draft_model_contract_sha256') != content_hash(selected['draft']) or
                 role.get('verifier_contract_sha256') != content_hash(selected['verifier']) or
-                type(role.get('gemma_routing_input_tokens')) is not int or role['gemma_routing_input_tokens'] <= 0 or
-                (role['gemma_routing_input_tokens'] > ROUTING_THRESHOLD) != (drafter == HAIKU) or
+                type(role.get(count_key)) is not int or role[count_key] <= 0 or
+                (not active_flash and (role[count_key] > ROUTING_THRESHOLD) != (drafter == HAIKU)) or
+                (active_flash and role[count_key]!=role.get('selected_draft_input_tokens')) or
                 type(role.get('selected_draft_input_tokens')) is not int or role['selected_draft_input_tokens'] <= 0 or
                 type(plan.get('initial_haiku_counter_headroom_tokens')) is not int or
                 not 0 <= plan['initial_haiku_counter_headroom_tokens'] <= (512 if drafter == HAIKU else 0) or
+                (active_flash and (type(plan.get('initial_primary_counter_headroom_tokens'))is not int or
+                    not 0<=plan['initial_primary_counter_headroom_tokens']<=512)) or
                 (phase == 'initial' and role['selected_draft_input_tokens'] +
-                    plan['initial_haiku_counter_headroom_tokens'] != rows[0]['input_tokens']) or
+                    plan['initial_primary_counter_headroom_tokens' if active_flash else 'initial_haiku_counter_headroom_tokens'] != rows[0]['input_tokens']) or
                 any(type(role.get(key)) is not str or len(role[key]) != 64 or
                     any(char not in '0123456789abcdef' for char in role[key]) for key in
                     ('initial_draft_request_sha256', 'stable_context_sha256')) or
@@ -434,7 +450,8 @@ class WholeTurnAdmission:
                 raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
             actual_input = tokens - rows[index]['output_tokens']
             if (not 0 < actual_input <= rows[index]['input_tokens'] or
-                    (model == GEMMA and actual_input > GEMMA_INPUT_TPM)):
+                    (model == GEMMA and actual_input > GEMMA_INPUT_TPM) or
+                    (model == FLASH and actual_input > FLASH_INPUT_TPM)):
                 raise ProviderFailure('PROVIDER_NATIVE_ENVELOPE_EXCEEDED')
         elif model is not None or tokens > rows[index]['tokens']:
             raise ProviderFailure('PROVIDER_UNRESERVED_ATTEMPT')

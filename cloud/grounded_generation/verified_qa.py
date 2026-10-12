@@ -12,7 +12,8 @@ from pathlib import Path
 from controller_contracts import ResponseType
 from constrained_generator import ValidationFailure
 from evidence_registry import content_hash
-from cloud.grounded_generation.provider import ProviderFailure,MODEL
+from cloud.grounded_generation.provider import ProviderFailure
+from cloud.grounded_generation.flash_lite_provider import MODEL
 from cloud.arm_a.rider_contract import saved_view as legacy_view
 
 VERSION='open-manual-draft-verify-v10'
@@ -141,14 +142,14 @@ class Config:
         code={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ('verified_qa.py','provider.py','cached_verifier.py','claude_provider.py','fallback_provider.py','claude_budget.py','admission.py','whole_turn_admission.py','source_authority.py','open_questions.py','generic_runtime.py','runtime.py','source_context.py','fuse_refusal.py')}
         for name in ('serving_retrieval.py','serving_source_authority.py','serving_questions.py','serving_context.py','serving_baseline.py','serving_safety.py'):
             if (root/name).is_file():code[name]=hashlib.sha256((root/name).read_bytes()).hexdigest()
-        for name in ('role_router.py','role_contracts.py'):
+        for name in ('role_router.py','role_contracts.py','flash_lite_provider.py'):
             code[name]=hashlib.sha256((root/name).read_bytes()).hexdigest()
         project=root.parents[1]
         for name in ('cloud/grounded_generation/delivery.py','cloud/arm_a/app.py','cloud/arm_a/rider_api.py','cloud/arm_a/store.py','cloud/arm_a/rider_contract.py','cloud/arm_a/runtime_controls.py','controller_contracts.py','reviewed_controller.py','approved_registry.py','evidence_registry.py','constrained_generator.py','human_review/agent_release_161/approval_consumer.py'):
             code[name]=hashlib.sha256((project/name).read_bytes()).hexdigest()
         for name in ('cloud/arm_a/durable_dispatch.py','cloud/arm_a/public_admission.py','cloud/serving_artifacts.py'):
             if (project/name).is_file():code[name]=hashlib.sha256((project/name).read_bytes()).hexdigest()
-        return {'version':VERSION,'model':MODEL,'draft_model_contract':deepcopy(self.draft_contract),'verifier_contract':deepcopy(self.verifier_contract),'provider_contract':deepcopy(self.provider_contract),'model_routing_contract':deepcopy(self.routing_contract),'draft_policy_sha256':hashlib.sha256(DRAFT_POLICY.encode()).hexdigest(),'verify_policy_sha256':hashlib.sha256(VERIFY_POLICY.encode()).hexdigest(),'draft_schema_sha256':content_hash(DRAFT_SCHEMA),'verify_schema_sha256':content_hash(VERIFY_SCHEMA),'code_sha256':code,'input_tokens':{'gemma':254200,'haiku':998200},'request_bytes':None,'output_tokens':1800,'provider_concurrency':1,'provider_max_attempts':3 if self.provider_contract else 2,'provider_retry_rejections':[429,503],'max_corrections':1,'answer_cache':'DISABLED','provider_prompt_cache':'EXPLICIT_ROLE_PREFIX' if self.routing_contract else 'EXPLICIT_VERIFIER_PREFIX' if self.verifier_contract else 'UNSUPPORTED','semantic_verification':'DIFFERENT_MODEL_EXACT_FINALIZED_RESPONSE' if self.verifier_contract else 'SEPARATE_EXACT_FINALIZED_RESPONSE','answer_admission':'APPLICABLE_IMMUTABLE_SOURCE_ONLY_NO_ACTION_ALLOWLIST'}
+        return {'version':VERSION,'model':MODEL,'draft_model_contract':deepcopy(self.draft_contract),'verifier_contract':deepcopy(self.verifier_contract),'provider_contract':deepcopy(self.provider_contract),'model_routing_contract':deepcopy(self.routing_contract),'draft_policy_sha256':hashlib.sha256(DRAFT_POLICY.encode()).hexdigest(),'verify_policy_sha256':hashlib.sha256(VERIFY_POLICY.encode()).hexdigest(),'draft_schema_sha256':content_hash(DRAFT_SCHEMA),'verify_schema_sha256':content_hash(VERIFY_SCHEMA),'code_sha256':code,'input_tokens':{'flash_lite':1048576,'haiku':998200},'request_bytes':None,'output_tokens':1800,'provider_concurrency':1,'provider_max_attempts':3 if self.provider_contract else 2,'provider_retry_rejections':[429,503],'max_corrections':1,'answer_cache':'DISABLED','provider_prompt_cache':'EXPLICIT_ROLE_PREFIX' if self.routing_contract else 'EXPLICIT_VERIFIER_PREFIX' if self.verifier_contract else 'UNSUPPORTED','semantic_verification':'DIFFERENT_MODEL_EXACT_FINALIZED_RESPONSE' if self.verifier_contract else 'SEPARATE_EXACT_FINALIZED_RESPONSE','answer_admission':'APPLICABLE_IMMUTABLE_SOURCE_ONLY_NO_ACTION_ALLOWLIST'}
     @property
     def lock(self):return content_hash(self.versions())
 
@@ -376,7 +377,7 @@ class Composer:
         self.router=router
         if router is not None:
             if provider is not None or verifier is not None:raise ValidationFailure('ROUTER_PROVIDER_DUPLICATED')
-            provider,verifier=router.gemma_draft,router.haiku_verifier
+            provider,verifier=router.draft,router.verifier
         if verifier is provider:raise ValidationFailure('VERIFIER_MUST_BE_SEPARATE_PROVIDER')
         if verifier is not None and getattr(verifier,'contract',None) is None:raise ValidationFailure('VERIFIER_CONTRACT_REQUIRED')
         self.provider=provider;self.verifier=verifier if verifier is not None else provider;self.source_authority=source_authority;self.config=Config(provider_contract=None if router else getattr(provider,'contract',None),verifier_contract=getattr(verifier,'contract',None),routing_contract=getattr(router,'contract',None))
@@ -492,6 +493,11 @@ class Composer:
                 if accepted:
                     self.last_admitted={'status':'ACCEPTED','source_payload':deepcopy(admitted),'selected_source':selected,'final_response':deepcopy(final),'binding':binding,'binding_sha256':content_hash(binding),'verdict':verdict,'verdict_sha256':content_hash(verdict),'runtime_lock':self.config.lock,'provider_contract':deepcopy(self.config.provider_contract),'verifier_contract':deepcopy(self.config.verifier_contract),'routing_contract':deepcopy(self.config.routing_contract),'selected_draft_contract':deepcopy(draft_provider.contract) if role_plan else deepcopy(self.config.draft_contract),'selected_verifier_contract':deepcopy(verifier_provider.contract) if role_plan else deepcopy(self.config.verifier_contract)}
                     trace.update(verified_buffer_ready=True,accepted_response_sha256=content_hash(final),accepted_binding_sha256=content_hash(binding))
+                    if role_plan is not None:
+                        counted=[role_plan.initial_input_tokens]
+                        for step in trace['attempts']:
+                            counted += [step.get(name,{}).get('input_tokens_counted',0) for name in ('draft_provider','verification_provider')]
+                        trace['start_new_conversation_required']=max(counted)>=.8*min(draft_provider.contract['input_tokens'],verifier_provider.contract['input_tokens'])
                     return response
                 if revision==0 and verdict['correction_possible'] and admitted['evidence']:
                     feedback={'rejected_response':final,'verdict':verdict};trace['corrections']=1
