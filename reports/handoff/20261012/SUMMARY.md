@@ -2,7 +2,7 @@
 
 The owner ended this build session and asked for a fresh chat to continue. The build goal is paused. This is a saved work-in-progress, **not a completed or accepted public demo**. No UI public opening occurred.
 
-Read this summary, [ordered handoff TODO](TODO.md), then the current [PRD](../../../docs/PRD.md), [TRD](../../../docs/TRD.md), [architecture](../../../docs/ARCHITECTURE.md), [root TODO](../../../TODO.md) and [project instructions](../../../AGENTS.md). The working branch is `codex/public-evaluator`; main remains the checked baseline. [Draft PR4](https://github.com/Maneshwar-Kumar/motomedic-ai/pull/4) holds implementation work. The publication receipt beside this document records the pushed snapshot commit.
+Read this summary, [ordered handoff TODO](TODO.md), then the current [PRD](../../../docs/PRD.md), [TRD](../../../docs/TRD.md), [architecture](../../../docs/ARCHITECTURE.md), [root TODO](../../../TODO.md) and [project instructions](../../../AGENTS.md). The working branch is `codex/public-evaluator`; main remains the checked baseline. [Draft PR4](https://github.com/Maneshwar-Kumar/motomedic-ai/pull/4) holds implementation work. The [publication receipt](publication_v1.json) records the pushed snapshot commit.
 
 ## Latest decision: Haiku only
 
@@ -29,6 +29,8 @@ Gemma's former 16K restriction was input tokens per minute, not its native windo
 | Engineering helpers | Ignored local helper scripts are archived in [engineering_helpers_v1.zip](engineering_helpers_v1.zip) with an [exact manifest](engineering_helpers_manifest_v1.json). V11 clones are unfinished. Restore original `tmp/` paths after hash checks; do not execute them merely because they are archived. |
 
 The new count-only v10.11 script **was not created**. V11 browser launcher still has `CURRENT_V10_11_MANIFEST_SHA`. Test fixtures, full helper migration, native forecasts and model-access acceptance are unfinished. The [runtime diagnostic](../../public_evaluator/20261012/operations/stopped_flash_lite_wip_v2.json) ran 120 methods: 94 passed, 4 assertion failures and 23 error entries (two entries belong to one method). These are largely unmigrated retired-role fixtures; they still must be fixed. See [handoff validation](validation_v1.json) for checks; syntax and synthetic tests are not real-provider acceptance.
+
+The published snapshot `1c0626561a3ecc31f8447e1904be730ababc69ba` passed committed verification of all 549 frozen inputs. [Hosted provider-free CI](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38221482493) passed navigation, source approvals and committed inventory, then failed its 264-method boundary suite with four assertion failures and 24 error entries from the unfinished role migration. The later UI workflow step was skipped; the nine local synthetic UI passes remain separate evidence. [Failed CI log](provider_free_ci_38221482493.log.txt) is preserved. The PR remains draft; main is unchanged.
 
 ## Last deployed cloud state
 
