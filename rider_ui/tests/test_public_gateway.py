@@ -6,10 +6,29 @@ from types import SimpleNamespace
 from unittest.mock import patch, MagicMock
 from tornado.testing import AsyncHTTPTestCase
 import tornado.web
-from rider_ui.public_gateway import configured, reserve_visitor, health_routes, POLICY
+from rider_ui.public_gateway import (configured, reserve_visitor, health_routes,POLICY,
+    rider_answers_enabled,preview_socket_message_allowed,answer_dispatch_routes,PREVIEW_MESSAGE)
 
 
 class PublicGatewayTests(unittest.TestCase):
+    def test_preview_flag_default_and_explicit_values(self):
+        with patch.dict(os.environ,{},clear=True):self.assertTrue(rider_answers_enabled())
+        for value in ('false','FALSE','invalid',''):
+            with patch.dict(os.environ,{'MOTOMEDIC_RIDER_ANSWERS_ENABLED':value}):
+                self.assertFalse(rider_answers_enabled())
+    def test_preview_allows_shell_widget_frame_but_blocks_forged_question_frame(self):
+        from streamlit.proto.BackMsg_pb2 import BackMsg
+        frame=BackMsg();widget=frame.rerun_script.widget_states.widgets.add()
+        widget.id='synthetic-confirmation';widget.bool_value=True
+        with patch.dict(os.environ,{'MOTOMEDIC_RIDER_ANSWERS_ENABLED':'false'}):
+            self.assertTrue(preview_socket_message_allowed(frame.SerializeToString()))
+            widget.id='synthetic-input';widget.chat_input_value.data=''
+            self.assertTrue(preview_socket_message_allowed(frame.SerializeToString()))
+            widget.id='synthetic-input';widget.chat_input_value.data='private synthetic question'
+            self.assertFalse(preview_socket_message_allowed(frame.SerializeToString()))
+            self.assertFalse(preview_socket_message_allowed(b'not-protobuf'))
+        with patch.dict(os.environ,{'MOTOMEDIC_RIDER_ANSWERS_ENABLED':'true'}):
+            self.assertTrue(preview_socket_message_allowed(frame.SerializeToString()))
     def env(self):
         return {'K_SERVICE': 'motomedic-evaluator', 'MOTOMEDIC_VISITOR_SECRET': 'x' * 64,
                 'MOTOMEDIC_PUBLIC_HOST': 'motomedic-evaluator-123.us-central1.run.app',
@@ -45,6 +64,21 @@ class PublicGatewayTests(unittest.TestCase):
             with patch('rider_ui.public_gateway.cloud_run_token', return_value='synthetic'), \
                     patch('requests.post', return_value=response), self.assertRaises(PermissionError):
                 reserve_visitor(self.env()['MOTOMEDIC_RIDER_API_URL'], 'a' * 64)
+
+
+class GatewayPreviewDispatchTests(AsyncHTTPTestCase):
+    def get_app(self):
+        return tornado.web.Application(answer_dispatch_routes())
+    def test_preview_rejects_external_api_mutations_without_backend_proxy(self):
+        with patch.dict(os.environ,{'MOTOMEDIC_RIDER_ANSWERS_ENABLED':'false'}):
+            for path in ('/v1/sessions','/v1/sessions/synthetic/questions','/v1/sessions/synthetic/feedback','/v1/operations/synthetic'):
+                response=self.fetch(path,method='POST',body='{}')
+                self.assertEqual(response.code,503)
+                self.assertEqual(json.loads(response.body),{'error':'ANSWERS_PAUSED','message':PREVIEW_MESSAGE})
+                self.assertEqual(response.headers['Cache-Control'],'no-store')
+    def test_enabled_gateway_still_does_not_expose_private_api_routes(self):
+        with patch.dict(os.environ,{'MOTOMEDIC_RIDER_ANSWERS_ENABLED':'true'}):
+            self.assertEqual(self.fetch('/v1/sessions',method='POST',body='{}').code,404)
 
 
 class GatewayHealthTests(AsyncHTTPTestCase):

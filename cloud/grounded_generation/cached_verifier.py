@@ -37,6 +37,27 @@ def wire(value):
                       allow_nan=False, separators=(',', ':'))
 
 
+def native_role_schema(template,evidence,role):
+    """Bind native citation choices to exact literal admitted source objects.
+
+    This enum restricts citation spelling/membership, never semantic support.
+    A wrong admitted object must still fail exact-object verification.
+    """
+    source=evidence.get('evidence')
+    if type(source)is not dict or any(type(key)is not str or not key for key in source):
+        raise ProviderFailure('CLAUDE_LITERAL_EVIDENCE_MAP_REQUIRED')
+    ids=sorted(source)
+    schema=deepcopy(template)
+    if role=='private_draft':
+        target=schema['properties']['claims']['items']['properties']['evidence_ids']
+    elif role=='semantic_verifier':
+        target=schema['properties']['per_claim_support']['items']['properties']['supported_evidence_ids']
+    else:raise ProviderFailure('CLAUDE_VERIFIER_ROLE_MISMATCH')
+    if ids:target['items']={'type':'string','enum':ids}
+    else:target['description']='No admitted source objects: this array must be empty. The server rejects every citation.'
+    return schema,ids
+
+
 class CachedVerifier:
     cache_capability = 'explicit'
     contract = CONTRACT
@@ -105,6 +126,9 @@ class CachedVerifier:
                 raise ProviderFailure('CLAUDE_VERIFIER_ROLE_MISMATCH')
             if type(evidence) is not dict or set(evidence) != STABLE_FIELDS:
                 raise ProviderFailure('CLAUDE_VERIFIER_STABLE_PREFIX_FIELDS')
+            if type(evidence['source_projection'])is not str or (type(dynamic)is dict and dynamic.get('encoding')=='lossless-shared-json-v2'):
+                raise ProviderFailure('CLAUDE_PLAIN_COMPLETE_CONTEXT_REQUIRED')
+            native_schema,citable_ids=native_role_schema(schema,evidence,self.contract['role'])
             cache = {'type': 'ephemeral', 'ttl': '5m'}
             body = {
                 'model': MODEL, 'max_tokens': OUTPUT_TOKENS,
@@ -116,8 +140,12 @@ class CachedVerifier:
                 ]}],
                 'thinking': {'type': 'disabled'},
                 'output_config': {'effort': 'medium',
-                                  'format': {'type': 'json_schema', 'schema': deepcopy(schema)}},
+                                  'format': {'type': 'json_schema', 'schema': native_schema}},
             }
+            trace.update(role_schema_template_sha256=content_hash(schema),
+                         native_role_schema_sha256=content_hash(native_schema),
+                         citable_evidence_ids_sha256=content_hash(citable_ids),
+                         citable_evidence_id_count=len(citable_ids))
             trace['request_bytes'] = len(wire(body).encode())
             count = self._count(body)
             trace['input_tokens_counted'] = count
@@ -147,7 +175,7 @@ class CachedVerifier:
                          cached_prefix_sha256=hashlib.sha256(wire({
                              'contract': self.contract, 'system': body['system'],
                              'evidence': body['messages'][0]['content'][0],
-                             'schema': schema}).encode()).hexdigest())
+                             'schema': body['output_config']['format']['schema']}).encode()).hexdigest())
             remaining = getattr(self.turn, 'remaining', None)
             maximum_cost=haiku_maximum_nanodollars(count)/1000000000
             if self.central_admission:

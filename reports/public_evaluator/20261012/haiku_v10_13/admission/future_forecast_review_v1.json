@@ -1,0 +1,28 @@
+{
+  "schema": "motomedic-haiku-v10-13-future-forecast-review-v1",
+  "provider_calls": 0,
+  "cloud_calls": 0,
+  "runtime_code_changed": false,
+  "forecast_preserved": {
+    "private_output_tokens": 1800,
+    "private_output_json_bytes": 16384,
+    "unknown_verifier_allowance": 33280,
+    "unknown_correction_allowance": 49664,
+    "native_count_headroom": 512
+  },
+  "conclusion": "No rigorously smaller output-token-derived future forecast was proved. Keep current hard private-output byte forecasts and complete evidence.",
+  "reason": [
+    "The 1800 generated-token limit is not a proven 1800-input-token upper bound after draft parsing, finalized text assembly and JSON reserialization.",
+    "This repository has no pinned Haiku tokenizer maximum UTF-8 bytes per generated token sufficient to prove a smaller absolute allowance.",
+    "Source citation, warning and fixed response scaffolds are counted separately. Finalized text can duplicate claim strings; verifier and correction envelopes can JSON-escape response/verdict strings.",
+    "Actual known correction is natively recounted and admitted separately; uncertain completion or a consumed rejected call never refunds charge or retries."
+  ],
+  "owner_cap_prepare_requirements": [
+    "Use only a v2 measured phase budget derived and validated against the exact native-count v4 receipt, frozen source/manifest/runtime-lock/role plan, and all six evaluation rows. Hash-shaped references alone do not prove these upstream bindings.",
+    "Read fresh original primary and shared Haiku ledger snapshots. The pure proposal adds all six initial phases, selected conditional-phase strategy and retained public/human floor to historical reserved tokens.",
+    "Present exact measured numeric increase and proposal hash to the owner. Do not treat this review, a synthetic fixture, elapsed time, or compiled maximum3000000 as approval.",
+    "Record the direct owner instruction in the exact owner-evidence schema tied to proposal SHA and numeric maximum, with all other budgets and historical charges unchanged and billing restart/reset false.",
+    "Apply only in the explicitly marked hosted maintenance environment to existing private ledgers, after exact fresh snapshot verification. Preserve a pre-commit pending journal, immutable grant and complete readback digests.",
+    "Before generation or public release require fresh resolved ceiling/grant bindings, unchangedUSD1/attempt/INR controls, guard and retained-floor checks."
+  ]
+}

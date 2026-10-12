@@ -8,6 +8,39 @@ from streamlit.testing.v1 import AppTest
 from rider_ui.tests.fixture_api import serve, requests, operations, sessions, Handler
 
 class AppTests(unittest.TestCase):
+    def test_preview_disables_input_after_confirmation_and_creates_no_operation(self):
+        server=serve(0)
+        threading.Thread(target=server.serve_forever,daemon=True).start()
+        requests.clear();sessions.clear();operations.clear()
+        env={'MOTOMEDIC_RIDER_API_URL':'http://127.0.0.1:'+str(server.server_port),
+            'MOTOMEDIC_RIDER_API_TOKEN':'ui-test-only','MOTOMEDIC_UI_ENGINEERING_LOOPBACK':'1',
+            'MOTOMEDIC_RIDER_ANSWERS_ENABLED':'false'}
+        try:
+            with patch.dict(os.environ,env):
+                at=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=15).run()
+                self.assertFalse(at.exception)
+                at.checkbox[0].check().run()
+                self.assertFalse(at.exception)
+                self.assertTrue(at.chat_input[0].disabled)
+                self.assertIn('Answering is paused while we finish checking the demo.',[item.value for item in at.info])
+                # Force a widget return independently of the browser's disabled
+                # control to exercise the server dispatch guard as well.
+                import streamlit
+                real_chat_input=streamlit.chat_input
+                sent=[False]
+                def forged(*args,**kwargs):
+                    value=real_chat_input(*args,**kwargs)
+                    if not sent[0]:
+                        sent[0]=True
+                        return 'Forged disabled-widget question'
+                    return value
+                with patch('streamlit.chat_input',side_effect=forged):at.run()
+                self.assertFalse(at.exception)
+                self.assertEqual(requests,[]);self.assertEqual(operations,{})
+                self.assertIsNone(at.session_state['pending'])
+        finally:
+            server.shutdown();server.server_close()
+
     def show_saved_notice_fixture(self, *, state='SUPPORTED', composition=None, reasons=None, verified=True):
         """Render only a saved synthetic view; no request or model call."""
         with patch.dict(os.environ, {'MOTOMEDIC_RIDER_API_URL': '', 'MOTOMEDIC_RIDER_API_TOKEN': ''}):

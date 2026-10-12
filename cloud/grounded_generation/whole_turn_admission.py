@@ -16,6 +16,8 @@ from generation_providers import ProviderFailure
 from cloud.grounded_generation.claude_budget import (
     ALLOCATION as CLAUDE_ALLOCATION, VERSION as CLAUDE_VERSION,
     validate_ledger as validate_claude_ledger)
+from cloud.grounded_generation.token_ceiling import (GRANT_DOCUMENT, DEFAULT_TOKEN_CEILING,
+    MAX_TOKEN_CEILING, resolve_token_ceiling)
 
 VERSION = 'whole-turn-capacity-v1'
 # Allocation identity stays unchanged: a runtime upgrade cannot replenish it.
@@ -37,6 +39,7 @@ MODEL_INPUT_LIMITS = {GEMMA: 256000 - 1800, FLASH:1048576, HAIKU: 1000000 - 1800
 # serving reservations and permits are scoped to the owner-selected model.
 SERVING_MODELS = (HAIKU,)
 MAX_OUTPUT_TOKENS = 1800
+MAX_CALL_TOKENS = max(MODEL_INPUT_LIMITS.values()) + MAX_OUTPUT_TOKENS
 STAGES = ('draft', 'verify', 'correction', 'reverify')
 SLOT_SECONDS = 61
 MAX_SLEEP_SECONDS = 60
@@ -68,12 +71,22 @@ def _events(data):
     events = data.get('events', [])
     if type(events) is not list or any(type(e) is not dict or
             not isinstance(e.get('at'), datetime) or e['at'].tzinfo is None or
-            type(e.get('tokens')) is not int or not 0 <= e['tokens'] <= MAX_TOKENS or
+            type(e.get('tokens')) is not int or not 0 <= e['tokens'] <= MAX_CALL_TOKENS or
             e.get('kind') not in ('generation', 'prompt_cache') or
             ('consumed' in e and type(e['consumed']) is not bool) for e in events):
         raise ProviderFailure('PROVIDER_ADMISSION_STORE_INVALID')
     for event in events:
         _sealed_unused(event)
+        if ('primary_token_ceiling' in event or 'token_ceiling_scope_sha256' in event) and (
+                type(event.get('primary_token_ceiling')) is not int or
+                not DEFAULT_TOKEN_CEILING <= event['primary_token_ceiling'] <= MAX_TOKEN_CEILING or
+                (event['primary_token_ceiling'] == DEFAULT_TOKEN_CEILING and
+                    event.get('token_ceiling_scope_sha256') is not None) or
+                (event['primary_token_ceiling'] > DEFAULT_TOKEN_CEILING and
+                    (type(event.get('token_ceiling_scope_sha256')) is not str or
+                     len(event['token_ceiling_scope_sha256']) != 64 or
+                     any(char not in '0123456789abcdef' for char in event['token_ceiling_scope_sha256'])))):
+            raise ProviderFailure('PROVIDER_ADMISSION_STORE_INVALID')
         if event.get('model') is not None and (
                 event['model'] not in MODEL_INPUT_LIMITS or event.get('stage') not in STAGES or
                 type(event.get('input_tokens')) is not int or not 0 < event['input_tokens'] <= MODEL_INPUT_LIMITS[event['model']] or
@@ -102,6 +115,10 @@ def _bound_event(turn, event):
             event.get(key) != row[key] for key in
             ('model', 'stage', 'input_tokens', 'output_tokens', 'attempt')))):
         raise ProviderFailure('PROVIDER_NATIVE_PLAN_STORE_CHANGED')
+    if ('primary_token_ceiling' in turn and
+            (event.get('primary_token_ceiling') != turn['primary_token_ceiling'] or
+             event.get('token_ceiling_scope_sha256') != turn['token_ceiling_scope_sha256'])):
+        raise ProviderFailure('PROVIDER_TOKEN_CEILING_RESERVATION_BINDING_CHANGED')
     if turn['entry_plan_hashes'][index] is not None and any(
             event.get(key) != turn[field][index] for key, field in
             (('plan_sha256', 'entry_plan_hashes'), ('phase', 'entry_phases'),
@@ -243,6 +260,7 @@ class WholeTurnAdmission:
         usage = self.client.collection('arm_a_usage').document('grounded-provider-global-v1')
         lifetime = self.client.collection('arm_a_usage').document(ALLOCATION)
         claude = self.client.collection('arm_a_usage').document(CLAUDE_ALLOCATION)
+        grant = self.client.collection('arm_a_usage').document(GRANT_DOCUMENT)
 
         @firestore.transactional
         def reserve(tx):
@@ -251,18 +269,25 @@ class WholeTurnAdmission:
                 raise ProviderFailure('PROVIDER_OPERATION_DEADLINE_EXCEEDED')
             snap = usage.get(transaction=tx)
             allocation_snap = lifetime.get(transaction=tx)
+            grant_snap = grant.get(transaction=tx)
             claude_snap = claude.get(transaction=tx) if monetary else None
             previous = snap.to_dict() if snap.exists else {}
             allocation = allocation_snap.to_dict() if allocation_snap.exists else {}
+            token_limit, token_authorization = resolve_token_ceiling(allocation,
+                grant_snap.to_dict() if grant_snap.exists else None)
+            scope_sha = token_authorization['scope_sha256'] if token_authorization else None
+            if prior is not None and (token_limit != prior['primary_token_ceiling'] or
+                    scope_sha != prior['token_ceiling_scope_sha256']):
+                raise ProviderFailure('PROVIDER_TOKEN_CEILING_CHANGED_DURING_TURN')
             claude_previous = claude_snap.to_dict() if claude_snap is not None and claude_snap.exists else {}
             if allocation and (allocation.get('version') != VERSION or
-                    allocation.get('maximum_tokens') != MAX_TOKENS or
+                    allocation.get('maximum_tokens') != token_limit or
                     allocation.get('maximum_attempts') != MAX_ATTEMPTS):
                 raise ProviderFailure('PROVIDER_ALLOCATION_BINDING_CHANGED')
             spent = allocation.get('reserved_tokens', 0)
             count = allocation.get('reserved_attempts', 0)
             if (type(spent) is not int or type(count) is not int or
-                    not 0 <= spent <= MAX_TOKENS or not 0 <= count <= MAX_ATTEMPTS):
+                    not 0 <= spent <= token_limit or not 0 <= count <= MAX_ATTEMPTS):
                 raise ProviderFailure('PROVIDER_ALLOCATION_STORE_INVALID')
             if monetary:
                 nano_spent, monetary_count = validate_claude_ledger(claude_previous)
@@ -284,8 +309,8 @@ class WholeTurnAdmission:
                     raise ProviderFailure('PROVIDER_CORRECTION_WITHOUT_VERIFICATION')
             if (len(events) + attempts > 120 or
                     sum(e['kind'] == 'generation' for e in events) + attempts > MAX_ATTEMPTS or
-                    sum(e['tokens'] for e in events) + total > MAX_TOKENS or
-                    count + attempts > MAX_ATTEMPTS or spent + total > MAX_TOKENS):
+                    sum(e['tokens'] for e in events) + total > token_limit or
+                    count + attempts > MAX_ATTEMPTS or spent + total > token_limit):
                 raise ProviderFailure('PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT')
             # Retain conservative61-second spacing across the shared ledger.
             # Native context, provider throughput and lifetime money/token
@@ -301,6 +326,7 @@ class WholeTurnAdmission:
                 raise ProviderFailure('PROVIDER_OPERATION_DEADLINE_EXCEEDED')
             reserved = [{'at':slot, 'tokens':row['tokens'], 'kind':'generation',
                          'operation_id':operation_id, 'slot':offset + i, 'consumed':False,
+                         'primary_token_ceiling':token_limit, 'token_ceiling_scope_sha256':scope_sha,
                          **({key: row[key] for key in ('model', 'stage', 'input_tokens', 'output_tokens', 'attempt')}
                             if row['model'] is not None else {}),
                          **({'plan_sha256': plan_sha, 'phase': phase, 'phase_nonce': nonce}
@@ -311,7 +337,7 @@ class WholeTurnAdmission:
                           'controls_version':VERSION})
             # No TTL: a fresh validation run, new visitor or restart cannot
             # replenish this allocation. Unused/uncertain slots stay reserved.
-            tx.set(lifetime, {'version':VERSION, 'maximum_tokens':MAX_TOKENS,
+            tx.set(lifetime, {**allocation, 'version':VERSION, 'maximum_tokens':token_limit,
                               'maximum_attempts':MAX_ATTEMPTS,
                               'reserved_tokens':spent + total,
                               'reserved_attempts':count + attempts})
@@ -319,15 +345,15 @@ class WholeTurnAdmission:
                 tx.set(claude, {'version': CLAUDE_VERSION, 'model': HAIKU,
                     'maximum_nanodollars': 1000000000, 'reserved_nanodollars': nano_spent + monetary,
                     'reservation_count': monetary_count + 1})
-            return slots
+            return slots, token_limit, token_authorization
 
         try:
-            slots = reserve(self.client.transaction())
+            slots, token_limit, token_authorization = reserve(self.client.transaction())
         except ProviderFailure:
             raise
         except Exception:
             raise ProviderFailure('PROVIDER_ADMISSION_STORE_UNAVAILABLE') from None
-        return slots, nonce
+        return slots, nonce, token_limit, token_authorization
 
     def begin_turn(self, operation_id, attempts=8, *, plan=None, compatibility_full_plan=False):
         if (type(operation_id) is not str or not 1 <= len(operation_id) <= 200 or
@@ -342,7 +368,8 @@ class WholeTurnAdmission:
         role_identity = _role_identity(plan, entries, 'verify') if plan is not None else None
         deadline = _OPERATION_DEADLINE.get()
         phase = 'initial' if phased else 'compatibility'
-        slots, nonce = self._reserve_entries(operation_id, entries, monetary, deadline, plan_sha, phase)
+        slots, nonce, token_limit, token_authorization = self._reserve_entries(
+            operation_id, entries, monetary, deadline, plan_sha, phase)
         attempts = len(entries)
         total = sum(row['tokens'] for row in entries)
         receipt = {'version':VERSION, 'pacing_version':PACING_VERSION,
@@ -350,6 +377,8 @@ class WholeTurnAdmission:
                    'reservation_mode': 'INITIAL_PAIR_CONDITIONAL_CORRECTION' if phased else 'EXPLICIT_COMPATIBILITY',
                    'reserved_attempts':attempts, 'reserved_tokens':total,
                    'reserved_nanodollars': monetary, 'reserved_slots':deepcopy(entries),
+                   'primary_token_ceiling':token_limit,
+                   'token_ceiling_authorization':deepcopy(token_authorization),
                    'maximum_corrections': 1 if phased else None, 'correction_reserved': False,
                    'phases': [{'phase':phase, 'phase_nonce':nonce, 'plan_sha256':plan_sha,
                        'reserved_attempts':attempts, 'reserved_tokens':total, 'reserved_nanodollars':monetary}],
@@ -366,6 +395,8 @@ class WholeTurnAdmission:
                            'entry_plan_hashes': [plan_sha] * attempts, 'role_identity': role_identity,
                            'entry_phases': [phase] * attempts, 'entry_nonces': [nonce] * attempts,
                            'phase':phase, 'correction_attempted':False}
+        self.local.turn.update(primary_token_ceiling=token_limit,
+            token_ceiling_scope_sha256=token_authorization['scope_sha256'] if token_authorization else None)
         return receipt
 
     def reserve_correction(self, operation_id, *, plan):
@@ -384,7 +415,7 @@ class WholeTurnAdmission:
         # cannot retry a commit whose result might already have been persisted.
         turn['correction_attempted'] = True
         plan_sha = content_hash(plan)
-        slots, nonce = self._reserve_entries(operation_id, entries, monetary, turn['deadline'],
+        slots, nonce, token_limit, token_authorization = self._reserve_entries(operation_id, entries, monetary, turn['deadline'],
             plan_sha, 'correction', prior=turn)
         turn['entries'].extend(entries)
         turn['slots'].extend(slots)
@@ -412,7 +443,7 @@ class WholeTurnAdmission:
     def _permit(self, tokens, kind, *, model=None, stage=None, role=None):
         from google.cloud import firestore
         turn = getattr(self.local, 'turn', None)
-        if (turn is None or type(tokens) is not int or not 0 < tokens <= MAX_TOKENS or
+        if (turn is None or type(tokens) is not int or not 0 < tokens <= MAX_CALL_TOKENS or
                 kind != 'generation' or turn['next'] >= len(turn['slots'])):
             raise ProviderFailure('PROVIDER_UNRESERVED_ATTEMPT')
         index = turn['next']

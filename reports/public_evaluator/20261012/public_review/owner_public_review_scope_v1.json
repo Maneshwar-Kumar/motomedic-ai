@@ -1,0 +1,40 @@
+{
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "authorized": {
+    "anonymous_backend_worker_health_inspection": true,
+    "clone_fork_test_and_reproduction_documentation": true,
+    "public_ci_workflow_and_results": true,
+    "public_existing_github_repository_and_history": true,
+    "public_manual_and_manual_evidence_in_repository": true,
+    "public_qdrant_existing_read_only_wrapper": true,
+    "public_ui_preview_before_factual_acceptance": true
+  },
+  "exact_user_instructions": [
+    "before you test actual answers against manual, expose the public link UI. i want to see that it is there. Also push the stuff to remote so i can share that with the reviewer on email.",
+    "the github should tell the architecture, what is running where. Make Qdrant public too so that someone can inspect. Backend worker too. The whole CI pipeline should be public in github",
+    "it is not a google account. Make it public, let it be inspected by anyone. i will control distribution",
+    "expose the manual too. it is already a public document. the setup i want it someone is able to clone or fork my repo and test the RAG agent"
+  ],
+  "github": {
+    "main_unchanged": true,
+    "repository": "https://github.com/Maneshwar-Kumar/motomedic-ai",
+    "visibility_readback": "PUBLIC",
+    "working_branch": "codex/public-evaluator"
+  },
+  "implementation_constraints": {
+    "historical_charges_and_existing_dollar_inr_attempt_limits_unchanged": true,
+    "no_billing_restart": true,
+    "preview_answer_submission_paused": true,
+    "provider_credentials_never_public": true,
+    "quality_acceptance_not_claimed_by_publication": true,
+    "rider_session_and_signed_visitor_bindings_preserved": true,
+    "signature_and_application_identity_checks_required_before_core_iam_public": true,
+    "worker_job_submission_remains_exact_tasks_identity_bound": true
+  },
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "provider_calls": 0,
+  "recorded_at_utc": "2026-10-12T09:56:06.282761+00:00",
+  "schema": "motomedic-owner-public-review-scope-v1",
+  "source_content_approval_changed": false,
+  "supersedes_prior_network_and_public_manual_restrictions_for_this_review": true
+}

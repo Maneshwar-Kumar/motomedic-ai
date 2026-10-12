@@ -28,12 +28,14 @@ HISTORICAL = 'reports/grounded_generation/v8/runtime_freeze.json'
 HISTORICAL_SHA = 'd7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0'
 PRESERVED = 'reports/build/20261012/frozen_v8_runtime'
 MIGRATION = 'reports/build/20261012/v8_preservation.json'
-CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_12.json'
+CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_13.json'
 SCHEMA = 'motomedic-serving-release-v10'
 SOURCE_BASELINE = 'f2daacbb35cb4997bed7915336dfbdc1456c0ddc'
 OWNER_SCOPE = 'reports/public_evaluator/20261012/owner_scope_v1.json'
 OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v3.json'
 HISTORICAL_SERVING = {
+    'reports/public_evaluator/20261012/serving_manifest_v10_12.json':
+        'ff82ee677ada2e42fc08b5ea710ebe05cef7dac527f7008785ed0320bf58e8fb',
     'reports/public_evaluator/20261012/serving_manifest_v10_11.json':
         'c4f87a48fcb3645c46b74734ffd1df6b8faaa735e54d2286d6f3b099700d06f1',
     'reports/public_evaluator/20261012/serving_manifest_v10_10.json':
@@ -215,6 +217,7 @@ def serving_inputs(root=ROOT):
         'tools/validate_serving_artifacts_hosted.py',
         'tools/provision_evaluator_secret_hosted.py',
         'tools/probe_cached_verifier_hosted.py', 'tools/test_probe_cached_verifier_hosted.py',
+        'tools/manage_primary_token_ceiling.py', 'tools/test_manage_primary_token_ceiling.py',
         'reports/build/20261012/ui_base_image.json',
         'reports/build/20261012/ui_dependency_lock.json',
         'reports/build/20261012/index_snapshot_reference.json', MIGRATION))
@@ -230,6 +233,8 @@ def serving_inputs(root=ROOT):
     for path in (Path(root) / 'reports/build/20261012/source_context_refinement_v2').glob('*.json'):
         names.add(path.relative_to(root).as_posix())
     names.update((OWNER_SCOPE, OWNER_MODEL_SCOPE,
+                  'reports/public_evaluator/20261012/public_review/owner_public_review_scope_v1.json',
+                  'reports/public_evaluator/20261012/haiku_v10_12/owner_anthropic_payload_scope_v2.json',
                   'reports/public_evaluator/20261012/provider_quota_summary_v1.json'))
     names.update(('reports/public_evaluator/20261012/owner_credential_scope_v1.json',
                   'reports/public_evaluator/20261012/ui_dependency_lock_v2.json'))

@@ -50,12 +50,15 @@ jobs:
           cloud.grounded_generation.test_verified_qa.PairedProviderTests
           cloud.grounded_generation.test_verified_qa.RoutedProviderTests
           cloud.grounded_generation.test_verified_qa.SharedProjectionTests
+          cloud.grounded_generation.test_verified_qa.LiteralMeasurementAndDraftDiagnosticsTests
           cloud.grounded_generation.test_open_wiring
           cloud.grounded_generation.test_whole_turn_admission
+          cloud.grounded_generation.test_token_ceiling
           cloud.grounded_generation.test_serving_retrieval
           cloud.arm_a.test_store
           cloud.arm_a.test_durable_operations
           cloud.arm_a.test_health
+          cloud.arm_a.test_public_inspection_auth
           cloud.arm_a.test_production_policy
           cloud.arm_a.test_public_admission
           cloud.test_serving_artifacts
@@ -63,6 +66,7 @@ jobs:
           tools.test_bind_serving_images
           tools.test_probe_cached_verifier_hosted
           tools.test_check_installed_serving_release
+          tools.test_manage_primary_token_ceiling
       - name: Test the complete rider UI against engineering-only loopback HTTP fixtures
         run: python -m unittest discover -s rider_ui/tests -p 'test_*.py' -v
       - name: Record scope of these checks

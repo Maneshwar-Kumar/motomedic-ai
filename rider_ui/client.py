@@ -14,7 +14,7 @@ STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
-RUNTIME_POLICY = 'open-manual-haiku-draft-verify-v10_12'
+RUNTIME_POLICY = 'open-manual-haiku-draft-verify-v10_13'
 CHECK_ERROR_COPY = 'I couldn\u2019t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):
@@ -115,7 +115,7 @@ def validate_view(view, *, expected_policy=None):
     return view
 
 class RiderAPI:
-    def __init__(self, base_url, token, *, timeout=180, allow_loopback=False, visitor=None, cache_mode='bypass', network=None):
+    def __init__(self, base_url, token, *, timeout=180, allow_loopback=False, visitor=None, cache_mode='bypass', network=None,answers_enabled=True):
         p = urlsplit(base_url)
         local = allow_loopback and p.hostname in {'127.0.0.1', 'localhost'}
         if not p.hostname or (p.scheme != 'https' and not (local and p.scheme == 'http')):
@@ -131,9 +131,13 @@ class RiderAPI:
         self.cache_mode = cache_mode
         self.visitor = visitor
         self.network = network
+        self.answers_enabled=answers_enabled is True
         self.opener = build_opener(NoRedirect())
 
     def request(self, method, path, payload=None, request_id=None, *, on_verified=None, on_progress=None, on_chunk=None, stream=False):
+        if method!='GET' and not self.answers_enabled:
+            from rider_ui.public_gateway import PREVIEW_MESSAGE
+            raise APIError(PREVIEW_MESSAGE,terminal=True)
         try:
             credential = self.token() if callable(self.token) else self.token
         except Exception:

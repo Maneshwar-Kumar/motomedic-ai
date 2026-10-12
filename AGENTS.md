@@ -16,7 +16,7 @@ Approval remains exact-version and scope bound. Preserve required paths/bytes an
 
 Preserve warning, prerequisite, condition, table-header/unit, figure and reference context for each claim. Docling's page 103 gap remains flagged. Missing review/extraction is a maintainer problem, not rider-resolvable ambiguity. Never invent repairs, page numbers, hidden faults or OEM diagnostic order.
 
-Engineering use is permitted; rider-facing PDF, excerpts and figure crops are prohibited. The manifest binds the verified support route and its market-fit limitation. Keep credentials and raw rider media out of Git and routine telemetry.
+The latest owner review scope authorizes public GitHub publication of the manual and engineering evidence so reviewers can clone/fork/test the agent. Keep provider credentials and rider data private. The rider chat continues to show finalized answers rather than raw source excerpts. The manifest binds the verified support route and its market-fit limitation. Keep credentials and raw rider media out of Git and routine telemetry.
 
 ## Pipeline
 
@@ -26,7 +26,7 @@ Target: authenticated Qdrant dense retrieval concurrent with BM25, RRF, bounded 
 
 Keep SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR distinct. Malformed/outage/quota/integrity failures are SYSTEM_ERROR. Fixed messages are in the PRD. Verified source-specific safety takes precedence. Relevance/confidence is not answer authorization. Held-out cases cannot enrich prompts or retrieval tuning.
 
-The latest owner direction selects `claude-haiku-5-5` for both private drafting and separate exact finalized-response verification, with distinct role policies/schemas. Both calls share the existing Haiku USD1 ledger and use role-specific five-minute policy/evidence-prefix caching. Same-model calls do not establish cross-model agreement; independent original-source review remains required. Preserve superseded frozen v10.11 history and use a fresh v10.12 candidate. Availability fallback stays disabled; semantic rejection, quota, malformed output and integrity failure cannot select another model. Full-manual Claude remains retired. Prompt caching is separate from answer authority; current-role reads and savings require their own evidence. Answer-cache shortcuts are disabled.
+The latest owner direction selects `claude-haiku-5-5` for both private drafting and separate exact finalized-response verification, with distinct role policies/schemas. Both calls share the existing Haiku USD1 ledger and use role-specific five-minute policy/evidence-prefix caching. Same-model calls do not establish cross-model agreement; independent original-source review remains required. Preserve superseded frozen v10.11 and failed v10.12 history; complete the fresh v10.13 candidate. Availability fallback stays disabled; semantic rejection, quota, malformed output and integrity failure cannot select another model. Full-manual Claude remains retired. Prompt caching is separate from answer authority; current-role reads and savings require their own evidence. Answer-cache shortcuts are disabled.
 
 ## Operating permissions and evidence
 

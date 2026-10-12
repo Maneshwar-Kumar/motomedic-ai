@@ -1,0 +1,82 @@
+{
+  "cases": [
+    {
+      "accepted": true,
+      "cache_calls": [
+        {
+          "attempt": 0,
+          "cache_creation_input_tokens": 5786,
+          "cache_read_input_tokens": 0,
+          "case_id": "EVAL_DIRECT_01",
+          "input_tokens": 6060,
+          "input_tokens_counted": 6060,
+          "prefix_sha256": "50c4a4cbdc315598946fd0e7e217818308470c608ad56ec59b1d550a0f69d96b",
+          "role": "private_draft"
+        },
+        {
+          "attempt": 0,
+          "cache_creation_input_tokens": 6064,
+          "cache_read_input_tokens": 0,
+          "case_id": "EVAL_DIRECT_01",
+          "input_tokens": 8165,
+          "input_tokens_counted": 8165,
+          "prefix_sha256": "532c86d36c272d82ff06af97ed1ff621fffa32a42c2b5b92f278fcf2052c8bb0",
+          "role": "semantic_verifier"
+        }
+      ],
+      "case_id": "EVAL_DIRECT_01",
+      "completed_boundary_receipt_present": true,
+      "errors": [],
+      "finalized_response_sha256": "aac59e30182e6dde7c5a11329e0f47d9372e47c8df9365c132f6f8abd4c17aa2",
+      "operation_id": "12a8c731dc364f9bb4707774eea33779",
+      "passed": true,
+      "presentation_response_sha256": "67a06c68c64d2c46f7cb025a5950a60039ca5d8a6595db65415605aefb423d16",
+      "text_sha256": "be8be2ecda6de6ae2a866afe045d76443901965a6e5c91f91d0b5de91d823b86"
+    },
+    {
+      "accepted": false,
+      "cache_calls": [],
+      "case_id": "EVAL_USB_02",
+      "completed_boundary_receipt_present": false,
+      "errors": [
+        "RECORDED_CALL_TOTAL_CHANGED",
+        "OPERATIONAL_ERROR_IS_NOT_ACCEPTANCE"
+      ],
+      "finalized_response_sha256": null,
+      "operation_id": "e5095223663541a397c9f3e3d026f21a",
+      "passed": false,
+      "presentation_response_sha256": "d1697243c6b70ba4f9f62f19565190958583e5149a495cd4637380d511b159b3",
+      "text_sha256": null
+    }
+  ],
+  "classification": "READONLY_ACTUAL_HOSTED_RECEIPT_AUDIT",
+  "cloud_mutations": 0,
+  "errors": [
+    "SIX_CASE_RUN_INCOMPLETE"
+  ],
+  "hosted_receipt_sha256": "e3365dd6bd4b548e7ece58d82412793b1b6db275e56f312ac57ab5da18e8fe71",
+  "limits": [
+    "Exact stream/recovery/duplicate view equality is the hash-bound hosted client assertion; raw transport frames are not retained.",
+    "Finalized wire hash and binding are scalar server records; the verifier prompt body is not independently reconstructed here.",
+    "Completed-boundary no-call evidence uses the recorded unchanged reservation ledger assertion and idempotent response; per-provider request logs are not retained.",
+    "A policy-only cache read with a changed evidence-prefix hash does not establish exact evidence-prefix reuse."
+  ],
+  "passed": false,
+  "provider_calls_by_auditor": 0,
+  "public_browser_acceptance": false,
+  "recorded_utc": "2026-10-12T09:04:06.743799+00:00",
+  "role_cache_proofs": {
+    "private_draft": {
+      "exact_role_prefix_creation_then_read_proven": false,
+      "pairs": []
+    },
+    "semantic_verifier": {
+      "exact_role_prefix_creation_then_read_proven": false,
+      "pairs": []
+    }
+  },
+  "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+  "schema": "motomedic-haiku-delivery-cache-audit-v1",
+  "serving_manifest_sha256": "ff82ee677ada2e42fc08b5ea710ebe05cef7dac527f7008785ed0320bf58e8fb",
+  "source_factual_quality_acceptance": false
+}

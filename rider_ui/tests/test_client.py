@@ -7,7 +7,7 @@ from urllib.error import HTTPError, URLError
 from rider_ui.client import APIError, RiderAPI, validate_view, MANUAL_SHA, INDEX_ID
 
 def view():
-    return {'runtime_policy':'open-manual-haiku-draft-verify-v10_12','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
+    return {'runtime_policy':'open-manual-haiku-draft-verify-v10_13','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
             'session_id':'a'*32,'version':1,'choices':[],'history':[],
             'response':{'type':'SUPPORTED','technical_content':True,'release_gate_passed':True,
                         'natural_language':'Engineering fixture only.',
@@ -32,9 +32,31 @@ class Transport:
         return Response(self.result)
 
 class ClientTests(unittest.TestCase):
+    def test_preview_client_blocks_operation_posts_before_identity_or_transport(self):
+        def forbidden():raise AssertionError('Preview must not mint backend identity for a mutation')
+        api=RiderAPI('https://example.com',forbidden,answers_enabled=False)
+        api.opener=Transport(result=json.dumps(view()).encode())
+        for invoke in (lambda:api.start('Synthetic question','c'*32),
+            lambda:api.feedback(view(),'synthetic-choice','c'*32),
+            lambda:api.request('POST','/v1/sessions',{},'c'*32,stream=True)):
+            with self.assertRaises(APIError) as caught:invoke()
+            self.assertTrue(caught.exception.terminal)
+            self.assertEqual(str(caught.exception),'Answering is paused while we finish checking the demo.')
+        self.assertEqual(api.opener.calls,0)
+    def test_preview_client_keeps_saved_operation_recovery_available(self):
+        current=view();api=RiderAPI('https://example.com','engineering-fixture',answers_enabled=False)
+        api.opener=Transport(result=json.dumps(current).encode())
+        self.assertEqual(api.recover_operation('c'*32),current)
+        self.assertEqual(api.opener.calls,1)
+
+    def test_v13_policy_rejects_superseded_v12_saved_answer(self):
+        from rider_ui.client import RUNTIME_POLICY,validate_view
+        old=view();old['runtime_policy']='open-manual-haiku-draft-verify-v10_12'
+        with self.assertRaises(APIError):validate_view(old,expected_policy=RUNTIME_POLICY)
+
     def test_v10_policy_acceptance_rejects_v9_recovery_continuation_and_feedback(self):
         from rider_ui.client import RUNTIME_POLICY
-        self.assertEqual(RUNTIME_POLICY,'open-manual-haiku-draft-verify-v10_12')
+        self.assertEqual(RUNTIME_POLICY,'open-manual-haiku-draft-verify-v10_13')
         current=view();old=copy.deepcopy(current);old['runtime_policy']='open-manual-draft-verify-v9'
         api=RiderAPI('https://example.com','engineering-fixture')
         api.opener=Transport(result=json.dumps(current).encode())

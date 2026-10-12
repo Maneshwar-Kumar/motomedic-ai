@@ -1,0 +1,105 @@
+{
+  "checks": {
+    "CI_boundary_suite": {
+      "elapsed_seconds": 23.621,
+      "errors": 0,
+      "failed": 0,
+      "passed": 283
+    },
+    "complete_verified_qa_cache_and_router": {
+      "elapsed_seconds": 70.75,
+      "errors": 0,
+      "failed": 0,
+      "passed": 89
+    },
+    "final_rider_UI": {
+      "elapsed_seconds": 50.344,
+      "errors": 0,
+      "failed": 0,
+      "passed": 74
+    },
+    "git_diff_check": "PASS",
+    "rider_UI_before_one_additional_v12_rejection_test": {
+      "elapsed_seconds": 16.013,
+      "errors": 0,
+      "failed": 0,
+      "passed": 73
+    }
+  },
+  "classification": "SYNTHETIC_PROVIDER_FREE_LOCAL_CHECKS",
+  "cloud_actions": 0,
+  "codec_active_in_model_payload": false,
+  "correction_maximum_pairs": 1,
+  "derived_native_schema_bound_to_exact_admitted_ids_and_cache_prefix": true,
+  "frozen_v10_12_edited": false,
+  "numeric_guard": {
+    "blocks": [
+      "measured value absent from cited object text",
+      "explicit native unit conflict",
+      "wrong source row notwithstanding value elsewhere in bundle",
+      "unauthorized parent/reference/layout metadata used as quantity witness"
+    ],
+    "limits": [
+      "Not a replacement for semantic verification or independent original-page review.",
+      "Only recognized explicitly written native measurement units are tested.",
+      "Unlabelled/spelled quantities, quantity names and contextual header units still require semantic verification.",
+      "A unitless exact object value defers the required unit check to the verifier; it does not authorize an inferred unit.",
+      "No unit conversion is performed or authorized."
+    ],
+    "normalization": [
+      "native unit spelling aliases",
+      "decimal trailing zeros",
+      "comma thousands separators",
+      "Unicode minus and degree spacing",
+      "native ranges and plus/minus values"
+    ],
+    "source_scope": "Only exact cited own text and text cells; explicit parent text only when parent_text_authorized is true.",
+    "version": "literal-cited-object-native-measurements-v1"
+  },
+  "only_serving_model": "claude-haiku-5-5",
+  "paid_scalar_draft_usage_retained_before_validation": true,
+  "precise_static_draft_validation_predicates_retained": true,
+  "private_output_json_bytes": 16384,
+  "private_output_maximum_tokens": 1800,
+  "provider_generation_calls": 0,
+  "provider_schema_documentation": {
+    "checked_date": "2026-10-12",
+    "empty_source_handling": "Native empty-only description; unchanged strict server subset check rejects every citation.",
+    "unsupported_maxItems_used": false,
+    "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+    "used_features": "Primitive string enums for nonempty admitted source IDs."
+  },
+  "public_browser_acceptance": false,
+  "raw_private_draft_or_rider_text_in_routine_telemetry": false,
+  "recorded_utc": "2026-10-12T09:33:24.270474+00:00",
+  "required_hosted_followups": [
+    "complete current native counts with literal evidence/history and actual derived schemas",
+    "measured permanent capacity and any separately necessary exact owner grant",
+    "independent original-page useful-answer and exact-citation acceptance",
+    "actual current-role cache creation followed by positive reads",
+    "exact durable delivery/recovery/ownership and compatible rollback",
+    "anonymous public browser acceptance"
+  ],
+  "role_contract_version": "haiku-literal-object-draft-finalized-verifier-v4",
+  "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+  "same_model_is_not_cross_model_agreement": true,
+  "schema": "motomedic-haiku-literal-source-v13-runtime-synthetic-validation-v1",
+  "scoped_file_sha256": {
+    "cloud/grounded_generation/cached_verifier.py": "aeb31d99994fad00ca94569b69c7862dbf7e9578a0db8d6fd7f688993c7221c0",
+    "cloud/grounded_generation/role_contracts.py": "05ae9962f371b33ad6ffc7a9274d07464d47bfb764bf365393cd3c9a967c14d5",
+    "cloud/grounded_generation/role_router.py": "8ab8f609f1d1423e5e2dd17cdf39d49a222676621269302b95c5c032a5054538",
+    "cloud/grounded_generation/test_cached_verifier.py": "1f18decaf22d691ff3c3c479deb925ff309a4b4789bc121d7a322e48b82197fd",
+    "cloud/grounded_generation/test_role_router.py": "34ce46bda64862aaf0da7cda04e1cced0b499448c553b76b0bcc0b1005e4f4d1",
+    "cloud/grounded_generation/test_verified_qa.py": "539c37c703dc0ff68970c6b88fd7696f9c4d0c0623066f27759460f2cf48e40b",
+    "cloud/grounded_generation/token_ceiling.py": "b46386b6058abc3820776dbe3467437e401067a97cef1850e99458457915cd9f",
+    "cloud/grounded_generation/verified_qa.py": "e489988abdaf817eadabc6359b25fea4a0cba324ca82e8b3e31b1a2763e67659",
+    "rider_ui/API_CONTRACT.md": "487607a0239dde044a8675afb64824fe0c26aac83efb783dbc7dd9d9ce3c87ce",
+    "rider_ui/SERVICE_SAFEGUARDS.md": "abedcc2d7391783a6b04f08ccd6ebbe822f41de4334b4cb7eeb3956a881f927c",
+    "rider_ui/client.py": "d895cb57e414a14c7fe344a46f0f4411d454d63f5b6b0dd366b44803911103ed",
+    "rider_ui/tests/test_client.py": "9a2915e690f597de27bfece6bec5fac9dc9d1e6493706f359e4837871ac80348"
+  },
+  "separate_calls_distinct_roles_policies_schemas": true,
+  "source_encoding": "PLAIN_JSON_LITERAL_SOURCE_IDS",
+  "source_factual_quality_acceptance": false,
+  "source_text_history_and_final_response_truncated": false
+}

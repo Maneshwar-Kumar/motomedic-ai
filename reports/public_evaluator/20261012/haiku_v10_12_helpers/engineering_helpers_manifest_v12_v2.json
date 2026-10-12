@@ -1,0 +1,46 @@
+{
+  "added_helpers": [
+    "tmp/test_rollback_revision_binding_v10_12.py"
+  ],
+  "archive": "engineering_helpers_v12_v2.zip",
+  "browser_expected_manifest": "Runtime read of current v10.12 manifest, exact hash and matching sidecar; no placeholder.",
+  "browser_self_check": "PASS_ABOUT_BLANK_ZERO_EXTERNAL_REQUESTS",
+  "changed_existing_helpers": [
+    "tmp/rollback_public_v10_12.py",
+    "tmp/test_haiku_helpers_v10_12.py"
+  ],
+  "classification": "REVIEWED_EXACT_REVISION_CONFIGURATION_HELPER_CORRECTION_SYNTHETIC_PASS_HOSTED_ACCEPTANCE_PENDING",
+  "cloud_actions_by_packaging": 0,
+  "credentials_or_models_or_pdf_in_archive": false,
+  "file_sha256": {
+    "tmp/download_evaluator_artifacts.py": "2749af8b353aadbc1db610a39b9bb2d7e80c179116006986fd82095328af4377",
+    "tmp/launch_evaluator_browser_v10_12.py": "5f390022592ec7a781a5b0db949c777c77a1f69da3b179ac63f1b23efe7d4ff2",
+    "tmp/prepare_evaluator_v10_12.py": "f749cdd9e5aef154221550ef3fedae8c3ec07ac24b1f5db114e8a1ecfd2225ac",
+    "tmp/private_acceptance_console_v10_12.py": "560ed8a5b3bdf003577012d3f4e05fb83a1df744f719f445e30ee37d63c7b877",
+    "tmp/public_cloud_run_v10_12.py": "3cd2155b1a7261842d20b853722b32521765e71b7cb60ae646b2aab8ab88ee84",
+    "tmp/public_evaluator/browser_acceptance_v12.cjs": "e8acce0983e3b78101b010599cdae1379a5404490329621587e4ec68ff043036",
+    "tmp/public_evaluator/count_history_v1.json": "a3ca21d4aaf5ff9d14afd1bb4f5d82bdc50094cf6b9a5ef55cb8e6833721a998",
+    "tmp/public_evaluator/count_only_context_v10_12.py": "8916a27882e85dd20c8d4eab5fcb69a4ef0c04e6d82d8d79a6a4909b8fd7fb1c",
+    "tmp/public_evaluator/hosted_client.py": "4902f8157713872f5908e61dfcc33a410d9a790ce7770b4854da7d4d4959a32f",
+    "tmp/public_evaluator/hosted_client_v10_12.py": "1f1e9a2ac81efc8c596355ed3e51bd1a3767ee2c75abee9f7e153829ecffbfe7",
+    "tmp/public_evaluator/phase_budget_v10_12.py": "fff6edffba352fe35a332152fde53cef1d1716e60b1d6f7595f03889e392e0ec",
+    "tmp/public_hosted_logs.py": "44e3ac510017290253beb49916c9c1dc386fdf7ead466c9d8c7cb2aeb183d175",
+    "tmp/rollback_public_v10_12.py": "c1a3ec9c54432907b0a7fd78cd2399815c2e70a1818b6322c12d04ea87e2fb61",
+    "tmp/submit_hosted_v10.py": "2854f77afb285a2065b9609fdc0731488abfa43cb650aa0a39c9fc34c29f0760",
+    "tmp/test_evaluator_packaging_v10_12.py": "71bf8ea6dddef1bddf04b2083c15ca58e8cf376a2e4fc835d86aa3e2f2ab4884",
+    "tmp/test_haiku_helpers_v10_12.py": "6820444676dffcf6ae32ede28abf16fb753a9d3ae910a8b7a8226a08081e5f48",
+    "tmp/test_private_acceptance_helpers_v10_12.py": "28234158cd8f5c42e9420a95e9ec308c9f0ff74c63f82d2c140536465e2c5293",
+    "tmp/test_rollback_revision_binding_v10_12.py": "afd151039892e76433127700976c3b4557907c6fe88ea7e23e818e034823a441"
+  },
+  "prior_archive_and_manifest_bytes_preserved": true,
+  "prior_manifest_sha256": "a432fa588aa179e60ed77787485c75929f1d5149300abf58d97da54335e58100",
+  "provider_calls_by_packaging": 0,
+  "restore_policy": "Restore exact original repository-relative tmp paths after hash and workspace-root checks; no automatic cloud/provider execution.",
+  "reviewed_helper_known_limitation": "Public-opening coordinator separately requires current-role cache/delivery audit, fresh unchanged-budget/billing guard and floor-ledger check before invoking helper.",
+  "schema": "motomedic-haiku-v10_12-engineering-helper-bundle-v2",
+  "scope3_sha256": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f",
+  "sha256": "d10fecada0e8d40481441f8294ce7da72d486fa1282abf478c4ac83e8f3960b7",
+  "supersedes_archive": "engineering_helpers_v12_v1.zip",
+  "supersedes_archive_sha256": "c3943cdfee9d163037d53a71793b72a248e13bef32bfed32bff6ba2e3a474c07",
+  "synthetic_tests_passed": 35
+}

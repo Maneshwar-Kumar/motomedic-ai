@@ -4,7 +4,8 @@ import json
 import unittest
 
 from generation_providers import ProviderFailure
-from cloud.grounded_generation.cached_verifier import CachedDraft, CachedVerifier, CONTRACT, MODEL, MAX_CALL_USD,INPUT_TOKENS, STABLE_FIELDS
+from cloud.grounded_generation.cached_verifier import CachedDraft, CachedVerifier, CONTRACT, MODEL, MAX_CALL_USD,INPUT_TOKENS, STABLE_FIELDS,native_role_schema
+from evidence_registry import content_hash
 from cloud.grounded_generation.role_contracts import haiku_maximum_nanodollars
 from cloud.grounded_generation.verified_qa import VERIFY_POLICY, VERIFY_SCHEMA, DRAFT_POLICY,DRAFT_SCHEMA
 
@@ -13,7 +14,7 @@ def stable():
     value = {k: {} for k in STABLE_FIELDS}
     value.update(manual_checksum='synthetic-manual', index_id='synthetic-index',
                  full_evidence_payload_sha256='synthetic-evidence',
-                 source_authority_lock='synthetic-source-lock',
+                 source_authority_lock='synthetic-source-lock',source_projection='plain-json-literal-source-objects-v3',
                  evidence={'synthetic-id': {'text': 'Engineering fixture only.'}})
     return value
 
@@ -63,7 +64,11 @@ class Tests(unittest.TestCase):
         self.assertEqual(json.loads(dynamic['text'])['request']['question'], 'synthetic question')
         self.assertEqual(body['thinking'], {'type': 'disabled'})
         self.assertEqual(body['output_config']['effort'], 'medium')
-        self.assertEqual(body['output_config']['format']['schema'], VERIFY_SCHEMA)
+        derived,ids=native_role_schema(VERIFY_SCHEMA,stable(),'semantic_verifier')
+        self.assertEqual(body['output_config']['format']['schema'],derived)
+        self.assertEqual(self.provider.last_trace['role_schema_template_sha256'],content_hash(VERIFY_SCHEMA))
+        self.assertEqual(self.provider.last_trace['native_role_schema_sha256'],content_hash(derived))
+        self.assertEqual(self.provider.last_trace['citable_evidence_ids_sha256'],content_hash(ids))
         counted = self.transport.calls[0][2]
         self.assertNotIn('max_tokens', counted)
         self.assertEqual(counted['messages'], body['messages'])
@@ -293,6 +298,26 @@ class Tests(unittest.TestCase):
                 with self.assertRaisesRegex(ProviderFailure,'MODEL_ROLE_RESERVATION_BINDING_REQUIRED'):
                     provider.complete(policy,stable(),{},schema)
                 self.assertFalse(any(call[1]=='messages' for call in transport.calls))
+
+    def test_native_citation_enum_uses_literal_admitted_keys_and_excludes_gap_ids(self):
+        evidence=stable();evidence['evidence']={'source-z':{'text':'last'},'source-a':{'text':'first'}}
+        evidence['source_gaps']=[{'evidence_ids':['not-admitted'],'rider_resolvable':False}]
+        for role,template,field in (('private_draft',DRAFT_SCHEMA,'evidence_ids'),
+            ('semantic_verifier',VERIFY_SCHEMA,'supported_evidence_ids')):
+            derived,ids=native_role_schema(template,evidence,role)
+            property_name='claims' if role=='private_draft' else 'per_claim_support'
+            enum=derived['properties'][property_name]['items']['properties'][field]['items']['enum']
+            self.assertEqual(enum,ids);self.assertEqual(ids,['source-a','source-z'])
+            self.assertNotIn('not-admitted',str(derived))
+        self.assertNotIn('enum',DRAFT_SCHEMA['properties']['claims']['items']['properties']['evidence_ids']['items'])
+
+    def test_reference_codec_payload_is_rejected_before_native_count_or_generation(self):
+        evidence=stable();evidence['source_projection']={'encoding':'lossless-shared-json-v2','shared':[]}
+        with self.assertRaisesRegex(ProviderFailure,'PLAIN_COMPLETE_CONTEXT_REQUIRED'):
+            self.call(evidence=evidence)
+        with self.assertRaisesRegex(ProviderFailure,'PLAIN_COMPLETE_CONTEXT_REQUIRED'):
+            self.call(dynamic={'encoding':'lossless-shared-json-v2','shared':[],'value':{}})
+        self.assertFalse(self.transport.calls)
 
 
 if __name__ == '__main__': unittest.main()

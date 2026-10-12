@@ -1,6 +1,6 @@
 # MotoMedic AI
 
-**Current work: Haiku-only v10.12 demonstration.** The owner authorized continuation on 12 October 2026. Use `claude-haiku-5-5` for separate drafting and exact finalized-response verification calls, with distinct role policies/schemas. Frozen v10.11 remains superseded history. Hosted quality, cache, delivery, rollback and public-browser acceptance are in progress. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
+**Current work: Haiku-only v10.13 repair.** V10.12 passed software, hosted build, counts and rollback checks, but its live answer review failed: one incorrect claim-to-object citation and one invalid draft. UI remains private. V10.13 will preserve complete literal evidence/history, constrain original source IDs and strengthen exact-object verification. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
 
 A manual-grounded question-answering assistant for the Royal Enfield New Himalayan 450. The selected source is the supplied **owner's manual**. The runtime privately drafts from retrieved evidence, separately verifies the finalized answer, saves it, then streams that exact verified text.
 
@@ -36,9 +36,13 @@ Some compatibility modules implement earlier methods because current imports and
 
 The selected index `index_a3282c4d98cf54595e4ba168` has 532 BGE M3 chunks, 277 parents and BM25. Runtime retrieval uses authenticated Qdrant concurrently with BM25, RRF and conditional reranking. Accepted answers require separate model verification and exact saved-buffer streaming.
 
-The owner selected Haiku only for drafting and separate finalized-response verification. The saved v10.11 Gemini WIP remains superseded history. The v10.12 runtime, fixtures, shared admission and hosted helpers are being validated. UI remains private until current acceptance passes. [Current status](docs/STATUS.md) preserves results and failures.
+The owner selected Haiku only for drafting and separate finalized-response verification. Frozen v10.11 and the failed v10.12 live run remain history. The v10.13 repair preserves complete literal evidence and history and binds citations to admitted source objects. UI remains private until current acceptance passes. [Current status](docs/STATUS.md) preserves results and failures.
 
 Haiku policy/evidence-prefix caching is required; primary caching optimization, photo and voice are deferred. The availability fallback and whole-manual Claude route remain disabled. Existing source-display restrictions and spending guards stay in force.
+
+## Clone, fork and review
+
+The repository and manual are public by the owner's latest review instruction. Start with [reviewer guide](docs/REVIEWER.md), [setup](docs/SETUP.md) and [architecture](docs/ARCHITECTURE.md). The current Haiku repair is on `codex/public-evaluator` in [PR #4](https://github.com/Maneshwar-Kumar/motomedic-ai/pull/4); main remains the baseline until accepted integration. [CI workflow](.github/workflows/ci.yml) and [runs](https://github.com/Maneshwar-Kumar/motomedic-ai/actions) are public. Public preview and service inspection do not establish answer-quality acceptance.
 
 ## Working checks
 

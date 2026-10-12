@@ -16,7 +16,7 @@ HAIKU_CONTEXT_TOKENS=1000000
 ROUTING_THRESHOLD=8192
 FLASH_INPUT_TOKENS=1048576
 FLASH_INPUT_TPM=250000
-VERSION='haiku-draft-finalized-verifier-v3'
+VERSION='haiku-literal-object-draft-finalized-verifier-v4'
 SOURCES={'checked_date':'2026-10-12',
     'flash_lite_native_window':'https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite',
     'flash_lite_pricing':'https://ai.google.dev/gemini-api/docs/pricing',
@@ -46,6 +46,8 @@ def contract(model,role):
             primary_cost_bound='RETAINED_GLOBAL_999200_TOKEN_ALLOCATION_MAXIMUM_USD_0.39968')
     if model==HAIKU:
         result.update(cache_ttl='5m',minimum_cache_tokens=512,thinking='disabled',effort='medium',
+            evidence_encoding='PLAIN_JSON_LITERAL_SOURCE_IDS',
+            citation_schema='ROLE_TEMPLATE_WITH_EXACT_ADMITTED_SOURCE_ID_ENUM',
             native_limit_sources={k:v for k,v in SOURCES.items() if k in ('checked_date','haiku_native_window_and_pricing')},
             pricing={'long_context_above_input_tokens':100000,
                 'base_usd_per_million':{'input':.10,'output':.50,'cache_write':.125,'cache_read':.01},
@@ -70,6 +72,8 @@ CONTRACT={'version':VERSION,'selection':'FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE
 _legacy_sources={k:v for k,v in SOURCES.items() if not k.startswith('flash_lite')}
 def _legacy_role(value):
     result=deepcopy(value)
+    result.pop('evidence_encoding',None)
+    result.pop('citation_schema',None)
     result['version']='native-context-distinct-role-router-v1'
     result['native_limit_sources']=deepcopy(_legacy_sources)
     return result

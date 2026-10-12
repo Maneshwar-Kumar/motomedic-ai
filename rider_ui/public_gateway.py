@@ -21,6 +21,44 @@ from rider_ui.public_edge import COOKIE, challenge, check_proof
 
 VERSION = 'cloud-run-public-gateway-v2'
 POLICY = 'gcp-public-cloud-run-cookie-v2'
+PREVIEW_MESSAGE = 'Answering is paused while we finish checking the demo.'
+
+
+def rider_answers_enabled():
+    """Server-owned preview control; absent retains existing enabled behavior."""
+    return os.environ.get('MOTOMEDIC_RIDER_ANSWERS_ENABLED','true').strip().lower()=='true'
+
+
+def preview_socket_message_allowed(message):
+    """Keep Streamlit shell widgets live but reject question submission frames."""
+    if rider_answers_enabled():return True
+    try:
+        from streamlit.proto.BackMsg_pb2 import BackMsg
+        if type(message)is not bytes:return False
+        frame=BackMsg();frame.ParseFromString(message)
+        if frame.WhichOneof('type')=='rerun_script':
+            for widget in frame.rerun_script.widget_states.widgets:
+                kind=widget.WhichOneof('value')
+                if kind=='chat_input_value':
+                    value=widget.chat_input_value
+                    if value.data or value.file_uploader_state.uploaded_file_info:return False
+                elif kind=='string_trigger_value' and widget.string_trigger_value.data:return False
+                elif kind=='json_trigger_value' and widget.json_trigger_value not in ('','null'):return False
+        return True
+    except Exception:
+        return False
+
+
+def answer_dispatch_routes():
+    """The public gateway never proxies private API operations to the browser."""
+    import tornado.web
+    class AnswerDispatch(tornado.web.RequestHandler):
+        async def post(self):
+            if rider_answers_enabled():raise tornado.web.HTTPError(404)
+            self.set_status(503)
+            self.set_header('Cache-Control','no-store')
+            self.finish({'error':'ANSWERS_PAUSED','message':PREVIEW_MESSAGE})
+    return [(r'/v1/(?:sessions|operations)(?:/.*)?',AnswerDispatch)]
 
 
 def configured():
@@ -230,6 +268,9 @@ document.getElementById('status').textContent='Unable to connect right now. Plea
             if size > 16384:
                 self.close(code=1009)
                 return
+            if not preview_socket_message_allowed(message):
+                self.close(code=1008)
+                return
             try:
                 await self.upstream.write_message(message, binary=isinstance(message, bytes))
             except Exception:
@@ -241,7 +282,7 @@ document.getElementById('status').textContent='Unable to connect right now. Plea
             if self.reader:
                 self.reader.cancel()
 
-    application = tornado.web.Application(health_routes(worker, client, upstream) + [
+    application = tornado.web.Application(health_routes(worker, client, upstream) + answer_dispatch_routes() + [
         (r'/', Entry), (r'/_visitor', Visitor),
         (r'/_stcore/stream', Socket), (r'/(?:_stcore/(?!upload)|static/|media/).*', Assets)],
         websocket_max_message_size=16384, websocket_ping_interval=30, websocket_ping_timeout=30)

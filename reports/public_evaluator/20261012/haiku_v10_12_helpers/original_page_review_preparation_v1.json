@@ -1,0 +1,97 @@
+{
+  "actual_final_answers_reviewed": 0,
+  "authority": "INDEPENDENT_AGENT_ENGINEERING_SOURCE_REVIEW_ONLY",
+  "human_signoff": false,
+  "limitations": [
+    "No current live answer-quality acceptance yet.",
+    "These four pages do not establish exhaustive absence of a connecting-rod bolt torque throughout the entire149-page manual.",
+    "Later review requires exact downloaded hosted artifacts, manifest/images/runtime lock and saved-stream-recovery bindings.",
+    "Engineering-only original images are not rider-facing artifacts."
+  ],
+  "manual_pdf_pages": 149,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "pages": [
+    {
+      "complete_page_visually_inspected": true,
+      "exact_original_render_hash_match": true,
+      "independent_visual_findings": {
+        "facts": [
+          "Bore84mm and stroke81.5mm are separate engine dimensions.",
+          "Swept volume452cc is distinct from those dimensions.",
+          "Max torque40Nm at5500rpm denotes engine output, not a connecting-rod fastener tightening specification."
+        ],
+        "heading": "TECHNICAL SPECIFICATIONS / ENGINE",
+        "printed_page": "14",
+        "separate_context": "Right-hand IGNITION SYSTEM is a separate heading; unrelated spark-plug facts are not required for bore/stroke."
+      },
+      "original_plan_png_sha256": "861518ceab5d2137fd0370b7545c6ed4803ade4092f19f3500115fd1b264a010",
+      "pdf_page": 16,
+      "png_sha256": "861518ceab5d2137fd0370b7545c6ed4803ade4092f19f3500115fd1b264a010",
+      "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf016.png"
+    },
+    {
+      "complete_page_visually_inspected": true,
+      "exact_original_render_hash_match": true,
+      "independent_visual_findings": {
+        "facts": [
+          "Low-fuel warning3L plus/minus0.5L, fuel tank capacity17.0L and dead stock0.95L to1.15L are distinct rows.",
+          "The asterisk footnote qualifies these values as approximate and actual fuel filling capacity as variable."
+        ],
+        "heading": "Right-hand fuel specification rows",
+        "printed_page": "16",
+        "separate_context": "Left-hand tyre size/pressure tables and rim/tyre NOTE do not qualify the right-hand fuel rows."
+      },
+      "original_plan_png_sha256": "e88e4989c46727ef7952357db546a5d9af9f20e4564f84de17963764aa83429c",
+      "pdf_page": 18,
+      "png_sha256": "e88e4989c46727ef7952357db546a5d9af9f20e4564f84de17963764aa83429c",
+      "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf018.png"
+    },
+    {
+      "complete_page_visually_inspected": true,
+      "exact_original_render_hash_match": true,
+      "independent_visual_findings": {
+        "facts": [
+          "Upper-left fuel WARNING says avoid prolonged use with the last segment blinking and refuel at the earliest; failure can strand the rider and seriously damage the fuel pump.",
+          "The lower-left CHARGER PORT heading and handlebar illustration describe the separate USB port.",
+          "Right-hand USB WARNING recommends avoiding rainy charging; mobile phones only and one at a time; proper insertion; unused cap not open or partly closed; no metal/conductive material in the port."
+        ],
+        "heading": "OPERATION OF CONTROLS",
+        "printed_page": "62",
+        "separate_context": "The upper-left fuel warning is a different subsection from USB charging despite sharing the page."
+      },
+      "original_plan_png_sha256": "8e7a5de0246685daedd7e6310d4dd432edf359b1f48ab6f43208b2f2b286b3b2",
+      "pdf_page": 64,
+      "png_sha256": "8e7a5de0246685daedd7e6310d4dd432edf359b1f48ab6f43208b2f2b286b3b2",
+      "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf064.png"
+    },
+    {
+      "complete_page_visually_inspected": true,
+      "exact_original_render_hash_match": true,
+      "independent_visual_findings": {
+        "facts": [
+          "Charging only, no data transfer; constant charging only, not fast/dash, with performance not assumed equivalent to an original phone charger.",
+          "Charging duration can be longer and varies with phone make, battery capacity, state of charge and charging circuitry; no exact duration is supplied.",
+          "Above2.5A current shuts the charger down; check phone battery current ratings before use.",
+          "USB charging requires the engine to be running; use standard approved/high-quality USB cables.",
+          "CAUTION says close and lock the unused USB cap properly and explains damaged/unsealed cap warranty limits."
+        ],
+        "heading": "OPERATION OF CONTROLS / USB NOTE and CAUTION",
+        "printed_page": "63",
+        "separate_context": "These mode, time, operating-condition and caution bullets are all USB-specific; their applicability depends on the live answer claims."
+      },
+      "original_plan_png_sha256": "c5b0b744f493ecf132e5ed0bb3c9561602c09e77418fb06e8b5eec2037a8e345",
+      "pdf_page": 65,
+      "png_sha256": "c5b0b744f493ecf132e5ed0bb3c9561602c09e77418fb06e8b5eec2037a8e345",
+      "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf065.png"
+    }
+  ],
+  "plan_sha256": "a7dc784be633c14accdff256e57abb784a486076da07b149c6f2e04096ee5541",
+  "procedure_sha256": "fb9069839cfd4b70319637fdd7b3bd4e11668250759e64593eb05654c2733d5b",
+  "provider_calls": 0,
+  "render_provenance_sha256": "ab23d9ce4181c51315f549c7f2c30a094cc4f82ad0ae1b49faf274bfca119ff5",
+  "reviewer_actor": "/root/engineering_helpers",
+  "schema": "motomedic-v10_12-independent-original-page-review-preparation-v1",
+  "serving_prompts_or_retrieval_changed_from_criteria": false,
+  "source_approval_changed": false,
+  "status": "SOURCE_PREPARATION_READY_ACTUAL_HOSTED_ANSWERS_PENDING"
+}

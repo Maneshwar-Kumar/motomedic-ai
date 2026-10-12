@@ -1,0 +1,123 @@
+{
+  "charges_remain_permanent": true,
+  "classification": "READONLY_ACTUAL_HOSTED_RECEIPT_AND_FROZEN_SOURCE_DIAGNOSIS",
+  "cloud_build_id": "e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53",
+  "cloud_mutations_by_diagnosing_agent": 0,
+  "combined_predicates_in_bound_validator": [
+    "claim text non-string, blank or over2400 characters",
+    "role outside allowed schema roles",
+    "evidence_ids non-list or non-string item",
+    "duplicate evidence_ids",
+    "citation identifier outside admitted evidence dictionary keys"
+  ],
+  "diagnostic_gap": {
+    "do_not_infer": "No particular bad citation, missing source claim or model-selected role can be identified from this combined error.",
+    "raw_rejected_draft_retained": false,
+    "reason": "Attempt trace is appended only after verification; a draft validation exception skips that append. Successful returned draft telemetry is not copied into a failed-provider trace for ValidationFailure.",
+    "successful_draft_provider_trace_retained_on_validation_failure": false
+  },
+  "exact_leaf_predicate": "UNRECOVERABLE_FROM_RETAINED_RECEIPTS",
+  "existing_proofs": {
+    "current_draft_cache_reads_proven": false,
+    "current_draft_cache_write_tokens": 5786,
+    "current_verifier_cache_reads_proven": false,
+    "current_verifier_cache_write_tokens": 6064,
+    "direct_accepted_delivery_hash_checks": true,
+    "direct_completed_duplicate_view_unchanged": true,
+    "direct_duplicate_provider_reservations_unchanged": true,
+    "direct_original_page_factual_acceptance": "SEPARATE_AGENT_REVIEW_PENDING",
+    "direct_other_valid_visitor404": true,
+    "public_browser_acceptance": false,
+    "six_case_useful_answer_acceptance": false
+  },
+  "failed_case": {
+    "accepted_buffer": false,
+    "case_id": "EVAL_USB_02",
+    "corrections": 0,
+    "counted_initial_draft_tokens": 11991,
+    "failure_code": "INVALID_DRAFT_CITATION_OR_ROLE",
+    "final_outcome_saved_streamed_recovered": true,
+    "operation_id": "e5095223663541a397c9f3e3d026f21a",
+    "paid_draft_calls": 1,
+    "paid_generation_calls": 1,
+    "private_attempt_trace_count": 0,
+    "route": "SYSTEM_ERROR",
+    "sealed_unused_pacing_slots": 1,
+    "sealing_status": "SEALED_UNUSED_CONFIRMED",
+    "technical_content_released": false,
+    "verification_calls": 0
+  },
+  "ledger_after": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 28,
+      "reserved_tokens": 357663,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 5,
+      "reserved_nanodollars": 28975875,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "ledger_before": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 24,
+      "reserved_tokens": 239808,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 3,
+      "reserved_nanodollars": 11544000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "minimal_generic_repair_proposal": {
+    "changes": [
+      "Retain scalar successful draft provider telemetry at the draft-validation boundary, including native counts, actual token/cache usage, cost, role/model and parsed-output SHA256; keep private answer text absent from routine telemetry.",
+      "Emit sanitized violation flags and claim ordinal for each currently combined validation predicate. Do not emit raw invalid citation strings, claim text, questions or private draft bodies.",
+      "Keep every current citation/schema/role/context binding check and SYSTEM_ERROR classification; do not normalize invalid citations into approved IDs or automatically retry malformed output."
+    ],
+    "new_frozen_version_required": "v10.13 if runtime inputs change",
+    "optional_prevention_not_proven_rootcause": "Clarify generically that only dictionary keys in assembled_evidence.evidence may be cited; identifiers inside source_gaps/references/history never authorize citations. No failed-case wording or answer facts should enter policies.",
+    "required_validation": [
+      "Synthetic doubles exercising each exact violation predicate keep zero technical release and no verifier/correction generation.",
+      "Successful initial/corrected paths retain exact finalized-response binding and no private tokens.",
+      "Fresh immutable source/image/runtime binding and current native counts before any newly authorized hosted evaluation."
+    ]
+  },
+  "no_refund_reset_or_retry": true,
+  "proven_failure_location": {
+    "called_after": "successful CachedDraft.complete and paid usage counted",
+    "called_before": [
+      "finalization",
+      "separate finalized-response verifier",
+      "correction admission",
+      "accepted response delivery"
+    ],
+    "error": "INVALID_DRAFT_CITATION_OR_ROLE",
+    "file": "cloud/grounded_generation/verified_qa.py",
+    "function": "validate_draft",
+    "not_observed": [
+      "provider transport error",
+      "native context overflow",
+      "admission or monetary guard rejection"
+    ]
+  },
+  "provider_calls_by_diagnosing_agent": 0,
+  "recorded_utc": "2026-10-12T09:05:28.477648+00:00",
+  "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+  "runtime_source_edits": 0,
+  "schema": "motomedic-haiku-v10-12-operational-failure-diagnosis-v1",
+  "serving_manifest_sha256": "ff82ee677ada2e42fc08b5ea710ebe05cef7dac527f7008785ed0320bf58e8fb",
+  "source_artifact_sha256": {
+    "EVAL_DIRECT_01.json": "205eb9db1049c0660b142fab01421407311a6511753f6864d0590377b1b14c32",
+    "EVAL_USB_02.json": "5e891e29e91654afa4629b2ddd557736a67ebfea623b1f8fcddbf8fdc1a27145",
+    "receipt.json": "e3365dd6bd4b548e7ece58d82412793b1b6db275e56f312ac57ab5da18e8fe71"
+  }
+}

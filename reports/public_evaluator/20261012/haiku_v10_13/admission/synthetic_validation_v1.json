@@ -1,0 +1,37 @@
+{
+  "schema": "motomedic-haiku-v10-13-admission-synthetic-review-v1",
+  "recorded_at_utc": "2026-10-12T09:44:54.287795+00:00",
+  "validation_kind": "PROVIDER_FREE_SYNTHETIC_LOCAL",
+  "command": "python -m unittest cloud.grounded_generation.test_token_ceiling cloud.grounded_generation.test_whole_turn_admission cloud.grounded_generation.test_admission cloud.grounded_generation.test_claude_fallback tools.test_manage_primary_token_ceiling -q",
+  "exit_code": 0,
+  "tests_run": 95,
+  "tests_passed": 95,
+  "elapsed_seconds": 0.785,
+  "provider_calls": 0,
+  "cloud_calls": 0,
+  "real_owner_grant_applied": false,
+  "real_ledger_writes": 0,
+  "billing_changes": 0,
+  "file_sha256": {
+    "cloud/grounded_generation/token_ceiling.py": "b46386b6058abc3820776dbe3467437e401067a97cef1850e99458457915cd9f",
+    "cloud/grounded_generation/whole_turn_admission.py": "ec98c177b1d71d18a1f402640e2f79a4ad4403feffb27f4fc65b90edbe4002cf",
+    "cloud/grounded_generation/test_token_ceiling.py": "a7e45b5d3c95789a43ba6f0dae4fd369fb4ab0ce750afe692e1ddc5c3b2b60cb",
+    "cloud/grounded_generation/test_whole_turn_admission.py": "7bdb151efc355a71c6cc01e63a43d4a2ee14000e57f0177db64c2f3c88b97e1a",
+    "tools/manage_primary_token_ceiling.py": "ec745cf332f9d014f28f013ee7b2a606ed2c47c5ed4a0d625b6f01a4c708ec29",
+    "tools/test_manage_primary_token_ceiling.py": "334cd577b4a766b818297a7132447e34c67d7098180b9d68111f35618837b948"
+  },
+  "validated": [
+    "Default token ceiling remains 999200; maximum compiled owner-granted ceiling is 3000000.",
+    "An expanded allocation requires exact immutable grant and authorization bindings.",
+    "Grant application is atomic, preserves historical reserved counters, event documents, ledger versions and original shared USD1 allocation, and rejects changed fresh snapshots.",
+    "Same applied grant is idempotent; missing, altered, replacement or rolled-back grants fail closed.",
+    "Native per-call limits remain separate from lifetime token limits; attempts100, INR2700 lifetime and INR2540 disconnect controls remain unchanged.",
+    "New reservations bind exact ceiling and grant scope; a change during an admitted turn rejects.",
+    "Firestore timestamp events/metadata serialize into JSON-safe complete document and event digests without exposing raw events.",
+    "A pending journal records exact intended grant before writes; an unsupported post-commit readback preserves this journal rather than reporting success without a receipt."
+  ],
+  "limitations": [
+    "No real grant or owner approval was created. Synthetic authorization inside unit tests is not operational authority.",
+    "No hosted provider quality, latency, prompt-cache, delivery or deployment acceptance is established by these tests."
+  ]
+}

@@ -8,6 +8,7 @@ from rider_ui.client import APIError, RiderAPI, operation_id
 from rider_ui.safeguards import LIMITS
 from rider_ui.verified_sse import PROGRESS_LABELS
 from rider_ui.identity import issue, verify, cloud_run_token, platform_subject
+from rider_ui.public_gateway import rider_answers_enabled,PREVIEW_MESSAGE
 
 st.set_page_config(page_title='MotoMedic · Rider assistant', page_icon='🏍️', layout='wide')
 st.markdown(Path(__file__).with_name('theme.css').read_text(encoding='utf-8'), unsafe_allow_html=True)
@@ -46,7 +47,8 @@ def client():
     return RiderAPI(url, credential,
                     allow_loopback=setting('MOTOMEDIC_UI_ENGINEERING_LOOPBACK') == '1',
                     visitor=st.session_state.get('visitor_capability'),
-                    cache_mode=setting('MOTOMEDIC_CACHE_MODE') or 'bypass', network=network)
+                    cache_mode=setting('MOTOMEDIC_CACHE_MODE') or 'bypass', network=network,
+                    answers_enabled=rider_answers_enabled())
 
 def remember(view, rider_text=None):
     if rider_text:
@@ -73,6 +75,8 @@ def conversation_notice(view):
     return None
 
 def perform(kind, value):
+    if not rider_answers_enabled():
+        return
     pending = {'id': operation_id(), 'kind': kind, 'value': value}
     st.session_state.pending = pending
     try:
@@ -144,7 +148,10 @@ if configured and not st.session_state.catalogue:
             st.rerun()
 
 catalogue = st.session_state.catalogue
-ready = configured and bool(catalogue) and confirmed
+answers_enabled=rider_answers_enabled()
+ready = configured and bool(catalogue) and confirmed and answers_enabled
+if not answers_enabled:
+    st.info(PREVIEW_MESSAGE)
 if not st.session_state.messages:
     with st.container(border=True):
         st.markdown('### What would you like to know?')
@@ -229,7 +236,7 @@ if view and not st.session_state.pending:
         st.markdown('**' + ('Your observation' if view['response']['type'] == 'AMBIGUOUS' else 'How did it go?') + '**')
         cols = st.columns(min(len(choices), 3))
         for i, choice in enumerate(choices):
-            if cols[i % len(cols)].button(choice['label'], key='choice_' + str(view['version']) + '_' + choice['id'], use_container_width=True):
+            if cols[i % len(cols)].button(choice['label'], key='choice_' + str(view['version']) + '_' + choice['id'], use_container_width=True,disabled=not answers_enabled):
                 perform('feedback', choice)
     with st.expander('What this conversation remembers'):
         if not view.get('history'):

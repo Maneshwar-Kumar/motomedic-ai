@@ -1,8 +1,8 @@
 # MotoMedic product requirements
 
-**Current work: Haiku-only v10.12 demonstration.** The owner authorized continuation on 12 October 2026. Use `claude-haiku-5-5` for separate drafting and exact finalized-response verification calls, with distinct role policies/schemas. Frozen v10.11 remains superseded history. Current runtime, hosted quality, cache, delivery, rollback and public-browser acceptance are in progress; no public URL is accepted yet. Read [model scope3](../reports/public_evaluator/20261012/owner_model_scope_v3.json).
+**Current work: Haiku-only v10.13 repair.** V10.12 passed software, hosted build, counts and rollback checks, but its live answer review failed: one incorrect claim-to-object citation and one invalid draft. UI remains private. V10.13 will preserve complete literal evidence/history, constrain original source IDs and strengthen exact-object verification. Read [model scope3](../reports/public_evaluator/20261012/owner_model_scope_v3.json).
 
-Version 1.4 · 12 October 2026 · Haiku-only demonstration implementation and acceptance.
+Version 1.5 · 12 October 2026 · Haiku-only demonstration implementation and acceptance.
 
 This is the single current product specification. It consolidates the owner's open-manual draft, verify, stream decision and subsequent request for a public evaluator URL, conditional ranking, prompt caching and separate finalized-response verification. The latest instruction selects Haiku for both calls. The [exact operational scope](../reports/public_evaluator/20261012/owner_scope_v1.json) and [credential setup approval](../reports/public_evaluator/20261012/owner_credential_scope_v1.json) authorize the necessary public frontend, private backend/worker, managed identity and bounded hosted validation. Existing source approvals, source-display restrictions and spending limits remain unchanged. [TRD.md](TRD.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [TODO.md](../TODO.md) define implementation and acceptance.
 

@@ -98,6 +98,15 @@ def create_app(registry, retriever, state_factory, cases):
         if request.path == '/healthz':
             return None
         try:
+            from cloud.arm_a.public_inspection_auth import enabled, verify_request
+            if enabled():
+                if request.path == '/v1/health' and request.method == 'GET':
+                    return None
+                verified_token = verify_request(request.headers)
+                # Cloud Run strips the alternate header's signature. Downstream
+                # edge/Tasks checks must read the same fully verified JWT.
+                request.environ.pop('HTTP_X_SERVERLESS_AUTHORIZATION', None)
+                request.environ['HTTP_AUTHORIZATION'] = 'Bearer ' + verified_token
             request.environ['arm_a_owner'] = cloud_run_owner(request.headers)
         except PermissionError:
             return error('SYSTEM_ERROR','AUTH_REQUIRED',401)

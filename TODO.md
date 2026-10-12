@@ -1,6 +1,6 @@
 # MotoMedic execution plan
 
-**Current work: Haiku-only v10.12 demonstration.** The owner authorized continuation on 12 October 2026. Use `claude-haiku-5-5` for separate drafting and exact finalized-response verification calls, with distinct role policies/schemas. Frozen v10.11 remains superseded history. Current runtime, hosted quality, cache, delivery, rollback and public-browser acceptance are in progress; no public URL is accepted yet. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
+**Current work: Haiku-only v10.13 repair.** V10.12 passed software, hosted build, counts and rollback checks, but its live answer review failed: one incorrect claim-to-object citation and one invalid draft. UI remains private. V10.13 will preserve complete literal evidence/history, constrain original source IDs and strengthen exact-object verification. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
 
 **Stopped for fresh-chat handoff.** Read the [summary](reports/handoff/20261012/SUMMARY.md) and [ordered next-chat TODO](reports/handoff/20261012/TODO.md). Current code is unbuilt WIP; the UI remains private.
 

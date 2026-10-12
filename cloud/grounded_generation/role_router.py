@@ -82,8 +82,8 @@ class RoleRouter:
         validate_role_plan_binding(plan.binding())
 
     def select(self,stable,dynamic):
-        from cloud.grounded_generation.verified_qa import DRAFT_POLICY,DRAFT_SCHEMA,compact_model_context
-        encoded=compact_model_context(dynamic)
+        from cloud.grounded_generation.verified_qa import DRAFT_POLICY,DRAFT_SCHEMA
+        encoded=deepcopy(dynamic)
         name='HAIKU_DRAFT_HAIKU_VERIFY'
         draft,verifier=self.draft,self.verifier
         chosen=deepcopy(stable)
@@ -103,7 +103,7 @@ class RoleRouter:
         generation seeds. Actual contexts must fit the reserved hard ceiling.
         """
         from cloud.grounded_generation.verified_qa import (VERSION,DRAFT_POLICY,DRAFT_SCHEMA,
-            VERIFY_POLICY,VERIFY_SCHEMA,compact_model_context)
+            VERIFY_POLICY,VERIFY_SCHEMA)
         claims=[{'claim_id':'draft:'+str(i),'text':'','role':'PREREQUISITE',
             'evidence_ids':[],'presentation_mode':'VERIFIED_GENERATED_PARAPHRASE','origin':'DRAFT'} for i in range(12)]
         claims += [{'claim_id':'source:'+row['claim_id'],'text':row['text'],'role':row['response_role'],
@@ -125,7 +125,7 @@ class RoleRouter:
             'unanswered_parts':[],'binding':binding,'binding_sha256':'0'*64}
         def counted(provider,policy,payload,schema,*,sizing=False):
             self.last_count_provider=provider
-            return provider.context(policy,stable,compact_model_context(payload),schema)[1]
+            return provider.context(policy,stable,deepcopy(payload),schema)[1]
         verify_fixed=counted(plan.verifier,VERIFY_POLICY,verification,VERIFY_SCHEMA,sizing=True)
         base_verification=deepcopy(verification)
         base_verification['complete_proposed_response'].update(claims=[],citations=[],text='')
@@ -183,14 +183,14 @@ class RoleRouter:
         return receipt
 
     def begin_correction(self,operation_id,plan,stable,dynamic,admitted,session,feedback,rejected_binding):
-        from cloud.grounded_generation.verified_qa import DRAFT_POLICY,DRAFT_SCHEMA,compact_model_context
+        from cloud.grounded_generation.verified_qa import DRAFT_POLICY,DRAFT_SCHEMA
         self.validate(plan)
         initial=getattr(self.local,'initial_forecast',None)
         if (getattr(self.local,'operation_id',None)!=operation_id or not initial or
             initial['role_plan']!=plan.binding()):raise ProviderFailure('ROUTER_CORRECTION_OPERATION_CHANGED')
         if content_hash(stable)!=plan.stable_sha256:raise ProviderFailure('ROUTER_STABLE_CONTEXT_CHANGED')
         self.last_count_provider=plan.draft
-        body,count=plan.draft.context(DRAFT_POLICY,stable,compact_model_context({**dynamic,
+        body,count=plan.draft.context(DRAFT_POLICY,stable,deepcopy({**dynamic,
             'correction_feedback':feedback}),DRAFT_SCHEMA)
         reservation=self.reservation_plan(plan,stable,dynamic,admitted,session)
         for key in ('initial_haiku_counter_headroom_tokens','initial_primary_counter_headroom_tokens','known_verifier_prefix_native_tokens'):

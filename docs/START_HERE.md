@@ -1,8 +1,8 @@
 # Start here
 
-**Current work: Haiku-only v10.12 demonstration.** The owner authorized continuation on 12 October 2026. Use `claude-haiku-5-5` for separate drafting and exact finalized-response verification calls, with distinct role policies/schemas. Read [model scope3](../reports/public_evaluator/20261012/owner_model_scope_v3.json).
+**Current work: Haiku-only v10.13 repair.** V10.12 passed software, hosted build, counts and rollback checks, but its live answer review failed: one incorrect claim-to-object citation and one invalid draft. UI remains private. V10.13 will preserve complete literal evidence/history, constrain original source IDs and strengthen exact-object verification. Read [model scope3](../reports/public_evaluator/20261012/owner_model_scope_v3.json).
 
-Read the preserved [handoff summary](../reports/handoff/20261012/SUMMARY.md) and [ordered continuation TODO](../reports/handoff/20261012/TODO.md) for history. V10.11 remains superseded and unbuilt. Current v10.12 runtime, admission, helpers and hosted acceptance are being validated; UI remains private until acceptance.
+Read the preserved [handoff summary](../reports/handoff/20261012/SUMMARY.md) and [ordered continuation TODO](../reports/handoff/20261012/TODO.md) for history. V10.11 remains superseded and unbuilt. V10.12 failed live citation and draft validation. The v10.13 repair requires fresh hosted counts, source review and delivery acceptance; UI remains private until acceptance.
 
 Read [PRD](PRD.md), [TRD](TRD.md), [architecture](ARCHITECTURE.md), [root TODO](../TODO.md), [AGENTS](../AGENTS.md) and [CONTRIBUTING](../CONTRIBUTING.md). [STATUS](STATUS.md) separates implementation, checks and acceptance; [reports](../reports/README.md) preserve exact evidence and failures.
 

@@ -35,6 +35,7 @@ def stable():
     value.update(runtime_contract={'runtime_lock':'1'*64,'draft_model_contract':HAIKU_DRAFT,
         'verifier_contract':HAIKU_VERIFIER},manual_checksum='2'*64,index_id='synthetic-index',
         source_authority_lock='3'*64,full_evidence_payload_sha256='4'*64,
+        source_projection='plain-json-literal-source-objects-v3',
         evidence={'synthetic':{'text':'Complete engineering fixture source.'}},
         required_source_display=[],source_gaps=[])
     return value

@@ -151,7 +151,7 @@ class VerifiedTests(unittest.TestCase):
         self.assertEqual(SYSTEM_ERROR_TEXT,expected_error)
         self.assertEqual(FALLBACK_TEXT.encode('utf-8'),expected_fallback.encode('utf-8'))
         self.assertEqual(SYSTEM_ERROR_TEXT.encode('utf-8'),expected_error.encode('utf-8'))
-        self.assertEqual(VERSION,'open-manual-haiku-draft-verify-v10_12')
+        self.assertEqual(VERSION,'open-manual-haiku-draft-verify-v10_13')
     def test_runtime_source_is_ascii_and_apostrophe_is_source_escape(self):
         import cloud.grounded_generation.verified_qa as module
         from pathlib import Path
@@ -385,6 +385,45 @@ class PairedProviderTests(unittest.TestCase):
         self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
         self.assertIsNone(self.composer.last_admitted)
 
+    def test_invalid_draft_retains_paid_usage_and_static_predicate_without_private_text(self):
+        self.draft.drafts=[draft('unknown-private-id','PRIVATE_BAD_DRAFT_BODY')]
+        response=self.call()
+        self.assertEqual(response.type.value,'SYSTEM_ERROR')
+        trace=self.composer.last_trace
+        self.assertEqual(trace['generation_calls'],1);self.assertEqual(trace['verification_calls'],0)
+        self.assertEqual(len(trace['attempts']),1)
+        attempt=trace['attempts'][0]
+        self.assertEqual(attempt['draft_provider']['model'],self.draft.model)
+        self.assertEqual(attempt['draft_validation_status'],'REJECTED')
+        self.assertEqual(attempt['draft_output_sha256'],self.hash(self.draft.drafts[0]))
+        self.assertEqual(attempt['draft_validation_failure']['violated_predicates'],['CITATION_ID_NOT_ADMITTED'])
+        self.assertNotIn('PRIVATE_BAD_DRAFT_BODY',str(trace));self.assertNotIn('unknown-private-id',str(trace))
+        self.assertFalse(self.verifier.calls);self.assertEqual(trace['corrections'],0)
+        self.assertIsNone(self.composer.last_admitted)
+
+    def test_wrong_cited_quantity_cannot_reach_false_accepting_semantic_verifier(self):
+        self.admitted['evidence'][self.eid]['source_object']['content']['text']='Ratio 9.2:1.'
+        self.expected=self.hash(self.admitted)
+        self.draft.drafts=[draft(self.eid,'Length is 37.75 mm.')]
+        response=self.call();trace=self.composer.last_trace
+        self.assertEqual(response.type.value,'SYSTEM_ERROR')
+        self.assertEqual(trace['failure_code'],'NUMERIC_CLAIM_CITATION_NOT_SUPPORTED')
+        self.assertEqual(trace['draft_validation_failure']['violated_predicates'],['MEASUREMENT_VALUE_ABSENT_FROM_CITED_OBJECTS'])
+        self.assertEqual(trace['generation_calls'],1);self.assertFalse(self.verifier.calls)
+        self.assertIsNone(self.composer.last_admitted)
+
+    def test_active_source_history_and_finalized_answer_use_plain_literal_json(self):
+        response=self.call();self.assertEqual(response.type.value,'SUPPORTED')
+        stable,dynamic=self.draft.wire_calls[0][1:]
+        self.assertEqual(stable['source_projection'],'plain-json-literal-source-objects-v3')
+        self.assertIsInstance(stable['evidence'],dict);self.assertIn(self.eid,stable['evidence'])
+        self.assertEqual(dynamic['question'],'Synthetic question only.')
+        self.assertEqual(dynamic['history'],self.history);self.assertNotIn('encoding',dynamic)
+        final=self.verifier.wire_calls[0][2]['complete_proposed_response']
+        self.assertEqual(final['text'],response.natural_language)
+        self.assertEqual(final['claims'],list(response.claim_evidence_map))
+
+
 class RoutedProviderTests(unittest.TestCase):
     """Index-free exact-buffer and authority fixtures for both selected pairs."""
     def setUp(self):
@@ -472,6 +511,64 @@ class RoutedProviderTests(unittest.TestCase):
             changed=deepcopy(accepted);changed['selected_draft_contract']=deepcopy(self.hv.contract)
             with self.assertRaisesRegex(ValidationFailure,'MODEL_ROLE_BINDING_CHANGED'):
                 saved_view(self.controller.registry,self.session,response,self.authority,changed)
+
+
+class LiteralMeasurementAndDraftDiagnosticsTests(unittest.TestCase):
+    """Synthetic exact-object checks; no manual facts or tuning cases."""
+    def guard(self,claim_text,source_text,*,parent=None,authorized=False):
+        from cloud.grounded_generation.verified_qa import validate_numeric_citation_provenance
+        evidence={'synthetic-object':{'source_object':{'content':{'text':source_text}},
+            'reviewed_source_context':{'parent_text':parent,'parent_text_authorized':authorized}}}
+        return validate_numeric_citation_provenance([draft('synthetic-object',claim_text)['claims'][0]],evidence)
+    def test_quantity_must_appear_in_own_cited_object_not_another_bundle_object(self):
+        from cloud.grounded_generation.verified_qa import validate_numeric_citation_provenance
+        evidence={'wrong':{'source_object':{'content':{'text':'Ratio 9.2:1.'}},
+            'reviewed_source_context':{'parent_text':'Length 37.75 mm.','parent_text_authorized':False}},
+            'uncited':{'source_object':{'content':{'text':'Length 37.75 mm.'}}}}
+        with self.assertRaisesRegex(ValidationFailure,'NUMERIC_CLAIM_CITATION_NOT_SUPPORTED'):
+            validate_numeric_citation_provenance([draft('wrong','Length is 37.75 mm.')['claims'][0]],evidence)
+    def test_literal_decimals_thousands_ranges_unicode_and_native_unit_spellings(self):
+        for claim,source in [('Capacity is 4,200 mAh.','Capacity 4200 mAh'),
+            ('Temperature is -7.50 °C.','Temperature −7.5 ° C'),
+            ('Mass is 6–8 kg.','Mass 6 to 8 kg'),
+            ('Length is 5 +/- 0.75 millimetres.','Length 5 ± 0.750 mm')]:
+            with self.subTest(claim=claim):
+                result=self.guard(claim,source)
+                self.assertGreater(result['checked_measurement_pairs'],0)
+                self.assertTrue(result['semantic_verifier_still_required'])
+    def test_native_units_cannot_be_substituted_or_converted(self):
+        for claim,source in [('Current is 12 A.','Voltage 12 V'),('Volume is 1000 ml.','Volume 1 L')]:
+            with self.subTest(claim=claim),self.assertRaisesRegex(ValidationFailure,'NUMERIC_CLAIM_CITATION_NOT_SUPPORTED'):
+                self.guard(claim,source)
+    def test_unitless_value_stays_for_semantic_header_unit_check(self):
+        result=self.guard('Length is 37.75 mm.','Length 37.75')
+        self.assertEqual(result['unit_witness_deferred_to_verifier'],1)
+        self.assertEqual(self.guard('Length is 37.75 mm.','Label only.',parent='Length 37.75 mm.',authorized=True)['checked_measurement_pairs'],1)
+        with self.assertRaises(ValidationFailure):
+            self.guard('Length is 37.75 mm.','Label only.',parent='Length 37.75 mm.',authorized=False)
+    def test_table_text_cells_are_semantic_but_row_offsets_and_refs_are_not(self):
+        from cloud.grounded_generation.verified_qa import validate_numeric_citation_provenance
+        evidence={'synthetic':{'source_object':{'content':{'data':{'table_cells':{
+            'fields':['text','row_span','start_col_offset_idx'],
+            'rows':[['Length 37.75 mm',1,999]]}},'references':[{'text':'999 mm'}]}}}}
+        self.assertEqual(validate_numeric_citation_provenance([draft('synthetic','Length is 37.75 mm.')['claims'][0]],evidence)['checked_measurement_pairs'],1)
+        with self.assertRaises(ValidationFailure):
+            validate_numeric_citation_provenance([draft('synthetic','Length is 999 mm.')['claims'][0]],evidence)
+    def test_each_combined_invalid_draft_predicate_has_only_static_diagnostics(self):
+        from cloud.grounded_generation.verified_qa import validate_draft,DraftValidationFailure
+        tests=[({'text':'   '},'CLAIM_TEXT_BLANK'),({'text':'x'*2401},'CLAIM_TEXT_TOO_LONG'),
+            ({'role':'PRIVATE_BAD_ROLE'},'CLAIM_ROLE_NOT_ALLOWED'),
+            ({'evidence_ids':['unknown-private-id']},'CITATION_ID_NOT_ADMITTED'),
+            ({'evidence_ids':['synthetic','synthetic']},'CITATION_ID_DUPLICATED'),
+            ({'evidence_ids':[True]},'CITATION_ID_NOT_STRING')]
+        for changed,predicate in tests:
+            proposal=draft('synthetic');proposal['claims'][0].update(changed)
+            with self.subTest(predicate=predicate),self.assertRaises(DraftValidationFailure) as caught:
+                validate_draft(proposal,{'synthetic':{}})
+            self.assertIn(predicate,caught.exception.diagnostics['violated_predicates'])
+            self.assertEqual(caught.exception.diagnostics['claim_index'],0)
+            self.assertNotIn('unknown-private-id',str(caught.exception.diagnostics))
+            self.assertNotIn('PRIVATE_BAD_ROLE',str(caught.exception.diagnostics))
 
 
 class SharedProjectionTests(unittest.TestCase):
@@ -607,7 +704,7 @@ class SharedProjectionTests(unittest.TestCase):
                   'authority_lock':'f'*64,'payload_sha256':content_hash(original)}
         config=SimpleNamespace(lock='b'*64,draft_contract={},verifier_contract={},provider_contract=None)
         registry=SimpleNamespace(checksum='a'*64,index_id='synthetic-index',source={})
-        restored=expand_stable_context(model_source_context(config,registry,admitted))
+        restored=model_source_context(config,registry,admitted)
         self.assertEqual(restored['full_evidence_payload_sha256'],content_hash(original))
         self.assertEqual(restored['evidence'],projected_evidence)
         self.assertEqual(restored['required_source_display'],projected_display)
