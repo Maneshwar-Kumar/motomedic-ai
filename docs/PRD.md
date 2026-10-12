@@ -2,7 +2,7 @@
 
 **Current work: complete the Haiku-only functional demonstration.** Public answering and anonymous core inspection are enabled. Frozen v10.13/CI/builds and native retrieval counts passed; one direct SUPPORTED answer passed exact-finalized verification and saved stream/recovery; broader checks remain open. The [latest exact owner instruction](../reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) waives independent manual answer review for this demo. Immutable source approval and separate exact-finalized Haiku verification remain required; no independent factual acceptance is claimed.
 
-Version 1.6 · 12 October 2026 · Haiku-only functional demonstration and recorded owner review waiver.
+Version 1.7 · 12 October 2026 · Owner-selected manual, immediate text input and recorded stage timings.
 
 This is the single current product specification. It consolidates the owner's open-manual draft, verify, stream decision and subsequent request for a public evaluator URL, conditional ranking, prompt caching and separate finalized-response verification. The latest instruction selects Haiku for both calls. The [operational scope](../reports/public_evaluator/20261012/owner_scope_v1.json), [credential approval](../reports/public_evaluator/20261012/owner_credential_scope_v1.json), [public-review scope](../reports/public_evaluator/20261012/public_review/owner_public_review_scope_v1.json) and [index-release approval](../reports/public_evaluator/20261012/public_review/owner_index_release_scope_v1.json) authorize bounded hosted validation, public repository/manual/index inspection and public read-only service routes. Writes, worker jobs and owner-private reads retain exact verified service identities and application capabilities. Immutable source approvals, historical charges and USD1/attempt/INR controls remain; a separate measured owner grant changes only the legacy primary token ceiling. [TRD.md](TRD.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [TODO.md](../TODO.md) define implementation and acceptance.
 
@@ -20,7 +20,7 @@ The product accepts arbitrary questions. A predefined question, answer card, dia
 
 | Priority | Included |
 | --- | --- |
-| P0 | Text questions and follow-ups; confirmed Himalayan + BS6 selection; one immutable English manual; manual-supported complete or explicit partial answers; focused clarification; safety, abstention and error handling. |
+| P0 | Text questions and follow-ups immediately available for the owner-selected Himalayan BS6 manual; one immutable English manual; manual-supported complete or explicit partial answers; focused clarification; safety, abstention and error handling. |
 | P0 | Versioned hosted ingestion and index reuse; Source/index-bound Qdrant dense + concurrent BM25 retrieval; RRF; bounded recovery and conditional reranking when distinct parent ranks disagree. |
 | P0 | Questions of at most 100 words; private Haiku drafting and separate Haiku verification; five-minute role-specific policy/evidence-prefix caching; saved verified streaming, recovery and follow-ups. |
 | P0 | Public evaluator URL with signed visitor cookies/proof, public repository/manual/index and anonymous read-only API/worker health and Qdrant inspection; private write/job/owner-state authorization, server-side secrets, persistent admission/spend controls, redacted traces, functional proof and exact deployment/rollback receipts. |
@@ -36,7 +36,7 @@ Other manuals, undocumented internal repairs, aftermarket modifications, hidden-
 | Type / pages | Owner's manual / 149 PDF pages |
 | Edition | RAM00818/A; 4th November 2025 |
 | SHA-256 | `CF221A29E2F9CD5AF6E80A99774A697C814E8EDA661C27D72E519D8A7E80DA89` |
-| Applicability | Rider confirms Himalayan and BS6 under the owner-approved selection policy. No invented model-year or edition-selection requirement. |
+| Applicability | The owner selects the fixed Himalayan BS6 manual for this demo. No rider checkbox, model-year or edition-selection requirement. This does not assert that the visitor has verified their motorcycle's identity. |
 | Support route | Manifest-bound `mailto:support@royalenfield.com`; preserve its recorded market-fit limitation. |
 | Display | Supplied manual and exact existing evidence/figure/index archive are public for inspection/reproduction under the latest owner scopes. The answer UI retains supported paraphrases and server-derived evidence/page references; no additional source-display feature is added. |
 
@@ -44,12 +44,14 @@ Other manuals, undocumented internal repairs, aftermarket modifications, hidden-
 
 ## 4. Rider journey
 
-1. Open the public evaluator link, complete its browser proof challenge and receive a signed visitor cookie, then confirm the supported motorcycle selection and see the manual's identity.
+1. Open the public evaluator link, complete its automatic browser proof challenge and receive a signed visitor cookie. See the fixed Himalayan BS6 manual's identity and type immediately; no motorcycle confirmation checkbox is required.
 2. Ask a natural text question. An example question is a convenience, never an input allowlist.
 3. See truthful progress as the backend retrieves, drafts privately and checks the complete answer.
 4. Receive the complete supported answer or explicitly limited partial answer, applicable warnings/conditions and exact source references. A concise checklist is allowed when the manual supports every item.
 5. Ask a follow-up or report an outcome. Relevant topic, prior evidence and typed facts remain available. The assistant does not repeat an unresolved action without a documented or corrected-context reason.
 6. After a disconnect, recover the same saved outcome without another generation call.
+
+Show the recorded retrieval/assembly, conditional reranking, generation and verification durations beside each result, plus UI-observed answer streaming when available. Identify overlapping durations and phase waiting time; do not invent zero for an unrecorded stage or include UI timing in the verified answer. An explicit skipped rerank can be labelled as skipped.
 
 One focused question is used only when the rider can resolve an ambiguity needed for the answer. Missing extraction, source review or table context belongs to the maintainer and must not be turned into a rider question.
 

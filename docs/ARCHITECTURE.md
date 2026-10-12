@@ -76,7 +76,7 @@ Anonymous service readback passed. API and worker allow only anonymous GET `/v1/
 
 ## One rider turn
 
-1. The UI confirms the selected Himalayan BS6 source. The authenticated API operation checks the signed visitor, input limits, ownership, operation key and persistent admission, then saves and dispatches work.
+1. The UI opens against the owner-selected Himalayan BS6 source, with no confirmation checkbox. The authenticated API operation checks the signed visitor, exact selected source, input limits, ownership, operation key and persistent admission, then saves and dispatches work.
 2. The worker prepares a history-aware retrieval query. Source/index-bound dense retrieval and BM25 run concurrently; RRF, conditional reranking and bounded reviewed-dependency recovery select evidence.
 3. Assembly preserves complete applicable evidence, original admitted IDs, warnings, prerequisites, conditions, units, headers, references and relevant history. Missing extraction or review is a maintainer failure. No old assembled-evidence cap or silent truncation applies.
 4. Native request counts, native windows and persistent budgets are checked separately. The initial private draft/verifier phase reserves two role-bound calls against the existing ledgers.

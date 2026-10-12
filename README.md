@@ -8,7 +8,7 @@ The implementation under review is on `codex/public-evaluator`; `main` remains t
 
 ## Using the demo
 
-Confirm that your motorcycle is the Himalayan BS6 by checking the box on the left margin, then ask a question in your own words, using up to 100 words. MotoMedic shows progress while it retrieves, drafts and verifies. A completed answer can contain supported facts or procedures, an explicitly limited partial answer, a needed clarification or a manual-supported safety stop. When it cannot support an answer, it says so; a failed technical check produces a separate system-error message.
+Ask a question in your own words, using up to 100 words. The demo uses the fixed Himalayan BS6 manual shown in the sidebar; no confirmation checkbox is needed. MotoMedic shows progress while it retrieves, drafts and verifies, then displays recorded stage timings beside the result. Retrieval includes ranking and assembly; generation and verification include required waiting time. Answer streaming is measured separately by the UI client. A completed answer can contain supported facts or procedures, an explicitly limited partial answer, a needed clarification or a manual-supported safety stop. When it cannot support an answer, it says so; a failed technical check produces a separate system-error message.
 
 The source is the supplied [149-page owner's manual](royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf), edition RAM00818/A, dated 4 November 2025. Questions are not restricted to a predefined catalogue. The application is currently text-only; photo and voice features are deferred.
 

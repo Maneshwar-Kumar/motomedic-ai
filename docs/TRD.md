@@ -2,7 +2,7 @@
 
 **Current work: complete the frozen Haiku-only functional demonstration.** Public answering is enabled and anonymous API/worker/Qdrant inspection passed. Hosted v10.13 CI/builds and native retrieval counts passed; one direct answer and its saved delivery are proven; USB returned SYSTEM_ERROR and broader checks remain open. The [latest owner instruction](../reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) waives independent manual answer review for this demo, while retaining exact immutable source admission and separate finalized-response verification.
 
-Version 1.6 · 12 October 2026 · Frozen separate Haiku roles, public inspection and owner-authorized functional acceptance.
+Version 1.7 · 12 October 2026 · Owner-selected fixed manual and presentation of recorded stage durations.
 
 This is the current technical specification paired with [PRD](PRD.md), [architecture](ARCHITECTURE.md) and [TODO](../TODO.md). The [latest owner scope](../reports/public_evaluator/20261012/owner_model_scope_v3.json) selects Claude `claude-haiku-5-5` only. Use separate draft and finalized-response verifier calls, distinct role policies/schemas, role-specific prefix caching, complete evidence/history, authenticated hybrid retrieval, conditional reranking and exact durable delivery. Different-model identity is superseded. Independent manual answer adjudication is waived for the present functional demo; immutable source/content approvals and deterministic/runtime-semantic checks remain. V10.13 is frozen, built and deployed with public answering enabled after the owner's later instruction; the complete functional suite is not accepted. See [status](STATUS.md) for exact receipts.
 
@@ -68,6 +68,10 @@ The original deployment stores durable snapshots in private Cloud Storage under 
 Bind an answer verdict to the exact question, relevant history and typed-state projection, manual/index/source context, response and claim map, runtime, prompt and model policy. Reject missing, changed, extra or mismatched fields. Evidence IDs alone are insufficient without their content/version bindings.
 
 ## 4. Request sequence
+
+The UI starts with the owner-selected Himalayan BS6 manual and does not require a rider confirmation checkbox. The existing transport confirmation flag affirms that fixed source selection; it does not record a visitor attestation. Exact variant, manual checksum and index checks remain in the API.
+
+UI timing presentation reads finite, nonnegative durations from the existing saved source-admission and composition diagnostics. Retrieval/assembly includes reranking, while the reranking duration measures the conditional cross-encoder step; these values overlap and are not added into a false total. Draft/verification phase clocks include any admission or pacing waits. Measure verified answer delivery separately using a monotonic UI-server clock, retain it outside the saved view, and show unavailable measurements honestly after recovery. No timing change modifies the finalized answer, verification binding, saved buffer or SSE equality checks.
 
 1. Authenticate the visitor capability, reject rider questions over 100 words without truncation, validate the other applicable transport limits and selected manual, establish session ownership, and deduplicate the operation by idempotency key plus payload hash.
 2. Read relevant history and immutable outcomes. Preserve an explicit topic for short follow-ups; any query expansion remains source retrieval context and cannot invent observations.

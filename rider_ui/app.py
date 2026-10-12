@@ -9,6 +9,7 @@ from rider_ui.safeguards import LIMITS
 from rider_ui.verified_sse import PROGRESS_LABELS
 from rider_ui.identity import issue, verify, cloud_run_token, platform_subject
 from rider_ui.public_gateway import rider_answers_enabled,PREVIEW_MESSAGE
+from rider_ui.render import timing_caption
 
 st.set_page_config(page_title='MotoMedic · Rider assistant', page_icon='🏍️', layout='wide')
 st.markdown(Path(__file__).with_name('theme.css').read_text(encoding='utf-8'), unsafe_allow_html=True)
@@ -50,10 +51,12 @@ def client():
                     cache_mode=setting('MOTOMEDIC_CACHE_MODE') or 'bypass', network=network,
                     answers_enabled=rider_answers_enabled())
 
-def remember(view, rider_text=None):
+def remember(view, rider_text=None, delivery_timing=None):
     if rider_text:
         st.session_state.messages.append(('rider', rider_text))
     st.session_state.view = view
+    st.session_state.delivery_timings[len(st.session_state.messages)] = (
+        dict(delivery_timing) if type(delivery_timing) is dict else None)
     st.session_state.messages.append(('assistant', view))
     st.session_state.pending = None
     st.session_state.connection_error = None
@@ -95,7 +98,8 @@ def perform(kind, value):
                 answer_slot.text(displayed[0])
             callbacks = {'on_verified':verified,'on_progress':progress,'on_chunk':chunk}
             view = api.start(value, pending['id'], view=st.session_state.view, **callbacks) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'], **callbacks)
-        remember(view, value if kind == 'start' else value['label'])
+        remember(view, value if kind == 'start' else value['label'],
+                 getattr(api, 'last_delivery_timing', None))
     except APIError as exc:
         if exc.terminal:
             st.session_state.pending = None
@@ -103,10 +107,10 @@ def perform(kind, value):
     st.rerun()
 
 def reset():
-    for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None)]:
+    for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('delivery_timings', {})]:
         st.session_state[k] = v
 
-for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('catalogue', None)]:
+for k, v in [('messages', []), ('view', None), ('pending', None), ('connection_error', None), ('catalogue', None), ('delivery_timings', {})]:
     if k not in st.session_state:
         st.session_state[k] = v
 configured = bool(setting('MOTOMEDIC_RIDER_API_URL') and
@@ -118,7 +122,6 @@ with st.sidebar:
     st.divider()
     st.caption('YOUR MOTORCYCLE')
     st.selectbox('Motorcycle', ['Royal Enfield Himalayan 450'], disabled=True)
-    confirmed = st.checkbox('My motorcycle is a Himalayan BS6', disabled=bool(st.session_state.view or st.session_state.pending))
     st.caption('SELECTED SOURCE')
     st.markdown('**Owner’s manual · English**')
     st.caption('RAM00818/A · 4 November 2025')
@@ -149,7 +152,7 @@ if configured and not st.session_state.catalogue:
 
 catalogue = st.session_state.catalogue
 answers_enabled=rider_answers_enabled()
-ready = configured and bool(catalogue) and confirmed and answers_enabled
+ready = configured and bool(catalogue) and answers_enabled
 if not answers_enabled:
     st.info(PREVIEW_MESSAGE)
 if not st.session_state.messages:
@@ -205,6 +208,8 @@ for index, (role, value) in enumerate(st.session_state.messages):
             st.link_button('Contact Royal Enfield ↗', value['escalation_uri'])
         if response.get('trace_id'):
             st.caption('Response reference: ' + response['trace_id'])
+        st.caption(timing_caption(value, st.session_state.delivery_timings.get(index)))
+        st.caption('Stages overlap. Retrieval includes search, rank fusion, reranking and assembly; Ranking measures conditional reranking only. Model stages include counting and waiting; Streaming starts after verification.')
 
 if st.session_state.connection_error:
     if st.session_state.pending and st.session_state.pending.get('verified'):
@@ -217,11 +222,12 @@ if st.session_state.connection_error:
         try:
             pending = st.session_state.pending
             with st.spinner('Retrieving the saved response…'):
-                view = client().recover_operation(pending['id']) if pending else client().recover(st.session_state.view['session_id'])
+                api = client()
+                view = api.recover_operation(pending['id']) if pending else api.recover(st.session_state.view['session_id'])
             if pending and pending.get('verified') and view != pending['verified']:
                 raise APIError('The saved response changed. Keep this request pending and reconnect.')
             rider_text = None if not pending else pending['value'] if pending['kind'] == 'start' else pending['value']['label']
-            remember(view, rider_text)
+            remember(view, rider_text, getattr(api, 'last_delivery_timing', None))
             st.rerun()
         except APIError as exc:
             if exc.terminal:
