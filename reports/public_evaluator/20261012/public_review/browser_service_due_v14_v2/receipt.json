@@ -1,0 +1,114 @@
+{
+  "schema_version": "public-evaluator-browser-service-due-v14",
+  "recorded_at_utc": "2026-10-12T13:28:42.672Z",
+  "script_sha256": "9dd5ff18893bebe2da7c1ff76ba90ca9dd494fd780435fc18cbd29e1c5112258",
+  "expected_runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+  "target_backend_serving_revision": "v10_14",
+  "reused_ui_revision": "v10_13",
+  "acceptance_scope": "ONE_PUBLIC_SERVICE_DUE_ANSWER_WITH_CITATION",
+  "runtime_policy_directly_observed": false,
+  "runtime_policy_evidence": "REQUIRES_CORRELATED_PRIVATE_READINESS_AND_SAVED_OPERATION_BINDING",
+  "execution": "AUTHORIZED_PUBLIC_BROWSER",
+  "provider_bodies_logged": false,
+  "cookie_values_logged": false,
+  "raw_page_text_logged": false,
+  "raw_network_trace_saved": false,
+  "ui_turn_submissions": 1,
+  "actual_provider_calls": "REQUIRES_CORRELATED_HOSTED_RECEIPT",
+  "turns": [
+    {
+      "turn": 1,
+      "question_sha256": "edcd45cfc495e3ba0c23cec2e5920fb5d9b65fb76b90fd8da2315ef9fcac31d5",
+      "route": "SUPPORTED",
+      "rendered_text_sha256": "9fa0cdf5a7c6c8967fa897dcca1eb61b4d270b652d2c2ebb2f6e9bdd5b7fa42b",
+      "rendered_characters": 380,
+      "citation_heading_sha256": "51ba77711eb3e9fa2204f9882e312c2f0036520548296df288ac83f8f4c69a31",
+      "elapsed_seconds": 71.33,
+      "ui_recovery_used": false,
+      "observed_progress_stages": [
+        "Retrieving manual information.",
+        "Drafting your answer.",
+        "Checking the answer against the manual.",
+        "Displaying the verified answer."
+      ],
+      "stream_rendering_observed": false,
+      "distinct_stream_renderings": 0,
+      "stream_prefixes_match_final": true,
+      "first_transient_stage": "NOT_OBSERVED",
+      "screenshots": [
+        "turn_1_accepted.png"
+      ],
+      "browser_source_display": "UI_PARAPHRASES_AND_CITATION_METADATA_ONLY",
+      "independent_source_quality_acceptance": false,
+      "backend_sse_binding_acceptance": "REQUIRES_CORRELATED_HOSTED_RECEIPT"
+    }
+  ],
+  "browser_version": "154.0.8037.98",
+  "public_origin": "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+  "expected_release_manifest_sha256": "b8d39544a9cc216b7bd6d37dd741c12e95f6e1d2694a59eaf573cb51195962f5",
+  "gateway_health": {
+    "path": "/health",
+    "status": 200,
+    "ready": true
+  },
+  "public_admission": {
+    "proof_submission_status": 200,
+    "cookie_secure": true,
+    "cookie_http_only": true,
+    "cookie_same_site": "Lax",
+    "streamlit_socket_opened": true
+  },
+  "widget_metadata_before_scope": [
+    {
+      "placeholder": "Choose an option",
+      "aria_label": "Motorcycle",
+      "disabled": true
+    },
+    {
+      "placeholder": null,
+      "aria_label": "My motorcycle is a Himalayan BS6",
+      "disabled": false
+    },
+    {
+      "placeholder": "Ask a question…",
+      "aria_label": "Ask a question…",
+      "disabled": true
+    },
+    {
+      "placeholder": null,
+      "aria_label": "file upload",
+      "disabled": false
+    }
+  ],
+  "scope_checkbox_checked": true,
+  "question_input_enabled": true,
+  "widget_metadata_after_scope": [
+    {
+      "placeholder": "Choose an option",
+      "aria_label": "Motorcycle",
+      "disabled": true
+    },
+    {
+      "placeholder": null,
+      "aria_label": "My motorcycle is a Himalayan BS6",
+      "disabled": false
+    },
+    {
+      "placeholder": "Ask a question…",
+      "aria_label": "Ask a question…",
+      "disabled": false
+    },
+    {
+      "placeholder": null,
+      "aria_label": "file upload",
+      "disabled": false
+    }
+  ],
+  "no_horizontal_overflow": true,
+  "status": "PASS_UI_BOUNDARY_OBSERVATION",
+  "independent_factual_quality_acceptance": false,
+  "full_release_acceptance": false,
+  "stream_visibility_limits": "Browser DOM may coalesce chunks; backend exact SSE/verifier/cache proofs must be joined separately.",
+  "page_error_count": 0,
+  "streamlit_socket_count": 1
+}

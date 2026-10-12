@@ -1,0 +1,62 @@
+{
+  "backend_build_binding_path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/backend_build_binding_v2.json",
+  "backend_build_binding_sha256": "f1b4e0756962c0461887edf6bc805c44d189efcb5e3d7d5fb52dea00589fec07",
+  "config": {
+    "availableSecrets": {
+      "secretManager": [
+        {
+          "env": "MOTOMEDIC_VISITOR_SECRET",
+          "versionName": "projects/motomedic-ai-20261009/secrets/motomedic-rider-visitor-v1/versions/1"
+        }
+      ]
+    },
+    "options": {
+      "logging": "CLOUD_LOGGING_ONLY"
+    },
+    "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "source": {
+      "storageSource": {
+        "bucket": "motomedic-ai-20261009-indices",
+        "generation": "1791810847424185",
+        "object": "serving/engineering-diagnostics/v10_14/f2c83f6c612771526b1a2071c16bbe25da79237303f874deffabce2fcb6ea9a7.tar.gz"
+      }
+    },
+    "steps": [
+      {
+        "args": [
+          "-c",
+          "from pathlib import Path; p=Path(\"/workspace/tmp/service-due-api-v14-v2-run/$BUILD_ID\"); p.mkdir(parents=True,exist_ok=True); p.chmod(0o777)"
+        ],
+        "entrypoint": "python",
+        "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1"
+      },
+      {
+        "args": [
+          "-B",
+          "tmp/single_service_due_client_v14_v2.py",
+          "--inventory",
+          "tmp/service-due-api-v14-v2/source_inventory.json",
+          "--output",
+          "/workspace/tmp/service-due-api-v14-v2-run/$BUILD_ID",
+          "--allocated-job-id",
+          "$BUILD_ID",
+          "--artifact-uri",
+          "gs://motomedic-ai-20261009-indices/engineering-acceptance/public-v10_3/$BUILD_ID"
+        ],
+        "entrypoint": "python",
+        "env": [
+          "PYTHONPATH=/app",
+          "MOTOMEDIC_HOSTED_PROVIDER_VALIDATION=true",
+          "MOTOMEDIC_CLOUD_BUILD_ID=$BUILD_ID"
+        ],
+        "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:531b0478458606f8faddcea78353cdb5f4cbe028dc06a2bc169f624024a2d362",
+        "secretEnv": [
+          "MOTOMEDIC_VISITOR_SECRET"
+        ]
+      }
+    ],
+    "timeout": "1800s"
+  },
+  "operation_id": "3701dc10ebad42f398fbac569548979c",
+  "provider_calls": 0
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "repository-monitor-check-v1",
+  "trigger_utc": "2026-10-12T13:17:22.887Z",
+  "structure": {
+    "schema_version": "repository-structure-audit-v4",
+    "ok": true,
+    "unexpected_root_files": [],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "missing_critical_source_files": [],
+    "integrity_errors": [],
+    "local_links_checked": 245,
+    "root_file_count": 48,
+    "runtime_freeze_files_verified": 64,
+    "current_serving_files_verified": 563,
+    "approved_output_files_verified": 187,
+    "note": "Canonical navigation, byte-exact historical v8 snapshots and v9/v9.1 manifests, current v10 inputs and original scoped approval paths. Not factual or deployment acceptance."
+  },
+  "polls": [
+    {
+      "thread_id": "01a12f2a-8db7-7f11-88fb-55867d766816",
+      "status": "active",
+      "cursor": "7d8ae3a5-0b2b-4e57-b7a1-ffbd90a1544c:10"
+    },
+    {
+      "thread_id": "01a12c4e-f3ef-7342-b33b-45cdb6511587",
+      "status": "notLoaded",
+      "cursor": "4fa8c308-659f-4313-94e2-55c7db91b3fe:17"
+    }
+  ],
+  "observations": [
+    "Checker passes: 245 canonical links, 563 current serving inputs, 64 historical runtime objects and 187 approved outputs.",
+    "New v10.14 backend/operator helper versions stay grouped with their manifests and run evidence.",
+    "Active release/browser acceptance and diagnostic inputs were preserved.",
+    "Canonical status remains a dated repair snapshot while live acceptance is in progress.",
+    "No unexpected root files, broken canonical navigation or clearly unbound duplicate handoffs detected."
+  ],
+  "new_actionable_organization_changes": [],
+  "navigation_changed": [],
+  "moved_files": [],
+  "allowlist_changed": false,
+  "clean_consecutive_checks": 0,
+  "pause_eligible": false,
+  "pause_reason": "Relevant Haiku evaluator continuation remains active.",
+  "provider_calls": 0,
+  "deployment_or_billing_changes": false,
+  "protected_paths_unchanged": true,
+  "monitor_status": "ACTIVE",
+  "notification": "suppressed: no new actionable organization drift"
+}

@@ -1,0 +1,84 @@
+{
+  "actions": [
+    "metric",
+    "prepare",
+    "apply",
+    "status",
+    "health"
+  ],
+  "actual_availability_repair_success_not_claimed_by_packaging": true,
+  "actual_platform_health429_evidence": "Coordinator-reported sanitized request logs at12:00:38/12:03:26: no available instance; zero latency.",
+  "anonymous_health_required_for_availability_pass": true,
+  "application_health_path_emits_only_200_or_503": {
+    "line": 92,
+    "path": "rider_ui/public_gateway.py",
+    "sha256": "d699e047b40a506551f693ac0b851b4713d6265b5564fc673776e4fce7e39bf1"
+  },
+  "archive": "ui_capacity_repair_helpers_v13_v1.zip",
+  "archive_sha256": "92c82ff75de8f621411725259625cff6cca291264db17960e5648ac86fbcd94c",
+  "authorization_basis": "COORDINATOR_NECESSARY_REVERSIBLE_IMPLEMENTATION_FOR_OWNER_AUTHORIZED_WORKING_PUBLIC_UI",
+  "cause_limit": "Service max2 may relieve concurrent cross-revision drain pressure; with revisionmax1 it cannot admit more than one instance of the enabled revision, or resolve same-instance concurrency saturation.",
+  "check_only_passed": true,
+  "classification": "PROVIDER_FREE_REVIEWED_BOUNDED_UI_AVAILABILITY_REPAIR_OPERATOR",
+  "cloud_calls_by_review_packaging": 0,
+  "entrypoint": "tmp/repair_ui_capacity_v13_v1.py",
+  "exact_current_enabled_revision_and_material_configuration_bound": true,
+  "explicit_owner_max_two_instruction_claimed": false,
+  "file_sha256": {
+    "reports/public_evaluator/20261012/haiku_v10_13_runtime/audit_hosted_delivery_cache_v3.py": "741c550d76f243fc30b14cdc67c59b294cc5ff248410f55a8960f1e5f0eca806",
+    "tmp/functional_ui_guard_bridge_v13_v1.py": "6d27eeb4e5ea873cf514b37277571c0fa5dd4cfd41e608fef81727ad6e2d4b3d",
+    "tmp/functional_ui_promotion_v13_v2.py": "cd73163fdc1cf0e0216ef0a781c4cc25204d7cc25a1c5a8a5ef5fe47155e4627",
+    "tmp/functional_ui_rollback_console_v13_v1.py": "9e586b140b092c8e5b431382aa66d810fa971f769a1a426b0dad6dcfd038cf24",
+    "tmp/prepare_evaluator_v10_13.py": "49908fd13f52490c83a05cf2810e844d82e2222dbb2ef9ba8f54a66c69cb9bad",
+    "tmp/private_acceptance_console_v10_13_v2.py": "b5a11516d9b878155b44853a888cf3b42645ba4fa4b7158e018627e7bb39c7c6",
+    "tmp/public_cloud_run_v10_13.py": "d15551649028367e8b3152461f8f015765b4507daed4dccda69c8c33f82a8473",
+    "tmp/public_cloud_run_v10_13_v2.py": "750f9d0f4b02560441bdb72175b31750d7ba32a5dd5a0dfe212aaa0efb438600",
+    "tmp/public_core_inspection_v13_v3.py": "9d17aced2a198b7c810ac867bb5b38e3d56620b994dfcb455b49fa7328f91a03",
+    "tmp/public_evaluator/browser_acceptance_v13.cjs": "24e2ea53d9b390a1a2ffa34f70ff5519d4c573fd37ffb12ebc9d29ca51b4e8f1",
+    "tmp/public_evaluator/browser_preview_v13_v1.cjs": "5a9a1bab322f5b0b203a35eb2a6b80c014fb201173f1dc66d4067950bea2f0aa",
+    "tmp/public_evaluator/hosted_client_v10_13_v2.py": "176038cdbd9dd0d707ff64d24e040ba7d2519783e3fabcbe39344c07d9a18566",
+    "tmp/public_evaluator/phase_budget_v10_13.py": "35199ba3d870d4026dbd1e7f951564253ebc48209b70ecc3918f31d1e54fd46f",
+    "tmp/public_hosted_logs.py": "44e3ac510017290253beb49916c9c1dc386fdf7ead466c9d8c7cb2aeb183d175",
+    "tmp/public_ui_preview_v13_v2.py": "ee1aac7b75983dd5e3f0e172fda2a2fd3efd23d82d66407dd2c7dbc56a5847e4",
+    "tmp/repair_ui_capacity_v13_v1.py": "836808bf5450a2424a3492ac96bdd113fb0bb9d699bfdc00be28b6e52e34eff6",
+    "tmp/rollback_public_v10_13.py": "e93901be07a34ff87153c270e6e11e818f96a472a32a620348c52d6302e7148d",
+    "tmp/submit_hosted_v10.py": "2854f77afb285a2065b9609fdc0731488abfa43cb650aa0a39c9fc34c29f0760",
+    "tmp/test_functional_ui_guard_bridge_v13_v1.py": "8c9a40aba19207572da3f937d798d3104bf92ca3fa1e9028f31020861b8af180",
+    "tmp/test_functional_ui_promotion_v13_v2.py": "856e808bfadc870ed4f94707d6e4de547398cd3da4b9bf29ac22fcd7a897c2c7",
+    "tmp/test_functional_ui_rollback_console_v13_v1.py": "df0bc0b6abe77dc39ea4a63229109addff3e86c2ccc9fcef8c29f9b6c915da11",
+    "tmp/test_repair_ui_capacity_v13_v1.py": "dac0e0caf1ab96b1c2cd1ed6a7cde0e85cba7fd0733e4afbffcc56e67b40c3df"
+  },
+  "fresh_guard_bridge_and_latest_immutable_charge_floor_required": true,
+  "independent_factual_quality_acceptance": false,
+  "intent_journal_before_single_ui_service_scaling_patch": true,
+  "new_revision_or_traffic_or_env_or_image_or_iam_or_core_or_model_or_billing_or_allocation_change": false,
+  "primary_documentation": [
+    {
+      "supports": "CloudRun HTTP429 may indicate no instance/maxlimit/coldstart/longrequests.",
+      "url": "https://docs.cloud.google.com/run/docs/troubleshooting"
+    },
+    {
+      "supports": "Separate service/revision limits, effective limit is lesser, service limit applies immediately.",
+      "url": "https://docs.cloud.google.com/run/docs/configuring/max-instances"
+    },
+    {
+      "supports": "WebSocket requests occupy concurrency and remain HTTP requests subject to timeout.",
+      "url": "https://docs.cloud.google.com/run/docs/triggering/websockets"
+    }
+  ],
+  "provider_calls_by_review_packaging": 0,
+  "read_only_instance_metric_action_filters_service_and_saves_only_revision_state_timestamp_value": true,
+  "revision_minimum_setting_unchanged_omitted": true,
+  "revision_scaling_unchanged": {
+    "maxInstanceCount": 1
+  },
+  "schema": "motomedic-ui-only-service-capacity-repair-helpers-manifest-v1",
+  "service_scaling_delta": {
+    "maxInstanceCount": {
+      "from": 1,
+      "to": 2
+    }
+  },
+  "synthetic_tests_passed": 4,
+  "ui_etag_concurrency_required": true
+}

@@ -1,0 +1,259 @@
+{
+  "actual_final_answer_for_this_query_observed": false,
+  "actual_hosted_dense_rrf_rerank_selection_observed": false,
+  "baseline": {
+    "document_embedding_calls": 0,
+    "document_parse_calls": 0,
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "index_manifest_sha256": "665121e286a22881803ec181597e860cdec8024412dbd334b2774b509cbabfde",
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "parser_gap_pages": [
+      103
+    ],
+    "version": "immutable-selected-baseline-v1"
+  },
+  "bm25_only_top10": [
+    {
+      "chunk_id": "chunk_310b993c8fa51884795f9489",
+      "parent_section_id": "section_06dd177e2fac8a35cc5cb6f2",
+      "rank": 1,
+      "score": 14.070133808001724,
+      "section_path": [
+        "OPERATION OF CONTROLS"
+      ]
+    },
+    {
+      "chunk_id": "chunk_5b491df8abf4b367a821f63e",
+      "parent_section_id": "section_01fa831e1174b5331f1cd195",
+      "rank": 2,
+      "score": 13.494030353885368,
+      "section_path": [
+        "3. MY VEHICLE"
+      ]
+    },
+    {
+      "chunk_id": "chunk_264840a2d10e014e3246865a",
+      "parent_section_id": "section_a51b83f3ee13fe583e091f9a",
+      "rank": 3,
+      "score": 10.172966912481595,
+      "section_path": [
+        "EMISSION WARRANTY"
+      ]
+    },
+    {
+      "chunk_id": "chunk_2ba5bb62d2871b7b89ad748a",
+      "parent_section_id": "section_ceb3391451bf246b507ba84f",
+      "rank": 4,
+      "score": 9.876519690038092,
+      "section_path": [
+        "CAUTION"
+      ]
+    },
+    {
+      "chunk_id": "chunk_c673ef9d74d9adb4dce57072",
+      "parent_section_id": "section_78586368b2a6fc2fff925bf0",
+      "rank": 5,
+      "score": 9.265264802298248,
+      "section_path": [
+        "DISPOSAL OF END OF LIFE - PARTS / VEHICLE"
+      ]
+    },
+    {
+      "chunk_id": "chunk_02b629d7600e74675a61a8af",
+      "parent_section_id": "section_bbcb68ddf6f324d8709bd2af",
+      "rank": 6,
+      "score": 8.56633788360486,
+      "section_path": [
+        "CAUTION"
+      ]
+    },
+    {
+      "chunk_id": "chunk_f6bb9e264a079f438c42d5e0",
+      "parent_section_id": "section_af9f7dcfecf1c88a70f5769f",
+      "rank": 7,
+      "score": 8.095785379203063,
+      "section_path": [
+        "SERVICE REMINDER"
+      ]
+    },
+    {
+      "chunk_id": "chunk_3abdfe995677fb905e8e2522",
+      "parent_section_id": "section_01fa831e1174b5331f1cd195",
+      "rank": 8,
+      "score": 7.49241390676023,
+      "section_path": [
+        "3. MY VEHICLE"
+      ]
+    },
+    {
+      "chunk_id": "chunk_f88ad1ad39439652297b6815",
+      "parent_section_id": "section_01fa831e1174b5331f1cd195",
+      "rank": 9,
+      "score": 7.49241390676023,
+      "section_path": [
+        "3. MY VEHICLE"
+      ]
+    },
+    {
+      "chunk_id": "chunk_d85be9b2248a2c8f1cceb6ff",
+      "parent_section_id": "section_170edf59574700ebe87fbcae",
+      "rank": 10,
+      "score": 7.4590564933149075,
+      "section_path": [
+        "CHECKS PRIOR TO THE COMMENCEMENT OF A LONG JOURNEY"
+      ]
+    }
+  ],
+  "classification": "PROVIDER_FREE_EXISTING_IMMUTABLE_INDEX_AND_APPROVED_OBJECT_COVERAGE_ONLY",
+  "cloud_calls": 0,
+  "dense_query_embedding_calls": 0,
+  "document_embedding_calls": 0,
+  "document_parse_calls": 0,
+  "frozen_source_retrieval_or_prompts_changed": false,
+  "independent_factual_quality_acceptance": false,
+  "index_files_sha256": {
+    "bm25.json": "256fd0092afb78f66ecbaa43d96cd8f25d5b47e94e4faa17f019dda5e5763f30",
+    "chunks.jsonl": "e15098db5e9ed58230dab97721a153eb383252720f69ae990bd5cd37f05ed7be",
+    "evidence.jsonl": "792408e533d68f99b0787056e02c4a9f2edf6ea1e06b4b0591b743753a6bc2c8",
+    "manifest.json": "665121e286a22881803ec181597e860cdec8024412dbd334b2774b509cbabfde",
+    "parents.jsonl": "0887179158741bd0f9ca6e1dd368b8510e2f172170f61a427206e02e31db00ed"
+  },
+  "limits": [
+    "Sparse-only rank is not the actual concurrent dense/RRF/conditional-rerank selection.",
+    "Existing source approval/admission coverage is not a new independent answer/manual review.",
+    "Why the actual answer failed remains pending the hash-bound hosted diagnostic for the exact unchanged query."
+  ],
+  "manual_original_pages_reviewed": false,
+  "provider_calls": 0,
+  "query": "When is the service due for my bike?",
+  "retrieval_query_without_hint": "When is the service due for my bike?",
+  "schema": "motomedic-readonly-service-reminder-index-coverage-v1",
+  "service_reminder_chunks": [
+    {
+      "assembled_admitted_evidence_ids": [
+        "evidence_157a86dd6fd9f3a9d4c3fc0d",
+        "evidence_512f860518ee9abe0ced1fd4",
+        "evidence_8555b50f22af8eabcabb0b76"
+      ],
+      "assembled_source_gap_count": 0,
+      "assembled_source_gap_ids": [],
+      "bm25_only_rank_for_exact_query": 7,
+      "bm25_only_score": 8.095785379203063,
+      "chunk_id": "chunk_f6bb9e264a079f438c42d5e0",
+      "member_evidence_ids": [
+        "evidence_524af4df0cb19477470c5d9e",
+        "evidence_84f6791f2601d09593f38288",
+        "evidence_6b5735e11152c574268529f6",
+        "evidence_157a86dd6fd9f3a9d4c3fc0d",
+        "evidence_8555b50f22af8eabcabb0b76",
+        "evidence_512f860518ee9abe0ced1fd4"
+      ],
+      "parent_section_id": "section_af9f7dcfecf1c88a70f5769f",
+      "section_path": [
+        "SERVICE REMINDER"
+      ]
+    }
+  ],
+  "service_reminder_objects": [
+    {
+      "evidence_id": "evidence_157a86dd6fd9f3a9d4c3fc0d",
+      "indexed_object_sha256": "bbfbf144b4b3f1aaed0f5a63ca86f08701ca027a9c1ca9e312f9b3d45fb28b80",
+      "parent_text_authorized": null,
+      "pdf_pages": [
+        60
+      ],
+      "raw_object_kind": "list_item",
+      "raw_text_sha256": "8729742d83a00d8acc00ad0a28390934bcab5182cf20b5b66763bf3c5ce13ecf",
+      "required_dependency_ids": [],
+      "reviewed_context_available": true,
+      "section_path": [
+        "SERVICE REMINDER"
+      ],
+      "source_content_currently_bound": true
+    },
+    {
+      "evidence_id": "evidence_512f860518ee9abe0ced1fd4",
+      "indexed_object_sha256": "d46721752020e235334b1717f8d5a1f290d182fe52ff3b6a4136fbaea4cb6bff",
+      "parent_text_authorized": null,
+      "pdf_pages": [
+        60
+      ],
+      "raw_object_kind": "list_item",
+      "raw_text_sha256": "1a53a93cbe78db4f6d13e1eefae801985756572a5b254001db1371172b5d4aed",
+      "required_dependency_ids": [],
+      "reviewed_context_available": true,
+      "section_path": [
+        "SERVICE REMINDER"
+      ],
+      "source_content_currently_bound": true
+    },
+    {
+      "evidence_id": "evidence_524af4df0cb19477470c5d9e",
+      "indexed_object_sha256": "0f3fb5868a68c5eafce2331862d932b723d04b7005ec77c4a29a9f83e0e402a1",
+      "parent_text_authorized": null,
+      "pdf_pages": [
+        60
+      ],
+      "raw_object_kind": "list_item",
+      "raw_text_sha256": "4e4890bd3cd3090fcd1e4135e0c5aa9054462eb9802054db7901887d9875dc2a",
+      "required_dependency_ids": [],
+      "reviewed_context_available": true,
+      "section_path": [
+        "SERVICE REMINDER"
+      ],
+      "source_content_currently_bound": true
+    },
+    {
+      "evidence_id": "evidence_6b5735e11152c574268529f6",
+      "indexed_object_sha256": "dc73ad2443ef5506164b631031f95a6fda7d8d0871410329dfdc707f012918a4",
+      "parent_text_authorized": null,
+      "pdf_pages": [
+        60
+      ],
+      "raw_object_kind": "list_item",
+      "raw_text_sha256": "071eae7f6bca8eee7ee9c8fb8b28b9151695da073b22e3df467f2e03aa92714f",
+      "required_dependency_ids": [],
+      "reviewed_context_available": false,
+      "section_path": null,
+      "source_content_currently_bound": false
+    },
+    {
+      "evidence_id": "evidence_84f6791f2601d09593f38288",
+      "indexed_object_sha256": "d5259ca0494f700f895901718beccedb78a1ba4e9fc5adbfd1b59912dce508f6",
+      "parent_text_authorized": null,
+      "pdf_pages": [
+        60
+      ],
+      "raw_object_kind": "list_item",
+      "raw_text_sha256": "1ea6676d1e4c0ebbe00f36f8a49ba965649dab6e81d8fa47ec00fde55de68bb6",
+      "required_dependency_ids": [],
+      "reviewed_context_available": true,
+      "section_path": [
+        "SERVICE REMINDER"
+      ],
+      "source_content_currently_bound": true
+    },
+    {
+      "evidence_id": "evidence_8555b50f22af8eabcabb0b76",
+      "indexed_object_sha256": "8ed10eb1b705ad722071b9e654f70883e445ab2ff35011d5a8c4adaa1cd0ad9a",
+      "parent_text_authorized": null,
+      "pdf_pages": [
+        60
+      ],
+      "raw_object_kind": "list_item",
+      "raw_text_sha256": "692e1b1661e4959b22420c1ad974fa88bc4bc4a8a705c59ec9f8b6f61c9a76f0",
+      "required_dependency_ids": [],
+      "reviewed_context_available": true,
+      "section_path": [
+        "SERVICE REMINDER"
+      ],
+      "source_content_currently_bound": true
+    }
+  ],
+  "service_reminder_parent_ids": [
+    "section_af9f7dcfecf1c88a70f5769f"
+  ],
+  "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+  "source_authority_lock": "7d89fd2c7ec34d8a7fdd74a0007bc4f1c9dd2890a90a4da99f29b96e2fb58711",
+  "source_hints_added_to_query": false
+}

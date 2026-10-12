@@ -1,0 +1,177 @@
+{
+  "actual_guard_receipt": {
+    "path": "reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T133426751754Z.json",
+    "sha256": "8d2493490cc5258f1c8ed8cd4fcdd11652803c6e65be5fd52a23062ef675062f"
+  },
+  "billing_changed": false,
+  "billing_enabled": {
+    "motomedic-ai-20261009": true,
+    "motomedic-inference-20261009": false
+  },
+  "billing_restart_performed": false,
+  "bindings": {
+    "current_public_browser_receipt": {
+      "path": "reports/public_evaluator/20261012/public_review/browser_service_due_v14_v2/receipt.json",
+      "sha256": "c6bd8ad8767ae6d497b805cfe5aee3786728625d43bdd9a2a7ddf6420c30daba"
+    },
+    "current_public_success_trace": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/browser_service_due_success_trace_v2.json",
+      "sha256": "d1bc1fa8cf4723ae268fac6ca64c3cb1bf3bcb339a9587214f7cc068f431d1e0"
+    },
+    "expected_runtime_lock_v2": {
+      "path": "reports/public_evaluator/20261012/expected_runtime_lock_v10_14_v2.json",
+      "sha256": "cb5bf8284c4b1ff519b04799364469501e670cbc83cd361abf3efbf13b2e8b5d"
+    },
+    "prior_browser_failure_trace": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/browser_service_due_failure_trace_v1.json",
+      "sha256": "eb3adce6b65b61a780204b362b0559c021c883930b034641ca197710226b7b4b"
+    },
+    "private_case": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/service_due_case.json",
+      "sha256": "95fc8f37751696920e4bda14000731e6fa355c519fc0a5078ee8e59cc6a4bcec"
+    },
+    "private_receipt": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/receipt.json",
+      "sha256": "2872f643510289615d836052649858c8ff3830fb4a7988e93a2d2faa603b0411"
+    }
+  },
+  "classification": "LIVE_READ_ONLY_PERMANENT_LEDGER_AND_RECORDED_ROLE_CACHE_HANDOVER",
+  "cloud_mutations_by_this_review": 0,
+  "counter_reset_or_refund_performed": false,
+  "distinct_draft_and_verifier_native_schema_and_cached_prefix_hashes": true,
+  "guard_read_at_utc": "2026-10-12T13:34:26.751754+00:00",
+  "guard_settings": {
+    "BUDGET_DISPLAY_NAME": "MotoMedic lifetime INR2700",
+    "BUDGET_INR": "2700",
+    "SIMULATE": "false",
+    "STOP_INR": "2540"
+  },
+  "historical_charges_monotonically_retained_since_exact_private_retest": true,
+  "human_signoff": false,
+  "independent_factual_quality_acceptance": false,
+  "latest_guard_log_scalars": [
+    {
+      "cost_inr": 287.59,
+      "stop": false,
+      "timestamp": "2026-10-12T13:16:14.873084Z"
+    },
+    {
+      "cost_inr": 252.24,
+      "stop": false,
+      "timestamp": "2026-10-12T12:41:57.215866Z"
+    },
+    {
+      "cost_inr": 246.52,
+      "stop": false,
+      "timestamp": "2026-10-12T12:01:01.909369Z"
+    }
+  ],
+  "ledger_caps_verified_by_live_read": true,
+  "ledger_read_source": "FOUR_AUTHENTICATED_FIRESTORE_DOCUMENT_GETS_IN_arm_a_usage",
+  "limitations": [
+    "Reserved counters are conservative permanent allocations, not exact invoice usage.",
+    "Delayed INR reporting cannot establish an instantaneous billing total.",
+    "The four live document GETs are sequential reads; public rider usage may continue after this snapshot.",
+    "Provider usage reports cache write/read tokens without identifying the physical cached checkpoint.",
+    "Current public success recorded cache creation with zero cache-read tokens; successful private retest recorded reads for both roles.",
+    "Browser DOM coalesced stream output; exact saved/SSE/recovery equality is established separately by the private retest."
+  ],
+  "limits": {
+    "billing_disconnect_guard_inr": 2540,
+    "lifetime_budget_inr": 2700,
+    "maximum_attempts": 100,
+    "owner_approved_maximum_tokens": 2000000,
+    "shared_haiku_maximum_nanodollars": 1000000000
+  },
+  "live_ledger": {
+    "full_document_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "fae3d33a22e0ccbd1c12ae3802f7fd68ccd76bf4bed3164548346e8269667ff7",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "f0538567c2f25a5cd53909fe0652ac3d5c90f8dde9d5ea93df5558976d7a6b3e",
+      "owner-haiku-fallback-20261011-validation-v1": "34b9ed0e75e34450b85044c29f6067599ec0d73d2c51bb41987de6236f8f369b"
+    },
+    "immutable_non_charge_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "e029cbd37abbd6dafc48ebcd748442f3cf4efc38bd21503e6f850e699997ff32",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "9e0d5b18c1ad0b9cbc7fda54427a5000708e847be21334afef29af643d064783",
+      "owner-haiku-fallback-20261011-validation-v1": "daadac75082af4bb53a05e7ab2155aaaa396f0afb2768da52ee3a1cc6128c2b4"
+    },
+    "maximum_tokens": 2000000,
+    "reservation_count": 16,
+    "reserved_attempts": 50,
+    "reserved_nanodollars": 132503500,
+    "reserved_tokens": 1067084,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "owner_2M_grant_exact_binding_unchanged": true,
+  "preserved_history": {
+    "invalid_v14_v1_archive": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_helpers_v14_v1.zip",
+      "sha256": "311ced55c8ba37b0406ef100003c88a9305621ca4fb165e42cdda55cd3da0574"
+    },
+    "invalid_v14_v1_expected_lock": {
+      "path": "reports/public_evaluator/20261012/expected_runtime_lock_v10_14.json",
+      "sha256": "df506328e34b6eadfe5ccde7064310f3e714049fe575bac7036de3cdfeea0446"
+    },
+    "invalid_v14_v1_prepared_retest_unsubmitted": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v1/source_preparation.json",
+      "sha256": "f4f78031d6a05f66079e4e0f44b0c95253a93815016cc35230e77efe6e52c7ea"
+    }
+  },
+  "private_retest_supported_exact_delivery": true,
+  "private_runtime_verifier_decision": "RELEASE_PARTIAL",
+  "provider_calls_by_this_review": 0,
+  "public_browser_one_question_supported": true,
+  "public_runtime_verifier_decision": "RELEASE_PARTIAL",
+  "raw_rejected_or_private_model_bodies_saved_by_this_review": false,
+  "read_at_utc": "2026-10-12T13:38:44.703707+00:00",
+  "remaining": {
+    "attempts": 50,
+    "haiku_nanodollars": 867496500,
+    "tokens": 932916
+  },
+  "reported_at_utc": "2026-10-12T13:39:58.702150+00:00",
+  "reserved_haiku_usd": "0.132503500",
+  "role_cache_creation_and_reads": {
+    "private_draft": {
+      "current_haiku_role_creation_and_read_observed": true,
+      "current_public_browser_cache_creation_input_tokens": 6312,
+      "current_public_browser_cache_read_input_tokens": 0,
+      "current_public_success_has_cache_read": false,
+      "native_role_schema_sha256": "d6bfda3078db1d3d789b9cc243a47fd933d6e2d25c882a79cba51f2b25d67fbf",
+      "prior_browser_failure_cache_creation_input_tokens": 6312,
+      "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+      "same_exact_cached_prefix_hash": "d6d98a306a1d3d1f2bec9eb32a1653f776c094f293ff88422b9c16efaa4e7799",
+      "successful_private_retest_cache_creation_input_tokens": 0,
+      "successful_private_retest_cache_read_input_tokens": 6312
+    },
+    "semantic_verifier": {
+      "current_haiku_role_creation_and_read_observed": true,
+      "current_public_browser_cache_creation_input_tokens": 6592,
+      "current_public_browser_cache_read_input_tokens": 0,
+      "current_public_success_has_cache_read": false,
+      "native_role_schema_sha256": "20048b29232f903d2b32f6da8354020051caaf0e4ce22bab298dde81aafdba50",
+      "prior_browser_failure_cache_creation_input_tokens": 6592,
+      "role_schema_template_sha256": "de5ad9929c54e7df5d81ff2fbb22717b6ee2a548c7ed8f3e3b5eb3c384b8a8bd",
+      "same_exact_cached_prefix_hash": "c185784d2cbf6aa3e8081f9f70bcbd85bba03237d235d8fb248e561828767add",
+      "successful_private_retest_cache_creation_input_tokens": 0,
+      "successful_private_retest_cache_read_input_tokens": 6592
+    }
+  },
+  "role_policy_sha256": {
+    "private_draft": "7321abcc400581467fbc698476dfd65d1c0f954262165f0da3a07d0a1aa7145c",
+    "semantic_verifier": "ec6bc60c9ed86d96bfe7a714ef20753f24fb470fafb5f35a5fb675c4de1d3f2f"
+  },
+  "runtime_finalized_semantic_verifier_retained": true,
+  "runtime_semantic_verifier_bypassed": false,
+  "schema": "motomedic-final-lifetime-usage-and-role-cache-v14-v1",
+  "six_case_acceptance": false
+}
