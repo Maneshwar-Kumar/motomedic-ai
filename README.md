@@ -1,6 +1,6 @@
 # MotoMedic AI
 
-**Latest owner direction: Haiku only.** Use `claude-haiku-5-5` for drafting and a separate verification call, with different role policies/schemas. This supersedes Gemini and the different-model requirement. The session is stopped; the Haiku-only migration is the first next-chat TODO. Frozen v10.11 is superseded, unbuilt WIP and must not be deployed. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
+**Current work: Haiku-only v10.12 demonstration.** The owner authorized continuation on 12 October 2026. Use `claude-haiku-5-5` for separate drafting and exact finalized-response verification calls, with distinct role policies/schemas. Frozen v10.11 remains superseded history. Hosted quality, cache, delivery, rollback and public-browser acceptance are in progress. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
 
 A manual-grounded question-answering assistant for the Royal Enfield New Himalayan 450. The selected source is the supplied **owner's manual**. The runtime privately drafts from retrieved evidence, separately verifies the finalized answer, saves it, then streams that exact verified text.
 
@@ -36,7 +36,7 @@ Some compatibility modules implement earlier methods because current imports and
 
 The selected index `index_a3282c4d98cf54595e4ba168` has 532 BGE M3 chunks, 277 parents and BM25. Runtime retrieval uses authenticated Qdrant concurrently with BM25, RRF and conditional reranking. Accepted answers require separate model verification and exact saved-buffer streaming.
 
-The owner selected Haiku only for drafting and separate finalized-response verification. The saved v10.11 Gemini WIP is superseded, unbuilt and must not be deployed. Haiku-only runtime/fixtures/admission remain the first next-chat work. The session stopped; UI remains private. [Current status](docs/STATUS.md) preserves results and failures.
+The owner selected Haiku only for drafting and separate finalized-response verification. The saved v10.11 Gemini WIP remains superseded history. The v10.12 runtime, fixtures, shared admission and hosted helpers are being validated. UI remains private until current acceptance passes. [Current status](docs/STATUS.md) preserves results and failures.
 
 Haiku policy/evidence-prefix caching is required; primary caching optimization, photo and voice are deferred. The availability fallback and whole-manual Claude route remain disabled. Existing source-display restrictions and spending guards stay in force.
 

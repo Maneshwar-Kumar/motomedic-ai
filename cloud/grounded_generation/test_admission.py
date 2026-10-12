@@ -67,6 +67,15 @@ class Tests(unittest.TestCase):
         self.client.fail=True
         with self.assertRaisesRegex(ProviderFailure,'STORE_UNAVAILABLE'):self.admit(9992,'generation')
         self.assertFalse(self.client.body)
+    def test_malformed_historical_event_cannot_reopen_legacy_allowance(self):
+        for mutation in ({'tokens': '1'}, {'at': datetime(2026, 10, 11)},
+                         {'kind': 'unknown'}, {'consumed': 'false'}):
+            event = self.event();event.update(mutation);self.seed([event])
+            before = deepcopy(self.client.body)
+            with self.subTest(mutation=mutation), self.assertRaisesRegex(ProviderFailure, 'STORE_INVALID'):
+                self.admit(1, 'generation')
+            self.assertEqual(before, self.client.body)
+
     def test_concurrent_transaction_reservations_do_not_overadmit(self):
         results=[]
         def call():

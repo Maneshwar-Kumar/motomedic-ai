@@ -39,7 +39,7 @@ class ReleaseTests(unittest.TestCase):
                 'authority': 'DIRECT_USER_INSTRUCTION', 'scope': 'PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION'},
             'owner_model_authorization': {'path': release.OWNER_MODEL_SCOPE,
                 'sha256': OWNER_MODEL_SCOPE_SHA, 'authority': 'DIRECT_USER_INSTRUCTION',
-                'scope': 'PAID_FLASH_LITE_PRIMARY_AND_DISTINCT_HAIKU_VERIFIER'},
+                'scope': 'HAIKU_ONLY_SEPARATE_DRAFT_AND_FINALIZED_RESPONSE_VERIFICATION'},
             'deployment_authorized': True, 'public_opening_authorized': True,
             'public_release_approved': False, 'billing_changed': False,
             'acceptance': {'source_approval': 'EXACT_UNCHANGED_SCOPED_SOURCE_APPROVAL',
@@ -158,7 +158,7 @@ class ReleaseTests(unittest.TestCase):
 
     def test_role_cache_and_authority_mutations_need_new_scope(self):
         changes = (
-            ('primary_model', 'claude-haiku-5-5'), ('verifier_model', 'gemma-4-26b-a4b-it'),
+            ('primary_model', 'gemini-2.5-flash-lite'), ('verifier_model', 'gemma-4-26b-a4b-it'),
             ('verifier_enabled', False), ('prompt_cache', 'ANSWER_CACHE'),
             ('verification_authority', 'RANKING_CONFIDENCE'), ('billing_changed', True),
             ('public_release_approved', True), ('fallback_enabled', True),
@@ -197,9 +197,7 @@ class ReleaseTests(unittest.TestCase):
                 if changed == 'scope':
                     (root / release.OWNER_MODEL_SCOPE).write_text('{}')
                 elif changed == 'native_window':
-                    scope = json.loads((root / release.OWNER_MODEL_SCOPE).read_bytes())
-                    scope['published_native_context']['gemini']['input_limit_tokens']=16000
-                    (root / release.OWNER_MODEL_SCOPE).write_text(json.dumps(scope))
+                    manifest['draft_model_contract']['native_input_limit_tokens'] = 16000
                 else:
                     manifest['model_routing_contract'] = {'allowed': 'same-model-verification'}
                 with self.assertRaises(ValueError):

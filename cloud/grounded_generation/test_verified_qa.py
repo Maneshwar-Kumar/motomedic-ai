@@ -151,7 +151,7 @@ class VerifiedTests(unittest.TestCase):
         self.assertEqual(SYSTEM_ERROR_TEXT,expected_error)
         self.assertEqual(FALLBACK_TEXT.encode('utf-8'),expected_fallback.encode('utf-8'))
         self.assertEqual(SYSTEM_ERROR_TEXT.encode('utf-8'),expected_error.encode('utf-8'))
-        self.assertEqual(VERSION,'open-manual-draft-verify-v10')
+        self.assertEqual(VERSION,'open-manual-haiku-draft-verify-v10_12')
     def test_runtime_source_is_ascii_and_apostrophe_is_source_escape(self):
         import cloud.grounded_generation.verified_qa as module
         from pathlib import Path
@@ -194,21 +194,16 @@ class VerifiedTests(unittest.TestCase):
         self.assertNotIn('code_sha256',p.calls[0][1]['runtime_contract'])
         self.assertEqual(p.calls[0][1]['full_evidence_payload_sha256'],c.last_admitted['source_payload']['payload_sha256'])
         self.assertNotIn('claim_to_evidence_map',p.calls[1][2])
-    def test_enabled_provider_contract_is_exactly_bound_through_delivery(self):
+    def test_retired_fallback_contract_and_missing_separate_verifier_are_rejected(self):
         from cloud.grounded_generation.fallback_provider import CONTRACT
+        from cloud.grounded_generation.cached_verifier import DRAFT_CONTRACT
         from cloud.grounded_generation.verified_qa import Config
-        p=Provider();p.contract=deepcopy(CONTRACT)
-        q,p,c,s=self.setup_runtime(p)
-        self.assertNotEqual(c.config.lock,Config().lock)
-        self.assertEqual(c.config.versions()['provider_max_attempts'],3)
-        _,view,_=q.answer(s,'How wide is the bore?')
-        self.assertEqual(view['response']['type'],'SUPPORTED')
-        self.assertEqual(view['verified_delivery']['runtime_lock'],c.config.lock)
-        self.assertEqual(c.last_admitted['provider_contract'],CONTRACT)
-        p.contract['fallback']['model']='other'
-        self.assertEqual(c.config.provider_contract,CONTRACT)
-        with self.assertRaises(ValidationFailure):Config(provider_contract=p.contract)
-
+        with self.assertRaisesRegex(ValidationFailure,'UNRECOGNIZED_PROVIDER_CONTRACT'):
+            Config(provider_contract=CONTRACT)
+        with self.assertRaisesRegex(ValidationFailure,'SEPARATE_VERIFIER_CONTRACT_REQUIRED'):
+            Config(provider_contract=DRAFT_CONTRACT)
+        self.assertEqual(Config().versions()['provider_max_attempts'],1)
+        self.assertEqual(Config().versions()['provider_retry_rejections'],[])
 
     def test_special_route_rejection_never_becomes_ordinary_fallback(self):
         for route,correctable in [('SAFETY_STOP',False),('SAFETY_STOP',True),('AMBIGUOUS',False)]:
@@ -234,8 +229,7 @@ class PairedProviderTests(unittest.TestCase):
     def setUp(self):
         from controller_contracts import DiagnosticSession,Response,ResponseType
         from evidence_registry import content_hash
-        from cloud.grounded_generation.provider import MODEL
-        from cloud.grounded_generation.cached_verifier import CONTRACT
+        from cloud.grounded_generation.cached_verifier import MODEL,CONTRACT,DRAFT_CONTRACT
         self.hash=content_hash
         self.eid='synthetic-evidence-only'
         evidence={self.eid:{'provenance':[{'page_no':1}],
@@ -258,21 +252,21 @@ class PairedProviderTests(unittest.TestCase):
         self.controller=SimpleNamespace(registry=registry,scope_status=lambda s:'CONFIRMED',
             response=lambda route,text,session,**kw:Response(ResponseType(route),text,**kw))
         class RoleProvider(Provider):
-            def __init__(self,model,*,cached=False,**kw):
+            def __init__(self,contract,**kw):
                 super().__init__(drafts=[draft(owner.eid,'Synthetic approved fixture.')],**kw)
-                self.model=model;self.lifecycle=[]
-                if cached:self.contract=deepcopy(CONTRACT);self.cache_capability='explicit'
+                self.contract=deepcopy(contract);self.model=contract['model'];self.lifecycle=[]
+                self.cache_capability='explicit'
             def begin_turn(self,*args):
                 self.lifecycle.append(('begin',args));return {'engineering_fixture':True}
             def end_turn(self):self.lifecycle.append(('end',()))
             def complete(self,policy,stable,dynamic,schema):
-                if (self.model==MODEL)!=(schema==DRAFT_SCHEMA):
+                if (self.contract['role']=='private_draft')!=(schema==DRAFT_SCHEMA):
                     raise AssertionError('Selected provider received the wrong role')
                 result=super().complete(policy,stable,dynamic,schema)
                 result.telemetry['model']=self.model
                 return result
-        self.draft=RoleProvider(MODEL)
-        self.verifier=RoleProvider(CONTRACT['model'],cached=True)
+        self.draft=RoleProvider(DRAFT_CONTRACT)
+        self.verifier=RoleProvider(CONTRACT)
         self.composer=Composer(self.draft,self.authority,verifier=self.verifier)
         self.session=DiagnosticSession('synthetic-session','synthetic-manual-id','synthetic-manual',
             'Himalayan BS6',None,(),'synthetic-selection',generation_lock=self.composer.config.lock)
@@ -280,7 +274,7 @@ class PairedProviderTests(unittest.TestCase):
     def call(self):
         return self.composer.compose_open(self.controller,self.session,self.admitted,
             'Synthetic question only.',self.history)
-    def test_distinct_models_route_exact_finalized_response_including_server_warning(self):
+    def test_distinct_haiku_calls_verify_exact_finalized_response_including_server_warning(self):
         response=self.call()
         self.assertEqual(response.type.value,'SUPPORTED')
         self.assertEqual(len(self.draft.calls),1);self.assertEqual(len(self.verifier.calls),1)
@@ -291,7 +285,9 @@ class PairedProviderTests(unittest.TestCase):
         stable=self.verifier.calls[0][1]
         self.assertNotIn('question',stable);self.assertNotIn('history',stable)
         self.assertNotIn('private fixture history',str(stable))
-        self.assertNotEqual(self.composer.last_trace['draft_model'],self.composer.last_trace['verifier_model'])
+        self.assertEqual(self.composer.last_trace['draft_model'],self.composer.last_trace['verifier_model'])
+        self.assertIsNot(self.composer.provider,self.composer.verifier)
+        self.assertNotEqual(self.draft.contract['role'],self.verifier.contract['role'])
         self.assertEqual(self.composer.last_trace['provider_calls'],2)
         self.assertEqual([event[0] for event in self.draft.lifecycle],['begin','end'])
         self.assertEqual([event[0] for event in self.verifier.lifecycle],['begin','end'])
@@ -316,7 +312,7 @@ class PairedProviderTests(unittest.TestCase):
             self.assertEqual(result['response']['natural_language'],response.natural_language)
             self.assertEqual(result['verified_delivery']['runtime_lock'],self.composer.config.lock)
             changed=deepcopy(self.composer.last_admitted);changed['verifier_contract']=None
-            with self.assertRaisesRegex(ValidationFailure,'DELIVERY_EVIDENCE_OR_VERSION_CHANGED'):
+            with self.assertRaisesRegex(ValidationFailure,'HAIKU_SEPARATE_VERIFIER_CONTRACT_REQUIRED'):
                 saved_view(self.controller.registry,self.session,response,self.authority,changed,'synthetic-operation')
     def test_reused_verdict_after_cached_prefix_cannot_authorize_another_question(self):
         self.call()
@@ -394,7 +390,7 @@ class RoutedProviderTests(unittest.TestCase):
     def setUp(self):
         PairedProviderTests.setUp(self)
         from cloud.grounded_generation.role_router import RoleRouter
-        from cloud.grounded_generation.role_contracts import GEMMA_DRAFT,GEMMA_VERIFIER,HAIKU_DRAFT,HAIKU_VERIFIER
+        from cloud.grounded_generation.role_contracts import HAIKU_DRAFT,HAIKU_VERIFIER
         self.admitted['citation_mapping']=[{'evidence_id':self.eid,'pdf_page':1}]
         self.expected=self.hash(self.admitted)
         owner=self
@@ -416,22 +412,21 @@ class RoutedProviderTests(unittest.TestCase):
                 return result
         class Admission:
             def __init__(self):self.initial=[];self.corrections=[];self.ended=0;self.fail_correction=False
-            def begin_turn(self,op,*,plan):self.initial.append((op,deepcopy(plan)));return {'reserved_attempts':3}
+            def begin_turn(self,op,*,plan):self.initial.append((op,deepcopy(plan)));return {'reserved_attempts':2}
             def reserve_correction(self,op,*,plan):
                 if self.fail_correction:raise ProviderFailure('PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT')
-                self.corrections.append((op,deepcopy(plan)));return {'reserved_attempts':3}
+                self.corrections.append((op,deepcopy(plan)));return {'reserved_attempts':2}
             def end_turn(self):self.ended+=1
-        self.gd,self.hd,self.gv,self.hv=(Role(GEMMA_DRAFT,100),Role(HAIKU_DRAFT,200),
-                                        Role(GEMMA_VERIFIER,300),Role(HAIKU_VERIFIER,400))
-        self.admission=Admission();self.router=RoleRouter(self.gd,self.hd,self.gv,self.hv,self.admission)
+        self.hd,self.hv=Role(HAIKU_DRAFT,100),Role(HAIKU_VERIFIER,400)
+        self.admission=Admission();self.router=RoleRouter(self.hd,self.hv,self.admission)
         self.composer=Composer(source_authority=self.authority,router=self.router)
         self.session=replace(self.session,generation_lock=self.composer.config.lock)
     call=PairedProviderTests.call
-    def test_both_routes_bind_exact_selected_models_and_complete_final_buffer(self):
+    def test_fixed_route_binds_exact_haiku_calls_and_complete_final_buffer(self):
         for large in (False,True):
-            self.setUp();self.gd.count_value=9000 if large else 100
+            self.setUp();self.hd.count_value=9000 if large else 100
             lock=self.composer.config.lock;response=self.call();self.assertEqual(response.type.value,'SUPPORTED')
-            drafter,verifier=(self.hd,self.gv) if large else (self.gd,self.hv)
+            drafter,verifier=self.hd,self.hv
             self.assertEqual(len(drafter.calls),1);self.assertEqual(len(verifier.calls),1)
             self.assertEqual(verifier.calls[0][2]['complete_proposed_response']['text'],response.natural_language)
             self.assertIn('synthetic source condition',response.natural_language)
@@ -442,13 +437,13 @@ class RoutedProviderTests(unittest.TestCase):
             self.assertEqual(len(self.admission.initial),1);self.assertFalse(self.admission.corrections)
             self.assertEqual(self.admission.ended,1)
     def test_correction_keeps_roles_and_requires_new_atomic_phase(self):
-        self.gd.count_value=9000
+        self.hd.count_value=9000
         def revise(v,d,p):
             if len(p.calls)==1:v.update(decision='SHOW_FALLBACK',release_eligible=False,correction_possible=True)
             return v
-        self.gv.verifier=revise;response=self.call()
+        self.hv.verifier=revise;response=self.call()
         self.assertEqual(response.type.value,'SUPPORTED');self.assertEqual(len(self.hd.calls),2)
-        self.assertEqual(len(self.gv.calls),2);self.assertFalse(self.gd.calls);self.assertFalse(self.hv.calls)
+        self.assertEqual(len(self.hv.calls),2)
         self.assertEqual(len(self.admission.corrections),1)
         initial=self.admission.initial[0];correction=self.admission.corrections[0]
         self.assertEqual(initial[0],correction[0]);self.assertEqual(initial[1]['role_plan'],correction[1]['role_plan'])
@@ -456,25 +451,25 @@ class RoutedProviderTests(unittest.TestCase):
     def test_underfunded_correction_is_operational_error_with_private_draft_hidden(self):
         def revise(v,*args):v.update(decision='SHOW_FALLBACK',release_eligible=False,correction_possible=True);return v
         self.hv.verifier=revise;self.admission.fail_correction=True;response=self.call()
-        self.assertEqual(response.type.value,'SYSTEM_ERROR');self.assertEqual(len(self.gd.calls),1)
+        self.assertEqual(response.type.value,'SYSTEM_ERROR');self.assertEqual(len(self.hd.calls),1)
         self.assertEqual(self.composer.last_trace['failure_code'],'PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT')
         self.assertIsNone(self.composer.last_admitted);self.assertNotIn('Synthetic source-supported',response.natural_language)
     def test_semantic_rejection_and_quota_failure_do_not_switch_role_pair(self):
         def reject(v,*args):v.update(decision='SHOW_FALLBACK',release_eligible=False);return v
         self.hv.verifier=reject;response=self.call();self.assertEqual(response.type.value,'UNSUPPORTED')
-        self.assertFalse(self.hd.calls);self.assertFalse(self.gv.calls)
+        self.assertEqual(len(self.hd.calls),1);self.assertEqual(len(self.hv.calls),1)
         self.setUp()
         def outage(*args):raise ProviderFailure('PROVIDER_HTTP_429')
         self.hv.verifier=outage;response=self.call();self.assertEqual(response.type.value,'SYSTEM_ERROR')
-        self.assertFalse(self.hd.calls);self.assertFalse(self.gv.calls)
+        self.assertEqual(len(self.hd.calls),1);self.assertEqual(len(self.hv.calls),1)
     def test_delivery_rejects_changed_selected_role_contract(self):
         from unittest.mock import patch
-        self.gd.count_value=9000;response=self.call();accepted=self.composer.last_admitted
+        self.hd.count_value=9000;response=self.call();accepted=self.composer.last_admitted
         with patch('cloud.grounded_generation.verified_qa.legacy_view',return_value=({'response':{},'schema_version':'fixture'},{})):
             view,_=saved_view(self.controller.registry,self.session,response,self.authority,accepted)
             self.assertEqual(view['verified_delivery']['draft_model'],self.hd.contract['model'])
-            self.assertEqual(view['verified_delivery']['verifier_model'],self.gv.contract['model'])
-            changed=deepcopy(accepted);changed['selected_draft_contract']=deepcopy(self.gd.contract)
+            self.assertEqual(view['verified_delivery']['verifier_model'],self.hv.contract['model'])
+            changed=deepcopy(accepted);changed['selected_draft_contract']=deepcopy(self.hv.contract)
             with self.assertRaisesRegex(ValidationFailure,'MODEL_ROLE_BINDING_CHANGED'):
                 saved_view(self.controller.registry,self.session,response,self.authority,changed)
 

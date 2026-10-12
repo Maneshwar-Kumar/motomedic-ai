@@ -14,12 +14,12 @@ from generation_providers import ProviderFailure, ProviderResult
 from evidence_registry import content_hash
 from cloud.grounded_generation.claude_provider import HTTP
 from cloud.grounded_generation.provider import OUTPUT_TOKENS, unique
-from cloud.grounded_generation.role_contracts import (FLASH_DRAFT,HAIKU_DRAFT,HAIKU_VERIFIER,
+from cloud.grounded_generation.role_contracts import (HAIKU_DRAFT,HAIKU_VERIFIER,
     HAIKU_CONTEXT_TOKENS,OUTPUT_JSON_BYTES,haiku_maximum_nanodollars,haiku_actual_cost)
 
 MODEL = 'claude-haiku-5-5'
 INPUT_TOKENS=HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS
-DRAFT_CONTRACT=FLASH_DRAFT
+DRAFT_CONTRACT=HAIKU_DRAFT
 CONTRACT=HAIKU_VERIFIER
 # Retained isolated two-call fixture admission; production uses an atomic
 # counted role plan, not this historical default forecast.
@@ -42,6 +42,7 @@ class CachedVerifier:
     contract = CONTRACT
 
     def __init__(self, reserve, *, reserve_cost=None, transport=None, key=None,pre_reserved=False):
+        self.contract=deepcopy(type(self).contract)
         self.reserve = reserve
         self.reserve_cost = reserve_cost
         self.transport = transport or HTTP()
@@ -163,7 +164,9 @@ class CachedVerifier:
             permit=self.reserve(count + OUTPUT_TOKENS, 'generation')
             input_ceiling=INPUT_TOKENS
             if self.central_admission:
+                stages=('draft','correction') if self.contract['role']=='private_draft' else ('verify','reverify')
                 if (type(permit)is not dict or permit.get('model')!=MODEL or
+                    permit.get('stage') not in stages or permit.get('attempt')!=1 or
                     type(permit.get('input_tokens'))is not int or permit['input_tokens']<count or
                     permit.get('output_tokens')!=OUTPUT_TOKENS or
                     type(permit.get('maximum_nanodollars'))is not int or

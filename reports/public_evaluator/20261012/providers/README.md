@@ -1,4 +1,6 @@
-# Separate verifier and prompt-cache candidate
+# Historical separate-verifier and prompt-cache candidate
+
+This receipt describes the earlier Gemma/Haiku candidate. Current v10.12 work uses separate Haiku draft/verifier calls under [scope3](../owner_model_scope_v3.json); see the [current TRD](../../../../docs/TRD.md). Preserve the historical cache proof separately from current-role creation/read acceptance.
 
 12 October 2026. Software candidate; hosted capability and independent answer-quality acceptance remain separate.
 

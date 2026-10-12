@@ -1,4 +1,7 @@
-"""Pinned bidirectional model roles, native windows and nonrecurring cost math."""
+"""Pinned Haiku call roles, native windows and permanent cost math.
+
+Retired provider contracts below exist only for immutable historical receipts.
+"""
 from copy import deepcopy
 from decimal import Decimal,ROUND_CEILING
 
@@ -13,7 +16,7 @@ HAIKU_CONTEXT_TOKENS=1000000
 ROUTING_THRESHOLD=8192
 FLASH_INPUT_TOKENS=1048576
 FLASH_INPUT_TPM=250000
-VERSION='flash-lite-draft-haiku-verifier-v2'
+VERSION='haiku-draft-finalized-verifier-v3'
 SOURCES={'checked_date':'2026-10-12',
     'flash_lite_native_window':'https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite',
     'flash_lite_pricing':'https://ai.google.dev/gemini-api/docs/pricing',
@@ -43,6 +46,7 @@ def contract(model,role):
             primary_cost_bound='RETAINED_GLOBAL_999200_TOKEN_ALLOCATION_MAXIMUM_USD_0.39968')
     if model==HAIKU:
         result.update(cache_ttl='5m',minimum_cache_tokens=512,thinking='disabled',effort='medium',
+            native_limit_sources={k:v for k,v in SOURCES.items() if k in ('checked_date','haiku_native_window_and_pricing')},
             pricing={'long_context_above_input_tokens':100000,
                 'base_usd_per_million':{'input':.10,'output':.50,'cache_write':.125,'cache_read':.01},
                 'long_usd_per_million':{'input':.50,'output':2.50,'cache_write':.625,'cache_read':.05}})
@@ -54,10 +58,12 @@ GEMMA_VERIFIER=contract(GEMMA,'semantic_verifier')
 HAIKU_DRAFT=contract(HAIKU,'private_draft')
 HAIKU_VERIFIER=contract(HAIKU,'semantic_verifier')
 FLASH_DRAFT=contract(FLASH,'private_draft')
-CONTRACT={'version':VERSION,'selection':'FIXED_DISTINCT_MODEL_PAIR_NO_SIZE_FLIP',
-    'roles':{'FLASH_LITE_DRAFT_HAIKU_VERIFY':{'draft':FLASH_DRAFT,'verifier':HAIKU_VERIFIER}},
+CONTRACT={'version':VERSION,'selection':'FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE_FLIP',
+    'roles':{'HAIKU_DRAFT_HAIKU_VERIFY':{'draft':HAIKU_DRAFT,'verifier':HAIKU_VERIFIER}},
+    'same_model_is_not_cross_model_agreement':True,
     'route_after_semantic_quota_schema_integrity_or_availability_failure':False,
-    'availability_fallback_enabled':False,'native_limit_sources':SOURCES}
+    'availability_fallback_enabled':False,
+    'native_limit_sources':deepcopy(HAIKU_DRAFT['native_limit_sources'])}
 
 # Retired in-memory engineering fixtures and immutable historic reservations
 # retain their exact role contract. Serving's router never selects these pairs.

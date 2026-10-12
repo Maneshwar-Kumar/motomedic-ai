@@ -26,7 +26,7 @@ Target: authenticated Qdrant dense retrieval concurrent with BM25, RRF, bounded 
 
 Keep SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR distinct. Malformed/outage/quota/integrity failures are SYSTEM_ERROR. Fixed messages are in the PRD. Verified source-specific safety takes precedence. Relevance/confidence is not answer authorization. Held-out cases cannot enrich prompts or retrieval tuning.
 
-The primary model is pinned in the runtime. Evidence-only Claude Haiku availability fallback stays disabled until existing activation permission applies. Semantic rejection, quota, malformed output and integrity failure cannot trigger it. Full-manual Claude is retired; do not rerun it without new owner authorization. Prompt caching is separate from answer authority and has no demonstrated support/savings for the current primary. Answer-cache shortcuts are disabled.
+The latest owner direction selects `claude-haiku-5-5` for both private drafting and separate exact finalized-response verification, with distinct role policies/schemas. Both calls share the existing Haiku USD1 ledger and use role-specific five-minute policy/evidence-prefix caching. Same-model calls do not establish cross-model agreement; independent original-source review remains required. Preserve superseded frozen v10.11 history and use a fresh v10.12 candidate. Availability fallback stays disabled; semantic rejection, quota, malformed output and integrity failure cannot select another model. Full-manual Claude remains retired. Prompt caching is separate from answer authority; current-role reads and savings require their own evidence. Answer-cache shortcuts are disabled.
 
 ## Operating permissions and evidence
 

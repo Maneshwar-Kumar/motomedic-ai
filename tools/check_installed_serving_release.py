@@ -7,11 +7,11 @@ import sys
 SCHEMA = 'motomedic-serving-release-v10'
 OWNER_SCOPE = 'reports/public_evaluator/20261012/owner_scope_v1.json'
 OWNER_SCOPE_SHA = '65c42d40b4a882972570e377b4a314abd2767be7fb8fb8129e7bfe9c2a436b0d'
-PRIMARY_MODEL = 'gemini-2.5-flash-lite'
+PRIMARY_MODEL = 'claude-haiku-5-5'
 VERIFIER_MODEL = 'claude-haiku-5-5'
 PROMPT_CACHE = 'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M'
-OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v2.json'
-OWNER_MODEL_SCOPE_SHA = 'e0b27ce5c620d29d30e6ad4942c17d0ad6b1282f344bf22cc50a3e1b6c271ea4'
+OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v3.json'
+OWNER_MODEL_SCOPE_SHA = '65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f'
 MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
 INDEX = 'index_a3282c4d98cf54595e4ba168'
 APPROVAL = 'human_review/agent_release_161/coordinator/release_manifest_v3.json'
@@ -65,7 +65,7 @@ def validate_policy(release, root):
         raise ValueError('SERVING_AUTHORIZATION_SCOPE_CHANGED')
     expected_model_scope = {'path': OWNER_MODEL_SCOPE, 'sha256': OWNER_MODEL_SCOPE_SHA,
         'authority': 'DIRECT_USER_INSTRUCTION',
-        'scope': 'PAID_FLASH_LITE_PRIMARY_AND_DISTINCT_HAIKU_VERIFIER'}
+        'scope': 'HAIKU_ONLY_SEPARATE_DRAFT_AND_FINALIZED_RESPONSE_VERIFICATION'}
     if release.get('owner_model_authorization') != expected_model_scope:
         raise ValueError('SERVING_MODEL_AUTHORIZATION_BINDING_CHANGED')
     model_scope_path = confined(root, OWNER_MODEL_SCOPE)
@@ -74,7 +74,7 @@ def validate_policy(release, root):
     model_scope = json.loads(model_scope_path.read_bytes())
     if (model_scope.get('authority') != 'DIRECT_USER_INSTRUCTION'
             or model_scope.get('billing_restart_authorized') is not False
-            or model_scope.get('new_spend_allocation_authorized') is not False
+            or model_scope.get('new_spending_allocation_authorized') is not False
             or model_scope.get('availability_fallback_enabled') is not False
             or model_scope.get('source_display_policy_changed') is not False
             or model_scope.get('human_factual_quality_approval') is not False):
@@ -82,17 +82,20 @@ def validate_policy(release, root):
     interpretation=model_scope.get('interpretation',{})
     if (interpretation.get('draft_model')!=PRIMARY_MODEL or
             interpretation.get('verifier_model')!=VERIFIER_MODEL or
-            interpretation.get('fixed_distinct_model_pair') is not True or
-            interpretation.get('paid_primary_requests_authorized_within_retained_allocation') is not True or
-            interpretation.get('native_context_and_provider_quota_limits_remain') is not True or
-            interpretation.get('complete_evidence_history_final_response_preserved') is not True or
-            interpretation.get('new_chat_preserves_visitor_and_global_budgets') is not True or
+            interpretation.get('only_serving_model')!=PRIMARY_MODEL or
+            interpretation.get('separate_draft_and_verifier_calls_required') is not True or
+            interpretation.get('distinct_role_policies_and_schemas_required') is not True or
+            interpretation.get('same_haiku_monetary_ledger_shared_by_draft_and_verify') is not True or
+            interpretation.get('same_model_independent_call_not_cross_model_agreement') is not True or
+            interpretation.get('complete_evidence_history_and_exact_final_response_preserved') is not True or
+            interpretation.get('no_automatic_retry_of_uncertain_completion') is not True or
+            interpretation.get('maximum_correction_reverification_pairs') != 1 or
+            interpretation.get('rider_question_word_limit') != 100 or
             model_scope.get('whole_manual_claude_authorized') is not False or
             model_scope.get('source_approval_changed') is not False or
             model_scope.get('retained_budget')!={
                 'billing_disconnect_inr':2540,'haiku_lifetime_usd':1,
-                'maximum_primary_usd_if_all_lifetime_tokens_are_output_at_published_rate':0.39968,
-                'no_reservation_refunds_or_resets':True,'primary_lifetime_attempts':100,
+                'historical_charges_retained':True, 'no_reset_or_refund':True,'primary_lifetime_attempts':100,
                 'primary_lifetime_tokens':999200,'project_lifetime_inr':2700}):
         raise ValueError('SERVING_PAID_MODEL_OR_RETAINED_BUDGET_SCOPE_CHANGED')
     return True

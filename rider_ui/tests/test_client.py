@@ -7,7 +7,7 @@ from urllib.error import HTTPError, URLError
 from rider_ui.client import APIError, RiderAPI, validate_view, MANUAL_SHA, INDEX_ID
 
 def view():
-    return {'runtime_policy':'open-manual-draft-verify-v10','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
+    return {'runtime_policy':'open-manual-haiku-draft-verify-v10_12','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
             'session_id':'a'*32,'version':1,'choices':[],'history':[],
             'response':{'type':'SUPPORTED','technical_content':True,'release_gate_passed':True,
                         'natural_language':'Engineering fixture only.',
@@ -34,7 +34,7 @@ class Transport:
 class ClientTests(unittest.TestCase):
     def test_v10_policy_acceptance_rejects_v9_recovery_continuation_and_feedback(self):
         from rider_ui.client import RUNTIME_POLICY
-        self.assertEqual(RUNTIME_POLICY,'open-manual-draft-verify-v10')
+        self.assertEqual(RUNTIME_POLICY,'open-manual-haiku-draft-verify-v10_12')
         current=view();old=copy.deepcopy(current);old['runtime_policy']='open-manual-draft-verify-v9'
         api=RiderAPI('https://example.com','engineering-fixture')
         api.opener=Transport(result=json.dumps(current).encode())

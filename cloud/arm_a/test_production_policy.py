@@ -7,13 +7,19 @@ import unittest
 from unittest.mock import patch
 
 from cloud.arm_a import app
-from tools.serving_release import CURRENT,ROOT as REPOSITORY_ROOT
+from cloud.grounded_generation.cached_verifier import DRAFT_CONTRACT,CONTRACT as VERIFIER_CONTRACT
+from cloud.grounded_generation.role_router import ROUTING_CONTRACT
 
 
 class ProductionPolicyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.release=json.loads((REPOSITORY_ROOT/CURRENT).read_bytes())
+        cls.release={'schema_version':'motomedic-serving-release-v10',
+            'primary_model':'claude-haiku-5-5','verifier_model':'claude-haiku-5-5',
+            'answer_cache_enabled':False,'fallback_enabled':False,'verifier_enabled':True,
+            'draft_model_contract':deepcopy(DRAFT_CONTRACT),'verifier_contract':deepcopy(VERIFIER_CONTRACT),
+            'prompt_cache':'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',
+            'model_routing_contract':deepcopy(ROUTING_CONTRACT)}
 
     def test_current_frozen_role_policy_passes_without_provider_construction(self):
         with patch('cloud.grounded_generation.role_router.production_router',
@@ -27,13 +33,13 @@ class ProductionPolicyTests(unittest.TestCase):
             with self.subTest(field=field),self.assertRaisesRegex(RuntimeError,'serving policy mismatch'):
                 app.validate_production_policy(changed)
         changed=deepcopy(self.release)
-        changed['model_routing_contract']['roles']['HAIKU_DRAFT_GEMMA_VERIFY']['verifier']['model']='changed'
+        changed['model_routing_contract']['roles']['HAIKU_DRAFT_HAIKU_VERIFY']['verifier']['model']='changed'
         with self.assertRaisesRegex(RuntimeError,'serving policy mismatch'):
             app.validate_production_policy(changed)
 
     def test_existing_model_cache_and_verifier_predicates_remain_required(self):
         for field,value in [('schema_version','old'),('primary_model','changed'),
-            ('answer_cache_enabled',True),('verifier_enabled',False),
+            ('answer_cache_enabled',True),('fallback_enabled',True),('verifier_enabled',False),
             ('draft_model_contract',None),('verifier_model','changed'),('verifier_contract',None)]:
             changed=deepcopy(self.release);changed[field]=value
             with self.subTest(field=field),self.assertRaisesRegex(RuntimeError,'serving policy mismatch'):

@@ -1,6 +1,6 @@
 # Rider interface
 
-The selected v10 frontend provides a public evaluator gateway around Streamlit. Signed cookies and a browser proof challenge lead to a private IAM-authenticated backend; provider keys stay server-side. The backend owns Qdrant/BM25 retrieval, conditional ranking, distinct-model drafting/verification and durable response storage. The latest scoped v10.7 change adds a 100-word rider limit and size-selected Gemma/Haiku roles without truncating applicable evidence. Haiku caches only its selected policy/evidence prefix. The client displays truthful progress and exact saved text, with follow-up and recovery binding checks.
+The selected frontend provides a public evaluator gateway around Streamlit. Signed cookies and a browser proof challenge lead to a private IAM-authenticated backend; provider keys stay server-side. The v10.12 candidate uses Haiku for separate private draft and finalized-response verification calls, with distinct role policies and schemas. Both roles cache their policy/evidence prefix and share the existing USD1 ledger. Questions are limited to 100 words; complete applicable evidence remains intact. The client displays progress and exact saved text, with follow-up and recovery binding checks.
 
 Current product and technical requirements: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architecture](../docs/ARCHITECTURE.md) and [TODO](../TODO.md).
 

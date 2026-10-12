@@ -27,8 +27,8 @@ class HealthTests(unittest.TestCase):
         self.app = create_app(registry,None,no_state,[])
         self.app.config.update(GROUNDED_PRIMARY=True,DURABLE_DISPATCH_CONFIGURED=True,
             SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-            ANSWER_PROVIDER='gemma-4-26b-a4b-it',VERIFIER_PROVIDER='claude-haiku-5-5',
-            PROMPT_CACHE='ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M',ARM_A_RUNTIME_LOCK='b'*64)
+            ANSWER_PROVIDER='claude-haiku-5-5',VERIFIER_PROVIDER='claude-haiku-5-5',
+            PROMPT_CACHE='ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',ARM_A_RUNTIME_LOCK='b'*64)
         self.client = self.app.test_client()
         composer = patch('cloud.arm_a.app.ArmAComposer',
             return_value=SimpleNamespace(config=SimpleNamespace(lock='c'*64)))
@@ -45,9 +45,9 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(external.json['runtime_lock'],'b'*64)
         self.assertEqual(external.json['manual_checksum'],'a'*64)
         self.assertEqual(external.json['index_id'],'synthetic-index')
-        self.assertEqual(external.json['answer_provider'],'gemma-4-26b-a4b-it')
+        self.assertEqual(external.json['answer_provider'],'claude-haiku-5-5')
         self.assertEqual(external.json['verifier_provider'],'claude-haiku-5-5')
-        self.assertEqual(external.json['prompt_cache'],'ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M')
+        self.assertEqual(external.json['prompt_cache'],'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M')
         self.assertEqual(external.headers['Cache-Control'],'no-store')
 
     def test_external_health_requires_application_identity_but_startup_probe_does_not(self):

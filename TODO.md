@@ -1,6 +1,6 @@
 # MotoMedic execution plan
 
-**Latest owner direction: Haiku only.** Use `claude-haiku-5-5` for drafting and a separate verification call, with different role policies/schemas. This supersedes Gemini and the different-model requirement. The session is stopped; the Haiku-only migration is the first next-chat TODO. Frozen v10.11 is superseded, unbuilt WIP and must not be deployed. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
+**Current work: Haiku-only v10.12 demonstration.** The owner authorized continuation on 12 October 2026. Use `claude-haiku-5-5` for separate drafting and exact finalized-response verification calls, with distinct role policies/schemas. Frozen v10.11 remains superseded history. Current runtime, hosted quality, cache, delivery, rollback and public-browser acceptance are in progress; no public URL is accepted yet. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
 
 **Stopped for fresh-chat handoff.** Read the [summary](reports/handoff/20261012/SUMMARY.md) and [ordered next-chat TODO](reports/handoff/20261012/TODO.md). Current code is unbuilt WIP; the UI remains private.
 

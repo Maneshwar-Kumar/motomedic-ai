@@ -2,9 +2,9 @@
 
 Uses the existing global daily/rate ledger and a non-expiring conservative
 allocation. Does not increase account limits or authorize provider spending.
-Serving atomically reserves each draft/verification pair, including the allowed
-Gemma retry, before that phase begins. One correction phase may be reserved
-after rejection. Explicit compatibility consumers retain full-turn reservation.
+Serving atomically reserves each separate Haiku draft/verification pair before
+that phase begins. Each role gets one transport attempt. One correction phase
+may be reserved after rejection. Historical reservations remain charged.
 """
 from datetime import datetime, timedelta, timezone
 from contextlib import contextmanager
@@ -14,13 +14,15 @@ import threading
 import time
 from generation_providers import ProviderFailure
 from cloud.grounded_generation.claude_budget import (
-    ALLOCATION as CLAUDE_ALLOCATION, VERSION as CLAUDE_VERSION)
+    ALLOCATION as CLAUDE_ALLOCATION, VERSION as CLAUDE_VERSION,
+    validate_ledger as validate_claude_ledger)
 
 VERSION = 'whole-turn-capacity-v1'
 # Allocation identity stays unchanged: a runtime upgrade cannot replenish it.
-PACING_VERSION = 'whole-turn-sealed-unused-pacing-v3-variable-model'
+PACING_VERSION = 'whole-turn-sealed-unused-pacing-v4-haiku-roles'
 LEGACY_PACING_VERSION = 'whole-turn-sealed-unused-pacing-v2'
-PLAN_VERSION = 'whole-turn-model-native-envelope-v1'
+HISTORICAL_PACING_VERSION = 'whole-turn-sealed-unused-pacing-v3-variable-model'
+PLAN_VERSION = 'whole-turn-haiku-role-native-envelope-v2'
 ALLOCATION = 'grounded-primary-nonrecurring-v1'
 MAX_TOKENS = 999200
 MAX_ATTEMPTS = 100
@@ -31,6 +33,9 @@ HAIKU = 'claude-haiku-5-5'
 GEMMA_INPUT_TPM = 16000
 FLASH_INPUT_TPM = 250000
 MODEL_INPUT_LIMITS = {GEMMA: 256000 - 1800, FLASH:1048576, HAIKU: 1000000 - 1800}
+# Retired model limits above validate existing immutable events only. New
+# serving reservations and permits are scoped to the owner-selected model.
+SERVING_MODELS = (HAIKU,)
 MAX_OUTPUT_TOKENS = 1800
 STAGES = ('draft', 'verify', 'correction', 'reverify')
 SLOT_SECONDS = 61
@@ -48,7 +53,7 @@ def _sealed_unused(event):
         return False
     sealed_at = event.get('sealed_at')
     if (event.get('state') != 'SEALED_UNUSED' or
-            event.get('sealed_version') not in (PACING_VERSION, LEGACY_PACING_VERSION) or
+            event.get('sealed_version') not in (PACING_VERSION, LEGACY_PACING_VERSION, HISTORICAL_PACING_VERSION) or
             event.get('consumed') not in (None, False) or
             event.get('kind') != 'generation' or
             type(event.get('operation_id')) is not str or
@@ -116,28 +121,22 @@ def _plan(plan, attempts, phase='initial'):
         'fixed_verifier_native_tokens', 'fixed_correction_native_tokens',
         'unknown_verifier_byte_allowance', 'unknown_correction_byte_allowance',
         'initial_haiku_counter_headroom_tokens', 'known_verifier_prefix_native_tokens'}
-    if (type(plan)is dict and type(plan.get('slots'))is list and plan['slots'] and
-            type(plan['slots'][0])is dict and plan['slots'][0].get('model')==FLASH):
-        metadata_keys.add('initial_primary_counter_headroom_tokens')
+    metadata_keys.add('initial_primary_counter_headroom_tokens')
     correction_bindings = {'correction_request_sha256', 'rejected_binding_sha256', 'verdict_sha256'}
     if (type(plan) is not dict or not set(plan) <= {'slots'} | metadata_keys | correction_bindings or
             (set(plan) - correction_bindings) not in ({'slots'}, {'slots'} | metadata_keys) or
-            type(plan['slots']) is not list or len(plan['slots']) not in (3, 6) or
-            phase not in ('initial', 'correction') or (phase == 'correction' and len(plan['slots']) != 3)):
+            type(plan['slots']) is not list or len(plan['slots']) not in (2, 4) or
+            phase not in ('initial', 'correction') or (phase == 'correction' and len(plan['slots']) != 2)):
         raise ProviderFailure('WHOLE_TURN_NATIVE_PLAN_INVALID')
     rows = deepcopy(plan['slots'])
     allowed = {'model', 'stage', 'input_tokens', 'output_tokens', 'attempt', 'maximum_nanodollars'}
     for row in rows:
         if (type(row) is not dict or not set(row) <= allowed or
-                row.get('model') not in MODEL_INPUT_LIMITS or row.get('stage') not in STAGES or
+                row.get('model') not in SERVING_MODELS or row.get('stage') not in STAGES or
                 type(row.get('input_tokens')) is not int or not 0 < row['input_tokens'] <= MODEL_INPUT_LIMITS[row['model']] or
                 type(row.get('output_tokens')) is not int or row['output_tokens'] != MAX_OUTPUT_TOKENS or
-                type(row.get('attempt')) is not int or row['attempt'] not in (1, 2)):
+                type(row.get('attempt')) is not int or row['attempt'] != 1):
             raise ProviderFailure('WHOLE_TURN_NATIVE_PLAN_INVALID')
-        if row['model'] == GEMMA and row['input_tokens'] > GEMMA_INPUT_TPM:
-            raise ProviderFailure('PROVIDER_MODEL_INPUT_RATE_LIMIT')
-        if row['model'] == FLASH and row['input_tokens'] > FLASH_INPUT_TPM:
-            raise ProviderFailure('PROVIDER_MODEL_INPUT_RATE_LIMIT')
         row['tokens'] = row['input_tokens'] + row['output_tokens']
         if row['model'] == HAIKU:
             # Maximum5m cache-write plus output price at the selected native
@@ -150,13 +149,9 @@ def _plan(plan, attempts, phase='initial'):
             row['maximum_nanodollars'] = supplied
         elif type(row.get('maximum_nanodollars', 0)) is not int or row.get('maximum_nanodollars', 0) != 0:
             raise ProviderFailure('CLAUDE_COST_MODEL_MISMATCH')
-    drafter = rows[0]['model']
-    verifier = HAIKU if drafter in (GEMMA,FLASH) else GEMMA
-    expected = [(model, stage, attempt) for stage, model in
-        (('draft', drafter), ('verify', verifier), ('correction', drafter), ('reverify', verifier))
-        for attempt in range(1, 2 if model == HAIKU else 3)]
-    if len(rows) == 3:
-        expected = expected[:3] if phase == 'initial' else expected[3:]
+    expected = [(HAIKU, stage, 1) for stage in STAGES]
+    if len(rows) == 2:
+        expected = expected[:2] if phase == 'initial' else expected[2:]
     if [(row['model'], row['stage'], row['attempt']) for row in rows] != expected:
         raise ProviderFailure('WHOLE_TURN_MODEL_ROLE_PLAN_INVALID')
     for left, right in zip(rows, rows[1:]):
@@ -170,32 +165,27 @@ def _plan(plan, attempts, phase='initial'):
         raise ProviderFailure('WHOLE_TURN_CORRECTION_BINDING_REQUIRED')
     if 'role_plan' in plan:
         from evidence_registry import content_hash
-        from cloud.grounded_generation.role_contracts import CONTRACT, LEGACY_CONTRACT, ROUTING_THRESHOLD
+        from cloud.grounded_generation.role_contracts import CONTRACT
         role = plan['role_plan']
-        active_flash=drafter==FLASH
-        selected_contract=CONTRACT if active_flash else LEGACY_CONTRACT
-        count_key='primary_input_tokens_counted' if active_flash else 'gemma_routing_input_tokens'
-        role_keys = {'version', 'route', 'routing_contract_sha256', 'gemma_routing_input_tokens',
+        count_key='primary_input_tokens_counted'
+        role_keys = {'version', 'route', 'routing_contract_sha256', count_key,
             'selected_draft_input_tokens', 'initial_draft_request_sha256', 'stable_context_sha256',
             'draft_model_contract_sha256', 'verifier_contract_sha256'}
-        if active_flash:
-            role_keys.remove('gemma_routing_input_tokens');role_keys.add(count_key)
-        route = 'FLASH_LITE_DRAFT_HAIKU_VERIFY' if active_flash else 'GEMMA_DRAFT_HAIKU_VERIFY' if drafter == GEMMA else 'HAIKU_DRAFT_GEMMA_VERIFY'
-        selected = selected_contract['roles'][route]
-        if (type(role) is not dict or set(role) != role_keys or role.get('version') != selected_contract['version'] or
-                role.get('route') != route or role.get('routing_contract_sha256') != content_hash(selected_contract) or
+        route = 'HAIKU_DRAFT_HAIKU_VERIFY'
+        selected = CONTRACT['roles'][route]
+        if (type(role) is not dict or set(role) != role_keys or role.get('version') != CONTRACT['version'] or
+                role.get('route') != route or role.get('routing_contract_sha256') != content_hash(CONTRACT) or
                 role.get('draft_model_contract_sha256') != content_hash(selected['draft']) or
                 role.get('verifier_contract_sha256') != content_hash(selected['verifier']) or
                 type(role.get(count_key)) is not int or role[count_key] <= 0 or
-                (not active_flash and (role[count_key] > ROUTING_THRESHOLD) != (drafter == HAIKU)) or
-                (active_flash and role[count_key]!=role.get('selected_draft_input_tokens')) or
+                role[count_key] != role.get('selected_draft_input_tokens') or
                 type(role.get('selected_draft_input_tokens')) is not int or role['selected_draft_input_tokens'] <= 0 or
                 type(plan.get('initial_haiku_counter_headroom_tokens')) is not int or
-                not 0 <= plan['initial_haiku_counter_headroom_tokens'] <= (512 if drafter == HAIKU else 0) or
-                (active_flash and (type(plan.get('initial_primary_counter_headroom_tokens'))is not int or
-                    not 0<=plan['initial_primary_counter_headroom_tokens']<=512)) or
+                not 0 <= plan['initial_haiku_counter_headroom_tokens'] <= 512 or
+                type(plan.get('initial_primary_counter_headroom_tokens')) is not int or
+                plan['initial_primary_counter_headroom_tokens'] != 0 or
                 (phase == 'initial' and role['selected_draft_input_tokens'] +
-                    plan['initial_primary_counter_headroom_tokens' if active_flash else 'initial_haiku_counter_headroom_tokens'] != rows[0]['input_tokens']) or
+                    plan['initial_haiku_counter_headroom_tokens'] != rows[0]['input_tokens']) or
                 any(type(role.get(key)) is not str or len(role[key]) != 64 or
                     any(char not in '0123456789abcdef' for char in role[key]) for key in
                     ('initial_draft_request_sha256', 'stable_context_sha256')) or
@@ -211,11 +201,11 @@ class ModelAdmission:
     """A model-scoped permit, returning its already reserved hard envelope."""
     pre_reserved = True
 
-    def __init__(self, owner, model):
-        self.owner, self.model = owner, model
+    def __init__(self, owner, model, role=None):
+        self.owner, self.model, self.role = owner, model, role
 
     def __call__(self, tokens, kind, *, stage=None):
-        return self.owner._permit(tokens, kind, model=self.model, stage=stage)
+        return self.owner._permit(tokens, kind, model=self.model, stage=stage, role=self.role)
 
 
 @contextmanager
@@ -238,10 +228,10 @@ class WholeTurnAdmission:
         self.maximum_queue_seconds = maximum_queue_seconds
         self.local = threading.local()
 
-    def for_model(self, model):
-        if model not in MODEL_INPUT_LIMITS:
+    def for_model(self, model, *, role=None):
+        if model not in SERVING_MODELS or role not in (None, 'private_draft', 'semantic_verifier'):
             raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
-        return ModelAdmission(self, model)
+        return ModelAdmission(self, model, role)
 
     def _reserve_entries(self, operation_id, entries, monetary, deadline, plan_sha, phase, *, prior=None):
         from google.cloud import firestore
@@ -275,15 +265,7 @@ class WholeTurnAdmission:
                     not 0 <= spent <= MAX_TOKENS or not 0 <= count <= MAX_ATTEMPTS):
                 raise ProviderFailure('PROVIDER_ALLOCATION_STORE_INVALID')
             if monetary:
-                if claude_previous and (claude_previous.get('version') != CLAUDE_VERSION or
-                        claude_previous.get('maximum_nanodollars') != 1000000000 or
-                        claude_previous.get('model', HAIKU) != HAIKU):
-                    raise ProviderFailure('CLAUDE_COST_BINDING_CHANGED')
-                nano_spent = claude_previous.get('reserved_nanodollars', 0)
-                monetary_count = claude_previous.get('reservation_count', 0)
-                if (type(nano_spent) is not int or not 0 <= nano_spent <= 1000000000 or
-                        type(monetary_count) is not int or monetary_count < 0):
-                    raise ProviderFailure('CLAUDE_COST_STORE_INVALID')
+                nano_spent, monetary_count = validate_claude_ledger(claude_previous)
                 if nano_spent + monetary > 1000000000:
                     raise ProviderFailure('CLAUDE_SPEND_LIMIT')
             events = _events(previous)
@@ -305,10 +287,10 @@ class WholeTurnAdmission:
                     sum(e['tokens'] for e in events) + total > MAX_TOKENS or
                     count + attempts > MAX_ATTEMPTS or spent + total > MAX_TOKENS):
                 raise ProviderFailure('PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT')
-            # The observed NORMAL Gemma quota is16000input tokens/minute.
-            # Output tokens are not part of that quota. Conservative61-second
-            # spacing keeps one permit in a rolling minute across both models;
-            # large Haiku inputs are bounded by its native window and USD1 cost.
+            # Retain conservative61-second spacing across the shared ledger.
+            # Native context, provider throughput and lifetime money/token
+            # limits are separate constraints; historical Google TPM cannot
+            # become an assembled-evidence limit for the Haiku serving roles.
             start = max([now] + [e['at'] + timedelta(seconds=SLOT_SECONDS)
                                 for e in events if not _sealed_unused(e) and
                                 e['at'] > now - timedelta(seconds=SLOT_SECONDS)])
@@ -352,8 +334,8 @@ class WholeTurnAdmission:
                 getattr(self.local, 'turn', None) is not None):
             raise ProviderFailure('WHOLE_TURN_RESERVATION_INVALID')
         entries, monetary = _plan(plan, attempts)
-        phased = plan is not None and len(entries) == 3
-        if plan is not None and len(entries) == 6 and compatibility_full_plan is not True:
+        phased = plan is not None and len(entries) == 2
+        if plan is not None and len(entries) == 4 and compatibility_full_plan is not True:
             raise ProviderFailure('FULL_NATIVE_PLAN_REQUIRES_EXPLICIT_COMPATIBILITY')
         from evidence_registry import content_hash
         plan_sha = content_hash(plan) if plan is not None else None
@@ -390,9 +372,9 @@ class WholeTurnAdmission:
         from evidence_registry import content_hash
         turn = getattr(self.local, 'turn', None)
         if (turn is None or operation_id != turn['operation_id'] or turn['phase'] != 'initial' or
-                turn['correction_attempted'] or len(turn['entries']) != 3):
+                turn['correction_attempted'] or len(turn['entries']) != 2):
             raise ProviderFailure('PROVIDER_CORRECTION_ALREADY_RESERVED_NO_REPLAY')
-        entries, monetary = _plan(plan, 3, phase='correction')
+        entries, monetary = _plan(plan, 2, phase='correction')
         role_identity = _role_identity(plan, entries, 'reverify')
         if role_identity != turn['role_identity']:
             raise ProviderFailure('PROVIDER_CORRECTION_MODEL_ROLE_BINDING_CHANGED')
@@ -427,7 +409,7 @@ class WholeTurnAdmission:
     def __call__(self, tokens, kind):
         return self._permit(tokens, kind)
 
-    def _permit(self, tokens, kind, *, model=None, stage=None):
+    def _permit(self, tokens, kind, *, model=None, stage=None, role=None):
         from google.cloud import firestore
         turn = getattr(self.local, 'turn', None)
         if (turn is None or type(tokens) is not int or not 0 < tokens <= MAX_TOKENS or
@@ -436,22 +418,21 @@ class WholeTurnAdmission:
         index = turn['next']
         rows = turn['entries']
         if rows[index]['model'] is not None:
-            if model not in MODEL_INPUT_LIMITS:
+            if model not in SERVING_MODELS or rows[index]['model'] != model:
                 raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
-            while rows[index]['model'] != model:
-                # A successful first Gemma attempt can skip ONLY its remaining
-                # retry. Mandatory verification/correction stages cannot jump.
-                if (index == 0 or rows[index]['attempt'] != 2 or
-                        rows[index - 1]['stage'] != rows[index]['stage'] or
-                        index + 1 >= len(rows)):
+            if role is not None:
+                allowed_stages = {'private_draft': ('draft', 'correction'),
+                    'semantic_verifier': ('verify', 'reverify')}
+                if role not in allowed_stages or rows[index]['stage'] not in allowed_stages[role]:
                     raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
-                index += 1
-            if stage is not None and rows[index]['stage'] != stage:
+                if stage is None:
+                    stage = rows[index]['stage']
+            # Same model identity cannot distinguish draft from verification.
+            # The permit must be bound to either an explicit stage or role.
+            if stage is None or rows[index]['stage'] != stage:
                 raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
             actual_input = tokens - rows[index]['output_tokens']
-            if (not 0 < actual_input <= rows[index]['input_tokens'] or
-                    (model == GEMMA and actual_input > GEMMA_INPUT_TPM) or
-                    (model == FLASH and actual_input > FLASH_INPUT_TPM)):
+            if not 0 < actual_input <= rows[index]['input_tokens']:
                 raise ProviderFailure('PROVIDER_NATIVE_ENVELOPE_EXCEEDED')
         elif model is not None or tokens > rows[index]['tokens']:
             raise ProviderFailure('PROVIDER_UNRESERVED_ATTEMPT')

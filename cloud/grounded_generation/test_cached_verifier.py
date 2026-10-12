@@ -4,9 +4,9 @@ import json
 import unittest
 
 from generation_providers import ProviderFailure
-from cloud.grounded_generation.cached_verifier import CachedVerifier, CONTRACT, MODEL, MAX_CALL_USD,INPUT_TOKENS, STABLE_FIELDS
+from cloud.grounded_generation.cached_verifier import CachedDraft, CachedVerifier, CONTRACT, MODEL, MAX_CALL_USD,INPUT_TOKENS, STABLE_FIELDS
 from cloud.grounded_generation.role_contracts import haiku_maximum_nanodollars
-from cloud.grounded_generation.verified_qa import VERIFY_POLICY, VERIFY_SCHEMA, DRAFT_POLICY
+from cloud.grounded_generation.verified_qa import VERIFY_POLICY, VERIFY_SCHEMA, DRAFT_POLICY,DRAFT_SCHEMA
 
 
 def stable():
@@ -262,6 +262,37 @@ class Tests(unittest.TestCase):
                 self.call()
         finally:
             self.provider.lock.release()
+
+    def test_both_roles_create_and_read_distinct_cache_prefixes(self):
+        identities=[]
+        for cls,policy,schema in ((CachedDraft,DRAFT_POLICY,DRAFT_SCHEMA),
+                                  (CachedVerifier,VERIFY_POLICY,VERIFY_SCHEMA)):
+            transport=Transport()
+            provider=cls(lambda *args:None,reserve_cost=lambda *args:None,
+                         transport=transport,key='engineering-only')
+            write=provider.complete(policy,stable(),{'question':'first private question'},schema)
+            transport.response['usage'].update(cache_creation_input_tokens=0,cache_read_input_tokens=900)
+            read=provider.complete(policy,stable(),{'question':'second private question'},schema)
+            self.assertEqual(write.telemetry['cache_creation_input_tokens'],900)
+            self.assertEqual(read.telemetry['cache_read_input_tokens'],900)
+            self.assertEqual(write.telemetry['cached_prefix_sha256'],read.telemetry['cached_prefix_sha256'])
+            self.assertEqual(read.telemetry['role'],provider.contract['role'])
+            self.assertNotIn('private question',transport.calls[-1][2]['messages'][0]['content'][0]['text'])
+            identities.append(read.telemetry['cached_prefix_sha256'])
+        self.assertNotEqual(*identities)
+
+    def test_same_model_permit_must_match_call_role_and_single_attempt(self):
+        for cls,policy,schema,stage,other in ((CachedDraft,DRAFT_POLICY,DRAFT_SCHEMA,'draft','verify'),
+            (CachedVerifier,VERIFY_POLICY,VERIFY_SCHEMA,'verify','draft')):
+            for mutated in ({'stage':other},{'attempt':2}):
+                transport=Transport()
+                permit={'model':MODEL,'stage':stage,'attempt':1,'input_tokens':1512,
+                    'output_tokens':1800,'maximum_nanodollars':haiku_maximum_nanodollars(1512),**mutated}
+                provider=cls(lambda *args:deepcopy(permit),transport=transport,
+                    key='engineering-only',pre_reserved=True)
+                with self.assertRaisesRegex(ProviderFailure,'MODEL_ROLE_RESERVATION_BINDING_REQUIRED'):
+                    provider.complete(policy,stable(),{},schema)
+                self.assertFalse(any(call[1]=='messages' for call in transport.calls))
 
 
 if __name__ == '__main__': unittest.main()

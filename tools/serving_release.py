@@ -28,12 +28,14 @@ HISTORICAL = 'reports/grounded_generation/v8/runtime_freeze.json'
 HISTORICAL_SHA = 'd7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0'
 PRESERVED = 'reports/build/20261012/frozen_v8_runtime'
 MIGRATION = 'reports/build/20261012/v8_preservation.json'
-CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_11.json'
+CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_12.json'
 SCHEMA = 'motomedic-serving-release-v10'
 SOURCE_BASELINE = 'f2daacbb35cb4997bed7915336dfbdc1456c0ddc'
 OWNER_SCOPE = 'reports/public_evaluator/20261012/owner_scope_v1.json'
-OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v2.json'
+OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v3.json'
 HISTORICAL_SERVING = {
+    'reports/public_evaluator/20261012/serving_manifest_v10_11.json':
+        'c4f87a48fcb3645c46b74734ffd1df6b8faaa735e54d2286d6f3b099700d06f1',
     'reports/public_evaluator/20261012/serving_manifest_v10_10.json':
         'eb3a853947507b8739886a43f62dfc3fbd447b406d0ce9f4f7db12a172341dde',
     'reports/public_evaluator/20261012/serving_manifest_v10_9.json':
@@ -303,7 +305,7 @@ def freeze(root=ROOT, *, index_dir=None, reference_path=None, destination=CURREN
             'authority': 'DIRECT_USER_INSTRUCTION', 'scope': 'PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION'},
         'owner_model_authorization': {'path': OWNER_MODEL_SCOPE,
             'sha256': digest(confined(root, OWNER_MODEL_SCOPE)), 'authority': 'DIRECT_USER_INSTRUCTION',
-            'scope': 'PAID_FLASH_LITE_PRIMARY_AND_DISTINCT_HAIKU_VERIFIER'},
+            'scope': 'HAIKU_ONLY_SEPARATE_DRAFT_AND_FINALIZED_RESPONSE_VERIFICATION'},
         'backend_base_image': BASE_IMAGE,
         'ui_base_image': UI_BASE_IMAGE,
         'backend_image_digest': None, 'ui_image_digest': None,

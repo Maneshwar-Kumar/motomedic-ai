@@ -238,8 +238,9 @@ def validate_production_policy(lock):
     from cloud.grounded_generation.cached_verifier import CONTRACT as VERIFIER_CONTRACT, DRAFT_CONTRACT
     from cloud.grounded_generation.role_router import ROUTING_CONTRACT
     if (type(lock) is not dict or lock.get('schema_version') != 'motomedic-serving-release-v10' or
-            lock.get('primary_model') != 'gemini-2.5-flash-lite' or
+            lock.get('primary_model') != 'claude-haiku-5-5' or
             lock.get('answer_cache_enabled') is not False or
+            lock.get('fallback_enabled') is not False or
             lock.get('verifier_enabled') is not True or
             lock.get('draft_model_contract') != DRAFT_CONTRACT or
             lock.get('verifier_model') != 'claude-haiku-5-5' or
@@ -258,8 +259,8 @@ def load_production():
             raise RuntimeError('Production runtime binding mismatch')
     validate_production_policy(lock)
     fallback_enabled = os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true'
-    if fallback_enabled and lock.get('fallback_enabled') is not True:
-        raise RuntimeError('Claude fallback serving activation is not authorized by the exact release')
+    if fallback_enabled or lock.get('fallback_enabled') is not False:
+        raise RuntimeError('The Haiku-only evaluator does not activate availability fallback')
     from google.cloud import firestore
     from cloud.serving_artifacts import load_index
     index = load_index(lock, ROOT/'build/serving-artifacts')
@@ -285,36 +286,19 @@ def load_production():
     # exact-wording composer is kept only for old regression fixtures.
     from cloud.grounded_generation.verified_qa import Composer
     from cloud.grounded_generation.serving_questions import Questions
-    from cloud.grounded_generation.provider import GemmaProvider
     from cloud.grounded_generation.whole_turn_admission import WholeTurnAdmission
     client = firestore.Client(project='motomedic-ai-20261009')
-    # Gemma drafting has no demonstrated prompt cache support. The separately
-    # selected verifier owns its explicitly bound evidence-prefix cache policy.
+    # Separate Haiku call roles share permanent token and USD1 reservations.
     reserve_provider = WholeTurnAdmission(client)
-    answer_provider = GemmaProvider(reserve_provider,cache_capability='unsupported')
-    # Preparation only: deployment and secret access are separate release scopes.
-    # Disabled by default; a quota/schema/source failure never selects this fallback.
-    if fallback_enabled:
-        from cloud.grounded_generation.claude_provider import ClaudeProvider
-        from cloud.grounded_generation.claude_budget import ClaudeBudget
-        from cloud.grounded_generation.fallback_provider import FallbackProvider
-        if not os.environ.get('ANTHROPIC_API_KEY'):
-            raise RuntimeError('Claude fallback requires its server-side secret')
-        answer_provider = FallbackProvider(answer_provider,
-            ClaudeProvider(reserve_provider,reserve_cost=ClaudeBudget(client)))
-    if fallback_enabled:
-        raise RuntimeError('The paired public evaluator does not activate availability fallback')
-    from cloud.grounded_generation.cached_verifier import CachedVerifier
-    from cloud.grounded_generation.claude_budget import ClaudeBudget
     if not os.environ.get('ANTHROPIC_API_KEY'):
-        raise RuntimeError('The selected verifier requires its server-side managed secret')
+        raise RuntimeError('The selected Haiku roles require their server-side managed secret')
     from cloud.grounded_generation.role_router import production_router,ROUTING_CONTRACT
     model_router=production_router(reserve_provider)
     controlled_composer = Composer(router=model_router)
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-        ANSWER_PROVIDER='gemini-2.5-flash-lite', VERIFIER_PROVIDER='claude-haiku-5-5',
+        ANSWER_PROVIDER='claude-haiku-5-5', VERIFIER_PROVIDER='claude-haiku-5-5',
         PROMPT_CACHE='ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',
         MODEL_ROUTING_CONTRACT=ROUTING_CONTRACT)
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock

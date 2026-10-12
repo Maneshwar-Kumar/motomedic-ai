@@ -14,7 +14,7 @@ STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
-RUNTIME_POLICY = 'open-manual-draft-verify-v10'
+RUNTIME_POLICY = 'open-manual-haiku-draft-verify-v10_12'
 CHECK_ERROR_COPY = 'I couldn\u2019t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):

@@ -1,4 +1,4 @@
-"""Choose distinct pinned model roles before generation; never error fallback.
+"""Bind separate pinned Haiku call roles before generation; no model switching.
 
 Future request forecasts are conservative admission ceilings, not assertions
 about an unknown final answer. Every actual complete request is counted again.
@@ -10,10 +10,9 @@ import threading
 from evidence_registry import content_hash
 from generation_providers import ProviderFailure
 from cloud.grounded_generation.provider import GemmaProvider
-from cloud.grounded_generation.flash_lite_provider import FlashLiteProvider
 from cloud.grounded_generation.cached_verifier import CachedDraft,CachedVerifier
 from cloud.grounded_generation.role_contracts import (CONTRACT as ROUTING_CONTRACT,
-    GEMMA,FLASH,HAIKU,GEMMA_DRAFT,GEMMA_VERIFIER,FLASH_DRAFT,HAIKU_VERIFIER,
+    GEMMA,FLASH,HAIKU,GEMMA_DRAFT,GEMMA_VERIFIER,HAIKU_DRAFT,HAIKU_VERIFIER,
     OUTPUT_TOKENS,OUTPUT_JSON_BYTES,GEMMA_INPUT_TPM,ROUTING_THRESHOLD,
     FLASH_INPUT_TOKENS,FLASH_INPUT_TPM,HAIKU_CONTEXT_TOKENS,haiku_maximum_nanodollars)
 
@@ -67,16 +66,16 @@ class RoleRouter:
     contract=ROUTING_CONTRACT
     def __init__(self,draft,verifier,admission):
         self.draft,self.verifier=draft,verifier
-        self.gemma_draft,self.haiku_verifier=draft,verifier
+        self.haiku_draft,self.haiku_verifier=draft,verifier
         self.admission=admission
-        for provider,expected in ((draft,FLASH_DRAFT),(verifier,HAIKU_VERIFIER)):
+        for provider,expected in ((draft,HAIKU_DRAFT),(verifier,HAIKU_VERIFIER)):
             if getattr(provider,'contract',None)!=expected:raise ProviderFailure('ROUTER_MODEL_ROLE_CONTRACT_CHANGED')
         self.last_plan=None
         self.last_count_provider=None
         self.local=threading.local()
 
     def validate(self,plan):
-        if (plan.draft is plan.verifier or plan.draft.contract['model']==plan.verifier.contract['model'] or
+        if (plan.draft is plan.verifier or plan.draft is not self.draft or plan.verifier is not self.verifier or
             content_hash(plan.draft.contract)!=plan.draft_contract_sha256 or
             content_hash(plan.verifier.contract)!=plan.verifier_contract_sha256 or self.contract!=ROUTING_CONTRACT):
             raise ProviderFailure('ROUTER_SELECTED_ROLE_BINDING_CHANGED')
@@ -85,7 +84,7 @@ class RoleRouter:
     def select(self,stable,dynamic):
         from cloud.grounded_generation.verified_qa import DRAFT_POLICY,DRAFT_SCHEMA,compact_model_context
         encoded=compact_model_context(dynamic)
-        name='FLASH_LITE_DRAFT_HAIKU_VERIFY'
+        name='HAIKU_DRAFT_HAIKU_VERIFY'
         draft,verifier=self.draft,self.verifier
         chosen=deepcopy(stable)
         chosen['runtime_contract']['draft_model_contract']=deepcopy(draft.contract)
@@ -103,7 +102,7 @@ class RoleRouter:
         These placeholders are engineering admission inputs, never answers or
         generation seeds. Actual contexts must fit the reserved hard ceiling.
         """
-        from cloud.grounded_generation.verified_qa import (DRAFT_POLICY,DRAFT_SCHEMA,
+        from cloud.grounded_generation.verified_qa import (VERSION,DRAFT_POLICY,DRAFT_SCHEMA,
             VERIFY_POLICY,VERIFY_SCHEMA,compact_model_context)
         claims=[{'claim_id':'draft:'+str(i),'text':'','role':'PREREQUISITE',
             'evidence_ids':[],'presentation_mode':'VERIFIED_GENERATED_PARAPHRASE','origin':'DRAFT'} for i in range(12)]
@@ -115,7 +114,7 @@ class RoleRouter:
             'index_id':stable['index_id']} for row in admitted['citation_mapping']]
         final={'route':'SAFETY_STOP','text':'','claims':claims,'citations':citations,
             'clarification_question':'','escalation_uri':None,'trace_id':'0'*32,'session_status':session.status}
-        binding={'version':'open-manual-draft-verify-v10','runtime_lock':stable['runtime_contract']['runtime_lock'],
+        binding={'version':VERSION,'runtime_lock':stable['runtime_contract']['runtime_lock'],
             'draft_model_contract_sha256':plan.draft_contract_sha256,'verifier_contract_sha256':plan.verifier_contract_sha256,
             'question_sha256':content_hash(dynamic['question']),'history_sha256':content_hash(dynamic['history']),
             'session_sha256':content_hash(asdict(session) if is_dataclass(session) else session.__dict__),'response_sha256':'0'*64,
@@ -126,8 +125,7 @@ class RoleRouter:
             'unanswered_parts':[],'binding':binding,'binding_sha256':'0'*64}
         def counted(provider,policy,payload,schema,*,sizing=False):
             self.last_count_provider=provider
-            kwargs={'_sizing':True} if sizing and provider.contract['model']==FLASH else {}
-            return provider.context(policy,stable,compact_model_context(payload),schema,**kwargs)[1]
+            return provider.context(policy,stable,compact_model_context(payload),schema)[1]
         verify_fixed=counted(plan.verifier,VERIFY_POLICY,verification,VERIFY_SCHEMA,sizing=True)
         base_verification=deepcopy(verification)
         base_verification['complete_proposed_response'].update(claims=[],citations=[],text='')
@@ -146,12 +144,11 @@ class RoleRouter:
         unknown_verify=2*OUTPUT_JSON_BYTES+512
         unknown_correction=3*OUTPUT_JSON_BYTES+512
         def future(provider,fixed,unknown):
-            if provider.contract['model']==FLASH:return min(FLASH_INPUT_TPM,fixed+unknown)
             value=fixed+unknown
             if value>HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS:
                 raise ProviderFailure('ROLE_FUTURE_FORECAST_EXCEEDS_NATIVE_WINDOW')
             return value
-        initial_limit=min(FLASH_INPUT_TPM,plan.initial_input_tokens+512)
+        initial_limit=min(HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS,plan.initial_input_tokens+512)
         limits={'draft':initial_limit,'verify':future(plan.verifier,verify_fixed,unknown_verify),
                 'correction':future(plan.draft,correction_fixed,unknown_correction),
                 'reverify':future(plan.verifier,verify_fixed,unknown_verify)}
@@ -168,15 +165,15 @@ class RoleRouter:
             'fixed_verifier_native_tokens':verify_fixed,'fixed_correction_native_tokens':correction_fixed,
             'known_verifier_prefix_native_tokens':verify_base,
             'unknown_verifier_byte_allowance':unknown_verify,'unknown_correction_byte_allowance':unknown_correction,
-            'initial_haiku_counter_headroom_tokens':0,
-            'initial_primary_counter_headroom_tokens':initial_limit-plan.initial_input_tokens}
+            'initial_haiku_counter_headroom_tokens':initial_limit-plan.initial_input_tokens,
+            'initial_primary_counter_headroom_tokens':0}
 
     def begin(self,operation_id,plan,stable,dynamic,admitted,session):
         self.validate(plan)
         if content_hash(stable)!=plan.stable_sha256:raise ProviderFailure('ROUTER_STABLE_CONTEXT_CHANGED')
         reservation=self.reservation_plan(plan,stable,dynamic,admitted,session)
         # The ledger retains the audited slot, role and scaffold bindings.
-        initial=deepcopy(reservation);initial['slots']=initial['slots'][:3]
+        initial=deepcopy(reservation);initial['slots']=[row for row in initial['slots'] if row['stage'] in ('draft','verify')]
         receipt=self.admission.begin_turn(operation_id,plan=initial)
         self.local.operation_id=operation_id;self.local.initial_forecast=deepcopy(reservation)
         receipt['model_routing']=deepcopy(reservation)
@@ -198,10 +195,10 @@ class RoleRouter:
         reservation=self.reservation_plan(plan,stable,dynamic,admitted,session)
         for key in ('initial_haiku_counter_headroom_tokens','initial_primary_counter_headroom_tokens','known_verifier_prefix_native_tokens'):
             reservation[key]=initial[key]
-        reservation['slots']=reservation['slots'][3:]
+        reservation['slots']=[row for row in reservation['slots'] if row['stage'] in ('correction','reverify')]
         for slot in reservation['slots']:
             if slot['stage']=='correction':
-                slot['input_tokens']=min(FLASH_INPUT_TPM,count+512)
+                slot['input_tokens']=min(HAIKU_CONTEXT_TOKENS-OUTPUT_TOKENS,count+512)
                 if slot['model']==HAIKU:slot['maximum_nanodollars']=haiku_maximum_nanodollars(slot['input_tokens'])
         reservation.update(correction_request_sha256=content_hash(body),
             rejected_binding_sha256=content_hash(rejected_binding),verdict_sha256=content_hash(feedback['verdict']))
@@ -217,8 +214,8 @@ class RoleRouter:
 
 
 def production_router(admission):
-    return RoleRouter(FlashLiteProvider(admission.for_model(FLASH),pre_reserved=True),
-        CachedVerifier(admission.for_model(HAIKU),pre_reserved=True),admission)
+    return RoleRouter(CachedDraft(admission.for_model(HAIKU,role='private_draft'),pre_reserved=True),
+        CachedVerifier(admission.for_model(HAIKU,role='semantic_verifier'),pre_reserved=True),admission)
 
 
 def validate_role_plan_binding(value):
@@ -234,9 +231,8 @@ def validate_role_plan_binding(value):
         any(type(value[k])is not str or not re.fullmatch('[0-9a-f]{64}',value[k]) for k in keys if k.endswith('sha256')) or
         value['draft_model_contract_sha256']!=content_hash(pair['draft']) or
         value['verifier_contract_sha256']!=content_hash(pair['verifier']) or
-        value['route']!='FLASH_LITE_DRAFT_HAIKU_VERIFY' or
+        value['route']!='HAIKU_DRAFT_HAIKU_VERIFY' or
         value['primary_input_tokens_counted']!=value['selected_draft_input_tokens'] or
-        value['selected_draft_input_tokens']>FLASH_INPUT_TPM or
         value['selected_draft_input_tokens']>pair['draft']['input_tokens']):
         raise ProviderFailure('ROUTER_SELECTED_ROLE_BINDING_CHANGED')
     return pair
