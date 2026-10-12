@@ -1,0 +1,33 @@
+{
+  "actual_revision_scaling": {
+    "maxInstanceCount": 1
+  },
+  "bound_configuration_scaling": {
+    "maxInstanceCount": 1
+  },
+  "env": [
+    {
+      "name": "INDEX_BUNDLE_URL",
+      "value": "https://storage.googleapis.com/motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/qdrant_points.json"
+    },
+    {
+      "name": "INDEX_BUNDLE_SHA256",
+      "value": "fb847f240a1aa1def0a5048575279afddaf443c5346bd51cf2727ab60b5f0ee3"
+    },
+    {
+      "name": "INDEX_ID",
+      "value": "index_a3282c4d98cf54595e4ba168"
+    }
+  ],
+  "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+  "invokerIamDisabled": null,
+  "revision": "motomedic-qdrant-00003-cjb",
+  "service": "motomedic-qdrant",
+  "service_scaling": {
+    "maxInstanceCount": 1,
+    "minInstanceCount": 1
+  },
+  "template_scaling": {
+    "maxInstanceCount": 1
+  }
+}

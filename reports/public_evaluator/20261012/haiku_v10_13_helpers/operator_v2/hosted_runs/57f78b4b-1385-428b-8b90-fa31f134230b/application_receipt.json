@@ -1,0 +1,125 @@
+{
+  "already_applied": false,
+  "application_pending_receipt_sha256": "309698be51cc284b6be0782da2248f1442aa642e612a6abb33e492436d4962d8",
+  "authorization": {
+    "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+    "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+    "maximum_tokens": 2000000,
+    "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+    "previous_maximum_tokens": 999200,
+    "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+    "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+  },
+  "billing_changed": false,
+  "events_written": 0,
+  "grant": {
+    "allocation_id": "grounded-primary-nonrecurring-v1",
+    "allocation_version": "whole-turn-capacity-v1",
+    "approval_evidence": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_13/admission/owner_token_ceiling_approval_v1.json",
+      "sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d"
+    },
+    "approved_at_utc": "2026-10-12T10:44:23.380787+00:00",
+    "authority": "DIRECT_OWNER_INSTRUCTION",
+    "billing_disconnect_inr": 2540,
+    "billing_restart_authorized": false,
+    "exact_owner_instruction": "Approve 2,000,000 tokens (Recommended)",
+    "haiku_maximum_nanodollars": 1000000000,
+    "ledger_before": {
+      "grounded-primary-nonrecurring-v1": {
+        "maximum_attempts": 100,
+        "maximum_tokens": 999200,
+        "reserved_attempts": 28,
+        "reserved_tokens": 357663,
+        "version": "whole-turn-capacity-v1"
+      },
+      "owner-haiku-fallback-20261011-validation-v1": {
+        "maximum_nanodollars": 1000000000,
+        "reservation_count": 5,
+        "reserved_nanodollars": 28975875,
+        "version": "claude-fallback-nonrecurring-one-dollar-v1"
+      }
+    },
+    "maximum_attempts": 100,
+    "maximum_tokens": 2000000,
+    "measured": {
+      "conditional_strategy": "ALL_CONDITIONAL_PHASES",
+      "count_build_id": "d73b3c1d-153a-4796-b4f4-b1c3c8324333",
+      "count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "phase_budget_sha256": "c3262da0d8dc606976e362dfad9acd4b62d28dbf78c9079d52379013461099de",
+      "required_attempts": 30,
+      "required_haiku_nanodollars": 215463500,
+      "required_token_ceiling": 1919371,
+      "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+      "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c"
+    },
+    "model_scope_sha256": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f",
+    "owner_approved": true,
+    "previous_maximum_tokens": 999200,
+    "project_lifetime_inr": 2700,
+    "proposal_sha256": "1d4e9e722b24f178dc1ef6c5103c6c38b164a3c89049e5b4f97eb5d85fa1de53",
+    "refund_or_reset_authorized": false,
+    "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+    "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+  },
+  "inr_guard_changed": false,
+  "maximum_attempts_changed": false,
+  "owner_approved": true,
+  "owner_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+  "primary_counters_retained": {
+    "reserved_attempts": 28,
+    "reserved_tokens": 357663
+  },
+  "primary_readback": {
+    "all_document_fields_in_digest": true,
+    "complete_document_sha256": "56b13604a50f9878d6cc97c5bc6a995b7dfe3e8750f46b75371aa5aa8970cfa1",
+    "complete_events_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "event_count": 0,
+    "raw_events_or_unrelated_metadata_saved": false,
+    "scalars": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 2000000,
+      "reserved_attempts": 28,
+      "reserved_tokens": 357663,
+      "token_ceiling_authorization": {
+        "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+        "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+        "maximum_tokens": 2000000,
+        "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+        "previous_maximum_tokens": 999200,
+        "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+        "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+      },
+      "version": "whole-turn-capacity-v1"
+    }
+  },
+  "provider_calls": 0,
+  "reserved_counters_reset_or_refunded": false,
+  "rolling_usage_readback": {
+    "all_document_fields_in_digest": true,
+    "complete_document_sha256": "21d7221d00484026aa7fe90b03538b02984a0714111c57a7bd57d08f93e72913",
+    "complete_events_sha256": "4b8ccfab6b9114f5d7437f113b4913157bdd697a4df911af028df860e796d9a7",
+    "event_count": 28,
+    "raw_events_or_unrelated_metadata_saved": false,
+    "scalars": {
+      "controls_version": "whole-turn-capacity-v1"
+    }
+  },
+  "schema": "motomedic-owner-token-ceiling-application-receipt-v1",
+  "shared_haiku_limit_changed": false,
+  "shared_haiku_readback": {
+    "all_document_fields_in_digest": true,
+    "complete_document_sha256": "5a5a2acfcd54fbcbf89787bdb4e29345b2222949278857b1df0ef82c177a24f4",
+    "complete_events_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "event_count": 0,
+    "raw_events_or_unrelated_metadata_saved": false,
+    "scalars": {
+      "maximum_nanodollars": 1000000000,
+      "model": "claude-haiku-5-5",
+      "reservation_count": 5,
+      "reserved_nanodollars": 28975875,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "writes": 2
+}

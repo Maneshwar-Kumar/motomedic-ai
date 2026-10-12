@@ -1,0 +1,93 @@
+{
+  "base_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4",
+  "build_executed": false,
+  "contexts": {
+    "backend": {
+      "build_options": {
+        "logging": "CLOUD_LOGGING_ONLY",
+        "substitutionOption": "ALLOW_LOOSE"
+      },
+      "build_steps": [
+        {
+          "args": [
+            "build",
+            "--platform=linux/amd64",
+            "--label",
+            "org.motomedic.serving-manifest-sha256=3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+            "--label",
+            "org.motomedic.input-tree-sha256=358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac",
+            "--label",
+            "org.opencontainers.image.revision=3b7da1692187736295fee7345e9b3e932d02b216",
+            "-t",
+            "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_13-358935275e91",
+            "."
+          ],
+          "name": "gcr.io/cloud-builders/docker"
+        }
+      ],
+      "build_timeout": "1800s",
+      "cloudbuild_sha256": "b9b61b05984c984d91f85b89f1b21574b1e6126116fde578e95e1f263ab37f4c",
+      "dockerfile_sha256": "56a82644e64ec32a455fe21990c51dead5d38a52afb6841fc318d6b250a4b57b",
+      "image_tag": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_13-358935275e91",
+      "installed_manifest_sha256": "7410c41977c12a93641948d51b86c0e2176d0acc45046288e7e867b2e564acdb",
+      "path": "build/serving-v10_13/backend",
+      "source_archive": "build/serving-v10_13/backend.tar.gz",
+      "source_archive_sha256": "4953e014083d67d9aa62022f82f9b65d21ef8938de7d520f38c472243a405830"
+    },
+    "ui": {
+      "build_options": {
+        "logging": "CLOUD_LOGGING_ONLY",
+        "substitutionOption": "ALLOW_LOOSE"
+      },
+      "build_steps": [
+        {
+          "args": [
+            "build",
+            "--platform=linux/amd64",
+            "--label",
+            "org.motomedic.serving-manifest-sha256=3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+            "--label",
+            "org.motomedic.input-tree-sha256=358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac",
+            "--label",
+            "org.opencontainers.image.revision=3b7da1692187736295fee7345e9b3e932d02b216",
+            "-t",
+            "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v10_13-358935275e91",
+            "."
+          ],
+          "name": "gcr.io/cloud-builders/docker"
+        }
+      ],
+      "build_timeout": "1800s",
+      "cloudbuild_sha256": "e765773a193f550b5d8f7fbadf318faf938d7e2661d5ddb9538ae0736877d125",
+      "dockerfile_sha256": "76c43e6e89b40f99deb30ea829929e05737cf8542dec4fef2897b4c36c6c24ad",
+      "image_tag": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v10_13-358935275e91",
+      "installed_manifest_sha256": "16e5804654987cf551ba5c886c28c4852c9256fef496d0a2850b122a1fbb6b2b",
+      "path": "build/serving-v10_13/ui",
+      "source_archive": "build/serving-v10_13/ui.tar.gz",
+      "source_archive_sha256": "2dcfd4b8deeaf96b481e8106b7144081ad36eee4f9fc5a2a1befb9712848ebd8"
+    }
+  },
+  "deployment_changed": false,
+  "hosted_operations_acceptance": false,
+  "input_tree_sha256": "358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac",
+  "owner_authorization": {
+    "authority": "DIRECT_USER_INSTRUCTION",
+    "path": "reports/public_evaluator/20261012/owner_scope_v1.json",
+    "scope": "PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION",
+    "sha256": "65c42d40b4a882972570e377b4a314abd2767be7fb8fb8129e7bfe9c2a436b0d"
+  },
+  "provider_calls": 0,
+  "quality_acceptance": false,
+  "required_future_receipts": [
+    "Cloud Build image digests and exact source/context receipts",
+    "Independent original-page and current-model quality acceptance",
+    "Hosted retrieval, cached verification and saved streaming acceptance",
+    "Compatible backend/UI revisions and preserved rollback images",
+    "Recorded authorization and existing spend guard remain applicable; no billing restart"
+  ],
+  "runtime_revision": "v10_13",
+  "schema_version": "serving-v10-hosted-build-preparation-v1",
+  "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+  "serving_schema_version": "motomedic-serving-release-v10",
+  "source_commit": "3b7da1692187736295fee7345e9b3e932d02b216"
+}

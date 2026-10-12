@@ -1,0 +1,24 @@
+{
+  "archive_sha256": "86cd0c366b49c8603b4a7b83077256b6679998442123d3172eebf23f8ad1762c",
+  "bindings_preserved": [
+    "existingimage",
+    "sourceindex",
+    "bundleURL",
+    "bundleSHA",
+    "serviceaccount",
+    "Readyrevision",
+    "completeactualRevisionmaterialconfiguration",
+    "publiccrypto",
+    "providerledgers"
+  ],
+  "cause": "Historical warm minimum is Service.scaling. Actual template/Revision scaling contains only maxInstanceCount1. Prior helper incorrectly required the service minimum in the Revision.",
+  "cloud_calls": 0,
+  "live_acceptance": false,
+  "new_helper": "tmp/public_core_inspection_v13_v2.py",
+  "original_v1_archive_and_helper_unchanged": true,
+  "provider_calls": 0,
+  "resolution": "Bind serviceScaling min1/max1 independently and hash it; bind exact template/Revision max1 with omitted minimum unchanged; require full actualRevision hash to match existing baked image proof.",
+  "runtime_or_qdrant_configuration_changes": 0,
+  "schema": "motomedic-public-core-inspection-helper-review-v2",
+  "synthetic_tests_passed": 8
+}

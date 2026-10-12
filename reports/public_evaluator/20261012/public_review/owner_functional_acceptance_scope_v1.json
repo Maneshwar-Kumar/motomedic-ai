@@ -1,0 +1,50 @@
+{
+  "schema": "motomedic-owner-functional-demo-acceptance-scope-v1",
+  "authority": "DIRECT_OWNER_INSTRUCTION",
+  "owner_authorized": true,
+  "recorded_at_utc": "2026-10-12T11:01:06.034117+00:00",
+  "exact_owner_instruction": "Actually no need for independant manual review.\nJust run this much that the Agent is working and retrieving and answering Questions.",
+  "scope": "PRESENT_PUBLIC_TEXT_FUNCTIONAL_DEMONSTRATION",
+  "independent_manual_review_required": false,
+  "independent_manual_review_waived_for_present_functional_demo": true,
+  "independent_factual_quality_acceptance": false,
+  "human_factual_signoff": false,
+  "immutable_source_bindings_required": true,
+  "existing_scoped_source_approval_waived": false,
+  "source_content_approval_changed": false,
+  "runtime_semantic_verifier_required": true,
+  "runtime_semantic_verifier_bypass_authorized": false,
+  "answering_enablement_requires_functional_probe": true,
+  "functional_probe_completed_by_this_receipt": false,
+  "required_functional_proof": [
+    "The deployed agent receives questions and performs real immutable-index retrieval.",
+    "The real serving path drafts privately with pinned Haiku and separately verifies the exact finalized response with distinct policies/schemas.",
+    "Admitted useful direct, partial and follow-up answers are durably saved, streamed and recovered with identical saved content.",
+    "Current-role cache creation/read usage and persistent budget/ownership/operation bindings are retained and reported honestly."
+  ],
+  "supersedes_prior_independent_manual_answer_review_release_gate_for_present_demo": true,
+  "does_not_reclassify_historical_failed_runs": true,
+  "frozen_candidate": {
+    "source_commit": "3b7da1692187736295fee7345e9b3e932d02b216",
+    "serving_manifest_path": "reports/public_evaluator/20261012/serving_manifest_v10_13.json",
+    "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+    "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df"
+  },
+  "budget_scope": {
+    "primary_token_ceiling_approved": 2000000,
+    "approval_path": "reports/public_evaluator/20261012/haiku_v10_13/admission/owner_token_ceiling_approval_v1.json",
+    "application_pending_at_recording": true,
+    "maximum_attempts": 100,
+    "shared_haiku_maximum_usd": 1,
+    "project_lifetime_inr": 2700,
+    "billing_disconnect_inr": 2540,
+    "new_monetary_allocation_authorized": false,
+    "refund_or_reset_authorized": false,
+    "billing_restart_authorized": false
+  },
+  "frozen_inputs_changed": false,
+  "independent_manual_review_performed": false,
+  "provider_calls": 0,
+  "cloud_writes": 0,
+  "ledger_or_billing_changes": false
+}

@@ -1,10 +1,10 @@
 # MotoMedic AI
 
-**Current work: Haiku-only v10.13 repair.** V10.12 passed software, hosted build, counts and rollback checks, but its live answer review failed: one incorrect claim-to-object citation and one invalid draft. UI remains private. V10.13 will preserve complete literal evidence/history, constrain original source IDs and strengthen exact-object verification. Read [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json).
+**Current work: Haiku-only v10.13 functional demonstration.** The [public UI](https://motomedic-rider-ui-279945185781.us-central1.run.app) is visible with answering paused while the live functional test is completed. The repository, supplied manual, immutable index release and service inspection are public. Read [current status](docs/STATUS.md) for actual results and [model scope3](reports/public_evaluator/20261012/owner_model_scope_v3.json) for the sole-model decision.
 
 A manual-grounded question-answering assistant for the Royal Enfield New Himalayan 450. The selected source is the supplied **owner's manual**. The runtime privately drafts from retrieved evidence, separately verifies the finalized answer, saves it, then streams that exact verified text.
 
-The owner stopped this build for a fresh-chat handoff. Start with the [handoff summary](reports/handoff/20261012/SUMMARY.md) and [ordered continuation TODO](reports/handoff/20261012/TODO.md). The saved work is unfinished; the UI is private and the Haiku-only migration remains pending.
+The owner authorized continuation of the [saved handoff](reports/handoff/20261012/SUMMARY.md). The latest [functional demonstration scope](reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) waives independent manual answer review for this demo. Immutable source admission and the separate verification of each exact finalized answer remain required. No independent factual acceptance is claimed.
 
 ## Read these four documents
 
@@ -36,9 +36,9 @@ Some compatibility modules implement earlier methods because current imports and
 
 The selected index `index_a3282c4d98cf54595e4ba168` has 532 BGE M3 chunks, 277 parents and BM25. Runtime retrieval uses authenticated Qdrant concurrently with BM25, RRF and conditional reranking. Accepted answers require separate model verification and exact saved-buffer streaming.
 
-The owner selected Haiku only for drafting and separate finalized-response verification. Frozen v10.11 and the failed v10.12 live run remain history. The v10.13 repair preserves complete literal evidence and history and binds citations to admitted source objects. UI remains private until current acceptance passes. [Current status](docs/STATUS.md) preserves results and failures.
+The owner selected pinned Haiku for private drafting and a separate finalized-response verification call, using distinct policies and schemas. Frozen v10.11 and the failed v10.12 live run remain history. V10.13 preserves complete literal evidence/history and binds citations to admitted source objects. [Current status](docs/STATUS.md) distinguishes functional checks, software validation and factual review.
 
-Haiku policy/evidence-prefix caching is required; primary caching optimization, photo and voice are deferred. The availability fallback and whole-manual Claude route remain disabled. Existing source-display restrictions and spending guards stay in force.
+Role-specific Haiku prompt-cache creation and reads are required. Photo, voice, compaction and optional refinements remain deferred. Availability fallback and whole-manual Claude are disabled. The owner's separate public-review approval authorizes publishing the supplied manual and index; credentials, rider data, historical charges and spending guards remain protected.
 
 ## Clone, fork and review
 
