@@ -1,0 +1,124 @@
+{
+  "schema_version": "public-evaluator-current-budget-allocation-readback-v2",
+  "project_id": "motomedic-ai-20261009",
+  "region": "us-central1",
+  "scope": "Read-only current budget/billing and masked scalar provider reservation totals plus maxima; no provider event contents",
+  "prior_historical_receipt": "reports/public_evaluator/20261012/operations/current_readback_v1.json",
+  "started_at_utc": "2026-10-12T02:03:41.3950473Z",
+  "budget": {
+    "main_billing_enabled": true,
+    "main_billing_read_at_utc": "2026-10-12T02:03:45.2909214Z",
+    "inference_billing_enabled": false,
+    "inference_billing_read_at_utc": "2026-10-12T02:03:49.9034813Z",
+    "guard_revision": "motomedic-budget-guard-00003-qax",
+    "guard_settings": [
+      {
+        "name": "BUDGET_INR",
+        "value": "2700"
+      },
+      {
+        "name": "SIMULATE",
+        "value": "false"
+      },
+      {
+        "name": "STOP_INR",
+        "value": "2540"
+      }
+    ],
+    "guard_read_at_utc": "2026-10-12T02:03:56.1313657Z",
+    "latest_guard_log_scalars": [
+      {
+        "timestamp": "2026-10-12T01:48:01.401409Z",
+        "cost_inr": 121.79,
+        "stop": false
+      }
+    ],
+    "guard_log_read_at_utc": "2026-10-12T02:04:06.868874Z"
+  },
+  "allocation_scalar_readbacks": [
+    {
+      "allocation": "grounded-primary-nonrecurring-v1",
+      "status": "PRESENT",
+      "scalar_fields": {
+        "reserved_attempts": {
+          "integerValue": "8"
+        },
+        "maximum_tokens": {
+          "integerValue": "999200"
+        },
+        "maximum_attempts": {
+          "integerValue": "100"
+        },
+        "version": {
+          "stringValue": "whole-turn-capacity-v1"
+        },
+        "reserved_tokens": {
+          "integerValue": "79936"
+        }
+      },
+      "read_at_utc": "2026-10-12T02:05:14.0415920Z"
+    },
+    {
+      "allocation": "owner-haiku-fallback-20261011-validation-v1",
+      "status": "PRESENT",
+      "scalar_fields": {
+        "reserved_nanodollars": {
+          "integerValue": "3848000"
+        },
+        "version": {
+          "stringValue": "claude-fallback-nonrecurring-one-dollar-v1"
+        },
+        "reservation_count": {
+          "integerValue": "1"
+        },
+        "maximum_nanodollars": {
+          "integerValue": "1000000000"
+        }
+      },
+      "read_at_utc": "2026-10-12T02:05:19.5632002Z"
+    }
+  ],
+  "provider_calls": 0,
+  "new_tasks": 0,
+  "secret_values_read": false,
+  "billing_changes": 0,
+  "allocation_writes": 0,
+  "status": "CURRENT_BILLING_BUDGET_AND_EXISTING_ALLOCATION_SCALARS_VERIFIED",
+  "scalar_summary": {
+    "primary": {
+      "reserved_attempts": 8,
+      "maximum_attempts": 100,
+      "remaining_attempts": 92,
+      "reserved_tokens": 79936,
+      "maximum_tokens": 999200,
+      "remaining_tokens": 919264
+    },
+    "claude": {
+      "reserved_nanodollars": 3848000,
+      "maximum_nanodollars": 1000000000,
+      "remaining_nanodollars": 996152000,
+      "reservation_count": 1,
+      "reserved_usd": "0.003848",
+      "remaining_usd": "0.996152"
+    }
+  },
+  "interpretation": "Scalar reservation totals are conservative held capacity, not finalized spend or provider-call counts. Billing report is delayed. No reset/refund or new allocation was made.",
+  "checks": {
+    "main_billing_enabled": true,
+    "inference_billing_disabled": true,
+    "budget_2700_unchanged": true,
+    "disconnect_threshold_2540_unchanged": true,
+    "guard_live_unchanged": true,
+    "latest_guard_stop_false": true,
+    "primary_version_unchanged": true,
+    "primary_maxima_unchanged": true,
+    "primary_totals_within_existing_bounds": true,
+    "claude_version_unchanged": true,
+    "claude_maximum_unchanged": true,
+    "claude_totals_within_existing_bounds": true,
+    "only_whitelisted_primary_scalar_fields_read": true,
+    "only_whitelisted_claude_scalar_fields_read": true,
+    "no_provider_tasks_secret_billing_or_ledger_writes": true
+  },
+  "completed_at_utc": "2026-10-12T02:06:55.264335+00:00"
+}

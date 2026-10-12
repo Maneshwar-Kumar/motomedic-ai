@@ -13,9 +13,15 @@ def draft(eid=BORE,text='The listed bore is 84 mm.',role='FACT',route='SUPPORTED
     return {'route':route,'coverage':coverage,'claims':[{'text':text,'role':role,'evidence_ids':[eid] if eid else []}],'unanswered_parts':[],'clarification_question':'','rider_resolvable':False}
 class Provider:
     cache_capability='unsupported'
-    def __init__(self,drafts=None,verifier=None):self.drafts=drafts or [draft()];self.verifier=verifier;self.calls=[];self.last_trace=None
+    def __init__(self,drafts=None,verifier=None):self.drafts=drafts or [draft()];self.verifier=verifier;self.calls=[];self.wire_calls=[];self.last_trace=None
     def count(self,body):return 100
     def complete(self,policy,stable,dynamic,schema):
+        from cloud.grounded_generation.verified_qa import expand_model_context,expand_stable_context,CONTEXT_ENCODING
+        self.wire_calls.append((schema,deepcopy(stable),deepcopy(dynamic)))
+        if type(stable.get('source_projection'))is dict and stable['source_projection'].get('encoding')==CONTEXT_ENCODING:
+            stable=expand_stable_context(stable)
+        if dynamic.get('encoding')==CONTEXT_ENCODING:
+            dynamic=expand_model_context(dynamic)
         self.calls.append((schema,deepcopy(stable),deepcopy(dynamic)))
         self.last_trace={'generation_calls':1}
         if schema==DRAFT_SCHEMA:
@@ -181,7 +187,7 @@ class VerifiedTests(unittest.TestCase):
             self.assertEqual(restore(compact[eid]['source_object']['content']),row['source_object']['content'])
             self.assertEqual(compact[eid]['provenance'],row['provenance'])
             for key,value in row['reviewed_source_context'].items():
-                if key not in ('original_object_sha256','original_raw_object_sha256'):
+                if key not in ('original_object_sha256','original_raw_object_sha256','component_review_sha256'):
                     self.assertEqual(compact[eid]['reviewed_source_context'][key],value)
         self.assertEqual(admitted,original)
         _,view,_=q.answer(s,'Where is my socket?')
@@ -382,6 +388,137 @@ class PairedProviderTests(unittest.TestCase):
         self.verifier.verifier=mutate
         self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
         self.assertIsNone(self.composer.last_admitted)
+
+class SharedProjectionTests(unittest.TestCase):
+    """Index-free synthetic checks of representation, never answer quality."""
+    def helpers(self):
+        from cloud.grounded_generation.verified_qa import compact_model_context,expand_model_context
+        return compact_model_context,expand_model_context
+
+    def test_every_source_value_and_table_position_survives_roundtrip(self):
+        import json
+        compact,expand=self.helpers()
+        warning='Synthetic caution text: retain every condition, unit and reference. '*5
+        source={'objects':{'evidence_'+'a'*24:{'orig':'distinct original text',
+            'text':'different displayed text','section':['Synthetic section','Synthetic table'],
+            'table':{'fields':['text','column_header','row_header','row_span','col_span'],
+                'rows':[['3 L +/- 0.5 L',False,True,1,2],[None,False,False,2,1]],
+                'missing':{'1':[0]},'row_lengths':[2,1]},'warnings':[warning]*5,
+            'refs':['#/texts/10','#/tables/2'],'nullable':None,'false':False,'number':-0.0}},
+            'gaps':[{'type':'SOURCE_CONTEXT_REVIEW_REQUIRED','rider_resolvable':False}],
+            'required_display':[{'text':warning,'evidence_ids':['evidence_'+'a'*24]}]*4}
+        before=deepcopy(source);packed=compact(source)
+        self.assertEqual(json.dumps(expand(packed),sort_keys=True),json.dumps(source,sort_keys=True))
+        self.assertEqual(source,before)
+        self.assertLess(len(json.dumps(packed)),len(json.dumps(source)))
+
+    def test_repeated_field_schemas_and_values_are_readable_and_exact(self):
+        compact,expand=self.helpers()
+        rows=[{'long_warning_field_name':'Complete synthetic warning text. '*10,
+               'long_section_field_name':['Synthetic chapter','Synthetic subsection'],
+               'long_position_field_name':i} for i in range(12)]
+        packed=compact(rows)
+        self.assertEqual(expand(packed),rows)
+        self.assertTrue(any(type(value)is list and 'long_warning_field_name' in value
+                            for value in packed['shared']))
+        self.assertTrue(any(type(value)is str and 'Complete synthetic warning text.' in value
+                            for value in packed['shared']))
+
+    def test_reserved_source_field_names_are_escaped_without_semantic_changes(self):
+        compact,expand=self.helpers()
+        source={'$ref':0,'$literal':{'$record':2,'values':['literal source list']},
+                'nested':[{'$ref':True},{'$literal':{'$ref':4}}]}
+        self.assertEqual(expand(compact(source)),source)
+
+    def test_cyclic_boolean_unknown_and_out_of_range_refs_fail_closed(self):
+        _,expand=self.helpers()
+        from cloud.grounded_generation.verified_qa import CONTEXT_ENCODING
+        fixtures=[{'shared':[],'value':{'$ref':0}},
+                  {'shared':['text'],'value':{'$ref':True}},
+                  {'shared':['text'],'value':{'$ref':-1}},
+                  {'shared':[{'$ref':0}],'value':{'$ref':0}},
+                  {'shared':[['field','field']],'value':{'$record':0,'values':[1,2]}},
+                  {'shared':[['field']],'value':{'$record':0,'values':[]}},
+                  {'shared':[],'value':{'$ref':0,'other':'unescaped'}}]
+        for fixture in fixtures:
+            with self.subTest(fixture=fixture),self.assertRaises(ValidationFailure):
+                expand({'encoding':CONTEXT_ENCODING,**fixture})
+
+    def test_citation_ids_and_hash_echo_remain_literal_and_alias_outputs_are_rejected(self):
+        compact,expand=self.helpers()
+        from cloud.grounded_generation.verified_qa import validate_draft
+        eid='evidence_'+'a'*24;sha='b'*64
+        source={'evidence':{eid:{'evidence_id':eid,'text':'Synthetic text.'}},
+                'same_id':[eid]*8,'binding_sha256':sha,'binding':{'sha':sha}}
+        packed=compact(source)
+        self.assertEqual(expand(packed),source)
+        self.assertNotIn(eid,packed['shared']);self.assertNotIn(sha,packed['shared'])
+        for alias in ('0','$ref:0'):
+            with self.assertRaisesRegex(ValidationFailure,'INVALID_DRAFT_CITATION'):
+                validate_draft(draft(alias),{eid:source['evidence'][eid]})
+
+    def test_stable_fields_displays_and_gaps_restore_with_uncached_dynamic_separate(self):
+        from cloud.grounded_generation.verified_qa import compact_stable_context,expand_stable_context
+        from cloud.grounded_generation.cached_verifier import STABLE_FIELDS
+        compact,expand=self.helpers()
+        stable={k:None for k in STABLE_FIELDS}
+        stable.update(evidence={'evidence_'+'a'*24:{'text':'Synthetic source'}},
+            required_source_display=[{'text':'Synthetic warning','evidence_ids':['evidence_'+'a'*24]}],
+            source_gaps=[{'rider_resolvable':False,'type':'SOURCE_REVIEW_REQUIRED'}],
+            source_projection='lossless-identical-orig-reference-v1')
+        packed=compact_stable_context(stable)
+        self.assertEqual(set(packed),STABLE_FIELDS)
+        self.assertEqual(expand_stable_context(packed),stable)
+        history={'conversation':[{'response':'PRIVATE_DYNAMIC_RESPONSE','query':'PRIVATE_DYNAMIC_QUESTION'}]*5,
+                 'typed_outcomes':{'result':'ACTION_COMPLETED_UNRESOLVED'}}
+        request={'question':'PRIVATE_DYNAMIC_QUESTION','history':history,
+                 'complete_proposed_response':{'text':'PRIVATE_DYNAMIC_RESPONSE','claims':[]},
+                 'binding':{'history_sha256':'c'*64},'binding_sha256':'d'*64}
+        self.assertEqual(expand(compact(request)),request)
+        self.assertNotIn('PRIVATE_DYNAMIC',str(packed))
+
+    def test_reordering_input_object_keys_does_not_change_projection(self):
+        compact,expand=self.helpers()
+        first={'b':[{'second_field_name':2,'first_field_name':'repeat '*20}]*6,'a':None}
+        second={'a':None,'b':[{'first_field_name':'repeat '*20,'second_field_name':2}]*6}
+        self.assertEqual(compact(first),compact(second))
+        self.assertEqual(expand(compact(first)),first)
+
+    def test_only_approved_proof_layout_fields_are_omitted_and_original_payload_is_bound(self):
+        from cloud.grounded_generation.verified_qa import (compact_source_evidence,
+            compact_required_source_display,model_source_context,expand_stable_context)
+        from evidence_registry import content_hash
+        eid='evidence_'+'a'*24
+        text='Complete synthetic warning, prerequisites, 3 L +/- 0.5 L, and reference.'
+        evidence={eid:{'source_object':{'content':{'text':text,'orig':text+' distinct original'},
+                                      'original_object_sha256':'c'*64},
+            'reviewed_source_context':{'section_path':['Synthetic full section'],
+                'parent_text_authorized':False,'component_review_sha256':'d'*64,
+                'original_object_sha256':'c'*64},'provenance':[{'page_no':1}]}}
+        display=[{'text':text,'evidence_ids':[eid],'source_spans':[{'evidence_id':eid,
+            'exact_text':text,'visual_page':1,'text_sha256':'e'*64,'text_span':[0,len(text)],
+            'provenance':[{'page_no':1,'bbox':{'l':1,'r':2},'charspan':[0,len(text)],
+                           'other_semantic_field':'unchanged'}]}]}]
+        original=deepcopy({'evidence':evidence,'required_display':display})
+        projected_evidence=compact_source_evidence(evidence)
+        projected_display=compact_required_source_display(display)
+        self.assertEqual(projected_evidence[eid]['source_object']['content'],evidence[eid]['source_object']['content'])
+        self.assertEqual(projected_evidence[eid]['reviewed_source_context']['section_path'],['Synthetic full section'])
+        span=projected_display[0]['source_spans'][0]
+        self.assertEqual(span['exact_text'],text);self.assertEqual(span['evidence_id'],eid)
+        self.assertEqual(span['visual_page'],1)
+        self.assertEqual(span['provenance'],[{'page_no':1,'other_semantic_field':'unchanged'}])
+        self.assertNotIn('text_sha256',span);self.assertNotIn('text_span',span)
+        self.assertEqual({'evidence':evidence,'required_display':display},original)
+        admitted={'evidence':evidence,'required_display':display,'gaps':[],
+                  'authority_lock':'f'*64,'payload_sha256':content_hash(original)}
+        config=SimpleNamespace(lock='b'*64,draft_contract={},verifier_contract={},provider_contract=None)
+        registry=SimpleNamespace(checksum='a'*64,index_id='synthetic-index',source={})
+        restored=expand_stable_context(model_source_context(config,registry,admitted))
+        self.assertEqual(restored['full_evidence_payload_sha256'],content_hash(original))
+        self.assertEqual(restored['evidence'],projected_evidence)
+        self.assertEqual(restored['required_source_display'],projected_display)
+        self.assertEqual(admitted['evidence'][eid]['reviewed_source_context']['component_review_sha256'],'d'*64)
 
 del SourceTests
 if __name__=='__main__':unittest.main()

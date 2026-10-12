@@ -123,7 +123,7 @@ def create_app(registry, retriever, state_factory, cases):
             'answer_provider':app.config.get('ANSWER_PROVIDER'), 'benchmark_pacing':False,
             'streaming':('DRAFT_VERIFY_STREAM' if app.config.get('GROUNDED_PRIMARY') else 'VERIFIED_COMPLETE_UNIT_SSE'),
             'durable_dispatch_configured': app.config.get('DURABLE_DISPATCH_CONFIGURED', False),
-            'reranking':'authenticated-open-hybrid-rank-disagreement-v3',
+            'reranking':'authenticated-open-hybrid-rank-disagreement-v4',
             'verifier_provider':app.config.get('VERIFIER_PROVIDER'),
             'prompt_cache':app.config.get('PROMPT_CACHE'),
             'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)}), (200 if ready else 503)

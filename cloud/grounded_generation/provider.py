@@ -76,28 +76,42 @@ class GemmaProvider:
         end=getattr(self.reserve,'end_turn',None)
         if callable(end):end()
 
-    def context(self,policy,evidence,dynamic,schema):
-        body={'systemInstruction':{'parts':[{'text':policy}]},
-            'contents':[{'role':'user','parts':[{'text':json.dumps(evidence,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]},
-                {'role':'user','parts':[{'text':json.dumps(dynamic,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]}],
-            'generationConfig':{'maxOutputTokens':OUTPUT_TOKENS,'temperature':0,
-                'responseMimeType':'application/json','responseJsonSchema':deepcopy(schema),
-                'thinkingConfig':{'thinkingLevel':'minimal'}}}
-        if len(json.dumps(body,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode())>REQUEST_BYTES:
-            raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
-        count=self.count(body)
-        if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
-        return body,count
-
-    def complete(self, policy, evidence, dynamic, schema):
-        trace={'model':MODEL,'generation_calls':0,'verifier_calls':0,'retry_count':0,
+    @staticmethod
+    def _new_trace():
+        return {'model':MODEL,'generation_calls':0,'verifier_calls':0,'retry_count':0,
             'provider_cache':'UNSUPPORTED_EXACT_MODEL','cached_tokens':0,
             'raw_content_logged':False,'token_counter':'PROVIDER_COUNT_TOKENS'}
+
+    def context(self,policy,evidence,dynamic,schema,*,_trace=None):
+        # Standalone preflight must never inherit another request's telemetry.
+        # Completion supplies its local trace so its counters remain attached.
+        trace=self._new_trace() if _trace is None else _trace
+        if _trace is None:self.last_trace=trace
+        try:
+            body={'systemInstruction':{'parts':[{'text':policy}]},
+                'contents':[{'role':'user','parts':[{'text':json.dumps(evidence,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]},
+                    {'role':'user','parts':[{'text':json.dumps(dynamic,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]}],
+                'generationConfig':{'maxOutputTokens':OUTPUT_TOKENS,'temperature':0,
+                    'responseMimeType':'application/json','responseJsonSchema':deepcopy(schema),
+                    'thinkingConfig':{'thinkingLevel':'minimal'}}}
+            trace['request_bytes']=len(json.dumps(body,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode())
+            if trace['request_bytes']>REQUEST_BYTES:
+                raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
+            count=self.count(body)
+            trace['input_tokens_counted']=count
+            if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
+            return body,count
+        except ProviderFailure as exc:
+            trace['failure_code']=str(exc)
+            raise
+
+    def complete(self, policy, evidence, dynamic, schema):
+        trace=self._new_trace()
         self.last_trace=trace
         if not self.key: raise ProviderFailure('PROVIDER_UNCONFIGURED')
         if not self.lock.acquire(blocking=False): raise ProviderFailure('PROVIDER_CONCURRENCY_LIMIT')
         try:
-            body,count=self.context(policy,evidence,dynamic,schema)
+            body,count=self.context(policy,evidence,dynamic,schema,_trace=trace)
             system=body['systemInstruction'];stable,varying=body['contents']
             trace['input_tokens_counted']=count
             if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')

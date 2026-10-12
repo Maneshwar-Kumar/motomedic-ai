@@ -6,7 +6,8 @@ This module never streams, stores, deploys or spends outside the injected provid
 """
 from copy import deepcopy
 from dataclasses import asdict,replace
-import hashlib,time
+import hashlib,time,json,re
+from collections import Counter
 from pathlib import Path
 from controller_contracts import ResponseType
 from constrained_generator import ValidationFailure
@@ -91,6 +92,30 @@ Original object hashes and full provenance remain bound on the server.'''
 DRAFT_POLICY+=TABLE_PROJECTION_POLICY
 VERIFY_POLICY+=TABLE_PROJECTION_POLICY
 
+CONTEXT_ENCODING='lossless-shared-json-v1'
+REFERENCE_PROJECTION_POLICY=''' Context JSON uses lossless-shared-json-v1.
+All source text/values remain readable; no facts are removed or summarized.
+In stable evidence, source_projection.shared is the common value dictionary for
+evidence, required_source_display and source_gaps. In a dynamic request envelope,
+shared is its own dictionary and value is the complete original request.
+An object containing only "$ref":n means shared[n], recursively expanded.
+An object with "$record":n and "values":[...] is an original object: shared[n]
+is its ordered list of field names, paired with values at matching positions.
+Every value position is present; do not infer or invent omitted defaults.
+An object containing only "$literal" wraps an original object whose field names
+collide with this encoding; expand its field values, then retain those field names.
+These references are representation only, never citation or claim identifiers.
+Cite only full immutable evidence IDs, never reference numbers or field indexes.
+After expansion apply every original field, table header/unit/span, warning,
+dependency, source gap, history item, complete displayed claim and binding.
+Echo the literal supplied binding_sha256 exactly. Cache includes stable sources
+only; question, history and proposed response remain in the dynamic request.
+Source-span proof hashes, bounding boxes, character offsets and component-review
+hashes are omitted from model context but remain validated and bound on the server.
+All exact source/span text, page identities, semantic context and conditions remain.'''
+DRAFT_POLICY+=REFERENCE_PROJECTION_POLICY
+VERIFY_POLICY+=REFERENCE_PROJECTION_POLICY
+
 DRAFT_POLICY_SHA256=hashlib.sha256(DRAFT_POLICY.encode()).hexdigest()
 
 class Config:
@@ -121,7 +146,7 @@ class Config:
 
 
 def compact_source_evidence(evidence):
-    """Lossless model projection: omit duplicate orig=text and proof hash metadata.
+    """Complete semantic projection: omit duplicate orig=text and proof hashes.
 
     All source content and section/parent context remain. The complete original
     admitted payload, including omitted hashes, stays bound and validated server-side.
@@ -138,7 +163,151 @@ def compact_source_evidence(evidence):
         row.get('source_object',{}).pop('original_object_sha256',None)
         row.get('reviewed_source_context',{}).pop('original_raw_object_sha256',None)
         row.get('reviewed_source_context',{}).pop('original_object_sha256',None)
+        row.get('reviewed_source_context',{}).pop('component_review_sha256',None)
     return result
+
+
+def compact_required_source_display(display):
+    """Omit server-bound proof/layout metadata, retaining every source-span text."""
+    def provenance(value):
+        if type(value)is list:return [provenance(v) for v in value]
+        if type(value)is dict:return {k:provenance(v) for k,v in value.items() if k not in ('bbox','charspan')}
+        return deepcopy(value)
+    result=deepcopy(display)
+    for claim in result:
+        for span in claim.get('source_spans',()):
+            span.pop('text_sha256',None)
+            span.pop('text_span',None)
+            if 'provenance' in span:span['provenance']=provenance(span['provenance'])
+    return result
+
+
+def _context_wire(value):
+    return json.dumps(value,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))
+
+
+def compact_model_context(value):
+    """Reversible exact-value/field-name sharing; no source selection or aliases.
+
+    Every definition is ordinary readable JSON. Citation IDs and SHA-256 values
+    stay literal, and original reserved field names are explicitly escaped.
+    """
+    counts,shapes=Counter(),Counter()
+    def inspect(node):
+        if type(node)is dict:
+            if any(type(k)is not str for k in node):raise ValidationFailure('CONTEXT_JSON_KEY')
+            shapes[tuple(sorted(node))]+=1
+            for child in node.values():inspect(child)
+        elif type(node)is list:
+            for child in node:inspect(child)
+        elif type(node)not in (str,int,float,bool,type(None)):
+            raise ValidationFailure('CONTEXT_JSON_VALUE')
+        raw=_context_wire(node)
+        if type(node)in (dict,list,str) and len(raw)>=(24 if type(node)is str else 64):
+            if type(node)is not str or not re.fullmatch(r'(?:evidence|chunk|section|policy)_[A-Za-z0-9_:-]+|[a-fA-F0-9]{64}',node):
+                counts[raw]+=1
+    inspect(value)
+    candidates={raw for raw,count in counts.items() if count>=2 and (count-1)*len(raw)>count*16+4}
+    schema_candidates={keys for keys,count in shapes.items() if count>=2 and len(keys)>=2 and
+        (count-1)*len(_context_wire(list(keys)))>count*26+4 and
+        not set(keys)&{'$ref','$record','$literal'}}
+    shared,positions=[],{}
+    def remember(key,make):
+        if key not in positions:
+            positions[key]=len(shared);shared.append(None)
+            shared[positions[key]]=make()
+        return positions[key]
+    def encode(node,share=True,record=True):
+        raw=_context_wire(node)
+        if share and raw in candidates:
+            return {'$ref':remember(('value',raw),lambda:encode(node,False))}
+        if type(node)is list:return [encode(x) for x in node]
+        if type(node)is not dict:return deepcopy(node)
+        if set(node)&{'$ref','$record','$literal'}:
+            return {'$literal':{k:encode(v) for k,v in sorted(node.items())}}
+        keys=tuple(sorted(node))
+        if record and keys in schema_candidates:
+            return {'$record':remember(('fields',keys),lambda:list(keys)),
+                    'values':[encode(node[k]) for k in keys]}
+        return {k:encode(v) for k,v in sorted(node.items())}
+    result={'encoding':CONTEXT_ENCODING,'shared':shared,'value':encode(value,record=False)}
+    # A compression bug must block before any provider count/generation.
+    if _context_wire(expand_model_context(result))!=_context_wire(value):
+        raise ValidationFailure('CONTEXT_PROJECTION_ROUNDTRIP')
+    return result
+
+
+def expand_model_context(envelope):
+    """Strict inspection inverse; rejects malformed/cyclic reference graphs."""
+    if (type(envelope)is not dict or set(envelope)!={'encoding','shared','value'} or
+            envelope['encoding']!=CONTEXT_ENCODING or type(envelope['shared'])is not list):
+        raise ValidationFailure('CONTEXT_PROJECTION_SCHEMA')
+    shared=envelope['shared'];active=set();memo={}
+    def reference(index):
+        if type(index)is not int or not 0<=index<len(shared) or index in active:
+            raise ValidationFailure('CONTEXT_PROJECTION_REFERENCE')
+        if index not in memo:
+            active.add(index);memo[index]=decode(shared[index]);active.remove(index)
+        return deepcopy(memo[index])
+    def decode(node):
+        if type(node)is list:return [decode(x) for x in node]
+        if type(node)is not dict:return deepcopy(node)
+        if set(node)=={'$ref'}:return reference(node['$ref'])
+        if set(node)=={'$literal'}:
+            literal=node['$literal']
+            if type(literal)is not dict:raise ValidationFailure('CONTEXT_PROJECTION_LITERAL')
+            return {k:decode(v) for k,v in literal.items()}
+        if set(node)=={'$record','values'}:
+            keys=reference(node['$record']);values=node['values']
+            if (type(keys)is not list or any(type(k)is not str for k in keys) or
+                    len(keys)!=len(set(keys)) or type(values)is not list or len(keys)!=len(values)):
+                raise ValidationFailure('CONTEXT_PROJECTION_RECORD')
+            return {k:decode(v) for k,v in zip(keys,values)}
+        if set(node)&{'$ref','$record','$literal'}:
+            raise ValidationFailure('CONTEXT_PROJECTION_UNESCAPED')
+        return {k:decode(v) for k,v in node.items()}
+    return decode(envelope['value'])
+
+
+def compact_stable_context(stable):
+    """Share source evidence/displays/gaps without changing verifier fields."""
+    fields=('evidence','required_source_display','source_gaps')
+    envelope=compact_model_context({key:stable[key] for key in fields})
+    packed=envelope['value']
+    if type(packed)is not dict or set(packed)!=set(fields):
+        raise ValidationFailure('CONTEXT_PROJECTION_STABLE_FIELDS')
+    result=deepcopy(stable);result.update(packed)
+    result['source_projection']={'encoding':CONTEXT_ENCODING,'shared':envelope['shared'],
+                                 'original':deepcopy(stable['source_projection'])}
+    if _context_wire(expand_stable_context(result))!=_context_wire(stable):
+        raise ValidationFailure('CONTEXT_PROJECTION_STABLE_ROUNDTRIP')
+    return result
+
+
+def expand_stable_context(stable):
+    projection=stable['source_projection']
+    fields=('evidence','required_source_display','source_gaps')
+    restored=expand_model_context({'encoding':projection['encoding'],'shared':projection['shared'],
+                                  'value':{key:stable[key] for key in fields}})
+    result=deepcopy(stable);result.update(restored)
+    result['source_projection']=deepcopy(projection['original'])
+    return result
+
+
+def model_source_context(config,registry,admitted):
+    """Pure shared builder for serving and hosted native-count diagnostics."""
+    stable={'runtime_contract':{'version':VERSION,'runtime_lock':config.lock,
+        'draft_model_contract':deepcopy(config.draft_contract),'verifier_contract':deepcopy(config.verifier_contract),
+        'provider_contract':deepcopy(config.provider_contract)},
+        'full_evidence_payload_sha256':admitted['payload_sha256'],
+        'source_projection':'complete-semantic-content-server-proof-bindings-v2',
+        'manual_checksum':registry.checksum,'index_id':registry.index_id,
+        'source_authority_lock':admitted['authority_lock'],
+        'evidence':compact_source_evidence(admitted['evidence']),
+        'required_source_display':compact_required_source_display(admitted['required_display']),
+        'source_gaps':deepcopy(admitted['gaps']),
+        'verified_oem_support':deepcopy(registry.source.get('oem_service_route'))}
+    return compact_stable_context(stable)
 
 
 def response_wire(response):
@@ -235,13 +404,13 @@ class Composer:
         try:
             self._check_source(controller,session,admitted)
             frozen_history=deepcopy(history);initial_session=content_hash(asdict(session))
-            stable={'runtime_contract':{'version':VERSION,'runtime_lock':self.config.lock,'draft_model_contract':deepcopy(self.config.draft_contract),'verifier_contract':deepcopy(self.config.verifier_contract),'provider_contract':deepcopy(self.config.provider_contract)},'full_evidence_payload_sha256':admitted['payload_sha256'],'source_projection':'lossless-identical-orig-reference-v1','manual_checksum':controller.registry.checksum,'index_id':controller.registry.index_id,'source_authority_lock':admitted['authority_lock'],'evidence':compact_source_evidence(admitted['evidence']),'required_source_display':deepcopy(admitted['required_display']),'source_gaps':deepcopy(admitted['gaps']),'verified_oem_support':deepcopy(controller.registry.source.get('oem_service_route'))}
+            stable=model_source_context(self.config,controller.registry,admitted)
             dynamic={'question':query,'history':frozen_history};feedback=None
             # Exact counting of the complete first request precedes capacity
             # reservation. Remaining calls reserve maximum permitted inputs and
             # outputs, including one correction and explicit rejection retries.
             context=getattr(self.provider,'context',None)
-            if callable(context):context(DRAFT_POLICY,stable,dynamic,DRAFT_SCHEMA)
+            if callable(context):context(DRAFT_POLICY,stable,compact_model_context(dynamic),DRAFT_SCHEMA)
             begin=getattr(self.provider,'begin_turn',None)
             if callable(begin):
                 operation=frozen_history.get('operation_id') if type(frozen_history)is dict else None
@@ -256,7 +425,7 @@ class Composer:
                 if progress:progress('drafting')
                 call_started=time.monotonic()
                 active_provider=self.provider;active_provider_call=True;trace['draft_calls']+=1;trace['correction_calls']+=1 if revision else 0
-                result=self.provider.complete(DRAFT_POLICY,stable,{**dynamic,**({'correction_feedback':feedback} if feedback else {})},DRAFT_SCHEMA)
+                result=self.provider.complete(DRAFT_POLICY,stable,compact_model_context({**dynamic,**({'correction_feedback':feedback} if feedback else {})}),DRAFT_SCHEMA)
                 active_provider_call=False
                 attempt={'revision':revision,'draft_seconds':time.monotonic()-call_started,'draft_provider':deepcopy(result.telemetry or {})}
                 trace['generation_calls']+=(result.telemetry or {}).get('generation_calls',1);trace['provider_calls']=trace['generation_calls']
@@ -276,7 +445,7 @@ class Composer:
                 if progress:progress('verifying')
                 call_started=time.monotonic()
                 active_provider=self.verifier;active_provider_call=True;trace['verification_calls']+=1;trace['verifier_calls']+=1
-                verified=self.verifier.complete(VERIFY_POLICY,stable,{'question':query,'history':frozen_history,'complete_proposed_response':final,'declared_question_coverage':draft['coverage'],'unanswered_parts':draft['unanswered_parts'],'binding':binding,'binding_sha256':content_hash(binding)},VERIFY_SCHEMA)
+                verified=self.verifier.complete(VERIFY_POLICY,stable,compact_model_context({'question':query,'history':frozen_history,'complete_proposed_response':final,'declared_question_coverage':draft['coverage'],'unanswered_parts':draft['unanswered_parts'],'binding':binding,'binding_sha256':content_hash(binding)}),VERIFY_SCHEMA)
                 active_provider_call=False;trace['generation_calls']+=(verified.telemetry or {}).get('generation_calls',1);trace['provider_calls']=trace['generation_calls']
                 if self.config.verifier_contract and (verified.telemetry or {}).get('model')!=self.config.verifier_contract['model']:raise ProviderFailure('VERIFIER_PROVIDER_MODEL_MISMATCH')
                 attempt.update(verification_seconds=time.monotonic()-call_started,verification_provider=deepcopy(verified.telemetry or {}),binding_sha256=content_hash(binding))

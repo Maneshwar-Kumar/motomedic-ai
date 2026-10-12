@@ -1,0 +1,21 @@
+{
+  "schema_version": "incomplete-freeze-reference-v1",
+  "manifest": "reports/public_evaluator/20261012/serving_manifest_v10_5.json",
+  "manifest_sha256": "b95d89b5d95641f39ef7c3961233a99fb2824fa1320aff0c6e6d808772b7fb2a",
+  "files": 530,
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "recorded_snapshot": {
+    "generation": null,
+    "maximum_bytes": 1073741824,
+    "sha256": "4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc",
+    "uri": "gs://motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz"
+  },
+  "durable_reference_status": "OBJECT_GENERATION_RECEIPT_REQUIRED",
+  "cause": "Coordinator omitted explicit existing snapshot reference during freeze",
+  "builds_submitted": 0,
+  "deployed": false,
+  "provider_calls": 0,
+  "superseded_by": "serving_manifest_v10_6.json",
+  "required_reference": "reports/build/20261012/index_snapshot_reference.json",
+  "original_manifest_preserved": true
+}

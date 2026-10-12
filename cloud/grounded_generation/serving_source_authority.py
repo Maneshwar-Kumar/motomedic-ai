@@ -12,7 +12,8 @@ from evidence_registry import content_hash
 from cloud.grounded_generation.source_authority import SourceAuthority as FrozenAuthority
 from cloud.grounded_generation.serving_context import project, VERSION as PROJECTION_VERSION
 
-VERSION = 'open-reviewed-anchor-authority-v2'
+VERSION = 'open-reviewed-anchor-authority-v3'
+MAX_RETAINED_GAP_HITS = 25
 REFINEMENT_PATH = 'reports/build/20261012/source_context_refinement_v2/proposal_v3.json'
 REFINEMENT_SHA = '405269fa7d31274a1e5c6260bbee3e762c8cf2898a5401a4f71e97e155afa1f0'
 REFINEMENT_REVIEW_PATH = 'reports/build/20261012/source_context_refinement_v2/independent_review_v3.json'
@@ -90,8 +91,19 @@ class SourceAuthority(FrozenAuthority):
         if (bundle.get('index_id') != self.index_id or
                 bundle.get('manual_checksum', bundle.get('source_sha256')) != self.checksum):
             raise ValidationFailure('SOURCE_AUTHORITY_RETRIEVAL_IDENTITY')
-        admitted, anchors, gaps = set(), set(), []
-        for hit in bundle.get('hits', ()):
+        retained = bundle.get('retained_gap_hits', [])
+        if type(retained) is not list or len(retained) > MAX_RETAINED_GAP_HITS:
+            raise ValidationFailure('RETAINED_SOURCE_GAP_HIT_BOUND_NO_TRUNCATION')
+        for hit in retained:
+            if (type(hit) is not dict or set(hit) != {'id', 'evidence_ids', 'parent_section_id'}
+                    or type(hit['id']) is not str or type(hit['parent_section_id']) is not str
+                    or type(hit['evidence_ids']) is not list
+                    or any(type(eid) is not str for eid in hit['evidence_ids'])):
+                raise ValidationFailure('RETAINED_SOURCE_GAP_HIT_INVALID')
+        admitted, anchors, gaps, seen = set(), set(), [], set()
+        for hit in [*bundle.get('hits', ()), *retained]:
+            if type(hit) is not dict:
+                raise ValidationFailure('SOURCE_AUTHORITY_RETRIEVAL_MEMBERSHIP_CHANGED')
             chunk = self.chunks.get(hit.get('id'))
             if chunk is None:
                 raise ValidationFailure('SOURCE_AUTHORITY_UNKNOWN_CHUNK')
@@ -100,6 +112,11 @@ class SourceAuthority(FrozenAuthority):
             if (hit.get('evidence_ids') != chunk['evidence_ids'] or
                     hit.get('parent_section_id') != chunk['parent_section_id']):
                 raise ValidationFailure('SOURCE_AUTHORITY_RETRIEVAL_MEMBERSHIP_CHANGED')
+            # Validate every duplicate before de-duplicating. Retained skeletons
+            # regenerate gaps from immutable membership, never supplied gaps.
+            if chunk['id'] in seen:
+                continue
+            seen.add(chunk['id'])
             direct = set(chunk['evidence_ids'])
             for eid in sorted(direct):
                 if eid not in self.complete_context_ids:

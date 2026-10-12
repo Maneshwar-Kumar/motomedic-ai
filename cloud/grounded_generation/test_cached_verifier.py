@@ -151,6 +151,55 @@ class Tests(unittest.TestCase):
             self.call(evidence=evidence)
         self.assertEqual(len(self.transport.calls), 1)
 
+    def test_preflight_overflow_after_success_has_current_zero_generation_trace(self):
+        previous = self.call(); previous_trace = deepcopy(previous.telemetry)
+        before_tokens, before_costs = list(self.tokens), list(self.costs)
+        self.transport.count = 8193
+        with self.assertRaisesRegex(ProviderFailure, 'TOKEN_BOUND_NO_TRUNCATION'):
+            self.provider.context(VERIFY_POLICY, stable(), {'question':'private current question'}, VERIFY_SCHEMA)
+        trace = self.provider.last_trace
+        self.assertEqual(trace['generation_calls'], 0)
+        self.assertEqual(trace['input_tokens_counted'], 8193)
+        self.assertEqual(trace['failure_code'], 'COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
+        self.assertGreater(trace['request_bytes'], 0)
+        self.assertNotIn('input_tokens', trace)
+        self.assertNotIn('cached_prefix_sha256', trace)
+        self.assertNotIn('private current question', str(trace))
+        self.assertEqual(previous.telemetry, previous_trace)
+        self.assertEqual((self.tokens, self.costs), (before_tokens, before_costs))
+        self.assertEqual(sum(c[1] == 'messages' for c in self.transport.calls), 1)
+
+    def test_preflight_byte_failure_after_success_does_not_reuse_count_or_usage(self):
+        self.call(); before_calls = len(self.transport.calls)
+        before_tokens, before_costs = list(self.tokens), list(self.costs)
+        evidence = stable(); evidence['evidence'] = {'fixture':'x'*65536}
+        with self.assertRaisesRegex(ProviderFailure, 'BYTE_BOUND_NO_TRUNCATION'):
+            self.provider.context(VERIFY_POLICY, evidence, {}, VERIFY_SCHEMA)
+        trace = self.provider.last_trace
+        self.assertEqual(trace['generation_calls'], 0)
+        self.assertGreater(trace['request_bytes'], 65536)
+        self.assertNotIn('input_tokens_counted', trace)
+        self.assertNotIn('input_tokens', trace)
+        self.assertEqual(trace['failure_code'], 'COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
+        self.assertEqual(len(self.transport.calls), before_calls)
+        self.assertEqual((self.tokens, self.costs), (before_tokens, before_costs))
+
+    def test_completion_trace_stays_attached_after_failed_preflight(self):
+        self.call(); self.transport.count = 8193
+        with self.assertRaisesRegex(ProviderFailure, 'TOKEN_BOUND_NO_TRUNCATION'):
+            self.call()
+        self.assertEqual(self.provider.last_trace['generation_calls'], 0)
+        self.assertEqual(self.provider.last_trace['input_tokens_counted'], 8193)
+        self.assertEqual((len(self.tokens), len(self.costs)), (1, 1))
+        self.transport.count = 1000
+        result = self.call()
+        self.assertEqual(self.provider.last_trace, result.telemetry)
+        self.assertEqual(result.telemetry['generation_calls'], 1)
+        self.assertEqual(result.telemetry['input_tokens_counted'], 1000)
+        self.assertGreater(result.telemetry['request_bytes'], 0)
+        self.assertNotIn('failure_code', result.telemetry)
+        self.assertEqual((len(self.tokens), len(self.costs)), (2, 2))
+
     def test_cached_and_created_tokens_count_toward_full_input_bound(self):
         for values in ((1,8192,0), (1,0,8192), (100,4000,4093)):
             with self.subTest(values=values):

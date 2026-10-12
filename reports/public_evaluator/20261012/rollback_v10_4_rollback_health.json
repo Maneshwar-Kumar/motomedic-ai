@@ -1,0 +1,69 @@
+{
+  "motomedic-arm-a": {
+    "status": 200,
+    "health": {
+      "answer_provider": "gemma-4-26b-a4b-it",
+      "architecture": "DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA",
+      "benchmark_pacing": false,
+      "durable_dispatch_configured": true,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "prompt_cache": "ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M",
+      "ready": true,
+      "reranking": "authenticated-open-hybrid-rank-disagreement-v3",
+      "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+      "streaming": "DRAFT_VERIFY_STREAM",
+      "verifier_provider": "claude-haiku-5-5"
+    },
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION",
+        "revision": "motomedic-arm-a-00006-mbn",
+        "percent": 100
+      }
+    ],
+    "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:ff35ff5ff998912e05403290a5c07ee6d67b51c719b372c63e4b76b7e3314e8f",
+    "provider_calls": 0
+  },
+  "motomedic-rider-ui": {
+    "status": 200,
+    "health": {
+      "ready": true
+    },
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION",
+        "revision": "motomedic-rider-ui-00005-p5w",
+        "percent": 100
+      }
+    ],
+    "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:383e968f1297c9799e3b16848c09e5b5b417de40e498026a9044f8c2058f1f8f",
+    "provider_calls": 0
+  },
+  "motomedic-answer-worker": {
+    "status": 200,
+    "health": {
+      "answer_provider": "gemma-4-26b-a4b-it",
+      "architecture": "DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA",
+      "benchmark_pacing": false,
+      "durable_dispatch_configured": true,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "prompt_cache": "ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M",
+      "ready": true,
+      "reranking": "authenticated-open-hybrid-rank-disagreement-v3",
+      "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+      "streaming": "DRAFT_VERIFY_STREAM",
+      "verifier_provider": "claude-haiku-5-5"
+    },
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION",
+        "revision": "motomedic-answer-worker-00003-9vr",
+        "percent": 100
+      }
+    ],
+    "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:ff35ff5ff998912e05403290a5c07ee6d67b51c719b372c63e4b76b7e3314e8f",
+    "provider_calls": 0
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "public-evaluator-browser-acceptance-v6",
+  "recorded_at_utc": "2026-10-12T04:31:00.760Z",
+  "script_sha256": "2f8fb2867a1dd8263f46dc077b934ed81aa409771e125f8635e8bfc55f8a8f87",
+  "runtime_policy": "open-manual-draft-verify-v10",
+  "execution": "AUTHORIZED_PRIVATE_SHELL_NO_QUESTION",
+  "provider_bodies_logged": false,
+  "cookie_values_logged": false,
+  "raw_page_text_logged": false,
+  "raw_network_trace_saved": false,
+  "ui_turn_submissions": 0,
+  "actual_provider_calls": 0,
+  "turns": [],
+  "browser_version": "154.0.8037.98",
+  "private_authentication": {
+    "source": "SHORT_LIVED_OWNER_IDENTITY_TOKEN_IN_MEMORY",
+    "scoped_origin": "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+    "all_other_http_and_websocket_origins_blocked": true,
+    "paid_turns_forbidden": true
+  },
+  "public_origin": "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+  "expected_release_manifest_sha256": "b6aadba39d309bf90a50be93aecc947a3cfb44357f15cd40dd5c4dd3672f2fd3",
+  "gateway_health": {
+    "path": "/health",
+    "status": 200,
+    "ready": true
+  },
+  "public_admission": {
+    "proof_submission_status": 200,
+    "cookie_secure": true,
+    "cookie_http_only": true,
+    "cookie_same_site": "Lax",
+    "streamlit_socket_opened": true
+  },
+  "widget_metadata_before_scope": [
+    {
+      "placeholder": "Choose an option",
+      "aria_label": "Motorcycle",
+      "disabled": true
+    },
+    {
+      "placeholder": null,
+      "aria_label": "My motorcycle is a Himalayan BS6",
+      "disabled": false
+    },
+    {
+      "placeholder": "Ask a question…",
+      "aria_label": "Ask a question…",
+      "disabled": true
+    },
+    {
+      "placeholder": null,
+      "aria_label": "file upload",
+      "disabled": false
+    }
+  ],
+  "scope_checkbox_checked": true,
+  "question_input_enabled": true,
+  "widget_metadata_after_scope": [
+    {
+      "placeholder": "Choose an option",
+      "aria_label": "Motorcycle",
+      "disabled": true
+    },
+    {
+      "placeholder": null,
+      "aria_label": "My motorcycle is a Himalayan BS6",
+      "disabled": false
+    },
+    {
+      "placeholder": "Ask a question…",
+      "aria_label": "Ask a question…",
+      "disabled": false
+    },
+    {
+      "placeholder": null,
+      "aria_label": "file upload",
+      "disabled": false
+    }
+  ],
+  "provider_call_scope": "NO_QUESTION_SUBMITTED_BY_THIS_HARNESS",
+  "no_horizontal_overflow": true,
+  "status": "PASS_PRIVATE_SHELL_NO_QUESTION",
+  "independent_factual_quality_acceptance": false,
+  "full_release_acceptance": false,
+  "stream_visibility_limits": "Browser DOM may coalesce chunks; backend exact SSE/verifier/cache proofs must be joined separately.",
+  "page_error_count": 0,
+  "streamlit_socket_count": 1
+}

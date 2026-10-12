@@ -1,0 +1,128 @@
+{
+  "schema_version": "offline-operator-diagnostics-and-scheduling-v1",
+  "created_at_utc": "2026-10-12T04:50:53.565029+00:00",
+  "scope": "Offline saved-run/code analysis and synthetic regressions; no new cloud read, task, model call, configuration or allocation change",
+  "failed_run_id": "53339a5f-3c60-486c-a18e-e0fa110e1502",
+  "failed_run_status": "All six saved SYSTEM_ERROR; common COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION; zero technical releases",
+  "pipeline_generation_calls_in_saved_trace": {
+    "EVAL_DIRECT_01": 0,
+    "EVAL_USB_02": 0,
+    "EVAL_FOLLOWUP_03": 0,
+    "EVAL_TOPIC_TABLE_04": 1,
+    "EVAL_PARTIAL_05": 0,
+    "EVAL_UNSUPPORTED_06": 1
+  },
+  "stale_trace_observed": {
+    "case": "EVAL_PARTIAL_05",
+    "current_pipeline_generation_calls": 0,
+    "previous_failed_provider_trace_generation_calls": 1,
+    "previous_failed_provider_trace_input_tokens": 8046,
+    "root_cause": "Standalone Gemma context preflight retained the singleton provider last_trace from an earlier completed generation"
+  },
+  "trace_repair": {
+    "files": [
+      "cloud/grounded_generation/provider.py",
+      "cloud/grounded_generation/cached_verifier.py",
+      "cloud/grounded_generation/test_provider.py",
+      "cloud/grounded_generation/test_cached_verifier.py"
+    ],
+    "fresh_standalone_context_trace": true,
+    "completion_reuses_its_local_trace": true,
+    "pre_rejection_scalar_fields": [
+      "request_bytes",
+      "input_tokens_counted",
+      "failure_code"
+    ],
+    "raw_request_response_or_credentials_logged": false,
+    "prompt_bound_allocation_transport_retry_changes": false
+  },
+  "qdrant_authenticated_path": {
+    "binding_source": "cloud/deployment_status.json",
+    "binding_sha256": "5502743036d277c861b0d9b59267f5f283af252a57c9592c3c0e253e6fd85915",
+    "url": "https://motomedic-qdrant-279945185781.us-central1.run.app",
+    "audience": "https://motomedic-qdrant-279945185781.us-central1.run.app",
+    "request_path": "/query",
+    "identity": "backend/worker runtime service account obtains managed audience-bound ID token; Authorization Bearer private RPC",
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+    "last_recorded_iam_receipt": "reports/public_evaluator/20261012/operations/current_readback_v1.json",
+    "last_recorded_qdrant_invoker": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "guards": [
+      "HTTPS with redirect rejection and 30s RPC timeout",
+      "Source checksum/index identity and candidate_evidence_only required",
+      "Finite dimension-bound query embedding; remote candidate limit20",
+      "Remote IDs, source checksum, scores, duplicates and immutable chunk scope validated",
+      "Unchanged offline index and inherited local pinned query/rerank models; no request-time document embedding",
+      "Concurrent authenticated dense RPC and immutable BM25; RRF candidates remain evidence only"
+    ]
+  },
+  "scheduling_repair": {
+    "retrieval_version": "authenticated-open-hybrid-rank-disagreement-v4",
+    "gate_version": "ordered-distinct-parent-rank-disagreement-v2",
+    "source_authority_version": "open-reviewed-anchor-authority-v3",
+    "trigger": "Observed distinct-parent rank disagreement with reviewed anchors available",
+    "source_gaps_not_trigger_or_skip": true,
+    "no_anchors_skip": true,
+    "same_or_missing_backend_ranks_skip": true,
+    "retained_gap_hit_fields": [
+      "id",
+      "evidence_ids",
+      "parent_section_id"
+    ],
+    "retention_bound": "min(candidate_limit,25) in scheduler;25 in source authority",
+    "gap_regeneration": "Every skeleton checked against loaded chunk hash and exact membership before de-duplication; no external gap dictionaries or text accepted",
+    "final_partial_action": "CONTINUE_WITH_SOURCE_GAPS",
+    "source_dependency_bound": 256,
+    "new_source_approval_or_index_or_answer_authority": false
+  },
+  "retained_provider_guards": {
+    "primary_maximum_attempts": 100,
+    "primary_maximum_tokens": 999200,
+    "input_tokens": 8192,
+    "output_tokens": 1800,
+    "request_bytes": 65536,
+    "whole_turn_attempts": 8,
+    "one_correction_reverification": true,
+    "uncertain_reservations_refunded": false,
+    "verifier_allocation_maximum_usd": "1",
+    "no_new_spending_by_this_agent": true
+  },
+  "remaining_capacity_from_saved_post_run_receipt": {
+    "primary_attempts": 76,
+    "primary_tokens": 759392,
+    "verifier_nanodollars": 988456000,
+    "verifier_usd": "0.988456"
+  },
+  "synthetic_validation": [
+    {
+      "suite": "test_provider + test_cached_verifier",
+      "tests": 36,
+      "result": "PASS"
+    },
+    {
+      "suite": "test_serving_retrieval + test_serving_source_authority.SyntheticGapRetentionTests",
+      "tests": 29,
+      "result": "PASS"
+    },
+    {
+      "suite": "test_verified_qa + test_claude_fallback before retrieval scheduling edits",
+      "tests": 46,
+      "result": "PASS"
+    }
+  ],
+  "source_original_and_build_candidate_integration": "Delegated to retrieval_evidence agent after runtime quiescence; native provider count/live acceptance still required",
+  "changed_file_sha256": {
+    "cloud/grounded_generation/provider.py": "3a58822733bbbc29e1af93b9db2cfebd6d0bc29d928aed4ad77aa9ab3351c57b",
+    "cloud/grounded_generation/cached_verifier.py": "ab9d5a40505e0cfdc9a7cb0c3744a9197b23f90daef8b508578642ba3f938181",
+    "cloud/grounded_generation/test_provider.py": "81a2a1d586094f1e2e1e604b195e7ae832898b32e7c0b2dceaab62d4d8ac1f7d",
+    "cloud/grounded_generation/test_cached_verifier.py": "c55ba40b788573d672b550d8a63eaf1df7c259cceb73c3956f2ef8a530d2627c",
+    "cloud/grounded_generation/serving_retrieval.py": "4f3892e200061674f29d23c3b71547f97997dc88bfee1c449ce46091b0eaa14f",
+    "cloud/grounded_generation/serving_source_authority.py": "fea5299a6a198fec74b68ab1d0681bff6ad43f8dc080d87c23157356b38bd9a4",
+    "cloud/grounded_generation/test_serving_retrieval.py": "6450b30df48cc3dda80d38899477f5799342cdc2b0ed848740c63a62aa1527fd",
+    "cloud/grounded_generation/test_serving_source_authority.py": "e3d8159e951f54c0bf6ee588e619e6a389cfa056f0495f6f74d24f4af0942db4"
+  },
+  "provider_calls_by_this_agent": 0,
+  "cloud_reads_in_this_diagnostic_assignment": 0,
+  "allocation_writes": 0,
+  "frozen_deployment_status_modified": false
+}

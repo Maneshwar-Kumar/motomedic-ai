@@ -1,0 +1,128 @@
+{
+  "allocation_refund": false,
+  "allocation_reset": false,
+  "answer_quality_accepted": false,
+  "case_count": 6,
+  "cases": [
+    {
+      "artifact_sha256": "967eae1969820a381053dc00b083d94854570c73bdd3372f805fb216b7ace7a7",
+      "case_id": "EVAL_DIRECT_01",
+      "exact_recovered_view": true,
+      "exact_saved_stream": true,
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "reported_provider_calls": 0,
+      "route": "SYSTEM_ERROR",
+      "source_evidence_count": 30,
+      "total_seconds": 32.32106539200001
+    },
+    {
+      "artifact_sha256": "fa6be1210faaaaa4cf0c99a51025ba86fed66b66addceea08f3cb42b99350387",
+      "case_id": "EVAL_FOLLOWUP_03",
+      "exact_recovered_view": true,
+      "exact_saved_stream": true,
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "reported_provider_calls": 0,
+      "route": "SYSTEM_ERROR",
+      "source_evidence_count": 20,
+      "total_seconds": 6.249651380000017
+    },
+    {
+      "artifact_sha256": "42b52ea9f6094c8b94fa2292ae1ee215c26c6ad3e42e4ee0b0d98cec836262b2",
+      "case_id": "EVAL_PARTIAL_05",
+      "exact_recovered_view": true,
+      "exact_saved_stream": true,
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "reported_provider_calls": 0,
+      "route": "SYSTEM_ERROR",
+      "source_evidence_count": 17,
+      "total_seconds": 5.799678600999982
+    },
+    {
+      "artifact_sha256": "733f5ccf019bd895145dd7bd8b72f323f55312993658c341e6af346a7d0674b9",
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "exact_recovered_view": true,
+      "exact_saved_stream": true,
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "reported_provider_calls": 1,
+      "route": "SYSTEM_ERROR",
+      "source_evidence_count": 15,
+      "total_seconds": 11.028699193999984
+    },
+    {
+      "artifact_sha256": "ff334912e3f384b7c4f7e35fb7a2e8c46ca5fec1ea1650addc3668bfa9038521",
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "exact_recovered_view": true,
+      "exact_saved_stream": true,
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "reported_provider_calls": 1,
+      "route": "SYSTEM_ERROR",
+      "source_evidence_count": 10,
+      "total_seconds": 51.75813888500002
+    },
+    {
+      "artifact_sha256": "97a1d632e3a6bc65c5b06c0199714cf5a30d0a5f274fcde6003c0552a3f46a49",
+      "case_id": "EVAL_USB_02",
+      "exact_recovered_view": true,
+      "exact_saved_stream": true,
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "reported_provider_calls": 0,
+      "route": "SYSTEM_ERROR",
+      "source_evidence_count": 34,
+      "total_seconds": 6.137971465000021
+    }
+  ],
+  "cloud_build_id": "53339a5f-3c60-486c-a18e-e0fa110e1502",
+  "credentials_logged": false,
+  "diagnosis": "Complete source prompts exceeded8192 input-token bound. Repeated source/context/display metadata needs lossless projection; no source content may be truncated.",
+  "fallback_enabled": false,
+  "ledger_after": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 24,
+      "reserved_tokens": 239808,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 3,
+      "reserved_nanodollars": 11544000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "ledger_before": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 8,
+      "reserved_tokens": 79936,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 1,
+      "reserved_nanodollars": 3848000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "public_opening_accepted": false,
+  "recorded_at_utc": "2026-10-12T04:35:17.877481+00:00",
+  "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+  "schema": "motomedic-hosted-context-overflow-failure-v1",
+  "serving_manifest_sha256": "b6aadba39d309bf90a50be93aecc947a3cfb44357f15cd40dd5c4dd3672f2fd3",
+  "source_or_retrieval_tuning": false,
+  "technical_releases": 0,
+  "telemetry_limitation": "Standalone primary preflight inherited stale previous-provider trace. Correct reported_calls using versioned provider trace fix; allocation readback is independent."
+}

@@ -1,0 +1,206 @@
+{
+  "case_id": "EVAL_UNSUPPORTED_06",
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "expected_route_matched": false,
+  "inference_replayed": false,
+  "operation_id": "515719b63f7e40c9b4ab7828c04fa03c",
+  "post_retries": 0,
+  "question": "What torque should I use to tighten the engine's connecting-rod bolts?",
+  "question_sha256": "74a67242354288ba4f01267b06cad5c58bc68493aec0c95076e49e2601182c14",
+  "request_sha256": "084ac9ee38689c4c9ff992b5db3a79e36244f02da10d9988b2b71cd339f0d075",
+  "response_sha256": "7dd272b9883dc388d82199d784aac52c7eef05e991a5b84423a186e2cde657d1",
+  "route": "SYSTEM_ERROR",
+  "saved_received_seconds": 51.559691852999975,
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": null,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "515719b63f7e40c9b4ab7828c04fa03c",
+      "response_sha256": "7dd272b9883dc388d82199d784aac52c7eef05e991a5b84423a186e2cde657d1",
+      "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+      "verification_binding_sha256": null
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 1,
+    "response": {
+      "cited_pages": [],
+      "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "release_gate_passed": false,
+      "technical_content": false,
+      "trace_id": "11ab35dfd5914a0094e34e97d5188924",
+      "type": "SYSTEM_ERROR"
+    },
+    "runtime_controls": {
+      "composition": {
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 1,
+        "draft_model": "gemma-4-26b-a4b-it",
+        "failed_provider_trace": {
+          "cache_hit_observed": false,
+          "cached_tokens": 0,
+          "generation_calls": 0,
+          "model": "claude-haiku-5-5",
+          "provider": "anthropic",
+          "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+          "raw_content_logged": false,
+          "retry_count": 0,
+          "role": "semantic_verifier",
+          "token_counter": "ANTHROPIC_COUNT_TOKENS",
+          "token_counter_is_estimate": true
+        },
+        "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+        "generation_calls": 1,
+        "provider_calls": 1,
+        "provider_prompt_cache": "EXPLICIT_VERIFIER_PREFIX",
+        "total_private_pipeline_seconds": 48.098919432,
+        "verification_calls": 1,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": false,
+        "verifier_calls": 1,
+        "verifier_model": "claude-haiku-5-5",
+        "verifier_spend_reservation": {
+          "reserved_attempts": 2,
+          "reserved_maximum_cost_usd": 0.003848,
+          "version": "haiku-evidence-prefix-verifier-v1"
+        },
+        "version": "open-manual-draft-verify-v10",
+        "whole_turn_reservation": {
+          "maximum_wait_seconds": 471.930961,
+          "pacing_version": "whole-turn-sealed-unused-pacing-v2",
+          "reserved_attempts": 8,
+          "reserved_tokens": 79936,
+          "sealed_unused_slots": 7,
+          "sealing_status": "SEALED_UNUSED_CONFIRMED",
+          "version": "whole-turn-capacity-v1"
+        }
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 22,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_13ff401422c8fc0d784d7e92",
+          "evidence_32cf970fdb9c163e0de21c1a",
+          "evidence_3a585b9acb43c05172e95624",
+          "evidence_467855effee5419bd63fb826",
+          "evidence_a5bb5d14fd332f16c381c1b7",
+          "evidence_b1e9bacad4e60cf54b0a3aa2",
+          "evidence_b42c533d2f90267c01b12bb6",
+          "evidence_d11ae7cb778df64207e63d04",
+          "evidence_e43f21422e7fcda50e76c4bb",
+          "evidence_f4ee929e545ef669fdb494a1"
+        ],
+        "authority_lock": "685052f0f5aae1fdde8442985595bafedbc0547edb828f960c5ae1b1a57713f9",
+        "chunk_ids": [
+          "chunk_0d7f1c37ffe8f71c7cd36784",
+          "chunk_ec5eccd505a36dff8f7bda57",
+          "chunk_2592f0e869a2da6246639f17",
+          "chunk_fallback_2bc28638cf37f30990e78d42",
+          "chunk_94a11c87f6ea387a48cdd837"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_0d7f1c37ffe8f71c7cd36784",
+            "evidence_ids": [
+              "evidence_3321be46b0157fe9fd49d294"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_0d7f1c37ffe8f71c7cd36784",
+            "evidence_ids": [
+              "evidence_b2f76da9245364a30f3315e9"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_0d7f1c37ffe8f71c7cd36784",
+            "evidence_ids": [
+              "evidence_f04725541eb2c3601fbe4b50"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_2592f0e869a2da6246639f17",
+            "evidence_ids": [
+              "evidence_27fd0fb13b21ad5196e7abc5"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_2592f0e869a2da6246639f17",
+            "evidence_ids": [
+              "evidence_35535d1182508ca1e1f41d17"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_2592f0e869a2da6246639f17",
+            "evidence_ids": [
+              "evidence_82fb12f1ba1b147340d25e2c"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_2592f0e869a2da6246639f17",
+            "evidence_ids": [
+              "evidence_9eeae7b44f77107f740b3572"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_fallback_2bc28638cf37f30990e78d42",
+            "evidence_ids": [
+              "page_fallback_8b6564d03faed904d5826a8a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_94a11c87f6ea387a48cdd837",
+            "evidence_ids": [
+              "evidence_f2c27e541e9979a6958c426f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 0.8943410869999866
+      }
+    },
+    "runtime_policy": "open-manual-draft-verify-v10",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "4e47949e468e4c2ca6b5803006a1788b",
+    "version": 1
+  },
+  "session_group": "unsupported_engine",
+  "status": "SAVED_STREAMED_RECOVERED",
+  "stream_stages": [],
+  "streamed_text": "",
+  "total_seconds": 51.75813888500002
+}

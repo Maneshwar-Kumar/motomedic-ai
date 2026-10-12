@@ -19,7 +19,7 @@ MANUAL_SHA = "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
 FREEZE = "reports/grounded_generation/v8/runtime_freeze.json"
 FREEZE_SHA = "d7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0"
 HISTORICAL_RUNTIME = "reports/build/20261012/frozen_v8_runtime"
-CURRENT_FREEZE = "reports/public_evaluator/20261012/serving_manifest_v10_4.json"
+CURRENT_FREEZE = "reports/public_evaluator/20261012/serving_manifest_v10_6.json"
 RELEASE = "human_review/agent_release_161/coordinator/release_manifest_v3.json"
 RELEASE_SHA = "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298"
 

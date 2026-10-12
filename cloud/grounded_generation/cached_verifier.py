@@ -93,38 +93,51 @@ class CachedVerifier:
         return self._count({'model': MODEL, 'messages': messages,
                             'thinking': {'type': 'disabled'}})
 
-    def context(self, policy, evidence, dynamic, schema):
-        from cloud.grounded_generation.verified_qa import VERIFY_POLICY, VERIFY_SCHEMA
-        if policy != VERIFY_POLICY or schema != VERIFY_SCHEMA:
-            raise ProviderFailure('CLAUDE_VERIFIER_ROLE_MISMATCH')
-        if type(evidence) is not dict or set(evidence) != STABLE_FIELDS:
-            raise ProviderFailure('CLAUDE_VERIFIER_STABLE_PREFIX_FIELDS')
-        cache = {'type': 'ephemeral', 'ttl': '5m'}
-        body = {
-            'model': MODEL, 'max_tokens': OUTPUT_TOKENS,
-            'system': [{'type': 'text', 'text': policy, 'cache_control': deepcopy(cache)}],
-            'messages': [{'role': 'user', 'content': [
-                {'type': 'text', 'text': wire({'assembled_evidence': evidence}),
-                 'cache_control': deepcopy(cache)},
-                {'type': 'text', 'text': wire({'request': dynamic})},
-            ]}],
-            'thinking': {'type': 'disabled'},
-            'output_config': {'effort': 'medium',
-                              'format': {'type': 'json_schema', 'schema': deepcopy(schema)}},
-        }
-        if len(wire(body).encode()) > REQUEST_BYTES:
-            raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
-        count = self._count(body)
-        if count > INPUT_TOKENS:
-            raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
-        return body, count
-
-    def complete(self, policy, evidence, dynamic, schema):
-        trace = {'model': MODEL, 'provider': 'anthropic', 'role': 'semantic_verifier',
+    @staticmethod
+    def _new_trace():
+        return {'model': MODEL, 'provider': 'anthropic', 'role': 'semantic_verifier',
                  'generation_calls': 0, 'retry_count': 0, 'cached_tokens': 0,
                  'provider_cache': CONTRACT['prompt_cache'], 'cache_hit_observed': False,
                  'raw_content_logged': False, 'token_counter': 'ANTHROPIC_COUNT_TOKENS',
                  'token_counter_is_estimate': True}
+
+    def context(self, policy, evidence, dynamic, schema, *, _trace=None):
+        trace = self._new_trace() if _trace is None else _trace
+        if _trace is None:
+            self.last_trace = trace
+        try:
+            from cloud.grounded_generation.verified_qa import VERIFY_POLICY, VERIFY_SCHEMA
+            if policy != VERIFY_POLICY or schema != VERIFY_SCHEMA:
+                raise ProviderFailure('CLAUDE_VERIFIER_ROLE_MISMATCH')
+            if type(evidence) is not dict or set(evidence) != STABLE_FIELDS:
+                raise ProviderFailure('CLAUDE_VERIFIER_STABLE_PREFIX_FIELDS')
+            cache = {'type': 'ephemeral', 'ttl': '5m'}
+            body = {
+                'model': MODEL, 'max_tokens': OUTPUT_TOKENS,
+                'system': [{'type': 'text', 'text': policy, 'cache_control': deepcopy(cache)}],
+                'messages': [{'role': 'user', 'content': [
+                    {'type': 'text', 'text': wire({'assembled_evidence': evidence}),
+                     'cache_control': deepcopy(cache)},
+                    {'type': 'text', 'text': wire({'request': dynamic})},
+                ]}],
+                'thinking': {'type': 'disabled'},
+                'output_config': {'effort': 'medium',
+                                  'format': {'type': 'json_schema', 'schema': deepcopy(schema)}},
+            }
+            trace['request_bytes'] = len(wire(body).encode())
+            if trace['request_bytes'] > REQUEST_BYTES:
+                raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
+            count = self._count(body)
+            trace['input_tokens_counted'] = count
+            if count > INPUT_TOKENS:
+                raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
+            return body, count
+        except ProviderFailure as exc:
+            trace['failure_code'] = str(exc)
+            raise
+
+    def complete(self, policy, evidence, dynamic, schema):
+        trace = self._new_trace()
         self.last_trace = trace
         if not self.key:
             raise ProviderFailure('CLAUDE_UNCONFIGURED')
@@ -133,7 +146,7 @@ class CachedVerifier:
         if not self.lock.acquire(blocking=False):
             raise ProviderFailure('PROVIDER_CONCURRENCY_LIMIT')
         try:
-            body, count = self.context(policy, evidence, dynamic, schema)
+            body, count = self.context(policy, evidence, dynamic, schema, _trace=trace)
             trace.update(input_tokens_counted=count,
                          cached_prefix_sha256=hashlib.sha256(wire({
                              'contract': self.contract, 'system': body['system'],

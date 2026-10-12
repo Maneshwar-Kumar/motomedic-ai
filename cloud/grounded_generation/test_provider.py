@@ -32,6 +32,51 @@ class Tests(unittest.TestCase):
         self.transport.count=8193
         with self.assertRaisesRegex(ProviderFailure,'NO_TRUNCATION'): self.call()
         self.assertFalse(self.reservations)
+
+    def test_preflight_overflow_after_success_has_current_zero_generation_trace(self):
+        previous=self.call();previous_trace=deepcopy(previous.telemetry)
+        before=list(self.reservations)
+        self.transport.count=8193
+        with self.assertRaisesRegex(ProviderFailure,'TOKEN_BOUND_NO_TRUNCATION'):
+            self.provider.context('policy',{'fixture':True},{'question':'private current question'},SCHEMA)
+        trace=self.provider.last_trace
+        self.assertEqual(trace['generation_calls'],0)
+        self.assertEqual(trace['input_tokens_counted'],8193)
+        self.assertEqual(trace['failure_code'],'COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
+        self.assertGreater(trace['request_bytes'],0)
+        self.assertNotIn('input_tokens',trace)
+        self.assertNotIn('private current question',str(trace))
+        self.assertEqual(previous.telemetry,previous_trace)
+        self.assertEqual(self.reservations,before)
+        self.assertEqual(sum(c[0].endswith(':generateContent') for c in self.transport.calls),1)
+
+    def test_preflight_byte_failure_after_success_does_not_reuse_count_or_usage(self):
+        self.call();before_calls=len(self.transport.calls);before=list(self.reservations)
+        with self.assertRaisesRegex(ProviderFailure,'BYTE_BOUND_NO_TRUNCATION'):
+            self.provider.context('policy',{'mandatory':'x'*65536},{},SCHEMA)
+        trace=self.provider.last_trace
+        self.assertEqual(trace['generation_calls'],0)
+        self.assertGreater(trace['request_bytes'],65536)
+        self.assertNotIn('input_tokens_counted',trace)
+        self.assertNotIn('input_tokens',trace)
+        self.assertEqual(trace['failure_code'],'COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
+        self.assertEqual(len(self.transport.calls),before_calls)
+        self.assertEqual(self.reservations,before)
+
+    def test_completion_trace_stays_attached_after_failed_preflight(self):
+        self.call();self.transport.count=8193
+        with self.assertRaisesRegex(ProviderFailure,'TOKEN_BOUND_NO_TRUNCATION'):self.call()
+        self.assertEqual(self.provider.last_trace['generation_calls'],0)
+        self.assertEqual(self.provider.last_trace['input_tokens_counted'],8193)
+        self.assertEqual(len(self.reservations),1)
+        self.transport.count=100
+        result=self.call()
+        self.assertEqual(self.provider.last_trace,result.telemetry)
+        self.assertEqual(result.telemetry['generation_calls'],1)
+        self.assertEqual(result.telemetry['input_tokens_counted'],100)
+        self.assertGreater(result.telemetry['request_bytes'],0)
+        self.assertNotIn('failure_code',result.telemetry)
+        self.assertEqual(len(self.reservations),2)
     def test_byte_bound_keeps_mandatory_bundle(self):
         with self.assertRaisesRegex(ProviderFailure,'BYTE_BOUND'):
             self.provider.complete('policy',{'mandatory':'x'*65536},{},SCHEMA)

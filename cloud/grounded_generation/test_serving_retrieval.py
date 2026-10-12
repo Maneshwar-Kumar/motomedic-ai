@@ -19,9 +19,16 @@ class Authority:
         anchors = {e for hit in bundle['hits'] for e in hit['evidence_ids']}
         required = anchors | ({'warning'} if 'action' in anchors else set())
         required.update(bundle.get('retained_approved_evidence_ids', ()))
+        gaps = [{'type': 'SOURCE_CONTEXT_REVIEW_REQUIRED', 'chunk_id': hit['id'],
+                 'rider_resolvable': False} for hit in bundle['hits']] if self.gap else []
+        for hit in bundle.get('retained_gap_hits', ()):
+            gap = {'type': 'SOURCE_CONTEXT_REVIEW_REQUIRED', 'chunk_id': hit['id'],
+                   'rider_resolvable': False}
+            if gap not in gaps:
+                gaps.append(gap)
         return {'payload': {}, 'required_evidence_ids': sorted(required),
             'reviewed_anchor_ids': sorted(anchors),
-            'source_gaps': [{'type': 'SOURCE_CONTEXT_REVIEW_REQUIRED', 'rider_resolvable': False}] if self.gap else [],
+            'source_gaps': gaps,
             'dependency_review_status': 'APPROVED', 'coverage_established': True,
             'source_review_required': self.gap}
 
@@ -101,12 +108,75 @@ class Tests(unittest.TestCase):
         self.assertEqual(b['retrieval_action'], 'CONTINUE_GATES')
         self.assertEqual(r.reranker.calls, 1)
 
-    def test_source_review_gap_skips_rerank_and_keeps_partial_anchors(self):
+    def test_source_review_gap_preserves_observed_rerank_and_partial_anchors(self):
         r = serving(gap=True, disagreement=True)
         b = r.search('check', limit=1, applicability_status='CONFIRMED')
         self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
-        self.assertEqual(r.reranker.calls, 0)
+        self.assertEqual(r.reranker.calls, 1)
+        self.assertEqual(b['retrieval_policy']['rerank_attempts'], 1)
+        self.assertTrue({'action', 'warning'} <= set(b['attached_evidence_ids']))
         self.assertFalse(b['source_gaps'][0]['rider_resolvable'])
+
+    def test_source_gaps_do_not_trigger_rerank_when_backend_ranks_agree(self):
+        r = serving(gap=True)
+        r._sparse_scores = lambda query: (np.array([2., 1.]), 0.)
+        b = r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
+        self.assertEqual(r.reranker.calls, 0)
+        self.assertEqual(b['retrieval_policy']['rerank_skip_reason'], 'DENSE_SPARSE_DISTINCT_PARENT_RANKS_AGREE')
+
+    def test_source_gaps_do_not_trigger_rerank_without_comparable_backend_ranks(self):
+        r = serving(gap=True)
+        b = r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
+        self.assertEqual(r.reranker.calls, 0)
+        self.assertEqual(b['retrieval_policy']['rerank_skip_reason'], 'NO_COMPARABLE_DENSE_SPARSE_RANKS')
+
+    def test_no_reviewed_anchors_skip_observed_disagreement_even_with_diagnostic_override(self):
+        r = serving(gap=True, disagreement=True)
+        context = r.source_authority.scheduling_context
+        def missing(bundle):
+            value = context(bundle)
+            value.update(coverage_established=False, required_evidence_ids=[], reviewed_anchor_ids=[])
+            return value
+        r.source_authority.scheduling_context = missing
+        for override in (None, True):
+            with self.subTest(override=override):
+                b = r.search('check', limit=1, applicability_status='CONFIRMED', rerank=override)
+                self.assertEqual(b['retrieval_action'], 'SOURCE_REVIEW_REQUIRED')
+                self.assertTrue(b['retrieval_policy']['initial_ranking_signals']['ranking_uncertain'])
+                self.assertEqual(r.reranker.calls, 0)
+
+    def test_rerank_dropped_unreviewed_sibling_remains_in_immutable_gap_retention(self):
+        from cloud.grounded_generation.serving_source_authority import SourceAuthority
+        from evidence_registry import content_hash
+        r = serving(disagreement=True)
+        r.chunks[0]['evidence_ids'].append('unreviewed-sibling')
+        authority = SourceAuthority.__new__(SourceAuthority)
+        authority.lock = 'synthetic-gap-authority'; authority.base = r.source_authority.base
+        authority.index_id = 'synthetic'; authority.checksum = 'sha'
+        authority.chunks = {c['id']: deepcopy(c) for c in r.chunks}
+        authority._chunk_hashes = {cid: content_hash(c) for cid, c in authority.chunks.items()}
+        authority.complete_context_ids = {'action', 'warning', 'other'}
+        authority.check = lambda: None
+        authority.evidence_ready = lambda eid: eid in authority.complete_context_ids
+        authority._closure = lambda ids: set(ids) | ({'warning'} if 'action' in ids else set())
+        authority._payload = lambda ids, anchors, gaps: {
+            'required_evidence_ids': sorted(ids), 'anchor_evidence_ids': sorted(anchors),
+            'evidence': {eid: {} for eid in ids}, 'gaps': gaps}
+        r.source_authority = authority
+        b = r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(r.reranker.calls, 1)
+        self.assertEqual([hit['id'] for hit in b['hits']], ['c2'])
+        self.assertEqual(b['retained_gap_hits'], [{'id':'c1',
+            'evidence_ids':['action', 'unreviewed-sibling'], 'parent_section_id':'p1'}])
+        self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
+        self.assertTrue(b['source_review_required'])
+        self.assertEqual(b['source_gaps'][0]['evidence_ids'], ['unreviewed-sibling'])
+        self.assertTrue({'action', 'warning'} <= set(b['required_evidence_ids']))
+        admitted = authority.assemble(b)
+        self.assertTrue(admitted['gaps'])
+        self.assertNotIn('unreviewed-sibling', admitted['evidence'])
 
     def test_rerank_query_bound_preserves_complete_full_query(self):
         r = serving(disagreement=True)

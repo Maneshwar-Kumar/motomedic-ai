@@ -7,6 +7,7 @@ from approved_registry import ApprovedEvidenceRegistry
 from constrained_generator import ValidationFailure
 from cloud.grounded_generation.source_authority import SourceAuthority as PriorAuthority
 from cloud.grounded_generation.serving_source_authority import SourceAuthority, REFINEMENT_REVIEW_SHA
+from evidence_registry import content_hash
 
 ROOT = Path(__file__).resolve().parents[2]
 INDEX = Path(os.environ.get('MOTOMEDIC_TEST_INDEX', str(ROOT / 'build/index-bge-final')))
@@ -83,6 +84,60 @@ class Tests(unittest.TestCase):
                     self.assertFalse(unknown & set(payload['evidence']))
                     return
         self.fail('No mixed independently complete reviewed anchor fixture exists')
+
+
+class SyntheticGapRetentionTests(unittest.TestCase):
+    """Immutable gap membership checks without source/model/cloud fixtures."""
+    def setUp(self):
+        self.s = SourceAuthority.__new__(SourceAuthority)
+        self.s.index_id = 'synthetic-index'; self.s.checksum = 'synthetic-manual'
+        self.s.chunks = {
+            'reviewed': {'id':'reviewed', 'evidence_ids':['approved'], 'parent_section_id':'p1'},
+            'gap': {'id':'gap', 'evidence_ids':['unreviewed'], 'parent_section_id':'p2'}}
+        self.s._chunk_hashes = {cid: content_hash(c) for cid, c in self.s.chunks.items()}
+        self.s.complete_context_ids = {'approved'}
+        self.s.check = lambda: None
+        self.s.evidence_ready = lambda eid: eid == 'approved'
+        self.s._closure = lambda ids: set(ids)
+        self.s._payload = lambda ids, anchors, gaps: {'evidence': {eid:{} for eid in ids},
+            'required_evidence_ids':sorted(ids), 'anchor_evidence_ids':sorted(anchors), 'gaps':gaps}
+        self.bundle = {'index_id':self.s.index_id, 'manual_checksum':self.s.checksum,
+            'hits':[deepcopy(self.s.chunks['reviewed'])],
+            'retained_gap_hits':[deepcopy(self.s.chunks['gap'])]}
+
+    def test_retained_immutable_hit_regenerates_gap_without_admitting_unreviewed_content(self):
+        payload = self.s.assemble(self.bundle)
+        self.assertEqual(set(payload['evidence']), {'approved'})
+        self.assertEqual(payload['gaps'], [{'type':'SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED',
+            'chunk_id':'gap', 'evidence_ids':['unreviewed'], 'rider_resolvable':False}])
+
+    def test_retained_skeleton_mutations_fail_closed(self):
+        for field, value in (('evidence_ids',['approved']), ('parent_section_id','wrong'), ('id','unknown')):
+            with self.subTest(field=field):
+                bundle = deepcopy(self.bundle); bundle['retained_gap_hits'][0][field] = value
+                with self.assertRaises(ValidationFailure):self.s.assemble(bundle)
+
+    def test_retained_raw_gap_dictionary_or_content_is_not_trusted(self):
+        for extra in ('gaps', 'source_object', 'index_text'):
+            with self.subTest(extra=extra):
+                bundle = deepcopy(self.bundle); bundle['retained_gap_hits'][0][extra] = 'external'
+                with self.assertRaisesRegex(ValidationFailure,'GAP_HIT_INVALID'):self.s.assemble(bundle)
+
+    def test_retained_hits_are_deduplicated_only_after_each_membership_check(self):
+        bundle = deepcopy(self.bundle)
+        bundle['hits'].append(deepcopy(self.s.chunks['gap']))
+        self.assertEqual(len(self.s.assemble(bundle)['gaps']), 1)
+        bundle['retained_gap_hits'][0]['evidence_ids'] = ['approved']
+        with self.assertRaisesRegex(ValidationFailure,'MEMBERSHIP_CHANGED'):self.s.assemble(bundle)
+
+    def test_retained_gap_bound_fails_without_truncation(self):
+        bundle = deepcopy(self.bundle)
+        bundle['retained_gap_hits'] *= 26
+        with self.assertRaisesRegex(ValidationFailure,'BOUND_NO_TRUNCATION'):self.s.assemble(bundle)
+
+    def test_retained_immutable_chunk_mutation_is_rejected(self):
+        self.s.chunks['gap']['evidence_ids'] = ['approved']
+        with self.assertRaisesRegex(ValidationFailure,'INDEX_CHUNK_CHANGED'):self.s.assemble(self.bundle)
 
 
 if __name__ == '__main__': unittest.main()
