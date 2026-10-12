@@ -1,0 +1,78 @@
+{
+  "core_and_public_iam_preserved": true,
+  "explicit_owner_max_two_instruction_claimed": false,
+  "http_health": {
+    "health": {
+      "ready": true
+    },
+    "http_status": 200,
+    "provider_calls": 0
+  },
+  "independent_factual_quality_acceptance": false,
+  "provider_calls_by_health_check": 0,
+  "provider_ledger_after": {
+    "full_document_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "d15b75c708f0bb22e5a52d7fcedb1502e80eb0aaf6a07b7f239f2f69bf88c0ba",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "1d660c3e7d0621554e37134c69f72f5af2540bf92a96462fa92edb78fe82c70d",
+      "owner-haiku-fallback-20261011-validation-v1": "3496197becd5724f0b7b538f19aa6a541899b7cad5057b0546c049286ad74011"
+    },
+    "immutable_non_charge_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "e029cbd37abbd6dafc48ebcd748442f3cf4efc38bd21503e6f850e699997ff32",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "9e0d5b18c1ad0b9cbc7fda54427a5000708e847be21334afef29af643d064783",
+      "owner-haiku-fallback-20261011-validation-v1": "daadac75082af4bb53a05e7ab2155aaaa396f0afb2768da52ee3a1cc6128c2b4"
+    },
+    "maximum_tokens": 2000000,
+    "reservation_count": 10,
+    "reserved_attempts": 38,
+    "reserved_nanodollars": 76449375,
+    "reserved_tokens": 683451,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "provider_ledger_before": {
+    "full_document_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "d15b75c708f0bb22e5a52d7fcedb1502e80eb0aaf6a07b7f239f2f69bf88c0ba",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "1d660c3e7d0621554e37134c69f72f5af2540bf92a96462fa92edb78fe82c70d",
+      "owner-haiku-fallback-20261011-validation-v1": "3496197becd5724f0b7b538f19aa6a541899b7cad5057b0546c049286ad74011"
+    },
+    "immutable_non_charge_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "e029cbd37abbd6dafc48ebcd748442f3cf4efc38bd21503e6f850e699997ff32",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "9e0d5b18c1ad0b9cbc7fda54427a5000708e847be21334afef29af643d064783",
+      "owner-haiku-fallback-20261011-validation-v1": "daadac75082af4bb53a05e7ab2155aaaa396f0afb2768da52ee3a1cc6128c2b4"
+    },
+    "maximum_tokens": 2000000,
+    "reservation_count": 10,
+    "reserved_attempts": 38,
+    "reserved_nanodollars": 76449375,
+    "reserved_tokens": 683451,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "revision_max_unchanged": 1,
+  "routed_ui": {
+    "revision": "motomedic-rider-ui-v10-13-functional-enabled",
+    "revision_configuration_sha256": "c06c68929838694a3bb61efa68f3f11ff9cc440971040a7f645fc7c238d2376b"
+  },
+  "schema": "motomedic-ui-capacity-repair-anonymous-health-v1",
+  "service_scaling": {
+    "maxInstanceCount": 2
+  }
+}
