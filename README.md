@@ -4,11 +4,11 @@ MotoMedic is a text assistant for questions about the **Royal Enfield New Himala
 
 **[Open the public demo](https://motomedic-rider-ui-279945185781.us-central1.run.app)** · [Review PR #4](https://github.com/Maneshwar-Kumar/motomedic-ai/pull/4) · [Current results](docs/STATUS.md) · [Setup guide](docs/SETUP.md)
 
-The implementation under review is on `codex/public-evaluator`; `main` remains the baseline. The current goal is a working text MVP. One public supported answer has been observed. The service-due test returned UNSUPPORTED because ranking discarded its reviewed evidence; an essential retrieval repair is in progress.
+The implementation under review is on `codex/public-evaluator`; `main` remains the baseline. The current goal is a working text MVP.
 
 ## Using the demo
 
-Confirm that your motorcycle is the Himalayan BS6, then ask a question in your own words, using up to 100 words. MotoMedic shows progress while it retrieves, drafts and verifies. A completed answer can contain supported facts or procedures, an explicitly limited partial answer, a needed clarification or a manual-supported safety stop. When it cannot support an answer, it says so; a failed technical check produces a separate system-error message.
+Confirm that your motorcycle is the Himalayan BS6 by checking the box on the left margin, then ask a question in your own words, using up to 100 words. MotoMedic shows progress while it retrieves, drafts and verifies. A completed answer can contain supported facts or procedures, an explicitly limited partial answer, a needed clarification or a manual-supported safety stop. When it cannot support an answer, it says so; a failed technical check produces a separate system-error message.
 
 The source is the supplied [149-page owner's manual](royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf), edition RAM00818/A, dated 4 November 2025. Questions are not restricted to a predefined catalogue. The application is currently text-only; photo and voice features are deferred.
 
