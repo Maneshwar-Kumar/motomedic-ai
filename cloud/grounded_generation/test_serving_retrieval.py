@@ -98,13 +98,13 @@ class Tests(unittest.TestCase):
         dense, sparse, _, _ = r._first_stage('query')
         self.assertEqual(list(dense), [.9, .8]); self.assertEqual(list(sparse), [1., 0.])
 
-    def test_open_question_uses_loaded_dependencies_and_final_reranked_anchors(self):
+    def test_open_question_keeps_initial_and_final_reranked_anchors_with_dependencies(self):
         r = serving(disagreement=True)
         b = r.search('check', limit=1, applicability_status='CONFIRMED')
-        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 0)
+        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 1)
         self.assertEqual(b['retrieval_policy']['rerank_attempts'], 1)
-        self.assertEqual(b['required_evidence_ids'], ['other'])
-        self.assertNotIn('warning', b['attached_evidence_ids'])
+        self.assertEqual(b['required_evidence_ids'], ['action', 'other', 'warning'])
+        self.assertIn('warning', b['attached_evidence_ids'])
         self.assertEqual(b['retrieval_action'], 'CONTINUE_GATES')
         self.assertEqual(r.reranker.calls, 1)
 
@@ -129,12 +129,12 @@ class Tests(unittest.TestCase):
             return value
         r.source_authority.scheduling_context = context
         b = r.search('check', limit=1, applicability_status='CONFIRMED')
-        self.assertEqual(set(b['required_evidence_ids']), {'other', 'other-warning'})
-        self.assertEqual(set(b['attached_evidence_ids']), {'other', 'other-warning'})
+        self.assertEqual(set(b['required_evidence_ids']), {'action', 'warning', 'other', 'other-warning'})
+        self.assertEqual(set(b['attached_evidence_ids']), {'action', 'warning', 'other', 'other-warning'})
         self.assertEqual(b['missing_evidence_ids'], [])
-        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 0)
-        self.assertNotIn('action', b['required_evidence_ids'])
-        self.assertNotIn('warning', b['required_evidence_ids'])
+        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 1)
+        self.assertIn('action', b['required_evidence_ids'])
+        self.assertIn('warning', b['required_evidence_ids'])
         self.assertEqual(r.reranker.calls, 1)
 
     def test_incomplete_reported_payload_is_integrity_failure_not_false_recovery(self):
@@ -157,7 +157,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
         self.assertEqual(r.reranker.calls, 1)
         self.assertEqual(b['retrieval_policy']['rerank_attempts'], 1)
-        self.assertEqual(b['attached_evidence_ids'], ['other'])
+        self.assertEqual(b['attached_evidence_ids'], ['action', 'other', 'warning'])
         self.assertFalse(b['source_gaps'][0]['rider_resolvable'])
 
     def test_source_gaps_do_not_trigger_rerank_when_backend_ranks_agree(self):
@@ -191,7 +191,7 @@ class Tests(unittest.TestCase):
                 self.assertTrue(b['retrieval_policy']['initial_ranking_signals']['ranking_uncertain'])
                 self.assertEqual(r.reranker.calls, 0)
 
-    def test_rerank_dropped_unreviewed_sibling_remains_in_immutable_gap_retention(self):
+    def test_rerank_preserves_reviewed_anchor_and_warning_without_admitting_unreviewed_sibling(self):
         from cloud.grounded_generation.serving_source_authority import SourceAuthority
         from evidence_registry import content_hash
         r = serving(disagreement=True)
@@ -211,19 +211,54 @@ class Tests(unittest.TestCase):
         r.source_authority = authority
         b = r.search('check', limit=1, applicability_status='CONFIRMED')
         self.assertEqual(r.reranker.calls, 1)
-        self.assertEqual([hit['id'] for hit in b['hits']], ['c2'])
+        self.assertEqual([hit['id'] for hit in b['hits']], ['c2','c1'])
         self.assertEqual(b['retained_gap_hits'], [{'id':'c1',
             'evidence_ids':['action', 'unreviewed-sibling'], 'parent_section_id':'p1'}])
         self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
         self.assertTrue(b['source_review_required'])
         self.assertEqual(b['source_gaps'][0]['evidence_ids'], ['unreviewed-sibling'])
-        self.assertEqual(b['required_evidence_ids'], ['other'])
-        self.assertEqual(b['reviewed_anchor_ids'], ['other'])
+        self.assertEqual(b['required_evidence_ids'], ['action', 'other', 'warning'])
+        self.assertEqual(b['reviewed_anchor_ids'], ['action', 'other'])
         admitted = authority.assemble(b)
         self.assertTrue(admitted['gaps'])
         self.assertNotIn('unreviewed-sibling', admitted['evidence'])
-        self.assertNotIn('action', admitted['evidence'])
-        self.assertNotIn('warning', admitted['evidence'])
+        self.assertIn('action', admitted['evidence'])
+        self.assertIn('warning', admitted['evidence'])
+
+    def test_gap_only_rerank_winner_cannot_erase_initial_reviewed_anchor_or_its_warning(self):
+        from cloud.grounded_generation.serving_source_authority import SourceAuthority
+        from evidence_registry import content_hash
+        r = serving(disagreement=True)
+        r.chunks[0]['evidence_ids'].append('unreviewed-sibling')
+        authority = SourceAuthority.__new__(SourceAuthority)
+        authority.lock = 'synthetic-gap-authority'; authority.base = r.source_authority.base
+        authority.index_id = 'synthetic'; authority.checksum = 'sha'
+        authority.chunks = {c['id']: deepcopy(c) for c in r.chunks}
+        authority._chunk_hashes = {cid: content_hash(c) for cid, c in authority.chunks.items()}
+        authority.complete_context_ids = {'action', 'warning'}
+        authority.check = lambda: None
+        authority.evidence_ready = lambda eid: eid in authority.complete_context_ids
+        authority._closure = lambda ids: set(ids) | ({'warning'} if 'action' in ids else set())
+        authority._payload = lambda ids, anchors, gaps: {
+            'required_evidence_ids': sorted(ids), 'anchor_evidence_ids': sorted(anchors),
+            'evidence': {eid: {} for eid in ids}, 'gaps': gaps}
+        r.source_authority = authority
+        bundle = r.search('check', limit=1, applicability_status='CONFIRMED')
+        # c2 wins the cross encoder but has no source-approved anchor. c1's
+        # already selected action and complete warning closure must survive.
+        self.assertEqual([hit['id'] for hit in bundle['hits']], ['c2', 'c1'])
+        self.assertEqual(bundle['reviewed_anchor_ids'], ['action'])
+        self.assertEqual(bundle['attached_evidence_ids'], ['action', 'warning'])
+        self.assertEqual(bundle['retrieval_policy']['preserved_initial_anchor_chunk_ids'], ['c1'])
+        self.assertEqual(bundle['retrieval_policy']['assembled_hit_count'], 2)
+        self.assertEqual(len({hit['id'] for hit in bundle['hits']}), len(bundle['hits']))
+        self.assertEqual(r.reranker.calls, 1)
+        self.assertEqual(bundle['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
+        gaps = {eid for row in bundle['source_gaps'] for eid in row['evidence_ids']}
+        self.assertEqual(gaps, {'other', 'unreviewed-sibling'})
+        admitted = authority.assemble(bundle)
+        self.assertEqual(set(admitted['evidence']), {'action', 'warning'})
+        self.assertNotIn('retained_approved_evidence_ids', bundle)
 
     def test_rerank_query_bound_preserves_complete_full_query(self):
         r = serving(disagreement=True)
@@ -386,7 +421,7 @@ class Tests(unittest.TestCase):
         bundle = r.search('check', limit=1, applicability_status='CONFIRMED')
         self.assertEqual(bundle['retrieval_policy']['rerank_attempts'], 1)
         self.assertEqual(r.reranker.calls, 1)
-        self.assertEqual(bundle['attached_evidence_ids'], ['other'])
+        self.assertEqual(bundle['attached_evidence_ids'], ['action', 'other', 'warning'])
 
     def test_conditional_reranker_failure_is_system_error_without_retry(self):
         r = serving(disagreement=True)

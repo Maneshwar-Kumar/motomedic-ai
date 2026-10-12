@@ -19,7 +19,7 @@ from online_retrieve import Retriever as FrozenRetriever, RetrievalSystemError
 from retrieval_policy import RetrievalPolicy, ranking_signals
 from cloud.grounded_generation.serving_source_authority import MAX_RETAINED_GAP_HITS
 
-VERSION = 'authenticated-open-hybrid-rank-disagreement-v5'
+VERSION = 'authenticated-open-hybrid-rank-disagreement-v6'
 RERANK_GATE_VERSION = 'ordered-distinct-parent-rank-disagreement-v3'
 QUERY_CONTEXT = ContextVar('motomedic_retrieval_history', default=())
 
@@ -273,7 +273,7 @@ class Retriever(FrozenRetriever):
         candidate_limit = candidate_limit or policy.candidate_limit
         if not 1 <= limit <= candidate_limit <= policy.expanded_candidate_limit:
             raise ValueError('Invalid retrieval bounds')
-        limit = min(limit, 5)  # Current open-Q&A configured assembly maximum.
+        limit = min(limit, 5)  # Primary ranked selection window; reviewed anchors survive reranking.
         if applicability_status != 'CONFIRMED':
             raise RetrievalSystemError('SELECTED_SOURCE_SCOPE_NOT_CONFIRMED')
         if rerank is not None and type(rerank) is not bool:
@@ -306,6 +306,9 @@ class Retriever(FrozenRetriever):
             candidates, fused, signals = self._rank(dense, sparse, candidate_limit, policy, allowed)
             assembly_started = time.perf_counter()
             bundle = self._assemble_open(query, candidates, limit, dense, sparse, fused)
+            initial_anchors = set(bundle['reviewed_anchor_ids'])
+            initial_anchor_chunks = [i for i in candidates[:limit]
+                if initial_anchors.intersection(self.chunks[i]['evidence_ids'])]
             telemetry['stages_seconds']['initial_assembly'] = time.perf_counter()-assembly_started
             retained_gap_hits = {}
             self._retain_gap_hits(bundle, retained_gap_hits, candidate_limit)
@@ -321,7 +324,14 @@ class Retriever(FrozenRetriever):
                 telemetry.update(rerank_pair_count=pairs, rerank_skip_reason=skip)
                 if scores is not None:
                     pool.sort(key=lambda i: (-scores[i], self.chunks[i]['id']))
-                    bundle = self._assemble_open(query, pool, limit, dense, sparse, fused, scores,
+                    selected = pool[:limit]
+                    preserved = [i for i in initial_anchor_chunks if i not in selected]
+                    selected.extend(preserved)
+                    if len(selected) > candidate_limit:
+                        raise RetrievalSystemError('REVIEWED_ANCHOR_SELECTION_BOUND_NO_TRUNCATION')
+                    telemetry.update(recovery_attempts=int(bool(preserved)),
+                        preserved_initial_anchor_chunk_ids=[self.chunks[i]['id'] for i in preserved])
+                    bundle = self._assemble_open(query, selected, len(selected), dense, sparse, fused, scores,
                         retained_gap_hits.values())
                 # Optional rerank bounds do not turn complete evidence into a
                 # missing-source claim; full query and dependencies are retained.
@@ -331,7 +341,9 @@ class Retriever(FrozenRetriever):
                 telemetry['rerank_skip_reason'] = ('RERANK_DISABLED' if rerank is False else
                     'DENSE_SPARSE_DISTINCT_PARENT_RANKS_AGREE' if signals['rank_comparison_available'] else
                     'NO_COMPARABLE_DENSE_SPARSE_RANKS')
-            telemetry.update(final_action=action, initial_ranking_signals=signals,
+            telemetry.update(primary_hit_limit=limit, assembled_hit_limit=min(candidate_limit,2*limit),
+                             assembled_hit_count=len(bundle['hits']),
+                             final_action=action, initial_ranking_signals=signals,
                              dense_rpc=deepcopy(getattr(self, 'last_dense_trace', None)))
             telemetry['decisions'].append(action)
             bundle.update(retrieval_action=action, retrieval_policy=telemetry,

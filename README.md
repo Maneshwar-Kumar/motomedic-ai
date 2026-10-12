@@ -4,7 +4,7 @@ MotoMedic is a text assistant for questions about the **Royal Enfield New Himala
 
 **[Open the public demo](https://motomedic-rider-ui-279945185781.us-central1.run.app)** · [Review PR #4](https://github.com/Maneshwar-Kumar/motomedic-ai/pull/4) · [Current results](docs/STATUS.md) · [Setup guide](docs/SETUP.md)
 
-The implementation under review is on `codex/public-evaluator`; `main` remains the baseline. The current goal is a working text MVP. One public supported answer has been observed. The owner's service-due question is being checked, and its result is pending.
+The implementation under review is on `codex/public-evaluator`; `main` remains the baseline. The current goal is a working text MVP. One public supported answer has been observed. The service-due test returned UNSUPPORTED because ranking discarded its reviewed evidence; an essential retrieval repair is in progress.
 
 ## Using the demo
 
@@ -65,9 +65,9 @@ The browser uses the UI. API writes, worker execution and private operation read
 
 ## What is built, and what is still being checked
 
-The deployed text path includes immutable-index retrieval, complete evidence assembly, private drafting, separate finalized-response verification, durable operations, saved-buffer streaming and recovery. A public browser returned a supported answer, and a separate private operation check confirmed identical saved, streamed and recovered content. After the UI capacity repair, the [latest public browser check](reports/public_evaluator/20261012/public_review/browser_mvp_restored_v1/receipt.json) passed health, connection, scope confirmation and enabled question input. It submitted no question; the service-due answer check remains pending.
+The deployed text path includes immutable-index retrieval, complete evidence assembly, private drafting, separate finalized-response verification, durable operations, saved-buffer streaming and recovery. A public browser returned a supported answer, and a separate private operation check confirmed identical saved, streamed and recovered content. After the UI capacity repair, the [latest public browser check](reports/public_evaluator/20261012/public_review/browser_mvp_restored_v1/receipt.json) passed health, connection, scope confirmation and enabled question input. It submitted no question.
 
-The service-due question is the current unresolved check. An earlier USB question reached a system error during verification. That failure remains recorded, and its exact provider stop reason was not retained. Current MVP work focuses on that service question and the usable public text UI. [Status](docs/STATUS.md) contains the actual receipts, known limits and historical results; software tests and builds are reported separately from returned-answer evidence.
+The service-due test found the Service Reminder section, but reranking selected five unreviewed hits and left the model with no citable evidence. It returned UNSUPPORTED, so the MVP is not complete. A minimal retrieval repair must preserve applicable reviewed evidence and then pass the same question. An earlier USB question also reached a verification error; both failures remain recorded. [Status](docs/STATUS.md) contains the actual receipts, known limits and historical results; software tests and builds are reported separately from returned-answer evidence.
 
 ## Clone, inspect and test
 
