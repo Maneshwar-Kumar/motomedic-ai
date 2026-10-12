@@ -1,143 +1,105 @@
 # MotoMedic architecture
 
-Fresh baseline: 11 October 2026. [PRD.md](PRD.md) defines product behavior; [TRD.md](TRD.md) defines implementation contracts. [TODO.md](../TODO.md) gives the execution sequence.
+MotoMedic answers questions about the selected Himalayan BS6 owner's manual. Haiku `claude-haiku-5-5` drafts privately, and a separate Haiku call verifies the exact finalized answer. The worker saves the accepted answer before the API streams or recovers that same buffer.
 
-Build a small, hosted question-answering assistant for the selected Royal Enfield Himalayan BS6 owner's manual. Ingest and embed the immutable manual once. For each rider turn, retrieve applicable evidence, privately draft a concise answer, separately verify that exact answer, save the accepted response, and stream the saved text.
+**12 October 2026: the repository is public and v10.13 is frozen.** Source commit [3b7da1692187736295fee7345e9b3e932d02b216](https://github.com/Maneshwar-Kumar/motomedic-ai/commit/3b7da1692187736295fee7345e9b3e932d02b216) passed [provider-free CI](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38233548200). Public answering is enabled; anonymous API/worker health and read-only Qdrant checks passed. The owner [waived independent manual answer review](../reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) for this functional demonstration. Public answering is enabled after one observed direct SUPPORTED answer; no independent factual acceptance is claimed. V10.12 failed independent live review. See [current status](STATUS.md), [reviewer guide](REVIEWER.md) and [clone/fork setup](SETUP.md).
 
-This diagram describes the required architecture. It does not claim that every connection is deployed or accepted.
+Public answering is enabled by the [later direct owner instruction](../reports/public_evaluator/20261012/public_review/owner_public_answer_enablement_scope_v1.json), before full six-case acceptance. [Routed UI health](../reports/public_evaluator/20261012/haiku_v10_13_helpers/functional_ui_promotion_v2/enabled_health.json) passed for `motomedic-rider-ui-v10-13-functional-enabled`. The [anonymous browser](../reports/public_evaluator/20261012/public_review/browser_enabled_v1/receipt.json) observed a 97-character SUPPORTED answer in 71.06 seconds with enabled input and all four progress stages; it did not capture incremental chunk rendering or session/operation identity. The separate [private direct audit](../reports/public_evaluator/20261012/haiku_v10_13_runtime/direct_delivery_a77d_v1.json) proves exact-finalized verification and identical saved/stream/recovery. USB returned `PROVIDER_INCOMPLETE_OR_REFUSED` without a retained exact stop reason, four cases remain unrun and positive cache reads are unproven. Broader functional acceptance and merge remain pending; independent manual answer review was waived.
+
+## What runs where
+
+All current Google Cloud services are in project `motomedic-ai-20261009`, region `us-central1`. The stopped `motomedic-inference-20261009` project is not the model host; its billing remains disabled. The answering model is called through Anthropic's HTTPS API.
 
 ```mermaid
 flowchart TB
-    subgraph BUILD[Hosted build: once per source/parser/chunk/embedding version]
-        PDF[Approved owner's manual PDF]
-        SOURCE[Source manifest: checksum, applicability, display policy]
-        PARSE[Docling extraction: pages, tables, figures, warnings]
-        REVIEW[Source review: exact approved objects and dependencies]
-        CHUNK[Parent-child chunks and verified source links]
-        EMBED[BGE M3 embeddings]
-        POST[BM25 postings]
-        QDRANT[(Private Qdrant dense index)]
-        OBJECTS[(Private Cloud Storage: immutable source and index artifacts)]
-        INDEX[Version manifest: hashes and review bindings]
-        PDF --> PARSE
-        SOURCE --> PARSE
-        PARSE --> REVIEW --> CHUNK
-        CHUNK --> EMBED --> QDRANT
-        CHUNK --> POST --> OBJECTS
-        PARSE --> OBJECTS
-        REVIEW --> OBJECTS
-        QDRANT --> INDEX
-        OBJECTS --> INDEX
+    GIT[GitHub: code, supplied manual, scoped approvals and receipts]
+    CI[GitHub Actions: provider-free contract and UI tests]
+    CB[Google Cloud Build: prepared frozen source to container images]
+    REG[(Private Artifact Registry: backend and UI image digests)]
+    GIT --> CI
+    GIT -->|exact committed inputs| CB --> REG
+
+    subgraph OFFLINE[Hosted index build: historical immutable artifact, reused]
+        PDF[149-page supplied owner manual]
+        INGEST[Parse, review objects and dependencies, chunk, embed once]
+        BUNDLE[(Private Cloud Storage: source, BM25, vectors and pinned model assets)]
+        PDF --> INGEST --> BUNDLE
     end
 
-    subgraph SERVE[Hosted serving: one operation per rider turn]
-        UI[Browser: selected manual, question, optional typed outcomes]
-        API[Authenticated API: ownership, input, rate and spend checks]
-        STATE[(Firestore: sessions, operations, leases, accepted responses)]
-        DISPATCH[Durable authenticated worker dispatch]
-        CONTEXT[Relevant question and history projection]
-        QEMBED[Embed retrieval query]
-        DENSE[Dense search RPC]
-        SPARSE[BM25 search]
-        FUSE[Rank fusion: RRF]
-        INITIAL[Source and applicability checks; initial evidence assembly]
-        SCHEDULE[Bounded recovery and conditional reranking]
-        ASSEMBLE[Approved assembly: required context and citations]
-        BOUND[Count complete context; reserve whole-turn capacity]
-        DRAFT[Private answer draft]
-        FINALIZE[Finalize warnings, limitations and server citations]
-        VERIFY[Separate verification of exact response and claims]
-        CORRECT[At most one corrective draft]
-        GUARD[Final schema, source, history and binding checks]
-        SAVE[Durably save accepted buffer or fixed terminal message]
-        STREAM[Stream exact saved text; recover by operation ID]
-        UI --> API --> STATE
-        API --> DISPATCH --> CONTEXT
-        STATE --> CONTEXT
-        CONTEXT --> QEMBED --> DENSE
-        CONTEXT --> SPARSE
-        DENSE --> FUSE
-        SPARSE --> FUSE
-        FUSE --> INITIAL --> SCHEDULE --> ASSEMBLE --> BOUND --> DRAFT
-        DRAFT --> FINALIZE --> VERIFY
-        VERIFY -->|correctable rejection| CORRECT --> FINALIZE
-        VERIFY -->|eligible verdict| GUARD --> SAVE --> STATE
-        VERIFY -->|unsupported after allowed correction| SAVE
-        BOUND -->|operational failure| SAVE
-        GUARD -->|integrity failure| SAVE
-        STATE --> STREAM --> UI
-        API -->|progress events| STREAM
+    subgraph GCP[Google Cloud serving]
+        BROWSER[Human browser]
+        UI[Cloud Run motomedic-rider-ui: gateway and Streamlit]
+        API[Cloud Run motomedic-arm-a: public health, authenticated operations]
+        TASKS[Cloud Tasks: motomedic-verified-answers, exact worker OIDC]
+        WORKER[Cloud Run motomedic-answer-worker: public health, private task execution]
+        QDRANT[Cloud Run motomedic-qdrant: public read-only health and vector queries]
+        STATE[(Private Firestore: sessions, operations, leases, saved answers and ledgers)]
+        SECRET[(Private managed secrets)]
+        BROWSER -->|HTTPS, signed visitor cookie and proof| UI
+        BROWSER -->|anonymous health only| API
+        BROWSER -->|anonymous health only| WORKER
+        BROWSER -->|anonymous read-only health and query| QDRANT
+        UI -->|verified UI service identity and owned visitor capability| API
+        API --> STATE
+        API --> TASKS --> WORKER
+        WORKER -->|source and immutable index bound query| QDRANT
+        WORKER --> STATE
+        STATE -->|saved answer and durable progress| API -->|SSE or recovery| UI
+        SECRET -.-> UI
+        SECRET -.-> API
+        SECRET -.-> WORKER
     end
 
-    QDRANT --> DENSE
-    OBJECTS --> SPARSE
-    OBJECTS --> INITIAL
-    OBJECTS --> ASSEMBLE
-    INDEX --> ASSEMBLE
-    SOURCE --> ASSEMBLE
-    SOURCE --> INITIAL
-
-    subgraph CONTROLS[Shared controls]
-        PROVIDER[Authorized primary and optional Claude availability fallback]
-        BUDGET[Atomic token and monetary reservations]
-        TRACE[Redacted traces: versions, retrieval, verdicts, latency, cost]
-    end
-    PROVIDER -.-> BOUND
-    PROVIDER -.-> DRAFT
-    PROVIDER -.-> VERIFY
-    BUDGET -.-> BOUND
-    STATE -.-> TRACE
-    SCHEDULE -.-> TRACE
-    VERIFY -.-> TRACE
+    REG -.-> UI
+    REG -.-> API
+    REG -.-> WORKER
+    BUNDLE -->|generation and hash checked at startup| QDRANT
+    BUNDLE -->|BM25, source mappings and local query/reranker assets| WORKER
+    ANTHROPIC[Anthropic: pinned Haiku, distinct draft and verifier calls]
+    WORKER -->|private complete admitted evidence and relevant history| ANTHROPIC
+    ANTHROPIC -->|private draft or verdict| WORKER
 ```
 
-Dense search and BM25 execute concurrently after a history-aware retrieval query is prepared. Their ranks are fused; relevance alone never authorizes an answer. Conditional reranking resolves uncertain ordering of usable candidates. One bounded recovery may retrieve missing, reviewed dependencies. Missing source approval is a review problem, not a reranking trigger or a question for the rider.
+Anonymous service readback passed. API and worker allow only anonymous GET `/v1/health`; every other request requires a cryptographically verified Google token with the exact audience and an allowlisted verified service-account email. Visitor, edge and Tasks restrictions still apply. Qdrant exposes only read-only `/health` and source/index-bound `/query`, not native dashboard or management routes. See [exact public-review authority](../reports/public_evaluator/20261012/public_review/owner_public_review_scope_v1.json).
 
-Evidence assembly retains immutable evidence IDs, original page metadata, applicable conditions, warnings, specifications, units, table headers and verified references. Admit reviewed objects at their approved scope. A reviewed heading does not approve its entire parent body. Assemble compact complete context around approved evidence and mandatory dependencies; never omit required context to fit the model.
-
-The current authorized primary model remains the default. Optional Claude receives only assembled evidence and relevant history, under its recorded authorization and budget. Only explicitly eligible primary availability failures can select it. Semantic rejection, invalid JSON, exhausted quota, source defects and integrity failure keep their original failure paths. The retired full-manual Claude method is excluded. Fallback remains disabled unless serving activation is authorized.
-
-Drafting and verification are separate calls. Verification binds the exact finalized response, claims, question, relevant history, evidence and runtime versions. A partial answer states its limitation before verification. At most one correction and re-verification is allowed. Verification cannot cure wrong applicability, missing mandatory context or invalid citations.
-
-Save only after final checks pass. Progress may be displayed while work proceeds; unchecked drafting tokens are private. Stream slices of the saved accepted buffer, never regenerate it for delivery. Recovery returns the same response and hashes. Processing must survive browser disconnection independently of the SSE connection. Authenticated Cloud Tasks dispatch to a Cloud Run worker is a proposed implementation, not a deployed fact. Leases and terminal reconciliation prevent indefinitely `RUNNING` operations. An uncertain provider completion must not trigger automatic paid replay.
-
-| Rider outcome | Meaning and delivery |
-| --- | --- |
-| `SUPPORTED` | Verified complete or explicitly partial manual-backed answer. |
-| `AMBIGUOUS` | One focused question about a rider-resolvable ambiguity supported by the source. |
-| `UNSUPPORTED` | No releasable answer after permitted checks; fixed manual fallback and verified service route. |
-| `SAFETY_STOP` | Applicable source-specific safety stop with priority over ordinary answering. |
-| `SYSTEM_ERROR` | Provider, quota, malformed output, integrity, storage or other operational failure; fixed retry message. |
-
-Fallback: “I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.”
-
-System error: “I couldn’t check the answer right now. Please try again shortly.”
-
-Fallback does not assert that the entire manual has no answer. Neither fixed message requires a successful model call. Citations expose authorized metadata and the verified OEM route; source policy prohibits rider access to the PDF, excerpts and figure crops.
-
-| Storage | Responsibility |
-| --- | --- |
-| Private Cloud Storage | Immutable PDF/extraction/index artifacts and manifests identified by generation and hash. |
-| Private Qdrant | BGE M3 vectors and selected-manual/version-filtered dense retrieval. |
-| Versioned BM25 snapshot | Sparse retrieval over the same manual and chunk mappings, loaded once per worker/index version. |
-| Firestore | Owned sessions, optional typed observations/attempts, idempotent operations, leases, accepted buffers and atomic quota/spend reservations. |
-| Managed secrets | Provider credentials available only to authorized backend identities. |
-| Redacted telemetry | Stage timing, verdicts, error categories, exact versions and estimated cost; no raw rider media or routine transcript copies. |
-
-`ACTION_COMPLETED_UNRESOLVED` remains distinct from an observed normal component. Ordinary questions require neither authored question IDs nor diagnostic StepDefinitions. Prompt caching, if supported by the exact authorized model/account, is a cost/latency optimization separate from answer permission. Current validation recorded zero cached tokens. Exact-answer shortcuts are disabled for this integration.
-
-## Current baseline and gaps
-
-The 149-page owner's manual has SHA-256 `CF221A29E2F9CD5AF6E80A99774A697C814E8EDA661C27D72E519D8A7E80DA89`. Existing candidate index `index_a3282c4d98cf54595e4ba168` contains BGE M3 vectors, 532 search chunks, 277 parents and BM25, with private Qdrant infrastructure. Exact owner-delegated source approvals remain version- and scope-bound; they do not automatically approve general generation or public display.
-
-| Area | Evidence before this reset | Required next change |
+| Component | Execution and responsibility | Code or evidence |
 | --- | --- | --- |
-| Retrieval | Dense/BM25 concurrency and RRF exist; serving searches NumPy vectors instead of the hosted Qdrant RPC. | Connect and measure the actual Qdrant request path against the immutable index. |
-| Reranking | Open questions reach legacy missing-step review gates, bypassing conditional scheduling. | Use approved source dependencies and rank uncertainty without a step allowlist. |
-| Source admission | Low-fuel evidence was not admitted; other approved contexts became too large. | Version a compact approved-object/dependency representation and check completeness independently. |
-| Real answer coverage | v8 Haiku run `38160944967` released zero technical answers and answered zero of four clearly answerable or partially answerable turns; three contexts exceeded 8,192 tokens. | Fix admission/context and evaluate fresh source-reviewed cases before release. |
-| Provider capacity | Drafting plus separate verification can exceed existing per-minute admission capacity. | Reserve and schedule a complete bounded turn, including possible correction and fallback. |
-| History and delivery | Short follow-ups can lose retrieval topic; detached work can strand operations. | Preserve topic/outcomes and add durable execution, reconciliation and exact replay. |
-| DevOps | Expiring Actions artifacts, competing runtime paths and weak image bindings remain. | Durable GCS inputs, one release manifest, provider-free PR checks, immutable images and rollback. |
+| Browser UI | Cloud Run gateway fronts loopback Streamlit; presents scope, progress, saved text and follow-up. The deployed enabled revision accepts answer submission; the retained preview revision remains a rollback target. | [UI](../rider_ui/README.md), [gateway](../rider_ui/public_gateway.py), [client](../rider_ui/client.py) |
+| API | Cloud Run service exposes public health. Other routes require verified service identity plus visitor/operation authorization; validate questions up to 100 words, save durable work, dispatch and observe results. | [API](../cloud/arm_a/rider_api.py), [production wiring](../cloud/arm_a/app.py) |
+| Answer worker | Separate Cloud Run service using the backend image, with public health and exact private task identity for execution. Performs retrieval, complete evidence assembly, private drafting, final verification and durable commit. Browser disconnection does not cancel its operation. | [worker](../cloud/arm_a/durable_dispatch.py), [generation](../cloud/grounded_generation/verified_qa.py) |
+| Dense retrieval | Read-only Qdrant wrapper restores existing vectors, then exposes only `/health` and source/index-bound `/query` publicly under the recorded readback. It does not expose a native dashboard or collection-management API. | [wrapper](../cloud/qdrant/boot.py), [recorded deployment](../cloud/deployment_status.json) |
+| Sparse retrieval and ranking | BGE M3 query embedding, BM25 and pinned cross-encoder run on the hosted worker's CPU. Dense RPC and BM25 run concurrently; RRF combines them. Reranking is conditional on observed distinct-parent rank disagreement. | [retrieval](../cloud/grounded_generation/serving_retrieval.py) |
+| Durable state | Firestore owns sessions/history, operations, fenced leases, accepted buffers, visitor quotas and permanent token/money reservations. | [store](../cloud/arm_a/store.py), [admission](../cloud/grounded_generation/whole_turn_admission.py) |
+| Dispatch | Named Cloud Tasks carry a work reference, not the raw work snapshot. Exact task-caller identity/audience and persistent state prevent redelivery from repeating paid work. | [dispatch](../cloud/arm_a/durable_dispatch.py), [setup receipt](../reports/public_evaluator/20261012/operations/setup_v1.json) |
+| Model calls/cache | Both roles use pinned Haiku with distinct policies, schemas and instances. Each caches its own policy/evidence prefix for five minutes; question/history/final answer are dynamic. Answer-cache shortcuts and availability fallback are disabled. | [contracts](../cloud/grounded_generation/role_contracts.py), [adapters](../cloud/grounded_generation/cached_verifier.py) |
+| Offline source/index | Hosted ingestion created the immutable index before serving. Requests never parse or re-embed the manual. Startup reloads generation/hash-bound artifacts. | [source](../source_manifest.json), [loader](../cloud/serving_artifacts.py) |
 
-Software tests establish boundary behavior, not factual coverage, deployed Qdrant/Firestore answering, live browser recovery, public readiness or production latency. Existing private services and their spending controls are unchanged by these documents. Photo and voice follow text acceptance.
+## One rider turn
+
+1. The UI confirms the selected Himalayan BS6 source. The authenticated API operation checks the signed visitor, input limits, ownership, operation key and persistent admission, then saves and dispatches work.
+2. The worker prepares a history-aware retrieval query. Source/index-bound dense retrieval and BM25 run concurrently; RRF, conditional reranking and bounded reviewed-dependency recovery select evidence.
+3. Assembly preserves complete applicable evidence, original admitted IDs, warnings, prerequisites, conditions, units, headers, references and relevant history. Missing extraction or review is a maintainer failure. No old assembled-evidence cap or silent truncation applies.
+4. Native request counts, native windows and persistent budgets are checked separately. The initial private draft/verifier phase reserves two role-bound calls against the existing ledgers.
+5. Haiku drafts privately. The server finalizes text, conditions, warnings and citations. A separate Haiku call checks every claim against each cited original object and binds the exact finalized answer, evidence, question, history and runtime.
+6. One correctable rejection may permit one corrected draft and new verification, admitted as a separate phase. Malformed output, quota, outage or integrity failure is `SYSTEM_ERROR`; uncertain provider completion never triggers automatic paid replay or refund.
+7. Final binding checks precede the Firestore commit. The API streams slices of the saved buffer. Recovery and completed replay return that same operation's saved answer without another model call.
+
+`SUPPORTED` includes useful complete or explicitly partial answers. `AMBIGUOUS`, `UNSUPPORTED`, `SAFETY_STOP` and `SYSTEM_ERROR` remain distinct. Applicable source-specific safety has priority. A model verdict is probabilistic. Independent manual answer review is waived for this functional demo by the owner; immutable source approval and separate exact-finalized verification remain required, without independent factual acceptance.
+
+The exact existing 181,153,632-byte index snapshot is published as a [GitHub Release asset](https://github.com/Maneshwar-Kumar/motomedic-ai/releases/tag/index-a3282c4d98cf54595e4ba168), SHA-256 `4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc`. The [publication readback](../reports/public_evaluator/20261012/public_review/index_release_readback_v1.json) binds the asset and GitHub digest. This is a byte-identical export, not new ingestion. Original hosted GCS generation/hash bindings remain unchanged. The snapshot includes pinned reranker files; the BGE M3 query model and private inherited container base still require own hosted setup; see [SETUP](SETUP.md).
+
+## Build, test and release boundaries
+
+[GitHub Actions](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/workflows/ci.yml) runs the complete published [CI workflow](../.github/workflows/ci.yml) on pull requests, pushes to `main` and manual dispatch. It checks navigation/source approvals, frozen bytes and committed serving inputs; then tests provider, admission, retrieval, managed-store, delivery and UI contracts using synthetic doubles. It requests no provider secrets and does not establish hosted answer quality.
+
+Google Cloud Build separately builds Linux containers from prepared, generation/hash-bound source archives. The canonical build configuration is generated by [serving_release.py](../tools/serving_release.py); submitting the historical raw [cloudbuild.yaml](../cloud/arm_a/cloudbuild.yaml) intentionally fails. Backend and UI images bind source commit, frozen manifest, input tree and image digest. API and worker share the backend image. Hosted native-count/evaluator jobs use explicit scope and ledger readback; they are separate from ordinary CI.
+
+Release evidence must identify actual Ready revisions, full material configuration, traffic, source/index/runtime/model/image bindings, rollback and restore health. Browser recovery, real retrieval/returned answers and current-role cache creation/reads need actual hosted functional receipts. The current owner scope waives independent manual answer adjudication; original source-object approvals remain immutable. The [v10.12 CI run](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38223614708) and successful builds did not prevent its citation/draft failures; they are historical software evidence, not v10.13 acceptance.
+
+## Source and spending controls
+
+The source is the 149-page RAM00818/A owner's manual, SHA-256 `cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89`. The immutable index `index_a3282c4d98cf54595e4ba168` contains 532 chunks, 277 parents and BM25. Exact [161-case delegated source approval](../human_review/agent_release_161/README.md) and additional pinned packages remain scope-bound; a heading does not approve a whole parent. Docling page 103 remains flagged.
+
+The owner's latest instruction authorizes publishing the supplied manual for inspection. Historical source/display manifests retain their original bytes; public access does not change source-content approval. No credentials or rider records belong in Git or public inspection.
+
+Both Haiku roles share the existing USD1 ledger and the existing 100-attempt primary ledger. The default legacy ceiling was 999,200; the owner approved and [applied exactly 2,000,000 tokens](../reports/public_evaluator/20261012/haiku_v10_13_helpers/operator_v2/hosted_runs/57f78b4b-1385-428b-8b90-fa31f134230b/application_receipt.json), grant scope `9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1`. The compiled 3,000,000 bound is not an allocation or approval. It preserves all historical counters/charges, attempts, USD1, INR2,700 lifetime and INR2,540 billing-disconnect guard. [Admission review](../reports/public_evaluator/20261012/haiku_v10_13/admission/synthetic_validation_v1.json) remains provider-free evidence; the separate hosted application receipt proves the real grant. Stopped billing is never restarted implicitly.

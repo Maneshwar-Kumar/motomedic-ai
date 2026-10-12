@@ -4,19 +4,48 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from copy import deepcopy
 from unittest.mock import patch
 
 from tools import serving_release as release
 from tools.validate_serving_artifacts_hosted import check_snapshot_binding
+from tools.check_installed_serving_release import (OWNER_SCOPE_SHA, OWNER_MODEL_SCOPE_SHA,
+                                                   PROMPT_CACHE, validate_policy)
+from cloud.grounded_generation.cached_verifier import DRAFT_CONTRACT, CONTRACT
+from cloud.grounded_generation.role_router import ROUTING_CONTRACT
 
 
 class ReleaseTests(unittest.TestCase):
     def fixture(self, root):
         (root / 'runtime.py').write_bytes(b'candidate-runtime')
         bindings = {'runtime.py': hashlib.sha256(b'candidate-runtime').hexdigest()}
-        manifest = {'schema_version': 'motomedic-serving-release-v9',
+        authority = root / release.OWNER_SCOPE
+        authority.parent.mkdir(parents=True, exist_ok=True)
+        authority.write_bytes((release.ROOT / release.OWNER_SCOPE).read_bytes())
+        model_authority = root / release.OWNER_MODEL_SCOPE
+        model_authority.write_bytes((release.ROOT / release.OWNER_MODEL_SCOPE).read_bytes())
+        manifest = {'schema_version': release.SCHEMA,
             'file_sha256': bindings, 'manual_checksum': release.MANUAL_SHA,
-            'index_id': release.INDEX, 'source_approval': {'sha256': release.APPROVAL_SHA},
+            'index_id': release.INDEX, 'source_approval': {'path': release.APPROVAL, 'sha256': release.APPROVAL_SHA},
+            'source_baseline_commit': release.SOURCE_BASELINE,
+            'historical_serving_manifests': dict(release.HISTORICAL_SERVING),
+            'primary_model': DRAFT_CONTRACT['model'], 'draft_model_contract': deepcopy(DRAFT_CONTRACT),
+            'verifier_model': 'claude-haiku-5-5', 'verifier_contract': deepcopy(CONTRACT),
+            'model_routing_contract': deepcopy(ROUTING_CONTRACT),
+            'verifier_enabled': True,
+            'verification_authority': 'EXACT_FINALIZED_RESPONSE_AND_IMMUTABLE_EVIDENCE',
+            'prompt_cache': PROMPT_CACHE,
+            'owner_authorization': {'path': release.OWNER_SCOPE, 'sha256': OWNER_SCOPE_SHA,
+                'authority': 'DIRECT_USER_INSTRUCTION', 'scope': 'PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION'},
+            'owner_model_authorization': {'path': release.OWNER_MODEL_SCOPE,
+                'sha256': OWNER_MODEL_SCOPE_SHA, 'authority': 'DIRECT_USER_INSTRUCTION',
+                'scope': 'HAIKU_ONLY_SEPARATE_DRAFT_AND_FINALIZED_RESPONSE_VERIFICATION'},
+            'deployment_authorized': True, 'public_opening_authorized': True,
+            'public_release_approved': False, 'billing_changed': False,
+            'acceptance': {'source_approval': 'EXACT_UNCHANGED_SCOPED_SOURCE_APPROVAL',
+                'runtime_quality': 'INDEPENDENT_ORIGINAL_SOURCE_AND_CURRENT_MODEL_ACCEPTANCE_REQUIRED',
+                'hosted_operations': 'CURRENT_RUNTIME_HOSTED_ACCEPTANCE_REQUIRED',
+                'build_checks': 'PROVIDER_FREE_BINDINGS_ONLY'},
             'fallback_enabled': False, 'answer_cache_enabled': False,
             'backend_base_image': release.BASE_IMAGE,
             'ui_base_image': release.UI_BASE_IMAGE,
@@ -29,6 +58,8 @@ class ReleaseTests(unittest.TestCase):
 
     def verify(self, root, **options):
         with patch.object(release, 'verify_history', return_value=64), patch.object(
+                release, 'verify_serving_history', return_value=release.HISTORICAL_SERVING), patch.object(
+                release, 'verify_source_bindings', return_value={}), patch.object(
                 release, 'serving_inputs', return_value=['runtime.py']):
             return release.verify(root, **options)
 
@@ -95,6 +126,109 @@ class ReleaseTests(unittest.TestCase):
     def test_all_historical_snapshots_still_match_immutable_v8(self):
         # Real retained bytes are read-only; no source or historical objects mutate.
         self.assertEqual(release.verify_history(), 64)
+
+    def test_v9_manifests_retained_without_matching_changed_active_runtime(self):
+        self.assertEqual(release.verify_serving_history(), release.HISTORICAL_SERVING)
+
+    def test_historical_manifest_and_sidecar_cannot_be_refrozen(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in release.HISTORICAL_SERVING:
+                target = root / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((release.ROOT / name).read_bytes())
+                target.with_suffix('.sha256').write_bytes((release.ROOT / name).with_suffix('.sha256').read_bytes())
+            name = next(iter(release.HISTORICAL_SERVING))
+            target = root / name
+            target.write_bytes(target.read_bytes() + b' ')
+            target.with_suffix('.sha256').write_text(release.digest(target))
+            with self.assertRaisesRegex(ValueError, 'HISTORICAL_SERVING_MANIFEST_CHANGED'):
+                release.verify_serving_history(root)
+
+    def test_v10_binds_every_existing_canonical_source_dependency(self):
+        bindings = release.verify_source_bindings()
+        approved = json.loads((release.ROOT / release.APPROVAL).read_bytes())
+        names = set(release.serving_inputs())
+        self.assertEqual(bindings[release.MANUAL], release.MANUAL_SHA)
+        self.assertTrue(set(bindings) <= names)
+        planner_names = {r['artifact_bindings']['planner_case_locator']['file'] for r in approved['records']}
+        self.assertEqual(len(planner_names), 161)
+        self.assertTrue(planner_names <= names)
+        self.assertIn('rider_ui/public_edge.py', names)
+
+    def test_role_cache_and_authority_mutations_need_new_scope(self):
+        changes = (
+            ('primary_model', 'gemini-2.5-flash-lite'), ('verifier_model', 'gemma-4-26b-a4b-it'),
+            ('verifier_enabled', False), ('prompt_cache', 'ANSWER_CACHE'),
+            ('verification_authority', 'RANKING_CONFIDENCE'), ('billing_changed', True),
+            ('public_release_approved', True), ('fallback_enabled', True),
+            ('answer_cache_enabled', True), ('deployment_authorized', False),
+        )
+        for name, value in changes:
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                _, manifest = self.fixture(root)
+                manifest[name] = value
+                with self.assertRaises(ValueError):
+                    validate_policy(manifest, root)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, manifest = self.fixture(root)
+            for name, field, altered in (
+                    ('draft_model_contract', 'model', 'alternate-draft'),
+                    ('verifier_contract', 'fallback_role', True),
+                    ('verifier_contract', 'cache_ttl', '1h'),
+                    ('owner_authorization', 'sha256', '0' * 64),
+                    ('owner_model_authorization', 'sha256', '0' * 64),
+                    ('acceptance', 'runtime_quality', 'ACCEPTED_BY_BUILD')):
+                candidate = deepcopy(manifest)
+                candidate[name][field] = altered
+                with self.subTest(name=name, field=field), self.assertRaises(ValueError):
+                    validate_policy(candidate, root)
+            (root / release.OWNER_SCOPE).write_text('{}')
+            with self.assertRaisesRegex(ValueError, 'SERVING_OWNER_AUTHORIZATION_CHANGED'):
+                validate_policy(manifest, root)
+
+    def test_owner_model_scope_and_native_window_are_exact_bindings(self):
+        for changed in ('scope', 'native_window', 'routing'):
+            with self.subTest(changed=changed), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                _, manifest = self.fixture(root)
+                if changed == 'scope':
+                    (root / release.OWNER_MODEL_SCOPE).write_text('{}')
+                elif changed == 'native_window':
+                    manifest['draft_model_contract']['native_input_limit_tokens'] = 16000
+                else:
+                    manifest['model_routing_contract'] = {'allowed': 'same-model-verification'}
+                with self.assertRaises(ValueError):
+                    validate_policy(manifest, root)
+
+    def test_prepare_v10_carries_public_edge_but_keeps_original_pdf_backend_only(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, manifest = self.fixture(root)
+            manifest['index'] = {'snapshot': {'uri': 'gs://private/immutable.tar.gz',
+                'generation': '123', 'sha256': 'a' * 64, 'maximum_bytes': 1024}}
+            blobs = {'rider_ui/Dockerfile': b'FROM pinned-ui-base\nCMD ["public_edge"]\n',
+                'rider_ui/public_edge.py': b'public edge code',
+                'rider_ui/public_gateway.py': b'public gateway code', 'controller_contracts.py': b'contracts',
+                release.MANUAL: b'synthetic source PDF', 'runtime.py': b'candidate-runtime',
+                release.OWNER_SCOPE: (release.ROOT / release.OWNER_SCOPE).read_bytes()}
+            manifest['file_sha256'] = {n: hashlib.sha256(v).hexdigest() for n, v in blobs.items()}
+            with patch.object(release, 'verify', return_value=manifest), patch.object(release, 'git_blobs', return_value=blobs):
+                receipt = release.prepare(root, committed_revision='c' * 40)
+            revision = Path(release.CURRENT).stem.removeprefix('serving_manifest_')
+            self.assertEqual(receipt['runtime_revision'], revision)
+            self.assertEqual(receipt['schema_version'], 'serving-v10-hosted-build-preparation-v1')
+            output = root / 'build' / ('serving-' + revision)
+            self.assertTrue((output / 'ui/rider_ui/public_edge.py').exists())
+            self.assertTrue((output / 'ui/rider_ui/public_gateway.py').exists())
+            self.assertFalse((output / 'ui' / release.MANUAL).exists())
+            self.assertTrue((output / 'backend' / release.MANUAL).exists())
+            self.assertIn('"--threads", "8"', (output / 'backend/Dockerfile').read_text())
+            self.assertIn(':serving-' + revision + '-', receipt['contexts']['ui']['image_tag'])
+            self.assertFalse(receipt['quality_acceptance'])
+            self.assertFalse(receipt['hosted_operations_acceptance'])
 
     def test_hosted_validation_cannot_replace_frozen_generation_with_same_hash(self):
         reference = {'uri':'gs://private/index.tar.gz', 'generation':'123',

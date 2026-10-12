@@ -1,0 +1,180 @@
+{
+  "case_id": "EVAL_TOPIC_TABLE_04",
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "expected_route_matched": false,
+  "inference_replayed": false,
+  "operation_id": "6d9be61e6e804ca5ba0f2b73aa4b66c6",
+  "post_retries": 0,
+  "previous_saved_response_sha256": "339c8dba99a703ebf30c246947b27e9974e432b728654982732b758569970c2a",
+  "question": "Different question: what is the low-fuel warning level and what should I do?",
+  "question_sha256": "3418f34f6dd7bfabd22559912c7d2a00acfea4e855b701b2964022ea3f5ee5a8",
+  "request_sha256": "4d3ee1f8b3132d15399e9dd1dd1d3b7d0dae8292711781426bcebf7b96297bf3",
+  "response_sha256": "b58a54b714b5589362cead2f530897bb842699c12e1175a7ae0952439b12d1ee",
+  "route": "SYSTEM_ERROR",
+  "saved_received_seconds": 10.766954521000002,
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": null,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "6d9be61e6e804ca5ba0f2b73aa4b66c6",
+      "response_sha256": "b58a54b714b5589362cead2f530897bb842699c12e1175a7ae0952439b12d1ee",
+      "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+      "verification_binding_sha256": null
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 1,
+    "response": {
+      "cited_pages": [],
+      "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "release_gate_passed": false,
+      "technical_content": false,
+      "trace_id": "fae5b5039468490e8b7119b5ac6a1692",
+      "type": "SYSTEM_ERROR"
+    },
+    "runtime_controls": {
+      "composition": {
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 1,
+        "draft_model": "gemma-4-26b-a4b-it",
+        "failed_provider_trace": {
+          "cache_hit_observed": false,
+          "cached_tokens": 0,
+          "generation_calls": 0,
+          "model": "claude-haiku-5-5",
+          "provider": "anthropic",
+          "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+          "raw_content_logged": false,
+          "retry_count": 0,
+          "role": "semantic_verifier",
+          "token_counter": "ANTHROPIC_COUNT_TOKENS",
+          "token_counter_is_estimate": true
+        },
+        "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+        "generation_calls": 1,
+        "provider_calls": 1,
+        "provider_prompt_cache": "EXPLICIT_VERIFIER_PREFIX",
+        "total_private_pipeline_seconds": 3.540015896,
+        "verification_calls": 1,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": false,
+        "verifier_calls": 1,
+        "verifier_model": "claude-haiku-5-5",
+        "verifier_spend_reservation": {
+          "reserved_attempts": 2,
+          "reserved_maximum_cost_usd": 0.003848,
+          "version": "haiku-evidence-prefix-verifier-v1"
+        },
+        "version": "open-manual-draft-verify-v10",
+        "whole_turn_reservation": {
+          "maximum_wait_seconds": 426.958841,
+          "pacing_version": "whole-turn-sealed-unused-pacing-v2",
+          "reserved_attempts": 8,
+          "reserved_tokens": 79936,
+          "sealed_unused_slots": 7,
+          "sealing_status": "SEALED_UNUSED_CONFIRMED",
+          "version": "whole-turn-capacity-v1"
+        }
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 58,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_13dac6aaee2fcbdd57618d29",
+          "evidence_1e819216fd033fbe0f84a38b",
+          "evidence_2b8af8f01370b1d3b9ee880a",
+          "evidence_31f9ffe7f325a580f7c58947",
+          "evidence_3f0254b2230794cc5e25393b",
+          "evidence_46ea7e82545c259cf4ed23b3",
+          "evidence_662d4a163d504cc62ff5147e",
+          "evidence_82764faca7aa6cec43f2eeb3",
+          "evidence_87d7aaf9a6f68c203a240607",
+          "evidence_a35159dd2d88b584ad319de1",
+          "evidence_a4a384cb8cd1cd437ac00907",
+          "evidence_b345d26bcf46960f7125d8d8",
+          "evidence_ea69e5fbd3ff27f1dd159960",
+          "evidence_f4f3ea7f748d6732d21cae42",
+          "evidence_f5f14378db31693f76bd2a81"
+        ],
+        "authority_lock": "685052f0f5aae1fdde8442985595bafedbc0547edb828f960c5ae1b1a57713f9",
+        "chunk_ids": [
+          "chunk_978068c2e079d4865ba1f8da",
+          "chunk_c9262bc554f6a06dc1e93ab9",
+          "chunk_f93c0aea44853c21bd0f05c7",
+          "chunk_4b91b30bfdfa9efc7ba822bb",
+          "chunk_8105564d21681a7b4bc8728b"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_f93c0aea44853c21bd0f05c7",
+            "evidence_ids": [
+              "evidence_2634c935288556e630a3ef29"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_f93c0aea44853c21bd0f05c7",
+            "evidence_ids": [
+              "evidence_5ca120be479d8177a9e4abbc"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_f93c0aea44853c21bd0f05c7",
+            "evidence_ids": [
+              "evidence_70bed8091599ec7c16e03c3b"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_f93c0aea44853c21bd0f05c7",
+            "evidence_ids": [
+              "evidence_866a35ce69c506f6ed684745"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_f93c0aea44853c21bd0f05c7",
+            "evidence_ids": [
+              "evidence_cc41a397722d624951c9efeb"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 1.3005412770000078
+      }
+    },
+    "runtime_policy": "open-manual-draft-verify-v10",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "90c879f9ef364b1aaf42bb84ba67a1fe",
+    "version": 3
+  },
+  "session_group": "usb_followup_topic_shift",
+  "status": "SAVED_STREAMED_RECOVERED",
+  "stream_stages": [],
+  "streamed_text": "",
+  "total_seconds": 11.028699193999984
+}

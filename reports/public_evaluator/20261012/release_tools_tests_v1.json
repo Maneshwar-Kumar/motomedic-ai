@@ -1,0 +1,33 @@
+{
+  "build_executed": false,
+  "cloud_calls": 0,
+  "deployment_changed": false,
+  "execution_environment": "LOCAL_SYNTHETIC_PROVIDER_FREE",
+  "file_sha256": {
+    "tools/bind_serving_images.py": "adc196466ce648eb986deb1ad5d598fd672a1438cf19207c93bdb505051acf80",
+    "tools/check_installed_serving_release.py": "b5af62233c051a4c8830007db4df164d6d6210c2589f617c40015bd614c349da",
+    "tools/check_repository_structure.py": "8a49913bc36dcc20a46c82a61df3bad8172f3cb10e74896929ddf40347a9d338",
+    "tools/serving_release.py": "2261142e179e81f37ee8354c9ced5ce138673ee37f6bfd783fdb1ee9f5cee7fe",
+    "tools/test_bind_serving_images.py": "07737060f9da212e48796bbf04f2b4038fc108a1fd3c5ebbbcf4431b3ac364dc",
+    "tools/test_check_installed_serving_release.py": "6e510c2ec73cad1f6a2d53e001034b35b0ac696213bbb07db5d4c8be9abab3de",
+    "tools/test_serving_release.py": "d7f63043baa05fbbcdccd62df69ee97dc6f723f094c5d199faa15670731aa862"
+  },
+  "freeze_created": false,
+  "historical_serving_manifests": {
+    "reports/build/20261012/serving_manifest_v9.json": "a5604aaa277b4095fb3aebc95703cfd7c128e1d609cde80965c18d1791b98a84",
+    "reports/build/20261012/serving_manifest_v9_1.json": "474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d"
+  },
+  "historical_v8_files_verified": 64,
+  "hosted_operations_acceptance": false,
+  "model_constructions": 0,
+  "owner_authorization_sha256": "65c42d40b4a882972570e377b4a314abd2767be7fb8fb8129e7bfe9c2a436b0d",
+  "pending_gate": "Coordinator code/workflow stability confirmation before a new exact v10 freeze; then committed blob checks and hosted build/live acceptance",
+  "provider_calls": 0,
+  "quality_acceptance": false,
+  "recorded_at_utc": "2026-10-11T20:25:25.571143+00:00",
+  "schema_version": "motomedic-serving-v10-local-release-tests-v1",
+  "source_canonical_files_verified": 349,
+  "test_command": "python -B -m unittest tools.test_serving_release tools.test_bind_serving_images tools.test_check_installed_serving_release -v",
+  "test_reported_seconds": 3.084,
+  "tests_passed": 26
+}

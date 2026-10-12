@@ -11,14 +11,43 @@ from copy import deepcopy
 import json
 import math
 from pathlib import Path
+import re
 import time
 import urllib.request
 from online_ingest import stable_id, digest
 from online_retrieve import Retriever as FrozenRetriever, RetrievalSystemError
 from retrieval_policy import RetrievalPolicy, ranking_signals
+from cloud.grounded_generation.serving_source_authority import MAX_RETAINED_GAP_HITS
 
-VERSION = 'authenticated-open-hybrid-retrieval-v2'
+VERSION = 'authenticated-open-hybrid-rank-disagreement-v6'
+RERANK_GATE_VERSION = 'ordered-distinct-parent-rank-disagreement-v3'
 QUERY_CONTEXT = ContextVar('motomedic_retrieval_history', default=())
+
+
+def conditional_rank_signals(dense_sections, sparse_sections, fused_sections, policy):
+    """Only observed differences between backend parent ranks trigger reranking.
+
+    Several sibling search chunks represent one section. Missing backend hits
+    and an unmatched trailing rank supply no contradictory ordering. RRF margin
+    is diagnostic: adjacent reciprocal ranks are intrinsically close even when
+    both backends agree, so margin alone cannot start cross-encoder inference.
+    """
+    signals = ranking_signals(dense_sections, sparse_sections, fused_sections, policy)
+    dense = list(dict.fromkeys(dense_sections))[:policy.disagreement_top_k]
+    sparse = list(dict.fromkeys(sparse_sections))[:policy.disagreement_top_k]
+    comparable = bool(dense and sparse)
+    differences = [rank for rank, (left, right) in enumerate(zip(dense, sparse), 1)
+                   if left != right] if comparable else []
+    signals.update(rerank_gate_version=RERANK_GATE_VERSION,
+        dense_top_distinct_parent_ids=dense, sparse_top_distinct_parent_ids=sparse,
+        rank_comparison_available=comparable,
+        compared_rank_positions=min(len(dense), len(sparse)) if comparable else 0,
+        disagreeing_rank_positions=differences,
+        dense_sparse_section_overlap=(len(set(dense) & set(sparse)) /
+            min(len(dense), len(sparse))) if comparable else None,
+        uncertainty_reasons=['DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT'] if differences else [],
+        ranking_uncertain=bool(differences), rrf_margin_is_diagnostic_only=True)
+    return signals
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -26,13 +55,43 @@ class _NoRedirect(urllib.request.HTTPRedirectHandler):
         raise RetrievalSystemError('QDRANT_REDIRECT_REJECTED')
 
 
+def _topic_boundary(question):
+    """Conversational topic markers apply to arbitrary subjects, never source IDs."""
+    return bool(re.match(r'^\s*(?:(?:a\s+)?(?:different|new|another|separate|unrelated)\s+'
+        r'(?:question|topic|issue)\b|(?:back|return(?:ing)?|switch(?:ing)?|moving)\s+'
+        r'(?:back\s+)?to\s+\S|on\s+another\s+note\b)', question, re.IGNORECASE))
+
+
+def _needs_topic_context(question):
+    if _topic_boundary(question):
+        return False
+    words = re.findall(r"[\w'-]+", question.lower())
+    if any(word in {'it', 'its', 'them', 'their'} for word in words):
+        return True
+    if any(word in {'that', 'same'} for word in words):
+        return True
+    placeholders = {'one', 'ones', 'part', 'parts', 'component', 'components',
+        'thing', 'things', 'item', 'items', 'issue', 'problem', 'step', 'procedure',
+        'condition', 'setting', 'value', 'of', 'is', 'was', 'are', 'were'}
+    for at, word in enumerate(words):
+        if word in {'this', 'that', 'these', 'those', 'same'} and (
+                at + 1 == len(words) or words[at + 1] in placeholders):
+            return True
+    # Ellipsis has an omitted subject, rather than merely a short question.
+    # Complete named questions such as "What is the battery capacity?" do not
+    # inherit an unrelated topic solely because they contain fewer words.
+    return bool(re.fullmatch(r'\s*(?:(?:and|also|then)\s+)?(?:'
+        r'what\s+(?:should|can|do)\s+i\s+(?:do|check|avoid|try)|what\s+(?:next|else)|'
+        r'(?:how|why|when)|how\s+(?:long|much|often)|anything\s+else|'
+        r'(?:and|also)\s+(?:the\s+)?(?:value|grade|interval|condition|precautions|next\s+step))'
+        r'\s*[?!.]*\s*', question, re.IGNORECASE))
+
+
 def retrieval_query(question, history=()):
     """Preserve prior rider topic for short/deictic follow-ups without new facts."""
     if not isinstance(question, str) or not question.strip():
         raise ValueError('Query is empty')
-    words = question.split()
-    references = {'it', 'its', 'that', 'this', 'those', 'them', 'there', 'same'}
-    if len(words) > 16 and not references.intersection(w.lower().strip('.,?!') for w in words):
+    if not _needs_topic_context(question):
         return question
     prior = []
     for row in history:
@@ -49,7 +108,7 @@ def retrieval_query(question, history=()):
     selected = [prior[-1]]
     # Follow the explicit reference chain to its original rider question.
     for earlier in reversed(prior[:-1]):
-        if not references.intersection(w.lower().strip('.,?!') for w in selected[0].split()):
+        if not _needs_topic_context(selected[0]):
             break
         selected.insert(0, earlier)
     return 'Previous rider questions (topic context):\n' + '\n'.join(selected) + '\nCurrent rider question:\n' + question
@@ -164,27 +223,41 @@ class Retriever(FrozenRetriever):
         for i in candidates:
             section = self.chunks[i]['parent_section_id']
             sections[section] = max(sections.get(section, 0), fused[i])
-        signals = ranking_signals(*([self.chunks[i]['parent_section_id'] for i in rank] for rank in rankings),
+        signals = conditional_rank_signals(*([self.chunks[i]['parent_section_id'] for i in rank] for rank in rankings),
             sorted(sections.items(), key=lambda x: (-x[1], x[0])), policy)
         return candidates, fused, signals
 
     def _assemble_open(self, query, candidates, limit, dense, sparse, fused, rerank_scores=None,
-                       retained_ids=()):
+                       retained_gap_hits=()):
         hits = [{**deepcopy(self.chunks[i]), 'dense_score': float(dense[i]) if math.isfinite(float(dense[i])) else None,
                  'bm25_score': float(sparse[i]), 'rrf_score': fused[i],
                  'cross_encoder_score': (rerank_scores or {}).get(i)} for i in candidates[:limit]]
         bundle = {'index_id': self.manifest['index_id'], 'manual_checksum': self.manifest['source_sha256'],
             'source_sha256': self.manifest['source_sha256'], 'hits': hits, 'query': query,
             'conflicts': [], 'applicability_status': 'CONFIRMED', 'parents': [], 'linked_chunks': [], 'links': [],
-            'retained_approved_evidence_ids': sorted(retained_ids), 'may_generate_procedural_advice': False}
+            'retained_gap_hits': deepcopy(list(retained_gap_hits)), 'may_generate_procedural_advice': False}
         context = self.source_authority.scheduling_context(bundle)
         required = set(context['required_evidence_ids'])
-        attached = {e for hit in hits for e in hit['evidence_ids']} | set(retained_ids)
+        # SourceAuthority has already fetched and validated the complete closure
+        # from the immutable loaded snapshot. Comparing it to direct search-hit
+        # IDs falsely reported every attached warning as requiring recovery.
+        attached = set(context['payload']['evidence'])
+        if required - attached:
+            raise RetrievalSystemError('COMPLETE_REVIEWED_SOURCE_PAYLOAD_MISSING')
         bundle.update({k: deepcopy(v) for k, v in context.items() if k != 'payload'})
         bundle.update(required_evidence_ids=sorted(required), attached_evidence_ids=sorted(attached),
                       missing_evidence_ids=sorted(required-attached),
                       evidence_ids=sorted(attached & self.evidence.keys()))
         return bundle
+
+    def _retain_gap_hits(self, bundle, retained, candidate_limit):
+        gap_ids = {gap['chunk_id'] for gap in bundle['source_gaps']}
+        for hit in bundle['hits']:
+            if hit['id'] in gap_ids:
+                retained[hit['id']] = {key: deepcopy(hit[key])
+                    for key in ('id', 'evidence_ids', 'parent_section_id')}
+        if len(retained) > min(candidate_limit, MAX_RETAINED_GAP_HITS):
+            raise RetrievalSystemError('RETAINED_SOURCE_GAP_HIT_BOUND_NO_TRUNCATION')
 
     def search(self, query, limit=5, candidate_limit=None, scope=None, rerank=None, *, policy=None,
                dependency_manifest=None, step_id=None, applicability_status='UNCONFIRMED',
@@ -200,7 +273,7 @@ class Retriever(FrozenRetriever):
         candidate_limit = candidate_limit or policy.candidate_limit
         if not 1 <= limit <= candidate_limit <= policy.expanded_candidate_limit:
             raise ValueError('Invalid retrieval bounds')
-        limit = min(limit, 5)  # Current open-Q&A configured assembly maximum.
+        limit = min(limit, 5)  # Primary ranked selection window; reviewed anchors survive reranking.
         if applicability_status != 'CONFIRMED':
             raise RetrievalSystemError('SELECTED_SOURCE_SCOPE_NOT_CONFIRMED')
         if rerank is not None and type(rerank) is not bool:
@@ -221,7 +294,10 @@ class Retriever(FrozenRetriever):
         telemetry = {'version': VERSION, 'policy': policy.to_dict(), 'recovery_attempts': 0,
             'rerank_attempts': 0, 'rerank_pair_count': 0, 'stages_seconds': {},
             'first_stage_execution': 'CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25',
-            'decisions': [], 'rerank_skip_reason': None, 'assembled_hit_limit': limit}
+            'decisions': [], 'rerank_skip_reason': None, 'assembled_hit_limit': limit,
+            'rerank_gate_version': RERANK_GATE_VERSION,
+            'rerank_mode': ('CONDITIONAL_RANK_DISAGREEMENT' if rerank is None else
+                            'ALWAYS_DIAGNOSTIC' if rerank else 'OFF_DIAGNOSTIC')}
         try:
             if not allowed:
                 raise RetrievalSystemError('SELECTED_SCOPE_HAS_NO_INDEXED_CHUNKS')
@@ -230,27 +306,13 @@ class Retriever(FrozenRetriever):
             candidates, fused, signals = self._rank(dense, sparse, candidate_limit, policy, allowed)
             assembly_started = time.perf_counter()
             bundle = self._assemble_open(query, candidates, limit, dense, sparse, fused)
+            initial_anchors = set(bundle['reviewed_anchor_ids'])
+            initial_anchor_chunks = [i for i in candidates[:limit]
+                if initial_anchors.intersection(self.chunks[i]['evidence_ids'])]
             telemetry['stages_seconds']['initial_assembly'] = time.perf_counter()-assembly_started
-            retained = set()
-            if bundle['missing_evidence_ids']:
-                recovery_started = time.perf_counter()
-                telemetry['recovery_attempts'] = 1
-                missing = list(bundle['missing_evidence_ids'])
-                # Exact reviewed dependencies are recovered from the already
-                # hash-validated object snapshot, not another semantic guess.
-                retained.update(bundle['required_evidence_ids'])
-                candidates, fused, signals = self._rank(dense, sparse, policy.expanded_candidate_limit, policy, allowed)
-                bundle = self._assemble_open(query, candidates, limit, dense, sparse, fused, retained_ids=retained)
-                telemetry['recovery'] = {'requested_evidence_ids': missing,
-                    'fetched_evidence_ids': sorted(set(missing)&retained),
-                    'remaining_missing_evidence_ids': bundle['missing_evidence_ids'],
-                    'candidate_limit': policy.expanded_candidate_limit, 'dense_candidate_limit': 20}
-                telemetry['decisions'].append('RECOVER_REVIEWED_DEPENDENCIES')
-                telemetry['stages_seconds']['dependency_recovery'] = time.perf_counter()-recovery_started
-            if bundle['source_gaps']:
-                action = 'CONTINUE_WITH_SOURCE_GAPS' if bundle['coverage_established'] else 'SOURCE_REVIEW_REQUIRED'
-                telemetry['rerank_skip_reason'] = 'SOURCE_REVIEW_REQUIRED'
-            elif not bundle['coverage_established']:
+            retained_gap_hits = {}
+            self._retain_gap_hits(bundle, retained_gap_hits, candidate_limit)
+            if not bundle['coverage_established']:
                 action = 'SOURCE_REVIEW_REQUIRED'
                 telemetry['rerank_skip_reason'] = action
             elif (rerank is True or (rerank is None and signals['ranking_uncertain'])):
@@ -261,16 +323,27 @@ class Retriever(FrozenRetriever):
                 telemetry['stages_seconds']['reranking'] = time.perf_counter()-rerank_started
                 telemetry.update(rerank_pair_count=pairs, rerank_skip_reason=skip)
                 if scores is not None:
-                    retained.update(bundle['required_evidence_ids'])
                     pool.sort(key=lambda i: (-scores[i], self.chunks[i]['id']))
-                    bundle = self._assemble_open(query, pool, limit, dense, sparse, fused, scores, retained)
+                    selected = pool[:limit]
+                    preserved = [i for i in initial_anchor_chunks if i not in selected]
+                    selected.extend(preserved)
+                    if len(selected) > candidate_limit:
+                        raise RetrievalSystemError('REVIEWED_ANCHOR_SELECTION_BOUND_NO_TRUNCATION')
+                    telemetry.update(recovery_attempts=int(bool(preserved)),
+                        preserved_initial_anchor_chunk_ids=[self.chunks[i]['id'] for i in preserved])
+                    bundle = self._assemble_open(query, selected, len(selected), dense, sparse, fused, scores,
+                        retained_gap_hits.values())
                 # Optional rerank bounds do not turn complete evidence into a
                 # missing-source claim; full query and dependencies are retained.
-                action = 'CONTINUE_GATES'
+                action = 'CONTINUE_WITH_SOURCE_GAPS' if bundle['source_gaps'] else 'CONTINUE_GATES'
             else:
-                action = 'CONTINUE_GATES'
-                telemetry['rerank_skip_reason'] = 'RERANK_DISABLED' if rerank is False else 'CLEAR_RANKING'
-            telemetry.update(final_action=action, initial_ranking_signals=signals,
+                action = 'CONTINUE_WITH_SOURCE_GAPS' if bundle['source_gaps'] else 'CONTINUE_GATES'
+                telemetry['rerank_skip_reason'] = ('RERANK_DISABLED' if rerank is False else
+                    'DENSE_SPARSE_DISTINCT_PARENT_RANKS_AGREE' if signals['rank_comparison_available'] else
+                    'NO_COMPARABLE_DENSE_SPARSE_RANKS')
+            telemetry.update(primary_hit_limit=limit, assembled_hit_limit=min(candidate_limit,2*limit),
+                             assembled_hit_count=len(bundle['hits']),
+                             final_action=action, initial_ranking_signals=signals,
                              dense_rpc=deepcopy(getattr(self, 'last_dense_trace', None)))
             telemetry['decisions'].append(action)
             bundle.update(retrieval_action=action, retrieval_policy=telemetry,

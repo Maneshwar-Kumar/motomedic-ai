@@ -1,0 +1,156 @@
+{
+  "anonymous_ui_health": {
+    "health": {
+      "ready": true
+    },
+    "http_status": 200,
+    "provider_calls": 0
+  },
+  "binding": {
+    "image_binding_sha256": "51e76b34f9e0b9074227f45649c43cf0eedccacecea6f069e56d1a288fe1ba61",
+    "images": {
+      "backend": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+      "ui": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:dbb6bb80e7b56fdb999930c0f74f58c1290b0674f26a3b20616cf5589773cb5e"
+    },
+    "model_routing_contract": {
+      "availability_fallback_enabled": false,
+      "native_limit_sources": {
+        "checked_date": "2026-10-12",
+        "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+      },
+      "roles": {
+        "HAIKU_DRAFT_HAIKU_VERIFY": {
+          "draft": {
+            "answer_cache": "DISABLED",
+            "automatic_retries": 0,
+            "cache_ttl": "5m",
+            "citation_schema": "ROLE_TEMPLATE_WITH_EXACT_ADMITTED_SOURCE_ID_ENUM",
+            "context_window_tokens": 1000000,
+            "effort": "medium",
+            "evidence_encoding": "PLAIN_JSON_LITERAL_SOURCE_IDS",
+            "fallback_role": false,
+            "input_tokens": 998200,
+            "maximum_attempts_per_call": 1,
+            "minimum_cache_tokens": 512,
+            "model": "claude-haiku-5-5",
+            "native_json_schema": true,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "output_json_bytes": 16384,
+            "output_tokens": 1800,
+            "pricing": {
+              "base_usd_per_million": {
+                "cache_read": 0.01,
+                "cache_write": 0.125,
+                "input": 0.1,
+                "output": 0.5
+              },
+              "long_context_above_input_tokens": 100000,
+              "long_usd_per_million": {
+                "cache_read": 0.05,
+                "cache_write": 0.625,
+                "input": 0.5,
+                "output": 2.5
+              }
+            },
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "provider": "anthropic",
+            "request_bytes": null,
+            "retry_rejections": [],
+            "role": "private_draft",
+            "thinking": "disabled",
+            "version": "haiku-literal-object-draft-finalized-verifier-v4"
+          },
+          "verifier": {
+            "answer_cache": "DISABLED",
+            "automatic_retries": 0,
+            "cache_ttl": "5m",
+            "citation_schema": "ROLE_TEMPLATE_WITH_EXACT_ADMITTED_SOURCE_ID_ENUM",
+            "context_window_tokens": 1000000,
+            "effort": "medium",
+            "evidence_encoding": "PLAIN_JSON_LITERAL_SOURCE_IDS",
+            "fallback_role": false,
+            "input_tokens": 998200,
+            "maximum_attempts_per_call": 1,
+            "minimum_cache_tokens": 512,
+            "model": "claude-haiku-5-5",
+            "native_json_schema": true,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "output_json_bytes": 16384,
+            "output_tokens": 1800,
+            "pricing": {
+              "base_usd_per_million": {
+                "cache_read": 0.01,
+                "cache_write": 0.125,
+                "input": 0.1,
+                "output": 0.5
+              },
+              "long_context_above_input_tokens": 100000,
+              "long_usd_per_million": {
+                "cache_read": 0.05,
+                "cache_write": 0.625,
+                "input": 0.5,
+                "output": 2.5
+              }
+            },
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "provider": "anthropic",
+            "request_bytes": null,
+            "retry_rejections": [],
+            "role": "semantic_verifier",
+            "thinking": "disabled",
+            "version": "haiku-literal-object-draft-finalized-verifier-v4"
+          }
+        }
+      },
+      "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+      "same_model_is_not_cross_model_agreement": true,
+      "selection": "FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE_FLIP",
+      "version": "haiku-literal-object-draft-finalized-verifier-v4"
+    },
+    "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+    "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c"
+  },
+  "core_and_iam_unchanged": true,
+  "independent_factual_quality_acceptance": false,
+  "legitimate_bounded_public_usage_does_not_disable_rollback": true,
+  "permanent_grant_caps_and_charges_retained": true,
+  "provider_calls_by_health_check": 0,
+  "provider_ledger_after": {
+    "full_document_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "d15b75c708f0bb22e5a52d7fcedb1502e80eb0aaf6a07b7f239f2f69bf88c0ba",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "1d660c3e7d0621554e37134c69f72f5af2540bf92a96462fa92edb78fe82c70d",
+      "owner-haiku-fallback-20261011-validation-v1": "3496197becd5724f0b7b538f19aa6a541899b7cad5057b0546c049286ad74011"
+    },
+    "immutable_non_charge_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "e029cbd37abbd6dafc48ebcd748442f3cf4efc38bd21503e6f850e699997ff32",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "9e0d5b18c1ad0b9cbc7fda54427a5000708e847be21334afef29af643d064783",
+      "owner-haiku-fallback-20261011-validation-v1": "daadac75082af4bb53a05e7ab2155aaaa396f0afb2768da52ee3a1cc6128c2b4"
+    },
+    "maximum_tokens": 2000000,
+    "reservation_count": 10,
+    "reserved_attempts": 38,
+    "reserved_nanodollars": 76449375,
+    "reserved_tokens": 683451,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "revision": "motomedic-rider-ui-v10-13-canary",
+  "revision_configuration_sha256": "a2cf4ec33f7d28365e3cc5a13afedf44d8d17b4d7c25ca57c14fd0cdb7fd054f",
+  "schema": "motomedic-functional-ui-routed-health-v1",
+  "stage": "paused_rollback"
+}

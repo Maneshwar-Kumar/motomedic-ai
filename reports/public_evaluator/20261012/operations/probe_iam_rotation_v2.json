@@ -1,0 +1,273 @@
+{
+  "schema_version": "hosted-probe-source-grant-rotation-v2",
+  "project_id": "motomedic-ai-20261009",
+  "authorization": "Owner-approved public evaluator bounded hosted validation; replace only v1 source-object get condition with supplied v2 object; no provider calls or billing changes",
+  "source": {
+    "schema_version": "hosted-cache-probe-source-v1",
+    "uri": "gs://motomedic-ai-20261009-indices/serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz",
+    "object": "serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz",
+    "generation": "1791752146855315",
+    "sha256": "02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f",
+    "bytes": 29392956,
+    "files": 526,
+    "serving_manifest": "reports/public_evaluator/20261012/serving_manifest_v10_3.json",
+    "serving_manifest_sha256": "1ec0f19b5a4cad2543018d1a793b41f0a50bd0004ace61a1c61d839252532d16",
+    "step_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d2b8417a1bccc97a1ba05bf2f71b0ae4f3aff4052f69ab5bdbe00a606507ba25",
+    "service_account": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "provider_calls": 0
+  },
+  "prior": {
+    "main_billing_enabled": true,
+    "inference_billing_enabled": false,
+    "budget_guard_log_scalars": [
+      {
+        "timestamp": "2026-10-11T20:55:14.300717Z",
+        "cost_inr": 116.07,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T20:14:14.885082Z",
+        "cost_inr": 116.07,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T19:33:14.795624Z",
+        "cost_inr": 86.5,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T18:52:13.996694Z",
+        "cost_inr": 31.11,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T18:11:13.892994Z",
+        "cost_inr": 18.92,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T17:30:14.078336Z",
+        "cost_inr": 0,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T16:49:13.80761Z",
+        "cost_inr": 0,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T16:08:13.97733Z",
+        "cost_inr": 0,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T15:27:09.879518Z",
+        "cost_inr": 0,
+        "stop": false
+      },
+      {
+        "timestamp": "2026-10-11T14:46:13.740374Z",
+        "cost_inr": 0,
+        "stop": false
+      }
+    ],
+    "bucket_backend_bindings": [
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+          "title": "motomedic-backend-exact-index-snapshot"
+        }
+      },
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "description": "Read only the exact authorized hosted probe source archive",
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_2/3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b.tar.gz'",
+          "title": "motomedic-backend-exact-cache-probe-v10-2"
+        }
+      }
+    ],
+    "at_utc": "2026-10-11T20:56:57.2589974Z"
+  },
+  "actions": [
+    {
+      "command": [
+        "storage",
+        "buckets",
+        "remove-iam-policy-binding",
+        "gs://motomedic-ai-20261009-indices",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "--condition=expression=resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_2/3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b.tar.gz',title=motomedic-backend-exact-cache-probe-v10-2,description=Read only the exact authorized hosted probe source archive",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "bindings": [
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+            "condition": {
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+              "title": "motomedic-backend-exact-index-snapshot"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "roles/storage.legacyBucketOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyBucketReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.objectViewer",
+            "condition": null,
+            "members": [
+              "serviceAccount:motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ],
+        "etag": "CAU=",
+        "kind": "storage#policy",
+        "resourceId": "projects/_/buckets/motomedic-ai-20261009-indices",
+        "version": 3
+      },
+      "at_utc": "2026-10-11T20:57:41.5135544Z"
+    },
+    {
+      "command": [
+        "storage",
+        "buckets",
+        "add-iam-policy-binding",
+        "gs://motomedic-ai-20261009-indices",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "--condition=expression=resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz',title=motomedic-backend-exact-cache-probe-v10-3,description=Read only the exact authorized hosted probe source archive",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "bindings": [
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+            "condition": {
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+              "title": "motomedic-backend-exact-index-snapshot"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+            "condition": {
+              "description": "Read only the exact authorized hosted probe source archive",
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz'",
+              "title": "motomedic-backend-exact-cache-probe-v10-3"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "roles/storage.legacyBucketOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyBucketReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.objectViewer",
+            "condition": null,
+            "members": [
+              "serviceAccount:motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ],
+        "etag": "CAY=",
+        "kind": "storage#policy",
+        "resourceId": "projects/_/buckets/motomedic-ai-20261009-indices",
+        "version": 3
+      },
+      "at_utc": "2026-10-11T20:57:50.1223201Z"
+    }
+  ],
+  "readback": {
+    "bucket_backend_bindings": [
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+          "title": "motomedic-backend-exact-index-snapshot"
+        }
+      },
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "description": "Read only the exact authorized hosted probe source archive",
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_3/02aa1256eaab3efb36e1c46da00f9242e601515b4acedd71f9752663ef85677f.tar.gz'",
+          "title": "motomedic-backend-exact-cache-probe-v10-3"
+        }
+      }
+    ],
+    "at_utc": "2026-10-11T20:58:28.5997885Z"
+  },
+  "provider_calls": 0,
+  "secret_values_read": false,
+  "billing_changes": 0,
+  "status": "V2_SOURCE_GRANT_VERIFIED_BILLING_UNCHANGED",
+  "checks": {
+    "both_rotation_actions_succeeded": true,
+    "exact_v2_source_get_present": true,
+    "v1_source_get_removed": true,
+    "exact_index_snapshot_get_retained": true,
+    "only_exact_get_bindings": true,
+    "main_billing_enabled": true,
+    "inference_billing_disabled": true,
+    "latest_guard_stop_false": true,
+    "no_provider_or_billing_changes": true
+  }
+}

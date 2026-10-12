@@ -98,6 +98,15 @@ def create_app(registry, retriever, state_factory, cases):
         if request.path == '/healthz':
             return None
         try:
+            from cloud.arm_a.public_inspection_auth import enabled, verify_request
+            if enabled():
+                if request.path == '/v1/health' and request.method == 'GET':
+                    return None
+                verified_token = verify_request(request.headers)
+                # Cloud Run strips the alternate header's signature. Downstream
+                # edge/Tasks checks must read the same fully verified JWT.
+                request.environ.pop('HTTP_X_SERVERLESS_AUTHORIZATION', None)
+                request.environ['HTTP_AUTHORIZATION'] = 'Bearer ' + verified_token
             request.environ['arm_a_owner'] = cloud_run_owner(request.headers)
         except PermissionError:
             return error('SYSTEM_ERROR','AUTH_REQUIRED',401)
@@ -112,6 +121,9 @@ def create_app(registry, retriever, state_factory, cases):
     def oversized(_):
         return error('SYSTEM_ERROR','REQUEST_TOO_LARGE',413)
 
+    # Cloud Run reserves /healthz at external ingress; retain it for the
+    # container startup probe and expose an ordinary IAM-protected API path.
+    @app.get('/v1/health')
     @app.get('/healthz')
     def health():
         ready = not app.config.get('GROUNDED_PRIMARY') or app.config.get('DURABLE_DISPATCH_CONFIGURED') is True
@@ -120,7 +132,11 @@ def create_app(registry, retriever, state_factory, cases):
             'answer_provider':app.config.get('ANSWER_PROVIDER'), 'benchmark_pacing':False,
             'streaming':('DRAFT_VERIFY_STREAM' if app.config.get('GROUNDED_PRIMARY') else 'VERIFIED_COMPLETE_UNIT_SSE'),
             'durable_dispatch_configured': app.config.get('DURABLE_DISPATCH_CONFIGURED', False),
-            'reranking':'conditional-rerank-v1', 'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)}), (200 if ready else 503)
+            'reranking':'authenticated-open-hybrid-rank-disagreement-v5',
+            'verifier_provider':app.config.get('VERIFIER_PROVIDER'),
+            'prompt_cache':app.config.get('PROMPT_CACHE'),
+            'model_routing':app.config.get('MODEL_ROUTING_CONTRACT'),
+            'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)}), (200 if ready else 503)
 
     @app.get('/v1/initial-catalogue')
     def catalogue():
@@ -226,6 +242,23 @@ def create_app(registry, retriever, state_factory, cases):
     return app
 
 
+def validate_production_policy(lock):
+    """Check the installed role policy before models, providers or stores load."""
+    from cloud.grounded_generation.cached_verifier import CONTRACT as VERIFIER_CONTRACT, DRAFT_CONTRACT
+    from cloud.grounded_generation.role_router import ROUTING_CONTRACT
+    if (type(lock) is not dict or lock.get('schema_version') != 'motomedic-serving-release-v10' or
+            lock.get('primary_model') != 'claude-haiku-5-5' or
+            lock.get('answer_cache_enabled') is not False or
+            lock.get('fallback_enabled') is not False or
+            lock.get('verifier_enabled') is not True or
+            lock.get('draft_model_contract') != DRAFT_CONTRACT or
+            lock.get('verifier_model') != 'claude-haiku-5-5' or
+            lock.get('verifier_contract') != VERIFIER_CONTRACT or
+            lock.get('prompt_cache') != 'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M' or
+            lock.get('model_routing_contract') != ROUTING_CONTRACT):
+        raise RuntimeError('Production serving policy mismatch')
+
+
 def load_production():
     if not os.environ.get('K_SERVICE'):
         raise RuntimeError('Production app requires Cloud Run IAM environment')
@@ -233,13 +266,10 @@ def load_production():
     for name, sha in lock['file_sha256'].items():
         if hashlib.sha256((ROOT/name).read_bytes()).hexdigest() != sha:
             raise RuntimeError('Production runtime binding mismatch')
-    if (lock.get('schema_version') != 'motomedic-serving-release-v9' or
-            lock.get('primary_model') != 'gemma-4-26b-a4b-it' or
-            lock.get('answer_cache_enabled') is not False):
-        raise RuntimeError('Production serving policy mismatch')
+    validate_production_policy(lock)
     fallback_enabled = os.environ.get('MOTOMEDIC_CLAUDE_FALLBACK_ENABLED') == 'true'
-    if fallback_enabled and lock.get('fallback_enabled') is not True:
-        raise RuntimeError('Claude fallback serving activation is not authorized by the exact release')
+    if fallback_enabled or lock.get('fallback_enabled') is not False:
+        raise RuntimeError('The Haiku-only evaluator does not activate availability fallback')
     from google.cloud import firestore
     from cloud.serving_artifacts import load_index
     index = load_index(lock, ROOT/'build/serving-artifacts')
@@ -265,29 +295,21 @@ def load_production():
     # exact-wording composer is kept only for old regression fixtures.
     from cloud.grounded_generation.verified_qa import Composer
     from cloud.grounded_generation.serving_questions import Questions
-    from cloud.grounded_generation.provider import GemmaProvider
     from cloud.grounded_generation.whole_turn_admission import WholeTurnAdmission
     client = firestore.Client(project='motomedic-ai-20261009')
-    # Prior exact-model/account probes returned 404. An environment switch is
-    # not evidence of cache support; fresh capability review is required.
+    # Separate Haiku call roles share permanent token and USD1 reservations.
     reserve_provider = WholeTurnAdmission(client)
-    answer_provider = GemmaProvider(reserve_provider,cache_capability='unsupported')
-    # Preparation only: deployment and secret access are separate release scopes.
-    # Disabled by default; a quota/schema/source failure never selects this fallback.
-    if fallback_enabled:
-        from cloud.grounded_generation.claude_provider import ClaudeProvider
-        from cloud.grounded_generation.claude_budget import ClaudeBudget
-        from cloud.grounded_generation.fallback_provider import FallbackProvider
-        if not os.environ.get('ANTHROPIC_API_KEY'):
-            raise RuntimeError('Claude fallback requires its server-side secret')
-        answer_provider = FallbackProvider(answer_provider,
-            ClaudeProvider(reserve_provider,reserve_cost=ClaudeBudget(client)))
-    controlled_composer = Composer(answer_provider)
+    if not os.environ.get('ANTHROPIC_API_KEY'):
+        raise RuntimeError('The selected Haiku roles require their server-side managed secret')
+    from cloud.grounded_generation.role_router import production_router,ROUTING_CONTRACT
+    model_router=production_router(reserve_provider)
+    controlled_composer = Composer(router=model_router)
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-        ANSWER_PROVIDER=('gemma-4-26b-a4b-it -> claude-haiku-5-5'
-            if fallback_enabled else 'gemma-4-26b-a4b-it'))
+        ANSWER_PROVIDER='claude-haiku-5-5', VERIFIER_PROVIDER='claude-haiku-5-5',
+        PROMPT_CACHE='ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',
+        MODEL_ROUTING_CONTRACT=ROUTING_CONTRACT)
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
     if secret:

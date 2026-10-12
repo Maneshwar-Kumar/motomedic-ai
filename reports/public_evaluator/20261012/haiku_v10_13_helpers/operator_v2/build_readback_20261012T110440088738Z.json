@@ -1,0 +1,115 @@
+{
+  "createTime": "2026-10-12T11:02:17.395235759Z",
+  "id": "57f78b4b-1385-428b-8b90-fa31f134230b",
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds/57f78b4b-1385-428b-8b90-fa31f134230b?project=279945185781",
+  "name": "projects/279945185781/locations/global/builds/57f78b4b-1385-428b-8b90-fa31f134230b",
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "pool": {}
+  },
+  "projectId": "motomedic-ai-20261009",
+  "queueTtl": "3600s",
+  "results": {
+    "buildStepImages": [
+      "sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      ""
+    ],
+    "buildStepOutputs": [
+      "",
+      ""
+    ]
+  },
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+  "source": {
+    "storageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "generation": "1791802877335045",
+      "object": "serving/engineering-maintenance/v10_13/b7e96d3bffdc181ce62ad020ce33266ec954b95b517f2d7f6d9525d44f931c44.tar.gz"
+    }
+  },
+  "sourceProvenance": {
+    "fileHashes": {
+      "gs://motomedic-ai-20261009-indices/serving/engineering-maintenance/v10_13/b7e96d3bffdc181ce62ad020ce33266ec954b95b517f2d7f6d9525d44f931c44.tar.gz#1791802877335045": {
+        "fileHash": [
+          {
+            "type": "MD5",
+            "value": "Y/N8TuvOJNQD3eMSJOi68Q=="
+          },
+          {
+            "type": "SHA256",
+            "value": "t+ltO//cGBzmKtAgzjMmbslUuVtRfy1/bZUl1E+THEQ="
+          }
+        ]
+      }
+    },
+    "resolvedStorageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "generation": "1791802877335045",
+      "object": "serving/engineering-maintenance/v10_13/b7e96d3bffdc181ce62ad020ce33266ec954b95b517f2d7f6d9525d44f931c44.tar.gz"
+    }
+  },
+  "startTime": "2026-10-12T11:02:19.039102165Z",
+  "status": "WORKING",
+  "steps": [
+    {
+      "args": [
+        "-c",
+        "from pathlib import Path; p=Path(\"/workspace/tmp/token-ceiling-maintenance-v13-run/57f78b4b-1385-428b-8b90-fa31f134230b\"); p.mkdir(parents=True,exist_ok=True); p.chmod(0o777)"
+      ],
+      "entrypoint": "python",
+      "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "pullTiming": {
+        "endTime": "2026-10-12T11:02:33.846500915Z",
+        "startTime": "2026-10-12T11:02:28.083970453Z"
+      },
+      "status": "SUCCESS",
+      "timing": {
+        "endTime": "2026-10-12T11:02:34.676502387Z",
+        "startTime": "2026-10-12T11:02:28.083970453Z"
+      }
+    },
+    {
+      "args": [
+        "-B",
+        "tmp/token_ceiling_maintenance_job_v13.py",
+        "--inventory",
+        "tmp/token-ceiling-maintenance-v13-v2/source_inventory.json",
+        "--output",
+        "/workspace/tmp/token-ceiling-maintenance-v13-run/57f78b4b-1385-428b-8b90-fa31f134230b",
+        "--allocated-job-id",
+        "57f78b4b-1385-428b-8b90-fa31f134230b",
+        "--artifact-uri",
+        "gs://motomedic-ai-20261009-indices/engineering-acceptance/public-v10_3/57f78b4b-1385-428b-8b90-fa31f134230b"
+      ],
+      "entrypoint": "python",
+      "env": [
+        "PYTHONPATH=/workspace:/app",
+        "MOTOMEDIC_HOSTED_TOKEN_LIMIT_MAINTENANCE=true",
+        "MOTOMEDIC_CLOUD_BUILD_ID=57f78b4b-1385-428b-8b90-fa31f134230b"
+      ],
+      "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+      "pullTiming": {
+        "startTime": "2026-10-12T11:02:34.676734506Z"
+      },
+      "status": "WORKING",
+      "timing": {
+        "startTime": "2026-10-12T11:02:34.676734506Z"
+      }
+    }
+  ],
+  "timeout": "600s",
+  "timing": {
+    "BUILD": {
+      "endTime": "2026-10-12T11:04:38.052238804Z",
+      "startTime": "2026-10-12T11:02:27.532214123Z"
+    },
+    "FETCHSOURCE": {
+      "endTime": "2026-10-12T11:02:27.532024509Z",
+      "startTime": "2026-10-12T11:02:24.128851298Z"
+    },
+    "STORAGE_SOURCE": {
+      "endTime": "2026-10-12T11:02:27.532024509Z",
+      "startTime": "2026-10-12T11:02:24.128851298Z"
+    }
+  }
+}

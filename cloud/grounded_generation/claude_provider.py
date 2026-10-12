@@ -4,7 +4,11 @@ import json, os, threading, time
 from urllib.request import Request, build_opener
 from urllib.error import HTTPError
 from generation_providers import ProviderFailure, ProviderResult
-from cloud.grounded_generation.provider import NoRedirect, unique, INPUT_TOKENS, OUTPUT_TOKENS, REQUEST_BYTES
+from cloud.grounded_generation.provider import NoRedirect, unique, OUTPUT_TOKENS
+# Dormant availability fallback retains its separately approved legacy bounds.
+# Bidirectional selected roles use cached_verifier's native limits instead.
+INPUT_TOKENS=8192
+REQUEST_BYTES=65536
 
 MODEL = 'claude-haiku-5-5'
 CONTRACT = {'provider':'anthropic', 'model':MODEL, 'version':'haiku-evidence-json-v1',

@@ -1,0 +1,12 @@
+{
+  "schema": "motomedic-ui15-runtime-packaging-failure-v1",
+  "recorded_at_utc": "2026-10-12T17:44:21.917248+00:00",
+  "error": "ModuleNotFoundError: rider_ui.render",
+  "cause": "Final runtime Docker COPY allowlist omitted new render.py and timings.py, while the tested intermediate stage included them.",
+  "public_browser_status": "FAIL",
+  "question_submissions": 0,
+  "provider_calls_by_browser": 0,
+  "accepted_answers": 0,
+  "recovery": "CLItrafficrestoredknownworkingUI13; fresh16Dockerpackagefixwithruntimeimportsmoke required.",
+  "previous_build_and_test_success_not_runtime_acceptance": true
+}

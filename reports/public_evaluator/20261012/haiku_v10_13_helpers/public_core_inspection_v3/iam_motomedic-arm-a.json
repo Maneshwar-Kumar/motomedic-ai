@@ -1,0 +1,25 @@
+{
+  "all_users_invoker_only_added": true,
+  "existing_exact_public_policy_recovered": true,
+  "inspection_sha256": "dbe0def078fea27c0c6bdfb41aafcc725a44e612cc6480aba1d7502b20d9d41f",
+  "policy": {
+    "bindings": [
+      {
+        "members": [
+          "allUsers",
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+          "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "role": "roles/run.invoker"
+      }
+    ],
+    "etag": "BwZdoncrPXs=",
+    "version": 1
+  },
+  "prior_policy_sha256": "08522ae977a44c20309d55591fa975ff42a5972ee47488e54ef88b53ad229102",
+  "provider_calls": 0,
+  "quality_acceptance": false,
+  "schema": "motomedic-core-public-invoker-application-v3",
+  "service": "motomedic-arm-a",
+  "unrelated_policy_rows_preserved": true
+}

@@ -2,13 +2,19 @@
 from copy import deepcopy
 import unittest
 from tools.bind_serving_images import bind, bind_build
+from tools.check_installed_serving_release import OWNER_SCOPE, OWNER_SCOPE_SHA
 
 
 class ImageBindingTests(unittest.TestCase):
     def fixture(self):
-        preparation = {'source_commit': 'c' * 40, 'serving_manifest_sha256': 'a' * 64,
+        preparation = {'schema_version': 'serving-v10-hosted-build-preparation-v1',
+            'serving_schema_version': 'motomedic-serving-release-v10', 'runtime_revision': 'v10',
+            'quality_acceptance': False, 'hosted_operations_acceptance': False,
+            'owner_authorization': {'path':OWNER_SCOPE,'sha256':OWNER_SCOPE_SHA,
+                'authority':'DIRECT_USER_INSTRUCTION','scope':'PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION'},
+            'source_commit': 'c' * 40, 'serving_manifest_sha256': 'a' * 64,
             'input_tree_sha256': 'b' * 64, 'contexts': {kind: {
-                'source_archive_sha256': 'e' * 64, 'image_tag': 'registry.example/repo/' + kind + ':version',
+                'source_archive_sha256': 'e' * 64, 'image_tag': 'registry.example/repo/' + kind + ':serving-v10-' + 'b'*12,
                 'installed_manifest_sha256': 'f' * 64, 'dockerfile_sha256': '1' * 64,
                 'build_steps': [{'name': 'synthetic-docker-builder', 'args': ['build', '.']}],
                 'build_options': {'logging':'CLOUD_LOGGING_ONLY','substitutionOption':'ALLOW_LOOSE'},
@@ -33,6 +39,7 @@ class ImageBindingTests(unittest.TestCase):
 
     def test_exact_pair_bound_without_promotion_claim(self):
         receipt = bind(*self.fixture())
+        self.assertEqual(receipt['schema_version'], 'motomedic-serving-v10-image-binding-v1')
         self.assertEqual(set(receipt['images']), {'backend', 'ui'})
         self.assertFalse(receipt['quality_acceptance'])
         self.assertFalse(receipt['deployment_authorized'])
@@ -40,12 +47,38 @@ class ImageBindingTests(unittest.TestCase):
 
     def test_build_only_requires_no_fictional_rollback_and_cannot_claim_promotion(self):
         receipt = bind_build(*self.fixture()[:3])
+        self.assertEqual(receipt['schema_version'], 'motomedic-serving-v10-build-binding-v1')
         self.assertEqual(receipt['binding_scope'], 'HOSTED_BUILD_PROVENANCE_ONLY')
         self.assertEqual(set(receipt['images']), {'backend', 'ui'})
         self.assertNotIn('rollback', receipt)
         for field in ('rollback_verified', 'promotion_ready', 'quality_acceptance',
                       'deployment_authorized', 'deployment_changed'):
             self.assertIs(receipt[field], False)
+
+    def test_legacy_isolated_v9_recipe_can_still_bind(self):
+        preparation, builds, uploads, _ = self.fixture()
+        preparation['schema_version'] = 'serving-v9-hosted-build-preparation-v1'
+        receipt = bind_build(preparation, builds, uploads)
+        self.assertEqual(receipt['schema_version'], 'motomedic-serving-v9-build-binding-v1')
+        self.assertNotIn('owner_authorization', receipt)
+
+    def test_preparation_does_not_fabricate_v10_acceptance_or_tags(self):
+        for change in ('schema', 'runtime', 'quality', 'operations', 'tag', 'authority'):
+            preparation, builds, uploads, _ = self.fixture()
+            if change == 'schema':
+                preparation['schema_version'] = 'future-unreviewed'
+            elif change == 'runtime':
+                preparation['runtime_revision'] = 'v9'
+            elif change == 'quality':
+                preparation['quality_acceptance'] = True
+            elif change == 'operations':
+                preparation['hosted_operations_acceptance'] = True
+            elif change == 'authority':
+                preparation['owner_authorization']['sha256'] = 'f'*64
+            else:
+                preparation['contexts']['ui']['image_tag'] = 'registry.example/ui:serving-v9-old'
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                bind_build(preparation, builds, uploads)
 
     def test_build_only_rejects_every_altered_build_binding(self):
         for change in ('commit', 'manifest', 'tree', 'recipe', 'generation', 'archive', 'digest', 'pair'):

@@ -1,0 +1,247 @@
+{
+  "billing_enabled": {
+    "motomedic-ai-20261009": true,
+    "motomedic-inference-20261009": false
+  },
+  "cloud_writes": 0,
+  "credential_metadata_api_access": true,
+  "delayed_reporting_prevents_instantaneous_cap": true,
+  "guard_settings": {
+    "BUDGET_DISPLAY_NAME": "MotoMedic lifetime INR2700",
+    "BUDGET_INR": "2700",
+    "SIMULATE": "false",
+    "STOP_INR": "2540"
+  },
+  "latest_guard_log_scalars": [
+    {
+      "cost_inr": 189.88,
+      "stop": false,
+      "timestamp": "2026-10-12T07:49:14.591666Z"
+    },
+    {
+      "cost_inr": 189.88,
+      "stop": false,
+      "timestamp": "2026-10-12T07:08:09.983326Z"
+    },
+    {
+      "cost_inr": 185.31,
+      "stop": false,
+      "timestamp": "2026-10-12T06:27:11.564150Z"
+    }
+  ],
+  "ledgers": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 24,
+      "reserved_tokens": 239808,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 3,
+      "reserved_nanodollars": 11544000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "managed_secret_metadata": {
+    "motomedic-evaluator-anthropic-v1": {
+      "audit_http_status": null,
+      "createTime": "2026-10-11T20:26:59.610685Z",
+      "name": "projects/279945185781/secrets/motomedic-evaluator-anthropic-v1/versions/1",
+      "state": "ENABLED"
+    },
+    "motomedic-rider-visitor-v1": {
+      "audit_http_status": null,
+      "createTime": "2026-10-11T12:25:40.993177Z",
+      "name": "projects/279945185781/secrets/motomedic-rider-visitor-v1/versions/1",
+      "state": "ENABLED"
+    }
+  },
+  "private_iam": {
+    "motomedic-answer-worker": {
+      "http_status": 200,
+      "public_members": []
+    },
+    "motomedic-arm-a": {
+      "http_status": 200,
+      "public_members": []
+    },
+    "motomedic-qdrant": {
+      "http_status": 200,
+      "public_members": []
+    },
+    "motomedic-rider-ui": {
+      "http_status": 200,
+      "public_members": []
+    }
+  },
+  "provider_calls": 0,
+  "read_at_utc": "20261012T081628580655Z",
+  "schema": "motomedic-haiku-operational-audit-v1",
+  "secret_payload_reads": 0,
+  "services": {
+    "motomedic-answer-worker": {
+      "audit_http_status": null,
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a04a94caa5f6c485204916f1a824cc49ebfbc2e7802ef680a2c51b03091ebd48",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-00009-8j8",
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-00008-x7q",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker",
+      "resources": {
+        "cpuIdle": true,
+        "limits": {
+          "cpu": "2",
+          "memory": "8Gi"
+        },
+        "startupCpuBoost": true
+      },
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "service_account": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "terminalCondition": {
+        "lastTransitionTime": "2026-10-12T07:19:58.904589Z",
+        "state": "CONDITION_SUCCEEDED",
+        "type": "Ready"
+      },
+      "trafficStatuses": [
+        {
+          "percent": 100,
+          "revision": "motomedic-answer-worker-00008-x7q",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+        }
+      ],
+      "uri": "https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app"
+    },
+    "motomedic-arm-a": {
+      "audit_http_status": null,
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a04a94caa5f6c485204916f1a824cc49ebfbc2e7802ef680a2c51b03091ebd48",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00012-trr",
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00011-2cf",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a",
+      "resources": {
+        "cpuIdle": true,
+        "limits": {
+          "cpu": "2",
+          "memory": "8Gi"
+        },
+        "startupCpuBoost": true
+      },
+      "scaling": {
+        "maxInstanceCount": 1,
+        "minInstanceCount": 1
+      },
+      "service_account": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "terminalCondition": {
+        "lastTransitionTime": "2026-10-12T07:19:54.684254Z",
+        "state": "CONDITION_SUCCEEDED",
+        "type": "Ready"
+      },
+      "trafficStatuses": [
+        {
+          "percent": 100,
+          "revision": "motomedic-arm-a-00011-2cf",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+        }
+      ],
+      "uri": "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app"
+    },
+    "motomedic-budget-guard": {
+      "audit_http_status": null,
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/gcf-artifacts/motomedic--ai--20261009__us--central1__motomedic--budget--guard:version_1",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-budget-guard/revisions/motomedic-budget-guard-00003-qax",
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-budget-guard/revisions/motomedic-budget-guard-00003-qax",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-budget-guard",
+      "resources": {
+        "cpuIdle": true,
+        "limits": {
+          "cpu": "0.1666",
+          "memory": "256Mi"
+        },
+        "startupCpuBoost": true
+      },
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "service_account": "motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "terminalCondition": {
+        "lastTransitionTime": "2026-10-11T09:18:18.448597Z",
+        "state": "CONDITION_SUCCEEDED",
+        "type": "Ready"
+      },
+      "trafficStatuses": [
+        {
+          "percent": 100,
+          "revision": "motomedic-budget-guard-00003-qax",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
+        }
+      ],
+      "uri": "https://motomedic-budget-guard-5uyul6ay6a-uc.a.run.app"
+    },
+    "motomedic-qdrant": {
+      "audit_http_status": null,
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-qdrant/revisions/motomedic-qdrant-00003-cjb",
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-qdrant/revisions/motomedic-qdrant-00003-cjb",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-qdrant",
+      "resources": {
+        "cpuIdle": true,
+        "limits": {
+          "cpu": "1",
+          "memory": "512Mi"
+        },
+        "startupCpuBoost": true
+      },
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "service_account": "motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "terminalCondition": {
+        "lastTransitionTime": "2026-10-11T09:19:23.755294Z",
+        "state": "CONDITION_SUCCEEDED",
+        "type": "Ready"
+      },
+      "trafficStatuses": [
+        {
+          "percent": 100,
+          "revision": "motomedic-qdrant-00003-cjb",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
+        }
+      ],
+      "uri": "https://motomedic-qdrant-5uyul6ay6a-uc.a.run.app"
+    },
+    "motomedic-rider-ui": {
+      "audit_http_status": null,
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:2f57d1a9da6237e795e8066e15474883f3451d2e8ed82bd5dbd4a4e2ae3d60aa",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00012-tmg",
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00011-ck8",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui",
+      "resources": {
+        "cpuIdle": true,
+        "limits": {
+          "cpu": "1",
+          "memory": "512Mi"
+        },
+        "startupCpuBoost": true
+      },
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "service_account": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "terminalCondition": {
+        "lastTransitionTime": "2026-10-12T07:19:56.754721Z",
+        "state": "CONDITION_SUCCEEDED",
+        "type": "Ready"
+      },
+      "trafficStatuses": [
+        {
+          "percent": 100,
+          "revision": "motomedic-rider-ui-00011-ck8",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+        }
+      ],
+      "uri": "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app"
+    }
+  },
+  "tokens_logged": false
+}

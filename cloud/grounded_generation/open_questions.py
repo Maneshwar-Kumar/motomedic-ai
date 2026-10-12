@@ -89,6 +89,9 @@ class Questions(SafetyQuestions):
                 'chunk_ids': [h['id'] for h in bundle.get('hits', ())],
                 'admitted_evidence_ids': admitted['required_evidence_ids'],
                 'gaps': deepcopy(admitted['gaps']),
+                # This serving trace contains only bounded source IDs, rank
+                # decisions and timings; it excludes query/vector/token data.
+                'retrieval_policy': deepcopy(bundle.get('retrieval_policy')),
                 'retrieval_assembly_seconds': time.monotonic()-started}
             context = {'conversation': deepcopy(list(history)),
                        'typed_outcomes': diagnostic_projection(session),

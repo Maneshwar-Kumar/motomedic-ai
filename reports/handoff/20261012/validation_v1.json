@@ -1,0 +1,97 @@
+{
+  "agent_checks": {
+    "focused_release_packaging_tests": {
+      "failed": 0,
+      "passed": 21
+    },
+    "helper_syntax_files_passed": 13,
+    "runtime_syntax_files_passed": 8,
+    "ui_synthetic_tests": {
+      "failed": 0,
+      "passed": 9
+    }
+  },
+  "build_goal_paused_at_owner_request": true,
+  "classification": "SYNTHETIC_AND_READONLY_EVIDENCE_ONLY",
+  "committed_snapshot_verification": {
+    "commit": "1c0626561a3ecc31f8447e1904be730ababc69ba",
+    "files_verified": 549,
+    "passed": true,
+    "provider_calls": 0
+  },
+  "credentials_in_handoff": false,
+  "full_CI": "FAILURE_UNMIGRATED_ROLE_FIXTURES",
+  "helper_archive_verification": {
+    "files": 33,
+    "passed": true,
+    "sha256": "2ad9c97c2dd05ba7bba447d562211611ba2f7f4e4dccddffa7ac495ba20fe2bb"
+  },
+  "hosted_provider_free_CI": {
+    "assertion_failures": 4,
+    "boundary_suite_methods": 264,
+    "commit": "1c0626561a3ecc31f8447e1904be730ababc69ba",
+    "conclusion": "failure",
+    "error_entries": 24,
+    "log": "reports/handoff/20261012/provider_free_ci_38221482493.log.txt",
+    "log_sha256": "8fafcbed67ea42a17b92e615e7c037740012de72744cbd60888040c645010dc8",
+    "navigation_approval_and_committed_inventory_steps": "PASS",
+    "observed_errors": [
+      "Retired role-router constructor in fixtures",
+      "Removed GEMMA_DRAFT_HAIKU_VERIFY / HAIKU_DRAFT_GEMMA_VERIFY keys",
+      "Old provider model/paired-answer fixtures"
+    ],
+    "provider_calls": 0,
+    "run_id": 38221482493,
+    "status": "completed",
+    "subsequent_ui_workflow_step": "SKIPPED_AFTER_BOUNDARY_FAILURE",
+    "url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38221482493"
+  },
+  "latest_owner_model_scope": {
+    "draft_and_verify_separate_calls": true,
+    "frozen_runtime_unchanged": true,
+    "implementation_pending": true,
+    "only_model": "claude-haiku-5-5",
+    "path": "reports/public_evaluator/20261012/owner_model_scope_v3.json",
+    "sha256": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f"
+  },
+  "new_model_generation_or_deployment": false,
+  "public_release_accepted": false,
+  "root_checks_after_snapshot": {
+    "git_diff_check": "PASS",
+    "handoff_links": {
+      "broken": 0,
+      "checked": 27
+    },
+    "release_installed_production_health_tests": {
+      "error_reason": "Unmigrated fixture addresses removed HAIKU_DRAFT_GEMMA_VERIFY role",
+      "error_test": "cloud.arm_a.test_production_policy.ProductionPolicyTests.test_old_cache_policy_or_changed_role_contract_rejects",
+      "errors": 1,
+      "failed_assertions": 0,
+      "methods_run": 26,
+      "passed": 25
+    },
+    "repository_structure": {
+      "approved_outputs": 187,
+      "current_inputs": 549,
+      "historical_runtime_files": 64,
+      "navigation_links": 151,
+      "passed": true
+    }
+  },
+  "runtime_diagnostic": {
+    "assertion_failures": 4,
+    "error_entries": 23,
+    "one_method_has_two_error_entries": true,
+    "passed_methods": 94,
+    "path": "reports/public_evaluator/20261012/operations/stopped_flash_lite_wip_v2.json",
+    "sha256": "f6e94f854fa646a158db322386d1491aad10d6ee592a4e027b61680a06181ab0",
+    "tests_run": 120
+  },
+  "schema": "motomedic-stopped-handoff-validation-v1",
+  "snapshot": {
+    "build_executed": false,
+    "inputs": 549,
+    "manifest": "reports/public_evaluator/20261012/serving_manifest_v10_11.json",
+    "sha256": "c4f87a48fcb3645c46b74734ffd1df6b8faaa735e54d2286d6f3b099700d06f1"
+  }
+}

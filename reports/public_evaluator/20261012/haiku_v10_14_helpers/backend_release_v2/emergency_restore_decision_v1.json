@@ -1,0 +1,42 @@
+{
+  "authority": "EXPLICIT_COORDINATOR_RECOVERY_FOR_OWNER_AUTHORIZED_WORKING_MVP",
+  "automatic_health_retry_or_paid_operation_replay": false,
+  "classification": "RESTORE_AFTER_FAILED_ROLLBACK_HEALTH",
+  "corrected_backend_binding": {
+    "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/backend_build_binding_v2.json",
+    "sha256": "f1b4e0756962c0461887edf6bc805c44d189efcb5e3d7d5fb52dea00589fec07"
+  },
+  "known_good_v14_candidate_health": {
+    "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/candidate_health.json",
+    "sha256": "726ca52e6a517acd3c7a1e09e145a997c688232e3943bac6d64c973a857616f7"
+  },
+  "old13_rollback_intent": {
+    "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v1/rollback_route_intent.json",
+    "sha256": "5c3d26deb0717f478ceb6652ff5f940f5329a79e31bdca5ae33987bfb6b98a2e"
+  },
+  "old13_route_journals": {
+    "motomedic-answer-worker": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v1/rollback_route_motomedic-answer-worker.json",
+      "sha256": "e072b0aacd6eef2ab3371e11023ccb57fc097e65a83ab5fe88df38f361ba20f2"
+    },
+    "motomedic-arm-a": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v1/rollback_route_motomedic-arm-a.json",
+      "sha256": "96079b881b237284141846a1e9b1d2886b6557066fa418b2ffcc6386e5e89ab4"
+    }
+  },
+  "old_health_receipt_created_or_overwritten": false,
+  "provider_calls": 0,
+  "read_only_health_failures": [
+    {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/rollback_health_timeout_v1.json",
+      "sha256": "2fcd539b60b367a654d6cfef8de5651c391f7c331aff837bb6084758bf5fc14b"
+    },
+    {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/rollback_health_timeout_v2.json",
+      "sha256": "6b26b90a993d94848f5da9cbcec0a4d3151cad4b6e92985e8cbf5fe506c021eb"
+    }
+  ],
+  "rollback_pair_health_passed": false,
+  "rollback_validation_complete": false,
+  "schema": "motomedic-explicit-known-good14-emergency-restore-v1"
+}

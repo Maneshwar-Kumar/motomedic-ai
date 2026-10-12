@@ -1,0 +1,41 @@
+{
+  "schema": "motomedic-v10-13-reviewer-documentation-review-v1",
+  "recorded_at_utc": "2026-10-12T09:56:02.804742+00:00",
+  "provider_calls": 0,
+  "cloud_calls": 0,
+  "runtime_changed": false,
+  "local_links_checked": 47,
+  "missing_local_links": [],
+  "document_sha256": {
+    "docs/ARCHITECTURE.md": "2089abca8ec54c147fca86fdf70d3c7cc112d700ba6654b97f2a90757e1e0890",
+    "docs/REVIEWER.md": "a738b835203a33bdea6f87f02b9a8d388adbc098cd8e9fbb10ea1c2cfc820f14",
+    "docs/SETUP.md": "38c6f45873dfe136a5547f010018a2f7e4e6ff0f9087364c01a151bf737259a7"
+  },
+  "implementation_checked": [
+    "cloud/arm_a/app.py",
+    "cloud/arm_a/rider_api.py",
+    "cloud/arm_a/durable_dispatch.py",
+    "cloud/grounded_generation/serving_retrieval.py",
+    "cloud/qdrant/boot.py",
+    "rider_ui/client.py",
+    "rider_ui/identity.py",
+    "rider_ui/Dockerfile",
+    ".github/workflows/ci.yml",
+    "cloud/deployment_status.json",
+    "reports/public_evaluator/20261012/private_readiness_v10_12.json"
+  ],
+  "repository_structure_check": {
+    "exit_code": 1,
+    "navigation_failures": [],
+    "historical_integrity_failures": [],
+    "pending_current_binding": "reports/public_evaluator/20261012/serving_manifest_v10_13.json does not exist before freeze",
+    "requires_post_freeze_rerun": true
+  },
+  "public_status": "Publication, anonymous paused-preview readback, safe inspection route and current CI result remain pending; docs make no acceptance claim.",
+  "reproduction_limit": "Synthetic tests require no private artifacts/provider keys; real own-project reproduction requires authorized immutable snapshot/model assets, own hosted identities/credentials/ledger, configuration changes and a fresh scoped freeze.",
+  "official_authentication_references": [
+    "https://docs.cloud.google.com/run/docs/authenticating/developers",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/auth/print-identity-token",
+    "https://docs.cloud.google.com/run/docs/reference/iam/roles"
+  ]
+}

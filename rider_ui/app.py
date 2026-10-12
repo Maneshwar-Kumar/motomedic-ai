@@ -8,6 +8,7 @@ from rider_ui.client import APIError, RiderAPI, operation_id
 from rider_ui.safeguards import LIMITS
 from rider_ui.verified_sse import PROGRESS_LABELS
 from rider_ui.identity import issue, verify, cloud_run_token, platform_subject
+from rider_ui.public_gateway import rider_answers_enabled,PREVIEW_MESSAGE
 
 st.set_page_config(page_title='MotoMedic · Rider assistant', page_icon='🏍️', layout='wide')
 st.markdown(Path(__file__).with_name('theme.css').read_text(encoding='utf-8'), unsafe_allow_html=True)
@@ -25,14 +26,15 @@ def client():
     url = setting('MOTOMEDIC_RIDER_API_URL')
     managed = setting('MOTOMEDIC_RIDER_AUTH') == 'cloud_run'
     credential = (lambda:cloud_run_token(url)) if managed else setting('MOTOMEDIC_RIDER_API_TOKEN')
-    anonymous = setting('MOTOMEDIC_RIDER_ACCESS') == 'anonymous_edge'
+    anonymous = setting('MOTOMEDIC_RIDER_ACCESS') in ('anonymous_edge', 'public_gateway')
     network = None
     if anonymous:
         try:
             capability = st.context.headers.get('X-MotoMedic-Edge-Visitor')
-            network = st.context.headers.get('X-MotoMedic-Edge-Network')
             verify(setting('MOTOMEDIC_VISITOR_SECRET'), capability, 'anonymous-edge-v1')
-            verify(setting('MOTOMEDIC_VISITOR_SECRET'), network, 'anonymous-network-v1')
+            if setting('MOTOMEDIC_RIDER_ACCESS') == 'anonymous_edge':
+                network = st.context.headers.get('X-MotoMedic-Edge-Network')
+                verify(setting('MOTOMEDIC_VISITOR_SECRET'), network, 'anonymous-network-v1')
             st.session_state.visitor_capability = capability
         except (PermissionError, ValueError):
             raise APIError('Please refresh to reconnect securely.') from None
@@ -45,7 +47,8 @@ def client():
     return RiderAPI(url, credential,
                     allow_loopback=setting('MOTOMEDIC_UI_ENGINEERING_LOOPBACK') == '1',
                     visitor=st.session_state.get('visitor_capability'),
-                    cache_mode=setting('MOTOMEDIC_CACHE_MODE') or 'bypass', network=network)
+                    cache_mode=setting('MOTOMEDIC_CACHE_MODE') or 'bypass', network=network,
+                    answers_enabled=rider_answers_enabled())
 
 def remember(view, rider_text=None):
     if rider_text:
@@ -55,7 +58,25 @@ def remember(view, rider_text=None):
     st.session_state.pending = None
     st.session_state.connection_error = None
 
+def conversation_notice(view):
+    """Operational guidance beside the unchanged, durably saved answer."""
+    response = view.get('response', {})
+    if (response.get('type') == 'SYSTEM_ERROR' and
+            type(response.get('reason_codes')) is list and
+            'COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION' in response['reason_codes']):
+        return 'This chat is too large to process. Start a new conversation for your next question.'
+    controls = view.get('runtime_controls')
+    composition = controls.get('composition') if type(controls) is dict else None
+    if (type(composition) is dict and composition.get('start_new_conversation_required') is True and
+            response.get('type') in ('SUPPORTED', 'AMBIGUOUS', 'SAFETY_STOP') and
+            response.get('release_gate_passed') is True and
+            response.get('semantic_verification_passed') is True):
+        return 'This chat used a large amount of context. Start a new conversation before your next question.'
+    return None
+
 def perform(kind, value):
+    if not rider_answers_enabled():
+        return
     pending = {'id': operation_id(), 'kind': kind, 'value': value}
     st.session_state.pending = pending
     try:
@@ -127,11 +148,14 @@ if configured and not st.session_state.catalogue:
             st.rerun()
 
 catalogue = st.session_state.catalogue
-ready = configured and bool(catalogue) and confirmed
+answers_enabled=rider_answers_enabled()
+ready = configured and bool(catalogue) and confirmed and answers_enabled
+if not answers_enabled:
+    st.info(PREVIEW_MESSAGE)
 if not st.session_state.messages:
     with st.container(border=True):
         st.markdown('### What would you like to know?')
-        st.write('Ask your question in your own words. Include relevant details and anything you have already checked.')
+        st.write('Ask your question in up to 100 words. Include relevant details and anything you have already checked.')
         st.caption('Up to 2,000 characters per message.')
         query = st.chat_input('Ask a question…', key='symptom_input', max_chars=LIMITS.message_characters,
                               disabled=not ready or bool(st.session_state.pending))
@@ -164,6 +188,9 @@ for index, (role, value) in enumerate(st.session_state.messages):
             st.warning('Unable to verify right now'); st.text(response['natural_language'])
         else:
             st.text(response['natural_language'])
+        notice = conversation_notice(value)
+        if notice:
+            st.info(notice)
         citations = response.get('cited_pages', [])
         if citations:
             pages = sorted({c['pdf_page'] for c in citations})
@@ -209,7 +236,7 @@ if view and not st.session_state.pending:
         st.markdown('**' + ('Your observation' if view['response']['type'] == 'AMBIGUOUS' else 'How did it go?') + '**')
         cols = st.columns(min(len(choices), 3))
         for i, choice in enumerate(choices):
-            if cols[i % len(cols)].button(choice['label'], key='choice_' + str(view['version']) + '_' + choice['id'], use_container_width=True):
+            if cols[i % len(cols)].button(choice['label'], key='choice_' + str(view['version']) + '_' + choice['id'], use_container_width=True,disabled=not answers_enabled):
                 perform('feedback', choice)
     with st.expander('What this conversation remembers'):
         if not view.get('history'):
@@ -219,6 +246,7 @@ if view and not st.session_state.pending:
         st.caption('Reported success does not verify the repair or identify its cause.')
 
 if view:
+    st.caption('Up to 100 words per question.')
     query = st.chat_input('Ask another question…',key='followup_input',max_chars=LIMITS.message_characters,
                           disabled=not ready or bool(st.session_state.pending))
     if query and query.strip():

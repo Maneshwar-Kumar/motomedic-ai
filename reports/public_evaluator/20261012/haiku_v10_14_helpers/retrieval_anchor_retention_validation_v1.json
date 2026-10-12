@@ -1,0 +1,36 @@
+{
+  "before_rerank_all_gap_recovery_added": false,
+  "candidate_pool_expanded": false,
+  "change": "Append only missing originally RRF-selected chunks that contributed exact reviewed_anchor_ids to the reranked top-window selected hits, in original rank order; then unchanged SourceAuthority revalidates ordinary selected membership and complete closures.",
+  "classification": "PROVIDER_FREE_RUNTIME_RETRIEVAL_BUGFIX_VALIDATION",
+  "cloud_calls": 0,
+  "complete_warning_dependency_closure_and_gap_diagnostics_preserved": true,
+  "file_sha256": {
+    "cloud/grounded_generation/serving_retrieval.py": "f925d4090d7fa5796f866632bcc5516c90c94f15f14c5a16567392b0ee5c0277",
+    "cloud/grounded_generation/test_serving_retrieval.py": "d0075b78317cc7fc337333bb1e8acfb85c72801e97f0e3e7bc05630db973098f"
+  },
+  "final_selected_hits_bounded_unique_within_original_candidate_pool": true,
+  "frozen_v13_history_modified": false,
+  "generic_provider_free_test_result": {
+    "passed": true,
+    "retrieval_tests": 31,
+    "total": 47,
+    "unchanged_source_authority_tests": 16
+  },
+  "independent_factual_quality_acceptance": false,
+  "index_or_source_or_query_tuned": false,
+  "live_v14_answer_acceptance": false,
+  "observed_historical_case": {
+    "admitted_evidence_count": 0,
+    "path": "reports/public_evaluator/20261012/haiku_v10_13_helpers/service_due_api_operator_v1/hosted_runs/915800c4-aa0d-48d4-b0e1-1cedd3799d04/service_due_case.json",
+    "recovery_attempts": 0,
+    "response_type": "UNSUPPORTED",
+    "sha256": "bbcdbd654e94d48a402c3d419176eb9fa6fa4dfb358daad47d98f7d60d9f4d27"
+  },
+  "provider_calls": 0,
+  "rerank_retries_added": false,
+  "retrieval_version": "authenticated-open-hybrid-rank-disagreement-v6",
+  "root_cause": "Conditional rerank kept only its primary top window; previously admitted chunks were left diagnostic-only and their approved evidence dropped.",
+  "schema": "motomedic-generic-initial-reviewed-anchor-retention-validation-v1",
+  "source_authority_or_approval_changed": false
+}

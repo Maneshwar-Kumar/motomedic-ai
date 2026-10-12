@@ -1,0 +1,386 @@
+{
+  "serving_manifest_sha256": "eb3a853947507b8739886a43f62dfc3fbd447b406d0ce9f4f7db12a172341dde",
+  "services": {
+    "motomedic-arm-a": {
+      "health": {
+        "answer_provider": "gemma-4-26b-a4b-it",
+        "architecture": "DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA",
+        "benchmark_pacing": false,
+        "durable_dispatch_configured": true,
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "model_routing": {
+          "availability_fallback_enabled": false,
+          "native_limit_sources": {
+            "checked_date": "2026-10-12",
+            "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+          },
+          "roles": {
+            "GEMMA_DRAFT_HAIKU_VERIFY": {
+              "draft": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 1,
+                "context_window_tokens": 256000,
+                "fallback_role": false,
+                "input_tokens": 254200,
+                "maximum_attempts_per_call": 2,
+                "model": "gemma-4-26b-a4b-it",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "project_input_tpm_readback": 16000,
+                "prompt_cache": "UNSUPPORTED",
+                "provider": "google-generative-language",
+                "request_bytes": null,
+                "retry_rejections": [
+                  429,
+                  503
+                ],
+                "role": "private_draft",
+                "version": "native-context-distinct-role-router-v1"
+              },
+              "verifier": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 0,
+                "cache_ttl": "5m",
+                "context_window_tokens": 1000000,
+                "effort": "medium",
+                "fallback_role": false,
+                "input_tokens": 998200,
+                "maximum_attempts_per_call": 1,
+                "minimum_cache_tokens": 512,
+                "model": "claude-haiku-5-5",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "pricing": {
+                  "base_usd_per_million": {
+                    "cache_read": 0.01,
+                    "cache_write": 0.125,
+                    "input": 0.1,
+                    "output": 0.5
+                  },
+                  "long_context_above_input_tokens": 100000,
+                  "long_usd_per_million": {
+                    "cache_read": 0.05,
+                    "cache_write": 0.625,
+                    "input": 0.5,
+                    "output": 2.5
+                  }
+                },
+                "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                "provider": "anthropic",
+                "request_bytes": null,
+                "retry_rejections": [],
+                "role": "semantic_verifier",
+                "thinking": "disabled",
+                "version": "native-context-distinct-role-router-v1"
+              }
+            },
+            "HAIKU_DRAFT_GEMMA_VERIFY": {
+              "draft": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 0,
+                "cache_ttl": "5m",
+                "context_window_tokens": 1000000,
+                "effort": "medium",
+                "fallback_role": false,
+                "input_tokens": 998200,
+                "maximum_attempts_per_call": 1,
+                "minimum_cache_tokens": 512,
+                "model": "claude-haiku-5-5",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "pricing": {
+                  "base_usd_per_million": {
+                    "cache_read": 0.01,
+                    "cache_write": 0.125,
+                    "input": 0.1,
+                    "output": 0.5
+                  },
+                  "long_context_above_input_tokens": 100000,
+                  "long_usd_per_million": {
+                    "cache_read": 0.05,
+                    "cache_write": 0.625,
+                    "input": 0.5,
+                    "output": 2.5
+                  }
+                },
+                "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                "provider": "anthropic",
+                "request_bytes": null,
+                "retry_rejections": [],
+                "role": "private_draft",
+                "thinking": "disabled",
+                "version": "native-context-distinct-role-router-v1"
+              },
+              "verifier": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 1,
+                "context_window_tokens": 256000,
+                "fallback_role": false,
+                "input_tokens": 254200,
+                "maximum_attempts_per_call": 2,
+                "model": "gemma-4-26b-a4b-it",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "project_input_tpm_readback": 16000,
+                "prompt_cache": "UNSUPPORTED",
+                "provider": "google-generative-language",
+                "request_bytes": null,
+                "retry_rejections": [
+                  429,
+                  503
+                ],
+                "role": "semantic_verifier",
+                "version": "native-context-distinct-role-router-v1"
+              }
+            }
+          },
+          "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+          "routing_threshold_tokens": 8192,
+          "threshold_is_pre_generation_choice_not_context_rejection": true,
+          "version": "native-context-distinct-role-router-v1"
+        },
+        "prompt_cache": "ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M",
+        "ready": true,
+        "reranking": "authenticated-open-hybrid-rank-disagreement-v5",
+        "runtime_lock": "b59c7eac02bcf9efdf729a3e846d7c4f87f15d88336f8292af187924c7c83fbc",
+        "streaming": "DRAFT_VERIFY_STREAM",
+        "verifier_provider": "claude-haiku-5-5"
+      },
+      "revision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00011-2cf",
+      "traffic": [
+        {
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+          "revision": "motomedic-arm-a-00011-2cf",
+          "percent": 100
+        }
+      ],
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a04a94caa5f6c485204916f1a824cc49ebfbc2e7802ef680a2c51b03091ebd48",
+      "provider_calls": 0
+    },
+    "motomedic-rider-ui": {
+      "health": {
+        "ready": true
+      },
+      "revision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00011-ck8",
+      "traffic": [
+        {
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+          "revision": "motomedic-rider-ui-00011-ck8",
+          "percent": 100
+        }
+      ],
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:2f57d1a9da6237e795e8066e15474883f3451d2e8ed82bd5dbd4a4e2ae3d60aa",
+      "provider_calls": 0
+    },
+    "motomedic-answer-worker": {
+      "health": {
+        "answer_provider": "gemma-4-26b-a4b-it",
+        "architecture": "DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA",
+        "benchmark_pacing": false,
+        "durable_dispatch_configured": true,
+        "index_id": "index_a3282c4d98cf54595e4ba168",
+        "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+        "model_routing": {
+          "availability_fallback_enabled": false,
+          "native_limit_sources": {
+            "checked_date": "2026-10-12",
+            "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+          },
+          "roles": {
+            "GEMMA_DRAFT_HAIKU_VERIFY": {
+              "draft": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 1,
+                "context_window_tokens": 256000,
+                "fallback_role": false,
+                "input_tokens": 254200,
+                "maximum_attempts_per_call": 2,
+                "model": "gemma-4-26b-a4b-it",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "project_input_tpm_readback": 16000,
+                "prompt_cache": "UNSUPPORTED",
+                "provider": "google-generative-language",
+                "request_bytes": null,
+                "retry_rejections": [
+                  429,
+                  503
+                ],
+                "role": "private_draft",
+                "version": "native-context-distinct-role-router-v1"
+              },
+              "verifier": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 0,
+                "cache_ttl": "5m",
+                "context_window_tokens": 1000000,
+                "effort": "medium",
+                "fallback_role": false,
+                "input_tokens": 998200,
+                "maximum_attempts_per_call": 1,
+                "minimum_cache_tokens": 512,
+                "model": "claude-haiku-5-5",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "pricing": {
+                  "base_usd_per_million": {
+                    "cache_read": 0.01,
+                    "cache_write": 0.125,
+                    "input": 0.1,
+                    "output": 0.5
+                  },
+                  "long_context_above_input_tokens": 100000,
+                  "long_usd_per_million": {
+                    "cache_read": 0.05,
+                    "cache_write": 0.625,
+                    "input": 0.5,
+                    "output": 2.5
+                  }
+                },
+                "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                "provider": "anthropic",
+                "request_bytes": null,
+                "retry_rejections": [],
+                "role": "semantic_verifier",
+                "thinking": "disabled",
+                "version": "native-context-distinct-role-router-v1"
+              }
+            },
+            "HAIKU_DRAFT_GEMMA_VERIFY": {
+              "draft": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 0,
+                "cache_ttl": "5m",
+                "context_window_tokens": 1000000,
+                "effort": "medium",
+                "fallback_role": false,
+                "input_tokens": 998200,
+                "maximum_attempts_per_call": 1,
+                "minimum_cache_tokens": 512,
+                "model": "claude-haiku-5-5",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "pricing": {
+                  "base_usd_per_million": {
+                    "cache_read": 0.01,
+                    "cache_write": 0.125,
+                    "input": 0.1,
+                    "output": 0.5
+                  },
+                  "long_context_above_input_tokens": 100000,
+                  "long_usd_per_million": {
+                    "cache_read": 0.05,
+                    "cache_write": 0.625,
+                    "input": 0.5,
+                    "output": 2.5
+                  }
+                },
+                "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                "provider": "anthropic",
+                "request_bytes": null,
+                "retry_rejections": [],
+                "role": "private_draft",
+                "thinking": "disabled",
+                "version": "native-context-distinct-role-router-v1"
+              },
+              "verifier": {
+                "answer_cache": "DISABLED",
+                "automatic_retries": 1,
+                "context_window_tokens": 256000,
+                "fallback_role": false,
+                "input_tokens": 254200,
+                "maximum_attempts_per_call": 2,
+                "model": "gemma-4-26b-a4b-it",
+                "native_json_schema": true,
+                "native_limit_sources": {
+                  "checked_date": "2026-10-12",
+                  "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+                  "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                },
+                "output_json_bytes": 16384,
+                "output_tokens": 1800,
+                "project_input_tpm_readback": 16000,
+                "prompt_cache": "UNSUPPORTED",
+                "provider": "google-generative-language",
+                "request_bytes": null,
+                "retry_rejections": [
+                  429,
+                  503
+                ],
+                "role": "semantic_verifier",
+                "version": "native-context-distinct-role-router-v1"
+              }
+            }
+          },
+          "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+          "routing_threshold_tokens": 8192,
+          "threshold_is_pre_generation_choice_not_context_rejection": true,
+          "version": "native-context-distinct-role-router-v1"
+        },
+        "prompt_cache": "ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M",
+        "ready": true,
+        "reranking": "authenticated-open-hybrid-rank-disagreement-v5",
+        "runtime_lock": "b59c7eac02bcf9efdf729a3e846d7c4f87f15d88336f8292af187924c7c83fbc",
+        "streaming": "DRAFT_VERIFY_STREAM",
+        "verifier_provider": "claude-haiku-5-5"
+      },
+      "revision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-00008-x7q",
+      "traffic": [
+        {
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+          "revision": "motomedic-answer-worker-00008-x7q",
+          "percent": 100
+        }
+      ],
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a04a94caa5f6c485204916f1a824cc49ebfbc2e7802ef680a2c51b03091ebd48",
+      "provider_calls": 0
+    }
+  },
+  "provider_calls": 0,
+  "public_iam_changed": false
+}

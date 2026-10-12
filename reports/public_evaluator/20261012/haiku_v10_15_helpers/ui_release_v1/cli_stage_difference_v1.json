@@ -1,0 +1,35 @@
+{
+  "current_traffic": "motomedic-rider-ui-v10-13-functional-enabled",
+  "expected_old_traffic": "motomedic-rider-ui-v10-13-functional-enabled",
+  "latest_created": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-v10-15-direct-timed",
+  "service_configuration_actual": {
+    "ingress": "INGRESS_TRAFFIC_ALL",
+    "labels": {
+      "motomedic-release": "v10-13"
+    },
+    "launchStage": "GA",
+    "scaling": {
+      "maxInstanceCount": 2
+    }
+  },
+  "service_configuration_expected": {
+    "ingress": "INGRESS_TRAFFIC_ALL",
+    "labels": {
+      "motomedic-release": "v10-13"
+    },
+    "launchStage": "GA",
+    "scaling": {
+      "maxInstanceCount": 2
+    }
+  },
+  "template_changed_fields": {
+    "client": {
+      "actual": "gcloud",
+      "expected": null
+    },
+    "clientVersion": {
+      "actual": "575.0.0",
+      "expected": null
+    }
+  }
+}

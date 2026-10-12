@@ -1,0 +1,417 @@
+{
+  "schema_version": "hosted-probe-iam-and-operation-ttl-v1",
+  "project_id": "motomedic-ai-20261009",
+  "region": "us-central1",
+  "authorization": "Owner explicitly approved credential setup and bounded hosted validation for public evaluator; exact root assignment; no provider calls or billing changes",
+  "prior_readback": "reports/public_evaluator/20261012/operations/probe_iam_prior_v1.json",
+  "source": {
+    "schema_version": "hosted-cache-probe-source-v1",
+    "uri": "gs://motomedic-ai-20261009-indices/serving/capability-probes/v10_2/3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b.tar.gz",
+    "object": "serving/capability-probes/v10_2/3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b.tar.gz",
+    "generation": "1791751438626483",
+    "sha256": "3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b",
+    "bytes": 29350810,
+    "files": 524,
+    "serving_manifest": "reports/public_evaluator/20261012/serving_manifest_v10_2.json",
+    "serving_manifest_sha256": "2b5638cbc0e98369fa1488f89f823a736ed84a618e4e6670935919a0a0c05898",
+    "step_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d2b8417a1bccc97a1ba05bf2f71b0ae4f3aff4052f69ab5bdbe00a606507ba25",
+    "service_account": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "provider_calls": 0
+  },
+  "actions": [
+    {
+      "command": [
+        "projects",
+        "add-iam-policy-binding",
+        "motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/logging.logWriter",
+        "--condition=None",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:46:24.2511452Z",
+      "metadata": {
+        "cli_notice": "Updated IAM policy for project [motomedic-ai-20261009].",
+        "policy": {
+          "bindings": [
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+              ],
+              "role": "roles/artifactregistry.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/billing.projectManager"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/browser"
+            },
+            {
+              "members": [
+                "serviceAccount:279945185781@cloudbuild.gserviceaccount.com"
+              ],
+              "role": "roles/cloudbuild.builds.builder"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+              ],
+              "role": "roles/cloudbuild.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcf-admin-robot.iam.gserviceaccount.com"
+              ],
+              "role": "roles/cloudfunctions.standardServiceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-cloudtasks.iam.gserviceaccount.com"
+              ],
+              "role": "roles/cloudtasks.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:279945185781@cloudservices.gserviceaccount.com"
+              ],
+              "role": "roles/compute.instanceGroupManagerServiceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@compute-system.iam.gserviceaccount.com"
+              ],
+              "role": "roles/compute.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@containerregistry.iam.gserviceaccount.com"
+              ],
+              "role": "roles/containerregistry.ServiceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/datastore.user"
+            },
+            {
+              "members": [
+                "serviceAccount:279945185781-compute@developer.gserviceaccount.com",
+                "serviceAccount:motomedic-ai-20261009@appspot.gserviceaccount.com"
+              ],
+              "role": "roles/editor"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-budget-guard@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/eventarc.eventReceiver"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-eventarc.iam.gserviceaccount.com"
+              ],
+              "role": "roles/eventarc.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@firebase-rules.iam.gserviceaccount.com"
+              ],
+              "role": "roles/firebaserules.system"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-firestore.iam.gserviceaccount.com"
+              ],
+              "role": "roles/firestore.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/logging.logWriter"
+            },
+            {
+              "members": [],
+              "role": "roles/owner"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@gcp-sa-pubsub.iam.gserviceaccount.com"
+              ],
+              "role": "roles/pubsub.serviceAgent"
+            },
+            {
+              "members": [
+                "serviceAccount:service-279945185781@serverless-robot-prod.iam.gserviceaccount.com"
+              ],
+              "role": "roles/run.serviceAgent"
+            }
+          ],
+          "etag": "BwZdlqyk860=",
+          "version": 1
+        }
+      }
+    },
+    {
+      "command": [
+        "artifacts",
+        "repositories",
+        "add-iam-policy-binding",
+        "motomedic",
+        "--project=motomedic-ai-20261009",
+        "--location=us-central1",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/artifactregistry.reader",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:46:32.8746884Z",
+      "metadata": {
+        "cli_notice": "Updated IAM policy for repository [motomedic].",
+        "policy": {
+          "bindings": [
+            {
+              "members": [
+                "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/artifactregistry.reader"
+            }
+          ],
+          "etag": "BwZdlq0nLHg=",
+          "version": 1
+        }
+      }
+    },
+    {
+      "command": [
+        "storage",
+        "buckets",
+        "add-iam-policy-binding",
+        "gs://motomedic-ai-20261009-indices",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "--condition=expression=resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_2/3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b.tar.gz',title=motomedic-backend-exact-cache-probe-v10-2,description=Read only the exact authorized hosted probe source archive",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:46:42.0276293Z",
+      "metadata": {
+        "bindings": [
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+            "condition": {
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+              "title": "motomedic-backend-exact-index-snapshot"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+            "condition": {
+              "description": "Read only the exact authorized hosted probe source archive",
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_2/3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b.tar.gz'",
+              "title": "motomedic-backend-exact-cache-probe-v10-2"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "roles/storage.legacyBucketOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyBucketReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectOwner",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.legacyObjectReader",
+            "condition": null,
+            "members": []
+          },
+          {
+            "role": "roles/storage.objectViewer",
+            "condition": null,
+            "members": [
+              "serviceAccount:motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ],
+        "etag": "CAQ=",
+        "kind": "storage#policy",
+        "resourceId": "projects/_/buckets/motomedic-ai-20261009-indices",
+        "version": 3
+      }
+    },
+    {
+      "command": [
+        "firestore",
+        "fields",
+        "ttls",
+        "update",
+        "expires_at",
+        "--collection-group=arm_a_session_operations",
+        "--enable-ttl",
+        "--database=(default)",
+        "--project=motomedic-ai-20261009",
+        "--async",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:46:49.6271931Z",
+      "metadata": {
+        "cli_output": "Request issued for: [expires_at]\r\nCheck operation [projects/motomedic-ai-20261009/databases/(default)/operations/AyBkYzU3MDM0YjNhYjYtNjk0YS1kNjQ0LWJlYWMtYzNiZDRhNjUkGnNlbmlsZXBpcAkKMxI] for status.\r\nUpdated field [expires_at].\r\n{\r\n  \"metadata\": {\r\n    \"@type\": \"type.googleapis.com/google.firestore.admin.v1.FieldOperationMetadata\",\r\n    \"field\": \"projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_session_operations/fields/expires_at\",\r\n    \"startTime\": \"2026-10-11T20:46:48.759791Z\",\r\n    \"state\": \"INITIALIZING\",\r\n    \"ttlConfigDelta\": {\r\n      \"changeType\": \"ADD\"\r\n    }\r\n  },\r\n  \"name\": \"projects/motomedic-ai-20261009/databases/(default)/operations/AyBkYzU3MDM0YjNhYjYtNjk0YS1kNjQ0LWJlYWMtYzNiZDRhNjUkGnNlbmlsZXBpcAkKMxI\"\r\n}",
+        "operation": {
+          "metadata": {
+            "@type": "type.googleapis.com/google.firestore.admin.v1.FieldOperationMetadata",
+            "field": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_session_operations/fields/expires_at",
+            "startTime": "2026-10-11T20:46:48.759791Z",
+            "state": "INITIALIZING",
+            "ttlConfigDelta": {
+              "changeType": "ADD"
+            }
+          },
+          "name": "projects/motomedic-ai-20261009/databases/(default)/operations/AyBkYzU3MDM0YjNhYjYtNjk0YS1kNjQ0LWJlYWMtYzNiZDRhNjUkGnNlbmlsZXBpcAkKMxI"
+        }
+      }
+    }
+  ],
+  "readbacks": {
+    "project_backend_bindings": [
+      {
+        "role": "roles/datastore.user",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": null
+      },
+      {
+        "role": "roles/logging.logWriter",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": null
+      }
+    ],
+    "repository_backend_bindings": [
+      {
+        "role": "roles/artifactregistry.reader",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": null
+      }
+    ],
+    "bucket_backend_bindings": [
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+          "title": "motomedic-backend-exact-index-snapshot"
+        }
+      },
+      {
+        "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "members": [
+          "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "condition": {
+          "description": "Read only the exact authorized hosted probe source archive",
+          "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/capability-probes/v10_2/3b075a511ed6adfaa10828ff4ff0dbc3f6acb46ea9e1f7cdc70d051d55a6ba3b.tar.gz'",
+          "title": "motomedic-backend-exact-cache-probe-v10-2"
+        }
+      }
+    ],
+    "ttl_fields": [
+      {
+        "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_operations/fields/expires_at",
+        "ttlConfig": {
+          "state": "ACTIVE"
+        }
+      },
+      {
+        "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_session_operations/fields/expires_at",
+        "ttlConfig": {
+          "state": "CREATING"
+        }
+      },
+      {
+        "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_session_versions/fields/expires_at",
+        "ttlConfig": {
+          "state": "ACTIVE"
+        }
+      },
+      {
+        "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_sessions/fields/expires_at",
+        "ttlConfig": {
+          "state": "ACTIVE"
+        }
+      },
+      {
+        "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_usage/fields/expires_at",
+        "ttlConfig": {
+          "state": "ACTIVE"
+        }
+      }
+    ],
+    "main_billing_enabled": true,
+    "inference_billing_enabled": false,
+    "at_utc": "2026-10-11T20:47:46.3885891Z"
+  },
+  "provider_calls": 0,
+  "secret_values_read": false,
+  "billing_changes": 0,
+  "token_creator_grants": 0,
+  "broad_builder_grants": 0,
+  "storage_write_grants": 0,
+  "status": "PROBE_IAM_READY_TTL_ACTIVE",
+  "checks": {
+    "all_four_actions_succeeded": true,
+    "logging_writer_present": true,
+    "repository_reader_only": true,
+    "get_only_custom_role": true,
+    "exact_probe_source_object_binding": true,
+    "existing_index_binding_preserved": true,
+    "no_unconditional_backend_bucket_grants": true,
+    "no_broad_project_builder_or_token_creator": true,
+    "operation_ttl_enable_requested": true,
+    "existing_four_ttl_policies_active": true,
+    "main_billing_unchanged_enabled": true,
+    "inference_billing_unchanged_disabled": true,
+    "provider_and_secret_values_untouched": true,
+    "operation_ttl_active": true
+  },
+  "ttl_state": "ACTIVE",
+  "ttl_reconciliation": {
+    "operation_ttl": [
+      {
+        "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_session_operations/fields/expires_at",
+        "ttlConfig": {
+          "state": "ACTIVE"
+        }
+      }
+    ],
+    "at_utc": "2026-10-11T20:51:38.3092938Z"
+  }
+}

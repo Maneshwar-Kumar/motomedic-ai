@@ -1,0 +1,18 @@
+{
+  "archive_sha256": "d6adf90ee72c2ee91af849ee84a2a4d6bc8c13b2ceb558c862b9e395578ff3a9",
+  "cause": "Cloud Run IAM readback returned identical invoker members in a different list order after the backend grant had already been applied.",
+  "cloud_calls": 0,
+  "cloud_setIam_not_repeated_by_agent": true,
+  "factual_acceptance_claimed": false,
+  "inspection_sha256": "dbe0def078fea27c0c6bdfb41aafcc725a44e612cc6480aba1d7502b20d9d41f",
+  "live_probe_acceptance_pending": true,
+  "new_helper": "tmp/public_core_inspection_v13_v3.py",
+  "original_v1_v2_archives_and_sources_unchanged": true,
+  "original_v2_prepared_ledger_and_bytes_preserved": true,
+  "provider_calls": 0,
+  "resolution": "Compare sorted distinct string members while retaining each complete role/condition/other-field binding digest; adopt exact prior v2 preparation and recover already exact public IAM with GET-only calls.",
+  "runtime_changes": 0,
+  "schema": "motomedic-public-core-inspection-helper-review-v3",
+  "source_quality_review_stopped_owner_requested": true,
+  "synthetic_tests_passed": 12
+}

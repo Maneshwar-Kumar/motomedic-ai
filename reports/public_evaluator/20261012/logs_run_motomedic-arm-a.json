@@ -1,0 +1,302 @@
+[
+  {
+    "timestamp": "2026-10-12T06:32:44.300550Z",
+    "message": "[2026-10-12 06:32:44 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:44.301625Z",
+    "message": "[2026-10-12 06:32:44 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:44.301669Z",
+    "message": "[2026-10-12 06:32:44 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:32:50.698003Z",
+    "message": "[2026-10-12 06:32:50 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:50.706320Z",
+    "message": "[2026-10-12 06:32:50 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:51.214835Z",
+    "message": "[2026-10-12 06:32:51 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:51.214881Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:51.214881Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:51.214964Z",
+    "message": "[2026-10-12 06:32:51 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:51.264073Z",
+    "message": "[2026-10-12 06:32:51 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:51.265157Z",
+    "message": "[2026-10-12 06:32:51 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:51.265197Z",
+    "message": "[2026-10-12 06:32:51 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:32:58.795080Z",
+    "message": "[2026-10-12 06:32:58 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:58.804263Z",
+    "message": "[2026-10-12 06:32:58 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:59.320639Z",
+    "message": "[2026-10-12 06:32:59 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:59.320675Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:59.320675Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:59.320763Z",
+    "message": "[2026-10-12 06:32:59 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:59.363783Z",
+    "message": "[2026-10-12 06:32:59 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:59.364725Z",
+    "message": "[2026-10-12 06:32:59 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:32:59.364769Z",
+    "message": "[2026-10-12 06:32:59 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:33:07.685858Z",
+    "message": "[2026-10-12 06:33:07 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:07.694633Z",
+    "message": "[2026-10-12 06:33:07 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:08.185618Z",
+    "message": "[2026-10-12 06:33:08 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:08.185671Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:08.185671Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:08.185718Z",
+    "message": "[2026-10-12 06:33:08 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:08.232638Z",
+    "message": "[2026-10-12 06:33:08 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:08.233882Z",
+    "message": "[2026-10-12 06:33:08 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:08.233980Z",
+    "message": "[2026-10-12 06:33:08 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:33:20.686512Z",
+    "message": "[2026-10-12 06:33:20 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:20.693702Z",
+    "message": "[2026-10-12 06:33:20 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:21.163172Z",
+    "message": "[2026-10-12 06:33:21 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:21.163229Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:21.163229Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:21.163385Z",
+    "message": "[2026-10-12 06:33:21 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:21.218424Z",
+    "message": "[2026-10-12 06:33:21 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:21.219367Z",
+    "message": "[2026-10-12 06:33:21 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:21.219412Z",
+    "message": "[2026-10-12 06:33:21 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:33:34.692795Z",
+    "message": "[2026-10-12 06:33:34 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:34.701983Z",
+    "message": "[2026-10-12 06:33:34 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:35.149455Z",
+    "message": "[2026-10-12 06:33:35 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:35.149503Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:35.149503Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:35.149602Z",
+    "message": "[2026-10-12 06:33:35 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:35.204167Z",
+    "message": "[2026-10-12 06:33:35 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:35.205103Z",
+    "message": "[2026-10-12 06:33:35 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:35.205375Z",
+    "message": "[2026-10-12 06:33:35 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:33:54.683896Z",
+    "message": "[2026-10-12 06:33:54 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:54.692402Z",
+    "message": "[2026-10-12 06:33:54 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:55.110279Z",
+    "message": "[2026-10-12 06:33:55 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:55.110323Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:55.110323Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:55.110452Z",
+    "message": "[2026-10-12 06:33:55 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:55.159096Z",
+    "message": "[2026-10-12 06:33:55 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:55.160103Z",
+    "message": "[2026-10-12 06:33:55 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:33:55.160124Z",
+    "message": "[2026-10-12 06:33:55 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:34:12.672780Z",
+    "message": "[2026-10-12 06:34:12 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:12.680760Z",
+    "message": "[2026-10-12 06:34:12 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:13.117761Z",
+    "message": "[2026-10-12 06:34:13 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:13.117807Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:13.117807Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:13.117866Z",
+    "message": "[2026-10-12 06:34:13 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:13.166096Z",
+    "message": "[2026-10-12 06:34:13 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:13.166993Z",
+    "message": "[2026-10-12 06:34:13 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:13.167034Z",
+    "message": "[2026-10-12 06:34:13 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  },
+  {
+    "timestamp": "2026-10-12T06:34:39.735773Z",
+    "message": "[2026-10-12 06:34:39 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:39.746547Z",
+    "message": "[2026-10-12 06:34:39 +0000] [2] [INFO] Booting worker with pid: 2"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:40.286389Z",
+    "message": "[2026-10-12 06:34:40 +0000] [2] [ERROR] Exception in worker process"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:40.286428Z",
+    "startup_exception_tail": "    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:40.286428Z",
+    "message": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py\", line 608, in spawn_worker\n    worker.init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py\", line 94, in init_process\n    super().init_process()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 135, in init_process\n    self.load_wsgi()\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py\", line 147, in load_wsgi\n    self.wsgi = self.app.wsgi()\n                ^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py\", line 66, in wsgi\n    self.callable = self.load()\n                    ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 57, in load\n    return self.load_wsgiapp()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py\", line 47, in load_wsgiapp\n    return util.import_app(self.app_uri)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/gunicorn/util.py\", line 423, in import_app\n    app = app(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/app/cloud/arm_a/app.py\", line 252, in load_production\n    raise RuntimeError('Production serving policy mismatch')\nRuntimeError: Production serving policy mismatch"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:40.286545Z",
+    "message": "[2026-10-12 06:34:40 +0000] [2] [INFO] Worker exiting (pid: 2)"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:40.330928Z",
+    "message": "[2026-10-12 06:34:40 +0000] [1] [ERROR] Worker (pid:2) exited with code 3"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:40.332023Z",
+    "message": "[2026-10-12 06:34:40 +0000] [1] [ERROR] Shutting down: Master"
+  },
+  {
+    "timestamp": "2026-10-12T06:34:40.332070Z",
+    "message": "[2026-10-12 06:34:40 +0000] [1] [ERROR] Reason: Worker failed to boot."
+  }
+]

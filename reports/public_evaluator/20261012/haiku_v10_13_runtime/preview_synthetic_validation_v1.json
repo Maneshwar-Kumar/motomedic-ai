@@ -1,0 +1,42 @@
+{
+  "absent_default": "true",
+  "actual_public_browser_validation": false,
+  "answer_quality_acceptance": false,
+  "backend_worker_and_provider_configuration_changed": false,
+  "checks": {
+    "complete_rider_UI": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 81
+    },
+    "focused_gateway_client_and_forged_UI_callback": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 33
+    }
+  },
+  "classification": "SYNTHETIC_PROVIDER_FREE_LOCAL_CHECKS",
+  "cloud_actions": 0,
+  "controls": [
+    "gateway rejects nonempty question/trigger WebSocket frames while allowing shell and empty widget reset frames",
+    "gateway external session/operation POST returns503 without exposing private API",
+    "server perform returns before operationID/pending/client when paused",
+    "server RiderAPI nonGET rejected before identity mint or HTTP when paused",
+    "chat input and feedback disabled; valid saved recovery GET remains available"
+  ],
+  "flag": "MOTOMEDIC_RIDER_ANSWERS_ENABLED",
+  "invalid_values_fail_closed": true,
+  "preview_value": "false",
+  "preview_visible_message": "Answering is paused while we finish checking the demo.",
+  "provider_calls": 0,
+  "recorded_utc": "2026-10-12T09:51:39.465167+00:00",
+  "schema": "motomedic-public-ui-preview-synthetic-validation-v1",
+  "source_file_sha256": {
+    "rider_ui/app.py": "592911401219b160eca186b44e24237634da74e41e4f842c592e55e0417cf4d0",
+    "rider_ui/client.py": "9c7942d0875b4432ae05aef7e99209864d44396c86def1f26f0b637a076dd401",
+    "rider_ui/public_gateway.py": "d699e047b40a506551f693ac0b851b4713d6265b5564fc673776e4fce7e39bf1",
+    "rider_ui/tests/test_app.py": "c583755fba358b4d8313814cb5de42268c3c23a8b15918030e19fbb98f158ebf",
+    "rider_ui/tests/test_client.py": "c2684d1974b2b8dbcccb841150e6a62563dd91a4f6ee053ac2c8dd89f1a6ae84",
+    "rider_ui/tests/test_public_gateway.py": "385aa22fdc7dd0b7ccc85fd99bef8562659d8bd24d21169e38f1ec56e80f64c1"
+  }
+}

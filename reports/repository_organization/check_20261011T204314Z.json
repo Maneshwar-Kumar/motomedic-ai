@@ -1,0 +1,56 @@
+{
+  "schema_version": "repository-monitor-check-v1",
+  "trigger_utc": "2026-10-11T20:43:14.180Z",
+  "structure": {
+    "schema_version": "repository-structure-audit-v4",
+    "ok": true,
+    "unexpected_root_files": [],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "missing_critical_source_files": [],
+    "integrity_errors": [],
+    "local_links_checked": 120,
+    "root_file_count": 48,
+    "runtime_freeze_files_verified": 64,
+    "current_serving_files_verified": 523,
+    "approved_output_files_verified": 187,
+    "note": "Canonical navigation, byte-exact historical v8 snapshots and v9/v9.1 manifests, current v10 inputs and original scoped approval paths. Not factual or deployment acceptance."
+  },
+  "polls": [
+    {
+      "thread_id": "01a12c4e-f3ef-7342-b33b-45cdb6511587",
+      "status": "active",
+      "cursor": "4fa8c308-659f-4313-94e2-55c7db91b3fe:4"
+    },
+    {
+      "thread_id": "01a12c11-9372-7e61-8283-02d780fe9232",
+      "status": "idle",
+      "cursor": "847b25cf-0c79-4522-b1c2-ebca40389d7b:3"
+    },
+    {
+      "thread_id": "01a12bb1-3fda-7603-9dcf-a28efe202bbb",
+      "status": "idle",
+      "cursor": "fa7c016d-3fc2-42a1-a5d3-ebd2456fc0d7:1"
+    }
+  ],
+  "observations": [
+    "Current v10.2 serving manifest verifies 523 inputs; prior serving-binding failure cleared.",
+    "Historical runtime snapshots/manifests and original source approvals preserved.",
+    "Current evaluator outputs grouped under reports/public_evaluator/20261012 with linked canonical status.",
+    "No unexpected root files, broken navigation or unbound duplicated handoffs detected."
+  ],
+  "resolved_failures": [
+    "Serving input binding conflict cleared in current version."
+  ],
+  "new_actionable_organization_changes": [],
+  "navigation_changed": [],
+  "moved_files": [],
+  "allowlist_changed": false,
+  "clean_consecutive_checks": 0,
+  "pause_eligible": false,
+  "pause_reason": "Relevant evaluator build chat remains active.",
+  "provider_calls": 0,
+  "deployment_or_billing_changes": false,
+  "protected_paths_unchanged": true,
+  "monitor_status": "ACTIVE"
+}

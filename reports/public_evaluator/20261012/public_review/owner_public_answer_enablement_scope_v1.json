@@ -1,0 +1,45 @@
+{
+  "authority": "DIRECT_OWNER_INSTRUCTION",
+  "authorized_ui_configuration_delta": {
+    "MOTOMEDIC_RIDER_ANSWERS_ENABLED": {
+      "from": "false",
+      "to": "true"
+    }
+  },
+  "basis": "ACTUAL_SUPPORTED_DIRECT_ANSWER_SAVED_STREAMED_RECOVERED",
+  "budget_scope": {
+    "billing_disconnect_inr": 2540,
+    "billing_restart_authorized": false,
+    "maximum_attempts": 100,
+    "new_monetary_allocation_authorized": false,
+    "primary_maximum_tokens": 2000000,
+    "project_lifetime_inr": 2700,
+    "refund_or_reset_authorized": false,
+    "shared_haiku_maximum_usd": 1
+  },
+  "cloud_writes": 0,
+  "enablement_before_complete_six_case_run_authorized": true,
+  "exact_owner_instruction": "Oh this means the supported answer came back. Expose the answering in the UI too then, for the public link",
+  "frozen_candidate": {
+    "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+    "serving_manifest_path": "reports/public_evaluator/20261012/serving_manifest_v10_13.json",
+    "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+    "source_commit": "3b7da1692187736295fee7345e9b3e932d02b216"
+  },
+  "human_factual_signoff": false,
+  "immutable_source_bindings_required": true,
+  "independent_factual_quality_acceptance": false,
+  "known_current_usb_case_outcome": "SYSTEM_ERROR",
+  "owner_authorized": true,
+  "provider_calls": 0,
+  "public_ui_answers_enabled_authorized": true,
+  "public_url": "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+  "recorded_at_utc": "2026-10-12T11:29:05.079461+00:00",
+  "remaining_functional_checks_pending": true,
+  "runtime_semantic_verifier_bypass_authorized": false,
+  "runtime_semantic_verifier_required": true,
+  "schema": "motomedic-direct-owner-public-answer-enablement-scope-v1",
+  "six_case_functional_acceptance_claimed": false,
+  "successful_case_id": "EVAL_DIRECT_01",
+  "successful_hosted_job_id": "a77d5e33-4419-4d5c-855b-cb8bc2c98690"
+}

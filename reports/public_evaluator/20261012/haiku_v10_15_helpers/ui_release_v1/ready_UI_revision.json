@@ -1,0 +1,76 @@
+{
+  "revision": "motomedic-rider-ui-v10-15-direct-timed",
+  "revision_configuration": {
+    "containers": [
+      {
+        "env": [
+          {
+            "name": "MOTOMEDIC_RIDER_API_URL",
+            "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+          },
+          {
+            "name": "MOTOMEDIC_PUBLIC_HOST",
+            "value": "motomedic-rider-ui-279945185781.us-central1.run.app"
+          },
+          {
+            "name": "MOTOMEDIC_EDGE_POLICY",
+            "value": "gcp-public-cloud-run-cookie-v2"
+          },
+          {
+            "name": "MOTOMEDIC_RIDER_ACCESS",
+            "value": "public_gateway"
+          },
+          {
+            "name": "MOTOMEDIC_RIDER_AUTH",
+            "value": "cloud_run"
+          },
+          {
+            "name": "MOTOMEDIC_RIDER_ANSWERS_ENABLED",
+            "value": "true"
+          },
+          {
+            "name": "MOTOMEDIC_VISITOR_SECRET",
+            "valueSource": {
+              "secretKeyRef": {
+                "secret": "motomedic-rider-visitor-v1",
+                "version": "1"
+              }
+            }
+          }
+        ],
+        "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:483de64b85123a501d5c55031d4885e3f4c2c44155f4b4f273ea4a2498be4760",
+        "ports": [
+          {
+            "containerPort": 8080,
+            "name": "http1"
+          }
+        ],
+        "resources": {
+          "cpuIdle": true,
+          "limits": {
+            "cpu": "1",
+            "memory": "512Mi"
+          },
+          "startupCpuBoost": true
+        },
+        "startupProbe": {
+          "failureThreshold": 24,
+          "httpGet": {
+            "path": "/health",
+            "port": 8080
+          },
+          "periodSeconds": 10,
+          "timeoutSeconds": 5
+        }
+      }
+    ],
+    "launchStage": "GA",
+    "maxInstanceRequestConcurrency": 4,
+    "scaling": {
+      "maxInstanceCount": 1
+    },
+    "serviceAccount": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "timeout": "1200s"
+  },
+  "revision_configuration_sha256": "8596b6fa8ddb86d79ef8a66c9e93964724c2ef4156cf6755ea81a97707b46653"
+}

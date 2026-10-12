@@ -156,12 +156,12 @@ class ProgressStreamTests(unittest.TestCase):
             read_verified_stream([frame('error',{'type':'SYSTEM_ERROR','error':'OPERATION_NOT_COMMITTED','operation_id':OP})],operation_id=OP)
         self.assertEqual(str(raised.exception),'I couldn\u2019t check the answer right now. Please try again shortly.')
 
-    def test_v9_production_policy_rejects_retired_neutral_or_technical_copy(self):
+    def test_v10_production_policy_rejects_retired_neutral_or_technical_copy(self):
         import json
         from rider_ui.client import RiderAPI,RUNTIME_POLICY
         from rider_ui.tests.test_client import Transport
         for route in ('SUPPORTED','AMBIGUOUS','UNSUPPORTED','SAFETY_STOP','SYSTEM_ERROR'):
-            for policy in (None,'open-manual-draft-verify-v6','open-manual-draft-verify-v7','open-manual-draft-verify-v8'):
+            for policy in (None,'open-manual-draft-verify-v6','open-manual-draft-verify-v7','open-manual-draft-verify-v8','open-manual-draft-verify-v9'):
                 v=view();v['response'].update(type=route,technical_content=False,release_gate_passed=False,cited_pages=[])
                 if policy is None:v.pop('runtime_policy')
                 else:v['runtime_policy']=policy
@@ -172,7 +172,7 @@ class ProgressStreamTests(unittest.TestCase):
                     read_verified_stream([frame('complete',v)],published.append,operation_id=OP,
                                          on_chunk=parts.append,expected_policy=RUNTIME_POLICY)
                 self.assertEqual(published,[]);self.assertEqual(parts,[])
-        v=view();v['runtime_policy']='open-manual-draft-verify-v7';published=[];parts=[]
+        v=view();v['runtime_policy']='open-manual-draft-verify-v9';published=[];parts=[]
         with self.assertRaises(APIError):
             read_verified_stream(accepted_frames(v),published.append,operation_id=OP,
                                  on_chunk=parts.append,expected_policy=RUNTIME_POLICY)

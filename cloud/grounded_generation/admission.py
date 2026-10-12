@@ -1,8 +1,9 @@
-"""Atomic conservative provider allowances, separate from UI admission counters.
+"""Retired fixed-envelope admission retained for historical synthetic consumers.
 
 Reserve worst-case tokens before EACH generation attempt. Uncertain calls retain
-their reservation. All counters expire in 24h, never reset on browser refresh.
-No price inference: bound paid token volume; existing project billing guard stays.
+their reservation. This rolling ledger is not serving authority: Haiku serving
+uses WholeTurnAdmission's native roles and permanent token/USD1 allocations.
+The old envelope below must never cap assembled evidence in the active runtime.
 """
 from datetime import datetime,timedelta,timezone
 from generation_providers import ProviderFailure
@@ -19,8 +20,9 @@ class ProviderAdmission:
         ref=self.client.collection('arm_a_usage').document('grounded-provider-global-v1')
         @firestore.transactional
         def reserve(tx):
+            from cloud.grounded_generation.whole_turn_admission import _events
             now=self.now();snap=ref.get(transaction=tx)
-            events=[e for e in (snap.to_dict().get('events',[]) if snap.exists else []) if e['at']>now-timedelta(hours=24)]
+            events=[e for e in _events(snap.to_dict() if snap.exists else {}) if e['at']>now-timedelta(hours=24)]
             generated=[e for e in events if e['kind']=='generation']
             # Maximum 100 attempts/day and 999,200 reserved tokens/day. Gemma
             # account quota and the unchanged project budget can stop earlier.

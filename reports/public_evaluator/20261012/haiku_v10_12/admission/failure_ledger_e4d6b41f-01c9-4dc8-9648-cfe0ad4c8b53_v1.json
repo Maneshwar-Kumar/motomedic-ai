@@ -1,0 +1,258 @@
+{
+  "arbitrary_future_question_affordability_guaranteed": false,
+  "billing_changes": 0,
+  "case_records": [
+    {
+      "all_individual_provider_usage_present": true,
+      "artifact_sha256": "205eb9db1049c0660b142fab01421407311a6511753f6864d0590377b1b14c32",
+      "capacity_admitted": true,
+      "case_id": "EVAL_DIRECT_01",
+      "correction_calls": 0,
+      "draft_calls": 1,
+      "failure_code": null,
+      "generation_calls": 2,
+      "reserved_attempts": 2,
+      "reserved_nanodollars": 7839000,
+      "reserved_tokens": 51912,
+      "role_usage_available_in_receipt": [
+        {
+          "cache_creation_input_tokens": 5786,
+          "cache_read_input_tokens": 0,
+          "cached_prefix_sha256": "50c4a4cbdc315598946fd0e7e217818308470c608ad56ec59b1d550a0f69d96b",
+          "input_tokens": 6060,
+          "input_tokens_counted": 6060,
+          "output_tokens": 178,
+          "reserved_input_token_ceiling": 6572,
+          "reserved_maximum_cost_usd": 0.0017215,
+          "role": "private_draft"
+        },
+        {
+          "cache_creation_input_tokens": 6064,
+          "cache_read_input_tokens": 0,
+          "cached_prefix_sha256": "532c86d36c272d82ff06af97ed1ff621fffa32a42c2b5b92f278fcf2052c8bb0",
+          "input_tokens": 8165,
+          "input_tokens_counted": 8165,
+          "output_tokens": 362,
+          "reserved_input_token_ceiling": 41740,
+          "reserved_maximum_cost_usd": 0.0061175,
+          "role": "semantic_verifier"
+        }
+      ],
+      "route": "SUPPORTED",
+      "sealed_unused_slots": 0,
+      "sealing_releases_pacing_only_no_refund": true,
+      "verification_calls": 1
+    },
+    {
+      "all_individual_provider_usage_present": false,
+      "artifact_sha256": "5e891e29e91654afa4629b2ddd557736a67ebfea623b1f8fcddbf8fdc1a27145",
+      "capacity_admitted": true,
+      "case_id": "EVAL_USB_02",
+      "correction_calls": 0,
+      "draft_calls": 1,
+      "failure_code": "INVALID_DRAFT_CITATION_OR_ROLE",
+      "generation_calls": 1,
+      "reserved_attempts": 2,
+      "reserved_nanodollars": 9592875,
+      "reserved_tokens": 65943,
+      "role_usage_available_in_receipt": [],
+      "route": "SYSTEM_ERROR",
+      "sealed_unused_slots": 1,
+      "sealing_releases_pacing_only_no_refund": true,
+      "verification_calls": 0
+    }
+  ],
+  "classification": "READONLY_ACTUAL_RUN_RESERVATIONS_AND_OLD_CANDIDATE_FORECAST_AUDIT",
+  "cloud_build_id": "e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53",
+  "cloud_mutations": 0,
+  "cloud_reads_performed_by_audit": 0,
+  "conclusion": "USB failed draft citation/role validation after admission, not quota/budget denial. All four initial reservations remain charged. The retained demonstration/human floor alone fits; old v10.12 continuation/replay forecasts plus the required conditional envelope and floor do not fit the permanent token allocation.",
+  "count_build_id": "8fa2fb34-75f5-4a1a-9d4d-66a96f05fa97",
+  "count_receipt_sha256": "5acc6f312bc76a31784c64fb2cd908df72819dbf24523ebb8c9f978110c57d97",
+  "counter_edits": 0,
+  "downloaded_files_hash_verified": {
+    "EVAL_DIRECT_01.json": "205eb9db1049c0660b142fab01421407311a6511753f6864d0590377b1b14c32",
+    "EVAL_USB_02.json": "5e891e29e91654afa4629b2ddd557736a67ebfea623b1f8fcddbf8fdc1a27145",
+    "exit_status.json": "17a738066c9e9553bd127c4b1457b74fd9a63970009e1d5bb94f9960b811e964",
+    "receipt.json": "e3365dd6bd4b548e7ece58d82412793b1b6db275e56f312ac57ab5da18e8fe71"
+  },
+  "factual_quality_acceptance_claimed": false,
+  "floor_only": {
+    "after_floor_headroom": {
+      "attempts": 66,
+      "haiku_nanodollars": 936623875,
+      "tokens": 398735
+    },
+    "available": {
+      "attempts": 72,
+      "haiku_nanodollars": 971024125,
+      "tokens": 641537
+    },
+    "eligible": true,
+    "required": {
+      "attempts": 6,
+      "haiku_nanodollars": 34400250,
+      "tokens": 242802
+    }
+  },
+  "future_capacity_checks": [
+    {
+      "available": {
+        "attempts": 72,
+        "haiku_nanodollars": 971024125,
+        "tokens": 641537
+      },
+      "current_conditional": {
+        "attempts": 2,
+        "haiku_nanodollars": 18389125,
+        "tokens": 136313
+      },
+      "deficit": {
+        "attempts": 0,
+        "haiku_nanodollars": 0,
+        "tokens": 9884
+      },
+      "eligible": false,
+      "forecast_candidate": "FROZEN_V10_12_ONLY",
+      "remaining_planned_initial": {
+        "attempts": 8,
+        "haiku_nanodollars": 39438250,
+        "tokens": 272306
+      },
+      "required": {
+        "attempts": 16,
+        "haiku_nanodollars": 92227625,
+        "tokens": 651421
+      },
+      "retained_public_and_two_human_floor": {
+        "attempts": 6,
+        "haiku_nanodollars": 34400250,
+        "tokens": 242802
+      },
+      "scenario": "REMAINING_FOUR_WITH_CURRENT_FOLLOWUP_CONDITIONAL"
+    },
+    {
+      "available": {
+        "attempts": 72,
+        "haiku_nanodollars": 971024125,
+        "tokens": 641537
+      },
+      "current_conditional": {
+        "attempts": 2,
+        "haiku_nanodollars": 16270625,
+        "tokens": 119365
+      },
+      "deficit": {
+        "attempts": 0,
+        "haiku_nanodollars": 0,
+        "tokens": 58896
+      },
+      "eligible": false,
+      "forecast_candidate": "FROZEN_V10_12_ONLY",
+      "remaining_planned_initial": {
+        "attempts": 10,
+        "haiku_nanodollars": 49033250,
+        "tokens": 338266
+      },
+      "required": {
+        "attempts": 18,
+        "haiku_nanodollars": 99704125,
+        "tokens": 700433
+      },
+      "retained_public_and_two_human_floor": {
+        "attempts": 6,
+        "haiku_nanodollars": 34400250,
+        "tokens": 242802
+      },
+      "scenario": "REPEAT_USB_AND_REMAINING_FOUR"
+    },
+    {
+      "available": {
+        "attempts": 72,
+        "haiku_nanodollars": 971024125,
+        "tokens": 641537
+      },
+      "current_conditional": {
+        "attempts": 2,
+        "haiku_nanodollars": 14182750,
+        "tokens": 102662
+      },
+      "deficit": {
+        "attempts": 0,
+        "haiku_nanodollars": 0,
+        "tokens": 94100
+      },
+      "eligible": false,
+      "forecast_candidate": "FROZEN_V10_12_ONLY",
+      "remaining_planned_initial": {
+        "attempts": 12,
+        "haiku_nanodollars": 56871625,
+        "tokens": 390173
+      },
+      "required": {
+        "attempts": 20,
+        "haiku_nanodollars": 105454625,
+        "tokens": 735637
+      },
+      "retained_public_and_two_human_floor": {
+        "attempts": 6,
+        "haiku_nanodollars": 34400250,
+        "tokens": 242802
+      },
+      "scenario": "FRESH_SIX_CASE_REPLAY"
+    }
+  ],
+  "inr_limitation": "This receipt audits provider reservations; latest billing guard readback and delayed INR reporting remain separate.",
+  "ledger_after": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 28,
+      "reserved_tokens": 357663,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 5,
+      "reserved_nanodollars": 28975875,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "ledger_before": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 24,
+      "reserved_tokens": 239808,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 3,
+      "reserved_nanodollars": 11544000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "new_candidate_counts_required": true,
+  "provider_calls_performed_by_audit": 0,
+  "receipt_sha256": "e3365dd6bd4b548e7ece58d82412793b1b6db275e56f312ac57ab5da18e8fe71",
+  "recorded_at_utc": "2026-10-12T09:06:58.155561+00:00",
+  "refunds_or_resets": 0,
+  "remaining": {
+    "attempts": 72,
+    "haiku_nanodollars": 971024125,
+    "tokens": 641537
+  },
+  "remaining_haiku_usd": "0.971024125",
+  "reserved_haiku_usd": "0.028975875",
+  "retained_actual_reservation_delta": {
+    "attempts": 4,
+    "haiku_nanodollars": 17431875,
+    "tokens": 117855
+  },
+  "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+  "schema": "motomedic-haiku-failed-run-readonly-ledger-audit-v1",
+  "serving_manifest_sha256": "ff82ee677ada2e42fc08b5ea710ebe05cef7dac527f7008785ed0320bf58e8fb",
+  "unknown_actual_finalized_verifier_count_guaranteed": false,
+  "usage_limitation": "USB stopped before the attempt usage trace was appended; no fresh/cache token usage inferred for that draft. Permanent reservations remain exact."
+}

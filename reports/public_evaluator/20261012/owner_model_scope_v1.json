@@ -1,0 +1,64 @@
+{
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "availability_fallback_enabled": false,
+  "billing_restart_authorized": false,
+  "coordinator": "/root",
+  "exact_user_instructions": [
+    "Just a slight steer. Riders will most likely ask only 100 word questions at max",
+    "If the prompt is big, send it to Haiku. Whose 8,192 token limit is it? Gemma?",
+    "No need for this cap. Limit the prompt given by user. Retrieval chunks, evidences can be big."
+  ],
+  "human_factual_quality_approval": false,
+  "interpretation": {
+    "actual_provider_context_and_quota_limits_remain": true,
+    "complete_evidence_history_final_response_preserved": true,
+    "distinct_model_verification_required": true,
+    "large_draft_model": "claude-haiku-5-5",
+    "large_verifier_model": "gemma-4-26b-a4b-it",
+    "question_overflow": "REJECT_WITH_CLEAR_MESSAGE_NEVER_TRUNCATE",
+    "remove_artificial_assembled_input_8192_token_cap": true,
+    "remove_artificial_assembled_input_byte_cap": true,
+    "retrieved_evidence_only": true,
+    "rider_question_word_limit": 100,
+    "route_is_bound_before_generation": true,
+    "size_routing_threshold_tokens": 8192,
+    "size_threshold_is_not_a_rejection": true,
+    "small_draft_model": "gemma-4-26b-a4b-it",
+    "small_verifier_model": "claude-haiku-5-5"
+  },
+  "live_acceptance_demonstrated": false,
+  "new_spend_allocation_authorized": false,
+  "prior_owner_scope_path": "reports/public_evaluator/20261012/owner_scope_v1.json",
+  "prior_owner_scope_sha256": "65c42d40b4a882972570e377b4a314abd2767be7fb8fb8129e7bfe9c2a436b0d",
+  "published_native_context": {
+    "gemma": {
+      "api_metadata_readback_pending": true,
+      "checked_date": "2026-10-12",
+      "model": "gemma-4-26b-a4b-it",
+      "published_window_tokens": 256000,
+      "source": "https://ai.google.dev/gemma/docs/core/model_card_4"
+    },
+    "haiku": {
+      "api_metadata_readback_pending": true,
+      "checked_date": "2026-10-12",
+      "model": "claude-haiku-5-5",
+      "published_window_tokens": 1000000,
+      "source": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+    }
+  },
+  "quota_summary_path": "reports/public_evaluator/20261012/provider_quota_summary_v1.json",
+  "quota_summary_sha256": "41bf403e6e9ce086ab9c349938e6898ec8a888570b1f9f3fb022632aad54b424",
+  "recorded_date": "2026-10-12",
+  "retained_budget": {
+    "billing_disconnect_inr": 2540,
+    "haiku_lifetime_usd": 1,
+    "no_reservation_refunds_or_resets": true,
+    "primary_lifetime_attempts": 100,
+    "primary_lifetime_tokens": 999200,
+    "project_lifetime_inr": 2700
+  },
+  "schema": "motomedic-public-evaluator-owner-model-scope-v1",
+  "source_approval_changed": false,
+  "source_display_policy_changed": false,
+  "whole_manual_claude_authorized": false
+}

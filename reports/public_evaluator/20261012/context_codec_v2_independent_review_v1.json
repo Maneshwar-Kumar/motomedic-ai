@@ -1,0 +1,99 @@
+{
+  "schema": "motomedic-independent-lossless-context-codec-review-v1",
+  "recorded_at": "2026-10-12T06:57:48.065372+00:00",
+  "reviewer": "/root/durable_operations",
+  "classification": "INDEPENDENT_LOCAL_PROVIDER_FREE_SERIALIZATION_REVIEW",
+  "runtime_file": "cloud\\grounded_generation\\verified_qa.py",
+  "runtime_file_sha256": "f23c2ae08bf8bde9964b202ace397389dea433e10777a2b84e18a572cb7138db",
+  "encoding": "lossless-shared-json-v2",
+  "review_helper_sha256": "921bb1069d2c2073900ed767ba5f19c6cac6ca030959a1c0cb99dfb854abdc5f",
+  "tested_checks": 1337,
+  "canonical_equality": "PASS",
+  "input_mutation": "NONE",
+  "checks": {
+    "synthetic_provider_free": true,
+    "real_provider_calls": 0,
+    "checks": 1337,
+    "result": "PASS",
+    "original_preserved_source_fixtures": [
+      {
+        "case_id": "EVAL_DIRECT_01",
+        "evidence_count": 30,
+        "roundtrip": "PASS",
+        "source_artifact_sha256": "88735e16a5cae3c73c5115aaf0b722d043fdc6de135d964e15af081a9ac3e0c9"
+      },
+      {
+        "case_id": "EVAL_FOLLOWUP_03",
+        "evidence_count": 20,
+        "roundtrip": "PASS",
+        "source_artifact_sha256": "448bd135ef038e6f2cdf4213cfc5a2f47c2663742d26bdc879275d118583ce8d"
+      },
+      {
+        "case_id": "EVAL_PARTIAL_05",
+        "evidence_count": 17,
+        "roundtrip": "PASS",
+        "source_artifact_sha256": "a6afb5ed2b1e59e964bc36458227231db05dfc1f05ddc0384b28bd581c80a0b0"
+      },
+      {
+        "case_id": "EVAL_TOPIC_TABLE_04",
+        "evidence_count": 15,
+        "roundtrip": "PASS",
+        "source_artifact_sha256": "54edb8fac7857e4775248f126fba0bfdcb77f9be6db195cd02f6c535839feec5"
+      },
+      {
+        "case_id": "EVAL_UNSUPPORTED_06",
+        "evidence_count": 10,
+        "roundtrip": "PASS",
+        "source_artifact_sha256": "b374589caa252266de0d4806c80f8cc34195e1b4d42df18b28c8a30303a8e36d"
+      },
+      {
+        "case_id": "EVAL_USB_02",
+        "evidence_count": 34,
+        "roundtrip": "PASS",
+        "source_artifact_sha256": "493a0acfad5972355717d104c6cc7dea5b0bf0ad3c527ca7af727565cb71752c"
+      }
+    ],
+    "original_index_all_chunks_and_parents": [
+      {
+        "file": "build\\serving-artifacts\\index_a3282c4d98cf54595e4ba168\\chunks.jsonl",
+        "rows": 532,
+        "roundtrip": "PASS",
+        "sha256": "e15098db5e9ed58230dab97721a153eb383252720f69ae990bd5cd37f05ed7be"
+      },
+      {
+        "file": "build\\serving-artifacts\\index_a3282c4d98cf54595e4ba168\\parents.jsonl",
+        "rows": 277,
+        "roundtrip": "PASS",
+        "sha256": "0887179158741bd0f9ca6e1dd368b8510e2f172170f61a427206e02e31db00ed"
+      }
+    ],
+    "table_headers_units_spans_null_missing_reference_roundtrip": "PASS",
+    "random_seed": 20261012,
+    "fuzz_cases": 500
+  },
+  "code_review": {
+    "all_source_keys_values_relationships_preserved": true,
+    "full_evidence_ids_and_keys_interned_with_literal_definitions": true,
+    "root_binding_sha256_remains_literal": true,
+    "strict_full_id_output_validation_retained": true,
+    "reserved_array_tags_escaped": true,
+    "malformed_reference_cycles_boolean_indices_duplicate_keys_lengths_rejected": true,
+    "non_json_leaf_key_and_nonfinite_float_guards_present": true,
+    "table_factoring_activated": false,
+    "semantic_source_view_activated": false,
+    "source_or_context_removed": false
+  },
+  "provider_generation_calls": 0,
+  "native_token_counter_calls": 0,
+  "cloud_mutations": 0,
+  "retrieval_calls": 0,
+  "source_or_approval_changed": false,
+  "billing_or_allocation_changed": false,
+  "factual_acceptance": false,
+  "public_or_deployment_acceptance": false,
+  "limitations": [
+    "Local byte/roundtrip checks do not establish actual model-native token reduction or quota eligibility.",
+    "Preserved admitted closure fixtures are historical; current35-evidence follow-up requires hosted native count.",
+    "Serialization correctness does not establish factual answer quality."
+  ]
+}

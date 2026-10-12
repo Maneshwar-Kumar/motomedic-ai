@@ -12,11 +12,13 @@ import time
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 from urllib.error import HTTPError
 from generation_providers import ProviderFailure, ProviderResult
+from cloud.grounded_generation.role_contracts import OUTPUT_JSON_BYTES
+from evidence_registry import content_hash
 
 MODEL = 'gemma-4-26b-a4b-it'
-INPUT_TOKENS = 8192
+INPUT_TOKENS = 256000-1800
 OUTPUT_TOKENS = 1800
-REQUEST_BYTES = 65536
+REQUEST_BYTES = None  # Complete evidence uses the native window, no artificial byte cap.
 
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
@@ -47,6 +49,9 @@ class HTTP:
         except Exception: raise ProviderFailure('PROVIDER_TRANSPORT_OR_SCHEMA_FAILURE') from None
 
 class GemmaProvider:
+    model=MODEL
+    input_tokens=INPUT_TOKENS
+    thinking={'thinkingLevel':'minimal'}
     def __init__(self, reserve, *, transport=None, key=None, cache_capability='unsupported', clock=time.monotonic):
         self.reserve=reserve
         self.transport=transport or HTTP()
@@ -57,11 +62,15 @@ class GemmaProvider:
         self.cache={}
         self.lock=threading.Lock()
         self.last_trace=None
+        self.initial_context=threading.local()
+
+    def expect_initial_context(self,expected):
+        self.initial_context.expected=expected
 
     def count(self, body):
         if not self.key: raise ProviderFailure('PROVIDER_UNCONFIGURED')
-        result=self.transport('POST','models/'+MODEL+':countTokens',
-            {'generateContentRequest':{'model':'models/'+MODEL,**body}},self.key)
+        result=self.transport('POST','models/'+self.model+':countTokens',
+            {'generateContentRequest':{'model':'models/'+self.model,**body}},self.key)
         n=result.get('totalTokens')
         if type(n) is not int or n<1: raise ProviderFailure('EXACT_TOKEN_COUNT_UNAVAILABLE')
         return n
@@ -76,32 +85,48 @@ class GemmaProvider:
         end=getattr(self.reserve,'end_turn',None)
         if callable(end):end()
 
-    def context(self,policy,evidence,dynamic,schema):
-        body={'systemInstruction':{'parts':[{'text':policy}]},
-            'contents':[{'role':'user','parts':[{'text':json.dumps(evidence,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]},
-                {'role':'user','parts':[{'text':json.dumps(dynamic,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]}],
-            'generationConfig':{'maxOutputTokens':OUTPUT_TOKENS,'temperature':0,
-                'responseMimeType':'application/json','responseJsonSchema':deepcopy(schema),
-                'thinkingConfig':{'thinkingLevel':'minimal'}}}
-        if len(json.dumps(body,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode())>REQUEST_BYTES:
-            raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
-        count=self.count(body)
-        if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
-        return body,count
-
-    def complete(self, policy, evidence, dynamic, schema):
-        trace={'model':MODEL,'generation_calls':0,'verifier_calls':0,'retry_count':0,
+    @classmethod
+    def _new_trace(cls):
+        return {'model':cls.model,'generation_calls':0,'verifier_calls':0,'retry_count':0,
             'provider_cache':'UNSUPPORTED_EXACT_MODEL','cached_tokens':0,
             'raw_content_logged':False,'token_counter':'PROVIDER_COUNT_TOKENS'}
+
+    def context(self,policy,evidence,dynamic,schema,*,_trace=None,_native_window=True):
+        # Standalone preflight must never inherit another request's telemetry.
+        # Completion supplies its local trace so its counters remain attached.
+        trace=self._new_trace() if _trace is None else _trace
+        if _trace is None:self.last_trace=trace
+        try:
+            body={'systemInstruction':{'parts':[{'text':policy}]},
+                'contents':[{'role':'user','parts':[{'text':json.dumps(evidence,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]},
+                    {'role':'user','parts':[{'text':json.dumps(dynamic,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))}]}],
+                'generationConfig':{'maxOutputTokens':OUTPUT_TOKENS,'temperature':0,
+                    'responseMimeType':'application/json','responseJsonSchema':deepcopy(schema),
+                    'thinkingConfig':deepcopy(self.thinking)}}
+            trace['request_bytes']=len(json.dumps(body,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode())
+            count=self.count(body)
+            trace['input_tokens_counted']=count
+            if _native_window and count>self.input_tokens: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
+            return body,count
+        except ProviderFailure as exc:
+            trace['failure_code']=str(exc)
+            raise
+
+    def complete(self, policy, evidence, dynamic, schema):
+        trace=self._new_trace()
         self.last_trace=trace
         if not self.key: raise ProviderFailure('PROVIDER_UNCONFIGURED')
         if not self.lock.acquire(blocking=False): raise ProviderFailure('PROVIDER_CONCURRENCY_LIMIT')
         try:
-            body,count=self.context(policy,evidence,dynamic,schema)
+            body,count=self.context(policy,evidence,dynamic,schema,_trace=trace)
+            expected=getattr(self.initial_context,'expected',None)
+            if expected is not None:
+                if content_hash(body)!=expected:raise ProviderFailure('ROUTER_INITIAL_REQUEST_BINDING_CHANGED')
+                self.initial_context.expected=None
             system=body['systemInstruction'];stable,varying=body['contents']
             trace['input_tokens_counted']=count
-            if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
-            cache_key=hashlib.sha256(json.dumps({'model':MODEL,'system':system,'stable':stable,'schema':schema},sort_keys=True).encode()).hexdigest()
+            if count>self.input_tokens: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
+            cache_key=hashlib.sha256(json.dumps({'model':self.model,'system':system,'stable':stable,'schema':schema},sort_keys=True).encode()).hexdigest()
             if self.cache_capability=='explicit':
                 entry=self.cache.get(cache_key)
                 if entry and entry[1]<=self.clock(): entry=None; self.cache.pop(cache_key,None)
@@ -110,7 +135,7 @@ class GemmaProvider:
                     stable_tokens=self.count({'systemInstruction':system,'contents':[stable]})
                     self.reserve(stable_tokens,'prompt_cache')
                     try:
-                        created=self.transport('POST','cachedContents',{'model':'models/'+MODEL,
+                        created=self.transport('POST','cachedContents',{'model':'models/'+self.model,
                             'systemInstruction':system,'contents':[stable],'ttl':'300s'},self.key)
                         name=created['name']
                         if not isinstance(name,str) or not name.startswith('cachedContents/'): raise ValueError()
@@ -126,10 +151,18 @@ class GemmaProvider:
                     trace['provider_cache']='EXPLICIT_VERSIONED_CONTEXT'
             started=time.monotonic()
             for attempt in range(2):
-                self.reserve(count+OUTPUT_TOKENS,'generation')
+                permit=self.reserve(count+OUTPUT_TOKENS,'generation')
+                input_ceiling=self.input_tokens
+                if getattr(self,'central_admission',False):
+                    if (type(permit)is not dict or permit.get('model')!=self.model or
+                            type(permit.get('input_tokens'))is not int or
+                            permit['input_tokens']<count or permit.get('output_tokens')!=OUTPUT_TOKENS):
+                        raise ProviderFailure('MODEL_ROLE_RESERVATION_BINDING_REQUIRED')
+                    input_ceiling=permit['input_tokens']
+                trace['reserved_input_token_ceiling']=input_ceiling
                 trace['generation_calls']+=1
                 try:
-                    response=self.transport('POST','models/'+MODEL+':generateContent',body,self.key)
+                    response=self.transport('POST','models/'+self.model+':generateContent',body,self.key)
                     break
                 except ProviderFailure as exc:
                     # Retry only an explicit rejection, never uncertain timeout/delivery.
@@ -138,8 +171,8 @@ class GemmaProvider:
                         continue
                     raise
             trace['provider_seconds']=time.monotonic()-started
-            trace['model_version_matches']=response.get('modelVersion')==MODEL
-            if response.get('modelVersion')!=MODEL: raise ProviderFailure('PROVIDER_MODEL_MISMATCH')
+            trace['model_version_matches']=response.get('modelVersion')==self.model
+            if response.get('modelVersion')!=self.model: raise ProviderFailure('PROVIDER_MODEL_MISMATCH')
             candidates=response.get('candidates',[])
             trace['candidate_count']=len(candidates)
             if candidates:
@@ -162,12 +195,14 @@ class GemmaProvider:
             for field in ('promptTokenCount','candidatesTokenCount','totalTokenCount'):
                 if type(usage.get(field)) is not int or usage[field]<0: raise ProviderFailure('PROVIDER_USAGE_MISSING')
             if usage.get('thoughtsTokenCount',0)!=0: raise ProviderFailure('PROVIDER_UNBOUNDED_THINKING')
-            if usage['promptTokenCount']>INPUT_TOKENS or usage['candidatesTokenCount']>OUTPUT_TOKENS:
+            if usage['promptTokenCount']>min(self.input_tokens,input_ceiling) or usage['candidatesTokenCount']>OUTPUT_TOKENS:
                 raise ProviderFailure('PROVIDER_TOKEN_BOUND')
             cached=usage.get('cachedContentTokenCount',0)
-            if type(cached) is not int or cached<0: raise ProviderFailure('PROVIDER_CACHE_USAGE_INVALID')
+            if type(cached) is not int or not 0<=cached<=usage['promptTokenCount']: raise ProviderFailure('PROVIDER_CACHE_USAGE_INVALID')
             trace.update(input_tokens=usage['promptTokenCount'],output_tokens=usage['candidatesTokenCount'],cached_tokens=cached)
-            output=json.loads(''.join(p['text'] for p in parts),object_pairs_hook=unique,
+            output_text=''.join(p['text'] for p in parts)
+            if len(output_text.encode())>OUTPUT_JSON_BYTES:raise ProviderFailure('PRIVATE_GENERATED_JSON_BYTE_BOUND')
+            output=json.loads(output_text,object_pairs_hook=unique,
                 parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
             return ProviderResult(output,usage['promptTokenCount'],usage['candidatesTokenCount'],None,deepcopy(trace))
         except ProviderFailure: raise

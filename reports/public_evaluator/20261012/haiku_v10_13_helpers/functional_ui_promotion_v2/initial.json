@@ -1,0 +1,677 @@
+{
+  "binding": {
+    "image_binding_sha256": "51e76b34f9e0b9074227f45649c43cf0eedccacecea6f069e56d1a288fe1ba61",
+    "images": {
+      "backend": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+      "ui": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:dbb6bb80e7b56fdb999930c0f74f58c1290b0674f26a3b20616cf5589773cb5e"
+    },
+    "model_routing_contract": {
+      "availability_fallback_enabled": false,
+      "native_limit_sources": {
+        "checked_date": "2026-10-12",
+        "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+      },
+      "roles": {
+        "HAIKU_DRAFT_HAIKU_VERIFY": {
+          "draft": {
+            "answer_cache": "DISABLED",
+            "automatic_retries": 0,
+            "cache_ttl": "5m",
+            "citation_schema": "ROLE_TEMPLATE_WITH_EXACT_ADMITTED_SOURCE_ID_ENUM",
+            "context_window_tokens": 1000000,
+            "effort": "medium",
+            "evidence_encoding": "PLAIN_JSON_LITERAL_SOURCE_IDS",
+            "fallback_role": false,
+            "input_tokens": 998200,
+            "maximum_attempts_per_call": 1,
+            "minimum_cache_tokens": 512,
+            "model": "claude-haiku-5-5",
+            "native_json_schema": true,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "output_json_bytes": 16384,
+            "output_tokens": 1800,
+            "pricing": {
+              "base_usd_per_million": {
+                "cache_read": 0.01,
+                "cache_write": 0.125,
+                "input": 0.1,
+                "output": 0.5
+              },
+              "long_context_above_input_tokens": 100000,
+              "long_usd_per_million": {
+                "cache_read": 0.05,
+                "cache_write": 0.625,
+                "input": 0.5,
+                "output": 2.5
+              }
+            },
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "provider": "anthropic",
+            "request_bytes": null,
+            "retry_rejections": [],
+            "role": "private_draft",
+            "thinking": "disabled",
+            "version": "haiku-literal-object-draft-finalized-verifier-v4"
+          },
+          "verifier": {
+            "answer_cache": "DISABLED",
+            "automatic_retries": 0,
+            "cache_ttl": "5m",
+            "citation_schema": "ROLE_TEMPLATE_WITH_EXACT_ADMITTED_SOURCE_ID_ENUM",
+            "context_window_tokens": 1000000,
+            "effort": "medium",
+            "evidence_encoding": "PLAIN_JSON_LITERAL_SOURCE_IDS",
+            "fallback_role": false,
+            "input_tokens": 998200,
+            "maximum_attempts_per_call": 1,
+            "minimum_cache_tokens": 512,
+            "model": "claude-haiku-5-5",
+            "native_json_schema": true,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "output_json_bytes": 16384,
+            "output_tokens": 1800,
+            "pricing": {
+              "base_usd_per_million": {
+                "cache_read": 0.01,
+                "cache_write": 0.125,
+                "input": 0.1,
+                "output": 0.5
+              },
+              "long_context_above_input_tokens": 100000,
+              "long_usd_per_million": {
+                "cache_read": 0.05,
+                "cache_write": 0.625,
+                "input": 0.5,
+                "output": 2.5
+              }
+            },
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "provider": "anthropic",
+            "request_bytes": null,
+            "retry_rejections": [],
+            "role": "semantic_verifier",
+            "thinking": "disabled",
+            "version": "haiku-literal-object-draft-finalized-verifier-v4"
+          }
+        }
+      },
+      "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+      "same_model_is_not_cross_model_agreement": true,
+      "selection": "FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE_FLIP",
+      "version": "haiku-literal-object-draft-finalized-verifier-v4"
+    },
+    "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+    "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c"
+  },
+  "cloud_writes": 0,
+  "core": {
+    "motomedic-answer-worker": {
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+      "revision": "motomedic-answer-worker-v10-13-canary",
+      "revision_configuration": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_QUEUE",
+                "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_WORKER_URL",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_INSPECTION_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_AUDIENCE",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_ALLOWED_CALLERS",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "ANTHROPIC_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-evaluator-anthropic-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "cpuIdle": true,
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              },
+              "startupCpuBoost": true
+            },
+            "startupProbe": {
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              },
+              "periodSeconds": 10,
+              "timeoutSeconds": 5
+            }
+          }
+        ],
+        "launchStage": "GA",
+        "maxInstanceRequestConcurrency": 1,
+        "scaling": {
+          "maxInstanceCount": 1
+        },
+        "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "timeout": "1200s"
+      },
+      "revision_configuration_sha256": "63cb4e65495c7e5e14db62c2af6eb7ce46c93c0799d765fff81cf704fe09b26e",
+      "service_configuration": {
+        "ingress": "INGRESS_TRAFFIC_ALL",
+        "labels": {
+          "motomedic-release": "v10-13"
+        },
+        "launchStage": "GA",
+        "scaling": {
+          "maxInstanceCount": 5
+        }
+      },
+      "service_scaling": {
+        "maxInstanceCount": 5
+      },
+      "service_scaling_sha256": "9c124b05b9eb9046be1c963661b320a1a2badd1a79ff058c1613b97da73f36a8"
+    },
+    "motomedic-arm-a": {
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+      "revision": "motomedic-arm-a-v10-13-canary",
+      "revision_configuration": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_QUEUE",
+                "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_WORKER_URL",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_INSPECTION_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_AUDIENCE",
+                "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_ALLOWED_CALLERS",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com,motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "ANTHROPIC_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-evaluator-anthropic-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "cpuIdle": true,
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              },
+              "startupCpuBoost": true
+            },
+            "startupProbe": {
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              },
+              "periodSeconds": 10,
+              "timeoutSeconds": 5
+            }
+          }
+        ],
+        "launchStage": "GA",
+        "maxInstanceRequestConcurrency": 6,
+        "scaling": {
+          "maxInstanceCount": 1,
+          "minInstanceCount": 1
+        },
+        "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "timeout": "1200s"
+      },
+      "revision_configuration_sha256": "ea591f1bf46c10748e791ad92505f569e0ff1ba6c033c4625270512dd945bd7c",
+      "service_configuration": {
+        "ingress": "INGRESS_TRAFFIC_ALL",
+        "labels": {
+          "motomedic-release": "v10-13"
+        },
+        "launchStage": "GA",
+        "scaling": {
+          "maxInstanceCount": 1
+        }
+      },
+      "service_scaling": {
+        "maxInstanceCount": 1
+      },
+      "service_scaling_sha256": "d29140d18f2bca23ac2ecdc1905cdfd24bf723539484876e5fbbc2e1947a3a2a"
+    },
+    "motomedic-qdrant": {
+      "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+      "revision": "motomedic-qdrant-00003-cjb",
+      "revision_configuration": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "INDEX_BUNDLE_URL",
+                "value": "https://storage.googleapis.com/motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/qdrant_points.json"
+              },
+              {
+                "name": "INDEX_BUNDLE_SHA256",
+                "value": "fb847f240a1aa1def0a5048575279afddaf443c5346bd51cf2727ab60b5f0ee3"
+              },
+              {
+                "name": "INDEX_ID",
+                "value": "index_a3282c4d98cf54595e4ba168"
+              }
+            ],
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "cpuIdle": true,
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi"
+              },
+              "startupCpuBoost": true
+            },
+            "startupProbe": {
+              "failureThreshold": 1,
+              "periodSeconds": 240,
+              "tcpSocket": {
+                "port": 8080
+              },
+              "timeoutSeconds": 240
+            }
+          }
+        ],
+        "launchStage": "GA",
+        "maxInstanceRequestConcurrency": 8,
+        "scaling": {
+          "maxInstanceCount": 1
+        },
+        "serviceAccount": "motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "timeout": "30s"
+      },
+      "revision_configuration_sha256": "8714bdcf89e73ee35c09b9c393842c84fd45d42bb84566ea4bbd9e793c3a17fc",
+      "service_configuration": {
+        "ingress": "INGRESS_TRAFFIC_ALL",
+        "launchStage": "GA",
+        "scaling": {
+          "maxInstanceCount": 1,
+          "minInstanceCount": 1
+        }
+      },
+      "service_scaling": {
+        "maxInstanceCount": 1,
+        "minInstanceCount": 1
+      },
+      "service_scaling_sha256": "71f96af1c4f58849f728b5f334679489e6f6ed443e0bea8bf107a1834371e85f"
+    }
+  },
+  "functional_evidence": {
+    "direct_case": {
+      "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/EVAL_DIRECT_01.json",
+      "sha256": "bc9075a8daef6c3152b8fee70f471ffe780d9fd9a66f597bf282b4f56e9421a0"
+    },
+    "direct_proof": {
+      "cache_creation_then_read_proof_required_before_enablement": false,
+      "case_id": "EVAL_DIRECT_01",
+      "current_role_policies_and_native_schemas_bound": true,
+      "finalized_response_sha256": "c8795151dd4d4f03cc4f16c552c76c9065a6dc3cfb1da45909cb11ad1942e115",
+      "independent_factual_quality_acceptance": false,
+      "operation_id": "f00fbe5c04e745e09339dc28e31162e0",
+      "permanent_ledger_proof_passed": true,
+      "presentation_response_sha256": "ddb51e611922eb1ef2955f983e057d5b730875467ece4a621d1cda6b56b4c564",
+      "saved_stream_and_recovery_identical": true,
+      "separate_exact_finalized_response_verifier_passed": true,
+      "six_case_functional_acceptance": false,
+      "text_sha256": "be8be2ecda6de6ae2a866afe045d76443901965a6e5c91f91d0b5de91d823b86"
+    },
+    "download_inventory": {
+      "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/download_inventory.json",
+      "sha256": "5ab34bd9b6f34877e29b6601c7f7471d338529c97d2b34a45d303e1041c9b19b"
+    },
+    "evaluator_source": {
+      "path": "reports/public_evaluator/20261012/evaluator_client_source_v11.json",
+      "sha256": "394f133f735d39282927fbd3fc15226fbca4cc24f9063537fddb8aa4f361a1ce"
+    },
+    "evaluator_submission": {
+      "path": "reports/public_evaluator/20261012/evaluator_client_submission_v9.json",
+      "sha256": "7dbf2948aaff1554b8f06169bf66bd9be999bcacce670c5e21acbdda5234b2e8"
+    },
+    "hosted_receipt": {
+      "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/receipt.json",
+      "sha256": "450196dfccfa5b7192e1db8b5687c482131d463244df6dbde87f66a415b2adc4"
+    },
+    "independent_factual_quality_acceptance": false,
+    "known_usb_case_outcome": "SYSTEM_ERROR",
+    "owner_enablement": {
+      "path": "reports/public_evaluator/20261012/public_review/owner_public_answer_enablement_scope_v1.json",
+      "sha256": "e9911c739d0609d45b9956c8e118459f63513a914f141a1a4756305a0375de54"
+    },
+    "public_browser_acceptance": false,
+    "read_only_auditor": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_13_runtime/audit_hosted_delivery_cache_v3.py",
+      "sha256": "741c550d76f243fc30b14cdc67c59b294cc5ff248410f55a8960f1e5f0eca806"
+    },
+    "schema": "motomedic-owner-directed-single-direct-ui-enablement-evidence-v1",
+    "six_case_acceptance_claimed": false
+  },
+  "guard": {
+    "delayed_reporting_prevents_instantaneous_cap": true,
+    "path": "reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T113007143191Z.json",
+    "sha256": "bffb9647c08574df24a174eb7a9943141f68c0f2bc98697ea24501b693d7b353"
+  },
+  "independent_factual_quality_acceptance": false,
+  "provider_calls": 0,
+  "provider_ledger": {
+    "full_document_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "576393951cf8a0a75bbee65f1110a7571370910996f7d01640d526ab79971e8d",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "5ddb991baa9a46230b99ba7a81ee60e5fbf08d70d9e2e698d51d6783fb5631a0",
+      "owner-haiku-fallback-20261011-validation-v1": "79ee13be702e8b83acb8bd7e1885155c8ca422cb26b39ad2e7207cb84ae15299"
+    },
+    "immutable_non_charge_field_sha256": {
+      "grounded-primary-nonrecurring-v1": "e029cbd37abbd6dafc48ebcd748442f3cf4efc38bd21503e6f850e699997ff32",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": "10f6c6b367f07e786ba54d9246211a3432a36bd8d3e261f2aa99a1beeb062541",
+      "grounded-provider-global-v1": "9e0d5b18c1ad0b9cbc7fda54427a5000708e847be21334afef29af643d064783",
+      "owner-haiku-fallback-20261011-validation-v1": "daadac75082af4bb53a05e7ab2155aaaa396f0afb2768da52ee3a1cc6128c2b4"
+    },
+    "maximum_tokens": 2000000,
+    "reservation_count": 7,
+    "reserved_attempts": 32,
+    "reserved_nanodollars": 48535000,
+    "reserved_tokens": 492536,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "public_iam": {
+    "motomedic-answer-worker": {
+      "etag": "BwZdopKp1dM=",
+      "normalized_binding_sha256": "63fa2f48166eceef3c419b019de787b6e1087b3c9aee558b7baacc7b99495002",
+      "version": 1
+    },
+    "motomedic-arm-a": {
+      "etag": "BwZdoncrPXs=",
+      "normalized_binding_sha256": "9813f670a11aa1fea35e1749dae92dedd41515972168e67b094a411319d8da60",
+      "version": 1
+    },
+    "motomedic-qdrant": {
+      "etag": "BwZdopQhad4=",
+      "normalized_binding_sha256": "6fa0ec0a7ff2fd0b7e2f5e57cd768906d53bcf491eac10311b59f5496d5ef049",
+      "version": 1
+    },
+    "motomedic-rider-ui": {
+      "etag": "BwZdolT1ysQ=",
+      "normalized_binding_sha256": "2d2944c19d3e6c62766ca6d341962dbcc0fd7e4fcd709f1c0f5f137f497637d4",
+      "version": 1
+    }
+  },
+  "recorded_at_utc": "2026-10-12T11:31:33.892733+00:00",
+  "schema": "motomedic-owner-waived-functional-ui-promotion-initial-v1",
+  "ui": {
+    "revision": "motomedic-rider-ui-v10-13-canary",
+    "revision_configuration": {
+      "containers": [
+        {
+          "env": [
+            {
+              "name": "MOTOMEDIC_RIDER_API_URL",
+              "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_PUBLIC_HOST",
+              "value": "motomedic-rider-ui-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_EDGE_POLICY",
+              "value": "gcp-public-cloud-run-cookie-v2"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_ACCESS",
+              "value": "public_gateway"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_AUTH",
+              "value": "cloud_run"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_ANSWERS_ENABLED",
+              "value": "false"
+            },
+            {
+              "name": "MOTOMEDIC_VISITOR_SECRET",
+              "valueSource": {
+                "secretKeyRef": {
+                  "secret": "motomedic-rider-visitor-v1",
+                  "version": "1"
+                }
+              }
+            }
+          ],
+          "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:dbb6bb80e7b56fdb999930c0f74f58c1290b0674f26a3b20616cf5589773cb5e",
+          "ports": [
+            {
+              "containerPort": 8080,
+              "name": "http1"
+            }
+          ],
+          "resources": {
+            "cpuIdle": true,
+            "limits": {
+              "cpu": "1",
+              "memory": "512Mi"
+            },
+            "startupCpuBoost": true
+          },
+          "startupProbe": {
+            "failureThreshold": 24,
+            "httpGet": {
+              "path": "/health",
+              "port": 8080
+            },
+            "periodSeconds": 10,
+            "timeoutSeconds": 5
+          }
+        }
+      ],
+      "launchStage": "GA",
+      "maxInstanceRequestConcurrency": 4,
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "serviceAccount": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "timeout": "1200s"
+    },
+    "revision_configuration_sha256": "a2cf4ec33f7d28365e3cc5a13afedf44d8d17b4d7c25ca57c14fd0cdb7fd054f",
+    "service_configuration": {
+      "ingress": "INGRESS_TRAFFIC_ALL",
+      "labels": {
+        "motomedic-release": "v10-13"
+      },
+      "launchStage": "GA",
+      "scaling": {
+        "maxInstanceCount": 1
+      }
+    },
+    "service_scaling": {
+      "maxInstanceCount": 1
+    },
+    "template": {
+      "containers": [
+        {
+          "env": [
+            {
+              "name": "MOTOMEDIC_RIDER_API_URL",
+              "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_PUBLIC_HOST",
+              "value": "motomedic-rider-ui-279945185781.us-central1.run.app"
+            },
+            {
+              "name": "MOTOMEDIC_EDGE_POLICY",
+              "value": "gcp-public-cloud-run-cookie-v2"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_ACCESS",
+              "value": "public_gateway"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_AUTH",
+              "value": "cloud_run"
+            },
+            {
+              "name": "MOTOMEDIC_RIDER_ANSWERS_ENABLED",
+              "value": "false"
+            },
+            {
+              "name": "MOTOMEDIC_VISITOR_SECRET",
+              "valueSource": {
+                "secretKeyRef": {
+                  "secret": "motomedic-rider-visitor-v1",
+                  "version": "1"
+                }
+              }
+            }
+          ],
+          "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:dbb6bb80e7b56fdb999930c0f74f58c1290b0674f26a3b20616cf5589773cb5e",
+          "ports": [
+            {
+              "containerPort": 8080,
+              "name": "http1"
+            }
+          ],
+          "resources": {
+            "cpuIdle": true,
+            "limits": {
+              "cpu": "1",
+              "memory": "512Mi"
+            },
+            "startupCpuBoost": true
+          },
+          "startupProbe": {
+            "failureThreshold": 24,
+            "httpGet": {
+              "path": "/health",
+              "port": 8080
+            },
+            "periodSeconds": 10,
+            "timeoutSeconds": 5
+          }
+        }
+      ],
+      "maxInstanceRequestConcurrency": 4,
+      "revision": "motomedic-rider-ui-v10-13-canary",
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "serviceAccount": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "timeout": "1200s"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "authority": "DIRECT_OWNER_INSTRUCTION",
+  "authorized_delivery": "Necessary hosted UI build, deployment to existing public UI and focused browser validation under existing allocations.",
+  "billing_restart": false,
+  "budgets": {
+    "disconnect_inr": 2540,
+    "lifetime_inr": 2700,
+    "maximum_attempts": 100,
+    "maximum_tokens": 2000000,
+    "shared_haiku_usd": 1
+  },
+  "counter_reset_or_refund": false,
+  "exact_instruction": "Anything you can do for the UI where this checkbox is removed. people just type their queries. Further, the time taken for retreival, ranking and generation and verification then streaming is also shown. Can you do this to the UI?",
+  "legacy_transport_confirmation": "Affirms the owner-selected fixed source, not a new visitor attestation. Exact source/index/variant checks remain.",
+  "optional_photo_voice_compaction": false,
+  "provider_calls_by_recording": 0,
+  "recorded_at_utc": "2026-10-12T15:47:22.897302+00:00",
+  "requested_changes": [
+    "Remove rider confirmation checkbox; fixed Himalayan BS6 source remains clearly visible.",
+    "Show actual recorded retrieval, conditional reranking, draft and finalized verification phase timings.",
+    "Show separately measured UI-side verified answer delivery duration when available."
+  ],
+  "runtime_boundary": "UI-only change; keep deployed backend v10.14, worker, Qdrant, index, source approvals, model roles and exact saved-answer binding unchanged.",
+  "schema": "motomedic-owner-fixed-source-and-visible-stage-timings-v1"
+}

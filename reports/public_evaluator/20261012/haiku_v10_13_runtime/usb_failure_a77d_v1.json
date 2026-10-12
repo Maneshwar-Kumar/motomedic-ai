@@ -1,0 +1,65 @@
+{
+  "case_id": "EVAL_USB_02",
+  "case_reference": {
+    "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/EVAL_USB_02.json",
+    "sha256": "b6dbb08e6b18c902d71f04f775e1b5c148617bbfb5d2dc84cb85560f67fa6879"
+  },
+  "classification": "ACTUAL_HOSTED_FAILURE_SOURCE_PATH_REVIEW",
+  "cloud_build_id": "a77d5e33-4419-4d5c-855b-cb8bc2c98690",
+  "cloud_mutations": 0,
+  "correction_calls": 0,
+  "current_reserved_attempts": 32,
+  "current_reserved_haiku_nanodollars": 48535000,
+  "current_reserved_tokens": 492536,
+  "draft_citation_validation_is_cause": false,
+  "draft_generation_calls": 1,
+  "draft_output_tokens": 789,
+  "draft_validation_status": "VALID",
+  "exact_failing_predicate": "result.get(stop_reason) != end_turn after exact provider model check",
+  "failed_verifier_usage_retained": false,
+  "failure_code": "PROVIDER_INCOMPLETE_OR_REFUSED",
+  "frozen_runtime_changed": false,
+  "hosted_receipt": {
+    "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/receipt.json",
+    "sha256": "450196dfccfa5b7192e1db8b5687c482131d463244df6dbde87f66a415b2adc4"
+  },
+  "maximum_output_tokens": 1800,
+  "neutral_saved_stream_recovery_identical": true,
+  "next_version_proposal": {
+    "change": "Capture allowlisted scalar native stop_reason and validated bounded usage before completeness guard.",
+    "keep_failure_priority_and_incomplete_rejection": true,
+    "no_output_cap_change_without_evidence": true,
+    "no_retry_or_verifier_bypass": true,
+    "raw_content_blocks_recorded": false,
+    "raw_response_text_recorded": false,
+    "tests": [
+      "max_tokens and refusal retain distinct sanitized reasons and valid usage, raise same failure, and make one call.",
+      "Missing or arbitrary stop reason is sanitized, never echoed; invalid/missing/over-budget/cache-inconsistent usage is marked invalid and never zero-filled.",
+      "Complete success, model/schema/permit identity failures, exact final verification and save/stream bindings retain current strict behavior.",
+      "Composer retains failed verifier scalar trace, returns SYSTEM_ERROR, releases no technical chunks and reserves no correction phase on provider incompleteness."
+    ]
+  },
+  "numeric_citation_guard": {
+    "checked_measurement_pairs": 1,
+    "conversions_performed": false,
+    "semantic_verifier_still_required": true,
+    "unit_witness_deferred_to_verifier": 0,
+    "version": "literal-cited-object-native-measurements-v1"
+  },
+  "original_manual_pages_inspected": false,
+  "output_cap_is_proven_cause": false,
+  "provider_calls_by_investigation": 0,
+  "provider_reference": "https://platform.claude.com/docs/en/api/messages/create",
+  "provider_stop_reason_retained": false,
+  "recorded_at_utc": "2026-10-12T11:33:08.864703+00:00",
+  "refusal_is_proven_cause": false,
+  "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+  "schema": "motomedic-haiku-usb-operational-diagnosis-v1",
+  "semantic_verdict_returned": false,
+  "source_line": 212,
+  "source_path": "cloud/grounded_generation/cached_verifier.py",
+  "technical_content_released": false,
+  "verifier_generation_calls": 1,
+  "verifier_input_tokens_counted": 23826,
+  "verifier_reserved_input_token_ceiling": 58072
+}

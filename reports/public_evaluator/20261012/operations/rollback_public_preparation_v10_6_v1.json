@@ -1,0 +1,54 @@
+{
+  "schema": "motomedic-rollback-public-helper-preparation-v1",
+  "recorded_at": "2026-10-12T05:14:18.635057Z",
+  "classification": "PREPARED_HELPER_SYNTHETIC_TESTS_AND_LOCAL_SAVED_BINDINGS_ONLY",
+  "version": "v10_6",
+  "binding": {
+    "serving_manifest_sha256": "b94faeb2c4774cd121c4e6f622a5b2371cd9c9df0147fe40b4ddbb25af9bed52",
+    "runtime_lock": "88373ba664b9d86a3eb0aad51f8aafb12738e4cf9ddc36e62600f462c408935b",
+    "images": {
+      "backend": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:5a115eb8ed54c6278cec85576498b4704706723a36ffa5ce62c1c84c9b269165",
+      "ui": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:064e39e27eb078031046e0a06ff2f0e64bc3aa9324d1d1e53a8f571973a62fd8"
+    },
+    "image_binding_sha256": "9213c5b92532bcf636bc6daa1db5dd67e9707ef78c305281997c3806267e44a6"
+  },
+  "helper": "tmp/rollback_public_v10_6.py",
+  "helper_sha256": "089f70a9f77cdcfdb2160f589b0315deadbb5cb71182390e3c3587211ce689b1",
+  "synthetic_tests": "tmp/test_rollback_public_v10_6.py",
+  "synthetic_tests_sha256": "92060868c02fffdedfeb66073750432defe4f3a14ebf061b248f6255db574966",
+  "synthetic_tests_passed": 20,
+  "synthetic_test_failures": 0,
+  "local_saved_binding_checks": {
+    "local_inventory_hash_matches_source": true,
+    "inventory_manifest_matches_release": true,
+    "plan_local_bytes_and_source_hash_match_pin": true,
+    "source_runtime_matches_release": true
+  },
+  "private_actions": [
+    "create",
+    "poll",
+    "route_candidate",
+    "health_candidate",
+    "route_rollback",
+    "health_rollback",
+    "route_restore",
+    "health_restore"
+  ],
+  "separate_public_actions": [
+    "public_open",
+    "public_health"
+  ],
+  "semantic_receipt_required": "reports/public_evaluator/20261012/operations/semantic_acceptance_v10_6.json",
+  "semantic_schema_required": "motomedic-six-case-semantic-acceptance-v1",
+  "semantic_acceptance_recorded_by_this_preparation": false,
+  "compatible_rollback_executed": false,
+  "public_opening_executed": false,
+  "public_browser_acceptance": false,
+  "cloud_actions_executed": false,
+  "provider_calls": 0,
+  "secret_payload_read": false,
+  "billing_changed": false,
+  "allocation_changed": false,
+  "source_display_authorization_changed": false,
+  "repository_structure_check": "PASS; 128 local links; exact historical and current serving integrity verified"
+}

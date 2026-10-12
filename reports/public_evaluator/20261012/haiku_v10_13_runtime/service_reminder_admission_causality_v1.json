@@ -1,0 +1,92 @@
+{
+  "actual_case_checks_required": [
+    "Compare saved runtime_controls.source_admission.chunk_ids and admitted_evidence_ids with the exact Service Reminder numeric IDs. Gap presence alone is insufficient.",
+    "If admitted numeric IDs are absent, distinguish final ranked-hit selection from diagnostic retained-gap membership.",
+    "If IDs are present, inspect saved composition.failure_code, sanitized draft_validation_failure, verdict_summary and failed_provider_trace for the actual refusing stage.",
+    "Preserve missing-context authority and exact citation bindings; only a demonstrated concrete cause can justify a generic minimum repair."
+  ],
+  "actual_public_or_private_case_cause_observed": false,
+  "classification": "READ_ONLY_FROZEN_CODE_AND_IMMUTABLE_INDEX_METADATA",
+  "cloud_actions": 0,
+  "coverage_report": {
+    "path": "reports/public_evaluator/20261012/haiku_v10_13_helpers/service_reminder_coverage_v2.json",
+    "sha256": "35181cff62ca5c0c68b3f6ab07fb7a0241a26927b61e696c22e2d085566fa482"
+  },
+  "diagnostic_plan_status": "Owner selected existing live API single-case path; prepared native observer remains unused and unsubmitted bootstrap draft is ignored history.",
+  "excluded_context_gap_ids": [
+    "evidence_524af4df0cb19477470c5d9e",
+    "evidence_6b5735e11152c574268529f6",
+    "evidence_84f6791f2601d09593f38288"
+  ],
+  "findings": [
+    {
+      "file": "cloud/grounded_generation/serving_source_authority.py",
+      "finding": "Each non-complete-context sibling creates a non-rider-resolvable gap and is skipped; it does not discard independently complete reviewed anchors in the selected chunk.",
+      "line": 126
+    },
+    {
+      "file": "cloud/grounded_generation/serving_source_authority.py",
+      "finding": "Only selected_anchor=True adds approved dependency closure and anchor IDs. A chunk retained only as gap diagnostics does not contribute its otherwise reviewed numeric objects.",
+      "line": 140
+    },
+    {
+      "file": "cloud/grounded_generation/serving_source_authority.py",
+      "finding": "coverage_established is bool(payload.evidence); source_review_required is independently bool(payload.gaps). Approved numeric objects and three gaps can coexist.",
+      "line": 153
+    },
+    {
+      "file": "cloud/grounded_generation/serving_retrieval.py",
+      "finding": "Actual retrieval assembles at most five ranked search hits. BM25-only rank7 is not proof of exclusion because dense/RRF and conditional reranking also determine selection.",
+      "line": 276
+    },
+    {
+      "file": "cloud/grounded_generation/serving_retrieval.py",
+      "finding": "No approved evidence skips reranking as SOURCE_REVIEW_REQUIRED; otherwise parent-rank disagreement may rerank and continue with source gaps.",
+      "line": 312
+    },
+    {
+      "file": "cloud/grounded_generation/verified_qa.py",
+      "finding": "Composer checks scope/runtime/model/cache identity and source payload validation; no unconditional gap rejection is present.",
+      "line": 534
+    },
+    {
+      "file": "cloud/grounded_generation/verified_qa.py",
+      "finding": "Admitted gaps are passed into the model source context; the policy forbids citing gap IDs or asking the rider to repair missing review.",
+      "line": 363
+    },
+    {
+      "file": "cloud/grounded_generation/cached_verifier.py",
+      "finding": "Native citation enum contains only admitted evidence keys. Missing context IDs cannot acquire authority merely by being in gaps or the same section.",
+      "line": 49
+    },
+    {
+      "file": "cloud/grounded_generation/verified_qa.py",
+      "finding": "Release still requires exact source citations, finalized-response verifier support/coverage and no omissions/conflicts; source gaps alone do not imply acceptance.",
+      "line": 517
+    }
+  ],
+  "gap_alone_forces_system_error": false,
+  "independent_factual_quality_acceptance": false,
+  "independently_complete_reviewed_numeric_ids": [
+    "evidence_157a86dd6fd9f3a9d4c3fc0d",
+    "evidence_512f860518ee9abe0ced1fd4",
+    "evidence_8555b50f22af8eabcabb0b76"
+  ],
+  "manual_text_or_expected_answers_added": false,
+  "original_manual_pages_inspected": false,
+  "provider_calls": 0,
+  "question": "When is the service due for my bike?",
+  "recorded_at_utc": "2026-10-12T12:17:54.811214+00:00",
+  "retrieval_or_prompt_tuning": false,
+  "runtime_changes": false,
+  "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+  "schema": "motomedic-service-reminder-admission-causality-v1",
+  "section_chunk_id": "chunk_f6bb9e264a079f438c42d5e0",
+  "section_parent_id": "section_af9f7dcfecf1c88a70f5769f",
+  "source_sha256": {
+    "cloud/grounded_generation/cached_verifier.py": "aeb31d99994fad00ca94569b69c7862dbf7e9578a0db8d6fd7f688993c7221c0",
+    "cloud/grounded_generation/serving_retrieval.py": "d2dc6d246ac9f6e76bda0f4fb57e96ed6a22bcdaa791cf09d55ed6ea0333352a",
+    "cloud/grounded_generation/serving_source_authority.py": "563faf17d093e0b11afa19622b1d5da594c71cd3f67d7c7bbfc2bde2f7d2ab5f",
+    "cloud/grounded_generation/verified_qa.py": "996e4f964e7625e547480ede4f4ae730a8e1dc7fe6cd37d673425583fcf26402"
+  }
+}

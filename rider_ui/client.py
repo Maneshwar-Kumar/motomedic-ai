@@ -14,7 +14,7 @@ STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
-RUNTIME_POLICY = 'open-manual-draft-verify-v9'
+RUNTIME_POLICY = 'open-manual-haiku-draft-verify-v10_13'
 CHECK_ERROR_COPY = 'I couldn\u2019t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):
@@ -115,7 +115,7 @@ def validate_view(view, *, expected_policy=None):
     return view
 
 class RiderAPI:
-    def __init__(self, base_url, token, *, timeout=180, allow_loopback=False, visitor=None, cache_mode='bypass', network=None):
+    def __init__(self, base_url, token, *, timeout=180, allow_loopback=False, visitor=None, cache_mode='bypass', network=None,answers_enabled=True):
         p = urlsplit(base_url)
         local = allow_loopback and p.hostname in {'127.0.0.1', 'localhost'}
         if not p.hostname or (p.scheme != 'https' and not (local and p.scheme == 'http')):
@@ -131,9 +131,13 @@ class RiderAPI:
         self.cache_mode = cache_mode
         self.visitor = visitor
         self.network = network
+        self.answers_enabled=answers_enabled is True
         self.opener = build_opener(NoRedirect())
 
     def request(self, method, path, payload=None, request_id=None, *, on_verified=None, on_progress=None, on_chunk=None, stream=False):
+        if method!='GET' and not self.answers_enabled:
+            from rider_ui.public_gateway import PREVIEW_MESSAGE
+            raise APIError(PREVIEW_MESSAGE,terminal=True)
         try:
             credential = self.token() if callable(self.token) else self.token
         except Exception:
@@ -207,21 +211,25 @@ class RiderAPI:
     def start(self, query, request_id, *, view=None, on_verified=None, on_progress=None, on_chunk=None):
         try:
             query = validate_message(query)
-        except LimitError:
-            raise APIError('Enter a message of up to 2,000 characters.') from None
+        except LimitError as exc:
+            message = ('Keep your question to 100 words or fewer.'
+                       if exc.reason == 'MESSAGE_WORD_LIMIT'
+                       else 'Enter a question of up to 100 words and 2,000 characters.')
+            raise APIError(message, terminal=True) from None
         payload = {
             'query': query, 'bike_variant': 'Himalayan BS6',
             'manual_checksum': MANUAL_SHA, 'index_id': INDEX_ID,
             'confirmed_himalayan_bs6': True, 'cache_mode': self.cache_mode}
         path = '/v1/sessions'
         if view:
-            validate_view(view)
+            validate_view(view,expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
             path += '/'+view['session_id']+'/questions'
             payload['expected_version'] = view['version']
         return validate_view(self.request('POST',path,payload,request_id,
                                          stream=True,on_verified=on_verified,on_progress=on_progress,on_chunk=on_chunk))
 
     def feedback(self, view, choice_id, request_id, *, on_verified=None, on_progress=None, on_chunk=None):
+        validate_view(view,expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
         if not valid_id(view.get('session_id')):
             raise APIError('The session identifier is invalid.')
         return validate_view(self.request('POST', '/v1/sessions/' + view['session_id'] + '/feedback', {

@@ -1,0 +1,248 @@
+{
+  "backend": {
+    "id": "591d1cfd-d8ff-4ad1-a68d-36040983a17c",
+    "status": "SUCCESS",
+    "source": {
+      "storageSource": {
+        "bucket": "motomedic-ai-20261009-indices",
+        "object": "serving/v10_13/358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac/backend-4953e014083d67d9aa62022f82f9b65d21ef8938de7d520f38c472243a405830.tar.gz",
+        "generation": "1791799303734941"
+      }
+    },
+    "createTime": "2026-10-12T10:01:50.894701984Z",
+    "startTime": "2026-10-12T10:01:51.930314656Z",
+    "finishTime": "2026-10-12T10:05:32.858720Z",
+    "results": {
+      "images": [
+        {
+          "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_13-358935275e91",
+          "digest": "sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+          "pushTiming": {
+            "startTime": "2026-10-12T10:05:27.036326441Z",
+            "endTime": "2026-10-12T10:05:32.345684059Z"
+          },
+          "artifactRegistryPackage": "projects/motomedic-ai-20261009/locations/us-central1/repositories/motomedic/packages/arm-a/versions/sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22"
+        }
+      ],
+      "buildStepImages": [
+        "sha256:40c2fb4fcd0ad51376eef166c2e7b2b40a3508d5776e2bf33db3783ab39d0f2e"
+      ],
+      "buildStepOutputs": [
+        ""
+      ]
+    },
+    "steps": [
+      {
+        "name": "gcr.io/cloud-builders/docker",
+        "args": [
+          "build",
+          "--platform=linux/amd64",
+          "--label",
+          "org.motomedic.serving-manifest-sha256=3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+          "--label",
+          "org.motomedic.input-tree-sha256=358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac",
+          "--label",
+          "org.opencontainers.image.revision=3b7da1692187736295fee7345e9b3e932d02b216",
+          "-t",
+          "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_13-358935275e91",
+          "."
+        ],
+        "timing": {
+          "startTime": "2026-10-12T10:01:58.112273844Z",
+          "endTime": "2026-10-12T10:05:26.943430422Z"
+        },
+        "status": "SUCCESS",
+        "pullTiming": {
+          "startTime": "2026-10-12T10:01:58.112273844Z",
+          "endTime": "2026-10-12T10:01:58.120857781Z"
+        }
+      }
+    ],
+    "timeout": "1800s",
+    "images": [
+      "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_13-358935275e91"
+    ],
+    "projectId": "motomedic-ai-20261009",
+    "sourceProvenance": {
+      "resolvedStorageSource": {
+        "bucket": "motomedic-ai-20261009-indices",
+        "object": "serving/v10_13/358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac/backend-4953e014083d67d9aa62022f82f9b65d21ef8938de7d520f38c472243a405830.tar.gz",
+        "generation": "1791799303734941"
+      },
+      "fileHashes": {
+        "gs://motomedic-ai-20261009-indices/serving/v10_13/358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac/backend-4953e014083d67d9aa62022f82f9b65d21ef8938de7d520f38c472243a405830.tar.gz#1791799303734941": {
+          "fileHash": [
+            {
+              "type": "MD5",
+              "value": "4Iqfh/dm5t2AnquQdgZHZQ=="
+            },
+            {
+              "type": "SHA256",
+              "value": "SVPgFAg9Z9mqYgIvgvm2XSHviTjefVIPOMRyJDpAWDA="
+            }
+          ]
+        }
+      }
+    },
+    "options": {
+      "substitutionOption": "ALLOW_LOOSE",
+      "logging": "CLOUD_LOGGING_ONLY",
+      "pool": {}
+    },
+    "logUrl": "https://console.cloud.google.com/cloud-build/builds/591d1cfd-d8ff-4ad1-a68d-36040983a17c?project=279945185781",
+    "substitutions": {
+      "_SOURCE_COMMIT": "3b7da1692187736295fee7345e9b3e932d02b216",
+      "_INPUT_TREE_SHA256": "358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac",
+      "_SERVING_MANIFEST_SHA256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c"
+    },
+    "timing": {
+      "STORAGE_SOURCE": {
+        "startTime": "2026-10-12T10:01:53.531031854Z",
+        "endTime": "2026-10-12T10:01:57.475736973Z"
+      },
+      "FETCHSOURCE": {
+        "startTime": "2026-10-12T10:01:53.531031854Z",
+        "endTime": "2026-10-12T10:01:57.475736973Z"
+      },
+      "BUILD": {
+        "startTime": "2026-10-12T10:01:57.476027229Z",
+        "endTime": "2026-10-12T10:05:27.036173302Z"
+      },
+      "PUSH": {
+        "startTime": "2026-10-12T10:05:27.036324992Z",
+        "endTime": "2026-10-12T10:05:32.345761668Z"
+      }
+    },
+    "artifacts": {
+      "images": [
+        "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_13-358935275e91"
+      ]
+    },
+    "queueTtl": "3600s",
+    "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+    "name": "projects/279945185781/locations/global/builds/591d1cfd-d8ff-4ad1-a68d-36040983a17c"
+  },
+  "ui": {
+    "id": "aac0ef4e-5ccd-40c6-a7a0-de251b41ff56",
+    "status": "SUCCESS",
+    "source": {
+      "storageSource": {
+        "bucket": "motomedic-ai-20261009-indices",
+        "object": "serving/v10_13/358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac/ui-2dcfd4b8deeaf96b481e8106b7144081ad36eee4f9fc5a2a1befb9712848ebd8.tar.gz",
+        "generation": "1791799314371363"
+      }
+    },
+    "createTime": "2026-10-12T10:01:55.722107524Z",
+    "startTime": "2026-10-12T10:01:56.630840150Z",
+    "finishTime": "2026-10-12T10:03:26.556152Z",
+    "results": {
+      "images": [
+        {
+          "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v10_13-358935275e91",
+          "digest": "sha256:dbb6bb80e7b56fdb999930c0f74f58c1290b0674f26a3b20616cf5589773cb5e",
+          "pushTiming": {
+            "startTime": "2026-10-12T10:02:57.432425907Z",
+            "endTime": "2026-10-12T10:03:26.312469230Z"
+          },
+          "artifactRegistryPackage": "projects/motomedic-ai-20261009/locations/us-central1/repositories/motomedic/packages/rider-ui/versions/sha256:dbb6bb80e7b56fdb999930c0f74f58c1290b0674f26a3b20616cf5589773cb5e"
+        }
+      ],
+      "buildStepImages": [
+        "sha256:40c2fb4fcd0ad51376eef166c2e7b2b40a3508d5776e2bf33db3783ab39d0f2e"
+      ],
+      "buildStepOutputs": [
+        ""
+      ]
+    },
+    "steps": [
+      {
+        "name": "gcr.io/cloud-builders/docker",
+        "args": [
+          "build",
+          "--platform=linux/amd64",
+          "--label",
+          "org.motomedic.serving-manifest-sha256=3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+          "--label",
+          "org.motomedic.input-tree-sha256=358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac",
+          "--label",
+          "org.opencontainers.image.revision=3b7da1692187736295fee7345e9b3e932d02b216",
+          "-t",
+          "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v10_13-358935275e91",
+          "."
+        ],
+        "timing": {
+          "startTime": "2026-10-12T10:02:03.679772880Z",
+          "endTime": "2026-10-12T10:02:57.396887598Z"
+        },
+        "status": "SUCCESS",
+        "pullTiming": {
+          "startTime": "2026-10-12T10:02:03.679772880Z",
+          "endTime": "2026-10-12T10:02:03.687586226Z"
+        }
+      }
+    ],
+    "timeout": "1800s",
+    "images": [
+      "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v10_13-358935275e91"
+    ],
+    "projectId": "motomedic-ai-20261009",
+    "sourceProvenance": {
+      "resolvedStorageSource": {
+        "bucket": "motomedic-ai-20261009-indices",
+        "object": "serving/v10_13/358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac/ui-2dcfd4b8deeaf96b481e8106b7144081ad36eee4f9fc5a2a1befb9712848ebd8.tar.gz",
+        "generation": "1791799314371363"
+      },
+      "fileHashes": {
+        "gs://motomedic-ai-20261009-indices/serving/v10_13/358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac/ui-2dcfd4b8deeaf96b481e8106b7144081ad36eee4f9fc5a2a1befb9712848ebd8.tar.gz#1791799314371363": {
+          "fileHash": [
+            {
+              "type": "MD5",
+              "value": "OcbXiTYCM8HjZuvZKTPo5w=="
+            },
+            {
+              "type": "SHA256",
+              "value": "Lc/UuN7q+WtIHoEGtxRAga027uT5/FoqG++5cShI69g="
+            }
+          ]
+        }
+      }
+    },
+    "options": {
+      "substitutionOption": "ALLOW_LOOSE",
+      "logging": "CLOUD_LOGGING_ONLY",
+      "pool": {}
+    },
+    "logUrl": "https://console.cloud.google.com/cloud-build/builds/aac0ef4e-5ccd-40c6-a7a0-de251b41ff56?project=279945185781",
+    "substitutions": {
+      "_SOURCE_COMMIT": "3b7da1692187736295fee7345e9b3e932d02b216",
+      "_INPUT_TREE_SHA256": "358935275e914fb15dfcd999817c2a054743598889b337260e326b10ee24eeac",
+      "_SERVING_MANIFEST_SHA256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c"
+    },
+    "timing": {
+      "PUSH": {
+        "startTime": "2026-10-12T10:02:57.432424804Z",
+        "endTime": "2026-10-12T10:03:26.312574778Z"
+      },
+      "STORAGE_SOURCE": {
+        "startTime": "2026-10-12T10:02:00.072452424Z",
+        "endTime": "2026-10-12T10:02:03.045893940Z"
+      },
+      "FETCHSOURCE": {
+        "startTime": "2026-10-12T10:02:00.072452424Z",
+        "endTime": "2026-10-12T10:02:03.045893940Z"
+      },
+      "BUILD": {
+        "startTime": "2026-10-12T10:02:03.046129408Z",
+        "endTime": "2026-10-12T10:02:57.432244228Z"
+      }
+    },
+    "artifacts": {
+      "images": [
+        "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui:serving-v10_13-358935275e91"
+      ]
+    },
+    "queueTtl": "3600s",
+    "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/279945185781-compute@developer.gserviceaccount.com",
+    "name": "projects/279945185781/locations/global/builds/aac0ef4e-5ccd-40c6-a7a0-de251b41ff56"
+  }
+}

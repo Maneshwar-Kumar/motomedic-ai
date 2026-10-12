@@ -1,87 +1,44 @@
 # MotoMedic execution plan
 
-Fresh baseline: 11 October 2026. Follow [PRD](docs/PRD.md), [TRD](docs/TRD.md) and the [architecture diagram](docs/ARCHITECTURE.md). Check an item only after recording its result. Parallel work is explicitly paired as `a` and `b`; each pair joins before the next numbered step.
+The [public UI](https://motomedic-rider-ui-279945185781.us-central1.run.app) is enabled. **The service-due question now returned a verified partial answer privately and a supported answer with a citation in a fresh public browser run.** Backend v10.14 contains the retrieval repair and reuses the v10.13 UI. The owner's [latest MVP scope](reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json) asks for a working retrieval/answer UI and removes broader six-case/cache demonstrations as completion gates. The [earlier waiver](reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) still waives independent manual answer review. Do not claim independent factual acceptance.
 
-The first two hours are a repository and design reset. The owner clarified the deliverables as fresh PRD, TRD, architecture diagram and step sequence. Runtime replacement and live answer acceptance are subsequent gates.
+Haiku `claude-haiku-5-5` remains the sole model. Immutable source approval, complete applicable evidence/history, separate exact-finalized verification, durable save/identical streaming/recovery and all existing charge/guard bindings remain mandatory. This scope does not authorize source changes, another allocation, refund/reset or billing restart.
 
-## First two hours
+## Recorded completion
 
-| Step | Time from start | Work | Depends on | Exit evidence |
-| --- | --- | --- | --- | --- |
-| 1 | 0–20 min | Inventory local changes, remote/default branches, dependencies, exact source approvals and other active work. Save recoverable dirty/untracked work and branch tips. | None | Snapshot path/hash, inventory and cleanup retention rules. |
-| 2a | 20–55 min | Write fresh PRD: manual-only open Q&A, useful complete/partial answers, separate verification, fallback/error messages and measurable acceptance. | 1 | Reviewable `docs/PRD.md` separating evidence from requirements. |
-| 2b | 20–55 min | Write fresh TRD: versions, Qdrant/BM25 concurrency, reranking, complete evidence, provider capacity, verification and durable streaming. | 1; runs with 2a | Reviewable `docs/TRD.md` with data/API/failure contracts. |
-| 3a | 55–80 min | Produce the diagram and ordered checklist; reconcile PRD/TRD terminology and decisions. | 2a and 2b | Diagram and sequence agree with the fresh contracts. |
-| 3b | 55–80 min | Remove obsolete active files and unsupported branches using the retention inventory; preserve manual/source approvals and current failure evidence. | 1; runs with 3a | Cleanup diff and retention receipt; recovery preserved. |
-| 4a | 80–105 min | Validate links, retained dependencies, baseline checks and absence of active retired-architecture references. | 3a and 3b | Passed checks and explicit remaining runtime limitations. |
-| 4b | 80–105 min | Prepare one coherent GitHub default-branch update with exact inputs and recovery information. | 3a and 3b; runs with 4a | Reviewable commit/diff and verified remote tips. |
-| 5 | 105–120 min | Publish authorized cleanup/design changes, remove obsolete remote branches, verify local/remote equality and hand over implementation steps. | 4a and 4b | Commit URL, branch receipt and explained remaining changes. |
+| Work | Evidence |
+| --- | --- |
+| Repository/design reset | [Reset receipt](reports/reset/20261011/README.md): 4,297 obsolete active files and two superseded branches removed with recovery retained; 103 hosted provider-free checks. The historical handoff remains [here](reports/handoff/20261012/SUMMARY.md). |
+| Exact source/index reuse | [Hosted source validation](reports/build/20261012/hosted_source_validation_v9_1.json), unchanged 161-case/context approval packages and selected immutable index. No ingestion or document embedding per request. |
+| v10.14 service-due repair and answer | [Current backend binding](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/backend_build_binding_v2.json) and [health](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/candidate_health.json) bind the new backend and reused UI. The [private retest](reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/service_due_case.json) passed SUPPORTED with PARTIAL coverage, separate finalized verification and exact saved/stream/recovery. The [fresh public browser](reports/public_evaluator/20261012/public_review/browser_service_due_v14_v2/receipt.json) returned SUPPORTED with a citation in 71.33 seconds. |
+| Frozen v10.13/CI/builds | [Manifest](reports/public_evaluator/20261012/serving_manifest_v10_13.json), source commit `3b7da1692187736295fee7345e9b3e932d02b216`, [CI success](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38233548200) and [hosted images](reports/public_evaluator/20261012/hosted_build_results_v10_13.json). Frozen historical versions remain intact. |
+| Native counts/retrieval | [Count-only run d73b3c1d](reports/public_evaluator/20261012/hosted_runs/d73b3c1d-153a-4796-b4f4-b1c3c8324333/count_receipt.json): 36 Haiku counters/six cases, actual Qdrant/concurrent BM25, RRF and conditional reranking, frozen module-origin checks, zero generation/reservation and unchanged ledgers. |
+| Candidate/rollback/restore | [Exact readiness](reports/public_evaluator/20261012/private_readiness_v10_13_v2.json) and [restore health](reports/public_evaluator/20261012/operations/rollback_v10_13_restore_health.json) bind current revisions/configuration. This is operational evidence, not proof of a returned answer. |
+| Public preview/source/reproduction | [Anonymous paused browser](reports/public_evaluator/20261012/public_review/browser_preview_v1/public/receipt.json) and [runtime correlation](reports/public_evaluator/20261012/public_review/browser_preview_v1/correlation.json) passed with no submitted question. Repository/manual and [immutable index export](reports/public_evaluator/20261012/public_review/index_release_readback_v1.json) are public; [SETUP](docs/SETUP.md) provides clone/download/check instructions. |
+| Exact new capacity permission | [Owner approved 2,000,000 tokens](reports/public_evaluator/20261012/haiku_v10_13/admission/owner_token_ceiling_approval_v1.json), and [hosted atomic application](reports/public_evaluator/20261012/haiku_v10_13_helpers/operator_v2/hosted_runs/57f78b4b-1385-428b-8b90-fa31f134230b/application_receipt.json) passed with 28 attempts/357,663 reserved tokens and USD0.028975875/reservation_count5 retained; zero model calls. The existing shared USD1/100 attempts/INR guards and historical charges are unchanged. |
 
-- [x] Step 1: recovery and retention evidence recorded.
-- [x] Step 2a: fresh PRD completed and reconciled.
-- [x] Step 2b: fresh TRD completed and reconciled.
-- [x] Step 3a: diagram and sequence validated against fresh contracts.
-- [x] Step 3b: local active-tree cleanup completed with recovery preserved.
-- [x] Step 4a: links, dependency closure and appropriate checks passed or limitations recorded.
-- [x] Step 4b: GitHub update prepared against verified branch tips.
-- [x] Step 5: GitHub cleanup and final comparison recorded.
+The [latest guard readback](reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T133426751754Z.json) records delayed INR287.59 at 13:16 UTC, stop=false, main billing enabled and inference billing disabled, read at 13:34 UTC. The [latest usage/cache receipt](reports/public_evaluator/20261012/haiku_v10_14_helpers/final_usage_and_cache_v14_v1.json) retains 50/100 attempts, 1,067,084/2,000,000 tokens and USD0.1325035/USD1, with no reset or refund. These are timestamped readings, not an instantaneous cost guarantee.
 
-Reset completed: 4,297 active files removed, the two superseded branches removed locally and remotely, main consolidated, exact bindings retained, and 103 hosted provider-free checks passed. See [cleanup and validation receipt](reports/reset/20261011/README.md). Runtime implementation steps below remain open.
+The v10.12 [failed live run](reports/public_evaluator/20261012/hosted_runs/e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53/receipt.json), [failed independent review](reports/public_evaluator/20261012/operations/semantic_acceptance_v10_12.json), missing current-role cache reads and the older v8 0/4 coverage baseline remain history. The owner's new functional scope does not turn those failures into factual acceptance. Gemini/Gemma access work stays retired.
 
-Timeboxes are estimates, not a promise of a deployable agent in two hours. This reset does not authorize provider spending, live-service changes, billing changes or public access. Check existing permissions against each exact subsequent action.
+## MVP result and handover
 
-## Implementation sequence after the reset
+1. **Use the applied exact token ceiling.** The separately persisted 2,000,000-token grant is applied with pending/application/readback receipts. Resolve it from fresh ledgers and bind its exact scope in every admission. Keep reserved attempts/tokens/events/versions and all old charges; do not change USD1, attempts100, INR2,700/INR2,540 or stopped billing.
+2. **Retain the tested retrieval repair and its limits.** The [v10.13 failure](reports/public_evaluator/20261012/haiku_v10_13_helpers/service_due_api_operator_v1/hosted_runs/915800c4-aa0d-48d4-b0e1-1cedd3799d04/service_due_case.json) remains recorded. The frozen v10.14 repair retains applicable approved evidence from the initial ranking through reranking, without changing source authority or adding the section hint. The [private same-question retest](reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/service_due_case.json) admitted the three reviewed Service Reminder objects, separately verified a partial answer and proved exact save/stream/recovery. The [first public attempt](reports/public_evaluator/20261012/public_review/browser_service_due_v14_v1/receipt.json) failed safely at `VERIFIER_INCONSISTENT_ACCEPTANCE`; a fresh operation passed. Keep all charges and failures; no uncertain paid replay or verifier bypass.
+3. **Keep the public UI usable and hand over the result.** The [capacity repair](reports/public_evaluator/20261012/haiku_v10_13_helpers/ui_capacity_repair_v1/health_passed.json) retained service maximum two and revision maximum one. The [fresh public service-due browser](reports/public_evaluator/20261012/public_review/browser_service_due_v14_v2/receipt.json) passed health, proof/cookie/WebSocket, scope confirmation, enabled input, all four progress stages and a supported answer with a citation. Visible incremental chunk rendering was not observed. The latest old-v10.13 rollback health check [timed out twice](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/rollback_health_timeout_v2.json); exact v10.14 traffic was restored and [both restored health checks passed](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/restore_health.json). Preserve current identity/source checks and the billing guard. Share the URL with the actual evidence and verifier/rollback limitations. Broader six-case, cache-read and extra follow-up demonstrations remain deferred; independent manual answer review was waived.
 
-The 12 October v9.1 candidate implements the code for steps 6–9, freezes 341 direct inputs and completes hosted backend/UI image builds with exact provenance. Hosted CI passed 198 provider-free tests. See the [build receipt](reports/build/20261012/README.md) and [current status](docs/STATUS.md). The existing machine GCP identity and immutable snapshot generation are verified. The step exits below stay open where hosted loading, rollback or live quality/operations evidence is still required. Synthetic checks do not close those gates; no deployment or provider-spending permission is inferred.
+- [x] Exact owner-authorized 2,000,000-token cap applied and read back without counter/event/charge reset.
+- [x] Service-due question retrieves applicable admitted source and returns a useful verified supported/partial answer.
+- [x] Private direct answer separately verified; identical saved stream/recovery and completed operation boundaries proven.
+- [x] Anonymous inspection, enabled UI health and a public service-due SUPPORTED browser answer with a citation passed.
+- [x] Public URL, result receipts and limitations recorded for reviewer handover.
 
-### 6. Establish one immutable serving baseline
+## Preserved requirements
 
-- [x] **6a — Source and index:** validate manual checksum, scoped approvals, parser/chunk/index versions, evidence IDs and mandatory dependencies. Use durable GCS artifacts with generation/hash checks rather than expiring Actions artifacts. Exit recorded in [hosted source validation](reports/build/20261012/hosted_source_validation_v9_1.json): exact generation/SHA, all 212 original index hashes, original scoped source reload and 36 synthetic checks. Page 103 and unapproved context gaps remain explicitly flagged maintainer work.
-- [ ] **6b — Runtime and CI:** select one serving package/version manifest, add provider-free PR checks, bind container inputs and image digests to the release, and document exact rollback. Exit: reproducible build-input receipt and CI rejection of altered bindings.
+Rider questions are at most 100 words; accept arbitrary manual-supported wording and reject longer input before retrieval/reservation without truncation. Preserve all applicable conditions, warnings, units, headers, references and relevant history. There is no old assembled-evidence cap. Native windows, actual provider throughput and lifetime budgets are distinct.
 
-**Concurrency:** 6a and 6b run together after step 5 and join before step 7. Reuse unchanged immutable artifacts; do not reparse or re-embed per rider request.
+Use two initial Haiku call slots and, only after fresh correctable rejection/admission, two conditional slots for the sole correction/re-verification. Both roles share the existing Haiku USD1 ledger. Malformed/outage/quota/integrity failures remain `SYSTEM_ERROR`; safety, unsupported and rider-resolvable ambiguity remain distinct. `ACTION_COMPLETED_UNRESOLVED` is never observed normality; reported success is not a verified repair. Authored questions and StepDefinitions are not Q&A gates.
 
-### 7. Repair retrieval and operation state
+Immutable source/context approvals stay exact and scope-bound. Missing extraction/review is maintainer work, and page 103 stays flagged. The new waiver concerns independent answer evaluation only. Held-out cases may not enrich prompts or tune retrieval.
 
-- [ ] **7a — Hybrid retrieval:** connect authenticated Qdrant dense search and concurrent BM25; filter selected manual/version before ranking; preserve history in the retrieval query; fuse with RRF; implement bounded dependency recovery and conditional reranking for ordinary Q&A. Exit: approved direct/follow-up evidence is retrieved, and source-review gaps trigger neither reranking nor rider questions.
-- [ ] **7b — Durable state:** implement owned sessions, optional typed outcomes, request deduplication, operation leases, terminal reconciliation and exact saved-response recovery. Processing must survive browser disconnection. Exit: duplicates/disconnects do not repeat paid calls or leave operations indefinitely `RUNNING`.
-
-**Concurrency:** 7a and 7b run together after step 6. Keep `ACTION_COMPLETED_UNRESOLVED` distinct from observed normality. StepDefinitions and authored question IDs are not general Q&A prerequisites.
-
-### 8. Admit complete evidence within the budget
-
-- [ ] Version a compact approved-anchor/dependency assembler. Preserve conditions, warnings, units, table headers, references and server page metadata at reviewed scopes; exclude unapproved parent bodies.
-- [ ] Count the complete projected request with the exact provider's mechanism, including question, relevant history, evidence and schema overhead. If complete context does not fit, return `SYSTEM_ERROR`; never silently discard mandatory evidence.
-- [ ] Reserve whole-turn token/rate/monetary capacity, including maximum permitted correction and authorized availability fallback. Retain uncertain reservations. Validation allocations are non-recurring across runs.
-
-**Depends on:** 7a and 7b. **Exit:** separately versioned repairs for the recorded v8 brake-fluid, bore/stroke, USB and low-fuel failures, with independently checked complete evidence and bounded prompts. Quota failure is never described as missing manual information.
-
-### 9. Integrate drafting, verification and saved delivery
-
-- [ ] **9a — Answer path:** privately draft from actual question, relevant history and assembled evidence. Finalize warnings, limitations, citations and service wording before a separate verifier. Require strict question coverage, all-claim support, omissions/conflicts and exact response/evidence/history/runtime bindings. Permit one corrective draft plus re-verification.
-- [ ] **9b — Delivery and provider path:** show operational progress, then stream only a durably saved accepted buffer. Keep fixed fallback/error messages outside technical-answer streaming. Bind token counts and budgets to the actual model; keep Claude disabled until serving activation is authorized, and allow it only for eligible primary availability failures. Validate UI recovery and ownership.
-
-**Concurrency:** 9a and 9b run together after step 8. **Joint exit:** accepted/saved/streamed/recovered hashes match; no rejected tokens escape; malformed/outage/quota/integrity failures are `SYSTEM_ERROR`; unsupported, safety and ambiguity remain distinct.
-
-### 10. Independently evaluate quality and operations
-
-- [ ] **10a — Answer quality:** review fresh direct, partial, follow-up, table/unit, warning, unsupported and safety cases against original pages independently of serving models. Separate tuning/held-out cases. Measure question coverage, all-claim support, false acceptance/refusal, complete-evidence recall and citation support. Workflow success is not answer-quality success.
-- [ ] **10b — Failure, latency and cost:** test injection, wrong selection, missing dependencies, overflow, provider/store outage, replay, concurrent turns and disconnects. Separate cold/warm timings, especially first verified answer. Record retrieval, draft, verification, correction, save and completion, provider usage, estimated cost and cost per correctly handled case.
-
-**Concurrency:** 10a and 10b run together after step 9. **Exit:** explicit quality/operational acceptance for the same frozen runtime. Zero unsupported released technical steps is mandatory. A run releasing zero technical answers cannot establish factual-support accuracy.
-
-### 11. Deploy an accepted text candidate
-
-- [ ] Confirm current deployment/provider/IAM/spending authorization for the exact candidate. Preserve budget-stop behavior and never re-enable stopped billing without permission.
-- [ ] Build immutable backend/UI images from the accepted manifest, bind secrets to managed identities, verify Qdrant readiness and Firestore permissions, and deploy compatible revisions with rollback recorded.
-- [ ] Test a fresh authenticated browser: direct, partial, follow-up, unsupported, safety/ambiguity, operational error and disconnect/recovery. Verify deployed image/runtime/index bindings.
-- [ ] Review public identity/access, abuse/rate/per-day spend controls, retention/deletion and display restrictions separately before publishing a rider URL.
-
-**Depends on:** successful 10a and 10b plus applicable authorization. **Exit:** reproducible live acceptance, measured latency/cost, rollback and an approved access scope. Existing private retrieval deployment does not establish new-answer-pipeline acceptance.
-
-### 12. Add optional optimizations and modalities
-
-- [ ] **12a — Caching and tuning:** establish caching support for the exact authorized model/account. Preserve source/verification gates; measure reported cached tokens and paired latency/cost. Compare reranking thresholds and retrieval variants on held-out cases. Unsupported caching remains an explicit capability gap with no claimed savings.
-- [ ] **12b — Photo, then voice:** add bounded ephemeral uploads and observation-only vision with uncertainty; exclude hidden-fault diagnosis. Reuse text evidence/verification. Add voice only with editable transcript confirmation. Verify privacy/deletion and modality quality before activation.
-
-**Concurrency:** 12a and 12b may run together after accepted text release in step 11, under separately confirmed scope and spending. They are not prerequisites for fixing the current text-answer coverage failure.
+Photo, voice, compaction and optional refinements remain deferred until separately agreed. Follow [PRD](docs/PRD.md), [TRD](docs/TRD.md), [architecture](docs/ARCHITECTURE.md), [status](docs/STATUS.md), [CONTRIBUTING](CONTRIBUTING.md) and the recorded scopes. Main remains unchanged pending checked integration.

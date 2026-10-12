@@ -1,0 +1,51 @@
+{
+  "schema_version": "repository-monitor-check-v1",
+  "trigger_utc": "2026-10-12T10:17:24.843Z",
+  "structure": {
+    "schema_version": "repository-structure-audit-v4",
+    "ok": true,
+    "unexpected_root_files": [],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "missing_critical_source_files": [],
+    "integrity_errors": [],
+    "local_links_checked": 161,
+    "root_file_count": 48,
+    "runtime_freeze_files_verified": 64,
+    "current_serving_files_verified": 561,
+    "approved_output_files_verified": 187,
+    "note": "Canonical navigation, byte-exact historical v8 snapshots and v9/v9.1 manifests, current v10 inputs and original scoped approval paths. Not factual or deployment acceptance."
+  },
+  "polls": [
+    {
+      "thread_id": "01a12f2a-8db7-7f11-88fb-55867d766816",
+      "status": "active",
+      "cursor": "7d8ae3a5-0b2b-4e57-b7a1-ffbd90a1544c:4"
+    },
+    {
+      "thread_id": "01a12c4e-f3ef-7342-b33b-45cdb6511587",
+      "status": "idle",
+      "cursor": "4fa8c308-659f-4313-94e2-55c7db91b3fe:16"
+    }
+  ],
+  "observations": [
+    "Current v10.13 manifest now verifies 561 inputs; pending-manifest failure cleared.",
+    "New reviewer/setup guides and architecture narrative are being updated by the active evaluator chat.",
+    "Versioned build, helper, public-review and rollback receipts remain grouped in their work area.",
+    "Historical runtime and source approvals remain intact; no unexplained root files or broken canonical links."
+  ],
+  "resolved_failures": [
+    "Current v10.13 serving manifest requirement cleared."
+  ],
+  "new_actionable_organization_changes": [],
+  "navigation_changed": [],
+  "moved_files": [],
+  "allowlist_changed": false,
+  "clean_consecutive_checks": 0,
+  "pause_eligible": false,
+  "pause_reason": "Relevant Haiku evaluator continuation remains active.",
+  "provider_calls": 0,
+  "deployment_or_billing_changes": false,
+  "protected_paths_unchanged": true,
+  "monitor_status": "ACTIVE"
+}

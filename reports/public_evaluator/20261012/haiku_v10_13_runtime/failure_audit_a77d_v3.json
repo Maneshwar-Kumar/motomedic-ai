@@ -1,0 +1,157 @@
+{
+  "cases": [
+    {
+      "accepted": true,
+      "cache_calls": [
+        {
+          "attempt": 0,
+          "cache_creation_input_tokens": 7087,
+          "cache_read_input_tokens": 0,
+          "case_id": "EVAL_DIRECT_01",
+          "input_tokens": 7335,
+          "input_tokens_counted": 7335,
+          "prefix_sha256": "66e0c48a3a4ec900c97626d167adcf7a4e4b7a60302a2e09dda2fb4dd2621953",
+          "role": "private_draft"
+        },
+        {
+          "attempt": 0,
+          "cache_creation_input_tokens": 7367,
+          "cache_read_input_tokens": 0,
+          "case_id": "EVAL_DIRECT_01",
+          "input_tokens": 10285,
+          "input_tokens_counted": 10285,
+          "prefix_sha256": "a33aaca5414416053b1ad0ddfe8fcd74f0844c487a95e768bf03a537fd693539",
+          "role": "semantic_verifier"
+        }
+      ],
+      "case_id": "EVAL_DIRECT_01",
+      "completed_boundary_receipt_present": true,
+      "errors": [],
+      "finalized_response_sha256": "c8795151dd4d4f03cc4f16c552c76c9065a6dc3cfb1da45909cb11ad1942e115",
+      "operation_id": "f00fbe5c04e745e09339dc28e31162e0",
+      "passed": true,
+      "presentation_response_sha256": "ddb51e611922eb1ef2955f983e057d5b730875467ece4a621d1cda6b56b4c564",
+      "text_sha256": "be8be2ecda6de6ae2a866afe045d76443901965a6e5c91f91d0b5de91d823b86"
+    },
+    {
+      "accepted": false,
+      "cache_calls": [
+        {
+          "attempt": 0,
+          "cache_creation_input_tokens": 16781,
+          "cache_read_input_tokens": 0,
+          "case_id": "EVAL_USB_02",
+          "input_tokens": 17037,
+          "input_tokens_counted": 17037,
+          "prefix_sha256": "ffaa9b9a98482fafa5fe857606444ec38f15591484cdf9a0fc1f9fb7b9c5e273",
+          "role": "private_draft"
+        },
+        {
+          "attempt": 0,
+          "cache_creation_input_tokens": null,
+          "cache_read_input_tokens": null,
+          "case_id": "EVAL_USB_02",
+          "input_tokens": null,
+          "input_tokens_counted": null,
+          "prefix_sha256": null,
+          "role": "semantic_verifier"
+        }
+      ],
+      "case_id": "EVAL_USB_02",
+      "completed_boundary_receipt_present": false,
+      "errors": [
+        "CURRENT_ROLE_PROVIDER_IDENTITY_CHANGED",
+        "CURRENT_ROLE_NOT_SINGLE_GENERATION_CALL",
+        "EXACT_ADMITTED_ID_ENUM_BINDING_CHANGED",
+        "ACTUAL_NATIVE_ROLE_SCHEMA_HASH_MISSING",
+        "BASE_ROLE_SCHEMA_HASH_MISSING",
+        "ROLE_PREFIX_HASH_MISSING",
+        "ROLE_USAGE_INVALID_INPUT_TOKENS_COUNTED",
+        "ROLE_USAGE_INVALID_INPUT_TOKENS",
+        "ROLE_USAGE_INVALID_OUTPUT_TOKENS",
+        "ROLE_USAGE_INVALID_UNCACHED_INPUT_TOKENS",
+        "ROLE_USAGE_INVALID_CACHE_CREATION_INPUT_TOKENS",
+        "ROLE_USAGE_INVALID_CACHE_READ_INPUT_TOKENS",
+        "ROLE_CACHE_POLICY_CHANGED",
+        "ROLE_CACHE_READ_TRACE_INCONSISTENT",
+        "OPERATIONAL_ERROR_IS_NOT_ACCEPTANCE",
+        "FROZEN_ROLE_SCHEMA_TEMPLATE_CHANGED",
+        "ACTUAL_NATIVE_ENUM_SCHEMA_CHANGED"
+      ],
+      "finalized_response_sha256": null,
+      "operation_id": "74b6311d95f64cb1ad5b2c7c84594302",
+      "passed": false,
+      "presentation_response_sha256": "a1e21228e7a7e63bea40fabb65eef0a8a6a11d7f4fc9301dd387f5c43b6ce894",
+      "text_sha256": null
+    }
+  ],
+  "classification": "READONLY_ACTUAL_HOSTED_FUNCTIONAL_RECEIPT_AUDIT",
+  "cloud_mutations": 0,
+  "current_role_cache_usage_proofs": {
+    "private_draft": {
+      "current_role_creation_then_read_usage_proven": false,
+      "frozen_policy_sha256": "7321abcc400581467fbc698476dfd65d1c0f954262165f0da3a07d0a1aa7145c",
+      "frozen_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+      "frozen_system_checkpoint_sha256": "dc6814dcdd3655f2513b37590418fe9d7876f502c367497fd6df8f7cedfa28e0",
+      "pairs": [],
+      "provider_usage_identifies_exact_checkpoint": false
+    },
+    "semantic_verifier": {
+      "current_role_creation_then_read_usage_proven": false,
+      "frozen_policy_sha256": "ec6bc60c9ed86d96bfe7a714ef20753f24fb470fafb5f35a5fb675c4de1d3f2f",
+      "frozen_schema_template_sha256": "de5ad9929c54e7df5d81ff2fbb22717b6ee2a548c7ed8f3e3b5eb3c384b8a8bd",
+      "frozen_system_checkpoint_sha256": "68af175e7248932bdab6fc1644d86354aff97bf184084492af5f7b05361a5c61",
+      "pairs": [],
+      "provider_usage_identifies_exact_checkpoint": false
+    }
+  },
+  "errors": [
+    "SIX_CASE_RUN_INCOMPLETE"
+  ],
+  "hosted_receipt_sha256": "450196dfccfa5b7192e1db8b5687c482131d463244df6dbde87f66a415b2adc4",
+  "limits": [
+    "Exact stream/recovery/duplicate view equality is the hash-bound hosted client assertion; raw transport frames are not retained.",
+    "Finalized wire hash and binding are scalar server records; the verifier prompt body is not independently reconstructed here.",
+    "Completed-boundary no-call evidence uses the recorded unchanged reservation ledger assertion and idempotent response; per-provider request logs are not retained.",
+    "Current-role positive cache creation followed by positive read usage is role-level functional proof. The provider does not identify the exact reused checkpoint.",
+    "Policy identity is reconstructed from source hashes and the exact Config runtime lock; the frozen adapter rejects another role policy or base schema.",
+    "Exact complete evidence-prefix reuse is reported separately and only when the cached_prefix_sha256 pair matches.",
+    "Event scope checks cover supplied new event records only; standard hosted receipts omit the global event ledger. Every operation reservation scope is checked separately."
+  ],
+  "passed": false,
+  "permanent_ledger_proof": {
+    "errors": [],
+    "event_readback_present": false,
+    "grant_sha256": "310d665b1b9e7e2423e64408d537302c50997602a68b4ba2c519894031b8bf32",
+    "new_event_scopes_checked": 0,
+    "new_events_without_scope_fields": 0,
+    "passed": true,
+    "primary_token_ceiling": 2000000,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "provider_calls_by_auditor": 0,
+  "public_browser_acceptance": false,
+  "recorded_utc": "2026-10-12T11:32:01.222650+00:00",
+  "role_cache_proofs": {
+    "private_draft": {
+      "exact_role_prefix_creation_then_read_proven": false,
+      "pairs": []
+    },
+    "semantic_verifier": {
+      "exact_role_prefix_creation_then_read_proven": false,
+      "pairs": []
+    }
+  },
+  "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+  "schema": "motomedic-haiku-functional-delivery-cache-audit-v3",
+  "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+  "source_factual_quality_acceptance": false
+}

@@ -1,0 +1,580 @@
+{
+  "schema_version": "public-evaluator-current-operations-readback-v1",
+  "project_id": "motomedic-ai-20261009",
+  "region": "us-central1",
+  "scope": "Read-only current billing, existing budget allocation, private service IAM and v10_3 revision readiness; no provider requests",
+  "started_at_utc": "2026-10-11T21:13:26.3786964Z",
+  "budget": {
+    "main_billing_enabled": true,
+    "inference_billing_enabled": false,
+    "guard_revision": "motomedic-budget-guard-00003-qax",
+    "guard_settings": [
+      {
+        "name": "BUDGET_INR",
+        "value": "2700"
+      },
+      {
+        "name": "SIMULATE",
+        "value": "false"
+      },
+      {
+        "name": "STOP_INR",
+        "value": "2540"
+      }
+    ],
+    "latest_guard_log_scalars": [
+      {
+        "timestamp": "2026-10-11T20:55:14.300717Z",
+        "cost_inr": 116.07,
+        "stop": false
+      }
+    ],
+    "read_at_utc": "2026-10-11T21:13:55.8278858Z"
+  },
+  "services": {
+    "motomedic-arm-a": {
+      "service": {
+        "metadata": {
+          "annotations": {
+            "run.googleapis.com/client-name": "gcloud",
+            "run.googleapis.com/client-version": "575.0.0",
+            "run.googleapis.com/ingress": "all",
+            "run.googleapis.com/ingress-status": "all",
+            "run.googleapis.com/maxScale": "1",
+            "run.googleapis.com/operation-id": "7ea75edd-9a94-4ba5-8247-319e2ed3e4dd",
+            "run.googleapis.com/urls": "[\"https://motomedic-arm-a-279945185781.us-central1.run.app\",\"https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app\"]",
+            "serving.knative.dev/creator": "maneshwarkumar@gmail.com",
+            "serving.knative.dev/lastModifier": "maneshwarkumar@gmail.com"
+          },
+          "name": "motomedic-arm-a"
+        },
+        "spec": {
+          "template": {
+            "metadata": {
+              "annotations": {
+                "autoscaling.knative.dev/maxScale": "1",
+                "autoscaling.knative.dev/minScale": "1",
+                "run.googleapis.com/cpu-throttling": "true",
+                "run.googleapis.com/sessionAffinity": "false",
+                "run.googleapis.com/startup-cpu-boost": "true"
+              }
+            },
+            "spec": {
+              "containerConcurrency": 6,
+              "serviceAccountName": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+              "timeoutSeconds": 1200
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T21:05:45.034918Z",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:31.38221Z",
+              "status": "True",
+              "type": "ConfigurationsReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:44.98105Z",
+              "status": "True",
+              "type": "RoutesReady"
+            }
+          ],
+          "latestCreatedRevisionName": "motomedic-arm-a-00005-kl8",
+          "latestReadyRevisionName": "motomedic-arm-a-00005-kl8",
+          "url": "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app"
+        }
+      },
+      "revision": {
+        "metadata": {
+          "name": "motomedic-arm-a-00005-kl8"
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T21:05:43.593292Z",
+              "message": "Deploying revision succeeded in 1m13.23s.",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:43.756202Z",
+              "severity": "Info",
+              "status": "True",
+              "type": "Active"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:41.293978Z",
+              "message": "Containers became healthy in 58.54s.",
+              "status": "True",
+              "type": "ContainerHealthy"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:31.283888Z",
+              "message": "Container image import completed.",
+              "status": "True",
+              "type": "ContainerReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:43.524507Z",
+              "message": "Min instances provisioned successfully  in 1m12.08s.",
+              "status": "True",
+              "type": "MinInstancesProvisioned"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:42.803962Z",
+              "message": "Provisioning imported containers completed in 11.52s. Checking container health. This will wait for up to 4m for the configured startup probe, including an initial delay of 0s.",
+              "status": "True",
+              "type": "ResourcesAvailable"
+            }
+          ],
+          "imageDigest": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:0a6d142b18962854824205b0bcc89bf9ce4f973e01bd8cb00fa7dbe98386ed5c"
+        }
+      },
+      "iam_bindings": [
+        {
+          "role": "roles/run.invoker",
+          "condition": null,
+          "members": [
+            "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+            "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+          ]
+        }
+      ],
+      "read_at_utc": "2026-10-11T21:14:42.6173782Z"
+    },
+    "motomedic-answer-worker": {
+      "service": {
+        "metadata": {
+          "annotations": {
+            "run.googleapis.com/ingress": "all",
+            "run.googleapis.com/ingress-status": "all",
+            "run.googleapis.com/maxScale": "5",
+            "run.googleapis.com/operation-id": "ee0b3627-b78b-4859-b84d-c2e869a1193d",
+            "run.googleapis.com/urls": "[\"https://motomedic-answer-worker-279945185781.us-central1.run.app\",\"https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app\"]",
+            "serving.knative.dev/creator": "maneshwarkumar@gmail.com",
+            "serving.knative.dev/lastModifier": "maneshwarkumar@gmail.com"
+          },
+          "name": "motomedic-answer-worker"
+        },
+        "spec": {
+          "template": {
+            "metadata": {
+              "annotations": {
+                "autoscaling.knative.dev/maxScale": "1",
+                "autoscaling.knative.dev/minScale": "0",
+                "run.googleapis.com/cpu-throttling": "true",
+                "run.googleapis.com/sessionAffinity": "false",
+                "run.googleapis.com/startup-cpu-boost": "true"
+              }
+            },
+            "spec": {
+              "containerConcurrency": 1,
+              "serviceAccountName": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+              "timeoutSeconds": 1200
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T21:05:36.77588Z",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:22.501814Z",
+              "status": "True",
+              "type": "ConfigurationsReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:36.724707Z",
+              "status": "True",
+              "type": "RoutesReady"
+            }
+          ],
+          "latestCreatedRevisionName": "motomedic-answer-worker-00002-fbw",
+          "latestReadyRevisionName": "motomedic-answer-worker-00002-fbw",
+          "url": "https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app"
+        }
+      },
+      "revision": {
+        "metadata": {
+          "name": "motomedic-answer-worker-00002-fbw"
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T21:05:34.361577Z",
+              "message": "Deploying revision succeeded in 1m15.11s.",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:35.46433Z",
+              "severity": "Info",
+              "status": "True",
+              "type": "Active"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:34.309669Z",
+              "message": "Containers became healthy in 1m10.04s.",
+              "status": "True",
+              "type": "ContainerHealthy"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:22.394252Z",
+              "message": "Container image import completed in 2.46s.",
+              "status": "True",
+              "type": "ContainerReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:23.92395Z",
+              "message": "Provisioning imported containers completed in 1.53s. Checking container health. This will wait for up to 4m for the configured startup probe, including an initial delay of 0s.",
+              "status": "True",
+              "type": "ResourcesAvailable"
+            }
+          ],
+          "imageDigest": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:0a6d142b18962854824205b0bcc89bf9ce4f973e01bd8cb00fa7dbe98386ed5c"
+        }
+      },
+      "iam_bindings": [
+        {
+          "role": "roles/run.invoker",
+          "condition": null,
+          "members": [
+            "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+          ]
+        }
+      ],
+      "read_at_utc": "2026-10-11T21:14:59.8098831Z"
+    },
+    "motomedic-qdrant": {
+      "service": {
+        "metadata": {
+          "annotations": {
+            "run.googleapis.com/client-name": "gcloud",
+            "run.googleapis.com/client-version": "575.0.0",
+            "run.googleapis.com/ingress": "all",
+            "run.googleapis.com/ingress-status": "all",
+            "run.googleapis.com/maxScale": "1",
+            "run.googleapis.com/minScale": "1",
+            "run.googleapis.com/operation-id": "d440d056-399a-490f-909e-2244a36b08b7",
+            "run.googleapis.com/urls": "[\"https://motomedic-qdrant-279945185781.us-central1.run.app\",\"https://motomedic-qdrant-5uyul6ay6a-uc.a.run.app\"]",
+            "serving.knative.dev/creator": "maneshwarkumar@gmail.com",
+            "serving.knative.dev/lastModifier": "maneshwarkumar@gmail.com"
+          },
+          "name": "motomedic-qdrant"
+        },
+        "spec": {
+          "template": {
+            "metadata": {
+              "annotations": {
+                "autoscaling.knative.dev/maxScale": "1",
+                "run.googleapis.com/client-name": "gcloud",
+                "run.googleapis.com/client-version": "575.0.0",
+                "run.googleapis.com/startup-cpu-boost": "true"
+              }
+            },
+            "spec": {
+              "containerConcurrency": 8,
+              "serviceAccountName": "motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com",
+              "timeoutSeconds": 30
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T09:19:23.755294Z",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T09:19:06.763257Z",
+              "status": "True",
+              "type": "ConfigurationsReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T09:19:23.715525Z",
+              "status": "True",
+              "type": "RoutesReady"
+            }
+          ],
+          "latestCreatedRevisionName": "motomedic-qdrant-00003-cjb",
+          "latestReadyRevisionName": "motomedic-qdrant-00003-cjb",
+          "url": "https://motomedic-qdrant-5uyul6ay6a-uc.a.run.app"
+        }
+      },
+      "revision": {
+        "metadata": {
+          "name": "motomedic-qdrant-00003-cjb"
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T09:19:22.295437Z",
+              "message": "Deploying revision succeeded in 16.54s.",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T09:19:22.475241Z",
+              "severity": "Info",
+              "status": "True",
+              "type": "Active"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T09:19:18.772653Z",
+              "message": "Containers became healthy in 2.81s.",
+              "status": "True",
+              "type": "ContainerHealthy"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T09:19:06.64451Z",
+              "message": "Container image import completed.",
+              "status": "True",
+              "type": "ContainerReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T09:19:22.204991Z",
+              "message": "Min instances provisioned successfully  in 15.29s.",
+              "status": "True",
+              "type": "MinInstancesProvisioned"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T09:19:16.253842Z",
+              "message": "Provisioning imported containers completed in 9.61s. Checking container health. This will wait for up to 4m for the configured startup probe, including an initial delay of 0s.",
+              "status": "True",
+              "type": "ResourcesAvailable"
+            }
+          ],
+          "imageDigest": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37"
+        }
+      },
+      "iam_bindings": [
+        {
+          "role": "roles/run.invoker",
+          "condition": null,
+          "members": [
+            "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+          ]
+        }
+      ],
+      "read_at_utc": "2026-10-11T21:15:55.09296Z"
+    },
+    "motomedic-rider-ui": {
+      "service": {
+        "metadata": {
+          "annotations": {
+            "run.googleapis.com/client-name": "gcloud",
+            "run.googleapis.com/client-version": "575.0.0",
+            "run.googleapis.com/ingress": "all",
+            "run.googleapis.com/ingress-status": "all",
+            "run.googleapis.com/maxScale": "1",
+            "run.googleapis.com/operation-id": "114d5ee2-2771-4953-8f6a-c56ff6c0e8e3",
+            "run.googleapis.com/urls": "[\"https://motomedic-rider-ui-279945185781.us-central1.run.app\",\"https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app\"]",
+            "serving.knative.dev/creator": "maneshwarkumar@gmail.com",
+            "serving.knative.dev/lastModifier": "maneshwarkumar@gmail.com"
+          },
+          "name": "motomedic-rider-ui"
+        },
+        "spec": {
+          "template": {
+            "metadata": {
+              "annotations": {
+                "autoscaling.knative.dev/maxScale": "1",
+                "autoscaling.knative.dev/minScale": "0",
+                "run.googleapis.com/cpu-throttling": "true",
+                "run.googleapis.com/sessionAffinity": "false",
+                "run.googleapis.com/startup-cpu-boost": "true"
+              }
+            },
+            "spec": {
+              "containerConcurrency": 4,
+              "serviceAccountName": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+              "timeoutSeconds": 1200
+            }
+          }
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T21:05:09.538401Z",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:56.20698Z",
+              "status": "True",
+              "type": "ConfigurationsReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:09.50251Z",
+              "status": "True",
+              "type": "RoutesReady"
+            }
+          ],
+          "latestCreatedRevisionName": "motomedic-rider-ui-00004-9wx",
+          "latestReadyRevisionName": "motomedic-rider-ui-00004-9wx",
+          "url": "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app"
+        }
+      },
+      "revision": {
+        "metadata": {
+          "name": "motomedic-rider-ui-00004-9wx"
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-10-11T21:05:08.146367Z",
+              "message": "Deploying revision succeeded in 30.03s.",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:08.287867Z",
+              "severity": "Info",
+              "status": "True",
+              "type": "Active"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:05:08.057944Z",
+              "message": "Containers became healthy in 10.03s.",
+              "status": "True",
+              "type": "ContainerHealthy"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:56.07197Z",
+              "message": "Container image import completed in 14.76s.",
+              "status": "True",
+              "type": "ContainerReady"
+            },
+            {
+              "lastTransitionTime": "2026-10-11T21:04:57.727906Z",
+              "message": "Provisioning imported containers completed in 1.66s. Checking container health. This will wait for up to 4m for the configured startup probe, including an initial delay of 0s.",
+              "status": "True",
+              "type": "ResourcesAvailable"
+            }
+          ],
+          "imageDigest": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716"
+        }
+      },
+      "iam_bindings": [],
+      "read_at_utc": "2026-10-11T21:16:16.3221001Z"
+    }
+  },
+  "provider_calls": 0,
+  "new_tasks": 0,
+  "secret_values_read": false,
+  "billing_changes": 0,
+  "iam_changes": 0,
+  "status": "V10_3_READY_PRIVATE_DATA_SERVICES_ALLOCATION_UNCHANGED",
+  "allocation_capacity_readbacks": [
+    {
+      "allocation": "grounded-primary-nonrecurring-v1",
+      "status": "PRESENT",
+      "capacity_fields": {
+        "maximum_attempts": {
+          "integerValue": "100"
+        },
+        "version": {
+          "stringValue": "whole-turn-capacity-v1"
+        },
+        "maximum_tokens": {
+          "integerValue": "999200"
+        }
+      },
+      "read_at_utc": "2026-10-11T21:16:50.5802418Z"
+    },
+    {
+      "allocation": "owner-haiku-fallback-20261011-validation-v1",
+      "status": "PRESENT",
+      "capacity_fields": {
+        "maximum_nanodollars": {
+          "integerValue": "1000000000"
+        },
+        "version": {
+          "stringValue": "claude-fallback-nonrecurring-one-dollar-v1"
+        }
+      },
+      "read_at_utc": "2026-10-11T21:16:52.4554784Z"
+    }
+  ],
+  "service_v2_invoker_flags": [
+    {
+      "service": "motomedic-arm-a",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a",
+      "invoker_iam_disabled": false,
+      "field_present": false,
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00005-kl8",
+      "read_at_utc": "2026-10-11T21:17:51.7056831Z"
+    },
+    {
+      "service": "motomedic-answer-worker",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker",
+      "invoker_iam_disabled": false,
+      "field_present": false,
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-00002-fbw",
+      "read_at_utc": "2026-10-11T21:17:53.4796337Z"
+    },
+    {
+      "service": "motomedic-qdrant",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-qdrant",
+      "invoker_iam_disabled": false,
+      "field_present": false,
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-qdrant/revisions/motomedic-qdrant-00003-cjb",
+      "read_at_utc": "2026-10-11T21:17:55.2743746Z"
+    },
+    {
+      "service": "motomedic-rider-ui",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui",
+      "invoker_iam_disabled": false,
+      "field_present": false,
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00004-9wx",
+      "read_at_utc": "2026-10-11T21:17:57.1415273Z"
+    }
+  ],
+  "pinned_release": {
+    "runtime_revision": "v10_3",
+    "serving_manifest_sha256": "1ec0f19b5a4cad2543018d1a793b41f0a50bd0004ace61a1c61d839252532d16",
+    "images": {
+      "backend": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:0a6d142b18962854824205b0bcc89bf9ce4f973e01bd8cb00fa7dbe98386ed5c",
+      "ui": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716"
+    }
+  },
+  "checks": {
+    "main_billing_enabled": true,
+    "inference_billing_disabled": true,
+    "existing_budget_2700_unchanged": true,
+    "existing_disconnect_threshold_2540_unchanged": true,
+    "guard_simulation_disabled": true,
+    "existing_guard_revision_unchanged": true,
+    "latest_guard_stop_false": true,
+    "primary_allocation_version_unchanged": true,
+    "primary_attempt_capacity_unchanged": true,
+    "primary_token_capacity_unchanged": true,
+    "claude_allocation_version_unchanged": true,
+    "claude_nonrecurring_capacity_unchanged": true,
+    "backend_invokers_exact": true,
+    "worker_invoker_task_only": true,
+    "qdrant_invoker_backend_only": true,
+    "no_public_private_service_principals": true,
+    "private_service_invoker_checks_enabled": true,
+    "backend_v10_3_image": true,
+    "worker_v10_3_image": true,
+    "ui_v10_3_image": true,
+    "qdrant_retained_image": true,
+    "all_four_services_ready": true,
+    "latest_created_revisions_are_ready": true,
+    "no_agent_mutations_or_provider_calls": true
+  },
+  "completed_at_utc": "2026-10-11T21:19:30.568610+00:00",
+  "allocation_read_scope": "Only version and maximum-capacity fields; no reservation usage or rider data read, no provider ledger writes",
+  "ui_visibility": "UI is ready with invoker checking enabled and no service IAM bindings; public opening remains a separate root action",
+  "frozen_deployment_status_sha256_at_completion": "5502743036d277c861b0d9b59267f5f283af252a57c9592c3c0e253e6fd85915"
+}

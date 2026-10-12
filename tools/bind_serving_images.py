@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from cloud.serving_artifacts import ObjectReference, digest
 from tools.serving_release import dump
+from tools.check_installed_serving_release import OWNER_SCOPE, OWNER_SCOPE_SHA
 
 
 def immutable_image(value):
@@ -24,6 +25,24 @@ def immutable_image(value):
 
 def bind_build(preparation, results, uploads):
     """Record build provenance without inventing deployment or rollback evidence."""
+    schema = preparation.get('schema_version')
+    if schema not in ('serving-v9-hosted-build-preparation-v1', 'serving-v10-hosted-build-preparation-v1'):
+        raise ValueError('VERSIONED_HOSTED_PREPARATION_REQUIRED')
+    version = 'v10' if schema == 'serving-v10-hosted-build-preparation-v1' else 'v9'
+    if version == 'v10':
+        if (preparation.get('serving_schema_version') != 'motomedic-serving-release-v10'
+                or not re.fullmatch(r'v10(?:_[1-9][0-9]*)?', preparation.get('runtime_revision', ''))
+                or preparation.get('quality_acceptance') is not False
+                or preparation.get('hosted_operations_acceptance') is not False
+                or preparation.get('owner_authorization') != {
+                    'path': OWNER_SCOPE, 'sha256': OWNER_SCOPE_SHA,
+                    'authority': 'DIRECT_USER_INSTRUCTION',
+                    'scope': 'PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION'}):
+            raise ValueError('PREPARATION_CANNOT_GRANT_RUNTIME_ACCEPTANCE')
+        if any(not preparation['contexts'][kind]['image_tag'].endswith(
+                ':serving-' + preparation['runtime_revision'] + '-' + preparation['input_tree_sha256'][:12])
+                for kind in ('backend', 'ui')):
+            raise ValueError('VERSIONED_IMAGE_TAG_CHANGED')
     if set(results) != {'backend', 'ui'} or set(uploads) != {'backend', 'ui'}:
         raise ValueError('COMPATIBLE_BUILD_PAIR_REQUIRED')
     images, provenance = {}, {}
@@ -66,7 +85,7 @@ def bind_build(preparation, results, uploads):
             'cloudbuild_sha256': preparation['contexts'][kind]['cloudbuild_sha256']}
         provenance[kind].update(build_options=expected_options,
             build_timeout=preparation['contexts'][kind]['build_timeout'])
-    return {'schema_version': 'motomedic-serving-v9-build-binding-v1',
+    receipt = {'schema_version': 'motomedic-serving-' + version + '-build-binding-v1',
         'binding_scope': 'HOSTED_BUILD_PROVENANCE_ONLY',
         'source_commit': preparation['source_commit'],
         'serving_manifest_sha256': preparation['serving_manifest_sha256'],
@@ -75,7 +94,13 @@ def bind_build(preparation, results, uploads):
         'rollback_verified': False, 'promotion_ready': False,
         'provider_calls': 0, 'deployment_changed': False,
         'quality_acceptance': False, 'deployment_authorized': False,
-        'promotion_requirement': 'Same frozen runtime independent quality and hosted private acceptance, then exact owner operational authorization.'}
+        'hosted_operations_acceptance': False,
+        'promotion_requirement': 'Same frozen runtime independent original-source/current-model quality and hosted operations acceptance, compatible rollback, recorded owner authorization and existing spend guard.'}
+    if version == 'v10':
+        receipt.update(serving_schema_version=preparation['serving_schema_version'],
+            runtime_revision=preparation['runtime_revision'],
+            owner_authorization=preparation['owner_authorization'])
+    return receipt
 
 
 def bind(preparation, results, uploads, rollback):
@@ -90,7 +115,7 @@ def bind(preparation, results, uploads, rollback):
             raise ValueError('EXACT_ROLLBACK_REVISION_REQUIRED')
     if not rollback['session_schema'] or not rollback['runtime_lock']:
         raise ValueError('ROLLBACK_STATE_COMPATIBILITY_REQUIRED')
-    receipt.update(schema_version='motomedic-serving-v9-image-binding-v1',
+    receipt.update(schema_version=receipt['schema_version'].replace('-build-binding-', '-image-binding-'),
         binding_scope='HOSTED_BUILD_AND_COMPATIBLE_ROLLBACK', rollback=rollback,
         rollback_verified=True)
     # Factual/hosted acceptance and exact operational authorization remain open.

@@ -1,0 +1,52 @@
+{
+  "createTime": "2026-10-12T10:19:53.652484166Z",
+  "finishTime": "2026-10-12T10:20:07.648548Z",
+  "id": "38633b16-c4d8-46be-b89e-b9e8489dd7cc",
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds/38633b16-c4d8-46be-b89e-b9e8489dd7cc?project=279945185781",
+  "name": "projects/279945185781/locations/global/builds/38633b16-c4d8-46be-b89e-b9e8489dd7cc",
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "pool": {}
+  },
+  "projectId": "motomedic-ai-20261009",
+  "queueTtl": "3600s",
+  "results": {
+    "buildStepImages": [
+      "sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37"
+    ],
+    "buildStepOutputs": [
+      ""
+    ]
+  },
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+  "sourceProvenance": {},
+  "startTime": "2026-10-12T10:19:55.947910795Z",
+  "status": "SUCCESS",
+  "steps": [
+    {
+      "args": [
+        "-B",
+        "-c",
+        "from pathlib import Path; import hashlib,json; raw=Path('/qdrant/boot.py').read_bytes(); actual=hashlib.sha256(raw).hexdigest(); print(json.dumps({\"schema\":'motomedic-hosted-qdrant-baked-wrapper-hash-v1',\"actual_boot_path\":'/qdrant/boot.py',\"actual_boot_sha256\":actual,\"expected_boot_sha256\":'4c696031dad4d0f8bd9aeb4f21ee662022feb033bad3d1f083752afe929499b4',\"boot_bytes\":len(raw),\"matches_reviewed_source\":actual=='4c696031dad4d0f8bd9aeb4f21ee662022feb033bad3d1f083752afe929499b4',\"qdrant_started\":False,\"index_download_or_load\":False,\"provider_calls\":0,\"secret_environment_supplied\":False},sort_keys=True),flush=True); raise SystemExit(0 if actual=='4c696031dad4d0f8bd9aeb4f21ee662022feb033bad3d1f083752afe929499b4' else 2)"
+      ],
+      "entrypoint": "python3",
+      "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+      "pullTiming": {
+        "endTime": "2026-10-12T10:20:05.651501188Z",
+        "startTime": "2026-10-12T10:19:56.643170474Z"
+      },
+      "status": "SUCCESS",
+      "timing": {
+        "endTime": "2026-10-12T10:20:06.563916453Z",
+        "startTime": "2026-10-12T10:19:56.643170474Z"
+      }
+    }
+  ],
+  "timeout": "180s",
+  "timing": {
+    "BUILD": {
+      "endTime": "2026-10-12T10:20:06.564079206Z",
+      "startTime": "2026-10-12T10:19:55.970271054Z"
+    }
+  }
+}

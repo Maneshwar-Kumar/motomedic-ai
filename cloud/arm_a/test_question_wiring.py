@@ -71,6 +71,14 @@ class WiringTests(unittest.TestCase):
         self.assertEqual(result.status_code,200,result.data)
         return read_verified_stream([result.data])
 
+    def test_user_question_word_limit_blocks_work_without_truncation(self):
+        query=' '.join(['motorcycle']*101)
+        result=self.post({**self.body,'query':query})
+        self.assertEqual(result.status_code,413)
+        self.assertEqual(result.json['error'],'MESSAGE_WORD_LIMIT')
+        self.assertEqual(self.retriever.queries,[])
+        self.assertFalse(any(p.startswith('arm_a_operations/') for p in self.database.data))
+
     def test_raw_paraphrase_retrieval_and_atomic_verified_stream(self):
         view=self.streamed(self.post())
         self.assertEqual(view['response']['type'],'SUPPORTED')
@@ -166,7 +174,9 @@ class WiringTests(unittest.TestCase):
         self.assertEqual(view['response']['type'],'SYSTEM_ERROR')
 
     def test_scope_and_size_reject_before_retrieval(self):
-        self.assertEqual(self.post({**self.body,'query':'x'*2001}).status_code,400)
+        oversized = self.post({**self.body,'query':'x'*2001})
+        self.assertEqual(oversized.status_code,413)
+        self.assertEqual(oversized.json['error'],'MESSAGE_CHARACTER_LIMIT')
         self.assertEqual(self.post({**self.body,'manual_checksum':'wrong'}).status_code,400)
         self.assertFalse(self.retriever.queries)
 

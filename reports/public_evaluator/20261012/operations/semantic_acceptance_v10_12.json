@@ -1,0 +1,326 @@
+{
+  "blocking_findings": [
+    "EVAL_DIRECT_01 stroke claim associated with compression-ratio source object.",
+    "EVAL_USB_02 answerable question ended SYSTEM_ERROR without a verified technical response.",
+    "EVAL_FOLLOWUP_03,EVAL_TOPIC_TABLE_04,EVAL_PARTIAL_05,EVAL_UNSUPPORTED_06 were not run."
+  ],
+  "case_records": [
+    {
+      "actual_route": "SUPPORTED",
+      "artifact_file": "reports/public_evaluator/20261012/hosted_runs/e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53/EVAL_DIRECT_01.json",
+      "artifact_generation": "1791795624026581",
+      "artifact_object": "engineering-acceptance/public-v10_3/e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53/EVAL_DIRECT_01.json",
+      "artifact_sha256": "205eb9db1049c0660b142fab01421407311a6511753f6864d0590377b1b14c32",
+      "case_id": "EVAL_DIRECT_01",
+      "citations": "FAIL",
+      "claim_records": [
+        {
+          "cited_evidence_support": "PASS",
+          "claim_id": "draft:0",
+          "claim_text": "The engine bore is 84 mm.",
+          "evidence_ids": [
+            "evidence_13ff401422c8fc0d784d7e92"
+          ],
+          "factual_source_support": "PASS",
+          "original_pdf_page": 16,
+          "source_object_sha256": "6c279cb5e074634b69022d85bc66990822a3cbcc9423d3d328708d106ad03ad6"
+        },
+        {
+          "actual_supporting_evidence_id": "evidence_b1e9bacad4e60cf54b0a3aa2",
+          "actual_supporting_object_sha256": "40dfba67818c9fa0dc20008560aebf3ec41cf0185c47e012d9df9d5ad68c11aa",
+          "cited_evidence_support": "FAIL",
+          "cited_object_description": "Compression ratio11.5:1",
+          "claim_id": "draft:1",
+          "claim_text": "The engine stroke is 81.5 mm.",
+          "evidence_ids": [
+            "evidence_a5bb5d14fd332f16c381c1b7"
+          ],
+          "factual_source_support": "PASS",
+          "original_pdf_page": 16,
+          "source_object_sha256": "b199cddbd26bff2f7e246854ae2f6074cadd12bde9751e525e71f1f6d6edfae1"
+        }
+      ],
+      "claim_support": "FAIL",
+      "completed_operation_checks": {
+        "duplicate_post_same_operation_and_request": true,
+        "duplicate_post_same_saved_view": true,
+        "new_operation_or_question_created": false,
+        "provider_calls": 0,
+        "provider_reservations_unchanged": true,
+        "wrong_valid_visitor_get_status": 404
+      },
+      "exact_recovered_view_receipt": true,
+      "exact_saved_stream_receipt": true,
+      "expected_route": "SUPPORTED",
+      "factual_values": "PASS",
+      "findings": [
+        "Both dimension values and millimetre units match the freshly inspected ENGINE rows on PDF16/printed14.",
+        "The stroke claim cites the separate compression-ratio row. Correct stroke evidence is separately admitted, but was not associated with that finalized claim.",
+        "All broad page references target PDF16; broad same-page coverage does not repair the wrong associated source object.",
+        "No operation-specific safety warning applies to a pure dimension answer.",
+        "Composition summary reports release of both claims after one draft and one verifier, despite the wrong associated stroke citation. Full private verdict is not included in these artifacts."
+      ],
+      "history": "NOT_APPLICABLE",
+      "operation_id": "12a8c731dc364f9bb4707774eea33779",
+      "original_pdf_pages": [
+        16
+      ],
+      "provider_calls": 2,
+      "question_handling": "COMPLETE",
+      "question_sha256": "3c4c4380f6df3bd5034911e16b2dd8058ecee0c8e9a45309db9158a3eef2ed88",
+      "request_sha256": "778c21f378e87a67232ba50963e5c59397dfa1401f1de0214bd11b811c6b1cef",
+      "required_criteria": [
+        {
+          "criterion": "Bore is 84 mm.",
+          "decision": "PASS_ORIGINAL_PAGE16_TEXT_AND_UNITS"
+        },
+        {
+          "criterion": "Stroke is 81.5 mm.",
+          "decision": "PASS_ORIGINAL_PAGE16_TEXT_AND_UNITS"
+        }
+      ],
+      "response_sha256": "67a06c68c64d2c46f7cb025a5950a60039ca5d8a6595db65415605aefb423d16",
+      "response_text_sha256": "be8be2ecda6de6ae2a866afe045d76443901965a6e5c91f91d0b5de91d823b86",
+      "review_status": "FAILED_CLAIM_CITATION_BINDING",
+      "session_id": "4abc30f8d44149069163b933f2e9e0a7",
+      "source_authority_lock_as_served": "5570f46dd41b6f31e34cee3d2342ee02eae9716e238b0c5f5d1004384ce20903",
+      "source_gap_count": 1,
+      "total_seconds": 96.41290049199998,
+      "verification_binding_sha256": "7e96b6cfdccdcbf44030d0259137b31449be2ee097078e5aeb5fa4052d154e59",
+      "version": 1,
+      "warning_condition_unit_context": "PASS"
+    },
+    {
+      "actual_route": "SYSTEM_ERROR",
+      "answerable_question_unanswered": true,
+      "artifact_file": "reports/public_evaluator/20261012/hosted_runs/e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53/EVAL_USB_02.json",
+      "artifact_generation": "1791795624221101",
+      "artifact_object": "engineering-acceptance/public-v10_3/e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53/EVAL_USB_02.json",
+      "artifact_sha256": "5e891e29e91654afa4629b2ddd557736a67ebfea623b1f8fcddbf8fdc1a27145",
+      "case_id": "EVAL_USB_02",
+      "citations": "NOT_APPLICABLE",
+      "claim_support": "NOT_REVIEWABLE",
+      "draft_calls": 1,
+      "exact_recovered_view_receipt": true,
+      "exact_saved_stream_receipt": true,
+      "expected_route": "SUPPORTED",
+      "findings": [
+        "Original PDF65 states USB charging functions only with the engine running; this question is source-answerable.",
+        "The saved result is the fixed operational-error message with INVALID_DRAFT_CITATION_OR_ROLE, not a supported answer or proper unsupported abstention.",
+        "No technical answer was released or streamed, and no finalized-response verifier ran.",
+        "The refused private draft is not present in these saved artifacts; its exact malformed citation or role cannot be independently diagnosed from the failure code alone."
+      ],
+      "history": "NOT_APPLICABLE",
+      "operation_id": "e5095223663541a397c9f3e3d026f21a",
+      "original_pdf_pages": [
+        64,
+        65
+      ],
+      "provider_calls": 1,
+      "question_handling": "SYSTEM_ERROR",
+      "question_sha256": "23d2e1840b9dc7473f3b687b8b9876d5cb8bdfbda8fe4e17cf49f0ea0cfaa1d4",
+      "reason_codes": [
+        "INVALID_DRAFT_CITATION_OR_ROLE"
+      ],
+      "request_sha256": "5875648b6cb300f64a03cd5b9f82105fd796b6398a1e0fd718496c40052634e1",
+      "required_criteria": [
+        {
+          "criterion": "No: USB charging requires the engine to be running; ignition ON alone is not established as sufficient.",
+          "decision": "UNANSWERED_ANSWERABLE_SYSTEM_ERROR"
+        }
+      ],
+      "response_sha256": "d1697243c6b70ba4f9f62f19565190958583e5149a495cd4637380d511b159b3",
+      "response_text_sha256": "b72fbe7f74a1b9944e0ae7db122c78a822b4c4f993c0cea5cfb7de3b10457775",
+      "review_status": "FAILED_ANSWERABLE_SYSTEM_ERROR",
+      "session_id": "61cc188cc4144b3cb62b288c58251bc8",
+      "source_authority_lock_as_served": "5570f46dd41b6f31e34cee3d2342ee02eae9716e238b0c5f5d1004384ce20903",
+      "source_gap_count": 12,
+      "total_seconds": 63.69087568100002,
+      "verification_binding_sha256": null,
+      "verification_calls": 0,
+      "version": 1,
+      "warning_condition_unit_context": "NOT_REVIEWABLE"
+    },
+    {
+      "actual_route": null,
+      "artifact_file": null,
+      "artifact_sha256": null,
+      "case_id": "EVAL_FOLLOWUP_03",
+      "citations": "NOT_REVIEWABLE",
+      "claim_support": "NOT_REVIEWABLE",
+      "expected_route": "SUPPORTED",
+      "findings": [
+        "No case artifact exists after the stop on USB SYSTEM_ERROR; no success, abstention or follow-up quality is inferred."
+      ],
+      "history": "NOT_REVIEWABLE",
+      "original_pdf_pages": [
+        64,
+        65
+      ],
+      "question_handling": "NOT_RUN",
+      "question_sha256": "2e5d74775b3dac7d1abd9ce64246cc86700ef5d7606379baa7f8b3dcc806a39a",
+      "required_criteria": [
+        {
+          "criterion": "Resolve 'it' to the actual preceding USB/phone charging discussion.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Avoid charging in rainy conditions.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Do not connect non-phone devices or charge more than one mobile at once.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Avoid forcing or inserting the USB cable incorrectly; use a suitable approved/high-quality cable.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Do not leave the unused port open or partly closed; close and lock its cap properly.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Do not put metal or other conductive material into the port because it can short-circuit.",
+          "decision": "NOT_RUN"
+        }
+      ],
+      "review_status": "INCOMPLETE_NOT_RUN",
+      "warning_condition_unit_context": "NOT_REVIEWABLE"
+    },
+    {
+      "actual_route": null,
+      "artifact_file": null,
+      "artifact_sha256": null,
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "citations": "NOT_REVIEWABLE",
+      "claim_support": "NOT_REVIEWABLE",
+      "expected_route": "SUPPORTED",
+      "findings": [
+        "No case artifact exists after the stop on USB SYSTEM_ERROR; no success, abstention or follow-up quality is inferred."
+      ],
+      "history": "NOT_REVIEWABLE",
+      "original_pdf_pages": [
+        18,
+        64
+      ],
+      "question_handling": "NOT_RUN",
+      "question_sha256": "3418f34f6dd7bfabd22559912c7d2a00acfea4e855b701b2964022ea3f5ee5a8",
+      "required_criteria": [
+        {
+          "criterion": "The low-fuel warning value is approximately 3 L with a plus/minus 0.5 L tolerance.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Retain the fuel table's qualification that the figures are approximate and actual filling capacity can vary.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "When the last fuel-indicator segment is blinking, avoid prolonged use and refuel at the earliest.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Ignoring that warning can lead to running out of fuel/being stranded and serious fuel-pump damage.",
+          "decision": "NOT_RUN"
+        }
+      ],
+      "review_status": "INCOMPLETE_NOT_RUN",
+      "warning_condition_unit_context": "NOT_REVIEWABLE"
+    },
+    {
+      "actual_route": null,
+      "artifact_file": null,
+      "artifact_sha256": null,
+      "case_id": "EVAL_PARTIAL_05",
+      "citations": "NOT_REVIEWABLE",
+      "claim_support": "NOT_REVIEWABLE",
+      "expected_route": "SUPPORTED",
+      "findings": [
+        "No case artifact exists after the stop on USB SYSTEM_ERROR; no success, abstention or follow-up quality is inferred."
+      ],
+      "history": "NOT_REVIEWABLE",
+      "original_pdf_pages": [
+        64,
+        65
+      ],
+      "question_handling": "NOT_RUN",
+      "question_sha256": "9ec86188a0258d772137ea2e1856f2ba479e8db20cc5f210eb074039e96a8a49",
+      "required_criteria": [
+        {
+          "criterion": "Only constant charging is provided; fast/dash charging is not provided.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Do not supply an exact duration. Charging duration can be longer and varies with phone make, battery capacity, state of charge and phone charging circuitry.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Clearly separate the supported charging-mode answer from the unavailable exact duration.",
+          "decision": "NOT_RUN"
+        }
+      ],
+      "review_status": "INCOMPLETE_NOT_RUN",
+      "warning_condition_unit_context": "NOT_REVIEWABLE"
+    },
+    {
+      "actual_route": null,
+      "artifact_file": null,
+      "artifact_sha256": null,
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "citations": "NOT_REVIEWABLE",
+      "claim_support": "NOT_REVIEWABLE",
+      "expected_route": "UNSUPPORTED",
+      "findings": [
+        "No case artifact exists after the stop on USB SYSTEM_ERROR; no success, abstention or follow-up quality is inferred."
+      ],
+      "history": "NOT_REVIEWABLE",
+      "original_pdf_pages": [
+        16
+      ],
+      "question_handling": "NOT_RUN",
+      "question_sha256": "74a67242354288ba4f01267b06cad5c58bc68493aec0c95076e49e2601182c14",
+      "required_criteria": [
+        {
+          "criterion": "Do not invent an internal bolt-tightening specification or repair procedure from owner's-manual evidence.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Use the PRD fixed unsupported wording and manifest-bound OEM support route mailto:support@royalenfield.com.",
+          "decision": "NOT_RUN"
+        },
+        {
+          "criterion": "Preserve the recorded support market-fit limitation; do not describe it as independently validated for every rider market.",
+          "decision": "NOT_RUN"
+        }
+      ],
+      "review_status": "INCOMPLETE_NOT_RUN",
+      "warning_condition_unit_context": "NOT_REVIEWABLE"
+    }
+  ],
+  "cloud_mutations_by_reviewer": 0,
+  "completion": "INCOMPLETE",
+  "counts": {
+    "answerable_cases_ending_system_error": 1,
+    "available_actual_case_artifacts": 2,
+    "fully_accepted_cases_including_citations": 0,
+    "planned_cases": 6,
+    "proper_unsupported_abstentions_demonstrated": 0,
+    "released_claim_citation_failures": 1,
+    "source_correct_dimension_answers": 1,
+    "technical_releases": 1,
+    "unrun_cases": 4
+  },
+  "decision": "FAILED",
+  "detailed_review_path": "reports/public_evaluator/20261012/haiku_v10_12_helpers/source_quality_e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53_v1.json",
+  "detailed_review_sha256": "d3b319e082c573f3a6778a3d60d4d8fe8c938d4dafc119ac37ffead904b54786",
+  "evaluator_build_id": "e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53",
+  "hosted_receipt_sha256": "e3365dd6bd4b548e7ece58d82412793b1b6db275e56f312ac57ab5da18e8fe71",
+  "human_signoff": false,
+  "independent_original_pdf_agent_review": true,
+  "provider_calls_by_reviewer": 0,
+  "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+  "schema": "motomedic-six-case-semantic-acceptance-v1",
+  "serving_manifest_sha256": "ff82ee677ada2e42fc08b5ea710ebe05cef7dac527f7008785ed0320bf58e8fb",
+  "source_approval_changed": false,
+  "source_display_authorization_changed": false
+}
