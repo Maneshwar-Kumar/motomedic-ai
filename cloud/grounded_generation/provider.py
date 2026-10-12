@@ -12,11 +12,13 @@ import time
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 from urllib.error import HTTPError
 from generation_providers import ProviderFailure, ProviderResult
+from cloud.grounded_generation.role_contracts import OUTPUT_JSON_BYTES
+from evidence_registry import content_hash
 
 MODEL = 'gemma-4-26b-a4b-it'
-INPUT_TOKENS = 8192
+INPUT_TOKENS = 256000-1800
 OUTPUT_TOKENS = 1800
-REQUEST_BYTES = 65536
+REQUEST_BYTES = None  # Complete evidence uses the native window, no artificial byte cap.
 
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
@@ -57,6 +59,10 @@ class GemmaProvider:
         self.cache={}
         self.lock=threading.Lock()
         self.last_trace=None
+        self.initial_context=threading.local()
+
+    def expect_initial_context(self,expected):
+        self.initial_context.expected=expected
 
     def count(self, body):
         if not self.key: raise ProviderFailure('PROVIDER_UNCONFIGURED')
@@ -82,7 +88,7 @@ class GemmaProvider:
             'provider_cache':'UNSUPPORTED_EXACT_MODEL','cached_tokens':0,
             'raw_content_logged':False,'token_counter':'PROVIDER_COUNT_TOKENS'}
 
-    def context(self,policy,evidence,dynamic,schema,*,_trace=None):
+    def context(self,policy,evidence,dynamic,schema,*,_trace=None,_native_window=True):
         # Standalone preflight must never inherit another request's telemetry.
         # Completion supplies its local trace so its counters remain attached.
         trace=self._new_trace() if _trace is None else _trace
@@ -95,11 +101,9 @@ class GemmaProvider:
                     'responseMimeType':'application/json','responseJsonSchema':deepcopy(schema),
                     'thinkingConfig':{'thinkingLevel':'minimal'}}}
             trace['request_bytes']=len(json.dumps(body,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode())
-            if trace['request_bytes']>REQUEST_BYTES:
-                raise ProviderFailure('COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
             count=self.count(body)
             trace['input_tokens_counted']=count
-            if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
+            if _native_window and count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
             return body,count
         except ProviderFailure as exc:
             trace['failure_code']=str(exc)
@@ -112,6 +116,10 @@ class GemmaProvider:
         if not self.lock.acquire(blocking=False): raise ProviderFailure('PROVIDER_CONCURRENCY_LIMIT')
         try:
             body,count=self.context(policy,evidence,dynamic,schema,_trace=trace)
+            expected=getattr(self.initial_context,'expected',None)
+            if expected is not None:
+                if content_hash(body)!=expected:raise ProviderFailure('ROUTER_INITIAL_REQUEST_BINDING_CHANGED')
+                self.initial_context.expected=None
             system=body['systemInstruction'];stable,varying=body['contents']
             trace['input_tokens_counted']=count
             if count>INPUT_TOKENS: raise ProviderFailure('COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
@@ -140,7 +148,15 @@ class GemmaProvider:
                     trace['provider_cache']='EXPLICIT_VERSIONED_CONTEXT'
             started=time.monotonic()
             for attempt in range(2):
-                self.reserve(count+OUTPUT_TOKENS,'generation')
+                permit=self.reserve(count+OUTPUT_TOKENS,'generation')
+                input_ceiling=INPUT_TOKENS
+                if getattr(self,'central_admission',False):
+                    if (type(permit)is not dict or permit.get('model')!=MODEL or
+                            type(permit.get('input_tokens'))is not int or
+                            permit['input_tokens']<count or permit.get('output_tokens')!=OUTPUT_TOKENS):
+                        raise ProviderFailure('MODEL_ROLE_RESERVATION_BINDING_REQUIRED')
+                    input_ceiling=permit['input_tokens']
+                trace['reserved_input_token_ceiling']=input_ceiling
                 trace['generation_calls']+=1
                 try:
                     response=self.transport('POST','models/'+MODEL+':generateContent',body,self.key)
@@ -176,12 +192,14 @@ class GemmaProvider:
             for field in ('promptTokenCount','candidatesTokenCount','totalTokenCount'):
                 if type(usage.get(field)) is not int or usage[field]<0: raise ProviderFailure('PROVIDER_USAGE_MISSING')
             if usage.get('thoughtsTokenCount',0)!=0: raise ProviderFailure('PROVIDER_UNBOUNDED_THINKING')
-            if usage['promptTokenCount']>INPUT_TOKENS or usage['candidatesTokenCount']>OUTPUT_TOKENS:
+            if usage['promptTokenCount']>min(INPUT_TOKENS,input_ceiling) or usage['candidatesTokenCount']>OUTPUT_TOKENS:
                 raise ProviderFailure('PROVIDER_TOKEN_BOUND')
             cached=usage.get('cachedContentTokenCount',0)
             if type(cached) is not int or cached<0: raise ProviderFailure('PROVIDER_CACHE_USAGE_INVALID')
             trace.update(input_tokens=usage['promptTokenCount'],output_tokens=usage['candidatesTokenCount'],cached_tokens=cached)
-            output=json.loads(''.join(p['text'] for p in parts),object_pairs_hook=unique,
+            output_text=''.join(p['text'] for p in parts)
+            if len(output_text.encode())>OUTPUT_JSON_BYTES:raise ProviderFailure('PRIVATE_GENERATED_JSON_BYTE_BOUND')
+            output=json.loads(output_text,object_pairs_hook=unique,
                 parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
             return ProviderResult(output,usage['promptTokenCount'],usage['candidatesTokenCount'],None,deepcopy(trace))
         except ProviderFailure: raise

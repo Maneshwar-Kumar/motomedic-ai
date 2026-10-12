@@ -1,0 +1,54 @@
+{
+  "schema": "motomedic-synthetic-phased-admission-verification-v1",
+  "recorded_at": "2026-10-12T06:10:18.175445+00:00",
+  "candidate": "v10_7",
+  "synthetic_local": true,
+  "cloud_reads": 0,
+  "cloud_mutations": 0,
+  "real_provider_generation_calls": 0,
+  "source_display_authorization_changed": false,
+  "allocation_reset_or_refund": false,
+  "live_acceptance_established": false,
+  "public_access_established": false,
+  "allocation_identity": "grounded-primary-nonrecurring-v1",
+  "allocation_version": "whole-turn-capacity-v1",
+  "maximum_attempts": 100,
+  "maximum_forecast_tokens": 999200,
+  "haiku_allocation_identity": "owner-haiku-fallback-20261011-validation-v1",
+  "maximum_haiku_nanodollars": 1000000000,
+  "phase_slots": {
+    "initial": 3,
+    "conditional_correction": 3
+  },
+  "maximum_corrections": 1,
+  "tests": {
+    "admission": 47,
+    "focused_admission_router_adapters": 92,
+    "combined_index_free_composer_identity": 118,
+    "retrieval_authority": 46,
+    "result": "PASS"
+  },
+  "independent_read_only_review": {
+    "paid_call_requires_funded_pair": true,
+    "correction_request_hash_bound_before_paid_call": true,
+    "same_operation_roles_source_and_deadline": true,
+    "central_haiku_does_not_double_reserve": true,
+    "actual_final_gemma_input_quota_checked_before_http": true,
+    "unknown_final_native_fit_not_guaranteed": true
+  },
+  "file_sha256": {
+    "cloud/grounded_generation/whole_turn_admission.py": "db491b227b51c0b4a0c222cc3e93b7abd75003fc7694c931b353b7a3d34fda55",
+    "cloud/grounded_generation/test_whole_turn_admission.py": "e2556c5ac3ed2353530783a61d53e707674916627ae32934198bc70f736536eb",
+    "cloud/grounded_generation/serving_retrieval.py": "d2dc6d246ac9f6e76bda0f4fb57e96ed6a22bcdaa791cf09d55ed6ea0333352a",
+    "cloud/grounded_generation/serving_source_authority.py": "563faf17d093e0b11afa19622b1d5da594c71cd3f67d7c7bbfc2bde2f7d2ab5f",
+    "reports/public_evaluator/20261012/operations/runtime_admission_v10_7_v1.md": "04543751a44cdbb8bb36b8929d02504eb7cd7df06004680712887b06eed219fc"
+  },
+  "remaining_gates": [
+    "hosted_native_counts_and_exact_remaining_capacity",
+    "actual_six_case_outputs",
+    "independent_original_manual_semantic_review",
+    "owned_operation_boundary_checks",
+    "actual_rollback_restored_readiness",
+    "public_ui_only_iam_opening"
+  ]
+}

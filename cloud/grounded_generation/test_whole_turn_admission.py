@@ -10,7 +10,9 @@ from evidence_registry import content_hash
 from controller_contracts import DiagnosticSession, Response, ResponseType
 import cloud.grounded_generation.test_verified_qa as verified
 from cloud.grounded_generation.whole_turn_admission import (WholeTurnAdmission, ALLOCATION,
-    operation_deadline, MAX_SLEEP_SECONDS, PACING_VERSION)
+    operation_deadline, MAX_SLEEP_SECONDS, PACING_VERSION, GEMMA, HAIKU, GEMMA_INPUT_TPM,
+    LEGACY_PACING_VERSION, PLAN_VERSION)
+from cloud.grounded_generation.claude_budget import ALLOCATION as CLAUDE_ALLOCATION, VERSION as CLAUDE_VERSION
 from cloud.grounded_generation.provider import GemmaProvider, ProviderFailure
 from cloud.grounded_generation.fallback_provider import FallbackProvider
 from cloud.grounded_generation.claude_provider import ClaudeProvider, MAX_CALL_USD
@@ -49,6 +51,454 @@ class Tests(unittest.TestCase):
         cloud.firestore=types.SimpleNamespace(transactional=atomic);google.cloud=cloud
         self.patch=patch.dict('sys.modules',{'google':google,'google.cloud':cloud});self.patch.start()
         self.addCleanup(self.patch.stop)
+
+    def native_plan(self, drafter=GEMMA, *, haiku_input=20000):
+        verifier = HAIKU if drafter == GEMMA else GEMMA
+        result = []
+        for stage, model in (('draft', drafter), ('verify', verifier), ('correction', drafter), ('reverify', verifier)):
+            count = haiku_input if model == HAIKU else 14000
+            for attempt in range(1, 3 if model == GEMMA else 2):
+                result.append({'model': model, 'stage': stage, 'input_tokens': count,
+                    'output_tokens': 1800, 'attempt': attempt})
+        return {'slots': result}
+
+    def phased_plans(self, drafter=GEMMA, *, haiku_input=20000):
+        full = self.native_plan(drafter, haiku_input=haiku_input)
+        return {'slots': deepcopy(full['slots'][:3])}, {'slots': deepcopy(full['slots'][3:])}
+
+    def with_role_metadata(self, plan, drafter=GEMMA, *, selected_input=None, headroom=0):
+        from cloud.grounded_generation.role_contracts import CONTRACT
+        result = deepcopy(plan)
+        route = 'GEMMA_DRAFT_HAIKU_VERIFY' if drafter == GEMMA else 'HAIKU_DRAFT_GEMMA_VERIFY'
+        roles = CONTRACT['roles'][route]
+        selected_input = selected_input if selected_input is not None else plan['slots'][0]['input_tokens']
+        result.update(role_plan={'version': CONTRACT['version'], 'route': route,
+            'routing_contract_sha256': content_hash(CONTRACT), 'gemma_routing_input_tokens': 8000 if drafter == GEMMA else 9000,
+            'selected_draft_input_tokens': selected_input, 'initial_draft_request_sha256': 'a' * 64,
+            'stable_context_sha256': 'b' * 64, 'draft_model_contract_sha256': content_hash(roles['draft']),
+            'verifier_contract_sha256': content_hash(roles['verifier'])},
+            forecast_method='NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES',
+            forecast_is_not_unknown_final_answer_guarantee=True, fixed_verifier_native_tokens=1000,
+            fixed_correction_native_tokens=1200, unknown_verifier_byte_allowance=33280,
+            unknown_correction_byte_allowance=49664, initial_haiku_counter_headroom_tokens=headroom,
+            known_verifier_prefix_native_tokens=900)
+        if plan['slots'][0]['stage'] == 'correction':
+            result.update(correction_request_sha256='c' * 64,
+                rejected_binding_sha256='d' * 64, verdict_sha256='e' * 64)
+        return result
+
+    def test_full_role_and_forecast_metadata_is_validated_preserved_and_phase_bound(self):
+        initial, correction = self.phased_plans(HAIKU)
+        initial['slots'][0]['input_tokens'] += 512
+        initial = self.with_role_metadata(initial, HAIKU, selected_input=20000, headroom=512)
+        correction = self.with_role_metadata(correction, HAIKU, selected_input=20000, headroom=512)
+        correction.update(correction_request_sha256='c' * 64, rejected_binding_sha256='d' * 64, verdict_sha256='e' * 64)
+        receipt = self.admit.begin_turn('metadata', plan=initial)
+        self.assertEqual(receipt['role_forecast_sha256'], content_hash(initial))
+        self.assertEqual(receipt['role_forecast_binding']['role_plan'], initial['role_plan'])
+        self.complete_initial_pair(HAIKU)
+        phase = self.admit.reserve_correction('metadata', plan=correction)
+        self.assertEqual(phase['plan_sha256'], content_hash(correction))
+        self.assertEqual(phase['role_forecast_binding']['correction_request_sha256'], 'c' * 64)
+        events = self.client.documents['grounded-provider-global-v1']['events']
+        self.assertEqual([e['plan_sha256'] for e in events], [content_hash(initial)] * 3 + [content_hash(correction)] * 3)
+
+    def test_routing_contract_or_role_metadata_cannot_be_silently_dropped_or_changed(self):
+        initial = self.with_role_metadata(self.phased_plans()[0])
+        for mutation in ('missing-metadata', 'contract-hash', 'model-contract', 'routing-count', 'headroom', 'unexpected-field'):
+            changed = deepcopy(initial)
+            if mutation == 'missing-metadata':changed.pop('forecast_method')
+            if mutation == 'contract-hash':changed['role_plan']['routing_contract_sha256'] = '0' * 64
+            if mutation == 'model-contract':changed['role_plan']['verifier_contract_sha256'] = '0' * 64
+            if mutation == 'routing-count':changed['role_plan']['gemma_routing_input_tokens'] = 9000
+            if mutation == 'headroom':changed['initial_haiku_counter_headroom_tokens'] = 512
+            if mutation == 'unexpected-field':changed['unknown_unbounded_override'] = True
+            with self.subTest(mutation=mutation), self.assertRaises(ProviderFailure):
+                self.admit.begin_turn('bad-' + mutation, plan=changed)
+        self.assertFalse(self.client.documents)
+
+    def test_correction_changed_source_or_phase_hash_refuses_new_spend(self):
+        initial, correction = self.phased_plans()
+        initial = self.with_role_metadata(initial)
+        correction = self.with_role_metadata(correction)
+        self.admit.begin_turn('fixed-source', plan=initial)
+        self.complete_initial_pair()
+        before = deepcopy(self.client.documents)
+        correction['role_plan']['stable_context_sha256'] = 'f' * 64
+        with self.assertRaisesRegex(ProviderFailure, 'MODEL_ROLE_BINDING_CHANGED'):
+            self.admit.reserve_correction('fixed-source', plan=correction)
+        self.assertEqual(before, self.client.documents)
+        events = self.client.documents['grounded-provider-global-v1']['events']
+        events[0]['plan_sha256'] = '0' * 64
+        correction['role_plan']['stable_context_sha256'] = 'b' * 64
+        with self.assertRaisesRegex(ProviderFailure, 'NATIVE_PLAN_STORE_CHANGED'):
+            self.admit.reserve_correction('fixed-source', plan=correction)
+
+    def test_initial_counter_headroom_and_known_verifier_prefix_are_immutable_across_phases(self):
+        initial, correction = self.phased_plans(HAIKU)
+        initial['slots'][0]['input_tokens'] += 512
+        initial = self.with_role_metadata(initial, HAIKU, selected_input=20000, headroom=512)
+        correction = self.with_role_metadata(correction, HAIKU, selected_input=20000, headroom=512)
+        self.admit.begin_turn('fixed-counter-forecast', plan=initial)
+        self.complete_initial_pair(HAIKU)
+        before = deepcopy(self.client.documents)
+        for key in ('initial_haiku_counter_headroom_tokens', 'known_verifier_prefix_native_tokens'):
+            changed = deepcopy(correction)
+            changed[key] -= 1
+            with self.subTest(key=key), self.assertRaisesRegex(ProviderFailure, 'MODEL_ROLE_BINDING_CHANGED'):
+                self.admit.reserve_correction('fixed-counter-forecast', plan=changed)
+            self.assertEqual(before, self.client.documents)
+
+    def test_production_correction_requires_every_exact_request_rejection_and_verdict_hash(self):
+        initial, correction = self.phased_plans()
+        initial, correction = self.with_role_metadata(initial), self.with_role_metadata(correction)
+        self.admit.begin_turn('complete-correction-binding', plan=initial)
+        self.complete_initial_pair()
+        before = deepcopy(self.client.documents)
+        for key in ('correction_request_sha256', 'rejected_binding_sha256', 'verdict_sha256'):
+            changed = deepcopy(correction)
+            changed.pop(key)
+            with self.subTest(key=key), self.assertRaisesRegex(ProviderFailure, 'CORRECTION_BINDING_REQUIRED'):
+                self.admit.reserve_correction('complete-correction-binding', plan=changed)
+            self.assertEqual(before, self.client.documents)
+
+    def test_durable_phase_or_nonce_mutation_blocks_permit_and_sealing(self):
+        for key in ('phase', 'phase_nonce'):
+            with self.subTest(key=key):
+                self.client = Client()
+                self.admit = WholeTurnAdmission(self.client, now=lambda: self.now,
+                    sleep=lambda seconds: setattr(self, 'now', self.now + timedelta(seconds=seconds)))
+                initial, correction = self.phased_plans()
+                self.admit.begin_turn('nonce-' + key, plan=initial)
+                self.complete_initial_pair()
+                self.admit.reserve_correction('nonce-' + key, plan=correction)
+                events = self.client.documents['grounded-provider-global-v1']['events']
+                events[3][key] = 'initial' if key == 'phase' else 'f' * 64
+                before = deepcopy(self.client.documents)
+                with self.assertRaisesRegex(ProviderFailure, 'NATIVE_PLAN_STORE_CHANGED'):
+                    self.admit.for_model(GEMMA)(15800, 'generation', stage='correction')
+                self.assertEqual(before, self.client.documents)
+                receipt = self.admit.end_turn()
+                self.assertEqual(receipt['sealing_status'], 'SEALING_UNCONFIRMED_ACTIVE_POLICY_RETAINED')
+                self.assertEqual(before, self.client.documents)
+
+    def test_initial_durable_nonce_mutation_cannot_authorize_correction_spend(self):
+        initial, correction = self.phased_plans()
+        self.admit.begin_turn('mutated-initial-nonce', plan=initial)
+        self.complete_initial_pair()
+        self.client.documents['grounded-provider-global-v1']['events'][0]['phase_nonce'] = 'f' * 64
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'NATIVE_PLAN_STORE_CHANGED'):
+            self.admit.reserve_correction('mutated-initial-nonce', plan=correction)
+        self.assertEqual(before, self.client.documents)
+
+    def test_real_router_forecasts_match_strict_phased_admission_for_both_role_routes(self):
+        from cloud.grounded_generation.test_role_router import Tests as RouterTests, stable
+        fixtures = RouterTests()
+        for routing_count in (100, 9000):
+            with self.subTest(routing_count=routing_count):
+                self.client = Client()
+                self.admit = WholeTurnAdmission(self.client, now=lambda: self.now,
+                    sleep=lambda seconds: setattr(self, 'now', self.now + timedelta(seconds=seconds)))
+                router, _ = fixtures.router(routing_count)
+                router.admission = self.admit
+                dynamic, admitted = fixtures.dynamic(), fixtures.admitted()
+                session = types.SimpleNamespace(status='CONFIRMED')
+                plan, chosen = router.select(stable(), dynamic)
+                receipt = router.begin('integrated-' + str(routing_count), plan, chosen, dynamic, admitted, session)
+                self.assertEqual(receipt['reserved_attempts'], 3)
+                self.admit.for_model(plan.draft.contract['model'])(plan.initial_input_tokens + 1800, 'generation', stage='draft')
+                self.admit.for_model(plan.verifier.contract['model'])(plan.verifier.count_value + 1800, 'generation', stage='verify')
+                router.begin_correction('integrated-' + str(routing_count), plan, chosen, dynamic, admitted, session,
+                    {'rejected_response': {'text': 'Private rejected fixture'}, 'verdict': {'correction_possible': True}},
+                    {'response_sha256': 'f' * 64})
+                self.assertEqual(receipt['reserved_attempts'], 6)
+                self.assertTrue(receipt['correction_reserved'])
+                self.admit.for_model(plan.draft.contract['model'])(plan.initial_input_tokens + 1800, 'generation', stage='correction')
+                self.admit.for_model(plan.verifier.contract['model'])(plan.verifier.count_value + 1800, 'generation', stage='reverify')
+                router.end()
+                self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 6)
+
+    def complete_initial_pair(self, drafter=GEMMA):
+        verifier = HAIKU if drafter == GEMMA else GEMMA
+        self.admit.for_model(drafter)((20000 if drafter == HAIKU else 14000) + 1800,
+            'generation', stage='draft')
+        self.admit.for_model(verifier)((20000 if verifier == HAIKU else 14000) + 1800,
+            'generation', stage='verify')
+
+    def test_initial_three_fund_draft_and_known_verification_before_first_generation(self):
+        for drafter in (GEMMA, HAIKU):
+            self.client = Client()
+            self.admit = WholeTurnAdmission(self.client, now=lambda: self.now,
+                sleep=lambda seconds: setattr(self, 'now', self.now + timedelta(seconds=seconds)))
+            initial, correction = self.phased_plans(drafter)
+            receipt = self.admit.begin_turn('initial-' + drafter, plan=initial)
+            self.assertEqual(receipt['reserved_attempts'], 3)
+            self.assertEqual(receipt['reservation_mode'], 'INITIAL_PAIR_CONDITIONAL_CORRECTION')
+            self.assertFalse(receipt['correction_reserved'])
+            self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 3)
+            self.assertEqual(len(self.client.documents['grounded-provider-global-v1']['events']), 3)
+            self.complete_initial_pair(drafter)
+            before = deepcopy(self.client.documents)
+            with self.assertRaises(ProviderFailure):
+                self.admit.for_model(drafter)((20000 if drafter == HAIKU else 14000) + 1800,
+                    'generation', stage='correction')
+            self.assertEqual(before, self.client.documents)
+            self.admit.end_turn()
+            self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 3)
+
+    def test_correction_three_are_fresh_atomic_single_phase_with_same_operation_and_roles(self):
+        initial, correction = self.phased_plans()
+        receipt = self.admit.begin_turn('phase', plan=initial)
+        self.complete_initial_pair()
+        before = deepcopy(self.client.documents[ALLOCATION])
+        phase = self.admit.reserve_correction('phase', plan=correction)
+        self.assertEqual(phase['phase'], 'correction')
+        self.assertNotEqual(phase['phase_nonce'], receipt['phases'][0]['phase_nonce'])
+        self.assertNotEqual(phase['plan_sha256'], receipt['phases'][0]['plan_sha256'])
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], before['reserved_attempts'] + 3)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'], before['reserved_tokens'] + phase['reserved_tokens'])
+        self.assertTrue(receipt['correction_reserved'])
+        self.assertEqual(receipt['reserved_attempts'], 6)
+        self.assertEqual([e['slot'] for e in self.client.documents['grounded-provider-global-v1']['events']], list(range(6)))
+        paid = self.admit.for_model(GEMMA)(15800, 'generation', stage='correction')
+        self.assertEqual(paid['stage'], 'correction')
+        paid = self.admit.for_model(HAIKU)(21800, 'generation', stage='reverify')
+        self.assertEqual(paid['stage'], 'reverify')
+        old = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'ALREADY_RESERVED_NO_REPLAY'):
+            self.admit.reserve_correction('phase', plan=correction)
+        self.assertEqual(old, self.client.documents)
+
+    def test_correction_never_strands_verifier_by_reserving_draft_only(self):
+        initial, correction = self.phased_plans(HAIKU)
+        self.admit.begin_turn('complete-correction-pair', plan=initial)
+        self.complete_initial_pair(HAIKU)
+        self.admit.reserve_correction('complete-correction-pair', plan=correction)
+        self.assertEqual([e['stage'] for e in self.client.documents['grounded-provider-global-v1']['events'][3:]],
+            ['correction', 'reverify', 'reverify'])
+        slot = self.admit.for_model(HAIKU)(21800, 'generation', stage='correction')
+        self.assertEqual(slot['model'], HAIKU)
+        slot = self.admit.for_model(GEMMA)(15800, 'generation', stage='reverify')
+        self.assertEqual(slot['attempt'], 1)
+        slot = self.admit.for_model(GEMMA)(15800, 'generation', stage='reverify')
+        self.assertEqual(slot['attempt'], 2)
+
+    def test_unfunded_correction_no_paid_permit_no_changed_charges_or_refund(self):
+        initial, correction = self.phased_plans()
+        self.admit.begin_turn('unfunded', plan=initial)
+        self.complete_initial_pair()
+        old = self.client.documents[ALLOCATION]
+        old['reserved_attempts'] = 98
+        old['reserved_tokens'] = 900000
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'ALLOCATION_LIMIT'):
+            self.admit.reserve_correction('unfunded', plan=correction)
+        self.assertEqual(before, self.client.documents)
+        with self.assertRaises(ProviderFailure):
+            self.admit.for_model(GEMMA)(15800, 'generation', stage='correction')
+        with self.assertRaisesRegex(ProviderFailure, 'ALREADY_RESERVED_NO_REPLAY'):
+            self.admit.reserve_correction('unfunded', plan=correction)
+        self.admit.end_turn()
+        self.assertEqual(self.client.documents[ALLOCATION], before[ALLOCATION])
+        self.assertEqual(self.client.documents[CLAUDE_ALLOCATION], before[CLAUDE_ALLOCATION])
+
+    def test_haiku_insufficient_correction_keeps_initial_tokens_and_cost_retained(self):
+        initial, correction = self.phased_plans()
+        self.admit.begin_turn('money', plan=initial)
+        self.complete_initial_pair()
+        self.client.documents[CLAUDE_ALLOCATION]['reserved_nanodollars'] = 999999999
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'CLAUDE_SPEND_LIMIT'):
+            self.admit.reserve_correction('money', plan=correction)
+        self.assertEqual(before, self.client.documents)
+        self.assertFalse(self.admit.local.turn['receipt']['correction_reserved'])
+
+    def test_correction_before_verification_wrong_operation_or_swapped_roles_are_rejected(self):
+        initial, correction = self.phased_plans()
+        self.admit.begin_turn('bound', plan=initial)
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'ALREADY_RESERVED_NO_REPLAY'):
+            self.admit.reserve_correction('wrong', plan=correction)
+        self.assertEqual(before, self.client.documents)
+        opposite = self.phased_plans(HAIKU)[1]
+        with self.assertRaisesRegex(ProviderFailure, 'MODEL_ROLE_BINDING_CHANGED'):
+            self.admit.reserve_correction('bound', plan=opposite)
+        self.assertEqual(before, self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'WITHOUT_VERIFICATION'):
+            self.admit.reserve_correction('bound', plan=correction)
+        self.assertEqual(before, self.client.documents)
+
+    def test_correction_retains_exact_original_durable_deadline(self):
+        initial, correction = self.phased_plans()
+        deadline = self.now + timedelta(seconds=1000)
+        with operation_deadline(deadline):
+            self.admit.begin_turn('deadline-phases', plan=initial)
+            self.complete_initial_pair()
+            before = deepcopy(self.client.documents)
+            with operation_deadline(deadline + timedelta(seconds=1)):
+                with self.assertRaisesRegex(ProviderFailure, 'DEADLINE_CHANGED'):
+                    self.admit.reserve_correction('deadline-phases', plan=correction)
+            self.assertEqual(before, self.client.documents)
+            self.now = deadline
+            with self.assertRaisesRegex(ProviderFailure, 'DEADLINE_EXCEEDED'):
+                self.admit.reserve_correction('deadline-phases', plan=correction)
+            self.assertEqual(before, self.client.documents)
+
+    def test_uncertain_correction_commit_is_not_replayed_or_refunded(self):
+        initial, correction = self.phased_plans()
+        self.admit.begin_turn('uncertain-phase', plan=initial)
+        self.complete_initial_pair()
+        original = self.client.set
+        def uncertain(ref, body):
+            original(ref, body)
+            if ref.name == CLAUDE_ALLOCATION:
+                raise RuntimeError('synthetic commit status uncertain')
+        self.client.set = uncertain
+        with self.assertRaisesRegex(ProviderFailure, 'STORE_UNAVAILABLE'):
+            self.admit.reserve_correction('uncertain-phase', plan=correction)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 6)
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'ALREADY_RESERVED_NO_REPLAY'):
+            self.admit.reserve_correction('uncertain-phase', plan=correction)
+        self.assertEqual(before, self.client.documents)
+        self.admit.end_turn()
+        self.assertEqual(self.client.documents[ALLOCATION], before[ALLOCATION])
+
+    def test_oversleep_in_conditional_phase_never_returns_stale_paid_permit(self):
+        initial, correction = self.phased_plans()
+        self.admit.begin_turn('phase-pacing', plan=initial)
+        self.complete_initial_pair()
+        self.admit.reserve_correction('phase-pacing', plan=correction)
+        self.admit.sleep = lambda seconds: setattr(self, 'now', self.now + timedelta(seconds=seconds + 120))
+        self.admit.for_model(GEMMA)(15800, 'generation', stage='correction')
+        events = self.client.documents['grounded-provider-global-v1']['events']
+        consumed = [e['at'] for e in events if e.get('consumed')]
+        self.assertEqual(consumed[-1], self.now)
+        self.assertTrue(all((right - left).total_seconds() >= 61 for left, right in zip(consumed, consumed[1:])))
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 6)
+
+    def test_full_six_native_slots_require_explicit_legacy_compatibility(self):
+        with self.assertRaisesRegex(ProviderFailure, 'EXPLICIT_COMPATIBILITY'):
+            self.admit.begin_turn('accidental-six', plan=self.native_plan())
+        self.assertFalse(self.client.documents)
+
+    def test_model_native_plan_reserves_all_roles_and_both_old_allocations_atomically(self):
+        self.client.documents[ALLOCATION] = {'version': 'whole-turn-capacity-v1',
+            'maximum_attempts': 100, 'maximum_tokens': 999200, 'reserved_attempts': 24, 'reserved_tokens': 239808}
+        self.client.documents[CLAUDE_ALLOCATION] = {'version': CLAUDE_VERSION, 'model': HAIKU,
+            'maximum_nanodollars': 1000000000, 'reserved_nanodollars': 11544000, 'reservation_count': 3}
+        plan = self.native_plan()
+        expected_tokens = sum(row['input_tokens'] + row['output_tokens'] for row in plan['slots'])
+        expected_cost = 2 * (20000 * 125 + 1800 * 500)
+        receipt = self.admit.begin_turn('native', plan=plan, compatibility_full_plan=True)
+        self.assertEqual(receipt['plan_version'], PLAN_VERSION)
+        self.assertEqual(receipt['reserved_attempts'], 6)
+        self.assertEqual(receipt['reserved_tokens'], expected_tokens)
+        self.assertEqual(receipt['reserved_nanodollars'], expected_cost)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'], 239808 + expected_tokens)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 30)
+        self.assertEqual(self.client.documents[CLAUDE_ALLOCATION]['reserved_nanodollars'], 11544000 + expected_cost)
+        self.assertEqual(self.client.documents[CLAUDE_ALLOCATION]['reservation_count'], 4)
+        self.assertNotIn('expires_at', self.client.documents[ALLOCATION])
+        self.assertNotIn('expires_at', self.client.documents[CLAUDE_ALLOCATION])
+        self.assertEqual(plan, self.native_plan())
+
+    def test_large_haiku_input_is_permitted_and_cost_tier_reserved_before_calls(self):
+        plan = self.native_plan(HAIKU, haiku_input=120000)
+        receipt = self.admit.begin_turn('large', plan=plan, compatibility_full_plan=True)
+        expected = 2 * (120000 * 625 + 1800 * 2500)
+        self.assertEqual(receipt['reserved_nanodollars'], expected)
+        slot = self.admit.for_model(HAIKU)(120000 + 1800, 'generation', stage='draft')
+        self.assertEqual(slot['maximum_nanodollars'], expected // 2)
+        self.assertEqual(slot['input_tokens'], 120000)
+        self.assertEqual(slot['stage'], 'draft')
+        self.assertFalse(self.waits)
+
+    def test_model_permits_skip_only_unused_retry_and_preserve_role_order(self):
+        self.admit.begin_turn('roles', plan=self.native_plan(), compatibility_full_plan=True)
+        gemma, haiku = self.admit.for_model(GEMMA), self.admit.for_model(HAIKU)
+        first = gemma(14000 + 1800, 'generation', stage='draft')
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'MODEL_ROLE_MISMATCH'):
+            gemma(14000 + 1800, 'generation', stage='correction')
+        self.assertEqual(before, self.client.documents)
+        verified = haiku(20000 + 1800, 'generation', stage='verify')
+        self.assertEqual(verified['stage'], 'verify')
+        events = self.client.documents['grounded-provider-global-v1']['events']
+        self.assertTrue(events[0]['consumed'])
+        self.assertFalse(events[1]['consumed'])
+        self.assertTrue(events[2]['consumed'])
+        corrected = gemma(14000 + 1800, 'generation', stage='correction')
+        reverified = haiku(20000 + 1800, 'generation', stage='reverify')
+        self.assertEqual([first['stage'], verified['stage'], corrected['stage'], reverified['stage']],
+            ['draft', 'verify', 'correction', 'reverify'])
+        self.admit.end_turn()
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 6)
+        self.assertEqual(sum(e['tokens'] for e in self.client.documents['grounded-provider-global-v1']['events']),
+            self.client.documents[ALLOCATION]['reserved_tokens'])
+
+    def test_real_gemma_input_quota_excludes_output_and_old8192_ceiling(self):
+        plan = self.native_plan()
+        for row in plan['slots']:
+            if row['model'] == GEMMA:
+                row['input_tokens'] = GEMMA_INPUT_TPM
+        self.admit.begin_turn('real-quota', plan=plan, compatibility_full_plan=True)
+        self.assertEqual(self.admit.for_model(GEMMA)(16000 + 1800, 'generation')['input_tokens'], 16000)
+        self.admit.end_turn()
+        self.now += timedelta(days=2)
+        for row in plan['slots']:
+            if row['model'] == GEMMA:
+                row['input_tokens'] = 16001
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'MODEL_INPUT_RATE_LIMIT'):
+            self.admit.begin_turn('quota-exceeded', plan=plan)
+        self.assertEqual(before, self.client.documents)
+
+    def test_missing_wrong_role_or_changed_envelope_never_gets_paid_permit(self):
+        self.admit.begin_turn('hard-envelope', plan=self.native_plan(), compatibility_full_plan=True)
+        before = deepcopy(self.client.documents)
+        for model, tokens in ((HAIKU, 21800), (GEMMA, 15801)):
+            with self.assertRaises(ProviderFailure):
+                self.admit.for_model(model)(tokens, 'generation')
+        with self.assertRaisesRegex(ProviderFailure, 'MODEL_ROLE_MISMATCH'):
+            self.admit(100, 'generation')
+        self.assertEqual(before, self.client.documents)
+        events = self.client.documents['grounded-provider-global-v1']['events']
+        events[0]['model'] = HAIKU
+        with self.assertRaisesRegex(ProviderFailure, 'NATIVE_PLAN_STORE_CHANGED'):
+            self.admit.for_model(GEMMA)(15800, 'generation')
+
+    def test_haiku_spend_failure_leaves_all_global_capacity_untouched(self):
+        self.client.documents[CLAUDE_ALLOCATION] = {'version': CLAUDE_VERSION,
+            'maximum_nanodollars': 1000000000, 'model': HAIKU,
+            'reserved_nanodollars': 999999999, 'reservation_count': 3}
+        before = deepcopy(self.client.documents)
+        with self.assertRaisesRegex(ProviderFailure, 'CLAUDE_SPEND_LIMIT'):
+            self.admit.begin_turn('no-cost-capacity', plan=self.native_plan(), compatibility_full_plan=True)
+        self.assertEqual(before, self.client.documents)
+
+    def test_native_plan_must_include_one_correction_both_distinct_roles_and_bounded_retries(self):
+        for mutation in ('missing', 'same-model', 'third-retry', 'money-understated'):
+            plan = self.native_plan()
+            if mutation == 'missing':plan['slots'].pop()
+            if mutation == 'same-model':plan['slots'][2]['model'] = GEMMA
+            if mutation == 'third-retry':plan['slots'][1]['attempt'] = 3
+            if mutation == 'money-understated':plan['slots'][2]['maximum_nanodollars'] = 1
+            with self.subTest(mutation=mutation), self.assertRaises(ProviderFailure):
+                self.admit.begin_turn('invalid-' + mutation, plan=plan)
+        self.assertFalse(self.client.documents)
+
+    def test_legacy_proved_sealing_remains_honored_without_refunding_old_charges(self):
+        self.admit.begin_turn('old');self.admit(9992, 'generation');self.admit.end_turn()
+        events = self.client.documents['grounded-provider-global-v1']['events']
+        for event in events:
+            if event.get('state') == 'SEALED_UNUSED':event['sealed_version'] = LEGACY_PACING_VERSION
+        old = deepcopy(self.client.documents[ALLOCATION])
+        self.admit.begin_turn('new', plan=self.native_plan(), compatibility_full_plan=True)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], old['reserved_attempts'] + 6)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'],
+            old['reserved_tokens'] + sum(row['input_tokens'] + row['output_tokens'] for row in self.native_plan()['slots']))
 
     def test_reserves_correction_and_retry_capacity_before_first_call(self):
         receipt=self.admit.begin_turn('operation-1')

@@ -111,6 +111,46 @@ class SyntheticGapRetentionTests(unittest.TestCase):
         self.assertEqual(payload['gaps'], [{'type':'SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED',
             'chunk_id':'gap', 'evidence_ids':['unreviewed'], 'rider_resolvable':False}])
 
+    def test_retained_gap_sibling_cannot_admit_dropped_reviewed_anchor_or_warning(self):
+        self.s.chunks['gap']['evidence_ids'] = ['discarded', 'unreviewed']
+        self.s._chunk_hashes['gap'] = content_hash(self.s.chunks['gap'])
+        self.s.complete_context_ids.update({'discarded', 'warning'})
+        self.s.evidence_ready = lambda eid: eid in self.s.complete_context_ids
+        self.s._closure = lambda ids: set(ids) | ({'warning'} if 'discarded' in ids else set())
+        self.bundle['retained_gap_hits'] = [deepcopy(self.s.chunks['gap'])]
+        payload = self.s.assemble(self.bundle)
+        self.assertEqual(payload['required_evidence_ids'], ['approved'])
+        self.assertEqual(payload['anchor_evidence_ids'], ['approved'])
+        self.assertNotIn('discarded', payload['evidence'])
+        self.assertNotIn('warning', payload['evidence'])
+        self.assertEqual(payload['gaps'][0]['evidence_ids'], ['unreviewed'])
+
+    def test_selected_gap_chunk_retains_complete_approved_sibling_closure(self):
+        self.s.chunks['gap']['evidence_ids'] = ['discarded', 'unreviewed']
+        self.s._chunk_hashes['gap'] = content_hash(self.s.chunks['gap'])
+        self.s.complete_context_ids.update({'discarded', 'warning'})
+        self.s.evidence_ready = lambda eid: eid in self.s.complete_context_ids
+        self.s._closure = lambda ids: set(ids) | ({'warning'} if 'discarded' in ids else set())
+        self.bundle['hits'] = [deepcopy(self.s.chunks['gap'])]
+        self.bundle['retained_gap_hits'] = []
+        payload = self.s.assemble(self.bundle)
+        self.assertEqual(set(payload['required_evidence_ids']), {'discarded', 'warning'})
+        self.assertEqual(payload['anchor_evidence_ids'], ['discarded'])
+        self.assertEqual(payload['gaps'][0]['evidence_ids'], ['unreviewed'])
+
+    def test_legacy_unselected_evidence_retention_cannot_reenter_admission(self):
+        self.bundle['retained_approved_evidence_ids'] = ['approved']
+        with self.assertRaisesRegex(ValidationFailure, 'UNSELECTED_SOURCE_ANCHOR_RETENTION'):
+            self.s.assemble(self.bundle)
+
+    def test_truly_unavailable_selected_dependency_is_a_gap_without_incomplete_admission(self):
+        self.s._closure = lambda ids: set(ids) | {'missing-warning'}
+        payload = self.s.assemble(self.bundle)
+        self.assertEqual(payload['required_evidence_ids'], [])
+        self.assertEqual(payload['anchor_evidence_ids'], [])
+        self.assertIn({'type': 'SOURCE_OBJECT_OR_CONTEXT_REVIEW_REQUIRED', 'chunk_id': 'reviewed',
+            'evidence_ids': ['missing-warning'], 'rider_resolvable': False}, payload['gaps'])
+
     def test_retained_skeleton_mutations_fail_closed(self):
         for field, value in (('evidence_ids',['approved']), ('parent_section_id','wrong'), ('id','unknown')):
             with self.subTest(field=field):

@@ -132,7 +132,7 @@ ready = configured and bool(catalogue) and confirmed
 if not st.session_state.messages:
     with st.container(border=True):
         st.markdown('### What would you like to know?')
-        st.write('Ask your question in your own words. Include relevant details and anything you have already checked.')
+        st.write('Ask your question in up to 100 words. Include relevant details and anything you have already checked.')
         st.caption('Up to 2,000 characters per message.')
         query = st.chat_input('Ask a question…', key='symptom_input', max_chars=LIMITS.message_characters,
                               disabled=not ready or bool(st.session_state.pending))
@@ -220,6 +220,7 @@ if view and not st.session_state.pending:
         st.caption('Reported success does not verify the repair or identify its cause.')
 
 if view:
+    st.caption('Up to 100 words per question.')
     query = st.chat_input('Ask another question…',key='followup_input',max_chars=LIMITS.message_characters,
                           disabled=not ready or bool(st.session_state.pending))
     if query and query.strip():

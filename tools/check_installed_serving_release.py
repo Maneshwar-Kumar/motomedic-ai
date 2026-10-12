@@ -9,7 +9,9 @@ OWNER_SCOPE = 'reports/public_evaluator/20261012/owner_scope_v1.json'
 OWNER_SCOPE_SHA = '65c42d40b4a882972570e377b4a314abd2767be7fb8fb8129e7bfe9c2a436b0d'
 PRIMARY_MODEL = 'gemma-4-26b-a4b-it'
 VERIFIER_MODEL = 'claude-haiku-5-5'
-PROMPT_CACHE = 'ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M'
+PROMPT_CACHE = 'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M'
+OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v1.json'
+OWNER_MODEL_SCOPE_SHA = '05145aff6facd33a6e22c86696bf9a4c16a15ae08bd5b28b9706358b69b08cfb'
 MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
 INDEX = 'index_a3282c4d98cf54595e4ba168'
 APPROVAL = 'human_review/agent_release_161/coordinator/release_manifest_v3.json'
@@ -20,6 +22,7 @@ def validate_policy(release, root):
     """Exact operational scope selects roles; it grants no factual acceptance."""
     from cloud.serving_artifacts import confined, digest
     from cloud.grounded_generation.cached_verifier import DRAFT_CONTRACT, CONTRACT
+    from cloud.grounded_generation.role_router import ROUTING_CONTRACT
     if (release.get('schema_version') != SCHEMA
             or release.get('manual_checksum') != MANUAL_SHA
             or release.get('index_id') != INDEX
@@ -29,6 +32,7 @@ def validate_policy(release, root):
             or release.get('draft_model_contract') != DRAFT_CONTRACT
             or release.get('verifier_model') != VERIFIER_MODEL
             or release.get('verifier_contract') != CONTRACT
+            or release.get('model_routing_contract') != ROUTING_CONTRACT
             or release.get('verifier_enabled') is not True
             or release.get('verification_authority') != 'EXACT_FINALIZED_RESPONSE_AND_IMMUTABLE_EVIDENCE'
             or release.get('fallback_enabled') is not False
@@ -59,6 +63,25 @@ def validate_policy(release, root):
             or scope.get('source_display_policy_changed') is not False
             or scope.get('human_factual_quality_approval') is not False):
         raise ValueError('SERVING_AUTHORIZATION_SCOPE_CHANGED')
+    expected_model_scope = {'path': OWNER_MODEL_SCOPE, 'sha256': OWNER_MODEL_SCOPE_SHA,
+        'authority': 'DIRECT_USER_INSTRUCTION',
+        'scope': 'USER_QUESTION_LIMIT_AND_LARGE_CONTEXT_DISTINCT_MODEL_ROUTING'}
+    if release.get('owner_model_authorization') != expected_model_scope:
+        raise ValueError('SERVING_MODEL_AUTHORIZATION_BINDING_CHANGED')
+    model_scope_path = confined(root, OWNER_MODEL_SCOPE)
+    if digest(model_scope_path) != OWNER_MODEL_SCOPE_SHA:
+        raise ValueError('SERVING_MODEL_AUTHORIZATION_CHANGED')
+    model_scope = json.loads(model_scope_path.read_bytes())
+    if (model_scope.get('authority') != 'DIRECT_USER_INSTRUCTION'
+            or model_scope.get('billing_restart_authorized') is not False
+            or model_scope.get('new_spend_allocation_authorized') is not False
+            or model_scope.get('availability_fallback_enabled') is not False
+            or model_scope.get('source_display_policy_changed') is not False
+            or model_scope.get('human_factual_quality_approval') is not False):
+        raise ValueError('SERVING_MODEL_AUTHORIZATION_SCOPE_CHANGED')
+    quota_path = confined(root, model_scope['quota_summary_path'])
+    if digest(quota_path) != model_scope['quota_summary_sha256']:
+        raise ValueError('SERVING_MODEL_QUOTA_BINDING_CHANGED')
     return True
 
 

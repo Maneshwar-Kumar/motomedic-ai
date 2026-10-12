@@ -28,11 +28,14 @@ HISTORICAL = 'reports/grounded_generation/v8/runtime_freeze.json'
 HISTORICAL_SHA = 'd7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0'
 PRESERVED = 'reports/build/20261012/frozen_v8_runtime'
 MIGRATION = 'reports/build/20261012/v8_preservation.json'
-CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_6.json'
+CURRENT = 'reports/public_evaluator/20261012/serving_manifest_v10_7.json'
 SCHEMA = 'motomedic-serving-release-v10'
 SOURCE_BASELINE = 'f2daacbb35cb4997bed7915336dfbdc1456c0ddc'
 OWNER_SCOPE = 'reports/public_evaluator/20261012/owner_scope_v1.json'
+OWNER_MODEL_SCOPE = 'reports/public_evaluator/20261012/owner_model_scope_v1.json'
 HISTORICAL_SERVING = {
+    'reports/public_evaluator/20261012/serving_manifest_v10_6.json':
+        'b94faeb2c4774cd121c4e6f622a5b2371cd9c9df0147fe40b4ddbb25af9bed52',
     'reports/public_evaluator/20261012/serving_manifest_v10_5.json':
         'b95d89b5d95641f39ef7c3961233a99fb2824fa1320aff0c6e6d808772b7fb2a',
     'reports/public_evaluator/20261012/serving_manifest_v10_4.json':
@@ -216,7 +219,8 @@ def serving_inputs(root=ROOT):
         'human_review/agent_release_161/root_validation_v3.json'))
     for path in (Path(root) / 'reports/build/20261012/source_context_refinement_v2').glob('*.json'):
         names.add(path.relative_to(root).as_posix())
-    names.add(OWNER_SCOPE)
+    names.update((OWNER_SCOPE, OWNER_MODEL_SCOPE,
+                  'reports/public_evaluator/20261012/provider_quota_summary_v1.json'))
     names.update(('reports/public_evaluator/20261012/owner_credential_scope_v1.json',
                   'reports/public_evaluator/20261012/ui_dependency_lock_v2.json'))
     for name in HISTORICAL_SERVING:
@@ -267,6 +271,7 @@ def freeze(root=ROOT, *, index_dir=None, reference_path=None, destination=CURREN
     names = serving_inputs(root)
     bindings = {name: digest(confined(root, name)) for name in names}
     from cloud.grounded_generation.cached_verifier import DRAFT_CONTRACT, CONTRACT
+    from cloud.grounded_generation.role_router import ROUTING_CONTRACT
     value = {'schema_version': SCHEMA,
         'frozen_at_utc': datetime.now(timezone.utc).isoformat(),
         'architecture': 'DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
@@ -281,12 +286,16 @@ def freeze(root=ROOT, *, index_dir=None, reference_path=None, destination=CURREN
         'index': index_policy(root, index_dir or root / 'build/index-bge-final', reference_path),
         'primary_model': DRAFT_CONTRACT['model'], 'draft_model_contract': DRAFT_CONTRACT,
         'verifier_model': CONTRACT['model'], 'verifier_contract': CONTRACT,
+        'model_routing_contract': ROUTING_CONTRACT,
         'verifier_enabled': True, 'verification_authority': 'EXACT_FINALIZED_RESPONSE_AND_IMMUTABLE_EVIDENCE',
         'fallback_model': 'claude-haiku-5-5',
         'fallback_enabled': False, 'answer_cache_enabled': False,
-        'prompt_cache': 'ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M',
+        'prompt_cache': 'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',
         'owner_authorization': {'path': OWNER_SCOPE, 'sha256': digest(confined(root, OWNER_SCOPE)),
             'authority': 'DIRECT_USER_INSTRUCTION', 'scope': 'PUBLIC_EVALUATOR_DEPLOYMENT_AND_BOUNDED_PROVIDER_VALIDATION'},
+        'owner_model_authorization': {'path': OWNER_MODEL_SCOPE,
+            'sha256': digest(confined(root, OWNER_MODEL_SCOPE)), 'authority': 'DIRECT_USER_INSTRUCTION',
+            'scope': 'USER_QUESTION_LIMIT_AND_LARGE_CONTEXT_DISTINCT_MODEL_ROUTING'},
         'backend_base_image': BASE_IMAGE,
         'ui_base_image': UI_BASE_IMAGE,
         'backend_image_digest': None, 'ui_image_digest': None,

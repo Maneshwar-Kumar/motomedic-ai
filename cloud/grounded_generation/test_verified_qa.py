@@ -389,6 +389,96 @@ class PairedProviderTests(unittest.TestCase):
         self.assertEqual(self.call().type.value,'SYSTEM_ERROR')
         self.assertIsNone(self.composer.last_admitted)
 
+class RoutedProviderTests(unittest.TestCase):
+    """Index-free exact-buffer and authority fixtures for both selected pairs."""
+    def setUp(self):
+        PairedProviderTests.setUp(self)
+        from cloud.grounded_generation.role_router import RoleRouter
+        from cloud.grounded_generation.role_contracts import GEMMA_DRAFT,GEMMA_VERIFIER,HAIKU_DRAFT,HAIKU_VERIFIER
+        self.admitted['citation_mapping']=[{'evidence_id':self.eid,'pdf_page':1}]
+        self.expected=self.hash(self.admitted)
+        owner=self
+        class Role(Provider):
+            def __init__(self,contract,count):
+                super().__init__([draft(owner.eid,'Synthetic source-supported fixture.')])
+                self.contract=deepcopy(contract);self.count_value=count;self.expected=None
+                self.cache_capability='explicit' if contract['provider']=='anthropic' else 'unsupported'
+            def context(self,policy,stable,dynamic,schema,**kw):
+                return {'policy':policy,'stable':deepcopy(stable),'dynamic':deepcopy(dynamic),'schema':schema},self.count_value
+            def expect_initial_context(self,value):self.expected=value
+            def complete(self,policy,stable,dynamic,schema):
+                body,_=self.context(policy,stable,dynamic,schema)
+                if self.expected is not None:
+                    if owner.hash(body)!=self.expected:raise ProviderFailure('ROUTER_INITIAL_REQUEST_BINDING_CHANGED')
+                    self.expected=None
+                result=super().complete(policy,stable,dynamic,schema)
+                result.telemetry.update(model=self.contract['model'],role=self.contract['role'])
+                return result
+        class Admission:
+            def __init__(self):self.initial=[];self.corrections=[];self.ended=0;self.fail_correction=False
+            def begin_turn(self,op,*,plan):self.initial.append((op,deepcopy(plan)));return {'reserved_attempts':3}
+            def reserve_correction(self,op,*,plan):
+                if self.fail_correction:raise ProviderFailure('PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT')
+                self.corrections.append((op,deepcopy(plan)));return {'reserved_attempts':3}
+            def end_turn(self):self.ended+=1
+        self.gd,self.hd,self.gv,self.hv=(Role(GEMMA_DRAFT,100),Role(HAIKU_DRAFT,200),
+                                        Role(GEMMA_VERIFIER,300),Role(HAIKU_VERIFIER,400))
+        self.admission=Admission();self.router=RoleRouter(self.gd,self.hd,self.gv,self.hv,self.admission)
+        self.composer=Composer(source_authority=self.authority,router=self.router)
+        self.session=replace(self.session,generation_lock=self.composer.config.lock)
+    call=PairedProviderTests.call
+    def test_both_routes_bind_exact_selected_models_and_complete_final_buffer(self):
+        for large in (False,True):
+            self.setUp();self.gd.count_value=9000 if large else 100
+            lock=self.composer.config.lock;response=self.call();self.assertEqual(response.type.value,'SUPPORTED')
+            drafter,verifier=(self.hd,self.gv) if large else (self.gd,self.hv)
+            self.assertEqual(len(drafter.calls),1);self.assertEqual(len(verifier.calls),1)
+            self.assertEqual(verifier.calls[0][2]['complete_proposed_response']['text'],response.natural_language)
+            self.assertIn('synthetic source condition',response.natural_language)
+            accepted=self.composer.last_admitted;plan=accepted['binding']['role_plan']
+            self.assertEqual(plan['draft_model_contract_sha256'],self.hash(drafter.contract))
+            self.assertEqual(plan['verifier_contract_sha256'],self.hash(verifier.contract))
+            self.assertEqual(accepted['binding']['runtime_lock'],lock);self.assertEqual(self.composer.config.lock,lock)
+            self.assertEqual(len(self.admission.initial),1);self.assertFalse(self.admission.corrections)
+            self.assertEqual(self.admission.ended,1)
+    def test_correction_keeps_roles_and_requires_new_atomic_phase(self):
+        self.gd.count_value=9000
+        def revise(v,d,p):
+            if len(p.calls)==1:v.update(decision='SHOW_FALLBACK',release_eligible=False,correction_possible=True)
+            return v
+        self.gv.verifier=revise;response=self.call()
+        self.assertEqual(response.type.value,'SUPPORTED');self.assertEqual(len(self.hd.calls),2)
+        self.assertEqual(len(self.gv.calls),2);self.assertFalse(self.gd.calls);self.assertFalse(self.hv.calls)
+        self.assertEqual(len(self.admission.corrections),1)
+        initial=self.admission.initial[0];correction=self.admission.corrections[0]
+        self.assertEqual(initial[0],correction[0]);self.assertEqual(initial[1]['role_plan'],correction[1]['role_plan'])
+        self.assertIn('correction_request_sha256',correction[1]);self.assertEqual(self.composer.last_trace['corrections'],1)
+    def test_underfunded_correction_is_operational_error_with_private_draft_hidden(self):
+        def revise(v,*args):v.update(decision='SHOW_FALLBACK',release_eligible=False,correction_possible=True);return v
+        self.hv.verifier=revise;self.admission.fail_correction=True;response=self.call()
+        self.assertEqual(response.type.value,'SYSTEM_ERROR');self.assertEqual(len(self.gd.calls),1)
+        self.assertEqual(self.composer.last_trace['failure_code'],'PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT')
+        self.assertIsNone(self.composer.last_admitted);self.assertNotIn('Synthetic source-supported',response.natural_language)
+    def test_semantic_rejection_and_quota_failure_do_not_switch_role_pair(self):
+        def reject(v,*args):v.update(decision='SHOW_FALLBACK',release_eligible=False);return v
+        self.hv.verifier=reject;response=self.call();self.assertEqual(response.type.value,'UNSUPPORTED')
+        self.assertFalse(self.hd.calls);self.assertFalse(self.gv.calls)
+        self.setUp()
+        def outage(*args):raise ProviderFailure('PROVIDER_HTTP_429')
+        self.hv.verifier=outage;response=self.call();self.assertEqual(response.type.value,'SYSTEM_ERROR')
+        self.assertFalse(self.hd.calls);self.assertFalse(self.gv.calls)
+    def test_delivery_rejects_changed_selected_role_contract(self):
+        from unittest.mock import patch
+        self.gd.count_value=9000;response=self.call();accepted=self.composer.last_admitted
+        with patch('cloud.grounded_generation.verified_qa.legacy_view',return_value=({'response':{},'schema_version':'fixture'},{})):
+            view,_=saved_view(self.controller.registry,self.session,response,self.authority,accepted)
+            self.assertEqual(view['verified_delivery']['draft_model'],self.hd.contract['model'])
+            self.assertEqual(view['verified_delivery']['verifier_model'],self.gv.contract['model'])
+            changed=deepcopy(accepted);changed['selected_draft_contract']=deepcopy(self.gd.contract)
+            with self.assertRaisesRegex(ValidationFailure,'MODEL_ROLE_BINDING_CHANGED'):
+                saved_view(self.controller.registry,self.session,response,self.authority,changed)
+
+
 class SharedProjectionTests(unittest.TestCase):
     """Index-free synthetic checks of representation, never answer quality."""
     def helpers(self):

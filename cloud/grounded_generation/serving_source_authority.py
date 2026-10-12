@@ -12,7 +12,7 @@ from evidence_registry import content_hash
 from cloud.grounded_generation.source_authority import SourceAuthority as FrozenAuthority
 from cloud.grounded_generation.serving_context import project, VERSION as PROJECTION_VERSION
 
-VERSION = 'open-reviewed-anchor-authority-v3'
+VERSION = 'open-reviewed-anchor-authority-v4'
 MAX_RETAINED_GAP_HITS = 25
 REFINEMENT_PATH = 'reports/build/20261012/source_context_refinement_v2/proposal_v3.json'
 REFINEMENT_SHA = '405269fa7d31274a1e5c6260bbee3e762c8cf2898a5401a4f71e97e155afa1f0'
@@ -100,8 +100,12 @@ class SourceAuthority(FrozenAuthority):
                     or type(hit['evidence_ids']) is not list
                     or any(type(eid) is not str for eid in hit['evidence_ids'])):
                 raise ValidationFailure('RETAINED_SOURCE_GAP_HIT_INVALID')
+        if bundle.get('retained_approved_evidence_ids'):
+            raise ValidationFailure('UNSELECTED_SOURCE_ANCHOR_RETENTION_REJECTED')
         admitted, anchors, gaps, seen = set(), set(), [], set()
-        for hit in [*bundle.get('hits', ()), *retained]:
+        selected = [(hit, True) for hit in bundle.get('hits', ())]
+        diagnostics = [(hit, False) for hit in retained]
+        for hit, selected_anchor in [*selected, *diagnostics]:
             if type(hit) is not dict:
                 raise ValidationFailure('SOURCE_AUTHORITY_RETRIEVAL_MEMBERSHIP_CHANGED')
             chunk = self.chunks.get(hit.get('id'))
@@ -133,15 +137,9 @@ class SourceAuthority(FrozenAuthority):
                     continue
                 # Empty links are admissible ONLY because complete_context_ids
                 # has exact reviewed context/no-dependency authority for this ID.
-                admitted.update(closure)
-                anchors.add(eid)
-        for eid in bundle.get('retained_approved_evidence_ids', ()):
-            if eid not in self.complete_context_ids or not self.evidence_ready(eid):
-                raise ValidationFailure('RETAINED_SOURCE_CONTEXT_REVIEW_REQUIRED')
-            closure = self._closure({eid})
-            if any(not self.evidence_ready(e) for e in closure):
-                raise ValidationFailure('RETAINED_SOURCE_CONTEXT_REVIEW_REQUIRED')
-            admitted.update(closure)
+                if selected_anchor:
+                    admitted.update(closure)
+                    anchors.add(eid)
         if len(admitted) > 256:
             raise ValidationFailure('SOURCE_AUTHORITY_DEPENDENCY_BOUND_NO_TRUNCATION')
         return self._payload(admitted, anchors, gaps)

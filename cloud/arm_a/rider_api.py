@@ -224,7 +224,9 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
                 body.get('cache_mode','bypass') == 'enabled')
             digest = hashlib.sha256(json.dumps({'path':request.path,'body':body},
                 sort_keys=True,ensure_ascii=False).encode()).hexdigest()
-        except (ValueError, TypeError, KeyError, UnicodeError, LimitError):
+        except LimitError as exc:
+            return error('SYSTEM_ERROR',exc.reason,exc.status)
+        except (ValueError, TypeError, KeyError, UnicodeError):
             return error('SYSTEM_ERROR','INVALID_REQUEST',400)
         try:
             # Replay is operation-scoped and remains recoverable for its full

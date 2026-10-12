@@ -46,8 +46,8 @@ jobs:
           cloud.grounded_generation.test_admission
           cloud.grounded_generation.test_claude_fallback
           cloud.grounded_generation.test_cached_verifier
-          cloud.grounded_generation.test_verified_qa.PairedProviderTests
-          cloud.grounded_generation.test_verified_qa.SharedProjectionTests
+          cloud.grounded_generation.test_role_router
+          cloud.grounded_generation.test_verified_qa
           cloud.grounded_generation.test_open_wiring
           cloud.grounded_generation.test_whole_turn_admission
           cloud.grounded_generation.test_serving_retrieval
@@ -55,6 +55,7 @@ jobs:
           cloud.arm_a.test_durable_operations
           cloud.arm_a.test_health
           cloud.arm_a.test_public_admission
+          cloud.arm_a.test_question_wiring
           cloud.test_serving_artifacts
           tools.test_serving_release
           tools.test_bind_serving_images

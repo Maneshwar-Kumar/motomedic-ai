@@ -2,7 +2,7 @@
 
 Selected v10 public evaluator: 12 October 2026, following the 11 October reset. [PRD.md](PRD.md) defines product behavior; [TRD.md](TRD.md) defines implementation contracts. [TODO.md](../TODO.md) gives the execution sequence.
 
-Build a hosted question-answering assistant with a public evaluator URL for the selected Royal Enfield Himalayan BS6 owner's manual. Reuse its immutable hosted index. Retrieve applicable evidence, privately draft with Gemma, verify that exact finalized answer with Claude Haiku, save the accepted response, and stream the saved text. Only the frontend is public; backend, worker and Qdrant remain IAM-protected.
+Build a hosted question-answering assistant with a public evaluator URL for the selected Royal Enfield Himalayan BS6 owner's manual. Reuse its immutable hosted index. Accept rider questions up to 100 words, retrieve complete applicable evidence, select the draft/other-model verifier pair by native-counted size, save the accepted response and stream the saved text. Only the frontend is public; backend, worker and Qdrant remain IAM-protected. New v10.7 size routing is in progress; frozen v10.6 remains unaccepted.
 
 This diagram describes the required architecture. It does not claim that every connection is deployed or accepted.
 
@@ -34,7 +34,7 @@ flowchart TB
         UI[Public browser: selected manual, question, optional typed outcomes]
         GATEWAY[Public Cloud Run gateway: signed cookie and 14-bit proof]
         ISSUE[Private visitor issuance: exact UI service identity and persistent quotas]
-        API[Private API: ownership, input, rate and spend checks]
+        API[Private API: ownership, 100-word rider input, rate and spend checks]
         STATE[(Firestore: sessions, operations, leases, accepted responses)]
         DISPATCH[Cloud Tasks: named task and exact OIDC audience]
         WORKER[Dedicated private worker: independent of browser SSE capacity]
@@ -46,10 +46,10 @@ flowchart TB
         INITIAL[Source and applicability checks; initial evidence assembly]
         SCHEDULE[Bounded recovery; rerank observed distinct-parent rank disagreement]
         ASSEMBLE[Approved assembly: required context and citations]
-        BOUND[Count complete context; reserve whole-turn capacity]
-        DRAFT[Gemma: private answer draft]
+        BOUND[Native-count complete context; select roles and reserve whole-turn capacity]
+        DRAFT[Size-selected Gemma or Haiku: private draft]
         FINALIZE[Finalize warnings, limitations and server citations]
-        VERIFY[Claude Haiku: exact finalized response and claim verification]
+        VERIFY[Other pinned model: finalized response and claim verification]
         CORRECT[At most one corrective draft]
         GUARD[Final schema, source, history and binding checks]
         SAVE[Durably save accepted buffer or fixed terminal message]
@@ -83,8 +83,8 @@ flowchart TB
     SOURCE --> INITIAL
 
     subgraph CONTROLS[Shared controls]
-        PROVIDER[Exact Gemma draft and Haiku verifier contracts; fallback disabled]
-        CACHE[Haiku 5-minute policy and source-evidence prefix cache]
+        PROVIDER[Exact selected-role Gemma and Haiku contracts; availability fallback disabled]
+        CACHE[Selected Haiku role: 5-minute policy and source-evidence prefix cache]
         BUDGET[Atomic token and monetary reservations]
         TRACE[Redacted traces: versions, retrieval, verdicts, latency, cost]
     end
@@ -102,7 +102,7 @@ Dense Qdrant RPC and BM25 execute concurrently after a history-aware retrieval q
 
 Evidence assembly retains immutable evidence IDs, original page metadata, applicable conditions, warnings, specifications, units, table headers and verified references. Admit reviewed objects at their approved scope. A reviewed heading does not approve its entire parent body. Assemble compact complete context around approved evidence and mandatory dependencies; never omit required context to fit the model.
 
-Runtime `open-manual-draft-verify-v10` selects Gemma `gemma-4-26b-a4b-it` for drafting and Claude `claude-haiku-5-5` as a distinct evidence-only verifier. Both exact model contracts are bound through the verdict and saved delivery. Two five-minute verifier cache breakpoints cover policy and exact source-evidence prefix; question/history/final response remain uncached. No cached answer or prior verdict can replace fresh verification. The separate availability fallback remains disabled, and whole-manual Claude remains retired.
+Frozen v10.6 runtime `open-manual-draft-verify-v10` selects Gemma `gemma-4-26b-a4b-it` for drafting and Haiku `claude-haiku-5-5` for verification. The [latest model scope](../reports/public_evaluator/20261012/owner_model_scope_v1.json) selects that pair at or below 8,192 complete draft tokens, and Haiku draft/Gemma verifier above it. Bind the route and both exact role/model contracts before generation and through verdict/save/delivery. Native windows, actual account throughput and existing lifetime budgets remain separate gates; the threshold is not an evidence cap. Two five-minute Haiku cache breakpoints cover the selected role's policy and exact evidence prefix; question/history/final response remain uncached. No cached answer or verdict can replace fresh verification. Availability fallback remains disabled, and whole-manual Claude remains retired.
 
 Drafting and verification are separate calls. Verification binds the exact finalized response, claims, question, relevant history, evidence and runtime versions. A partial answer states its limitation before verification. At most one correction and re-verification is allowed. Verification cannot cure wrong applicability, missing mandatory context or invalid citations.
 
@@ -141,11 +141,11 @@ The 149-page owner's manual has SHA-256 `CF221A29E2F9CD5AF6E80A99774A697C814E8ED
 
 | Area | Implemented v10 candidate | Remaining acceptance |
 | --- | --- | --- |
-| Retrieval/ranking | Authenticated Qdrant + concurrent BM25, RRF and finite distinct-parent disagreement gate. | Actual RPC identity/readiness, direct/follow-up evidence recall and measured conditional reranking. |
-| Source admission | Exact reviewed-object closure and compact complete evidence retain warnings, references, headers and units. | Useful bounded complete/partial answers independently checked against original pages. |
-| Models/cache | Separate Gemma draft and Haiku verifier; exact role bindings and bounded five-minute prefix cache. | Hosted model/account/schema proof, positive cache reads and fresh answer-quality adjudication. |
-| History/delivery | Follow-up topic projection, durable task/operation fencing and exact saved streaming/recovery. | Dedicated-worker IAM, browser disconnect/recovery and cold/warm timings. |
-| Public controls | Signed cookie/proof gateway with private visitor admission; private backend/worker/Qdrant. | Public-browser challenge/cookie/WebSocket flow, persistent quotas, retention and redaction. |
-| DevOps | Current v10.3 build revision freezes 525 inputs and preserves earlier manifests/failures; immutable GCS generation/hash loading, locked dependencies and strict build/promotion binding. Artifact cache write permissions are checked as the actual container user. | Hosted image builds, compatible revisions and exact rollback. |
+| Retrieval/ranking | V10.6 native-count traces prove authenticated Qdrant + concurrent BM25 and actual reranking on all six disagreements. Reviewed dependencies/gap obligations are retained. | Useful-answer evidence recall and new context-selection acceptance. |
+| Source admission | Exact reviewed closure retains warnings, references, headers and units; v10.6 useful draft contexts counted 12,438–18,437 tokens. | Large applicable evidence is allowed. Approved final-ranked closure/gap recovery and native selected-role counts remain pending; semantic projection is unimplemented. |
+| Models/cache | Frozen Gemma draft/Haiku verify; v10.3 exact-verifier probe wrote then read 6,113 cached tokens. | New size-selected roles, native windows/actual 16K Gemma TPM and actual-role cache evidence; fresh answer quality and paired savings remain unmeasured. |
+| History/delivery | Follow-up topic projection, durable task/operation fencing and exact saved recovery. V10.6 API/worker/UI private readiness passed with zero provider work. | New-candidate readiness, browser disconnect/recovery and cold/warm timings. |
+| Public controls | Signed cookie/proof gateway with private visitor admission; private backend/worker/Qdrant. V10.4 private shell passed proof/cookie/WebSocket, checked scope and enabled input without a paid turn. | Current anonymous public-browser flow, persistent quotas, retention and redaction; private shell alone is not public acceptance. |
+| DevOps | V10.6 freezes 532 inputs; CI/images and [private readiness](../reports/public_evaluator/20261012/private_readiness_v10_6.json) passed. Native-count preflight failed without generation/reservations; paid Q&A/public were not submitted. V10.5 remains unbuilt history. | Approved v10.7 repairs/new role contract need tests/freeze/builds, fresh selected-role count/quality, rollback and public acceptance. |
 
 The v8 Haiku run `38160944967` released zero technical answers and answered 0/4 clearly answerable or partial turns; three contexts exceeded 8,192 tokens. Preserve that failed baseline. Current software tests do not establish factual quality or live readiness. [Exact operational scope](../reports/public_evaluator/20261012/owner_scope_v1.json) and [credential approval](../reports/public_evaluator/20261012/owner_credential_scope_v1.json) authorize this evaluator's deployment and bounded validation within existing limits, separate from source approval and acceptance. INR2,700/INR2,540 guards and disabled inference billing remain unchanged. Photo and voice follow text acceptance.

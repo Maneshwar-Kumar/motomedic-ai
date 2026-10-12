@@ -18,7 +18,6 @@ class Authority:
     def scheduling_context(self, bundle):
         anchors = {e for hit in bundle['hits'] for e in hit['evidence_ids']}
         required = anchors | ({'warning'} if 'action' in anchors else set())
-        required.update(bundle.get('retained_approved_evidence_ids', ()))
         gaps = [{'type': 'SOURCE_CONTEXT_REVIEW_REQUIRED', 'chunk_id': hit['id'],
                  'rider_resolvable': False} for hit in bundle['hits']] if self.gap else []
         for hit in bundle.get('retained_gap_hits', ()):
@@ -26,7 +25,7 @@ class Authority:
                    'rider_resolvable': False}
             if gap not in gaps:
                 gaps.append(gap)
-        return {'payload': {}, 'required_evidence_ids': sorted(required),
+        return {'payload': {'evidence': {eid: {} for eid in required}}, 'required_evidence_ids': sorted(required),
             'reviewed_anchor_ids': sorted(anchors),
             'source_gaps': gaps,
             'dependency_review_status': 'APPROVED', 'coverage_established': True,
@@ -99,14 +98,58 @@ class Tests(unittest.TestCase):
         dense, sparse, _, _ = r._first_stage('query')
         self.assertEqual(list(dense), [.9, .8]); self.assertEqual(list(sparse), [1., 0.])
 
-    def test_open_question_recovers_once_and_reranks_without_step_manifest(self):
+    def test_open_question_uses_loaded_dependencies_and_final_reranked_anchors(self):
         r = serving(disagreement=True)
         b = r.search('check', limit=1, applicability_status='CONFIRMED')
-        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 1)
+        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 0)
         self.assertEqual(b['retrieval_policy']['rerank_attempts'], 1)
-        self.assertIn('warning', b['attached_evidence_ids'])
+        self.assertEqual(b['required_evidence_ids'], ['other'])
+        self.assertNotIn('warning', b['attached_evidence_ids'])
         self.assertEqual(b['retrieval_action'], 'CONTINUE_GATES')
         self.assertEqual(r.reranker.calls, 1)
+
+    def test_selected_anchor_keeps_complete_warning_closure_without_false_recovery(self):
+        r = serving()
+        b = r.search('check', limit=1, applicability_status='CONFIRMED', rerank=False)
+        self.assertEqual(set(b['attached_evidence_ids']), {'action', 'warning'})
+        self.assertEqual(b['missing_evidence_ids'], [])
+        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 0)
+        self.assertNotIn('recovery', b['retrieval_policy'])
+        self.assertEqual(r.reranker.calls, 0)
+
+    def test_reranked_new_anchor_loads_its_own_complete_warning_closure(self):
+        r = serving(disagreement=True)
+        r.evidence['other-warning'] = {'id': 'other-warning'}
+        original = r.source_authority.scheduling_context
+        def context(bundle):
+            value = original(bundle)
+            if 'other' in value['reviewed_anchor_ids']:
+                value['required_evidence_ids'].append('other-warning')
+                value['payload']['evidence']['other-warning'] = {}
+            return value
+        r.source_authority.scheduling_context = context
+        b = r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(set(b['required_evidence_ids']), {'other', 'other-warning'})
+        self.assertEqual(set(b['attached_evidence_ids']), {'other', 'other-warning'})
+        self.assertEqual(b['missing_evidence_ids'], [])
+        self.assertEqual(b['retrieval_policy']['recovery_attempts'], 0)
+        self.assertNotIn('action', b['required_evidence_ids'])
+        self.assertNotIn('warning', b['required_evidence_ids'])
+        self.assertEqual(r.reranker.calls, 1)
+
+    def test_incomplete_reported_payload_is_integrity_failure_not_false_recovery(self):
+        r = serving()
+        original = r.source_authority.scheduling_context
+        def corrupted(bundle):
+            context = original(bundle)
+            context['payload']['evidence'].pop('warning', None)
+            return context
+        r.source_authority.scheduling_context = corrupted
+        with self.assertRaises(RetrievalSystemError) as raised:
+            r.search('check', limit=1, applicability_status='CONFIRMED')
+        self.assertEqual(raised.exception.telemetry['final_action'], 'SYSTEM_ERROR')
+        self.assertEqual(raised.exception.telemetry['recovery_attempts'], 0)
+        self.assertEqual(r.reranker.calls, 0)
 
     def test_source_review_gap_preserves_observed_rerank_and_partial_anchors(self):
         r = serving(gap=True, disagreement=True)
@@ -114,7 +157,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
         self.assertEqual(r.reranker.calls, 1)
         self.assertEqual(b['retrieval_policy']['rerank_attempts'], 1)
-        self.assertTrue({'action', 'warning'} <= set(b['attached_evidence_ids']))
+        self.assertEqual(b['attached_evidence_ids'], ['other'])
         self.assertFalse(b['source_gaps'][0]['rider_resolvable'])
 
     def test_source_gaps_do_not_trigger_rerank_when_backend_ranks_agree(self):
@@ -137,7 +180,8 @@ class Tests(unittest.TestCase):
         context = r.source_authority.scheduling_context
         def missing(bundle):
             value = context(bundle)
-            value.update(coverage_established=False, required_evidence_ids=[], reviewed_anchor_ids=[])
+            value.update(coverage_established=False, required_evidence_ids=[], reviewed_anchor_ids=[],
+                payload={'evidence': {}})
             return value
         r.source_authority.scheduling_context = missing
         for override in (None, True):
@@ -173,10 +217,13 @@ class Tests(unittest.TestCase):
         self.assertEqual(b['retrieval_action'], 'CONTINUE_WITH_SOURCE_GAPS')
         self.assertTrue(b['source_review_required'])
         self.assertEqual(b['source_gaps'][0]['evidence_ids'], ['unreviewed-sibling'])
-        self.assertTrue({'action', 'warning'} <= set(b['required_evidence_ids']))
+        self.assertEqual(b['required_evidence_ids'], ['other'])
+        self.assertEqual(b['reviewed_anchor_ids'], ['other'])
         admitted = authority.assemble(b)
         self.assertTrue(admitted['gaps'])
         self.assertNotIn('unreviewed-sibling', admitted['evidence'])
+        self.assertNotIn('action', admitted['evidence'])
+        self.assertNotIn('warning', admitted['evidence'])
 
     def test_rerank_query_bound_preserves_complete_full_query(self):
         r = serving(disagreement=True)
@@ -186,6 +233,68 @@ class Tests(unittest.TestCase):
         self.assertEqual(b['retrieval_policy']['rerank_skip_reason'], 'QUERY_EXCEEDS_RERANK_LIMIT')
         self.assertEqual(b['retrieval_action'], 'CONTINUE_GATES')
         self.assertIn('warning', b['attached_evidence_ids'])
+
+    def test_long_history_reference_query_is_never_cropped_for_reranking(self):
+        prior = 'battery ' + 'condition ' * 100
+        history = [{'question': prior, 'response': {'type': 'SYSTEM_ERROR'}}]
+        current = 'What should I avoid with it?'
+        expanded = retrieval_query(current, history)
+        self.assertIn(prior, expanded)
+        self.assertTrue(expanded.endswith(current))
+        r = serving(disagreement=True)
+        token = QUERY_CONTEXT.set(history)
+        try:
+            b = r.search(current, limit=1, applicability_status='CONFIRMED')
+        finally:
+            QUERY_CONTEXT.reset(token)
+        self.assertEqual(b['query'], expanded)
+        # Force the entire combined query above the existing128-token limit.
+        r = serving(disagreement=True)
+        history[0]['question'] += ' condition' * 50
+        token = QUERY_CONTEXT.set(history)
+        try:
+            b = r.search(current, limit=1, applicability_status='CONFIRMED')
+        finally:
+            QUERY_CONTEXT.reset(token)
+        self.assertEqual(b['query'], retrieval_query(current, history))
+        self.assertEqual(b['retrieval_policy']['rerank_skip_reason'], 'QUERY_EXCEEDS_RERANK_LIMIT')
+        self.assertEqual(r.reranker.calls, 0)
+        self.assertEqual(set(b['required_evidence_ids']), {'action', 'warning'})
+
+    def test_named_short_question_and_explicit_topic_shift_do_not_inherit_history(self):
+        history = [{'question': 'Where is the charging socket?'},
+            {'question': 'What should I avoid with it?'}]
+        for question in ('What is the battery capacity?',
+                'What grade of brake fluid is required?', 'Where is this bike battery?',
+                'Different question: how much fuel is left when the warning flashes?',
+                'Back to the suspension: how do I adjust it?',
+                'Switching to the brake: where is it?',
+                'A new topic: where is the horn?'):
+            with self.subTest(question=question):
+                self.assertEqual(retrieval_query(question, history), question)
+        self.assertEqual(len(history), 2)
+
+    def test_deictic_and_elliptic_followup_keeps_only_actual_rider_reference_chain(self):
+        history = [{'question': 'Where is the brake-fluid reservoir?'},
+            {'question': 'How do I check its level?'},
+            {'role': 'assistant', 'text': 'INVENTED UNSAFE EXPECTED ANSWER'}]
+        for question in ('What should I avoid with it?', 'What next?', 'and the grade?'):
+            with self.subTest(question=question):
+                expanded = retrieval_query(question, history)
+                self.assertIn('Where is the brake-fluid reservoir?', expanded)
+                self.assertIn('How do I check its level?', expanded)
+                self.assertTrue(expanded.endswith(question))
+                self.assertNotIn('INVENTED', expanded)
+
+    def test_reference_chain_stops_at_explicit_topic_boundary(self):
+        history = [{'question': 'Where is the charging socket?'},
+            {'question': 'What should I avoid with it?'},
+            {'question': 'Different topic: where is the rear brake?'},
+            {'question': 'How do I check it?'}]
+        expanded = retrieval_query('What precautions apply to it?', history)
+        self.assertIn('rear brake', expanded)
+        self.assertIn('How do I check it?', expanded)
+        self.assertNotIn('charging socket', expanded)
 
     def test_outage_is_system_error(self):
         r = serving()
@@ -277,7 +386,7 @@ class Tests(unittest.TestCase):
         bundle = r.search('check', limit=1, applicability_status='CONFIRMED')
         self.assertEqual(bundle['retrieval_policy']['rerank_attempts'], 1)
         self.assertEqual(r.reranker.calls, 1)
-        self.assertTrue({'action', 'warning'} <= set(bundle['attached_evidence_ids']))
+        self.assertEqual(bundle['attached_evidence_ids'], ['other'])
 
     def test_conditional_reranker_failure_is_system_error_without_retry(self):
         r = serving(disagreement=True)

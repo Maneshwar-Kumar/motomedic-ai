@@ -123,9 +123,10 @@ def create_app(registry, retriever, state_factory, cases):
             'answer_provider':app.config.get('ANSWER_PROVIDER'), 'benchmark_pacing':False,
             'streaming':('DRAFT_VERIFY_STREAM' if app.config.get('GROUNDED_PRIMARY') else 'VERIFIED_COMPLETE_UNIT_SSE'),
             'durable_dispatch_configured': app.config.get('DURABLE_DISPATCH_CONFIGURED', False),
-            'reranking':'authenticated-open-hybrid-rank-disagreement-v4',
+            'reranking':'authenticated-open-hybrid-rank-disagreement-v5',
             'verifier_provider':app.config.get('VERIFIER_PROVIDER'),
             'prompt_cache':app.config.get('PROMPT_CACHE'),
+            'model_routing':app.config.get('MODEL_ROUTING_CONTRACT'),
             'runtime_lock':app.config.get('ARM_A_RUNTIME_LOCK', ArmAComposer().config.lock)}), (200 if ready else 503)
 
     @app.get('/v1/initial-catalogue')
@@ -300,13 +301,15 @@ def load_production():
     from cloud.grounded_generation.claude_budget import ClaudeBudget
     if not os.environ.get('ANTHROPIC_API_KEY'):
         raise RuntimeError('The selected verifier requires its server-side managed secret')
-    verifier_provider = CachedVerifier(reserve_provider, reserve_cost=ClaudeBudget(client))
-    controlled_composer = Composer(answer_provider, verifier=verifier_provider)
+    from cloud.grounded_generation.role_router import production_router,ROUTING_CONTRACT
+    model_router=production_router(reserve_provider)
+    controlled_composer = Composer(router=model_router)
     state_factory = lambda owner:FirestoreState(client,owner)
     app = create_app(registry, retriever, state_factory, [])
     app.config.update(GROUNDED_PRIMARY=True,SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
         ANSWER_PROVIDER='gemma-4-26b-a4b-it', VERIFIER_PROVIDER='claude-haiku-5-5',
-        PROMPT_CACHE='ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M')
+        PROMPT_CACHE='ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',
+        MODEL_ROUTING_CONTRACT=ROUTING_CONTRACT)
     app.config['ARM_A_RUNTIME_LOCK'] = controlled_composer.config.lock
     secret = os.environ.get('MOTOMEDIC_VISITOR_SECRET')
     if secret:

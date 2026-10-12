@@ -1,0 +1,216 @@
+{
+  "actual_native_failure_counts": [
+    {
+      "admitted_evidence_count": 30,
+      "case_id": "EVAL_DIRECT_01",
+      "gap_count": 1,
+      "mandatory_display_count": 14,
+      "primary_counter": {
+        "input_tokens_counted": 12438,
+        "request_bytes": 36710
+      },
+      "verifier_counter": {
+        "input_tokens_counted": 24206,
+        "request_bytes": 52192
+      },
+      "verifier_failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+    },
+    {
+      "admitted_evidence_count": 44,
+      "case_id": "EVAL_USB_02",
+      "gap_count": 12,
+      "mandatory_display_count": 30,
+      "primary_counter": {
+        "input_tokens_counted": 18437,
+        "request_bytes": 52337
+      },
+      "verifier_counter": {},
+      "verifier_failure_code": "COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION"
+    },
+    {
+      "admitted_evidence_count": 42,
+      "case_id": "EVAL_FOLLOWUP_03",
+      "gap_count": 11,
+      "mandatory_display_count": 26,
+      "primary_counter": {
+        "input_tokens_counted": 17232,
+        "request_bytes": 49683
+      },
+      "verifier_counter": {},
+      "verifier_failure_code": "COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION"
+    },
+    {
+      "admitted_evidence_count": 36,
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "gap_count": 5,
+      "mandatory_display_count": 26,
+      "primary_counter": {
+        "input_tokens_counted": 15507,
+        "request_bytes": 45433
+      },
+      "verifier_counter": {},
+      "verifier_failure_code": "COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION"
+    },
+    {
+      "admitted_evidence_count": 37,
+      "case_id": "EVAL_PARTIAL_05",
+      "gap_count": 2,
+      "mandatory_display_count": 26,
+      "primary_counter": {
+        "input_tokens_counted": 15500,
+        "request_bytes": 45609
+      },
+      "verifier_counter": {},
+      "verifier_failure_code": "COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION"
+    },
+    {
+      "admitted_evidence_count": 10,
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "gap_count": 9,
+      "mandatory_display_count": 0,
+      "primary_counter": {
+        "input_tokens_counted": 4467,
+        "request_bytes": 14764
+      },
+      "verifier_counter": {
+        "input_tokens_counted": 9908,
+        "request_bytes": 21314
+      },
+      "verifier_failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+    }
+  ],
+  "all_semantics_retained": [
+    "every text and distinct orig",
+    "every nonempty annotation/caption/figure/image/reference/footnote/child",
+    "all unknown fields at every source/context/outer row level",
+    "all pages including printed labels",
+    "section paths and parent/scoped/dependency relationships",
+    "every table cell/header/unit/span/coordinate/null/missing field",
+    "all requireddisplay texts andsource_spans",
+    "every source gap and rider_resolvable flag"
+  ],
+  "cases": [
+    {
+      "canonical_semantic_roundtrip": "PASS",
+      "case_id": "EVAL_DIRECT_01",
+      "conservative_full_json_ID_table_packed_bytes": 22022,
+      "current_packed_source_bytes": 26143,
+      "old_evidence_count": 30,
+      "proposed_minimal_semantic_bytes": 24566,
+      "proposed_minimal_semantic_packed_bytes": 17447
+    },
+    {
+      "canonical_semantic_roundtrip": "PASS",
+      "case_id": "EVAL_FOLLOWUP_03",
+      "conservative_full_json_ID_table_packed_bytes": 13823,
+      "current_packed_source_bytes": 15752,
+      "old_evidence_count": 20,
+      "proposed_minimal_semantic_bytes": 13683,
+      "proposed_minimal_semantic_packed_bytes": 10355
+    },
+    {
+      "canonical_semantic_roundtrip": "PASS",
+      "case_id": "EVAL_PARTIAL_05",
+      "conservative_full_json_ID_table_packed_bytes": 12815,
+      "current_packed_source_bytes": 14786,
+      "old_evidence_count": 17,
+      "proposed_minimal_semantic_bytes": 12857,
+      "proposed_minimal_semantic_packed_bytes": 9838
+    },
+    {
+      "canonical_semantic_roundtrip": "PASS",
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "conservative_full_json_ID_table_packed_bytes": 10827,
+      "current_packed_source_bytes": 12463,
+      "old_evidence_count": 15,
+      "proposed_minimal_semantic_bytes": 11012,
+      "proposed_minimal_semantic_packed_bytes": 8122
+    },
+    {
+      "canonical_semantic_roundtrip": "PASS",
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "conservative_full_json_ID_table_packed_bytes": 5103,
+      "current_packed_source_bytes": 5737,
+      "old_evidence_count": 10,
+      "proposed_minimal_semantic_bytes": 4680,
+      "proposed_minimal_semantic_packed_bytes": 3281
+    },
+    {
+      "canonical_semantic_roundtrip": "PASS",
+      "case_id": "EVAL_USB_02",
+      "conservative_full_json_ID_table_packed_bytes": 27391,
+      "current_packed_source_bytes": 32480,
+      "old_evidence_count": 34,
+      "proposed_minimal_semantic_bytes": 31287,
+      "proposed_minimal_semantic_packed_bytes": 22177
+    }
+  ],
+  "classification": "OFFLINE_ENGINEERING_PROPOSAL_NOT_ACTIVE_RUNTIME",
+  "date": "2026-10-12",
+  "deployment_acceptance": false,
+  "frozen_v10_6_changed": false,
+  "human_signoff": false,
+  "limitations": [
+    "Nativefactor3savingsnotdemonstrated. ConservativepurelosslessfullJSONcodec onlyreducesbytes~16%; approvedproof/scaffolding semanticview reducesoldclosurebytes~33%.",
+    "Actualnewcountjobmembershipnotlogged; thesixold149page-sourceclosedobjectsarelimitedreconstruction, notexactnew44-IDcases.",
+    "Finalchosen-anchorclosure repair bydurableagent isnecessaryseparatecontribution; no unrelatedfact/warning maybetruncated tofit.",
+    "Typical100word question isdesignheadroom, nohardgate/truncation. Prospective acceptedhistory/finalizedanswer unknown; actualfullprompt alwayscounted beforegeneration.",
+    "No runtime/models/retrieval/nativeprovider/localprovider execution. No factual/human/deploymentacceptance."
+  ],
+  "native_count_failure_receipt_sha256": "a0dfad6f726015aee6eec63f90781575af8cefd6d5b3dbcb9d5010e025347980",
+  "native_counter_calls": 0,
+  "original_source_approval_changed": false,
+  "proof_scaffolding_omission_proposed": {
+    "content_conditioned_omissions": [
+      "label ONLYwhenexactlyequalsretainedrow.type",
+      "content_layer ONLY literalbody",
+      "orig_same_as_text ONLY true, exact retained textisoriginal",
+      "empty children/captions/references/footnotes/annotations",
+      "image ONLY null",
+      "enumerated ONLY false; true/markers remain"
+    ],
+    "duplicate_identity": "context evidence_id omitted only after exactequality with retainedliteralrowID",
+    "reviewed_source_context": [
+      "component_review_sha256",
+      "context_authority",
+      "context_kind",
+      "original_object_sha256",
+      "original_raw_object_sha256",
+      "parent_text_authorized",
+      "review_status"
+    ],
+    "source_object": [
+      "content_projection",
+      "original_object_sha256"
+    ]
+  },
+  "proposal_sha256": "27984c5b67e5ae791727fa0c16b33855d537c29a12444fbbcfc01bef925b7fcb",
+  "prototype_file": "tmp/public_evaluator/context_projection_proposal_v1.py",
+  "provider_calls": 0,
+  "representation_proposed": [
+    "KeepCachedVerifier exact10 stablefields; evidence.rows declares columns once, source_projection storesreadable dictionaries.",
+    "Full immutable IDs remainoncedefinedliterally inreadabledictionary; modeloutput mustusestillfullIDs, existingstrictmembershipandcitationbindingunchanged.",
+    "Use readabletyped @ref/@record/@literal list markers; keys andvaluesexpandrecursivelyexact.",
+    "Tablefieldconstants declaredonce; derivedendoffset=start+span only whenalloriginalintegercellsprovedequal; otherwiseoriginalfields retained. Missing/null/span/headerstate preservedexactly.",
+    "Finalresponse textcouldbeexplicitexactconcat oforderedfullclaimtexts withknownspaces, validatedbyteequalitytooriginalfinalbuffer beforecount; fullclaimIDs/roles/evidence/citations remain. Thisdynamicproposal isnotimplemented.",
+    "Model-facing repeated runtimepricing/trace/fullproofhashcopies canremainserverbound; preserveexactmodellock/contractsandbinding_sha256echo. Requiresseparaterootreview; notimplemented."
+  ],
+  "reservation_calls": 0,
+  "review_status": "ROOT_REVIEW_REQUIRED_BEFORE_RUNTIME_CHANGE",
+  "schema": "motomedic-semantic-model-projection-proposal-v2",
+  "validation": {
+    "classification": "SYNTHETIC_PROVIDER_FREE",
+    "original_reconstructed_closures": 6,
+    "result": "PASS",
+    "synthetic_checks": [
+      "unknownsource/scoped fields",
+      "distinctorig andtext",
+      "nonemptyrefs/figures/captions/footnotes",
+      "header/unit/merged spans/coordinates",
+      "null versus missingcells",
+      "literalID mismatch rejection",
+      "reservedmarker collisions",
+      "canonical allprojectedsemantic valuesroundtrip"
+    ]
+  }
+}

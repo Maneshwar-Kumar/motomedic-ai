@@ -4,7 +4,8 @@ import json
 import unittest
 
 from generation_providers import ProviderFailure
-from cloud.grounded_generation.cached_verifier import CachedVerifier, CONTRACT, MODEL, MAX_CALL_USD, STABLE_FIELDS
+from cloud.grounded_generation.cached_verifier import CachedVerifier, CONTRACT, MODEL, MAX_CALL_USD,INPUT_TOKENS, STABLE_FIELDS
+from cloud.grounded_generation.role_contracts import haiku_maximum_nanodollars
 from cloud.grounded_generation.verified_qa import VERIFY_POLICY, VERIFY_SCHEMA, DRAFT_POLICY
 
 
@@ -100,7 +101,7 @@ class Tests(unittest.TestCase):
 
     def test_full_cache_write_maximum_reserved_before_transport(self):
         self.call()
-        self.assertEqual(self.costs, [(MAX_CALL_USD, MODEL)])
+        self.assertEqual(self.costs, [(haiku_maximum_nanodollars(1000)/1e9, MODEL)])
         self.assertAlmostEqual(MAX_CALL_USD, .001924)
 
     def test_turn_reserves_two_verifier_calls_with_no_reset_or_retry(self):
@@ -141,25 +142,25 @@ class Tests(unittest.TestCase):
         self.assertFalse(self.transport.calls)
 
     def test_full_input_bounds_without_truncation(self):
-        self.transport.count = 8193
+        self.transport.count = INPUT_TOKENS+1
         with self.assertRaisesRegex(ProviderFailure, 'TOKEN_BOUND_NO_TRUNCATION'):
             self.call()
         self.assertFalse(self.tokens); self.assertFalse(self.costs)
         self.transport.count = 1000
         evidence = stable(); evidence['evidence'] = {'fixture': 'x'*65536}
-        with self.assertRaisesRegex(ProviderFailure, 'BYTE_BOUND_NO_TRUNCATION'):
-            self.call(evidence=evidence)
-        self.assertEqual(len(self.transport.calls), 1)
+        body,n=self.provider.context(VERIFY_POLICY,evidence,{},VERIFY_SCHEMA)
+        self.assertEqual(n,1000)
+        self.assertEqual(json.loads(body['messages'][0]['content'][0]['text'])['assembled_evidence'],evidence)
 
     def test_preflight_overflow_after_success_has_current_zero_generation_trace(self):
         previous = self.call(); previous_trace = deepcopy(previous.telemetry)
         before_tokens, before_costs = list(self.tokens), list(self.costs)
-        self.transport.count = 8193
+        self.transport.count = INPUT_TOKENS+1
         with self.assertRaisesRegex(ProviderFailure, 'TOKEN_BOUND_NO_TRUNCATION'):
             self.provider.context(VERIFY_POLICY, stable(), {'question':'private current question'}, VERIFY_SCHEMA)
         trace = self.provider.last_trace
         self.assertEqual(trace['generation_calls'], 0)
-        self.assertEqual(trace['input_tokens_counted'], 8193)
+        self.assertEqual(trace['input_tokens_counted'], INPUT_TOKENS+1)
         self.assertEqual(trace['failure_code'], 'COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION')
         self.assertGreater(trace['request_bytes'], 0)
         self.assertNotIn('input_tokens', trace)
@@ -169,27 +170,26 @@ class Tests(unittest.TestCase):
         self.assertEqual((self.tokens, self.costs), (before_tokens, before_costs))
         self.assertEqual(sum(c[1] == 'messages' for c in self.transport.calls), 1)
 
-    def test_preflight_byte_failure_after_success_does_not_reuse_count_or_usage(self):
+    def test_large_source_preflight_counts_full_payload_and_keeps_current_trace(self):
         self.call(); before_calls = len(self.transport.calls)
         before_tokens, before_costs = list(self.tokens), list(self.costs)
         evidence = stable(); evidence['evidence'] = {'fixture':'x'*65536}
-        with self.assertRaisesRegex(ProviderFailure, 'BYTE_BOUND_NO_TRUNCATION'):
-            self.provider.context(VERIFY_POLICY, evidence, {}, VERIFY_SCHEMA)
+        self.provider.context(VERIFY_POLICY, evidence, {}, VERIFY_SCHEMA)
         trace = self.provider.last_trace
         self.assertEqual(trace['generation_calls'], 0)
         self.assertGreater(trace['request_bytes'], 65536)
-        self.assertNotIn('input_tokens_counted', trace)
+        self.assertEqual(trace['input_tokens_counted'],1000)
         self.assertNotIn('input_tokens', trace)
-        self.assertEqual(trace['failure_code'], 'COMPLETE_CONTEXT_BYTE_BOUND_NO_TRUNCATION')
-        self.assertEqual(len(self.transport.calls), before_calls)
+        self.assertNotIn('failure_code', trace)
+        self.assertEqual(len(self.transport.calls), before_calls+1)
         self.assertEqual((self.tokens, self.costs), (before_tokens, before_costs))
 
     def test_completion_trace_stays_attached_after_failed_preflight(self):
-        self.call(); self.transport.count = 8193
+        self.call(); self.transport.count = INPUT_TOKENS+1
         with self.assertRaisesRegex(ProviderFailure, 'TOKEN_BOUND_NO_TRUNCATION'):
             self.call()
         self.assertEqual(self.provider.last_trace['generation_calls'], 0)
-        self.assertEqual(self.provider.last_trace['input_tokens_counted'], 8193)
+        self.assertEqual(self.provider.last_trace['input_tokens_counted'], INPUT_TOKENS+1)
         self.assertEqual((len(self.tokens), len(self.costs)), (1, 1))
         self.transport.count = 1000
         result = self.call()
@@ -201,7 +201,7 @@ class Tests(unittest.TestCase):
         self.assertEqual((len(self.tokens), len(self.costs)), (2, 2))
 
     def test_cached_and_created_tokens_count_toward_full_input_bound(self):
-        for values in ((1,8192,0), (1,0,8192), (100,4000,4093)):
+        for values in ((1,INPUT_TOKENS,0), (1,0,INPUT_TOKENS), (100,4000,INPUT_TOKENS-4099)):
             with self.subTest(values=values):
                 self.transport.response['usage'].update(input_tokens=values[0],
                     cache_creation_input_tokens=values[1], cache_read_input_tokens=values[2])

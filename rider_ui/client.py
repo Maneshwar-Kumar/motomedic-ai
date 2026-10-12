@@ -207,8 +207,11 @@ class RiderAPI:
     def start(self, query, request_id, *, view=None, on_verified=None, on_progress=None, on_chunk=None):
         try:
             query = validate_message(query)
-        except LimitError:
-            raise APIError('Enter a message of up to 2,000 characters.') from None
+        except LimitError as exc:
+            message = ('Keep your question to 100 words or fewer.'
+                       if exc.reason == 'MESSAGE_WORD_LIMIT'
+                       else 'Enter a question of up to 100 words and 2,000 characters.')
+            raise APIError(message, terminal=True) from None
         payload = {
             'query': query, 'bike_variant': 'Himalayan BS6',
             'manual_checksum': MANUAL_SHA, 'index_id': INDEX_ID,

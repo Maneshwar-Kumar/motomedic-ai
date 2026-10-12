@@ -9,10 +9,11 @@ import hashlib
 import json
 import warnings
 
-VERSION = 'rider-safeguards-v1'
+VERSION = 'rider-safeguards-v2-user-word-limit'
 
 @dataclass(frozen=True)
 class Limits:
+    message_words: int = 100
     message_characters: int = 2000
     message_utf8_bytes: int = 8000
     json_request_bytes: int = 16384
@@ -26,9 +27,8 @@ class Limits:
     turns_per_minute: int = 6
     turns_per_day: int = 30
     turns_per_session: int = 20
-    input_tokens: int = 8192
+    input_tokens: int = 256000 - 1800  # Published Gemma context, leaving output room.
     output_tokens: int = 1800
-    provider_request_bytes: int = 24000
     idle_expiry_seconds: int = 1800
     session_expiry_seconds: int = 86400
     media_expiry_seconds: int = 900
@@ -44,6 +44,8 @@ class LimitError(ValueError):
 def validate_message(text):
     if type(text) is not str or not text.strip():
         raise LimitError('MESSAGE_REQUIRED', 400)
+    if len(text.split()) > LIMITS.message_words:
+        raise LimitError('MESSAGE_WORD_LIMIT')
     if len(text) > LIMITS.message_characters:
         raise LimitError('MESSAGE_CHARACTER_LIMIT')
     try:
@@ -216,8 +218,6 @@ def check_model_request(policy, payload, schema, token_count, *, output_tokens=1
         wire = json.dumps(body, ensure_ascii=False, allow_nan=False).encode('utf-8')
     except (ValueError, UnicodeError, TypeError):
         raise LimitError('INVALID_MODEL_REQUEST', 503) from None
-    if len(wire) > LIMITS.provider_request_bytes:
-        raise LimitError('MODEL_CONTEXT_BYTE_LIMIT', 503)
     try:
         count = token_count(body)
     except Exception:
