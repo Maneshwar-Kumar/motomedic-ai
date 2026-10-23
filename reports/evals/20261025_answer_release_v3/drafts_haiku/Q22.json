@@ -1,0 +1,31 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "The warning symbol lights up whenever a vehicle component develops a fault.", "evidence_ids": ["E9"]},
+    {"text": "The manual does not say which specific part has failed.", "evidence_ids": []},
+    {"text": "Consult your Royal Enfield Authorised Service Centre about any problem that occurs in the operation of the motorcycle.", "evidence_ids": ["E59"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Concerns the engine MIL and EMS malfunctions, not the general warning symbol."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Concerns the ABS indicator lamp."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns loading weight and fitting accessories."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Concerns genuine accessories."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Concerns nonstandard front forks."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Continuation of E26 on nonstandard parts."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Concerns model and design specifications for accessories."},
+    {"display_id": "E39", "decision": "NOT_APPLICABLE", "reason": "Concerns nonstandard front forks and suspensions."},
+    {"display_id": "E40", "decision": "NOT_APPLICABLE", "reason": "Concerns running-in of a new motorcycle."},
+    {"display_id": "E41", "decision": "NOT_APPLICABLE", "reason": "Concerns riding at moderate speeds while learning the bike."},
+    {"display_id": "E42", "decision": "NOT_APPLICABLE", "reason": "Concerns speed and riding conditions."},
+    {"display_id": "E54", "decision": "NOT_APPLICABLE", "reason": "Concerns inspecting shock absorbers and front forks for leaks."},
+    {"display_id": "E55", "decision": "NOT_APPLICABLE", "reason": "Concerns exhaust gas."},
+    {"display_id": "E56", "decision": "NOT_APPLICABLE", "reason": "Concerns scheduled service and maintenance."},
+    {"display_id": "E63", "decision": "NOT_APPLICABLE", "reason": "Concerns hazard flashing and battery strain."},
+    {"display_id": "E68", "decision": "NOT_APPLICABLE", "reason": "Concerns turn signals with the hazard switch on."},
+    {"display_id": "E69", "decision": "NOT_APPLICABLE", "reason": "Concerns hazard lamps flashing together."}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not identify which specific component has failed when the warning symbol is on."}
+  ]
+}

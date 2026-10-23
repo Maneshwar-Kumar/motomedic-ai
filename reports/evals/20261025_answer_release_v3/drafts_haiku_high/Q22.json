@@ -1,0 +1,38 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "The warning symbol lights up whenever a vehicle component has a fault.", "evidence_ids": ["E9"]},
+    {"text": "Consult an authorised Royal Enfield service centre about any problem with the motorcycle's operation.", "evidence_ids": ["E59"]}
+  ],
+  "policy": [
+    {"text": "The warning symbol glows whenever a vehicle component faults.", "evidence_ids": ["E9"]},
+    {"text": "Problems in the motorcycle's operation should be checked with an authorised Royal Enfield service centre.", "evidence_ids": ["E59"]}
+  ],
+  "watchouts": [
+    {"text": "If the engine malfunction light stays on continuously, do not run the motorcycle. It can cause severe damage to the ECU and sensors.", "evidence_ids": ["E13"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not say which specific part has failed."},
+    {"text": "The manual does not list the faults that light the warning symbol or give steps to find the failed part."}
+  ],
+  "watchout_review": [
+    {"display_id": "E13", "decision": "INCLUDED", "reason": "Engine malfunction caution is the closest manual warning for a fault that stays on."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Concerns the ABS indicator lamp, not the general warning symbol."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns loading weight or installing accessories."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Concerns genuine accessories."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Concerns nonstandard front forks and parts."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Continuation of E26 on nonstandard parts."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Concerns model and design specifications for accessories."},
+    {"display_id": "E39", "decision": "NOT_APPLICABLE", "reason": "Concerns nonstandard suspensions and forks."},
+    {"display_id": "E40", "decision": "NOT_APPLICABLE", "reason": "Concerns the running-in procedure for a new motorcycle."},
+    {"display_id": "E41", "decision": "NOT_APPLICABLE", "reason": "Concerns moderate speeds while learning the motorcycle."},
+    {"display_id": "E42", "decision": "NOT_APPLICABLE", "reason": "Concerns speed limits and riding conditions."},
+    {"display_id": "E54", "decision": "NOT_APPLICABLE", "reason": "Concerns shock absorber and front fork inspection."},
+    {"display_id": "E55", "decision": "NOT_APPLICABLE", "reason": "Concerns exhaust gas hazards."},
+    {"display_id": "E56", "decision": "NOT_APPLICABLE", "reason": "Concerns scheduled maintenance intervals in general."},
+    {"display_id": "E63", "decision": "NOT_APPLICABLE", "reason": "Concerns battery strain from hazard flashing."},
+    {"display_id": "E68", "decision": "NOT_APPLICABLE", "reason": "Concerns turn signals while hazards are on."},
+    {"display_id": "E69", "decision": "NOT_APPLICABLE", "reason": "Concerns hazard lamp flashing."}
+  ]
+}

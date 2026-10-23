@@ -1,0 +1,2033 @@
+{
+ "schema": "motomedic-template-release-diagnostic-v3",
+ "gate_version": "template-answer-v3",
+ "arm": "haiku",
+ "label": "LOCAL_DIAGNOSTIC_CLAUDE_CODE_SUBAGENT_GENERATOR_NOT_HOSTED_NOT_ACCEPTANCE",
+ "rows": [
+  {
+   "alias": "Q11",
+   "case_id": "GEN007",
+   "group": "GOLDEN",
+   "question": "Does this manual allow E20 fuel?",
+   "gold_evidence_ids": [
+    "evidence_3f8de8466049af12783de7d0"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "Yes. The manual lists the fuel as unleaded gasoline with ethanol content up to E20, so E20 is within the stated limit. Use unleaded gasoline with ethanol content up to E20.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E5",
+     "evidence_id": "evidence_3f8de8466049af12783de7d0",
+     "pages": [
+      18
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_3f8de8466049af12783de7d0"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 7,
+   "sections": {
+    "answer": [
+     {
+      "text": "Yes. The manual lists the fuel as unleaded gasoline with ethanol content up to E20, so E20 is within the stated limit.",
+      "evidence_ids": [
+       "E5"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "Use unleaded gasoline with ethanol content up to E20.",
+      "evidence_ids": [
+       "E5"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "It specifies unleaded gasoline with ethanol content up to E20. That does not establish approval for fuel above E20.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q14",
+   "case_id": "GEN011",
+   "group": "GOLDEN",
+   "question": "Are the standard and low seats the same adjustable height?",
+   "gold_evidence_ids": [
+    "evidence_0977d270b64406ab9d320956",
+    "evidence_6058a38ed55c9b65bad75313",
+    "evidence_74d7693f57971057cf41fb71"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "SYSTEM_ERROR",
+   "rejection_code": "TEMPLATE_ITEM_INVALID",
+   "rejection_detail": "answer",
+   "released_route": null,
+   "released_text": null,
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": null,
+   "cited_evidence_ids": [],
+   "watchouts_included": null,
+   "warnings_sent": 0,
+   "sections": {
+    "answer": [
+     {
+      "text": "The standard seat adjusts from 825 mm to 845 mm.",
+      "evidence_ids": [
+       "E3"
+      ]
+     },
+     {
+      "text": "The low seat adjusts from 805 mm to 825 mm.",
+      "evidence_ids": [
+       "E4"
+      ]
+     },
+     {
+      "text": "So the two seats are not the same adjustable height; the manual gives different ranges for them.",
+      "evidence_ids": [
+       "E3",
+       "E4"
+      ]
+     },
+     {
+      "text": "To confirm the exact setting for your motorcycle, check with an authorised Royal Enfield service centre."
+     }
+    ],
+    "policy": [
+     {
+      "text": "Where the manual gives different values for the same thing, both are given and the rider is directed to confirm with an authorised Royal Enfield service centre.",
+      "evidence_ids": [
+       "E3",
+       "E4"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "No. The standard seat is listed as adjustable from 825 to 845 mm; the low seat from 805 to 825 mm. These are specification values for guidance, not confirmation of the seat fitted to your bike.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q26",
+   "case_id": "GEN012",
+   "group": "GOLDEN",
+   "question": "What spark-plug gap is specified?",
+   "gold_evidence_ids": [
+    "evidence_6bf722f54de89478dba83e34"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The spark plug gap is 0.8 mm to 0.9 mm.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E3",
+     "evidence_id": "evidence_6bf722f54de89478dba83e34",
+     "pages": [
+      16
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_6bf722f54de89478dba83e34"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 0,
+   "sections": {
+    "answer": [
+     {
+      "text": "The spark plug gap is 0.8 mm to 0.9 mm.",
+      "evidence_ids": [
+       "E3"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "The specification is 0.8–0.9 mm. This is a lookup, not an instruction to access, remove or adjust the plug.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q18",
+   "case_id": "GEN014",
+   "group": "GOLDEN",
+   "question": "Are the left and right fork oil quantities identical?",
+   "gold_evidence_ids": [
+    "evidence_37c6c31f5700495414de1101",
+    "evidence_424971c8f0be958200b09990",
+    "evidence_a6950ea73293cda81e695ce1"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "No, the two fork oil quantities are not the same. The right (RH) fork takes 589 ml, plus or minus 2.5 ml. The left (LH) fork takes 507 ml, plus or minus 2.5 ml. The manual says these values are approximate and the actual amount will vary. The fork oil capacities are approximate and the actual amount will vary. The manual lists different fork oil quantities for the two forks, so confirm them with an authorised Royal Enfield service centre.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E1",
+     "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+     "pages": [
+      21
+     ]
+    },
+    {
+     "label": "E4",
+     "evidence_id": "evidence_424971c8f0be958200b09990",
+     "pages": [
+      21
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_424971c8f0be958200b09990",
+    "evidence_a6950ea73293cda81e695ce1"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 1,
+   "sections": {
+    "answer": [
+     {
+      "text": "No, the two fork oil quantities are not the same.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "The right (RH) fork takes 589 ml, plus or minus 2.5 ml.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "The left (LH) fork takes 507 ml, plus or minus 2.5 ml.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "The manual says these values are approximate and the actual amount will vary.",
+      "evidence_ids": [
+       "E4"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "The fork oil capacities are approximate and the actual amount will vary.",
+      "evidence_ids": [
+       "E4"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": [
+     {
+      "text": "The manual lists different fork oil quantities for the two forks, so confirm them with an authorised Royal Enfield service centre."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "No. The table specifies SS-47G fork oil, right-hand fork 589 ± 2.5 ml and left-hand fork 507 ± 2.5 ml. This is a specification lookup; it does not supply a fork-service procedure. The table notes actual capacities can vary. Its caution says using the wrong oil grade reduces moving-part life and seriously affects performance.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q16",
+   "case_id": "GEN017",
+   "group": "GOLDEN",
+   "question": "What output rating is listed for the USB port?",
+   "gold_evidence_ids": [
+    "evidence_13dac6aaee2fcbdd57618d29",
+    "evidence_bcc2ecdbee298a98332e9c23",
+    "evidence_ea69e5fbd3ff27f1dd159960"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The USB port output is 5 V, 2 A. Watch out: If the current drawn is higher than 2.5 A, the USB charger shuts down. Check your smartphone battery's current rating before using it. Watch out: The USB charger works only when the engine is running.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E8",
+     "evidence_id": "evidence_bcc2ecdbee298a98332e9c23",
+     "pages": [
+      19
+     ]
+    },
+    {
+     "label": "E21",
+     "evidence_id": "evidence_ea69e5fbd3ff27f1dd159960",
+     "pages": [
+      65
+     ]
+    },
+    {
+     "label": "E22",
+     "evidence_id": "evidence_13dac6aaee2fcbdd57618d29",
+     "pages": [
+      65
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_13dac6aaee2fcbdd57618d29",
+    "evidence_bcc2ecdbee298a98332e9c23",
+    "evidence_ea69e5fbd3ff27f1dd159960"
+   ],
+   "watchouts_included": [
+    "E21",
+    "E22"
+   ],
+   "warnings_sent": 15,
+   "sections": {
+    "answer": [
+     {
+      "text": "The USB port output is 5 V, 2 A.",
+      "evidence_ids": [
+       "E8"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": [
+     {
+      "text": "If the current drawn is higher than 2.5 A, the USB charger shuts down. Check your smartphone battery's current rating before using it.",
+      "evidence_ids": [
+       "E21"
+      ]
+     },
+     {
+      "text": "The USB charger works only when the engine is running.",
+      "evidence_ids": [
+       "E22"
+      ]
+     }
+    ],
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "The electrical specification lists USB 2.0 Type C, 5 V, 2 A output. That is distinct from the separate warning that current draw greater than 2.5 A shuts the charger down; the charger works only with the engine running.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q12",
+   "case_id": "GEN022",
+   "group": "GOLDEN",
+   "question": "Why will the ignition key not come out while it is ON?",
+   "gold_evidence_ids": [
+    "evidence_1e819216fd033fbe0f84a38b",
+    "evidence_2b8af8f01370b1d3b9ee880a",
+    "evidence_6d18aae51376185337eba68f"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The key cannot be removed while the ignition is ON. The key can be removed only when the ignition is OFF or the steering is locked. The key can be removed only if the ignition is OFF or the steering is locked. Watch out: Do not switch the ignition OFF while riding the motorcycle. Watch out: Switching the ignition OFF while riding can cause a potential accident, resulting in serious injury to the rider and other road users, and severe damage to the motorcycle.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E3",
+     "evidence_id": "evidence_6d18aae51376185337eba68f",
+     "pages": [
+      26
+     ]
+    },
+    {
+     "label": "E6",
+     "evidence_id": "evidence_2b8af8f01370b1d3b9ee880a",
+     "pages": [
+      26
+     ]
+    },
+    {
+     "label": "E7",
+     "evidence_id": "evidence_1e819216fd033fbe0f84a38b",
+     "pages": [
+      26
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_1e819216fd033fbe0f84a38b",
+    "evidence_2b8af8f01370b1d3b9ee880a",
+    "evidence_6d18aae51376185337eba68f"
+   ],
+   "watchouts_included": [
+    "E6",
+    "E7"
+   ],
+   "warnings_sent": 3,
+   "sections": {
+    "answer": [
+     {
+      "text": "The key cannot be removed while the ignition is ON.",
+      "evidence_ids": [
+       "E3"
+      ]
+     },
+     {
+      "text": "The key can be removed only when the ignition is OFF or the steering is locked.",
+      "evidence_ids": [
+       "E3"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "The key can be removed only if the ignition is OFF or the steering is locked.",
+      "evidence_ids": [
+       "E3"
+      ]
+     }
+    ],
+    "watchouts": [
+     {
+      "text": "Do not switch the ignition OFF while riding the motorcycle.",
+      "evidence_ids": [
+       "E6"
+      ]
+     },
+     {
+      "text": "Switching the ignition OFF while riding can cause a potential accident, resulting in serious injury to the rider and other road users, and severe damage to the motorcycle.",
+      "evidence_ids": [
+       "E7"
+      ]
+     }
+    ],
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual says the key can be removed only with ignition OFF or the steering locked. It also warns never to switch the ignition OFF while riding.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q04",
+   "case_id": "GEN025",
+   "group": "GOLDEN",
+   "question": "Which riding mode combinations are listed?",
+   "gold_evidence_ids": [
+    "evidence_77334b27d80a1f1e7c1fe54b",
+    "evidence_ab33eebe16865f95a711ddfa",
+    "evidence_b7e876776f05725c8d89f4af",
+    "evidence_ed64042cada40bb015dffc46"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The manual lists these riding mode combinations: Performance + ABS ON, Performance + Rear ABS OFF, ECO + ABS ON and ECO + Rear ABS OFF. The following modes are available on the home screen.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E2",
+     "evidence_id": "evidence_cb7429d8ba39d16df149ca02",
+     "pages": [
+      32
+     ]
+    },
+    {
+     "label": "E3",
+     "evidence_id": "evidence_b7e876776f05725c8d89f4af",
+     "pages": [
+      32
+     ]
+    },
+    {
+     "label": "E4",
+     "evidence_id": "evidence_ab33eebe16865f95a711ddfa",
+     "pages": [
+      32
+     ]
+    },
+    {
+     "label": "E5",
+     "evidence_id": "evidence_ed64042cada40bb015dffc46",
+     "pages": [
+      32
+     ]
+    },
+    {
+     "label": "E6",
+     "evidence_id": "evidence_77334b27d80a1f1e7c1fe54b",
+     "pages": [
+      32
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_77334b27d80a1f1e7c1fe54b",
+    "evidence_ab33eebe16865f95a711ddfa",
+    "evidence_b7e876776f05725c8d89f4af",
+    "evidence_cb7429d8ba39d16df149ca02",
+    "evidence_ed64042cada40bb015dffc46"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 0,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual lists these riding mode combinations: Performance + ABS ON, Performance + Rear ABS OFF, ECO + ABS ON and ECO + Rear ABS OFF.",
+      "evidence_ids": [
+       "E3",
+       "E4",
+       "E5",
+       "E6"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "The following modes are available on the home screen.",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual lists Performance + ABS ON, Performance + Rear ABS OFF, ECO + ABS ON and ECO + Rear ABS OFF. This lists available modes; it does not recommend disabling ABS or infer your selected mode.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q10",
+   "case_id": "GEN030",
+   "group": "GOLDEN",
+   "question": "Which display languages are listed?",
+   "gold_evidence_ids": [
+    "evidence_0dff6026a67902df25210af2",
+    "evidence_7f57d765db8c41979f270112",
+    "evidence_90061300e4df669ac99f9d8d",
+    "evidence_a5e8430eda5a282f5c17e986",
+    "evidence_c6c47cb26648960a02d4b727",
+    "evidence_de4c690b1c25827ccfdc72d1"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The manual lists these display languages: English, Italian, Spanish, Portuguese, German and French.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E3",
+     "evidence_id": "evidence_c6c47cb26648960a02d4b727",
+     "pages": [
+      50
+     ]
+    },
+    {
+     "label": "E4",
+     "evidence_id": "evidence_de4c690b1c25827ccfdc72d1",
+     "pages": [
+      50
+     ]
+    },
+    {
+     "label": "E5",
+     "evidence_id": "evidence_7f57d765db8c41979f270112",
+     "pages": [
+      50
+     ]
+    },
+    {
+     "label": "E6",
+     "evidence_id": "evidence_90061300e4df669ac99f9d8d",
+     "pages": [
+      50
+     ]
+    },
+    {
+     "label": "E7",
+     "evidence_id": "evidence_a5e8430eda5a282f5c17e986",
+     "pages": [
+      51
+     ]
+    },
+    {
+     "label": "E8",
+     "evidence_id": "evidence_0dff6026a67902df25210af2",
+     "pages": [
+      51
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_0dff6026a67902df25210af2",
+    "evidence_7f57d765db8c41979f270112",
+    "evidence_90061300e4df669ac99f9d8d",
+    "evidence_a5e8430eda5a282f5c17e986",
+    "evidence_c6c47cb26648960a02d4b727",
+    "evidence_de4c690b1c25827ccfdc72d1"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 2,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual lists these display languages: English, Italian, Spanish, Portuguese, German and French.",
+      "evidence_ids": [
+       "E3",
+       "E4",
+       "E5",
+       "E6",
+       "E7",
+       "E8"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual lists English, Italian, Spanish, Portuguese, German and French. That is this manual’s listed menu content, not a guarantee that every firmware version has identical options.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q07",
+   "case_id": "GEN035",
+   "group": "GOLDEN",
+   "question": "Why does the compass not work with navigation inactive?",
+   "gold_evidence_ids": [
+    "evidence_145c685b98e1e04b7955e1d6"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The compass works only when there is active navigation. The manual states the condition but does not explain why the compass depends on active navigation.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E4",
+     "evidence_id": "evidence_145c685b98e1e04b7955e1d6",
+     "pages": [
+      57
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_145c685b98e1e04b7955e1d6"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 7,
+   "sections": {
+    "answer": [
+     {
+      "text": "The compass works only when there is active navigation.",
+      "evidence_ids": [
+       "E4"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": [
+     {
+      "text": "The manual states the condition but does not explain why the compass depends on active navigation."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual says the compass functions only while navigation is active. That condition does not diagnose the compass if navigation is already active.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q20",
+   "case_id": "GEN044",
+   "group": "GOLDEN",
+   "question": "At 300 km, does this manual allow full throttle?",
+   "gold_evidence_ids": [
+    "evidence_22f28ee80b5722700b451737",
+    "evidence_46773c959c783a25fed63c5d",
+    "evidence_4c44e041f331d8e8c1c20d45",
+    "evidence_b27f0ee41aa174a7ff6818ea",
+    "evidence_c25ff60686f3788166014a45"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "No. At 300 km the manual does not allow full throttle. During this period, keep the maximum engine speed below 6000 rpm. Full throttle is not allowed in the first 500 km, which covers 300 km. Avoid full throttle operation during the running-in period.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E4",
+     "evidence_id": "evidence_22f28ee80b5722700b451737",
+     "pages": [
+      71
+     ]
+    },
+    {
+     "label": "E8",
+     "evidence_id": "evidence_b27f0ee41aa174a7ff6818ea",
+     "pages": [
+      71
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_22f28ee80b5722700b451737",
+    "evidence_b27f0ee41aa174a7ff6818ea"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 0,
+   "sections": {
+    "answer": [
+     {
+      "text": "No. At 300 km the manual does not allow full throttle.",
+      "evidence_ids": [
+       "E8"
+      ]
+     },
+     {
+      "text": "During this period, keep the maximum engine speed below 6000 rpm.",
+      "evidence_ids": [
+       "E8"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "Full throttle is not allowed in the first 500 km, which covers 300 km.",
+      "evidence_ids": [
+       "E8"
+      ]
+     },
+     {
+      "text": "Avoid full throttle operation during the running-in period.",
+      "evidence_ids": [
+       "E4"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "No. For 0–500 km the running-in table says below 6,000 rpm and no full throttle. The running-in guidance also says vary speed, avoid sudden acceleration/braking, respect payload limits and take a brief stop rather than riding continuously over an hour.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q25",
+   "case_id": "N01",
+   "group": "NO_ANSWER",
+   "question": "What is the top speed of this motorcycle?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "SYSTEM_ERROR",
+   "rejection_code": "UNCITED_TECHNICAL_ITEM",
+   "rejection_detail": "answer",
+   "released_route": null,
+   "released_text": null,
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": null,
+   "cited_evidence_ids": [],
+   "watchouts_included": null,
+   "warnings_sent": 7,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual does not state a top speed for the New Himalayan 450.",
+      "evidence_ids": []
+     },
+     {
+      "text": "The running-in table gives engine speed limits in rpm for the first 1500 km, which are not a top speed.",
+      "evidence_ids": [
+       "E41"
+      ]
+     },
+     {
+      "text": "Do not exceed the legal speed limit or ride too fast for the conditions.",
+      "evidence_ids": [
+       "E14"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "Do not exceed the legal speed limit or ride too fast for existing conditions.",
+      "evidence_ids": [
+       "E14"
+      ]
+     },
+     {
+      "text": "Use the running-in procedure for a new motorcycle, with engine speed limits in the first 500 km.",
+      "evidence_ids": [
+       "E12",
+       "E41"
+      ]
+     }
+    ],
+    "watchouts": [
+     {
+      "text": "A new motorcycle must be run in according to the running-in procedure.",
+      "evidence_ids": [
+       "E12"
+      ]
+     },
+     {
+      "text": "Ride at moderate speeds and out of traffic until you are thoroughly familiar with the motorcycle.",
+      "evidence_ids": [
+       "E13"
+      ]
+     },
+     {
+      "text": "High speed increases the chance of losing control, so reduce speed when conditions are poor.",
+      "evidence_ids": [
+       "E14"
+      ]
+     }
+    ],
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No top-speed figure. Traps: p14 \"do not exceed 110 km/h\" on accessory-equipped bikes; p44-45 \"Max speed\" trip display item."
+  },
+  {
+   "alias": "Q17",
+   "case_id": "N02",
+   "group": "NO_ANSWER",
+   "question": "How many seconds does it take to go from 0 to 100 km/h?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "SYSTEM_ERROR",
+   "rejection_code": "WATCHOUT_NOT_CONSIDERED",
+   "rejection_detail": "E10,E14,E15,E16,E17,E18,E19,E25,E26,E27,E28,E40,E41,E42,E43,E44,E45",
+   "released_route": null,
+   "released_text": null,
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": null,
+   "cited_evidence_ids": [],
+   "watchouts_included": null,
+   "warnings_sent": 17,
+   "sections": {
+    "answer": null,
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No acceleration figure; p71/p75-77 only give riding/starting advice on accelerating."
+  },
+  {
+   "alias": "Q15",
+   "case_id": "N03",
+   "group": "NO_ANSWER",
+   "question": "What mileage in km per litre should I expect from this bike?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "The manual's fuel consumption menu offers the units km/l, L/100 km, mpg (UK) and mpg (US). When the speed/distance is set to km, only km/l or L/100 km can be selected. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E2",
+     "evidence_id": "evidence_3c681e6188e6de9d42af188d",
+     "pages": [
+      49
+     ]
+    },
+    {
+     "label": "E3",
+     "evidence_id": "evidence_0b98de2141b37b21553f04a3",
+     "pages": [
+      49
+     ]
+    },
+    {
+     "label": "E4",
+     "evidence_id": "evidence_913f0a1a83d359defb379e89",
+     "pages": [
+      49
+     ]
+    },
+    {
+     "label": "E5",
+     "evidence_id": "evidence_50649517954717ce69a9c6b9",
+     "pages": [
+      49
+     ]
+    },
+    {
+     "label": "E6",
+     "evidence_id": "evidence_93536fea5763754396fd4a52",
+     "pages": [
+      49
+     ]
+    },
+    {
+     "label": "E9",
+     "evidence_id": "evidence_955e562b08455576c61a9871",
+     "pages": [
+      49
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_0b98de2141b37b21553f04a3",
+    "evidence_3c681e6188e6de9d42af188d",
+    "evidence_50649517954717ce69a9c6b9",
+    "evidence_913f0a1a83d359defb379e89",
+    "evidence_93536fea5763754396fd4a52",
+    "evidence_955e562b08455576c61a9871"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 0,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual's fuel consumption menu offers the units km/l, L/100 km, mpg (UK) and mpg (US).",
+      "evidence_ids": [
+       "E2",
+       "E3",
+       "E4",
+       "E5",
+       "E6"
+      ]
+     },
+     {
+      "text": "When the speed/distance is set to km, only km/l or L/100 km can be selected.",
+      "evidence_ids": [
+       "E9"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No fuel-economy figure. Traps: km/l is a display unit (p37-38, p49); a 146 km fuel range appears in display illustrations."
+  },
+  {
+   "alias": "Q28",
+   "case_id": "N04",
+   "group": "NO_ANSWER",
+   "question": "Does this bike have cruise control?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [],
+   "cited_evidence_ids": [],
+   "watchouts_included": [],
+   "warnings_sent": 21,
+   "sections": {
+    "answer": null,
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No mention of cruise control anywhere in the manual."
+  },
+  {
+   "alias": "Q01",
+   "case_id": "N05",
+   "group": "NO_ANSWER",
+   "question": "How deep a water crossing can the bike safely ride through?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "SYSTEM_ERROR",
+   "rejection_code": "TEMPLATE_SCHEMA",
+   "rejection_detail": "",
+   "released_route": null,
+   "released_text": null,
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": null,
+   "cited_evidence_ids": [],
+   "watchouts_included": null,
+   "warnings_sent": 8,
+   "sections": {
+    "answer": null,
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No wading depth or water-crossing guidance (only a warranty exclusion mentioning flood, p132)."
+  },
+  {
+   "alias": "Q06",
+   "case_id": "N06",
+   "group": "NO_ANSWER",
+   "question": "Does the manual give any advice for riding at high altitude, like in Ladakh?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [],
+   "cited_evidence_ids": [],
+   "watchouts_included": [],
+   "warnings_sent": 7,
+   "sections": {
+    "answer": null,
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No altitude guidance anywhere in the manual."
+  },
+  {
+   "alias": "Q19",
+   "case_id": "N07",
+   "group": "NO_ANSWER",
+   "question": "What is the battery's cold cranking amps (CCA) rating?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "The manual lists the battery as 12 V - 8 Ah VRLA, which is its voltage and capacity, not a cold cranking amps rating. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E1",
+     "evidence_id": "evidence_a13f7fa9cd6b4eb3ecc9aad8",
+     "pages": [
+      104
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_a13f7fa9cd6b4eb3ecc9aad8"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 20,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual lists the battery as 12 V - 8 Ah VRLA, which is its voltage and capacity, not a cold cranking amps rating.",
+      "evidence_ids": [
+       "E1"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No CCA rating. Trap: p104 lists a 12 V 8 Ah VRLA battery."
+  },
+  {
+   "alias": "Q03",
+   "case_id": "N08",
+   "group": "NO_ANSWER",
+   "question": "What compression pressure should a healthy engine show on a compression test?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "The manual gives the engine's compression ratio as 11.5:1. That is a design figure, not a compression test reading. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E5",
+     "evidence_id": "evidence_a5bb5d14fd332f16c381c1b7",
+     "pages": [
+      16
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_a5bb5d14fd332f16c381c1b7"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 5,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual gives the engine's compression ratio as 11.5:1. That is a design figure, not a compression test reading.",
+      "evidence_ids": [
+       "E5"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No compression-test pressure. Trap: p16 lists the compression ratio."
+  },
+  {
+   "alias": "Q05",
+   "case_id": "N09",
+   "group": "NO_ANSWER",
+   "question": "What throttle cable free play does the manual specify?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "The manual's free play adjustment is for the clutch lever: 9 - 11 mm of free play at the clutch lever ball end before engine engagement. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E5",
+     "evidence_id": "evidence_b3f8fe7889735025223e2242",
+     "pages": [
+      101
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_b3f8fe7889735025223e2242"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 6,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual's free play adjustment is for the clutch lever: 9 - 11 mm of free play at the clutch lever ball end before engine engagement.",
+      "evidence_ids": [
+       "E5"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No throttle free-play figure. Traps: clutch free play 9-11 mm (p101-102), drive chain free play 35-40 mm (p102-103)."
+  },
+  {
+   "alias": "Q13",
+   "case_id": "N10",
+   "group": "NO_ANSWER",
+   "question": "How do I pair a Bluetooth intercom headset with the bike?",
+   "gold_evidence_ids": [],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "The manual says to use only genuine Royal Enfield spare parts and approved accessories. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E9",
+     "evidence_id": "evidence_27e3084b428698e642724d66",
+     "pages": [
+      8
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_27e3084b428698e642724d66"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 13,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual says to use only genuine Royal Enfield spare parts and approved accessories.",
+      "evidence_ids": [
+       "E9"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": null,
+   "absence_check": "No headset or intercom pairing; the manual covers phone/app connectivity (p53-57) and TCU pairing (p146)."
+  },
+  {
+   "alias": "Q24",
+   "case_id": "EXP027",
+   "group": "PARTIAL",
+   "question": "When do the brake pads need replacement?",
+   "gold_evidence_ids": [],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The manual says the front and rear brake pads must be checked for wear at the intervals in the periodic maintenance chart. The manual says the pads need to be replaced if a brake pad is \"warm to the indicator\". The front and rear brake pads must be checked for wear at the intervals in the periodic maintenance chart. The pads need to be replaced if a brake pad is \"warm to the indicator\". The supplied sections do not give a distance or time for checking or replacing the pads, and the maintenance chart they refer to is not included. The replacement wording in the manual is unclear, so confirm the replacement point with an authorised Royal Enfield service centre.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E1",
+     "evidence_id": "evidence_7cd1de903310b8e09d8a9d4e",
+     "pages": [
+      90
+     ]
+    },
+    {
+     "label": "E2",
+     "evidence_id": "evidence_1fd98dd6ead9e18f957b54ed",
+     "pages": [
+      91
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_1fd98dd6ead9e18f957b54ed",
+    "evidence_7cd1de903310b8e09d8a9d4e"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 7,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual says the front and rear brake pads must be checked for wear at the intervals in the periodic maintenance chart.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "The manual says the pads need to be replaced if a brake pad is \"warm to the indicator\".",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "The front and rear brake pads must be checked for wear at the intervals in the periodic maintenance chart.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "The pads need to be replaced if a brake pad is \"warm to the indicator\".",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": [
+     {
+      "text": "The supplied sections do not give a distance or time for checking or replacing the pads, and the maintenance chart they refer to is not included."
+     },
+     {
+      "text": "The replacement wording in the manual is unclear, so confirm the replacement point with an authorised Royal Enfield service centre.",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual requires scheduled front/rear pad checks. Its printed replacement-threshold wording is unclear; have authorised service assess pad wear.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q21",
+   "case_id": "EXP034",
+   "group": "PARTIAL",
+   "question": "How do I check the battery voltage?",
+   "gold_evidence_ids": [
+    "evidence_45e01fb1becff7605de0f33d"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "For checking the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre. On the analog screen, the battery gauge has four segments, and each segment represents 1 V. For example, two segments completely filled means 12.5 V, and up to three segments half filled means 13 V. Battery voltage checks are referred to a Royal Enfield Authorised Service Centre or a battery service centre. Watch out: Do not hold the starter button down for long periods after the engine fails to start, because this drains the battery below 10 V. The manual does not give a step-by-step way for a rider to measure the battery voltage. The manual does not say how accurate the analog screen battery gauge is.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E10",
+     "evidence_id": "evidence_45e01fb1becff7605de0f33d",
+     "pages": [
+      105
+     ]
+    },
+    {
+     "label": "E17",
+     "evidence_id": "evidence_6ea24b0017b92e74e4c193c6",
+     "pages": [
+      37
+     ]
+    },
+    {
+     "label": "E18",
+     "evidence_id": "evidence_8cf19b0f3aa83fe252f906cc",
+     "pages": [
+      38
+     ]
+    },
+    {
+     "label": "E25",
+     "evidence_id": "evidence_533bb7ef741105dc8ee7cdf1",
+     "pages": [
+      74
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_45e01fb1becff7605de0f33d",
+    "evidence_533bb7ef741105dc8ee7cdf1",
+    "evidence_6ea24b0017b92e74e4c193c6",
+    "evidence_8cf19b0f3aa83fe252f906cc"
+   ],
+   "watchouts_included": [
+    "E25"
+   ],
+   "warnings_sent": 8,
+   "sections": {
+    "answer": [
+     {
+      "text": "For checking the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre.",
+      "evidence_ids": [
+       "E10"
+      ]
+     },
+     {
+      "text": "On the analog screen, the battery gauge has four segments, and each segment represents 1 V.",
+      "evidence_ids": [
+       "E17"
+      ]
+     },
+     {
+      "text": "For example, two segments completely filled means 12.5 V, and up to three segments half filled means 13 V.",
+      "evidence_ids": [
+       "E18"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "Battery voltage checks are referred to a Royal Enfield Authorised Service Centre or a battery service centre.",
+      "evidence_ids": [
+       "E10"
+      ]
+     }
+    ],
+    "watchouts": [
+     {
+      "text": "Do not hold the starter button down for long periods after the engine fails to start, because this drains the battery below 10 V.",
+      "evidence_ids": [
+       "E25"
+      ]
+     }
+    ],
+    "disclaimers": [
+     {
+      "text": "The manual does not give a step-by-step way for a rider to measure the battery voltage."
+     },
+     {
+      "text": "The manual does not say how accurate the analog screen battery gauge is."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual directs you to a Royal Enfield authorised service centre or battery service centre for checking battery voltage. It does not give an owner multimeter test procedure in this guidance.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q27",
+   "case_id": "EXP037",
+   "group": "PARTIAL",
+   "question": "The number-plate light stopped working. Which bulb should I buy?",
+   "gold_evidence_ids": [
+    "evidence_263f3b555e67f5b3d5dd921b",
+    "evidence_9bd367226b5030b7a79beb0f"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The number-plate light is an LED unit. If it fails, the manual says the whole tail lamp and number-plate light assembly should be replaced, not just a bulb. Contact a Royal Enfield Authorised Dealer or Service Centre to have it replaced. Replace the whole tail lamp and number-plate light assembly if it fails. Have the replacement done by a Royal Enfield Authorised Dealer or Service Centre. Use bulbs and electrical parts of the specified rating only. Watch out: Using bulbs or electrical parts with a rating other than the specified one can cause overloading, erratic behaviour or early failure of the electrical system. Watch out: Fitting parts that Royal Enfield has not approved can seriously affect the vehicle's performance and will void the warranty. The manual does not give a part number, bulb type or wattage for the number-plate light, so I cannot say which bulb to buy. The 0.31 W figure in the manual is for the tail lamp, not the number-plate light. Confirm the correct part with an authorised Royal Enfield service centre before buying anything.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E1",
+     "evidence_id": "evidence_9bd367226b5030b7a79beb0f",
+     "pages": [
+      110
+     ]
+    },
+    {
+     "label": "E2",
+     "evidence_id": "evidence_263f3b555e67f5b3d5dd921b",
+     "pages": [
+      110
+     ]
+    },
+    {
+     "label": "E8",
+     "evidence_id": "evidence_e5038680f235054234151f44",
+     "pages": [
+      19
+     ]
+    },
+    {
+     "label": "E16",
+     "evidence_id": "evidence_da497f5f0bbf1c24b8f93714",
+     "pages": [
+      19
+     ]
+    },
+    {
+     "label": "E17",
+     "evidence_id": "evidence_081f245f33f1dec5cb06a080",
+     "pages": [
+      19
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_081f245f33f1dec5cb06a080",
+    "evidence_263f3b555e67f5b3d5dd921b",
+    "evidence_9bd367226b5030b7a79beb0f",
+    "evidence_da497f5f0bbf1c24b8f93714",
+    "evidence_e5038680f235054234151f44"
+   ],
+   "watchouts_included": [
+    "E16",
+    "E17"
+   ],
+   "warnings_sent": 8,
+   "sections": {
+    "answer": [
+     {
+      "text": "The number-plate light is an LED unit.",
+      "evidence_ids": [
+       "E1",
+       "E8"
+      ]
+     },
+     {
+      "text": "If it fails, the manual says the whole tail lamp and number-plate light assembly should be replaced, not just a bulb.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "Contact a Royal Enfield Authorised Dealer or Service Centre to have it replaced.",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "Replace the whole tail lamp and number-plate light assembly if it fails.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "Have the replacement done by a Royal Enfield Authorised Dealer or Service Centre.",
+      "evidence_ids": [
+       "E2"
+      ]
+     },
+     {
+      "text": "Use bulbs and electrical parts of the specified rating only.",
+      "evidence_ids": [
+       "E16"
+      ]
+     }
+    ],
+    "watchouts": [
+     {
+      "text": "Using bulbs or electrical parts with a rating other than the specified one can cause overloading, erratic behaviour or early failure of the electrical system.",
+      "evidence_ids": [
+       "E16"
+      ]
+     },
+     {
+      "text": "Fitting parts that Royal Enfield has not approved can seriously affect the vehicle's performance and will void the warranty.",
+      "evidence_ids": [
+       "E17"
+      ]
+     }
+    ],
+    "disclaimers": [
+     {
+      "text": "The manual does not give a part number, bulb type or wattage for the number-plate light, so I cannot say which bulb to buy."
+     },
+     {
+      "text": "The 0.31 W figure in the manual is for the tail lamp, not the number-plate light.",
+      "evidence_ids": [
+       "E8"
+      ]
+     },
+     {
+      "text": "Confirm the correct part with an authorised Royal Enfield service centre before buying anything."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual identifies an LED license-plate illuminator and directs authorised dealer/service replacement of its assembly on failure. It does not specify a replaceable bulb for this light.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q02",
+   "case_id": "EXP038",
+   "group": "PARTIAL",
+   "question": "Which direction can the headlamp beam be adjusted?",
+   "gold_evidence_ids": [
+    "evidence_baa411676d221984d8072550"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The headlight beam can be adjusted in the vertical direction only. Turn the head light beam adjusting screw clockwise or anticlockwise to increase or decrease the height of the beam. The beam is adjusted with the adjusting screw, and only in the vertical direction.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E1",
+     "evidence_id": "evidence_baa411676d221984d8072550",
+     "pages": [
+      109
+     ]
+    },
+    {
+     "label": "E2",
+     "evidence_id": "evidence_4e4adae2ce9bea194c953cab",
+     "pages": [
+      109
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_4e4adae2ce9bea194c953cab",
+    "evidence_baa411676d221984d8072550"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 0,
+   "sections": {
+    "answer": [
+     {
+      "text": "The headlight beam can be adjusted in the vertical direction only.",
+      "evidence_ids": [
+       "E1",
+       "E2"
+      ]
+     },
+     {
+      "text": "Turn the head light beam adjusting screw clockwise or anticlockwise to increase or decrease the height of the beam.",
+      "evidence_ids": [
+       "E1",
+       "E2"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "The beam is adjusted with the adjusting screw, and only in the vertical direction.",
+      "evidence_ids": [
+       "E1",
+       "E2"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual describes vertical adjustment using the adjusting screw turned clockwise or anticlockwise. It does not map each direction to up/down or supply an aiming distance/height in this guidance, so I cannot prescribe a precise aim setting. Authorised service can set it.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q08",
+   "case_id": "EXP040",
+   "group": "PARTIAL",
+   "question": "What rear-suspension notch should I use riding solo?",
+   "gold_evidence_ids": [
+    "evidence_f27b3a99805a40992be6f399",
+    "evidence_fb5ddc131802596bbfc6777e"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "COMPLETE",
+   "gate": "SYSTEM_ERROR",
+   "rejection_code": "TEMPLATE_ITEM_INVALID",
+   "rejection_detail": "answer",
+   "released_route": null,
+   "released_text": null,
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": null,
+   "cited_evidence_ids": [],
+   "watchouts_included": null,
+   "warnings_sent": 5,
+   "sections": {
+    "answer": [
+     {
+      "text": "When riding solo, with only the rider and no load, set the rear suspension to the 3rd notch.",
+      "evidence_ids": [
+       "E10"
+      ]
+     },
+     {
+      "text": "The manual also says the adjuster is kept at the first notch position, so the two values differ.",
+      "evidence_ids": [
+       "E4"
+      ]
+     },
+     {
+      "text": "Confirm the correct notch with an authorised Royal Enfield service centre."
+     }
+    ],
+    "policy": [
+     {
+      "text": "The suspension setting notch depends on whether the motorcycle is unladen or laden.",
+      "evidence_ids": [
+       "E10"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "Page117 table lists3rd notch for rider-only loading, but page116 says the six-step adjuster is kept at first notch. I cannot verify which setting applies to your situation from those differing statements. Please confirm with authorised service.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q29",
+   "case_id": "EXP044",
+   "group": "PARTIAL",
+   "question": "My bike has been stored for over a month. Can I just restart it?",
+   "gold_evidence_ids": [
+    "evidence_8fa7f3dd0a735ed98d818a77",
+    "evidence_fcba93b4680b3116de440b69"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "For a motorcycle not used for a month or longer, the manual advises disconnecting the battery terminals and removing the battery. Before refitting the battery, check that its voltage is within specification; if it is not, recharge it at an authorised service workshop or battery dealer. For re-use after storage, the manual says it is preferable to have the motorcycle prepared by a Royal Enfield Authorised Service Centre. Storage for a month or longer calls for disconnecting and removing the battery, and checking its voltage before refitting. Preparation for re-use after storage is preferably done by a Royal Enfield Authorised Service Centre. The manual does not give a step-by-step procedure for restarting a motorcycle that has been stored this long. The manual does not say whether the motorcycle can be started without this preparation.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E10",
+     "evidence_id": "evidence_fcba93b4680b3116de440b69",
+     "pages": [
+      120
+     ]
+    },
+    {
+     "label": "E11",
+     "evidence_id": "evidence_8fa7f3dd0a735ed98d818a77",
+     "pages": [
+      120
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_8fa7f3dd0a735ed98d818a77",
+    "evidence_fcba93b4680b3116de440b69"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 8,
+   "sections": {
+    "answer": [
+     {
+      "text": "For a motorcycle not used for a month or longer, the manual advises disconnecting the battery terminals and removing the battery.",
+      "evidence_ids": [
+       "E11"
+      ]
+     },
+     {
+      "text": "Before refitting the battery, check that its voltage is within specification; if it is not, recharge it at an authorised service workshop or battery dealer.",
+      "evidence_ids": [
+       "E11"
+      ]
+     },
+     {
+      "text": "For re-use after storage, the manual says it is preferable to have the motorcycle prepared by a Royal Enfield Authorised Service Centre.",
+      "evidence_ids": [
+       "E10"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "Storage for a month or longer calls for disconnecting and removing the battery, and checking its voltage before refitting.",
+      "evidence_ids": [
+       "E11"
+      ]
+     },
+     {
+      "text": "Preparation for re-use after storage is preferably done by a Royal Enfield Authorised Service Centre.",
+      "evidence_ids": [
+       "E10"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": [
+     {
+      "text": "The manual does not give a step-by-step procedure for restarting a motorcycle that has been stored this long."
+     },
+     {
+      "text": "The manual does not say whether the motorcycle can be started without this preparation."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual prefers authorised-service preparation for reuse after storage. It advises battery removal/disconnection for a month or longer, and checking voltage before refitting; recharge through authorised workshop/battery dealer if outside specification. This guidance does not state a voltage threshold here.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q23",
+   "case_id": "GEN004",
+   "group": "PARTIAL",
+   "question": "How many kilograms can I put in the panniers and top box?",
+   "gold_evidence_ids": [
+    "evidence_b9c4e4222f25cb0fca7dffc6"
+   ],
+   "draft_route": "UNSUPPORTED",
+   "draft_coverage": "NONE",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "UNSUPPORTED",
+   "released_text": "The manual says not to exceed the maximum payload defined in the GMA fitting instructions for panniers and top boxes. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "escalation_uri": "mailto:support@royalenfield.com",
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E1",
+     "evidence_id": "evidence_b9c4e4222f25cb0fca7dffc6",
+     "pages": [
+      15
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_b9c4e4222f25cb0fca7dffc6"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 0,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual says not to exceed the maximum payload defined in the GMA fitting instructions for panniers and top boxes.",
+      "evidence_ids": [
+       "E1"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": null
+   },
+   "clarification_question": null,
+   "canonical_answer": "This manual points to the maximum payload in the GMA fitting instructions; it does not give a universal pannier or top-box kilogram limit here. Please confirm the model-specific fitting instructions with Royal Enfield at support@royalenfield.com.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q22",
+   "case_id": "GEN041",
+   "group": "PARTIAL",
+   "question": "The general warning symbol is on. Which exact part has failed?",
+   "gold_evidence_ids": [
+    "evidence_16df2546fcf3ee0edb0cf3ec"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "SYSTEM_ERROR",
+   "rejection_code": "UNCITED_TECHNICAL_ITEM",
+   "rejection_detail": "answer",
+   "released_route": null,
+   "released_text": null,
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": null,
+   "cited_evidence_ids": [],
+   "watchouts_included": null,
+   "warnings_sent": 17,
+   "sections": {
+    "answer": [
+     {
+      "text": "The warning symbol lights up whenever a vehicle component develops a fault.",
+      "evidence_ids": [
+       "E9"
+      ]
+     },
+     {
+      "text": "The manual does not say which specific part has failed.",
+      "evidence_ids": []
+     },
+     {
+      "text": "Consult your Royal Enfield Authorised Service Centre about any problem that occurs in the operation of the motorcycle.",
+      "evidence_ids": [
+       "E59"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": [
+     {
+      "text": "The manual does not identify which specific component has failed when the warning symbol is on."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "The manual describes the symbol as a vehicle-component fault indication, but that symbol alone does not identify the failed component. Please have authorised Royal Enfield service investigate; I cannot infer a fault code from it.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q30",
+   "case_id": "GEN047",
+   "group": "PARTIAL",
+   "question": "It says Champion: what exact spark-plug part number should I order?",
+   "gold_evidence_ids": [
+    "evidence_0801208d8cde38daf72f6ab3",
+    "evidence_6bf722f54de89478dba83e34"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The manual names the spark plug as Champion. The manual gives the spark plug brand as Champion but no part number, so it cannot confirm the exact part number to order. Confirm the exact part number with an authorised Royal Enfield service centre.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E2",
+     "evidence_id": "evidence_0801208d8cde38daf72f6ab3",
+     "pages": [
+      16
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_0801208d8cde38daf72f6ab3"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 1,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual names the spark plug as Champion.",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ],
+    "policy": null,
+    "watchouts": null,
+    "disclaimers": [
+     {
+      "text": "The manual gives the spark plug brand as Champion but no part number, so it cannot confirm the exact part number to order.",
+      "evidence_ids": [
+       "E2"
+      ]
+     },
+     {
+      "text": "Confirm the exact part number with an authorised Royal Enfield service centre."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "The engine table names Champion and a 0.8–0.9 mm gap, but does not establish an exact ordering part number there. Confirm the correct part with authorised Royal Enfield service rather than infer compatibility from brand and gap.",
+   "absence_check": null
+  },
+  {
+   "alias": "Q09",
+   "case_id": "GEN048",
+   "group": "PARTIAL",
+   "question": "Will the app work with my new phone OS released this week?",
+   "gold_evidence_ids": [
+    "evidence_6d65a0c9aaa0d6acbf4aab29",
+    "evidence_8b950cdd4b977781b231dfe3"
+   ],
+   "draft_route": "SUPPORTED",
+   "draft_coverage": "PARTIAL",
+   "gate": "RELEASED",
+   "rejection_code": null,
+   "rejection_detail": null,
+   "released_route": "SUPPORTED",
+   "released_text": "The manual gives minimum phone OS versions for the RE Mobile app, not a list of supported phone versions. On Android, the app's minimum supported version is two versions behind the current Android OS. On iOS, the minimum supported version is one version behind the current iOS release. The RE Mobile app's minimum supported Android version is two versions behind the current Android OS. The RE Mobile app's minimum supported iOS version is one version behind the current iOS release. The manual does not say whether the app works with a phone OS released this week. The manual does not list tested or confirmed phone OS versions, so please confirm with an authorised Royal Enfield service centre.",
+   "escalation_uri": null,
+   "provider_calls": 1,
+   "citations": [
+    {
+     "label": "E1",
+     "evidence_id": "evidence_8b950cdd4b977781b231dfe3",
+     "pages": [
+      54
+     ]
+    },
+    {
+     "label": "E2",
+     "evidence_id": "evidence_6d65a0c9aaa0d6acbf4aab29",
+     "pages": [
+      54
+     ]
+    }
+   ],
+   "cited_evidence_ids": [
+    "evidence_6d65a0c9aaa0d6acbf4aab29",
+    "evidence_8b950cdd4b977781b231dfe3"
+   ],
+   "watchouts_included": [],
+   "warnings_sent": 9,
+   "sections": {
+    "answer": [
+     {
+      "text": "The manual gives minimum phone OS versions for the RE Mobile app, not a list of supported phone versions.",
+      "evidence_ids": [
+       "E1",
+       "E2"
+      ]
+     },
+     {
+      "text": "On Android, the app's minimum supported version is two versions behind the current Android OS.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "On iOS, the minimum supported version is one version behind the current iOS release.",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ],
+    "policy": [
+     {
+      "text": "The RE Mobile app's minimum supported Android version is two versions behind the current Android OS.",
+      "evidence_ids": [
+       "E1"
+      ]
+     },
+     {
+      "text": "The RE Mobile app's minimum supported iOS version is one version behind the current iOS release.",
+      "evidence_ids": [
+       "E2"
+      ]
+     }
+    ],
+    "watchouts": null,
+    "disclaimers": [
+     {
+      "text": "The manual does not say whether the app works with a phone OS released this week."
+     },
+     {
+      "text": "The manual does not list tested or confirmed phone OS versions, so please confirm with an authorised Royal Enfield service centre."
+     }
+    ]
+   },
+   "clarification_question": null,
+   "canonical_answer": "This fixed manual describes relative Android/iOS support policies; it cannot verify compatibility with a release this week. Please confirm current support with Royal Enfield at support@royalenfield.com.",
+   "absence_check": null
+  }
+ ]
+}

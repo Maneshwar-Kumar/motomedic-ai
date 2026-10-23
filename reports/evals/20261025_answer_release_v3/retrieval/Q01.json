@@ -1,0 +1,447 @@
+{
+ "retrieval": {
+  "version": "section-top5-hybrid-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "query": "How deep a water crossing can the bike safely ride through?",
+  "chunk_ids": [
+   "chunk_bfb981fca9b6582314c724cf",
+   "chunk_663b8bc7eccfdba1c3dc189f",
+   "chunk_9086568f70252c717c1d4814",
+   "chunk_f672b8fe35727f87d3d25d29",
+   "chunk_aa814d09365c961ccd434d70"
+  ],
+  "dense_top": [
+   "chunk_23ea025a26df21f42dfa65c5",
+   "chunk_7a639274a78cf2a46d60b7ca",
+   "chunk_6882d29d69c99363a971b690",
+   "chunk_f672b8fe35727f87d3d25d29",
+   "chunk_8845ca4848d9c662e44516e7"
+  ],
+  "bm25_top": [
+   "chunk_b71d9400b2aa65edb4facaa1",
+   "chunk_663b8bc7eccfdba1c3dc189f",
+   "chunk_7176952e17390c94eed68feb",
+   "chunk_d3d1cc3f4ac90bb412ff9145",
+   "chunk_0d7f1c37ffe8f71c7cd36784"
+  ],
+  "fused_scores": {
+   "chunk_bfb981fca9b6582314c724cf": 0.029851,
+   "chunk_663b8bc7eccfdba1c3dc189f": 0.029643,
+   "chunk_9086568f70252c717c1d4814": 0.026857,
+   "chunk_f672b8fe35727f87d3d25d29": 0.027253,
+   "chunk_aa814d09365c961ccd434d70": 0.028405
+  },
+  "rerank_scores": {
+   "chunk_bfb981fca9b6582314c724cf": -8.8889,
+   "chunk_663b8bc7eccfdba1c3dc189f": -9.1873,
+   "chunk_aa814d09365c961ccd434d70": -11.2095,
+   "chunk_f672b8fe35727f87d3d25d29": -10.6154,
+   "chunk_9086568f70252c717c1d4814": -10.276
+  },
+  "sections_disagree": true,
+  "reranked": true
+ },
+ "assembled": {
+  "version": "section-plain-text-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "sections": [
+   "section_c24f807badaf8e2c6441858b",
+   "section_6c39b0b1472eda5f1b23f149",
+   "section_28cf2ef999680f0dfe1a698a",
+   "section_59b591b2085c923e34d30a0e"
+  ],
+  "objects": {
+   "E1": {
+    "evidence_id": "evidence_17955ec3bb127d5f014bdc32",
+    "text": "Once the motorcycle has been ridden in salty conditions (i.e. during winter in places where road salt is used) or near coastal areas it is recommended to wash your motorcycle with cold water after the ride to prevent corrosion or rust build-up. Please do not use warm water for washing as it may damage the motorcycle due to chemical reaction with the salt. After washing process once the motorcycle is completely dry it is recommended to apply anti corrosion spray on all the metal and chrome plated areas to protect the parts from corrosion.",
+    "pages": [
+     119
+    ],
+    "box": null,
+    "section": "WASHING PROCEDURE",
+    "type": "list_item"
+   },
+   "E2": {
+    "evidence_id": "evidence_917ba4e5f02a9086fd60cedd",
+    "text": "It is recommended not to apply the anti-corrosion spray on the brake discs.",
+    "pages": [
+     119
+    ],
+    "box": null,
+    "section": "WASHING PROCEDURE",
+    "type": "list_item"
+   },
+   "E3": {
+    "evidence_id": "evidence_c9e64dd162da3c81851c03db",
+    "text": "Do not use petrol, brake oil or other flammable liquids to clean or wash on electronic parts.",
+    "pages": [
+     119
+    ],
+    "box": null,
+    "section": "WASHING PROCEDURE",
+    "type": "list_item"
+   },
+   "E4": {
+    "evidence_id": "evidence_a78f16ab5eda3103d13a7da9",
+    "text": "The parts chosen using motorcycle configurator should not be washed with soap or chemical, use only with plain water.",
+    "pages": [
+     119
+    ],
+    "box": null,
+    "section": "WASHING PROCEDURE",
+    "type": "list_item"
+   },
+   "E5": {
+    "evidence_id": "evidence_97145986abff65ab672bec97",
+    "text": "No direct jet at the edges of decal, electrical parts, coupler joints, silencer tail pipe, radiator lubrication points",
+    "pages": [
+     119
+    ],
+    "box": null,
+    "section": "WASHING PROCEDURE",
+    "type": "list_item"
+   },
+   "E6": {
+    "evidence_id": "evidence_09d8e6e8b742f5bc5031ff55",
+    "text": "like steering cone kit, brake pedal, wheel bearings, chain, brake cam & swing arm bushes to be washed in spray mode only (not in jet mode).",
+    "pages": [
+     119
+    ],
+    "box": null,
+    "section": "WASHING PROCEDURE",
+    "type": "text"
+   },
+   "E7": {
+    "evidence_id": "evidence_a480942edeb88b5651064f06",
+    "text": "Welcome to your new Royal Enfield Himalayan.",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E8": {
+    "evidence_id": "evidence_2d288f0a2e1594dc16607391",
+    "text": "The all-new Himalayan is a creature of its environment. A profound, mystical space that is always changing, and changing fast.",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E9": {
+    "evidence_id": "evidence_ca20a5f4fd294be484fbaf88",
+    "text": "There was no one machine designed for this journey. Until now. The all-new Himalayan has many motorcycles rolled into one.",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E10": {
+    "evidence_id": "evidence_ae68666fb3e0b5f9ca55664a",
+    "text": "It adapts to the terrain. It adapts to the rider. It adapts to the elements.",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E11": {
+    "evidence_id": "evidence_748464c395a21313fe90204e",
+    "text": "With its new 452cc liquid cooled Sherpa engine and 6 speed gearbox ready for any situation. Featuring for the first time, the Tripper (TM) upwards Dash with full map navigation, and a whole host of adventureready features for your rides - whether its a multi-week ride to the Himalayas or a 30 minutes ride through the city.",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E12": {
+    "evidence_id": "evidence_10b495af2f075966fecba0dc",
+    "text": "This is your capable, purpose-built and versatile machine built to explore the Himalayas and anywhere else your adventure takes you.",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E13": {
+    "evidence_id": "evidence_d731f6f9e5e28330b8ea0622",
+    "text": "The new Royal Enfield Himalayan.",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E14": {
+    "evidence_id": "evidence_69803d661650805240d89180",
+    "text": "Built by the Himalayas",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E15": {
+    "evidence_id": "evidence_e674eff77ec5d5ce1ff792fc",
+    "text": "#AllRoadsNoRoads",
+    "pages": [
+     3
+    ],
+    "box": null,
+    "section": "FOREWORD",
+    "type": "text"
+   },
+   "E16": {
+    "evidence_id": "evidence_2fb2de5d16d58c43c0088195",
+    "text": "The Royal Enfield motorcycle as you would be experiencing is capable of consistent high speeds. However as with any new motorcycle, a \"RUNNING-IN PERIOD\" procedure is essential to help in proper \"Bedding-in\" of the various moving parts in your motorcycle and to achieve optimum performance like gear shifting subsequently.",
+    "pages": [
+     71
+    ],
+    "box": null,
+    "section": "RUNNING IN PERIOD",
+    "type": "text"
+   },
+   "E17": {
+    "evidence_id": "evidence_c25ff60686f3788166014a45",
+    "text": "Do not exceed maximum specified pay load.",
+    "pages": [
+     71
+    ],
+    "box": null,
+    "section": "RUNNING IN PERIOD",
+    "type": "list_item"
+   },
+   "E18": {
+    "evidence_id": "evidence_46b1dacc0dfe31859e826eb3",
+    "text": "Warm up the engine for a few minutes at idling speed to allow engine oil to lubricate all the moving parts in the engine before riding the motorcycle.",
+    "pages": [
+     71
+    ],
+    "box": null,
+    "section": "RUNNING IN PERIOD",
+    "type": "list_item"
+   },
+   "E19": {
+    "evidence_id": "evidence_22f28ee80b5722700b451737",
+    "text": "Avoid full throttle operation and do not ride at constant throttle continuously. Vary the speed by 10% while riding.",
+    "pages": [
+     71
+    ],
+    "box": null,
+    "section": "RUNNING IN PERIOD",
+    "type": "list_item"
+   },
+   "E20": {
+    "evidence_id": "evidence_46773c959c783a25fed63c5d",
+    "text": "Ride at proper speed and avoid sudden accelerations and braking.",
+    "pages": [
+     71
+    ],
+    "box": null,
+    "section": "RUNNING IN PERIOD",
+    "type": "list_item"
+   },
+   "E21": {
+    "evidence_id": "evidence_4c44e041f331d8e8c1c20d45",
+    "text": "Avoid riding motorcycle continuously for over an hour, it is recommended to take brief stop.",
+    "pages": [
+     71
+    ],
+    "box": null,
+    "section": "RUNNING IN PERIOD",
+    "type": "list_item"
+   },
+   "E22": {
+    "evidence_id": "evidence_ff1831e60f51274ec0b03614",
+    "text": "The below table indicates the recommended engine speed in rpm for optimum performance of the engine.",
+    "pages": [
+     71
+    ],
+    "box": "NOTE",
+    "section": "RUNNING IN PERIOD",
+    "type": "text"
+   },
+   "E23": {
+    "evidence_id": "evidence_b27f0ee41aa174a7ff6818ea",
+    "text": "Distance Covered: 0 to 500 km; Max. Engine Speed: < 6000 rpm No full throttle\n    Distance Covered: 501 to 1500 km; Max. Engine Speed: Gradually increase to max. rpm for short periods",
+    "pages": [
+     71
+    ],
+    "box": "NOTE",
+    "section": "RUNNING IN PERIOD",
+    "type": "table"
+   },
+   "E24": {
+    "evidence_id": "evidence_91ac5ade2895a493bbab1583",
+    "text": "Front: Check that the brake fluid reservoir is horizontal and that the fluid level is center of the window consider as a minimum level.",
+    "pages": [
+     88
+    ],
+    "box": null,
+    "section": "CHECKING BRAKE FLUID",
+    "type": "text"
+   },
+   "E25": {
+    "evidence_id": "evidence_bab06f99aa13ab1578a152a0",
+    "text": "Rear: Check that the brake fluid reservoir is horizontal and that the fluid level is between the \"MAX\" level and \"Min\" level marks.",
+    "pages": [
+     88
+    ],
+    "box": null,
+    "section": "CHECKING BRAKE FLUID",
+    "type": "text"
+   },
+   "E26": {
+    "evidence_id": "evidence_636a0212b65da61d01bc5ff0",
+    "text": "Place your motorcycle in an upright position on a firm, level surface.",
+    "pages": [
+     88
+    ],
+    "box": null,
+    "section": "CHECKING BRAKE FLUID",
+    "type": "text"
+   },
+   "E27": {
+    "evidence_id": "evidence_d6ae12d562fda72cd97f73d7",
+    "text": "Brake fluid is highly corrosive and can cause damage to painted parts. Please ensure that brake fluid does not spill on any part of the motorcycle. In the event of a spill, please clean the area immediately with a soft cloth (preferably a wet cloth) to avoid damage.",
+    "pages": [
+     88
+    ],
+    "box": "CAUTION",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E28": {
+    "evidence_id": "evidence_fdd616b47465a42cfd4f1c01",
+    "text": "Do not mix DOT 4 & other brake fluid together.",
+    "pages": [
+     88
+    ],
+    "box": "CAUTION",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E29": {
+    "evidence_id": "evidence_08219b37f69e88ba51ab8ad4",
+    "text": "Clean the filler cap before removing. Use only DOT 4 brake fluid from sealer container.",
+    "pages": [
+     88
+    ],
+    "box": "NOTE",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E30": {
+    "evidence_id": "evidence_fc08bdc40ab26a9700db87e5",
+    "text": "Use only the specified brake fluid; otherwise, the rubber seals may deteriorate, causing leakage.",
+    "pages": [
+     88
+    ],
+    "box": "NOTE",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E31": {
+    "evidence_id": "evidence_16d0fa8780452cdc8c063917",
+    "text": "Refill with the same type of brake fluid. Adding a brake fluid other than DOT 4 may result in a harmful chemical reaction.",
+    "pages": [
+     88
+    ],
+    "box": "NOTE",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E32": {
+    "evidence_id": "evidence_8e1dfabe9f50a1a1b6d184cf",
+    "text": "Be careful that water or dust does not enter the brake fluid reservoir when refilling. Water will significantly lower the boiling point of the fluid and may result in vapor lock and dirt may clog the ABS hydraulic unit valves.",
+    "pages": [
+     89
+    ],
+    "box": null,
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E33": {
+    "evidence_id": "evidence_83a88ebb31e7e605c31f08e4",
+    "text": "An insufficient brake fluid level will cause the brake system to fail.",
+    "pages": [
+     89
+    ],
+    "box": "WARNING",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E34": {
+    "evidence_id": "evidence_c9c77d066e7149b42883c323",
+    "text": "Old brake fluid reduces the braking effect.",
+    "pages": [
+     89
+    ],
+    "box": "WARNING",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E35": {
+    "evidence_id": "evidence_19466e6264cba31b9148066c",
+    "text": "Make sure that brake fluid for the front and rear brake is changed in accordance with the periodic maintenance schedule.",
+    "pages": [
+     89
+    ],
+    "box": "WARNING",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E36": {
+    "evidence_id": "evidence_811a469947b84f2c69db18fb",
+    "text": "Keep brake fluid out of the reach of children.",
+    "pages": [
+     89
+    ],
+    "box": "WARNING",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E37": {
+    "evidence_id": "evidence_436176ca24953c494cf78f03",
+    "text": "Do not allow brake fluid to come into contact with the skin, the eyes or clothing.",
+    "pages": [
+     89
+    ],
+    "box": "WARNING",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   },
+   "E38": {
+    "evidence_id": "evidence_4632b1e6c87b504a33b83110",
+    "text": "Brake fluid is highly corrosive and can cause damage to painted parts. Ensure brake fluid does not spill on any part of the motorcycle, in the event of spill please clean the area immediately with a soft cloth to avoid damage.",
+    "pages": [
+     89
+    ],
+    "box": "WARNING",
+    "section": "CHECKING BRAKE FLUID",
+    "type": "list_item"
+   }
+  },
+  "warnings": [
+   "E27",
+   "E28",
+   "E33",
+   "E34",
+   "E35",
+   "E36",
+   "E37",
+   "E38"
+  ],
+  "text": "## WASHING PROCEDURE (page 119)\n[E1] Once the motorcycle has been ridden in salty conditions (i.e. during winter in places where road salt is used) or near coastal areas it is recommended to wash your motorcycle with cold water after the ride to prevent corrosion or rust build-up. Please do not use warm water for washing as it may damage the motorcycle due to chemical reaction with the salt. After washing process once the motorcycle is completely dry it is recommended to apply anti corrosion spray on all the metal and chrome plated areas to protect the parts from corrosion.\n[E2] It is recommended not to apply the anti-corrosion spray on the brake discs.\n[E3] Do not use petrol, brake oil or other flammable liquids to clean or wash on electronic parts.\n[E4] The parts chosen using motorcycle configurator should not be washed with soap or chemical, use only with plain water.\n[E5] No direct jet at the edges of decal, electrical parts, coupler joints, silencer tail pipe, radiator lubrication points\n[E6] like steering cone kit, brake pedal, wheel bearings, chain, brake cam & swing arm bushes to be washed in spray mode only (not in jet mode).\n\n## FOREWORD (page 3)\n[E7] Welcome to your new Royal Enfield Himalayan.\n[E8] The all-new Himalayan is a creature of its environment. A profound, mystical space that is always changing, and changing fast.\n[E9] There was no one machine designed for this journey. Until now. The all-new Himalayan has many motorcycles rolled into one.\n[E10] It adapts to the terrain. It adapts to the rider. It adapts to the elements.\n[E11] With its new 452cc liquid cooled Sherpa engine and 6 speed gearbox ready for any situation. Featuring for the first time, the Tripper (TM) upwards Dash with full map navigation, and a whole host of adventureready features for your rides - whether its a multi-week ride to the Himalayas or a 30 minutes ride through the city.\n[E12] This is your capable, purpose-built and versatile machine built to explore the Himalayas and anywhere else your adventure takes you.\n[E13] The new Royal Enfield Himalayan.\n[E14] Built by the Himalayas\n[E15] #AllRoadsNoRoads\n\n## RUNNING IN PERIOD (page 71)\n[E16] The Royal Enfield motorcycle as you would be experiencing is capable of consistent high speeds. However as with any new motorcycle, a \"RUNNING-IN PERIOD\" procedure is essential to help in proper \"Bedding-in\" of the various moving parts in your motorcycle and to achieve optimum performance like gear shifting subsequently.\n[E17] Do not exceed maximum specified pay load.\n[E18] Warm up the engine for a few minutes at idling speed to allow engine oil to lubricate all the moving parts in the engine before riding the motorcycle.\n[E19] Avoid full throttle operation and do not ride at constant throttle continuously. Vary the speed by 10% while riding.\n[E20] Ride at proper speed and avoid sudden accelerations and braking.\n[E21] Avoid riding motorcycle continuously for over an hour, it is recommended to take brief stop.\n[E22] (NOTE) The below table indicates the recommended engine speed in rpm for optimum performance of the engine.\n[E23] (NOTE) Distance Covered: 0 to 500 km; Max. Engine Speed: < 6000 rpm No full throttle\n    Distance Covered: 501 to 1500 km; Max. Engine Speed: Gradually increase to max. rpm for short periods\n\n## CHECKING BRAKE FLUID (pages 88-89)\n[E24] Front: Check that the brake fluid reservoir is horizontal and that the fluid level is center of the window consider as a minimum level.\n[E25] Rear: Check that the brake fluid reservoir is horizontal and that the fluid level is between the \"MAX\" level and \"Min\" level marks.\n[E26] Place your motorcycle in an upright position on a firm, level surface.\n[E27] (CAUTION) Brake fluid is highly corrosive and can cause damage to painted parts. Please ensure that brake fluid does not spill on any part of the motorcycle. In the event of a spill, please clean the area immediately with a soft cloth (preferably a wet cloth) to avoid damage.\n[E28] (CAUTION) Do not mix DOT 4 & other brake fluid together.\n[E29] (NOTE) Clean the filler cap before removing. Use only DOT 4 brake fluid from sealer container.\n[E30] (NOTE) Use only the specified brake fluid; otherwise, the rubber seals may deteriorate, causing leakage.\n[E31] (NOTE) Refill with the same type of brake fluid. Adding a brake fluid other than DOT 4 may result in a harmful chemical reaction.\n[E32] Be careful that water or dust does not enter the brake fluid reservoir when refilling. Water will significantly lower the boiling point of the fluid and may result in vapor lock and dirt may clog the ABS hydraulic unit valves.\n[E33] (WARNING) An insufficient brake fluid level will cause the brake system to fail.\n[E34] (WARNING) Old brake fluid reduces the braking effect.\n[E35] (WARNING) Make sure that brake fluid for the front and rear brake is changed in accordance with the periodic maintenance schedule.\n[E36] (WARNING) Keep brake fluid out of the reach of children.\n[E37] (WARNING) Do not allow brake fluid to come into contact with the skin, the eyes or clothing.\n[E38] (WARNING) Brake fluid is highly corrosive and can cause damage to painted parts. Ensure brake fluid does not spill on any part of the motorcycle, in the event of spill please clean the area immediately with a soft cloth to avoid damage."
+ }
+}

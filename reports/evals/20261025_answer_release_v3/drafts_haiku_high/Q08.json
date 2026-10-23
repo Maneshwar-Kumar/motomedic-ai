@@ -1,0 +1,27 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "When riding solo (rider only, unladen), set the rear suspension adjuster to the 3rd notch.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "The manual also says the adjuster is kept at the first notch, which differs from the 3rd notch for solo riding, so confirm the setting with an authorised Royal Enfield service centre.",
+      "evidence_ids": ["E4", "E10"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The rear suspension notch depends on loading: the 3rd notch is for unladen, one-up riding with the rider only, and the 6th notch is for laden or two-up riding.",
+      "evidence_ids": ["E10"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Concerns loading weight or installing accessories incorrectly; the question is solo riding with no accessories."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Statement about genuine accessories; it does not concern the suspension notch."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns aftermarket front forks; not relevant to the rear notch setting."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Continuation of the aftermarket fork warning; not relevant to the rear notch setting."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns model specifications and accessory misuse; not relevant to solo notch selection."}
+  ]
+}

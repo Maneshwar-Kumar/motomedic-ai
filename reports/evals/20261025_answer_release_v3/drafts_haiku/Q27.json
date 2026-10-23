@@ -1,0 +1,33 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "The number-plate light is an LED unit.", "evidence_ids": ["E1", "E8"]},
+    {"text": "If it fails, the manual says the whole tail lamp and number-plate light assembly should be replaced, not just a bulb.", "evidence_ids": ["E1"]},
+    {"text": "Contact a Royal Enfield Authorised Dealer or Service Centre to have it replaced.", "evidence_ids": ["E2"]}
+  ],
+  "policy": [
+    {"text": "Replace the whole tail lamp and number-plate light assembly if it fails.", "evidence_ids": ["E1"]},
+    {"text": "Have the replacement done by a Royal Enfield Authorised Dealer or Service Centre.", "evidence_ids": ["E2"]},
+    {"text": "Use bulbs and electrical parts of the specified rating only.", "evidence_ids": ["E16"]}
+  ],
+  "watchouts": [
+    {"text": "Using bulbs or electrical parts with a rating other than the specified one can cause overloading, erratic behaviour or early failure of the electrical system.", "evidence_ids": ["E16"]},
+    {"text": "Fitting parts that Royal Enfield has not approved can seriously affect the vehicle's performance and will void the warranty.", "evidence_ids": ["E17"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not give a part number, bulb type or wattage for the number-plate light, so I cannot say which bulb to buy."},
+    {"text": "The 0.31 W figure in the manual is for the tail lamp, not the number-plate light.", "evidence_ids": ["E8"]},
+    {"text": "Confirm the correct part with an authorised Royal Enfield service centre before buying anything."}
+  ],
+  "watchout_review": [
+    {"display_id": "E16", "decision": "INCLUDED", "reason": "Warns against bulbs of a rating other than specified, which bears on buying a bulb."},
+    {"display_id": "E17", "decision": "INCLUDED", "reason": "Warns that unapproved fitments void the warranty, which bears on buying a non-approved part."},
+    {"display_id": "E19", "decision": "NOT_APPLICABLE", "reason": "Concerns fuse failure, not the number-plate light."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Concerns fuse ratings, not the number-plate light."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Concerns spare fuses."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns defective fuses."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Concerns turn signals with the hazard switch on."},
+    {"display_id": "E29", "decision": "NOT_APPLICABLE", "reason": "Concerns trafficator lamps flashing together."}
+  ]
+}

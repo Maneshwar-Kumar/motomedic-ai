@@ -1,0 +1,12 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "The manual says the key can be removed only when the ignition is in the OFF position or the steering is locked.", "evidence_ids": ["E3"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E6", "decision": "NOT_APPLICABLE", "reason": "Concerns switching off the ignition while riding, not removing the key."},
+    {"display_id": "E7", "decision": "NOT_APPLICABLE", "reason": "Consequence of switching off while riding; not about key removal."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "About battery drain with engine off, not key removal."}
+  ]
+}

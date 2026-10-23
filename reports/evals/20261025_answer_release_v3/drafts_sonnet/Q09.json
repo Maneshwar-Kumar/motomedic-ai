@@ -1,0 +1,23 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "For Android, the manual says the app's minimum supported version is two versions behind the current Android OS.", "evidence_ids": ["E1"]},
+    {"text": "For iOS, the manual says the minimum supported version is one version behind the current iOS release.", "evidence_ids": ["E2"]},
+    {"text": "Huawei phones are not compatible with the app and are not supported.", "evidence_ids": ["E4"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not say whether a newly released phone OS version works with the app. Please confirm with an authorised Royal Enfield service centre."}
+  ],
+  "watchout_review": [
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Charging in rain, not about app compatibility"},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Charger port use, not about app compatibility"},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "USB cable insertion, not about app compatibility"},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "USB port cap, not about app compatibility"},
+    {"display_id": "E17", "decision": "NOT_APPLICABLE", "reason": "USB port safety, not about app compatibility"},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "USB port cap, not about app compatibility"},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Charging current, not about app compatibility"},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Charger operation, not about app compatibility"},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "USB cable quality, not about app compatibility"}
+  ]
+}

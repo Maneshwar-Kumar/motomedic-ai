@@ -1,0 +1,27 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {"text": "The manual does not state a top speed for the New Himalayan 450.", "evidence_ids": []},
+    {"text": "The running-in table gives engine speed limits in rpm for the first 1500 km, which are not a top speed.", "evidence_ids": ["E41"]},
+    {"text": "Do not exceed the legal speed limit or ride too fast for the conditions.", "evidence_ids": ["E14"]}
+  ],
+  "policy": [
+    {"text": "Do not exceed the legal speed limit or ride too fast for existing conditions.", "evidence_ids": ["E14"]},
+    {"text": "Use the running-in procedure for a new motorcycle, with engine speed limits in the first 500 km.", "evidence_ids": ["E12", "E41"]}
+  ],
+  "watchouts": [
+    {"text": "A new motorcycle must be run in according to the running-in procedure.", "evidence_ids": ["E12"]},
+    {"text": "Ride at moderate speeds and out of traffic until you are thoroughly familiar with the motorcycle.", "evidence_ids": ["E13"]},
+    {"text": "High speed increases the chance of losing control, so reduce speed when conditions are poor.", "evidence_ids": ["E14"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Concerns aftermarket suspension, not the question."},
+    {"display_id": "E12", "decision": "INCLUDED", "reason": "Running-in limits apply to speed use of a new bike."},
+    {"display_id": "E13", "decision": "INCLUDED", "reason": "Speed caution until the rider knows the bike."},
+    {"display_id": "E14", "decision": "INCLUDED", "reason": "Directly about riding speed and legal limits."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Shock and fork inspection, not speed."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Exhaust gas warning, not speed."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Maintenance warning, not speed."}
+  ]
+}

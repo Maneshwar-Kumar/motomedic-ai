@@ -1,0 +1,25 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "Yes. The manual lists the fuel as unleaded gasoline with ethanol content up to E20, so E20 is within the stated limit.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Use unleaded gasoline with ethanol content up to E20.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Concerns aftermarket front forks and suspensions, not fuel."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns running-in procedure, not fuel."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Concerns moderate speeds when learning the motorcycle, not fuel."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns speed limits and riding conditions, not fuel."},
+    {"display_id": "E36", "decision": "NOT_APPLICABLE", "reason": "Concerns shock absorbers and front forks, not fuel."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Concerns exhaust gas, not fuel type."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Concerns service and maintenance intervals, not fuel type."}
+  ]
+}

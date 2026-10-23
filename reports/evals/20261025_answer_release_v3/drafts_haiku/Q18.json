@@ -1,0 +1,19 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "No, the two fork oil quantities are not the same.", "evidence_ids": ["E1"]},
+    {"text": "The right (RH) fork takes 589 ml, plus or minus 2.5 ml.", "evidence_ids": ["E1"]},
+    {"text": "The left (LH) fork takes 507 ml, plus or minus 2.5 ml.", "evidence_ids": ["E1"]},
+    {"text": "The manual says these values are approximate and the actual amount will vary.", "evidence_ids": ["E4"]}
+  ],
+  "policy": [
+    {"text": "The fork oil capacities are approximate and the actual amount will vary.", "evidence_ids": ["E4"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual lists different fork oil quantities for the two forks, so confirm them with an authorised Royal Enfield service centre."}
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "NOT_APPLICABLE", "reason": "The caution is about using the wrong engine oil grade, not fork oil quantity."}
+  ]
+}

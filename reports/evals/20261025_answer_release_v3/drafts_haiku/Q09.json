@@ -1,0 +1,47 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "The manual gives minimum phone OS versions for the RE Mobile app, not a list of supported phone versions.",
+      "evidence_ids": ["E1", "E2"]
+    },
+    {
+      "text": "On Android, the app's minimum supported version is two versions behind the current Android OS.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "On iOS, the minimum supported version is one version behind the current iOS release.",
+      "evidence_ids": ["E2"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The RE Mobile app's minimum supported Android version is two versions behind the current Android OS.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "The RE Mobile app's minimum supported iOS version is one version behind the current iOS release.",
+      "evidence_ids": ["E2"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Charger rain warning does not affect whether the app works."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Charging-only device rule does not address app OS compatibility."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "USB insertion warning is about charging cables, not the app."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "USB port cap warning is about the charging port, not the app."},
+    {"display_id": "E17", "decision": "NOT_APPLICABLE", "reason": "Metal-object warning is about the charging port, not the app."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Port cap warranty warning is about the charging port, not the app."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "High-current charger shutdown does not affect app compatibility."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Charger-only-when-running rule does not affect app compatibility."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "USB cable quality warning is about charging, not the app."}
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not say whether the app works with a phone OS released this week."
+    },
+    {
+      "text": "The manual does not list tested or confirmed phone OS versions, so please confirm with an authorised Royal Enfield service centre."
+    }
+  ]
+}

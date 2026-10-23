@@ -1,0 +1,19 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "When riding solo, with only the rider and no load, set the rear suspension to the 3rd notch.", "evidence_ids": ["E10"]},
+    {"text": "The manual also says the adjuster is kept at the first notch position, so the two values differ.", "evidence_ids": ["E4"]},
+    {"text": "Confirm the correct notch with an authorised Royal Enfield service centre."}
+  ],
+  "policy": [
+    {"text": "The suspension setting notch depends on whether the motorcycle is unladen or laden.", "evidence_ids": ["E10"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Concerns loading weight or fitting accessories incorrectly, not the notch for a solo ride."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Concerns genuine accessories, not the rear suspension notch."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns nonstandard front forks and parts, not the rear notch."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Continuation of E22 about altered original parts, not the rear notch."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns model and design specifications, not the solo notch setting."}
+  ]
+}

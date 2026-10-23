@@ -1,0 +1,21 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "For checking the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre.", "evidence_ids": ["E10"]},
+    {"text": "The battery gauge on the analog screen has four segments, and each segment carries 1 V.", "evidence_ids": ["E17"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not give a step-by-step method for measuring the battery voltage yourself."}
+  ],
+  "watchout_review": [
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Applies to removing battery connections, which was not asked."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "About starter use when the engine does not start."},
+    {"display_id": "E29", "decision": "NOT_APPLICABLE", "reason": "General riding warning, not about checking voltage."},
+    {"display_id": "E30", "decision": "NOT_APPLICABLE", "reason": "About neutral and starting, not voltage."},
+    {"display_id": "E31", "decision": "NOT_APPLICABLE", "reason": "About shifting gears, not voltage."},
+    {"display_id": "E32", "decision": "NOT_APPLICABLE", "reason": "About the clutch when starting."},
+    {"display_id": "E33", "decision": "NOT_APPLICABLE", "reason": "About the starter button."},
+    {"display_id": "E34", "decision": "NOT_APPLICABLE", "reason": "About repeated cranking."}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "The USB charger port is rated USB 2.0 Type C, 5 V, 2 A output.", "evidence_ids": ["E8"]}
+  ],
+  "watchouts": [
+    {"text": "If the current draw is greater than 2.5 A, the USB charger shuts down, so check your smart phone battery current rating before using it.", "evidence_ids": ["E21"]},
+    {"text": "The USB charger works only when the engine is running.", "evidence_ids": ["E22"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "Concerns bulbs and other gadgets in general, not this port's rating."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Concerns unapproved modifications and warranty."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Rainy-condition use, not the rating."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Device and single-phone limit, not the rating."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Cable insertion, not the rating."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Port cap position, not the rating."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Metal objects in the port, not the rating."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Port cap and warranty, not the rating."},
+    {"display_id": "E21", "decision": "INCLUDED", "reason": "Shutdown above 2.5 A directly limits the output."},
+    {"display_id": "E22", "decision": "INCLUDED", "reason": "Output is available only with the engine running."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Cable quality, not the rating."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Fuse failure, not the USB port rating."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Fuse ratings, not the USB port rating."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Spare fuse, not this question."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Jumpering fuses, not this question."}
+  ]
+}
