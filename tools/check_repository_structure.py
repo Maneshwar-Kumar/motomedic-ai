@@ -19,7 +19,7 @@ MANUAL_SHA = "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
 FREEZE = "reports/grounded_generation/v8/runtime_freeze.json"
 FREEZE_SHA = "d7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0"
 HISTORICAL_RUNTIME = "reports/build/20261012/frozen_v8_runtime"
-CURRENT_FREEZE = "reports/public_evaluator/20261025/serving_manifest_v11.json"
+CURRENT_FREEZE = "reports/public_evaluator/20261012/serving_manifest_v10_14.json"
 RELEASE = "human_review/agent_release_161/coordinator/release_manifest_v3.json"
 RELEASE_SHA = "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298"
 
@@ -40,7 +40,6 @@ CRITICAL = (
     "reports/build/20261012/serving_manifest_v9.json",
     "reports/build/20261012/serving_manifest_v9_1.json",
     "reports/public_evaluator/20261012/owner_scope_v1.json",
-    "reports/evals/20261025_answer_release_v3/owner_decision_v3.json",
 )
 # Root runtime paths are compatibility inputs, not a template for new files.
 ROOT_FILES = frozenset("""
@@ -113,9 +112,8 @@ def audit():
             if not isinstance(bindings, dict) or len(bindings) != required_count:
                 raise ValueError("Unexpected binding inventory")
             for name, sha in bindings.items():
-                # v8 remains exact historical evidence and the 161-case package is
-                # retained golden-answer data, not a gate. Current serving inputs
-                # are independently checked below against the v11 inventory.
+                # v8 remains exact historical evidence. Current serving inputs
+                # are independently checked below against the v10 inventory.
                 resolved_name = (HISTORICAL_RUNTIME + "/" + name) if field == "file_sha256" else name
                 bound = (ROOT / resolved_name).resolve()
                 if not bound.is_relative_to(ROOT) or not bound.is_file():
@@ -151,7 +149,7 @@ def audit():
         "runtime_freeze_files_verified": runtime_count,
         "current_serving_files_verified": current_count,
         "approved_output_files_verified": approved_count,
-        "note": "Canonical navigation, byte-exact historical v8 snapshots, v9-v10.14 manifests, current v11 serving inputs and the retained 161-case golden-answer package. Not factual or deployment acceptance.",
+        "note": "Canonical navigation, byte-exact historical v8 snapshots and v9/v9.1 manifests, current v10 inputs and original scoped approval paths. Not factual or deployment acceptance.",
     }
 
 

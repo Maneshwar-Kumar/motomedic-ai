@@ -1,1 +1,1 @@
-"""Section retrieval, one generation call and a deterministic release gate; no review layer or verifier."""
+"""Versioned evidence-grounded serving, without a separate semantic verifier."""

@@ -8,7 +8,7 @@ from rider_ui.tests.test_verified_sse import frame
 
 OP='c'*32
 
-def accepted_frames(v,key=OP,stages=('retrieving','drafting','checking','displaying')):
+def accepted_frames(v,key=OP,stages=('retrieving','drafting','verifying','displaying')):
     digest=response_hash(v);text=v['response']['natural_language']
     v['delivery']={'operation_id':key,'response_sha256':digest,'runtime_lock':'e'*64,
         'manual_checksum':v['manual_checksum'],'index_id':v['index_id']}
@@ -51,7 +51,7 @@ class ProgressStreamTests(unittest.TestCase):
         for data in ({'operation_id':OP,'stage':'drafting','text':'private draft'},
                      {'operation_id':'d'*32,'stage':'drafting'},
                      {'operation_id':OP,'stage':'99 percent complete'},
-                     {'operation_id':OP,'stage':'checking','confidence':1}):
+                     {'operation_id':OP,'stage':'verifying','confidence':1}):
             seen=[]
             with self.assertRaises(APIError):
                 read_verified_stream([frame('progress',data)],operation_id=OP,on_progress=seen.append)
@@ -72,7 +72,7 @@ class ProgressStreamTests(unittest.TestCase):
 
     def test_revised_draft_progress_allowed_without_private_answer_tokens(self):
         v=view();stages=[]
-        sequence=('retrieving','drafting','checking','drafting','checking','displaying')
+        sequence=('retrieving','drafting','verifying','drafting','verifying','displaying')
         self.assertEqual(read_verified_stream(accepted_frames(v,stages=sequence),operation_id=OP,on_progress=stages.append),v)
         self.assertEqual(stages,list(sequence))
 
@@ -125,21 +125,19 @@ class ProgressStreamTests(unittest.TestCase):
         self.assertEqual(api.recover_operation(OP),v)
         with self.assertRaises(APIError):api.recover_operation('d'*32)
 
-    def test_persisted_release_receipt_metadata_is_bound(self):
+    def test_persisted_verification_receipt_metadata_is_bound(self):
         import hashlib
         from rider_ui.client import validate_view
         v=view();accepted_frames(v)
-        v['delivery'].update(evidence_payload_sha256='1'*64,release_binding_sha256='2'*64)
-        v['release_delivery']={'operation_id':OP,'runtime_lock':'e'*64,'manual_checksum':v['manual_checksum'],
+        v['delivery'].update(evidence_payload_sha256='1'*64,verification_binding_sha256='2'*64)
+        v['verified_delivery']={'operation_id':OP,'runtime_lock':'e'*64,'manual_checksum':v['manual_checksum'],
             'index_id':v['index_id'],'presentation_sha256':response_hash(v),'evidence_payload_sha256':'1'*64,
-            'release_sha256':'2'*64,'text_sha256':hashlib.sha256(v['response']['natural_language'].encode()).hexdigest()}
+            'binding_sha256':'2'*64,'text_sha256':hashlib.sha256(v['response']['natural_language'].encode()).hexdigest()}
         self.assertEqual(validate_view(v),v)
-        for key in v['release_delivery']:
-            changed=copy.deepcopy(v);changed['release_delivery'][key]='changed'
+        for key in v['verified_delivery']:
+            changed=copy.deepcopy(v);changed['verified_delivery'][key]='changed'
             with self.assertRaises(APIError):validate_view(changed)
-        changed=copy.deepcopy(v);changed['delivery']['release_binding_sha256']='invalid'
-        with self.assertRaises(APIError):validate_view(changed)
-        changed=copy.deepcopy(v);changed['delivery']['verification_binding_sha256']='2'*64
+        changed=copy.deepcopy(v);changed['delivery']['verification_binding_sha256']='invalid'
         with self.assertRaises(APIError):validate_view(changed)
 
     def test_fixed_fallback_is_neutral_complete_only_with_no_verified_label_or_chunks(self):
@@ -147,7 +145,7 @@ class ProgressStreamTests(unittest.TestCase):
         v['response']['natural_language']='I couldn\u2019t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.'
         v['escalation_uri']='mailto:support@royalenfield.com'
         received=[];parts=[];stages=[]
-        frames=[frame('progress',{'operation_id':OP,'stage':stage}) for stage in ('retrieving','drafting','checking')]+[frame('complete',v)]
+        frames=[frame('progress',{'operation_id':OP,'stage':stage}) for stage in ('retrieving','drafting','verifying')]+[frame('complete',v)]
         result=read_verified_stream(frames,received.append,operation_id=OP,on_chunk=parts.append,on_progress=stages.append)
         self.assertEqual(result,v);self.assertEqual(received,[]);self.assertEqual(parts,[])
         self.assertNotIn('displaying',stages)
@@ -193,7 +191,7 @@ class ProgressStreamTests(unittest.TestCase):
     def test_failure_progress_then_system_error_releases_no_technical_text(self):
         v=view();v['response'].update(type='SYSTEM_ERROR',technical_content=False,release_gate_passed=False,cited_pages=[])
         seen=[];parts=[]
-        result=read_verified_stream([frame('progress',{'operation_id':OP,'stage':'checking'}),frame('complete',v)],seen.append,operation_id=OP,on_chunk=parts.append)
+        result=read_verified_stream([frame('progress',{'operation_id':OP,'stage':'verifying'}),frame('complete',v)],seen.append,operation_id=OP,on_chunk=parts.append)
         self.assertEqual(result['response']['type'],'SYSTEM_ERROR')
         self.assertEqual(seen,[]);self.assertEqual(parts,[])
 

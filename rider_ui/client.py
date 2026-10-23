@@ -9,12 +9,12 @@ from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
-INDEX_ID = 'index_a609ca61c635641e0a22dc48'
+INDEX_ID = 'index_a3282c4d98cf54595e4ba168'
 STATES = {'SUPPORTED', 'AMBIGUOUS', 'UNSUPPORTED', 'SAFETY_STOP', 'SYSTEM_ERROR'}
 OUTCOMES = {'NOT_TRIED', 'OBSERVED_NORMAL', 'OBSERVED_ABNORMAL',
             'ACTION_COMPLETED_UNRESOLVED', 'NOT_APPLICABLE', 'UNCLEAR', 'RESOLVED'}
 MAX_BYTES = 256 * 1024
-RUNTIME_POLICY = 'open-manual-section-template-v1'
+RUNTIME_POLICY = 'open-manual-haiku-draft-verify-v10_13'
 CHECK_ERROR_COPY = 'I couldn\u2019t check the answer right now. Please try again shortly.'
 
 class APIError(RuntimeError):
@@ -87,7 +87,7 @@ def validate_view(view, *, expected_policy=None):
         raise APIError('The service returned an invalid session history.')
     delivery = view.get('delivery')
     if delivery is not None:
-        if (type(delivery) is not dict or not {'operation_id','response_sha256','runtime_lock','manual_checksum','index_id'} <= set(delivery) or set(delivery)-{'operation_id','response_sha256','runtime_lock','manual_checksum','index_id','evidence_payload_sha256','release_binding_sha256','event_protocol'} or
+        if (type(delivery) is not dict or not {'operation_id','response_sha256','runtime_lock','manual_checksum','index_id'} <= set(delivery) or set(delivery)-{'operation_id','response_sha256','runtime_lock','manual_checksum','index_id','evidence_payload_sha256','verification_binding_sha256','event_protocol'} or
                 type(delivery.get('operation_id')) is not str or not re.fullmatch(r'[a-f0-9]{32}',delivery['operation_id']) or
                 type(delivery.get('runtime_lock')) is not str or not re.fullmatch(r'[a-f0-9]{64}',delivery['runtime_lock']) or
                 delivery.get('manual_checksum') != MANUAL_SHA or delivery.get('index_id') != INDEX_ID):
@@ -96,20 +96,20 @@ def validate_view(view, *, expected_policy=None):
             raise APIError('The saved event bindings could not be verified.')
         digest = hashlib.sha256(json.dumps(response,sort_keys=True,separators=(',',':'),
             ensure_ascii=False,allow_nan=False).encode('utf-8')).hexdigest()
-        for key in ('evidence_payload_sha256','release_binding_sha256'):
+        for key in ('evidence_payload_sha256','verification_binding_sha256'):
             value=delivery.get(key)
             if value is not None and (type(value) is not str or not re.fullmatch(r'[a-f0-9]{64}',value)):
-                raise APIError('The saved release bindings could not be verified.')
-        released=view.get('release_delivery')
-        if released is not None:
-            if (type(released) is not dict or released.get('operation_id')!=delivery['operation_id'] or
-                    released.get('runtime_lock')!=delivery['runtime_lock'] or
-                    released.get('manual_checksum')!=MANUAL_SHA or released.get('index_id')!=INDEX_ID or
-                    released.get('presentation_sha256')!=digest or
-                    released.get('evidence_payload_sha256')!=delivery.get('evidence_payload_sha256') or
-                    released.get('release_sha256')!=delivery.get('release_binding_sha256') or
-                    released.get('text_sha256')!=hashlib.sha256(response['natural_language'].encode('utf-8')).hexdigest()):
-                raise APIError('The saved release bindings could not be verified.')
+                raise APIError('The saved verification bindings could not be verified.')
+        verified=view.get('verified_delivery')
+        if verified is not None:
+            if (type(verified) is not dict or verified.get('operation_id')!=delivery['operation_id'] or
+                    verified.get('runtime_lock')!=delivery['runtime_lock'] or
+                    verified.get('manual_checksum')!=MANUAL_SHA or verified.get('index_id')!=INDEX_ID or
+                    verified.get('presentation_sha256')!=digest or
+                    verified.get('evidence_payload_sha256')!=delivery.get('evidence_payload_sha256') or
+                    verified.get('binding_sha256')!=delivery.get('verification_binding_sha256') or
+                    verified.get('text_sha256')!=hashlib.sha256(response['natural_language'].encode('utf-8')).hexdigest()):
+                raise APIError('The saved verification bindings could not be verified.')
         if delivery.get('response_sha256') != digest:
             raise APIError('The saved response changed. Retrieve the original operation.')
     return view
@@ -204,7 +204,7 @@ class RiderAPI:
             raise APIError('The service manual does not match the selected source.')
         if data.get('question_input') != 'open':
             raise APIError('The service cannot yet accept rider questions. Please reconnect later.')
-        if not self.engineering_loopback and data.get('streaming') != 'SAVED_RELEASE_STREAM':
+        if not self.engineering_loopback and data.get('streaming') != 'DRAFT_VERIFY_STREAM':
             raise APIError('The service cannot yet check and stream rider answers. Please reconnect later.')
         return data
 
@@ -227,6 +227,14 @@ class RiderAPI:
             payload['expected_version'] = view['version']
         return validate_view(self.request('POST',path,payload,request_id,
                                          stream=True,on_verified=on_verified,on_progress=on_progress,on_chunk=on_chunk))
+
+    def feedback(self, view, choice_id, request_id, *, on_verified=None, on_progress=None, on_chunk=None):
+        validate_view(view,expected_policy=None if self.engineering_loopback else RUNTIME_POLICY)
+        if not valid_id(view.get('session_id')):
+            raise APIError('The session identifier is invalid.')
+        return validate_view(self.request('POST', '/v1/sessions/' + view['session_id'] + '/feedback', {
+            'expected_version': view['version'], 'choice_id': choice_id,
+            'cache_mode': self.cache_mode}, request_id,stream=True,on_verified=on_verified,on_progress=on_progress,on_chunk=on_chunk))
 
     def recover(self, session_id):
         if not valid_id(session_id):

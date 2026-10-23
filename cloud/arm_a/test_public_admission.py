@@ -46,10 +46,10 @@ class PublicAdmissionTests(unittest.TestCase):
         settings.start();self.addCleanup(settings.stop)
         self.database=Client();self.now=datetime(2026,10,12,tzinfo=timezone.utc)
         self.admission=PublicAdmission(self.database,now=lambda:self.now)
-        source=types.SimpleNamespace(checksum='synthetic-manual',index_id='synthetic-index',variant='Himalayan BS6')
+        registry=types.SimpleNamespace(checksum='synthetic-manual',index_id='synthetic-index')
         factory=lambda owner:FirestoreState(self.database,owner,now=lambda:self.now)
-        self.app=create_app(source)
-        install(self.app,types.SimpleNamespace(source=source),factory,'s'*32)
+        self.app=create_app(registry,None,factory,[])
+        install(self.app,types.SimpleNamespace(registry=registry),factory,'s'*32)
         self.http=self.app.test_client()
 
     def reserve(self,value=1,credential=None,raw=None,headers=None):

@@ -56,20 +56,17 @@ Each arm ran 30 isolated subagents that read [ANSWER_INSTRUCTIONS_v3.md](ANSWER_
 
 ## Decision for integration
 
-The bar was: no unfaithful cited statement and at least 27/30 correct for Haiku.
-- **Haiku at high effort clears it** (30/30, 0 unfaithful).
-- **Haiku at default effort does not** (24/30).
+The bar applies to the Haiku arm (default effort): no unfaithful cited statement and at least 27/30 correct.
 
-Integration therefore uses Haiku with effort `high`. That setting's latency and cost were not measured here, because subagent timings are not API timings.
+**The Haiku arm does not meet it.** It had 0 unfaithful cited items but only 24/30 correct: its 6 failures were structural gate failures, none factual. Under the goal, the work therefore stops here. The candidate does not replace draft-then-verify or the review gate, and the repository keeps its existing answer path.
 
-**Integrated.** The candidate is now the only answer path in the repository:
-- Code: [cloud/grounded_generation/](../../../cloud/grounded_generation/), in `section_index`, `section_retrieval`, `section_assembly`, `template_answer`, `haiku_answer` and `section_questions`.
-- The serving `section_index.py` differs from [candidate/section_index.py](candidate/section_index.py) only in its import path, so the index built here keeps its ID.
-- Parity: [serving_parity.py](serving_parity.py) runs the serving modules on the real index. They reproduce all 30 model inputs byte for byte and all 90 gate outcomes of this run ([serving_parity.json](serving_parity.json)), with no model calls.
-- Release: frozen in [serving manifest v11](../../public_evaluator/20261025/serving_manifest_v11.json).
-- Owner decision: recorded in [owner_decision_v3.json](owner_decision_v3.json).
-- Retired: the draft-then-verify and review-gate modules are deleted.
-- Not changed: nothing was deployed, and the new index is not uploaded to hosted Qdrant.
+The separate Haiku-at-high-effort arm would clear the bar (30/30, 0 unfaithful). Its latency and cost were not measured, because subagent timings are not API timings. An integration that uses that arm is prepared on branch [`codex/section-template-integration`](https://github.com/Maneshwar-Kumar/motomedic-ai/tree/codex/section-template-integration) (commit `512a78b`, not merged). It includes:
+- the serving modules, with the draft-then-verify and review-gate modules deleted;
+- provider-free tests, passing in CI;
+- frozen serving manifest v11;
+- the docs, and a real-index parity check that reproduces this run's 30 inputs and 90 gate outcomes.
+
+Merging it needs the owner to accept Haiku at high effort as the integration bar.
 
 ## Reproduce
 

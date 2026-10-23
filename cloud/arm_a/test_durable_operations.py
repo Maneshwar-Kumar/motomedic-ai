@@ -1,5 +1,6 @@
 """Synthetic durable task/lease/stream failure checks; no providers or cloud."""
 from copy import deepcopy
+from dataclasses import asdict, replace
 from datetime import datetime, timedelta, timezone
 import base64
 import json
@@ -15,11 +16,12 @@ from cloud.arm_a.durable_dispatch import (CloudTasksDispatcher, DispatchError,
 from cloud.arm_a.store import FirestoreState, OperationConflict
 from cloud.arm_a.test_store import Client, Ref, Transaction, transactional
 from cloud.arm_a.visitor import issue
-from cloud.grounded_generation.test_section_wiring import ScriptedQuestions, OP
+from cloud.grounded_generation.test_open_wiring import ScriptedQuestions, OP
 from cloud.grounded_generation.delivery import bind_view, accepted_events, encode, stream_operation
 from rider_ui.client import APIError
 from rider_ui.verified_sse import read_verified_stream
 from session_store import SessionConflict
+from evidence_registry import content_hash
 
 
 class DurableOperationTests(unittest.TestCase):
@@ -38,6 +40,91 @@ class DurableOperationTests(unittest.TestCase):
     def tearDown(self):self.modules.stop()
     def queue(self,key=OP,work=None):self.store.begin(key,'d'*64,work=work or self.work)
     def raw_operation(self):return self.database.data[self.store._operation(OP).path]
+
+    def safety_buffer(self):
+        """Synthetic proof for the storage boundary; it grants no source approval."""
+        from cloud.grounded_generation.serving_safety import METHOD
+        self.queue();self.store.claim_operation(OP,'d'*64,'lease')
+        updated,view,choices=self.questions.answer(self.session,self.work['query'],
+            progress=lambda stage:None,operation_id=OP)
+        view['response'].update(type='SAFETY_STOP',verification_method=METHOD,
+            source_scope_verification_passed=True,semantic_verification_passed=False,
+            semantic_support_proven=False)
+        snapshot=json.loads(json.dumps(asdict(updated)))
+        view['source_scope_verification']={'verification_method':METHOD,'operation_id':OP,
+            'question_sha256':content_hash(self.work['query']),
+            'history_sha256':content_hash(self.work['history']),
+            'session_snapshot':snapshot,'session_sha256':content_hash(snapshot),
+            'evidence_payload_sha256':'1'*64}
+        view['verified_delivery']['verification_method']=METHOD
+        self.rebind_safety(view)
+        return updated,view,choices
+
+    def rebind_safety(self,view):
+        from cloud.grounded_generation.delivery import response_hash
+        view['verified_delivery']['binding_sha256']=content_hash(view.get('source_scope_verification',{}))
+        view['verified_delivery']['presentation_sha256']=response_hash(view)
+        view.update(bind_view(view,OP,self.session.generation_lock))
+
+    def commit_safety(self,updated,view,choices,query=None):
+        return self.store.commit_answer(OP,updated,view,choices,query=query or self.work['query'],
+            expected_version=None,lease_token='lease')
+
+    def test_exact_safety_commit_preserves_private_context_in_all_three_records(self):
+        updated,view,choices=self.safety_buffer();self.commit_safety(updated,view,choices)
+        operation=self.store.operation(OP);head=self.store.saved(updated.session_id)
+        version=self.database.data['arm_a_sessions/'+updated.session_id+'/arm_a_session_versions/'+str(updated.version)]
+        context=operation['accepted_source_scope_context']
+        self.assertEqual(head['accepted_source_scope_context'],context)
+        self.assertEqual(version['accepted_source_scope_context'],context)
+        self.assertEqual(context['question_sha256'],content_hash(self.work['query']))
+        self.assertEqual(context['history_sha256'],content_hash(self.work['history']))
+        self.assertEqual(context['session_sha256'],content_hash(asdict(updated)))
+        self.assertIsNone(operation['work'])
+        self.assertNotIn('accepted_source_scope_context',view)
+        self.assertNotIn('query',context);self.assertNotIn('history',context)
+
+    def test_rebound_safety_proof_cannot_change_original_work_or_session(self):
+        def session_change(view):
+            proof=view['source_scope_verification']
+            proof['session_snapshot']['current_symptoms']=['synthetic-other-context']
+            proof['session_sha256']=content_hash(proof['session_snapshot'])
+        mutations=[('question',lambda v:v['source_scope_verification'].__setitem__('question_sha256',content_hash('different'))),
+            ('history',lambda v:v['source_scope_verification'].__setitem__('history_sha256',content_hash([{'question':'different'}]))),
+            ('session',session_change),
+            ('operation',lambda v:v['source_scope_verification'].__setitem__('operation_id','f'*32)),
+            ('route',lambda v:v['response'].__setitem__('type','SUPPORTED')),
+            ('semantic_flag',lambda v:v['response'].__setitem__('semantic_verification_passed',True)),
+            ('scope_flag',lambda v:v['response'].__setitem__('source_scope_verification_passed',False)),
+            ('proof_flag',lambda v:v['response'].__setitem__('semantic_support_proven',True))]
+        for label,mutation in mutations:
+            with self.subTest(label=label):
+                self.database.data.clear();updated,view,choices=self.safety_buffer()
+                mutation(view);self.rebind_safety(view);before=deepcopy(self.database.data)
+                with self.assertRaises(OperationConflict):self.commit_safety(updated,view,choices)
+                self.assertEqual(self.database.data,before)
+                self.assertEqual(self.store.operation(OP)['state'],'RUNNING')
+
+    def test_post_claim_work_tamper_and_changed_commit_query_fail_atomically(self):
+        updated,view,choices=self.safety_buffer();before=deepcopy(self.database.data)
+        with self.assertRaises(OperationConflict):self.commit_safety(updated,view,choices,query='changed argument')
+        self.assertEqual(self.database.data,before)
+        self.raw_operation()['work']['query']='changed after claim'
+        view['source_scope_verification']['question_sha256']=content_hash('changed after claim')
+        self.rebind_safety(view);before=deepcopy(self.database.data)
+        with self.assertRaises(OperationConflict):self.commit_safety(updated,view,choices,query='changed after claim')
+        self.assertEqual(self.database.data,before)
+
+    def test_saved_safety_context_blocks_rebound_recovery_and_duplicate_replay(self):
+        updated,view,choices=self.safety_buffer();self.commit_safety(updated,view,choices)
+        changed=deepcopy(view)
+        changed['source_scope_verification']['history_sha256']=content_hash([{'question':'changed after work cleared'}])
+        self.rebind_safety(changed)
+        self.raw_operation()['view']=changed
+        with self.assertRaises(OperationConflict):self.store.operation(OP)
+        with self.assertRaises(OperationConflict):self.store.begin(OP,'d'*64,work=self.work)
+        self.database.data['arm_a_sessions/'+updated.session_id]['view']=changed
+        with self.assertRaises(OperationConflict):self.store.saved(updated.session_id)
 
     def test_task_claim_is_atomic_and_redelivery_never_calls_provider_twice(self):
         self.queue();claimed=[]
@@ -65,13 +152,8 @@ class DurableOperationTests(unittest.TestCase):
 
     def test_deadline_expiring_during_startup_stops_worker_before_generation(self):
         self.queue()
-        import cloud.arm_a.durable_dispatch as dispatch
-        real_decode=dispatch.decode
-        def slow_decode(raw):
-            self.now+=timedelta(seconds=1201)
-            return real_decode(raw)
-        with patch.object(dispatch,'decode',slow_decode):
-            self.assertEqual(self.worker.run(self.store.owner,OP,'d'*64),204)
+        self.questions.source_authority.check=lambda:setattr(self,'now',self.now+timedelta(seconds=1201))
+        self.assertEqual(self.worker.run(self.store.owner,OP,'d'*64),204)
         self.assertEqual(self.questions.calls,0)
         self.assertEqual(self.store.operation(OP)['error'],'OPERATION_DEADLINE_EXCEEDED')
 
@@ -198,8 +280,8 @@ class DurableOperationTests(unittest.TestCase):
         install(app,self.questions,self.factory,secret,dispatcher=Queue())
         headers={'X-MotoMedic-Visitor':issue(secret),'Idempotency-Key':OP,'Accept':'application/json'}
         body={'query':'Synthetic arbitrary question','bike_variant':'Himalayan BS6',
-            'confirmed_himalayan_bs6':True,'manual_checksum':self.questions.source.checksum,
-            'index_id':self.questions.source.index_id}
+            'confirmed_himalayan_bs6':True,'manual_checksum':self.questions.registry.checksum,
+            'index_id':self.questions.registry.index_id}
         with app.test_client() as client:
             failed=client.post('/v1/sessions',json=body,headers=headers)
             self.assertEqual(failed.status_code,503)
@@ -228,8 +310,8 @@ class DurableOperationTests(unittest.TestCase):
         install(app,self.questions,self.factory,secret)
         with app.test_client() as client:
             result=client.post('/v1/sessions',json={'query':'Synthetic arbitrary question','bike_variant':'Himalayan BS6',
-                'confirmed_himalayan_bs6':True,'manual_checksum':self.questions.source.checksum,
-                'index_id':self.questions.source.index_id},headers={'X-MotoMedic-Visitor':issue(secret),'Idempotency-Key':OP})
+                'confirmed_himalayan_bs6':True,'manual_checksum':self.questions.registry.checksum,
+                'index_id':self.questions.registry.index_id},headers={'X-MotoMedic-Visitor':issue(secret),'Idempotency-Key':OP})
         self.assertEqual(result.status_code,503)
         self.assertEqual(result.json['error'],'DURABLE_DISPATCH_UNCONFIGURED')
         self.assertFalse(self.database.data)

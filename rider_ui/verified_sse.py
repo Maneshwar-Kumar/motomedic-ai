@@ -11,8 +11,8 @@ from rider_ui.client import APIError, MAX_BYTES, validate_view, CHECK_ERROR_COPY
 PROGRESS_LABELS={
     'retrieving':'Retrieving manual information.',
     'drafting':'Drafting your answer.',
-    'checking':'Checking the answer\u2019s citations against the manual.',
-    'displaying':'Displaying the checked answer.',
+    'verifying':'Checking the answer against the manual.',
+    'displaying':'Displaying the verified answer.',
 }
 
 def response_hash(view):

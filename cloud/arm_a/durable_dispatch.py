@@ -16,7 +16,7 @@ import uuid
 from cloud.arm_a.store import OperationConflict, OPERATION_SECONDS
 from session_store import decode, SessionConflict
 
-VERSION = 'durable-cloud-tasks-operations-v2'
+VERSION = 'durable-cloud-tasks-operations-v1'
 WORKER_PATH = '/internal/operations/run'
 
 
@@ -30,9 +30,9 @@ def make_work(session, query, history, expected_version, questions):
         'session_snapshot': json.dumps(asdict(session), allow_nan=False),
         'query': query, 'history': list(history), 'expected_version': expected_version,
         'runtime_lock': session.generation_lock,
-        'manual_checksum': questions.source.checksum,
-        'index_id': questions.source.index_id,
-        'index_lock': questions.index_lock}
+        'manual_checksum': questions.registry.checksum,
+        'index_id': questions.registry.index_id,
+        'source_authority_lock': questions.source_authority.lock}
 
 
 class CloudTasksDispatcher:
@@ -126,10 +126,12 @@ class DurableWorker:
                 return 204 if operation['state'] in ('COMPLETE', 'FAILED') else 503
             claimed = True
             q = self.questions
-            if (work['version'] != VERSION or work['manual_checksum'] != q.source.checksum or
-                    work['index_id'] != q.source.index_id or work['index_lock'] != q.index_lock or
-                    work['runtime_lock'] != q.runtime_lock):
+            if (work['version'] != VERSION or work['manual_checksum'] != q.registry.checksum or
+                    work['index_id'] != q.registry.index_id or
+                    work['source_authority_lock'] != q.source_authority.lock or
+                    work['runtime_lock'] != q.controller.response_generator.config.lock):
                 raise OperationConflict()
+            q.source_authority.check()
             session = decode(work['session_snapshot'])
             if session.session_id != work['session_id'] or session.generation_lock != work['runtime_lock']:
                 raise OperationConflict()

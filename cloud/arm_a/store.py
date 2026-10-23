@@ -17,7 +17,52 @@ class OperationConflict(Exception):
 
 OPERATION_SECONDS = 1200
 LEASE_SECONDS = 1200
-PRIVATE_STAGES = {'retrieving', 'drafting', 'checking'}
+PRIVATE_STAGES = {'retrieving', 'drafting', 'verifying'}
+
+
+def _source_scope_context(view, key):
+    """Private hashes for a separately approved exact safety buffer."""
+    from cloud.grounded_generation.serving_safety import METHOD
+    from cloud.grounded_generation.delivery import response_hash
+    body = view.get('response', {})
+    verified = view.get('verified_delivery', {})
+    if (verified.get('verification_method') != METHOD and
+            body.get('verification_method') != METHOD and 'source_scope_verification' not in view):
+        return None
+    proof = view.get('source_scope_verification', {})
+    if (verified.get('verification_method') != METHOD or body.get('verification_method') != METHOD or
+            proof.get('verification_method') != METHOD or body.get('type') != 'SAFETY_STOP' or
+            body.get('technical_content') is not True or body.get('release_gate_passed') is not True or
+            body.get('source_scope_verification_passed') is not True or
+            body.get('semantic_verification_passed') is not False or body.get('semantic_support_proven') is not False or
+            not key or proof.get('operation_id') != key or verified.get('operation_id') != key or
+            verified.get('binding_sha256') != content_hash(proof) or
+            verified.get('presentation_sha256') != response_hash(view) or
+            verified.get('evidence_payload_sha256') != proof.get('evidence_payload_sha256') or
+            content_hash(proof.get('session_snapshot')) != proof.get('session_sha256')):
+        raise OperationConflict()
+    fields = ('question_sha256', 'history_sha256', 'session_sha256')
+    if any(type(proof.get(field)) is not str or len(proof[field]) != 64 or
+            any(c not in '0123456789abcdef' for c in proof[field]) for field in fields):
+        raise OperationConflict()
+    payload_hash = verified.get('evidence_payload_sha256')
+    if type(payload_hash) is not str or len(payload_hash) != 64 or any(c not in '0123456789abcdef' for c in payload_hash):
+        raise OperationConflict()
+    return {**{field: proof[field] for field in fields}, 'operation_id': key,
+            'verification_method': METHOD, 'verification_binding_sha256': verified['binding_sha256'],
+            'evidence_payload_sha256': verified['evidence_payload_sha256'],
+            'response_sha256': response_hash(view)}
+
+
+def _check_saved_context(body, key):
+    if body.get('view') is None:
+        return
+    expected = _source_scope_context(body['view'], key)
+    if body.get('accepted_source_scope_context') != expected:
+        raise OperationConflict()
+    if expected is not None and body.get('snapshot') is not None:
+        if content_hash(json.loads(body['snapshot'])) != expected['session_sha256']:
+            raise OperationConflict()
 
 
 class FirestoreState:
@@ -79,6 +124,8 @@ class FirestoreState:
                     raise OperationConflict()
                 if body['expires_at'] <= now:
                     raise OperationConflict()
+                if body['state'] == 'COMPLETE':
+                    _check_saved_context(body, key)
                 return self._reconcile(tx, op, body, now)
             session_lock = None
             abandoned = None
@@ -215,6 +262,7 @@ class FirestoreState:
             if not snap.exists or snap.to_dict()['owner'] != self.owner:
                 raise OperationConflict()
             if snap.to_dict()['state'] == 'COMPLETE':
+                _check_saved_context(snap.to_dict(), key)
                 return snap.to_dict()['view']
             self._require_lease(snap.to_dict(), None, self.now())
             tx.update(ref, {'state':'COMPLETE', 'view':view})
@@ -230,7 +278,10 @@ class FirestoreState:
             now = self.now()
             if not snap.exists or snap.to_dict()['expires_at'] <= now or snap.to_dict()['owner'] != self.owner:
                 raise KeyError(key)
-            return self._reconcile(tx, ref, snap.to_dict(), now)
+            body = self._reconcile(tx, ref, snap.to_dict(), now)
+            if body['state'] == 'COMPLETE':
+                _check_saved_context(body, key)
+            return body
         return read(self.client.transaction())
 
     def fail_operation(self, key, code, status, lease_token=None):
@@ -269,6 +320,7 @@ class FirestoreState:
         body = self.client.collection('arm_a_sessions').document(session_id).get().to_dict()
         if body['owner'] != self.owner or body['expires_at'] <= self.now() or body['idle_expires_at'] <= self.now():
             raise KeyError(session_id)
+        _check_saved_context(body, body.get('view', {}).get('delivery', {}).get('operation_id'))
         return body
 
     def commit_answer(self, key, session, view, choices, expected_version=None, query=None, lease_token=None):
@@ -287,9 +339,11 @@ class FirestoreState:
             if not op.exists or op.to_dict()['owner'] != self.owner or op.to_dict()['expires_at'] <= now:
                 raise OperationConflict()
             if op.to_dict()['state'] == 'COMPLETE':
+                _check_saved_context(op.to_dict(), key)
                 return op.to_dict()['view']
             self._require_lease(op.to_dict(), lease_token, now)
             operation_body = op.to_dict()
+            source_context = _source_scope_context(view, key)
             if operation_body.get('work_sha256'):
                 from cloud.grounded_generation.delivery import response_hash
                 work = operation_body['work']
@@ -301,6 +355,13 @@ class FirestoreState:
                         view['delivery'].get('runtime_lock') != session.generation_lock or
                         view['delivery'].get('response_sha256') != response_hash(view)):
                     raise OperationConflict()
+                if source_context is not None and (
+                        source_context['question_sha256'] != content_hash(work['query']) or
+                        source_context['history_sha256'] != content_hash(work['history']) or
+                        source_context['session_sha256'] != content_hash(asdict(session))):
+                    raise OperationConflict()
+            elif source_context is not None:
+                raise OperationConflict()
             old = old_head.to_dict() if old_head.exists else None
             if (old['version'] if old else None) != expected_version:
                 raise SessionConflict('Concurrent or stale session update')
@@ -325,10 +386,13 @@ class FirestoreState:
                         ([{'question':query, 'response':view['response']['natural_language'],
                            'route':view['response']['type']}] if query is not None else [])),
                     'expires_at':expiry, 'idle_expires_at':min(expiry, now+timedelta(minutes=30))}
+            context_record = ({'accepted_source_scope_context': source_context}
+                              if source_context is not None else {})
+            body.update(context_record)
             tx.set(head, body)
             tx.create(head.collection('arm_a_session_versions').document(str(session.version)),
-                      {'snapshot':snapshot, 'view':view, 'expires_at':expiry})
-            tx.update(operation, {'state':'COMPLETE', 'view':view, 'completed_at':now, 'work':None})
+                      {'snapshot':snapshot, 'view':view, 'expires_at':expiry, **context_record})
+            tx.update(operation, {'state':'COMPLETE', 'view':view, 'completed_at':now, 'work':None, **context_record})
             self._release_session(tx, op.to_dict())
             return view
         return commit(self.client.transaction())

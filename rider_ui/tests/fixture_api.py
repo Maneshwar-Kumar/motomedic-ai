@@ -1,4 +1,5 @@
 """LOOPBACK ENGINEERING FIXTURE. No retrieval, provider, or motorcycle advice."""
+import copy
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from rider_ui.client import MANUAL_SHA, INDEX_ID
@@ -33,7 +34,25 @@ class Handler(BaseHTTPRequestHandler):
         v={**BASE,'session_id':'f'*32,'version':1,'history':[],
            'response':{'type':'AMBIGUOUS','natural_language':'Engineering fixture: confirm this test observation?',
                        'technical_content':False,'cited_pages':[],'trace_id':'ui-fixture-response'},
-           'choices':[]}
+           'choices':[{'id':'yes','label':'Yes','outcome':'OBSERVED_NORMAL'},
+                      {'id':'no','label':'No','outcome':'OBSERVED_ABNORMAL'},
+                      {'id':'unsure','label':'Not sure','outcome':'UNCLEAR'}]}
+        if self.path.endswith('/feedback'):
+            old=sessions.get('f'*32)
+            if not old or raw.get('expected_version')!=old['version']:
+                self.reply({},409);return
+            v=copy.deepcopy(old);v['version']+=1
+            if raw['choice_id']=='unresolved':
+                v['response']={'type':'UNSUPPORTED','natural_language':'Engineering fixture: no further test step is available. This is not motorcycle advice.','technical_content':False,'cited_pages':[]}
+                v['choices']=[]
+                v['history']=[{'label':'Tried, not fixed · ACTION_COMPLETED_UNRESOLVED'}]
+                v['escalation_uri']='mailto:support@royalenfield.com'
+            else:
+                v['response']={'type':'SUPPORTED','natural_language':'Engineering fixture: the response layout is displayed here. No motorcycle advice is provided.','technical_content':False,'cited_pages':[],'trace_id':'ui-fixture-response'}
+                v['choices']=[{'id':'unresolved','label':'Tried, not fixed','outcome':'ACTION_COMPLETED_UNRESOLVED'},
+                              {'id':'resolved','label':'Fixed','outcome':'RESOLVED'},
+                              {'id':'unclear','label':'Not sure','outcome':'UNCLEAR'}]
+                v['history']=[{'label':'Test observation recorded.'}]
         sessions[v['session_id']]=v;operations[op]=v
         if Handler.fail_next_response:
             Handler.fail_next_response=False;self.reply({},500)

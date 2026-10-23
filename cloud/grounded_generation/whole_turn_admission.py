@@ -2,9 +2,9 @@
 
 Uses the existing global daily/rate ledger and a non-expiring conservative
 allocation. Does not increase account limits or authorize provider spending.
-Serving atomically reserves the turn's single Haiku generation call (one
-transport attempt) before it starts; there is no verification or correction
-phase. Historical draft/verify reservations remain charged and readable.
+Serving atomically reserves each separate Haiku draft/verification pair before
+that phase begins. Each role gets one transport attempt. One correction phase
+may be reserved after rejection. Historical reservations remain charged.
 """
 from datetime import datetime, timedelta, timezone
 from contextlib import contextmanager
@@ -21,10 +21,10 @@ from cloud.grounded_generation.token_ceiling import (GRANT_DOCUMENT, DEFAULT_TOK
 
 VERSION = 'whole-turn-capacity-v1'
 # Allocation identity stays unchanged: a runtime upgrade cannot replenish it.
-PACING_VERSION = 'whole-turn-sealed-unused-pacing-v5-single-generation'
-SEALED_VERSIONS = (PACING_VERSION, 'whole-turn-sealed-unused-pacing-v4-haiku-roles',
-                   'whole-turn-sealed-unused-pacing-v3-variable-model', 'whole-turn-sealed-unused-pacing-v2')
-PLAN_VERSION = 'whole-turn-single-generation-native-envelope-v1'
+PACING_VERSION = 'whole-turn-sealed-unused-pacing-v4-haiku-roles'
+LEGACY_PACING_VERSION = 'whole-turn-sealed-unused-pacing-v2'
+HISTORICAL_PACING_VERSION = 'whole-turn-sealed-unused-pacing-v3-variable-model'
+PLAN_VERSION = 'whole-turn-haiku-role-native-envelope-v2'
 ALLOCATION = 'grounded-primary-nonrecurring-v1'
 MAX_TOKENS = 999200
 MAX_ATTEMPTS = 100
@@ -40,9 +40,7 @@ MODEL_INPUT_LIMITS = {GEMMA: 256000 - 1800, FLASH:1048576, HAIKU: 1000000 - 1800
 SERVING_MODELS = (HAIKU,)
 MAX_OUTPUT_TOKENS = 1800
 MAX_CALL_TOKENS = max(MODEL_INPUT_LIMITS.values()) + MAX_OUTPUT_TOKENS
-GENERATE = 'generate'
-# Retired draft/verify stages remain valid only for reading historical events.
-STAGES = ('draft', 'verify', 'correction', 'reverify', GENERATE)
+STAGES = ('draft', 'verify', 'correction', 'reverify')
 SLOT_SECONDS = 61
 MAX_SLEEP_SECONDS = 60
 # A permit may return at most one second after its recorded time. The extra
@@ -58,7 +56,7 @@ def _sealed_unused(event):
         return False
     sealed_at = event.get('sealed_at')
     if (event.get('state') != 'SEALED_UNUSED' or
-            event.get('sealed_version') not in SEALED_VERSIONS or
+            event.get('sealed_version') not in (PACING_VERSION, LEGACY_PACING_VERSION, HISTORICAL_PACING_VERSION) or
             event.get('consumed') not in (None, False) or
             event.get('kind') != 'generation' or
             type(event.get('operation_id')) is not str or
@@ -99,6 +97,16 @@ def _events(data):
     return events
 
 
+def _role_identity(plan, entries, verifier_stage):
+    from evidence_registry import content_hash
+    if 'role_plan' in plan:
+        keys=['role_plan','initial_haiku_counter_headroom_tokens','known_verifier_prefix_native_tokens']
+        if 'initial_primary_counter_headroom_tokens' in plan:keys.append('initial_primary_counter_headroom_tokens')
+        return content_hash({key:plan[key] for key in keys})
+    return content_hash([entries[0]['model'], next(
+        row['model'] for row in entries if row.get('stage') == verifier_stage)])
+
+
 def _bound_event(turn, event):
     """A permit or phase cannot replace its immutable durable reservation."""
     index = event['slot']
@@ -118,7 +126,7 @@ def _bound_event(turn, event):
         raise ProviderFailure('PROVIDER_NATIVE_PLAN_STORE_CHANGED')
 
 
-def _plan(plan, attempts):
+def _plan(plan, attempts, phase='initial'):
     if plan is None:
         if type(attempts) is not int or attempts not in (8, 12):
             raise ProviderFailure('WHOLE_TURN_RESERVATION_INVALID')
@@ -126,29 +134,84 @@ def _plan(plan, attempts):
         # old conservative reservation. Serving supplies an explicit native plan.
         return [{'model': None, 'input_tokens': 8192, 'output_tokens': 1800,
                  'tokens': CALL_TOKENS} for _ in range(attempts)], 0
-    if (type(plan) is not dict or not {'slots'} <= set(plan) <= {'slots', 'request_sha256'} or
-            type(plan['slots']) is not list or len(plan['slots']) != 1 or
-            ('request_sha256' in plan and (type(plan['request_sha256']) is not str or len(plan['request_sha256']) != 64 or
-                any(char not in '0123456789abcdef' for char in plan['request_sha256'])))):
+    metadata_keys = {'role_plan', 'forecast_method', 'forecast_is_not_unknown_final_answer_guarantee',
+        'fixed_verifier_native_tokens', 'fixed_correction_native_tokens',
+        'unknown_verifier_byte_allowance', 'unknown_correction_byte_allowance',
+        'initial_haiku_counter_headroom_tokens', 'known_verifier_prefix_native_tokens'}
+    metadata_keys.add('initial_primary_counter_headroom_tokens')
+    correction_bindings = {'correction_request_sha256', 'rejected_binding_sha256', 'verdict_sha256'}
+    if (type(plan) is not dict or not set(plan) <= {'slots'} | metadata_keys | correction_bindings or
+            (set(plan) - correction_bindings) not in ({'slots'}, {'slots'} | metadata_keys) or
+            type(plan['slots']) is not list or len(plan['slots']) not in (2, 4) or
+            phase not in ('initial', 'correction') or (phase == 'correction' and len(plan['slots']) != 2)):
         raise ProviderFailure('WHOLE_TURN_NATIVE_PLAN_INVALID')
-    row = deepcopy(plan['slots'][0])
+    rows = deepcopy(plan['slots'])
     allowed = {'model', 'stage', 'input_tokens', 'output_tokens', 'attempt', 'maximum_nanodollars'}
-    if (type(row) is not dict or not set(row) <= allowed or row.get('model') != HAIKU or
-            row.get('stage') != GENERATE or
-            type(row.get('input_tokens')) is not int or not 0 < row['input_tokens'] <= MODEL_INPUT_LIMITS[HAIKU] or
-            type(row.get('output_tokens')) is not int or row['output_tokens'] != MAX_OUTPUT_TOKENS or
-            type(row.get('attempt')) is not int or row['attempt'] != 1):
-        raise ProviderFailure('WHOLE_TURN_NATIVE_PLAN_INVALID')
-    row['tokens'] = row['input_tokens'] + row['output_tokens']
-    # Maximum 5m cache-write plus output price at the selected native input
-    # tier. USD1 allocation identity and old charges are unchanged.
-    input_price, output_price = (625, 2500) if row['input_tokens'] > 100000 else (125, 500)
-    worst = row['input_tokens'] * input_price + row['output_tokens'] * output_price
-    supplied = row.get('maximum_nanodollars', worst)
-    if type(supplied) is not int or supplied < worst:
-        raise ProviderFailure('CLAUDE_COST_RESERVATION_INVALID')
-    row['maximum_nanodollars'] = supplied
-    return [row], supplied
+    for row in rows:
+        if (type(row) is not dict or not set(row) <= allowed or
+                row.get('model') not in SERVING_MODELS or row.get('stage') not in STAGES or
+                type(row.get('input_tokens')) is not int or not 0 < row['input_tokens'] <= MODEL_INPUT_LIMITS[row['model']] or
+                type(row.get('output_tokens')) is not int or row['output_tokens'] != MAX_OUTPUT_TOKENS or
+                type(row.get('attempt')) is not int or row['attempt'] != 1):
+            raise ProviderFailure('WHOLE_TURN_NATIVE_PLAN_INVALID')
+        row['tokens'] = row['input_tokens'] + row['output_tokens']
+        if row['model'] == HAIKU:
+            # Maximum5m cache-write plus output price at the selected native
+            # input tier. USD1 allocation identity and old charges are unchanged.
+            input_price, output_price = (625, 2500) if row['input_tokens'] > 100000 else (125, 500)
+            worst = row['input_tokens'] * input_price + row['output_tokens'] * output_price
+            supplied = row.get('maximum_nanodollars', worst)
+            if type(supplied) is not int or supplied < worst:
+                raise ProviderFailure('CLAUDE_COST_RESERVATION_INVALID')
+            row['maximum_nanodollars'] = supplied
+        elif type(row.get('maximum_nanodollars', 0)) is not int or row.get('maximum_nanodollars', 0) != 0:
+            raise ProviderFailure('CLAUDE_COST_MODEL_MISMATCH')
+    expected = [(HAIKU, stage, 1) for stage in STAGES]
+    if len(rows) == 2:
+        expected = expected[:2] if phase == 'initial' else expected[2:]
+    if [(row['model'], row['stage'], row['attempt']) for row in rows] != expected:
+        raise ProviderFailure('WHOLE_TURN_MODEL_ROLE_PLAN_INVALID')
+    for left, right in zip(rows, rows[1:]):
+        if left['stage'] == right['stage'] and any(left[key] != right[key] for key in ('input_tokens', 'output_tokens')):
+            raise ProviderFailure('WHOLE_TURN_RETRY_ENVELOPE_CHANGED')
+    for key in correction_bindings & set(plan):
+        if (phase != 'correction' or type(plan[key]) is not str or len(plan[key]) != 64 or
+                any(char not in '0123456789abcdef' for char in plan[key])):
+            raise ProviderFailure('WHOLE_TURN_CORRECTION_BINDING_CHANGED')
+    if 'role_plan' in plan and phase == 'correction' and not correction_bindings <= set(plan):
+        raise ProviderFailure('WHOLE_TURN_CORRECTION_BINDING_REQUIRED')
+    if 'role_plan' in plan:
+        from evidence_registry import content_hash
+        from cloud.grounded_generation.role_contracts import CONTRACT
+        role = plan['role_plan']
+        count_key='primary_input_tokens_counted'
+        role_keys = {'version', 'route', 'routing_contract_sha256', count_key,
+            'selected_draft_input_tokens', 'initial_draft_request_sha256', 'stable_context_sha256',
+            'draft_model_contract_sha256', 'verifier_contract_sha256'}
+        route = 'HAIKU_DRAFT_HAIKU_VERIFY'
+        selected = CONTRACT['roles'][route]
+        if (type(role) is not dict or set(role) != role_keys or role.get('version') != CONTRACT['version'] or
+                role.get('route') != route or role.get('routing_contract_sha256') != content_hash(CONTRACT) or
+                role.get('draft_model_contract_sha256') != content_hash(selected['draft']) or
+                role.get('verifier_contract_sha256') != content_hash(selected['verifier']) or
+                type(role.get(count_key)) is not int or role[count_key] <= 0 or
+                role[count_key] != role.get('selected_draft_input_tokens') or
+                type(role.get('selected_draft_input_tokens')) is not int or role['selected_draft_input_tokens'] <= 0 or
+                type(plan.get('initial_haiku_counter_headroom_tokens')) is not int or
+                not 0 <= plan['initial_haiku_counter_headroom_tokens'] <= 512 or
+                type(plan.get('initial_primary_counter_headroom_tokens')) is not int or
+                plan['initial_primary_counter_headroom_tokens'] != 0 or
+                (phase == 'initial' and role['selected_draft_input_tokens'] +
+                    plan['initial_haiku_counter_headroom_tokens'] != rows[0]['input_tokens']) or
+                any(type(role.get(key)) is not str or len(role[key]) != 64 or
+                    any(char not in '0123456789abcdef' for char in role[key]) for key in
+                    ('initial_draft_request_sha256', 'stable_context_sha256')) or
+                plan.get('forecast_method') != 'NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES' or
+                plan.get('forecast_is_not_unknown_final_answer_guarantee') is not True or
+                any(type(plan.get(key)) is not int or plan[key] < 0 for key in
+                    metadata_keys - {'role_plan', 'forecast_method', 'forecast_is_not_unknown_final_answer_guarantee'})):
+            raise ProviderFailure('WHOLE_TURN_ROLE_FORECAST_BINDING_CHANGED')
+    return rows, sum(row.get('maximum_nanodollars', 0) for row in rows)
 
 
 class ModelAdmission:
@@ -183,15 +246,16 @@ class WholeTurnAdmission:
         self.local = threading.local()
 
     def for_model(self, model, *, role=None):
-        if model not in SERVING_MODELS or role not in (None, 'generation'):
+        if model not in SERVING_MODELS or role not in (None, 'private_draft', 'semantic_verifier'):
             raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
         return ModelAdmission(self, model, role)
 
-    def _reserve_entries(self, operation_id, entries, monetary, deadline, plan_sha, phase):
+    def _reserve_entries(self, operation_id, entries, monetary, deadline, plan_sha, phase, *, prior=None):
         from google.cloud import firestore
         from evidence_registry import content_hash
         attempts = len(entries)
         total = sum(row['tokens'] for row in entries)
+        offset = len(prior['entries']) if prior is not None else 0
         nonce = content_hash({'operation_id': operation_id, 'phase': phase, 'plan_sha256': plan_sha})
         usage = self.client.collection('arm_a_usage').document('grounded-provider-global-v1')
         lifetime = self.client.collection('arm_a_usage').document(ALLOCATION)
@@ -212,6 +276,9 @@ class WholeTurnAdmission:
             token_limit, token_authorization = resolve_token_ceiling(allocation,
                 grant_snap.to_dict() if grant_snap.exists else None)
             scope_sha = token_authorization['scope_sha256'] if token_authorization else None
+            if prior is not None and (token_limit != prior['primary_token_ceiling'] or
+                    scope_sha != prior['token_ceiling_scope_sha256']):
+                raise ProviderFailure('PROVIDER_TOKEN_CEILING_CHANGED_DURING_TURN')
             claude_previous = claude_snap.to_dict() if claude_snap is not None and claude_snap.exists else {}
             if allocation and (allocation.get('version') != VERSION or
                     allocation.get('maximum_tokens') != token_limit or
@@ -229,8 +296,17 @@ class WholeTurnAdmission:
             events = _events(previous)
             events = [e for e in events if e['at'] > now - timedelta(hours=24)]
             own = [e for e in events if e.get('operation_id') == operation_id]
-            if own:
+            if prior is None and own:
                 raise ProviderFailure('PROVIDER_OPERATION_ALREADY_RESERVED_NO_REPLAY')
+            if prior is not None:
+                if any(e.get('phase') == 'correction' for e in own):
+                    raise ProviderFailure('PROVIDER_CORRECTION_ALREADY_RESERVED_NO_REPLAY')
+                if len(own) != offset or {e.get('slot') for e in own} != set(range(offset)):
+                    raise ProviderFailure('PROVIDER_RESERVATION_LOST')
+                for event in own:
+                    _bound_event(prior, event)
+                if not any(e.get('stage') == 'verify' and e.get('consumed') is True for e in own):
+                    raise ProviderFailure('PROVIDER_CORRECTION_WITHOUT_VERIFICATION')
             if (len(events) + attempts > 120 or
                     sum(e['kind'] == 'generation' for e in events) + attempts > MAX_ATTEMPTS or
                     sum(e['tokens'] for e in events) + total > token_limit or
@@ -239,7 +315,7 @@ class WholeTurnAdmission:
             # Retain conservative61-second spacing across the shared ledger.
             # Native context, provider throughput and lifetime money/token
             # limits are separate constraints; historical Google TPM cannot
-            # become an assembled-evidence limit for the Haiku generation call.
+            # become an assembled-evidence limit for the Haiku serving roles.
             start = max([now] + [e['at'] + timedelta(seconds=SLOT_SECONDS)
                                 for e in events if not _sealed_unused(e) and
                                 e['at'] > now - timedelta(seconds=SLOT_SECONDS)])
@@ -249,7 +325,7 @@ class WholeTurnAdmission:
             if deadline is not None and slots[-1] >= deadline:
                 raise ProviderFailure('PROVIDER_OPERATION_DEADLINE_EXCEEDED')
             reserved = [{'at':slot, 'tokens':row['tokens'], 'kind':'generation',
-                         'operation_id':operation_id, 'slot':i, 'consumed':False,
+                         'operation_id':operation_id, 'slot':offset + i, 'consumed':False,
                          'primary_token_ceiling':token_limit, 'token_ceiling_scope_sha256':scope_sha,
                          **({key: row[key] for key in ('model', 'stage', 'input_tokens', 'output_tokens', 'attempt')}
                             if row['model'] is not None else {}),
@@ -279,40 +355,87 @@ class WholeTurnAdmission:
             raise ProviderFailure('PROVIDER_ADMISSION_STORE_UNAVAILABLE') from None
         return slots, nonce, token_limit, token_authorization
 
-    def begin_turn(self, operation_id, attempts=8, *, plan=None):
+    def begin_turn(self, operation_id, attempts=8, *, plan=None, compatibility_full_plan=False):
         if (type(operation_id) is not str or not 1 <= len(operation_id) <= 200 or
                 getattr(self.local, 'turn', None) is not None):
             raise ProviderFailure('WHOLE_TURN_RESERVATION_INVALID')
         entries, monetary = _plan(plan, attempts)
+        phased = plan is not None and len(entries) == 2
+        if plan is not None and len(entries) == 4 and compatibility_full_plan is not True:
+            raise ProviderFailure('FULL_NATIVE_PLAN_REQUIRES_EXPLICIT_COMPATIBILITY')
         from evidence_registry import content_hash
         plan_sha = content_hash(plan) if plan is not None else None
+        role_identity = _role_identity(plan, entries, 'verify') if plan is not None else None
         deadline = _OPERATION_DEADLINE.get()
-        phase = 'initial' if plan is not None else 'compatibility'
+        phase = 'initial' if phased else 'compatibility'
         slots, nonce, token_limit, token_authorization = self._reserve_entries(
             operation_id, entries, monetary, deadline, plan_sha, phase)
         attempts = len(entries)
         total = sum(row['tokens'] for row in entries)
         receipt = {'version':VERSION, 'pacing_version':PACING_VERSION,
                    'plan_version': PLAN_VERSION if plan is not None else 'LEGACY_FIXED_ENVELOPE',
-                   'reservation_mode': 'SINGLE_GENERATION_CALL' if plan is not None else 'EXPLICIT_COMPATIBILITY',
+                   'reservation_mode': 'INITIAL_PAIR_CONDITIONAL_CORRECTION' if phased else 'EXPLICIT_COMPATIBILITY',
                    'reserved_attempts':attempts, 'reserved_tokens':total,
                    'reserved_nanodollars': monetary, 'reserved_slots':deepcopy(entries),
                    'primary_token_ceiling':token_limit,
                    'token_ceiling_authorization':deepcopy(token_authorization),
+                   'maximum_corrections': 1 if phased else None, 'correction_reserved': False,
                    'phases': [{'phase':phase, 'phase_nonce':nonce, 'plan_sha256':plan_sha,
                        'reserved_attempts':attempts, 'reserved_tokens':total, 'reserved_nanodollars':monetary}],
                    'maximum_wait_seconds':max(0, (slots[-1] - self.now()).total_seconds()),
                    'sealing_status':'ACTIVE_RESERVATIONS_RETAINED', 'sealed_unused_slots':0}
-        # The caller retains this same receipt in its trace. Final sealing
+        if plan is not None and 'role_plan' in plan:
+            from evidence_registry import content_hash
+            receipt['role_forecast_binding'] = deepcopy({key: value for key, value in plan.items() if key != 'slots'})
+            receipt['role_forecast_sha256'] = content_hash(plan)
+        # The composer retains this same receipt in its trace. Final sealing
         # updates it without needing to replace an original generation error.
         self.local.turn = {'operation_id':operation_id, 'slots':slots, 'entries':entries, 'next':0,
                            'deadline':deadline, 'receipt':receipt, 'plan_sha256': plan_sha,
-                           'entry_plan_hashes': [plan_sha] * attempts,
+                           'entry_plan_hashes': [plan_sha] * attempts, 'role_identity': role_identity,
                            'entry_phases': [phase] * attempts, 'entry_nonces': [nonce] * attempts,
-                           'phase':phase}
+                           'phase':phase, 'correction_attempted':False}
         self.local.turn.update(primary_token_ceiling=token_limit,
             token_ceiling_scope_sha256=token_authorization['scope_sha256'] if token_authorization else None)
         return receipt
+
+    def reserve_correction(self, operation_id, *, plan):
+        from evidence_registry import content_hash
+        turn = getattr(self.local, 'turn', None)
+        if (turn is None or operation_id != turn['operation_id'] or turn['phase'] != 'initial' or
+                turn['correction_attempted'] or len(turn['entries']) != 2):
+            raise ProviderFailure('PROVIDER_CORRECTION_ALREADY_RESERVED_NO_REPLAY')
+        entries, monetary = _plan(plan, 2, phase='correction')
+        role_identity = _role_identity(plan, entries, 'reverify')
+        if role_identity != turn['role_identity']:
+            raise ProviderFailure('PROVIDER_CORRECTION_MODEL_ROLE_BINDING_CHANGED')
+        if _OPERATION_DEADLINE.get() != turn['deadline']:
+            raise ProviderFailure('PROVIDER_OPERATION_DEADLINE_CHANGED')
+        # A failed or uncertain reservation is terminal for this operation; it
+        # cannot retry a commit whose result might already have been persisted.
+        turn['correction_attempted'] = True
+        plan_sha = content_hash(plan)
+        slots, nonce, token_limit, token_authorization = self._reserve_entries(operation_id, entries, monetary, turn['deadline'],
+            plan_sha, 'correction', prior=turn)
+        turn['entries'].extend(entries)
+        turn['slots'].extend(slots)
+        turn['entry_plan_hashes'].extend([plan_sha] * len(entries))
+        turn['entry_phases'].extend(['correction'] * len(entries))
+        turn['entry_nonces'].extend([nonce] * len(entries))
+        turn['phase'] = 'correction'
+        total = sum(row['tokens'] for row in entries)
+        receipt = turn['receipt']
+        receipt['reserved_attempts'] += len(entries)
+        receipt['reserved_tokens'] += total
+        receipt['reserved_nanodollars'] += monetary
+        receipt['reserved_slots'].extend(deepcopy(entries))
+        receipt['correction_reserved'] = True
+        receipt['phases'].append({'phase':'correction', 'phase_nonce':nonce, 'plan_sha256':plan_sha,
+            'reserved_attempts':len(entries), 'reserved_tokens':total, 'reserved_nanodollars':monetary,
+            'role_forecast_binding':deepcopy({key:value for key,value in plan.items() if key != 'slots'})})
+        receipt['maximum_wait_seconds'] = max(receipt['maximum_wait_seconds'],
+            max(0, (slots[-1] - self.now()).total_seconds()))
+        return receipt['phases'][-1]
 
     def __call__(self, tokens, kind):
         return self._permit(tokens, kind)
@@ -329,11 +452,13 @@ class WholeTurnAdmission:
             if model not in SERVING_MODELS or rows[index]['model'] != model:
                 raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
             if role is not None:
-                allowed_stages = {'generation': (GENERATE,)}
+                allowed_stages = {'private_draft': ('draft', 'correction'),
+                    'semantic_verifier': ('verify', 'reverify')}
                 if role not in allowed_stages or rows[index]['stage'] not in allowed_stages[role]:
                     raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
                 if stage is None:
                     stage = rows[index]['stage']
+            # Same model identity cannot distinguish draft from verification.
             # The permit must be bound to either an explicit stage or role.
             if stage is None or rows[index]['stage'] != stage:
                 raise ProviderFailure('PROVIDER_MODEL_ROLE_MISMATCH')
