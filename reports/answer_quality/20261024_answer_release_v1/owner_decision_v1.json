@@ -1,0 +1,24 @@
+{
+  "schema": "motomedic-owner-decision-v1",
+  "recorded_at_utc": "2026-10-24T03:00:00Z",
+  "authority": "DIRECT_OWNER_INSTRUCTION_IN_SESSION",
+  "owner_messages": [
+    "Remove the verifier since release is what gets the answer to our bar of generation. We can give the generation model to write the answer as to fill the answer prose as the answer, the stated policy claim, any watchouts, any disclaimers that it has to fill. We agreed on a style of answering, so these elements will be filled and then the answer gets released. We therefore will not need a verifier. It also helps with latency. Once this is done, we will look at not released again.",
+    "Then we pickup the other 3 suggestions too. I agree with them",
+    "Watchouts: let model choose freely. Only that the deterministic gate will check if model considered the watchout, and indeed judged on releasing it without the watchout."
+  ],
+  "decisions": {
+    "semantic_verifier_call": "REMOVED_FROM_RELEASE_PATH",
+    "answer_template": ["answer", "policy", "watchouts", "disclaimers"],
+    "release_authority": "DETERMINISTIC_GATE_ONLY",
+    "watchouts": "MODEL_CHOSEN_WITH_EXPLICIT_PER_WARNING_DECISION_CHECKED_BY_GATE",
+    "server_appended_warning_paraphrases": "NO_LONGER_APPENDED",
+    "numeric_guard": "EXEMPT_NUMBERS_STATED_IN_THE_RIDER_QUESTION; DERIVED_VALUES_STILL_REJECTED",
+    "unsupported_route": "MAY_CARRY_CITED_CLARIFYING_FACTS_WITH_A_DISCLAIMER",
+    "conciseness": "PER_SECTION_ITEM_CAPS"
+  },
+  "status": "CANDIDATE_DESIGN_NOT_DEPLOYED",
+  "supersedes_for_candidate_only": ["PRD FR-06 separate verification", "PRD FR-07 correction/re-verification"],
+  "spec_reconciliation_required_before_adoption": ["docs/PRD.md", "docs/TRD.md", "docs/ARCHITECTURE.md", "AGENTS.md pipeline section"],
+  "human_signoff": false
+}

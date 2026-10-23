@@ -1,0 +1,111 @@
+{
+ "route": "UNSUPPORTED",
+ "coverage": "NONE",
+ "answer": [
+  {
+   "text": "The manual describes the warning symbol as an indicator that glows whenever the vehicle components fault.",
+   "evidence_ids": [
+    "evidence_16df2546fcf3ee0edb0cf3ec"
+   ]
+  },
+  {
+   "text": "The engine MIL is a separate tell-tale that stays continuously ON in case of EMS malfunction.",
+   "evidence_ids": [
+    "evidence_4808f410e808b353b66c6d8e"
+   ]
+  }
+ ],
+ "policy": [],
+ "watchouts": [],
+ "disclaimers": [
+  {
+   "text": "The manual does not say which specific part has failed when the general warning symbol is on; the symbol only indicates that some vehicle component has a fault."
+  },
+  {
+   "text": "The manual does not give a way to identify the failed part from this symbol alone, so no specific part can be named."
+  }
+ ],
+ "watchout_review": [
+  {
+   "display_id": "evidence_081f245f33f1dec5cb06a080",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Warranty note on unapproved modifications; unrelated to identifying a failed part."
+  },
+  {
+   "display_id": "evidence_13dac6aaee2fcbdd57618d29",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB charger note; unrelated."
+  },
+  {
+   "display_id": "evidence_3106be2805197091e9f489ba",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Hazard lamp behaviour; unrelated."
+  },
+  {
+   "display_id": "evidence_31f9ffe7f325a580f7c58947",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB charger rain note; unrelated."
+  },
+  {
+   "display_id": "evidence_7936d013ddebf1f7cfa4b218",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Hazard switch behaviour; unrelated."
+  },
+  {
+   "display_id": "evidence_87d7aaf9a6f68c203a240607",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB port warning; unrelated."
+  },
+  {
+   "display_id": "evidence_8ee409a6e58bad5ea0f5ab2c",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Hazard flashing battery strain; unrelated."
+  },
+  {
+   "display_id": "evidence_a35159dd2d88b584ad319de1",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB cable caution; unrelated."
+  },
+  {
+   "display_id": "evidence_a4a384cb8cd1cd437ac00907",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB cable insertion warning; unrelated."
+  },
+  {
+   "display_id": "evidence_aef43455a47ebc6374b7bba9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns the engine MIL (EMS malfunction), not the general warning symbol."
+  },
+  {
+   "display_id": "evidence_b345d26bcf46960f7125d8d8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB port cap caution; unrelated."
+  },
+  {
+   "display_id": "evidence_d867f6c7da84e269ebddf176",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns the ABS indicator lamp, not the general warning symbol."
+  },
+  {
+   "display_id": "evidence_da497f5f0bbf1c24b8f93714",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Bulb rating warning; unrelated to this question."
+  },
+  {
+   "display_id": "evidence_ea69e5fbd3ff27f1dd159960",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB charger current caution; unrelated."
+  },
+  {
+   "display_id": "evidence_f4f3ea7f748d6732d21cae42",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB port cap warning; unrelated."
+  },
+  {
+   "display_id": "evidence_f5f14378db31693f76bd2a81",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB charging device warning; unrelated."
+  }
+ ],
+ "clarification_question": ""
+}
