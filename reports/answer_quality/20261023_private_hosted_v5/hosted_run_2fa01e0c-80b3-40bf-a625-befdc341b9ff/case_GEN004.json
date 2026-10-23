@@ -1,0 +1,258 @@
+{
+  "case_id": "GEN004",
+  "elapsed_seconds": 10.86,
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "group": "PARTIAL",
+  "operation_id": "c4dc0f9e13cd45c4ada0173a3b5f3593",
+  "post_retries": 0,
+  "question": "How many kilograms can I put in the panniers and top box?",
+  "response_sha256": "00aa168e3a46daf0bee110fd27a5545d7c942e5e70ea557bd2cd54d225b6e458",
+  "route": "SYSTEM_ERROR",
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": null,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "c4dc0f9e13cd45c4ada0173a3b5f3593",
+      "response_sha256": "00aa168e3a46daf0bee110fd27a5545d7c942e5e70ea557bd2cd54d225b6e458",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "verification_binding_sha256": null
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 0,
+    "response": {
+      "cited_pages": [],
+      "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+      "reason_codes": [
+        "PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT"
+      ],
+      "release_gate_passed": false,
+      "technical_content": false,
+      "trace_id": "0b309f46decc4b97ab6447cc36660c17",
+      "type": "SYSTEM_ERROR"
+    },
+    "runtime_controls": {
+      "composition": {
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 0,
+        "draft_model": "claude-haiku-5-5",
+        "failed_provider_trace": {
+          "cache_hit_observed": false,
+          "cached_tokens": 0,
+          "citable_evidence_id_count": 27,
+          "citable_evidence_ids_sha256": "217df84554e89d517f247d8ac322dc55da32b730dace3a396a085c14461fe31f",
+          "generation_calls": 0,
+          "input_tokens_counted": 22039,
+          "model": "claude-haiku-5-5",
+          "native_role_schema_sha256": "88025959e03a1975e9018cb28e4fa8f6b112b9d1a1211294965b07159ac14ceb",
+          "provider": "anthropic",
+          "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+          "raw_content_logged": false,
+          "request_bytes": 49042,
+          "retry_count": 0,
+          "role": "private_draft",
+          "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+          "token_counter": "ANTHROPIC_COUNT_TOKENS",
+          "token_counter_is_estimate": true
+        },
+        "failure_code": "PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT",
+        "generation_calls": 0,
+        "model_routing": {
+          "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+          "initial_draft_request_sha256": "5a917b492bd7486145fc68b63c8432865da1180ee85b97c892ef62633fb26801",
+          "primary_input_tokens_counted": 15408,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+          "selected_draft_input_tokens": 15408,
+          "stable_context_sha256": "f22c3749c197ff189915e424e5206b58f232517a3ea0f78a4695abb8d607b6eb",
+          "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+          "version": "haiku-literal-object-draft-finalized-verifier-v4"
+        },
+        "provider_calls": 0,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "total_private_pipeline_seconds": 0.795059327999752,
+        "verification_calls": 0,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": false,
+        "verifier_calls": 0,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_13"
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 18,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_05bae4423aeebcb5527e2088",
+          "evidence_0977d270b64406ab9d320956",
+          "evidence_1816d47b8003f29a29c44542",
+          "evidence_19292eb18fe76d6d84c83062",
+          "evidence_1e0072a51a34136e217eb0cc",
+          "evidence_32a2dfb5649c03d469c7a578",
+          "evidence_39af261056aeef9f3b5f412d",
+          "evidence_41ddc000f6abdfa3a402fa60",
+          "evidence_5c099ad65b4864786494dd80",
+          "evidence_5cfa59d9941c156e8f2f3d89",
+          "evidence_6058a38ed55c9b65bad75313",
+          "evidence_655747f05f4a0b2df006062a",
+          "evidence_74d7693f57971057cf41fb71",
+          "evidence_80a460d371b840a11e5ef627",
+          "evidence_96901ce702d093c70b02e73d",
+          "evidence_a4bb14d7d40e42aa7a1abdc2",
+          "evidence_b1ca37705229227013a30dc4",
+          "evidence_b45cd32783b18b7a0f3a6bd3",
+          "evidence_b9c4e4222f25cb0fca7dffc6",
+          "evidence_bae47efa7a6ce22a3c3b2039",
+          "evidence_bb23ce8073c78eef5d28fd08",
+          "evidence_bbf3e2f088553465b973f78e",
+          "evidence_c3f89576489b978b3db27348",
+          "evidence_cb8341a603cdb0ba99658a9f",
+          "evidence_f052ee7a7d42a7c8e925daf0",
+          "evidence_f215ffd94a6c830c1ba6dfb0",
+          "evidence_fe1b0eab8df9910c9491f786"
+        ],
+        "authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+        "chunk_ids": [
+          "chunk_2b74b731babc494440b682fe",
+          "chunk_b60cc60e5481d89c3675f4ee",
+          "chunk_6c7251d3963a38967a66fdb2",
+          "chunk_6ed6bbe93e97912dbf905e83",
+          "chunk_10457fa5319d43f9bbf26810"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_6ed6bbe93e97912dbf905e83",
+            "evidence_ids": [
+              "evidence_f1b023ea7924903fed5dfe5f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_10457fa5319d43f9bbf26810",
+            "evidence_ids": [
+              "evidence_cd81c1174bb3a2fbf99ba2d2"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_88cc1946ce6a972bf0c62aa4",
+            "evidence_ids": [
+              "evidence_57fab436dbf86721f8ebbb7a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_6882d29d69c99363a971b690",
+            "evidence_ids": [
+              "evidence_f50d9f509de5b4cda729bdf7"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_6aa2967673413979c7cdc4fa",
+            "evidence_ids": [
+              "evidence_cd81c1174bb3a2fbf99ba2d2"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 4.654766178000045,
+        "retrieval_policy": {
+          "assembled_hit_count": 5,
+          "assembled_hit_limit": 10,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.6666666666666666,
+            "dense_top_distinct_parent_ids": [
+              "section_3c2e48e8b5b934502a3e5c2f",
+              "section_857c44640d5ac4188fc10da1",
+              "section_0d33b259255a54f0ccf525db"
+            ],
+            "disagreeing_rank_positions": [
+              2
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.03174603174603185,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_3c2e48e8b5b934502a3e5c2f",
+              "section_38ead19962d783f040195656",
+              "section_0d33b259255a54f0ccf525db"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "preserved_initial_anchor_chunk_ids": [],
+          "primary_hit_limit": 5,
+          "recovery_attempts": 0,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 24,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.0012027120001221192,
+            "dense_query_embedding_and_qdrant_rpc": 0.527051598000071,
+            "initial_assembly": 0.02831885700015846,
+            "reranking": 3.9038633749996734
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v6"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "bbca607788c243008fd74323d3459ccf",
+    "version": 1
+  },
+  "status": "SAVED_STREAMED_RECOVERED",
+  "streamed_text": ""
+}

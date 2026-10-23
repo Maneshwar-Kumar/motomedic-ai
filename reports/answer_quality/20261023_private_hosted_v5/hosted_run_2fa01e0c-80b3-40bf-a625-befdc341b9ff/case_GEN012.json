@@ -1,0 +1,574 @@
+{
+  "case_id": "GEN012",
+  "elapsed_seconds": 118.96,
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "group": "GOLDEN",
+  "operation_id": "6e4ba64cc074467f89a69a6433626ddc",
+  "post_retries": 0,
+  "question": "What spark-plug gap is specified?",
+  "response_sha256": "7abf79278179ae5ce9c709358646a7f23953542f69fe942cab87b75368874d29",
+  "route": "SUPPORTED",
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": "8b60587389377225f53cfae169be1a948b5537183de58ab2f093a8b65fe49f90",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "6e4ba64cc074467f89a69a6433626ddc",
+      "response_sha256": "7abf79278179ae5ce9c709358646a7f23953542f69fe942cab87b75368874d29",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "verification_binding_sha256": "dc2056e34c1da39ddeb6e58a5ad7e147b7338b53da3ea31faa1e39d3ec5c19bf"
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 2,
+    "response": {
+      "cited_pages": [
+        {
+          "evidence_id": "evidence_0801208d8cde38daf72f6ab3",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_6bf722f54de89478dba83e34",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_8c2f0823b184b2a67a450c35",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        }
+      ],
+      "claim_evidence_map": [
+        {
+          "claim_id": "draft:0",
+          "evidence_ids": [
+            "evidence_6bf722f54de89478dba83e34"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "FACT",
+          "text": "The specified spark plug gap is 0.8 mm to 0.9 mm."
+        },
+        {
+          "claim_id": "draft:1",
+          "evidence_ids": [
+            "evidence_0801208d8cde38daf72f6ab3"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "FACT",
+          "text": "The manual lists the spark plug brand as Champion."
+        }
+      ],
+      "clarification_question": null,
+      "escalation_uri": "mailto:support@royalenfield.com",
+      "natural_language": "The specified spark plug gap is 0.8 mm to 0.9 mm. The manual lists the spark plug brand as Champion.",
+      "reason_codes": [
+        "VERIFIED_OPEN_QA_ACCEPTED"
+      ],
+      "release_gate_passed": true,
+      "semantic_support_proven": false,
+      "semantic_verification_passed": true,
+      "technical_content": true,
+      "trace_id": "da5fe58efa3a41ef9f1689306184a64b",
+      "type": "SUPPORTED"
+    },
+    "runtime_controls": {
+      "composition": {
+        "accepted_binding_sha256": "dc2056e34c1da39ddeb6e58a5ad7e147b7338b53da3ea31faa1e39d3ec5c19bf",
+        "accepted_response_sha256": "bad925a615b23f4226ac4ad1d7d82983b52658d1462f92f6007857c294604b23",
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [
+          {
+            "binding_sha256": "dc2056e34c1da39ddeb6e58a5ad7e147b7338b53da3ea31faa1e39d3ec5c19bf",
+            "draft_output_sha256": "7b71c1ad14cf15946ff7b8ccabcf291736a62d2af571495fff80a6bc13b0a324",
+            "draft_provider": {
+              "cache_creation_input_tokens": 31622,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "69bf872f00100106e5e27b8ae2f5bc668ea0d7352ec74b0bcfec1873c7673fd6",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 46,
+              "citable_evidence_ids_sha256": "4023d10f93dee666b0799d9c265e981a42bb5f60726874bcc28798f8191eea72",
+              "estimated_cost_usd": 0.00407215,
+              "generation_calls": 1,
+              "input_tokens": 31866,
+              "input_tokens_counted": 31866,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "4dc9d3b6c23929339e3b58a88bf617559203e0796190f789be839b355c8e14e6",
+              "output_tokens": 190,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 2.8677280219999375,
+              "raw_content_logged": false,
+              "request_bytes": 71789,
+              "reserved_input_token_ceiling": 32378,
+              "reserved_maximum_cost_usd": 0.00494725,
+              "retry_count": 0,
+              "role": "private_draft",
+              "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 244
+            },
+            "draft_seconds": 49.070805318999874,
+            "draft_validation_status": "VALID",
+            "numeric_citation_guard": {
+              "checked_measurement_pairs": 2,
+              "conversions_performed": false,
+              "semantic_verifier_still_required": true,
+              "unit_witness_deferred_to_verifier": 0,
+              "version": "literal-cited-object-native-measurements-v1"
+            },
+            "revision": 0,
+            "verdict_summary": {
+              "conflict_count": 0,
+              "decision": "RELEASE_COMPLETE",
+              "omission_count": 0,
+              "question_coverage": "COMPLETE",
+              "release_eligible": true,
+              "supported_claims": 2,
+              "total_claims": 2
+            },
+            "verification_provider": {
+              "cache_creation_input_tokens": 31902,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "8398e54753c9657bc4f0f7b1f906bc8d3a2f46620be306d0497328bfd49225c5",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 46,
+              "citable_evidence_ids_sha256": "4023d10f93dee666b0799d9c265e981a42bb5f60726874bcc28798f8191eea72",
+              "estimated_cost_usd": 0.00437135,
+              "generation_calls": 1,
+              "input_tokens": 33953,
+              "input_tokens_counted": 33953,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "b10c10867eb6b423f6c46dc12bfcacf5a16ee1f1062824bf2ebf0780b6e9b70f",
+              "output_tokens": 357,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 4.11439765199998,
+              "raw_content_logged": false,
+              "request_bytes": 75757,
+              "reserved_input_token_ceiling": 78152,
+              "reserved_maximum_cost_usd": 0.010669,
+              "retry_count": 0,
+              "role": "semantic_verifier",
+              "role_schema_template_sha256": "de5ad9929c54e7df5d81ff2fbb22717b6ee2a548c7ed8f3e3b5eb3c384b8a8bd",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 2051
+            },
+            "verification_seconds": 61.88497567599984
+          }
+        ],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 1,
+        "draft_model": "claude-haiku-5-5",
+        "generation_calls": 2,
+        "model_routing": {
+          "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+          "initial_draft_request_sha256": "96fb9b6bcf226893d9ce01ea3d222223805e2b8f0f1d48bd17945746ebb4566b",
+          "primary_input_tokens_counted": 31866,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+          "selected_draft_input_tokens": 31866,
+          "stable_context_sha256": "55143de9ee00ebfc52fed86ecb78f5fd49ef34f788280030d7364427d8dcd4fe",
+          "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+          "version": "haiku-literal-object-draft-finalized-verifier-v4"
+        },
+        "provider_calls": 2,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "start_new_conversation_required": false,
+        "total_private_pipeline_seconds": 112.87715128100012,
+        "verification_calls": 1,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": true,
+        "verifier_calls": 1,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_13",
+        "whole_turn_reservation": {
+          "correction_reserved": false,
+          "maximum_corrections": 1,
+          "maximum_wait_seconds": 107.259225,
+          "model_routing": {
+            "fixed_correction_native_tokens": 45775,
+            "fixed_verifier_native_tokens": 44872,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 33246,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "96fb9b6bcf226893d9ce01ea3d222223805e2b8f0f1d48bd17945746ebb4566b",
+              "primary_input_tokens_counted": 31866,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 31866,
+              "stable_context_sha256": "55143de9ee00ebfc52fed86ecb78f5fd49ef34f788280030d7364427d8dcd4fe",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "slots": [
+              {
+                "attempt": 1,
+                "input_tokens": 32378,
+                "maximum_nanodollars": 4947250,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "draft"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 78152,
+                "maximum_nanodollars": 10669000,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "verify"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 95439,
+                "maximum_nanodollars": 12829875,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "correction"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 78152,
+                "maximum_nanodollars": 10669000,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "reverify"
+              }
+            ],
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "pacing_version": "whole-turn-sealed-unused-pacing-v4-haiku-roles",
+          "phases": [
+            {
+              "phase": "initial",
+              "phase_nonce": "da8c1f931a76f7c3bec3e318fbc2d0116810383d71602859e54d32c80eaa92d0",
+              "plan_sha256": "dafe61981387379e114882a2524ecbfcc4c16780831c777800dd76401e14b483",
+              "reserved_attempts": 2,
+              "reserved_nanodollars": 15616250,
+              "reserved_tokens": 114130
+            }
+          ],
+          "plan_version": "whole-turn-haiku-role-native-envelope-v2",
+          "primary_token_ceiling": 2000000,
+          "reservation_mode": "INITIAL_PAIR_CONDITIONAL_CORRECTION",
+          "reserved_attempts": 2,
+          "reserved_nanodollars": 15616250,
+          "reserved_slots": [
+            {
+              "attempt": 1,
+              "input_tokens": 32378,
+              "maximum_nanodollars": 4947250,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "draft",
+              "tokens": 34178
+            },
+            {
+              "attempt": 1,
+              "input_tokens": 78152,
+              "maximum_nanodollars": 10669000,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "verify",
+              "tokens": 79952
+            }
+          ],
+          "reserved_tokens": 114130,
+          "role_forecast_binding": {
+            "fixed_correction_native_tokens": 45775,
+            "fixed_verifier_native_tokens": 44872,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 33246,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "96fb9b6bcf226893d9ce01ea3d222223805e2b8f0f1d48bd17945746ebb4566b",
+              "primary_input_tokens_counted": 31866,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 31866,
+              "stable_context_sha256": "55143de9ee00ebfc52fed86ecb78f5fd49ef34f788280030d7364427d8dcd4fe",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "role_forecast_sha256": "dafe61981387379e114882a2524ecbfcc4c16780831c777800dd76401e14b483",
+          "sealed_unused_slots": 0,
+          "sealing_status": "SEALED_UNUSED_CONFIRMED",
+          "token_ceiling_authorization": {
+            "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+            "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+            "maximum_tokens": 2000000,
+            "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+            "previous_maximum_tokens": 999200,
+            "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+            "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+          },
+          "version": "whole-turn-capacity-v1"
+        }
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 11,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_00497a5a6998712d564a2df2",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_0801208d8cde38daf72f6ab3",
+          "evidence_081f245f33f1dec5cb06a080",
+          "evidence_0c58e6021490c80a7a7f8d99",
+          "evidence_13dac6aaee2fcbdd57618d29",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2e67c4cc94e9a302ba9a6822",
+          "evidence_31f9ffe7f325a580f7c58947",
+          "evidence_3ab349b8b479f442a8c6f618",
+          "evidence_3f0254b2230794cc5e25393b",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_46ea7e82545c259cf4ed23b3",
+          "evidence_4e1a61e411e2b752c1a8716b",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5547cca73df703b2d779755c",
+          "evidence_5560e923c89c184bddf2414f",
+          "evidence_590e7744c6d77b972e3950ee",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_662d4a163d504cc62ff5147e",
+          "evidence_6a7eba4e0fa3ae46308ea11c",
+          "evidence_6bf722f54de89478dba83e34",
+          "evidence_82764faca7aa6cec43f2eeb3",
+          "evidence_87d7aaf9a6f68c203a240607",
+          "evidence_8b5ef092d20493cd2b9b58b8",
+          "evidence_8c2f0823b184b2a67a450c35",
+          "evidence_90b50d7059435c1578fd7d12",
+          "evidence_a03ccd44ab2d6b5db6bab123",
+          "evidence_a35159dd2d88b584ad319de1",
+          "evidence_a4a384cb8cd1cd437ac00907",
+          "evidence_a66e862d634c23573bb30c90",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_b345d26bcf46960f7125d8d8",
+          "evidence_bcc2ecdbee298a98332e9c23",
+          "evidence_c5bacd3bd5b428c8950b0ce1",
+          "evidence_cb5d01a60a05ab5e91447f30",
+          "evidence_d312aaa5aca85242f73bec26",
+          "evidence_da497f5f0bbf1c24b8f93714",
+          "evidence_e5038680f235054234151f44",
+          "evidence_ea69e5fbd3ff27f1dd159960",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f4f3ea7f748d6732d21cae42",
+          "evidence_f5f14378db31693f76bd2a81"
+        ],
+        "authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+        "chunk_ids": [
+          "chunk_9ad1f6745a834eb6eaa9531f",
+          "chunk_bfa01c70956737ca3179a753",
+          "chunk_00167536a90359a310825d89",
+          "chunk_1c2990f676e324a8387a7635",
+          "chunk_9a9c223ed62fd189640d4cd5"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_0b48ffd32b845515249840ab"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_4f71b1bc4982bd7bf3489ad6"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_77c44249cc8a5f046b6a7798"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_cb9f15f609f419b604bb2029"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_f60c90aae28918d4c8ffa07e"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_e0c01b5659a5b924439217be",
+            "evidence_ids": [
+              "evidence_57fab436dbf86721f8ebbb7a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_e95b703cf17fd093e4da74cf",
+            "evidence_ids": [
+              "evidence_f50d9f509de5b4cda729bdf7"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_3b557cd98cd28d3b10a81aa0",
+            "evidence_ids": [
+              "evidence_99b055f3beedea0f634074e0"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_89b2fda70a26c664b3b00b25",
+            "evidence_ids": [
+              "evidence_cd81c1174bb3a2fbf99ba2d2"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 4.027147133000199,
+        "retrieval_policy": {
+          "assembled_hit_count": 5,
+          "assembled_hit_limit": 10,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.3333333333333333,
+            "dense_top_distinct_parent_ids": [
+              "section_083bf6d83f1f6d2a09186ff4",
+              "section_0d33b259255a54f0ccf525db",
+              "section_79d07c21af3ade16f67f1631"
+            ],
+            "disagreeing_rank_positions": [
+              2,
+              3
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.13462301587301592,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_083bf6d83f1f6d2a09186ff4",
+              "section_78586368b2a6fc2fff925bf0",
+              "section_25fc007289d1898092de2834"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "preserved_initial_anchor_chunk_ids": [],
+          "primary_hit_limit": 5,
+          "recovery_attempts": 0,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 25,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.0002683679999790911,
+            "dense_query_embedding_and_qdrant_rpc": 0.603853817000072,
+            "initial_assembly": 0.02170252599989908,
+            "reranking": 3.1307427280000866
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v6"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "98edddb6cd4641f08c6db7066e7d20f3",
+    "verified_delivery": {
+      "binding_sha256": "dc2056e34c1da39ddeb6e58a5ad7e147b7338b53da3ea31faa1e39d3ec5c19bf",
+      "draft_model": "claude-haiku-5-5",
+      "evidence_payload_sha256": "8b60587389377225f53cfae169be1a948b5537183de58ab2f093a8b65fe49f90",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "model_route": "HAIKU_DRAFT_HAIKU_VERIFY",
+      "model_routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+      "operation_id": "6e4ba64cc074467f89a69a6433626ddc",
+      "presentation_sha256": "7abf79278179ae5ce9c709358646a7f23953542f69fe942cab87b75368874d29",
+      "response_sha256": "bad925a615b23f4226ac4ad1d7d82983b52658d1462f92f6007857c294604b23",
+      "role_plan_sha256": "0d8960756e4fa3de617610e38e19f05b5c849a646e7f151c1b676fb9bc28e6da",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "source_authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+      "text_sha256": "57efba716a6245a228181ba42009278e1271969ecd109d40a699c16c20ad8e5e",
+      "verifier_model": "claude-haiku-5-5"
+    },
+    "version": 1
+  },
+  "status": "SAVED_STREAMED_RECOVERED",
+  "streamed_text": "The specified spark plug gap is 0.8 mm to 0.9 mm. The manual lists the spark plug brand as Champion."
+}

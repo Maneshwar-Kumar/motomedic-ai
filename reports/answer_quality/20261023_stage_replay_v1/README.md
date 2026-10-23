@@ -145,6 +145,16 @@ Limits:
 - **Generation not run.** Answer correctness is not measured.
 - **Development cases.** These 30 cases chose the reviewed sections, so they are not held-out evidence for the fix. Coverage of the other approved-package cases improves only where they share these sections.
 
+## Follow-ups
+
+- **[Private hosted v10.15 candidate run](../20261023_private_hosted_v5/README.md):** the deployed tagged candidate, at 0% public traffic, admitted the answer evidence for **20/20** answerable questions, and all 30 hosted traces matched this replay.
+  - Haiku generated answers for 12 questions before the shared ledger's token ceiling was reached.
+  - 5 were released correct, and none were released wrong.
+- **[Sonnet generation diagnostic](../20261024_sonnet_generation_v1/README.md):** same admitted evidence, production validators and policies, with a separate drafter and verifier.
+  - 15 of the 20 answerable questions were released correct, with 0 wrong.
+  - There were 0 hallucinations on the no-answer questions.
+  - The remaining blockers are the numeric guard, the UNSUPPORTED-with-fact rule, over-long drafts and verifier reliability.
+
 ## Files
 
 | File | Contents |

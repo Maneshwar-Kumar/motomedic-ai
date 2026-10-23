@@ -1,0 +1,515 @@
+{
+  "case_id": "EXP027",
+  "elapsed_seconds": 123.97,
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "group": "PARTIAL",
+  "operation_id": "3c8de2da7abb4ce4851df5f4d6e52ce7",
+  "post_retries": 0,
+  "question": "When do the brake pads need replacement?",
+  "response_sha256": "be71f39736a3e1292a829d01754638cb85a35de4e48dee236b731e8978553c07",
+  "route": "SUPPORTED",
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": "e69af3b78281aef6342d5406f2dafa9dc98e628fa36134c5da07cb1b2ed3a0dc",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "3c8de2da7abb4ce4851df5f4d6e52ce7",
+      "response_sha256": "be71f39736a3e1292a829d01754638cb85a35de4e48dee236b731e8978553c07",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "verification_binding_sha256": "b64deb925faff01a66a182384d843b9a15b67a2120386534703ada9794daeff3"
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 2,
+    "response": {
+      "cited_pages": [
+        {
+          "evidence_id": "evidence_1fd98dd6ead9e18f957b54ed",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 91,
+          "pdf_page_index": 90
+        },
+        {
+          "evidence_id": "evidence_408aceccea34b9af73a5150c",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 91,
+          "pdf_page_index": 90
+        },
+        {
+          "evidence_id": "evidence_4699daa5c7736c164e16ae72",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 91,
+          "pdf_page_index": 90
+        },
+        {
+          "evidence_id": "evidence_7cd1de903310b8e09d8a9d4e",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 90,
+          "pdf_page_index": 89
+        },
+        {
+          "evidence_id": "evidence_9eb870e564adb38655d7e145",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 91,
+          "pdf_page_index": 90
+        }
+      ],
+      "claim_evidence_map": [
+        {
+          "claim_id": "draft:0",
+          "evidence_ids": [
+            "evidence_1fd98dd6ead9e18f957b54ed"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "PROCEDURE_STEP",
+          "text": "The pads need to be replaced if a brake pad is warm to the indicator."
+        },
+        {
+          "claim_id": "draft:1",
+          "evidence_ids": [
+            "evidence_7cd1de903310b8e09d8a9d4e"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "PROCEDURE_STEP",
+          "text": "The front and rear brake pads must be checked for wear at the intervals specified in the periodic maintenance chart."
+        },
+        {
+          "claim_id": "draft:2",
+          "evidence_ids": [],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "LIMITATION",
+          "text": "This partly answers your question. The retrieved manual information does not establish the specific check intervals from the periodic maintenance chart, and the replacement criterion wording \"warm to the indicator\" is unclear in the source."
+        }
+      ],
+      "clarification_question": null,
+      "escalation_uri": "mailto:support@royalenfield.com",
+      "natural_language": "The pads need to be replaced if a brake pad is warm to the indicator. The front and rear brake pads must be checked for wear at the intervals specified in the periodic maintenance chart. This partly answers your question. The retrieved manual information does not establish the specific check intervals from the periodic maintenance chart, and the replacement criterion wording \"warm to the indicator\" is unclear in the source.",
+      "reason_codes": [
+        "VERIFIED_OPEN_QA_ACCEPTED"
+      ],
+      "release_gate_passed": true,
+      "semantic_support_proven": false,
+      "semantic_verification_passed": true,
+      "technical_content": true,
+      "trace_id": "2e02d97b29b34b329a075ce0eeb4dd6f",
+      "type": "SUPPORTED"
+    },
+    "runtime_controls": {
+      "composition": {
+        "accepted_binding_sha256": "b64deb925faff01a66a182384d843b9a15b67a2120386534703ada9794daeff3",
+        "accepted_response_sha256": "3b7fd8bfebd1deea455d86b99d43a9b28c7e7c3744e8390469368fb9a8c9710b",
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [
+          {
+            "binding_sha256": "b64deb925faff01a66a182384d843b9a15b67a2120386534703ada9794daeff3",
+            "draft_output_sha256": "784bd387b3d38b5d3d099ff7d56414f8a44d7eef920de1c9c7c1e61d6260bd4b",
+            "draft_provider": {
+              "cache_creation_input_tokens": 5967,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "05bc335520b76e7d71ad74fe482b0882fd9e5cd5b8ceb1e06674e0b4c3df88c7",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 5,
+              "citable_evidence_ids_sha256": "133130b4268c578f8bc1c9a4cb318488ae902eebdaa3d1aefc8f00446b15a81e",
+              "estimated_cost_usd": 0.000953675,
+              "generation_calls": 1,
+              "input_tokens": 6215,
+              "input_tokens_counted": 6215,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "77c66ef8fed61fefe5af484cc4ea38b3b9e38c6ef73215c5e9ead1180fcd68d7",
+              "output_tokens": 366,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 4.210072667999611,
+              "raw_content_logged": false,
+              "request_bytes": 14508,
+              "reserved_input_token_ceiling": 6727,
+              "reserved_maximum_cost_usd": 0.001740875,
+              "retry_count": 0,
+              "role": "private_draft",
+              "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 248
+            },
+            "draft_seconds": 52.6332560879996,
+            "draft_validation_status": "VALID",
+            "numeric_citation_guard": {
+              "checked_measurement_pairs": 0,
+              "conversions_performed": false,
+              "semantic_verifier_still_required": true,
+              "unit_witness_deferred_to_verifier": 0,
+              "version": "literal-cited-object-native-measurements-v1"
+            },
+            "revision": 0,
+            "verdict_summary": {
+              "conflict_count": 0,
+              "decision": "RELEASE_PARTIAL",
+              "omission_count": 0,
+              "question_coverage": "PARTIAL",
+              "release_eligible": true,
+              "supported_claims": 3,
+              "total_claims": 3
+            },
+            "verification_provider": {
+              "cache_creation_input_tokens": 6247,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "60b17eea31c2f774086342f3eec580f70274de94c92ccb01864ed178febe2b49",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 5,
+              "citable_evidence_ids_sha256": "133130b4268c578f8bc1c9a4cb318488ae902eebdaa3d1aefc8f00446b15a81e",
+              "estimated_cost_usd": 0.001270975,
+              "generation_calls": 1,
+              "input_tokens": 8878,
+              "input_tokens_counted": 8878,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "8ff760c269412d46c07f7b09b252fd7bb4fdcaad45b500057b47777fb4c6957e",
+              "output_tokens": 454,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 4.394767064000007,
+              "raw_content_logged": false,
+              "request_bytes": 19929,
+              "reserved_input_token_ceiling": 42461,
+              "reserved_maximum_cost_usd": 0.006207625,
+              "retry_count": 0,
+              "role": "semantic_verifier",
+              "role_schema_template_sha256": "de5ad9929c54e7df5d81ff2fbb22717b6ee2a548c7ed8f3e3b5eb3c384b8a8bd",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 2631
+            },
+            "verification_seconds": 60.992410472999836
+          }
+        ],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 1,
+        "draft_model": "claude-haiku-5-5",
+        "generation_calls": 2,
+        "model_routing": {
+          "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+          "initial_draft_request_sha256": "8a6f1e21f4d0ebfea9c25327f9a6840edfbada25d8c5a5f550e320b2efbff21b",
+          "primary_input_tokens_counted": 6215,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+          "selected_draft_input_tokens": 6215,
+          "stable_context_sha256": "606ae1a79893b5db8610f85b44df1d2ad8c13f85e149314d6b489b3afa6c6fdc",
+          "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+          "version": "haiku-literal-object-draft-finalized-verifier-v4"
+        },
+        "provider_calls": 2,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "start_new_conversation_required": false,
+        "total_private_pipeline_seconds": 114.93047503900016,
+        "verification_calls": 1,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": true,
+        "verifier_calls": 1,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_13",
+        "whole_turn_reservation": {
+          "correction_reserved": false,
+          "maximum_corrections": 1,
+          "maximum_wait_seconds": 109.462295,
+          "model_routing": {
+            "fixed_correction_native_tokens": 8473,
+            "fixed_verifier_native_tokens": 9181,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 7614,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "8a6f1e21f4d0ebfea9c25327f9a6840edfbada25d8c5a5f550e320b2efbff21b",
+              "primary_input_tokens_counted": 6215,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 6215,
+              "stable_context_sha256": "606ae1a79893b5db8610f85b44df1d2ad8c13f85e149314d6b489b3afa6c6fdc",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "slots": [
+              {
+                "attempt": 1,
+                "input_tokens": 6727,
+                "maximum_nanodollars": 1740875,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "draft"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 42461,
+                "maximum_nanodollars": 6207625,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "verify"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 58137,
+                "maximum_nanodollars": 8167125,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "correction"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 42461,
+                "maximum_nanodollars": 6207625,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "reverify"
+              }
+            ],
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "pacing_version": "whole-turn-sealed-unused-pacing-v4-haiku-roles",
+          "phases": [
+            {
+              "phase": "initial",
+              "phase_nonce": "e9b2fde891d1553e143dd542f578678831b318c8e5f9080b65fa58104827f819",
+              "plan_sha256": "99e2d2cbc51d89451530b2ff15f2c0ab0db4b03cd7e69bd866f84ca00cf9d08b",
+              "reserved_attempts": 2,
+              "reserved_nanodollars": 7948500,
+              "reserved_tokens": 52788
+            }
+          ],
+          "plan_version": "whole-turn-haiku-role-native-envelope-v2",
+          "primary_token_ceiling": 2000000,
+          "reservation_mode": "INITIAL_PAIR_CONDITIONAL_CORRECTION",
+          "reserved_attempts": 2,
+          "reserved_nanodollars": 7948500,
+          "reserved_slots": [
+            {
+              "attempt": 1,
+              "input_tokens": 6727,
+              "maximum_nanodollars": 1740875,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "draft",
+              "tokens": 8527
+            },
+            {
+              "attempt": 1,
+              "input_tokens": 42461,
+              "maximum_nanodollars": 6207625,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "verify",
+              "tokens": 44261
+            }
+          ],
+          "reserved_tokens": 52788,
+          "role_forecast_binding": {
+            "fixed_correction_native_tokens": 8473,
+            "fixed_verifier_native_tokens": 9181,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 7614,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "8a6f1e21f4d0ebfea9c25327f9a6840edfbada25d8c5a5f550e320b2efbff21b",
+              "primary_input_tokens_counted": 6215,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 6215,
+              "stable_context_sha256": "606ae1a79893b5db8610f85b44df1d2ad8c13f85e149314d6b489b3afa6c6fdc",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "role_forecast_sha256": "99e2d2cbc51d89451530b2ff15f2c0ab0db4b03cd7e69bd866f84ca00cf9d08b",
+          "sealed_unused_slots": 0,
+          "sealing_status": "SEALED_UNUSED_CONFIRMED",
+          "token_ceiling_authorization": {
+            "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+            "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+            "maximum_tokens": 2000000,
+            "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+            "previous_maximum_tokens": 999200,
+            "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+            "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+          },
+          "version": "whole-turn-capacity-v1"
+        }
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 13,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_1fd98dd6ead9e18f957b54ed",
+          "evidence_408aceccea34b9af73a5150c",
+          "evidence_4699daa5c7736c164e16ae72",
+          "evidence_7cd1de903310b8e09d8a9d4e",
+          "evidence_9eb870e564adb38655d7e145"
+        ],
+        "authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+        "chunk_ids": [
+          "chunk_3ce85c3a27a98cc864ca3c13",
+          "chunk_a0161069cb21ab51426112b6",
+          "chunk_80ba7cdd6a3d96c779317543",
+          "chunk_a71908eb694f68573e953403",
+          "chunk_8dcafe78f9bfe3d06748fd79"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_80ba7cdd6a3d96c779317543",
+            "evidence_ids": [
+              "evidence_06a00ae3bba4554e538db166"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_a71908eb694f68573e953403",
+            "evidence_ids": [
+              "evidence_3a355912cf7780e1b00fc073"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_8dcafe78f9bfe3d06748fd79",
+            "evidence_ids": [
+              "evidence_030854e7b5dcb40121aae7bc"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_8dcafe78f9bfe3d06748fd79",
+            "evidence_ids": [
+              "evidence_596a101a4864b4d4a4d1c50c"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 3.68747270699987,
+        "retrieval_policy": {
+          "assembled_hit_count": 5,
+          "assembled_hit_limit": 10,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.6666666666666666,
+            "dense_top_distinct_parent_ids": [
+              "section_0c761df91f0b12be3468a439",
+              "section_a15e1e240538c98851e7cccd",
+              "section_3a8340ad0594d788b10a95d8"
+            ],
+            "disagreeing_rank_positions": [
+              2,
+              3
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.023937532002048224,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_0c761df91f0b12be3468a439",
+              "section_3a8340ad0594d788b10a95d8",
+              "section_36d09842223480adc661a4c8"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "preserved_initial_anchor_chunk_ids": [],
+          "primary_hit_limit": 5,
+          "recovery_attempts": 0,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 24,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.0007907659996817529,
+            "dense_query_embedding_and_qdrant_rpc": 0.6995860440001707,
+            "initial_assembly": 0.02481788500017501,
+            "reranking": 2.8087376170001335
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v6"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "b0ca3fb1ad2d4404a86b35c8d33cd991",
+    "verified_delivery": {
+      "binding_sha256": "b64deb925faff01a66a182384d843b9a15b67a2120386534703ada9794daeff3",
+      "draft_model": "claude-haiku-5-5",
+      "evidence_payload_sha256": "e69af3b78281aef6342d5406f2dafa9dc98e628fa36134c5da07cb1b2ed3a0dc",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "model_route": "HAIKU_DRAFT_HAIKU_VERIFY",
+      "model_routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+      "operation_id": "3c8de2da7abb4ce4851df5f4d6e52ce7",
+      "presentation_sha256": "be71f39736a3e1292a829d01754638cb85a35de4e48dee236b731e8978553c07",
+      "response_sha256": "3b7fd8bfebd1deea455d86b99d43a9b28c7e7c3744e8390469368fb9a8c9710b",
+      "role_plan_sha256": "aeee89a7525f0106fbf5ae220ef653097eb724f8f97ca1d7997a5d4e137d089c",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "source_authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+      "text_sha256": "a0d5f31df5341955077157161f5a3210fc3f9ef7009591a57bc9f706323b76a5",
+      "verifier_model": "claude-haiku-5-5"
+    },
+    "version": 1
+  },
+  "status": "SAVED_STREAMED_RECOVERED",
+  "streamed_text": "The pads need to be replaced if a brake pad is warm to the indicator. The front and rear brake pads must be checked for wear at the intervals specified in the periodic maintenance chart. This partly answers your question. The retrieved manual information does not establish the specific check intervals from the periodic maintenance chart, and the replacement criterion wording \"warm to the indicator\" is unclear in the source."
+}

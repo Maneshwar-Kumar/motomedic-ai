@@ -1,0 +1,237 @@
+{
+  "case_id": "EXP040",
+  "elapsed_seconds": 5.77,
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "group": "PARTIAL",
+  "operation_id": "aa0f5ea53e1c4890a1ce9816b7f0ca77",
+  "post_retries": 0,
+  "question": "What rear-suspension notch should I use riding solo?",
+  "response_sha256": "066d081d5f1ddf5f857bf6783a5ede63178099c8a9d158b3f9bc5dad2a4165db",
+  "route": "SYSTEM_ERROR",
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": null,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "aa0f5ea53e1c4890a1ce9816b7f0ca77",
+      "response_sha256": "066d081d5f1ddf5f857bf6783a5ede63178099c8a9d158b3f9bc5dad2a4165db",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "verification_binding_sha256": null
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 0,
+    "response": {
+      "cited_pages": [],
+      "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+      "reason_codes": [
+        "PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT"
+      ],
+      "release_gate_passed": false,
+      "technical_content": false,
+      "trace_id": "4ba32d50d96b4b50922c956e06dd6ba7",
+      "type": "SYSTEM_ERROR"
+    },
+    "runtime_controls": {
+      "composition": {
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 0,
+        "draft_model": "claude-haiku-5-5",
+        "failed_provider_trace": {
+          "cache_hit_observed": false,
+          "cached_tokens": 0,
+          "citable_evidence_id_count": 25,
+          "citable_evidence_ids_sha256": "dd6c16f7b25690318234e35512693c3a1c93a5a503bddbfdbc6d5e8c77bd4b1f",
+          "generation_calls": 0,
+          "input_tokens_counted": 21842,
+          "model": "claude-haiku-5-5",
+          "native_role_schema_sha256": "2599df807e2514cc007565dcfaa497300562d0a8c35bdf105e0c93191ee7e2b2",
+          "provider": "anthropic",
+          "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+          "raw_content_logged": false,
+          "request_bytes": 48950,
+          "retry_count": 0,
+          "role": "private_draft",
+          "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+          "token_counter": "ANTHROPIC_COUNT_TOKENS",
+          "token_counter_is_estimate": true
+        },
+        "failure_code": "PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT",
+        "generation_calls": 0,
+        "model_routing": {
+          "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+          "initial_draft_request_sha256": "2c961c6606dd874b645d951c42e835fccee031f92c22dbe0a71f87da508384e9",
+          "primary_input_tokens_counted": 15837,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+          "selected_draft_input_tokens": 15837,
+          "stable_context_sha256": "8c2c00f114beb05ca6c24723ca4783e10d933dcdede778c7b13b533904ffe728",
+          "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+          "version": "haiku-literal-object-draft-finalized-verifier-v4"
+        },
+        "provider_calls": 0,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "total_private_pipeline_seconds": 0.7909866340000917,
+        "verification_calls": 0,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": false,
+        "verifier_calls": 0,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_13"
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 17,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_05bae4423aeebcb5527e2088",
+          "evidence_0a41839a0af876026ae748c5",
+          "evidence_1816d47b8003f29a29c44542",
+          "evidence_1c82dab261432295db9fe165",
+          "evidence_1e0072a51a34136e217eb0cc",
+          "evidence_1f5d36a42bfb8c9be6c88ec2",
+          "evidence_32a2dfb5649c03d469c7a578",
+          "evidence_41ddc000f6abdfa3a402fa60",
+          "evidence_4b5a7d4b6a3105cf7a57068d",
+          "evidence_550e3226ffbd802c9150b7be",
+          "evidence_5c099ad65b4864786494dd80",
+          "evidence_5cfa59d9941c156e8f2f3d89",
+          "evidence_804b237e12a706b8ac0d40f9",
+          "evidence_96901ce702d093c70b02e73d",
+          "evidence_a4bb14d7d40e42aa7a1abdc2",
+          "evidence_b45cd32783b18b7a0f3a6bd3",
+          "evidence_b9c4e4222f25cb0fca7dffc6",
+          "evidence_bae47efa7a6ce22a3c3b2039",
+          "evidence_bbf3e2f088553465b973f78e",
+          "evidence_cb8341a603cdb0ba99658a9f",
+          "evidence_d33c9227de283eabd47ceee1",
+          "evidence_dba259f217225ce9dfad7a44",
+          "evidence_f27b3a99805a40992be6f399",
+          "evidence_fb5ddc131802596bbfc6777e",
+          "evidence_fe1b0eab8df9910c9491f786"
+        ],
+        "authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+        "chunk_ids": [
+          "chunk_064ae243e05da608fc7ed099",
+          "chunk_5397b0eb345a579c5c6abf08",
+          "chunk_2e5a3219de397099d0963a40",
+          "chunk_6ed6bbe93e97912dbf905e83",
+          "chunk_28edbe7ee01e3fe786fb06f2"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_6ed6bbe93e97912dbf905e83",
+            "evidence_ids": [
+              "evidence_f1b023ea7924903fed5dfe5f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_01a2607f9c27f35c5499f468",
+            "evidence_ids": [
+              "evidence_c762ef2c61505dc7ac7c01d8",
+              "evidence_cb7062b4cec26700e3ae1185",
+              "evidence_f1b023ea7924903fed5dfe5f",
+              "evidence_f3dd00ecbff8fd98a8c32736"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_OBJECT_OR_CONTEXT_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 3.407600341000034,
+        "retrieval_policy": {
+          "assembled_hit_count": 5,
+          "assembled_hit_limit": 10,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.0,
+            "dense_top_distinct_parent_ids": [
+              "section_a8e96f62120abdb822b83cdc",
+              "section_b7aba9c9ae16317fae5accf2",
+              "section_15ce944a8e4b3f1709b3f9fe"
+            ],
+            "disagreeing_rank_positions": [
+              1,
+              2,
+              3
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.007289135716764979,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_938fddab1f44b652f496ab1c",
+              "section_0d33b259255a54f0ccf525db",
+              "section_32b46659d5b77d75c307d009"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "preserved_initial_anchor_chunk_ids": [],
+          "primary_hit_limit": 5,
+          "recovery_attempts": 0,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 23,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.00021479099996213336,
+            "dense_query_embedding_and_qdrant_rpc": 0.5921953590000157,
+            "initial_assembly": 0.05376236400024936,
+            "reranking": 2.5753748790002646
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v6"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "a2b3956e8b2b4ac380ec313c2dc38803",
+    "version": 1
+  },
+  "status": "SAVED_STREAMED_RECOVERED",
+  "streamed_text": ""
+}

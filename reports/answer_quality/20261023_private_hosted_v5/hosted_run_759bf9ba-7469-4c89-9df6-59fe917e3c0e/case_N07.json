@@ -1,0 +1,308 @@
+{
+  "case_id": "N07",
+  "elapsed_seconds": 5.8,
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "group": "NO_ANSWER",
+  "operation_id": "a39587c58a4f475f8968fdbe19ffe08f",
+  "post_retries": 0,
+  "question": "What is the battery's cold cranking amps (CCA) rating?",
+  "response_sha256": "7522a0035c8bc55b3d49e14808f3b856db81fac59a2b8ecb2884dd85566ae86d",
+  "route": "SYSTEM_ERROR",
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": null,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "a39587c58a4f475f8968fdbe19ffe08f",
+      "response_sha256": "7522a0035c8bc55b3d49e14808f3b856db81fac59a2b8ecb2884dd85566ae86d",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "verification_binding_sha256": null
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 0,
+    "response": {
+      "cited_pages": [],
+      "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+      "reason_codes": [
+        "PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT"
+      ],
+      "release_gate_passed": false,
+      "technical_content": false,
+      "trace_id": "43b10a0c027e443c9be8695d51142d9c",
+      "type": "SYSTEM_ERROR"
+    },
+    "runtime_controls": {
+      "composition": {
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 0,
+        "draft_model": "claude-haiku-5-5",
+        "failed_provider_trace": {
+          "cache_hit_observed": false,
+          "cached_tokens": 0,
+          "citable_evidence_id_count": 44,
+          "citable_evidence_ids_sha256": "54bf0129e138be6a2b362990b773119c214ff7014b058476321afcc88cc0fa96",
+          "generation_calls": 0,
+          "input_tokens_counted": 44782,
+          "model": "claude-haiku-5-5",
+          "native_role_schema_sha256": "c6bc350d22d2265f9d3753006c8883b3422b0afbee53c9afb32ac5d05eb8d00a",
+          "provider": "anthropic",
+          "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+          "raw_content_logged": false,
+          "request_bytes": 98853,
+          "retry_count": 0,
+          "role": "private_draft",
+          "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+          "token_counter": "ANTHROPIC_COUNT_TOKENS",
+          "token_counter_is_estimate": true
+        },
+        "failure_code": "PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT",
+        "generation_calls": 0,
+        "model_routing": {
+          "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+          "initial_draft_request_sha256": "868fec7d86e8703cbb19072a27c7b7161d73a098da3a20c3af496d43c5a252b5",
+          "primary_input_tokens_counted": 31113,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+          "selected_draft_input_tokens": 31113,
+          "stable_context_sha256": "bd60ba0104533f7dd7226aac1c2f0ca59517363508b4616c39329bad2af9162c",
+          "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+          "version": "haiku-literal-object-draft-finalized-verifier-v4"
+        },
+        "provider_calls": 0,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "total_private_pipeline_seconds": 0.8495977490001678,
+        "verification_calls": 0,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": false,
+        "verifier_calls": 0,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_13"
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 20,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_00497a5a6998712d564a2df2",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_081f245f33f1dec5cb06a080",
+          "evidence_0c58e6021490c80a7a7f8d99",
+          "evidence_13dac6aaee2fcbdd57618d29",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_2e67c4cc94e9a302ba9a6822",
+          "evidence_31f9ffe7f325a580f7c58947",
+          "evidence_3ab349b8b479f442a8c6f618",
+          "evidence_3f0254b2230794cc5e25393b",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_46ea7e82545c259cf4ed23b3",
+          "evidence_4e1a61e411e2b752c1a8716b",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_5547cca73df703b2d779755c",
+          "evidence_5560e923c89c184bddf2414f",
+          "evidence_590e7744c6d77b972e3950ee",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_662d4a163d504cc62ff5147e",
+          "evidence_6a7eba4e0fa3ae46308ea11c",
+          "evidence_82764faca7aa6cec43f2eeb3",
+          "evidence_87d7aaf9a6f68c203a240607",
+          "evidence_8b5ef092d20493cd2b9b58b8",
+          "evidence_90b50d7059435c1578fd7d12",
+          "evidence_a03ccd44ab2d6b5db6bab123",
+          "evidence_a13f7fa9cd6b4eb3ecc9aad8",
+          "evidence_a35159dd2d88b584ad319de1",
+          "evidence_a4a384cb8cd1cd437ac00907",
+          "evidence_a66e862d634c23573bb30c90",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_b345d26bcf46960f7125d8d8",
+          "evidence_bcc2ecdbee298a98332e9c23",
+          "evidence_c5bacd3bd5b428c8950b0ce1",
+          "evidence_cb5d01a60a05ab5e91447f30",
+          "evidence_d312aaa5aca85242f73bec26",
+          "evidence_da497f5f0bbf1c24b8f93714",
+          "evidence_e5038680f235054234151f44",
+          "evidence_ea69e5fbd3ff27f1dd159960",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f4f3ea7f748d6732d21cae42",
+          "evidence_f5f14378db31693f76bd2a81"
+        ],
+        "authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+        "chunk_ids": [
+          "chunk_e70eeb04efaa470f68d61548",
+          "chunk_695f5be9c2444cce70b12a2d",
+          "chunk_72359a9cd785d431f09da027",
+          "chunk_1eb9e3a09686f9bc9cd24f5e",
+          "chunk_a876019bc141a9d47934e87a",
+          "chunk_991a43e9941b6d2e792bbadc",
+          "chunk_cd9afab59118ad5fb63990a9",
+          "chunk_978068c2e079d4865ba1f8da"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_e70eeb04efaa470f68d61548",
+            "evidence_ids": [
+              "evidence_6ea24b0017b92e74e4c193c6"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1eb9e3a09686f9bc9cd24f5e",
+            "evidence_ids": [
+              "evidence_0f21b2b02c8fc94db183d35a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_a876019bc141a9d47934e87a",
+            "evidence_ids": [
+              "evidence_4cf04dc20e51ea99b2f65f8a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_a876019bc141a9d47934e87a",
+            "evidence_ids": [
+              "evidence_8cf19b0f3aa83fe252f906cc"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_a876019bc141a9d47934e87a",
+            "evidence_ids": [
+              "evidence_ca19a0798d747387ac97d08b"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_991a43e9941b6d2e792bbadc",
+            "evidence_ids": [
+              "evidence_04860a9ebc96bd7a4dfb7d1a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_991a43e9941b6d2e792bbadc",
+            "evidence_ids": [
+              "evidence_1d08249ef0a941452787d4ad"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_a326e1af57c41362ab924e01",
+            "evidence_ids": [
+              "evidence_c3b27f95a2bb4cb96b6a1c06"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 2.3961956400003146,
+        "retrieval_policy": {
+          "assembled_hit_count": 8,
+          "assembled_hit_limit": 10,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.0,
+            "dense_top_distinct_parent_ids": [
+              "section_ec3e96aa0769da8077b3ffcf",
+              "section_a0475ae129a81413a077a9ad",
+              "section_2171c3613d0d94614f1ac859"
+            ],
+            "disagreeing_rank_positions": [
+              1,
+              2,
+              3
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.05144533902415366,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_79d07c21af3ade16f67f1631",
+              "section_78586368b2a6fc2fff925bf0",
+              "section_dd3e409c78e9125832464abd"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "preserved_initial_anchor_chunk_ids": [
+            "chunk_991a43e9941b6d2e792bbadc",
+            "chunk_cd9afab59118ad5fb63990a9",
+            "chunk_978068c2e079d4865ba1f8da"
+          ],
+          "primary_hit_limit": 5,
+          "recovery_attempts": 1,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 20,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.0009327599996140634,
+            "dense_query_embedding_and_qdrant_rpc": 0.6155766819997552,
+            "initial_assembly": 0.07947208599989608,
+            "reranking": 1.43864359600002
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v6"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "03bd242ed171490ab523d317c74aba28",
+    "version": 1
+  },
+  "status": "SAVED_STREAMED_RECOVERED",
+  "streamed_text": ""
+}

@@ -1,0 +1,51 @@
+{
+ "route": "SUPPORTED",
+ "question_coverage": "PARTIAL",
+ "unanswered_parts": [
+  "Which exact part has failed when the general warning symbol is on"
+ ],
+ "claims": [
+  {
+   "text": "The manual describes the warning symbol in the tell-tales as an indicator that glows whenever a vehicle component faults.",
+   "role": "FACT",
+   "evidence_ids": [
+    "evidence_16df2546fcf3ee0edb0cf3ec"
+   ],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "The manual lists the engine MIL separately: it stays continuously ON in case of an EMS malfunction, and the ABS lamp separately lights up for an ABS system malfunction. These are different indicators from the general warning symbol.",
+   "role": "FACT",
+   "evidence_ids": [
+    "evidence_4808f410e808b353b66c6d8e",
+    "evidence_bc21f201712faeaa4da13dbe"
+   ],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "This partly answers your question. The retrieved manual information does not establish which exact part has failed when the general warning symbol is on; the symbol only indicates that some vehicle component has a fault.",
+   "role": "LIMITATION",
+   "evidence_ids": [],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "Do not run the motorcycle if the malfunction indication remains ON continuously, as it can cause severe damage to the ECU and sensors; visit the nearest authorised Royal Enfield dealer to diagnose and rectify the EMS defect.",
+   "role": "WARNING",
+   "evidence_ids": [
+    "evidence_aef43455a47ebc6374b7bba9"
+   ],
+   "origin": "SOURCE_REQUIRED_DISPLAY"
+  },
+  {
+   "text": "The ABS indicator is ON during the initial check-up (until or after the vehicle has run a particular distance/speed) and turns OFF if the system is OK; it lights up again in case of any ABS system malfunction. Do not run the motorcycle if the ABS indicator lamp remains continuously ON.",
+   "role": "WARNING",
+   "evidence_ids": [
+    "evidence_bc21f201712faeaa4da13dbe",
+    "evidence_d867f6c7da84e269ebddf176"
+   ],
+   "origin": "SOURCE_REQUIRED_DISPLAY"
+  }
+ ],
+ "draft_validation": "VALID",
+ "draft_rejection_code": null
+}

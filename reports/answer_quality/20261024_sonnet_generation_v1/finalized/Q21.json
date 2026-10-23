@@ -1,0 +1,65 @@
+{
+ "route": "SUPPORTED",
+ "question_coverage": "PARTIAL",
+ "unanswered_parts": [
+  "A rider-performed procedure, tool or acceptable voltage reading for checking battery voltage"
+ ],
+ "claims": [
+  {
+   "text": "The manual says that to check the battery voltage you should contact a Royal Enfield Authorised Service Centre or a battery service centre.",
+   "role": "FACT",
+   "evidence_ids": [
+    "evidence_45e01fb1becff7605de0f33d"
+   ],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "The motorcycle is provided with a 12 V - 8 Ah VRLA battery.",
+   "role": "FACT",
+   "evidence_ids": [
+    "evidence_a13f7fa9cd6b4eb3ecc9aad8"
+   ],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "This partly answers your question. The retrieved manual information does not give a rider-performed procedure, tool or target voltage reading for checking the battery voltage yourself.",
+   "role": "LIMITATION",
+   "evidence_ids": [],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "Always disconnect the black negative (-ve) battery cable first and then the red positive (+ve) cable when removing the battery connections.",
+   "role": "WARNING",
+   "evidence_ids": [
+    "evidence_7c9ae62e3172702a1a3b13cd"
+   ],
+   "origin": "SOURCE_REQUIRED_DISPLAY"
+  },
+  {
+   "text": "Caution: when connecting the battery, connect the red positive (+ve) terminal first and then the black negative (-ve) terminal.",
+   "role": "WARNING",
+   "evidence_ids": [
+    "evidence_fd9b2d785aff600ed5a45e2d"
+   ],
+   "origin": "SOURCE_REQUIRED_DISPLAY"
+  },
+  {
+   "text": "Caution: keep both battery terminal cables firmly connected to their terminals; failure to do so may damage the motorcycle electrical system.",
+   "role": "WARNING",
+   "evidence_ids": [
+    "evidence_1ef48d8f41966dab4592fc8b"
+   ],
+   "origin": "SOURCE_REQUIRED_DISPLAY"
+  },
+  {
+   "text": "Note: poor contact or loose fitment of the battery terminals may cause ECU failure.",
+   "role": "WARNING",
+   "evidence_ids": [
+    "evidence_e56e7474f3f117209f8530fc"
+   ],
+   "origin": "SOURCE_REQUIRED_DISPLAY"
+  }
+ ],
+ "draft_validation": "VALID",
+ "draft_rejection_code": null
+}
