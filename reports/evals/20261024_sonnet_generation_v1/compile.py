@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 E = Path(sys.argv[1]); OUT = Path(sys.argv[2])
-cases = {c['case_id']: c for c in json.loads(Path('reports/answer_quality/20261023_stage_replay_v1/cases.json').read_text(encoding='utf-8'))['cases']}
+cases = {c['case_id']: c for c in json.loads(Path('reports/evals/20261023_stage_replay_v1/cases.json').read_text(encoding='utf-8'))['cases']}
 mapping = json.loads((E / 'alias_mapping_PRIVATE.json').read_text())
 rows = []
 for q, cid in sorted(mapping.items(), key=lambda kv: (cases[kv[1]]['group'], kv[1])):

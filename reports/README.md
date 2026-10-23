@@ -4,6 +4,7 @@ The current design is in [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architec
 
 | Record | Why retained |
 | --- | --- |
+| [Answer-quality evaluations](evals/README.md) | Stage replay, private hosted v10.15 candidate, Sonnet draft + verify and verifier-free release runs on 30 questions (23–24 October 2026). |
 | [Haiku continuation](public_evaluator/20261012/haiku_v10_12/continuation_scope_v1.json) | Current continuation authority and exact verification of superseded v10.11 against the saved commit. |
 | [Stopped handoff](handoff/20261012/SUMMARY.md) | Fresh-chat summary, ordered TODO, exact WIP/helper archive, access blocker and publication/validation receipts. |
 | [Reset receipt](reset/20261011/README.md) | What was removed, what was preserved, recovery and validation. |
@@ -18,4 +19,4 @@ The current design is in [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architec
 
 Exact retained receipts preserve their original bytes and original version meaning. Historical links or paths inside them can refer to files removed from the active tree; reconstruct that historical snapshot at commit 997a21e22625ec5b972a66f38df898e2f41315bb or the recovery bundle. They are evidence, not competing current specifications or commands to rerun paid experiments.
 
-New reports belong in reports/<work-area>/<version-or-run>/. Label synthetic checks, real provider measurements, original-page review and deployment separately. Do not convert workflow success or zero technical releases into answer accuracy.
+New reports belong in reports/<work-area>/<version-or-run>/; evaluations belong in reports/evals/<run>/. Label synthetic checks, real provider measurements, original-page review and deployment separately. Do not convert workflow success or zero technical releases into answer accuracy.

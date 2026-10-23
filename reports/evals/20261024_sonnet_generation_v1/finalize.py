@@ -17,7 +17,7 @@ from cloud.grounded_generation.verified_qa import validate_draft, validate_numer
 idx = Path('build/index-bge-final').resolve()
 sa = v5.SourceAuthority(ApprovedEvidenceRegistry.load(Path('.').resolve(), idx), idx)
 mapping = json.loads((E / 'alias_mapping_PRIVATE.json').read_text())
-rep = {r['case_id']: r for r in json.loads(Path('reports/answer_quality/20261023_stage_replay_v1/replay_v5.json').read_text(encoding='utf-8'))['results']}
+rep = {r['case_id']: r for r in json.loads(Path('reports/evals/20261023_stage_replay_v1/replay_v5.json').read_text(encoding='utf-8'))['results']}
 COVER = {'COMPLETE': 'COMPLETE', 'PARTIAL': 'PARTIAL', 'UNANSWERABLE': 'NONE', 'NEEDS_CLARIFICATION': 'NONE', 'NONE': 'NONE'}
 (E / 'finalized').mkdir(exist_ok=True)
 summary = {}

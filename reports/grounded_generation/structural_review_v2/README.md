@@ -4,7 +4,7 @@
 
 ## Why
 
-The [stage replay](../../answer_quality/20261023_stage_replay_v1/README.md) found that retrieval and reranking delivered the answer chunk for all 20 answerable test questions. The v10.14 serving gate admitted the answer evidence for only 8 of them, because it admits only reviewed objects (199 of 1,691). This package reviews the sections holding the blocked answers, plus the warning, note and caution context those sections need.
+The [stage replay](../../evals/20261023_stage_replay_v1/README.md) found that retrieval and reranking delivered the answer chunk for all 20 answerable test questions. The v10.14 serving gate admitted the answer evidence for only 8 of them, because it admits only reviewed objects (199 of 1,691). This package reviews the sections holding the blocked answers, plus the warning, note and caution context those sections need.
 
 ## What it approves
 

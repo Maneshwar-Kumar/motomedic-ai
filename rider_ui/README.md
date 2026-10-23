@@ -1,6 +1,6 @@
 # Rider interface
 
-The selected frontend provides a public evaluator gateway around Streamlit. Signed cookies and a browser proof challenge lead to a private IAM-authenticated backend; provider keys stay server-side. The v10.12 candidate uses Haiku for separate private draft and finalized-response verification calls, with distinct role policies and schemas. Both roles cache their policy/evidence prefix and share the existing USD1 ledger. Questions are limited to 100 words; complete applicable evidence remains intact. The client displays progress and exact saved text, with follow-up and recovery binding checks.
+The selected frontend provides a public evaluator gateway around Streamlit. Signed cookies and a browser proof challenge lead to a private IAM-authenticated backend; provider keys stay server-side. The backend uses Haiku. The current design makes one private generation call per turn and releases it through a deterministic gate; the deployed v10.14 backend still drafts and verifies. The call caches its policy/evidence prefix and uses the existing USD1 ledger. Questions are limited to 100 words; complete applicable evidence remains intact. The client displays progress and exact saved text, with follow-up and recovery binding checks.
 
 Current product and technical requirements: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architecture](../docs/ARCHITECTURE.md) and [TODO](../TODO.md).
 

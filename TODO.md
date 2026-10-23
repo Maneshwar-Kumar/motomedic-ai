@@ -1,8 +1,19 @@
 # MotoMedic execution plan
 
-The [public UI](https://motomedic-rider-ui-279945185781.us-central1.run.app) is enabled. **The service-due question now returned a verified partial answer privately and a supported answer with a citation in a fresh public browser run.** Backend v10.14 contains the retrieval repair and reuses the v10.13 UI. The owner's [latest MVP scope](reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json) asks for a working retrieval/answer UI and removes broader six-case/cache demonstrations as completion gates. The [earlier waiver](reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) still waives independent manual answer review. Do not claim independent factual acceptance.
+The [public UI](https://motomedic-rider-ui-279945185781.us-central1.run.app) is offline while billing is disabled ([status](docs/STATUS.md)). **The service-due question now returned a verified partial answer privately and a supported answer with a citation in a fresh public browser run.** Backend v10.14 contains the retrieval repair and reuses the v10.13 UI. The owner's [latest MVP scope](reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json) asks for a working retrieval/answer UI and removes broader six-case/cache demonstrations as completion gates. The [earlier waiver](reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) still waives independent manual answer review. Do not claim independent factual acceptance.
 
-Haiku `claude-haiku-5-5` remains the sole model. Immutable source approval, complete applicable evidence/history, separate exact-finalized verification, durable save/identical streaming/recovery and all existing charge/guard bindings remain mandatory. This scope does not authorize source changes, another allocation, refund/reset or billing restart.
+Haiku `claude-haiku-5-5` remains the sole model. Immutable source approval, complete applicable evidence/history, the single generation call with its deterministic release gate, durable save/identical streaming/recovery and all existing charge/guard bindings remain mandatory. The separate verifier was removed from the design on 24 October 2026; deployed v10.14 still drafts and verifies. This scope does not authorize source changes, another allocation, refund/reset or billing restart.
+
+## Next
+
+1. **Freeze a serving version with the verifier-free release.** It replaces draft-then-verify with the [candidate gate](reports/evals/20261024_answer_release_v1/candidate/answer_release.py) and adopts the reviewed [structural v2](reports/grounded_generation/structural_review_v2/README.md) admission. It needs provider-free tests, hosted build and private hosted runs, under a new owner scope.
+2. **Owner decision on Haiku capacity.** The shared ledger holds 1,949,856/2,000,000 tokens, below one question's reservation. No Haiku answer can be produced until the ceiling is raised. Billing on the main project is disabled.
+3. **Open answer-quality items** from the [evaluation](reports/evals/20261024_answer_release_v1/README.md):
+   - internal wording in 2 of 29 answers;
+   - source-gap IDs shown to the generator without content (GEN030);
+   - unasked steps in long answers;
+   - rerunning the 30 questions with the v2 instructions.
+4. **Restore candidate service templates** or remove the `v15cand` tags before any `--to-latest` routing.
 
 ## Recorded completion
 
@@ -37,7 +48,7 @@ The v10.12 [failed live run](reports/public_evaluator/20261012/hosted_runs/e4d6b
 
 Rider questions are at most 100 words; accept arbitrary manual-supported wording and reject longer input before retrieval/reservation without truncation. Preserve all applicable conditions, warnings, units, headers, references and relevant history. There is no old assembled-evidence cap. Native windows, actual provider throughput and lifetime budgets are distinct.
 
-Use two initial Haiku call slots and, only after fresh correctable rejection/admission, two conditional slots for the sole correction/re-verification. Both roles share the existing Haiku USD1 ledger. Malformed/outage/quota/integrity failures remain `SYSTEM_ERROR`; safety, unsupported and rider-resolvable ambiguity remain distinct. `ACTION_COMPLETED_UNRESOLVED` is never observed normality; reported success is not a verified repair. Authored questions and StepDefinitions are not Q&A gates.
+Use one Haiku generation slot per turn and none when nothing is admitted; there is no correction or verification call. The call uses the existing Haiku USD1 ledger. Malformed/outage/quota/integrity/gate failures remain `SYSTEM_ERROR`; safety, unsupported and rider-resolvable ambiguity remain distinct. `ACTION_COMPLETED_UNRESOLVED` is never observed normality; reported success is not a verified repair. Authored questions and StepDefinitions are not Q&A gates.
 
 Immutable source/context approvals stay exact and scope-bound. Missing extraction/review is maintainer work, and page 103 stays flagged. The new waiver concerns independent answer evaluation only. Held-out cases may not enrich prompts or tune retrieval.
 

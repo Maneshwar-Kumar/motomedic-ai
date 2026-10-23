@@ -1,0 +1,12 @@
+# Answer-quality evaluations
+
+These runs ask whether the answer evidence survives each stage of the answer path, and whether the generator turns it into a correct released answer. Read them in order. Each run's README states its label and limits. None of them is hosted acceptance, human review or independent factual acceptance.
+
+The question set is 30 cases: 10 golden cases and 10 partial-answer cases from the approved 161-case package, plus 10 authored questions the manual cannot answer ([cases.json](20261023_stage_replay_v1/cases.json)). These cases have now been used for development, so they can no longer serve as held-out evidence.
+
+| Run | What it measured | Result |
+|---|---|---|
+| [Stage replay](20261023_stage_replay_v1/README.md), 23 Oct, local and provider-free | Answer chunk through dense, BM25, RRF, top-5, rerank, final hits and source admission | Retrieval and reranking delivered the answer chunk for 20 of 20 answerable cases. The v10.14 admission gate passed it to generation for 8 fully and 1 partially. With the [structural review v2](../grounded_generation/structural_review_v2/README.md) gate (v5), all 20 were admitted. |
+| [Private hosted v10.15 candidate](20261023_private_hosted_v5/README.md), 23 Oct, owner-authorized, 0% traffic | The v5 gate on the deployed stack, with Haiku draft and verify | Hosted admission matched the local replay for all 30. Haiku generated only 12 before the shared ledger's token ceiling stopped it: 5 correct releases, 2 UNSUPPORTED and 5 SYSTEM_ERROR. |
+| [Sonnet draft + verify](20261024_sonnet_generation_v1/README.md), 24 Oct, local | Production draft and verify policies, run by Sonnet subagents on the v5 evidence | 22 correct outcomes (15 released answers, 7 abstentions) and 8 blocked: numeric-guard false positives, padded drafts and UNSUPPORTED drafts carrying a cited fact. |
+| [Verifier-free template release](20261024_answer_release_v1/README.md), 24 Oct, local | One generator call and a deterministic release gate, with no verifier | Gate v2 released 29 of 30, all matching the canonical answer, with every cited item faithful. EXP040 failed closed. |

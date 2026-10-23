@@ -1,15 +1,17 @@
 {
  "schema": "motomedic-verifier-free-release-score-v1",
  "label": "MAIN_AGENT_JUDGMENT_NOT_HUMAN_REVIEW_NOT_ACCEPTANCE",
+ "gate_version": "verifier-free-template-release-v2-candidate",
  "summary": {
   "released": 29,
   "system_error": 1,
-  "released_matching_canonical": 28,
-  "released_weaker_than_canonical": 1,
-  "cited_items_checked": 56,
+  "released_matching_canonical": 29,
+  "released_weaker_than_canonical": 0,
+  "cited_items_checked": 54,
   "cited_items_unfaithful": 0,
   "no_answer_cases_answered_with_invented_fact": 0,
-  "released_with_internal_wording": 13
+  "released_with_internal_wording": 2,
+  "provider_calls": 27
  },
  "rows": [
   {
@@ -20,6 +22,7 @@
    "coverage": "COMPLETE",
    "cited_items": 1,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -28,17 +31,16 @@
   {
    "case_id": "GEN011",
    "group": "GOLDEN",
-   "gate": "SYSTEM_ERROR",
+   "gate": "RELEASED",
    "route": "SUPPORTED",
    "coverage": "COMPLETE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
-   "matches_canonical": null,
+   "provider_calls": 1,
+   "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
-   "issues": [
-    "NOT_RELEASED: draft omitted the empty clarification_question field; content was correct"
-   ],
-   "released_characters": 0
+   "issues": [],
+   "released_characters": 230
   },
   {
    "case_id": "GEN012",
@@ -48,6 +50,7 @@
    "coverage": "COMPLETE",
    "cited_items": 1,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -61,6 +64,7 @@
    "coverage": "COMPLETE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [
@@ -77,6 +81,7 @@
    "coverage": "COMPLETE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [
@@ -92,6 +97,7 @@
    "coverage": "COMPLETE",
    "cited_items": 3,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -105,6 +111,7 @@
    "coverage": "COMPLETE",
    "cited_items": 4,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -118,6 +125,7 @@
    "coverage": "PARTIAL",
    "cited_items": 5,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [
     "admitted",
@@ -138,6 +146,7 @@
    "coverage": "PARTIAL",
    "cited_items": 1,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -151,6 +160,7 @@
    "coverage": "COMPLETE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -164,13 +174,11 @@
    "coverage": "NONE",
    "cited_items": 1,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "admitted",
-    "evidence"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 341
+   "released_characters": 400
   },
   {
    "case_id": "N02",
@@ -180,13 +188,11 @@
    "coverage": "NONE",
    "cited_items": 0,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "admitted",
-    "evidence"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 116
+   "released_characters": 146
   },
   {
    "case_id": "N03",
@@ -196,13 +202,11 @@
    "coverage": "NONE",
    "cited_items": 0,
    "cited_items_unfaithful": 0,
+   "provider_calls": 0,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "admitted",
-    "evidence"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 137
+   "released_characters": 146
   },
   {
    "case_id": "N04",
@@ -212,13 +216,11 @@
    "coverage": "NONE",
    "cited_items": 0,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "passage",
-    "retriev"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 312
+   "released_characters": 146
   },
   {
    "case_id": "N05",
@@ -228,14 +230,11 @@
    "coverage": "NONE",
    "cited_items": 0,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "available here",
-    "passage",
-    "retriev"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 262
+   "released_characters": 146
   },
   {
    "case_id": "N06",
@@ -245,15 +244,11 @@
    "coverage": "NONE",
    "cited_items": 0,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "admitted",
-    "available here",
-    "evidence",
-    "passage"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 243
+   "released_characters": 146
   },
   {
    "case_id": "N07",
@@ -263,13 +258,11 @@
    "coverage": "NONE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "admitted",
-    "evidence"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 424
+   "released_characters": 348
   },
   {
    "case_id": "N08",
@@ -279,13 +272,11 @@
    "coverage": "NONE",
    "cited_items": 1,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "admitted",
-    "evidence"
-   ],
+   "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 384
+   "released_characters": 272
   },
   {
    "case_id": "N09",
@@ -295,15 +286,11 @@
    "coverage": "NONE",
    "cited_items": 0,
    "cited_items_unfaithful": 0,
+   "provider_calls": 0,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "available to me",
-    "passage"
-   ],
-   "issues": [
-    "tells the rider to check the owner's manual directly"
-   ],
-   "released_characters": 245
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 146
   },
   {
    "case_id": "N10",
@@ -313,19 +300,11 @@
    "coverage": "NONE",
    "cited_items": 0,
    "cited_items_unfaithful": 0,
+   "provider_calls": 0,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "admitted",
-    "evidence",
-    "passage",
-    "retriev",
-    "reviewed",
-    "source context"
-   ],
-   "issues": [
-    "disclaimer tells the rider that source context was not fully reviewed"
-   ],
-   "released_characters": 295
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 146
   },
   {
    "case_id": "EXP027",
@@ -335,6 +314,7 @@
    "coverage": "PARTIAL",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [
     "evidence"
@@ -350,6 +330,7 @@
    "coverage": "COMPLETE",
    "cited_items": 1,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -363,6 +344,7 @@
    "coverage": "COMPLETE",
    "cited_items": 4,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -376,6 +358,7 @@
    "coverage": "COMPLETE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
@@ -384,18 +367,18 @@
   {
    "case_id": "EXP040",
    "group": "PARTIAL",
-   "gate": "RELEASED",
+   "gate": "SYSTEM_ERROR",
    "route": "SUPPORTED",
    "coverage": "COMPLETE",
    "cited_items": 4,
    "cited_items_unfaithful": 0,
-   "matches_canonical": false,
+   "provider_calls": 1,
+   "matches_canonical": null,
    "internal_wording_shown_to_rider": [],
    "issues": [
-    "p116/p117 conflict is disclosed, but the disclaimer leans to the 3rd notch and coverage is COMPLETE; canonical says it cannot be verified and to confirm with authorised service",
-    "the uncited disclaimer carries page numbers and a setting that the gate does not check"
+    "NOT_RELEASED: uncited disclaimer refers to page 116; v1 instructions did not ask disclaimers to cite"
    ],
-   "released_characters": 829
+   "released_characters": 0
   },
   {
    "case_id": "EXP044",
@@ -405,6 +388,7 @@
    "coverage": "PARTIAL",
    "cited_items": 7,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [
@@ -421,10 +405,11 @@
    "coverage": "NONE",
    "cited_items": 4,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 806
+   "released_characters": 762
   },
   {
    "case_id": "GEN041",
@@ -434,10 +419,13 @@
    "coverage": "NONE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
-   "issues": [],
-   "released_characters": 477
+   "issues": [
+    "fixed fallback replaces the model sentence saying the symbol does not identify the part"
+   ],
+   "released_characters": 346
   },
   {
    "case_id": "GEN047",
@@ -447,13 +435,13 @@
    "coverage": "NONE",
    "cited_items": 2,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
-   "internal_wording_shown_to_rider": [
-    "available here",
-    "evidence"
+   "internal_wording_shown_to_rider": [],
+   "issues": [
+    "fixed fallback replaces the model sentence saying no part number is given"
    ],
-   "issues": [],
-   "released_characters": 433
+   "released_characters": 288
   },
   {
    "case_id": "GEN048",
@@ -463,10 +451,11 @@
    "coverage": "NONE",
    "cited_items": 3,
    "cited_items_unfaithful": 0,
+   "provider_calls": 1,
    "matches_canonical": true,
    "internal_wording_shown_to_rider": [],
    "issues": [],
-   "released_characters": 605
+   "released_characters": 471
   }
  ]
 }

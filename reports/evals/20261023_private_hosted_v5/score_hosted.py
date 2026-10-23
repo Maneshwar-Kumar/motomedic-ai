@@ -1,6 +1,6 @@
 """Score the private hosted v10.15-candidate run against gold and the local v5 replay.
 
-Usage (project root): python reports/answer_quality/20261023_private_hosted_v5/score_hosted.py <run_dir> <out.json>
+Usage (project root): python reports/evals/20261023_private_hosted_v5/score_hosted.py <run_dir> <out.json>
 """
 import json
 import sys
