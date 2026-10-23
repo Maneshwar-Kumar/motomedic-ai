@@ -176,25 +176,24 @@ class TokenCeilingTests(unittest.TestCase):
         now = [datetime(2026, 10, 12, tzinfo=timezone.utc)]
         admission = WholeTurnAdmission(self.client, now=lambda: now[0],
             sleep=lambda seconds: now.__setitem__(0, now[0] + timedelta(seconds=seconds)))
-        plan = {'slots': [{'model': HAIKU, 'stage': stage, 'input_tokens': 20000,
-            'output_tokens': 1800, 'attempt': 1} for stage in ('draft', 'verify')]}
+        plan = {'slots': [{'model': HAIKU, 'stage': 'generate', 'input_tokens': 20000,
+            'output_tokens': 1800, 'attempt': 1}]}
         receipt = admission.begin_turn('synthetic-authorized', plan=plan)
         self.assertEqual(receipt['primary_token_ceiling'], 1050000)
         self.assertEqual(receipt['token_ceiling_authorization'], validate_grant(self.grant))
-        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'], before[ALLOCATION]['reserved_tokens'] + 43600)
-        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 30)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'], before[ALLOCATION]['reserved_tokens'] + 21800)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_attempts'], 29)
         self.assertEqual(self.client.documents[ALLOCATION]['token_ceiling_authorization'], validate_grant(self.grant))
         self.assertGreater(self.client.documents[HAIKU_ALLOCATION]['reserved_nanodollars'], before[HAIKU_ALLOCATION]['reserved_nanodollars'])
-        admission.for_model(HAIKU, role='private_draft')(21800, 'generation')
         events = self.client.documents['grounded-provider-global-v1']['events']
         self.assertEqual(events[0]['token_ceiling_scope_sha256'], self.grant['scope_sha256'])
-        events[1]['token_ceiling_scope_sha256'] = '0' * 64
+        events[0]['token_ceiling_scope_sha256'] = '0' * 64
         with self.assertRaisesRegex(ProviderFailure, 'TOKEN_CEILING_RESERVATION_BINDING_CHANGED'):
-            admission.for_model(HAIKU, role='semantic_verifier')(21800, 'generation')
+            admission.for_model(HAIKU, role='generation')(21800, 'generation')
 
     def test_authorized_limit_permits_new_capacity_above_old_ceiling_without_reset(self):
-        plan = {'slots': [{'model': HAIKU, 'stage': stage, 'input_tokens': 20000,
-            'output_tokens': 1800, 'attempt': 1} for stage in ('draft', 'verify')]}
+        plan = {'slots': [{'model': HAIKU, 'stage': 'generate', 'input_tokens': 20000,
+            'output_tokens': 1800, 'attempt': 1}]}
         self.client.documents[ALLOCATION]['reserved_tokens'] = 998000
         admission = WholeTurnAdmission(self.client)
         with self.assertRaisesRegex(ProviderFailure, 'ALLOCATION_LIMIT'):
@@ -203,14 +202,14 @@ class TokenCeilingTests(unittest.TestCase):
         self.client.documents[ALLOCATION]['reserved_tokens'] = 998000
         admission = WholeTurnAdmission(self.client)
         receipt = admission.begin_turn('authorized-headroom', plan=plan)
-        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'], 1041600)
+        self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'], 1019800)
         self.assertEqual(receipt['primary_token_ceiling'], 1050000)
         self.assertGreater(self.client.documents[ALLOCATION]['reserved_tokens'], 999200)
 
     def test_expanded_token_limit_does_not_raise_attempt_or_shared_money_guard(self):
         self.apply()
-        plan = {'slots': [{'model': HAIKU, 'stage': stage, 'input_tokens': 20000,
-            'output_tokens': 1800, 'attempt': 1} for stage in ('draft', 'verify')]}
+        plan = {'slots': [{'model': HAIKU, 'stage': 'generate', 'input_tokens': 20000,
+            'output_tokens': 1800, 'attempt': 1}]}
         self.client.documents[ALLOCATION]['reserved_attempts'] = 100
         before = deepcopy(self.client.documents)
         with self.assertRaisesRegex(ProviderFailure, 'ALLOCATION_LIMIT'):

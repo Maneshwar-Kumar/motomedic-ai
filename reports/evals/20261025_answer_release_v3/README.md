@@ -62,6 +62,15 @@ The bar was: no unfaithful cited statement and at least 27/30 correct for Haiku.
 
 Integration therefore uses Haiku with effort `high`. That setting's latency and cost were not measured here, because subagent timings are not API timings.
 
+**Integrated.** The candidate is now the only answer path in the repository:
+- Code: [cloud/grounded_generation/](../../../cloud/grounded_generation/), in `section_index`, `section_retrieval`, `section_assembly`, `template_answer`, `haiku_answer` and `section_questions`.
+- The serving `section_index.py` differs from [candidate/section_index.py](candidate/section_index.py) only in its import path, so the index built here keeps its ID.
+- Parity: [serving_parity.py](serving_parity.py) runs the serving modules on the real index. They reproduce all 30 model inputs byte for byte and all 90 gate outcomes of this run ([serving_parity.json](serving_parity.json)), with no model calls.
+- Release: frozen in [serving manifest v11](../../public_evaluator/20261025/serving_manifest_v11.json).
+- Owner decision: recorded in [owner_decision_v3.json](owner_decision_v3.json).
+- Retired: the draft-then-verify and review-gate modules are deleted.
+- Not changed: nothing was deployed, and the new index is not uploaded to hosted Qdrant.
+
 ## Reproduce
 
 From the project root, using the scratch venv with sentence-transformers:

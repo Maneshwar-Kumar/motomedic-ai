@@ -4,7 +4,7 @@ import json
 import time
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch  # noqa: F401  (used by subclasses)
 
 from cloud.arm_a.app import create_app
 
@@ -20,20 +20,12 @@ def platform_verified_token():
 
 class HealthTests(unittest.TestCase):
     def setUp(self):
-        registry = SimpleNamespace(checksum='a'*64,index_id='synthetic-index',
-                                   source={'variant':'Himalayan BS6'})
-        def no_state(_):
-            raise AssertionError('Health must not load rider state or generate answers')
-        self.app = create_app(registry,None,no_state,[])
-        self.app.config.update(GROUNDED_PRIMARY=True,DURABLE_DISPATCH_CONFIGURED=True,
-            SERVING_ARCHITECTURE='DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-            ANSWER_PROVIDER='claude-haiku-5-5',VERIFIER_PROVIDER='claude-haiku-5-5',
-            PROMPT_CACHE='ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M',ARM_A_RUNTIME_LOCK='b'*64)
+        source = SimpleNamespace(checksum='a'*64,index_id='synthetic-index',variant='Himalayan BS6')
+        self.app = create_app(source)
+        self.app.config.update(DURABLE_DISPATCH_CONFIGURED=True,ANSWER_PROVIDER='claude-haiku-5-5',
+            PROMPT_CACHE='ANTHROPIC_SYSTEM_PROMPT_5M',RETRIEVAL='section-top5-hybrid-v1',
+            DENSE_BACKEND='EXACT_PINNED_VECTORS',RUNTIME_LOCK='b'*64)
         self.client = self.app.test_client()
-        composer = patch('cloud.arm_a.app.ArmAComposer',
-            return_value=SimpleNamespace(config=SimpleNamespace(lock='c'*64)))
-        composer.start()
-        self.addCleanup(composer.stop)
         self.headers = {'Authorization':platform_verified_token()}
 
     def test_external_health_matches_startup_metadata_with_platform_identity(self):
@@ -46,8 +38,10 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(external.json['manual_checksum'],'a'*64)
         self.assertEqual(external.json['index_id'],'synthetic-index')
         self.assertEqual(external.json['answer_provider'],'claude-haiku-5-5')
-        self.assertEqual(external.json['verifier_provider'],'claude-haiku-5-5')
-        self.assertEqual(external.json['prompt_cache'],'ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M')
+        self.assertIsNone(external.json['verifier_provider'])
+        self.assertEqual(external.json['review_layer'],'NONE')
+        self.assertEqual(external.json['architecture'],'SECTION_TOP5_SINGLE_CALL_TEMPLATE_GATE')
+        self.assertEqual(external.json['prompt_cache'],'ANTHROPIC_SYSTEM_PROMPT_5M')
         self.assertEqual(external.headers['Cache-Control'],'no-store')
 
     def test_external_health_requires_application_identity_but_startup_probe_does_not(self):

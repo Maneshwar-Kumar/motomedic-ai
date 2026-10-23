@@ -65,19 +65,12 @@ def conversation_notice(view):
             type(response.get('reason_codes')) is list and
             'COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION' in response['reason_codes']):
         return 'This chat is too large to process. Start a new conversation for your next question.'
-    controls = view.get('runtime_controls')
-    composition = controls.get('composition') if type(controls) is dict else None
-    if (type(composition) is dict and composition.get('start_new_conversation_required') is True and
-            response.get('type') in ('SUPPORTED', 'AMBIGUOUS', 'SAFETY_STOP') and
-            response.get('release_gate_passed') is True and
-            response.get('semantic_verification_passed') is True):
-        return 'This chat used a large amount of context. Start a new conversation before your next question.'
     return None
 
-def perform(kind, value):
+def perform(value):
     if not rider_answers_enabled():
         return
-    pending = {'id': operation_id(), 'kind': kind, 'value': value}
+    pending = {'id': operation_id(), 'value': value}
     st.session_state.pending = pending
     try:
         with st.spinner('Connecting to MotoMedic...'):
@@ -88,14 +81,14 @@ def perform(kind, value):
             def progress(stage):
                 # Backend stages are operational events, never simulated timing.
                 progress_slot.caption(PROGRESS_LABELS[stage])
-            def verified(view):
-                st.session_state.pending['verified'] = view
+            def released(view):
+                st.session_state.pending['released'] = view
             def chunk(text):
                 displayed[0] += text
                 answer_slot.text(displayed[0])
-            callbacks = {'on_verified':verified,'on_progress':progress,'on_chunk':chunk}
-            view = api.start(value, pending['id'], view=st.session_state.view, **callbacks) if kind == 'start' else api.feedback(st.session_state.view, value['id'], pending['id'], **callbacks)
-        remember(view, value if kind == 'start' else value['label'])
+            callbacks = {'on_verified':released,'on_progress':progress,'on_chunk':chunk}
+            view = api.start(value, pending['id'], view=st.session_state.view, **callbacks)
+        remember(view, value)
     except APIError as exc:
         if exc.terminal:
             st.session_state.pending = None
@@ -160,7 +153,7 @@ if not st.session_state.messages:
         query = st.chat_input('Ask a question…', key='symptom_input', max_chars=LIMITS.message_characters,
                               disabled=not ready or bool(st.session_state.pending))
         if query and query.strip():
-            perform('start', query.strip())
+            perform(query.strip())
         st.file_uploader('Add a bike photo · coming next', type=['jpg', 'jpeg', 'png', 'webp'], accept_multiple_files=False, max_upload_size=5, disabled=True)
         st.caption('Photos: one per turn, up to 5 MB each; three per conversation. Photo support is coming next.')
     cols = st.columns(3)
@@ -172,7 +165,7 @@ if not st.session_state.messages:
                 st.write(body)
 
 labels = {'SUPPORTED': 'Answer', 'AMBIGUOUS': 'One detail to confirm',
-          'UNSUPPORTED': 'No supported answer', 'SAFETY_STOP': 'Safety stop', 'SYSTEM_ERROR': 'Unable to verify right now'}
+          'UNSUPPORTED': 'No supported answer', 'SAFETY_STOP': 'Safety stop', 'SYSTEM_ERROR': 'Unable to check right now'}
 for index, (role, value) in enumerate(st.session_state.messages):
     with st.chat_message('user' if role == 'rider' else 'assistant', avatar='🏍️' if role == 'rider' else '🛠️'):
         if role == 'rider':
@@ -185,7 +178,7 @@ for index, (role, value) in enumerate(st.session_state.messages):
         if state == 'SAFETY_STOP':
             st.error('Safety stop'); st.text(response['natural_language'])
         elif state == 'SYSTEM_ERROR':
-            st.warning('Unable to verify right now'); st.text(response['natural_language'])
+            st.warning('Unable to check right now'); st.text(response['natural_language'])
         else:
             st.text(response['natural_language'])
         notice = conversation_notice(value)
@@ -207,21 +200,20 @@ for index, (role, value) in enumerate(st.session_state.messages):
             st.caption('Response reference: ' + response['trace_id'])
 
 if st.session_state.connection_error:
-    if st.session_state.pending and st.session_state.pending.get('verified'):
-        retained = st.session_state.pending['verified']
-        st.caption('Verified response received; completion is being recovered')
+    if st.session_state.pending and st.session_state.pending.get('released'):
+        retained = st.session_state.pending['released']
+        st.caption('Checked response received; completion is being recovered')
         st.text(retained['response']['natural_language'])
     st.warning(st.session_state.connection_error)
-    st.caption('The request may already be saved. Retrieve its result before sending more feedback.')
+    st.caption('The request may already be saved. Retrieve its result before asking again.')
     if st.session_state.pending and st.button('Reconnect and retrieve result', type='primary'):
         try:
             pending = st.session_state.pending
             with st.spinner('Retrieving the saved response…'):
                 view = client().recover_operation(pending['id']) if pending else client().recover(st.session_state.view['session_id'])
-            if pending and pending.get('verified') and view != pending['verified']:
+            if pending and pending.get('released') and view != pending['released']:
                 raise APIError('The saved response changed. Keep this request pending and reconnect.')
-            rider_text = None if not pending else pending['value'] if pending['kind'] == 'start' else pending['value']['label']
-            remember(view, rider_text)
+            remember(view, pending['value'] if pending else None)
             st.rerun()
         except APIError as exc:
             if exc.terminal:
@@ -230,26 +222,11 @@ if st.session_state.connection_error:
             st.error(str(exc))
 
 view = st.session_state.view
-if view and not st.session_state.pending:
-    choices = view.get('choices', [])
-    if choices:
-        st.markdown('**' + ('Your observation' if view['response']['type'] == 'AMBIGUOUS' else 'How did it go?') + '**')
-        cols = st.columns(min(len(choices), 3))
-        for i, choice in enumerate(choices):
-            if cols[i % len(cols)].button(choice['label'], key='choice_' + str(view['version']) + '_' + choice['id'], use_container_width=True,disabled=not answers_enabled):
-                perform('feedback', choice)
-    with st.expander('What this conversation remembers'):
-        if not view.get('history'):
-            st.caption('No previous checks have been recorded yet.')
-        for item in view.get('history', []):
-            st.text(item['label'])
-        st.caption('Reported success does not verify the repair or identify its cause.')
-
 if view:
     st.caption('Up to 100 words per question.')
     query = st.chat_input('Ask another question…',key='followup_input',max_chars=LIMITS.message_characters,
                           disabled=not ready or bool(st.session_state.pending))
     if query and query.strip():
-        perform('start',query.strip())
+        perform(query.strip())
 st.markdown('<div class="footer-note">Built on the Owner\'s Manual, with no misleading instructions on the internet</div>', unsafe_allow_html=True)
 

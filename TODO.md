@@ -1,55 +1,40 @@
-# MotoMedic execution plan
+# MotoMedic TODO
 
-The [public UI](https://motomedic-rider-ui-279945185781.us-central1.run.app) is offline while billing is disabled ([status](docs/STATUS.md)). **The service-due question now returned a verified partial answer privately and a supported answer with a citation in a fresh public browser run.** Backend v10.14 contains the retrieval repair and reuses the v10.13 UI. The owner's [latest MVP scope](reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json) asks for a working retrieval/answer UI and removes broader six-case/cache demonstrations as completion gates. The [earlier waiver](reports/public_evaluator/20261012/public_review/owner_functional_acceptance_scope_v1.json) still waives independent manual answer review. Do not claim independent factual acceptance.
-
-Haiku `claude-haiku-5-5` remains the sole model. Immutable source approval, complete applicable evidence/history, the single generation call with its deterministic release gate, durable save/identical streaming/recovery and all existing charge/guard bindings remain mandatory. The separate verifier was removed from the design on 24 October 2026; deployed v10.14 still drafts and verifies. This scope does not authorize source changes, another allocation, refund/reset or billing restart.
+The section-template answer path is implemented, tested without a provider and frozen as [serving manifest v11](reports/public_evaluator/20261025/serving_manifest_v11.json). It is not deployed. Each item below that touches GCP, billing, the Haiku ledger or provider spending needs the owner's explicit scope first. See [status](docs/STATUS.md).
 
 ## Next
 
-1. **Freeze a serving version with the verifier-free release.** It replaces draft-then-verify with the [candidate gate](reports/evals/20261024_answer_release_v1/candidate/answer_release.py) and adopts the reviewed [structural v2](reports/grounded_generation/structural_review_v2/README.md) admission. It needs provider-free tests, hosted build and private hosted runs, under a new owner scope.
-2. **Owner decision on Haiku capacity.** The shared ledger holds 1,949,856/2,000,000 tokens, below one question's reservation. No Haiku answer can be produced until the ceiling is raised. Billing on the main project is disabled.
-3. **Open answer-quality items** from the [evaluation](reports/evals/20261024_answer_release_v1/README.md):
-   - internal wording in 2 of 29 answers;
-   - source-gap IDs shown to the generator without content (GEN030);
-   - unasked steps in long answers;
-   - rerunning the 30 questions with the v2 instructions.
-4. **Restore candidate service templates** or remove the `v15cand` tags before any `--to-latest` routing.
+1. **Owner scope for a hosted v11 run.** It covers:
+   - preparing the image context with the section index at `build/section-index`;
+   - a hosted build and private deployment at 0% traffic;
+   - one real-model run of the 30 development questions plus new held-out questions;
+   - measuring latency, cost and prompt-cache reads at effort `high`.
 
-## Recorded completion
+   Decide whether dense search uses exact in-image search or a new hosted Qdrant collection ([export_qdrant.py](cloud/export_qdrant.py) reads the section index).
+2. **Haiku capacity.** The ledger has 50,144 tokens left under its 2,000,000 ceiling, which covers only a few single-call turns. Running the hosted evaluation needs an owner decision on the ceiling.
+3. **Service templates.** Restore them or remove the `v15cand` tags before any `--to-latest` routing.
+4. **Publish the section index** as a release asset under an owner publication scope, so reviewers can download it instead of rebuilding it.
 
-| Work | Evidence |
-| --- | --- |
-| Repository/design reset | [Reset receipt](reports/reset/20261011/README.md): 4,297 obsolete active files and two superseded branches removed with recovery retained; 103 hosted provider-free checks. The historical handoff remains [here](reports/handoff/20261012/SUMMARY.md). |
-| Exact source/index reuse | [Hosted source validation](reports/build/20261012/hosted_source_validation_v9_1.json), unchanged 161-case/context approval packages and selected immutable index. No ingestion or document embedding per request. |
-| v10.14 service-due repair and answer | [Current backend binding](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/backend_build_binding_v2.json) and [health](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/candidate_health.json) bind the new backend and reused UI. The [private retest](reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/service_due_case.json) passed SUPPORTED with PARTIAL coverage, separate finalized verification and exact saved/stream/recovery. The [fresh public browser](reports/public_evaluator/20261012/public_review/browser_service_due_v14_v2/receipt.json) returned SUPPORTED with a citation in 71.33 seconds. |
-| Frozen v10.13/CI/builds | [Manifest](reports/public_evaluator/20261012/serving_manifest_v10_13.json), source commit `3b7da1692187736295fee7345e9b3e932d02b216`, [CI success](https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38233548200) and [hosted images](reports/public_evaluator/20261012/hosted_build_results_v10_13.json). Frozen historical versions remain intact. |
-| Native counts/retrieval | [Count-only run d73b3c1d](reports/public_evaluator/20261012/hosted_runs/d73b3c1d-153a-4796-b4f4-b1c3c8324333/count_receipt.json): 36 Haiku counters/six cases, actual Qdrant/concurrent BM25, RRF and conditional reranking, frozen module-origin checks, zero generation/reservation and unchanged ledgers. |
-| Candidate/rollback/restore | [Exact readiness](reports/public_evaluator/20261012/private_readiness_v10_13_v2.json) and [restore health](reports/public_evaluator/20261012/operations/rollback_v10_13_restore_health.json) bind current revisions/configuration. This is operational evidence, not proof of a returned answer. |
-| Public preview/source/reproduction | [Anonymous paused browser](reports/public_evaluator/20261012/public_review/browser_preview_v1/public/receipt.json) and [runtime correlation](reports/public_evaluator/20261012/public_review/browser_preview_v1/correlation.json) passed with no submitted question. Repository/manual and [immutable index export](reports/public_evaluator/20261012/public_review/index_release_readback_v1.json) are public; [SETUP](docs/SETUP.md) provides clone/download/check instructions. |
-| Exact new capacity permission | [Owner approved 2,000,000 tokens](reports/public_evaluator/20261012/haiku_v10_13/admission/owner_token_ceiling_approval_v1.json), and [hosted atomic application](reports/public_evaluator/20261012/haiku_v10_13_helpers/operator_v2/hosted_runs/57f78b4b-1385-428b-8b90-fa31f134230b/application_receipt.json) passed with 28 attempts/357,663 reserved tokens and USD0.028975875/reservation_count5 retained; zero model calls. The existing shared USD1/100 attempts/INR guards and historical charges are unchanged. |
+## Answer quality
 
-The [latest guard readback](reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T133426751754Z.json) records delayed INR287.59 at 13:16 UTC, stop=false, main billing enabled and inference billing disabled, read at 13:34 UTC. The [latest usage/cache receipt](reports/public_evaluator/20261012/haiku_v10_14_helpers/final_usage_and_cache_v14_v1.json) retains 50/100 attempts, 1,067,084/2,000,000 tokens and USD0.1325035/USD1, with no reset or refund. These are timestamped readings, not an instantaneous cost guarantee.
+Evidence is in the [v3 evaluation](reports/evals/20261025_answer_release_v3/README.md).
+- **Restatement.** Haiku restates facts across `answer` and `policy`. Restore v2's "do not restate a fact in two sections" line and re-measure.
+- **Internal wording.** Wording such as "sections supplied" reached 2 of 30 answers.
+- **Deterministic checks to consider.** Not enforced now:
+  - block internal words and label patterns in rider text;
+  - a total length cap;
+  - procedure steps only when the question asks how.
+- **Warnings outside the retrieved sections.** For example, the general loading warning on page 15 reaches the model only when its section is retrieved. Measure how often this matters before changing retrieval.
 
-The v10.12 [failed live run](reports/public_evaluator/20261012/hosted_runs/e4d6b41f-01c9-4dc8-9648-cfe0ad4c8b53/receipt.json), [failed independent review](reports/public_evaluator/20261012/operations/semantic_acceptance_v10_12.json), missing current-role cache reads and the older v8 0/4 coverage baseline remain history. The owner's new functional scope does not turn those failures into factual acceptance. Gemini/Gemma access work stays retired.
+## Repository
 
-## MVP result and handover
-
-1. **Use the applied exact token ceiling.** The separately persisted 2,000,000-token grant is applied with pending/application/readback receipts. Resolve it from fresh ledgers and bind its exact scope in every admission. Keep reserved attempts/tokens/events/versions and all old charges; do not change USD1, attempts100, INR2,700/INR2,540 or stopped billing.
-2. **Retain the tested retrieval repair and its limits.** The [v10.13 failure](reports/public_evaluator/20261012/haiku_v10_13_helpers/service_due_api_operator_v1/hosted_runs/915800c4-aa0d-48d4-b0e1-1cedd3799d04/service_due_case.json) remains recorded. The frozen v10.14 repair retains applicable approved evidence from the initial ranking through reranking, without changing source authority or adding the section hint. The [private same-question retest](reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/service_due_case.json) admitted the three reviewed Service Reminder objects, separately verified a partial answer and proved exact save/stream/recovery. The [first public attempt](reports/public_evaluator/20261012/public_review/browser_service_due_v14_v1/receipt.json) failed safely at `VERIFIER_INCONSISTENT_ACCEPTANCE`; a fresh operation passed. Keep all charges and failures; no uncertain paid replay or verifier bypass.
-3. **Keep the public UI usable and hand over the result.** The [capacity repair](reports/public_evaluator/20261012/haiku_v10_13_helpers/ui_capacity_repair_v1/health_passed.json) retained service maximum two and revision maximum one. The [fresh public service-due browser](reports/public_evaluator/20261012/public_review/browser_service_due_v14_v2/receipt.json) passed health, proof/cookie/WebSocket, scope confirmation, enabled input, all four progress stages and a supported answer with a citation. Visible incremental chunk rendering was not observed. The latest old-v10.13 rollback health check [timed out twice](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/rollback_health_timeout_v2.json); exact v10.14 traffic was restored and [both restored health checks passed](reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/restore_health.json). Preserve current identity/source checks and the billing guard. Share the URL with the actual evidence and verifier/rollback limitations. Broader six-case, cache-read and extra follow-up demonstrations remain deferred; independent manual answer review was waived.
-
-- [x] Exact owner-authorized 2,000,000-token cap applied and read back without counter/event/charge reset.
-- [x] Service-due question retrieves applicable admitted source and returns a useful verified supported/partial answer.
-- [x] Private direct answer separately verified; identical saved stream/recovery and completed operation boundaries proven.
-- [x] Anonymous inspection, enabled UI health and a public service-due SUPPORTED browser answer with a citation passed.
-- [x] Public URL, result receipts and limitations recorded for reviewer handover.
+- **Root modules.** Root-level modules outside the serving import graph (the reviewed controller, approved registry and related tests) are historical tooling. Remove them or move them to history in a checked change.
+- **Before any promotion,** bind the source commit, image digest, compatible backend/UI/worker revisions and rollback.
 
 ## Preserved requirements
 
-Rider questions are at most 100 words; accept arbitrary manual-supported wording and reject longer input before retrieval/reservation without truncation. Preserve all applicable conditions, warnings, units, headers, references and relevant history. There is no old assembled-evidence cap. Native windows, actual provider throughput and lifetime budgets are distinct.
-
-Use one Haiku generation slot per turn and none when nothing is admitted; there is no correction or verification call. The call uses the existing Haiku USD1 ledger. Malformed/outage/quota/integrity/gate failures remain `SYSTEM_ERROR`; safety, unsupported and rider-resolvable ambiguity remain distinct. `ACTION_COMPLETED_UNRESOLVED` is never observed normality; reported success is not a verified repair. Authored questions and StepDefinitions are not Q&A gates.
-
-Immutable source/context approvals stay exact and scope-bound. Missing extraction/review is maintainer work, and page 103 stays flagged. The new waiver concerns independent answer evaluation only. Held-out cases may not enrich prompts or tune retrieval.
-
-Photo, voice, compaction and optional refinements remain deferred until separately agreed. Follow [PRD](docs/PRD.md), [TRD](docs/TRD.md), [architecture](docs/ARCHITECTURE.md), [status](docs/STATUS.md), [CONTRIBUTING](CONTRIBUTING.md) and the recorded scopes. Main remains unchanged pending checked integration.
+- Rider questions are at most 100 words, rejected before retrieval or reservation without truncation.
+- One Haiku generation slot per turn, and none when nothing is retrieved. There is no correction, verification or retry call.
+- Malformed, outage, quota, integrity and gate failures are SYSTEM_ERROR.
+- Never restart stopped billing, reset or refund the ledgers, or activate a fallback model without the owner.
+- Photo, voice and compaction remain deferred.

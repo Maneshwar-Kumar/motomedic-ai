@@ -1,6 +1,6 @@
 # Answer-quality evaluations
 
-These runs ask whether the answer evidence survives each stage of the answer path, and whether the generator turns it into a correct released answer. Read them in order. Each run's README states its label and limits. None of them is hosted acceptance, human review or independent factual acceptance.
+These runs ask whether the answer evidence survives each stage of the answer path, and whether the generator turns it into a correct released answer. Read them in order. The last one, the section answer path v3, is the design the runtime now uses ([serving manifest v11](../public_evaluator/20261025/serving_manifest_v11.json)). Each run's README states its label and limits. None of them is hosted acceptance, human review or independent factual acceptance.
 
 The question set is 30 cases: 10 golden cases and 10 partial-answer cases from the approved 161-case package, plus 10 authored questions the manual cannot answer ([cases.json](20261023_stage_replay_v1/cases.json)). These cases have now been used for development, so they can no longer serve as held-out evidence.
 

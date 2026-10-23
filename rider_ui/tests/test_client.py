@@ -7,7 +7,7 @@ from urllib.error import HTTPError, URLError
 from rider_ui.client import APIError, RiderAPI, validate_view, MANUAL_SHA, INDEX_ID
 
 def view():
-    return {'runtime_policy':'open-manual-haiku-draft-verify-v10_13','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
+    return {'runtime_policy':'open-manual-section-template-v1','schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID,
             'session_id':'a'*32,'version':1,'choices':[],'history':[],
             'response':{'type':'SUPPORTED','technical_content':True,'release_gate_passed':True,
                         'natural_language':'Engineering fixture only.',
@@ -37,7 +37,6 @@ class ClientTests(unittest.TestCase):
         api=RiderAPI('https://example.com',forbidden,answers_enabled=False)
         api.opener=Transport(result=json.dumps(view()).encode())
         for invoke in (lambda:api.start('Synthetic question','c'*32),
-            lambda:api.feedback(view(),'synthetic-choice','c'*32),
             lambda:api.request('POST','/v1/sessions',{},'c'*32,stream=True)):
             with self.assertRaises(APIError) as caught:invoke()
             self.assertTrue(caught.exception.terminal)
@@ -49,14 +48,14 @@ class ClientTests(unittest.TestCase):
         self.assertEqual(api.recover_operation('c'*32),current)
         self.assertEqual(api.opener.calls,1)
 
-    def test_v13_policy_rejects_superseded_v12_saved_answer(self):
+    def test_current_policy_rejects_retired_draft_verify_saved_answer(self):
         from rider_ui.client import RUNTIME_POLICY,validate_view
-        old=view();old['runtime_policy']='open-manual-haiku-draft-verify-v10_12'
+        old=view();old['runtime_policy']='open-manual-haiku-draft-verify-v10_13'
         with self.assertRaises(APIError):validate_view(old,expected_policy=RUNTIME_POLICY)
 
-    def test_v10_policy_acceptance_rejects_v9_recovery_continuation_and_feedback(self):
+    def test_current_policy_rejects_retired_recovery_and_continuation(self):
         from rider_ui.client import RUNTIME_POLICY
-        self.assertEqual(RUNTIME_POLICY,'open-manual-haiku-draft-verify-v10_13')
+        self.assertEqual(RUNTIME_POLICY,'open-manual-section-template-v1')
         current=view();old=copy.deepcopy(current);old['runtime_policy']='open-manual-draft-verify-v9'
         api=RiderAPI('https://example.com','engineering-fixture')
         api.opener=Transport(result=json.dumps(current).encode())
@@ -65,7 +64,6 @@ class ClientTests(unittest.TestCase):
         with self.assertRaises(APIError):api.recover_operation('c'*32)
         api.opener=Transport(result=json.dumps(current).encode())
         with self.assertRaises(APIError):api.start('Synthetic continuation','c'*32,view=old)
-        with self.assertRaises(APIError):api.feedback(old,'synthetic-feedback','c'*32)
         self.assertEqual(api.opener.calls,0)
 
     def test_retired_policy_only_allowed_by_explicit_engineering_loopback(self):
@@ -98,7 +96,7 @@ class ClientTests(unittest.TestCase):
         api.opener=transport
         received=[];stages=[];parts=[]
         self.assertEqual(api.start('A raw question','c'*32,on_verified=received.append,on_progress=stages.append,on_chunk=parts.append),v)
-        self.assertEqual(stages,['retrieving','drafting','verifying','displaying'])
+        self.assertEqual(stages,['retrieving','drafting','checking','displaying'])
         self.assertEqual(''.join(parts),v['response']['natural_language'])
         self.assertEqual(received,[v])
         transport.result=b''.join(accepted_frames(v,key='d'*32))
@@ -169,15 +167,6 @@ class ClientTests(unittest.TestCase):
             with self.assertRaises(APIError) as e: api.catalogue()
             self.assertNotIn('PRIVATE',str(e.exception))
             self.assertEqual(api.opener.calls,1)
-    def test_feedback_only_sends_server_choice_and_version(self):
-        import json
-        api=RiderAPI('https://example.com','secret')
-        api.opener=Transport(result=json.dumps(view()).encode())
-        api.feedback(view(),'unresolved','b'*32)
-        req=api.opener.request
-        self.assertEqual(json.loads(req.data),{'expected_version':1,'choice_id':'unresolved','cache_mode':'bypass'})
-        self.assertNotIn(b'fact',req.data)
-        self.assertEqual(req.get_header('Idempotency-key'),'b'*32)
     def test_start_sends_raw_question_without_category_or_record(self):
         import json
         api=RiderAPI('https://example.com','secret');api.opener=Transport(result=json.dumps(view()).encode())
@@ -193,7 +182,7 @@ class ClientTests(unittest.TestCase):
         base={'schema_version':'motomedic-rider-api-v1','manual_checksum':MANUAL_SHA,'index_id':INDEX_ID}
         api.opener=Transport(result=json.dumps(base).encode())
         with self.assertRaises(APIError): api.catalogue()
-        api.opener=Transport(result=json.dumps({**base,'question_input':'open','streaming':'DRAFT_VERIFY_STREAM'}).encode())
+        api.opener=Transport(result=json.dumps({**base,'question_input':'open','streaming':'SAVED_RELEASE_STREAM'}).encode())
         self.assertEqual(api.catalogue()['question_input'],'open')
         api.opener=Transport(result=json.dumps({**base,'question_input':'open','streaming':'VERIFIED_COMPLETE_UNIT_SSE'}).encode())
         with self.assertRaises(APIError):api.catalogue()
