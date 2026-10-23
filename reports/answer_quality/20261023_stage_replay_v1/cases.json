@@ -1,0 +1,484 @@
+{
+ "schema": "motomedic-stage-replay-cases-v1",
+ "created": "2026-10-23",
+ "cases": [
+  {
+   "case_id": "CTRL_SERVICE_DUE",
+   "group": "CONTROL",
+   "question": "When is the service due for my bike?",
+   "gold_evidence_ids": [
+    "evidence_157a86dd6fd9f3a9d4c3fc0d",
+    "evidence_512f860518ee9abe0ced1fd4",
+    "evidence_8555b50f22af8eabcabb0b76"
+   ],
+   "gold_pages": [
+    60
+   ],
+   "hosted_expected": {
+    "chunk_ids": [
+     "chunk_caaa10eb8f6f9be0da83ecff",
+     "chunk_bc36a7206ccec88ff165045f",
+     "chunk_264840a2d10e014e3246865a",
+     "chunk_d85be9b2248a2c8f1cceb6ff",
+     "chunk_cdd11f54d74872df01aa62e9",
+     "chunk_f6bb9e264a079f438c42d5e0"
+    ],
+    "admitted_evidence_ids": [
+     "evidence_157a86dd6fd9f3a9d4c3fc0d",
+     "evidence_512f860518ee9abe0ced1fd4",
+     "evidence_8555b50f22af8eabcabb0b76"
+    ],
+    "dense_top_distinct_parent_ids": [
+     "section_0d33b259255a54f0ccf525db",
+     "section_6aab7fb42eae8002f91f026d",
+     "section_170edf59574700ebe87fbcae"
+    ],
+    "sparse_top_distinct_parent_ids": [
+     "section_06dd177e2fac8a35cc5cb6f2",
+     "section_01fa831e1174b5331f1cd195",
+     "section_a51b83f3ee13fe583e091f9a"
+    ],
+    "rerank_attempts": 1,
+    "preserved_initial_anchor_chunk_ids": [
+     "chunk_f6bb9e264a079f438c42d5e0"
+    ],
+    "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+    "gap_count": 16
+   },
+   "gold_basis": "hosted v10.14 job 4133435e trace (fidelity control)"
+  },
+  {
+   "case_id": "GEN007",
+   "group": "GOLDEN",
+   "question": "Does this manual allow E20 fuel?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "It specifies unleaded gasoline with ethanol content up to E20. That does not establish approval for fuel above E20.",
+   "gold_evidence_ids": [
+    "evidence_3f8de8466049af12783de7d0"
+   ],
+   "gold_pages": [
+    18
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN011",
+   "group": "GOLDEN",
+   "question": "Are the standard and low seats the same adjustable height?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "No. The standard seat is listed as adjustable from 825 to 845 mm; the low seat from 805 to 825 mm. These are specification values for guidance, not confirmation of the seat fitted to your bike.",
+   "gold_evidence_ids": [
+    "evidence_0977d270b64406ab9d320956",
+    "evidence_6058a38ed55c9b65bad75313",
+    "evidence_74d7693f57971057cf41fb71"
+   ],
+   "gold_pages": [
+    20
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN012",
+   "group": "GOLDEN",
+   "question": "What spark-plug gap is specified?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "The specification is 0.8–0.9 mm. This is a lookup, not an instruction to access, remove or adjust the plug.",
+   "gold_evidence_ids": [
+    "evidence_6bf722f54de89478dba83e34"
+   ],
+   "gold_pages": [
+    16
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN014",
+   "group": "GOLDEN",
+   "question": "Are the left and right fork oil quantities identical?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "No. The table specifies SS-47G fork oil, right-hand fork 589 ± 2.5 ml and left-hand fork 507 ± 2.5 ml. This is a specification lookup; it does not supply a fork-service procedure. The table notes actual capacities can vary. Its caution says using the wrong oil grade reduces moving-part life and seriously affects performance.",
+   "gold_evidence_ids": [
+    "evidence_37c6c31f5700495414de1101",
+    "evidence_424971c8f0be958200b09990",
+    "evidence_a6950ea73293cda81e695ce1"
+   ],
+   "gold_pages": [
+    21
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN017",
+   "group": "GOLDEN",
+   "question": "What output rating is listed for the USB port?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "The electrical specification lists USB 2.0 Type C, 5 V, 2 A output. That is distinct from the separate warning that current draw greater than 2.5 A shuts the charger down; the charger works only with the engine running.",
+   "gold_evidence_ids": [
+    "evidence_13dac6aaee2fcbdd57618d29",
+    "evidence_bcc2ecdbee298a98332e9c23",
+    "evidence_ea69e5fbd3ff27f1dd159960"
+   ],
+   "gold_pages": [
+    19,
+    65
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN022",
+   "group": "GOLDEN",
+   "question": "Why will the ignition key not come out while it is ON?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "The manual says the key can be removed only with ignition OFF or the steering locked. It also warns never to switch the ignition OFF while riding.",
+   "gold_evidence_ids": [
+    "evidence_1e819216fd033fbe0f84a38b",
+    "evidence_2b8af8f01370b1d3b9ee880a",
+    "evidence_6d18aae51376185337eba68f"
+   ],
+   "gold_pages": [
+    26
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN025",
+   "group": "GOLDEN",
+   "question": "Which riding mode combinations are listed?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "The manual lists Performance + ABS ON, Performance + Rear ABS OFF, ECO + ABS ON and ECO + Rear ABS OFF. This lists available modes; it does not recommend disabling ABS or infer your selected mode.",
+   "gold_evidence_ids": [
+    "evidence_77334b27d80a1f1e7c1fe54b",
+    "evidence_ab33eebe16865f95a711ddfa",
+    "evidence_b7e876776f05725c8d89f4af",
+    "evidence_ed64042cada40bb015dffc46"
+   ],
+   "gold_pages": [
+    32
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN030",
+   "group": "GOLDEN",
+   "question": "Which display languages are listed?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "The manual lists English, Italian, Spanish, Portuguese, German and French. That is this manual’s listed menu content, not a guarantee that every firmware version has identical options.",
+   "gold_evidence_ids": [
+    "evidence_0dff6026a67902df25210af2",
+    "evidence_7f57d765db8c41979f270112",
+    "evidence_90061300e4df669ac99f9d8d",
+    "evidence_a5e8430eda5a282f5c17e986",
+    "evidence_c6c47cb26648960a02d4b727",
+    "evidence_de4c690b1c25827ccfdc72d1"
+   ],
+   "gold_pages": [
+    50,
+    51
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN035",
+   "group": "GOLDEN",
+   "question": "Why does the compass not work with navigation inactive?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "The manual says the compass functions only while navigation is active. That condition does not diagnose the compass if navigation is already active.",
+   "gold_evidence_ids": [
+    "evidence_145c685b98e1e04b7955e1d6"
+   ],
+   "gold_pages": [
+    57
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN044",
+   "group": "GOLDEN",
+   "question": "At 300 km, does this manual allow full throttle?",
+   "package_route": "SUPPORTED",
+   "canonical_answer": "No. For 0–500 km the running-in table says below 6,000 rpm and no full throttle. The running-in guidance also says vary speed, avoid sudden acceleration/braking, respect payload limits and take a brief stop rather than riding continuously over an hour.",
+   "gold_evidence_ids": [
+    "evidence_22f28ee80b5722700b451737",
+    "evidence_46773c959c783a25fed63c5d",
+    "evidence_4c44e041f331d8e8c1c20d45",
+    "evidence_b27f0ee41aa174a7ff6818ea",
+    "evidence_c25ff60686f3788166014a45"
+   ],
+   "gold_pages": [
+    71
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN004",
+   "group": "PARTIAL",
+   "question": "How many kilograms can I put in the panniers and top box?",
+   "package_route": "UNSUPPORTED",
+   "canonical_answer": "This manual points to the maximum payload in the GMA fitting instructions; it does not give a universal pannier or top-box kilogram limit here. Please confirm the model-specific fitting instructions with Royal Enfield at support@royalenfield.com.",
+   "gold_evidence_ids": [
+    "evidence_b9c4e4222f25cb0fca7dffc6"
+   ],
+   "gold_pages": [
+    15
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN041",
+   "group": "PARTIAL",
+   "question": "The general warning symbol is on. Which exact part has failed?",
+   "package_route": "UNSUPPORTED",
+   "canonical_answer": "The manual describes the symbol as a vehicle-component fault indication, but that symbol alone does not identify the failed component. Please have authorised Royal Enfield service investigate; I cannot infer a fault code from it.",
+   "gold_evidence_ids": [
+    "evidence_16df2546fcf3ee0edb0cf3ec"
+   ],
+   "gold_pages": [
+    62
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN047",
+   "group": "PARTIAL",
+   "question": "It says Champion: what exact spark-plug part number should I order?",
+   "package_route": "UNSUPPORTED",
+   "canonical_answer": "The engine table names Champion and a 0.8–0.9 mm gap, but does not establish an exact ordering part number there. Confirm the correct part with authorised Royal Enfield service rather than infer compatibility from brand and gap.",
+   "gold_evidence_ids": [
+    "evidence_0801208d8cde38daf72f6ab3",
+    "evidence_6bf722f54de89478dba83e34"
+   ],
+   "gold_pages": [
+    16
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "GEN048",
+   "group": "PARTIAL",
+   "question": "Will the app work with my new phone OS released this week?",
+   "package_route": "UNSUPPORTED",
+   "canonical_answer": "This fixed manual describes relative Android/iOS support policies; it cannot verify compatibility with a release this week. Please confirm current support with Royal Enfield at support@royalenfield.com.",
+   "gold_evidence_ids": [
+    "evidence_6d65a0c9aaa0d6acbf4aab29",
+    "evidence_8b950cdd4b977781b231dfe3"
+   ],
+   "gold_pages": [
+    54
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "EXP027",
+   "group": "PARTIAL",
+   "question": "When do the brake pads need replacement?",
+   "package_route": null,
+   "canonical_answer": "The manual requires scheduled front/rear pad checks. Its printed replacement-threshold wording is unclear; have authorised service assess pad wear.",
+   "gold_evidence_ids": [],
+   "gold_pages": [
+    90,
+    91,
+    93,
+    98,
+    99,
+    119,
+    126,
+    131
+   ],
+   "gold_basis": "no claim evidence ids in package; pages located by text search for brake-pad wording (my derivation)"
+  },
+  {
+   "case_id": "EXP034",
+   "group": "PARTIAL",
+   "question": "How do I check the battery voltage?",
+   "package_route": null,
+   "canonical_answer": "The manual directs you to a Royal Enfield authorised service centre or battery service centre for checking battery voltage. It does not give an owner multimeter test procedure in this guidance.",
+   "gold_evidence_ids": [
+    "evidence_45e01fb1becff7605de0f33d"
+   ],
+   "gold_pages": [
+    105
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "EXP037",
+   "group": "PARTIAL",
+   "question": "The number-plate light stopped working. Which bulb should I buy?",
+   "package_route": null,
+   "canonical_answer": "The manual identifies an LED license-plate illuminator and directs authorised dealer/service replacement of its assembly on failure. It does not specify a replaceable bulb for this light.",
+   "gold_evidence_ids": [
+    "evidence_263f3b555e67f5b3d5dd921b",
+    "evidence_9bd367226b5030b7a79beb0f"
+   ],
+   "gold_pages": [
+    110
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "EXP038",
+   "group": "PARTIAL",
+   "question": "Which direction can the headlamp beam be adjusted?",
+   "package_route": null,
+   "canonical_answer": "The manual describes vertical adjustment using the adjusting screw turned clockwise or anticlockwise. It does not map each direction to up/down or supply an aiming distance/height in this guidance, so I cannot prescribe a precise aim setting. Authorised service can set it.",
+   "gold_evidence_ids": [
+    "evidence_baa411676d221984d8072550"
+   ],
+   "gold_pages": [
+    109
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "EXP040",
+   "group": "PARTIAL",
+   "question": "What rear-suspension notch should I use riding solo?",
+   "package_route": null,
+   "canonical_answer": "Page117 table lists3rd notch for rider-only loading, but page116 says the six-step adjuster is kept at first notch. I cannot verify which setting applies to your situation from those differing statements. Please confirm with authorised service.",
+   "gold_evidence_ids": [
+    "evidence_f27b3a99805a40992be6f399",
+    "evidence_fb5ddc131802596bbfc6777e"
+   ],
+   "gold_pages": [
+    116,
+    117
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "EXP044",
+   "group": "PARTIAL",
+   "question": "My bike has been stored for over a month. Can I just restart it?",
+   "package_route": null,
+   "canonical_answer": "The manual prefers authorised-service preparation for reuse after storage. It advises battery removal/disconnection for a month or longer, and checking voltage before refitting; recharge through authorised workshop/battery dealer if outside specification. This guidance does not state a voltage threshold here.",
+   "gold_evidence_ids": [
+    "evidence_8fa7f3dd0a735ed98d818a77",
+    "evidence_fcba93b4680b3116de440b69"
+   ],
+   "gold_pages": [
+    120
+   ],
+   "gold_basis": "approved package claim manual_evidence_ids"
+  },
+  {
+   "case_id": "N01",
+   "group": "NO_ANSWER",
+   "question": "What is the top speed of this motorcycle?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No top-speed figure. Traps: p14 \"do not exceed 110 km/h\" on accessory-equipped bikes; p44-45 \"Max speed\" trip display item.",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N02",
+   "group": "NO_ANSWER",
+   "question": "How many seconds does it take to go from 0 to 100 km/h?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No acceleration figure; p71/p75-77 only give riding/starting advice on accelerating.",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N03",
+   "group": "NO_ANSWER",
+   "question": "What mileage in km per litre should I expect from this bike?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No fuel-economy figure. Traps: km/l is a display unit (p37-38, p49); a 146 km fuel range appears in display illustrations.",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N04",
+   "group": "NO_ANSWER",
+   "question": "Does this bike have cruise control?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No mention of cruise control anywhere in the manual.",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N05",
+   "group": "NO_ANSWER",
+   "question": "How deep a water crossing can the bike safely ride through?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No wading depth or water-crossing guidance (only a warranty exclusion mentioning flood, p132).",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N06",
+   "group": "NO_ANSWER",
+   "question": "Does the manual give any advice for riding at high altitude, like in Ladakh?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No altitude guidance anywhere in the manual.",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N07",
+   "group": "NO_ANSWER",
+   "question": "What is the battery's cold cranking amps (CCA) rating?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No CCA rating. Trap: p104 lists a 12 V 8 Ah VRLA battery.",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N08",
+   "group": "NO_ANSWER",
+   "question": "What compression pressure should a healthy engine show on a compression test?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No compression-test pressure. Trap: p16 lists the compression ratio.",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N09",
+   "group": "NO_ANSWER",
+   "question": "What throttle cable free play does the manual specify?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No throttle free-play figure. Traps: clutch free play 9-11 mm (p101-102), drive chain free play 35-40 mm (p102-103).",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  },
+  {
+   "case_id": "N10",
+   "group": "NO_ANSWER",
+   "question": "How do I pair a Bluetooth intercom headset with the bike?",
+   "package_route": null,
+   "canonical_answer": null,
+   "expected": "UNSUPPORTED",
+   "gold_evidence_ids": [],
+   "gold_pages": [],
+   "absence_check": "No headset or intercom pairing; the manual covers phone/app connectivity (p53-57) and TCU pairing (p146).",
+   "gold_basis": "authored for this experiment; absence checked by full-text search of all 149 parsed pages incl. flagged page 103"
+  }
+ ]
+}

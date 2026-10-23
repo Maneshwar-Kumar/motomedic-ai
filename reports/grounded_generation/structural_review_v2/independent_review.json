@@ -1,0 +1,46 @@
+{
+  "version": "scoped-source-structure-independent-review-v2",
+  "decision": "APPROVED_EXACT_SOURCE_OBJECT_CONTEXT_ONLY",
+  "authority": "OWNER_DELEGATED_INDEPENDENT_AGENT_SOURCE_STRUCTURE",
+  "reviewer": "independent-subagent (Claude, separate context from proposer)",
+  "proposal_path": "reports/grounded_generation/structural_review_v2/proposal.json",
+  "proposal_sha256": "38dc070964b4e7027ee616db2b387776f338809b36116afda5e79a91a7a1cc3d",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "human_signoff": false,
+  "open_findings": [],
+  "approved_components": [
+    "BATTERY_HANDLING_NOTES",
+    "BRAKE_PAD_WEAR_CHECK",
+    "COMPASS_NAVIGATION_NOTE",
+    "DISPLAY_LANGUAGE_MENU",
+    "HEADLIGHT_BEAM_ADJUSTMENT",
+    "LUBRICANT_TABLE_FOOTNOTE",
+    "LUGGAGE_AND_ACCESSORY_LOADING",
+    "REAR_SUSPENSION_PRELOAD",
+    "RE_APP_PHONE_COMPATIBILITY",
+    "STORAGE_PRECAUTIONS",
+    "TAIL_AND_LICENSE_PLATE_LAMP",
+    "TELL_TALE_INDICATORS"
+  ],
+  "accepted_residual_limitations": [
+    "R2-N2: The page-8/page-27 fuel no-flame/no-spark warnings for draining fuel are carried only as a review_note on evidence_660ca3000454e2f166858581, not as a linked object or mandatory display. Linking them would pull their broad v4 closure (fuse, starter, troubleshooting warnings) into storage answers. Storage answers therefore will not show the fuel warning until a separately reviewed loader change permits a clean, non-transitive link.",
+    "R2-N7: evidence_1fd98dd6ead9e18f957b54ed and evidence_408aceccea34b9af73a5150c keep their earlier exact v4 bindings and contexts (v2 never rebinds an existing approval). The BRAKE PADS path and the wording/noise notes reach the model through evidence_7cd1de903310b8e09d8a9d4e.",
+    "R2-N3: The merged-cell FACT display on evidence_fb5ddc131802596bbfc6777e has not been exercised by the hosted verifier. A rejection fails closed. A hosted verifier probe is required before any live enablement, which is a separate scope."
+  ],
+  "rounds": [
+    {"round": 1, "proposal_sha256": "874473f13b8f986a38389194fd070701a90bfc908380d24fc188f1f583f8e387", "verdict": "APPROVE_AFTER_FIXES", "findings": "F1 BLOCKING (p117 merged 32 psi cell lost by parser); F2-F3, F5-F9 MAJOR (p14 luggage body, luggage display binding, p63 ABS conditions, p91 brake-pad continuation, battery warnings p104/105/107, storage fuel warnings, DOT 4 footnote); F4, F10-F15 MINOR (severity wording, section paths, links, limitation notes, metadata)."},
+    {"round": 2, "proposal_sha256": "52867152d206abdd274355ce6e4665235c4270e64019214f739fce274b088a34", "verdict": "APPROVE_AFTER_FIXES", "findings": "F1-F4, F6-F7, F9-F15 resolved; F5 and F8 partial. New: R2-N1 BLOCKING (component externals pulled 21-22-object v4 closures and 14-16 unrelated mandatory displays into tell-tale and storage answers); R2-N2 MAJOR (fuel warning not displayed); R2-N3-N8 MINOR (CLARIFICATION role collision, footnote path, CAUTION/NOTE shown as WARNING, p20 import, v4 contexts retained, ABS display wording)."},
+    {"round": 3, "proposal_sha256": "df2200c8c27a74dfc1d2cbe6f113f9f60f3fd34508c194d6b3f35440be48ae34", "verdict": "APPROVE_AFTER_FIXES", "findings": "R2-N1-N7 resolved (R2-N2, N3, N7 accepted as residual limitations); R2-N8 partial. New: R3-N1 MINOR (ABS display dropped the printed '(until or after vehicle running for a particular distance / speed)' qualifier); R3-N2 MINOR (stale 'CLARIFICATION display' wording in the table review_note)."},
+    {"round": 4, "proposal_sha256": "38dc070964b4e7027ee616db2b387776f338809b36116afda5e79a91a7a1cc3d", "verdict": "APPROVE", "findings": "R3-N1 and R3-N2 resolved. A sorted-key JSON diff against rev3 (df2200c8...) shows exactly 7 changed paths: the TELL_TALE ABS display text, revision 3->4, the added round3_findings_addressed, and on evidence_fb5ddc13 the review_note plus its three dependent hashes (context_sha256 x2, source_object_sha256). The loader's hash-binding checks accept them. No other change. No open findings."}
+  ],
+  "pages_visually_checked": [5, 6, 8, 14, 15, 16, 20, 21, 27, 47, 50, 51, 54, 57, 59, 60, 61, 62, 63, 66, 90, 91, 104, 105, 107, 109, 110, 116, 117, 120],
+  "simulation": "A provider-free v5 load with a scratchpad-only simulated review, run against rev4, did assemble+select for each of the 79 members. Every component's payload stays on its own pages (storage plus battery 18 objects with only the 4 battery displays; tell-tales 11 objects on p62 with 2 own displays; suspension 10 objects on pp116-117 with 1 FACT display). The only cross-links are the intended compass-to-RE-app and lubricant-table-to-footnote links. 9 v4 lubricant and brake/clutch-fluid objects gain only the p21 notes and footnote, with 0 added displays. No unrelated warnings are injected. The footnote is in no retrieval chunk and is reachable only through the table dependency, as intended.",
+  "parent_text_authorized": false,
+  "action_authority": false,
+  "diagnosis_authority": false,
+  "oem_sequence_authority": false,
+  "deployment_authorized": false,
+  "answer_quality_acceptance": false,
+  "scope_note": "This approves only the exact source-object membership, reviewed context, links and mandatory displays in the proposal bytes above. It is not human signoff and does not establish factual correctness of generated answers, live acceptance, latency, deployment or public opening. Any byte change to the proposal requires a new review."
+}
