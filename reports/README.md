@@ -4,11 +4,12 @@ The current design is in [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architec
 
 | Record | Why retained |
 | --- | --- |
-| [Answer-quality evaluations](evals/README.md) | Stage replay, private hosted v10.15 candidate, Sonnet draft + verify and verifier-free release runs on 30 questions (23–24 October 2026). |
-| [Haiku continuation](public_evaluator/20261012/haiku_v10_12/continuation_scope_v1.json) | Current continuation authority and exact verification of superseded v10.11 against the saved commit. |
+| [Answer-quality evaluations](evals/README.md) | Stage replay, private hosted v10.15 candidate, Sonnet draft + verify, verifier-free release and the section answer path v3 that the runtime now uses (23–25 October 2026). |
+| [Serving manifest v11](public_evaluator/20261025/serving_manifest_v11.json) | Current frozen serving inputs of the section-template answer path; authorizes no deployment. |
+| [Haiku continuation](public_evaluator/20261012/haiku_v10_12/continuation_scope_v1.json) | Historical v10.11–v10.13 continuation authority and verification of superseded v10.11 against its saved commit. |
 | [Stopped handoff](handoff/20261012/SUMMARY.md) | Fresh-chat summary, ordered TODO, exact WIP/helper archive, access blocker and publication/validation receipts. |
 | [Reset receipt](reset/20261011/README.md) | What was removed, what was preserved, recovery and validation. |
-| [v9 implementation receipt](build/20261012/README.md) | Current code, frozen historical bytes, synthetic checks and remaining hosted build/acceptance gates. |
+| [v9 implementation receipt](build/20261012/README.md) | Historical v9 code, frozen historical bytes and synthetic checks. |
 | [v8 runtime/provider evidence](grounded_generation/v8/REPORT.md) | Exact runtime, failed real answer coverage, independent source adjudication and packaging preparation. |
 | [Code review](code_review/20261011/README.md) | Concrete departures that informed the fresh specifications; dated before the reset. |
 | [Source context](grounded_generation/source_context_v1/) | Pinned original-object context and source-specific safety authority. |

@@ -83,7 +83,7 @@ class PublicInspectionHTTPTests(HealthTests):
 
     def test_signed_routes_remain_denied_without_verified_identity(self):
         with patch.dict(os.environ,{auth.FLAG:'true',auth.AUDIENCE:URL,auth.CALLERS:CALLER}), patch('builtins.print'):
-            for method,path in (('get','/v1/initial-catalogue'),('post','/internal/operations/run'),
+            for method,path in (('get','/v1/catalogue'),('post','/internal/operations/run'),
                                ('post','/internal/visitors/reserve')):
                 response=getattr(self.client,method)(path,json={})
                 self.assertEqual(response.status_code,401)
@@ -105,16 +105,24 @@ class PublicInspectionHTTPTests(HealthTests):
 
     def test_forged_header_is_denied_and_verified_alternate_header_is_removed(self):
         token,claims=signed_fixture()
+        seen={}
+        def probe():
+            from flask import request
+            seen.update(auth=request.headers.get('Authorization'),alternate=request.headers.get('X-Serverless-Authorization'))
+            return '',204
+        self.app.add_url_rule('/v1/test-probe','test_probe',probe)
         def reject(*args,**kwargs):raise ValueError('forged signature')
         with patch.dict(os.environ,{auth.FLAG:'true',auth.AUDIENCE:URL,auth.CALLERS:CALLER}), patch('builtins.print'), \
                 patch.dict('sys.modules',verifier_modules(reject)):
-            response=self.client.get('/v1/initial-catalogue',headers={'Authorization':'Bearer '+token})
+            response=self.client.get('/v1/test-probe',headers={'Authorization':'Bearer '+token})
             self.assertEqual(response.status_code,401)
+        self.assertEqual(seen,{})
         with patch.dict(os.environ,{auth.FLAG:'true',auth.AUDIENCE:URL,auth.CALLERS:CALLER}), \
                 patch.dict('sys.modules',verifier_modules(lambda *args,**kwargs:claims)):
-            response=self.client.get('/v1/initial-catalogue',headers={
+            response=self.client.get('/v1/test-probe',headers={
                 'Authorization':'Bearer '+token,'X-Serverless-Authorization':'Bearer forged'})
-            self.assertEqual(response.status_code,410)
+            self.assertEqual(response.status_code,204)
+        self.assertEqual(seen,{'auth':'Bearer '+token,'alternate':None})
 
 
 if __name__=='__main__':unittest.main()

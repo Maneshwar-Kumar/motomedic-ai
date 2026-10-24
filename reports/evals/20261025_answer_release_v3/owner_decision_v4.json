@@ -1,0 +1,19 @@
+{
+  "schema": "motomedic-owner-decision-v1",
+  "recorded_at_utc": "2026-10-25T00:00:00Z",
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "extends": "owner_decision_v3.json",
+  "context": "The integration bar (no unfaithful cited statement and at least 27/30 correct) applied to the default-effort Haiku arm, which scored 24/30 with 0 unfaithful; the goal therefore stopped after the experiment and the integration (512a78b) was reverted (2c35869) and kept unmerged on codex/section-template-integration. The owner was asked how to proceed.",
+  "owner_question": "The default-effort Haiku arm missed the 27/30 integration bar (24/30, 0 unfaithful; all 6 failures structural). The high-effort arm passed (30/30, 0 unfaithful). The full integration using Haiku at high effort is ready and green in CI on the unmerged branch codex/section-template-integration. How do you want to proceed?",
+  "owner_answer": "Merge the high-effort version (Recommended)",
+  "decisions": {
+    "integration_bar": "ACCEPTED_AS_MET_BY_THE_HAIKU_AT_HIGH_EFFORT_ARM (30/30 released and correct, 0 unfaithful cited items)",
+    "integration": "MERGED: the section-template answer path at effort high replaces draft-then-verify and the review gate; serving manifest v11 unchanged",
+    "runtime_effort": "high"
+  },
+  "deployment_authorized": false,
+  "billing_restart_authorized": false,
+  "ledger_changes_authorized": false,
+  "gcp_changes": false,
+  "human_signoff": false
+}

@@ -1,108 +1,83 @@
 # Rider API v1 integration contract
 
-The selected v10 public gateway hosts Streamlit and calls the private IAM-protected API implemented in `cloud/arm_a/rider_api.py`. The browser receives presentation, progress and a signed visitor cookie; provider credentials stay server-side. Backend/worker/Qdrant remain private. See [current status](../docs/STATUS.md) and the [recorded operational scope](../reports/public_evaluator/20261012/owner_scope_v1.json); v10 hosted/browser acceptance is pending. Do not point the UI at the retrieval-only Qdrant URL.
+The public gateway hosts Streamlit and calls the private IAM-protected API in [cloud/arm_a/rider_api.py](../cloud/arm_a/rider_api.py). The browser receives presentation, progress and a signed visitor cookie; provider credentials stay server-side.
 
 Source locks:
 
 - Schema: `motomedic-rider-api-v1`
+- Runtime policy: `open-manual-section-template-v1`
 - Manual SHA-256: `cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89`
-- Index: `index_a3282c4d98cf54595e4ba168`
+- Index: `index_a609ca61c635641e0a22dc48`
 - Variant: `Himalayan BS6`
-- Source display: citation metadata only; PDF, excerpts and figure crops prohibited.
+- Source display: citation metadata only; no PDF, excerpts or figure crops.
 
 ## HTTP boundary
 
-Every UI-to-backend request has a managed audience-bound `Authorization: Bearer ...` service identity and its owned signed visitor capability. Every rider mutation also has a unique `Idempotency-Key`. Transport uses HTTPS and rejects redirects. No automatic mutation retry. JSON responses are capped at 256 KiB; request text at 2,000 characters.
-
-Oversized rider questions return HTTP413 with a structured word, character or UTF-8 byte limit code. The new word rule accepts100words and rejects101 before retrieval/reservation, without truncation. Malformed requests and invalid source/selection fields remain HTTP400; ownership/version conflicts retain their specific404/409 handling. API/UI use the same word-count policy.
+Every UI-to-backend request carries a managed audience-bound `Authorization: Bearer ...` service identity and the owned signed visitor capability. Every rider mutation also carries a unique 32-hex `Idempotency-Key`. Transport uses HTTPS and rejects redirects, and mutations are never retried automatically. JSON responses are capped at 256 KiB, request JSON at 16 KiB and rider text at 2,000 characters and 8,000 UTF-8 bytes. Questions over 100 words return HTTP 413 with a limit code, before retrieval or reservation and without truncation.
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| GET | /v1/catalogue | Source locks and open-question capability |
-| POST | /v1/sessions | Confirm scope and retrieve for raw question |
-| POST | /v1/sessions/{id}/questions | Ask another question using expected_version |
-| POST | /v1/sessions/{id}/feedback | Apply exactly one issued server choice and run next turn |
-| GET | /v1/sessions/{id} | Retrieve latest saved view |
-| GET | /v1/operations/{idempotency_key} | Recover a mutation's committed response without executing it again |
+| GET | /v1/catalogue | Source locks, `question_input=open`, `streaming=SAVED_RELEASE_STREAM`, answer provider |
+| POST | /v1/sessions | Confirm scope and ask the first question |
+| POST | /v1/sessions/{id}/questions | Ask another question with `expected_version` |
+| GET | /v1/sessions/{id} | Retrieve the latest saved view |
+| GET | /v1/operations/{idempotency_key} | Recover a mutation's committed view without running it again |
 
-Catalogue: schema_version, manual_checksum, index_id, question_input=open, diagnostic_wizard=false, streaming=DRAFT_VERIFY_STREAM for the current open-verification service. Hosted UI capability checks reject the retired complete-unit service; neutral explicit engineering loopback fixtures remain available. The UI exposes no topic selector or symptom routing.
+A create request carries `query`, `bike_variant`, `confirmed_himalayan_bs6=true`, `manual_checksum` and `index_id`. It may add `cache_mode`, which is accepted for compatibility; answer caching is disabled. Continued questions add `expected_version`. A wrong source, variant or index returns HTTP 400 `SOURCE_OR_VARIANT_MISMATCH`. A stale version or conflicting payload returns HTTP 409. Open Q&A issues no feedback choices, and there is no feedback route.
 
-Create request: query, bike_variant, confirmed_himalayan_bs6=true, manual_checksum, index_id, cache_mode=bypass. Continued questions add expected_version. The new scoped candidate rejects questions above 100 words before retrieval or reservation, preserving text without truncation; ordinary questions require no canonical question, authored answer scope or registered action. Actual question and relevant saved history reach authenticated Qdrant + concurrent BM25, RRF, reviewed dependency assembly and conditional distinct-parent rank-disagreement reranking. Haiku `claude-haiku-5-5` drafts privately and a separate Haiku call checks coverage and every claim in the exact finalized response under a distinct policy and schema. Applicable evidence may be large; complete requests are counted against the pinned native window without the former assembled-evidence cap. Plain complete source/history JSON keeps each literal source ID beside its own content and reviewed scope. Role-specific native schemas restrict citations to exact admitted IDs; finalized response verification must check each cited object. A conservative native measurement check supplements that verification. Both call-role contracts and the fixed route bind the verdict and saved admission. Same-model calls do not establish cross-model agreement. All conditions/warnings/citations are finalized before verification; at most one correction and fresh verification is permitted. Answer-cache shortcuts stay disabled. Display/recovery causes no generation call.
+The request only admits the operation. A named Cloud Tasks task then runs it on the dedicated worker:
+1. top-5 hybrid retrieval;
+2. whole sections as plain text;
+3. one Haiku call;
+4. the deterministic gate;
+5. a durable commit.
 
-The direct public gateway signs a secure HttpOnly SameSite 24-hour cookie after a 14-bit proof challenge and private visitor reservation. Challenge validity is 120 seconds. `/internal/visitors/reserve` accepts only the exact IAM-authenticated UI service account and one proof SHA; task/other callers cannot issue visitors. Firestore atomically rejects spent proofs and bounds issuance to ten/minute and 60/rolling day. The UI forwards its signed `X-MotoMedic-Visitor` capability; backend ownership binds the UI principal and cookie nonce. No client or forwarded IP is trusted. A cookie identifies the visitor across refresh/new conversations; replacing it creates a new subject but cannot reset persistent global issuance/request or provider budgets. Every mutation uses a 32-hex key. Technical text streams only after durable commit; disconnect recovery reads that operation without rerunning it.
-
-Feedback request: expected_version, choice_id, cache_mode=bypass. **No client-supplied fact, approval, evidence, or model output.** Server looks up the choice previously issued for this exact session version, validates its reviewed typed binding, then applies ReviewedService.feedback and the next turn. Unresolved action never seeds an observation.
+Display and recovery never cause a model call.
 
 ## Saved view
 
-Required top-level fields: schema_version, manual_checksum, index_id, session_id (opaque identifier), version (nonnegative integer), response. Production requires runtime_policy=`open-manual-haiku-draft-verify-v10_13` on every route, including neutral fallback/errors and JSON recovery. V9, older and missing policies are rejected before display, continuation or feedback. Explicit engineering loopback fixtures remain separate; enabling loopback does not relax a remote HTTPS service.
+The required top-level fields are `schema_version`, `manual_checksum`, `index_id`, `session_id`, `version`, `runtime_policy` and `response`. The `response` object has these fields:
 
-Response fields:
+- `type`: SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP or SYSTEM_ERROR.
+- `natural_language`: the complete gate-composed rider text, displayed literally.
+- `technical_content`: true when the text carries cited manual content.
+- `release_gate_passed`: true only for a view released by the deterministic gate after one model call. The fixed no-retrieval fallback and SYSTEM_ERROR are false.
+- `cited_pages`: objects with `evidence_id`, `pdf_page` (1–149), `pdf_page_index`, `manual_checksum` and `index_id`.
+- `trace_id`, `reason_codes`, `clarification_question` and `escalation_uri`.
 
-- type: exactly SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP or SYSTEM_ERROR.
-- natural_language: the complete gated rider text, including mandatory conditions and warnings. UI displays it literally.
-- technical_content: boolean, default true. False only for nontechnical acknowledgments such as customer-reported resolution, independently controlled by the server.
-- release_gate_passed: true only after the actual deterministic/semantic checks required by the selected serving architecture. It is an authenticated server assertion, not a client evidence verifier.
-- cited_pages: list of immutable metadata objects: evidence_id, pdf_page (1–149), pdf_page_index (zero based), optional printed_page_label, manual_checksum, index_id.
-- trace_id: redacted correlated response identifier.
+The optional top-level fields are `escalation_uri` (null or the verified `mailto:support@royalenfield.com`) and `runtime_controls` (counts, cost and identifiers only). `choices` and `history` are always empty lists.
 
-Optional top-level fields:
+A gate-released view also carries `release_delivery`. It binds the operation ID and runtime lock, the manual and index, the response hash (`presentation_sha256`) and `text_sha256`. It also binds the SHA of the text sent to the model (`evidence_payload_sha256`) and of the private release record (`release_sha256`).
 
-- choices: at most eight id/label/outcome objects. Canonical outcome enums are unchanged. These are exact issued choices bound on the server to typed facts when needed. Do not invent generic Yes/No controls for ambiguous numeric or enum rules.
-- history: list of label objects describing server-recorded attempts. Keep unresolved vs normal distinct; corrections supersede previous observations.
-- escalation_uri: null or the verified `mailto:support@royalenfield.com`.
+The persisted `delivery` carries the operation ID, response hash, runtime lock, manual, index, `evidence_payload_sha256`, `release_binding_sha256` and `event_protocol: operation-sequence-v1`. The response hash is the SHA-256 of the UTF-8 JSON response object, with sorted keys, compact separators and no non-finite values. Views never contain evidence URIs, source text, crops, provider bodies, secrets or raw media.
 
-No evidence_uri, source text/excerpt, crops, raw source objects, provider bodies, secret values or raw media. Stopped/error paths issue no action feedback choices. A known applicable verified safety stop retains precedence even when optional storage/telemetry fails, consistent with existing controller semantics.
+## Progress and delivery
 
-## Progress and accepted-answer delivery
-
-Mutations request `Accept: text/event-stream`. V10 operations are committed to Firestore and dispatched as named authenticated Cloud Tasks to a dedicated private worker service. The worker has separate capacity from the private API/SSE service. SSE observes durable progress; closing the browser stream does not terminate generation. Every event binds to the operation's 32-hex ID and consecutive integer sequence, starting at one:
+Mutations request `Accept: text/event-stream`. The server-sent events (SSE) stream observes durable progress for up to 150 seconds; closing it does not stop the worker. Every event carries the 32-hex operation ID and a consecutive sequence starting at 1:
 
 | Event | Payload and rule |
 | --- | --- |
-| progress | operation_id, sequence and stage. Stage is retrieving, drafting, verifying or displaying. Constant client labels are shown only when the backend records a real stage. |
-| verified_block | operation_id, sequence, response_sha256 and the complete saved view. The persisted delivery binding, selected source, response hash and release gate must validate before any answer callback. |
-| answer_chunk | operation_id, sequence, response_sha256, offset and text. Offset counts Python Unicode codepoints; text must be the exact next slice of the buffered accepted response. |
-| complete | operation_id, sequence, response_sha256 and the identical saved view. Its full text must equal concatenated chunks and the accepted response hash. |
-| error | Sanitized operational failure; private drafts and verifier output are never displayed. |
+| progress | Stage `retrieving`, `drafting`, `checking` or `displaying`, emitted only when the backend reaches that stage. No text, confidence or percentages. |
+| verified_block | The complete saved view and its response hash; the wire name means the block the release gate passed. It is sent after durable save, before any chunk. |
+| answer_chunk | `response_sha256`, `offset` (Unicode codepoints) and `text`, the exact next slice of the saved text. |
+| complete | The identical saved view. Its text equals the concatenated chunks. |
+| error | A sanitized operational failure. |
 
-Displaying is emitted only after verification, final integrity checks and durable save. Progress contains no technical text, private drafts, chain-of-thought, confidence, percentages or simulated timing. A correction can emit drafting/verifying again, with no private answer token release. SYSTEM_ERROR uses neutral completion without accepted-answer chunks. Verified clarifications, supported partial responses and refusals retain their distinct routes.
+Fallback and SYSTEM_ERROR views emit only `complete`, with no `verified_block` or chunks. A disconnect keeps the accepted view, and the client then recovers the original operation; any changed saved view is blocked. Operations have a 1,200-second deadline and a fenced worker lease. An expired or uncertain operation ends terminally and is never retried.
 
-Persisted `delivery` contains operation_id, response_sha256, runtime_lock, manual_checksum, index_id and `event_protocol: operation-sequence-v1`, plus the semantic verification and evidence payload hashes. The response hash is SHA-256 of UTF-8 JSON for the complete response object with sorted keys, compact separators, no non-finite values and Unicode preserved. The client checks these bindings during streaming and recovery. A disconnect retains the entire accepted view, then retrieves the original operation; any changed saved view is blocked. Replay streams the existing buffer and starts no drafting or verification call. Neutral fallback/error buffers emit completion without a verified block or answer chunks.
+## Hosted obligations
 
-The observation stream polls once per second and stops after 150 seconds with a recoverable operational error if work is still active. Recovery reads the same operation. Proven terminal failures clear the UI's pending request; an uncertain store or transport failure preserves it. Operations have a 1,200-second deadline and fenced worker lease. Admission reads that exact durable deadline and rechecks it after bounded pacing waits before paid transmission. Delayed permits are atomically repositioned to preserve the existing rolling rate limits; expired or uncertain slots remain reserved. An expired or abandoned worker is terminally reconciled on task redelivery, status read or the next session turn; it is never allowed to retry an uncertain paid call. A pending dispatch uses the same hashed task name after an uncertain create response.
+The server must enforce these rules:
+- Use the frozen section index, verified at startup, and the frozen generation contract.
+- Never rebuild embeddings, switch models or add a verifier or fallback at runtime.
+- Use managed transactional session storage with immutable version snapshots and compare-and-swap.
+- Reserve and deduplicate operation IDs before any model call.
+- Enforce authenticated ownership on session and operation reads.
+- Apply the per-visitor, per-session and global limits listed in [SERVICE_SAFEGUARDS.md](SERVICE_SAFEGUARDS.md). Respond 429 when limited.
+- Redact query text and credentials from logs.
 
-## Hosted implementation obligations
-
-Use the exact source-approved registry, immutable BGE/BM25 chunks, complete reviewed source assembly and selected v10 model contracts. Do not import test fixtures, rebuild embeddings, silently switch models or bypass applicability, rights, context or claim checks. Registered legacy action eligibility does not restrict ordinary manual Q&A. Model roles are server-controlled; the UI contains no selector.
-
-Use managed transactional session storage with immutable attempt snapshots and compare-and-swap versions. SQLite/local Streamlit state is not the production store. Atomically reserve and deduplicate operation IDs before model calls; persist/retrieve the final response and choices. A concurrent or stale feedback returns 409. Repeated same operation returns the original response without another model call. An operation still executing should report a recoverable status, not re-execute it.
-
-Enforce authenticated ownership/capability on session and operation reads. Shared UI-to-API authentication alone is not a substitute for per-session authorization. Apply global and per-session rate/call limits, provider spending reservations and a fresh budget/guard preflight under the existing project authorization. Respond 429 when limited; no fallback after quota/rate failure and no automatic retries. Redact query text and credentials from logs. Expire sessions and operation records under a published retention policy.
-
-The selected Haiku role caches only its exact policy/source-evidence prefix for five minutes. Question/history/finalized response and verdict bindings remain dynamic. Hosted exact-role cache creation/positive reads are required; the historical verifier probe does not prove a new draft-role hit or savings. No answer or verdict cache is permitted. Availability fallback remains disabled; an environment switch cannot override the frozen Haiku-only policy. Source/integrity failures, quota, malformed output and semantic rejection never authorize switching. Whole-manual Claude remains retired.
-
-Before connecting a UI revision, authenticated API `/v1/health` must report the intended architecture, `streaming=DRAFT_VERIFY_STREAM`, exact model-routing contract/default model identities, selected-role prefix-cache policy and runtime/source/index identities. Actual saved answers bind their selected pair. Gateway `/health` reports only Streamlit readiness. `/healthz` remains an internal alias: Cloud Run intercepts that external path. V10.4 repaired routes and passed private shell; its six SYSTEM_ERROR answers did not pass quality. V10.6 CI/images, actual retrievalv4 traces and [private readiness](../reports/public_evaluator/20261012/private_readiness_v10_6.json) passed, but native-count preflight failed; no paid Q&A or public opening occurred. The [latest model scope](../reports/public_evaluator/20261012/owner_model_scope_v3.json) selects separate Haiku drafting and verification calls for the v10.13 candidate; current-role hosted validation and public acceptance remain release gates. `/v1/catalogue` must report open questions and the same streaming capability. Validate a saved v10 view and recover its unchanged operation through the production client. Historical [v8 handover](../reports/grounded_generation/v8/ui_wiring/CONNECTION_HANDOVER.md) and [software receipt](../reports/grounded_generation/v8/ui_streaming/REPORT.md) remain older evidence. Operational authorization and live acceptance are separate.
-
-## Live acceptance (pending)
-
-Public browser → cookie/proof gateway → private owned API/100-word rider check → dedicated task worker → authenticated Qdrant + concurrent BM25 → conditional rank-disagreement reranking/complete source assembly → native-counted role selection → private Gemma or Haiku draft → other-model verification → final checks/durable save → exact streamed cited response and follow-up/recovery. The selected Haiku role uses only policy/evidence-prefix caching.
-
-Run fresh ordinary questions, a useful partial answer, follow-up, fixed fallback, and verifier failure in a fresh browser. Answer caching remains disabled. Retain correlated redacted browser/service traces, immutable version bindings, actual provider execution, rendered matching citations, no-repeat results and browser-to-complete-response timings. Warm/cold p95 needs a suitable sample size; three samples do not establish p95.
-
-UI fixture tests or localhost screenshots do not meet this gate. The photo control remains disabled until this text gate passes and an observation-only vision path is implemented/evaluated.
-
-
-## Safeguards v1 serving integration
-
-Use [SERVICE_SAFEGUARDS.md](SERVICE_SAFEGUARDS.md) and [TODO](../TODO.md) as the implementation/release register. Preserve API v1 response/choice semantics. Text is at most 2,000 Unicode characters and 8,000 UTF-8 bytes; request JSON at most 16 KiB. Hosted handlers repeat bounds before retrieval. Bind browsers to signed visitors and owned sessions; service IAM alone is insufficient. Counters survive new conversations, and persistent proof/issuance/global/provider controls bound cookie reset abuse without a trusted-IP claim.
-
-The managed transaction must reserve an operation against six turns per rolling minute, 30 turns per rolling 24 hours, and 20 turns per session. Same-operation replay returns its original reservation/view without another model call; a different payload hash conflicts. Retrieval/provider failures consume admitted slots. Counters and model-call/budget admission must be project-wide across workers. A caller must not provide usage counts. Admission-store outage blocks new inference with a sanitized operational error; preserve already established applicable safety-stop semantics.
-
-Existing 100 attempts/999,200 reserved tokens remain permanent, including hosted validation usage. Larger requests may exhaust capacity sooner than the historical twelve-eight-slot-turn ceiling. Never reset or refund unused/uncertain reservations. Gemma uses the existing free configuration with unsupported caching; paid Haiku uses the unchanged persistent USD1 guard. INR2,700/INR2,540 limits and disabled inference billing remain unchanged. Public request quotas do not guarantee affordable model capacity.
-
-The new open-Q&A serving context uses relevant conversation history and freshly retrieved applicable evidence without the former 8,192-token/65,536-byte assembled-input cap. Native-count selected draft and exact finalized verification requests against pinned real model windows, actual provider throughput and remaining lifetime budgets before generation; output remains bounded. The 8,192-token threshold routes roles rather than discarding context. The [quota summary](../reports/public_evaluator/20261012/provider_quota_summary_v1.json) records Gemma 16K input TPM on both projects, while key-project association/native metadata are pending. Never trim warnings, prerequisites or unresolved attempts to fit. Missing native counter, real-window/quota/budget overflow or truncated output gives SYSTEM_ERROR with no partial technical instruction. Bind the role route, draft, verifier, accepted presentation and stored response to current runtime/source/evidence; retired receipts cannot authorize recovery.
-
-When the text gate passes, add a separately versioned authenticated multipart media endpoint: one JPEG/PNG/WebP per turn, 5 MiB/photo, three/session and six/visitor/day. Stream byte caps, decode actual MIME, reject animation/corruption/20-megapixel or 10,000-pixel-side violations, normalize to 1,600-pixel-side JPEG without metadata, and enforce worker resource limits. No client URL-fetch inputs. Raw and normalized media expire/delete within 15 minutes; session idle expiry 30 minutes and lifetime 24 hours. TTL/deletion evidence remains required before public release.
-
-Starting a new conversation detaches the old active session and clears displayed messages/attempt context; it is not a storage-delete request and cannot reset visitor counters. Retain scope confirmation if unchanged, create a fresh session for a new symptom, and never merge old observations automatically. Recovery reads are separately edge-rate-limited and do not count as a new model turn.
+Before a UI revision is connected, authenticated API `/v1/health` must report:
+- architecture `SECTION_TOP5_SINGLE_CALL_TEMPLATE_GATE`;
+- `review_layer: NONE` and no verifier;
+- the dense backend and runtime lock;
+- the source and index identities.
