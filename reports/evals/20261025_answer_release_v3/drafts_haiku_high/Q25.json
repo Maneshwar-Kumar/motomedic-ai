@@ -1,0 +1,25 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "During the first 500 km, the manual limits engine speed to below 6000 rpm and says not to use full throttle.",
+      "evidence_ids": ["E41"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not exceed the legal speed limit or ride too fast for the existing conditions. High speed increases the chance of losing control.",
+      "evidence_ids": ["E14"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Concerns aftermarket suspension parts, not the top speed."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Running-in rules do not state a top speed."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Concerns moderate speeds while learning the bike, not its top speed."},
+    {"display_id": "E14", "decision": "INCLUDED", "reason": "Speed caution that applies to any high-speed riding."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Concerns shock absorber and fork wear."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Concerns exhaust gas."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Concerns maintenance intervals."}
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "case_id": "EVAL_USB_02",
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "expected_route_matched": false,
+  "inference_replayed": false,
+  "operation_id": "c3b7218481d441518db77ee5e17d2f57",
+  "post_retries": 0,
+  "question": "Can I use the USB port to charge my phone while the engine is switched off?",
+  "question_sha256": "23d2e1840b9dc7473f3b687b8b9876d5cb8bdfbda8fe4e17cf49f0ea0cfaa1d4",
+  "request_sha256": "5875648b6cb300f64a03cd5b9f82105fd796b6398a1e0fd718496c40052634e1",
+  "response_sha256": "7fc0107fa1df624d56bc5aa33417b9af6d5993e0a0e93bab24b0ebbb78c746cf",
+  "route": "SYSTEM_ERROR",
+  "saved_received_seconds": 5.797183480000001,
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": null,
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "c3b7218481d441518db77ee5e17d2f57",
+      "response_sha256": "7fc0107fa1df624d56bc5aa33417b9af6d5993e0a0e93bab24b0ebbb78c746cf",
+      "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+      "verification_binding_sha256": null
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 0,
+    "response": {
+      "cited_pages": [],
+      "natural_language": "I couldn’t check the answer right now. Please try again shortly.",
+      "reason_codes": [
+        "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION"
+      ],
+      "release_gate_passed": false,
+      "technical_content": false,
+      "trace_id": "1fb240e66b5a4efebabe68e28f90b189",
+      "type": "SYSTEM_ERROR"
+    },
+    "runtime_controls": {
+      "composition": {
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 0,
+        "draft_model": "gemma-4-26b-a4b-it",
+        "failed_provider_trace": {},
+        "failure_code": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+        "generation_calls": 0,
+        "provider_calls": 0,
+        "provider_prompt_cache": "EXPLICIT_VERIFIER_PREFIX",
+        "total_private_pipeline_seconds": 0.1601741830000094,
+        "verification_calls": 0,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": false,
+        "verifier_calls": 0,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-draft-verify-v10"
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 20,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_00497a5a6998712d564a2df2",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_0c58e6021490c80a7a7f8d99",
+          "evidence_13dac6aaee2fcbdd57618d29",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_31f9ffe7f325a580f7c58947",
+          "evidence_3ab349b8b479f442a8c6f618",
+          "evidence_3f0254b2230794cc5e25393b",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_46ea7e82545c259cf4ed23b3",
+          "evidence_4e1a61e411e2b752c1a8716b",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_590e7744c6d77b972e3950ee",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_662d4a163d504cc62ff5147e",
+          "evidence_82764faca7aa6cec43f2eeb3",
+          "evidence_87d7aaf9a6f68c203a240607",
+          "evidence_8b5ef092d20493cd2b9b58b8",
+          "evidence_90b50d7059435c1578fd7d12",
+          "evidence_a03ccd44ab2d6b5db6bab123",
+          "evidence_a35159dd2d88b584ad319de1",
+          "evidence_a4a384cb8cd1cd437ac00907",
+          "evidence_a66e862d634c23573bb30c90",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_b345d26bcf46960f7125d8d8",
+          "evidence_c5bacd3bd5b428c8950b0ce1",
+          "evidence_e141910747861df746685a2e",
+          "evidence_ea69e5fbd3ff27f1dd159960",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_f4f3ea7f748d6732d21cae42",
+          "evidence_f5f14378db31693f76bd2a81"
+        ],
+        "authority_lock": "685052f0f5aae1fdde8442985595bafedbc0547edb828f960c5ae1b1a57713f9",
+        "chunk_ids": [
+          "chunk_978068c2e079d4865ba1f8da",
+          "chunk_c9262bc554f6a06dc1e93ab9",
+          "chunk_8105564d21681a7b4bc8728b",
+          "chunk_2ba5bb62d2871b7b89ad748a",
+          "chunk_6e97ba3b128150a482b7e9d7"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_6e97ba3b128150a482b7e9d7",
+            "evidence_ids": [
+              "evidence_ebd711e1eb6d9cb0703c8bcf"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 1.5298597500000142
+      }
+    },
+    "runtime_policy": "open-manual-draft-verify-v10",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "90c879f9ef364b1aaf42bb84ba67a1fe",
+    "version": 1
+  },
+  "session_group": "usb_followup_topic_shift",
+  "status": "SAVED_STREAMED_RECOVERED",
+  "stream_stages": [],
+  "streamed_text": "",
+  "total_seconds": 6.137971465000021
+}

@@ -1,0 +1,20 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "The manual says the compass works only when navigation is active.", "evidence_ids": ["E4"]},
+    {"text": "So with navigation inactive, the compass is not expected to function.", "evidence_ids": ["E4"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not explain why the compass depends on active navigation."}
+  ],
+  "watchout_review": [
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "About engine starting, not the compass"},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "General riding warning, not related to this question"},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "About shifting to neutral"},
+    {"display_id": "E17", "decision": "NOT_APPLICABLE", "reason": "About shifting gears"},
+    {"display_id": "E18", "decision": "NOT_APPLICABLE", "reason": "About starting the engine"},
+    {"display_id": "E19", "decision": "NOT_APPLICABLE", "reason": "About starting the engine"},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "About starter button use"}
+  ]
+}

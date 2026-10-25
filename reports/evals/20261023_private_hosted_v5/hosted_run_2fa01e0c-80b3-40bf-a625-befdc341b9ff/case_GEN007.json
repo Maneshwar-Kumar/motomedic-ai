@@ -1,0 +1,643 @@
+{
+  "case_id": "GEN007",
+  "elapsed_seconds": 116.21,
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "group": "GOLDEN",
+  "operation_id": "b2974eca0108471a94e3968285598571",
+  "post_retries": 0,
+  "question": "Does this manual allow E20 fuel?",
+  "response_sha256": "48c704b06d9a2e45321b9408a2e302347155071917bb6c39dca0cee3c8828b17",
+  "route": "SUPPORTED",
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": "21771866601648dba3ebe54a7919c1aabf698d079fcd93b86298f56f8f2cfd40",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "b2974eca0108471a94e3968285598571",
+      "response_sha256": "48c704b06d9a2e45321b9408a2e302347155071917bb6c39dca0cee3c8828b17",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "verification_binding_sha256": "b03b6ba4dac552c88c0e1fd895329b993e7b835411607797ee3358e5b7e42b27"
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 2,
+    "response": {
+      "cited_pages": [
+        {
+          "evidence_id": "evidence_3f8de8466049af12783de7d0",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 18,
+          "pdf_page_index": 17
+        },
+        {
+          "evidence_id": "evidence_64de3cc72b85735055b58fec",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 18,
+          "pdf_page_index": 17
+        },
+        {
+          "evidence_id": "evidence_a03ccd44ab2d6b5db6bab123",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 64,
+          "pdf_page_index": 63
+        },
+        {
+          "evidence_id": "evidence_c5bacd3bd5b428c8950b0ce1",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 64,
+          "pdf_page_index": 63
+        }
+      ],
+      "claim_evidence_map": [
+        {
+          "claim_id": "draft:0",
+          "evidence_ids": [
+            "evidence_3f8de8466049af12783de7d0"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "FACT",
+          "text": "Yes, the manual lists unleaded gasoline with an ethanol content of up to E20 as the approved fuel type."
+        },
+        {
+          "claim_id": "draft:1",
+          "evidence_ids": [
+            "evidence_64de3cc72b85735055b58fec"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "WARNING",
+          "text": "The stated fuel-specification values are approximate, and actual fuel filling capacity will vary from the values mentioned."
+        },
+        {
+          "claim_id": "source:source-refinement-fuel-approximation",
+          "evidence_ids": [
+            "evidence_64de3cc72b85735055b58fec"
+          ],
+          "origin": "SOURCE_REQUIRED_DISPLAY",
+          "presentation_mode": "VERIFIED_SOURCE_PARAPHRASE",
+          "role": "WARNING",
+          "text": "The stated fuel values are approximate; actual filling capacity varies."
+        },
+        {
+          "claim_id": "source:source-refinement-refuel-earliest",
+          "evidence_ids": [
+            "evidence_a03ccd44ab2d6b5db6bab123"
+          ],
+          "origin": "SOURCE_REQUIRED_DISPLAY",
+          "presentation_mode": "VERIFIED_SOURCE_PARAPHRASE",
+          "role": "WARNING",
+          "text": "Do not use the motorcycle for long with the last fuel-indicator segment blinking; refuel at the earliest."
+        },
+        {
+          "claim_id": "source:source-refinement-fuel-pump-warning",
+          "evidence_ids": [
+            "evidence_c5bacd3bd5b428c8950b0ce1"
+          ],
+          "origin": "SOURCE_REQUIRED_DISPLAY",
+          "presentation_mode": "VERIFIED_SOURCE_PARAPHRASE",
+          "role": "WARNING",
+          "text": "Failure to refuel can leave the motorcycle out of fuel and stranded and cause serious fuel-pump damage."
+        }
+      ],
+      "clarification_question": null,
+      "escalation_uri": "mailto:support@royalenfield.com",
+      "natural_language": "Yes, the manual lists unleaded gasoline with an ethanol content of up to E20 as the approved fuel type. The stated fuel-specification values are approximate, and actual fuel filling capacity will vary from the values mentioned. The stated fuel values are approximate; actual filling capacity varies. Do not use the motorcycle for long with the last fuel-indicator segment blinking; refuel at the earliest. Failure to refuel can leave the motorcycle out of fuel and stranded and cause serious fuel-pump damage.",
+      "reason_codes": [
+        "VERIFIED_OPEN_QA_ACCEPTED"
+      ],
+      "release_gate_passed": true,
+      "semantic_support_proven": false,
+      "semantic_verification_passed": true,
+      "technical_content": true,
+      "trace_id": "fb7de38b1b7e44e2b56162e007621349",
+      "type": "SUPPORTED"
+    },
+    "runtime_controls": {
+      "composition": {
+        "accepted_binding_sha256": "b03b6ba4dac552c88c0e1fd895329b993e7b835411607797ee3358e5b7e42b27",
+        "accepted_response_sha256": "820bbfa76e90d48c9973a6ff541732322ab7bd8eb962daeb63dcacaca91fa705",
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [
+          {
+            "binding_sha256": "b03b6ba4dac552c88c0e1fd895329b993e7b835411607797ee3358e5b7e42b27",
+            "draft_output_sha256": "5f1e2779255d3e946a9f3fcf7926aa636f6b927803af821ba92892ef423daacc",
+            "draft_provider": {
+              "cache_creation_input_tokens": 23017,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "f74cc072edac1d170a57c8e4f8cc91042e069e7d29051cf2b655eeb235dd70a8",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 30,
+              "citable_evidence_ids_sha256": "0194800c3a2c227a67bc7e661f13b4adb1a17b97fc54643bcc1e987f08755abd",
+              "estimated_cost_usd": 0.003012225,
+              "generation_calls": 1,
+              "input_tokens": 23258,
+              "input_tokens_counted": 23258,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "bbceded03b1de9131f0aeb20515050bb27b07ec67fc0137a20a08fe3384b7773",
+              "output_tokens": 222,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 5.4134927390000485,
+              "raw_content_logged": false,
+              "request_bytes": 51999,
+              "reserved_input_token_ceiling": 23770,
+              "reserved_maximum_cost_usd": 0.00387125,
+              "retry_count": 0,
+              "role": "private_draft",
+              "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 241
+            },
+            "draft_seconds": 5.6470296820000385,
+            "draft_validation_status": "VALID",
+            "numeric_citation_guard": {
+              "checked_measurement_pairs": 0,
+              "conversions_performed": false,
+              "semantic_verifier_still_required": true,
+              "unit_witness_deferred_to_verifier": 0,
+              "version": "literal-cited-object-native-measurements-v1"
+            },
+            "revision": 0,
+            "verdict_summary": {
+              "conflict_count": 0,
+              "decision": "RELEASE_COMPLETE",
+              "omission_count": 0,
+              "question_coverage": "COMPLETE",
+              "release_eligible": true,
+              "supported_claims": 5,
+              "total_claims": 5
+            },
+            "verification_provider": {
+              "cache_creation_input_tokens": 23297,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "57f4869e19cae526d03fe40b3a95cad366d9c83a352e210964d958d3d436ce47",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 30,
+              "citable_evidence_ids_sha256": "0194800c3a2c227a67bc7e661f13b4adb1a17b97fc54643bcc1e987f08755abd",
+              "estimated_cost_usd": 0.0035018249999999996,
+              "generation_calls": 1,
+              "input_tokens": 26084,
+              "input_tokens_counted": 26084,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "b76af5814f2d847bbe25dce03b2e2f4b8a9d8cbae93a432df826c572d04c9f87",
+              "output_tokens": 622,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 6.547967371999903,
+              "raw_content_logged": false,
+              "request_bytes": 57753,
+              "reserved_input_token_ceiling": 64987,
+              "reserved_maximum_cost_usd": 0.009023375,
+              "retry_count": 0,
+              "role": "semantic_verifier",
+              "role_schema_template_sha256": "de5ad9929c54e7df5d81ff2fbb22717b6ee2a548c7ed8f3e3b5eb3c384b8a8bd",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 2787
+            },
+            "verification_seconds": 61.91621964299998
+          }
+        ],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 1,
+        "draft_model": "claude-haiku-5-5",
+        "generation_calls": 2,
+        "model_routing": {
+          "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+          "initial_draft_request_sha256": "5213daf1e1336a40524b55f6abb7da021c07ac6595da93d533bed7dd5810fe72",
+          "primary_input_tokens_counted": 23258,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+          "selected_draft_input_tokens": 23258,
+          "stable_context_sha256": "ee74710b9bc51286e7fe191f71944db1e25773ac007a85aaf1c690f225200780",
+          "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+          "version": "haiku-literal-object-draft-finalized-verifier-v4"
+        },
+        "provider_calls": 2,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "start_new_conversation_required": false,
+        "total_private_pipeline_seconds": 69.3272063070001,
+        "verification_calls": 1,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": true,
+        "verifier_calls": 1,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_13",
+        "whole_turn_reservation": {
+          "correction_reserved": false,
+          "maximum_corrections": 1,
+          "maximum_wait_seconds": 60.892423,
+          "model_routing": {
+            "fixed_correction_native_tokens": 31764,
+            "fixed_verifier_native_tokens": 31707,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 24625,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "5213daf1e1336a40524b55f6abb7da021c07ac6595da93d533bed7dd5810fe72",
+              "primary_input_tokens_counted": 23258,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 23258,
+              "stable_context_sha256": "ee74710b9bc51286e7fe191f71944db1e25773ac007a85aaf1c690f225200780",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "slots": [
+              {
+                "attempt": 1,
+                "input_tokens": 23770,
+                "maximum_nanodollars": 3871250,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "draft"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 64987,
+                "maximum_nanodollars": 9023375,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "verify"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 81428,
+                "maximum_nanodollars": 11078500,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "correction"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 64987,
+                "maximum_nanodollars": 9023375,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "reverify"
+              }
+            ],
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "pacing_version": "whole-turn-sealed-unused-pacing-v4-haiku-roles",
+          "phases": [
+            {
+              "phase": "initial",
+              "phase_nonce": "41fa4e786a1850683980ca43fdf2270884c7d6ae614a58b449c7862053c44877",
+              "plan_sha256": "5161a293b93ea3e2025bd808202514e80f7ead6dd0f8305e8185110f5602761f",
+              "reserved_attempts": 2,
+              "reserved_nanodollars": 12894625,
+              "reserved_tokens": 92357
+            }
+          ],
+          "plan_version": "whole-turn-haiku-role-native-envelope-v2",
+          "primary_token_ceiling": 2000000,
+          "reservation_mode": "INITIAL_PAIR_CONDITIONAL_CORRECTION",
+          "reserved_attempts": 2,
+          "reserved_nanodollars": 12894625,
+          "reserved_slots": [
+            {
+              "attempt": 1,
+              "input_tokens": 23770,
+              "maximum_nanodollars": 3871250,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "draft",
+              "tokens": 25570
+            },
+            {
+              "attempt": 1,
+              "input_tokens": 64987,
+              "maximum_nanodollars": 9023375,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "verify",
+              "tokens": 66787
+            }
+          ],
+          "reserved_tokens": 92357,
+          "role_forecast_binding": {
+            "fixed_correction_native_tokens": 31764,
+            "fixed_verifier_native_tokens": 31707,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 24625,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "5213daf1e1336a40524b55f6abb7da021c07ac6595da93d533bed7dd5810fe72",
+              "primary_input_tokens_counted": 23258,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 23258,
+              "stable_context_sha256": "ee74710b9bc51286e7fe191f71944db1e25773ac007a85aaf1c690f225200780",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "role_forecast_sha256": "5161a293b93ea3e2025bd808202514e80f7ead6dd0f8305e8185110f5602761f",
+          "sealed_unused_slots": 0,
+          "sealing_status": "SEALED_UNUSED_CONFIRMED",
+          "token_ceiling_authorization": {
+            "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+            "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+            "maximum_tokens": 2000000,
+            "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+            "previous_maximum_tokens": 999200,
+            "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+            "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+          },
+          "version": "whole-turn-capacity-v1"
+        }
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 10,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_001335e5b633008075189f76",
+          "evidence_00497a5a6998712d564a2df2",
+          "evidence_017a78d6fdfd30389967f3c9",
+          "evidence_0c58e6021490c80a7a7f8d99",
+          "evidence_15e1ce067b76cc524a0448d2",
+          "evidence_272bd86a27fe5489e66a4af6",
+          "evidence_27e3084b428698e642724d66",
+          "evidence_2a4402c7fa3a280cff8e7923",
+          "evidence_3ab349b8b479f442a8c6f618",
+          "evidence_3f8de8466049af12783de7d0",
+          "evidence_4e1a61e411e2b752c1a8716b",
+          "evidence_533bb7ef741105dc8ee7cdf1",
+          "evidence_590e7744c6d77b972e3950ee",
+          "evidence_59184c3d66b4b2a53143442e",
+          "evidence_634643c9be7de4d37ee7b5a2",
+          "evidence_64de3cc72b85735055b58fec",
+          "evidence_67724bd81387131d7cfe6c4a",
+          "evidence_6d68a60a154ef288c48fe61c",
+          "evidence_8b5ef092d20493cd2b9b58b8",
+          "evidence_90b50d7059435c1578fd7d12",
+          "evidence_a03ccd44ab2d6b5db6bab123",
+          "evidence_a66e862d634c23573bb30c90",
+          "evidence_a7a5ea8352d16679e89780fb",
+          "evidence_b57860aec348c8aefa09d0e3",
+          "evidence_c4b345a3535cf5b8b9f3401b",
+          "evidence_c5bacd3bd5b428c8950b0ce1",
+          "evidence_d3ecbc3322fc4d9acc77064a",
+          "evidence_f4dbcfa8fd37b20ab295e5a1",
+          "evidence_fd5a9183e18775af14291d97",
+          "evidence_ff04ce4096a0444b874929b5"
+        ],
+        "authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+        "chunk_ids": [
+          "chunk_644284d7e736b8783fc3de8c",
+          "chunk_1c2990f676e324a8387a7635",
+          "chunk_f0ca276a14df00f5dc87b165",
+          "chunk_1b54ef2c7985fd11fca6b25e",
+          "chunk_7b3d2e24046b1baa7f81ae91"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_0b48ffd32b845515249840ab"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_4f71b1bc4982bd7bf3489ad6"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_77c44249cc8a5f046b6a7798"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_cb9f15f609f419b604bb2029"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1c2990f676e324a8387a7635",
+            "evidence_ids": [
+              "evidence_f60c90aae28918d4c8ffa07e"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_35305136a614cb0891f7b6d5"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_531da3ebfc9e6d7f7e7d86f9"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_7afae77fb48671c038bcf63f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_7e5f1c4dea97851b57a9b937"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_92fe63f8073c203f9e568dfd"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_cf610c36524a63402b1ce775"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_de5f2ba471bb36e9baf742f1"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_1b54ef2c7985fd11fca6b25e",
+            "evidence_ids": [
+              "evidence_f59acb43a149226d2a1308ca"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_7b3d2e24046b1baa7f81ae91",
+            "evidence_ids": [
+              "evidence_f816ef87fa0d999b02413adf"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_31f452a8cab4d026927bec3c",
+            "evidence_ids": [
+              "evidence_b47a11d35bc4bd2c42ac3e1c"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 39.37738000099989,
+        "retrieval_policy": {
+          "assembled_hit_count": 5,
+          "assembled_hit_limit": 10,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.6666666666666666,
+            "dense_top_distinct_parent_ids": [
+              "section_2866c639ee57053b2f9fe4a1",
+              "section_cc3539746702ad6f76bd7c23",
+              "section_a845bf715602e1df7482ff46"
+            ],
+            "disagreeing_rank_positions": [
+              2,
+              3
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.03150201612903232,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_2866c639ee57053b2f9fe4a1",
+              "section_a845bf715602e1df7482ff46",
+              "section_ab5e6db2d5f39ffb5e57aaa8"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "preserved_initial_anchor_chunk_ids": [],
+          "primary_hit_limit": 5,
+          "recovery_attempts": 0,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 22,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.00026778300002661126,
+            "dense_query_embedding_and_qdrant_rpc": 34.71907529800001,
+            "initial_assembly": 0.10426799299989398,
+            "reranking": 4.223782011999901
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v6"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "d28bab448a874c78856f922b9fad4497",
+    "verified_delivery": {
+      "binding_sha256": "b03b6ba4dac552c88c0e1fd895329b993e7b835411607797ee3358e5b7e42b27",
+      "draft_model": "claude-haiku-5-5",
+      "evidence_payload_sha256": "21771866601648dba3ebe54a7919c1aabf698d079fcd93b86298f56f8f2cfd40",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "model_route": "HAIKU_DRAFT_HAIKU_VERIFY",
+      "model_routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+      "operation_id": "b2974eca0108471a94e3968285598571",
+      "presentation_sha256": "48c704b06d9a2e45321b9408a2e302347155071917bb6c39dca0cee3c8828b17",
+      "response_sha256": "820bbfa76e90d48c9973a6ff541732322ab7bd8eb962daeb63dcacaca91fa705",
+      "role_plan_sha256": "95e9a22c7e93c3696a747f7e0bc0a20d205313c69d08a42f8b29d9bed49dbe3c",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "source_authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+      "text_sha256": "8270966a9a13c72c809fd58b0ebd96677f462c2f1834a264179212c853b73821",
+      "verifier_model": "claude-haiku-5-5"
+    },
+    "version": 1
+  },
+  "status": "SAVED_STREAMED_RECOVERED",
+  "streamed_text": "Yes, the manual lists unleaded gasoline with an ethanol content of up to E20 as the approved fuel type. The stated fuel-specification values are approximate, and actual fuel filling capacity will vary from the values mentioned. The stated fuel values are approximate; actual filling capacity varies. Do not use the motorcycle for long with the last fuel-indicator segment blinking; refuel at the earliest. Failure to refuel can leave the motorcycle out of fuel and stranded and cause serious fuel-pump damage."
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "motomedic-owner-scope-v1",
+  "recorded_at_utc": "2026-10-23T17:05:00Z",
+  "authority": "DIRECT_OWNER_INSTRUCTION_IN_SESSION",
+  "owner_messages": [
+    "You are allowed full control. I am leaving you on Auto. Run the eval - Give me the output.",
+    "You are also allowed $1 budget on claude Haiku. and close $5 on cloudrun in GCP, should you wish",
+    "Selected option 'Private hosted test (Recommended)': Re-link billing; raise the guard so it stops about INR 420 (~$5) above the current cost; build v10.15 with the reviewed v5 gate; deploy it as a tagged revision with 0% public traffic; run all 30 questions through the real hosted pipeline (retrieval, rerank, admission, Haiku draft and verify, within your $1); then report and disable billing again. The public UI stays on v10.14.",
+    "continue"
+  ],
+  "authorized_actions": [
+    "Re-link billing account 013BB2-A5996E-B48AB5 to project motomedic-ai-20261009",
+    "Raise the MotoMedic lifetime budget from INR 2,700 to INR 3,120 and the disconnect guard from INR 2,540 to INR 2,960 (about INR 420 / USD 5 above the recorded delayed cost INR 2,547.79)",
+    "Build a v10.15 candidate backend image that adds the independently approved structural_review_v2 package and v5 source authority",
+    "Deploy tagged API and worker revisions that receive 0% public traffic",
+    "Run the 30-question experiment plus control through the hosted pipeline, within the existing shared Haiku USD1 ledger",
+    "Disable billing again after the run"
+  ],
+  "not_authorized": [
+    "Routing any public traffic to v10.15",
+    "Changing the public UI",
+    "Raising the shared Haiku USD1 money ledger",
+    "Answer-cache shortcuts, fallback activation or source-display changes",
+    "Claiming human signoff or independent factual acceptance"
+  ],
+  "source_review": "reports/grounded_generation/structural_review_v2/independent_review.json (sha256 d7dfdc6e500788e863cf919b5c86be231a5faeb15fb17285dec0473a27bc58c8), approving proposal sha256 38dc070964b4e7027ee616db2b387776f338809b36116afda5e79a91a7a1cc3d",
+  "human_signoff": false
+}

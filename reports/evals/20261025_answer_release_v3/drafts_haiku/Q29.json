@@ -1,0 +1,27 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "For a motorcycle not used for a month or longer, the manual advises disconnecting the battery terminals and removing the battery.", "evidence_ids": ["E11"]},
+    {"text": "Before refitting the battery, check that its voltage is within specification; if it is not, recharge it at an authorised service workshop or battery dealer.", "evidence_ids": ["E11"]},
+    {"text": "For re-use after storage, the manual says it is preferable to have the motorcycle prepared by a Royal Enfield Authorised Service Centre.", "evidence_ids": ["E10"]}
+  ],
+  "policy": [
+    {"text": "Storage for a month or longer calls for disconnecting and removing the battery, and checking its voltage before refitting.", "evidence_ids": ["E11"]},
+    {"text": "Preparation for re-use after storage is preferably done by a Royal Enfield Authorised Service Centre.", "evidence_ids": ["E10"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not give a step-by-step procedure for restarting a motorcycle that has been stored this long."},
+    {"text": "The manual does not say whether the motorcycle can be started without this preparation."}
+  ],
+  "watchout_review": [
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns opening a hot radiator cap, not restarting."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Concerns coolant filling on level ground."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns filling the cooling system."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Concerns air bleeding of the cooling system."},
+    {"display_id": "E39", "decision": "NOT_APPLICABLE", "reason": "Concerns coolant disposal."},
+    {"display_id": "E44", "decision": "NOT_APPLICABLE", "reason": "Concerns riding with the stands, not restarting."},
+    {"display_id": "E45", "decision": "NOT_APPLICABLE", "reason": "Concerns parking, not restarting."},
+    {"display_id": "E46", "decision": "NOT_APPLICABLE", "reason": "Concerns side stand loading, not restarting."}
+  ]
+}

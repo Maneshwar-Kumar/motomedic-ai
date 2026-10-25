@@ -1,0 +1,300 @@
+{
+  "cases": [
+    {
+      "applicable_context": [
+        "Both are dimensions under ENGINE / TECHNICAL SPECIFICATIONS. No unrelated ignition or fuel warning is required for these dimensional facts."
+      ],
+      "blocked_claims": [
+        "Swapping the two dimensions, dropping millimetres, claiming both dimensions are 84 mm, or treating displacement as stroke.",
+        "Any undocumented piston, crankshaft or internal repair instruction."
+      ],
+      "case_id": "EVAL_DIRECT_01",
+      "categories": [
+        "direct",
+        "units"
+      ],
+      "expected_outcomes": [
+        "SUPPORTED"
+      ],
+      "max_expected_cited_pages": 1,
+      "optional_supported_facts": [
+        "Engine displacement is 452 cc if added without substituting it for bore/stroke."
+      ],
+      "original_pdf_pages": [
+        16
+      ],
+      "question": "What are the engine bore and stroke, with their units?",
+      "required_supported_facts": [
+        "Bore is 84 mm.",
+        "Stroke is 81.5 mm."
+      ],
+      "session_group": "engine_direct"
+    },
+    {
+      "applicable_context": [
+        "A short negative answer may state only the engine-running condition. If it advises proceeding with charging, retain applicable mobile-phone-only/one-phone, weather, cable/insertion and port-cap precautions from pages64-65.",
+        "Do not add the separate fuel warning above CHARGER PORT merely because it shares page64."
+      ],
+      "blocked_claims": [
+        "Charging works with only ignition ON or with the engine stopped.",
+        "Fast charging, data transfer, or a charging-time guarantee.",
+        "Instructions to bypass the shutdown protection or diagnose undocumented wiring faults."
+      ],
+      "case_id": "EVAL_USB_02",
+      "categories": [
+        "direct",
+        "operating_condition"
+      ],
+      "expected_outcomes": [
+        "SUPPORTED"
+      ],
+      "max_expected_cited_pages": 2,
+      "optional_supported_facts": [
+        "The socket is for charging, not data transfer.",
+        "It provides constant charging rather than fast/dash charging.",
+        "Current above 2.5 A causes shutdown; this does not establish a fault diagnosis."
+      ],
+      "original_pdf_pages": [
+        64,
+        65
+      ],
+      "question": "Can I use the USB port to charge my phone while the engine is switched off?",
+      "required_supported_facts": [
+        "No: USB charging requires the engine to be running; ignition ON alone is not established as sufficient."
+      ],
+      "session_group": "usb_followup_topic_shift"
+    },
+    {
+      "applicable_context": [
+        "Preserve the engine-running condition if use is advised. Do not turn charging instructions into an invented electrical repair.",
+        "Warranty and liability wording may be concise; preserving the actual short-circuit/damage precautions is required.",
+        "Use actual saved history and prior rider question. Never seed this case with an authored expected answer."
+      ],
+      "blocked_claims": [
+        "Treating 'it' as fuel, tyre pressure or an unmentioned repair.",
+        "Calling the port waterproof or advising wet use.",
+        "Recommending conductive cleaning tools, protection bypass or undocumented charger modifications.",
+        "Asserting that a reported charging problem proves a hidden component fault."
+      ],
+      "case_id": "EVAL_FOLLOWUP_03",
+      "categories": [
+        "short_followup",
+        "safety_conditions",
+        "checklist"
+      ],
+      "expected_outcomes": [
+        "SUPPORTED"
+      ],
+      "max_expected_cited_pages": 2,
+      "optional_supported_facts": [
+        "Charging is not data transfer or fast/dash charging.",
+        "The charger shuts down when current exceeds 2.5 A; check phone current ratings rather than bypassing protection."
+      ],
+      "original_pdf_pages": [
+        64,
+        65
+      ],
+      "previous_case_id": "EVAL_USB_02",
+      "question": "what should I avoid when using it?",
+      "required_supported_facts": [
+        "Resolve 'it' to the actual preceding USB/phone charging discussion.",
+        "Avoid charging in rainy conditions.",
+        "Do not connect non-phone devices or charge more than one mobile at once.",
+        "Avoid forcing or inserting the USB cable incorrectly; use a suitable approved/high-quality cable.",
+        "Do not leave the unused port open or partly closed; close and lock its cap properly.",
+        "Do not put metal or other conductive material into the port because it can short-circuit."
+      ],
+      "session_group": "usb_followup_topic_shift"
+    },
+    {
+      "applicable_context": [
+        "This is an explicit shift away from USB despite the short current question and actual prior history.",
+        "The relevant fuel table/footnote is on the right of page18; tyre tables and rim/tyre NOTE are unrelated.",
+        "The fuel warning is upper-left on page64, before the separate CHARGER PORT subsection."
+      ],
+      "blocked_claims": [
+        "An exact guaranteed3 L trigger with no tolerance/approximation qualification.",
+        "Substituting17 L capacity or0.95-1.15 L dead stock for the warning amount.",
+        "A promised remaining distance, riding time, or permission to continue until empty.",
+        "Asserting a currently damaged fuel pump or engine merely from a blinking indicator.",
+        "Continuing to answer the preceding USB topic or adding its unrelated warning paragraph."
+      ],
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "categories": [
+        "short_explicit_topic_shift",
+        "table",
+        "units",
+        "source_specific_warning"
+      ],
+      "expected_outcomes": [
+        "SUPPORTED"
+      ],
+      "max_expected_cited_pages": 2,
+      "optional_supported_facts": [
+        "Tank capacity is approximately17.0 L.",
+        "Dead stock is approximately0.95-1.15 L; it is not a promised usable riding reserve."
+      ],
+      "original_pdf_pages": [
+        18,
+        64
+      ],
+      "previous_case_id": "EVAL_FOLLOWUP_03",
+      "question": "Different question: what is the low-fuel warning level and what should I do?",
+      "required_supported_facts": [
+        "The low-fuel warning value is approximately 3 L with a plus/minus 0.5 L tolerance.",
+        "Retain the fuel table's qualification that the figures are approximate and actual filling capacity can vary.",
+        "When the last fuel-indicator segment is blinking, avoid prolonged use and refuel at the earliest.",
+        "Ignoring that warning can lead to running out of fuel/being stranded and serious fuel-pump damage."
+      ],
+      "session_group": "usb_followup_topic_shift"
+    },
+    {
+      "applicable_context": [
+        "Resolve the explicit return to USB without keeping fuel as the active subject.",
+        "Preserve engine-running and applicable precautions if the answer recommends use; the purely descriptive capability answer need not reproduce every nearby paragraph.",
+        "A concise useful partial answer is allowed without a canonical question or StepDefinition."
+      ],
+      "application_route": "SUPPORTED",
+      "blocked_claims": [
+        "An exact minute/hour duration, an invented wattage/USB protocol, or an unsupported fast-charge capability.",
+        "A full refusal that omits the supported charging-mode information.",
+        "Treating missing phone-specific timing as a maintainer extraction gap that the rider must resolve with an invented mandatory question."
+      ],
+      "case_id": "EVAL_PARTIAL_05",
+      "categories": [
+        "explicit_topic_shift",
+        "partial_answer",
+        "unsupported_precision"
+      ],
+      "expected_outcomes": [
+        "SUPPORTED"
+      ],
+      "max_expected_cited_pages": 2,
+      "optional_supported_facts": [
+        "No data transfer is enabled.",
+        "Charging performance cannot be assumed to match the phone's original charger."
+      ],
+      "original_pdf_pages": [
+        64,
+        65
+      ],
+      "partial_answer_required": true,
+      "previous_case_id": "EVAL_TOPIC_TABLE_04",
+      "question": "Back to the USB port: which charging mode does it offer and exactly how long will my phone take?",
+      "required_supported_facts": [
+        "Only constant charging is provided; fast/dash charging is not provided.",
+        "Do not supply an exact duration. Charging duration can be longer and varies with phone make, battery capacity, state of charge and phone charging circuitry.",
+        "Clearly separate the supported charging-mode answer from the unavailable exact duration."
+      ],
+      "session_group": "usb_followup_topic_shift"
+    },
+    {
+      "applicable_context": [
+        "Page16's40 Nm at5500 rpm is engine output torque, not connecting-rod bolt tightening torque.",
+        "The fixed fallback limits what the available evidence supports; it must not claim exhaustive absence from every page of the manual.",
+        "No technical streaming chunks or semantic-verification badge should be emitted for the fixed fallback; recovery must reproduce its saved outcome without another paid call."
+      ],
+      "blocked_claims": [
+        "Using40 Nm engine output torque, a generic workshop value, internet knowledge or a fabricated page as a bolt-tightening specification.",
+        "OEM diagnostic order, internal disassembly steps, a hidden-fault diagnosis, or a verified repair claim.",
+        "UNSUPPORTED wording for an operational outage/quota/integrity failure, which must remain SYSTEM_ERROR."
+      ],
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "categories": [
+        "unsupported_internal_repair",
+        "verified_support_route"
+      ],
+      "expected_outcomes": [
+        "UNSUPPORTED"
+      ],
+      "max_expected_cited_pages": 0,
+      "optional_supported_facts": [],
+      "original_pdf_pages": [
+        16
+      ],
+      "question": "What torque should I use to tighten the engine's connecting-rod bolts?",
+      "required_supported_facts": [
+        "Do not invent an internal bolt-tightening specification or repair procedure from owner's-manual evidence.",
+        "Use the PRD fixed unsupported wording and manifest-bound OEM support route mailto:support@royalenfield.com.",
+        "Preserve the recorded support market-fit limitation; do not describe it as independently validated for every rider market."
+      ],
+      "session_group": "unsupported_engine"
+    }
+  ],
+  "evaluation_rules": [
+    "Review the exact final saved response and its full evidence/verification/delivery bindings against original pages; a semantic verifier PASS alone is insufficient.",
+    "Accept concise supported paraphrases and explicit partial answers. Criteria are factual requirements, not canonical answer wording or an input allowlist.",
+    "Required context is conditional on the claims and use advice actually made. A negative capability answer need not reproduce every USB paragraph; a usage checklist must preserve the applicable precautions.",
+    "Do not make a reviewed heading approve a whole page or parent. Separate fuel warnings from USB warnings and tyre notes from fuel facts.",
+    "The expected page ceiling is a review triage expectation, not a retrieval cap or permission to truncate required evidence. Additional applicable, independently supported pages need explicit reviewer justification.",
+    "Operational failures, malformed outputs, exhausted admission or integrity problems remain SYSTEM_ERROR. Missing source review is a maintainer gap; it is not rider ambiguity or evidence that the manual lacks the answer.",
+    "Record factual acceptance, useful coverage, safety/condition omissions, unsupported claims, citation validity, release status, saved/stream/recovery hash equality and paid-call counts separately.",
+    "Keep original PDF, excerpts and figure crops out of the rider interface. The plan and PNG hashes are engineering evidence only.",
+    "This plan does not establish absence from every page of the manual. The unsupported case rejects a torque unsupported by the reviewed evidence; any newly located original-page specification must be independently checked before revising the plan in a new version."
+  ],
+  "execution_protocol": {
+    "answer_receipts_required": "Question/history/response/evidence/verification binding hashes, final saved response, outcome, server-derived citation metadata, distinct draft/verifier model identities and sanitized retrieval/cache/provider-call telemetry. Raw private provider tokens must not appear in routine logs.",
+    "cache_and_recovery": "Observe cache write/read token receipts rather than assuming a hit; replay a completed operation and require identical saved/streamed/recovered response hashes with zero additional paid calls.",
+    "cases_total": 6,
+    "expected_fixed_unsupported_turns": 1,
+    "expected_useful_supported_turns": 5,
+    "failure_recording": "Record SYSTEM_ERROR and refusals as coverage failures for otherwise answerable turns, separately from factual correctness of any released answer. Retain failed runs and do not tune from them in this run.",
+    "history": "Use actual persisted prior turns and operation IDs only; save each outcome before submitting the next related turn.",
+    "release_identity_required": "Exact current source commit, serving freeze SHA, backend/UI immutable image digests, runtime lock, manual/index identities and index object generation/SHA.",
+    "retrieval": "Record authenticated Qdrant plus BM25 first-stage execution, actual ranks, conditional rerank reason/calls and history query binding. Agreement and disagreement gates are also established by provider-free tests; this finite live set need not force a disagreement.",
+    "reviewer_delivery": "Coordinator supplies saved-answer receipts after hosted calls; reviewer checks exact final claims against freshly inspected original pages and records each outcome. No source approval or public-release acceptance is inferred from this plan.",
+    "session_selection": "Use actual confirmed Himalayan+BS6 selection without invented year/edition questions. Cases02-05 share one real session in sequence; cases01 and06 use separate fresh sessions."
+  },
+  "human_quality_signoff": false,
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "local_model_calls": 0,
+  "manual_file": "royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf",
+  "manual_pdf_pages": 149,
+  "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "original_page_inspection": {
+    "method": "Fresh full-page Poppler PNG rendering and visual inspection, plus PDF metadata/checksum verification. No index extraction was used to establish factual criteria.",
+    "pages": [
+      {
+        "pdf_page": 16,
+        "png_sha256": "861518ceab5d2137fd0370b7545c6ed4803ade4092f19f3500115fd1b264a010",
+        "printed_page_label": "14",
+        "scope": "Engine bore/stroke and engine output torque; separate ignition section on the right."
+      },
+      {
+        "pdf_page": 18,
+        "png_sha256": "e88e4989c46727ef7952357db546a5d9af9f20e4564f84de17963764aa83429c",
+        "printed_page_label": "16",
+        "scope": "Right-side fuel values and their approximation footnote. Left-side tyre tables and tyre NOTE are separate."
+      },
+      {
+        "pdf_page": 64,
+        "png_sha256": "8e7a5de0246685daedd7e6310d4dd432edf359b1f48ab6f43208b2f2b286b3b2",
+        "printed_page_label": "62",
+        "scope": "Upper-left blinking-fuel warning is separate from lower-left CHARGER PORT and right-side USB warnings."
+      },
+      {
+        "pdf_page": 65,
+        "png_sha256": "c5b0b744f493ecf132e5ed0bb3c9561602c09e77418fb06e8b5eec2037a8e345",
+        "printed_page_label": "63",
+        "scope": "USB charging-only, constant-mode, variable-duration notes; current shutdown, engine-running and cable conditions; closed/locked cap caution."
+      }
+    ],
+    "private_intermediate_directory": "tmp/pdfs/public-evaluator-review-v1",
+    "render_arguments": "-f PAGE -l PAGE -scale-to 1800 -png -singlefile",
+    "renderer": "pdftoppm 26.07.0"
+  },
+  "provider_calls": 0,
+  "public_release_acceptance": false,
+  "recorded_date": "2026-10-12",
+  "review_authority": "ENGINEERING_INDEPENDENT_ORIGINAL_PAGE_EVALUATION_ONLY",
+  "reviewer_actor": "/root/retrieval_evidence",
+  "schema_version": "motomedic-original-page-evaluator-plan-v2",
+  "scope": "Six finite engineering evaluation turns. Criteria were recorded before seeing current saved LLM answers. They must not enrich prompts, retrieval ranking, source approvals or held-out catalogues.",
+  "source_approval_changed": false,
+  "source_approval_manifest_sha256": "b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298",
+  "supersedes": {
+    "path": "reports/public_evaluator/20261012/original_page_evaluator_plan_v1.json",
+    "reason": "Use the actual application enum SUPPORTED for the partial-answer case; the explicit limitation is a factual acceptance criterion, not a new route.",
+    "sha256": "8860a59c48aaa98ff3b5bb227d3af8cdb9b5ccfb775a9948be34a907a1ff7b92"
+  }
+}

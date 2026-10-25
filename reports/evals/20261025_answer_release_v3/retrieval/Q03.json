@@ -1,0 +1,555 @@
+{
+ "retrieval": {
+  "version": "section-top5-hybrid-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "query": "What compression pressure should a healthy engine show on a compression test?",
+  "chunk_ids": [
+   "chunk_82dbd3d98a730627c9225565",
+   "chunk_e05967d9432a8056da2d5d86",
+   "chunk_75efade48e6b3da2a2928744",
+   "chunk_f4b75ad9dece6229f06a7308",
+   "chunk_a326e1af57c41362ab924e01"
+  ],
+  "dense_top": [
+   "chunk_82dbd3d98a730627c9225565",
+   "chunk_cb96f545d56dbd8e2719dc6d",
+   "chunk_ec5eccd505a36dff8f7bda57",
+   "chunk_6ed6bbe93e97912dbf905e83",
+   "chunk_b6dae87b9bc4c22c4f7d7718"
+  ],
+  "bm25_top": [
+   "chunk_82dbd3d98a730627c9225565",
+   "chunk_a326e1af57c41362ab924e01",
+   "chunk_4a880dce6f193618a3a6f1e0",
+   "chunk_97d2e69579280d5a3b3d4798",
+   "chunk_cd3b848e99abeddf8bccf1c0"
+  ],
+  "fused_scores": {
+   "chunk_82dbd3d98a730627c9225565": 0.032787,
+   "chunk_e05967d9432a8056da2d5d86": 0.028439,
+   "chunk_75efade48e6b3da2a2928744": 0.02904,
+   "chunk_f4b75ad9dece6229f06a7308": 0.024607,
+   "chunk_a326e1af57c41362ab924e01": 0.016129
+  },
+  "rerank_scores": {
+   "chunk_82dbd3d98a730627c9225565": -2.7263,
+   "chunk_75efade48e6b3da2a2928744": -10.862,
+   "chunk_e05967d9432a8056da2d5d86": -10.5478,
+   "chunk_f4b75ad9dece6229f06a7308": -11.1804,
+   "chunk_a326e1af57c41362ab924e01": -11.3892
+  },
+  "sections_disagree": true,
+  "reranked": true
+ },
+ "assembled": {
+  "version": "section-plain-text-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "sections": [
+   "section_eb66ba57ff90a5fc0a60d0cf",
+   "section_84b02cd95a7727aed90b94bd",
+   "section_bde8a31e0119cfb26ad8572c",
+   "section_2a0d996f813400394588731e",
+   "section_0e991445f3de1239270a3cec"
+  ],
+  "objects": {
+   "E1": {
+    "evidence_id": "evidence_b42c533d2f90267c01b12bb6",
+    "text": "Engine type ........................ Single cylinder, 4 stroke, DOHC, SI Engine, Water cooled, Fuel Injection",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E2": {
+    "evidence_id": "evidence_13ff401422c8fc0d784d7e92",
+    "text": "Bore .................................... 84 mm",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E3": {
+    "evidence_id": "evidence_b1e9bacad4e60cf54b0a3aa2",
+    "text": "Stroke ................................. 81.5 mm",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E4": {
+    "evidence_id": "evidence_467855effee5419bd63fb826",
+    "text": "Swept volume .................... 452 cc",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E5": {
+    "evidence_id": "evidence_a5bb5d14fd332f16c381c1b7",
+    "text": "Compression ratio .............. 11.5:1",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E6": {
+    "evidence_id": "evidence_e43f21422e7fcda50e76c4bb",
+    "text": "Max power .......................... 29.44 kW (40.02 PS)",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E7": {
+    "evidence_id": "evidence_d11ae7cb778df64207e63d04",
+    "text": "@ 8000 rpm",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E8": {
+    "evidence_id": "evidence_f4ee929e545ef669fdb494a1",
+    "text": "Max torque......................... 40 Nm @ 5500 rpm",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E9": {
+    "evidence_id": "evidence_3a585b9acb43c05172e95624",
+    "text": "Idle RPM ............................. 1300 rpm",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E10": {
+    "evidence_id": "evidence_32cf970fdb9c163e0de21c1a",
+    "text": "Starting............................... Electric start Air filter element................. Paper element Lubrication ......................... Semi-dry sump Cooling ............................... Water cooled",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "ENGINE",
+    "type": "text"
+   },
+   "E11": {
+    "evidence_id": "evidence_7aae4b15beb1223d7cb07ef5",
+    "text": "Place the vehicle on a level surface upright.",
+    "pages": [
+     83
+    ],
+    "box": null,
+    "section": "ENGINE OIL LEVEL CHECKING",
+    "type": "list_item"
+   },
+   "E12": {
+    "evidence_id": "evidence_9fc0fff84ef9fda9ab274bdd",
+    "text": "Start the engine from cold condition, allow the engine to idle for 2 to 3 minutes and stop the engine.",
+    "pages": [
+     83
+    ],
+    "box": null,
+    "section": "ENGINE OIL LEVEL CHECKING",
+    "type": "list_item"
+   },
+   "E13": {
+    "evidence_id": "evidence_b5748074c64e0a831d8193f6",
+    "text": "Wait 2 to 3 minutes to settle the oil and assess the sight glass. The volume added the minimum to maximum level is approximately 350 ml.",
+    "pages": [
+     83
+    ],
+    "box": null,
+    "section": "ENGINE OIL LEVEL CHECKING",
+    "type": "list_item"
+   },
+   "E14": {
+    "evidence_id": "evidence_bce21d9cd02ff7982b07b3c8",
+    "text": "Engine oil level should be close to \"MAX\" condition.",
+    "pages": [
+     83
+    ],
+    "box": null,
+    "section": "ENGINE OIL LEVEL CHECKING",
+    "type": "list_item"
+   },
+   "E15": {
+    "evidence_id": "evidence_abd8b8b4d0ab30bfaf35c730",
+    "text": "If in case of oil level is not in above mentioned condition, then top-up the oil to \"MAX\" condition and repeat the procedure.",
+    "pages": [
+     83
+    ],
+    "box": null,
+    "section": "ENGINE OIL LEVEL CHECKING",
+    "type": "list_item"
+   },
+   "E16": {
+    "evidence_id": "evidence_ca6f027d74d1e5eeebd845bb",
+    "text": "Do not over fill above the \"MAX\" mark as it may affect the clutch function.",
+    "pages": [
+     83
+    ],
+    "box": null,
+    "section": "ENGINE OIL LEVEL CHECKING",
+    "type": "list_item"
+   },
+   "E17": {
+    "evidence_id": "evidence_e314b1e8f5c1e964b43e5edb",
+    "text": "Ensure vehicle is in straight position on ground level.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E18": {
+    "evidence_id": "evidence_d0384c850c71ec0086d6da42",
+    "text": "Engine oil should always be drained when the engine is warmed up sufficiently so that the oil drains faster.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E19": {
+    "evidence_id": "evidence_1d4160437410be86fd03f39a",
+    "text": "Remove the sump guard and 2 plugs, then clean the 2 strainers.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E20": {
+    "evidence_id": "evidence_6e3ee51f0385ce1d59ac1406",
+    "text": "Check the condition of strainers, if strainers condition OK please reuse it.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E21": {
+    "evidence_id": "evidence_b190d2688869ab58b731b189",
+    "text": "Do not reuse the O-rings, renew all O-rings.",
+    "pages": [
+     84
+    ],
+    "box": "NOTE",
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "text"
+   },
+   "E22": {
+    "evidence_id": "evidence_9eeae7b44f77107f740b3572",
+    "text": "Lubricate strainer and O-rings with engine oil.",
+    "pages": [
+     84
+    ],
+    "box": "NOTE",
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E23": {
+    "evidence_id": "evidence_27fd0fb13b21ad5196e7abc5",
+    "text": "Push strainers fully into crankcases by hand before inserting the drain plugs.",
+    "pages": [
+     84
+    ],
+    "box": "NOTE",
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E24": {
+    "evidence_id": "evidence_35535d1182508ca1e1f41d17",
+    "text": "Lubricate plug O-rings with water based lubricant.",
+    "pages": [
+     84
+    ],
+    "box": "NOTE",
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E25": {
+    "evidence_id": "evidence_82fb12f1ba1b147340d25e2c",
+    "text": "Tighten torque of drain plugs to 13±1 Nm.",
+    "pages": [
+     84
+    ],
+    "box": "NOTE",
+    "section": "ENGINE OIL DRAINING/STRAINER CHECK",
+    "type": "list_item"
+   },
+   "E26": {
+    "evidence_id": "evidence_47cc2645c6c8e92d053e0964",
+    "text": "The clutch lever must be fully depressed before attempting a gear shift. Failure to fully depress the clutch lever will cause a rough start or stalling of the engine besides causing damage to transmission parts.",
+    "pages": [
+     76
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "text"
+   },
+   "E27": {
+    "evidence_id": "evidence_6d569a49e5b908196e6b8bc9",
+    "text": "When the vehicle is in neutral position, press gear shift lever down with toe to engage 1 st gear. GEAR SHIFT PATTERN",
+    "pages": [
+     76
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E28": {
+    "evidence_id": "evidence_311f5873869017c7bef07579",
+    "text": "It is recommended to use half clutch condition when commuting in the city traffic condition alone (Engine RPM around idling to 2000 RPM) at 1st gear condition. In other gears and higher RPM avoid using half clutch which will proportionately reduce the clutch life. During acceleration / deceleration disengage the clutch completely, shift the gear and engage the clutch gradually (Not too slowly).",
+    "pages": [
+     76
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E29": {
+    "evidence_id": "evidence_dcbc10d0837791aed3da51c3",
+    "text": "Recommended up shift speed Gear change: 1 st - 2 nd; km/h: 20\n    Recommended up shift speed Gear change: 2 nd - 3 rd; km/h: 30\n    Recommended up shift speed Gear change: 3 rd - 4 th; km/h: 40\n    Recommended up shift speed Gear change: 4 th - 5 th; km/h: 60\n    Recommended up shift speed Gear change: 5 th - 6 th; km/h: 75",
+    "pages": [
+     76
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "table"
+   },
+   "E30": {
+    "evidence_id": "evidence_2cc123175704ec55a1145e1c",
+    "text": "Recommended down shift speed Gear change: 6 th - 5 th; km/h: 70\n    Recommended down shift speed Gear change: 5 th - 4 th; km/h: 55\n    Recommended down shift speed Gear change: 4 th - 3 rd; km/h: 35\n    Recommended down shift speed Gear change: 3 rd - 2 nd; km/h: 25\n    Recommended down shift speed Gear change: 2 nd - 1 st; km/h: 18",
+    "pages": [
+     76
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "table"
+   },
+   "E31": {
+    "evidence_id": "evidence_d8ef5c61174ef2c328a86280",
+    "text": "If the clutch lever is released abruptly and throttle opening is done insufficiently the motorcycle will have a rough start and cause the engine to stall.",
+    "pages": [
+     77
+    ],
+    "box": "CAUTION",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E32": {
+    "evidence_id": "evidence_1919a71d56aa79aab9c06d31",
+    "text": "If the acceleration is very high and clutch lever is released abruptly, it will cause motorcycle to move suddenly, which will lead to loss of control leading to an accident resulting in injury and or loss of life to rider / other road users / passed by, besides damage to the motorcycle.",
+    "pages": [
+     77
+    ],
+    "box": "CAUTION",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E33": {
+    "evidence_id": "evidence_9029bf24bed16abb1dda47da",
+    "text": "Always exercise utmost caution while releasing clutch",
+    "pages": [
+     77
+    ],
+    "box": "CAUTION",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E34": {
+    "evidence_id": "evidence_f1dde59cf186e3439e32c7d9",
+    "text": "and riding the motorcycle.",
+    "pages": [
+     77
+    ],
+    "box": "CAUTION",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "text"
+   },
+   "E35": {
+    "evidence_id": "evidence_71ab78f5a6ff70d43bc3e8b7",
+    "text": "Follow the recommended up shifting and down shifting speeds.",
+    "pages": [
+     77
+    ],
+    "box": "CAUTION",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E36": {
+    "evidence_id": "evidence_57112f345182cf22a46bf066",
+    "text": "Always start motorcycle with the gear in neutral condition.",
+    "pages": [
+     77
+    ],
+    "box": "NOTE",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E37": {
+    "evidence_id": "evidence_f2c937da9637cd393bd153c9",
+    "text": "Always move the motorcycle in first gear position only.",
+    "pages": [
+     77
+    ],
+    "box": "NOTE",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E38": {
+    "evidence_id": "evidence_42e87c718f598655135ae5e2",
+    "text": "When the engine speed decreases or while climbing a gradient or running at a a reduced speed, shift to the appropriate lower gear to prevent the engine from stalling or straining to pull.",
+    "pages": [
+     77
+    ],
+    "box": "NOTE",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E39": {
+    "evidence_id": "evidence_9d1c2f64ece0939e6012dc26",
+    "text": "The clutch lever must be fully depressed, throttle modulated and immediately shifted to next gear as per recommended gear shifting speeds.",
+    "pages": [
+     77
+    ],
+    "box": "NOTE",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E40": {
+    "evidence_id": "evidence_1ac6485b82815926c3310154",
+    "text": "Failure to follow the above may cause a rough start or stalling or improper gear shifting of the engine besides causing damage to transmission parts.",
+    "pages": [
+     77
+    ],
+    "box": "NOTE",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E41": {
+    "evidence_id": "evidence_4f1a77974a15c8187b9a7a2f",
+    "text": "Always shift gears to neutral position just before bringing the vehicle to a complete stop.",
+    "pages": [
+     77
+    ],
+    "box": "NOTE",
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E42": {
+    "evidence_id": "evidence_b8f5c992bbc083e3545189c9",
+    "text": "Close throttle fully and release the clutch lever slowly ensuring the motorcycle is in neutral position and neutral lamp is glowing.",
+    "pages": [
+     78
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E43": {
+    "evidence_id": "evidence_f9b035f74126b3b9462f2e0c",
+    "text": "Stop the motorcycle in a safe place, turn OFF ignition and switch OFF engine kill switch.",
+    "pages": [
+     78
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E44": {
+    "evidence_id": "evidence_47631164996cb1817d109cf0",
+    "text": "While riding on steep slopes and descending long roads it is recommended to use the brake intermittently along with Engine braking in a combination way to achieve effective braking. Engine braking is achieved by performing downshifting of the gear from the current gear to slow down the vehicle.",
+    "pages": [
+     78
+    ],
+    "box": null,
+    "section": "GEAR SHIFTING, RIDING AND STOPPING",
+    "type": "list_item"
+   },
+   "E45": {
+    "evidence_id": "evidence_c3b27f95a2bb4cb96b6a1c06",
+    "text": "While your liquid waste like engine oil, coolant and other cleaning solvents need to be regularly replaced, what happens to them? Make sure they are not dumped in the soil or water bodies.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E46": {
+    "evidence_id": "evidence_b8b27711ad07058d6df8d51a",
+    "text": "You shall store them in a container and handover to an Govt authorized recycling agent, If any or RE Service Centre.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E47": {
+    "evidence_id": "evidence_12938fe8c0a8576f687cb473",
+    "text": "In the case of battery, tyres, plastic parts, electric or electronic parts and oil filter shall be handed over only to an authorized recycling agent, If any or RE Service Centre.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E48": {
+    "evidence_id": "evidence_2c73fbef22f54124973039ea",
+    "text": "The cleaning solvents or sprays whichever used for cleaning your bike shall be disposed in an environmentally friendly manner.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E49": {
+    "evidence_id": "evidence_ed28cadec365ae79c3371ca4",
+    "text": "In case you want to dispose your vehicle considered as an end of life vehicle, please handover the vehicle only to an authorized / registered vehicle scrapping facility near you or contact local authorities to follow due process.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   }
+  },
+  "warnings": [
+   "E31",
+   "E32",
+   "E33",
+   "E34",
+   "E35"
+  ],
+  "text": "## ENGINE (page 16)\n[E1] Engine type ........................ Single cylinder, 4 stroke, DOHC, SI Engine, Water cooled, Fuel Injection\n[E2] Bore .................................... 84 mm\n[E3] Stroke ................................. 81.5 mm\n[E4] Swept volume .................... 452 cc\n[E5] Compression ratio .............. 11.5:1\n[E6] Max power .......................... 29.44 kW (40.02 PS)\n[E7] @ 8000 rpm\n[E8] Max torque......................... 40 Nm @ 5500 rpm\n[E9] Idle RPM ............................. 1300 rpm\n[E10] Starting............................... Electric start Air filter element................. Paper element Lubrication ......................... Semi-dry sump Cooling ............................... Water cooled\n\n## ENGINE OIL LEVEL CHECKING (page 83)\n[E11] Place the vehicle on a level surface upright.\n[E12] Start the engine from cold condition, allow the engine to idle for 2 to 3 minutes and stop the engine.\n[E13] Wait 2 to 3 minutes to settle the oil and assess the sight glass. The volume added the minimum to maximum level is approximately 350 ml.\n[E14] Engine oil level should be close to \"MAX\" condition.\n[E15] If in case of oil level is not in above mentioned condition, then top-up the oil to \"MAX\" condition and repeat the procedure.\n[E16] Do not over fill above the \"MAX\" mark as it may affect the clutch function.\n\n## ENGINE OIL DRAINING/STRAINER CHECK (page 84)\n[E17] Ensure vehicle is in straight position on ground level.\n[E18] Engine oil should always be drained when the engine is warmed up sufficiently so that the oil drains faster.\n[E19] Remove the sump guard and 2 plugs, then clean the 2 strainers.\n[E20] Check the condition of strainers, if strainers condition OK please reuse it.\n[E21] (NOTE) Do not reuse the O-rings, renew all O-rings.\n[E22] (NOTE) Lubricate strainer and O-rings with engine oil.\n[E23] (NOTE) Push strainers fully into crankcases by hand before inserting the drain plugs.\n[E24] (NOTE) Lubricate plug O-rings with water based lubricant.\n[E25] (NOTE) Tighten torque of drain plugs to 13±1 Nm.\n\n## GEAR SHIFTING, RIDING AND STOPPING (pages 76-78)\n[E26] The clutch lever must be fully depressed before attempting a gear shift. Failure to fully depress the clutch lever will cause a rough start or stalling of the engine besides causing damage to transmission parts.\n[E27] When the vehicle is in neutral position, press gear shift lever down with toe to engage 1 st gear. GEAR SHIFT PATTERN\n[E28] It is recommended to use half clutch condition when commuting in the city traffic condition alone (Engine RPM around idling to 2000 RPM) at 1st gear condition. In other gears and higher RPM avoid using half clutch which will proportionately reduce the clutch life. During acceleration / deceleration disengage the clutch completely, shift the gear and engage the clutch gradually (Not too slowly).\n[E29] Recommended up shift speed Gear change: 1 st - 2 nd; km/h: 20\n    Recommended up shift speed Gear change: 2 nd - 3 rd; km/h: 30\n    Recommended up shift speed Gear change: 3 rd - 4 th; km/h: 40\n    Recommended up shift speed Gear change: 4 th - 5 th; km/h: 60\n    Recommended up shift speed Gear change: 5 th - 6 th; km/h: 75\n[E30] Recommended down shift speed Gear change: 6 th - 5 th; km/h: 70\n    Recommended down shift speed Gear change: 5 th - 4 th; km/h: 55\n    Recommended down shift speed Gear change: 4 th - 3 rd; km/h: 35\n    Recommended down shift speed Gear change: 3 rd - 2 nd; km/h: 25\n    Recommended down shift speed Gear change: 2 nd - 1 st; km/h: 18\n[E31] (CAUTION) If the clutch lever is released abruptly and throttle opening is done insufficiently the motorcycle will have a rough start and cause the engine to stall.\n[E32] (CAUTION) If the acceleration is very high and clutch lever is released abruptly, it will cause motorcycle to move suddenly, which will lead to loss of control leading to an accident resulting in injury and or loss of life to rider / other road users / passed by, besides damage to the motorcycle.\n[E33] (CAUTION) Always exercise utmost caution while releasing clutch\n[E34] (CAUTION) and riding the motorcycle.\n[E35] (CAUTION) Follow the recommended up shifting and down shifting speeds.\n[E36] (NOTE) Always start motorcycle with the gear in neutral condition.\n[E37] (NOTE) Always move the motorcycle in first gear position only.\n[E38] (NOTE) When the engine speed decreases or while climbing a gradient or running at a a reduced speed, shift to the appropriate lower gear to prevent the engine from stalling or straining to pull.\n[E39] (NOTE) The clutch lever must be fully depressed, throttle modulated and immediately shifted to next gear as per recommended gear shifting speeds.\n[E40] (NOTE) Failure to follow the above may cause a rough start or stalling or improper gear shifting of the engine besides causing damage to transmission parts.\n[E41] (NOTE) Always shift gears to neutral position just before bringing the vehicle to a complete stop.\n[E42] Close throttle fully and release the clutch lever slowly ensuring the motorcycle is in neutral position and neutral lamp is glowing.\n[E43] Stop the motorcycle in a safe place, turn OFF ignition and switch OFF engine kill switch.\n[E44] While riding on steep slopes and descending long roads it is recommended to use the brake intermittently along with Engine braking in a combination way to achieve effective braking. Engine braking is achieved by performing downshifting of the gear from the current gear to slow down the vehicle.\n\n## DISPOSAL OF END OF LIFE - PARTS / VEHICLE (page 123)\n[E45] While your liquid waste like engine oil, coolant and other cleaning solvents need to be regularly replaced, what happens to them? Make sure they are not dumped in the soil or water bodies.\n[E46] You shall store them in a container and handover to an Govt authorized recycling agent, If any or RE Service Centre.\n[E47] In the case of battery, tyres, plastic parts, electric or electronic parts and oil filter shall be handed over only to an authorized recycling agent, If any or RE Service Centre.\n[E48] The cleaning solvents or sprays whichever used for cleaning your bike shall be disposed in an environmentally friendly manner.\n[E49] In case you want to dispose your vehicle considered as an end of life vehicle, please handover the vehicle only to an authorized / registered vehicle scrapping facility near you or contact local authorities to follow due process."
+ }
+}

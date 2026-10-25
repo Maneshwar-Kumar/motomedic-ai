@@ -1,0 +1,37 @@
+{
+  "active_provider_transport_allowlist": [
+    "POST messages/count_tokens"
+  ],
+  "browser_release_hash_source": "Exact current manifest bytes with matching sidecar; no placeholder",
+  "classification": "SYNTHETIC_PROVIDER_FREE_CHECKS_ONLY",
+  "cloud_write_actions_executed": 0,
+  "count_generation_and_reservation_calls_permitted": 0,
+  "count_native_calls_planned": 36,
+  "evaluation_attempt_receipt": "evaluator_client_submission_v7.json",
+  "grant_receipt": "operations/client_source_grant_v8.json",
+  "helper_files_sha256": {
+    "tmp/launch_evaluator_browser_v10_12.py": "5f390022592ec7a781a5b0db949c777c77a1f69da3b179ac63f1b23efe7d4ff2",
+    "tmp/prepare_evaluator_v10_12.py": "f749cdd9e5aef154221550ef3fedae8c3ec07ac24b1f5db114e8a1ecfd2225ac",
+    "tmp/private_acceptance_console_v10_12.py": "560ed8a5b3bdf003577012d3f4e05fb83a1df744f719f445e30ee37d63c7b877",
+    "tmp/public_cloud_run_v10_12.py": "3cd2155b1a7261842d20b853722b32521765e71b7cb60ae646b2aab8ab88ee84",
+    "tmp/public_evaluator/browser_acceptance_v12.cjs": "b6959a051f39cca74d3d292afab37cc352920ed531be5bb119f772c508ef857d",
+    "tmp/public_evaluator/count_only_context_v10_12.py": "8916a27882e85dd20c8d4eab5fcb69a4ef0c04e6d82d8d79a6a4909b8fd7fb1c",
+    "tmp/public_evaluator/hosted_client_v10_12.py": "1f1e9a2ac81efc8c596355ed3e51bd1a3767ee2c75abee9f7e153829ecffbfe7",
+    "tmp/public_evaluator/phase_budget_v10_12.py": "fff6edffba352fe35a332152fde53cef1d1716e60b1d6f7595f03889e392e0ec",
+    "tmp/rollback_public_v10_12.py": "557656ec8b79c28c65021ec74b5d36e3ad1c9a32372f11c5690918f0bd6e7467"
+  },
+  "historical_hosted_client_import_scope": "count-only uses ledger/save/upload_artifacts/safe_code only; retired main never invoked",
+  "hosted_builds_or_deployments_submitted": 0,
+  "initial_and_conditional_slots": 2,
+  "live_runtime_and_factual_acceptance_established": false,
+  "owner_scope_sha256": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f",
+  "provider_calls": 0,
+  "role_pair": "HAIKU_DRAFT_HAIKU_VERIFY",
+  "schema": "motomedic-haiku-v10_12-helper-inspection-v1",
+  "source_receipt": "evaluator_client_source_v8.json",
+  "staged_candidate_readiness": "Exact Revision Ready condition and immutable configuration; Service.latestReadyRevision not used",
+  "test_command": "python -B -m unittest discover -s tmp -p test_*v10_12.py -v",
+  "tests_failed": 0,
+  "tests_passed": 22,
+  "unchanged_archive_history": true
+}

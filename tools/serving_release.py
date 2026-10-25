@@ -1,40 +1,83 @@
-"""Preserve history, freeze current serving inputs and prepare hosted image contexts.
+"""Freeze and verify the serving inputs of the section-template answer path (schema v11).
 
-Preparation and checks use no providers, cloud writes, builds or secret reads.
+The v11 manifest binds every serving code/UI/workflow file, the manual, the section index
+identity, the single generation contract and the owner decision. Earlier v8-v10 manifests stay
+verifiable as history. Freezing and checking use no providers, cloud writes, builds or secrets,
+and authorize no deployment; hosted build preparation for v11 is a later owner scope.
 """
 from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
 import hashlib
-import gzip
 import io
 import json
 from pathlib import Path
 import re
 import subprocess
 import sys
-import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from cloud.serving_artifacts import (ObjectReference, confined, digest,
-    ORIGINAL_INDEX_MANIFEST_SHA256, qdrant_lock_policy, restore_qdrant_lock, verify_index)
+from tools.check_installed_serving_release import (ARCHITECTURE, OWNER_DECISION, EVALUATION, SCHEMA,
+    INDEX, MANUAL_SHA, BASE_IMAGE, UI_BASE_IMAGE, confined, digest, validate_policy)
 
 BASELINE = '7cd58405e5e8a98abc0c272336249443d231d7ad'
 HISTORICAL = 'reports/grounded_generation/v8/runtime_freeze.json'
 HISTORICAL_SHA = 'd7990e2fc2863c05f9c4332d4a2df76354be6fbfe49c2430bbbc7f83990c70e0'
 PRESERVED = 'reports/build/20261012/frozen_v8_runtime'
 MIGRATION = 'reports/build/20261012/v8_preservation.json'
-CURRENT = 'reports/build/20261012/serving_manifest_v9_1.json'
-INDEX = 'index_a3282c4d98cf54595e4ba168'
-MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
-APPROVAL = 'human_review/agent_release_161/coordinator/release_manifest_v3.json'
-APPROVAL_SHA = 'b8f8c7b5a9e1a299f0a90eecbf10127779b62b35fc105f0cd587de433e235298'
-BASE_IMAGE = 'us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4'
-IMAGE_REPOSITORY = 'us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic'
-UI_BASE_IMAGE = 'docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1'
+CURRENT = 'reports/public_evaluator/20261025/serving_manifest_v11.json'
+MANUAL = 'royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf'
+HISTORICAL_SERVING = {
+    'reports/public_evaluator/20261012/serving_manifest_v10_14.json':
+        'b8d39544a9cc216b7bd6d37dd741c12e95f6e1d2694a59eaf573cb51195962f5',
+    'reports/public_evaluator/20261012/serving_manifest_v10_13.json':
+        '3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c',
+    'reports/public_evaluator/20261012/serving_manifest_v10_12.json':
+        'ff82ee677ada2e42fc08b5ea710ebe05cef7dac527f7008785ed0320bf58e8fb',
+    'reports/public_evaluator/20261012/serving_manifest_v10_11.json':
+        'c4f87a48fcb3645c46b74734ffd1df6b8faaa735e54d2286d6f3b099700d06f1',
+    'reports/public_evaluator/20261012/serving_manifest_v10_10.json':
+        'eb3a853947507b8739886a43f62dfc3fbd447b406d0ce9f4f7db12a172341dde',
+    'reports/public_evaluator/20261012/serving_manifest_v10_9.json':
+        '1056a3e5aaccec418a7fe36e7a2b0acd65b1ee5653a951aa03a1da05e116f6e6',
+    'reports/public_evaluator/20261012/serving_manifest_v10_8.json':
+        '7e5896add721d18ec186f272dda481a6aedc475c0274bf9281cf1802bb7510d0',
+    'reports/public_evaluator/20261012/serving_manifest_v10_7.json':
+        '27510150635230629284f0c6ae89d36a6beb546695b94a4da63e47c67387826d',
+    'reports/public_evaluator/20261012/serving_manifest_v10_6.json':
+        'b94faeb2c4774cd121c4e6f622a5b2371cd9c9df0147fe40b4ddbb25af9bed52',
+    'reports/public_evaluator/20261012/serving_manifest_v10_5.json':
+        'b95d89b5d95641f39ef7c3961233a99fb2824fa1320aff0c6e6d808772b7fb2a',
+    'reports/public_evaluator/20261012/serving_manifest_v10_4.json':
+        'b6aadba39d309bf90a50be93aecc947a3cfb44357f15cd40dd5c4dd3672f2fd3',
+    'reports/public_evaluator/20261012/serving_manifest_v10_3.json':
+        '1ec0f19b5a4cad2543018d1a793b41f0a50bd0004ace61a1c61d839252532d16',
+    'reports/public_evaluator/20261012/serving_manifest_v10_2.json':
+        '2b5638cbc0e98369fa1488f89f823a736ed84a618e4e6670935919a0a0c05898',
+    'reports/public_evaluator/20261012/serving_manifest_v10_1.json':
+        'abbf41b0ecd5301a56f8abe96ecce53c853eac35de651d1c71fb5318f9b9f172',
+    'reports/public_evaluator/20261012/serving_manifest_v10.json':
+        '398f48d44aedf8648bde2582ff76058ee917f8f59b7b4576726387077e919f13',
+    'reports/build/20261012/serving_manifest_v9.json':
+        'a5604aaa277b4095fb3aebc95703cfd7c128e1d609cde80965c18d1791b98a84',
+    'reports/build/20261012/serving_manifest_v9_1.json':
+        '474566cd3698bfc31f3186906d63fecd1198a98e926afc4701da733821c7f19d',
+}
+# Root modules the serving import graph reaches; the rest of the root is historical tooling.
+ROOT_MODULES = ('controller_contracts.py', 'evidence_registry.py', 'generation_contracts.py',
+                'generation_providers.py', 'online_ingest.py', 'session_store.py')
+NAMED_INPUTS = ('cloud/deployment_status.json', 'cloud/live_smoke.json', 'cloud/export_qdrant.py',
+    'cloud/arm_a/Dockerfile', 'rider_ui/Dockerfile', 'source_manifest.json', MANUAL,
+    'tools/serving_release.py', 'tools/test_serving_release.py', 'tools/check_repository_structure.py',
+    'tools/check_installed_serving_release.py', 'tools/test_check_installed_serving_release.py',
+    'tools/resolve_container_base.py', 'tools/manage_primary_token_ceiling.py',
+    'tools/test_manage_primary_token_ceiling.py', 'tools/provision_evaluator_secret_hosted.py',
+    'reports/build/20261012/ui_base_image.json', 'reports/build/20261012/ui_dependency_lock.json',
+    'reports/public_evaluator/20261012/ui_dependency_lock_v2.json', OWNER_DECISION, EVALUATION,
+    'reports/evals/20261025_answer_release_v3/README.md', MIGRATION)
 
 
 def dump(path, value, *, exclusive=True):
@@ -118,123 +161,110 @@ def verify_history(root=ROOT):
     return len(bindings)
 
 
+def verify_serving_history(root=ROOT):
+    """Retain prior serving manifests as history; none of them binds the current runtime."""
+    for name, expected in HISTORICAL_SERVING.items():
+        path = confined(root, name)
+        if digest(path) != expected or path.with_suffix('.sha256').read_text().strip() != expected:
+            raise ValueError('HISTORICAL_SERVING_MANIFEST_CHANGED:' + name)
+    return dict(HISTORICAL_SERVING)
+
+
 def serving_inputs(root=ROOT):
-    """Discover complete code/UI/build inputs so added unbound modules fail CI."""
-    names = set(historical_bindings(root))
+    """Discover complete code/UI/workflow inputs so an added unbound module fails CI."""
+    root = Path(root)
+    names = set()
     for folder in ('cloud/arm_a', 'cloud/grounded_generation', 'rider_ui'):
-        for path in (Path(root) / folder).rglob('*'):
+        for path in (root / folder).rglob('*'):
             if path.is_file() and '__pycache__' not in path.parts and path.suffix in ('.py', '.css', '.txt', '.yaml', '.json'):
                 names.add(path.relative_to(root).as_posix())
-    for path in (Path(root) / '.github/workflows').glob('*'):
+    for path in (root / '.github/workflows').glob('*'):
         if path.suffix in ('.yml', '.yaml'):
             names.add(path.relative_to(root).as_posix())
-    names.update(('cloud/serving_artifacts.py', 'cloud/test_serving_artifacts.py',
-        'cloud/deployment_status.json', 'cloud/live_smoke.json',
-        'cloud/arm_a/Dockerfile', 'rider_ui/Dockerfile', 'tools/serving_release.py',
-        'tools/test_serving_release.py', 'tools/check_repository_structure.py',
-        'tools/capture_serving_artifact.py', 'tools/check_installed_serving_release.py',
-        'tools/test_build_candidate.py', 'tools/resolve_container_base.py',
-        'tools/bind_serving_images.py', 'tools/test_bind_serving_images.py',
-        'tools/validate_serving_artifacts_hosted.py',
-        'reports/build/20261012/ui_base_image.json',
-        'reports/build/20261012/ui_dependency_lock.json',
-        'reports/build/20261012/index_snapshot_reference.json', MIGRATION))
-    names.add('reports/build/20261012/qdrant_lock_recovery.json')
-    # Retained root compatibility modules consumed by the serving imports.
-    names.update(path.name for path in Path(root).glob('*.py') if not path.name.startswith('test_'))
-    # All exact source approvals remain at original immutable paths.
-    approved = json.loads(confined(root, APPROVAL).read_bytes())
-    names.update(approved['outputs'])
-    names.update((APPROVAL, 'human_review/agent_release_161/owner_authority.json',
-        'human_review/agent_release_161/approval_consumer.py',
-        'human_review/agent_release_161/root_validation_v3.json'))
-    for path in (Path(root) / 'reports/build/20261012/source_context_refinement_v2').glob('*.json'):
-        names.add(path.relative_to(root).as_posix())
+    names.update(ROOT_MODULES)
+    names.update(NAMED_INPUTS)
+    for name in HISTORICAL_SERVING:
+        names.update((name, str(Path(name).with_suffix('.sha256')).replace('\\', '/')))
     return sorted(names)
 
 
-def index_policy(root, index_dir, reference_path=None):
-    index_dir = Path(index_dir)
-    manifest = json.loads((index_dir / 'manifest.json').read_bytes())
-    if manifest['index_id'] != INDEX or manifest['source_sha256'] != MANUAL_SHA:
-        raise ValueError('IMMUTABLE_INDEX_IDENTITY_CHANGED')
-    if digest(index_dir / 'manifest.json') != ORIGINAL_INDEX_MANIFEST_SHA256:
-        raise ValueError('IMMUTABLE_INDEX_MANIFEST_CHANGED')
-    identity = {'index_id': INDEX, 'manual_sha256': MANUAL_SHA,
-        'manifest_sha256': ORIGINAL_INDEX_MANIFEST_SHA256,
-        'file_sha256': manifest['file_checksums'], 'embedding': manifest['embedding'],
-        'chunker': manifest['chunker'], 'chunks': manifest['counts']['chunks'],
-        'parents': manifest['counts']['parent_sections'],
-        'deterministic_file_recovery':qdrant_lock_policy()}
-    restore_qdrant_lock(index_dir, identity)
-    verify_index(index_dir, identity)
-    recorded = json.loads((Path(root) / 'cloud/deployment_status.json').read_bytes())
-    snapshot = {'uri': recorded['snapshot_uri'], 'sha256': recorded['snapshot_sha256'],
-        'generation': None, 'maximum_bytes': 1024**3}
-    if reference_path:
-        snapshot = json.loads(Path(reference_path).read_bytes())
-        ObjectReference(**snapshot)
-        if snapshot['uri'] != recorded['snapshot_uri'] or snapshot['sha256'] != recorded['snapshot_sha256']:
-            raise ValueError('RECORDED_IMMUTABLE_SNAPSHOT_CHANGED')
-    return {**identity,
-        'parser_gap_pages': manifest['counts']['parser_gap_pages'],
-        'snapshot': snapshot,
-        'durable_reference_status': 'PINNED' if snapshot['generation'] else 'OBJECT_GENERATION_RECEIPT_REQUIRED',
-        'query_models': 'Inherited exact base image assets; no document embedding or request-time model download.'}
+def index_policy(index_dir):
+    """The exact section index the runtime must load; its files are verified at startup."""
+    from cloud.grounded_generation import section_index
+    identity = section_index.identity(index_dir)
+    section_index.verify(index_dir, identity)
+    if identity['index_id'] != INDEX or identity['manual_sha256'] != MANUAL_SHA:
+        raise ValueError('SECTION_INDEX_IDENTITY_CHANGED')
+    if not (Path(index_dir) / 'reranker_model').is_dir():
+        raise ValueError('SECTION_INDEX_RERANKER_MISSING')
+    manifest = json.loads((Path(index_dir) / 'manifest.json').read_bytes())
+    return identity, {'built_from_index_id': manifest['built_from_index_id'],
+        'cached_parse_sha256': manifest['cached_parse_sha256'], 'review_layer': manifest['review_layer'],
+        'qa': {k: manifest['qa'][k] for k in ('chunks', 'sections', 'box_chunks', 'box_chunks_attached',
+               'page_break_continuations', 'pages_covered', 'pdf_pages', 'parser_gap_pages')},
+        'durable_reference_status': 'OBJECT_GENERATION_RECEIPT_REQUIRED',
+        'hosted_qdrant_collection': 'NOT_UPLOADED',
+        'serving_path': 'build/section-index',
+        'query_models': 'BGE-M3 query encoder from the base image at the index revision; '
+                        'MiniLM cross-encoder copied with the index. No request embeds the manual.'}
 
 
-def freeze(root=ROOT, *, index_dir=None, reference_path=None, destination=CURRENT):
+def freeze(root=ROOT, *, index_dir, destination=CURRENT):
+    from cloud.grounded_generation import section_assembly, section_retrieval, template_answer
+    from cloud.grounded_generation.haiku_answer import CONTRACT
+    from cloud.grounded_generation.section_questions import RUNTIME_POLICY
     root = Path(root).resolve()
     target = confined(root, destination)
     if target.exists():
         raise ValueError('NEVER_OVERWRITE_SERVING_FREEZE')
     verify_history(root)
-    if digest(confined(root, APPROVAL)) != APPROVAL_SHA:
-        raise ValueError('EXACT_SOURCE_APPROVAL_CHANGED')
+    verify_serving_history(root)
     names = serving_inputs(root)
     bindings = {name: digest(confined(root, name)) for name in names}
-    value = {'schema_version': 'motomedic-serving-release-v9',
-        'frozen_at_utc': datetime.now(timezone.utc).isoformat(),
-        'architecture': 'DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA',
-        'source_baseline_commit': BASELINE, 'candidate_source_commit': None,
+    identity, index_release = index_policy(index_dir)
+    value = {'schema_version': SCHEMA, 'frozen_at_utc': datetime.now(timezone.utc).isoformat(),
+        'architecture': ARCHITECTURE, 'runtime_policy': RUNTIME_POLICY,
+        'historical_serving_manifests': dict(HISTORICAL_SERVING),
         'source_commit_status': 'COMMITTED_BLOB_CHECK_REQUIRED_BEFORE_HOSTED_BUILD',
         'file_sha256': bindings,
         'input_tree_sha256': hashlib.sha256(json.dumps(bindings, sort_keys=True, separators=(',', ':')).encode()).hexdigest(),
-        'source_approval': {'path': APPROVAL, 'sha256': APPROVAL_SHA,
-            'scope': 'EXACT_SOURCE_CONTENT_AND_INITIAL_SCOPES; NOT_DEPLOYMENT_OR_GENERAL_GENERATION_ACCEPTANCE'},
-        'manual_checksum': MANUAL_SHA, 'index_id': INDEX,
-        'index': index_policy(root, index_dir or root / 'build/index-bge-final', reference_path),
-        'primary_model': 'gemma-4-26b-a4b-it', 'fallback_model': 'claude-haiku-5-5',
-        'fallback_enabled': False, 'answer_cache_enabled': False,
-        'backend_base_image': BASE_IMAGE,
-        'ui_base_image': UI_BASE_IMAGE,
+        'manual_checksum': MANUAL_SHA, 'index_id': INDEX, 'index': identity, 'index_release': index_release,
+        'retrieval_version': section_retrieval.VERSION, 'assembly_version': section_assembly.VERSION,
+        'template_version': template_answer.VERSION,
+        'generation_model': CONTRACT['model'], 'generation_contract': CONTRACT,
+        'review_layer': 'NONE', 'verifier': 'NONE', 'fallback_enabled': False, 'answer_cache_enabled': False,
+        'prompt_cache': 'ANTHROPIC_SYSTEM_PROMPT_5M',
+        'owner_decision': {'path': OWNER_DECISION, 'sha256': digest(confined(root, OWNER_DECISION))},
+        'evaluation': {'path': EVALUATION, 'sha256': digest(confined(root, EVALUATION)),
+            'label': 'AGENT_SCORED_LOCAL_SUBAGENT_RUN_NOT_INDEPENDENT_ACCEPTANCE'},
+        'backend_base_image': BASE_IMAGE, 'ui_base_image': UI_BASE_IMAGE,
         'backend_image_digest': None, 'ui_image_digest': None,
         'provider_calls': 0, 'build_executed': False, 'deployment_authorized': False,
-        'public_release_approved': False, 'billing_changed': False,
-        'acceptance': 'SYNTHETIC_BOUNDARY_CHECKS_ONLY; HOSTED_AND_ORIGINAL_SOURCE_ACCEPTANCE_REQUIRED'}
+        'public_opening_authorized': False, 'billing_changed': False, 'ledger_changed': False,
+        'acceptance': {'runtime_quality': 'HOSTED_REAL_MODEL_RUN_REQUIRED',
+            'hosted_operations': 'NEW_OWNER_DEPLOYMENT_SCOPE_REQUIRED',
+            'build_checks': 'PROVIDER_FREE_BINDINGS_ONLY'}}
+    validate_policy(value, root)
     dump(target, value)
-    (target.with_suffix('.sha256')).write_text(digest(target) + '\n', encoding='ascii')
+    target.with_suffix('.sha256').write_bytes((digest(target) + '\n').encode('ascii'))
     return value
 
 
 def verify(root=ROOT, manifest_path=CURRENT, *, committed_revision=None):
     root = Path(root).resolve()
     verify_history(root)
+    verify_serving_history(root)
     path = confined(root, manifest_path)
     manifest = json.loads(path.read_bytes())
-    if manifest.get('schema_version') != 'motomedic-serving-release-v9':
+    if manifest.get('schema_version') != SCHEMA:
         raise ValueError('WRONG_SERVING_MANIFEST_SCHEMA')
     if path.with_suffix('.sha256').read_text().strip() != digest(path):
         raise ValueError('SERVING_MANIFEST_DIGEST_CHANGED')
-    expected_names = set(serving_inputs(root))
-    if set(manifest['file_sha256']) != expected_names:
+    if set(manifest['file_sha256']) != set(serving_inputs(root)):
         raise ValueError('SERVING_INPUT_INVENTORY_CHANGED')
-    if (manifest['manual_checksum'] != MANUAL_SHA or manifest['index_id'] != INDEX
-            or manifest['source_approval']['sha256'] != APPROVAL_SHA
-            or manifest['fallback_enabled'] is not False or manifest['answer_cache_enabled'] is not False
-            or manifest['backend_base_image'] != BASE_IMAGE
-            or manifest.get('ui_base_image') != UI_BASE_IMAGE):
-        raise ValueError('SERVING_POLICY_BINDING_CHANGED')
+    if manifest.get('historical_serving_manifests') != HISTORICAL_SERVING:
+        raise ValueError('SERVING_HISTORY_BINDING_CHANGED')
+    validate_policy(manifest, root)
     tree_hash = hashlib.sha256(json.dumps(manifest['file_sha256'], sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     if tree_hash != manifest['input_tree_sha256']:
         raise ValueError('SERVING_INPUT_TREE_CHANGED')
@@ -249,110 +279,25 @@ def verify(root=ROOT, manifest_path=CURRENT, *, committed_revision=None):
     return manifest
 
 
-def prepare(root=ROOT, manifest_path=CURRENT, *, committed_revision=None):
-    if not committed_revision:
-        raise ValueError('COMMITTED_REVISION_REQUIRED_FOR_BUILD_CONTEXT')
-    manifest = verify(root, manifest_path, committed_revision=committed_revision)
-    ObjectReference(**manifest['index']['snapshot'])
-    root = Path(root)
-    revision = re.fullmatch(r'serving_manifest_(v9(?:_[1-9][0-9]*)?)', Path(manifest_path).stem)
-    if revision is None:
-        raise ValueError('VERSIONED_V9_SERVING_MANIFEST_NAME_REQUIRED')
-    revision = revision.group(1)
-    output = root / 'build' / ('serving-' + revision)
-    if output.exists():
-        raise ValueError('NEVER_OVERWRITE_PREPARED_BUILD_CONTEXT')
-    blobs = git_blobs(root, manifest['file_sha256'], committed_revision)
-    for kind in ('backend', 'ui'):
-        context = output / kind
-        context.mkdir(parents=True)
-        for name, raw in blobs.items():
-            if kind == 'ui' and not (name.startswith('rider_ui/') or name == 'controller_contracts.py'):
-                continue
-            if kind == 'backend' and ('/test_' in name or '/tests/' in name or name.startswith('.github/')
-                    or (name.startswith('tools/') and name != 'tools/check_installed_serving_release.py')):
-                continue
-            target = confined(context, name)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(raw)
-        installed = dict(manifest)
-        installed['candidate_source_commit'] = committed_revision
-        installed['source_commit_status'] = 'EXACT_COMMITTED_BLOBS_VERIFIED'
-        installed['file_sha256'] = {n: h for n, h in manifest['file_sha256'].items()
-            if (context / n).is_file()}
-        dump(context / 'arm_a_release.json', installed)
-        if kind == 'backend':
-            docker = (f'FROM {BASE_IMAGE}\nUSER root\nCOPY --chown=motomedic:motomedic . /app\n'
-                'RUN python -B tools/check_installed_serving_release.py /app\n'
-                'USER motomedic\n'
-                'CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "4", "--timeout", "1200", "--access-logfile", "-", "cloud.arm_a.app:load_production()"]\n')
-        else:
-            docker = blobs['rider_ui/Dockerfile'].decode()
-        (context / 'Dockerfile').write_text(docker, encoding='utf-8', newline='\n')
-        image = IMAGE_REPOSITORY + '/' + ('arm-a' if kind == 'backend' else 'rider-ui') + ':serving-v9-' + manifest['input_tree_sha256'][:12]
-        substitutions = {'_SERVING_MANIFEST_SHA256': digest(root / manifest_path),
-            '_INPUT_TREE_SHA256': manifest['input_tree_sha256'], '_SOURCE_COMMIT': committed_revision}
-        labels = ['--label', 'org.motomedic.serving-manifest-sha256=' + substitutions['_SERVING_MANIFEST_SHA256'],
-            '--label', 'org.motomedic.input-tree-sha256=' + substitutions['_INPUT_TREE_SHA256'],
-            '--label', 'org.opencontainers.image.revision=' + committed_revision]
-        dump(context / 'cloudbuild.json', {'steps': [{'name': 'gcr.io/cloud-builders/docker',
-            'args': ['build', '--platform=linux/amd64', *labels, '-t', image, '.']}],
-            'substitutions': substitutions, 'images': [image], 'timeout': '1800s',
-            'options': {'logging': 'CLOUD_LOGGING_ONLY', 'substitutionOption':'ALLOW_LOOSE'}})
-        # Canonical archive bytes can be uploaded later under a generation-pinned
-        # reference. Never rely on an expiring Actions artifact as a build source.
-        with (output / (kind + '.tar.gz')).open('xb') as packed:
-            with gzip.GzipFile(fileobj=packed, filename='', mode='wb', mtime=0) as compressed:
-                with tarfile.open(fileobj=compressed, mode='w') as archive:
-                    for path in sorted(p for p in context.rglob('*') if p.is_file()):
-                        info = tarfile.TarInfo(path.relative_to(context).as_posix())
-                        info.size, info.mode, info.mtime = path.stat().st_size, 0o644, 0
-                        with path.open('rb') as source:
-                            archive.addfile(info, source)
-    receipt = {'schema_version': 'serving-v9-hosted-build-preparation-v1',
-        'source_commit': committed_revision, 'serving_manifest_sha256': digest(root / manifest_path),
-        'input_tree_sha256': manifest['input_tree_sha256'], 'base_image': BASE_IMAGE,
-        'contexts': {kind: {'path': str((output / kind).relative_to(root)).replace('\\', '/'),
-            'dockerfile_sha256': digest(output / kind / 'Dockerfile'),
-            'cloudbuild_sha256': digest(output / kind / 'cloudbuild.json'),
-            'build_steps': json.loads((output / kind / 'cloudbuild.json').read_bytes())['steps'],
-            'build_options': json.loads((output / kind / 'cloudbuild.json').read_bytes())['options'],
-            'build_timeout': '1800s',
-            'source_archive': str((output / (kind + '.tar.gz')).relative_to(root)).replace('\\', '/'),
-            'source_archive_sha256': digest(output / (kind + '.tar.gz')),
-            'installed_manifest_sha256': digest(output / kind / 'arm_a_release.json'),
-            'image_tag': IMAGE_REPOSITORY + '/' + ('arm-a' if kind == 'backend' else 'rider-ui')
-                + ':serving-v9-' + manifest['input_tree_sha256'][:12]}
-            for kind in ('backend', 'ui')},
-        'build_executed': False, 'provider_calls': 0, 'deployment_changed': False,
-        'required_future_receipts': ['Cloud Build image digests and exact source/context receipts',
-            'Independent original-page and hosted private service acceptance',
-            'Compatible backend/UI revisions and preserved rollback images',
-            'Exact deployment and spending authorization']}
-    dump(root / 'reports/build/20261012' / ('hosted_build_preparation_' + revision + '.json'), receipt)
-    return receipt
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('preserve-v8', 'freeze', 'verify', 'prepare'))
+    parser.add_argument('command', choices=('preserve-v8', 'freeze', 'verify'))
     parser.add_argument('--manifest', default=CURRENT)
-    parser.add_argument('--index')
-    parser.add_argument('--artifact-reference')
+    parser.add_argument('--index', help='section index directory (freeze only)')
     parser.add_argument('--committed-revision')
     args = parser.parse_args()
     if args.command == 'preserve-v8':
         result = preserve_v8()
         print(json.dumps({'preserved_files': len(result['objects']), 'baseline_commit': BASELINE}))
     elif args.command == 'freeze':
-        result = freeze(index_dir=args.index, reference_path=args.artifact_reference, destination=args.manifest)
+        if not args.index:
+            parser.error('freeze requires --index')
+        result = freeze(index_dir=args.index, destination=args.manifest)
         print(json.dumps({'files': len(result['file_sha256']), 'manifest_sha256': digest(ROOT / args.manifest),
-            'durable_reference_status': result['index']['durable_reference_status']}))
-    elif args.command == 'verify':
+            'index_id': result['index_id']}))
+    else:
         result = verify(manifest_path=args.manifest, committed_revision=args.committed_revision)
         print(json.dumps({'files_verified': len(result['file_sha256']), 'provider_calls': 0}))
-    else:
-        print(json.dumps(prepare(manifest_path=args.manifest, committed_revision=args.committed_revision)))
 
 
 if __name__ == '__main__':

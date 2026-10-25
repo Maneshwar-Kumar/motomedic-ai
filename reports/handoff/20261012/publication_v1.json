@@ -1,0 +1,77 @@
+{
+  "branch": "codex/public-evaluator",
+  "build_goal_status": "paused_at_owner_request",
+  "cloud_state_unchanged_by_handoff": true,
+  "commit_url": "https://github.com/Maneshwar-Kumar/motomedic-ai/commit/1c0626561a3ecc31f8447e1904be730ababc69ba",
+  "committed_frozen_inventory_verification": {
+    "commit": "1c0626561a3ecc31f8447e1904be730ababc69ba",
+    "files_verified": 549,
+    "passed": true,
+    "provider_calls": 0
+  },
+  "frozen_superseded_snapshot": {
+    "build_executed": false,
+    "inputs": 549,
+    "manifest": "reports/public_evaluator/20261012/serving_manifest_v10_11.json",
+    "sha256": "c4f87a48fcb3645c46b74734ffd1df6b8faaa735e54d2286d6f3b099700d06f1"
+  },
+  "github_repository": "Maneshwar-Kumar/motomedic-ai",
+  "helper_archive": {
+    "files": 33,
+    "passed": true,
+    "sha256": "2ad9c97c2dd05ba7bba447d562211611ba2f7f4e4dccddffa7ac495ba20fe2bb"
+  },
+  "hosted_provider_free_CI": {
+    "assertion_failures": 4,
+    "boundary_suite_methods": 264,
+    "commit": "1c0626561a3ecc31f8447e1904be730ababc69ba",
+    "conclusion": "failure",
+    "error_entries": 24,
+    "log": "reports/handoff/20261012/provider_free_ci_38221482493.log.txt",
+    "log_sha256": "8fafcbed67ea42a17b92e615e7c037740012de72744cbd60888040c645010dc8",
+    "navigation_approval_and_committed_inventory_steps": "PASS",
+    "observed_errors": [
+      "Retired role-router constructor in fixtures",
+      "Removed GEMMA_DRAFT_HAIKU_VERIFY / HAIKU_DRAFT_GEMMA_VERIFY keys",
+      "Old provider model/paired-answer fixtures"
+    ],
+    "provider_calls": 0,
+    "run_id": 38221482493,
+    "status": "completed",
+    "subsequent_ui_workflow_step": "SKIPPED_AFTER_BOUNDARY_FAILURE",
+    "url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38221482493"
+  },
+  "latest_model_decision": {
+    "only_model": "claude-haiku-5-5",
+    "runtime_migration_pending": true,
+    "scope": "reports/public_evaluator/20261012/owner_model_scope_v3.json",
+    "scope_sha256": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f",
+    "separate_draft_and_verifier_calls": true
+  },
+  "local_handoff_folder": "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent\\reports\\handoff\\20261012",
+  "local_repository": "C:\\Users\\kumar maneshwar\\OneDrive - The Boston Consulting Group, Inc\\Desktop\\Service Agent",
+  "main_baseline_unchanged": "f2daacbb35cb4997bed7915336dfbdc1456c0ddc",
+  "new_model_generation_or_deployment_or_public_opening": false,
+  "note": "This receipt records the already pushed payload snapshot. Its own later documentation commit is separate. WIP with failing tests; no merge or release acceptance.",
+  "public_demo_accepted": false,
+  "publication_audit": {
+    "actual_credentials_detected": 0,
+    "decoded_compressed_payloads_scanned": 3,
+    "new_rider_media_or_PDF_detected": 0,
+    "publication_files_scanned": 86,
+    "zip_members_scanned": 33
+  },
+  "pull_request": {
+    "draft": true,
+    "number": 4,
+    "state": "OPEN",
+    "title": "Save demo work and Haiku-only continuation handoff",
+    "url": "https://github.com/Maneshwar-Kumar/motomedic-ai/pull/4"
+  },
+  "pushed_snapshot_commit": "1c0626561a3ecc31f8447e1904be730ababc69ba",
+  "recorded_at_utc": "2026-10-12T08:07:51.033641+00:00",
+  "remote_push_confirmed": true,
+  "repository_private": true,
+  "schema": "motomedic-stopped-handoff-publication-v1",
+  "validation": "reports/handoff/20261012/validation_v1.json"
+}

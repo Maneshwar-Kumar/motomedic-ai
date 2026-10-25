@@ -1,0 +1,24 @@
+{
+  "schema": "motomedic-provider-free-validation-v1",
+  "serving_manifest_sha256": "27510150635230629284f0c6ae89d36a6beb546695b94a4da63e47c67387826d",
+  "serving_input_count": 539,
+  "checks": [
+    {"scope": "release inventory and model-scope bindings", "tests": 15, "result": "PASS"},
+    {"scope": "durable operations, health, public admission and serving artifact bindings", "tests": 63, "result": "PASS"},
+    {"scope": "complete rider UI synthetic suite", "tests": 69, "result": "PASS"},
+    {"scope": "complete question API synthetic suite", "tests": 13, "result": "PASS"},
+    {"scope": "retrieval, source authority, open wiring, admission, legacy fallback and cache probe fixtures", "tests": 78, "result": "PASS"},
+    {"scope": "role router, both adapters, complete Composer, phased admission and build-candidate fixtures", "tests": 145, "result": "PASS", "reported_by": "/root/retrieval_evidence"},
+    {"scope": "independent phased funding and request identity review plus overlapping integration fixtures", "tests": 118, "result": "PASS", "reported_by": "/root/durable_operations"},
+    {"scope": "repository structure and immutable byte checks", "links": 148, "serving_files": 539, "approved_source_files": 187, "historical_files": 64, "result": "PASS"},
+    {"scope": "original scoped approval consumer", "cases": 161, "result": "PASS"}
+  ],
+  "overlapping_test_counts_must_not_be_added": true,
+  "synthetic_local_checks": true,
+  "provider_generation_calls": 0,
+  "cloud_writes_in_these_checks": 0,
+  "factual_acceptance": false,
+  "live_deployment_acceptance": false,
+  "public_access_acceptance": false,
+  "notes": "The original source/index artifacts were reused. Real selected-role native counts, finalized answer verification and independent original-page quality remain hosted gates. No source review or historical freeze was changed to pass checks."
+}

@@ -1,0 +1,129 @@
+{
+  "availableSecrets": {
+    "secretManager": [
+      {
+        "env": "MOTOMEDIC_VISITOR_SECRET",
+        "versionName": "projects/motomedic-ai-20261009/secrets/motomedic-rider-visitor-v1/versions/1"
+      }
+    ]
+  },
+  "createTime": "2026-10-12T12:24:28.970918425Z",
+  "finishTime": "2026-10-12T12:31:15.922901Z",
+  "id": "915800c4-aa0d-48d4-b0e1-1cedd3799d04",
+  "logUrl": "https://console.cloud.google.com/cloud-build/builds/915800c4-aa0d-48d4-b0e1-1cedd3799d04?project=279945185781",
+  "name": "projects/279945185781/locations/global/builds/915800c4-aa0d-48d4-b0e1-1cedd3799d04",
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY",
+    "pool": {}
+  },
+  "projectId": "motomedic-ai-20261009",
+  "queueTtl": "3600s",
+  "results": {
+    "buildStepImages": [
+      "sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22"
+    ],
+    "buildStepOutputs": [
+      "",
+      ""
+    ]
+  },
+  "serviceAccount": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+  "source": {
+    "storageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "generation": "1791807827005709",
+      "object": "serving/engineering-diagnostics/v10_13/2c0c178fb159be995f3888c7a5fc82a8c29e3ebbdfec50c1033eecf31f76e4c7.tar.gz"
+    }
+  },
+  "sourceProvenance": {
+    "fileHashes": {
+      "gs://motomedic-ai-20261009-indices/serving/engineering-diagnostics/v10_13/2c0c178fb159be995f3888c7a5fc82a8c29e3ebbdfec50c1033eecf31f76e4c7.tar.gz#1791807827005709": {
+        "fileHash": [
+          {
+            "type": "MD5",
+            "value": "ZkQMB1p48URVKfExbNY62w=="
+          },
+          {
+            "type": "SHA256",
+            "value": "LAwXj7FZvplfOIjHpfyCqMKePrvf7FDBAz7s8x925Mc="
+          }
+        ]
+      }
+    },
+    "resolvedStorageSource": {
+      "bucket": "motomedic-ai-20261009-indices",
+      "generation": "1791807827005709",
+      "object": "serving/engineering-diagnostics/v10_13/2c0c178fb159be995f3888c7a5fc82a8c29e3ebbdfec50c1033eecf31f76e4c7.tar.gz"
+    }
+  },
+  "startTime": "2026-10-12T12:24:29.920100576Z",
+  "status": "SUCCESS",
+  "steps": [
+    {
+      "args": [
+        "-c",
+        "from pathlib import Path; p=Path(\"/workspace/tmp/service-due-api-run/915800c4-aa0d-48d4-b0e1-1cedd3799d04\"); p.mkdir(parents=True,exist_ok=True); p.chmod(0o777)"
+      ],
+      "entrypoint": "python",
+      "name": "docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "pullTiming": {
+        "endTime": "2026-10-12T12:24:45.193897119Z",
+        "startTime": "2026-10-12T12:24:38.888977272Z"
+      },
+      "status": "SUCCESS",
+      "timing": {
+        "endTime": "2026-10-12T12:24:46.197615746Z",
+        "startTime": "2026-10-12T12:24:38.888977272Z"
+      }
+    },
+    {
+      "args": [
+        "-B",
+        "tmp/single_service_due_client_v13_v1.py",
+        "--inventory",
+        "tmp/service-due-api-v13-v1/source_inventory.json",
+        "--output",
+        "/workspace/tmp/service-due-api-run/915800c4-aa0d-48d4-b0e1-1cedd3799d04",
+        "--allocated-job-id",
+        "915800c4-aa0d-48d4-b0e1-1cedd3799d04",
+        "--artifact-uri",
+        "gs://motomedic-ai-20261009-indices/engineering-acceptance/public-v10_3/915800c4-aa0d-48d4-b0e1-1cedd3799d04"
+      ],
+      "entrypoint": "python",
+      "env": [
+        "PYTHONPATH=/app",
+        "MOTOMEDIC_HOSTED_PROVIDER_VALIDATION=true",
+        "MOTOMEDIC_CLOUD_BUILD_ID=915800c4-aa0d-48d4-b0e1-1cedd3799d04"
+      ],
+      "name": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+      "pullTiming": {
+        "endTime": "2026-10-12T12:28:19.406737267Z",
+        "startTime": "2026-10-12T12:24:46.197910927Z"
+      },
+      "secretEnv": [
+        "MOTOMEDIC_VISITOR_SECRET"
+      ],
+      "status": "SUCCESS",
+      "timing": {
+        "endTime": "2026-10-12T12:31:15.583936373Z",
+        "startTime": "2026-10-12T12:24:46.197910927Z"
+      }
+    }
+  ],
+  "timeout": "1800s",
+  "timing": {
+    "BUILD": {
+      "endTime": "2026-10-12T12:31:15.584137530Z",
+      "startTime": "2026-10-12T12:24:38.228382262Z"
+    },
+    "FETCHSOURCE": {
+      "endTime": "2026-10-12T12:24:38.228123776Z",
+      "startTime": "2026-10-12T12:24:34.138243437Z"
+    },
+    "STORAGE_SOURCE": {
+      "endTime": "2026-10-12T12:24:38.228123776Z",
+      "startTime": "2026-10-12T12:24:34.138243437Z"
+    }
+  }
+}

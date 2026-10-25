@@ -1,0 +1,173 @@
+{
+  "archived_helper_archive_sha256": "95ea04931e2283853caa8b943f8bfa7179db99607e971c1ebed4c54406e4a829",
+  "archived_helper_bytes_changed": false,
+  "archived_helper_manifest_sha256": "4d6f6f7ec1f4e84f55df6adadfc15a2c4f2738c579682ce1c03b5199417e2af8",
+  "classification": "READ_ONLY_PREPARATION_NOT_A_CAP_GRANT_OR_RELEASE_ACCEPTANCE",
+  "cloud_calls": 0,
+  "cloud_mutations": 0,
+  "fresh_six_case_source_review": {
+    "human_signoff": false,
+    "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "original_render_pages": [
+      {
+        "exact_original_render_hash_match": true,
+        "original_plan_png_sha256": "861518ceab5d2137fd0370b7545c6ed4803ade4092f19f3500115fd1b264a010",
+        "pdf_page": 16,
+        "png_sha256": "861518ceab5d2137fd0370b7545c6ed4803ade4092f19f3500115fd1b264a010",
+        "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf016.png"
+      },
+      {
+        "exact_original_render_hash_match": true,
+        "original_plan_png_sha256": "e88e4989c46727ef7952357db546a5d9af9f20e4564f84de17963764aa83429c",
+        "pdf_page": 18,
+        "png_sha256": "e88e4989c46727ef7952357db546a5d9af9f20e4564f84de17963764aa83429c",
+        "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf018.png"
+      },
+      {
+        "exact_original_render_hash_match": true,
+        "original_plan_png_sha256": "8e7a5de0246685daedd7e6310d4dd432edf359b1f48ab6f43208b2f2b286b3b2",
+        "pdf_page": 64,
+        "png_sha256": "8e7a5de0246685daedd7e6310d4dd432edf359b1f48ab6f43208b2f2b286b3b2",
+        "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf064.png"
+      },
+      {
+        "exact_original_render_hash_match": true,
+        "original_plan_png_sha256": "c5b0b744f493ecf132e5ed0bb3c9561602c09e77418fb06e8b5eec2037a8e345",
+        "pdf_page": 65,
+        "png_sha256": "c5b0b744f493ecf132e5ed0bb3c9561602c09e77418fb06e8b5eec2037a8e345",
+        "render_path": "tmp/pdfs/haiku-v10-12-original-review/pdf065.png"
+      }
+    ],
+    "plan_sha256": "a7dc784be633c14accdff256e57abb784a486076da07b149c6f2e04096ee5541",
+    "procedure_sha256": "fb9069839cfd4b70319637fdd7b3bd4e11668250759e64593eb05654c2733d5b",
+    "review_protocol": [
+      "Require fresh hosted run job/source9 archive generation, manifest/runtime/images/source commit and downloaded case artifact generations/hashes.",
+      "Verify six unique exact cases/questions, receipt full completion, retained ledgers and no paid POST retries or counter reset/refund.",
+      "Inspect actual final text, each associated evidence ID/raw object and original source page; correct values do not repair a wrong associated source object.",
+      "Review bore/stroke units; USB engine-running condition; deictic USB checklist and applicable precautions; fuel table approximation/tolerance and warning; explicitly limited partial USB mode/time answer; legitimate unsupported fastener-torque fallback.",
+      "Check actual persisted predecessor/history/session-version chain for cases2-5; no seeded expected answer or history.",
+      "Preserve SYSTEM_ERROR/incomplete cases as coverage failure. Never treat missing source review as rider ambiguity.",
+      "Record source-quality acceptance separately from cached role usage, exact finalized/saved/SSE/recovery bindings, browser readiness, rollback and human evaluation.",
+      "Write new immutable operations/semantic_acceptance_v10_13.json with detailed unique report; decision ACCEPTED only if every required original-source/context/citation/history case passes."
+    ],
+    "serving_prompts_or_retrieval_enriched_from_plan": false,
+    "source_display": "Engineering only; no rider PDF/excerpt/figure display.",
+    "status": "READY_CURRENT_ACTUAL_ARTIFACTS_PENDING"
+  },
+  "ledger_reader": {
+    "collection": "arm_a_usage",
+    "compiled_maximum_owner_approved_tokens": 3000000,
+    "consumer": "cloud.grounded_generation.token_ceiling.resolve_token_ceiling(primary,grant_or_None)",
+    "database": "(default)",
+    "default_maximum_tokens": 999200,
+    "documents": [
+      "grounded-primary-nonrecurring-v1",
+      "owner-haiku-fallback-20261011-validation-v1",
+      "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1"
+    ],
+    "grant_200_representation": "Full recursive Firestore-decoded object; preserve strings, integers, booleans, nested maps and arrays.",
+    "grant_404_representation": null,
+    "historical_counters_and_reservations_retained": true,
+    "permanent_attempt_limit": 100,
+    "primary_keys": [
+      "version",
+      "reserved_attempts",
+      "reserved_tokens",
+      "maximum_attempts",
+      "maximum_tokens",
+      "token_ceiling_authorization"
+    ],
+    "project": "motomedic-ai-20261009",
+    "reader": "tmp/public_evaluator/hosted_client_v10_13.py ledger(project)",
+    "rest_path": "https://firestore.googleapis.com/v1/projects/motomedic-ai-20261009/databases/(default)/documents/arm_a_usage/<DOCUMENT>",
+    "shared_haiku_keys": [
+      "version",
+      "maximum_nanodollars",
+      "reserved_nanodollars",
+      "reservation_count"
+    ],
+    "shared_haiku_maximum_nanodollars": 1000000000
+  },
+  "maintainer_tool_read_only_review": {
+    "apply_fresh_transaction_checks": "Original primary attempts/tokens and shared Haiku counters must equal the proposal snapshot; preserve all existing events and counters.",
+    "apply_replay": "Same exact grant is idempotent; different grant rejects.",
+    "apply_requires_environment": "MOTOMEDIC_HOSTED_TOKEN_LIMIT_MAINTENANCE=true",
+    "grant_schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+    "owner_must_approve_exact_numeric_maximum_and_proposal_hash": true,
+    "owner_schema": "motomedic-direct-owner-primary-token-ceiling-approval-v1",
+    "prepare_authorizes_spending": false,
+    "prepare_command_shape": [
+      "python",
+      "-B",
+      "tools/manage_primary_token_ceiling.py",
+      "prepare",
+      "--budget",
+      "<EXACT_VALIDATED_V2_PHASE_BUDGET>",
+      "--ledgers",
+      "<FRESH_PRIVATE_LEDGER_SNAPSHOT>",
+      "--conditional-strategy",
+      "ONE_LARGEST_CONDITIONAL_PHASE",
+      "--output",
+      "<NEW_IMMUTABLE_PROPOSAL_PATH>"
+    ],
+    "proposal_schema": "motomedic-measured-primary-token-ceiling-proposal-v1",
+    "risks": [
+      "Tool prepare validates proposal shape and integer totals, but does not independently fetch/verify count/source/plan evidence; coordinator must build/validate exact v2 budget first.",
+      "Executing /app/tools/manage_primary_token_ceiling.py with owner evidence under /workspace fails owner_path.relative_to(ROOT); use the exact archived /workspace/tools script with owner file under the same archive root.",
+      "New maintenance source object needs a separate exact-object GET condition for the existing backend service account; replacing source9 GET would invalidate the forthcoming evaluator.",
+      "The printed counter_writes field denotes two Firestore document writes for maximum metadata and immutable grant; no reserved-attempt/token/money counters are replenished.",
+      "An application error after the transaction may leave outcome uncertain; read the permanent grant/allocation first, then use identical idempotent evidence if retry is necessary. Do not invent a new proposal or refund counters."
+    ],
+    "tool_path": "tools/manage_primary_token_ceiling.py",
+    "tool_sha256": "ec745cf332f9d014f28f013ee7b2a606ed2c47c5ed4a0d625b6f01a4c708ec29",
+    "validator_path": "cloud/grounded_generation/token_ceiling.py",
+    "validator_sha256": "b46386b6058abc3820776dbe3467437e401067a97cef1850e99458457915cd9f"
+  },
+  "preflight": {
+    "client_grant_receipt": "reports/public_evaluator/20261012/operations/client_source_grant_v9.json",
+    "client_source_receipt": "reports/public_evaluator/20261012/evaluator_client_source_v9.json",
+    "counter_receipt_sha_and_body_hash_bindings_required": true,
+    "generation_affordability_authorized": false,
+    "generation_calls": 0,
+    "initial_six_forecasts_fit_remaining_allocation": "DIAGNOSTIC_ONLY_MAY_BE_FALSE_WITH_VALID_COUNTER_PREFLIGHT",
+    "model_metadata_calls": 0,
+    "native_build_readback_path": "reports/public_evaluator/20261012/count_only_build_v10_13_v1.json",
+    "native_counter_calls": 36,
+    "native_receipt_path_pattern": "reports/public_evaluator/20261012/hosted_runs/<COUNT_BUILD_ID>/count_receipt.json",
+    "native_receipt_schema": "motomedic-hosted-native-count-role-preflight-v4",
+    "native_stage_order": [
+      "SELECTED_DRAFT",
+      "VERIFIER_WORST_STRUCTURAL_SCAFFOLD",
+      "VERIFIER_BASE_FULLSOURCE_PREFIX",
+      "CORRECTION_WORST_STRUCTURAL_SCAFFOLD",
+      "VERIFIER_SYNTHETIC_STRESS_ENVELOPE",
+      "VERIFIER_MINIMUM_OUTPUT_SHAPE"
+    ],
+    "native_submission_path": "reports/public_evaluator/20261012/count_only_submission_v10_13_v1.json",
+    "paid_post_cap_check": "capacity_check(budget,current_case_index,ledger(project)) before every POST",
+    "phase_budget_check_function": "validate_budget(budget,client_input_inventory,runtime_lock,original_plan)",
+    "phase_budget_function": "tmp/public_evaluator/phase_budget_v10_13.py make_budget(receipt,source,receipt_sha256,ROUTING_CONTRACT)",
+    "phase_budget_output_suggested_path": "reports/public_evaluator/20261012/haiku_v10_13_operations/measured_phase_budget_v1.json",
+    "phase_budget_schema": "motomedic-measured-initial-phase-capacity-v2",
+    "required_flags": [
+      "preflight_passed",
+      "selected_draft_native_window_eligible",
+      "selected_draft_counter_request_passed",
+      "known_verifier_count_request_passed",
+      "verifier_synthetic_stress_native_window_eligible",
+      "transport_allowlist_enforced",
+      "provider_allocation_delta_zero",
+      "native_counter_pass_not_generation_quota_or_factual_proof"
+    ],
+    "reservation_calls": 0,
+    "retained_floor": "One public engineering initial turn plus two human initial turns, each at componentwise maximum of six measured initial phase envelopes; no arbitrary future-question affordability guarantee",
+    "source_inventory_path": "tmp/public_evaluator/client_inputs_v10_13.json",
+    "transport_allowlist": [
+      "POST messages/count_tokens"
+    ]
+  },
+  "provider_calls": 0,
+  "recorded_at_utc": "2026-10-12T09:37:39.042848+00:00",
+  "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+  "schema": "motomedic-v10_13-read-only-evaluator-and-token-maintenance-readiness-v1"
+}

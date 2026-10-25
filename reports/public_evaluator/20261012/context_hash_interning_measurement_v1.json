@@ -1,0 +1,70 @@
+{
+  "actual_future_reranked_closures_or_dynamic_buffers_not_profiled": true,
+  "cases": [
+    {
+      "case_id": "EVAL_DIRECT_01",
+      "current_semantic_envelope_bytes": 26143,
+      "distinct_sha_values_after_approved_proof_omission": 0,
+      "prototype_bytes_saved": 0,
+      "prototype_hash_shared_semantic_envelope_bytes": 26143,
+      "roundtrip": "PASS",
+      "sha_value_occurrences_after_approved_proof_omission": 0
+    },
+    {
+      "case_id": "EVAL_FOLLOWUP_03",
+      "current_semantic_envelope_bytes": 15752,
+      "distinct_sha_values_after_approved_proof_omission": 0,
+      "prototype_bytes_saved": 0,
+      "prototype_hash_shared_semantic_envelope_bytes": 15752,
+      "roundtrip": "PASS",
+      "sha_value_occurrences_after_approved_proof_omission": 0
+    },
+    {
+      "case_id": "EVAL_PARTIAL_05",
+      "current_semantic_envelope_bytes": 14786,
+      "distinct_sha_values_after_approved_proof_omission": 0,
+      "prototype_bytes_saved": 0,
+      "prototype_hash_shared_semantic_envelope_bytes": 14786,
+      "roundtrip": "PASS",
+      "sha_value_occurrences_after_approved_proof_omission": 0
+    },
+    {
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "current_semantic_envelope_bytes": 12463,
+      "distinct_sha_values_after_approved_proof_omission": 0,
+      "prototype_bytes_saved": 0,
+      "prototype_hash_shared_semantic_envelope_bytes": 12463,
+      "roundtrip": "PASS",
+      "sha_value_occurrences_after_approved_proof_omission": 0
+    },
+    {
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "current_semantic_envelope_bytes": 5737,
+      "distinct_sha_values_after_approved_proof_omission": 0,
+      "prototype_bytes_saved": 0,
+      "prototype_hash_shared_semantic_envelope_bytes": 5737,
+      "roundtrip": "PASS",
+      "sha_value_occurrences_after_approved_proof_omission": 0
+    },
+    {
+      "case_id": "EVAL_USB_02",
+      "current_semantic_envelope_bytes": 32480,
+      "distinct_sha_values_after_approved_proof_omission": 0,
+      "prototype_bytes_saved": 0,
+      "prototype_hash_shared_semantic_envelope_bytes": 32480,
+      "roundtrip": "PASS",
+      "sha_value_occurrences_after_approved_proof_omission": 0
+    }
+  ],
+  "classification": "OFFLINE_PRIVATE_PROTOTYPE_ONLY_NOT_RUNTIME_CHANGE",
+  "conclusion": "Approved proof-only omission already removed all SHA strings from the three semantic source fields in these six reconstructed closures. Hash interning therefore provides zero further byte reduction and was not applied to runtime.",
+  "deployment_acceptance": false,
+  "human_signoff": false,
+  "measurement": "Only the existing generic hash-string exclusion was removed from an isolated in-memory function prototype. Immutable evidence IDs remain literal. Stable binding hashes outside the packed three source fields remain literal. All projectedsemanticvalues roundtrip exact.",
+  "models_or_retrieval_executed": false,
+  "native_counter_calls": 0,
+  "provider_calls": 0,
+  "runtime_file_sha256_before_after": "1c5859a3e9308c1ef6fb55539630ff670aee907067c020a8dc773facc983f9a8",
+  "schema": "motomedic-synthetic-hash-interning-measurement-v1",
+  "source_or_approval_changed": false
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "timestamp": "2026-10-12T05:05:13.318053798Z",
+    "message": "Digest: sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:13.321270628Z",
+    "message": "Status: Downloaded newer image for us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:14.435604494Z",
+    "message": "Step 3/11 : COPY --chown=motomedic:motomedic . /app"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:16.287321449Z",
+    "message": "Step 4/11 : RUN mkdir -p /app/build/serving-artifacts && chown motomedic:motomedic /app/build/serving-artifacts"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:20.261551709Z",
+    "message": "Step 6/11 : USER motomedic"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:21.317156299Z",
+    "message": "Step 9/11 : LABEL org.motomedic.input-tree-sha256=4fe9134097a68b144b80947835ab554f7ef59881ea20756c2e129748f1239936"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:21.467289972Z",
+    "message": "Step 10/11 : LABEL org.motomedic.serving-manifest-sha256=b94faeb2c4774cd121c4e6f622a5b2371cd9c9df0147fe40b4ddbb25af9bed52"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:21.826322142Z",
+    "message": "Successfully tagged us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_6-4fe9134097a6"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:22.199143084Z",
+    "message": "Pushing us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a:serving-v10_6-4fe9134097a6"
+  },
+  {
+    "timestamp": "2026-10-12T05:05:22.937942950Z",
+    "message": "The push refers to repository [us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a]"
+  }
+]

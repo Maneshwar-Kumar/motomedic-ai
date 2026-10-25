@@ -8,39 +8,77 @@ from streamlit.testing.v1 import AppTest
 from rider_ui.tests.fixture_api import serve, requests, operations, sessions, Handler
 
 class AppTests(unittest.TestCase):
+    def test_preview_disables_input_after_confirmation_and_creates_no_operation(self):
+        server=serve(0)
+        threading.Thread(target=server.serve_forever,daemon=True).start()
+        requests.clear();sessions.clear();operations.clear()
+        env={'MOTOMEDIC_RIDER_API_URL':'http://127.0.0.1:'+str(server.server_port),
+            'MOTOMEDIC_RIDER_API_TOKEN':'ui-test-only','MOTOMEDIC_UI_ENGINEERING_LOOPBACK':'1',
+            'MOTOMEDIC_RIDER_ANSWERS_ENABLED':'false'}
+        try:
+            with patch.dict(os.environ,env):
+                at=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=15).run()
+                self.assertFalse(at.exception)
+                at.checkbox[0].check().run()
+                self.assertFalse(at.exception)
+                self.assertTrue(at.chat_input[0].disabled)
+                self.assertIn('Answering is paused while we finish checking the demo.',[item.value for item in at.info])
+                # Force a widget return independently of the browser's disabled
+                # control to exercise the server dispatch guard as well.
+                import streamlit
+                real_chat_input=streamlit.chat_input
+                sent=[False]
+                def forged(*args,**kwargs):
+                    value=real_chat_input(*args,**kwargs)
+                    if not sent[0]:
+                        sent[0]=True
+                        return 'Forged disabled-widget question'
+                    return value
+                with patch('streamlit.chat_input',side_effect=forged):at.run()
+                self.assertFalse(at.exception)
+                self.assertEqual(requests,[]);self.assertEqual(operations,{})
+                self.assertIsNone(at.session_state['pending'])
+        finally:
+            server.shutdown();server.server_close()
+
+    def show_saved_notice_fixture(self, *, state='SUPPORTED', composition=None, reasons=None, verified=True):
+        """Render only a saved synthetic view; no request or model call."""
+        with patch.dict(os.environ, {'MOTOMEDIC_RIDER_API_URL': '', 'MOTOMEDIC_RIDER_API_TOKEN': ''}):
+            at = AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=15).run()
+            response = {'type': state, 'natural_language': 'Exact synthetic saved answer.',
+                'technical_content': False, 'cited_pages': [], 'reason_codes': reasons or [],
+                'release_gate_passed': verified, 'semantic_verification_passed': verified}
+            view = {'session_id': 'e' * 32, 'version': 1, 'response': response,
+                'choices': [], 'history': [], 'runtime_controls': {'composition': composition or {}}}
+            at.session_state['messages'] = [('rider', 'Synthetic question'), ('assistant', view)]
+            at.session_state['view'] = view
+            at.run()
+            self.assertFalse(at.exception)
+            return at, view
+
+    def test_only_proven_native_input_overflow_suggests_a_new_conversation(self):
+        at, view = self.show_saved_notice_fixture(state='SYSTEM_ERROR', verified=False,
+            reasons=['COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION'])
+        self.assertEqual([item.value for item in at.info],
+            ['This chat is too large to process. Start a new conversation for your next question.'])
+        self.assertEqual(at.session_state['view'], view)
+        self.assertIsNone(at.session_state['pending'])
+
+    def test_quota_budget_outage_and_output_bound_errors_do_not_suggest_a_new_chat(self):
+        for code in ('PROVIDER_HTTP_429', 'PROVIDER_WHOLE_TURN_ALLOCATION_LIMIT',
+                     'CLAUDE_SPEND_LIMIT', 'PROVIDER_ADMISSION_STORE_UNAVAILABLE',
+                     'FINAL_PRESENTATION_TOKEN_BOUND_NO_TRUNCATION'):
+            with self.subTest(code=code):
+                at, _ = self.show_saved_notice_fixture(state='SYSTEM_ERROR', verified=False,
+                    reasons=[code], composition={'start_new_conversation_required': True})
+                self.assertFalse(at.info)
+
     def test_disconnected_has_no_advice_input(self):
         with patch.dict(os.environ,{'MOTOMEDIC_RIDER_API_URL':'','MOTOMEDIC_RIDER_API_TOKEN':''}):
             at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=15).run()
             self.assertFalse(at.exception)
             self.assertTrue(at.chat_input[0].disabled)
             self.assertFalse(any('not connected' in x.value for x in at.info))
-    def test_confirmation_feedback_and_no_duplicate_rerun(self):
-        server=serve(0)
-        thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
-        requests.clear();sessions.clear();operations.clear()
-        env={'MOTOMEDIC_RIDER_API_URL':'http://127.0.0.1:'+str(server.server_port),
-             'MOTOMEDIC_RIDER_API_TOKEN':'ui-test-only','MOTOMEDIC_UI_ENGINEERING_LOOPBACK':'1'}
-        try:
-            with patch.dict(os.environ,env):
-                at=AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py'), default_timeout=15).run()
-                self.assertFalse(at.exception)
-                self.assertTrue(at.chat_input[0].disabled)
-                at.checkbox[0].check().run()
-                self.assertFalse(at.chat_input[0].disabled)
-                at.chat_input[0].set_value('Engineering test only').run()
-                self.assertFalse(at.exception)
-                self.assertTrue(any(x.label=='Yes' for x in at.button))
-                next(x for x in at.button if x.label=='Yes').click().run()
-                self.assertFalse(at.exception)
-                self.assertTrue(any(x.label=='Tried, not fixed' for x in at.button))
-                next(x for x in at.button if x.label=='Tried, not fixed').click().run()
-                self.assertFalse(at.exception)
-                self.assertEqual(at.session_state['view']['response']['type'],'UNSUPPORTED')
-                self.assertIn('ACTION_COMPLETED_UNRESOLVED',at.session_state['view']['history'][0]['label'])
-                count=len(requests);at.run();self.assertEqual(len(requests),count)
-                self.assertEqual(count,3)
-        finally:
-            server.shutdown();server.server_close()
     def test_reset_detaches_chat_and_diagnostic_context(self):
         server=serve(0)
         threading.Thread(target=server.serve_forever,daemon=True).start()

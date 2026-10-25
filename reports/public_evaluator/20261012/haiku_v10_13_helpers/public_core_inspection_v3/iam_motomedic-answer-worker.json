@@ -1,0 +1,24 @@
+{
+  "all_users_invoker_only_added": true,
+  "existing_exact_public_policy_recovered": false,
+  "inspection_sha256": "dbe0def078fea27c0c6bdfb41aafcc725a44e612cc6480aba1d7502b20d9d41f",
+  "policy": {
+    "bindings": [
+      {
+        "members": [
+          "allUsers",
+          "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ],
+        "role": "roles/run.invoker"
+      }
+    ],
+    "etag": "BwZdopKp1dM=",
+    "version": 1
+  },
+  "prior_policy_sha256": "c5b8e1b391c14c61eaaf47c26f784a1fdaa44d332d680fa6d425c80561d35041",
+  "provider_calls": 0,
+  "quality_acceptance": false,
+  "schema": "motomedic-core-public-invoker-application-v3",
+  "service": "motomedic-answer-worker",
+  "unrelated_policy_rows_preserved": true
+}

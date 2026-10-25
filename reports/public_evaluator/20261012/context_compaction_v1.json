@@ -1,0 +1,189 @@
+{
+  "actual_finalized_verifier_context_always_counted_before_generation": true,
+  "authority_bindings": "The full unprojected admitted payload is still validated before and after generation and its SHA is retained in stable context and exact-finalized-response verification binding. No authority/source selection change.",
+  "cases": [
+    {
+      "after_component_json_bytes": {
+        "evidence": 17690,
+        "full_evidence_payload_sha256": 66,
+        "index_id": 32,
+        "manual_checksum": 66,
+        "required_source_display": 4808,
+        "runtime_contract": 1135,
+        "source_authority_lock": 66,
+        "source_gaps": 178,
+        "source_projection": 3467,
+        "verified_oem_support": 396
+      },
+      "after_stable_json_bytes": 28112,
+      "before_stable_json_bytes": 40671,
+      "case_id": "EVAL_DIRECT_01",
+      "model_context_semantic_values_unchanged": true,
+      "original_admitted_payload_hash_retained": true,
+      "reconstructed_full_admitted_payload_sha256": "93d7f43fdc899d9f3382f21c83733c51bccf32a1f5dcedd519e3fc1b1e546037",
+      "semantic_projection_roundtrip": "PASS"
+    },
+    {
+      "after_component_json_bytes": {
+        "evidence": 10299,
+        "full_evidence_payload_sha256": 66,
+        "index_id": 32,
+        "manual_checksum": 66,
+        "required_source_display": 3310,
+        "runtime_contract": 1135,
+        "source_authority_lock": 66,
+        "source_gaps": 691,
+        "source_projection": 1452,
+        "verified_oem_support": 396
+      },
+      "after_stable_json_bytes": 17721,
+      "before_stable_json_bytes": 24156,
+      "case_id": "EVAL_FOLLOWUP_03",
+      "model_context_semantic_values_unchanged": true,
+      "original_admitted_payload_hash_retained": true,
+      "reconstructed_full_admitted_payload_sha256": "d248e23d59620eb478bf0efa3d70893b305e236010c695946c98bcb5c44c6065",
+      "semantic_projection_roundtrip": "PASS"
+    },
+    {
+      "after_component_json_bytes": {
+        "evidence": 9263,
+        "full_evidence_payload_sha256": 66,
+        "index_id": 32,
+        "manual_checksum": 66,
+        "required_source_display": 3999,
+        "runtime_contract": 1135,
+        "source_authority_lock": 66,
+        "source_gaps": 178,
+        "source_projection": 1346,
+        "verified_oem_support": 396
+      },
+      "after_stable_json_bytes": 16755,
+      "before_stable_json_bytes": 22732,
+      "case_id": "EVAL_PARTIAL_05",
+      "model_context_semantic_values_unchanged": true,
+      "original_admitted_payload_hash_retained": true,
+      "reconstructed_full_admitted_payload_sha256": "0cfb01abd98cb196d7816101a21fb125f213814e2edb360944884d35d14ea0b8",
+      "semantic_projection_roundtrip": "PASS"
+    },
+    {
+      "after_component_json_bytes": {
+        "evidence": 7197,
+        "full_evidence_payload_sha256": 66,
+        "index_id": 32,
+        "manual_checksum": 66,
+        "required_source_display": 3309,
+        "runtime_contract": 1135,
+        "source_authority_lock": 66,
+        "source_gaps": 576,
+        "source_projection": 1381,
+        "verified_oem_support": 396
+      },
+      "after_stable_json_bytes": 14432,
+      "before_stable_json_bytes": 19749,
+      "case_id": "EVAL_TOPIC_TABLE_04",
+      "model_context_semantic_values_unchanged": true,
+      "original_admitted_payload_hash_retained": true,
+      "reconstructed_full_admitted_payload_sha256": "e4ebc9969acd5e33005a7eeee4016e9f112daad01c6443e94d5736b60394a4a7",
+      "semantic_projection_roundtrip": "PASS"
+    },
+    {
+      "after_component_json_bytes": {
+        "evidence": 4093,
+        "full_evidence_payload_sha256": 66,
+        "index_id": 32,
+        "manual_checksum": 66,
+        "required_source_display": 2,
+        "runtime_contract": 1135,
+        "source_authority_lock": 66,
+        "source_gaps": 1032,
+        "source_projection": 610,
+        "verified_oem_support": 396
+      },
+      "after_stable_json_bytes": 7706,
+      "before_stable_json_bytes": 10240,
+      "case_id": "EVAL_UNSUPPORTED_06",
+      "model_context_semantic_values_unchanged": true,
+      "original_admitted_payload_hash_retained": true,
+      "reconstructed_full_admitted_payload_sha256": "a517e727168517cfab5de5732cd3a9cc02d377e468a0d1b6f9feed8b4955c170",
+      "semantic_projection_roundtrip": "PASS"
+    },
+    {
+      "after_component_json_bytes": {
+        "evidence": 20312,
+        "full_evidence_payload_sha256": 66,
+        "index_id": 32,
+        "manual_checksum": 66,
+        "required_source_display": 8069,
+        "runtime_contract": 1135,
+        "source_authority_lock": 66,
+        "source_gaps": 178,
+        "source_projection": 3921,
+        "verified_oem_support": 396
+      },
+      "after_stable_json_bytes": 34449,
+      "before_stable_json_bytes": 50192,
+      "case_id": "EVAL_USB_02",
+      "model_context_semantic_values_unchanged": true,
+      "original_admitted_payload_hash_retained": true,
+      "reconstructed_full_admitted_payload_sha256": "cafe055e5f354e4d7e52944bac6b2c455a4f70cf43abe4e43e0f9441bd4eb4fd",
+      "semantic_projection_roundtrip": "PASS"
+    }
+  ],
+  "classification": "SYNTHETIC_PROVIDER_FREE_ORIGINAL_SOURCE_RECONSTRUCTION",
+  "code_sha256": {
+    "cloud/grounded_generation/test_verified_qa.py": "cf6b31618758219d38939ac24139309f2122d4d3ac2e0047a33387f3420f65b9",
+    "cloud/grounded_generation/verified_qa.py": "1c5859a3e9308c1ef6fb55539630ff670aee907067c020a8dc773facc983f9a8"
+  },
+  "date": "2026-10-12",
+  "deployment_acceptance": false,
+  "failed_hosted_run_id": "53339a5f-3c60-486c-a18e-e0fa110e1502",
+  "final_live_reranked_context_counts_pending": true,
+  "human_signoff": false,
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "measurements": "Canonical JSON UTF8 byte counts only; the old admitted case objects are reconstructed engineering inputs, not final live reranked closures or native token counts.",
+  "native_context_bound_demonstrated": false,
+  "policy_and_schema_bytes": {
+    "draft_policy": 4491,
+    "draft_schema": 794,
+    "verify_policy": 4575,
+    "verify_schema": 1184
+  },
+  "provider_counter_calls": 0,
+  "provider_generation_calls": 0,
+  "reservation_calls": 0,
+  "retained_content": [
+    "every exact source/span text",
+    "table header/units/positional cells/null-versus-missing",
+    "section/procedure/context/dependencies",
+    "applicable warnings/prerequisites/conditions",
+    "page/evidence identities",
+    "source gaps",
+    "complete history/finalized response/binding in separate uncached dynamic dictionary"
+  ],
+  "retrieval_or_models_executed_for_measurements": false,
+  "schema": "motomedic-context-compaction-engineering-v1",
+  "semantic_representation": "Readable exact repeated JSON values and repeated field-name schemas share references; full immutable citation IDs and SHA values remain literal; reserved-key collisions are escaped and strict inverse checked.",
+  "server_proof_only_omissions": [
+    "source_object.original_object_sha256",
+    "reviewed_source_context.original_raw_object_sha256",
+    "reviewed_source_context.original_object_sha256",
+    "reviewed_source_context.component_review_sha256",
+    "required_source_display.source_spans.text_sha256",
+    "required_source_display.source_spans.text_span",
+    "required_source_display.source_spans.provenance.bbox",
+    "required_source_display.source_spans.provenance.charspan"
+  ],
+  "source_approval_changed": false,
+  "source_diagnosis_file": "reports/public_evaluator/20261012/context_diagnosis_v1.json",
+  "source_diagnosis_sha256": "04e507335f72f9895a75a33fc433e9e97af0c1473e61a77e1b0f151153f57cfe",
+  "source_objects_changed": false,
+  "validation": {
+    "classification": "SYNTHETIC_PROVIDER_FREE",
+    "command": "python -m unittest cloud.grounded_generation.test_verified_qa cloud.grounded_generation.test_provider cloud.grounded_generation.test_cached_verifier cloud.grounded_generation.test_whole_turn_admission tools.test_build_candidate -q",
+    "coverage": "SharedProjectionTests includes strict roundtrip, collisions, invalid references/cycles, field schemas, literal identities, dynamic full-history/final binding, and approved metadata-only omission checks.",
+    "result": "PASS",
+    "seconds": 61.972,
+    "tests_passed": 103
+  }
+}

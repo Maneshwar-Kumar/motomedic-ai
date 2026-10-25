@@ -1,0 +1,870 @@
+{
+  "case_id": "GEN025",
+  "elapsed_seconds": 118.45,
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "group": "GOLDEN",
+  "operation_id": "7770184edab84857b8da0bcdd82a74d8",
+  "post_retries": 0,
+  "question": "Which riding mode combinations are listed?",
+  "response_sha256": "29eba74b532b578eb715b2037d6163f8a3bc590151abc079f0769847a2902b92",
+  "route": "SUPPORTED",
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": "cfbc4ab0616e3cf86216a85d205998b8f7ecea216885c9136a4f39c68f360bcf",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "7770184edab84857b8da0bcdd82a74d8",
+      "response_sha256": "29eba74b532b578eb715b2037d6163f8a3bc590151abc079f0769847a2902b92",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "verification_binding_sha256": "04860b5d95fb0a387c4d89e4e73d7dd7518f15471482c4bad9ee7ec7a61e8f5c"
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 2,
+    "response": {
+      "cited_pages": [
+        {
+          "evidence_id": "evidence_77334b27d80a1f1e7c1fe54b",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 32,
+          "pdf_page_index": 31
+        },
+        {
+          "evidence_id": "evidence_ab33eebe16865f95a711ddfa",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 32,
+          "pdf_page_index": 31
+        },
+        {
+          "evidence_id": "evidence_b7e876776f05725c8d89f4af",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 32,
+          "pdf_page_index": 31
+        },
+        {
+          "evidence_id": "evidence_ed64042cada40bb015dffc46",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 32,
+          "pdf_page_index": 31
+        }
+      ],
+      "claim_evidence_map": [
+        {
+          "claim_id": "draft:0",
+          "evidence_ids": [
+            "evidence_b7e876776f05725c8d89f4af",
+            "evidence_ab33eebe16865f95a711ddfa",
+            "evidence_ed64042cada40bb015dffc46",
+            "evidence_77334b27d80a1f1e7c1fe54b"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "FACT",
+          "text": "The manual's Riding Mode section lists the combinations Performance + ABS ON, Performance + Rear ABS OFF, ECO + ABS ON, and ECO + Rear ABS OFF."
+        },
+        {
+          "claim_id": "draft:1",
+          "evidence_ids": [],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "LIMITATION",
+          "text": "This partly answers your question. The retrieved manual information does not establish the specific operating behaviour or settings associated with each combination."
+        }
+      ],
+      "clarification_question": null,
+      "escalation_uri": "mailto:support@royalenfield.com",
+      "natural_language": "The manual's Riding Mode section lists the combinations Performance + ABS ON, Performance + Rear ABS OFF, ECO + ABS ON, and ECO + Rear ABS OFF. This partly answers your question. The retrieved manual information does not establish the specific operating behaviour or settings associated with each combination.",
+      "reason_codes": [
+        "VERIFIED_OPEN_QA_ACCEPTED"
+      ],
+      "release_gate_passed": true,
+      "semantic_support_proven": false,
+      "semantic_verification_passed": true,
+      "technical_content": true,
+      "trace_id": "159d6d061b394be6ae8915f1248829d4",
+      "type": "SUPPORTED"
+    },
+    "runtime_controls": {
+      "composition": {
+        "accepted_binding_sha256": "04860b5d95fb0a387c4d89e4e73d7dd7518f15471482c4bad9ee7ec7a61e8f5c",
+        "accepted_response_sha256": "15f364b8843e6caf4d293f94f5010f8386c2586d56f4913ce13ca12befb9bbaf",
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [
+          {
+            "binding_sha256": "04860b5d95fb0a387c4d89e4e73d7dd7518f15471482c4bad9ee7ec7a61e8f5c",
+            "draft_output_sha256": "d3011547f88402f55ee238fac0a882dc480566a4259247be95ed990e228ad46f",
+            "draft_provider": {
+              "cache_creation_input_tokens": 14884,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "ed38f71650cb4fecd9edfb938c0d853b0d1912acdf13a4f3ffbceed275edb41e",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 15,
+              "citable_evidence_ids_sha256": "b511171fd88d1f30150a3e41ae443f802bf78cf16d239d0ddd000778699913cc",
+              "estimated_cost_usd": 0.0020454,
+              "generation_calls": 1,
+              "input_tokens": 15128,
+              "input_tokens_counted": 15128,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "b9165d97cbfec8564c788346425f4bed83a5cedbc5b4f9b5586c6bfcace2192a",
+              "output_tokens": 321,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 3.478378993999968,
+              "raw_content_logged": false,
+              "request_bytes": 31771,
+              "reserved_input_token_ceiling": 15640,
+              "reserved_maximum_cost_usd": 0.002855,
+              "retry_count": 0,
+              "role": "private_draft",
+              "role_schema_template_sha256": "3e2097dce7386b8e86e0e0a4a900956f5d453e96e4b938ab65e3a2718fe2c820",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 244
+            },
+            "draft_seconds": 50.307466877000024,
+            "draft_validation_status": "VALID",
+            "numeric_citation_guard": {
+              "checked_measurement_pairs": 0,
+              "conversions_performed": false,
+              "semantic_verifier_still_required": true,
+              "unit_witness_deferred_to_verifier": 0,
+              "version": "literal-cited-object-native-measurements-v1"
+            },
+            "revision": 0,
+            "verdict_summary": {
+              "conflict_count": 0,
+              "decision": "RELEASE_PARTIAL",
+              "omission_count": 0,
+              "question_coverage": "PARTIAL",
+              "release_eligible": true,
+              "supported_claims": 2,
+              "total_claims": 2
+            },
+            "verification_provider": {
+              "cache_creation_input_tokens": 15164,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "7de6fdd6373c34d29176184c1e55486b6cfc89aa503edcda41d97b5cba8ff75c",
+              "cached_tokens": 0,
+              "citable_evidence_id_count": 15,
+              "citable_evidence_ids_sha256": "b511171fd88d1f30150a3e41ae443f802bf78cf16d239d0ddd000778699913cc",
+              "estimated_cost_usd": 0.0023635,
+              "generation_calls": 1,
+              "input_tokens": 17534,
+              "input_tokens_counted": 17534,
+              "model": "claude-haiku-5-5",
+              "native_role_schema_sha256": "a4f7a8b97430a098d7042b816c1a9b6a11803d41676831523b0c9930e9b67075",
+              "output_tokens": 462,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 4.104318320999937,
+              "raw_content_logged": false,
+              "request_bytes": 36563,
+              "reserved_input_token_ceiling": 53037,
+              "reserved_maximum_cost_usd": 0.007529625,
+              "retry_count": 0,
+              "role": "semantic_verifier",
+              "role_schema_template_sha256": "de5ad9929c54e7df5d81ff2fbb22717b6ee2a548c7ed8f3e3b5eb3c384b8a8bd",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 2370
+            },
+            "verification_seconds": 61.40668938500016
+          }
+        ],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 1,
+        "draft_model": "claude-haiku-5-5",
+        "generation_calls": 2,
+        "model_routing": {
+          "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+          "initial_draft_request_sha256": "16b140de57246015c977f3b24075b977f844a05266879c3b76805a2d80d48f41",
+          "primary_input_tokens_counted": 15128,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+          "selected_draft_input_tokens": 15128,
+          "stable_context_sha256": "3db48d18f9eda01664fa9d72393b09c24a90cf230f76cd2a70aae6e5f8ecf92d",
+          "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+          "version": "haiku-literal-object-draft-finalized-verifier-v4"
+        },
+        "provider_calls": 2,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "start_new_conversation_required": false,
+        "total_private_pipeline_seconds": 113.04168186600009,
+        "verification_calls": 1,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": true,
+        "verifier_calls": 1,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_13",
+        "whole_turn_reservation": {
+          "correction_reserved": false,
+          "maximum_corrections": 1,
+          "maximum_wait_seconds": 107.83466,
+          "model_routing": {
+            "fixed_correction_native_tokens": 19172,
+            "fixed_verifier_native_tokens": 19757,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 16508,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "16b140de57246015c977f3b24075b977f844a05266879c3b76805a2d80d48f41",
+              "primary_input_tokens_counted": 15128,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 15128,
+              "stable_context_sha256": "3db48d18f9eda01664fa9d72393b09c24a90cf230f76cd2a70aae6e5f8ecf92d",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "slots": [
+              {
+                "attempt": 1,
+                "input_tokens": 15640,
+                "maximum_nanodollars": 2855000,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "draft"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 53037,
+                "maximum_nanodollars": 7529625,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "verify"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 68836,
+                "maximum_nanodollars": 9504500,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "correction"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 53037,
+                "maximum_nanodollars": 7529625,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "reverify"
+              }
+            ],
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "pacing_version": "whole-turn-sealed-unused-pacing-v4-haiku-roles",
+          "phases": [
+            {
+              "phase": "initial",
+              "phase_nonce": "10eec8ba1caeed5a1ee7520ac40cfae17ed698f3173e2aea0eddc09b38df79eb",
+              "plan_sha256": "6f4a500bb445e25ed3d4263c01020f9422c9d8f6726a36131c9e00dfc044ace8",
+              "reserved_attempts": 2,
+              "reserved_nanodollars": 10384625,
+              "reserved_tokens": 72277
+            }
+          ],
+          "plan_version": "whole-turn-haiku-role-native-envelope-v2",
+          "primary_token_ceiling": 2000000,
+          "reservation_mode": "INITIAL_PAIR_CONDITIONAL_CORRECTION",
+          "reserved_attempts": 2,
+          "reserved_nanodollars": 10384625,
+          "reserved_slots": [
+            {
+              "attempt": 1,
+              "input_tokens": 15640,
+              "maximum_nanodollars": 2855000,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "draft",
+              "tokens": 17440
+            },
+            {
+              "attempt": 1,
+              "input_tokens": 53037,
+              "maximum_nanodollars": 7529625,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "verify",
+              "tokens": 54837
+            }
+          ],
+          "reserved_tokens": 72277,
+          "role_forecast_binding": {
+            "fixed_correction_native_tokens": 19172,
+            "fixed_verifier_native_tokens": 19757,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 16508,
+            "role_plan": {
+              "draft_model_contract_sha256": "2046a04b252a90011be4637c66f9d57da48176dc91be0ba2b0b1f7beb90e5cd9",
+              "initial_draft_request_sha256": "16b140de57246015c977f3b24075b977f844a05266879c3b76805a2d80d48f41",
+              "primary_input_tokens_counted": 15128,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+              "selected_draft_input_tokens": 15128,
+              "stable_context_sha256": "3db48d18f9eda01664fa9d72393b09c24a90cf230f76cd2a70aae6e5f8ecf92d",
+              "verifier_contract_sha256": "c787c6167cb1bd15e7eaf1c2701d67505838203d4b7ba2a3f04a89f1a0aac80b",
+              "version": "haiku-literal-object-draft-finalized-verifier-v4"
+            },
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "role_forecast_sha256": "6f4a500bb445e25ed3d4263c01020f9422c9d8f6726a36131c9e00dfc044ace8",
+          "sealed_unused_slots": 0,
+          "sealing_status": "SEALED_UNUSED_CONFIRMED",
+          "token_ceiling_authorization": {
+            "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+            "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+            "maximum_tokens": 2000000,
+            "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+            "previous_maximum_tokens": 999200,
+            "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+            "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+          },
+          "version": "whole-turn-capacity-v1"
+        }
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 11,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_0f578049daa797b4bb00b976",
+          "evidence_16df2546fcf3ee0edb0cf3ec",
+          "evidence_39e673afc55d749610399c26",
+          "evidence_4808f410e808b353b66c6d8e",
+          "evidence_77334b27d80a1f1e7c1fe54b",
+          "evidence_91c555037ce3d96bff289594",
+          "evidence_ab33eebe16865f95a711ddfa",
+          "evidence_aef43455a47ebc6374b7bba9",
+          "evidence_b7e876776f05725c8d89f4af",
+          "evidence_bc21f201712faeaa4da13dbe",
+          "evidence_d1dbf489a8cb9e87db14468a",
+          "evidence_d1fb2c4d9b57112a74508362",
+          "evidence_d867f6c7da84e269ebddf176",
+          "evidence_ed64042cada40bb015dffc46",
+          "evidence_f2ff4f0f41463b16fe7a483d"
+        ],
+        "authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+        "chunk_ids": [
+          "chunk_d3d1cc3f4ac90bb412ff9145",
+          "chunk_a6021c281f2e03bc418fa6be",
+          "chunk_4c1d83811973e7e55f0b2045",
+          "chunk_164f83c133c02a791753e186",
+          "chunk_199cbd3babd142e380aa1421"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_d3d1cc3f4ac90bb412ff9145",
+            "evidence_ids": [
+              "evidence_49a98fb55e216025e19c92a2"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_d3d1cc3f4ac90bb412ff9145",
+            "evidence_ids": [
+              "evidence_cb7429d8ba39d16df149ca02"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_a6021c281f2e03bc418fa6be",
+            "evidence_ids": [
+              "evidence_41c34543ba966c1282227b97"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_00dc29b65dcf4af0d791ff57"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_02cb1d8d55bd9c3d6fd1210f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_04bae5c2791f685b8132369f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_0d12e682aebf039f18d1458e"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_196970710740be5693e59c71"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_1c6279c3a1c3b38a6dbd2ac0"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_2de90e96dc0cbfcf9171062d"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_36f4b8a237e20715f19a2e5c"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_3e6b572eca688a3da8695d3f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_7dc41008debba48523d0234a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_9605dcf7af1da1b8736513d1"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_9c8cc42cbab0e52ab501983c"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_a768f77198d636812529cd89"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_ae4dec35ddec2220cb0251e9"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_b5dc930213bf57cf5d5bd866"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_b8cc5cefbb9f103b2f62e344"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_be4b2d0ec6adc8d1d7523972"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_e205bd5d209a9c15b4aad3a6"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_4c1d83811973e7e55f0b2045",
+            "evidence_ids": [
+              "evidence_f8803f8cc9430840274b6068"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_2839d8b87962eb1e41a31ba4"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_2a14f89d694b79385df9f678"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_31aee21d09e3e64a286589f8"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_45c8286bec9007476182f08d"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_491c318a774015ef288bb9b7"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_60467e4ed304f5e5050c1bf7"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_660a56760700da778d9c2c58"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_6639ca1cb5e9df828786126c"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_7e80e7fc7ffe131d0c474104"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_a10b231ff01b0426040f6fae"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_a3621e4462f5eec9d1a1aba5"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_a3e8c110ef4ae5cb6fd3cdc7"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_a85d84a8c25bfcceccd94e4b"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_b2f0fb6f9b77f3e5ff22ef07"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_c53781c8f48fe385281394e7"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_c5ea83c02b59378321ddb39f"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_d182952831af2eb7ee9afdc2"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_d256c90594a37c377474a363"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_199cbd3babd142e380aa1421",
+            "evidence_ids": [
+              "evidence_dd153b6de2da88d43eb98407"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_20ef9013cd5ec3dc4614e73c",
+            "evidence_ids": [
+              "evidence_01bb03a17dcd0490c911475a"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_14fbd5dfce15cf3b58ff97c9",
+            "evidence_ids": [
+              "evidence_490ed87adb991cbc93fd40d3"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_14fbd5dfce15cf3b58ff97c9",
+            "evidence_ids": [
+              "evidence_54a60dc8f7049c76bccdf158"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_14fbd5dfce15cf3b58ff97c9",
+            "evidence_ids": [
+              "evidence_7704638af6f568420c99c37d"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_14fbd5dfce15cf3b58ff97c9",
+            "evidence_ids": [
+              "evidence_92fe721bfa146358892ab052"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_14fbd5dfce15cf3b58ff97c9",
+            "evidence_ids": [
+              "evidence_b990c94147a23591a5ddb9e1"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_14fbd5dfce15cf3b58ff97c9",
+            "evidence_ids": [
+              "evidence_fd475ddd79ecb7ff70eebc27"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          },
+          {
+            "chunk_id": "chunk_789c87b90c47708cf2ae75cc",
+            "evidence_ids": [
+              "evidence_09d8e6e8b742f5bc5031ff55"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 1.6114657699999952,
+        "retrieval_policy": {
+          "assembled_hit_count": 5,
+          "assembled_hit_limit": 10,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.6666666666666666,
+            "dense_top_distinct_parent_ids": [
+              "section_8bbae827a145b88f506c5d92",
+              "section_35d69c20020211c4be424f0b",
+              "section_a8e96f62120abdb822b83cdc"
+            ],
+            "disagreeing_rank_positions": [
+              3
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.016129032258064595,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_8bbae827a145b88f506c5d92",
+              "section_35d69c20020211c4be424f0b",
+              "section_391375c836750ba5c7095687"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "preserved_initial_anchor_chunk_ids": [],
+          "primary_hit_limit": 5,
+          "recovery_attempts": 0,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 20,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.0002360199998747703,
+            "dense_query_embedding_and_qdrant_rpc": 0.6030284309999843,
+            "initial_assembly": 0.021151731999907497,
+            "reranking": 0.7963724020000882
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v6"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "14e7784c85fd4444b30240c2aed85f63",
+    "verified_delivery": {
+      "binding_sha256": "04860b5d95fb0a387c4d89e4e73d7dd7518f15471482c4bad9ee7ec7a61e8f5c",
+      "draft_model": "claude-haiku-5-5",
+      "evidence_payload_sha256": "cfbc4ab0616e3cf86216a85d205998b8f7ecea216885c9136a4f39c68f360bcf",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "model_route": "HAIKU_DRAFT_HAIKU_VERIFY",
+      "model_routing_contract_sha256": "e438a065e8a22190e7fd08a5b9ffba2eeccb4389781faee245d15f70a278e64d",
+      "operation_id": "7770184edab84857b8da0bcdd82a74d8",
+      "presentation_sha256": "29eba74b532b578eb715b2037d6163f8a3bc590151abc079f0769847a2902b92",
+      "response_sha256": "15f364b8843e6caf4d293f94f5010f8386c2586d56f4913ce13ca12befb9bbaf",
+      "role_plan_sha256": "4bd2e57a0d81f09cca1f91b233eb313ca1f5b409c726b84dd34424b5075a034d",
+      "runtime_lock": "14476badaffd6ccf519ed54a82413605a57ae98767cd5e96bdbf9fbc3c552664",
+      "source_authority_lock": "dc9e9adb1c867ddc40a2ada745c9de957ffc3fadc36681e41f76cb5850a22ae5",
+      "text_sha256": "117b087cd64a4cd4ca25d4817168c2acc741e81ca68160ea6fdb1bc13ad52199",
+      "verifier_model": "claude-haiku-5-5"
+    },
+    "version": 1
+  },
+  "status": "SAVED_STREAMED_RECOVERED",
+  "streamed_text": "The manual's Riding Mode section lists the combinations Performance + ABS ON, Performance + Rear ABS OFF, ECO + ABS ON, and ECO + Rear ABS OFF. This partly answers your question. The retrieved manual information does not establish the specific operating behaviour or settings associated with each combination."
+}

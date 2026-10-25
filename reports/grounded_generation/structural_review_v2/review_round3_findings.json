@@ -1,0 +1,105 @@
+{
+  "reviewer": "independent-subagent",
+  "round": 3,
+  "review_basis": {
+    "proposal_path": "reports/grounded_generation/structural_review_v2/proposal.json",
+    "proposal_sha256_verified": "df2200c8c27a74dfc1d2cbe6f113f9f60f3fd34508c194d6b3f35440be48ae34",
+    "builder_sha256": "25a8c93c2e8d45d0eef7d9d0972b4b8bf9f98b0388037f8f12f18995f529db87",
+    "loader": "cloud/grounded_generation/serving_source_authority_v5.py. PROPOSAL_SHA matches revision 3 and REVIEW_SHA is None. Only DISPLAY_ROLES changed (WARNING/FACT/LIMITATION); link and closure logic is unchanged from round 2.",
+    "simulation": "scratchpad indep_scripts/v5_round3.py loads v4 and the v5 candidate without provider calls. It uses a SIMULATED review file kept only in the scratchpad (round3/SIMULATED_review_not_real.json); this is not an approval and was never written to the repository. For every one of the 79 members it runs assemble() on the member's retrieval chunk and select() with that member as the only cited evidence, then records the payload, pages, objects outside the component, rider-facing displays and the model-visible reviewed_source_context. It also diffs the v4 and v5 closures and display sets for every non-member object. Results are in round3/simulation.json.",
+    "mechanical_checks_passed": [
+      "79 source objects: exact_text matches the immutable raw text, provenance matches, and no object is a figure.",
+      "25 parents: approved plus excluded equals each immutable child set.",
+      "All printed_page_labels match the index printed_page values.",
+      "The loader loads revision 3 without error, and every closure is within its bound."
+    ]
+  },
+  "simulation_results": {
+    "per_component_selected_payload_for_any_single_member": {
+      "LUGGAGE_AND_ACCESSORY_LOADING": "15 objects, pp14-15, 4 own WARNING displays (891 bytes)",
+      "RE_APP_PHONE_COMPATIBILITY": "4 objects, p54, no displays",
+      "DISPLAY_LANGUAGE_MENU": "10 objects, pp50-51, no displays",
+      "COMPASS_NAVIGATION_NOTE": "5 objects, pp54+57 (compass NOTE plus the 4 p54 RE-app objects), no displays",
+      "TELL_TALE_INDICATORS": "11 objects, p62 only, 2 own WARNING displays (446 bytes); no imported content",
+      "BATTERY_HANDLING_NOTES": "7 objects, pp104/105/107, 4 own displays (493 bytes)",
+      "HEADLIGHT_BEAM_ADJUSTMENT": "2 objects, p109, no displays",
+      "TAIL_AND_LICENSE_PLATE_LAMP": "2 objects, p110, no displays",
+      "BRAKE_PAD_WEAR_CHECK": "5 objects, pp90-91, no displays",
+      "REAR_SUSPENSION_PRELOAD": "10 objects, pp116-117, 1 FACT display (166 bytes); no p20 import",
+      "STORAGE_PRECAUTIONS": "18 objects (11 storage + 7 battery), pp104/105/107/120; displays are only the 4 battery ones (493 bytes); no fuse, starter, refuel or brake-service displays",
+      "LUBRICANT_TABLE_FOOTNOTE": "The footnote is in no retrieval chunk, so it can never be an anchor itself. It is reached only through the lubricant-table dependency (table closure 6: table, CAUTION, NOTE 1-3, footnote)."
+    },
+    "non_member_v4_objects_whose_closure_changed": "9 objects, all lubricant or brake/clutch-fluid items on pp21, 83 and 88 that already linked to the p21 table: evidence_a6950ea7..., 37c6c31f..., 3a4f927a..., 424971c8..., 8b9b87ad..., 16d0fa87...8c063917, ca6f027d...ebd845bb, fc08bdc4...00db87e5, fdd616b4...fd4f1c01. Each gains only the p21 NOTE items 1-3 and the DOT 4 footnote, which are relevant to them, and zero added displays.",
+    "unrelated_warning_injection": "None found. Every answer's closure stays on its own component's pages, plus the intended storage-to-battery and compass-to-RE-app links."
+  },
+  "pages_visually_checked": [5, 6, 8, 14, 15, 21, 27, 47, 50, 51, 54, 57, 61, 62, 63, 66, 90, 91, 104, 105, 107, 109, 110, 116, 117, 120],
+  "objects_checked": 79,
+  "round1_resolution": {
+    "F1": "RESOLVED", "F2": "RESOLVED", "F3": "RESOLVED", "F4": "RESOLVED", "F5": "PARTIAL", "F6": "RESOLVED",
+    "F7": "RESOLVED", "F8": "RESOLVED", "F9": "RESOLVED", "F10": "RESOLVED", "F11": "RESOLVED", "F12": "RESOLVED",
+    "F13": "RESOLVED", "F14": "RESOLVED", "F15": "RESOLVED"
+  },
+  "round2_resolution": {
+    "R2-N1": "RESOLVED",
+    "R2-N2": "RESOLVED",
+    "R2-N3": "RESOLVED",
+    "R2-N4": "RESOLVED",
+    "R2-N5": "RESOLVED",
+    "R2-N6": "RESOLVED",
+    "R2-N7": "RESOLVED",
+    "R2-N8": "PARTIAL"
+  },
+  "round2_resolution_notes": {
+    "R2-N1": "Externals removed from TELL_TALE_INDICATORS (p63) and from STORAGE_PRECAUTIONS (fuel); verified by simulation above.",
+    "R2-N2": "Accepted as a residual limitation. The page-120 storage text itself carries no warning, the note accurately summarises p8 (printed 6) and p27 (printed 25), and no claim is invented. The drafter cannot cite the note, so storage answers will not show the fuel warning until a separately reviewed loader change (externals that are not traversed further) allows a clean link.",
+    "R2-N3": "Role is now FACT, which is in verified_qa TECHNICAL and so is treated as a cited technical claim; the collision with the AMBIGUOUS/CLARIFICATION route is gone. The residual is that no hosted verifier probe has been run; a rejection fails closed. Acceptable, but a probe should run before any live enablement, which is a separate scope.",
+    "R2-N4": "Path is now ['RECOMMENDED LUBRICANTS','FOOTNOTE'], matching CONTENTS p5 and the v4 table path. The display_omitted_reason is valid: the table closure is shared by engine-oil, coolant and fork-oil answers.",
+    "R2-N5": "Battery displays now carry 'Caution:' and 'Note:', consistent with the p6 SAFETY DEFINITIONS. Texts are faithful to p104/p105/p107.",
+    "R2-N6": "GVW and gross-weight links removed; the suspension closure is 10 objects, pp116-117 only.",
+    "R2-N7": "Accepted residual: the v4 contexts govern 1fd98dd6 and 408acecc. The added sentence in the 9d8a9d4e review_note ('mild disc-brake noise is normal does not establish that the pads are not worn') reaches the model.",
+    "R2-N8": "Duplication is gone and the display now leads with the normal start-up behaviour, but it drops the printed condition on how long the initial check-up lasts. See R3-N1."
+  },
+  "residual_limitations_assessment": {
+    "R2-N2": "ACCEPTABLE (documented; follow-up is a separate reviewed loader change)",
+    "R2-N7": "ACCEPTABLE",
+    "R2-N3": "ACCEPTABLE (hosted verifier probe required before live enablement, which is a separate scope)"
+  },
+  "findings": [
+    {
+      "id": "R3-N1",
+      "severity": "MINOR",
+      "component": "TELL_TALE_INDICATORS",
+      "evidence_ids": ["evidence_bc21f201712faeaa4da13dbe", "evidence_d867f6c7da84e269ebddf176"],
+      "page": 62,
+      "problem": "Mandatory display structural-v2-tell_tale_indicators-2 drops the printed qualifier '(until or after vehicle running for a particular distance / speed)'. That qualifier is the only page-62 statement that the start-up ABS lamp normally stays ON until the motorcycle has moved. Without it, 'ON during the initial check-up ... Do not run the motorcycle if the ABS indicator lamp remains continuously ON' can still be read as 'lamp still ON at standstill means do not ride', which is the F5 concern. A WARNING display must not drop a condition. (My own round-2 suggested wording had the same omission.)",
+      "evidence_from_page": "p62 (printed 60): '(3) ABS - Will be continuously ON during initial check up (until or after vehicle running for a particular distance / speed) and will turn OFF if system is ok, then will light up again in case of any ABS system malfunction.' CAUTION: 'Do not run motorcycle in case the ABS indicator lamp continuously \"ON\".'",
+      "required_fix": "Change only this display text, e.g.: 'The ABS indicator is ON during the initial check-up (until or after the vehicle has run a particular distance/speed) and turns OFF if the system is OK; it lights up again in case of any ABS system malfunction. Do not run the motorcycle if the ABS indicator lamp remains continuously ON.' Keep the same evidence_ids."
+    },
+    {
+      "id": "R3-N2",
+      "severity": "MINOR",
+      "component": "REAR_SUSPENSION_PRELOAD",
+      "evidence_ids": ["evidence_fb5ddc131802596bbfc6777e"],
+      "page": 117,
+      "problem": "The model-visible review_note still says 'the reviewed CLARIFICATION display records the printed cell', but the display role is now FACT and the loader no longer allows CLARIFICATION. The drafter and verifier read this note in reviewed_source_context. The stale role name contradicts the response they are evaluating and reintroduces the CLARIFICATION term that R2-N3 removed.",
+      "evidence_from_page": "n/a (proposal metadata; the printed p117 merged 32 psi cell is correctly described).",
+      "required_fix": "Change 'reviewed CLARIFICATION display' to 'reviewed FACT display' in the fb5ddc13 review_note (build_proposal.py notes['fb5ddc13']) and rebuild."
+    }
+  ],
+  "per_component_verdict": {
+    "LUGGAGE_AND_ACCESSORY_LOADING": "APPROVE",
+    "RE_APP_PHONE_COMPATIBILITY": "APPROVE",
+    "DISPLAY_LANGUAGE_MENU": "APPROVE",
+    "COMPASS_NAVIGATION_NOTE": "APPROVE",
+    "TELL_TALE_INDICATORS": "APPROVE_AFTER_FIXES",
+    "BATTERY_HANDLING_NOTES": "APPROVE",
+    "HEADLIGHT_BEAM_ADJUSTMENT": "APPROVE",
+    "TAIL_AND_LICENSE_PLATE_LAMP": "APPROVE",
+    "BRAKE_PAD_WEAR_CHECK": "APPROVE",
+    "REAR_SUSPENSION_PRELOAD": "APPROVE_AFTER_FIXES",
+    "STORAGE_PRECAUTIONS": "APPROVE",
+    "LUBRICANT_TABLE_FOOTNOTE": "APPROVE"
+  },
+  "overall": "APPROVE_AFTER_FIXES",
+  "overall_note": "No blocking or major issues remain. The transitive-import problem is gone for every member, and all three residual limitations are acceptable. Two one-string fixes remain open (R3-N1 display text, R3-N2 stale review_note), so this exact proposal (df2200c8...) is not approved and no approved_components list is issued. A revision 4 that changes only those two strings needs only a byte-diff confirmation plus a re-run of v5_round3.py; no further page review is required."
+}

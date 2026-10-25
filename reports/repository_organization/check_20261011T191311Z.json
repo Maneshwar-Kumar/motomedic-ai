@@ -1,0 +1,63 @@
+{
+  "schema_version": "repository-monitor-check-v1",
+  "trigger_utc": "2026-10-11T19:13:11.247Z",
+  "structure": {
+    "schema_version": "repository-structure-audit-v3",
+    "ok": false,
+    "unexpected_root_files": [],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "missing_critical_source_files": [
+      "reports/build/20261012/serving_manifest_v9.json"
+    ],
+    "integrity_errors": [
+      {
+        "path": "reports/build/20261012/serving_manifest_v9.json",
+        "reason": "CURRENT_SERVING_BINDING_FAILED",
+        "detail": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\kumar maneshwar\\\\OneDrive - The Boston Consulting Group, Inc\\\\Desktop\\\\Service Agent\\\\reports\\\\build\\\\20261012\\\\serving_manifest_v9.json'"
+      }
+    ],
+    "local_links_checked": 88,
+    "root_file_count": 48,
+    "runtime_freeze_files_verified": 64,
+    "current_serving_files_verified": 0,
+    "approved_output_files_verified": 187,
+    "note": "Canonical navigation, byte-exact historical v8 snapshots, current v9 inputs and original scoped approval paths. Not factual or deployment acceptance."
+  },
+  "polls": [
+    {
+      "thread_id": "01a12c4e-f3ef-7342-b33b-45cdb6511587",
+      "status": "active",
+      "cursor": "4fa8c308-659f-4313-94e2-55c7db91b3fe:1"
+    },
+    {
+      "thread_id": "01a12c11-9372-7e61-8283-02d780fe9232",
+      "status": "idle",
+      "cursor": "847b25cf-0c79-4522-b1c2-ebca40389d7b:3"
+    },
+    {
+      "thread_id": "01a12bb1-3fda-7603-9dcf-a28efe202bbb",
+      "status": "idle",
+      "last_cursor": "fa7c016d-3fc2-42a1-a5d3-ebd2456fc0d7:1"
+    }
+  ],
+  "observations": [
+    "Active build work and outputs stay under cloud/, rider_ui/, tools/ and reports/build/20261012.",
+    "Current checker requires the new serving manifest; it was absent during this check.",
+    "Historical v8 bytes and original source approvals pass retained integrity checks.",
+    "The missing manifest is an active build artifact and cannot be fabricated, moved or bypassed by organization work.",
+    "No unexpected root files or broken current navigation detected."
+  ],
+  "new_actionable_organization_changes": [],
+  "navigation_changed": [],
+  "moved_files": [],
+  "allowlist_changed": false,
+  "failure": "Current serving manifest binding incomplete.",
+  "clean_consecutive_checks": 0,
+  "pause_eligible": false,
+  "pause_reason": "Relevant build chat remains active.",
+  "provider_calls": 0,
+  "deployment_or_billing_changes": false,
+  "protected_paths_unchanged": true,
+  "monitor_status": "ACTIVE"
+}

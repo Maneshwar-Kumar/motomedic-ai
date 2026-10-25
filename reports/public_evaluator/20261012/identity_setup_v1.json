@@ -1,0 +1,55 @@
+{
+  "schema_version": "public-evaluator-identity-setup-v1",
+  "project": "motomedic-ai-20261009",
+  "provider": "projects/279945185781/locations/global/workloadIdentityPools/motomedic-public-release/providers/github-secret-publisher",
+  "service_account": "motomedic-gh-evaluator@motomedic-ai-20261009.iam.gserviceaccount.com",
+  "secret": "projects/motomedic-ai-20261009/secrets/motomedic-evaluator-anthropic-v1",
+  "mutations": [
+    {
+      "method": "POST",
+      "resource": "https://secretmanager.googleapis.com/v1/projects/motomedic-ai-20261009/secrets/motomedic-evaluator-anthropic-v1:setIamPolicy",
+      "role_added": "roles/secretmanager.secretVersionAdder",
+      "member_added": "serviceAccount:motomedic-gh-evaluator@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "response": {
+        "version": 1,
+        "etag": "BwZdlmPH/r0=",
+        "bindings": [
+          {
+            "role": "roles/secretmanager.secretVersionAdder",
+            "members": [
+              "serviceAccount:motomedic-gh-evaluator@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "resource": "https://secretmanager.googleapis.com/v1/projects/motomedic-ai-20261009/secrets/motomedic-evaluator-anthropic-v1:setIamPolicy",
+      "role_added": "roles/secretmanager.secretAccessor",
+      "member_added": "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+      "response": {
+        "version": 1,
+        "etag": "BwZdlmPjnyE=",
+        "bindings": [
+          {
+            "role": "roles/secretmanager.secretAccessor",
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          },
+          {
+            "role": "roles/secretmanager.secretVersionAdder",
+            "members": [
+              "serviceAccount:motomedic-gh-evaluator@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "old_disabled_identity_changed": false,
+  "billing_changed": false,
+  "secret_values_read_or_logged": false,
+  "provider_calls": 0
+}

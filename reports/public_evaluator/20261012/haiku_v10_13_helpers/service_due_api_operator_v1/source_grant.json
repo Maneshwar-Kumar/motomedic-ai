@@ -1,0 +1,50 @@
+{
+  "added_binding": {
+    "condition": {
+      "description": "Read only the exact owner-requested single service-due API diagnostic archive",
+      "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/engineering-diagnostics/v10_13/2c0c178fb159be995f3888c7a5fc82a8c29e3ebbdfec50c1033eecf31f76e4c7.tar.gz'",
+      "title": "motomedic-backend-exact-service-due-api-v10-13-v1"
+    },
+    "members": [
+      "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+    ],
+    "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet"
+  },
+  "all_previous_bindings_including_client10_and_artifact_creator_unchanged": true,
+  "prior_policy_sha256": "94898e8ba5e250653187f732e9df3061906db49ff01938b95a97efc6dba9beac",
+  "provider_calls": 0,
+  "public_iam_changed": false,
+  "readback_policy_sha256": "93827951b239ffb927d75dec21c06ddbd6c67eabc0c91b21bb373ff149d0dc39",
+  "source": {
+    "archive": "tmp/service-due-api-v13-v1/source.tar.gz",
+    "bytes": 58939,
+    "files": {
+      "reports/public_evaluator/20261012/evaluator_client_source_v11.json": "394f133f735d39282927fbd3fc15226fbca4cc24f9063537fddb8aa4f361a1ce",
+      "reports/public_evaluator/20261012/expected_runtime_lock_v10_13.json": "c565e080fa5b7bc11108fc4c2320924af62d52cf02867a01e3fa69fed3b5b3c9",
+      "reports/public_evaluator/20261012/haiku_v10_12/owner_anthropic_payload_scope_v2.json": "cf469c78449b70bba8cfc245cbb6ed5f3cf301e56102e1fe7fc2f1c415d189e9",
+      "reports/public_evaluator/20261012/haiku_v10_13_runtime/owner_service_due_diagnostic_scope_v1.json": "aa724e2cd11e6b7612aff440f5b9f73308a6cf4c0198565748216afe6f2e5cbc",
+      "reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T121834749431Z.json": "620b27f4a0a7193e8d9617dbf10ea503bcec5c783e6f10be4ea12b13eb81347f",
+      "reports/public_evaluator/20261012/owner_model_scope_v3.json": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f",
+      "reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json": "d93dcbb0fdbc197407f378e6c467be7d9d40169a93f48ef8e9ab84023c556f10",
+      "reports/public_evaluator/20261012/serving_manifest_v10_13.json": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+      "tmp/public_evaluator/hosted_client_v10_13_v2.py": "176038cdbd9dd0d707ff64d24e040ba7d2519783e3fabcbe39344c07d9a18566",
+      "tmp/service-due-api-v13-v1/source_inventory.json": "505b1fa67cb7f9bcabbb1491c6e4fd01dc10af7ad951a7c1cae11e0589014a24",
+      "tmp/single_service_due_client_v13_v1.py": "9831a734a53cf5832917ef3425d43624fac6686f8b897b83d27a2851ee312527"
+    },
+    "generation": "1791807827005709",
+    "guard": {
+      "delayed_reporting_prevents_instantaneous_cap": true,
+      "path": "reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T121834749431Z.json",
+      "sha256": "620b27f4a0a7193e8d9617dbf10ea503bcec5c783e6f10be4ea12b13eb81347f"
+    },
+    "inventory_sha256": "505b1fa67cb7f9bcabbb1491c6e4fd01dc10af7ad951a7c1cae11e0589014a24",
+    "object": "serving/engineering-diagnostics/v10_13/2c0c178fb159be995f3888c7a5fc82a8c29e3ebbdfec50c1033eecf31f76e4c7.tar.gz",
+    "operation_id": "fb1355e3099b488ebfe1ba9cb510ced6",
+    "provider_calls": 0,
+    "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+    "schema": "motomedic-single-service-due-api-source-preparation-v1",
+    "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+    "sha256": "2c0c178fb159be995f3888c7a5fc82a8c29e3ebbdfec50c1033eecf31f76e4c7",
+    "uri": "gs://motomedic-ai-20261009-indices/serving/engineering-diagnostics/v10_13/2c0c178fb159be995f3888c7a5fc82a8c29e3ebbdfec50c1033eecf31f76e4c7.tar.gz"
+  }
+}

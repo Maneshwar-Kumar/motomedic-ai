@@ -1,0 +1,18 @@
+{
+  "schema": "motomedic-owner-single-service-due-diagnostic-scope-v1",
+  "authority": "DIRECT_OWNER_INSTRUCTION_RELAYED_BY_COORDINATOR",
+  "owner_authorized": true,
+  "exact_owner_instruction": "Can you check why the agent does not answer when is the service due for my bike? The answer to that is present in Service Reminder section. you can use that as a test case instead of anything that you are using right now",
+  "question": "When is the service due for my bike?",
+  "replaces_previously_proposed_usb_test": true,
+  "section_hint_enters_model_or_retrieval": false,
+  "existing_model_payload_budget_and_source_approvals_required": true,
+  "scope": "ONE_FRESH_OWNED_HOSTED_DURABLE_OPERATION_WITH_GENERIC_SCALAR_OBSERVATION",
+  "model": "claude-haiku-5-5",
+  "maximum_corrections": 1,
+  "automatic_retries": 0,
+  "uncertain_operation_replay_authorized": false,
+  "runtime_source_model_output_cap_or_source_authority_changes_authorized": false,
+  "historical_charge_reset_refund_or_billing_restart_authorized": false,
+  "independent_factual_quality_acceptance": false
+}

@@ -1,0 +1,20 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "The key cannot be removed while the ignition is ON.", "evidence_ids": ["E3"]},
+    {"text": "The key can be removed only when the ignition is OFF or the steering is locked.", "evidence_ids": ["E3"]}
+  ],
+  "policy": [
+    {"text": "The key can be removed only if the ignition is OFF or the steering is locked.", "evidence_ids": ["E3"]}
+  ],
+  "watchouts": [
+    {"text": "Do not switch the ignition OFF while riding the motorcycle.", "evidence_ids": ["E6"]},
+    {"text": "Switching the ignition OFF while riding can cause a potential accident, resulting in serious injury to the rider and other road users, and severe damage to the motorcycle.", "evidence_ids": ["E7"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E6", "decision": "INCLUDED", "reason": "Warns against turning the ignition OFF while riding, which is the step needed before the key can be removed."},
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "States the consequences of switching the ignition OFF while riding."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Concerns battery drain when the engine is not running, not key removal."}
+  ]
+}

@@ -1,167 +1,193 @@
 # MotoMedic technical requirements
 
-Version 1.0 reset · 11 October 2026 · Status: target contract; current runtime has open acceptance gaps.
+Version 2.0, 25 October 2026. Paired with the [PRD](PRD.md), [architecture](ARCHITECTURE.md) and [status](STATUS.md). The owner's decisions are [v1](../reports/evals/20261024_answer_release_v1/owner_decision_v1.json), [v2](../reports/evals/20261024_answer_release_v1/owner_decision_v2.json), [v3](../reports/evals/20261025_answer_release_v3/owner_decision_v3.json) and [v4](../reports/evals/20261025_answer_release_v3/owner_decision_v4.json).
 
-This is the single current technical specification paired with [PRD.md](PRD.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [TODO.md](../TODO.md). It consolidates the owner's open-manual draft, verify, stream method and evidence-only optional Claude fallback. Earlier exact-answer selection, universal StepDefinition admission and omitted-semantic-verifier methods are superseded. Exact source approvals and permissions retain their original scope and bytes; this specification is not release or deployment approval.
+## 1. Components
 
-## 1. Selected architecture and boundaries
+| Component | Contract | Code |
+| --- | --- | --- |
+| Section index | Offline regrouping of the cached Docling parse into content sections, re-embedded once. Requests only load and verify it. | [section_index.py](../cloud/grounded_generation/section_index.py) |
+| Retrieval | BGE-M3 dense search and BM25, reciprocal rank fusion, top 5, conditional reranking. | [section_retrieval.py](../cloud/grounded_generation/section_retrieval.py) |
+| Assembly | The whole section of each chunk as plain labelled text, a server-side label map and the warnings to decide. | [section_assembly.py](../cloud/grounded_generation/section_assembly.py) |
+| Answer template and gate | System prompt, native answer schema, deterministic release gate, fixed fallback. | [template_answer.py](../cloud/grounded_generation/template_answer.py) |
+| Generation call | One `claude-haiku-5-5` request with ledger reservation and strict response validation. | [haiku_answer.py](../cloud/grounded_generation/haiku_answer.py) |
+| Turn pipeline | Session checks, the stages above, the saved view and its release binding. | [section_questions.py](../cloud/grounded_generation/section_questions.py) |
+| Admission ledger | Persistent token, attempt and USD reservations, pacing and sealing. | [whole_turn_admission.py](../cloud/grounded_generation/whole_turn_admission.py), [token_ceiling.py](../cloud/grounded_generation/token_ceiling.py), [claude_budget.py](../cloud/grounded_generation/claude_budget.py) |
+| Delivery | Operation binding, saved-buffer streaming and recovery. | [delivery.py](../cloud/grounded_generation/delivery.py) |
+| API, worker and store | Rider routes, Cloud Tasks dispatch, fenced worker, Firestore transactions. | [rider_api.py](../cloud/arm_a/rider_api.py), [durable_dispatch.py](../cloud/arm_a/durable_dispatch.py), [store.py](../cloud/arm_a/store.py), [app.py](../cloud/arm_a/app.py) |
 
-| Component | Contract |
+Qdrant and BM25 rank candidates; they do not authorize answers. The model is probabilistic. The gate checks structure, citations, numbers and warning decisions, not meaning.
+
+## 2. Section index
+
+The index is built from an existing index directory whose `docling_document.json` matches its manifest's `cached_parse_sha256`. Nothing is re-parsed. Usage, from the project root:
+
+`python -m cloud.grounded_generation.section_index <source_index_dir> <out_dir> <bge_m3_dir>`
+
+The build applies these rules:
+- **Boxes.** Every chunk whose Docling heading is WARNING, CAUTION or NOTE joins the content section it follows in reading order, labelled with its box.
+- **Running headers.** A section-header text printed on 3 or more pages, always in the top 12% of the page, is a running header. After its first appearance it does not start a new section, so a page-break continuation stays in one section.
+- **Search text.** Each chunk's search text is `<content heading>\n[<box label>\n]<text>`. It is embedded with the pinned BGE-M3 (revision `5617a9f61b028005a4858fdac845db406aefb181`), and the BM25 postings are rebuilt.
+- **Evidence ownership.** Each evidence object belongs to exactly one section.
+- **Identity.** The index ID hashes the source, the cached parse, the sectioning configuration, the embedding identity (including the weights SHA-256) and the build code.
+
+The manifest records the identity, `review_layer: NONE` and a QA block covering counts, attached boxes, continuations, page coverage and parser gap pages. `identity()` returns the manifest SHA, every declared file SHA and the counts. `verify()` fails closed on any changed manifest, inventory or file.
+
+The current index is `index_a609ca61c635641e0a22dc48`:
+- 154 sections and 532 chunks;
+- 121 boxes attached and 116 continuations;
+- 145 of 149 pages covered, with page 103 flagged as a parse gap.
+
+It was built by the [v3 candidate script](../reports/evals/20261025_answer_release_v3/candidate/section_index.py). The serving copy differs only in its import path. A changed source, parser, sectioning or embedding creates a new index ID.
+
+## 3. Retrieval
+
+| Setting | Value |
 | --- | --- |
-| Hosted ingestion job | Versioned Docling parsing and parent/child chunking once per source/parser/chunk/model version. |
-| Evidence artifacts | Immutable source objects, page registry, reviewed relationships and manifest in private object storage. |
-| Dense retrieval | Query embedding with pinned BGE M3; authenticated Qdrant query against the selected immutable collection. |
-| Sparse retrieval | BM25 postings from the same snapshot; run concurrently with the dense path. |
-| Retrieval orchestrator | RRF, selective reviewed context assembly, one bounded recovery and one conditional cross-encoder rerank. |
-| Private composer | Complete evidence-only draft using question, relevant history, typed outcomes and source policy. |
-| Separate verifier | Strict semantic coverage/claim verdict over the exact finalized response and evidence. |
-| Application gate | Validate bindings, schemas, applicability, citation membership, warnings and delivery integrity; cannot replace semantic verification. |
-| Durable state | Firestore sessions, facts/outcomes, operation leases, reservations and accepted response transaction. |
-| Planned work dispatch | Cloud Tasks to an authenticated worker endpoint; generation lifetime is independent of the browser SSE connection. This is a planned change, not a deployed claim. |
-| Delivery | Authenticated API/SSE progress and exact saved-buffer streaming; idempotent recovery. |
-| Operations | Immutable build images, managed secrets/identity, durable artifacts, admission/spend limits and redacted traces. |
+| Version | `section-top5-hybrid-v1` |
+| Dense candidates | 20, by cosine over normalized BGE-M3 vectors |
+| BM25 | k1 1.5, b 0.75, the index's own postings |
+| Fusion | Reciprocal rank fusion, k 60, over the first 50 of each ranking |
+| Kept | Top 5 fused chunks; ties broken by chunk ID |
+| Rerank trigger | The ordered first 3 distinct sections of dense and BM25 differ, compared over their common depth |
+| Rerank | The pinned cross-encoder scores only the 5 and reorders them. A query over 128 tokens skips with `QUERY_EXCEEDS_RERANK_LIMIT`. |
 
-Qdrant stores/searches dense vectors; it does not authorize answers. BM25 does not prove claim support. The verifier is probabilistic and requires independent evaluation. Source review and deterministic application checks remain separate controls.
+A short or deictic follow-up keeps the previous rider question as topic context (`retrieval_query`). A topic-change phrase drops it. The dense backend is chosen once at startup:
+- With `MOTOMEDIC_QDRANT_URL` set, it is hosted Qdrant with an identity token. The response must name the same index, mark `candidate_evidence_only`, and return only known chunks of the same source.
+- Otherwise it is exact search over the pinned vectors in the image.
 
-Current candidate index: `index_a3282c4d98cf54595e4ba168`, 532 child search chunks, 277 section parents, pinned BGE M3 with 1,024-token chunk budgets. Reuse it while fixing serving orchestration when source/parser/chunk/embedding content is unchanged. Query embedding is per request; document embedding is not.
+A backend failure is SYSTEM_ERROR, never a switch.
 
-## 2. Version identity and ingestion
+## 4. Model input
 
-Define index identity from source SHA-256, parser version/options, chunking configuration, embedding model/revision and dense/sparse settings. A change to any ingestion input creates a new index. Retrieval policy, prompts or controller changes create a new runtime version but do not automatically require unchanged document vectors to be rebuilt.
+The model input is built as follows:
+- **Order.** Sections appear in retrieval order, deduplicated, each under `## <heading> (page N[-M])`.
+- **Lines.** Every object with readable text becomes one line `[E<n>] [(<BOX>) ]<text>`. Tables become `header: value` rows. Headers, pictures, page headers and footers are skipped.
+- **Server side.** The label → evidence ID, pages, box and type map stays on the server.
+- **Warnings.** WARNING and CAUTION lines form `WARNINGS TO DECIDE`; NOTE lines are content only.
 
-The hosted job must:
+The user message carries the rider question, the earlier conversation and the sections. The earlier conversation is the last 3 saved turns, with each prior answer cut to 600 characters. It contains no parser JSON, evidence IDs, hashes, review state, source-gap IDs or server-added warning text. If no section has a readable line, generation is skipped.
 
-1. Check the PDF against `source_manifest.json`; record immutable object generation and checksum.
-2. Parse layout, reading order, PDF index and printed page labels, headings, tables/headers/units, warnings, captions/figures and source bounding boxes.
-3. Produce typed source objects and stable source-bound IDs. Mark uncertain extraction explicitly; retain page 103's flagged fallback rather than claiming clean Docling extraction.
-4. Create searchable children with parent links and table/header/unit context. A parent label or reviewed child does not authorize an entire parent body.
-5. Register only provenance-backed reviewed relationships for required warnings, conditions, prerequisites and references. Inferred semantic relationships cannot authorize technical content.
-6. Embed children once, create Qdrant points and BM25 postings, and write artifact/model/config hashes and ingestion QA.
-7. Validate page/object coverage and reproducible reload. Cached parsing is valid only when its manifest matches PDF hash, parser version/options and parsed artifact hash.
+## 5. Generation call
 
-Store durable snapshots in private Cloud Storage under immutable versioned object references. Expiring GitHub Actions artifacts may contain temporary logs, but cannot be the sole index or deployment input.
+Each request has this form:
+- **Model and output.** Model `claude-haiku-5-5`, `max_tokens` 1,800.
+- **Thinking and effort.** `thinking: disabled` and `output_config.effort: high`.
+- **Schema.** `output_config.format` is the native JSON schema from `answer_schema(assembled)`:
+  - route and coverage enums;
+  - `evidence_ids` items restricted to the labels sent;
+  - `watchout_review.display_id` restricted to the warnings sent, and required when any were sent;
+  - `additionalProperties: false` on every object.
 
-## 3. Core contracts
+  Array caps are not expressible in the schema; the gate enforces them.
+- **Caching.** The system prompt is one block with `cache_control: ephemeral, 5m`. The user content is uncached.
 
-| Object | Required data |
-| --- | --- |
-| ManualVersion | Manual ID, checksum, model/variant, edition, language, applicability policy, display policy, source metadata and support route binding. |
-| EvidenceObject | Immutable ID and content hash, manual checksum, type, source text/asset reference, PDF page and printed label, section, bbox, extraction/review scope. |
-| EvidenceDependency | Source and required target IDs, relationship type, provenance and exact approved context binding. |
-| SearchChunk | Chunk ID, index ID, evidence membership/hashes, parent IDs, index text, token count and applicability tags. |
-| IndexManifest | Source/parser/chunk/model revisions, Qdrant collection, BM25 artifact, object generations/hashes, counts and QA status. |
-| Session | Owner, selected manual/variant, expiry, monotonic version, relevant topic and typed facts/outcomes separate from chat text. |
-| OutcomeRecord | Stable referenced check/action, outcome enum, user turn, timestamp and optional superseded record. |
-| EvidenceBundle | Question/history identity, source/index identity, admitted evidence and hashes, mandatory/attached/missing context, source gaps, applicability, conflicts and provenance. |
-| RetrievalDecision | Policy/config, rank signals, recovery/rerank attempts, fetched/missing IDs, skip reason, stage durations and final route. |
-| Draft | Final proposed text, complete claim-to-evidence map, server citations, included limitations/conditions/warnings and response hash. |
-| VerificationVerdict | Strict decision, question coverage, per-claim support, omissions/conflicts, limitation/clarification flags, correction possibility and exact binding hash. |
-| DeliveryOperation | Owner/session version, idempotency/payload hash, state/lease/deadline, accepted buffer and response/evidence/runtime bindings, completion/error and expiry. |
-| ProviderReservation | Allocation/window, complete-request token estimate, conservative maximum cost, committed usage and retained uncertain-call state. |
+Effort `high` is used because default effort released 24/30 in the evaluation, with six structural gate failures, against 30/30 at high effort.
 
-Bind an answer verdict to the exact question, relevant history and typed-state projection, manual/index/source context, response and claim map, runtime, prompt and model policy. Reject missing, changed, extra or mismatched fields. Evidence IDs alone are insufficient without their content/version bindings.
+The call sequence is:
+1. Count the request with `messages/count_tokens`. Reserve the counted input plus 512 tokens of counter headroom, and fail before reservation if that exceeds the native window minus the output bound.
+2. Reserve one `generate` slot in the whole-turn ledger. The slot holds the input envelope, the 1,800 output tokens and the worst-case cost (all input written to the cache, plus full output, at the matching price tier).
+3. Take the permit, then send the request once, with a 60-second timeout and redirects rejected.
+4. Validate the response:
+   - the same model and `stop_reason: end_turn`;
+   - exactly one text block with no citations;
+   - complete non-negative usage within the reserved input and output;
+   - 5-minute cache usage consistent with the reported creation;
+   - actual cost within the reserved maximum;
+   - at most 16 KiB of strict JSON with unique keys, forming one object.
+5. End the turn, which seals the slot unused if it was never consumed. Reservations stay charged after any failure. Nothing is retried automatically.
 
-## 4. Request sequence
+The trace keeps counts, cost, cache usage and ledger outcome only, never prompt, section or draft text.
 
-1. Authenticate the visitor capability, validate limits and selected manual, establish session ownership, and deduplicate the operation by idempotency key plus payload hash.
-2. Read relevant history and immutable outcomes. Preserve an explicit topic for short follow-ups; any query expansion remains source retrieval context and cannot invent observations.
-3. Start dense and BM25 paths concurrently. The dense path computes the query vector and calls Qdrant. Both apply selected source/index/applicability filters before ranking.
-4. Fuse ranks with RRF, assemble reviewed source objects and required context, and evaluate integrity/applicability/source gaps separately from ranking uncertainty.
-5. Perform at most one exact-ID dependency recovery and one candidate expansion when reviewed required objects are missing. Rerank at most once only for uncertain ordering among admissible candidates; reassemble afterward.
-6. Select a complete, bounded evidence representation. Prefer relevant reviewed objects plus required dependency closure instead of whole section bodies. Never silently remove a warning, unit, header, condition, relevant history or unsupported-source limitation to fit.
-7. Count and reserve the complete private draft request; draft using only the evidence. There is no preliminary evidence-assessment LLM call.
-8. Finalize every server-derived condition, warning, citation, support route and limitation in the complete proposed response. Construct its bindings.
-9. Count/reserve and call the separate verifier against that exact response, actual question/history, claims and evidence. Its decision does not directly write to the rider stream.
-10. If a valid correctable rejection can be repaired from admitted evidence, allow one correction and one new verification. Otherwise route to fixed fallback; a required operational failure routes to SYSTEM_ERROR.
-11. Perform final deterministic checks and atomically persist the accepted outcome, exact response and session transition. Only then release technical content.
-12. Stream exact slices of the saved response. Recovery reads the same operation and response; it does not regenerate.
+## 6. Release gate
 
-## 5. Retrieval scheduling and evidence assembly
+`gate(draft, assembled, question, support_uri)` releases or raises `ReleaseRejected`:
+- **Shape.** Route and coverage are always present; other fields are optional; there are no extra fields. Caps: answer 6, policy 3, watchouts 5, disclaimers 3. No empty or over-long item.
+- **Citations.** Answer, policy and watchout items cite at least one label, and only labels that were sent. A disclaimer may cite; if it does not, it may not state a measurement or page the rider did not give.
+- **Numbers.** Every number with a unit must appear in a cited line or in the question, with a matching unit and no derived values. Every page reference must belong to a cited line or the question.
+- **Routes.** SUPPORTED needs coverage other than NONE and an answer. PARTIAL needs a disclaimer. UNSUPPORTED needs coverage NONE. SAFETY_STOP needs a cited answer or watchout. A clarification question is present exactly when the route is AMBIGUOUS.
+- **Warnings.** Every warning sent has one decision. INCLUDED must be cited in `watchouts`. NOT_APPLICABLE needs a non-empty reason.
+- **Composition.** The rider text is the answer, then policy, then `Watch out:` watchouts, then disclaimers (or the fixed fallback for UNSUPPORTED), then the clarification. Citations and pages come from the server label map.
 
-Normal mode is conditional. Off and always-diagnostic modes exist only for measured ablations and cannot bypass source or answer gates.
+`no_evidence_release` returns the fixed fallback and support route with zero provider calls. The gate does not judge relevance or meaning; a non-numeric claim in an uncited disclaimer is the accepted residual risk.
 
-| Setting | Current bounded starting value |
-| --- | --- |
-| Fused candidate pool / assembled hits | 20 / 5 |
-| Recovery candidate pool | 40 |
-| Cross-encoder pool / pair maximum | 20 / 100 |
-| Mandatory dependency maximum | 256; overflow is SYSTEM_ERROR without truncation |
-| Initial uncertainty signals | Distinct top-three parent overlap below 0.5, or relative RRF margin at most 0.05 |
-| Calibration | PROVISIONAL_UNCALIBRATED until reviewed tuning and held-out evaluation |
+## 7. Saved view and delivery
 
-Zero BM25 hits supply no sparse agreement signal. Sibling chunks of one section do not create false disagreement. Cross-encoder query/pair bounds must be explicit; an overlong query skips that optional inference with a reason and preserves the full query. A required component outage or malformed result is SYSTEM_ERROR, not evidence insufficiency.
+The view is schema `motomedic-rider-api-v1`, runtime policy `open-manual-section-template-v1`. Its fields are:
+- `response`: type, natural_language, technical_content, release_gate_passed, cited_pages, reason_codes, clarification_question and escalation_uri;
+- `cited_pages`: evidence ID, PDF page, page index, manual and index;
+- `runtime_controls`: retrieval chunk IDs and rerank flags; assembly counts and text SHA; generation counts, cost and ledger outcome; gate route and counts. It carries no draft, section text or warning reasons.
 
-The scheduling input is reviewed source-context completeness for open Q&A, not a required legacy `step_id`. Missing review is a maintainer gap; it cannot be repaired by reranking or a rider clarification. When only some requested claims have complete evidence, drafting may produce an explicitly limited partial answer supported by those objects.
+A gate-released view carries `release_delivery`, binding:
+- the operation ID and runtime lock;
+- the manual and index;
+- the response hash and text SHA;
+- the SHA of the text sent to the model;
+- the SHA of the private release record (gate output, chunk IDs and label map).
 
-Sources for accepted claims must be approved exact objects with applicable warnings, prerequisites, table headers, units and referenced context. Chunk membership containing another unapproved object must not automatically discard independently complete reviewed evidence; object selection must also prove that excluded context is unnecessary. Empty dependencies do not establish completeness unless an exact source-context review establishes that none are required.
+`bind_view` adds `delivery` with the operation, response hash, runtime lock, evidence payload SHA, `release_binding_sha256` and event protocol `operation-sequence-v1`. `validate_saved` delivers a saved view only under the same runtime policy, manual, index, runtime lock and bindings.
 
-## 6. Draft and verification contract
+Progress stages are `retrieving`, `drafting` and `checking`, then `displaying` once the saved view is read. Every event carries the operation ID and a consecutive sequence. `verified_block` (the wire name of the gate-released block) carries the saved view. `answer_chunk` slices exactly that saved text, and `complete` repeats the identical view. Fallback and error views emit only `complete`.
 
-The currently authorized primary model is `gemma-4-26b-a4b-it`. Lock the exact configured model/provider identity in the runtime; model changes require their applicable permission and fresh evaluation.
+The runtime lock hashes:
+- the questions version and runtime policy;
+- the source identity and index identity;
+- the retrieval constants, the assembly and template versions and the system prompt SHA;
+- the generation contract.
 
-The draft has complete response text and explicit claim mapping. PDF/user/history content is data and cannot override policy. The model may assemble and paraphrase supported facts and concise checklists; it may not infer hidden faults, undocumented repairs, causation or OEM diagnostic ordering.
-
-Verifier ordinary decisions are exactly:
-
-| Decision | Meaning and application route |
-| --- | --- |
-| RELEASE_COMPLETE | Question meaningfully answered; every technical claim supported; no missing mandatory context. Route SUPPORTED after final checks/save. |
-| RELEASE_PARTIAL | Useful supported subset; finalized text clearly states the unanswered portion. Route SUPPORTED with recorded partial coverage after final checks/save. |
-| SHOW_FALLBACK | Proposed answer irrelevant, lacks support or correction unsuccessful. Discard it; route UNSUPPORTED with the fixed application wording. |
-
-Special decisions `RELEASE_CLARIFICATION` and `RELEASE_SAFETY_STOP` preserve AMBIGUOUS and SAFETY_STOP. A clarification must be necessary and rider-resolvable. An established applicable verified safety warning has precedence; it cannot authorize unrelated advice.
-
-Strict verifier fields include `binding_sha256`, `decision`, `question_coverage`, `per_claim_support`, `omissions`, `conflicts`, `coverage_limitation_clear`, `clarification_is_rider_resolvable`, `release_eligible` and `correction_possible`. Every claim requires supported evidence membership and source meaning, including numeric values, units, variants and safety conditions. Confidence is not an acceptance field. Unknown decisions, extra fields, invalid types, missing claims and binding mismatch fail closed.
-
-Malformed output, timeout, outage, quota exhaustion and integrity failure are SYSTEM_ERROR. Valid semantic rejection can lead to one correction; operational failure cannot masquerade as a source limitation. Fixed neutral messages are specified in the PRD and do not depend on model success. Record fallback reason `IRRELEVANT_ANSWER`, `MISSING_SUPPORT` or `CORRECTION_UNSUCCESSFUL`; retain specific operational reason codes internally.
-
-## 7. Claude fallback and caching
-
-Optional `claude-haiku-5-5` is a backend-only availability fallback and remains disabled by default until activation is authorized. It receives retrieved applicable evidence and relevant history, never the full manual. Eligible primary failures are explicit 500/502/503/504 or unconfigured primary. Schema/malformed output, quota exhaustion, ambiguous timeout/schema errors, semantic rejection and source/applicability/integrity failures cannot select it.
-
-Count the complete Claude request with its configured model adapter; validate model, content, stop reason, usage and strict JSON. Reserve the conservative maximum tokens and monetary cost before transmission. One Claude transport attempt per call; no automatic Claude retry. Retain uncertain reservations. Missing primary credentials must not prevent a fallback-eligible request from reaching correct fallback counting and transport.
-
-Current input/output/request limits are 8,192 input tokens, 1,800 output tokens and 65,536 provider-request bytes. Exceeding a required bound is SYSTEM_ERROR, never silent source truncation. A persistent ledger must enforce the authorized non-recurring allocation across runs; a process restart or new validation run cannot reset it.
-
-Provider prompt caching is an optimization only when supported by the exact authorized model/account/API. The current Gemma configuration has no demonstrated support; claim no cached-token savings. Never pad prompts or change models silently to enable it. Old exact-response caches and semantic answer reuse stay disabled for this pipeline; neither bypasses the separate verification step.
+New sessions carry it, and every turn and recovery checks it.
 
 ## 8. Session and operation integrity
 
-Outcome enum: `NOT_TRIED`, `OBSERVED_NORMAL`, `OBSERVED_ABNORMAL`, `ACTION_COMPLETED_UNRESOLVED`, `NOT_APPLICABLE`, `UNCLEAR`, `RESOLVED`. Store evidence-linked attempts/facts separately from conversational text. Corrections supersede records; they do not rewrite history. An unresolved attempt never implies a normal observation, and reported success never establishes a verified repair.
+Sessions and turns are stored as follows:
+- **Session record.** `DiagnosticSession` snapshots record manual, variant, edition, the index manifest SHA (`version_lock`) and the runtime lock (`generation_lock`).
+- **Turns.** Each turn increments the version. The store applies compare-and-set on the session version and keeps immutable per-version snapshots.
+- **Conversation.** The conversation (question, response, route) is saved with each commit and passed to the next turn.
 
-Use transactional compare-and-set for session version, operation ownership/deduplication, reservations and final commit. A completed operation returns its saved outcome. Conflicting duplicate payloads reject. A provider call with an uncertain result is not silently retried; reconcile its reservation and operation explicitly.
+Operations run as follows:
+- **Admission.** The browser request only admits the operation: idempotency key plus payload hash, owner-bound. It stores a work snapshot and dispatches a named Cloud Tasks task carrying no rider text.
+- **Worker.** The dedicated worker verifies the exact task identity and audience. It claims a fenced lease, checks the work against the current manual, index, index lock and runtime lock, and runs the turn under the operation's 1,200-second deadline. It then binds, validates and commits atomically.
+- **Failure and redelivery.** A redelivered task observes the terminal state or lease and never regenerates. An uncertain provider result or an expired lease ends terminally, with no paid replay.
+- **Streaming.** Server-sent events (SSE) observe durable progress and the saved buffer for up to 150 seconds. Disconnecting does not cancel the operation.
 
-Do not rely on a daemon thread surviving after an SSE request ends. The target is durable Cloud Tasks dispatch to an authenticated worker, with a Firestore operation lease and browser SSE reading progress/accepted buffers. Its build, deployment and cost remain subject to existing permission. Deduplicate task delivery before a provider call; an uncertain provider result cannot be retried merely because a task is redelivered. Set operation deadline and terminal failure handling; stale RUNNING leases must reconcile. Exceptions and session conflicts must not leave an operation indefinitely running.
+Open Q&A issues no feedback choices, and there is no feedback route.
 
-Progress events name actual stages: retrieval, drafting, checking and displaying the verified answer. Technical chunks begin only after durable commit. Bind events to operation, response hash and sequence. Fixed fallback/error events carry no technical-answer chunks or verified-answer label.
+## 9. Admission, privacy and operations
 
-## 9. Admission, privacy and DevOps
+Admission and ledgers:
+- **Single slot.** Each turn reserves one `generate` slot, and none when nothing is retrieved, in the existing ledgers: the 100-attempt and token allocation and the shared Haiku USD1 ledger.
+- **Pacing.** Slots keep the 61-second pacing.
+- **History.** Earlier draft/verify events remain valid and charged when read.
+- **Limits.** There is no reset, refund or new allocation. Ceiling changes need the owner's grant, applied with [manage_primary_token_ceiling.py](../tools/manage_primary_token_ceiling.py).
 
-Admission budgets the entire permitted turn, including separate draft/verify and optional correction/re-verification, against real provider windows. A legacy 10,000-token-per-minute ceiling cannot be treated as sufficient for two requests whose combined reservations exceed it. Implement bounded queue/pacing or reject before starting work; do not accept a turn and predictably strand its verifier. Limits remain within current provider and spending permissions.
+Input and session limits:
+- Rider text is at most 100 words, 2,000 characters and 8,000 UTF-8 bytes, checked in both UI and API before retrieval or reservation.
+- Six accepted turns per minute, 30 per rolling day and 20 per conversation.
+- 30-minute idle and 24-hour session retention.
+- The request JSON is at most 16 KiB.
 
-Preserve the recorded text/visitor/session controls: 2,000-character/8,000-byte user text; six accepted turns/minute, 30/rolling day and 20/conversation; 30-minute idle and 24-hour session retention unless a separately approved policy changes them. Count complete model requests independently from user-text limits. Owner-bound sessions, expiry/deletion, global reservations, rate counters and fail-closed managed-store behavior require hosted tests. New conversations do not reset visitor budgets.
+Identity and secrets:
+- **Credentials.** Managed secrets hold the Anthropic key and the visitor-signing secret.
+- **Service routes.** All API and worker routes except GET `/v1/health` need a cryptographically verified Google identity with the exact audience and an allowlisted service email, before visitor, Tasks or owner checks.
+- **Public gateway.** The gateway issues signed, HttpOnly, SameSite 24-hour cookies after a proof challenge and a private visitor reservation. No client IP is trusted.
+- **Logs.** Traces are redacted, and no credentials, rider records or raw media go to Git.
 
-Keep model credentials in managed secrets, use least-privilege service identities and authenticated Qdrant/backend access, and redact routine traces. No raw user media, credential content or private model drafts in repository or routine telemetry. Photo/voice remain disabled until their scoped privacy and source-grounding acceptance is complete.
+Availability fallback, answer caching and whole-manual prompting do not exist in this runtime; `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true` refuses startup. Budget records are in [deployment_status.json](../cloud/deployment_status.json): INR2,700 lifetime and the INR2,540 billing-disconnect guard. Stopped billing is never restarted implicitly.
 
-CI must run provider-free contract tests on every pull request and main change. Builds use a pinned source commit, explicit runtime inputs, dependency locks and image digest. Promotion verifies the exact source/runtime/index/approval identities and service kind; an arbitrary successful build's first image is not a valid release artifact. Real provider validation is separately budgeted and never part of routine unguarded CI.
+## 10. Release and validation
 
-Publish durable versioned index artifacts and deployment receipts. Readiness must prove required artifacts/models/index and serving dependencies are loaded; configured point counts alone are not process health. Record compatible UI/backend revisions, managed-secret references, live private-browser stream/recovery tests, cold start, rollback and cost receipts before public opening.
+[serving_release.py](../tools/serving_release.py) freezes and verifies schema `motomedic-serving-release-v11`. The manifest binds:
+- every code, UI and workflow file under `cloud/arm_a`, `cloud/grounded_generation`, `rider_ui` and `.github/workflows`;
+- the root modules in the serving import graph;
+- the manual and source manifest;
+- the owner decision and the evaluation;
+- the section index identity and the generation contract.
 
-Use the latest recorded budget/configuration in [deployment_status.json](../cloud/deployment_status.json), not the superseded initial INR800 allocation. It records owner-authorized additions giving a non-recurring INR2,700 lifetime budget, alerts at INR1,350/2,160/2,700 and the INR2,540 billing-disconnect guard. The existing private Qdrant configuration records one minimum instance and startup CPU boost; these are already recorded changes, not new reset actions. Delayed reporting prevents an instantaneous exact cap. Never restart stopped billing or change service settings without applicable authorization; no new deployment or budget change is implied here.
+It records `deployment_authorized: false`. [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index inside an image. Earlier v8–v10.14 manifests stay verifiable history.
 
-## 10. Validation and implementation gaps
+The provider-free tests listed in [CI](../.github/workflows/ci.yml) cover:
+- the index, retrieval, assembly, gate and generation call, on a synthetic index with a fake transport and ledger;
+- the full API → worker → saved stream → UI parser path;
+- durable operations, admission and release tooling.
 
-Use source-checked tuning/regression and held-out cases with exact source/checksum/runtime bindings. Held-out answers are never prompt/index enrichment. Evaluate complete and partial questions, specifications, tables, warnings, unsupported repairs, short follow-ups, injection, wrong variant, source gaps, provider failures, quota/store failures, correction and disconnect/replay. Review real outputs against original pages independently of serving generator and verifier.
-
-Measure complete evidence recall, answerable coverage, proper abstention, citation and claim support, false verifier acceptance/refusal, recovery/rerank rescues/regressions, contextual follow-up correctness, unjustified repeats, all stage latency, first verified answer, cold start and cost per correctly handled case. Synthetic tests, historical retrieval diagnostics and real provider measurements must have separate labels.
-
-The implementation sequence in TODO must close these observed departures before claiming this contract complete:
-
-1. Replace serving NumPy dense similarity with real authenticated Qdrant requests while retaining concurrent BM25.
-2. Make conditional recovery/reranking consume open-Q&A reviewed source context rather than mandatory step manifests.
-3. Pack relevant complete reviewed objects/dependencies within existing token bounds; repair partial-support admission and short-follow-up topic retention.
-4. Admit and pace a whole draft/verify turn; enforce persistent provider allocations and correct fallback count configuration.
-5. Prove terminal durable operations and exact stream/recovery equality on Cloud Run/Firestore, including disconnect and worker failure.
-6. Replace expiring deployment inputs and weak image selection with immutable durable artifact promotion and provider-free CI.
-
-The preserved v8 software checks passed, but its real-provider run released zero technical answers and covered 0 of 4 clearly answerable/partially answerable turns. It is a failed coverage baseline, not release acceptance. Preserve exact approval packages, runtime receipts and failed-run adjudications needed for reproducibility. Cleanup removes obsolete active designs and duplicate generated outputs without discarding the evidence governing this contract.
+The [parity check](../reports/evals/20261025_answer_release_v3/serving_parity.py) runs the serving modules on the real index against the v3 run. Hosted acceptance needs a real-model run of held-out questions on the frozen runtime: returned answers, cache reads, saved/stream/recovery equality, ownership and replay, and stage timings. Evaluations live in [reports/evals](../reports/evals/README.md) and are labelled local, private or hosted.

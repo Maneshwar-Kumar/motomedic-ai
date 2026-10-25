@@ -1,0 +1,61 @@
+{
+  "custom_role": {
+    "description": "Read the immutable serving snapshot object only",
+    "etag": "BwZdlmUMwmA=",
+    "includedPermissions": [
+      "storage.objects.get"
+    ],
+    "name": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+    "stage": "GA",
+    "title": "MotoMedic exact snapshot object get"
+  },
+  "project_backend_bindings": [
+    {
+      "role": "roles/datastore.user",
+      "members": [
+        "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+      ],
+      "condition": null
+    }
+  ],
+  "repository_backend_bindings": [],
+  "bucket_backend_bindings": [
+    {
+      "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+      "members": [
+        "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+      ],
+      "condition": {
+        "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+        "title": "motomedic-backend-exact-index-snapshot"
+      }
+    }
+  ],
+  "ttl_fields": [
+    {
+      "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_operations/fields/expires_at",
+      "ttlConfig": {
+        "state": "ACTIVE"
+      }
+    },
+    {
+      "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_session_versions/fields/expires_at",
+      "ttlConfig": {
+        "state": "ACTIVE"
+      }
+    },
+    {
+      "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_sessions/fields/expires_at",
+      "ttlConfig": {
+        "state": "ACTIVE"
+      }
+    },
+    {
+      "name": "projects/motomedic-ai-20261009/databases/(default)/collectionGroups/arm_a_usage/fields/expires_at",
+      "ttlConfig": {
+        "state": "ACTIVE"
+      }
+    }
+  ],
+  "at_utc": "2026-10-11T20:45:39.9543903Z"
+}

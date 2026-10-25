@@ -1,0 +1,166 @@
+{
+  "allocation_reset_or_refund": false,
+  "classification": "SYNTHETIC_PROVIDER_FREE_UNFINISHED_WIP",
+  "cloud_actions": 0,
+  "errors": 23,
+  "errors_list": [
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_counter_failure_never_selects_other_model"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_full_six_slot_plan_covers_retry_correction_and_other_model"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_global_config_lock_does_not_depend_on_selected_role"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_plan_strict_keys_hashes_threshold_and_contracts"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_routing_counter_can_exceed_gemma_window_and_select_haiku"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_stable_contract_or_plan_mutation_rejects_before_admission"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_threshold_is_selection_and_preserves_complete_sources"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_role_router.Tests.test_unknown_worst_verifier_scaffold_is_diagnostic_and_base_is_gated"
+    },
+    {
+      "last_error_line": "TypeError: 'NoneType' object is not subscriptable",
+      "test": "cloud.grounded_generation.test_verified_qa.PairedProviderTests.test_both_role_contracts_bound_to_verdict_and_saved_admission"
+    },
+    {
+      "last_error_line": "KeyError: 'verified_delivery'",
+      "test": "cloud.grounded_generation.test_verified_qa.PairedProviderTests.test_delivery_requires_the_same_selected_verifier_contract"
+    },
+    {
+      "last_error_line": "TypeError: 'NoneType' object is not subscriptable",
+      "test": "cloud.grounded_generation.test_verified_qa.PairedProviderTests.test_reused_verdict_after_cached_prefix_cannot_authorize_another_question"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_verified_qa.RoutedProviderTests.test_both_routes_bind_exact_selected_models_and_complete_final_buffer"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_verified_qa.RoutedProviderTests.test_correction_keeps_roles_and_requires_new_atomic_phase"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_verified_qa.RoutedProviderTests.test_delivery_rejects_changed_selected_role_contract"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_verified_qa.RoutedProviderTests.test_semantic_rejection_and_quota_failure_do_not_switch_role_pair"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_verified_qa.RoutedProviderTests.test_underfunded_correction_is_operational_error_with_private_draft_hidden"
+    },
+    {
+      "last_error_line": "KeyError: 'GEMMA_DRAFT_HAIKU_VERIFY'",
+      "test": "cloud.grounded_generation.test_whole_turn_admission.Tests.test_correction_changed_source_or_phase_hash_refuses_new_spend"
+    },
+    {
+      "last_error_line": "KeyError: 'HAIKU_DRAFT_GEMMA_VERIFY'",
+      "test": "cloud.grounded_generation.test_whole_turn_admission.Tests.test_full_role_and_forecast_metadata_is_validated_preserved_and_phase_bound"
+    },
+    {
+      "last_error_line": "KeyError: 'HAIKU_DRAFT_GEMMA_VERIFY'",
+      "test": "cloud.grounded_generation.test_whole_turn_admission.Tests.test_initial_counter_headroom_and_known_verifier_prefix_are_immutable_across_phases"
+    },
+    {
+      "last_error_line": "KeyError: 'GEMMA_DRAFT_HAIKU_VERIFY'",
+      "test": "cloud.grounded_generation.test_whole_turn_admission.Tests.test_production_correction_requires_every_exact_request_rejection_and_verdict_hash"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_whole_turn_admission.Tests.test_real_router_forecasts_match_strict_phased_admission_for_both_role_routes (routing_count=100)"
+    },
+    {
+      "last_error_line": "TypeError: RoleRouter.__init__() takes 4 positional arguments but 6 were given",
+      "test": "cloud.grounded_generation.test_whole_turn_admission.Tests.test_real_router_forecasts_match_strict_phased_admission_for_both_role_routes (routing_count=9000)"
+    },
+    {
+      "last_error_line": "KeyError: 'GEMMA_DRAFT_HAIKU_VERIFY'",
+      "test": "cloud.grounded_generation.test_whole_turn_admission.Tests.test_routing_contract_or_role_metadata_cannot_be_silently_dropped_or_changed"
+    }
+  ],
+  "factual_acceptance": false,
+  "failed": 4,
+  "failures": [
+    {
+      "last_error_line": "+ SUPPORTED",
+      "test": "cloud.grounded_generation.test_verified_qa.PairedProviderTests.test_distinct_models_route_exact_finalized_response_including_server_warning"
+    },
+    {
+      "last_error_line": "+ SUPPORTED",
+      "test": "cloud.grounded_generation.test_verified_qa.PairedProviderTests.test_one_correction_goes_to_draft_and_fresh_verifier_binding"
+    },
+    {
+      "last_error_line": "AssertionError: 1 != 2",
+      "test": "cloud.grounded_generation.test_verified_qa.PairedProviderTests.test_verifier_uncertain_failure_has_own_trace_and_no_retry"
+    },
+    {
+      "last_error_line": "? ^^ ^ ^^^",
+      "test": "cloud.grounded_generation.test_verified_qa.PairedProviderTests.test_verifier_wrong_model_withheld_after_exact_private_draft"
+    }
+  ],
+  "file_sha256": {
+    "cloud/arm_a/app.py": "084f46b7dc432dbde3e81c0596ddaae3daa0ebc46b746b1a35e82b9dc47d861d",
+    "cloud/grounded_generation/cached_verifier.py": "648d4c19f608c4b4763239a7948befdfa1fe43552b81f9d08fdc885a80e1e936",
+    "cloud/grounded_generation/flash_lite_provider.py": "17161a4ed95218751f78e760f36652f4a9b20015a09d94de396f1f5a1a3d707f",
+    "cloud/grounded_generation/provider.py": "650a0270d61da2fd8a8f0be0a707ab9920fa96d3f6a2743ded926004cbcccb27",
+    "cloud/grounded_generation/role_contracts.py": "f2948d9edc5c1e2c90cf4b85e311867f1c75e0e3015ac7537f2fe15556cf289a",
+    "cloud/grounded_generation/role_router.py": "62100755909905fe742d308e78ba141787eae39638541732d2f35dfd8c1bc710",
+    "cloud/grounded_generation/verified_qa.py": "4bd5ea53e4558ee9364173c07e139727d6698cba46a67ae77d28e369e77769d8",
+    "cloud/grounded_generation/whole_turn_admission.py": "b52c416596c76ef8514a9dd59af4de08248e689eee44dc6751f4355d34d635b9"
+  },
+  "missing_work": [
+    "Fixed Flash/Haiku test fixtures still use retired role/router APIs and need migration.",
+    "New FlashLiteProvider needs dedicated counter-estimate/usage/headroom/paid-cost tests.",
+    "tmp/public_evaluator/count_only_context_v10_11.py is not yet implemented.",
+    "Hosted Flash count availability: metadata succeeded, first count404; subsequent access proof pending.",
+    "No frozen11 manifest/images/actual-model quality acceptance is established.",
+    "Phased measured capacity and retained public/human envelopes must be recomputed before generation; no allocation changes allowed.",
+    "Official model/usage/schema request validation and exact provider modelVersion need actual hosted evidence."
+  ],
+  "passed": 93,
+  "production_ready": false,
+  "real_provider_calls": 0,
+  "runtime_quiescent": true,
+  "schema": "motomedic-stopped-flash-lite-wip-diagnostic-v1",
+  "skipped": 0,
+  "stopped_at_owner_request": true,
+  "syntax_passed": [
+    "cloud/grounded_generation/provider.py",
+    "cloud/grounded_generation/role_contracts.py",
+    "cloud/grounded_generation/role_router.py",
+    "cloud/grounded_generation/flash_lite_provider.py",
+    "cloud/grounded_generation/cached_verifier.py",
+    "cloud/grounded_generation/whole_turn_admission.py",
+    "cloud/grounded_generation/verified_qa.py",
+    "cloud/arm_a/app.py"
+  ],
+  "test_modules": [
+    "cloud.grounded_generation.test_provider",
+    "cloud.grounded_generation.test_cached_verifier",
+    "cloud.grounded_generation.test_role_router",
+    "cloud.grounded_generation.test_verified_qa.SharedProjectionTests",
+    "cloud.grounded_generation.test_verified_qa.PairedProviderTests",
+    "cloud.grounded_generation.test_verified_qa.RoutedProviderTests",
+    "cloud.grounded_generation.test_whole_turn_admission"
+  ],
+  "tests_run": 120
+}

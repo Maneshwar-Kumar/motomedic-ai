@@ -1,0 +1,134 @@
+{
+  "actual_role_cache_observations": [
+    {
+      "cache_creation_input_tokens": 7087,
+      "cache_read_input_tokens": 0,
+      "case_id": "EVAL_DIRECT_01",
+      "role": "private_draft",
+      "usage_retained": true
+    },
+    {
+      "cache_creation_input_tokens": 7367,
+      "cache_read_input_tokens": 0,
+      "case_id": "EVAL_DIRECT_01",
+      "role": "semantic_verifier",
+      "usage_retained": true
+    },
+    {
+      "cache_creation_input_tokens": 16781,
+      "cache_read_input_tokens": 0,
+      "case_id": "EVAL_USB_02",
+      "role": "private_draft",
+      "usage_retained": true
+    },
+    {
+      "cache_creation_input_tokens": null,
+      "cache_read_input_tokens": null,
+      "case_id": "EVAL_USB_02",
+      "role": "semantic_verifier",
+      "usage_retained": false
+    }
+  ],
+  "classification": "ACTUAL_HOSTED_SINGLE_DIRECT_DELIVERY_EVIDENCE",
+  "cloud_build_id": "a77d5e33-4419-4d5c-855b-cb8bc2c98690",
+  "cloud_mutations": 0,
+  "complete_six_case_acceptance": false,
+  "direct_case": {
+    "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/EVAL_DIRECT_01.json",
+    "sha256": "bc9075a8daef6c3152b8fee70f471ffe780d9fd9a66f597bf282b4f56e9421a0"
+  },
+  "direct_delivery_checks": {
+    "accepted": true,
+    "cache_calls": [
+      {
+        "attempt": 0,
+        "cache_creation_input_tokens": 7087,
+        "cache_read_input_tokens": 0,
+        "case_id": "EVAL_DIRECT_01",
+        "input_tokens": 7335,
+        "input_tokens_counted": 7335,
+        "prefix_sha256": "66e0c48a3a4ec900c97626d167adcf7a4e4b7a60302a2e09dda2fb4dd2621953",
+        "role": "private_draft"
+      },
+      {
+        "attempt": 0,
+        "cache_creation_input_tokens": 7367,
+        "cache_read_input_tokens": 0,
+        "case_id": "EVAL_DIRECT_01",
+        "input_tokens": 10285,
+        "input_tokens_counted": 10285,
+        "prefix_sha256": "a33aaca5414416053b1ad0ddfe8fcd74f0844c487a95e768bf03a537fd693539",
+        "role": "semantic_verifier"
+      }
+    ],
+    "case_id": "EVAL_DIRECT_01",
+    "completed_boundary_receipt_present": true,
+    "errors": [],
+    "finalized_response_sha256": "c8795151dd4d4f03cc4f16c552c76c9065a6dc3cfb1da45909cb11ad1942e115",
+    "operation_id": "f00fbe5c04e745e09339dc28e31162e0",
+    "passed": true,
+    "presentation_response_sha256": "ddb51e611922eb1ef2955f983e057d5b730875467ece4a621d1cda6b56b4c564",
+    "text_sha256": "be8be2ecda6de6ae2a866afe045d76443901965a6e5c91f91d0b5de91d823b86"
+  },
+  "download_inventory": {
+    "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/download_inventory.json",
+    "sha256": "5ab34bd9b6f34877e29b6601c7f7471d338529c97d2b34a45d303e1041c9b19b"
+  },
+  "evaluator_source": {
+    "path": "reports/public_evaluator/20261012/evaluator_client_source_v11.json",
+    "sha256": "394f133f735d39282927fbd3fc15226fbca4cc24f9063537fddb8aa4f361a1ce"
+  },
+  "evaluator_submission": {
+    "path": "reports/public_evaluator/20261012/evaluator_client_submission_v9.json",
+    "sha256": "7dbf2948aaff1554b8f06169bf66bd9be999bcacce670c5e21acbdda5234b2e8"
+  },
+  "hosted_receipt": {
+    "path": "reports/public_evaluator/20261012/hosted_runs/a77d5e33-4419-4d5c-855b-cb8bc2c98690/receipt.json",
+    "sha256": "450196dfccfa5b7192e1db8b5687c482131d463244df6dbde87f66a415b2adc4"
+  },
+  "human_signoff": false,
+  "independent_factual_quality_acceptance": false,
+  "independent_manual_review_performed": false,
+  "known_usb_system_error": "PROVIDER_INCOMPLETE_OR_REFUSED",
+  "limits": [
+    "This proves the exact saved direct turn and runtime bindings, without independently reviewing manual facts.",
+    "The run stopped after two cases. USB was a saved SYSTEM_ERROR. Remaining four cases were not run.",
+    "Draft cache creation is observed in both cases; verifier creation is observed for direct. All retained read counts are zero; failed verifier usage is unknown."
+  ],
+  "original_manual_pages_inspected": false,
+  "owner_enablement": {
+    "path": "reports/public_evaluator/20261012/public_review/owner_public_answer_enablement_scope_v1.json",
+    "sha256": "e9911c739d0609d45b9956c8e118459f63513a914f141a1a4756305a0375de54"
+  },
+  "partial_followup_answers_demonstrated": false,
+  "passed": true,
+  "permanent_ledger_proof": {
+    "errors": [],
+    "event_readback_present": false,
+    "grant_sha256": "310d665b1b9e7e2423e64408d537302c50997602a68b4ba2c519894031b8bf32",
+    "new_event_scopes_checked": 0,
+    "new_events_without_scope_fields": 0,
+    "passed": true,
+    "primary_token_ceiling": 2000000,
+    "token_ceiling_authorization": {
+      "approval_evidence_sha256": "45934a0a5b1050379c604409e67aee05e3e8404afcf7c93fb80e3b1857f2e42d",
+      "document_id": "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1",
+      "maximum_tokens": 2000000,
+      "measured_count_receipt_sha256": "26e280f05ee862569ccfa08fd1b76c5e5ee663cc04e7d8748d87bfba0c39f1f1",
+      "previous_maximum_tokens": 999200,
+      "schema": "motomedic-primary-token-ceiling-owner-grant-v1",
+      "scope_sha256": "9781f7fde38d3618b9aed2356ca398e888a9b449afb9dfef1edf103981e292c1"
+    }
+  },
+  "provider_calls_by_auditor": 0,
+  "public_browser_acceptance": false,
+  "recorded_at_utc": "2026-10-12T11:33:08.860740+00:00",
+  "role_cache_reads_demonstrated": {
+    "private_draft": false,
+    "semantic_verifier": false
+  },
+  "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+  "schema": "motomedic-single-direct-runtime-delivery-audit-v1",
+  "scope": "ONE_CURRENT_SUPPORTED_DIRECT_TURN_ONLY",
+  "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c"
+}

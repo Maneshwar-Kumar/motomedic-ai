@@ -1,0 +1,32 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "The manual lists the battery as 12 V - 8 Ah VRLA, which is its voltage and capacity, not a cold cranking amps rating.",
+      "evidence_ids": ["E1"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "NOT_APPLICABLE", "reason": "Concerns long starter presses after a failed start, not the CCA rating."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "General riding-care warning, not about the battery rating."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Concerns shifting into neutral."},
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Concerns gear shifting."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Concerns the clutch lever during starting."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Concerns starter button use."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Concerns starter button timing, not the CCA rating."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Concerns fuse failures."},
+    {"display_id": "E17", "decision": "NOT_APPLICABLE", "reason": "Concerns fuse ratings."},
+    {"display_id": "E18", "decision": "NOT_APPLICABLE", "reason": "Concerns spare fuses."},
+    {"display_id": "E19", "decision": "NOT_APPLICABLE", "reason": "Concerns defective fuses."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns the USB charger port in rain."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Concerns the USB charger port."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns USB cable insertion."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Concerns the USB port cap."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Concerns metal objects in the USB port."},
+    {"display_id": "E30", "decision": "NOT_APPLICABLE", "reason": "Concerns the USB port cap."},
+    {"display_id": "E31", "decision": "NOT_APPLICABLE", "reason": "Concerns USB charger current draw."},
+    {"display_id": "E32", "decision": "NOT_APPLICABLE", "reason": "Concerns USB charger operation."},
+    {"display_id": "E33", "decision": "NOT_APPLICABLE", "reason": "Concerns USB cables."}
+  ]
+}

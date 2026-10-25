@@ -1,0 +1,25 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "The manual says the front and rear brake pads must be checked for wear at the intervals in the periodic maintenance chart.", "evidence_ids": ["E1"]},
+    {"text": "The manual says the pads need to be replaced if a brake pad is \"warm to the indicator\".", "evidence_ids": ["E2"]}
+  ],
+  "policy": [
+    {"text": "The front and rear brake pads must be checked for wear at the intervals in the periodic maintenance chart.", "evidence_ids": ["E1"]},
+    {"text": "The pads need to be replaced if a brake pad is \"warm to the indicator\".", "evidence_ids": ["E2"]}
+  ],
+  "disclaimers": [
+    {"text": "The supplied sections do not give a distance or time for checking or replacing the pads, and the maintenance chart they refer to is not included."},
+    {"text": "The replacement wording in the manual is unclear, so confirm the replacement point with an authorised Royal Enfield service centre.", "evidence_ids": ["E2"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Concerns securing wheel spacers and speed sensor when removing the axle; not about when pads need replacing."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns brake hose handling during rear wheel removal; not about when pads need replacing."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Concerns the chain during rear wheel removal; not about when pads need replacing."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Concerns sliding out the rear wheel; not about when pads need replacing."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Concerns pressing the rear brake pedal during wheel removal; not about when pads need replacing."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Concerns placing a spacer between pads during rear wheel removal; not about when pads need replacing."},
+    {"display_id": "E29", "decision": "NOT_APPLICABLE", "reason": "Concerns not using the rear brake pedal to lift the motorcycle; not about when pads need replacing."}
+  ]
+}

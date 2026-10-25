@@ -1,0 +1,89 @@
+{
+  "backend_builds": 0,
+  "compatibility": {
+    "backend_binding": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/backend_build_binding_v2.json",
+      "sha256": "f1b4e0756962c0461887edf6bc805c44d189efcb5e3d7d5fb52dea00589fec07"
+    },
+    "backend_build_or_deployment": false,
+    "backend_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:531b0478458606f8faddcea78353cdb5f4cbe028dc06a2bc169f624024a2d362",
+    "backend_manifest_sha256": "b8d39544a9cc216b7bd6d37dd741c12e95f6e1d2694a59eaf573cb51195962f5",
+    "backend_runtime_lock": "6371ec7e1f651a5666750600d8e62ce86ac25bcf41f4eb227b8e281e6d4e2c76",
+    "backend_runtime_revision": "v10_14",
+    "changed_frozen_inputs": [
+      "reports/public_evaluator/20261012/serving_manifest_v10_14.json",
+      "reports/public_evaluator/20261012/serving_manifest_v10_14.sha256",
+      "rider_ui/app.py",
+      "rider_ui/client.py",
+      "rider_ui/render.py",
+      "rider_ui/tests/browser_smoke.py",
+      "rider_ui/tests/test_app.py",
+      "rider_ui/tests/test_timings.py",
+      "rider_ui/timings.py",
+      "tools/check_repository_structure.py",
+      "tools/serving_release.py"
+    ],
+    "changed_ui_files": [
+      "rider_ui/app.py",
+      "rider_ui/client.py",
+      "rider_ui/render.py",
+      "rider_ui/tests/browser_smoke.py",
+      "rider_ui/tests/test_app.py",
+      "rider_ui/tests/test_timings.py",
+      "rider_ui/timings.py"
+    ],
+    "model_source_index_and_backend_unchanged": true,
+    "owner_ui_scope": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_15_helpers/owner_ui_scope_v1.json",
+      "sha256": "0141dc86583dd11ab725618e1b4ae505c56e4407932beefda9a4c627ebad6376"
+    },
+    "shared_auth_and_controller_bytes_identical": true,
+    "ui_files": {
+      "rider_ui/Dockerfile": "76c43e6e89b40f99deb30ea829929e05737cf8542dec4fef2897b4c36c6c24ad",
+      "rider_ui/__init__.py": "a494babcfa18918399ebd324349f9ad0de5e9cc0a9db5d6488d2e960160fad20",
+      "rider_ui/app.py": "ee40b5751048152a2c955cfaa233ef634c5324c72df7441b3c2fb243adcb39d8",
+      "rider_ui/client.py": "89a9336720830880ef45ea14b5e7bab0e68a774e5153c807e4a5990a27140232",
+      "rider_ui/identity.py": "b11b6cde8ed18fdf898182879757ef6c5623c3b365cf8a8c3f1db8693587287e",
+      "rider_ui/prompt_manifest_v1.json": "63338118bf3b392bdd12bbaafdf09383ee01967118e25e6a40902bab0f4ffa97",
+      "rider_ui/prompt_policy.py": "7a8ee5076b811a2842b674829046ed22d0d2a937cd9872f9d23cf6d0aef9a908",
+      "rider_ui/public_edge.py": "0a87dfc191652612e1fe3aeb6e3a4b8d921a84ed53c477f77f5ca4da428f0238",
+      "rider_ui/public_gateway.py": "d699e047b40a506551f693ac0b851b4713d6265b5564fc673776e4fce7e39bf1",
+      "rider_ui/render.py": "0d21014cf1f44eae85afe1f4cde38227a9aeccb4b452f8e2e1e5956caa12d0f9",
+      "rider_ui/requirements-linux-amd64-py312.lock.txt": "0dcfb967cef5749a6ddec4e24dc61d8656a76e59c91c68d757da5eeb81d8121e",
+      "rider_ui/requirements.txt": "8c5c3a654ddd1c649707ff8bb9a80e62313d2b2808699621a0c388eb8eb5631f",
+      "rider_ui/safeguards.py": "5645d6d725797b4157e1db8cc630d5b20b9936a37d4b22d515ede56848a37d9b",
+      "rider_ui/system_prompt_v1.txt": "e86a7fa8e1466d0a5e1d6e54a9a490db7926f8869e5ca030e3deb458a0ceaf5b",
+      "rider_ui/tests/__init__.py": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "rider_ui/tests/browser_smoke.py": "3455e3d497ffafcbcd8109374826ffcadd444aae2d2a23756e8021a9dac7b77b",
+      "rider_ui/tests/fixture_api.py": "2755f84eec6fd9adfa17e03a2a28852e320ae916d3adee8e28c098369bba09e7",
+      "rider_ui/tests/test_app.py": "505e16dba5fd2f24e785fa313b65a1c71993efb555ed6d59534d23f4f20992a0",
+      "rider_ui/tests/test_client.py": "c2684d1974b2b8dbcccb841150e6a62563dd91a4f6ee053ac2c8dd89f1a6ae84",
+      "rider_ui/tests/test_identity.py": "8f41728e1c780b59955a0996dcfbe58b488b91d3a5bc3f77ffcd6bda2235f079",
+      "rider_ui/tests/test_progress_stream.py": "84c30f09f858b21ebfd902307039c6e44e45dd3bdce9f37432b9fef6002089bb",
+      "rider_ui/tests/test_public_gateway.py": "385aa22fdc7dd0b7ccc85fd99bef8562659d8bd24d21169e38f1ec56e80f64c1",
+      "rider_ui/tests/test_safeguards.py": "770eabe7341f67767fdbaac1e707c59e34680bc0d4551e918807b5c1e9f12ebb",
+      "rider_ui/tests/test_timings.py": "afd9541d53da3fd9db4a15782fc029cbaf561c331577817a00ff53cc34ac4f85",
+      "rider_ui/tests/test_verified_sse.py": "027671c2b85502eec83ba61325dc365e0482636aa42f7ba64f12ffeae2e253a1",
+      "rider_ui/theme.css": "b79af6036a830eebacffd9c438078731e3eccd515c483d8dde094716352f5325",
+      "rider_ui/timings.py": "cdf29e6303ef032c68d2dc1adc208758fc629d3fe55b95168d6e418627edd6a7",
+      "rider_ui/verified_sse.py": "107b6d9a81727736f0fbb7a372e87c7814a58eba7ec845120c71c692d0185a68"
+    },
+    "ui_input_manifest_sha256": "11cc210fb223a7238ec30541ff87c286e85f0e58f5671a23528e0b01dc8d593d",
+    "unchanged_other_frozen_inputs": true
+  },
+  "provider_calls": 0,
+  "quality_acceptance": false,
+  "schema": "motomedic-UI15-backend14-compatible-build-binding-v1",
+  "source_commit": "a2c8e8859c5fb324bcffe3c93b30d145b85c6528",
+  "ui_build_id": "e93db2f5-a9a0-47aa-a5d0-812b4a80eb65",
+  "ui_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:483de64b85123a501d5c55031d4885e3f4c2c44155f4b4f273ea4a2498be4760",
+  "ui_image_revision": "v10_15",
+  "ui_input_manifest_sha256": "11cc210fb223a7238ec30541ff87c286e85f0e58f5671a23528e0b01dc8d593d",
+  "ui_installed_manifest_sha256": "c89778d83e9ea1dadc9ae312af1f1fb4097467d2eca8d4d9f7206263cbed9360",
+  "ui_source_reference": {
+    "generation": "1791822231055058",
+    "maximum_bytes": 69941,
+    "sha256": "78d69f3415f9188c77234bd47c767f9988d5c6a0c084db68df317a0523257264",
+    "uri": "gs://motomedic-ai-20261009-indices/serving/v10_15/aef0d8533d26dfd7d786a66f12a12e92d5e46cf0eac4edd4db925902c03baef8/ui-78d69f3415f9188c77234bd47c767f9988d5c6a0c084db68df317a0523257264.tar.gz"
+  }
+}

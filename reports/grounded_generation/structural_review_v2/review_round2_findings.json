@@ -1,0 +1,152 @@
+{
+  "reviewer": "independent-subagent",
+  "round": 2,
+  "review_basis": {
+    "proposal_path": "reports/grounded_generation/structural_review_v2/proposal.json",
+    "proposal_sha256_verified": "52867152d206abdd274355ce6e4665235c4270e64019214f739fce274b088a34",
+    "builder_sha256": "a71c3a8906075f809f3550c55d39e1f9543aac46bdce90a8da91cc8fe73b35d4",
+    "loader": "cloud/grounded_generation/serving_source_authority_v5.py (PROPOSAL_SHA matches revision 2; REVIEW_SHA None)",
+    "method": "Page images re-rendered from the hash-verified PDF. The v5 candidate loader was run provider-free with an in-memory SIMULATED review stored only in the scratchpad (round2/SIMULATED_review_not_real.json; not a real approval, never written to the repository). On that run I computed each component's transitive dependency closure, assembled payloads, and ran select() for single cited anchors to see the exact server-appended rider-facing displays and the reviewed_source_context the drafter and verifier receive.",
+    "mechanical_checks_passed": [
+      "79 source objects: exact_text equals the immutable raw text (non-table), provenance matches, no figures.",
+      "All 25 parents: approved plus excluded equals the immutable child set. The unparented footnote truly has no parent.",
+      "All 22 printed_page_labels match the index printed_page field and my renders (e.g. 8->6, 27->25, 63->61, 104->102, 107->105).",
+      "New page-14, 91, 104, 105 and 107 objects match the printed pages word for word (bullet glyphs aside).",
+      "Loader loads revision 2 without error. Every component's closure is within the 256 bound, and all objects are ready."
+    ]
+  },
+  "pages_visually_checked": [5, 6, 8, 14, 15, 21, 27, 47, 50, 51, 54, 57, 61, 62, 63, 66, 90, 91, 104, 105, 107, 109, 110, 116, 117, 120],
+  "objects_checked": 79,
+  "round1_resolution": {
+    "F1": "RESOLVED",
+    "F2": "RESOLVED",
+    "F3": "RESOLVED",
+    "F4": "RESOLVED",
+    "F5": "PARTIAL",
+    "F6": "RESOLVED",
+    "F7": "RESOLVED",
+    "F8": "PARTIAL",
+    "F9": "RESOLVED",
+    "F10": "RESOLVED",
+    "F11": "RESOLVED",
+    "F12": "RESOLVED",
+    "F13": "RESOLVED",
+    "F14": "RESOLVED",
+    "F15": "RESOLVED"
+  },
+  "round1_resolution_notes": {
+    "F1": "The CLARIFICATION display text is faithful to the printed merged cell (p117: one 32 psi cell spanning Front and Rear across both rows; consistent with p18/p90 'Front & Rear, Solo & With Pillion 32 psi'). The review_note reaches the drafter and verifier through reviewed_source_context, and the display is appended to every suspension answer. I judge the overlay sufficient and do not recommend exclusion, subject to the role caveat in R2-N3.",
+    "F2": "Page-14 body section_e94f77a5039c1deb9a565bf0 (9 children) added. The 110 km/h display is faithful. The component closure is 15 objects on pp14-15 only.",
+    "F3": "The display now cites a4bb14d7 and 32a2dfb5 and restores 'cautions you against use of' and 'serious injury or loss of life'. It is faithful to p15.",
+    "F4": "Severity and 'misuse' wording restored. Faithful.",
+    "F5": "The p63 qualifier is now in the closure, and the ABS display cites be61e25b. But the component-level external link drags the whole v4 dependency closure of the p63 objects into every tell-tale answer. See R2-N1 (blocking).",
+    "F6": "p91 criterion and NOTE added with an accurate review_note. Caveats in R2-N7.",
+    "F7": "Battery component now holds the p104 NOTE, p105 WARNING and NOTE, and the p107 CAUTION and NOTE. Its closure is exactly these 7 objects. The four displays are textually faithful (role caveat in R2-N5).",
+    "F8": "Battery warning/caution links are correct and clean. The fuel no-flame links import unrelated v4 content (R2-N1), and the fuel warning itself is never displayed (R2-N2).",
+    "F9": "Footnote 36ee9102 added as unparented and linked from the lubricant table. Table closure is 6 (table, CAUTION, NOTE 1-3, footnote). Path and display caveats in R2-N4.",
+    "F10": "TELL TALES, BATTERY AND MAINTENANCE > DISMANTLING/ASSEMBLY, 4. SYSTEM and 6. FAVORITES are correct against pp47, 53-54, 61, 104-107. SETTING TABLE is removed. A new wrong prefix on the footnote is in R2-N4.",
+    "F11": "Compass now links 0e636256. The closure is 5 (compass NOTE plus the 4 p54 RE-app objects). Fine.",
+    "F12": "review_notes on both headlight objects are accurate and reach the drafter.",
+    "F13": "The observation is now a review_note on f27b3a99 that reaches the drafter. GVW and gross-weight-note links added (side effects in R2-N6).",
+    "F14": "The GMA unlinked-reference review_note is on b9c4e422 and reaches the drafter.",
+    "F15": "Pages, printed labels and per-parent checks are added. requires_visual_verification stays false because the loader cannot bind true; the table's review_note records the parser loss instead, which is acceptable."
+  },
+  "findings": [
+    {
+      "id": "R2-N1",
+      "severity": "BLOCKING",
+      "component": "TELL_TALE_INDICATORS, STORAGE_PRECAUTIONS",
+      "evidence_ids": ["evidence_be61e25b35303514cfe3e5c8", "evidence_f008b65a1c3864b9ce1ca3bc", "evidence_fd5a9183e18775af14291d97", "evidence_b02f383c70aefc628503f3ce", "evidence_15e1ce067b76cc524a0448d2", "evidence_26bf2297a667bbfcac0535cc"],
+      "page": 62,
+      "problem": "Component-level external links pull large unrelated content into every answer. The loader links every member to every external, and source_authority._closure() follows links transitively. The p63 ABS objects (be61e25b, f008b65a) and the p8/p27 fuel warnings (fd5a9183, b02f383c) already carry v4 dependency closures of 21-22 objects across pp18, 27, 63-66, 72-75, 112, 121-122, including the p121 troubleshooting table 15e1ce06...0448d2. All of it now flows into these two components. Simulated end to end: a draft claim citing only legend item '(7) Turn left - Left turn signal ON' (evidence_0f578049daa797b4bb00b976) gives a 34-object payload, and select() appends 18 mandatory displays (2,238 bytes) to the rider answer. These include starter-duration and cranking warnings, a starting PREREQUISITE ('Before an actual starting attempt, establish neutral ... clutch pulled in and held ...'), seven fuse warnings, EVAP overfill, fuel-approximation, refuel warnings and 'Have authorised service inspect and correct the brake system; failure risks serious injury or loss of life.' That last v4 display (bound to 26bf2297, p66) drops its printed condition, so in a turn-signal or high-beam answer it reads as an unconditional brake-fault instruction. A storage answer citing 'Cover the silencer...' (evidence_35e6dd9cd4df241c231eba9c) gets a 40-object payload and the same 14 unrelated displays plus the 4 battery ones. 'Do not use the motorcycle for long with the last fuel-indicator segment blinking; refuel at the earliest' and 'Failure to refuel ... fuel-pump damage' then sit beside the manual's 'Drain the fuel completely'. This is the misleading safety-text injection that check (c) asks about. It also invites verifier rejection as irrelevant content, which would disable both components.",
+      "evidence_from_page": "p62 legend (turn signals, high beam, ride mode, connectivity) and p120 storage list contain nothing about fuses, starting, cranking or refuelling. On p66 the brake-system sentence is conditional: 'If the ABS indicator lamp does not switch OFF and remains continuously ON at higher speeds ... Get the brake system inspected and corrected ...'. p120 instructs 'Drain the fuel completely from the fuel tank and induction system.'",
+      "required_fix": "Do not add any external whose own v4 closure goes beyond the intended object. For TELL_TALE_INDICATORS, drop the p63 externals and keep the ABS display self-contained on p62 evidence, e.g. cite d867f6c7 + bc21f201: 'Do not run the motorcycle if the ABS indicator lamp stays continuously ON; the legend notes it is ON during the initial check-up and turns OFF if the system is OK.' p63 stays reachable by its own retrieval in v4. For STORAGE_PRECAUTIONS, drop fd5a9183/b02f383c, keep the battery externals (clean 7-object closure), and add a review_note on evidence_660ca3000454e2f166858581 that the manual's fuel-system no-flame/no-spark guidance (pp6, 25) applies but is not linked. Alternatively change the loader so external links are terminal (the external object is included but its own links are not followed) with matching display handling. That is a loader change needing its own review. Either way, re-run the closure/display simulation and re-review."
+    },
+    {
+      "id": "R2-N2",
+      "severity": "MAJOR",
+      "component": "STORAGE_PRECAUTIONS",
+      "evidence_ids": ["evidence_660ca3000454e2f166858581", "evidence_fd5a9183e18775af14291d97", "evidence_b02f383c70aefc628503f3ce"],
+      "page": 120,
+      "problem": "F8's intended safety context is never shown to the rider. Neither fuel object has a display in v4 or in this revision, so the storage answer gets 18 unrelated displays (R2-N1) but not the one warning that applies to draining fuel.",
+      "evidence_from_page": "p8 (printed 6): 'Do not smoke and please ensure that there are no open flames or sparks near the motorcycle, when refueling or servicing the fuel system.' p27 (printed 25) CAUTION: 'Gasoline vapour is highly explosive...'",
+      "required_fix": "If a fuel link is kept after fixing R2-N1 (only possible with terminal externals), add a WARNING display citing evidence_fd5a9183e18775af14291d97, e.g. 'Do not smoke and ensure there are no open flames or sparks near the motorcycle when servicing the fuel system.' Otherwise use the review_note route in R2-N1 and state honestly that the warning is not displayed."
+    },
+    {
+      "id": "R2-N3",
+      "severity": "MINOR",
+      "component": "REAR_SUSPENSION_PRELOAD",
+      "evidence_ids": ["evidence_fb5ddc131802596bbfc6777e"],
+      "page": 117,
+      "problem": "The F1 display uses response_role CLARIFICATION. In the v10.13 response contract that role already means something else: AMBIGUOUS is 'only one focused CLARIFICATION claim' with clarification_question and RELEASE_CLARIFICATION (verified_qa.py ROLES, DRAFT policy, validate_draft lines 400-403). It is also a non-TECHNICAL role, yet the display states a technical specification (32 psi front and rear, both rows). Every suspension answer now carries a CLARIFICATION-role claim inside a SUPPORTED response. The verifier must mark it supported against fb5ddc13, whose own content shows 32 only at r2c3, so acceptance depends on the verifier honouring the review_note. Content is correct, but rejection would disable the component (fail closed, not unsafe).",
+      "evidence_from_page": "p117: merged 32 psi cell across Front/Rear and both rows.",
+      "required_fix": "Prefer a display role that the response contract does not reserve for rider clarification questions, and that is treated as a technical specification. This needs a loader role addition reviewed separately. Run one hosted verifier probe on a suspension question before relying on the overlay. Exclude the table only if neither is possible; exclusion would lose the 3rd/6th notch values that EXP040 needs."
+    },
+    {
+      "id": "R2-N4",
+      "severity": "MINOR",
+      "component": "LUBRICANT_TABLE_FOOTNOTE",
+      "evidence_ids": ["evidence_36ee9102cfd9a8ef98c0466d", "evidence_a6950ea73293cda81e695ce1"],
+      "page": 21,
+      "problem": "The new section_path ['TECHNICAL SPECIFICATIONS','RECOMMENDED LUBRICANTS','FOOTNOTE'] invents a parent level. The CONTENTS page lists 'Technical specifications ... 14' and 'Recommended lubricants ... 19' as separate chapters, and the already-approved table's v4 path is ['RECOMMENDED LUBRICANTS']. The footnote is a brake-fluid 'Do not' instruction but still has no display.",
+      "evidence_from_page": "PDF p5 (printed 3) CONTENTS. PDF p21 page title 'RECOMMENDED LUBRICANTS' with '* Do not mix DOT 4 or other brake fluid together.' under the table.",
+      "required_fix": "Use ['RECOMMENDED LUBRICANTS','FOOTNOTE']. Optionally add a display citing 36ee9102: 'Do not mix DOT 4 with other brake fluids.' Its closure is 1 object, so it adds no unrelated content."
+    },
+    {
+      "id": "R2-N5",
+      "severity": "MINOR",
+      "component": "BATTERY_HANDLING_NOTES",
+      "evidence_ids": ["evidence_fd9b2d785aff600ed5a45e2d", "evidence_1ef48d8f41966dab4592fc8b", "evidence_e56e7474f3f117209f8530fc"],
+      "page": 107,
+      "problem": "Displays 2-3 come from a CAUTION box (p107) and display 4 from a NOTE (p104), but all are presented with response_role WARNING. The manual's own SAFETY DEFINITIONS give these levels different meanings: WARNING is risk of injury, CAUTION is damage to the motorcycle, NOTE is useful information. The display texts themselves are faithful. v4 uses the same convention, so this is not new in kind.",
+      "evidence_from_page": "PDF p6 (printed 4) SAFETY DEFINITIONS. p107 'CAUTION: Connect the red (+ve) positive terminal first ...'. p104 'NOTE: The poor contact or loose fitment of battery terminals may cause ECU failure.'",
+      "required_fix": "Accept as convention, or prefix the text with the printed level (e.g. 'Caution: ...') so the severity the rider sees does not exceed the manual's own."
+    },
+    {
+      "id": "R2-N6",
+      "severity": "MINOR",
+      "component": "REAR_SUSPENSION_PRELOAD",
+      "evidence_ids": ["evidence_c3f89576489b978b3db27348", "evidence_f215ffd94a6c830c1ba6dfb0", "evidence_80a460d371b840a11e5ef627"],
+      "page": 20,
+      "problem": "The GVW and gross-weight-note externals bring in the whole v4 p20 DIMENSIONS/WEIGHTS component (12 objects) and its 3 displays. 'Listed values and dimensions are guidance only' and 'Specifications may change without prior notice' are appended to every suspension answer, where a rider may read them as applying to notch or psi values. Kerb weight 196 kg now sits beside the table's 'maximum of 196 kg payload', and GVW 394 minus kerb 196 gives 198, which invites an unsupported calculation.",
+      "evidence_from_page": "p20: Kerb weight 196 kg, Gross vehicle weight 394 kg, NOTE items. p117: 'Up to a maximum of 196 kg payload'.",
+      "required_fix": "Acceptable if kept. Add a review_note on fb5ddc13 or 0a41839a that payload must not be derived from GVW and kerb weight, and that the p20 'guidance only' note refers to the dimension values."
+    },
+    {
+      "id": "R2-N7",
+      "severity": "MINOR",
+      "component": "BRAKE_PAD_WEAR_CHECK",
+      "evidence_ids": ["evidence_1fd98dd6ead9e18f957b54ed", "evidence_408aceccea34b9af73a5150c", "evidence_4699daa5c7736c164e16ae72", "evidence_9eb870e564adb38655d7e145"],
+      "page": 91,
+      "problem": "(a) 1fd98dd6 and 408acecc are already bound in v4, so the loader skips rebinding. The model therefore sees their v4 contexts (['MINOR MAINTENANCE TIPS'] and ['NOTE']), not the proposal's ['MINOR MAINTENANCE TIPS','BRAKE PADS'(,'NOTE')], so the corrected paths are ineffective for those two objects. (b) The p91 NOTE ('mild noise ... absolutely normal ... in no way will affect the performance') now travels with every pad-wear answer. A generator could use it to dismiss brake noise in a wear question.",
+      "evidence_from_page": "p91: the criterion line and NOTE sit under BRAKE PADS, before FRONT WHEEL REMOVAL.",
+      "required_fix": "State in the proposal that the v4 contexts govern those two objects. Add a review_note on a v2-bound member (e.g. 4699daa5) that the NOTE describes mild noise under certain riding conditions, does not rule out pad wear, and is not a diagnosis."
+    },
+    {
+      "id": "R2-N8",
+      "severity": "MINOR",
+      "component": "TELL_TALE_INDICATORS",
+      "evidence_ids": ["evidence_d867f6c7da84e269ebddf176", "evidence_be61e25b35303514cfe3e5c8"],
+      "page": 63,
+      "problem": "Display 2 opens with the unconditional clause 'Do not run the motorcycle if the ABS indicator lamp stays ON continuously', then refers to 'the ABS indicator lamp section'. It also duplicates the v4 display claim_a1949bc88bbdc55b100c357e that arrives through the same closure.",
+      "evidence_from_page": "p62 CAUTION, unconditional. p63 CAUTION, 'above 5 km/h'.",
+      "required_fix": "With the R2-N1 fix, use the p62-only wording proposed there. If p63 stays linked through a terminal-external loader, use one display: 'Do not run the motorcycle if the ABS indicator lamp is ON continuously above 5 km/h; it normally stays ON after switch-on until 5 km/h.'"
+    }
+  ],
+  "per_component_verdict": {
+    "LUGGAGE_AND_ACCESSORY_LOADING": "APPROVE",
+    "RE_APP_PHONE_COMPATIBILITY": "APPROVE",
+    "DISPLAY_LANGUAGE_MENU": "APPROVE",
+    "COMPASS_NAVIGATION_NOTE": "APPROVE",
+    "TELL_TALE_INDICATORS": "REJECT",
+    "BATTERY_HANDLING_NOTES": "APPROVE",
+    "HEADLIGHT_BEAM_ADJUSTMENT": "APPROVE",
+    "TAIL_AND_LICENSE_PLATE_LAMP": "APPROVE",
+    "BRAKE_PAD_WEAR_CHECK": "APPROVE",
+    "REAR_SUSPENSION_PRELOAD": "APPROVE",
+    "STORAGE_PRECAUTIONS": "REJECT",
+    "LUBRICANT_TABLE_FOOTNOTE": "APPROVE"
+  },
+  "overall": "APPROVE_AFTER_FIXES",
+  "overall_note": "Revision 2 (sha256 52867152d206abdd274355ce6e4665235c4270e64019214f739fce274b088a34) must not be approved. R2-N1 is blocking: two components' external links import unrelated v4 closures and 14-16 unrelated mandatory displays into rider answers. The v5 gate also requires open_findings == [] and every component approved. Text, membership, page labels, section paths (except the footnote) and all F1-F4, F6-F7 and F9-F15 resolutions check out against the pages. A revision 3 that removes or neutralises the transitive externals (and the fuel-display gap) needs a fresh review of TELL_TALE_INDICATORS and STORAGE_PRECAUTIONS, plus a re-run of the closure/display simulation. The minor items can be fixed in the same pass."
+}

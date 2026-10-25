@@ -1,0 +1,17 @@
+{
+  "schema_version": "public-evaluator-ui-dependency-addition-v2",
+  "platform": "linux-amd64-cpython312",
+  "baseline": "reports/build/20261012/ui_dependency_lock.json",
+  "unchanged_existing_pins": true,
+  "added": {
+    "package": "tornado",
+    "version": "6.5.2",
+    "wheel": "tornado-6.5.2-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "e792706668c87709709c18b353da1f7662317b563ff69f00bab83595940c7108",
+    "metadata_source": "https://pypi.org/pypi/tornado/6.5.2/json",
+    "metadata_read_date": "2026-10-12",
+    "purpose": "Bounded public HTTP/WebSocket gateway with private loopback Streamlit."
+  },
+  "installation": "HOSTED_IMAGE_PIP_REQUIRE_HASHES",
+  "local_build_or_provider_calls": 0
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": "repository-monitor-check-v1",
+  "trigger_utc": "2026-10-12T09:17:14.508Z",
+  "structure": {
+    "schema_version": "repository-structure-audit-v4",
+    "ok": false,
+    "unexpected_root_files": [],
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "missing_critical_source_files": [
+      "reports/public_evaluator/20261012/serving_manifest_v10_13.json"
+    ],
+    "integrity_errors": [
+      {
+        "path": "reports/public_evaluator/20261012/serving_manifest_v10_13.json",
+        "reason": "CURRENT_SERVING_BINDING_FAILED",
+        "detail": "Required current manifest absent during active v10.13 repair."
+      }
+    ],
+    "local_links_checked": 150,
+    "root_file_count": 48,
+    "runtime_freeze_files_verified": 64,
+    "current_serving_files_verified": 0,
+    "approved_output_files_verified": 187,
+    "note": "Canonical navigation, byte-exact historical v8 snapshots and v9/v9.1 manifests, current v10 inputs and original scoped approval paths. Not factual or deployment acceptance."
+  },
+  "polls": [
+    {
+      "thread_id": "01a12f2a-8db7-7f11-88fb-55867d766816",
+      "status": "active",
+      "cursor": "7d8ae3a5-0b2b-4e57-b7a1-ffbd90a1544c:2"
+    },
+    {
+      "thread_id": "01a12c4e-f3ef-7342-b33b-45cdb6511587",
+      "status": "idle",
+      "cursor": "4fa8c308-659f-4313-94e2-55c7db91b3fe:16"
+    }
+  ],
+  "observations": [
+    "Current checker references pending v10.13 manifest during active repair.",
+    "Historical 64 runtime objects and 187 original approval outputs verify.",
+    "Failed-run adjudication, admission and rollback receipts stay grouped in the evaluator work area.",
+    "No unexpected root files or broken canonical navigation.",
+    "Concurrent source/runtime and canonical status updates preserved."
+  ],
+  "new_actionable_organization_changes": [],
+  "navigation_changed": [],
+  "moved_files": [],
+  "allowlist_changed": false,
+  "clean_consecutive_checks": 0,
+  "pause_eligible": false,
+  "pause_reason": "Relevant Haiku evaluator continuation remains active.",
+  "provider_calls": 0,
+  "deployment_or_billing_changes": false,
+  "protected_paths_unchanged": true,
+  "monitor_status": "ACTIVE",
+  "failure": "Required current v10.13 serving manifest absent."
+}

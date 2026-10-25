@@ -1,0 +1,37 @@
+{
+  "actual_baked_wrapper": {
+    "actual_boot_path": "/qdrant/boot.py",
+    "actual_boot_sha256": "4c696031dad4d0f8bd9aeb4f21ee662022feb033bad3d1f083752afe929499b4",
+    "boot_bytes": 4036,
+    "expected_boot_sha256": "4c696031dad4d0f8bd9aeb4f21ee662022feb033bad3d1f083752afe929499b4",
+    "index_download_or_load": false,
+    "matches_reviewed_source": true,
+    "provider_calls": 0,
+    "qdrant_started": false,
+    "schema": "motomedic-hosted-qdrant-baked-wrapper-hash-v1",
+    "secret_environment_supplied": false
+  },
+  "boot_image_path": "/qdrant/boot.py",
+  "cloud_build_id": "38633b16-c4d8-46be-b89e-b9e8489dd7cc",
+  "completed_build_sha256": "ded896a4ea6b9dbdf15c04d37b02b10fc1f968d2be480dc132a1483fd5d6d3f8",
+  "current_revision_at_submission": "motomedic-qdrant-00003-cjb",
+  "current_revision_configuration_sha256_at_submission": "8714bdcf89e73ee35c09b9c393842c84fd45d42bb84566ea4bbd9e793c3a17fc",
+  "file_sha256": {
+    "cloud/deployment_status.json": "5502743036d277c861b0d9b59267f5f283af252a57c9592c3c0e253e6fd85915",
+    "cloud/qdrant/Dockerfile": "f950013db871583690b1483d717f341baad4204f7f2a7c1b8d448d6b4f91b859",
+    "cloud/qdrant/boot.py": "4c696031dad4d0f8bd9aeb4f21ee662022feb033bad3d1f083752afe929499b4"
+  },
+  "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+  "index_download_or_load": false,
+  "preparation_sha256": "53566daa0df17e0b997db4dd7dd463e71cc1d4a6372e639c7b7e3e76cb4af1b4",
+  "provider_calls": 0,
+  "qdrant_or_iam_or_billing_changes": false,
+  "qdrant_started": false,
+  "raw_logs_saved": false,
+  "read_only_endpoints": [
+    "GET /health",
+    "POST /query"
+  ],
+  "schema": "motomedic-existing-qdrant-read-only-image-source-proof-v1",
+  "submission_sha256": "9ad97ca9347947f9abc9b7aaf51f9f2b460bf5611b4a4585b54abb8f5ff18da1"
+}

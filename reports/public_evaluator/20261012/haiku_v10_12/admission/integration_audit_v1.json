@@ -1,0 +1,61 @@
+{
+  "actual_provider_calls": 0,
+  "billing_or_allocation_changed": false,
+  "bound_files": {
+    "cloud/arm_a/app.py": "89a449080cdd37f365835986d79d72b6e4bafb7415779b1d5811ebace63a29e3",
+    "cloud/grounded_generation/cached_verifier.py": "c981923983b05dfa6cf2d3a839e73229540bb87347dc0fb243265f9c921ed8e1",
+    "cloud/grounded_generation/claude_budget.py": "dd04199ecfe0d24817e1a5a4ef08e4485de4f511a13edbf2a3feb852dc81e226",
+    "cloud/grounded_generation/role_contracts.py": "0f744e233746ba4c6f195bea8558ec16664da9163dc58c08d011b452f807ba96",
+    "cloud/grounded_generation/role_router.py": "7773d9f1838e1576cedea25c9638724089d12ba0cdec13834f4c14edc1199c26",
+    "cloud/grounded_generation/verified_qa.py": "7d41df84d085d4d48e5a3a10f85de9803165c65928b7b83ca22a94927281ad90",
+    "cloud/grounded_generation/whole_turn_admission.py": "a1bbc93ab7c751acb5af92a743f199ef6d845644c388d7dfc0d728a891c81538"
+  },
+  "cloud_calls": 0,
+  "draft_invocation_reused_as_verifier_in_inspected_serving_path": false,
+  "ledger_bypass_found_in_inspected_serving_path": false,
+  "limitation": "Mocked source authority, native counts, provider outputs and Firestore; this audits code/data flow and does not establish factual quality or current hosted balances.",
+  "live_answer_quality_acceptance": false,
+  "production_code_edited_for_audit": false,
+  "recorded_at_utc": "2026-10-12T08:28:08.016080+00:00",
+  "scenarios": [
+    {
+      "passed": true,
+      "reserved_attempts": 2,
+      "reserved_nanodollars": 6274000,
+      "reserved_tokens": 39392,
+      "scenario": "complete",
+      "status": "SUPPORTED",
+      "synthetic_generation_stages": [
+        "draft",
+        "verify"
+      ]
+    },
+    {
+      "passed": true,
+      "reserved_attempts": 4,
+      "reserved_nanodollars": 12548000,
+      "reserved_tokens": 78784,
+      "scenario": "correction",
+      "status": "SUPPORTED",
+      "synthetic_generation_stages": [
+        "draft",
+        "verify",
+        "correction",
+        "reverify"
+      ]
+    },
+    {
+      "passed": true,
+      "reserved_attempts": 2,
+      "reserved_nanodollars": 6274000,
+      "reserved_tokens": 39392,
+      "scenario": "uncertain",
+      "status": "SYSTEM_ERROR",
+      "synthetic_generation_stages": [
+        "draft"
+      ]
+    }
+  ],
+  "schema": "motomedic-haiku-integration-independent-synthetic-audit-v1",
+  "validation_kind": "SYNTHETIC_LOCAL_PROVIDER_FREE_INDEPENDENT_CODE_AUDIT"
+}

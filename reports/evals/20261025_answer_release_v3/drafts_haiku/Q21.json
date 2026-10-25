@@ -1,0 +1,48 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "For checking the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "On the analog screen, the battery gauge has four segments, and each segment represents 1 V.",
+      "evidence_ids": ["E17"]
+    },
+    {
+      "text": "For example, two segments completely filled means 12.5 V, and up to three segments half filled means 13 V.",
+      "evidence_ids": ["E18"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Battery voltage checks are referred to a Royal Enfield Authorised Service Centre or a battery service centre.",
+      "evidence_ids": ["E10"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not hold the starter button down for long periods after the engine fails to start, because this drains the battery below 10 V.",
+      "evidence_ids": ["E25"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not give a step-by-step way for a rider to measure the battery voltage."
+    },
+    {
+      "text": "The manual does not say how accurate the analog screen battery gauge is."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Covers disconnecting battery terminals, not checking voltage."},
+    {"display_id": "E25", "decision": "INCLUDED", "reason": "Starter misuse can drain the battery below 10 V, which bears on battery voltage."},
+    {"display_id": "E29", "decision": "NOT_APPLICABLE", "reason": "General riding caution, unrelated to checking voltage."},
+    {"display_id": "E30", "decision": "NOT_APPLICABLE", "reason": "Covers selecting neutral, unrelated to checking voltage."},
+    {"display_id": "E31", "decision": "NOT_APPLICABLE", "reason": "Covers gear shifting, unrelated to checking voltage."},
+    {"display_id": "E32", "decision": "NOT_APPLICABLE", "reason": "Covers the clutch lever during starting, unrelated to checking voltage."},
+    {"display_id": "E33", "decision": "NOT_APPLICABLE", "reason": "Covers starting the engine, not battery voltage checks."},
+    {"display_id": "E34", "decision": "NOT_APPLICABLE", "reason": "Covers repeated cranking intervals; the battery drain point is already covered by E25."}
+  ]
+}

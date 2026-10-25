@@ -1,0 +1,47 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "The key stays in while the ignition is ON because it can be removed only when the ignition is OFF or the steering is locked.",
+      "evidence_ids": ["E3"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The key can be removed only when the ignition is OFF or the steering is locked.",
+      "evidence_ids": ["E3"]
+    },
+    {
+      "text": "Do not switch the ignition OFF while riding.",
+      "evidence_ids": ["E6"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not switch the ignition OFF while riding. Doing so can cause a potential accident, resulting in serious injury to the rider and other road users, and severe damage to the motorcycle.",
+      "evidence_ids": ["E6", "E7"]
+    },
+    {
+      "text": "When the engine is not running, turn the ignition OFF. If it is left ON, the battery will discharge because the headlamp stays on.",
+      "evidence_ids": ["E10"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E6",
+      "decision": "INCLUDED",
+      "reason": "Switching OFF while riding is the obvious workaround and is dangerous."
+    },
+    {
+      "display_id": "E7",
+      "decision": "INCLUDED",
+      "reason": "States the consequence of switching OFF while riding."
+    },
+    {
+      "display_id": "E10",
+      "decision": "INCLUDED",
+      "reason": "Explains the battery effect of leaving the ignition ON when the engine is not running, which bears on the key question."
+    }
+  ]
+}

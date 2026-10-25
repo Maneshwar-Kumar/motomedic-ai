@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "anonymous_health_only_when_inspection_flag_true": true,
+    "elapsed_seconds": 0.566,
+    "existing_signed_visitor_and_tasks_bindings_retained": true,
+    "foreign_signed_service_account_and_valid_visitor_cookie_denied_before_dispatch": true,
+    "google_signature_issuer_audience_and_verified_caller_allowlist_required": true,
+    "private_behavior_preserved": true,
+    "stripped_alternate_header_cannot_override_verified_identity": true,
+    "suite_modules": [
+      "cloud.arm_a.test_public_inspection_auth",
+      "cloud.arm_a.test_public_admission",
+      "cloud.arm_a.test_durable_operations"
+    ],
+    "tests_passed": 49
+  },
+  "classification": "SYNTHETIC_PROVIDER_FREE_AUTH_AND_EXISTING_APPLICATION_BOUNDARIES",
+  "cloud_calls": 0,
+  "factual_quality_acceptance": false,
+  "independent_agent_review": "/root/haiku_runtime",
+  "live_anonymous_probe_pending": true,
+  "passed": true,
+  "provider_calls": 0,
+  "schema": "motomedic-public-inspection-auth-source-review-v1",
+  "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+  "source_commit": "3b7da1692187736295fee7345e9b3e932d02b216",
+  "source_sha256": {
+    "cloud/arm_a/app.py": "7446ab126bec92104e9d1620daa674d23647ee52c2b6dd9e6983931e79cbdb2c",
+    "cloud/arm_a/durable_dispatch.py": "806f29cab066af56f452c5676eec07a220fc1b48a4d660b68d0e5b3ea9372ba0",
+    "cloud/arm_a/public_admission.py": "b024c46e6213b0551790e00eb2d42d3236ddec35b3343d84be0a2b5c1621407e",
+    "cloud/arm_a/public_inspection_auth.py": "2d23530ffb7ea7d2aff605c511151758ae28bcd21d19050e65fc9d3178a6e5c1",
+    "cloud/arm_a/rider_api.py": "a6945712bbe715c278c5ec4a9fd204759fcdfa90c59727447f3cc9de572fbb98",
+    "cloud/arm_a/test_public_inspection_auth.py": "63337deb4c19e3ca6e8fac15aa8f0c6b273191b6727d3df820714f047d4a8b4f"
+  }
+}

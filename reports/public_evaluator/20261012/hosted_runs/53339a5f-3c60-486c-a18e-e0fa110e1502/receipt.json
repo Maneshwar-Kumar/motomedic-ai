@@ -1,0 +1,91 @@
+{
+  "allocated_job_id": "53339a5f-3c60-486c-a18e-e0fa110e1502",
+  "allocation_refund": false,
+  "allocation_reset": false,
+  "case_count": 6,
+  "case_files": {
+    "EVAL_DIRECT_01": "967eae1969820a381053dc00b083d94854570c73bdd3372f805fb216b7ace7a7",
+    "EVAL_FOLLOWUP_03": "fa6be1210faaaaa4cf0c99a51025ba86fed66b66addceea08f3cb42b99350387",
+    "EVAL_PARTIAL_05": "42b52ea9f6094c8b94fa2292ae1ee215c26c6ad3e42e4ee0b0d98cec836262b2",
+    "EVAL_TOPIC_TABLE_04": "733f5ccf019bd895145dd7bd8b72f323f55312993658c341e6af346a7d0674b9",
+    "EVAL_UNSUPPORTED_06": "ff334912e3f384b7c4f7e35fb7a2e8c46ca5fec1ea1650addc3668bfa9038521",
+    "EVAL_USB_02": "97a1d632e3a6bc65c5b06c0199714cf5a30d0a5f274fcde6003c0552a3f46a49"
+  },
+  "classification": "HOSTED_REAL_PROVIDER_ENGINEERING_EVIDENCE_ONLY",
+  "client_input_inventory": {
+    "file_sha256": {
+      "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+      "reports/public_evaluator/20261012/original_page_evaluator_plan_v2.json": "a7dc784be633c14accdff256e57abb784a486076da07b149c6f2e04096ee5541",
+      "rider_ui/__init__.py": "a494babcfa18918399ebd324349f9ad0de5e9cc0a9db5d6488d2e960160fad20",
+      "rider_ui/client.py": "a448e78475480ae4a4d2824746bb246b6c5778ac6ad550569d889d78a440322e",
+      "rider_ui/identity.py": "b11b6cde8ed18fdf898182879757ef6c5623c3b365cf8a8c3f1db8693587287e",
+      "rider_ui/safeguards.py": "d6df3de2777dcde6534f2af706bb16c93c3eced8fe9036cf0dd6e6ea183393e6",
+      "rider_ui/verified_sse.py": "107b6d9a81727736f0fbb7a372e87c7814a58eba7ec845120c71c692d0185a68",
+      "tmp/public_evaluator/hosted_client.py": "7acb344fe8cdca60c9b42a3152ce4e6def45309099aae696d0f9185e1797246b"
+    },
+    "manual_or_models_in_archive": false,
+    "provider_calls": 0,
+    "schema": "motomedic-hosted-evaluator-client-inputs-v1",
+    "serving_manifest_sha256": "b6aadba39d309bf90a50be93aecc947a3cfb44357f15cd40dd5c4dd3672f2fd3",
+    "source_commit": "e69e0d3afa97fedc47d21ebb5753fab78a4e1064"
+  },
+  "cloud_build_id": "53339a5f-3c60-486c-a18e-e0fa110e1502",
+  "credentials_logged": false,
+  "engineering_completed_cases": 0,
+  "engineering_transport_and_route_passed": false,
+  "health": {
+    "answer_provider": "gemma-4-26b-a4b-it",
+    "architecture": "DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA",
+    "benchmark_pacing": false,
+    "durable_dispatch_configured": true,
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "prompt_cache": "ANTHROPIC_VERIFIER_EVIDENCE_PREFIX_5M",
+    "ready": true,
+    "reranking": "authenticated-open-hybrid-rank-disagreement-v3",
+    "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+    "streaming": "DRAFT_VERIFY_STREAM",
+    "verifier_provider": "claude-haiku-5-5"
+  },
+  "independent_factual_review_pending": true,
+  "index_id": "index_a3282c4d98cf54595e4ba168",
+  "ledger_after": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 24,
+      "reserved_tokens": 239808,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 3,
+      "reserved_nanodollars": 11544000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "ledger_after_error": null,
+  "ledger_before": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 8,
+      "reserved_tokens": 79936,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 1,
+      "reserved_nanodollars": 3848000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+  "plan_sha256": "a7dc784be633c14accdff256e57abb784a486076da07b149c6f2e04096ee5541",
+  "post_retries": 0,
+  "public_browser_acceptance": false,
+  "raw_rider_media_logged": false,
+  "runtime_lock": "b38b319cf747f03dc4199693fab5b530d3c71a289d8bc2b4c65eeece78ee84a9",
+  "schema": "motomedic-hosted-original-page-evaluator-v1",
+  "technical_releases": 0
+}

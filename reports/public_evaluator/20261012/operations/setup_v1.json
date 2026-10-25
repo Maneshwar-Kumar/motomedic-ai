@@ -1,0 +1,528 @@
+{
+  "schema_version": "private-durable-services-setup-v1",
+  "project_id": "motomedic-ai-20261009",
+  "region": "us-central1",
+  "authorization": "Owner-authorized public evaluator goal and credential/private Cloud Tasks IAM setup; no billing changes or provider calls",
+  "prior_readback": {
+    "task_service_account": "NOT_FOUND",
+    "queue": "NOT_FOUND",
+    "snapshot_get_role": "NOT_FOUND",
+    "main_billing_enabled": true,
+    "inference_billing_enabled": false
+  },
+  "actions": [
+    {
+      "exit_code": 0,
+      "metadata": {
+        "displayName": "MotoMedic private answer task caller",
+        "email": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "etag": "MDEwMjE5MjA=",
+        "name": "projects/motomedic-ai-20261009/serviceAccounts/motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "oauth2ClientId": "111357146553307869505",
+        "projectId": "motomedic-ai-20261009",
+        "uniqueId": "111357146553307869505"
+      },
+      "command": [
+        "iam",
+        "service-accounts",
+        "create",
+        "motomedic-answer-tasks",
+        "--project=motomedic-ai-20261009",
+        "--display-name=MotoMedic private answer task caller",
+        "--format=json"
+      ],
+      "at_utc": "2026-10-11T20:25:53.522879Z"
+    },
+    {
+      "exit_code": 0,
+      "metadata": {
+        "name": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers",
+        "rateLimits": {
+          "maxBurstSize": 10,
+          "maxConcurrentDispatches": 1,
+          "maxDispatchesPerSecond": 1.0
+        },
+        "retryConfig": {
+          "maxAttempts": 1,
+          "maxBackoff": "3600s",
+          "maxDoublings": 16,
+          "minBackoff": "0.100s"
+        },
+        "state": "RUNNING"
+      },
+      "command": [
+        "tasks",
+        "queues",
+        "create",
+        "motomedic-verified-answers",
+        "--project=motomedic-ai-20261009",
+        "--location=us-central1",
+        "--max-concurrent-dispatches=1",
+        "--max-dispatches-per-second=1",
+        "--max-attempts=1",
+        "--format=json"
+      ],
+      "at_utc": "2026-10-11T20:25:59.2117761Z"
+    },
+    {
+      "exit_code": 0,
+      "metadata": {
+        "description": "Read the immutable serving snapshot object only",
+        "etag": "BwZdlmUMwmA=",
+        "includedPermissions": [
+          "storage.objects.get"
+        ],
+        "name": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "stage": "GA",
+        "title": "MotoMedic exact snapshot object get"
+      },
+      "command": [
+        "iam",
+        "roles",
+        "create",
+        "motomedicSnapshotObjectGet",
+        "--project=motomedic-ai-20261009",
+        "--title=MotoMedic exact snapshot object get",
+        "--description=Read the immutable serving snapshot object only",
+        "--permissions=storage.objects.get",
+        "--stage=GA",
+        "--format=json"
+      ],
+      "at_utc": "2026-10-11T20:26:23.2359027Z"
+    },
+    {
+      "command": [
+        "tasks",
+        "queues",
+        "add-iam-policy-binding",
+        "motomedic-verified-answers",
+        "--project=motomedic-ai-20261009",
+        "--location=us-central1",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/cloudtasks.enqueuer",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:26:53.979715Z",
+      "sanitized_metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/cloudtasks.enqueuer"
+          }
+        ],
+        "etag": "BwZdlmborQc=",
+        "version": 1
+      }
+    },
+    {
+      "command": [
+        "iam",
+        "service-accounts",
+        "add-iam-policy-binding",
+        "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/iam.serviceAccountUser",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:27:02.251492Z",
+      "sanitized_metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/iam.serviceAccountUser"
+          }
+        ],
+        "etag": "BwZdlmdn7SA=",
+        "version": 1
+      }
+    },
+    {
+      "command": [
+        "iam",
+        "service-accounts",
+        "add-iam-policy-binding",
+        "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:service-279945185781@gcp-sa-cloudtasks.iam.gserviceaccount.com",
+        "--role=roles/iam.serviceAccountUser",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:27:11.6698323Z",
+      "sanitized_metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+              "serviceAccount:service-279945185781@gcp-sa-cloudtasks.iam.gserviceaccount.com"
+            ],
+            "role": "roles/iam.serviceAccountUser"
+          }
+        ],
+        "etag": "BwZdlmfxkzs=",
+        "version": 1
+      }
+    },
+    {
+      "command": [
+        "run",
+        "services",
+        "add-iam-policy-binding",
+        "motomedic-qdrant",
+        "--project=motomedic-ai-20261009",
+        "--region=us-central1",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/run.invoker",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:27:22.7027695Z",
+      "sanitized_metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/run.invoker"
+          }
+        ],
+        "etag": "BwZdlmidCqg=",
+        "version": 1
+      }
+    },
+    {
+      "command": [
+        "storage",
+        "buckets",
+        "add-iam-policy-binding",
+        "gs://motomedic-ai-20261009-indices",
+        "--project=motomedic-ai-20261009",
+        "--member=serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "--condition=title=motomedic-backend-exact-index-snapshot,expression=resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "at_utc": "2026-10-11T20:27:37.5311995Z",
+      "sanitized_metadata": {
+        "bindings": [
+          {
+            "condition": {
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+              "title": "motomedic-backend-exact-index-snapshot"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet"
+          },
+          {
+            "members": [
+              "projectEditor:motomedic-ai-20261009",
+              "projectOwner:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyBucketOwner"
+          },
+          {
+            "members": [
+              "projectViewer:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyBucketReader"
+          },
+          {
+            "members": [
+              "projectEditor:motomedic-ai-20261009",
+              "projectOwner:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyObjectOwner"
+          },
+          {
+            "members": [
+              "projectViewer:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyObjectReader"
+          },
+          {
+            "members": [
+              "serviceAccount:motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/storage.objectViewer"
+          }
+        ],
+        "etag": "CAM=",
+        "kind": "storage#policy",
+        "resourceId": "projects/_/buckets/motomedic-ai-20261009-indices",
+        "version": 3
+      }
+    },
+    {
+      "command": [
+        "run",
+        "services",
+        "add-iam-policy-binding",
+        "motomedic-answer-worker",
+        "--project=motomedic-ai-20261009",
+        "--region=us-central1",
+        "--member=serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "--role=roles/run.invoker",
+        "--format=json"
+      ],
+      "exit_code": 0,
+      "metadata": {
+        "cli_notice": "Updated IAM policy for service [motomedic-answer-worker].",
+        "policy": {
+          "bindings": [
+            {
+              "members": [
+                "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              ],
+              "role": "roles/run.invoker"
+            }
+          ],
+          "etag": "BwZdlsIObjg=",
+          "version": 1
+        }
+      },
+      "at_utc": "2026-10-11T20:52:23.0806438Z"
+    }
+  ],
+  "readback": {
+    "task_account": {
+      "metadata": {
+        "email": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "uniqueId": "111357146553307869505"
+      },
+      "at_utc": "2026-10-11T20:28:21.3549042Z"
+    },
+    "queue": {
+      "metadata": {
+        "name": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers",
+        "rateLimits": {
+          "maxBurstSize": 10,
+          "maxConcurrentDispatches": 1,
+          "maxDispatchesPerSecond": 1.0
+        },
+        "retryConfig": {
+          "maxAttempts": 1,
+          "maxBackoff": "3600s",
+          "maxDoublings": 16,
+          "minBackoff": "0.100s"
+        },
+        "state": "RUNNING"
+      },
+      "at_utc": "2026-10-11T20:28:34.2558528Z"
+    },
+    "queue_iam": {
+      "metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/cloudtasks.enqueuer"
+          }
+        ],
+        "etag": "BwZdlmborQc=",
+        "version": 1
+      },
+      "at_utc": "2026-10-11T20:28:45.9666536Z"
+    },
+    "task_account_iam": {
+      "metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+              "serviceAccount:service-279945185781@gcp-sa-cloudtasks.iam.gserviceaccount.com"
+            ],
+            "role": "roles/iam.serviceAccountUser"
+          }
+        ],
+        "etag": "BwZdlmfxkzs=",
+        "version": 1
+      },
+      "at_utc": "2026-10-11T20:28:54.7621068Z"
+    },
+    "snapshot_role": {
+      "metadata": {
+        "includedPermissions": [
+          "storage.objects.get"
+        ],
+        "name": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+        "stage": "GA"
+      },
+      "at_utc": "2026-10-11T20:29:02.7743445Z"
+    },
+    "qdrant_iam": {
+      "metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/run.invoker"
+          }
+        ],
+        "etag": "BwZdlmidCqg=",
+        "version": 1
+      },
+      "at_utc": "2026-10-11T20:29:10.0976545Z"
+    },
+    "snapshot_iam": {
+      "metadata": {
+        "bindings": [
+          {
+            "condition": {
+              "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz'",
+              "title": "motomedic-backend-exact-index-snapshot"
+            },
+            "members": [
+              "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet"
+          },
+          {
+            "members": [
+              "projectEditor:motomedic-ai-20261009",
+              "projectOwner:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyBucketOwner"
+          },
+          {
+            "members": [
+              "projectViewer:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyBucketReader"
+          },
+          {
+            "members": [
+              "projectEditor:motomedic-ai-20261009",
+              "projectOwner:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyObjectOwner"
+          },
+          {
+            "members": [
+              "projectViewer:motomedic-ai-20261009"
+            ],
+            "role": "roles/storage.legacyObjectReader"
+          },
+          {
+            "members": [
+              "serviceAccount:motomedic-qdrant@motomedic-ai-20261009.iam.gserviceaccount.com"
+            ],
+            "role": "roles/storage.objectViewer"
+          }
+        ],
+        "etag": "CAM="
+      },
+      "at_utc": "2026-10-11T20:29:19.3841546Z"
+    },
+    "task_service_agent": {
+      "metadata": {
+        "bindings": [
+          {
+            "members": [
+              "serviceAccount:service-279945185781@gcp-sa-cloudtasks.iam.gserviceaccount.com"
+            ],
+            "role": "roles/cloudtasks.serviceAgent"
+          }
+        ]
+      },
+      "at_utc": "2026-10-11T20:29:26.3699088Z"
+    },
+    "main_billing": {
+      "metadata": {
+        "billingEnabled": true,
+        "projectId": "motomedic-ai-20261009"
+      },
+      "at_utc": "2026-10-11T20:29:32.5277254Z"
+    },
+    "inference_billing": {
+      "metadata": {
+        "billingEnabled": false,
+        "projectId": "motomedic-inference-20261009"
+      },
+      "at_utc": "2026-10-11T20:29:37.9948420Z"
+    }
+  },
+  "worker_invoker": "VERIFIED_PRIVATE_TASK_ACCOUNT_ONLY",
+  "provider_calls": 0,
+  "billing_changes": 0,
+  "secret_values_read": false,
+  "ui_datastore_grant": false,
+  "backend_public_grant": false,
+  "fallback_activation": false,
+  "checks": {
+    "task_account_exact": true,
+    "queue_running": true,
+    "queue_concurrency_one": true,
+    "queue_dispatch_rate_one": true,
+    "queue_attempts_one": true,
+    "backend_queue_enqueuer": true,
+    "backend_task_account_act_as": true,
+    "task_agent_task_account_act_as": true,
+    "task_agent_automatic_role_present": true,
+    "backend_private_qdrant_invoker": true,
+    "qdrant_no_public_invokers": true,
+    "snapshot_role_only_objects_get": true,
+    "snapshot_object_condition_exact": true,
+    "main_billing_still_enabled": true,
+    "inference_billing_still_disabled": true,
+    "all_recorded_mutations_succeeded": true,
+    "worker_grant_succeeded": true,
+    "worker_exact_task_invoker_only": true,
+    "worker_no_public_worker_principal": true,
+    "worker_worker_uses_backend_identity": true,
+    "worker_cleanup_ttl_active": true,
+    "worker_no_provider_or_secret_access": true
+  },
+  "status": "PRIVATE_DURABLE_IAM_READY_WORKER_STARTUP_FAILURE_OBSERVED",
+  "task_service_agent_role_added_by_this_agent": false,
+  "worker_readback": {
+    "bindings": [
+      {
+        "role": "roles/run.invoker",
+        "condition": null,
+        "members": [
+          "serviceAccount:motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+        ]
+      }
+    ],
+    "etag": "BwZdlsIObjg=",
+    "at_utc": "2026-10-11T20:52:38.7347607Z"
+  },
+  "worker_runtime_observation": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-11T20:51:25.644262Z",
+        "message": "The user-provided container failed the configured startup probe checks. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=motomedic-ai-20261009&resource=cloud_run_revision/service_name/motomedic-answer-worker/revision_name/motomedic-answer-worker-00001-5vg&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22motomedic-answer-worker%22%0Aresource.labels.revision_name%3D%22motomedic-answer-worker-00001-5vg%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T20:51:25.574642Z",
+        "message": "The user-provided container failed the configured startup probe checks. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=motomedic-ai-20261009&resource=cloud_run_revision/service_name/motomedic-answer-worker/revision_name/motomedic-answer-worker-00001-5vg&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22motomedic-answer-worker%22%0Aresource.labels.revision_name%3D%22motomedic-answer-worker-00001-5vg%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "ConfigurationsReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-11T20:51:25.644262Z",
+        "message": "The user-provided container failed the configured startup probe checks. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=motomedic-ai-20261009&resource=cloud_run_revision/service_name/motomedic-answer-worker/revision_name/motomedic-answer-worker-00001-5vg&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22motomedic-answer-worker%22%0Aresource.labels.revision_name%3D%22motomedic-answer-worker-00001-5vg%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "RoutesReady"
+      }
+    ]
+  },
+  "worker_runtime_observation_at_utc": "2026-10-11T20:51:38.3092938Z"
+}

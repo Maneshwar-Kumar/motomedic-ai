@@ -1,0 +1,172 @@
+{
+  "anonymous_health": {
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "points": 532,
+    "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+  },
+  "binding": {
+    "image_binding_sha256": "51e76b34f9e0b9074227f45649c43cf0eedccacecea6f069e56d1a288fe1ba61",
+    "images": {
+      "backend": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:d3b0ca83c7b7fa0c81222999c3f16722d62d0ac6ec43491dc6bdb75b7a60ab22",
+      "ui": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:dbb6bb80e7b56fdb999930c0f74f58c1290b0674f26a3b20616cf5589773cb5e"
+    },
+    "model_routing_contract": {
+      "availability_fallback_enabled": false,
+      "native_limit_sources": {
+        "checked_date": "2026-10-12",
+        "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+      },
+      "roles": {
+        "HAIKU_DRAFT_HAIKU_VERIFY": {
+          "draft": {
+            "answer_cache": "DISABLED",
+            "automatic_retries": 0,
+            "cache_ttl": "5m",
+            "citation_schema": "ROLE_TEMPLATE_WITH_EXACT_ADMITTED_SOURCE_ID_ENUM",
+            "context_window_tokens": 1000000,
+            "effort": "medium",
+            "evidence_encoding": "PLAIN_JSON_LITERAL_SOURCE_IDS",
+            "fallback_role": false,
+            "input_tokens": 998200,
+            "maximum_attempts_per_call": 1,
+            "minimum_cache_tokens": 512,
+            "model": "claude-haiku-5-5",
+            "native_json_schema": true,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "output_json_bytes": 16384,
+            "output_tokens": 1800,
+            "pricing": {
+              "base_usd_per_million": {
+                "cache_read": 0.01,
+                "cache_write": 0.125,
+                "input": 0.1,
+                "output": 0.5
+              },
+              "long_context_above_input_tokens": 100000,
+              "long_usd_per_million": {
+                "cache_read": 0.05,
+                "cache_write": 0.625,
+                "input": 0.5,
+                "output": 2.5
+              }
+            },
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "provider": "anthropic",
+            "request_bytes": null,
+            "retry_rejections": [],
+            "role": "private_draft",
+            "thinking": "disabled",
+            "version": "haiku-literal-object-draft-finalized-verifier-v4"
+          },
+          "verifier": {
+            "answer_cache": "DISABLED",
+            "automatic_retries": 0,
+            "cache_ttl": "5m",
+            "citation_schema": "ROLE_TEMPLATE_WITH_EXACT_ADMITTED_SOURCE_ID_ENUM",
+            "context_window_tokens": 1000000,
+            "effort": "medium",
+            "evidence_encoding": "PLAIN_JSON_LITERAL_SOURCE_IDS",
+            "fallback_role": false,
+            "input_tokens": 998200,
+            "maximum_attempts_per_call": 1,
+            "minimum_cache_tokens": 512,
+            "model": "claude-haiku-5-5",
+            "native_json_schema": true,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "output_json_bytes": 16384,
+            "output_tokens": 1800,
+            "pricing": {
+              "base_usd_per_million": {
+                "cache_read": 0.01,
+                "cache_write": 0.125,
+                "input": 0.1,
+                "output": 0.5
+              },
+              "long_context_above_input_tokens": 100000,
+              "long_usd_per_million": {
+                "cache_read": 0.05,
+                "cache_write": 0.625,
+                "input": 0.5,
+                "output": 2.5
+              }
+            },
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "provider": "anthropic",
+            "request_bytes": null,
+            "retry_rejections": [],
+            "role": "semantic_verifier",
+            "thinking": "disabled",
+            "version": "haiku-literal-object-draft-finalized-verifier-v4"
+          }
+        }
+      },
+      "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+      "same_model_is_not_cross_model_agreement": true,
+      "selection": "FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE_FLIP",
+      "version": "haiku-literal-object-draft-finalized-verifier-v4"
+    },
+    "runtime_lock": "923ef8c96bf1dbae68a03a25816c638379c988bcb8d710e1db47e77f1682c2df",
+    "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c"
+  },
+  "human_signoff": false,
+  "iam_application_sha256": "a4848e6818b12eee926f4eeb13ac3106e2cb416fb1a6de8dfa01d1181c25579f",
+  "inspection_sha256": "dbe0def078fea27c0c6bdfb41aafcc725a44e612cc6480aba1d7502b20d9d41f",
+  "ledger_after": {
+    "grounded-primary-nonrecurring-v1": {
+      "complete_fields_sha256": "5a99b446e5904932caaa9ab78b15712940ecb59a4c906fd78703f34a044f6c2c",
+      "exists": true
+    },
+    "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": {
+      "exists": false
+    },
+    "grounded-provider-global-v1": {
+      "complete_fields_sha256": "07b1a59d8faf32c96d0b04d9cf6531f205576a757ad3f58753011d34a4de7bd4",
+      "exists": true
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "complete_fields_sha256": "efc9bb130c7bb5eb83e9c3998f774b72685e3f202f181eb76537345db352cfb3",
+      "exists": true
+    }
+  },
+  "ledger_before": {
+    "grounded-primary-nonrecurring-v1": {
+      "complete_fields_sha256": "5a99b446e5904932caaa9ab78b15712940ecb59a4c906fd78703f34a044f6c2c",
+      "exists": true
+    },
+    "grounded-primary-nonrecurring-v1-owner-token-ceiling-grant-v1": {
+      "exists": false
+    },
+    "grounded-provider-global-v1": {
+      "complete_fields_sha256": "07b1a59d8faf32c96d0b04d9cf6531f205576a757ad3f58753011d34a4de7bd4",
+      "exists": true
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "complete_fields_sha256": "efc9bb130c7bb5eb83e9c3998f774b72685e3f202f181eb76537345db352cfb3",
+      "exists": true
+    }
+  },
+  "ledger_unchanged": true,
+  "negative_auth_checks": [],
+  "provider_calls_by_probe": 0,
+  "public_url": "https://motomedic-qdrant-279945185781.us-central1.run.app",
+  "quality_acceptance": false,
+  "read_only_query": {
+    "candidate_evidence_only": true,
+    "http_status": 200,
+    "limit": 1,
+    "query_vector_dimensions": 1024,
+    "raw_query_candidate_payload_saved": false,
+    "result_points": 1
+  },
+  "schema": "motomedic-public-core-anonymous-inspection-v3",
+  "service": "motomedic-qdrant",
+  "signed_operation_gates_preserved": false,
+  "ui_answers_remain_paused_required": true,
+  "worker_probe_has_no_operation_owner_or_payload_identifiers": true
+}

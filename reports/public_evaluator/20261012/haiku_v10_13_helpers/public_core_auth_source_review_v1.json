@@ -1,0 +1,40 @@
+{
+  "anonymous_health_no_state_tested": true,
+  "classification": "SYNTHETIC_PROVIDER_FREE_LOCAL_CHECKS",
+  "cloud_calls": 0,
+  "exact_canonical_audience_and_allowed_callers_tested": true,
+  "file_sha256": {
+    "cloud/arm_a/app.py": "7446ab126bec92104e9d1620daa674d23647ee52c2b6dd9e6983931e79cbdb2c",
+    "cloud/arm_a/durable_dispatch.py": "806f29cab066af56f452c5676eec07a220fc1b48a4d660b68d0e5b3ea9372ba0",
+    "cloud/arm_a/public_inspection_auth.py": "2d23530ffb7ea7d2aff605c511151758ae28bcd21d19050e65fc9d3178a6e5c1",
+    "cloud/arm_a/rider_api.py": "a6945712bbe715c278c5ec4a9fd204759fcdfa90c59727447f3cc9de572fbb98",
+    "cloud/arm_a/test_durable_operations.py": "f165e6ec6ac9d4dbb031edea537402a04d611b67f5124b0616cb62388112b735",
+    "cloud/arm_a/test_public_inspection_auth.py": "63337deb4c19e3ca6e8fac15aa8f0c6b273191b6727d3df820714f047d4a8b4f"
+  },
+  "first_attempt_dependency_failure": {
+    "cause": "Flask missing from base bundled Python path",
+    "import_errors": 2,
+    "recovered_by_existing_tmp_build_test_deps": true,
+    "tested_cases": 0
+  },
+  "foreign_signed_service_account_with_visitor_cookie_dispatch_rejected_tested": true,
+  "forged_google_signature_rejected_tested": true,
+  "human_signoff": false,
+  "live_deployed_public_auth_acceptance": false,
+  "passed": true,
+  "provider_calls": 0,
+  "recorded_at_utc": "2026-10-12T10:14:07.045930+00:00",
+  "schema": "motomedic-public-core-auth-source-review-v1",
+  "serving_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+  "stripped_alternate_signature_header_never_substitutes_verified_authorization_tested": true,
+  "synthetic_errors": 0,
+  "synthetic_failures": 0,
+  "synthetic_tests_run": 39,
+  "test_environment": "BUNDLED_PYTHON_WITH_EXISTING_IGNORED_BUILD_TEST_DEPENDENCIES",
+  "test_modules": [
+    "cloud.arm_a.test_public_inspection_auth",
+    "cloud.arm_a.test_durable_operations"
+  ],
+  "tests_output_sha256": "b99f31b5aa2dc86db0b9d4f79d356bb8534b7f5458e63906a9c6bae7ca3cb81a",
+  "worker_tasks_exact_identity_preserved_tested": true
+}

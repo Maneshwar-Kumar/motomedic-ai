@@ -1,0 +1,17 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "The manual gives the engine's compression ratio as 11.5:1. That is a ratio, not a compression test pressure.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E31", "decision": "NOT_APPLICABLE", "reason": "Warns about releasing the clutch abruptly, not about a compression test."},
+    {"display_id": "E32", "decision": "NOT_APPLICABLE", "reason": "Warns about sudden movement from abrupt clutch release, not about a compression test."},
+    {"display_id": "E33", "decision": "NOT_APPLICABLE", "reason": "General caution about clutch release while riding, not about a compression test."},
+    {"display_id": "E34", "decision": "NOT_APPLICABLE", "reason": "Continuation of the riding caution, not about a compression test."},
+    {"display_id": "E35", "decision": "NOT_APPLICABLE", "reason": "Concerns recommended shift speeds, not about a compression test."}
+  ]
+}

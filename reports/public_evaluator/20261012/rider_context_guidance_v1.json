@@ -1,0 +1,48 @@
+{
+  "schema": "motomedic-rider-context-guidance-synthetic-review-v1",
+  "recorded_at": "2026-10-12T07:33:24.164500+00:00",
+  "classification": "LOCAL_SYNTHETIC_UI_ONLY",
+  "owned_files": [
+    "rider_ui/app.py",
+    "rider_ui/tests/test_app.py"
+  ],
+  "file_sha256": {
+    "rider_ui/app.py": "a25a5f06192e927adf86759e7904ac4d2b1ca2050286d570fffdf286ecb097fc",
+    "rider_ui/tests/test_app.py": "d062c7aae7ab5159806fc29a6efd552d11a3a9a6ffcc41996f3e5e3f93017712"
+  },
+  "ui_tests": {
+    "module": "rider_ui.tests.test_app",
+    "tests": 9,
+    "result": "PASS",
+    "existing_tests": 5,
+    "added_tests": 4
+  },
+  "trusted_success_flag": "runtime_controls.composition.start_new_conversation_required",
+  "success_eligibility": [
+    "SUPPORTED/AMBIGUOUS/SAFETY_STOP",
+    "release_gate_passed=true",
+    "semantic_verification_passed=true",
+    "strict_boolean_start_new_conversation_required=true"
+  ],
+  "threshold_defined_by_backend": "At least80percent of smaller paired native input allowance based actual counted complete request; UI computes no token threshold.",
+  "exact_native_overflow_reason": "COMPLETE_CONTEXT_TOKEN_BOUND_NO_TRUNCATION",
+  "overflow_state": "SYSTEM_ERROR",
+  "ignored_operational_failures": [
+    "provider_quota",
+    "allocation_or_monetary_budget",
+    "store_or_transport_outage",
+    "final_output_bound"
+  ],
+  "rendering": "Separate operational notice after unchanged saved response text.",
+  "automatic_retry": false,
+  "automatic_history_reset": false,
+  "evidence_or_history_truncated": false,
+  "technical_buffer_changed": false,
+  "source_display_or_approval_changed": false,
+  "model_runtime_edited": false,
+  "cloud_mutations": 0,
+  "real_provider_calls": 0,
+  "live_browser_or_semantic_acceptance": false,
+  "history_reset": "Only existing user-triggered Start a new conversation action.",
+  "limitation": "Generic overflow notice establishes complete context overflow, not that history alone caused it or that the same oversized evidence will fit a new chat."
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "hosted-run-post-allocation-capacity-v1",
+  "job_id": "53339a5f-3c60-486c-a18e-e0fa110e1502",
+  "source_receipt": "reports/public_evaluator/20261012/hosted_runs/53339a5f-3c60-486c-a18e-e0fa110e1502/receipt.json",
+  "source_receipt_sha256": "ce31024c6b1aa48a0b9ddec29c73f5e612f8cfb989fa18d91b59219cf4e9a166",
+  "source_after_read_error": null,
+  "ledger_before": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 8,
+      "reserved_tokens": 79936,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 1,
+      "reserved_nanodollars": 3848000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "ledger_after": {
+    "grounded-primary-nonrecurring-v1": {
+      "maximum_attempts": 100,
+      "maximum_tokens": 999200,
+      "reserved_attempts": 24,
+      "reserved_tokens": 239808,
+      "version": "whole-turn-capacity-v1"
+    },
+    "owner-haiku-fallback-20261011-validation-v1": {
+      "maximum_nanodollars": 1000000000,
+      "reservation_count": 3,
+      "reserved_nanodollars": 11544000,
+      "version": "claude-fallback-nonrecurring-one-dollar-v1"
+    }
+  },
+  "remaining_capacity": {
+    "primary_attempts": 76,
+    "primary_tokens": 759392,
+    "verifier_nanodollars": 988456000,
+    "verifier_usd": "0.988456"
+  },
+  "run_reservation_delta": {
+    "primary_attempts": 16,
+    "primary_tokens": 159872,
+    "verifier_nanodollars": 7696000,
+    "verifier_reservation_count": 2
+  },
+  "technical_releases": 0,
+  "allocation_reset": false,
+  "allocation_refund": false,
+  "new_provider_calls_by_this_agent": 0,
+  "ledger_writes_by_this_agent": 0,
+  "interpretation": "Reservation totals are retained conservative capacity, not finalized monetary spending or provider transmission counts.",
+  "checks": {
+    "after_read_succeeded": true,
+    "primary_version_and_limits_unchanged": true,
+    "verifier_version_and_limit_unchanged": true,
+    "remaining_nonnegative": true,
+    "no_reset_refund": true
+  }
+}

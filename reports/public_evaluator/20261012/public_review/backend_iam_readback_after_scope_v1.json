@@ -1,0 +1,35 @@
+{
+  "actual_bindings": [
+    {
+      "members": [
+        "allUsers",
+        "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+      ],
+      "role": "roles/run.invoker"
+    }
+  ],
+  "expected_bindings": [
+    {
+      "members": [
+        "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "allUsers"
+      ],
+      "role": "roles/run.invoker"
+    }
+  ],
+  "prior_bindings": [
+    {
+      "members": [
+        "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "serviceAccount:motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+      ],
+      "role": "roles/run.invoker"
+    }
+  ],
+  "provider_calls": 0,
+  "schema": "motomedic-core-iam-post-application-readback-v1",
+  "service": "motomedic-arm-a",
+  "setIamPolicy_repeated": false
+}

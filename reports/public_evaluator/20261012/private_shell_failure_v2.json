@@ -1,0 +1,42 @@
+{
+  "schema_version": "public-evaluator-browser-acceptance-v4",
+  "recorded_at_utc": "2026-10-12T02:07:54.908Z",
+  "script_sha256": "1bd36e50a70a467a0773b812ff0bb5e936751e85301f761b905e8244d35f3d0f",
+  "runtime_policy": "open-manual-draft-verify-v10",
+  "execution": "AUTHORIZED_PRIVATE_SHELL_NO_QUESTION",
+  "provider_bodies_logged": false,
+  "cookie_values_logged": false,
+  "raw_page_text_logged": false,
+  "raw_network_trace_saved": false,
+  "ui_turn_submissions": 0,
+  "actual_provider_calls": "REQUIRES_CORRELATED_HOSTED_RECEIPT",
+  "turns": [],
+  "browser_version": "154.0.8037.98",
+  "private_authentication": {
+    "source": "SHORT_LIVED_OWNER_IDENTITY_TOKEN_IN_MEMORY",
+    "scoped_origin": "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+    "all_other_http_and_websocket_origins_blocked": true,
+    "paid_turns_forbidden": true
+  },
+  "public_origin": "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+  "expected_release_manifest_sha256": "b6aadba39d309bf90a50be93aecc947a3cfb44357f15cd40dd5c4dd3672f2fd3",
+  "gateway_health": {
+    "path": "/health",
+    "status": 200,
+    "ready": true
+  },
+  "public_admission": {
+    "proof_submission_status": 200,
+    "cookie_secure": true,
+    "cookie_http_only": true,
+    "cookie_same_site": "Lax",
+    "streamlit_socket_opened": true
+  },
+  "status": "FAIL",
+  "failure_stage": "UI_SCOPE_AND_QUESTION_INPUT",
+  "error_name": "TimeoutError",
+  "failure_code": "BROWSER_WAIT_TIMEOUT",
+  "submission_status_may_be_uncertain": false,
+  "page_error_count": 0,
+  "streamlit_socket_count": 1
+}

@@ -1,0 +1,25 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "The manual says the compass only works when navigation is active.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The compass will function only when there is active navigation.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Concerns starter use and battery drain, not the compass."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "General riding-care warning, not specific to the compass."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Concerns shifting into neutral, not the compass."},
+    {"display_id": "E17", "decision": "NOT_APPLICABLE", "reason": "Concerns gear shifting, not the compass."},
+    {"display_id": "E18", "decision": "NOT_APPLICABLE", "reason": "Concerns the clutch lever, not the compass."},
+    {"display_id": "E19", "decision": "NOT_APPLICABLE", "reason": "Concerns the starter button, not the compass."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Concerns the starter button, not the compass."}
+  ]
+}

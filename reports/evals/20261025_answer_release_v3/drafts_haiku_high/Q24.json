@@ -1,0 +1,31 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "The front and rear brake pads must be checked for wear at the intervals in the periodic maintenance chart.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "The manual says the pads need to be replaced if a brake pad is \"warm to the indicator.\"",
+      "evidence_ids": ["E2"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual sections supplied give no mileage, time or pad thickness for replacement."
+    },
+    {
+      "text": "The replacement wording is unclear, so confirm when the pads need replacing with an authorised Royal Enfield service centre."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Wheel removal step; the question asks when pads need replacing."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Caliper and hose handling during wheel removal; not about when to replace."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Chain handling during rear wheel removal; not about when to replace."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Rear wheel sliding out procedure; not about when to replace."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Rear brake pedal during wheel removal; not about when to replace."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Spacer between pads during rear wheel removal; not about when to replace."},
+    {"display_id": "E29", "decision": "NOT_APPLICABLE", "reason": "Rear brake pedal use for lifting; not about when to replace."}
+  ]
+}

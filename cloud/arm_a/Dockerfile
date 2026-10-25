@@ -1,5 +1,7 @@
-# Build only the backend context prepared by tools/serving_release.py.
-# Inherit exact packaged model/dependency assets; never ingest the manual.
+# Backend image for the section-template answer path (serving manifest v11).
+# Inherit the exact packaged query model and dependency assets; never ingest or embed the manual.
+# The build context must hold the committed serving inputs, arm_a_release.json and the pinned
+# section index at build/section-index. Preparing that context is a later owner-scoped step.
 FROM us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4
 USER root
 COPY --chown=motomedic:motomedic . /app

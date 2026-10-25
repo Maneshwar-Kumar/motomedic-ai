@@ -1,19 +1,26 @@
 # Rider interface
 
-The Streamlit interface sends text questions and follow-ups to an authenticated backend. The backend owns retrieval, private drafting, separate verification and durable response storage. The client displays truthful progress and checks saved response bindings before showing accepted text.
+The frontend is a public gateway around Streamlit. Signed cookies and a browser proof challenge lead to a private IAM-authenticated backend; provider keys stay server-side. The backend retrieves the top-5 manual sections and makes one Haiku call per turn, released by a deterministic gate; there is no verifier. The UI shows real progress (`retrieving`, `drafting`, `checking`, `displaying`), then the exact saved text, and checks every binding during streaming, follow-ups and recovery.
 
-Current product and technical requirements: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architecture](../docs/ARCHITECTURE.md) and [TODO](../TODO.md).
+Requirements: [PRD](../docs/PRD.md), [TRD](../docs/TRD.md), [architecture](../docs/ARCHITECTURE.md), [API contract](API_CONTRACT.md) and [safeguards](SERVICE_SAFEGUARDS.md).
 
 ## Connection
 
-Backend configuration stays server-side: MOTOMEDIC_RIDER_API_URL, MOTOMEDIC_RIDER_AUTH=cloud_run and a managed visitor-signing secret. Provider keys never belong in browser fields. Do not enable engineering loopback in deployment. Claude fallback is configured only on the backend and remains disabled until authorized activation.
+Backend configuration stays server-side:
+- `MOTOMEDIC_RIDER_API_URL`;
+- `MOTOMEDIC_RIDER_AUTH=cloud_run`;
+- the managed visitor-signing secret.
 
-The candidate backend and UI must have compatible runtime, policy, operation and response bindings. A URL pointing to an older service does not install the new pipeline. Use [the v8 connection handover](../reports/grounded_generation/v8/ui_wiring/CONNECTION_HANDOVER.md) as a dated preparation receipt; the current TODO defines remaining hosted acceptance.
+Direct public mode uses `MOTOMEDIC_RIDER_ACCESS=public_gateway` and `MOTOMEDIC_EDGE_POLICY=gcp-public-cloud-run-cookie-v2`, with the exact configured Cloud Run host. Only the gateway listens publicly; Streamlit is loopback. Visitor reservation requires the exact UI service identity and persistent proof and issuance quotas. No client IP is trusted, and provider keys never belong in browser fields. Engineering loopback stays disabled in deployment.
 
-Photo and voice remain disabled pending scoped evaluation. Display only supported paraphrases and authorized evidence/page metadata; never serve the PDF, excerpts or figure crops.
+The client accepts only:
+- runtime policy `open-manual-section-template-v1`;
+- the manual SHA `cf221a29…7e80da89`;
+- index `index_a609ca61c635641e0a22dc48`;
+- a catalogue reporting `streaming: SAVED_RELEASE_STREAM`.
 
-## Checks and release
+Saved views from earlier runtimes are rejected before display or continuation. The UI displays released paraphrases and page references only, never the PDF, excerpts or figure crops. Photo and voice stay disabled.
 
-Provider-free CI covers the client, stream decoder and progress/recovery behavior using software doubles. Real browser-to-hosted retrieval, supported/partial answering, Firestore persistence, worker lifetime and disconnect recovery remain release gates.
+## Checks
 
-Build/deployment requires the accepted exact input manifest, compatible backend/UI images, managed identity/secrets, rate/spend/retention enforcement and recorded rollback. [Current status](../docs/STATUS.md) identifies the failed answer-coverage baseline.
+Provider-free CI covers the client, the stream decoder, progress and recovery, the gateway and the Streamlit app (`python -m unittest discover -s rider_ui/tests -p 'test_*.py'`). It uses an engineering loopback fixture server. Hosted browser-to-backend answering, Firestore persistence, worker lifetime and disconnect recovery need a hosted run under a new owner scope; see [TODO](../TODO.md).

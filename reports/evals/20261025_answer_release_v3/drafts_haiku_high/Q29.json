@@ -1,0 +1,46 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "The manual advises having the motorcycle prepared through a Royal Enfield Authorised Service Centre before you use it again after storage, so it is restored to its peak operating conditions.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "If the battery was disconnected and removed during storage, check that its voltage is within specification before refitting it, and recharge it through an authorised service workshop or battery dealer if it is not.",
+      "evidence_ids": ["E11"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The manual sets storage precautions for a motorcycle that is not used for a month or more.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "The manual asks for the motorcycle to be prepared by an authorised service centre before re-use after storage.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "The manual requires the battery voltage to be checked before the battery is refitted after a month or longer.",
+      "evidence_ids": ["E11"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not give a separate step-by-step restart procedure for a motorcycle that has been stored."
+    },
+    {
+      "text": "The manual describes the service centre preparation as preferable, not compulsory, and does not say what happens if it is skipped."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Radiator cap warning about hot coolant; not related to restarting after storage."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Coolant procedure warning; not related to the question."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Coolant filling warning; not related to the question."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Coolant air bleeding warning; not related to the question."},
+    {"display_id": "E39", "decision": "NOT_APPLICABLE", "reason": "Coolant disposal warning; not related to the question."},
+    {"display_id": "E44", "decision": "NOT_APPLICABLE", "reason": "Concerns riding with stands retracted; the rider asked about restarting, not riding."},
+    {"display_id": "E45", "decision": "NOT_APPLICABLE", "reason": "Parking warning; not related to the question."},
+    {"display_id": "E46", "decision": "NOT_APPLICABLE", "reason": "Side stand loading warning; not related to the question."}
+  ]
+}

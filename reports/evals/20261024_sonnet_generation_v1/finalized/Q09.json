@@ -1,0 +1,41 @@
+{
+ "route": "SUPPORTED",
+ "question_coverage": "PARTIAL",
+ "unanswered_parts": [
+  "Whether the app works with a newly released phone OS version"
+ ],
+ "claims": [
+  {
+   "text": "For the RE Mobile app, the manual says the minimum supported iOS version will be one version behind the current iOS release.",
+   "role": "FACT",
+   "evidence_ids": [
+    "evidence_6d65a0c9aaa0d6acbf4aab29"
+   ],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "For Android, the manual says the app's minimum supported version will be two versions behind the current Android OS.",
+   "role": "FACT",
+   "evidence_ids": [
+    "evidence_8b950cdd4b977781b231dfe3"
+   ],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "The manual also states that Huawei phones are not compatible with the app and that support is not offered for them.",
+   "role": "FACT",
+   "evidence_ids": [
+    "evidence_d536a93a2d9db0bbc972cf33"
+   ],
+   "origin": "DRAFT"
+  },
+  {
+   "text": "This partly answers your question. The retrieved manual information gives only the minimum-supported-version policy; it does not establish whether the app works with a specific OS release that came out this week.",
+   "role": "LIMITATION",
+   "evidence_ids": [],
+   "origin": "DRAFT"
+  }
+ ],
+ "draft_validation": "VALID",
+ "draft_rejection_code": null
+}

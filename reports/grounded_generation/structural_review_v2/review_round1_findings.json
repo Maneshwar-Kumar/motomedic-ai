@@ -1,0 +1,188 @@
+{
+  "reviewer": "independent-subagent",
+  "review_basis": {
+    "proposal_path": "reports/grounded_generation/structural_review_v2/proposal.json",
+    "proposal_sha256": "874473f13b8f986a38389194fd070701a90bfc908380d24fc188f1f583f8e387",
+    "manual_sha256_verified": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "index_parents_sha256_verified": "0887179158741bd0f9ca6e1dd368b8510e2f172170f61a427206e02e31db00ed",
+    "index_evidence_sha256_verified": "792408e533d68f99b0787056e02c4a9f2edf6ea1e06b4b0591b743753a6bc2c8",
+    "page_images": "Re-rendered independently from the hash-verified PDF (scale 3) into scratchpad/indep_pages; the proposer's pre-rendered PNGs were not relied on.",
+    "currently_admitted_baseline": "v4 SourceAuthority loaded provider-free (199 complete-context ids, 215 bound sources); 'V4 admitted' below means in that complete-context set.",
+    "mechanical_checks_passed": [
+      "All 60 source_objects are unique, none already bound in v4, exact_text equals immutable raw_object text for every non-table object, provenance equals index provenance.",
+      "Every child of all 18 parents is either approved or excluded; the two excluded page-51 '0' objects (evidence_ed28a45e17eaf90097dc90ba, evidence_88f78b3f9efd7d7a01e2246c) sit at l104/l181 t173 on the top edge of the dashboard illustration (pictures/71) and are the cropped speedometer '0' digits, so they are valid figure-label exclusions.",
+      "No picture/figure objects approved (types are text, list_item, table only).",
+      "Printed wording on pages 15, 50, 51, 54, 57, 62, 90, 105, 109, 110, 116, 117 (non-table bullet), 120 matches exact_text apart from bullet glyphs (U+F0A2/U+F0EA) and hyphenation; manual typos (It's shows, also gets disabled, It is we recommend, in direction vertical direction, warm to the indicator) are faithfully preserved.",
+      "Page-21 NOTE items 1-3 do qualify the RECOMMENDED LUBRICANTS table (item 1 coolant column, item 2 whole table, item 3 capacity rows); table and notes are already V4 admitted, so the dependency passes the v5 gate preconditions."
+    ]
+  },
+  "pages_visually_checked": [14, 15, 16, 21, 47, 50, 51, 54, 57, 59, 60, 61, 62, 63, 90, 91, 105, 107, 109, 110, 116, 117, 120],
+  "objects_checked": 64,
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "BLOCKING",
+      "component": "REAR_SUSPENSION_PRELOAD",
+      "evidence_ids": ["evidence_fb5ddc131802596bbfc6777e"],
+      "page": 117,
+      "problem": "The setting table's tyre-pressure value is mis-attributed. The parser stored '32' as a single 1x1 cell at r2c3 (Front, Unladen row) with row_span=1 and col_span=1; Rear/Unladen, Front/Laden and Rear/Laden are empty in table_cells and grid. The approved exact_text ('r2c3: 32', no r2c4/r3c3/r3c4) and the projected table the provider receives (serving_context keeps spans/positions) therefore say 32 psi applies only to the front tyre with rider only, and give no rear or laden pressure. The source object is nevertheless marked requires_visual_verification=false.",
+      "evidence_from_page": "Printed page 115 (PDF 117): the '32' is one merged cell spanning both the Front and Rear columns AND both the 'Unladen / One up loading / Rider only' and 'Laden / Two up / ... off road condition' rows, i.e. 32 psi front and rear in both conditions (consistent with PDF p18/p90 'Front & Rear, Solo & With Pillion 32 psi').",
+      "required_fix": "Do not admit this table object as-is. Either (a) exclude evidence_fb5ddc131802596bbfc6777e with an explicit PARSER_MERGED_CELL_LOSS reason (keeping it a maintainer gap), or (b) keep it but attach a reviewed, page-bound cell-span correction (32 psi applies to Front and Rear for both rows) that the generator and verifier receive with the object, and set requires_visual_verification accordingly. Re-review the component after the change."
+    },
+    {
+      "id": "F2",
+      "severity": "MAJOR",
+      "component": "LUGGAGE_AND_ACCESSORY_LOADING",
+      "evidence_ids": ["evidence_5c099ad65b4864786494dd80", "evidence_1816d47b8003f29a29c44542", "evidence_fe1b0eab8df9910c9491f786", "evidence_41ddc000f6abdfa3a402fa60", "evidence_bae47efa7a6ce22a3c3b2039", "evidence_cb8341a603cdb0ba99658a9f", "evidence_96901ce702d093c70b02e73d", "evidence_1e0072a51a34136e217eb0cc", "evidence_05bae4423aeebcb5527e2088"],
+      "page": 14,
+      "problem": "The component admits only the page-15 WARNING box and LUGGAGE CATEGORIES bullet, but the ACCESSORIES AND LUGGAGE section body (parent section_e94f77a5039c1deb9a565bf0, 9 children) begins on the previous page and is neither approved, V4 admitted, nor linked. The page-15 warning 'Do not load weight or install accessories incorrectly' is defined by those page-14 guidelines, which include a safety limit: 'Do not exceed 110 km/h when riding solo, carrying a pillion or payload on an accessory equipped motorcycle.' A luggage/accessory answer assembled from this component would omit the speed limit and loading rules while appearing complete.",
+      "evidence_from_page": "PDF p14 (printed 12) heading ACCESSORIES AND LUGGAGE: 'the rider must be responsible for safe operation...', 'Please adhere to the following guidelines...', then bullets on 110 km/h, low/close luggage, even distribution, no weight on handlebars/forks, re-check luggage, large surfaces, genuine model-specific accessories. PDF p15 repeats the same heading with the WARNING box.",
+      "required_fix": "Add parent section_e94f77a5039c1deb9a565bf0 (all 9 children) to this component after original-page review, with a mandatory WARNING display for evidence_41ddc000f6abdfa3a402fa60; or, if kept out of scope, record it as an explicit unresolved cross-page dependency so the page-15 objects cannot be presented as the complete luggage/accessory guidance."
+    },
+    {
+      "id": "F3",
+      "severity": "MAJOR",
+      "component": "LUGGAGE_AND_ACCESSORY_LOADING",
+      "evidence_ids": ["evidence_a4bb14d7d40e42aa7a1abdc2", "evidence_32a2dfb5649c03d469c7a578"],
+      "page": 15,
+      "problem": "Mandatory display structural-v2-luggage_and_accessory_loading-2 is not faithful and is mis-bound. (1) It cites only evidence_a4bb14d7..., which ends mid-word at 'perfor-'; the accident clause it states lives in evidence_32a2dfb5... (right column continuation), which is not cited. (2) It drops 'Royal Enfield cautions you against use of', turning a caution against using non-standard parts into a neutral 'may adversely affect' (weakened obligation). (3) It drops 'which could result in serious injury or loss of life'. (4) It merges the two sentences so 'could cause an accident' is attributed to non-standard parts as well, whereas the manual attaches the accident clause to removing/altering original parts.",
+      "evidence_from_page": "'Royal Enfield cautions you against use of nonstandard parts such as aftermarket and custom made extended front forks which may adversely affect the performance and handling of the motorcycle. Removing or altering original parts may adversely affect the perfor-' / 'mance of the motorcycle, causing an accident, which could result in serious injury or loss of life.'",
+      "required_fix": "Bind the display to both evidence_a4bb14d7d40e42aa7a1abdc2 and evidence_32a2dfb5649c03d469c7a578 and reword, e.g. 'Royal Enfield cautions against non-standard parts such as aftermarket or custom-made extended front forks, which may adversely affect performance and handling. Removing or altering original parts may adversely affect performance, causing an accident that could result in serious injury or loss of life.'"
+    },
+    {
+      "id": "F4",
+      "severity": "MINOR",
+      "component": "LUGGAGE_AND_ACCESSORY_LOADING",
+      "evidence_ids": ["evidence_bbf3e2f088553465b973f78e"],
+      "page": 15,
+      "problem": "Mandatory display structural-v2-luggage_and_accessory_loading-3 drops the severity qualifier 'which could result in serious injury or loss of life' (display 1 keeps the equivalent wording, so the set is inconsistent) and compresses 'constitutes both motorcycle and accessories misuse' to 'misuse'.",
+      "evidence_from_page": "'Do not ignore model / design specifications. Doing so constitutes both motorcycle and accessories misuse which may adversely affect the handling and performance of the motorcycle causing an accident, which could result in serious injury or loss of life.'",
+      "required_fix": "Restore '...and could cause an accident resulting in serious injury or loss of life' (and preferably 'misuse of the motorcycle and accessories')."
+    },
+    {
+      "id": "F5",
+      "severity": "MAJOR",
+      "component": "TELL_TALE_INDICATORS",
+      "evidence_ids": ["evidence_d867f6c7da84e269ebddf176", "evidence_bc21f201712faeaa4da13dbe", "evidence_d1dbf489a8cb9e87db14468a", "evidence_f008b65a1c3864b9ce1ca3bc", "evidence_be61e25b35303514cfe3e5c8", "evidence_26bf2297a667bbfcac0535cc"],
+      "page": 62,
+      "problem": "The ABS caution on p62 and its mandatory display ('Do not run the motorcycle if the ABS indicator lamp stays continuously ON') are unconditional, and the same component's NOTE says all tell-tales switch OFF after engine start. The manual's next page qualifies the same lamp: it stays ON at start-up until 5 km/h, and the caution applies only when it is ON continuously ABOVE 5 km/h. Those qualifiers (already V4 admitted) are not linked to this component, so a rider whose ABS lamp is lit at start-up could be told not to ride, or be told all tell-tales should already be off.",
+      "evidence_from_page": "PDF p63 (printed 61) ABS INDICATOR LAMP: 'the ABS sign will glow and remain ON till the motorcycle attains a speed of 5 km/h and turns OFF...'; CAUTION: 'Do not run motorcycle in case the ABS indicator lamp is ON continuously above 5 km/h.' (PDF p66 repeats the 5 kmph start-up behaviour.)",
+      "required_fix": "Add an evidence_dependencies link from evidence_d867f6c7da84e269ebddf176 and evidence_bc21f201712faeaa4da13dbe to evidence_f008b65a1c3864b9ce1ca3bc and evidence_be61e25b35303514cfe3e5c8 (optionally evidence_26bf2297a667bbfcac0535cc), and either add the 5 km/h condition to the display or make the display co-present with the p63 caution. Optionally link the Engine MIL items to the V4-admitted p72-73 MIL statements (evidence_d4cac8f8c2a17b9fd5955cd7, evidence_4cfcbb4612d5809c3511d6fa, evidence_86fc55f5643415ada60288dc)."
+    },
+    {
+      "id": "F6",
+      "severity": "MAJOR",
+      "component": "BRAKE_PAD_WEAR_CHECK",
+      "evidence_ids": ["evidence_7cd1de903310b8e09d8a9d4e", "evidence_1fd98dd6ead9e18f957b54ed", "evidence_4699daa5c7736c164e16ae72", "evidence_408aceccea34b9af73a5150c", "evidence_9eb870e564adb38655d7e145"],
+      "page": 91,
+      "problem": "The BRAKE PADS section is split across pages and the component keeps only the p90 bullet. Its continuation on p91, the replacement criterion 'Front/Rear : The pads need to be replaced if a brake pad is warm to the indicator.' (evidence_1fd98dd6..., parent section_0c761df91f0b12be3468a439, bound in v4 but not complete context), and the BRAKE PADS NOTE (parent section_cceed3eeebc4235fb019c7b8) are missing. This is the 'list split across pages' case. It also leaves stage-replay case EXP027 ('When do the brake pads need replacement?') without the printed threshold wording its expected answer refers to.",
+      "evidence_from_page": "PDF p90 (printed 88) BRAKE PADS bullet, then the Front/Rear Brake Pad figure; PDF p91 (printed 89) starts with 'Front/Rear : The pads need to be replaced if a brake pad is warm to the indicator.' followed by NOTE (disc-brake performance, mild noise is normal, testing protocols).",
+      "required_fix": "Add section_0c761df91f0b12be3468a439 and section_cceed3eeebc4235fb019c7b8 to the component (pages 90-91). Record that the printed 'warm' is a manual typo that must be shown as printed and not silently corrected or used to infer a wear limit, and that 'the indicator' is shown only in the unreviewed p90 figure."
+    },
+    {
+      "id": "F7",
+      "severity": "MAJOR",
+      "component": "BATTERY_USAGE_AND_VOLTAGE_NOTE",
+      "evidence_ids": ["evidence_3870b1a75daeaae613c60a86", "evidence_7c9ae62e3172702a1a3b13cd", "evidence_8fa7f3dd0a735ed98d818a77", "evidence_fd9b2d785aff600ed5a45e2d", "evidence_1ef48d8f41966dab4592fc8b", "evidence_e56e7474f3f117209f8530fc"],
+      "page": 105,
+      "problem": "The scope_reason promises 'on-page warning/note/caution context', but the WARNING directly above the battery NOTE on the same page is excluded and not admitted anywhere. The NOTE's point is that terminals should be disconnected when the bike is used rarely, and STORAGE_PRECAUTIONS (evidence_8fa7f3dd...) advises disconnecting terminals, removing and refitting the battery. Neither component carries the manual's terminal-order WARNING (p105), the reconnection-order CAUTION (p107) or the loose-terminal ECU NOTE (p104).",
+      "evidence_from_page": "PDF p105 (printed 103) WARNING: 'Always disconnect the black negative (-ve) battery cable first and then the red positive (+ve) cable while removing the battery connections.' PDF p107 CAUTION: 'Connect the red (+ve) positive terminal first and then connect black (-ve) negative terminal only. Keep the ... cables firmly connected ... Failure to do so may result in damage to the motorcycle electrical system.' PDF p104 NOTE: 'The poor contact or loose fitment of battery terminals may cause ECU failure.'",
+      "required_fix": "Review and admit evidence_7c9ae62e3172702a1a3b13cd (parent ...2dd9f913) with a mandatory WARNING display, and link it (plus p107 c8dfd4ce CAUTION and p104 NOTE) as dependencies of evidence_3870b1a75daeaae613c60a86 and evidence_8fa7f3dd0a735ed98d818a77. Otherwise record them as unresolved dependencies that make both components partial for disconnect/refit questions."
+    },
+    {
+      "id": "F8",
+      "severity": "MAJOR",
+      "component": "STORAGE_PRECAUTIONS",
+      "evidence_ids": ["evidence_660ca3000454e2f166858581", "evidence_fd5a9183e18775af14291d97", "evidence_b02f383c70aefc628503f3ce"],
+      "page": 120,
+      "problem": "The storage list admits rider actions with hazards ('Drain the fuel completely from the fuel tank and induction system', fuse removal, battery removal) with no safety context. The manual's fuel-system hazard statements are already V4 admitted but not linked. The battery side is covered in F7.",
+      "evidence_from_page": "PDF p120 has no WARNING. PDF p8: 'Do not smoke and please ensure that there are no open flames or sparks near the motorcycle, when refueling or servicing the fuel system.' PDF p27: 'Gasoline vapour is highly explosive. Please ensure there are no open flames or sparks nearby while refueling and fill fuel only in a well ventilated area.'",
+      "required_fix": "Add evidence_dependencies from evidence_660ca3000454e2f166858581 to evidence_fd5a9183e18775af14291d97 (and evidence_b02f383c70aefc628503f3ce), so a storage answer that mentions draining fuel carries the manual's no-flame/no-spark warning. Do not author a draining method; the manual gives none."
+    },
+    {
+      "id": "F9",
+      "severity": "MAJOR",
+      "component": "evidence_dependencies (page-21 lubricant table)",
+      "evidence_ids": ["evidence_a6950ea73293cda81e695ce1", "evidence_36ee9102cfd9a8ef98c0466d"],
+      "page": 21,
+      "problem": "The dependency correctly adds NOTE items 1-3, but it is incomplete. The table cell r1c4 'DOT 4*' carries an asterisk whose footnote '* Do not mix DOT 4 or other brake fluid together.' (unparented footnote, not admitted) directly qualifies the BRAKE FLUID column. This gap was already in v4; this proposal states it is completing the table's limitation context but leaves it open.",
+      "evidence_from_page": "PDF p21 (printed 19): the footnote sits immediately under the table, above NOTE 1-3 and the CAUTION.",
+      "required_fix": "Approve evidence_36ee9102cfd9a8ef98c0466d as an unparented footnote, following the generic_source_v1 'unparented' convention and with a WARNING display, and add it to external_dependency_evidence_ids; or record it explicitly as an open dependency of the table."
+    },
+    {
+      "id": "F10",
+      "severity": "MINOR",
+      "component": "TELL_TALE_INDICATORS, BATTERY_USAGE_AND_VOLTAGE_NOTE, DISPLAY_LANGUAGE_MENU, COMPASS_NAVIGATION_NOTE, REAR_SUSPENSION_PRELOAD",
+      "evidence_ids": ["evidence_8562ae8b6b5bce47677f6049", "evidence_250ff2bd358dc4b5e6297e1e", "evidence_4a5017f0af36f7e2f882e586", "evidence_463c01dc60aa5eaf12786f8b"],
+      "page": 61,
+      "problem": "Several section_path labels are invented or skip a printed level. (a) 'TELL-TALE INDICATIONS' is not printed anywhere; the legend belongs to the heading 'TELL TALES' (p61, right column, above the numbered figure). (b) 'BATTERY' is not a heading; the NOTE sits under 'BATTERY AND MAINTENANCE' > 'DISMANTLING' (p104-105). (c) 'v. Language' omits its parent '4. SYSTEM' (p47 list i-vi). (d) 'v. Compass' omits '6. FAVORITES' (p53-54 list i-v). (e) 'SETTING TABLE' (p117) is a reviewer label, not a heading.",
+      "evidence_from_page": "PDF p61 heading 'TELL TALES'; p104 'BATTERY AND MAINTENANCE' then 'DISMANTLING'; p47 '4. SYSTEM ... v. Language'; p53 '6. FAVORITES ... v. Compass' (continues p54).",
+      "required_fix": "Use the printed hierarchy: ['OPERATION OF CONTROLS','TELL TALES'(,'NOTE'/'CAUTION')], ['MINOR MAINTENANCE TIPS','BATTERY AND MAINTENANCE','DISMANTLING','NOTE'], ['OPERATION OF CONTROLS','4. SYSTEM','v. Language'], ['OPERATION OF CONTROLS','6. FAVORITES','v. Compass','NOTE'], and mark any non-printed label (e.g. setting table) as a reviewer label."
+    },
+    {
+      "id": "F11",
+      "severity": "MINOR",
+      "component": "COMPASS_NAVIGATION_NOTE",
+      "evidence_ids": ["evidence_145c685b98e1e04b7955e1d6", "evidence_0e6362569fc6a7498a94994c"],
+      "page": 54,
+      "problem": "Compass is item v of the FAVORITES menu (p53-54). The p54 NOTE 'If mobile phone connectivity is disabled from the vehicle, the favorite function will also gets disabled', which is in a different component of this proposal, is a further condition on compass availability, but the two components are not linked.",
+      "evidence_from_page": "PDF p53 '6. FAVORITES ... i. Navigation ii. Music iii. Android call or phone', p54 'iv. Android message v. Compass', with the NOTE in the right column of p54.",
+      "required_fix": "Link evidence_145c685b98e1e04b7955e1d6 to evidence_0e6362569fc6a7498a94994c (same-proposal objects), or merge the two notes into one component."
+    },
+    {
+      "id": "F12",
+      "severity": "MINOR",
+      "component": "HEADLIGHT_BEAM_ADJUSTMENT",
+      "evidence_ids": ["evidence_4e4adae2ce9bea194c953cab", "evidence_baa411676d221984d8072550"],
+      "page": 109,
+      "problem": "The printed sentence is garbled ('to help prevent the other riders/vehicles passing nearby', with the object of 'prevent' missing). The screw location appears only in the unreviewed figure (pictures/169), and the text does not map clockwise or anticlockwise to up or down. A generator could fill these gaps (for example 'prevent glare', 'clockwise raises the beam').",
+      "evidence_from_page": "PDF p109 (printed 107), right column, followed by a photo with an arrow at the adjusting screw.",
+      "required_fix": "Add a component limitation note: the garbled clause must not be completed, the direction mapping and screw location are not stated in the text, and figure-only content is not admitted."
+    },
+    {
+      "id": "F13",
+      "severity": "MINOR",
+      "component": "REAR_SUSPENSION_PRELOAD",
+      "evidence_ids": ["evidence_f27b3a99805a40992be6f399", "evidence_fb5ddc131802596bbfc6777e", "evidence_0a41839a0af876026ae748c5", "evidence_d33c9227de283eabd47ceee1", "evidence_f215ffd94a6c830c1ba6dfb0"],
+      "page": 116,
+      "problem": "The observation is neutral and accurate: the p116 'kept at first notch position' and the p117 table (3rd / 6th) plus the 'final notch for fully loaded (GVW condition)' bullet are all retained and travel together. But serving_source_authority_v5.py ignores the 'observation' and 'unlinked_reference' fields, so the generator is never told of the discrepancy. The 'fully loaded (GVW condition)' bullet and the 'Ensure the tyre pressure is at recommended specification' prerequisite are also not linked to the V4-admitted GVW limit note (p20, evidence_f215ffd94a6c830c1ba6dfb0) or the tyre-pressure tables (p18/p90).",
+      "evidence_from_page": "PDF p116 bullet 'The adjuster is a 6 step adjuster and it is kept at first notch position.'; p117 table 3rd/6th and 'keep it at final notch for fully loaded (GVW condition)'.",
+      "required_fix": "Keep the observation wording. Make it reach the drafter and verifier (as component limitation context), or accept that it is documentation only. Optionally link evidence_0a41839a0af876026ae748c5 to evidence_f215ffd94a6c830c1ba6dfb0."
+    },
+    {
+      "id": "F14",
+      "severity": "MINOR",
+      "component": "LUGGAGE_AND_ACCESSORY_LOADING",
+      "evidence_ids": ["evidence_b9c4e4222f25cb0fca7dffc6"],
+      "page": 15,
+      "problem": "The pannier/top-box payload limit is delegated to an external document ('GMA fitting instructions') that is not in the manual. This is not recorded as an unlinked_reference, unlike BRAKE_PAD_WEAR_CHECK. The generator could substitute the p117 '196 kg' total payload (rider + pillion + accessories) as a pannier limit.",
+      "evidence_from_page": "'Do not exceed the maximum payload as defined in the GMA fitting instructions for panniers and top boxes.'",
+      "required_fix": "Add an unlinked_reference/limitation stating that the manual does not give the pannier/top-box payload value."
+    },
+    {
+      "id": "F15",
+      "severity": "MINOR",
+      "component": "proposal metadata",
+      "evidence_ids": ["evidence_fb5ddc131802596bbfc6777e"],
+      "page": 21,
+      "problem": "Bookkeeping gaps compared with the approved generic_source_v1 convention. original_pdf_pages omits page 21 although evidence_dependencies cites it. There are no printed_page_labels and no per-parent 'checks' block (table headers/units/notes preserved, warning boundaries checked). Every object, including the merged-cell table in F1, is asserted requires_visual_verification=false.",
+      "evidence_from_page": "n/a (proposal structure)",
+      "required_fix": "Add page 21 and the context pages (14, 61, 63, 91, 104, 107) used in review. Add printed page labels and per-parent checks. Set requires_visual_verification truthfully for the table."
+    }
+  ],
+  "per_component_verdict": {
+    "LUGGAGE_AND_ACCESSORY_LOADING": "APPROVE_AFTER_FIXES",
+    "RE_APP_PHONE_COMPATIBILITY": "APPROVE",
+    "DISPLAY_LANGUAGE_MENU": "APPROVE",
+    "COMPASS_NAVIGATION_NOTE": "APPROVE",
+    "TELL_TALE_INDICATORS": "APPROVE_AFTER_FIXES",
+    "BATTERY_USAGE_AND_VOLTAGE_NOTE": "APPROVE_AFTER_FIXES",
+    "HEADLIGHT_BEAM_ADJUSTMENT": "APPROVE",
+    "TAIL_AND_LICENSE_PLATE_LAMP": "APPROVE",
+    "BRAKE_PAD_WEAR_CHECK": "APPROVE_AFTER_FIXES",
+    "REAR_SUSPENSION_PRELOAD": "REJECT",
+    "STORAGE_PRECAUTIONS": "APPROVE_AFTER_FIXES"
+  },
+  "overall": "APPROVE_AFTER_FIXES",
+  "overall_note": "The exact proposal bytes (sha256 874473f13b8f986a38389194fd070701a90bfc908380d24fc188f1f583f8e387) must NOT be approved: F1 is blocking, and the v5 gate requires open_findings == [] and approval of every component. A revised proposal must fix F1 (or drop REAR_SUSPENSION_PRELOAD), resolve or explicitly record F2-F9, and receive a fresh independent review of each changed component. Components marked APPROVE have only MINOR label or limitation notes and match the printed pages."
+}

@@ -1,0 +1,25 @@
+{
+  "task": {
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers/tasks/public-auth-canary-v10-2-001",
+    "httpRequest": {
+      "url": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+      "httpMethod": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "User-Agent": "Google-Cloud-Tasks"
+      },
+      "oidcToken": {
+        "serviceAccountEmail": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "audience": "https://motomedic-answer-worker-279945185781.us-central1.run.app"
+      }
+    },
+    "scheduleTime": "2026-10-11T21:06:17.216261Z",
+    "createTime": "2026-10-11T21:06:17Z",
+    "dispatchDeadline": "300s",
+    "view": "BASIC"
+  },
+  "expected_http_status": 400,
+  "proof": "The real task OIDC is accepted before fixed invalid-body rejection; no work snapshot exists.",
+  "provider_calls": 0,
+  "raw_rider_data": false
+}

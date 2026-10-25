@@ -1,0 +1,160 @@
+{
+  "operation": {
+    "metadata": {
+      "@type": "type.googleapis.com/google.cloud.run.v2.Service",
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-10-12T10:27:00.749245Z",
+          "state": "CONDITION_SUCCEEDED",
+          "type": "RoutesReady"
+        },
+        {
+          "lastTransitionTime": "2026-10-12T12:57:05.340370Z",
+          "revisionReason": "RETIRED",
+          "state": "CONDITION_SUCCEEDED",
+          "type": "ConfigurationsReady"
+        }
+      ],
+      "createTime": "2026-10-11T20:51:09.758839Z",
+      "creator": "maneshwarkumar@gmail.com",
+      "etag": "\"CJG0s9YGENDZsMYB/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtYW5zd2VyLXdvcmtlcg\"",
+      "generation": "22",
+      "ingress": "INGRESS_TRAFFIC_ALL",
+      "labels": {
+        "motomedic-release": "v10-13"
+      },
+      "lastModifier": "maneshwarkumar@gmail.com",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-v10-14-retrieval-v6",
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-v10-13-canary",
+      "launchStage": "GA",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker",
+      "observedGeneration": "21",
+      "reconciling": true,
+      "scaling": {
+        "maxInstanceCount": 5
+      },
+      "sshEnabled": false,
+      "template": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_QUEUE",
+                "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_WORKER_URL",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_INSPECTION_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_AUDIENCE",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_ALLOWED_CALLERS",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "ANTHROPIC_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-evaluator-anthropic-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:531b0478458606f8faddcea78353cdb5f4cbe028dc06a2bc169f624024a2d362",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "cpuIdle": true,
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              },
+              "startupCpuBoost": true
+            },
+            "startupProbe": {
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              },
+              "periodSeconds": 10,
+              "timeoutSeconds": 5
+            }
+          }
+        ],
+        "maxInstanceRequestConcurrency": 1,
+        "revision": "motomedic-answer-worker-v10-14-retrieval-v6",
+        "scaling": {
+          "maxInstanceCount": 1
+        },
+        "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "timeout": "1200s"
+      },
+      "terminalCondition": {
+        "lastTransitionTime": "2026-10-12T12:57:05.239178Z",
+        "state": "CONDITION_PENDING",
+        "type": "Ready"
+      },
+      "traffic": [
+        {
+          "percent": 100,
+          "revision": "motomedic-answer-worker-v10-14-retrieval-v6",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+        }
+      ],
+      "trafficStatuses": [
+        {
+          "percent": 100,
+          "revision": "motomedic-answer-worker-v10-13-canary",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+        }
+      ],
+      "uid": "97d98586-4752-4070-a7b5-c9ea2899db4e",
+      "updateTime": "2026-10-12T13:01:05.416034Z",
+      "uri": "https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app",
+      "urls": [
+        "https://motomedic-answer-worker-279945185781.us-central1.run.app",
+        "https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app"
+      ]
+    },
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/operations/4ff59f4d-2776-4d86-8600-c9df479f1adc"
+  },
+  "provider_calls": 0
+}

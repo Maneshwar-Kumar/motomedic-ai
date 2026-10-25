@@ -1,0 +1,55 @@
+{
+  "schema_version": "private-worker-existing-oidc-canary-result-v1",
+  "result": "AUTHENTICATED_WORKER_ROUTE_REJECTED_INVALID_BODY",
+  "task": {
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers/tasks/public-auth-canary-v10-2-001",
+    "httpRequest": {
+      "url": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+      "httpMethod": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "User-Agent": "Google-Cloud-Tasks"
+      },
+      "oidcToken": {
+        "serviceAccountEmail": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "audience": "https://motomedic-answer-worker-279945185781.us-central1.run.app"
+      }
+    },
+    "scheduleTime": "2026-10-11T21:06:17.216261Z",
+    "createTime": "2026-10-11T21:06:17Z",
+    "dispatchDeadline": "300s",
+    "view": "BASIC"
+  },
+  "expected_http_status": 400,
+  "observed_log": {
+    "timestamp": "2026-10-11T21:06:17.303081Z",
+    "status": 400,
+    "method": "POST",
+    "latency": "0.061053464s",
+    "path": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run",
+    "revision": "motomedic-answer-worker-00002-fbw"
+  },
+  "current_worker_revision": "motomedic-answer-worker-00002-fbw",
+  "current_worker_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:0a6d142b18962854824205b0bcc89bf9ce4f973e01bd8cb00fa7dbe98386ed5c",
+  "runtime_revision": "v10_3",
+  "source_records": {
+    "worker_auth_canary_submission_v1.json": "20e3a74e597d707023f8cf18d3ef30f90895307be948a96f07c814746b20ac68",
+    "logs_run_motomedic-answer-worker.json": "e892f019e50c6a859d61e352b2b9f8ee9fd0abaa5ae097d4d092a8545f22718b"
+  },
+  "checks": {
+    "existing_canary_expected_status_400": true,
+    "observed_status_400": true,
+    "submitted_task_identity_exact": true,
+    "audience_matches_task_worker_origin": true,
+    "observed_path_matches_existing_task": true,
+    "post_method_matches": true,
+    "observed_revision_matches_current_ready_worker": true,
+    "current_image_bound_to_v10_3": true,
+    "current_worker_private_task_only": true,
+    "submission_records_zero_provider_calls_no_raw_rider_data": true
+  },
+  "new_tasks_submitted_by_this_agent": 0,
+  "provider_calls_by_this_agent": 0,
+  "scope": "Existing actual Cloud Tasks OIDC transport/worker rejection canary; the handler verifies the worker identity before rejecting malformed work requests. Technical-answer acceptance belongs to the separate hosted evaluator.",
+  "observed_at_utc": "2026-10-11T21:19:30.568610+00:00"
+}

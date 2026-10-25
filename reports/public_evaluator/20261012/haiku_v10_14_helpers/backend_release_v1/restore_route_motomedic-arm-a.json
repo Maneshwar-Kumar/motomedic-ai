@@ -1,0 +1,164 @@
+{
+  "operation": {
+    "metadata": {
+      "@type": "type.googleapis.com/google.cloud.run.v2.Service",
+      "client": "gcloud",
+      "clientVersion": "575.0.0",
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-10-12T13:42:20.631939Z",
+          "state": "CONDITION_SUCCEEDED",
+          "type": "RoutesReady"
+        },
+        {
+          "lastTransitionTime": "2026-10-12T13:42:20.741483Z",
+          "message": "Deploying revision succeeded in 1m30.08s.",
+          "revisionReason": "RETIRED",
+          "state": "CONDITION_SUCCEEDED",
+          "type": "ConfigurationsReady"
+        }
+      ],
+      "createTime": "2026-10-11T11:06:18.539876Z",
+      "creator": "maneshwarkumar@gmail.com",
+      "etag": "\"CPvKs9YGELC6ub0D/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtYXJtLWE\"",
+      "generation": "28",
+      "ingress": "INGRESS_TRAFFIC_ALL",
+      "labels": {
+        "motomedic-release": "v10-13"
+      },
+      "lastModifier": "maneshwarkumar@gmail.com",
+      "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-v10-14-retrieval-v6",
+      "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-v10-14-retrieval-v6",
+      "launchStage": "GA",
+      "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a",
+      "observedGeneration": "27",
+      "reconciling": true,
+      "scaling": {
+        "maxInstanceCount": 1
+      },
+      "sshEnabled": false,
+      "template": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_QUEUE",
+                "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_WORKER_URL",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_INSPECTION_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_AUDIENCE",
+                "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+              },
+              {
+                "name": "MOTOMEDIC_SERVICE_ALLOWED_CALLERS",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com,motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "ANTHROPIC_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-evaluator-anthropic-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:531b0478458606f8faddcea78353cdb5f4cbe028dc06a2bc169f624024a2d362",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "cpuIdle": true,
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              },
+              "startupCpuBoost": true
+            },
+            "startupProbe": {
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              },
+              "periodSeconds": 10,
+              "timeoutSeconds": 5
+            }
+          }
+        ],
+        "maxInstanceRequestConcurrency": 6,
+        "revision": "motomedic-arm-a-v10-14-retrieval-v6",
+        "scaling": {
+          "maxInstanceCount": 1,
+          "minInstanceCount": 1
+        },
+        "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "timeout": "1200s"
+      },
+      "terminalCondition": {
+        "lastTransitionTime": "2026-10-12T13:42:20.677517Z",
+        "state": "CONDITION_PENDING",
+        "type": "Ready"
+      },
+      "traffic": [
+        {
+          "percent": 100,
+          "revision": "motomedic-arm-a-v10-14-retrieval-v6",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+        }
+      ],
+      "trafficStatuses": [
+        {
+          "percent": 100,
+          "revision": "motomedic-arm-a-v10-13-canary",
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+        }
+      ],
+      "uid": "bc1b292b-3701-465d-abf1-6879aa6adf20",
+      "updateTime": "2026-10-12T13:49:47.934174Z",
+      "uri": "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app",
+      "urls": [
+        "https://motomedic-arm-a-279945185781.us-central1.run.app",
+        "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app"
+      ]
+    },
+    "name": "projects/motomedic-ai-20261009/locations/us-central1/operations/c5fe0786-dde7-414c-be47-10cdc6481492"
+  },
+  "provider_calls": 0
+}

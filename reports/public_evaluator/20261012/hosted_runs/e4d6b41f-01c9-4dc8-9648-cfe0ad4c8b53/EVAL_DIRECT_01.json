@@ -1,0 +1,549 @@
+{
+  "case_id": "EVAL_DIRECT_01",
+  "completed_operation_checks": {
+    "duplicate_post_same_operation_and_request": true,
+    "duplicate_post_same_saved_view": true,
+    "new_operation_or_question_created": false,
+    "provider_calls": 0,
+    "provider_reservations_unchanged": true,
+    "wrong_valid_visitor_get_status": 404
+  },
+  "exact_recovered_view": true,
+  "exact_saved_stream": true,
+  "expected_route_matched": true,
+  "inference_replayed": false,
+  "operation_id": "12a8c731dc364f9bb4707774eea33779",
+  "post_retries": 0,
+  "pre_provider_capacity_check": {
+    "allocation_changes": 0,
+    "arbitrary_future_question_affordability_guaranteed": false,
+    "available": {
+      "attempts": 76,
+      "haiku_nanodollars": 988456000,
+      "tokens": 759392
+    },
+    "baseline_retained_charges": {
+      "attempts": 24,
+      "haiku_nanodollars": 11544000,
+      "tokens": 239808
+    },
+    "case_id": "EVAL_DIRECT_01",
+    "classification": "READONLY_MEASURED_PHASE_CAPACITY_CHECK",
+    "count_build_id": "8fa2fb34-75f5-4a1a-9d4d-66a96f05fa97",
+    "count_receipt_sha256": "5acc6f312bc76a31784c64fb2cd908df72819dbf24523ebb8c9f978110c57d97",
+    "current_conditional_correction": {
+      "attempts": 2,
+      "haiku_nanodollars": 14182750,
+      "tokens": 102662
+    },
+    "eligible": true,
+    "public_human_measured_floor": {
+      "attempts": 6,
+      "haiku_nanodollars": 34400250,
+      "tokens": 242802
+    },
+    "refunds_or_resets": 0,
+    "remaining_planned_initial": {
+      "attempts": 12,
+      "haiku_nanodollars": 56871625,
+      "tokens": 390173
+    },
+    "required": {
+      "attempts": 20,
+      "haiku_nanodollars": 105454625,
+      "tokens": 735637
+    }
+  },
+  "question": "What are the engine bore and stroke, with their units?",
+  "question_sha256": "3c4c4380f6df3bd5034911e16b2dd8058ecee0c8e9a45309db9158a3eef2ed88",
+  "request_sha256": "778c21f378e87a67232ba50963e5c59397dfa1401f1de0214bd11b811c6b1cef",
+  "response_sha256": "67a06c68c64d2c46f7cb025a5950a60039ca5d8a6595db65415605aefb423d16",
+  "route": "SUPPORTED",
+  "saved_received_seconds": 94.78158017999999,
+  "saved_view": {
+    "choices": [],
+    "delivery": {
+      "event_protocol": "operation-sequence-v1",
+      "evidence_payload_sha256": "e1dd97b0ea9d2ccbd909aa645838d61a17d1fa756afd6ee82bd2a2d3eb6f9836",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "operation_id": "12a8c731dc364f9bb4707774eea33779",
+      "response_sha256": "67a06c68c64d2c46f7cb025a5950a60039ca5d8a6595db65415605aefb423d16",
+      "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+      "verification_binding_sha256": "7e96b6cfdccdcbf44030d0259137b31449be2ee097078e5aeb5fa4052d154e59"
+    },
+    "escalation_uri": "mailto:support@royalenfield.com",
+    "history": [],
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+    "provider_calls": 2,
+    "response": {
+      "cited_pages": [
+        {
+          "evidence_id": "evidence_13ff401422c8fc0d784d7e92",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_32cf970fdb9c163e0de21c1a",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_3a585b9acb43c05172e95624",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_467855effee5419bd63fb826",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_a5bb5d14fd332f16c381c1b7",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_b1e9bacad4e60cf54b0a3aa2",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_b42c533d2f90267c01b12bb6",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_d11ae7cb778df64207e63d04",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_e43f21422e7fcda50e76c4bb",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        },
+        {
+          "evidence_id": "evidence_f4ee929e545ef669fdb494a1",
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "pdf_page": 16,
+          "pdf_page_index": 15
+        }
+      ],
+      "claim_evidence_map": [
+        {
+          "claim_id": "draft:0",
+          "evidence_ids": [
+            "evidence_13ff401422c8fc0d784d7e92"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "FACT",
+          "text": "The engine bore is 84 mm."
+        },
+        {
+          "claim_id": "draft:1",
+          "evidence_ids": [
+            "evidence_a5bb5d14fd332f16c381c1b7"
+          ],
+          "origin": "DRAFT",
+          "presentation_mode": "VERIFIED_GENERATED_PARAPHRASE",
+          "role": "FACT",
+          "text": "The engine stroke is 81.5 mm."
+        }
+      ],
+      "clarification_question": null,
+      "escalation_uri": "mailto:support@royalenfield.com",
+      "natural_language": "The engine bore is 84 mm. The engine stroke is 81.5 mm.",
+      "reason_codes": [
+        "VERIFIED_OPEN_QA_ACCEPTED"
+      ],
+      "release_gate_passed": true,
+      "semantic_support_proven": false,
+      "semantic_verification_passed": true,
+      "technical_content": true,
+      "trace_id": "ce1364931f4141a080c858a236cf6256",
+      "type": "SUPPORTED"
+    },
+    "runtime_controls": {
+      "composition": {
+        "accepted_binding_sha256": "7e96b6cfdccdcbf44030d0259137b31449be2ee097078e5aeb5fa4052d154e59",
+        "accepted_response_sha256": "aac59e30182e6dde7c5a11329e0f47d9372e47c8df9365c132f6f8abd4c17aa2",
+        "answer_cache": "DISABLED",
+        "answer_exposed": false,
+        "attempts": [
+          {
+            "binding_sha256": "7e96b6cfdccdcbf44030d0259137b31449be2ee097078e5aeb5fa4052d154e59",
+            "draft_provider": {
+              "cache_creation_input_tokens": 5786,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "50c4a4cbdc315598946fd0e7e217818308470c608ad56ec59b1d550a0f69d96b",
+              "cached_tokens": 0,
+              "estimated_cost_usd": 0.0008396499999999999,
+              "generation_calls": 1,
+              "input_tokens": 6060,
+              "input_tokens_counted": 6060,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 178,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 2.27053668100001,
+              "raw_content_logged": false,
+              "request_bytes": 14443,
+              "reserved_input_token_ceiling": 6572,
+              "reserved_maximum_cost_usd": 0.0017215,
+              "retry_count": 0,
+              "role": "private_draft",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 274
+            },
+            "draft_seconds": 2.5490625079999916,
+            "revision": 0,
+            "verdict_summary": {
+              "conflict_count": 0,
+              "decision": "RELEASE_COMPLETE",
+              "omission_count": 0,
+              "question_coverage": "COMPLETE",
+              "release_eligible": true,
+              "supported_claims": 2,
+              "total_claims": 2
+            },
+            "verification_provider": {
+              "cache_creation_input_tokens": 6064,
+              "cache_hit_observed": false,
+              "cache_read_input_tokens": 0,
+              "cached_prefix_sha256": "532c86d36c272d82ff06af97ed1ff621fffa32a42c2b5b92f278fcf2052c8bb0",
+              "cached_tokens": 0,
+              "estimated_cost_usd": 0.0011491,
+              "generation_calls": 1,
+              "input_tokens": 8165,
+              "input_tokens_counted": 8165,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 362,
+              "provider": "anthropic",
+              "provider_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+              "provider_seconds": 2.662849240000014,
+              "raw_content_logged": false,
+              "request_bytes": 18423,
+              "reserved_input_token_ceiling": 41740,
+              "reserved_maximum_cost_usd": 0.0061175,
+              "retry_count": 0,
+              "role": "semantic_verifier",
+              "token_counter": "ANTHROPIC_COUNT_TOKENS",
+              "token_counter_is_estimate": true,
+              "uncached_input_tokens": 2101
+            },
+            "verification_seconds": 61.080813121000006
+          }
+        ],
+        "correction_calls": 0,
+        "corrections": 0,
+        "draft_calls": 1,
+        "draft_model": "claude-haiku-5-5",
+        "generation_calls": 2,
+        "model_routing": {
+          "draft_model_contract_sha256": "85f9a1d926fa6b13078e783a36831c5a6a119ab01e7dc4d68ccb81dc4e4f8faf",
+          "initial_draft_request_sha256": "16a62c2d0e7162f530f669f7e441bc34fa726c6bf5a8a32b99c90b7402aab412",
+          "primary_input_tokens_counted": 6060,
+          "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+          "routing_contract_sha256": "ffde2164f16204df358dfb58b1f2fa0a9a3d3f3fb8c918c4f4af2226361ba3ad",
+          "selected_draft_input_tokens": 6060,
+          "stable_context_sha256": "a3428e716fbb7a5e9be3afb1d9e19468121099bbf2313127608d8039d12b5c3a",
+          "verifier_contract_sha256": "14d6dc008eaf4a704d1c4b46300b81e8deb0c501eb20f06358b775a7009304d2",
+          "version": "haiku-draft-finalized-verifier-v3"
+        },
+        "provider_calls": 2,
+        "provider_prompt_cache": "EXPLICIT_ROLE_PREFIX",
+        "start_new_conversation_required": false,
+        "total_private_pipeline_seconds": 65.38541831700002,
+        "verification_calls": 1,
+        "verification_probabilistic": true,
+        "verified_buffer_ready": true,
+        "verifier_calls": 1,
+        "verifier_model": "claude-haiku-5-5",
+        "version": "open-manual-haiku-draft-verify-v10_12",
+        "whole_turn_reservation": {
+          "correction_reserved": false,
+          "maximum_corrections": 1,
+          "maximum_wait_seconds": 60.88008,
+          "model_routing": {
+            "fixed_correction_native_tokens": 7663,
+            "fixed_verifier_native_tokens": 8460,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 7381,
+            "role_plan": {
+              "draft_model_contract_sha256": "85f9a1d926fa6b13078e783a36831c5a6a119ab01e7dc4d68ccb81dc4e4f8faf",
+              "initial_draft_request_sha256": "16a62c2d0e7162f530f669f7e441bc34fa726c6bf5a8a32b99c90b7402aab412",
+              "primary_input_tokens_counted": 6060,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "ffde2164f16204df358dfb58b1f2fa0a9a3d3f3fb8c918c4f4af2226361ba3ad",
+              "selected_draft_input_tokens": 6060,
+              "stable_context_sha256": "a3428e716fbb7a5e9be3afb1d9e19468121099bbf2313127608d8039d12b5c3a",
+              "verifier_contract_sha256": "14d6dc008eaf4a704d1c4b46300b81e8deb0c501eb20f06358b775a7009304d2",
+              "version": "haiku-draft-finalized-verifier-v3"
+            },
+            "slots": [
+              {
+                "attempt": 1,
+                "input_tokens": 6572,
+                "maximum_nanodollars": 1721500,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "draft"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 41740,
+                "maximum_nanodollars": 6117500,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "verify"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 57327,
+                "maximum_nanodollars": 8065875,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "correction"
+              },
+              {
+                "attempt": 1,
+                "input_tokens": 41740,
+                "maximum_nanodollars": 6117500,
+                "model": "claude-haiku-5-5",
+                "output_tokens": 1800,
+                "stage": "reverify"
+              }
+            ],
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "pacing_version": "whole-turn-sealed-unused-pacing-v4-haiku-roles",
+          "phases": [
+            {
+              "phase": "initial",
+              "phase_nonce": "3c95d52d34f6eaaf65636939204452dd562d13e65e14f4b515252159c65e4bee",
+              "plan_sha256": "9f99bf878e1cc9ac741dfada0282cfd858b0b1083a981089ac80619341a6b5cb",
+              "reserved_attempts": 2,
+              "reserved_nanodollars": 7839000,
+              "reserved_tokens": 51912
+            }
+          ],
+          "plan_version": "whole-turn-haiku-role-native-envelope-v2",
+          "reservation_mode": "INITIAL_PAIR_CONDITIONAL_CORRECTION",
+          "reserved_attempts": 2,
+          "reserved_nanodollars": 7839000,
+          "reserved_slots": [
+            {
+              "attempt": 1,
+              "input_tokens": 6572,
+              "maximum_nanodollars": 1721500,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "draft",
+              "tokens": 8372
+            },
+            {
+              "attempt": 1,
+              "input_tokens": 41740,
+              "maximum_nanodollars": 6117500,
+              "model": "claude-haiku-5-5",
+              "output_tokens": 1800,
+              "stage": "verify",
+              "tokens": 43540
+            }
+          ],
+          "reserved_tokens": 51912,
+          "role_forecast_binding": {
+            "fixed_correction_native_tokens": 7663,
+            "fixed_verifier_native_tokens": 8460,
+            "forecast_is_not_unknown_final_answer_guarantee": true,
+            "forecast_method": "NATIVE_FIXED_SCAFFOLD_PLUS_BOUNDED_PRIVATE_OUTPUT_BYTES",
+            "initial_haiku_counter_headroom_tokens": 512,
+            "initial_primary_counter_headroom_tokens": 0,
+            "known_verifier_prefix_native_tokens": 7381,
+            "role_plan": {
+              "draft_model_contract_sha256": "85f9a1d926fa6b13078e783a36831c5a6a119ab01e7dc4d68ccb81dc4e4f8faf",
+              "initial_draft_request_sha256": "16a62c2d0e7162f530f669f7e441bc34fa726c6bf5a8a32b99c90b7402aab412",
+              "primary_input_tokens_counted": 6060,
+              "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+              "routing_contract_sha256": "ffde2164f16204df358dfb58b1f2fa0a9a3d3f3fb8c918c4f4af2226361ba3ad",
+              "selected_draft_input_tokens": 6060,
+              "stable_context_sha256": "a3428e716fbb7a5e9be3afb1d9e19468121099bbf2313127608d8039d12b5c3a",
+              "verifier_contract_sha256": "14d6dc008eaf4a704d1c4b46300b81e8deb0c501eb20f06358b775a7009304d2",
+              "version": "haiku-draft-finalized-verifier-v3"
+            },
+            "unknown_correction_byte_allowance": 49664,
+            "unknown_verifier_byte_allowance": 33280
+          },
+          "role_forecast_sha256": "9f99bf878e1cc9ac741dfada0282cfd858b0b1083a981089ac80619341a6b5cb",
+          "sealed_unused_slots": 0,
+          "sealing_status": "SEALED_UNUSED_CONFIRMED",
+          "version": "whole-turn-capacity-v1"
+        }
+      },
+      "retrieval": {
+        "cache": "BYPASS",
+        "first_stage": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+        "input_tokens": 15,
+        "provider_calls": 0,
+        "raw_query_retained": false
+      },
+      "source_admission": {
+        "admitted_evidence_ids": [
+          "evidence_13ff401422c8fc0d784d7e92",
+          "evidence_32cf970fdb9c163e0de21c1a",
+          "evidence_3a585b9acb43c05172e95624",
+          "evidence_467855effee5419bd63fb826",
+          "evidence_a5bb5d14fd332f16c381c1b7",
+          "evidence_b1e9bacad4e60cf54b0a3aa2",
+          "evidence_b42c533d2f90267c01b12bb6",
+          "evidence_d11ae7cb778df64207e63d04",
+          "evidence_e43f21422e7fcda50e76c4bb",
+          "evidence_f4ee929e545ef669fdb494a1"
+        ],
+        "authority_lock": "5570f46dd41b6f31e34cee3d2342ee02eae9716e238b0c5f5d1004384ce20903",
+        "chunk_ids": [
+          "chunk_c63548d2d0eea40969f5a02c",
+          "chunk_1db5c7901af2cf565fd97f01",
+          "chunk_1750fde3d783557c2f8c58d1",
+          "chunk_82dbd3d98a730627c9225565",
+          "chunk_cb96f545d56dbd8e2719dc6d"
+        ],
+        "gaps": [
+          {
+            "chunk_id": "chunk_8d9ba451bd337726732ffb98",
+            "evidence_ids": [
+              "evidence_2f7f764e154aaf68164ade75"
+            ],
+            "rider_resolvable": false,
+            "type": "SOURCE_CONTEXT_COMPLETENESS_REVIEW_REQUIRED"
+          }
+        ],
+        "retrieval_assembly_seconds": 27.12977676700001,
+        "retrieval_policy": {
+          "assembled_hit_limit": 5,
+          "decisions": [
+            "CONTINUE_WITH_SOURCE_GAPS"
+          ],
+          "dense_rpc": {
+            "backend": "AUTHENTICATED_QDRANT_RPC",
+            "collection": "owner_manual",
+            "document_embedding_calls": 0,
+            "index_id": "index_a3282c4d98cf54595e4ba168",
+            "query_embedding_only": true,
+            "remote_candidate_limit": 20,
+            "returned_points": 20,
+            "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
+          },
+          "final_action": "CONTINUE_WITH_SOURCE_GAPS",
+          "first_stage_execution": "CONCURRENT_AUTHENTICATED_QDRANT_AND_BM25",
+          "initial_ranking_signals": {
+            "compared_rank_positions": 3,
+            "dense_sparse_section_overlap": 0.3333333333333333,
+            "dense_top_distinct_parent_ids": [
+              "section_faf045b505dcaa7f1866fe5d",
+              "section_2866c639ee57053b2f9fe4a1",
+              "section_938fddab1f44b652f496ab1c"
+            ],
+            "disagreeing_rank_positions": [
+              2,
+              3
+            ],
+            "rank_comparison_available": true,
+            "ranking_uncertain": true,
+            "relative_rrf_section_margin": 0.22520161290322585,
+            "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+            "rrf_margin_is_diagnostic_only": true,
+            "sparse_top_distinct_parent_ids": [
+              "section_faf045b505dcaa7f1866fe5d",
+              "section_78586368b2a6fc2fff925bf0",
+              "section_6a0e2d0e1ba0de11e07315dc"
+            ],
+            "uncertainty_reasons": [
+              "DENSE_SPARSE_DISTINCT_PARENT_RANK_DISAGREEMENT"
+            ]
+          },
+          "policy": {
+            "calibration_status": "PROVISIONAL_UNCALIBRATED",
+            "candidate_limit": 20,
+            "disagreement_top_k": 3,
+            "expanded_candidate_limit": 40,
+            "maximum_dependency_ids": 256,
+            "maximum_relative_rrf_margin": 0.05,
+            "maximum_rerank_pairs": 100,
+            "minimum_section_overlap": 0.5,
+            "version": "conditional-rerank-v1"
+          },
+          "recovery_attempts": 0,
+          "rerank_attempts": 1,
+          "rerank_gate_version": "ordered-distinct-parent-rank-disagreement-v3",
+          "rerank_mode": "CONDITIONAL_RANK_DISAGREEMENT",
+          "rerank_pair_count": 21,
+          "rerank_skip_reason": null,
+          "stages_seconds": {
+            "bm25_scoring": 0.0010769459999835362,
+            "dense_query_embedding_and_qdrant_rpc": 23.889809601000024,
+            "initial_assembly": 0.07115420100001302,
+            "reranking": 3.026767007000018
+          },
+          "version": "authenticated-open-hybrid-rank-disagreement-v5"
+        }
+      }
+    },
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_12",
+    "schema_version": "motomedic-rider-api-v1",
+    "session_id": "4abc30f8d44149069163b933f2e9e0a7",
+    "verified_delivery": {
+      "binding_sha256": "7e96b6cfdccdcbf44030d0259137b31449be2ee097078e5aeb5fa4052d154e59",
+      "draft_model": "claude-haiku-5-5",
+      "evidence_payload_sha256": "e1dd97b0ea9d2ccbd909aa645838d61a17d1fa756afd6ee82bd2a2d3eb6f9836",
+      "index_id": "index_a3282c4d98cf54595e4ba168",
+      "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+      "model_route": "HAIKU_DRAFT_HAIKU_VERIFY",
+      "model_routing_contract_sha256": "ffde2164f16204df358dfb58b1f2fa0a9a3d3f3fb8c918c4f4af2226361ba3ad",
+      "operation_id": "12a8c731dc364f9bb4707774eea33779",
+      "presentation_sha256": "67a06c68c64d2c46f7cb025a5950a60039ca5d8a6595db65415605aefb423d16",
+      "response_sha256": "aac59e30182e6dde7c5a11329e0f47d9372e47c8df9365c132f6f8abd4c17aa2",
+      "role_plan_sha256": "5dd22f17695f2aa50dfd8413689acbd4b6b606dd4ef4e9b4651f64052bd14a0d",
+      "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+      "source_authority_lock": "5570f46dd41b6f31e34cee3d2342ee02eae9716e238b0c5f5d1004384ce20903",
+      "text_sha256": "be8be2ecda6de6ae2a866afe045d76443901965a6e5c91f91d0b5de91d823b86",
+      "verifier_model": "claude-haiku-5-5"
+    },
+    "version": 1
+  },
+  "session_group": "engine_direct",
+  "status": "SAVED_STREAMED_RECOVERED",
+  "stream_stages": [
+    "displaying"
+  ],
+  "streamed_text": "The engine bore is 84 mm. The engine stroke is 81.5 mm.",
+  "total_seconds": 96.41290049199998
+}

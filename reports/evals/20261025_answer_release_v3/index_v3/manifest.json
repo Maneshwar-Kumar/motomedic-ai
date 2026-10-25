@@ -1,0 +1,194 @@
+{
+ "index_id": "index_a609ca61c635641e0a22dc48",
+ "built_from_index_id": "index_a3282c4d98cf54595e4ba168",
+ "source_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+ "cached_parse_sha256": "a84e0c34b70307b87947f15a2397e9e27d2dcd7b2862c42c8bee40404a18bfcc",
+ "chunker": {
+  "name": "HybridChunker",
+  "max_tokens": 1024,
+  "merge_peers": false,
+  "repeat_table_header": true
+ },
+ "sectioning": {
+  "version": "section-index-v1",
+  "boxes": [
+   "WARNING",
+   "CAUTION",
+   "NOTE"
+  ],
+  "running_min_pages": 3,
+  "running_top_band": 0.12,
+  "search_text": "<content heading>\\n[<box label>\\n]<text>"
+ },
+ "embedding": {
+  "model": "BAAI/bge-m3",
+  "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "dimensions": 1024,
+  "normalized": true,
+  "metric": "cosine",
+  "weights_file": "pytorch_model.bin",
+  "weights_sha256": "b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38"
+ },
+ "code_sha256": "dbd98acd5c457dbb9bdd8882cfe463d2e04a5d30c7b559238239e7da6461e4bc",
+ "review_layer": "NONE",
+ "file_sha256": {
+  "chunks.jsonl": "9476c77b673ba6d8b4330f9f79502ad1b0b152430277e8c0366869ba55a507b7",
+  "sections.jsonl": "15725bb26b0c064e91d844202e84a6f26f695cb4aef98549e03c167cdc3d81b0",
+  "embeddings.npy": "03c285830953b9724809bf5a441db6a8b6e6c2f89f67378f7d21787df4bd1714",
+  "bm25.json": "cc3008d39ff46433f64418f3b421ce0f134e92dfad9d07623d66cd4ceb3ebb83",
+  "evidence.jsonl": "792408e533d68f99b0787056e02c4a9f2edf6ea1e06b4b0591b743753a6bc2c8",
+  "pages.jsonl": "66487927b4a33bef021dbfc93b8a4fbd7f305a16f4bcd8264c3dc675fb912040"
+ },
+ "qa": {
+  "chunks": 532,
+  "sections": 154,
+  "evidence_objects_in_sections": 1137,
+  "source_parent_sections": 277,
+  "box_chunks": 121,
+  "box_chunks_attached": 121,
+  "page_break_continuations": 116,
+  "page_fallback_chunks": 1,
+  "box_chunks_unattached": 0,
+  "running_headers": {
+   "SAFE RIDING TIPS / GUIDELINES": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "TECHNICAL SPECIFICATIONS": [
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "LOCATION OF KEY PARTS": [
+    23,
+    24,
+    25
+   ],
+   "OPERATION OF CONTROLS": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65
+   ],
+   "WARNING INDICATIONS AND SAFETY SYSTEMS": [
+    66,
+    67,
+    68,
+    69
+   ],
+   "STARTING": [
+    72,
+    73,
+    74,
+    75
+   ],
+   "GEAR SHIFTING, RIDING AND STOPPING": [
+    76,
+    77,
+    78
+   ],
+   "MINOR MAINTENANCE TIPS": [
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114
+   ],
+   "PERIODICAL MAINTENANCE": [
+    124,
+    125,
+    126,
+    127,
+    128
+   ],
+   "GENERAL WARRANTY TERMS AND CONDITIONS": [
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135
+   ],
+   "EMISSION WARRANTY": [
+    139,
+    140,
+    141,
+    142,
+    143
+   ]
+  },
+  "pages_covered": 145,
+  "pdf_pages": 149,
+  "parser_gap_pages": [
+   103
+  ]
+ }
+}

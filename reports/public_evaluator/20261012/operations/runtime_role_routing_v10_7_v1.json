@@ -1,0 +1,250 @@
+{
+  "behavior": {
+    "actual_finalized_verifier_native_count_before_http_required": true,
+    "actual_gemma_normal_input_tpm": 16000,
+    "answer_cache_enabled": false,
+    "availability_fallback_enabled": false,
+    "conditional_correction_atomic_reserved_slots": 3,
+    "correction_request_rejected_binding_verdict_hashes_required": true,
+    "error_or_semantic_rejection_role_switch_allowed": false,
+    "full_evidence_and_history_retained": true,
+    "global_runtime_lock_unchanged_between_selected_roles": true,
+    "haiku_initial_admission_only_counter_headroom_tokens": 512,
+    "initial_paid_pair_atomic_reserved_slots": 3,
+    "input_evidence_byte_limit": null,
+    "maximum_corrections": 1,
+    "output_tokens_limit": 1800,
+    "private_generated_json_bytes_limit": 16384,
+    "routing_threshold_is_pre_generation_choice_only": true,
+    "unavoidable_full_source_verifier_prefix_quota_gated": true,
+    "unknown_finalized_verifier_native_fit_demonstrated": false,
+    "worst_scaffold_quota_fit_is_diagnostic": true
+  },
+  "boundaries": {
+    "allocation_refund_or_reset": false,
+    "cloud_mutations": 0,
+    "cloud_reads": 0,
+    "human_signoff": false,
+    "live_acceptance_established": false,
+    "real_provider_calls": 0,
+    "source_display_authorization_changed": false,
+    "source_index_or_approval_changed": false
+  },
+  "candidate": "v10_7",
+  "checks": {
+    "combined_suite": {
+      "elapsed_seconds": 50.58,
+      "modules": [
+        "cloud.grounded_generation.test_role_router",
+        "cloud.grounded_generation.test_provider",
+        "cloud.grounded_generation.test_cached_verifier",
+        "cloud.grounded_generation.test_verified_qa",
+        "cloud.grounded_generation.test_whole_turn_admission",
+        "tools.test_build_candidate"
+      ],
+      "result": "PASS",
+      "tests": 145
+    },
+    "count_helper_synthetic": {
+      "actual_native_counter_body_binding": "PASS",
+      "exact_transport_allowlist": "PASS",
+      "native_provider_calls": 0,
+      "stages_per_case": 7,
+      "syntax": "PASS"
+    }
+  },
+  "classification": "SYNTHETIC_PROVIDER_FREE_ENGINEERING_CHECKS",
+  "counter_scope": {
+    "classification": "HOSTED_NATIVE_COUNTERS_AND_ROLE_FORECAST_ONLY",
+    "generations": 0,
+    "history": "Prior-run saved SYSTEM_ERROR history; prospective accepted history unknown.",
+    "optional_gemma_metadata_gets": 1,
+    "planned_native_posts": 42,
+    "remaining_capacity_and_floor_require_actual_hosted_count_receipt": true,
+    "reservations": 0,
+    "script": "tmp/public_evaluator/count_only_context_v10_7.py",
+    "synthetic_verifier_scaffolds_are_not_answers_or_verdicts": true
+  },
+  "file_sha256": {
+    "cloud/arm_a/app.py": "d13513ba8157848707867cafa45a1ffa051331b577a4cd8e8956a96ec27523c9",
+    "cloud/grounded_generation/cached_verifier.py": "f879392f127c04eff74d78cec0b953ef7930fbd91e7594df074ce1def35e669f",
+    "cloud/grounded_generation/claude_provider.py": "e649e6e8672e5ac0850cc0b2c04c83f6f983173008fd199dcb4037a98a3b7725",
+    "cloud/grounded_generation/provider.py": "cb42000050710d39d840b2f9e25ffc527c056d33b0b03fcbd149c601ca90fc8c",
+    "cloud/grounded_generation/role_contracts.py": "db2aab6a5f77f6323bd7f20cbfcad9be547fe235322ea38f869a5a022b405357",
+    "cloud/grounded_generation/role_router.py": "441612fa27f6b949a4b33ba5188290061c34155be072cfb5081469a6ec2fb2c5",
+    "cloud/grounded_generation/test_cached_verifier.py": "10def32a8b129b306fdd8a6cfaf4d567615df02d7d56672904408acf9bdc5b20",
+    "cloud/grounded_generation/test_provider.py": "ab9fd00d950cb170272a0e89d6617c517edd42cda61e53b3117f7a8628033cfd",
+    "cloud/grounded_generation/test_role_router.py": "49d305733576d4d8672198c5cccdf199704d300828ebb0d71602f2225723453a",
+    "cloud/grounded_generation/test_verified_qa.py": "a7f4e771208ee55a966961fdc91ba9d5d28ee6fe34e887ef14da004015428c63",
+    "cloud/grounded_generation/verified_qa.py": "b526e075a270d10977c20e10b9394ceb1b35d4c0c08a3c14a5fd8f2e677e9290",
+    "tmp/public_evaluator/count_only_context_v10_7.py": "ae9cf31c6d111e06f4e385690251094437bd877ebb3b3b04779099eefcc3a555"
+  },
+  "model_routing_contract": {
+    "availability_fallback_enabled": false,
+    "native_limit_sources": {
+      "checked_date": "2026-10-12",
+      "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+      "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+    },
+    "roles": {
+      "GEMMA_DRAFT_HAIKU_VERIFY": {
+        "draft": {
+          "answer_cache": "DISABLED",
+          "automatic_retries": 1,
+          "context_window_tokens": 256000,
+          "fallback_role": false,
+          "input_tokens": 254200,
+          "maximum_attempts_per_call": 2,
+          "model": "gemma-4-26b-a4b-it",
+          "native_json_schema": true,
+          "native_limit_sources": {
+            "checked_date": "2026-10-12",
+            "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+          },
+          "output_json_bytes": 16384,
+          "output_tokens": 1800,
+          "project_input_tpm_readback": 16000,
+          "prompt_cache": "UNSUPPORTED",
+          "provider": "google-generative-language",
+          "request_bytes": null,
+          "retry_rejections": [
+            429,
+            503
+          ],
+          "role": "private_draft",
+          "version": "native-context-distinct-role-router-v1"
+        },
+        "verifier": {
+          "answer_cache": "DISABLED",
+          "automatic_retries": 0,
+          "cache_ttl": "5m",
+          "context_window_tokens": 1000000,
+          "effort": "medium",
+          "fallback_role": false,
+          "input_tokens": 998200,
+          "maximum_attempts_per_call": 1,
+          "minimum_cache_tokens": 512,
+          "model": "claude-haiku-5-5",
+          "native_json_schema": true,
+          "native_limit_sources": {
+            "checked_date": "2026-10-12",
+            "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+          },
+          "output_json_bytes": 16384,
+          "output_tokens": 1800,
+          "pricing": {
+            "base_usd_per_million": {
+              "cache_read": 0.01,
+              "cache_write": 0.125,
+              "input": 0.1,
+              "output": 0.5
+            },
+            "long_context_above_input_tokens": 100000,
+            "long_usd_per_million": {
+              "cache_read": 0.05,
+              "cache_write": 0.625,
+              "input": 0.5,
+              "output": 2.5
+            }
+          },
+          "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+          "provider": "anthropic",
+          "request_bytes": null,
+          "retry_rejections": [],
+          "role": "semantic_verifier",
+          "thinking": "disabled",
+          "version": "native-context-distinct-role-router-v1"
+        }
+      },
+      "HAIKU_DRAFT_GEMMA_VERIFY": {
+        "draft": {
+          "answer_cache": "DISABLED",
+          "automatic_retries": 0,
+          "cache_ttl": "5m",
+          "context_window_tokens": 1000000,
+          "effort": "medium",
+          "fallback_role": false,
+          "input_tokens": 998200,
+          "maximum_attempts_per_call": 1,
+          "minimum_cache_tokens": 512,
+          "model": "claude-haiku-5-5",
+          "native_json_schema": true,
+          "native_limit_sources": {
+            "checked_date": "2026-10-12",
+            "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+          },
+          "output_json_bytes": 16384,
+          "output_tokens": 1800,
+          "pricing": {
+            "base_usd_per_million": {
+              "cache_read": 0.01,
+              "cache_write": 0.125,
+              "input": 0.1,
+              "output": 0.5
+            },
+            "long_context_above_input_tokens": 100000,
+            "long_usd_per_million": {
+              "cache_read": 0.05,
+              "cache_write": 0.625,
+              "input": 0.5,
+              "output": 2.5
+            }
+          },
+          "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+          "provider": "anthropic",
+          "request_bytes": null,
+          "retry_rejections": [],
+          "role": "private_draft",
+          "thinking": "disabled",
+          "version": "native-context-distinct-role-router-v1"
+        },
+        "verifier": {
+          "answer_cache": "DISABLED",
+          "automatic_retries": 1,
+          "context_window_tokens": 256000,
+          "fallback_role": false,
+          "input_tokens": 254200,
+          "maximum_attempts_per_call": 2,
+          "model": "gemma-4-26b-a4b-it",
+          "native_json_schema": true,
+          "native_limit_sources": {
+            "checked_date": "2026-10-12",
+            "gemma_native_window": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+          },
+          "output_json_bytes": 16384,
+          "output_tokens": 1800,
+          "project_input_tpm_readback": 16000,
+          "prompt_cache": "UNSUPPORTED",
+          "provider": "google-generative-language",
+          "request_bytes": null,
+          "retry_rejections": [
+            429,
+            503
+          ],
+          "role": "semantic_verifier",
+          "version": "native-context-distinct-role-router-v1"
+        }
+      }
+    },
+    "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+    "routing_threshold_tokens": 8192,
+    "threshold_is_pre_generation_choice_not_context_rejection": true,
+    "version": "native-context-distinct-role-router-v1"
+  },
+  "model_routing_contract_sha256": "5362a6046748a1fd0546bddbbe660c13550df78e79c4e6a36a309044df7ea337",
+  "owner_model_scope_sha256": "05145aff6facd33a6e22c86696bf9a4c16a15ae08bd5b28b9706358b69b08cfb",
+  "recorded_at": "2026-10-12T06:13:22.690956+00:00",
+  "remaining_gates": [
+    "hosted_native_counts_and_remaining_capacity",
+    "actual_six_case_saved_outputs",
+    "independent_original_pdf_claim_review",
+    "private_operation_and_exact_stream_boundaries",
+    "public_frontend_and_browser_acceptance"
+  ],
+  "runtime_lock": "8ea0ee035c8bf64fa12569038bbcf126212f966527452ae12c1dba74eabd5de8",
+  "schema": "motomedic-synthetic-distinct-role-routing-verification-v1"
+}

@@ -1,0 +1,243 @@
+{
+  "acceptance_limits": {
+    "additional_optional_runs_required_for_owner_bare_MVP": false,
+    "broader_six_case_acceptance_claimed": false,
+    "historical_failed_browser_and_wrong_expectation_preserved": true,
+    "independent_factual_quality_acceptance": false,
+    "independent_manual_quality_review_required": false,
+    "runtime_finalized_verifier_bypassed": false
+  },
+  "audit_actions": {
+    "cloud_mutations": 0,
+    "cloud_requests_completed": 0,
+    "local_cloud_read_attempt_failed_before_request": "SDK_PROCESS_WINERROR5",
+    "provider_calls": 0,
+    "raw_private_or_rejected_provider_payloads_logged": false
+  },
+  "bindings": {
+    "backend_build_binding": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/backend_build_binding_v2.json",
+      "sha256": "f1b4e0756962c0461887edf6bc805c44d189efcb5e3d7d5fb52dea00589fec07"
+    },
+    "corrected_runtime_expectation": {
+      "path": "reports/public_evaluator/20261012/expected_runtime_lock_v10_14_v2.json",
+      "sha256": "cb5bf8284c4b1ff519b04799364469501e670cbc83cd361abf3efbf13b2e8b5d"
+    },
+    "emergency_restore_decision": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/emergency_restore_decision_v1.json",
+      "sha256": "bbaff8ba916f3ebc120ad57afc134ea89b04fd79c4f86a63d47eba1b0da312fb"
+    },
+    "manifest": {
+      "path": "reports/public_evaluator/20261012/serving_manifest_v10_14.json",
+      "sha256": "b8d39544a9cc216b7bd6d37dd741c12e95f6e1d2694a59eaf573cb51195962f5"
+    },
+    "owner_mvp_scope": {
+      "path": "reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json",
+      "sha256": "d93dcbb0fdbc197407f378e6c467be7d9d40169a93f48ef8e9ab84023c556f10"
+    },
+    "post_restore_public_shell": {
+      "path": "reports/public_evaluator/20261012/public_review/browser_post_restore_shell_v14_v1/receipt.json",
+      "sha256": "7d1ad26cff469750fbd30d7ce633e06f571f22cf83a608605e4b5a0e351f19aa"
+    },
+    "preserved_wrong_v1_expectation": {
+      "path": "reports/public_evaluator/20261012/expected_runtime_lock_v10_14.json",
+      "sha256": "df506328e34b6eadfe5ccde7064310f3e714049fe575bac7036de3cdfeea0446"
+    },
+    "prior_failed_browser": {
+      "path": "reports/public_evaluator/20261012/public_review/browser_service_due_v14_v1/receipt.json",
+      "sha256": "ddb5432a091368596efc169d9e5c5290464fe81a6eb2fdb1692b8d2943d89b63"
+    },
+    "prior_failed_public_projection": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/browser_service_due_failure_trace_v1.json",
+      "sha256": "eb3adce6b65b61a780204b362b0559c021c883930b034641ca197710226b7b4b"
+    },
+    "private_case": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/service_due_case.json",
+      "sha256": "95fc8f37751696920e4bda14000731e6fa355c519fc0a5078ee8e59cc6a4bcec"
+    },
+    "private_download_inventory": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/download_inventory.json",
+      "sha256": "5def2cdc3f6aafe2575a879946e1436c250a16504f3c84cf0f7af63f8d1fa2b8"
+    },
+    "private_receipt": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/service_due_api_operator_v2/hosted_runs/4133435e-9cb0-4281-98f4-d0c6bddda570/receipt.json",
+      "sha256": "2872f643510289615d836052649858c8ff3830fb4a7988e93a2d2faa603b0411"
+    },
+    "public_browser": {
+      "path": "reports/public_evaluator/20261012/public_review/browser_service_due_v14_v2/receipt.json",
+      "sha256": "c6bd8ad8767ae6d497b805cfe5aee3786728625d43bdd9a2a7ddf6420c30daba"
+    },
+    "public_success_projection": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/browser_service_due_success_trace_v2.json",
+      "sha256": "d1bc1fa8cf4723ae268fac6ca64c3cb1bf3bcb339a9587214f7cc068f431d1e0"
+    },
+    "restore_route_intent": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v1/restore_route_intent.json",
+      "sha256": "1db6165a5db93d662ca040cbc929c2d89497257a7898fb88867f9ac4464dd491"
+    },
+    "restored_pair_health": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/restore_health.json",
+      "sha256": "6ece4ef7f067bc7d3fdad1915228c0081e946393b82c7d96aca56f5d87ed93a1"
+    },
+    "rollback_route_intent": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v1/rollback_route_intent.json",
+      "sha256": "5c3d26deb0717f478ceb6652ff5f940f5329a79e31bdca5ae33987bfb6b98a2e"
+    },
+    "rollback_timeout1": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/rollback_health_timeout_v1.json",
+      "sha256": "2fcd539b60b367a654d6cfef8de5651c391f7c331aff837bb6084758bf5fc14b"
+    },
+    "rollback_timeout2": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/backend_release_v2/rollback_health_timeout_v2.json",
+      "sha256": "6b26b90a993d94848f5da9cbcec0a4d3151cad4b6e92985e8cbf5fe506c021eb"
+    },
+    "usage_and_cache": {
+      "path": "reports/public_evaluator/20261012/haiku_v10_14_helpers/final_usage_and_cache_v14_v1.json",
+      "sha256": "c07bfcac99066e36a2f4ed6b056f4585c0b8b1b5a75311f79f4e044f5563980b"
+    }
+  },
+  "post_restore_public_shell": {
+    "additional_answer_claimed": false,
+    "answer_proof_remains_prior_browser2_on_same_restored_runtime": true,
+    "execution": "AUTHORIZED_PUBLIC_SHELL_NO_QUESTION",
+    "health_http200_ready": true,
+    "page_errors": 0,
+    "passed": true,
+    "provider_calls": 0,
+    "question_input_enabled": true,
+    "question_submissions": 0,
+    "scope_checkbox_checked": true,
+    "signed_proof_cookie_websocket_passed": true,
+    "status": "PASS_PUBLIC_SHELL_NO_QUESTION"
+  },
+  "private_delivery": {
+    "completed_replay_or_wrong_visitor_checks_in_this_retest": false,
+    "corrections": 0,
+    "finalized_response_sha256": "f18db0b55dd61e54924d95c6c7e206b0d653cb623aca32464d2addb8e0ca3be6",
+    "native_enum_schema_checks_passed": true,
+    "operation_id": "3701dc10ebad42f398fbac569548979c",
+    "passed": true,
+    "post_retries": 0,
+    "presentation_sha256": "395acfd1aaa56760a0bfb6263ec10f7eca0869c64581b52efc76d93addf82a45",
+    "provider_calls": 2,
+    "route": "SUPPORTED",
+    "saved_stream_recovery_identical": true,
+    "separate_exact_finalized_verifier": true,
+    "text_sha256": "1bc3e62f1267b9d042a682ed68ec9fb5d8805f914ed471ae940a59dbdf4c287d",
+    "verified_coverage": "PARTIAL"
+  },
+  "public_browser": {
+    "characters": 380,
+    "citation_observed": true,
+    "elapsed_seconds": 71.33,
+    "incremental_chunk_rendering_observed": false,
+    "page_errors": 0,
+    "passed": true,
+    "progress_stages": [
+      "Retrieving manual information.",
+      "Drafting your answer.",
+      "Checking the answer against the manual.",
+      "Displaying the verified answer."
+    ],
+    "public_and_private_operation_identity_equivalence_claimed": false,
+    "question_input_enabled": true,
+    "route": "SUPPORTED",
+    "signed_proof_cookie_and_websocket_passed": true
+  },
+  "public_url": "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+  "recorded_at_utc": "2026-10-12T13:54:36.817636+00:00",
+  "result": "WORKING_PUBLIC_TEXT_MVP_WITH_RECORDED_ROLLBACK_HEALTH_LIMITATION",
+  "retained_financial_snapshot": {
+    "counter_reset_refund_or_billing_restart": false,
+    "delayed_guard_cost_inr": 287.59,
+    "delayed_reporting_prevents_instantaneous_cap": true,
+    "grant_and_historical_charges_retained": true,
+    "guard_stop": false,
+    "limits": {
+      "billing_disconnect_guard_inr": 2540,
+      "lifetime_budget_inr": 2700,
+      "maximum_attempts": 100,
+      "owner_approved_maximum_tokens": 2000000,
+      "shared_haiku_maximum_nanodollars": 1000000000
+    },
+    "remaining": {
+      "attempts": 50,
+      "haiku_usd": 0.8674965,
+      "tokens": 932916
+    },
+    "reserved_attempts": 50,
+    "reserved_haiku_usd": 0.1325035,
+    "reserved_tokens": 1067084
+  },
+  "role_cache_usage": {
+    "private_draft": {
+      "creation_tokens_in_prior_failed_public_turn": 6312,
+      "creation_tokens_in_successful_public_turn": 6312,
+      "native_schema_sha256": "d6bfda3078db1d3d789b9cc243a47fd933d6e2d25c882a79cba51f2b25d67fbf",
+      "physical_provider_checkpoint_identified": false,
+      "policy_sha256": "7321abcc400581467fbc698476dfd65d1c0f954262165f0da3a07d0a1aa7145c",
+      "prefix_sha256": "d6d98a306a1d3d1f2bec9eb32a1653f776c094f293ff88422b9c16efaa4e7799",
+      "read_tokens_in_accepted_private_retest": 6312,
+      "same_exact_role_prefix_observed": true
+    },
+    "semantic_verifier": {
+      "creation_tokens_in_prior_failed_public_turn": 6592,
+      "creation_tokens_in_successful_public_turn": 6592,
+      "native_schema_sha256": "20048b29232f903d2b32f6da8354020051caaf0e4ce22bab298dde81aafdba50",
+      "physical_provider_checkpoint_identified": false,
+      "policy_sha256": "ec6bc60c9ed86d96bfe7a714ef20753f24fb470fafb5f35a5fb675c4de1d3f2f",
+      "prefix_sha256": "c185784d2cbf6aa3e8081f9f70bcbd85bba03237d235d8fb248e561828767add",
+      "read_tokens_in_accepted_private_retest": 6592,
+      "same_exact_role_prefix_observed": true
+    }
+  },
+  "rollback": {
+    "UI_source_image_configuration_or_IAM_changed_by_cycle": false,
+    "complete_rollback_validation_passed": false,
+    "emergency_restore_to_known14_pair": true,
+    "old13_exact_ready_revision_and_material_gates_passed_before_traffic": true,
+    "old13_health_failures": [
+      {
+        "error_type": "TimeoutError",
+        "recorded_at_utc": "2026-10-12T13:42:51Z",
+        "timeout_seconds": 60
+      },
+      {
+        "error_type": "TimeoutError",
+        "recorded_at_utc": "2026-10-12T13:45:15Z",
+        "timeout_seconds": 60
+      }
+    ],
+    "old13_health_passed": false,
+    "old13_traffic_route_submitted_for_both_services": true,
+    "provider_calls_by_cycle": 0,
+    "restored14_pair_http200_ready_exact_lock": true,
+    "timeout_cause_established": false
+  },
+  "schema": "motomedic-final-bare-mvp-operational-audit-v1",
+  "source_and_runtime": {
+    "UI_revision": "v10_13",
+    "admitted_evidence_ids": [
+      "evidence_157a86dd6fd9f3a9d4c3fc0d",
+      "evidence_512f860518ee9abe0ced1fd4",
+      "evidence_8555b50f22af8eabcabb0b76"
+    ],
+    "backend_revision": "v10_14",
+    "concurrent_authenticated_dense_and_BM25": true,
+    "conditional_rerank_attempts": 1,
+    "immutable_index_reused": "index_a3282c4d98cf54595e4ba168",
+    "live_retrieval_version": "authenticated-open-hybrid-rank-disagreement-v6",
+    "model": "claude-haiku-5-5",
+    "observed_disagreeing_parent_ranks": [
+      1,
+      2,
+      3
+    ],
+    "preserved_initial_anchor_chunk_ids": [
+      "chunk_f6bb9e264a079f438c42d5e0"
+    ],
+    "runtime_lock": "6371ec7e1f651a5666750600d8e62ce86ac25bcf41f4eb227b8e281e6d4e2c76",
+    "runtime_policy": "open-manual-haiku-draft-verify-v10_13",
+    "selected_hit_count": 6
+  }
+}

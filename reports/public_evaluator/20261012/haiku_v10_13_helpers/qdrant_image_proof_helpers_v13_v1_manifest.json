@@ -1,0 +1,32 @@
+{
+  "actual_cloud_calls_by_preparation_or_packaging": 0,
+  "actual_provider_calls": 0,
+  "archive": "qdrant_image_proof_helpers_v13_v1.zip",
+  "baked_boot_path_derived_from_actual_Dockerfile_COPY_and_ENTRYPOINT": "/qdrant/boot.py",
+  "file_sha256": {
+    "cloud/qdrant/Dockerfile": "f950013db871583690b1483d717f341baad4204f7f2a7c1b8d448d6b4f91b859",
+    "cloud/qdrant/boot.py": "4c696031dad4d0f8bd9aeb4f21ee662022feb033bad3d1f083752afe929499b4",
+    "tmp/prepare_evaluator_v10_13.py": "49908fd13f52490c83a05cf2810e844d82e2222dbb2ef9ba8f54a66c69cb9bad",
+    "tmp/private_acceptance_console_v10_13_v2.py": "b5a11516d9b878155b44853a888cf3b42645ba4fa4b7158e018627e7bb39c7c6",
+    "tmp/public_cloud_run_v10_13.py": "d15551649028367e8b3152461f8f015765b4507daed4dccda69c8c33f82a8473",
+    "tmp/public_cloud_run_v10_13_v2.py": "750f9d0f4b02560441bdb72175b31750d7ba32a5dd5a0dfe212aaa0efb438600",
+    "tmp/public_hosted_logs.py": "44e3ac510017290253beb49916c9c1dc386fdf7ead466c9d8c7cb2aeb183d175",
+    "tmp/qdrant_image_source_proof_v13_v1.py": "26ddb53334751883d96dbf6a289e222c1bb485f3cf05786c39a434206d9a2293",
+    "tmp/rollback_public_v10_13.py": "e93901be07a34ff87153c270e6e11e818f96a472a32a620348c52d6302e7148d",
+    "tmp/submit_hosted_v10.py": "2854f77afb285a2065b9609fdc0731488abfa43cb650aa0a39c9fc34c29f0760",
+    "tmp/test_qdrant_image_source_proof_v13_v1.py": "d6425579894e0ae96a39f76efa26d4a9b17bff944b6d5b07bb87a33298705d15"
+  },
+  "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+  "live_image_proof_completed": false,
+  "preparation_path": "reports/public_evaluator/20261012/haiku_v10_13_helpers/qdrant_image_proof_v1/preparation.json",
+  "preparation_sha256": "53566daa0df17e0b997db4dd7dd463e71cc1d4a6372e639c7b7e3e76cb4af1b4",
+  "public_opening_established": false,
+  "qdrant_startup": false,
+  "recipe_one_python3_override_step": true,
+  "restore_policy": "Verify archive SHA and exact relative file hashes/path containment before restoration; never execute actions automatically.",
+  "schema": "motomedic-qdrant-image-source-proof-helper-bundle-v1",
+  "secret_environment": false,
+  "sha256": "c54ae5479029ec3f65870b9faf33bfb4c2bf42e19d2e30ca3cf2df1fff40510e",
+  "source_or_snapshot_download": false,
+  "synthetic_tests_passed": 4
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "motomedic-owner-decision-v1",
+  "recorded_at_utc": "2026-10-24T09:00:00Z",
+  "authority": "DIRECT_OWNER_INSTRUCTION_IN_SESSION",
+  "extends": "owner_decision_v1.json",
+  "owner_messages": [
+    "Model is allowed to leave out the empty clarification question field. All i want to know from the model it is that it did consider filling it and deliberately left it out.",
+    "Can we put the deterministic gate to see if citation is there? I understand nothing checks the disclaimers. We cant keep putting audit on top of the audit. It is just a loop.",
+    "Not in the manual- If the chunks are not relevant or because nothing was retreived then send the deterministed message and support route.",
+    "You can remove draft then verify from documentation. Put the experimental evlauation and its related outputs and readables in an Evals sub folder. Then commit to github."
+  ],
+  "decisions": {
+    "empty_sections": "MAY_BE_OMITTED; ROUTE_AND_COVERAGE_ALWAYS_PRESENT_AND_RECORD_THE_CLARIFICATION_AND_DISCLAIMER_DECISIONS; WATCHOUT_REVIEW_STILL_REQUIRED_WHEN_CANDIDATES_EXIST",
+    "disclaimers": "MAY_CITE; AN_UNCITED_DISCLAIMER_MAY_NOT_STATE_A_MEASUREMENT_OR_PAGE_UNLESS_THE_RIDER_DID; NO_SEMANTIC_AUDIT_LAYER",
+    "page_references": "MUST_BELONG_TO_A_CITED_OBJECT",
+    "unsupported_text": "FIXED_FALLBACK_AND_MANIFEST_SUPPORT_ROUTE; CITED_CLARIFYING_FACTS_MAY_PRECEDE_IT; MODEL_DISCLAIMERS_NOT_SHOWN",
+    "no_admitted_evidence": "NO_MODEL_CALL; FIXED_FALLBACK_AND_SUPPORT_ROUTE",
+    "documentation": "DRAFT_THEN_VERIFY_REMOVED_FROM_THE_DESIGN_DOCUMENTS; DEPLOYED_RUNTIME_DEPARTURE_RECORDED_IN_STATUS",
+    "evaluation_location": "reports/evals/"
+  },
+  "status": "CANDIDATE_DESIGN_NOT_DEPLOYED",
+  "human_signoff": false
+}

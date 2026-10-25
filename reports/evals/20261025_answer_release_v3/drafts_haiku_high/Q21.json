@@ -1,0 +1,44 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "For checking the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "On the analog screen, the battery gauge has four segments, and each segment represents 1 V.",
+      "evidence_ids": ["E17"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "For checking the battery voltage, the manual directs the rider to an authorised service centre.",
+      "evidence_ids": ["E10"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Holding the starter button down for long periods can drain the battery below the 10 V threshold.",
+      "evidence_ids": ["E25"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not describe a way for the rider to measure the battery voltage."
+    },
+    {
+      "text": "The gauge segments show approximate levels only, and the manual gives them as examples."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Warning covers disconnecting battery cables during removal, not checking voltage."},
+    {"display_id": "E25", "decision": "INCLUDED", "reason": "Gives the 10 V battery threshold that is relevant when reading battery voltage."},
+    {"display_id": "E29", "decision": "NOT_APPLICABLE", "reason": "General riding-safety warning, not related to checking battery voltage."},
+    {"display_id": "E30", "decision": "NOT_APPLICABLE", "reason": "Concerns shifting into neutral, not battery voltage."},
+    {"display_id": "E31", "decision": "NOT_APPLICABLE", "reason": "Concerns shifting gears, not battery voltage."},
+    {"display_id": "E32", "decision": "NOT_APPLICABLE", "reason": "Concerns the clutch lever during starting, not battery voltage."},
+    {"display_id": "E33", "decision": "NOT_APPLICABLE", "reason": "Concerns the starter button during starting, not battery voltage."},
+    {"display_id": "E34", "decision": "NOT_APPLICABLE", "reason": "Concerns starter button cranking limits, not checking battery voltage."}
+  ]
+}

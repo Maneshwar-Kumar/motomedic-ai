@@ -1,0 +1,28 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "The USB port output is 5 V, 2 A.", "evidence_ids": ["E8"]}
+  ],
+  "watchouts": [
+    {"text": "If the current drawn is higher than 2.5 A, the USB charger shuts down. Check your smartphone battery's current rating before using it.", "evidence_ids": ["E21"]},
+    {"text": "The USB charger works only when the engine is running.", "evidence_ids": ["E22"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "Concerns bulbs and electrical gadgets in general, not the USB port rating."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Concerns unapproved modifications and warranty, not the port rating."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Concerns use in rainy conditions, not the output rating."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Concerns which devices can be charged, not the output rating."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Concerns cable insertion and warranty, not the output rating."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Concerns the port cap position, not the output rating."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Concerns inserting metal objects, not the output rating."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Concerns closing and locking the port cap and warranty."},
+    {"display_id": "E21", "decision": "INCLUDED", "reason": "Current limit above 2.5 A causes shutdown; relevant to the port's output limit."},
+    {"display_id": "E22", "decision": "INCLUDED", "reason": "Port works only with the engine running; relevant to using the output."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Concerns cable quality, not the output rating."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Concerns fuse failures."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Concerns fuse ratings and materials."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Concerns replacing spare fuses."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Concerns jumpering defective fuses."}
+  ]
+}

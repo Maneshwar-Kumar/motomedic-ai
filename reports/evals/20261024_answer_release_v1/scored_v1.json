@@ -1,0 +1,504 @@
+{
+ "schema": "motomedic-verifier-free-release-score-v1",
+ "label": "MAIN_AGENT_JUDGMENT_NOT_HUMAN_REVIEW_NOT_ACCEPTANCE",
+ "gate_version": "verifier-free-template-release-v1-candidate",
+ "summary": {
+  "released": 29,
+  "system_error": 1,
+  "released_matching_canonical": 28,
+  "released_weaker_than_canonical": 1,
+  "cited_items_checked": 56,
+  "cited_items_unfaithful": 0,
+  "no_answer_cases_answered_with_invented_fact": 0,
+  "released_with_internal_wording": 13,
+  "provider_calls": 30
+ },
+ "rows": [
+  {
+   "case_id": "GEN007",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 1,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 268
+  },
+  {
+   "case_id": "GEN011",
+   "group": "GOLDEN",
+   "gate": "SYSTEM_ERROR",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": null,
+   "internal_wording_shown_to_rider": [],
+   "issues": [
+    "NOT_RELEASED: draft omitted the empty clarification_question field; content was correct"
+   ],
+   "released_characters": 0
+  },
+  {
+   "case_id": "GEN012",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 1,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 49
+  },
+  {
+   "case_id": "GEN014",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [
+    "an \"approximate values\" note was put in the policy section",
+    "wrong-grade oil caution excluded by the model with a reason"
+   ],
+   "released_characters": 292
+  },
+  {
+   "case_id": "GEN017",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [
+    "engine-running condition excluded by the model with a reason"
+   ],
+   "released_characters": 221
+  },
+  {
+   "case_id": "GEN022",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 3,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 321
+  },
+  {
+   "case_id": "GEN025",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 4,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 195
+  },
+  {
+   "case_id": "GEN030",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "PARTIAL",
+   "cited_items": 5,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "passage",
+    "retriev"
+   ],
+   "issues": [
+    "coverage PARTIAL with a disclaimer that describes the pipeline, though all six languages were given",
+    "three unasked menu-navigation sentences"
+   ],
+   "released_characters": 582
+  },
+  {
+   "case_id": "GEN035",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "PARTIAL",
+   "cited_items": 1,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 384
+  },
+  {
+   "case_id": "GEN044",
+   "group": "GOLDEN",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 334
+  },
+  {
+   "case_id": "N01",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 1,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "evidence"
+   ],
+   "issues": [],
+   "released_characters": 341
+  },
+  {
+   "case_id": "N02",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 0,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "evidence"
+   ],
+   "issues": [],
+   "released_characters": 116
+  },
+  {
+   "case_id": "N03",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 0,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "evidence"
+   ],
+   "issues": [],
+   "released_characters": 137
+  },
+  {
+   "case_id": "N04",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 0,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "passage",
+    "retriev"
+   ],
+   "issues": [],
+   "released_characters": 312
+  },
+  {
+   "case_id": "N05",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 0,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "available here",
+    "passage",
+    "retriev"
+   ],
+   "issues": [],
+   "released_characters": 262
+  },
+  {
+   "case_id": "N06",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 0,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "available here",
+    "evidence",
+    "passage"
+   ],
+   "issues": [],
+   "released_characters": 243
+  },
+  {
+   "case_id": "N07",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "evidence"
+   ],
+   "issues": [],
+   "released_characters": 424
+  },
+  {
+   "case_id": "N08",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 1,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "evidence"
+   ],
+   "issues": [],
+   "released_characters": 384
+  },
+  {
+   "case_id": "N09",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 0,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "available to me",
+    "passage"
+   ],
+   "issues": [
+    "tells the rider to check the owner's manual directly"
+   ],
+   "released_characters": 245
+  },
+  {
+   "case_id": "N10",
+   "group": "NO_ANSWER",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 0,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "admitted",
+    "evidence",
+    "passage",
+    "retriev",
+    "reviewed",
+    "source context"
+   ],
+   "issues": [
+    "disclaimer tells the rider that source context was not fully reviewed"
+   ],
+   "released_characters": 295
+  },
+  {
+   "case_id": "EXP027",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "PARTIAL",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "evidence"
+   ],
+   "issues": [],
+   "released_characters": 509
+  },
+  {
+   "case_id": "EXP034",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 1,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 251
+  },
+  {
+   "case_id": "EXP037",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 4,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 513
+  },
+  {
+   "case_id": "EXP038",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 363
+  },
+  {
+   "case_id": "EXP040",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "COMPLETE",
+   "cited_items": 4,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": false,
+   "internal_wording_shown_to_rider": [],
+   "issues": [
+    "p116/p117 conflict is disclosed, but the disclaimer leans to the 3rd notch and coverage is COMPLETE; canonical says it cannot be verified and to confirm with authorised service",
+    "the uncited disclaimer carries page numbers and a setting that the gate does not check"
+   ],
+   "released_characters": 829
+  },
+  {
+   "case_id": "EXP044",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "SUPPORTED",
+   "coverage": "PARTIAL",
+   "cited_items": 7,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [
+    "long: 9 items and 1,483 characters (five watchouts, at the cap)",
+    "one unasked starting-step sentence"
+   ],
+   "released_characters": 1483
+  },
+  {
+   "case_id": "GEN004",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 4,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 806
+  },
+  {
+   "case_id": "GEN041",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 477
+  },
+  {
+   "case_id": "GEN047",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 2,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [
+    "available here",
+    "evidence"
+   ],
+   "issues": [],
+   "released_characters": 433
+  },
+  {
+   "case_id": "GEN048",
+   "group": "PARTIAL",
+   "gate": "RELEASED",
+   "route": "UNSUPPORTED",
+   "coverage": "NONE",
+   "cited_items": 3,
+   "cited_items_unfaithful": 0,
+   "provider_calls": 1,
+   "matches_canonical": true,
+   "internal_wording_shown_to_rider": [],
+   "issues": [],
+   "released_characters": 605
+  }
+ ]
+}

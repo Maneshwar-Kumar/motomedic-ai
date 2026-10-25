@@ -1,0 +1,47 @@
+{"route":"SUPPORTED","coverage":"PARTIAL",
+"answer":[
+{"text":"Not necessarily straight away: a motorcycle that is used very rarely, with the battery terminals still connected, is bound to lose its battery charge and can end up with a dead battery.","evidence_ids":["evidence_3870b1a75daeaae613c60a86"]},
+{"text":"The basic starting step is to turn the ignition key to ON and put the engine kill switch on the right-hand handlebar in the run position.","evidence_ids":["evidence_001335e5b633008075189f76"]}
+],
+"policy":[],
+"watchouts":[
+{"text":"For a motorcycle not used for a month or more, the manual says storage precautions should be taken, and for re-use after storage it is preferable to have the motorcycle prepared at a Royal Enfield Authorised Service Centre.","evidence_ids":["evidence_033603bad1a5f2115bfc9cd9","evidence_fcba93b4680b3116de440b69"]},
+{"text":"If the battery was disconnected and removed for storage, check that its voltage is within specification before refitting it; if not, recharge it at an authorised service workshop or battery dealer.","evidence_ids":["evidence_8fa7f3dd0a735ed98d818a77"]},
+{"text":"When reconnecting the battery, connect the red (+ve) terminal first and then the black (-ve) terminal.","evidence_ids":["evidence_fd9b2d785aff600ed5a45e2d"]},
+{"text":"If the engine does not start, do not hold the starter switch down for long periods, as this drains the battery below the 10 V threshold; have it checked at a Royal Enfield Authorised Service Centre.","evidence_ids":["evidence_533bb7ef741105dc8ee7cdf1"]},
+{"text":"Do not press the starter button for more than 5 seconds after three successive crankings; wait 15 to 20 seconds for the battery to recover.","evidence_ids":["evidence_634643c9be7de4d37ee7b5a2"]}
+],
+"disclaimers":[
+{"text":"The manual gives no complete post-storage restart checklist, so this answer is partial."},
+{"text":"The manual does not say whether an unprepared bike stored for over a month can simply be restarted, and it cannot know what storage preparation you did."}
+],
+"watchout_review":[
+{"display_id":"evidence_00497a5a6998712d564a2df2","decision":"NOT_APPLICABLE","reason":"Fuse rating warning; not about restarting after storage."},
+{"display_id":"evidence_017a78d6fdfd30389967f3c9","decision":"NOT_APPLICABLE","reason":"Clutch step in the starting procedure; not specific to storage."},
+{"display_id":"evidence_033603bad1a5f2115bfc9cd9","decision":"INCLUDED","reason":"States the month-or-more storage precaution rule."},
+{"display_id":"evidence_0c58e6021490c80a7a7f8d99","decision":"NOT_APPLICABLE","reason":"Spare fuse replacement; unrelated."},
+{"display_id":"evidence_0d1c8ce4f8b29400d74b1264","decision":"NOT_APPLICABLE","reason":"Chain care is a storage-preparation step, not a restart check."},
+{"display_id":"evidence_1ef48d8f41966dab4592fc8b","decision":"NOT_APPLICABLE","reason":"Terminal connection caution; covered by the connection-order watchout."},
+{"display_id":"evidence_272bd86a27fe5489e66a4af6","decision":"NOT_APPLICABLE","reason":"Fuel level check during starting; not storage-specific."},
+{"display_id":"evidence_2f417777d76e8dac7b58bb32","decision":"NOT_APPLICABLE","reason":"Parking warning; unrelated to restart."},
+{"display_id":"evidence_35e6dd9cd4df241c231eba9c","decision":"NOT_APPLICABLE","reason":"Silencer cover and centre stand are storage steps, not restart."},
+{"display_id":"evidence_4e1a61e411e2b752c1a8716b","decision":"NOT_APPLICABLE","reason":"Fuse failure warning; unrelated."},
+{"display_id":"evidence_533bb7ef741105dc8ee7cdf1","decision":"INCLUDED","reason":"Relevant if the bike will not start after storage."},
+{"display_id":"evidence_5b88b5e70dd90826bf4d16b0","decision":"NOT_APPLICABLE","reason":"Storage step; the manual does not say whether it was done on this bike."},
+{"display_id":"evidence_634643c9be7de4d37ee7b5a2","decision":"INCLUDED","reason":"Starter use limit relevant to a weak battery."},
+{"display_id":"evidence_65af7271901bd8c94d72d9ec","decision":"NOT_APPLICABLE","reason":"Battery storage location; not a restart instruction."},
+{"display_id":"evidence_660ca3000454e2f166858581","decision":"NOT_APPLICABLE","reason":"Fuel draining is a storage step; no post-storage refuel step is given."},
+{"display_id":"evidence_7c9ae62e3172702a1a3b13cd","decision":"NOT_APPLICABLE","reason":"Concerns battery removal order, not refitting or restart."},
+{"display_id":"evidence_8b5ef092d20493cd2b9b58b8","decision":"NOT_APPLICABLE","reason":"Fuse replacement warning; unrelated."},
+{"display_id":"evidence_8fa7f3dd0a735ed98d818a77","decision":"INCLUDED","reason":"Battery voltage check before refitting after storage."},
+{"display_id":"evidence_a03ccd44ab2d6b5db6bab123","decision":"NOT_APPLICABLE","reason":"Low-fuel warning; unrelated."},
+{"display_id":"evidence_a66e862d634c23573bb30c90","decision":"NOT_APPLICABLE","reason":"Over-filling warning; unrelated."},
+{"display_id":"evidence_a7a5ea8352d16679e89780fb","decision":"NOT_APPLICABLE","reason":"Side stand cutoff; not storage-specific."},
+{"display_id":"evidence_b1de81bb7e744998641d4fa2","decision":"NOT_APPLICABLE","reason":"Chain lubricant wiping; storage prep detail."},
+{"display_id":"evidence_c5bacd3bd5b428c8950b0ce1","decision":"NOT_APPLICABLE","reason":"Low-fuel consequence; unrelated."},
+{"display_id":"evidence_dfbd011ce956434bc46e21d9","decision":"NOT_APPLICABLE","reason":"Anti-rust storage step; not a restart check."},
+{"display_id":"evidence_fadfa3eb516394fc24fdb564","decision":"NOT_APPLICABLE","reason":"Storage-preparation service step; re-use advice is covered by another cited item."},
+{"display_id":"evidence_fcba93b4680b3116de440b69","decision":"INCLUDED","reason":"Advice to have the bike prepared by an authorised centre for re-use."},
+{"display_id":"evidence_fd9b2d785aff600ed5a45e2d","decision":"INCLUDED","reason":"Terminal connection order when refitting the battery."}
+],
+"clarification_question":""}

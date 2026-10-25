@@ -1,0 +1,68 @@
+{
+  "schema_version": "hosted-evaluator-client-source-grant-v4",
+  "project_id": "motomedic-ai-20261009",
+  "source": {
+    "schema": "hosted-original-page-client-source-v1",
+    "uri": "gs://motomedic-ai-20261009-indices/serving/engineering-clients/v10_6/2e0db3e32f6694529cd6b3d766e14e0e7ca2169c7ae58d1d986899bbe5e4056f.tar.gz",
+    "object": "serving/engineering-clients/v10_6/2e0db3e32f6694529cd6b3d766e14e0e7ca2169c7ae58d1d986899bbe5e4056f.tar.gz",
+    "generation": "1791781727623502",
+    "sha256": "2e0db3e32f6694529cd6b3d766e14e0e7ca2169c7ae58d1d986899bbe5e4056f",
+    "bytes": 29734,
+    "files": {
+      "rider_ui/__init__.py": "a494babcfa18918399ebd324349f9ad0de5e9cc0a9db5d6488d2e960160fad20",
+      "rider_ui/identity.py": "b11b6cde8ed18fdf898182879757ef6c5623c3b365cf8a8c3f1db8693587287e",
+      "rider_ui/client.py": "a448e78475480ae4a4d2824746bb246b6c5778ac6ad550569d889d78a440322e",
+      "rider_ui/safeguards.py": "d6df3de2777dcde6534f2af706bb16c93c3eced8fe9036cf0dd6e6ea183393e6",
+      "rider_ui/verified_sse.py": "107b6d9a81727736f0fbb7a372e87c7814a58eba7ec845120c71c692d0185a68",
+      "controller_contracts.py": "dcb95f3cd3f30791628263c233680cd7823f79227b7f7b73ea8842519c2d4b2b",
+      "tmp/public_evaluator/hosted_client.py": "4902f8157713872f5908e61dfcc33a410d9a790ce7770b4854da7d4d4959a32f",
+      "tmp/public_evaluator/count_only_context.py": "0e26d9c3c01fe52b9860fc40454e04f3a5fde7564dfa33ef632a80e21010d587",
+      "tmp/public_evaluator/count_history_v1.json": "a3ca21d4aaf5ff9d14afd1bb4f5d82bdc50094cf6b9a5ef55cb8e6833721a998",
+      "reports/public_evaluator/20261012/original_page_evaluator_plan_v2.json": "a7dc784be633c14accdff256e57abb784a486076da07b149c6f2e04096ee5541",
+      "tmp/public_evaluator/client_inputs.json": "6861f64fb1712a56205b38ad262c4ec06e2aa0b95226563d26b0ea43348ac3ba"
+    },
+    "service_account": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+    "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:e30c30706e01603a5624979108042996db43c850d87d826d7045c765fbcb8716",
+    "client_image_scope": "PINNED_V10_3_UI_TRANSPORT_LIBRARIES_ONLY_NOT_SERVING_RUNTIME",
+    "count_backend_image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:5a115eb8ed54c6278cec85576498b4704706723a36ffa5ce62c1c84c9b269165",
+    "count_image_scope": "CURRENT_V10_6_BACKEND_ACTUAL_RETRIEVAL_NATIVE_COUNTERS_ONLY",
+    "source_inventory_sha256": "6861f64fb1712a56205b38ad262c4ec06e2aa0b95226563d26b0ea43348ac3ba",
+    "provider_calls": 0,
+    "model_execution": "PRIVATE_CLOUD_RUN_WORKER_ONLY",
+    "serving_manifest_sha256": "b94faeb2c4774cd121c4e6f622a5b2371cd9c9df0147fe40b4ddbb25af9bed52",
+    "runtime_lock": "88373ba664b9d86a3eb0aad51f8aafb12738e4cf9ddc36e62600f462c408935b",
+    "artifact_prefix": "engineering-acceptance/public-v10_3/"
+  },
+  "prior_receipt": "reports/public_evaluator/20261012/operations/client_source_grant_v3.json",
+  "authorization": "Owner-approved v10_6 private hosted client; replace only exact prior source get condition",
+  "removed_binding": {
+    "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+    "members": [
+      "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+    ],
+    "condition": {
+      "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/engineering-clients/v10_4/c3d0b5c67ffc5a11e9e918a3e5cc9537373fed5079f6f17e16b87e8083d00f6a.tar.gz'",
+      "title": "motomedic-backend-exact-evaluator-client-v10-4-v3",
+      "description": "Read only the exact authorized v10_4 hosted engineering client archive"
+    }
+  },
+  "added_binding": {
+    "role": "projects/motomedic-ai-20261009/roles/motomedicSnapshotObjectGet",
+    "members": [
+      "serviceAccount:motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com"
+    ],
+    "condition": {
+      "expression": "resource.name == 'projects/_/buckets/motomedic-ai-20261009-indices/objects/serving/engineering-clients/v10_6/2e0db3e32f6694529cd6b3d766e14e0e7ca2169c7ae58d1d986899bbe5e4056f.tar.gz'",
+      "title": "motomedic-backend-exact-evaluator-client-v10-6-v4",
+      "description": "Read only the exact authorized v10_6 hosted engineering client archive"
+    }
+  },
+  "unrelated_bindings_unchanged": true,
+  "prior_policy_sha256": "6cfd7f68868afb5b2f8566554ded9f687a41bdd8238b730fb02d7a6537eef651",
+  "result_policy_sha256": "45fc195c28ef86b4f275ca685995881e562763057033849dd22f5609dfc0776e",
+  "readback_policy_sha256": "45fc195c28ef86b4f275ca685995881e562763057033849dd22f5609dfc0776e",
+  "public_iam_changed": false,
+  "artifact_create_prefix_changed": false,
+  "provider_key_payload_read": false,
+  "provider_calls": 0
+}

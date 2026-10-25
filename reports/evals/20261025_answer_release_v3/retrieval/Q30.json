@@ -1,0 +1,119 @@
+{
+ "retrieval": {
+  "version": "section-top5-hybrid-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "query": "It says Champion: what exact spark-plug part number should I order?",
+  "chunk_ids": [
+   "chunk_bfa01c70956737ca3179a753",
+   "chunk_9ad1f6745a834eb6eaa9531f",
+   "chunk_e21b7278b7d5c739cdc024c3",
+   "chunk_8d9ba451bd337726732ffb98",
+   "chunk_740e3a1f44818f370fd5486d"
+  ],
+  "dense_top": [
+   "chunk_bfa01c70956737ca3179a753",
+   "chunk_9ad1f6745a834eb6eaa9531f",
+   "chunk_8d9ba451bd337726732ffb98",
+   "chunk_794f11a522b98409b6047f2c",
+   "chunk_e21b7278b7d5c739cdc024c3"
+  ],
+  "bm25_top": [
+   "chunk_bfa01c70956737ca3179a753",
+   "chunk_740e3a1f44818f370fd5486d",
+   "chunk_8d9ba451bd337726732ffb98",
+   "chunk_e21b7278b7d5c739cdc024c3",
+   "chunk_4ff8ac007a5d9d61168dfd50"
+  ],
+  "fused_scores": {
+   "chunk_bfa01c70956737ca3179a753": 0.032787,
+   "chunk_9ad1f6745a834eb6eaa9531f": 0.016129,
+   "chunk_e21b7278b7d5c739cdc024c3": 0.03101,
+   "chunk_8d9ba451bd337726732ffb98": 0.031746,
+   "chunk_740e3a1f44818f370fd5486d": 0.016129
+  },
+  "rerank_scores": {
+   "chunk_bfa01c70956737ca3179a753": -2.1876,
+   "chunk_8d9ba451bd337726732ffb98": -11.0665,
+   "chunk_e21b7278b7d5c739cdc024c3": -11.0594,
+   "chunk_740e3a1f44818f370fd5486d": -11.3108,
+   "chunk_9ad1f6745a834eb6eaa9531f": -7.7128
+  },
+  "sections_disagree": true,
+  "reranked": true
+ },
+ "assembled": {
+  "version": "section-plain-text-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "sections": [
+   "section_fb14694fd609c48bcf9586ca",
+   "section_22d65b471c105ba679561bb4",
+   "section_e766f47d03da0e3e93ce35b4"
+  ],
+  "objects": {
+   "E1": {
+    "evidence_id": "evidence_8c2f0823b184b2a67a450c35",
+    "text": "Ignition ............................... ECU controlled",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "IGNITION SYSTEM",
+    "type": "text"
+   },
+   "E2": {
+    "evidence_id": "evidence_0801208d8cde38daf72f6ab3",
+    "text": "Spark plug........................... Champion",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "IGNITION SYSTEM",
+    "type": "text"
+   },
+   "E3": {
+    "evidence_id": "evidence_6bf722f54de89478dba83e34",
+    "text": "Spark plug gap.................... 0.8 mm to 0.9 mm",
+    "pages": [
+     16
+    ],
+    "box": null,
+    "section": "IGNITION SYSTEM",
+    "type": "text"
+   },
+   "E4": {
+    "evidence_id": "evidence_875cfcf7fc4f79c898d8f747",
+    "text": "The VIN is a 17 digit number punched on the right side steering head tube in the form of label.",
+    "pages": [
+     22
+    ],
+    "box": null,
+    "section": "FRAME NUMBER",
+    "type": "text"
+   },
+   "E5": {
+    "evidence_id": "evidence_2f7f764e154aaf68164ade75",
+    "text": "The engine number is punched on the bottom of gear pedal connector rod.",
+    "pages": [
+     22
+    ],
+    "box": null,
+    "section": "ENGINE NUMBER",
+    "type": "text"
+   },
+   "E6": {
+    "evidence_id": "evidence_a7a3666771636148d6e0ebba",
+    "text": "It is illegal to tamper with or alter the VIN/Engine numbers of the motorcycle as it will not only against the law but will render the vehicle registration and warranty void.",
+    "pages": [
+     22
+    ],
+    "box": "CAUTION",
+    "section": "ENGINE NUMBER",
+    "type": "text"
+   }
+  },
+  "warnings": [
+   "E6"
+  ],
+  "text": "## IGNITION SYSTEM (page 16)\n[E1] Ignition ............................... ECU controlled\n[E2] Spark plug........................... Champion\n[E3] Spark plug gap.................... 0.8 mm to 0.9 mm\n\n## FRAME NUMBER (page 22)\n[E4] The VIN is a 17 digit number punched on the right side steering head tube in the form of label.\n\n## ENGINE NUMBER (page 22)\n[E5] The engine number is punched on the bottom of gear pedal connector rod.\n[E6] (CAUTION) It is illegal to tamper with or alter the VIN/Engine numbers of the motorcycle as it will not only against the law but will render the vehicle registration and warranty void."
+ }
+}

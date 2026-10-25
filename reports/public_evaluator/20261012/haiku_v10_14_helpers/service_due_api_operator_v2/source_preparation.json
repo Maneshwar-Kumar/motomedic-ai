@@ -1,0 +1,30 @@
+{
+  "archive": "tmp/service-due-api-v14-v2/source.tar.gz",
+  "bytes": 59475,
+  "files": {
+    "reports/public_evaluator/20261012/evaluator_client_source_v11.json": "394f133f735d39282927fbd3fc15226fbca4cc24f9063537fddb8aa4f361a1ce",
+    "reports/public_evaluator/20261012/expected_runtime_lock_v10_14_v2.json": "cb5bf8284c4b1ff519b04799364469501e670cbc83cd361abf3efbf13b2e8b5d",
+    "reports/public_evaluator/20261012/haiku_v10_12/owner_anthropic_payload_scope_v2.json": "cf469c78449b70bba8cfc245cbb6ed5f3cf301e56102e1fe7fc2f1c415d189e9",
+    "reports/public_evaluator/20261012/haiku_v10_14_helpers/owner_service_due_retest_scope_v1.json": "f65b4b11618642c2392cc67ef8bb3e8f0d3ff4051acfcedb99f80d6c13994b43",
+    "reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T131118255466Z.json": "cc3108b10ccb5734b4a7a3b0c19019486c962845ef6c66dc9b8fde3ecfbbb817",
+    "reports/public_evaluator/20261012/owner_model_scope_v3.json": "65755e0a6b79f2df542c1c4b5f4f2e382a6857f7ee5ff5803d64988204e5ad0f",
+    "reports/public_evaluator/20261012/public_review/owner_mvp_scope_v1.json": "d93dcbb0fdbc197407f378e6c467be7d9d40169a93f48ef8e9ab84023c556f10",
+    "reports/public_evaluator/20261012/serving_manifest_v10_14.json": "b8d39544a9cc216b7bd6d37dd741c12e95f6e1d2694a59eaf573cb51195962f5",
+    "tmp/public_evaluator/hosted_client_v10_13_v2.py": "176038cdbd9dd0d707ff64d24e040ba7d2519783e3fabcbe39344c07d9a18566",
+    "tmp/service-due-api-v14-v2/source_inventory.json": "1de1b6bb0a1747d7c28447f2b1f96580a18f00279267021521de264bf76a4425",
+    "tmp/single_service_due_client_v14_v2.py": "9831a734a53cf5832917ef3425d43624fac6686f8b897b83d27a2851ee312527"
+  },
+  "guard": {
+    "delayed_reporting_prevents_instantaneous_cap": true,
+    "path": "reports/public_evaluator/20261012/operations/guard_readback_v10_13_20261012T131118255466Z.json",
+    "sha256": "cc3108b10ccb5734b4a7a3b0c19019486c962845ef6c66dc9b8fde3ecfbbb817"
+  },
+  "inventory_sha256": "1de1b6bb0a1747d7c28447f2b1f96580a18f00279267021521de264bf76a4425",
+  "object": "serving/engineering-diagnostics/v10_14/f2c83f6c612771526b1a2071c16bbe25da79237303f874deffabce2fcb6ea9a7.tar.gz",
+  "operation_id": "3701dc10ebad42f398fbac569548979c",
+  "provider_calls": 0,
+  "runtime_lock": "6371ec7e1f651a5666750600d8e62ce86ac25bcf41f4eb227b8e281e6d4e2c76",
+  "schema": "motomedic-single-service-due-api-source-preparation-v1",
+  "serving_manifest_sha256": "b8d39544a9cc216b7bd6d37dd741c12e95f6e1d2694a59eaf573cb51195962f5",
+  "sha256": "f2c83f6c612771526b1a2071c16bbe25da79237303f874deffabce2fcb6ea9a7"
+}

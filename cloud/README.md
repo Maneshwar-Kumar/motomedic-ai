@@ -1,20 +1,18 @@
 # Hosted components
 
-Follow the current [TRD](../docs/TRD.md) and [TODO](../TODO.md).
+Follow the [TRD](../docs/TRD.md), [architecture](../docs/ARCHITECTURE.md) and [TODO](../TODO.md).
 
 | Area | Location |
 | --- | --- |
-| Candidate Qdrant restoration service | [qdrant/](qdrant/) |
+| Answer path: section index, retrieval, assembly, template and gate, Haiku call, ledger, delivery | [grounded_generation/](grounded_generation/) |
+| API, worker dispatch, store and production wiring | [arm_a/](arm_a/) |
+| Read-only Qdrant wrapper | [qdrant/](qdrant/) |
+| Qdrant export of an index's stored vectors | [export_qdrant.py](export_qdrant.py) |
 | Billing stop guard | [budget_guard/](budget_guard/) |
 | Recorded deployed resources | [deployment_status.json](deployment_status.json) |
-| Retrieval-only smoke results | [live_smoke.json](live_smoke.json) |
-| Current candidate answer pipeline | [grounded_generation/](grounded_generation/) |
-| API, store and compatibility imports | [arm_a/](arm_a/) |
 
-Qdrant reloads immutable stored vectors; it does not parse or embed the manual on cold start. The latest deployment receipt records min one/max one instance and startup CPU boost. The current answer path still needs to call that Qdrant service.
+The serving image loads the frozen section index from `build/section-index` and verifies every file hash at startup. It never parses or embeds the manual. Dense search runs over the index's pinned vectors in the image unless `MOTOMEDIC_QDRANT_URL` points at a hosted Qdrant collection exported from the same index. The hosted Qdrant currently holds the earlier index, not this one.
 
-The recorded lifetime allocation is INR2,700, with alerts at INR1,350/2,160/2,700 and billing disconnection at INR2,540. Treat receipts as snapshots, retain the guard and verify current state before operational changes. Never restart stopped billing without owner authorization.
+There is one `claude-haiku-5-5` call per turn, at effort high, with the system prompt cached for 5 minutes. A deterministic gate releases the answer. There is no verifier, correction round, retry or fallback model. The call reserves one slot in the existing shared ledgers (USD1, 100 attempts, the applied 2,000,000-token ceiling). Unused or uncertain reservations stay charged.
 
-The candidate draft/verify runtime has failed real answer coverage. [The v8 evidence](../reports/grounded_generation/v8/REPORT.md) and [status](../docs/STATUS.md) explain its limits. Source approval, packaging preparation and historical deployed revisions do not approve this changed pipeline for live use.
-
-No repository reset change deploys a service, activates Claude, transfers a secret or changes billing. Current build recipes are retained compatibility inputs; the next release must use explicit approved inputs and image bindings.
+The recorded lifetime allocation is INR2,700, with alerts at INR1,350/2,160/2,700 and billing disconnection at INR2,540. Treat receipts as snapshots and verify the current state before any operational change. Nothing here authorizes deployment, billing or ledger changes; never restart stopped billing without the owner.

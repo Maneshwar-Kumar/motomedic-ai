@@ -1,0 +1,15 @@
+{
+  "schema": "motomedic-exact-model-egress-owner-scope-v1",
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "recorded_date": "2026-10-12",
+  "exact_question": "Approve sending the retrieved Royal Enfield manual evidence, engineering test questions/history, and proposed answers to Google's Gemma API (generativelanguage.googleapis.com) and Anthropic's Haiku API (api.anthropic.com) for token counting, drafting and separate verification, including normal demo questions afterward? Existing provider allocations and budget guards remain unchanged; no PDF or rider media is sent or displayed. Automatic approval review requires this exact payload-and-destination approval.",
+  "exact_user_answer": "Approve these model API requests",
+  "external_destinations": ["generativelanguage.googleapis.com", "api.anthropic.com"],
+  "models": ["gemma-4-26b-a4b-it", "claude-haiku-5-5"],
+  "payload_scope": ["RETRIEVED_ORIGINAL_MANUAL_EVIDENCE", "ENGINEERING_TEST_QUESTIONS_AND_HISTORY", "PROPOSED_FINAL_RESPONSES", "NORMAL_TEXT_DEMO_QUESTIONS_AND_HISTORY"],
+  "operations": ["TOKEN_COUNTING", "DRAFTING", "SEPARATE_VERIFICATION"],
+  "provider_allocations_changed": false,
+  "budget_guards_changed": false,
+  "pdf_or_raw_rider_media_egress_authorized": false,
+  "rider_source_display_authorization_changed": false
+}

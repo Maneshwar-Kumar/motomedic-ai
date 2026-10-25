@@ -1,0 +1,20 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "Yes. The manual allows ethanol content up to E20.", "evidence_ids": ["E5"]},
+    {"text": "The fuel must still be unleaded petrol from a reputed fuel pump, and it must not be adulterated.", "evidence_ids": ["E7", "E8"]}
+  ],
+  "policy": [
+    {"text": "Use only unleaded petrol from reputed fuel pumps.", "evidence_ids": ["E7"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Covers aftermarket suspension and fork parts, not fuel."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Covers the running-in procedure, not fuel."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Covers moderate speeds when learning the bike, not fuel."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Covers speed limits and riding conditions, not fuel."},
+    {"display_id": "E36", "decision": "NOT_APPLICABLE", "reason": "Covers shock absorber and fork inspection, not fuel."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Covers exhaust gas hazards, not fuel choice."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Covers maintenance intervals, not fuel choice."}
+  ]
+}

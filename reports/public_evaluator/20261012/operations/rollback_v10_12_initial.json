@@ -1,0 +1,1012 @@
+{
+  "schema": "motomedic-compatible-rollback-v1",
+  "recorded_at": "2026-10-12T08:43:30.336758Z",
+  "binding": {
+    "serving_manifest_sha256": "ff82ee677ada2e42fc08b5ea710ebe05cef7dac527f7008785ed0320bf58e8fb",
+    "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+    "model_routing_contract": {
+      "version": "haiku-draft-finalized-verifier-v3",
+      "selection": "FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE_FLIP",
+      "roles": {
+        "HAIKU_DRAFT_HAIKU_VERIFY": {
+          "draft": {
+            "provider": "anthropic",
+            "model": "claude-haiku-5-5",
+            "role": "private_draft",
+            "version": "haiku-draft-finalized-verifier-v3",
+            "context_window_tokens": 1000000,
+            "input_tokens": 998200,
+            "output_tokens": 1800,
+            "output_json_bytes": 16384,
+            "request_bytes": null,
+            "native_json_schema": true,
+            "answer_cache": "DISABLED",
+            "fallback_role": false,
+            "maximum_attempts_per_call": 1,
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "automatic_retries": 0,
+            "retry_rejections": [],
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "cache_ttl": "5m",
+            "minimum_cache_tokens": 512,
+            "thinking": "disabled",
+            "effort": "medium",
+            "pricing": {
+              "long_context_above_input_tokens": 100000,
+              "base_usd_per_million": {
+                "input": 0.1,
+                "output": 0.5,
+                "cache_write": 0.125,
+                "cache_read": 0.01
+              },
+              "long_usd_per_million": {
+                "input": 0.5,
+                "output": 2.5,
+                "cache_write": 0.625,
+                "cache_read": 0.05
+              }
+            }
+          },
+          "verifier": {
+            "provider": "anthropic",
+            "model": "claude-haiku-5-5",
+            "role": "semantic_verifier",
+            "version": "haiku-draft-finalized-verifier-v3",
+            "context_window_tokens": 1000000,
+            "input_tokens": 998200,
+            "output_tokens": 1800,
+            "output_json_bytes": 16384,
+            "request_bytes": null,
+            "native_json_schema": true,
+            "answer_cache": "DISABLED",
+            "fallback_role": false,
+            "maximum_attempts_per_call": 1,
+            "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+            "automatic_retries": 0,
+            "retry_rejections": [],
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "cache_ttl": "5m",
+            "minimum_cache_tokens": 512,
+            "thinking": "disabled",
+            "effort": "medium",
+            "pricing": {
+              "long_context_above_input_tokens": 100000,
+              "base_usd_per_million": {
+                "input": 0.1,
+                "output": 0.5,
+                "cache_write": 0.125,
+                "cache_read": 0.01
+              },
+              "long_usd_per_million": {
+                "input": 0.5,
+                "output": 2.5,
+                "cache_write": 0.625,
+                "cache_read": 0.05
+              }
+            }
+          }
+        }
+      },
+      "same_model_is_not_cross_model_agreement": true,
+      "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+      "availability_fallback_enabled": false,
+      "native_limit_sources": {
+        "checked_date": "2026-10-12",
+        "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+      }
+    },
+    "images": {
+      "backend": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a592f993cf5229746d498a0bbb57b52e1be7bfd931c80d5c5d79f0101d7455d7",
+      "ui": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:bb29bf3dfab6494b4b3dbee2d1514d271b1ca6e559b2c93af21175f384255f83"
+    },
+    "image_binding_sha256": "9ae7a7bb39d528b47f1317ee1a41ba10313b93e993ae24f7ffeb753fbdbb46f0"
+  },
+  "services": {
+    "motomedic-arm-a": {
+      "service": {
+        "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a",
+        "uid": "bc1b292b-3701-465d-abf1-6879aa6adf20",
+        "generation": "15",
+        "labels": {
+          "motomedic-release": "v10-12"
+        },
+        "createTime": "2026-10-11T11:06:18.539876Z",
+        "updateTime": "2026-10-12T08:35:37.394958Z",
+        "creator": "maneshwarkumar@gmail.com",
+        "lastModifier": "maneshwarkumar@gmail.com",
+        "client": "gcloud",
+        "clientVersion": "575.0.0",
+        "ingress": "INGRESS_TRAFFIC_ALL",
+        "launchStage": "GA",
+        "template": {
+          "scaling": {
+            "minInstanceCount": 1,
+            "maxInstanceCount": 1
+          },
+          "timeout": "1200s",
+          "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+          "containers": [
+            {
+              "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a592f993cf5229746d498a0bbb57b52e1be7bfd931c80d5c5d79f0101d7455d7",
+              "env": [
+                {
+                  "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                  "value": "false"
+                },
+                {
+                  "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                  "value": "false"
+                },
+                {
+                  "name": "MOTOMEDIC_TASK_QUEUE",
+                  "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+                },
+                {
+                  "name": "MOTOMEDIC_TASK_WORKER_URL",
+                  "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+                },
+                {
+                  "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                  "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+                },
+                {
+                  "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                  "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+                },
+                {
+                  "name": "MOTOMEDIC_VISITOR_SECRET",
+                  "valueSource": {
+                    "secretKeyRef": {
+                      "secret": "motomedic-rider-visitor-v1",
+                      "version": "1"
+                    }
+                  }
+                },
+                {
+                  "name": "ANTHROPIC_API_KEY",
+                  "valueSource": {
+                    "secretKeyRef": {
+                      "secret": "motomedic-evaluator-anthropic-v1",
+                      "version": "1"
+                    }
+                  }
+                }
+              ],
+              "resources": {
+                "limits": {
+                  "cpu": "2",
+                  "memory": "8Gi"
+                },
+                "cpuIdle": true,
+                "startupCpuBoost": true
+              },
+              "ports": [
+                {
+                  "name": "http1",
+                  "containerPort": 8080
+                }
+              ],
+              "startupProbe": {
+                "timeoutSeconds": 5,
+                "periodSeconds": 10,
+                "failureThreshold": 24,
+                "httpGet": {
+                  "path": "/healthz",
+                  "port": 8080
+                }
+              }
+            }
+          ],
+          "maxInstanceRequestConcurrency": 6
+        },
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "percent": 100
+          }
+        ],
+        "scaling": {
+          "maxInstanceCount": 1
+        },
+        "urls": [
+          "https://motomedic-arm-a-279945185781.us-central1.run.app",
+          "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app"
+        ],
+        "sshEnabled": false,
+        "observedGeneration": "15",
+        "terminalCondition": {
+          "type": "Ready",
+          "state": "CONDITION_SUCCEEDED",
+          "lastTransitionTime": "2026-10-12T08:37:04.431416Z"
+        },
+        "conditions": [
+          {
+            "type": "RoutesReady",
+            "state": "CONDITION_SUCCEEDED",
+            "lastTransitionTime": "2026-10-12T08:37:04.388300Z"
+          },
+          {
+            "type": "ConfigurationsReady",
+            "state": "CONDITION_SUCCEEDED",
+            "lastTransitionTime": "2026-10-12T08:36:59.890076Z"
+          }
+        ],
+        "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00013-c9q",
+        "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-arm-a/revisions/motomedic-arm-a-00013-c9q",
+        "trafficStatuses": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "motomedic-arm-a-00013-c9q",
+            "percent": 100
+          }
+        ],
+        "uri": "https://motomedic-arm-a-5uyul6ay6a-uc.a.run.app",
+        "etag": "\"CNm3stYGELCpqrwB/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtYXJtLWE\""
+      },
+      "revision": "motomedic-arm-a-00013-c9q",
+      "server_assigned_single_container_name_normalized": true,
+      "template_sha256": "f66c26c0dbc7f1a2b6ce506e4398d5eeb70e7599c0fca6d671cc90ad39a64ca0",
+      "revision_configuration": {
+        "launchStage": "GA",
+        "scaling": {
+          "minInstanceCount": 1,
+          "maxInstanceCount": 1
+        },
+        "timeout": "1200s",
+        "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "containers": [
+          {
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a592f993cf5229746d498a0bbb57b52e1be7bfd931c80d5c5d79f0101d7455d7",
+            "env": [
+              {
+                "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_QUEUE",
+                "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_WORKER_URL",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "ANTHROPIC_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-evaluator-anthropic-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              },
+              "cpuIdle": true,
+              "startupCpuBoost": true
+            },
+            "ports": [
+              {
+                "name": "http1",
+                "containerPort": 8080
+              }
+            ],
+            "startupProbe": {
+              "timeoutSeconds": 5,
+              "periodSeconds": 10,
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              }
+            }
+          }
+        ],
+        "maxInstanceRequestConcurrency": 6
+      },
+      "revision_configuration_sha256": "8ca82b7f4200d23f238731afb6116199c1365e3cb1ec59d64b3037d20b73feb0",
+      "immutable_revision_configuration_confirmed": true,
+      "health": {
+        "http_status": 200,
+        "health": {
+          "answer_provider": "claude-haiku-5-5",
+          "architecture": "DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA",
+          "benchmark_pacing": false,
+          "durable_dispatch_configured": true,
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "model_routing": {
+            "availability_fallback_enabled": false,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "roles": {
+              "HAIKU_DRAFT_HAIKU_VERIFY": {
+                "draft": {
+                  "answer_cache": "DISABLED",
+                  "automatic_retries": 0,
+                  "cache_ttl": "5m",
+                  "context_window_tokens": 1000000,
+                  "effort": "medium",
+                  "fallback_role": false,
+                  "input_tokens": 998200,
+                  "maximum_attempts_per_call": 1,
+                  "minimum_cache_tokens": 512,
+                  "model": "claude-haiku-5-5",
+                  "native_json_schema": true,
+                  "native_limit_sources": {
+                    "checked_date": "2026-10-12",
+                    "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                  },
+                  "output_json_bytes": 16384,
+                  "output_tokens": 1800,
+                  "pricing": {
+                    "base_usd_per_million": {
+                      "cache_read": 0.01,
+                      "cache_write": 0.125,
+                      "input": 0.1,
+                      "output": 0.5
+                    },
+                    "long_context_above_input_tokens": 100000,
+                    "long_usd_per_million": {
+                      "cache_read": 0.05,
+                      "cache_write": 0.625,
+                      "input": 0.5,
+                      "output": 2.5
+                    }
+                  },
+                  "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                  "provider": "anthropic",
+                  "request_bytes": null,
+                  "retry_rejections": [],
+                  "role": "private_draft",
+                  "thinking": "disabled",
+                  "version": "haiku-draft-finalized-verifier-v3"
+                },
+                "verifier": {
+                  "answer_cache": "DISABLED",
+                  "automatic_retries": 0,
+                  "cache_ttl": "5m",
+                  "context_window_tokens": 1000000,
+                  "effort": "medium",
+                  "fallback_role": false,
+                  "input_tokens": 998200,
+                  "maximum_attempts_per_call": 1,
+                  "minimum_cache_tokens": 512,
+                  "model": "claude-haiku-5-5",
+                  "native_json_schema": true,
+                  "native_limit_sources": {
+                    "checked_date": "2026-10-12",
+                    "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                  },
+                  "output_json_bytes": 16384,
+                  "output_tokens": 1800,
+                  "pricing": {
+                    "base_usd_per_million": {
+                      "cache_read": 0.01,
+                      "cache_write": 0.125,
+                      "input": 0.1,
+                      "output": 0.5
+                    },
+                    "long_context_above_input_tokens": 100000,
+                    "long_usd_per_million": {
+                      "cache_read": 0.05,
+                      "cache_write": 0.625,
+                      "input": 0.5,
+                      "output": 2.5
+                    }
+                  },
+                  "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                  "provider": "anthropic",
+                  "request_bytes": null,
+                  "retry_rejections": [],
+                  "role": "semantic_verifier",
+                  "thinking": "disabled",
+                  "version": "haiku-draft-finalized-verifier-v3"
+                }
+              }
+            },
+            "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+            "same_model_is_not_cross_model_agreement": true,
+            "selection": "FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE_FLIP",
+            "version": "haiku-draft-finalized-verifier-v3"
+          },
+          "prompt_cache": "ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M",
+          "ready": true,
+          "reranking": "authenticated-open-hybrid-rank-disagreement-v5",
+          "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+          "streaming": "DRAFT_VERIFY_STREAM",
+          "verifier_provider": "claude-haiku-5-5"
+        },
+        "provider_calls": 0
+      }
+    },
+    "motomedic-rider-ui": {
+      "service": {
+        "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui",
+        "uid": "53be46e3-ab16-4139-9fa9-ad77826e7121",
+        "generation": "14",
+        "labels": {
+          "motomedic-release": "v10-12"
+        },
+        "createTime": "2026-10-11T12:34:17.705769Z",
+        "updateTime": "2026-10-12T08:35:44.355305Z",
+        "creator": "maneshwarkumar@gmail.com",
+        "lastModifier": "maneshwarkumar@gmail.com",
+        "client": "gcloud",
+        "clientVersion": "575.0.0",
+        "ingress": "INGRESS_TRAFFIC_ALL",
+        "launchStage": "GA",
+        "template": {
+          "scaling": {
+            "maxInstanceCount": 1
+          },
+          "timeout": "1200s",
+          "serviceAccount": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+          "containers": [
+            {
+              "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:bb29bf3dfab6494b4b3dbee2d1514d271b1ca6e559b2c93af21175f384255f83",
+              "env": [
+                {
+                  "name": "MOTOMEDIC_RIDER_API_URL",
+                  "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+                },
+                {
+                  "name": "MOTOMEDIC_PUBLIC_HOST",
+                  "value": "motomedic-rider-ui-279945185781.us-central1.run.app"
+                },
+                {
+                  "name": "MOTOMEDIC_EDGE_POLICY",
+                  "value": "gcp-public-cloud-run-cookie-v2"
+                },
+                {
+                  "name": "MOTOMEDIC_RIDER_ACCESS",
+                  "value": "public_gateway"
+                },
+                {
+                  "name": "MOTOMEDIC_RIDER_AUTH",
+                  "value": "cloud_run"
+                },
+                {
+                  "name": "MOTOMEDIC_VISITOR_SECRET",
+                  "valueSource": {
+                    "secretKeyRef": {
+                      "secret": "motomedic-rider-visitor-v1",
+                      "version": "1"
+                    }
+                  }
+                }
+              ],
+              "resources": {
+                "limits": {
+                  "cpu": "1",
+                  "memory": "512Mi"
+                },
+                "cpuIdle": true,
+                "startupCpuBoost": true
+              },
+              "ports": [
+                {
+                  "name": "http1",
+                  "containerPort": 8080
+                }
+              ],
+              "startupProbe": {
+                "timeoutSeconds": 5,
+                "periodSeconds": 10,
+                "failureThreshold": 24,
+                "httpGet": {
+                  "path": "/health",
+                  "port": 8080
+                }
+              }
+            }
+          ],
+          "maxInstanceRequestConcurrency": 4
+        },
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "percent": 100
+          }
+        ],
+        "scaling": {
+          "maxInstanceCount": 1
+        },
+        "urls": [
+          "https://motomedic-rider-ui-279945185781.us-central1.run.app",
+          "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app"
+        ],
+        "sshEnabled": false,
+        "observedGeneration": "14",
+        "terminalCondition": {
+          "type": "Ready",
+          "state": "CONDITION_SUCCEEDED",
+          "lastTransitionTime": "2026-10-12T08:36:09.803443Z"
+        },
+        "conditions": [
+          {
+            "type": "RoutesReady",
+            "state": "CONDITION_SUCCEEDED",
+            "lastTransitionTime": "2026-10-12T08:36:09.772270Z"
+          },
+          {
+            "type": "ConfigurationsReady",
+            "state": "CONDITION_SUCCEEDED",
+            "lastTransitionTime": "2026-10-12T08:35:56.540548Z"
+          }
+        ],
+        "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00013-2mq",
+        "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-rider-ui/revisions/motomedic-rider-ui-00013-2mq",
+        "trafficStatuses": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "motomedic-rider-ui-00013-2mq",
+            "percent": 100
+          }
+        ],
+        "uri": "https://motomedic-rider-ui-5uyul6ay6a-uc.a.run.app",
+        "etag": "\"COC3stYGEKiMtqkB/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtcmlkZXItdWk\""
+      },
+      "revision": "motomedic-rider-ui-00013-2mq",
+      "server_assigned_single_container_name_normalized": true,
+      "template_sha256": "3e41e2d3700316d5168973af5808be4be0bb1178c993387cb3f9d12ff1fa362b",
+      "revision_configuration": {
+        "launchStage": "GA",
+        "scaling": {
+          "maxInstanceCount": 1
+        },
+        "timeout": "1200s",
+        "serviceAccount": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "containers": [
+          {
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/rider-ui@sha256:bb29bf3dfab6494b4b3dbee2d1514d271b1ca6e559b2c93af21175f384255f83",
+            "env": [
+              {
+                "name": "MOTOMEDIC_RIDER_API_URL",
+                "value": "https://motomedic-arm-a-279945185781.us-central1.run.app"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_HOST",
+                "value": "motomedic-rider-ui-279945185781.us-central1.run.app"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_POLICY",
+                "value": "gcp-public-cloud-run-cookie-v2"
+              },
+              {
+                "name": "MOTOMEDIC_RIDER_ACCESS",
+                "value": "public_gateway"
+              },
+              {
+                "name": "MOTOMEDIC_RIDER_AUTH",
+                "value": "cloud_run"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi"
+              },
+              "cpuIdle": true,
+              "startupCpuBoost": true
+            },
+            "ports": [
+              {
+                "name": "http1",
+                "containerPort": 8080
+              }
+            ],
+            "startupProbe": {
+              "timeoutSeconds": 5,
+              "periodSeconds": 10,
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/health",
+                "port": 8080
+              }
+            }
+          }
+        ],
+        "maxInstanceRequestConcurrency": 4
+      },
+      "revision_configuration_sha256": "104ce70f538cdbfed9d0dd0abb27948f94578b16bf9c596961428a99c2097917",
+      "immutable_revision_configuration_confirmed": true,
+      "health": {
+        "http_status": 200,
+        "health": {
+          "ready": true
+        },
+        "provider_calls": 0
+      }
+    },
+    "motomedic-answer-worker": {
+      "service": {
+        "name": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker",
+        "uid": "97d98586-4752-4070-a7b5-c9ea2899db4e",
+        "generation": "11",
+        "labels": {
+          "motomedic-release": "v10-12"
+        },
+        "createTime": "2026-10-11T20:51:09.758839Z",
+        "updateTime": "2026-10-12T08:35:41.384839Z",
+        "creator": "maneshwarkumar@gmail.com",
+        "lastModifier": "maneshwarkumar@gmail.com",
+        "ingress": "INGRESS_TRAFFIC_ALL",
+        "launchStage": "GA",
+        "template": {
+          "scaling": {
+            "maxInstanceCount": 1
+          },
+          "timeout": "1200s",
+          "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+          "containers": [
+            {
+              "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a592f993cf5229746d498a0bbb57b52e1be7bfd931c80d5c5d79f0101d7455d7",
+              "env": [
+                {
+                  "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                  "value": "false"
+                },
+                {
+                  "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                  "value": "false"
+                },
+                {
+                  "name": "MOTOMEDIC_TASK_QUEUE",
+                  "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+                },
+                {
+                  "name": "MOTOMEDIC_TASK_WORKER_URL",
+                  "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+                },
+                {
+                  "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                  "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+                },
+                {
+                  "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                  "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+                },
+                {
+                  "name": "MOTOMEDIC_VISITOR_SECRET",
+                  "valueSource": {
+                    "secretKeyRef": {
+                      "secret": "motomedic-rider-visitor-v1",
+                      "version": "1"
+                    }
+                  }
+                },
+                {
+                  "name": "ANTHROPIC_API_KEY",
+                  "valueSource": {
+                    "secretKeyRef": {
+                      "secret": "motomedic-evaluator-anthropic-v1",
+                      "version": "1"
+                    }
+                  }
+                }
+              ],
+              "resources": {
+                "limits": {
+                  "cpu": "2",
+                  "memory": "8Gi"
+                },
+                "cpuIdle": true,
+                "startupCpuBoost": true
+              },
+              "ports": [
+                {
+                  "name": "http1",
+                  "containerPort": 8080
+                }
+              ],
+              "startupProbe": {
+                "timeoutSeconds": 5,
+                "periodSeconds": 10,
+                "failureThreshold": 24,
+                "httpGet": {
+                  "path": "/healthz",
+                  "port": 8080
+                }
+              }
+            }
+          ],
+          "maxInstanceRequestConcurrency": 1
+        },
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "percent": 100
+          }
+        ],
+        "scaling": {
+          "maxInstanceCount": 5
+        },
+        "urls": [
+          "https://motomedic-answer-worker-279945185781.us-central1.run.app",
+          "https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app"
+        ],
+        "sshEnabled": false,
+        "observedGeneration": "11",
+        "terminalCondition": {
+          "type": "Ready",
+          "state": "CONDITION_SUCCEEDED",
+          "lastTransitionTime": "2026-10-12T08:37:04.206377Z"
+        },
+        "conditions": [
+          {
+            "type": "RoutesReady",
+            "state": "CONDITION_SUCCEEDED",
+            "lastTransitionTime": "2026-10-12T08:37:04.161824Z"
+          },
+          {
+            "type": "ConfigurationsReady",
+            "state": "CONDITION_SUCCEEDED",
+            "lastTransitionTime": "2026-10-12T08:36:58.328201Z"
+          }
+        ],
+        "latestReadyRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-00010-9lw",
+        "latestCreatedRevision": "projects/motomedic-ai-20261009/locations/us-central1/services/motomedic-answer-worker/revisions/motomedic-answer-worker-00010-9lw",
+        "trafficStatuses": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "motomedic-answer-worker-00010-9lw",
+            "percent": 100
+          }
+        ],
+        "uri": "https://motomedic-answer-worker-5uyul6ay6a-uc.a.run.app",
+        "etag": "\"CN23stYGENjawLcB/cHJvamVjdHMvbW90b21lZGljLWFpLTIwMjYxMDA5L2xvY2F0aW9ucy91cy1jZW50cmFsMS9zZXJ2aWNlcy9tb3RvbWVkaWMtYW5zd2VyLXdvcmtlcg\""
+      },
+      "revision": "motomedic-answer-worker-00010-9lw",
+      "server_assigned_single_container_name_normalized": true,
+      "template_sha256": "adc7e333df4a9ef7cde5c910cd01afbc36f28642e52e73876053169e11bf62d3",
+      "revision_configuration": {
+        "launchStage": "GA",
+        "scaling": {
+          "maxInstanceCount": 1
+        },
+        "timeout": "1200s",
+        "serviceAccount": "motomedic-arm-a@motomedic-ai-20261009.iam.gserviceaccount.com",
+        "containers": [
+          {
+            "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a592f993cf5229746d498a0bbb57b52e1be7bfd931c80d5c5d79f0101d7455d7",
+            "env": [
+              {
+                "name": "MOTOMEDIC_CLAUDE_FALLBACK_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_PUBLIC_NETWORK_REQUIRED",
+                "value": "false"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_QUEUE",
+                "value": "projects/motomedic-ai-20261009/locations/us-central1/queues/motomedic-verified-answers"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_WORKER_URL",
+                "value": "https://motomedic-answer-worker-279945185781.us-central1.run.app/internal/operations/run"
+              },
+              {
+                "name": "MOTOMEDIC_TASK_SERVICE_ACCOUNT",
+                "value": "motomedic-answer-tasks@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_EDGE_SERVICE_ACCOUNT",
+                "value": "motomedic-rider-ui@motomedic-ai-20261009.iam.gserviceaccount.com"
+              },
+              {
+                "name": "MOTOMEDIC_VISITOR_SECRET",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-rider-visitor-v1",
+                    "version": "1"
+                  }
+                }
+              },
+              {
+                "name": "ANTHROPIC_API_KEY",
+                "valueSource": {
+                  "secretKeyRef": {
+                    "secret": "motomedic-evaluator-anthropic-v1",
+                    "version": "1"
+                  }
+                }
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "2",
+                "memory": "8Gi"
+              },
+              "cpuIdle": true,
+              "startupCpuBoost": true
+            },
+            "ports": [
+              {
+                "name": "http1",
+                "containerPort": 8080
+              }
+            ],
+            "startupProbe": {
+              "timeoutSeconds": 5,
+              "periodSeconds": 10,
+              "failureThreshold": 24,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8080
+              }
+            }
+          }
+        ],
+        "maxInstanceRequestConcurrency": 1
+      },
+      "revision_configuration_sha256": "acc961d96cacf2f010cd7c041b6e59a4388a491af358441680bd7013f7e6a4cb",
+      "immutable_revision_configuration_confirmed": true,
+      "health": {
+        "http_status": 200,
+        "health": {
+          "answer_provider": "claude-haiku-5-5",
+          "architecture": "DRAFT_VERIFY_STREAM_OPEN_MANUAL_QA",
+          "benchmark_pacing": false,
+          "durable_dispatch_configured": true,
+          "index_id": "index_a3282c4d98cf54595e4ba168",
+          "manual_checksum": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+          "model_routing": {
+            "availability_fallback_enabled": false,
+            "native_limit_sources": {
+              "checked_date": "2026-10-12",
+              "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+            },
+            "roles": {
+              "HAIKU_DRAFT_HAIKU_VERIFY": {
+                "draft": {
+                  "answer_cache": "DISABLED",
+                  "automatic_retries": 0,
+                  "cache_ttl": "5m",
+                  "context_window_tokens": 1000000,
+                  "effort": "medium",
+                  "fallback_role": false,
+                  "input_tokens": 998200,
+                  "maximum_attempts_per_call": 1,
+                  "minimum_cache_tokens": 512,
+                  "model": "claude-haiku-5-5",
+                  "native_json_schema": true,
+                  "native_limit_sources": {
+                    "checked_date": "2026-10-12",
+                    "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                  },
+                  "output_json_bytes": 16384,
+                  "output_tokens": 1800,
+                  "pricing": {
+                    "base_usd_per_million": {
+                      "cache_read": 0.01,
+                      "cache_write": 0.125,
+                      "input": 0.1,
+                      "output": 0.5
+                    },
+                    "long_context_above_input_tokens": 100000,
+                    "long_usd_per_million": {
+                      "cache_read": 0.05,
+                      "cache_write": 0.625,
+                      "input": 0.5,
+                      "output": 2.5
+                    }
+                  },
+                  "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                  "provider": "anthropic",
+                  "request_bytes": null,
+                  "retry_rejections": [],
+                  "role": "private_draft",
+                  "thinking": "disabled",
+                  "version": "haiku-draft-finalized-verifier-v3"
+                },
+                "verifier": {
+                  "answer_cache": "DISABLED",
+                  "automatic_retries": 0,
+                  "cache_ttl": "5m",
+                  "context_window_tokens": 1000000,
+                  "effort": "medium",
+                  "fallback_role": false,
+                  "input_tokens": 998200,
+                  "maximum_attempts_per_call": 1,
+                  "minimum_cache_tokens": 512,
+                  "model": "claude-haiku-5-5",
+                  "native_json_schema": true,
+                  "native_limit_sources": {
+                    "checked_date": "2026-10-12",
+                    "haiku_native_window_and_pricing": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+                  },
+                  "output_json_bytes": 16384,
+                  "output_tokens": 1800,
+                  "pricing": {
+                    "base_usd_per_million": {
+                      "cache_read": 0.01,
+                      "cache_write": 0.125,
+                      "input": 0.1,
+                      "output": 0.5
+                    },
+                    "long_context_above_input_tokens": 100000,
+                    "long_usd_per_million": {
+                      "cache_read": 0.05,
+                      "cache_write": 0.625,
+                      "input": 0.5,
+                      "output": 2.5
+                    }
+                  },
+                  "prompt_cache": "EXPLICIT_POLICY_AND_EVIDENCE_PREFIX",
+                  "provider": "anthropic",
+                  "request_bytes": null,
+                  "retry_rejections": [],
+                  "role": "semantic_verifier",
+                  "thinking": "disabled",
+                  "version": "haiku-draft-finalized-verifier-v3"
+                }
+              }
+            },
+            "route_after_semantic_quota_schema_integrity_or_availability_failure": false,
+            "same_model_is_not_cross_model_agreement": true,
+            "selection": "FIXED_HAIKU_SEPARATE_CALL_ROLES_NO_SIZE_FLIP",
+            "version": "haiku-draft-finalized-verifier-v3"
+          },
+          "prompt_cache": "ANTHROPIC_ROLE_EVIDENCE_PREFIX_5M",
+          "ready": true,
+          "reranking": "authenticated-open-hybrid-rank-disagreement-v5",
+          "runtime_lock": "518acf629a936c09ba874fe325b73843bebed04e74cc6c9e4e81492c9638645d",
+          "streaming": "DRAFT_VERIFY_STREAM",
+          "verifier_provider": "claude-haiku-5-5"
+        },
+        "provider_calls": 0
+      }
+    }
+  },
+  "private_policy_sha256": {
+    "motomedic-arm-a": "08522ae977a44c20309d55591fa975ff42a5972ee47488e54ef88b53ad229102",
+    "motomedic-answer-worker": "c5b8e1b391c14c61eaaf47c26f784a1fdaa44d332d680fa6d425c80561d35041",
+    "motomedic-qdrant": "7a85f1def095934214a76d622b98f8a68d4af62c2d5c71d3080ec4593f8e3b2d",
+    "motomedic-rider-ui": "de8e97540ca3499319bd4571ad89c465fd68328a4c4f26d143ca6f58d31816ac"
+  },
+  "provider_calls": 0,
+  "public_iam_changed": false
+}

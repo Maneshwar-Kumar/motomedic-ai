@@ -1,0 +1,520 @@
+{
+ "retrieval": {
+  "version": "section-top5-hybrid-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "query": "Are the left and right fork oil quantities identical?",
+  "chunk_ids": [
+   "chunk_7326caba6175a0e77bb8cc73",
+   "chunk_674f386c4b948a3ec66f612f",
+   "chunk_160b4b4d5dfbf8d34aa11374",
+   "chunk_113fd984bd1e59a9d7e3417f",
+   "chunk_5e39d42668aef9f540315f4a"
+  ],
+  "dense_top": [
+   "chunk_7326caba6175a0e77bb8cc73",
+   "chunk_88cc1946ce6a972bf0c62aa4",
+   "chunk_674f386c4b948a3ec66f612f",
+   "chunk_fa6de89e56b542d6c35a580f",
+   "chunk_6c7251d3963a38967a66fdb2"
+  ],
+  "bm25_top": [
+   "chunk_7326caba6175a0e77bb8cc73",
+   "chunk_c99f7f195b3356bde86aaef8",
+   "chunk_160b4b4d5dfbf8d34aa11374",
+   "chunk_f147a8d445cf90c3e8da0a9e",
+   "chunk_5c60232bfdf8cbf084ad2179"
+  ],
+  "fused_scores": {
+   "chunk_7326caba6175a0e77bb8cc73": 0.032787,
+   "chunk_674f386c4b948a3ec66f612f": 0.029031,
+   "chunk_160b4b4d5dfbf8d34aa11374": 0.030366,
+   "chunk_113fd984bd1e59a9d7e3417f": 0.028039,
+   "chunk_5e39d42668aef9f540315f4a": 0.028219
+  },
+  "rerank_scores": {
+   "chunk_7326caba6175a0e77bb8cc73": -6.111,
+   "chunk_160b4b4d5dfbf8d34aa11374": -9.9439,
+   "chunk_674f386c4b948a3ec66f612f": -9.1746,
+   "chunk_5e39d42668aef9f540315f4a": -11.211,
+   "chunk_113fd984bd1e59a9d7e3417f": -11.1143
+  },
+  "sections_disagree": true,
+  "reranked": true
+ },
+ "assembled": {
+  "version": "section-plain-text-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "sections": [
+   "section_d52f0f9fdad83d320a62abd1",
+   "section_f2d0400db95c2c7c4ad3b406",
+   "section_1ca142298e63614407c6a8bc",
+   "section_d663d262a7ae977aa163f77d"
+  ],
+  "objects": {
+   "E1": {
+    "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+    "text": "ENGINE OIL: Grade; 10W40 API SN, JASO MA2, Semi Synthetic; COOLANT: TOTAL COOLELF AUTO SUPRA -37 ºC; FRONT FORK OIL: SS-47G; BRAKE FLUID: DOT 4*\n    ENGINE OIL: Capacity; 1 st dry fill: 2.4 L; COOLANT: Radiator: Dry fill - 915 ml Service fill - 815 ml; FRONT FORK OIL: RH fork: 589 ± 2.5 ml; BRAKE FLUID: Front - 90 ± 5 ml\n    Refill: 2.1 L for oil service (Including filter change); COOLANT: Expansion Tank: Fill to max mark - 200 ml; FRONT FORK OIL: LH fork: 507 ± 2.5 ml; BRAKE FLUID: Rear - 80 ± 5 ml",
+    "pages": [
+     21
+    ],
+    "box": null,
+    "section": "RECOMMENDED LUBRICANTS",
+    "type": "table"
+   },
+   "E2": {
+    "evidence_id": "evidence_3a4f927af191ec4ce7915444",
+    "text": "Coolant from is ready to use and does not require mixing.",
+    "pages": [
+     21
+    ],
+    "box": "NOTE",
+    "section": "RECOMMENDED LUBRICANTS",
+    "type": "list_item"
+   },
+   "E3": {
+    "evidence_id": "evidence_8b9b87ad8adcc025075370ea",
+    "text": "Recommendation subject to change without notice.",
+    "pages": [
+     21
+    ],
+    "box": "NOTE",
+    "section": "RECOMMENDED LUBRICANTS",
+    "type": "list_item"
+   },
+   "E4": {
+    "evidence_id": "evidence_424971c8f0be958200b09990",
+    "text": "The above values are approximate and the actual capacity will vary.",
+    "pages": [
+     21
+    ],
+    "box": "NOTE",
+    "section": "RECOMMENDED LUBRICANTS",
+    "type": "list_item"
+   },
+   "E5": {
+    "evidence_id": "evidence_37c6c31f5700495414de1101",
+    "text": "Use of wrong oil grade will reduce the life of the moving parts and seriously affect performance.",
+    "pages": [
+     21
+    ],
+    "box": "CAUTION",
+    "section": "RECOMMENDED LUBRICANTS",
+    "type": "text"
+   },
+   "E6": {
+    "evidence_id": "evidence_e29759a7e3d0d06addef79ce",
+    "text": "Ensure vehicle is in straight position on ground level.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E7": {
+    "evidence_id": "evidence_a41e863c8f41d3be294e7fa2",
+    "text": "Remove the filler cap both cap and O-ring.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E8": {
+    "evidence_id": "evidence_f18eb797fdf1a22f15476d21",
+    "text": "Add oil to the engine, fill until the oil level reaches the maximum mark on the sight glass.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E9": {
+    "evidence_id": "evidence_5a4c23fd1272af33e7b7ff8b",
+    "text": "Install the filler cap. Start the engine from cold condition and run for 1-2 minutes.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E10": {
+    "evidence_id": "evidence_f1f4af63df829c4d2d10655e",
+    "text": "Switch off the engine and wait 1 minute.",
+    "pages": [
+     84
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E11": {
+    "evidence_id": "evidence_a23efa4560bb2dde18e82346",
+    "text": "Check that the oil level is between the minimum and maximum lines on the sight glass.",
+    "pages": [
+     85
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E12": {
+    "evidence_id": "evidence_c23d25aca732fbebb52ba68a",
+    "text": "If not, top up the oil level so that it is between the minimum and maximum lines on the sight glass",
+    "pages": [
+     85
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E13": {
+    "evidence_id": "evidence_403cf4f3a52d3cc2ecc153fd",
+    "text": "Refill the specified fresh engine oil quantity 2.1 L.",
+    "pages": [
+     85
+    ],
+    "box": null,
+    "section": "OIL FILLING DURING OIL SERVICE",
+    "type": "list_item"
+   },
+   "E14": {
+    "evidence_id": "evidence_41f1b4796fd690f4520b21db",
+    "text": "The right side view parts displayed above are reference purposes only. These parts can differ based on the selection of motorcycle variants.",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E15": {
+    "evidence_id": "evidence_5b290515dcf88349a314293d",
+    "text": "Right trafficator rear*",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E16": {
+    "evidence_id": "evidence_a14cbb89a34959d64ba7facd",
+    "text": "Pillion seat*",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E17": {
+    "evidence_id": "evidence_70043f7a06e336dfc7e7b805",
+    "text": "Rider seat*",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E18": {
+    "evidence_id": "evidence_37ba39efd838cd246790c3cd",
+    "text": "Right side panel*",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E19": {
+    "evidence_id": "evidence_8bc9c0e889d7b25fe4f8fec6",
+    "text": "Head lamp*",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E20": {
+    "evidence_id": "evidence_ae5da9561e23af77deab6e5b",
+    "text": "Right trafficator front*",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E21": {
+    "evidence_id": "evidence_6906c998fff482e5c47d4a82",
+    "text": "Horn",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E22": {
+    "evidence_id": "evidence_405b255d19cc5fb9653ca12e",
+    "text": "Rear brake pedal",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E23": {
+    "evidence_id": "evidence_79cde663c6f7100fc0687ae2",
+    "text": "Oil level window",
+    "pages": [
+     24
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E24": {
+    "evidence_id": "evidence_464f4e763e015c4f43b14f48",
+    "text": "The left side view parts displayed above are reference purposes only. These parts can differ based on the selection of motorcycle variants.",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E25": {
+    "evidence_id": "evidence_faf72355b69f8eee404af083",
+    "text": "Left trafficator front*",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E26": {
+    "evidence_id": "evidence_1bffa6ac5519227853f1a1a0",
+    "text": "Fuel tank*",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E27": {
+    "evidence_id": "evidence_12a7311e095b8b946900831a",
+    "text": "Left side panel*",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E28": {
+    "evidence_id": "evidence_b6273eede2d794c05cca8908",
+    "text": "Left trafficator rear*",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E29": {
+    "evidence_id": "evidence_9e53470c6a929144697921bc",
+    "text": "License plate illuminator*",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E30": {
+    "evidence_id": "evidence_ac9b9b7d5995aa08daba6ec3",
+    "text": "Saree guard (If fitted)",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E31": {
+    "evidence_id": "evidence_2c39e4617e91cd14b28f1f02",
+    "text": "Side stand",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E32": {
+    "evidence_id": "evidence_38441dc25f0b120a9bca3eb3",
+    "text": "Center stand",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E33": {
+    "evidence_id": "evidence_cabe27b1d7d315da85322958",
+    "text": "Gear change lever",
+    "pages": [
+     25
+    ],
+    "box": null,
+    "section": "Disclaimer",
+    "type": "list_item"
+   },
+   "E34": {
+    "evidence_id": "evidence_cb95404525de5deaebbf87cb",
+    "text": "Center press the joystick with the clock option selected to explore the options.",
+    "pages": [
+     47
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E35": {
+    "evidence_id": "evidence_a7499b56303423c717207944",
+    "text": "The following options are available in the clock menu.",
+    "pages": [
+     47
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E36": {
+    "evidence_id": "evidence_81c5340b401e3111995e8447",
+    "text": "24H",
+    "pages": [
+     47
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E37": {
+    "evidence_id": "evidence_a80747bc257bfbb390138dc1",
+    "text": "12H",
+    "pages": [
+     48
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E38": {
+    "evidence_id": "evidence_605d8b7e9beabedbf41fb1fd",
+    "text": "Set time",
+    "pages": [
+     48
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E39": {
+    "evidence_id": "evidence_282303d155e0f48def3899e2",
+    "text": "0",
+    "pages": [
+     48
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "text"
+   },
+   "E40": {
+    "evidence_id": "evidence_56f103092663bb500f41611d",
+    "text": "0",
+    "pages": [
+     48
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "text"
+   },
+   "E41": {
+    "evidence_id": "evidence_c3b7ab2caee938ec1f8d7da3",
+    "text": "The options can be navigated by joystick up and down press and selected by joystick center press.",
+    "pages": [
+     48
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E42": {
+    "evidence_id": "evidence_62ab876058cea233f56b3e4b",
+    "text": "Press the home button on the LH switch cube to go back.",
+    "pages": [
+     48
+    ],
+    "box": null,
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E43": {
+    "evidence_id": "evidence_61751c8d4da15420d67c210c",
+    "text": "If the mobile phone is connected to the vehicle only the hour format (i.e. 24H & 12H) can be selected based on the rider preference.",
+    "pages": [
+     48
+    ],
+    "box": "NOTE",
+    "section": "i. Clock",
+    "type": "text"
+   },
+   "E44": {
+    "evidence_id": "evidence_ebd711e1eb6d9cb0703c8bcf",
+    "text": "If the mobile phone is not connected to the vehicle all the options (i.e. 24H, 12H & Set Time) are selected.",
+    "pages": [
+     48
+    ],
+    "box": "NOTE",
+    "section": "i. Clock",
+    "type": "text"
+   },
+   "E45": {
+    "evidence_id": "evidence_fc82022664e5896e31a10c31",
+    "text": "In the set time option, time can be adjusted by joystick up, down, left & right press.",
+    "pages": [
+     48
+    ],
+    "box": "NOTE",
+    "section": "i. Clock",
+    "type": "list_item"
+   },
+   "E46": {
+    "evidence_id": "evidence_2a6b86e34c53d4c62cb14a5c",
+    "text": "Joystick up & down press is used to increase or decrease the hour, minute & time format values, while joystick left & right is used to switch between hour, minute & time format selection.",
+    "pages": [
+     48
+    ],
+    "box": "NOTE",
+    "section": "i. Clock",
+    "type": "list_item"
+   }
+  },
+  "warnings": [
+   "E5"
+  ],
+  "text": "## RECOMMENDED LUBRICANTS (page 21)\n[E1] ENGINE OIL: Grade; 10W40 API SN, JASO MA2, Semi Synthetic; COOLANT: TOTAL COOLELF AUTO SUPRA -37 ºC; FRONT FORK OIL: SS-47G; BRAKE FLUID: DOT 4*\n    ENGINE OIL: Capacity; 1 st dry fill: 2.4 L; COOLANT: Radiator: Dry fill - 915 ml Service fill - 815 ml; FRONT FORK OIL: RH fork: 589 ± 2.5 ml; BRAKE FLUID: Front - 90 ± 5 ml\n    Refill: 2.1 L for oil service (Including filter change); COOLANT: Expansion Tank: Fill to max mark - 200 ml; FRONT FORK OIL: LH fork: 507 ± 2.5 ml; BRAKE FLUID: Rear - 80 ± 5 ml\n[E2] (NOTE) Coolant from is ready to use and does not require mixing.\n[E3] (NOTE) Recommendation subject to change without notice.\n[E4] (NOTE) The above values are approximate and the actual capacity will vary.\n[E5] (CAUTION) Use of wrong oil grade will reduce the life of the moving parts and seriously affect performance.\n\n## OIL FILLING DURING OIL SERVICE (pages 84-85)\n[E6] Ensure vehicle is in straight position on ground level.\n[E7] Remove the filler cap both cap and O-ring.\n[E8] Add oil to the engine, fill until the oil level reaches the maximum mark on the sight glass.\n[E9] Install the filler cap. Start the engine from cold condition and run for 1-2 minutes.\n[E10] Switch off the engine and wait 1 minute.\n[E11] Check that the oil level is between the minimum and maximum lines on the sight glass.\n[E12] If not, top up the oil level so that it is between the minimum and maximum lines on the sight glass\n[E13] Refill the specified fresh engine oil quantity 2.1 L.\n\n## Disclaimer (pages 24-25)\n[E14] The right side view parts displayed above are reference purposes only. These parts can differ based on the selection of motorcycle variants.\n[E15] Right trafficator rear*\n[E16] Pillion seat*\n[E17] Rider seat*\n[E18] Right side panel*\n[E19] Head lamp*\n[E20] Right trafficator front*\n[E21] Horn\n[E22] Rear brake pedal\n[E23] Oil level window\n[E24] The left side view parts displayed above are reference purposes only. These parts can differ based on the selection of motorcycle variants.\n[E25] Left trafficator front*\n[E26] Fuel tank*\n[E27] Left side panel*\n[E28] Left trafficator rear*\n[E29] License plate illuminator*\n[E30] Saree guard (If fitted)\n[E31] Side stand\n[E32] Center stand\n[E33] Gear change lever\n\n## i. Clock (pages 47-48)\n[E34] Center press the joystick with the clock option selected to explore the options.\n[E35] The following options are available in the clock menu.\n[E36] 24H\n[E37] 12H\n[E38] Set time\n[E39] 0\n[E40] 0\n[E41] The options can be navigated by joystick up and down press and selected by joystick center press.\n[E42] Press the home button on the LH switch cube to go back.\n[E43] (NOTE) If the mobile phone is connected to the vehicle only the hour format (i.e. 24H & 12H) can be selected based on the rider preference.\n[E44] (NOTE) If the mobile phone is not connected to the vehicle all the options (i.e. 24H, 12H & Set Time) are selected.\n[E45] (NOTE) In the set time option, time can be adjusted by joystick up, down, left & right press.\n[E46] (NOTE) Joystick up & down press is used to increase or decrease the hour, minute & time format values, while joystick left & right is used to switch between hour, minute & time format selection."
+ }
+}

@@ -1,0 +1,460 @@
+{
+ "retrieval": {
+  "version": "section-top5-hybrid-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "query": "What is the battery's cold cranking amps (CCA) rating?",
+  "chunk_ids": [
+   "chunk_1eb9e3a09686f9bc9cd24f5e",
+   "chunk_991a43e9941b6d2e792bbadc",
+   "chunk_cd9afab59118ad5fb63990a9",
+   "chunk_978068c2e079d4865ba1f8da",
+   "chunk_a326e1af57c41362ab924e01"
+  ],
+  "dense_top": [
+   "chunk_978068c2e079d4865ba1f8da",
+   "chunk_1eb9e3a09686f9bc9cd24f5e",
+   "chunk_e0136c37004bf0f014e82ba5",
+   "chunk_695f5be9c2444cce70b12a2d",
+   "chunk_72359a9cd785d431f09da027"
+  ],
+  "bm25_top": [
+   "chunk_cd9afab59118ad5fb63990a9",
+   "chunk_a326e1af57c41362ab924e01",
+   "chunk_991a43e9941b6d2e792bbadc",
+   "chunk_9a9c223ed62fd189640d4cd5",
+   "chunk_00167536a90359a310825d89"
+  ],
+  "fused_scores": {
+   "chunk_1eb9e3a09686f9bc9cd24f5e": 0.016129,
+   "chunk_991a43e9941b6d2e792bbadc": 0.030798,
+   "chunk_cd9afab59118ad5fb63990a9": 0.029052,
+   "chunk_978068c2e079d4865ba1f8da": 0.016393,
+   "chunk_a326e1af57c41362ab924e01": 0.016129
+  },
+  "rerank_scores": {
+   "chunk_991a43e9941b6d2e792bbadc": -10.2601,
+   "chunk_cd9afab59118ad5fb63990a9": -10.4818,
+   "chunk_978068c2e079d4865ba1f8da": -10.7705,
+   "chunk_1eb9e3a09686f9bc9cd24f5e": -9.1626,
+   "chunk_a326e1af57c41362ab924e01": -11.3502
+  },
+  "sections_disagree": true,
+  "reranked": true
+ },
+ "assembled": {
+  "version": "section-plain-text-v1",
+  "index_id": "index_a609ca61c635641e0a22dc48",
+  "sections": [
+   "section_510e87c4fe055604fb47cc2e",
+   "section_66a272d94adbf2fbb623ebbd",
+   "section_0500987488d548f3e33883ea",
+   "section_078986097cb58d3803fc7284",
+   "section_0e991445f3de1239270a3cec"
+  ],
+  "objects": {
+   "E1": {
+    "evidence_id": "evidence_a13f7fa9cd6b4eb3ecc9aad8",
+    "text": "The motorcycle is provided with 12 V - 8 Ah VRLA battery.",
+    "pages": [
+     104
+    ],
+    "box": null,
+    "section": "BATTERY AND MAINTENANCE",
+    "type": "list_item"
+   },
+   "E2": {
+    "evidence_id": "evidence_0f21b2b02c8fc94db183d35a",
+    "text": "The battery must be periodically checked for cleanliness and corrosion free terminals.",
+    "pages": [
+     104
+    ],
+    "box": null,
+    "section": "BATTERY AND MAINTENANCE",
+    "type": "list_item"
+   },
+   "E3": {
+    "evidence_id": "evidence_e56e7474f3f117209f8530fc",
+    "text": "The poor contact or loose fitment of battery terminals may cause ECU failure.",
+    "pages": [
+     104
+    ],
+    "box": "NOTE",
+    "section": "BATTERY AND MAINTENANCE",
+    "type": "text"
+   },
+   "E4": {
+    "evidence_id": "evidence_a7a5ea8352d16679e89780fb",
+    "text": "Vehicle may start with side stand condition but engine will turn-off when gear is engaged, this side stand cutoff feature is provided for rider safety ensure side stand is retracted before vehicle moving / starting.",
+    "pages": [
+     74
+    ],
+    "box": null,
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E5": {
+    "evidence_id": "evidence_533bb7ef741105dc8ee7cdf1",
+    "text": "If the engine does not start. Do not hold the starter switch in depressed condition for long periods, this will cause the battery to drain below the threshold level of 10 V. Please get the motorcycle checked through an Royal Enfield Authorised Service Centre to identify and correct the reason for not starting.",
+    "pages": [
+     74
+    ],
+    "box": "CAUTION",
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E6": {
+    "evidence_id": "evidence_0b457a1e2c46f0dda868a05e",
+    "text": "Never accelerate as soon as the engine starts, especially in cold condition. The engine should be allowed to run in idle rpm for at least 120 seconds for the engine oil to circulate and lubricate all the internal moving parts and for the engine temperature to raise. Failure to adhere to this important information will cause serious damage to the engine internals.",
+    "pages": [
+     75
+    ],
+    "box": null,
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E7": {
+    "evidence_id": "evidence_225a8cc3d5bbeef0fe2a17f1",
+    "text": "Accelerate only after the idling rpm has stabilized and it is consistent.",
+    "pages": [
+     75
+    ],
+    "box": null,
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E8": {
+    "evidence_id": "evidence_c19fba2753688a23e58d92c0",
+    "text": "If the acceleration cable is damaged, should be replace the entire RH side module cube.",
+    "pages": [
+     75
+    ],
+    "box": null,
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E9": {
+    "evidence_id": "evidence_e1c4463ea4817a70cd888bdd",
+    "text": "Please exercise extreme care while riding the motorcycle. Failure to do so can result in an accident causing injury to you or to other road users / passerby.",
+    "pages": [
+     75
+    ],
+    "box": "WARNING",
+    "section": "PRECAUTIONS",
+    "type": "text"
+   },
+   "E10": {
+    "evidence_id": "evidence_830fe1615d6181e481ff8591",
+    "text": "Ensure gear in neutral position and the neutral lamp is glowing in the speedometer. To shift into neutral, move the motorcycle back and forth gently, while simultaneously shifting the gear.",
+    "pages": [
+     75
+    ],
+    "box": "WARNING",
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E11": {
+    "evidence_id": "evidence_0619f416b2c735fdf7b72725",
+    "text": "Do not attempt to shift gears without moving the motorcycle back and forth as it will damage the gears mechanism.",
+    "pages": [
+     75
+    ],
+    "box": "CAUTION",
+    "section": "PRECAUTIONS",
+    "type": "text"
+   },
+   "E12": {
+    "evidence_id": "evidence_1d08249ef0a941452787d4ad",
+    "text": "Depress and hold the clutch Lever.",
+    "pages": [
+     75
+    ],
+    "box": "CAUTION",
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E13": {
+    "evidence_id": "evidence_04860a9ebc96bd7a4dfb7d1a",
+    "text": "Press starter button and hold till engine starts. Do not release the button before engine starts.",
+    "pages": [
+     75
+    ],
+    "box": "CAUTION",
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E14": {
+    "evidence_id": "evidence_634643c9be7de4d37ee7b5a2",
+    "text": "Do not press the starter button more than 5 seconds after three successive cranking, wait for 15 to 20 seconds the battery to recover.",
+    "pages": [
+     75
+    ],
+    "box": "CAUTION",
+    "section": "PRECAUTIONS",
+    "type": "list_item"
+   },
+   "E15": {
+    "evidence_id": "evidence_90b50d7059435c1578fd7d12",
+    "text": "Fuse ID number: F1; Color: Blue; Rating: 15 A; Remarks: Ignition\n    Fuse ID number: F2; Color: Blue; Rating: 15 A; Remarks: EFI relay\n    Fuse ID number: F3; Color: Red; Rating: 10 A; Remarks: Fan\n    Fuse ID number: F4; Color: Yellow; Rating: 5 A; Remarks: POS, lights & CTRL\n    Fuse ID number: F5; Color: Yellow; Rating: 5 A; Remarks: Instruments\n    Fuse ID number: F6; Color: Red; Rating: 10 A; Remarks: Low/High Beam & Accessory\n    Fuse ID number: F7; Color: Red; Rating: 10 A; Remarks: Horn\n    Fuse ID number: F8; Color: Blue; Rating: 15 A; Remarks: ABS S motor\n    Fuse ID number: F9; Color: Red; Rating: 10 A; Remarks: ABS valve\n    Fuse ID number: Spare fuse list\n    Fuse ID number: SF1; Color: Yellow; Rating: 5 A; Remarks: Spare fuse\n    Fuse ID number: SF2; Color: Red; Rating: 10 A\n    Fuse ID number: SF3; Color: Blue; Rating: 15 A",
+    "pages": [
+     112
+    ],
+    "box": null,
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "table"
+   },
+   "E16": {
+    "evidence_id": "evidence_4e1a61e411e2b752c1a8716b",
+    "text": "Please get the electrical system of your motorcycle checked thoroughly and get the faults corrected immediately after experiencing any fuse failure. Failure to do so may result in repeated fuse failure.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E17": {
+    "evidence_id": "evidence_00497a5a6998712d564a2df2",
+    "text": "Usage of fuses other than specified rating or usage of any other conductive materials or low grade fuses will damage the complete electrical system.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E18": {
+    "evidence_id": "evidence_0c58e6021490c80a7a7f8d99",
+    "text": "Please ensure to replace a spare fuse in the holder at the earliest opportunity.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E19": {
+    "evidence_id": "evidence_8b5ef092d20493cd2b9b58b8",
+    "text": "Any attempt to jumper a defective fuse gives rise to the risk of a short-circuit and fire. Always replace a defective fuse with a new fuse of the same rating.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E20": {
+    "evidence_id": "evidence_590e7744c6d77b972e3950ee",
+    "text": "Make sure the ignition switch is in \"OFF\" position when replacing the bulbs, fuses and electrical parts.",
+    "pages": [
+     112
+    ],
+    "box": "NOTE",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E21": {
+    "evidence_id": "evidence_46ea7e82545c259cf4ed23b3",
+    "text": "Charger port is located on the center part of handle bar.",
+    "pages": [
+     64
+    ],
+    "box": null,
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E22": {
+    "evidence_id": "evidence_31f9ffe7f325a580f7c58947",
+    "text": "Recommended not to use in rainy conditions to avoid damages to smart phones and charger, RE shall not be liable for any damage to smart phones.",
+    "pages": [
+     64
+    ],
+    "box": "WARNING",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E23": {
+    "evidence_id": "evidence_f5f14378db31693f76bd2a81",
+    "text": "Do not use any other device other than mobile phones, only one mobile shall be charged at one point of time.",
+    "pages": [
+     64
+    ],
+    "box": "WARNING",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E24": {
+    "evidence_id": "evidence_a4a384cb8cd1cd437ac00907",
+    "text": "Ensure proper insertion of USB cable, damages due to hard / wrong insertion of cable will not be entertained in warranty.",
+    "pages": [
+     64
+    ],
+    "box": "WARNING",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E25": {
+    "evidence_id": "evidence_f4f3ea7f748d6732d21cae42",
+    "text": "Do not leave the USB port cap opened / closed partially to avoid any short circuit when not in use.",
+    "pages": [
+     64
+    ],
+    "box": "WARNING",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E26": {
+    "evidence_id": "evidence_87d7aaf9a6f68c203a240607",
+    "text": "Do not insert any metal or conductive materials inside USB charging port which may lead to short circuit.",
+    "pages": [
+     64
+    ],
+    "box": "WARNING",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E27": {
+    "evidence_id": "evidence_82764faca7aa6cec43f2eeb3",
+    "text": "Charging port is provided only for charging purpose and no data transfer is enabled.",
+    "pages": [
+     65
+    ],
+    "box": "NOTE",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E28": {
+    "evidence_id": "evidence_3f0254b2230794cc5e25393b",
+    "text": "Only constant charging mode is provided, fast / dash charging mode is not provided to be compatible with multiple makes mobile phones and cannot be compared with the performance of original smartphone chargers.",
+    "pages": [
+     65
+    ],
+    "box": "NOTE",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E29": {
+    "evidence_id": "evidence_662d4a163d504cc62ff5147e",
+    "text": "Duration of charging can be higher and will vary for different make mobile phones depending on smart phone battery capacity, SOC and smart phone charging circuits.",
+    "pages": [
+     65
+    ],
+    "box": "NOTE",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E30": {
+    "evidence_id": "evidence_b345d26bcf46960f7125d8d8",
+    "text": "Customer to ensure USB port cap is closed and locked properly when not in use, warranty will not be provided if port cap is damaged and not sealed properly.",
+    "pages": [
+     65
+    ],
+    "box": "CAUTION",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E31": {
+    "evidence_id": "evidence_ea69e5fbd3ff27f1dd159960",
+    "text": "If high current draw greater than 2.5 A is observed USB charger will shutdown please check your smart phone battery current ratings before using.",
+    "pages": [
+     65
+    ],
+    "box": "CAUTION",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E32": {
+    "evidence_id": "evidence_13dac6aaee2fcbdd57618d29",
+    "text": "USB charger will function only when engine is in running condition.",
+    "pages": [
+     65
+    ],
+    "box": "CAUTION",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E33": {
+    "evidence_id": "evidence_a35159dd2d88b584ad319de1",
+    "text": "Use standard approved and high quality USB cables for proper functioning.",
+    "pages": [
+     65
+    ],
+    "box": "CAUTION",
+    "section": "CHARGER PORT",
+    "type": "list_item"
+   },
+   "E34": {
+    "evidence_id": "evidence_c3b27f95a2bb4cb96b6a1c06",
+    "text": "While your liquid waste like engine oil, coolant and other cleaning solvents need to be regularly replaced, what happens to them? Make sure they are not dumped in the soil or water bodies.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E35": {
+    "evidence_id": "evidence_b8b27711ad07058d6df8d51a",
+    "text": "You shall store them in a container and handover to an Govt authorized recycling agent, If any or RE Service Centre.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E36": {
+    "evidence_id": "evidence_12938fe8c0a8576f687cb473",
+    "text": "In the case of battery, tyres, plastic parts, electric or electronic parts and oil filter shall be handed over only to an authorized recycling agent, If any or RE Service Centre.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E37": {
+    "evidence_id": "evidence_2c73fbef22f54124973039ea",
+    "text": "The cleaning solvents or sprays whichever used for cleaning your bike shall be disposed in an environmentally friendly manner.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   },
+   "E38": {
+    "evidence_id": "evidence_ed28cadec365ae79c3371ca4",
+    "text": "In case you want to dispose your vehicle considered as an end of life vehicle, please handover the vehicle only to an authorized / registered vehicle scrapping facility near you or contact local authorities to follow due process.",
+    "pages": [
+     123
+    ],
+    "box": null,
+    "section": "DISPOSAL OF END OF LIFE - PARTS / VEHICLE",
+    "type": "text"
+   }
+  },
+  "warnings": [
+   "E5",
+   "E9",
+   "E10",
+   "E11",
+   "E12",
+   "E13",
+   "E14",
+   "E16",
+   "E17",
+   "E18",
+   "E19",
+   "E22",
+   "E23",
+   "E24",
+   "E25",
+   "E26",
+   "E30",
+   "E31",
+   "E32",
+   "E33"
+  ],
+  "text": "## BATTERY AND MAINTENANCE (page 104)\n[E1] The motorcycle is provided with 12 V - 8 Ah VRLA battery.\n[E2] The battery must be periodically checked for cleanliness and corrosion free terminals.\n[E3] (NOTE) The poor contact or loose fitment of battery terminals may cause ECU failure.\n\n## PRECAUTIONS (pages 74-75)\n[E4] Vehicle may start with side stand condition but engine will turn-off when gear is engaged, this side stand cutoff feature is provided for rider safety ensure side stand is retracted before vehicle moving / starting.\n[E5] (CAUTION) If the engine does not start. Do not hold the starter switch in depressed condition for long periods, this will cause the battery to drain below the threshold level of 10 V. Please get the motorcycle checked through an Royal Enfield Authorised Service Centre to identify and correct the reason for not starting.\n[E6] Never accelerate as soon as the engine starts, especially in cold condition. The engine should be allowed to run in idle rpm for at least 120 seconds for the engine oil to circulate and lubricate all the internal moving parts and for the engine temperature to raise. Failure to adhere to this important information will cause serious damage to the engine internals.\n[E7] Accelerate only after the idling rpm has stabilized and it is consistent.\n[E8] If the acceleration cable is damaged, should be replace the entire RH side module cube.\n[E9] (WARNING) Please exercise extreme care while riding the motorcycle. Failure to do so can result in an accident causing injury to you or to other road users / passerby.\n[E10] (WARNING) Ensure gear in neutral position and the neutral lamp is glowing in the speedometer. To shift into neutral, move the motorcycle back and forth gently, while simultaneously shifting the gear.\n[E11] (CAUTION) Do not attempt to shift gears without moving the motorcycle back and forth as it will damage the gears mechanism.\n[E12] (CAUTION) Depress and hold the clutch Lever.\n[E13] (CAUTION) Press starter button and hold till engine starts. Do not release the button before engine starts.\n[E14] (CAUTION) Do not press the starter button more than 5 seconds after three successive cranking, wait for 15 to 20 seconds the battery to recover.\n\n## MINI BLADE FUSE USAGE LIST (page 112)\n[E15] Fuse ID number: F1; Color: Blue; Rating: 15 A; Remarks: Ignition\n    Fuse ID number: F2; Color: Blue; Rating: 15 A; Remarks: EFI relay\n    Fuse ID number: F3; Color: Red; Rating: 10 A; Remarks: Fan\n    Fuse ID number: F4; Color: Yellow; Rating: 5 A; Remarks: POS, lights & CTRL\n    Fuse ID number: F5; Color: Yellow; Rating: 5 A; Remarks: Instruments\n    Fuse ID number: F6; Color: Red; Rating: 10 A; Remarks: Low/High Beam & Accessory\n    Fuse ID number: F7; Color: Red; Rating: 10 A; Remarks: Horn\n    Fuse ID number: F8; Color: Blue; Rating: 15 A; Remarks: ABS S motor\n    Fuse ID number: F9; Color: Red; Rating: 10 A; Remarks: ABS valve\n    Fuse ID number: Spare fuse list\n    Fuse ID number: SF1; Color: Yellow; Rating: 5 A; Remarks: Spare fuse\n    Fuse ID number: SF2; Color: Red; Rating: 10 A\n    Fuse ID number: SF3; Color: Blue; Rating: 15 A\n[E16] (WARNING) Please get the electrical system of your motorcycle checked thoroughly and get the faults corrected immediately after experiencing any fuse failure. Failure to do so may result in repeated fuse failure.\n[E17] (WARNING) Usage of fuses other than specified rating or usage of any other conductive materials or low grade fuses will damage the complete electrical system.\n[E18] (WARNING) Please ensure to replace a spare fuse in the holder at the earliest opportunity.\n[E19] (WARNING) Any attempt to jumper a defective fuse gives rise to the risk of a short-circuit and fire. Always replace a defective fuse with a new fuse of the same rating.\n[E20] (NOTE) Make sure the ignition switch is in \"OFF\" position when replacing the bulbs, fuses and electrical parts.\n\n## CHARGER PORT (pages 64-65)\n[E21] Charger port is located on the center part of handle bar.\n[E22] (WARNING) Recommended not to use in rainy conditions to avoid damages to smart phones and charger, RE shall not be liable for any damage to smart phones.\n[E23] (WARNING) Do not use any other device other than mobile phones, only one mobile shall be charged at one point of time.\n[E24] (WARNING) Ensure proper insertion of USB cable, damages due to hard / wrong insertion of cable will not be entertained in warranty.\n[E25] (WARNING) Do not leave the USB port cap opened / closed partially to avoid any short circuit when not in use.\n[E26] (WARNING) Do not insert any metal or conductive materials inside USB charging port which may lead to short circuit.\n[E27] (NOTE) Charging port is provided only for charging purpose and no data transfer is enabled.\n[E28] (NOTE) Only constant charging mode is provided, fast / dash charging mode is not provided to be compatible with multiple makes mobile phones and cannot be compared with the performance of original smartphone chargers.\n[E29] (NOTE) Duration of charging can be higher and will vary for different make mobile phones depending on smart phone battery capacity, SOC and smart phone charging circuits.\n[E30] (CAUTION) Customer to ensure USB port cap is closed and locked properly when not in use, warranty will not be provided if port cap is damaged and not sealed properly.\n[E31] (CAUTION) If high current draw greater than 2.5 A is observed USB charger will shutdown please check your smart phone battery current ratings before using.\n[E32] (CAUTION) USB charger will function only when engine is in running condition.\n[E33] (CAUTION) Use standard approved and high quality USB cables for proper functioning.\n\n## DISPOSAL OF END OF LIFE - PARTS / VEHICLE (page 123)\n[E34] While your liquid waste like engine oil, coolant and other cleaning solvents need to be regularly replaced, what happens to them? Make sure they are not dumped in the soil or water bodies.\n[E35] You shall store them in a container and handover to an Govt authorized recycling agent, If any or RE Service Centre.\n[E36] In the case of battery, tyres, plastic parts, electric or electronic parts and oil filter shall be handed over only to an authorized recycling agent, If any or RE Service Centre.\n[E37] The cleaning solvents or sprays whichever used for cleaning your bike shall be disposed in an environmentally friendly manner.\n[E38] In case you want to dispose your vehicle considered as an end of life vehicle, please handover the vehicle only to an authorized / registered vehicle scrapping facility near you or contact local authorities to follow due process."
+ }
+}

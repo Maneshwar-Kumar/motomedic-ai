@@ -1,0 +1,31 @@
+{
+  "app_tests": {
+    "dependencies": "Existing tmp/build-test-deps, tmp/ui-test-protobuf-readable and tmp/tornado-test-deps; no new install.",
+    "passed": 13,
+    "seconds": 21.527
+  },
+  "classification": "SYNTHETIC_LOCAL_CHECKS_NOT_HOSTED_ANSWER_ACCEPTANCE",
+  "client_stream_timing_release_tests": {
+    "initial_combined_run_tests": 69,
+    "initial_error": "test_app import failed because Streamlit was absent from bundled default PYTHONPATH; isolated AppTests passed with existing UI test dependencies.",
+    "passed": 68
+  },
+  "cloud_mutations": 0,
+  "independent_factual_quality_acceptance": false,
+  "provider_calls": 0,
+  "recorded_at_utc": "2026-10-12T16:17:29.823497+00:00",
+  "repository_audit": {
+    "approved_outputs": 187,
+    "current_frozen_inputs": 568,
+    "historical_inputs": 64,
+    "links": 270,
+    "passed": true
+  },
+  "schema": "motomedic-ui-only-provider-free-validation-v1",
+  "ui_only_compatibility_check": {
+    "backend_rebuild_required": false,
+    "backend_runtime_lock": "6371ec7e1f651a5666750600d8e62ce86ac25bcf41f4eb227b8e281e6d4e2c76",
+    "passed": true,
+    "source_index_models_controller_and_auth_unchanged": true
+  }
+}

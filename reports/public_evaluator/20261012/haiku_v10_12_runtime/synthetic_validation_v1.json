@@ -1,0 +1,71 @@
+{
+  "schema": "motomedic-haiku-only-runtime-synthetic-validation-v1",
+  "recorded_utc": "2026-10-12T08:24:47.214243+00:00",
+  "classification": "SYNTHETIC_PROVIDER_FREE_LOCAL_CHECKS",
+  "only_serving_model": "claude-haiku-5-5",
+  "runtime_policy": "open-manual-haiku-draft-verify-v10_12",
+  "routing_version": "haiku-draft-finalized-verifier-v3",
+  "route": "HAIKU_DRAFT_HAIKU_VERIFY",
+  "separate_calls_distinct_role_contracts_policies_schemas": true,
+  "same_model_is_not_cross_model_agreement": true,
+  "provider_generation_calls": 0,
+  "cloud_actions": 0,
+  "factual_quality_acceptance": false,
+  "public_browser_acceptance": false,
+  "frozen_v10_11_edited": false,
+  "checks": {
+    "focused_runtime_cache_router_qa_openwire_health_policy": {
+      "passed": 62,
+      "failed": 0,
+      "errors": 0
+    },
+    "complete_CI_boundary_suite": {
+      "passed": 272,
+      "failed": 0,
+      "errors": 0,
+      "elapsed_seconds": 15.325
+    },
+    "complete_rider_UI_suite": {
+      "passed": 73,
+      "failed": 0,
+      "errors": 0,
+      "elapsed_seconds": 16.232
+    },
+    "git_diff_check": "PASS"
+  },
+  "local_dependencies": {
+    "python": "bundled_codex_runtime",
+    "boundary_pythonpath": [
+      "tmp/build-test-deps"
+    ],
+    "ui_pythonpath": [
+      "tmp/ui-test-protobuf-readable",
+      "tmp/tornado-test-deps",
+      "tmp/build-test-deps"
+    ],
+    "ui_protocol_buffers_implementation": "python"
+  },
+  "scoped_file_sha256": {
+    "cloud/arm_a/app.py": "89a449080cdd37f365835986d79d72b6e4bafb7415779b1d5811ebace63a29e3",
+    "cloud/arm_a/test_health.py": "9cf7df26955ffc93ecd647ec3e48c48642d77cb8945c3a2a05e2e2d8003fc456",
+    "cloud/arm_a/test_production_policy.py": "e82da4c6a973b1ef8a249b8dbc5e17981dfaf3ebe0bb887dc65e9947bc8cc293",
+    "cloud/grounded_generation/cached_verifier.py": "c981923983b05dfa6cf2d3a839e73229540bb87347dc0fb243265f9c921ed8e1",
+    "cloud/grounded_generation/role_contracts.py": "0f744e233746ba4c6f195bea8558ec16664da9163dc58c08d011b452f807ba96",
+    "cloud/grounded_generation/role_router.py": "7773d9f1838e1576cedea25c9638724089d12ba0cdec13834f4c14edc1199c26",
+    "cloud/grounded_generation/test_cached_verifier.py": "23bef199d1e1d001538bf279c348e80784ecdb6f3cecb6b79e5f852eaf350805",
+    "cloud/grounded_generation/test_role_router.py": "4b781b0dea6c6193b8d3a65f1b4c09bfa97aa076b89c48a7d3aebf14a69c0291",
+    "cloud/grounded_generation/test_verified_qa.py": "97c5a1aff45a9f4cd9c3c777caa4bd5f7115c025f531d90a8f2d676b2cfda78d",
+    "cloud/grounded_generation/verified_qa.py": "7d41df84d085d4d48e5a3a10f85de9803165c65928b7b83ca22a94927281ad90",
+    "rider_ui/client.py": "85248423a65e8ef94805a3c252c90ea321560863bfa390b8c8e0e45ed30e76ea",
+    "rider_ui/tests/test_client.py": "a1e7af38c6db5e79499d49a923bc1d27fcd043d94a7f25af5eff6a6b49f10d0a",
+    "rider_ui/API_CONTRACT.md": "6e3446598c09f95e0b7dcbf64e688f1bb3ec0e2d1716059e6cbd08d1421db6c6",
+    "rider_ui/SERVICE_SAFEGUARDS.md": "3c9d1d3dca48ac58d48965d4e5d6ae7a4910e0422e2cfbdcacc6235a90864a58"
+  },
+  "required_hosted_followups": [
+    "current-role native counts on complete real evidence and history",
+    "Haiku draft and finalized-response verifier factual acceptance against original pages",
+    "role-specific actual cache creation then positive reads",
+    "exact durable save/stream/recover and operation ownership",
+    "compatible private deployment rollback and anonymous public browser acceptance"
+  ]
+}

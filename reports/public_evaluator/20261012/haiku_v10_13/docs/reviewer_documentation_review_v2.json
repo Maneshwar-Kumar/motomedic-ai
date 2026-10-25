@@ -1,0 +1,52 @@
+{
+  "schema": "motomedic-v10-13-public-reproduction-documentation-review-v2",
+  "recorded_at_utc": "2026-10-12T10:13:27.852664+00:00",
+  "document_sha256": {
+    "docs/ARCHITECTURE.md": "44ac635767b7d1fa7cd1647766a0740056b35f2bbfed35965de18edd889c73db",
+    "docs/REVIEWER.md": "24ddb64e55c65a34169c9a53cb4f09e66103846179df252980736b7096ef1e05",
+    "docs/SETUP.md": "6cbf05391c7553110e8956c95b3e7f4db3a90762460be59857145d9be883f1df"
+  },
+  "provider_calls": 0,
+  "cloud_calls": 0,
+  "runtime_changed": false,
+  "public_repo_confirmed_by": "reports/public_evaluator/20261012/public_review/owner_public_review_scope_v1.json",
+  "frozen_commit": "3b7da1692187736295fee7345e9b3e932d02b216",
+  "frozen_manifest_sha256": "3d1d01d09c1929a8c1e52e698a3b4ca9b48c14a14954b82f7d6c795ab6bf031c",
+  "hosted_ci_url": "https://github.com/Maneshwar-Kumar/motomedic-ai/actions/runs/38233548200",
+  "hosted_ci_status_reported_by_coordinator": "SUCCESS",
+  "public_index_receipt": "reports/public_evaluator/20261012/public_review/index_release_readback_v1.json",
+  "public_index_sha256": "4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc",
+  "public_index_bytes": 181153632,
+  "local_links_checked": 57,
+  "missing_local_links": [],
+  "repository_structure": {
+    "exit_code": 1,
+    "current_serving_files_verified": 561,
+    "historical_runtime_files_verified": 64,
+    "approval_outputs_verified": 187,
+    "missing_navigation_files": [],
+    "broken_navigation_links": [],
+    "integrity_errors": [],
+    "sole_failure": "unexpected root file tmpfile, not created or modified by this docs task"
+  },
+  "index_loading_recipe": {
+    "validation_kind": "LOCAL_OFFLINE_EXISTING_BYTE_IDENTICAL_ARCHIVE",
+    "exit_code": 0,
+    "remote_download_executed": false,
+    "all_declared_file_hashes_verified": true,
+    "original_manifest_source_embedding_chunker_counts_verified": true,
+    "pdf_pages": 149,
+    "chunks": 532,
+    "parents": 277,
+    "evidence_objects": 1691,
+    "safe_extraction_executed": true,
+    "exact_deterministic_lock_recovery_executed": true,
+    "private_original_gcs_access_required": false,
+    "embedding_model_entries_in_archive": 0,
+    "reranker_model_entries_in_archive": 7
+  },
+  "public_services": "Anonymous health and read-only Qdrant rollout/readback pending; docs state no Google token needed for these routes once open. All other API/worker requests retain cryptographic signature/audience/verified-email allowlist and private application authorization.",
+  "answer_quality_acceptance": false,
+  "historical_charges_reset_or_refunded": false,
+  "budget_or_billing_changes": false
+}
