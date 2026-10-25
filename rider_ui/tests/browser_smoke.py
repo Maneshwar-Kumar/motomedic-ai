@@ -11,7 +11,7 @@ from playwright.sync_api import sync_playwright
 from rider_ui.tests.fixture_api import serve
 
 def run():
-    out=Path(os.environ.get('MOTOMEDIC_UI_SMOKE_OUTPUT','reports/rider_ui'));out.mkdir(parents=True,exist_ok=True)
+    out=Path(os.environ.get('MOTOMEDIC_UI_SMOKE_OUTPUT','build/rider_ui_smoke'));out.mkdir(parents=True,exist_ok=True)
     server=serve(0);threading.Thread(target=server.serve_forever,daemon=True).start()
     env=dict(os.environ,MOTOMEDIC_RIDER_API_URL='http://127.0.0.1:'+str(server.server_port),
              MOTOMEDIC_RIDER_API_TOKEN='ui-test-only',MOTOMEDIC_UI_ENGINEERING_LOOPBACK='1',

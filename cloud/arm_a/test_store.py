@@ -9,8 +9,8 @@ import unittest
 from unittest.mock import patch
 
 from cloud.arm_a.store import FirestoreState, Limited, OperationConflict
-from controller_contracts import DiagnosticSession, StepAttempt, Outcome
-from session_store import SessionConflict
+from cloud.common.session import DiagnosticSession, StepAttempt, Outcome
+from cloud.common.session import SessionConflict
 
 class Snapshot:
     def __init__(self, body): self.body=deepcopy(body); self.exists=body is not None

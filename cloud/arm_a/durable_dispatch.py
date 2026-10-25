@@ -14,7 +14,7 @@ from urllib.parse import urlsplit
 import uuid
 
 from cloud.arm_a.store import OperationConflict, OPERATION_SECONDS
-from session_store import decode, SessionConflict
+from cloud.common.session import decode, SessionConflict
 
 VERSION = 'durable-cloud-tasks-operations-v2'
 WORKER_PATH = '/internal/operations/run'

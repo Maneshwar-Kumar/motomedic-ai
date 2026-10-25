@@ -1,6 +1,6 @@
 # Rider safeguards and context integration
 
-Serving policy is `open-manual-section-template-v1` with `gcp-public-cloud-run-cookie-v2` frontend access. The code and its provider-free boundary checks are implemented. Hosted and browser acceptance need a hosted run under a new owner scope; see [TODO](../TODO.md).
+Serving policy is `open-manual-section-template-v1` with `gcp-public-cloud-run-cookie-v2` frontend access. The code and its provider-free boundary checks are implemented. Hosted and browser acceptance need a hosted run under a new owner scope; see [TODO](../docs/TODO.md).
 
 ## Limits
 
@@ -15,11 +15,11 @@ Serving policy is `open-manual-section-template-v1` with `gcp-public-cloud-run-c
 | Global rider requests | 60 per minute and 250 per day; provider allocation may run out much sooner |
 | Public visitor issuance | Ten per minute and 60 per rolling day, with atomic spent-proof rejection |
 | Public cookie and proof | Secure, HttpOnly, SameSite cookie valid 24 hours; 14-bit challenge valid 120 seconds |
-| Model request | One call per turn. The request is counted natively and must fit the window and the remaining shared budget; it reserves the counted input plus 512 tokens of headroom plus the 1,800-token output bound. |
+| Model request | One call per turn. The request is counted natively and must fit the model's window, the remaining attempts and the Haiku money ledger; it reserves the counted input plus 512 tokens of headroom plus the 1,800-token output bound. |
 | Model output | At most 1,800 tokens and 16 KiB of JSON; a truncated or refused output is SYSTEM_ERROR |
 | Retention | 30-minute idle session expiry; 24-hour session and operation lifetime; raw and normalized media at most 15 minutes |
 
-These ceilings do not promise that many provider turns. The shared ledgers (100 attempts, the applied 2,000,000-token ceiling, Haiku USD1) are permanent across restarts, conversations and days. Unused or uncertain reservations stay charged.
+These ceilings do not promise that many provider turns. The shared ledgers (the 100-attempt allocation and the Haiku USD1 ledger; there is no token ceiling) are permanent across restarts, conversations and days. Unused or uncertain reservations stay charged.
 
 ## Admission order
 

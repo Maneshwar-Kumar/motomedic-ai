@@ -3,7 +3,7 @@
 The system prompt is cached for five minutes; the rider question and manual sections are sent
 uncached. Effort is high with thinking disabled: on the 30-question run, default (medium) effort
 released 24/30 and high effort 30/30 with no unfaithful cited statement
-(reports/evals/20261025_answer_release_v3). There is no verifier, correction round, retry or
+(evals/20261025_answer_release_v3). There is no verifier, correction round, retry or
 fallback model. Before the call, the whole-turn ledger reserves one slot holding the counted
 input, a small counter headroom and the full output bound; the slot stays charged even when the
 call fails.
@@ -18,7 +18,7 @@ import time
 from urllib.error import HTTPError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-from generation_providers import ProviderFailure
+from cloud.common import ProviderFailure
 from cloud.grounded_generation.template_answer import SYSTEM_PROMPT, answer_schema
 
 MODEL = 'claude-haiku-5-5'

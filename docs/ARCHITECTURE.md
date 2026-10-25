@@ -6,7 +6,7 @@ MotoMedic answers questions about the selected Himalayan BS6 owner's manual:
 - one Haiku `claude-haiku-5-5` call that fills the answer template;
 - a deterministic release gate.
 
-There is no review layer and no verifier. The worker saves the released answer before the API streams or recovers that same buffer. The path is frozen as [serving manifest v11](../reports/public_evaluator/20261025/serving_manifest_v11.json) and is **not deployed**; see [status](STATUS.md).
+There is no review layer and no verifier. The worker saves the released answer before the API streams or recovers that same buffer. The path is frozen as [serving manifest v11.1](../releases/serving_manifest_v11_1.json) and is **not deployed**; see [status](STATUS.md). Until it is, experiments run the same code locally with a Claude Code subagent as the generator ([EXPERIMENTS](EXPERIMENTS.md)).
 
 ## What runs where
 
@@ -61,7 +61,7 @@ flowchart TB
 | Retrieval | BGE-M3 query vector and BM25 run on the worker CPU, with RRF top 5 and conditional reranking. Dense search uses hosted Qdrant when `MOTOMEDIC_QDRANT_URL` is set, or exact search over the same pinned vectors. | [section_retrieval.py](../cloud/grounded_generation/section_retrieval.py) |
 | Model input and gate | Plain labelled sections, the system prompt, the native answer schema and the deterministic gate. | [section_assembly.py](../cloud/grounded_generation/section_assembly.py), [template_answer.py](../cloud/grounded_generation/template_answer.py) |
 | Generation | One reserved Haiku call, with the system prompt cached for 5 minutes. | [haiku_answer.py](../cloud/grounded_generation/haiku_answer.py) |
-| Durable state and ledgers | Sessions, operations, fenced leases, saved views, visitor quotas and permanent token and money reservations. | [store.py](../cloud/arm_a/store.py), [whole_turn_admission.py](../cloud/grounded_generation/whole_turn_admission.py) |
+| Durable state and ledgers | Sessions, operations, fenced leases, saved views, visitor quotas, the 100-attempt allocation and the Haiku money reservations. Tokens are counted but have no ceiling. | [store.py](../cloud/arm_a/store.py), [whole_turn_admission.py](../cloud/grounded_generation/whole_turn_admission.py) |
 
 ## One rider turn
 
@@ -78,14 +78,14 @@ SUPPORTED includes complete and explicitly partial answers. AMBIGUOUS, UNSUPPORT
 
 ## Build, test and release boundaries
 
-[GitHub Actions](../.github/workflows/ci.yml) first runs the repository structure check and the v11 frozen-input check, comparing against the committed blobs. It then runs the provider-free unit tests and the UI tests. It requests no provider secret and does not establish hosted answer quality.
+[GitHub Actions](../.github/workflows/ci.yml) first runs the repository structure check and the v11.1 frozen-input check, comparing against the committed blobs. It then runs the provider-free unit tests and the UI tests. It requests no provider secret and does not establish hosted answer quality.
 
-[serving_release.py](../tools/serving_release.py) freezes and verifies the v11 manifest. Inside an image, [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index at `build/section-index`. The [Dockerfile](../cloud/arm_a/Dockerfile) runs that check during the build.
+[serving_release.py](../tools/serving_release.py) freezes and verifies the serving manifest (currently v11.1). Inside an image, [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index at `build/section-index`. The [Dockerfile](../cloud/arm_a/Dockerfile) runs that check during the build.
 
-Preparing a v11 build context is a later owner-scoped step. So are the hosted build, deployment and any Qdrant collection for the new index. A release record must name the Ready revisions, configuration, traffic, the source, index, runtime and image bindings, rollback and restore.
+Preparing a v11.1 build context is a later owner-scoped step. So are the hosted build, deployment and any Qdrant collection for the new index. A release record must name the Ready revisions, configuration, traffic, the source, index, runtime and image bindings, rollback and restore.
 
 ## Source and spending controls
 
-The source is the 149-page RAM00818/A owner's manual, SHA-256 `cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89`. The section index `index_a609ca61c635641e0a22dc48` derives from the cached parse of the public snapshot `index_a3282c4d98cf54595e4ba168`. Every parsed object can be cited. Earlier review packages are golden-answer data, not a gate. Docling's page 103 gap stays flagged.
+The source is the 149-page RAM00818/A owner's manual, SHA-256 `cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89`. The section index `index_a609ca61c635641e0a22dc48` derives from the cached parse of the public snapshot `index_a3282c4d98cf54595e4ba168`, built by [ingest/](../ingest/README.md). Every parsed object can be cited. Earlier review packages are golden-answer data, not a gate. Docling's page 103 gap stays flagged.
 
-The generation call uses the existing shared Haiku USD1 ledger, the 100-attempt allocation and the applied 2,000,000-token ceiling. Historical reservations stay charged; there is no reset, refund or new allocation. The INR2,700 lifetime budget and INR2,540 billing-disconnect guard remain. Stopped billing is never restarted without the owner.
+The generation call uses the existing shared Haiku USD1 ledger and the 100-attempt allocation. The token ceiling was removed on 25 October 2026 ([decision v5](../releases/owner_decision_v5.json)). Historical reservations stay charged; there is no reset, refund or new allocation. The INR3,120 lifetime budget and the INR2,960 billing-disconnect guard remain. Stopped billing is never restarted without the owner.

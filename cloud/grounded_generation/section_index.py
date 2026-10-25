@@ -116,7 +116,7 @@ def regroup(chunks, running):
 def build(source_dir, out_dir, model_dir):
     import numpy as np
     from sentence_transformers import SentenceTransformer
-    from online_ingest import build_bm25
+    from ingest.online_ingest import build_bm25
 
     source_dir, out_dir = Path(source_dir), Path(out_dir)
     if (out_dir / 'manifest.json').exists():

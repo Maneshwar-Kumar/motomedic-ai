@@ -13,8 +13,11 @@ SCHEMA = 'motomedic-serving-release-v11'
 ARCHITECTURE = 'SECTION_TOP5_SINGLE_CALL_TEMPLATE_GATE'
 MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
 INDEX = 'index_a609ca61c635641e0a22dc48'
-OWNER_DECISION = 'reports/evals/20261025_answer_release_v3/owner_decision_v3.json'
-EVALUATION = 'reports/evals/20261025_answer_release_v3/comparison.json'
+# The design (v3), the integration bar (v4) and the token-ceiling removal and layout (v5).
+OWNER_DECISIONS = ('evals/20261025_answer_release_v3/owner_decision_v3.json',
+                   'evals/20261025_answer_release_v3/owner_decision_v4.json',
+                   'releases/owner_decision_v5.json')
+EVALUATION = 'evals/20261025_answer_release_v3/comparison.json'
 BASE_IMAGE = 'us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4'
 UI_BASE_IMAGE = 'docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1'
 ACCEPTANCE = {'runtime_quality': 'HOSTED_REAL_MODEL_RUN_REQUIRED',
@@ -56,23 +59,28 @@ def validate_policy(release, root):
             or release.get('assembly_version') != section_assembly.VERSION
             or release.get('template_version') != template_answer.VERSION
             or release.get('review_layer') != 'NONE' or release.get('verifier') != 'NONE'
+            or release.get('token_ceiling') != 'NONE'
             or release.get('fallback_enabled') is not False or release.get('answer_cache_enabled') is not False
             or release.get('prompt_cache') != 'ANTHROPIC_SYSTEM_PROMPT_5M'
             or release.get('backend_base_image') != BASE_IMAGE or release.get('ui_base_image') != UI_BASE_IMAGE
             or release.get('deployment_authorized') is not False or release.get('public_opening_authorized') is not False
-            or release.get('billing_changed') is not False or release.get('ledger_changed') is not False):
+            or release.get('billing_changed') is not False or release.get('ledger_documents_changed') is not False):
         raise ValueError('SERVING_MODEL_OR_OPERATIONAL_POLICY_CHANGED')
     if release.get('acceptance') != ACCEPTANCE:
         raise ValueError('BUILD_CANNOT_GRANT_RUNTIME_ACCEPTANCE')
-    for field, path in (('owner_decision', OWNER_DECISION), ('evaluation', EVALUATION)):
-        bound = release.get(field) or {}
-        if bound.get('path') != path or bound.get('sha256') != digest(confined(root, path)):
-            raise ValueError('SERVING_DECISION_OR_EVALUATION_BINDING_CHANGED:' + field)
-    decision = json.loads(confined(root, OWNER_DECISION).read_bytes())
-    if (decision.get('authority') != 'DIRECT_USER_INSTRUCTION' or decision.get('review_layer') != 'NONE'
-            or decision.get('deployment_authorized') is not False or decision.get('billing_restart_authorized') is not False
-            or decision.get('ledger_changes_authorized') is not False):
-        raise ValueError('SERVING_OWNER_DECISION_SCOPE_CHANGED')
+    bound = release.get('owner_decisions')
+    if (type(bound) is not list or [row.get('path') for row in bound] != list(OWNER_DECISIONS)
+            or any(row.get('sha256') != digest(confined(root, row['path'])) for row in bound)):
+        raise ValueError('SERVING_DECISION_OR_EVALUATION_BINDING_CHANGED:owner_decisions')
+    evaluation = release.get('evaluation') or {}
+    if evaluation.get('path') != EVALUATION or evaluation.get('sha256') != digest(confined(root, EVALUATION)):
+        raise ValueError('SERVING_DECISION_OR_EVALUATION_BINDING_CHANGED:evaluation')
+    for path in OWNER_DECISIONS:
+        decision = json.loads(confined(root, path).read_bytes())
+        if (decision.get('authority') != 'DIRECT_USER_INSTRUCTION' or decision.get('review_layer', 'NONE') != 'NONE'
+                or decision.get('deployment_authorized') is not False
+                or decision.get('billing_restart_authorized') is not False):
+            raise ValueError('SERVING_OWNER_DECISION_SCOPE_CHANGED:' + path)
     return True
 
 

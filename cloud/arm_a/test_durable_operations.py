@@ -19,7 +19,7 @@ from cloud.grounded_generation.test_section_wiring import ScriptedQuestions, OP
 from cloud.grounded_generation.delivery import bind_view, accepted_events, encode, stream_operation
 from rider_ui.client import APIError
 from rider_ui.verified_sse import read_verified_stream
-from session_store import SessionConflict
+from cloud.common.session import SessionConflict
 
 
 class DurableOperationTests(unittest.TestCase):

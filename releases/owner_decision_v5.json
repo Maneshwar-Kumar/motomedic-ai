@@ -1,0 +1,20 @@
+{
+  "schema": "motomedic-owner-decision-v1",
+  "recorded_at_utc": "2026-10-25T12:00:00Z",
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "extends": "../evals/20261025_answer_release_v3/owner_decision_v4.json",
+  "owner_message": "Merge to main. Remove token ceiling, but keep current build for experimentation use claude code (here) for inference and answer generation. Then refresh the documentation, reorganize for an external human reviewer the whole repo.",
+  "decisions": {
+    "main": "MERGED: PR #4 (codex/public-evaluator) merged into main as 7c412369f055b4d0ee747501e6b026f5987d1564",
+    "token_ceiling": "REMOVED_IN_CODE: whole-turn admission still counts reserved tokens but enforces no lifetime or rolling-day token ceiling; the 100-attempt allocation, the shared Haiku USD1 ledger, the rolling event limits, pacing and each call's native window still apply",
+    "hosted_ledger_documents": "NOT_CHANGED: no Firestore write; the next hosted admission drops the ceiling fields from the allocation document it writes",
+    "experimentation": "LOCAL: tools/local_answer.py runs the serving retrieval, assembly and gate on the pinned section index; a Claude Code subagent (Haiku, effort high) writes the draft instead of the Anthropic API; no API key, ledger or cloud service is used",
+    "repository": "REORGANIZED_FOR_AN_EXTERNAL_REVIEWER: source/, ingest/, cloud/, rider_ui/, tools/, evals/, releases/, docs/ and archive/ (history); serving manifest v11.1 rebinds the moved inputs",
+    "history_verification": "The v8-v10.14 frozen bindings and the 161-case approval package were last verified in their original layout at 7c412369f055b4d0ee747501e6b026f5987d1564; archive/ keeps their bytes"
+  },
+  "review_layer": "NONE",
+  "deployment_authorized": false,
+  "billing_restart_authorized": false,
+  "gcp_changes": false,
+  "human_signoff": false
+}

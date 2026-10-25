@@ -1,6 +1,6 @@
 """Non-recurring Anthropic maximum-cost reservations; no reset or refund."""
 from decimal import Decimal, ROUND_CEILING
-from generation_providers import ProviderFailure
+from cloud.common import ProviderFailure
 
 VERSION='claude-fallback-nonrecurring-one-dollar-v1'
 ALLOCATION='owner-haiku-fallback-20261011-validation-v1'

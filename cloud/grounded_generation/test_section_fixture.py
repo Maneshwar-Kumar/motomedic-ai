@@ -9,7 +9,7 @@ from pathlib import Path
 
 # Loaded at import: tests that patch sys.modules must not first import NumPy inside the patch.
 import numpy as np
-from online_ingest import build_bm25
+from ingest.online_ingest import build_bm25
 from rider_ui.client import INDEX_ID, MANUAL_SHA
 
 TOPICS = (('running', 'engine', 'rpm', 'throttle', 'km'), ('charger', 'port', 'usb', 'rain', 'cap'),

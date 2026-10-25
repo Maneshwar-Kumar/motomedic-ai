@@ -12,7 +12,7 @@ import re
 from flask import jsonify, request
 from cloud.arm_a.visitor import verify
 from cloud.arm_a.store import Limited, OperationConflict
-from session_store import SessionConflict
+from cloud.common.session import SessionConflict
 from rider_ui.safeguards import validate_message, LimitError
 
 

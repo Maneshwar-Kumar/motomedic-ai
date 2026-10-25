@@ -22,13 +22,15 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
-          cache-dependency-path: requirements-ingest.txt
+          cache-dependency-path: ingest/requirements.txt
       - name: Install CPU runtime
         run: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
       - name: Install ingestion dependencies
-        run: pip install -r requirements-ingest.txt
+        run: pip install -r ingest/requirements.txt
       - name: Run regression checks
-        run: python -m unittest test_budget_guard test_online_assembly test_conditional_retrieval
+        run: |
+          python -m unittest cloud.budget_guard.test_policy
+          cd ingest && python -m unittest test_online_assembly test_conditional_retrieval
       - uses: actions/download-artifact@v4
         if: inputs.parse_run_id != ''
         with:
@@ -40,17 +42,18 @@ jobs:
         env:
           PARSE_RUN_ID: ${{ inputs.parse_run_id }}
         run: |
-          args=(--out build/index)
+          args=(--manifest source/source_manifest.json --out build/index)
           if [ -n "$PARSE_RUN_ID" ]; then args+=(--parsed-document build/parsed/docling_document.json); fi
           args+=(--embedding-model BAAI/bge-m3 --max-tokens 1024 --no-package-model)
-          python -u online_ingest.py "${args[@]}"
+          python -u ingest/online_ingest.py "${args[@]}"
       - name: Save resolved dependency versions
         run: pip freeze > build/index/requirements-resolved.txt
       - name: Prepare cross-encoder and compare retrieval
-        run: python -u online_retrieve.py --index build/index --prepare-reranker --evaluate
+        run: python -u ingest/online_retrieve.py --index build/index --prepare-reranker --evaluate
       - name: Verify assembled typed evidence
         env:
-          MOTOMEDIC_TEST_INDEX: build/index
+          MOTOMEDIC_TEST_INDEX: ${{ github.workspace }}/build/index
+        working-directory: ingest
         run: python -m unittest test_online_assembly
       - uses: actions/upload-artifact@v4
         if: always()

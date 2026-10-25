@@ -30,7 +30,7 @@ def synthetic_index(path):
 class ReleaseTests(unittest.TestCase):
     def fixture(self, root):
         (root / 'runtime.py').write_bytes(b'candidate-runtime')
-        for name in (policy.OWNER_DECISION, policy.EVALUATION):
+        for name in (*policy.OWNER_DECISIONS, policy.EVALUATION):
             target = root / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(release.ROOT / name, target)
@@ -43,8 +43,7 @@ class ReleaseTests(unittest.TestCase):
     def patched(self):
         class Both:
             def __enter__(inner):
-                inner.patches = [patch.object(release, 'verify_history', return_value=64),
-                    patch.object(release, 'verify_serving_history', return_value=release.HISTORICAL_SERVING),
+                inner.patches = [patch.object(release, 'verify_previous', return_value=release.PREVIOUS),
                     patch.object(release, 'serving_inputs', return_value=['runtime.py'])]
                 for p in inner.patches:
                     p.start()
@@ -68,8 +67,9 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(self.verify(root), manifest)
             self.assertEqual(manifest['file_sha256'], {'runtime.py': hashlib.sha256(b'candidate-runtime').hexdigest()})
             self.assertEqual(manifest['index'], section_index.identity(root / 'build/section-index'))
-            self.assertEqual((manifest['review_layer'], manifest['verifier'], manifest['generation_contract']['effort']),
-                             ('NONE', 'NONE', 'high'))
+            self.assertEqual((manifest['review_layer'], manifest['verifier'], manifest['generation_contract']['effort'],
+                              manifest['token_ceiling']), ('NONE', 'NONE', 'high', 'NONE'))
+            self.assertEqual([row['path'] for row in manifest['owner_decisions']], list(policy.OWNER_DECISIONS))
             self.assertEqual((manifest['deployment_authorized'], manifest['billing_changed'], manifest['provider_calls']),
                              (False, False, 0))
             self.assertEqual(manifest['index_release']['hosted_qdrant_collection'], 'NOT_UPLOADED')
@@ -98,7 +98,7 @@ class ReleaseTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'DIGEST_CHANGED'):
                 self.verify(root)
             for field, value in (('verifier', 'claude-haiku-5-5'), ('review_layer', 'AGENT_RELEASE_161'),
-                                 ('deployment_authorized', True), ('fallback_enabled', True),
+                                 ('deployment_authorized', True), ('fallback_enabled', True), ('token_ceiling', 2000000),
                                  ('schema_version', 'motomedic-serving-release-v10'), ('index_id', 'index_a3282c4d98cf54595e4ba168')):
                 changed = deepcopy(manifest); changed[field] = value
                 self.rewrite(target, changed)
@@ -120,6 +120,10 @@ class ReleaseTests(unittest.TestCase):
             (root / policy.EVALUATION).write_text('{}', encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'BINDING_CHANGED:evaluation'):
                 self.verify(root)
+            shutil.copyfile(release.ROOT / policy.EVALUATION, root / policy.EVALUATION)
+            (root / policy.OWNER_DECISIONS[-1]).write_text('{}', encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'BINDING_CHANGED:owner_decisions'):
+                self.verify(root)
 
     def test_index_policy_refuses_a_changed_index(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -131,12 +135,14 @@ class ReleaseTests(unittest.TestCase):
     def test_serving_inventory_covers_code_ui_workflows_and_history(self):
         names = set(release.serving_inputs(release.ROOT))
         for required in ('cloud/grounded_generation/section_questions.py', 'cloud/grounded_generation/haiku_answer.py',
-                         'cloud/arm_a/app.py', 'rider_ui/client.py', '.github/workflows/ci.yml', 'source_manifest.json',
-                         release.MANUAL, policy.OWNER_DECISION,
-                         'reports/public_evaluator/20261012/serving_manifest_v10_14.sha256'):
+                         'cloud/common/session.py', 'cloud/arm_a/app.py', 'rider_ui/client.py', '.github/workflows/ci.yml',
+                         'source/source_manifest.json', 'ingest/online_ingest.py', release.MANUAL, *policy.OWNER_DECISIONS,
+                         'releases/serving_manifest_v11.sha256'):
             self.assertIn(required, names)
-        for retired in ('cloud/grounded_generation/verified_qa.py', 'approved_registry.py', 'reviewed_controller.py'):
+        for retired in ('cloud/grounded_generation/verified_qa.py', 'cloud/grounded_generation/token_ceiling.py',
+                        'archive/legacy_root/approved_registry.py', 'tools/manage_primary_token_ceiling.py'):
             self.assertNotIn(retired, names)
+        self.assertFalse([n for n in names if n.startswith(('archive/', 'reports/', 'human_review/'))])
 
 
 if __name__ == '__main__':

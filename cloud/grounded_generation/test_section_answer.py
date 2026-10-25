@@ -10,7 +10,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from generation_providers import ProviderFailure
+from cloud.common import ProviderFailure
 from cloud.grounded_generation import haiku_answer as ha
 from cloud.grounded_generation import section_assembly as sa
 from cloud.grounded_generation import section_index as si
