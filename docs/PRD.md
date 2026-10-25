@@ -1,8 +1,8 @@
 # MotoMedic product requirements
 
-Version 2.0, 25 October 2026. The answer path is section retrieval, one generation call and a deterministic release gate, with no review layer.
+Version 2.1, 25 October 2026. The answer path is section retrieval, one generation call and a deterministic release gate, with no review layer and no token ceiling.
 
-This is the single product specification. It follows the owner's decisions of 24–25 October 2026 ([v1](../reports/evals/20261024_answer_release_v1/owner_decision_v1.json), [v2](../reports/evals/20261024_answer_release_v1/owner_decision_v2.json), [v3](../reports/evals/20261025_answer_release_v3/owner_decision_v3.json), [v4](../reports/evals/20261025_answer_release_v3/owner_decision_v4.json)). [TRD](TRD.md) and [architecture](ARCHITECTURE.md) define the implementation; [status](STATUS.md) records what is built and accepted.
+This is the single product specification. It follows the owner's decisions of 24–25 October 2026 ([v1](../evals/20261024_answer_release_v1/owner_decision_v1.json), [v2](../evals/20261024_answer_release_v1/owner_decision_v2.json), [v3](../evals/20261025_answer_release_v3/owner_decision_v3.json), [v4](../evals/20261025_answer_release_v3/owner_decision_v4.json)). [TRD](TRD.md) and [architecture](ARCHITECTURE.md) define the implementation; [status](STATUS.md) records what is built and accepted.
 
 ## 1. Product and purpose
 
@@ -41,7 +41,7 @@ Out of scope: other manuals, undocumented internal repairs, aftermarket modifica
 | Support route | Manifest-bound `mailto:support@royalenfield.com`, with its recorded market-fit limitation. |
 | Display | The answer shows the released text and server-derived page references, never PDF excerpts or crops. The repository publishes the manual for inspection under the owner's public-review scope. |
 
-[source_manifest.json](../source_manifest.json) keeps the immutable metadata. Every parsed object of the manual can be cited. Earlier review packages are kept as golden-answer data, not as a gate. Docling's page 103 parse gap stays flagged.
+[source_manifest.json](../source/source_manifest.json) keeps the immutable metadata. Every parsed object of the manual can be cited. Earlier review packages are kept as golden-answer data, not as a gate. Docling's page 103 parse gap stays flagged.
 
 ## 4. Rider journey
 
@@ -94,7 +94,7 @@ These messages do not depend on model success and are never labelled as technica
 
 ## 7. Acceptance and operating limits
 
-The design was chosen on a local, agent-scored run of 30 questions ([v3](../reports/evals/20261025_answer_release_v3/README.md)). Haiku at high effort released 30/30 correct answers with no unfaithful citation, which is not hosted or human acceptance. Hosted acceptance needs a real-model run of new held-out questions on the frozen runtime. It must show:
+The design was chosen on a local, agent-scored run of 30 questions ([v3](../evals/20261025_answer_release_v3/README.md)). Haiku at high effort released 30/30 correct answers with no unfaithful citation, which is not hosted or human acceptance. Hosted acceptance needs a real-model run of new held-out questions on the frozen runtime. It must show:
 - returned answers;
 - partial and follow-up behavior;
 - prompt-cache creation and reads;
@@ -104,9 +104,11 @@ The design was chosen on a local, agent-scored run of 30 questions ([v3](../repo
 Do not claim factual correctness from software tests, workflow success or gate releases.
 
 Keep these operating limits:
-- the INR2,700 lifetime budget, with the INR2,540 billing-disconnect guard;
+- the INR3,120 lifetime budget, with the INR2,960 billing-disconnect guard;
 - the shared Haiku USD1 ledger;
-- 100 attempts and the 2,000,000-token primary ceiling, with no reset or refund;
+- the 100-attempt allocation, with no reset or refund (there is no token ceiling since 25 October 2026);
 - stopped billing stays stopped.
+
+Until a hosted run is approved, experiments run locally: real retrieval and gate, with a Claude Code subagent as the generator ([EXPERIMENTS](EXPERIMENTS.md)).
 
 Deployment, public opening, billing and ledger changes need the owner's explicit scope.

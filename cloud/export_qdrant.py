@@ -4,7 +4,7 @@ from pathlib import Path
 import uuid
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from online_ingest import digest, write_json
+from ingest.online_ingest import digest, write_json
 import numpy as np
 
 p=argparse.ArgumentParser()

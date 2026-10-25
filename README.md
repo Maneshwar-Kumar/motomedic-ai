@@ -1,10 +1,20 @@
-# MotoMedic AI
+# MotoMedic
 
-MotoMedic is a text assistant for questions about the **Royal Enfield New Himalayan 450 BS6 owner's manual**. It retrieves the five most relevant manual chunks and sends their whole sections to one Haiku call, which fills an answer template. A deterministic gate releases the answer or fails closed, and the released answer is saved before it is shown.
+MotoMedic is a text assistant that answers rider questions about one document: the **Royal Enfield New Himalayan 450 BS6 owner's manual**. For each question it does three things:
+1. **Retrieval.** It retrieves the five most relevant chunks of the manual.
+2. **Generation.** It sends the whole manual section around each chunk to one Haiku call, which fills a fixed answer template.
+3. **Release gate.** A deterministic release gate either publishes that answer or fails closed. A released answer is saved before the rider sees it.
 
-[Current status](docs/STATUS.md) · [Evaluations](reports/evals/README.md) · [Setup guide](docs/SETUP.md) · [Review PR #4](https://github.com/Maneshwar-Kumar/motomedic-ai/pull/4)
+**New here? Read the [review guide](docs/REVIEW_GUIDE.md) first.**
 
-Work is on `codex/public-evaluator`; `main` remains the baseline. This answer path is implemented, tested without a provider and frozen as [serving manifest v11](reports/public_evaluator/20261025/serving_manifest_v11.json). **It is not deployed.** The hosted stack is offline while billing is disabled, and deploying needs a new owner scope; see [status](docs/STATUS.md).
+## Where things stand (25 October 2026)
+
+| Item | State |
+| --- | --- |
+| Answer path | Implemented and tested without a provider; frozen as [serving manifest v11.1](releases/serving_manifest_v11_1.json) on `main`. |
+| Hosted service | **Not deployed.** The Google Cloud project's billing is disabled, so the hosted services are offline. Deploying needs a new owner decision. |
+| Experiments | Run here, in Claude Code. [`tools/local_answer.py`](tools/local_answer.py) runs the real retrieval and gate on the real index. A Claude Code Haiku subagent writes the answer instead of the paid API ([how](docs/EXPERIMENTS.md)). |
+| Evidence | A 30-question local run in which the generators were Claude Code subagents and the answers were agent-scored. Haiku at high effort answered 30/30 correctly with no unfaithful citation ([evaluation](evals/20261025_answer_release_v3/README.md)). This is not hosted or human acceptance. |
 
 ## How an answer is produced
 
@@ -23,69 +33,49 @@ flowchart LR
     SECTIONS -->|nothing retrieved| FALLBACK[Fixed not-found message and support route]
     SECTIONS --> GEN[One Haiku call fills the answer template]
     GEN --> GATE[Deterministic release gate]
-    GATE --> SAVE[Durable saved answer]
+    GATE --> SAVE[Saved answer, then streamed]
     FALLBACK --> SAVE
-    SAVE --> UI[Stream or recover the saved text]
 ```
 
-1. **Index, built once.** The manual's cached Docling parse is regrouped into 154 content sections:
+1. **Index (built once, offline).** The manual's Docling parse is regrouped into 154 content sections:
    - each WARNING, CAUTION and NOTE box joins the section it follows;
-   - page-break continuations stay in one section;
-   - the search text of each of the 532 chunks starts with its real heading.
-
-   The chunks are embedded with BGE-M3. Requests embed only the query.
-2. **Retrieval.** Dense search and BM25 are fused, and only the top 5 chunks are kept. When the two searches disagree on the top-3 sections, a cross-encoder orders those 5. It never adds a chunk.
-3. **Model input.** The model gets the whole section of each chunk as plain text with short labels such as `[E7] (WARNING) …`. Every WARNING and CAUTION line it receives is listed for a decision. There is no parser JSON, no review layer and no server-added warning text.
-4. **One call.** Pinned `claude-haiku-5-5` (effort high, thinking disabled) fills the template:
-   - cited answer, policy and watchout sentences;
+   - text that continues across a page break stays in one section;
+   - each of the 532 search chunks is prefixed with its real heading and embedded with BGE-M3.
+2. **Retrieval.** Dense search and BM25 keyword search are fused, and only the top 5 chunks are kept. A cross-encoder reorders those 5 only when the two searches disagree on the top-3 sections.
+3. **Model input.** The model receives the whole section of each chunk as plain text with short labels such as `[E7] (WARNING) …`. Every WARNING and CAUTION line sent is listed for an explicit decision. There is no review layer, no parser JSON and no server-added warning text.
+4. **One call.** `claude-haiku-5-5` (effort high, thinking disabled) fills the template:
+   - answer, policy and watchout sentences, each citing its labels;
    - disclaimers;
-   - a decision for every warning sent.
-
-   The system prompt asks for plain rider wording, only what was asked, and both values when the manual disagrees with itself.
-5. **Gate.** The deterministic gate checks:
+   - an INCLUDED or NOT_APPLICABLE decision for every warning sent.
+5. **Gate.** The gate checks:
    - the schema and caps;
-   - that each cited item cites only labels that were sent;
+   - that every citation is a label that was sent;
    - that numbers come from the cited line or the question, and page references from a cited line;
-   - the route rules and warning decisions.
+   - the route rules and the warning decisions.
 
-   UNSUPPORTED shows any cited facts, then the fixed not-found message and support route. A gate failure, malformed output or outage is a system error. Nothing is retried and there is no verifier.
-6. **Delivery.** The worker saves the released view in Firestore before the UI receives answer text. Streaming and recovery read the same saved view, so a refresh never calls the model again.
+   Anything else is a system error. It checks structure, citations, numbers and warning decisions, not meaning.
+6. **Delivery.** The released view is saved in Firestore before any text streams. A refresh replays the saved text and never calls the model again.
 
-The gate checks structure, citations, numbers and warning decisions, not meaning, so a released answer is not independent proof of factual correctness.
+## Repository map
 
-## Evaluation behind this design
+| Folder | What it holds |
+| --- | --- |
+| [docs/](docs/) | [Review guide](docs/REVIEW_GUIDE.md), [architecture](docs/ARCHITECTURE.md), [product](docs/PRD.md) and [technical](docs/TRD.md) requirements, [status](docs/STATUS.md), [setup](docs/SETUP.md), [local experiments](docs/EXPERIMENTS.md), [decision log](docs/DECISIONS.md), [TODO](docs/TODO.md) |
+| [source/](source/README.md) | The 149-page manual, its source manifest and the graph links used by ingestion |
+| [ingest/](ingest/README.md) | The base ingestion job (Docling parse, chunks, embeddings) whose parse the section index reuses |
+| [cloud/](cloud/README.md) | Serving code: [answer path](cloud/grounded_generation/), [API and worker](cloud/arm_a/), [shared types](cloud/common/), Qdrant wrapper, billing guard |
+| [rider_ui/](rider_ui/README.md) | Streamlit rider interface, public gateway and API client |
+| [tools/](tools/README.md) | Release freeze/verify, repository check and the local experiment tool |
+| [evals/](evals/README.md) | Answer-quality evaluations, newest last |
+| [releases/](releases/README.md) | Frozen serving manifests and the latest owner decision |
+| [archive/](archive/README.md) | History: earlier designs, review packages, receipts and retired code. Not used by the current path. |
 
-The same 30 questions were run as isolated subagents in three arms ([v3 run](reports/evals/20261025_answer_release_v3/README.md)). All 19 gold answers reached the model. Results:
-
-| Arm | Released and correct | Unfaithful cited items |
-| --- | --- | --- |
-| Haiku, default effort | 24/30 (6 structural gate failures) | 0 |
-| **Haiku, high effort** (used) | **30/30** | 0 |
-| Sonnet | 28/30 | 0 |
-
-These are local, agent-scored runs, not hosted or human acceptance. The serving modules reproduce all 30 model inputs and all 90 gate outcomes of that run ([parity check](reports/evals/20261025_answer_release_v3/serving_parity.json)).
-
-## What runs where
-
-| Component | Responsibility | Code |
-| --- | --- | --- |
-| Cloud Run UI | Streamlit chat and gateway: scope confirmation, progress, answer display and recovery. | [rider_ui](rider_ui/README.md) |
-| Cloud Run API | Validates input and visitor ownership, creates durable operations, streams and recovers saved results. | [rider_api.py](cloud/arm_a/rider_api.py), [app.py](cloud/arm_a/app.py) |
-| Cloud Run answer worker | Runs the turn and commits the result. | [durable_dispatch.py](cloud/arm_a/durable_dispatch.py), [section_questions.py](cloud/grounded_generation/section_questions.py) |
-| Retrieval | BGE-M3 query vector, BM25, fusion and conditional reranking. Dense search uses hosted Qdrant when configured, or exact search over the same pinned vectors. | [section_retrieval.py](cloud/grounded_generation/section_retrieval.py), [section_index.py](cloud/grounded_generation/section_index.py) |
-| Assembly, template and gate | Plain-text sections, the system prompt, the answer schema and the release gate. | [section_assembly.py](cloud/grounded_generation/section_assembly.py), [template_answer.py](cloud/grounded_generation/template_answer.py) |
-| Anthropic | One Haiku call per answer, reserved first in the shared ledger. | [haiku_answer.py](cloud/grounded_generation/haiku_answer.py), [whole_turn_admission.py](cloud/grounded_generation/whole_turn_admission.py) |
-| Firestore | Conversations, operation leases, saved answers and persistent admission limits. | [store.py](cloud/arm_a/store.py) |
-| GitHub Actions | Provider-free contract and UI checks, and the frozen-input check. | [CI workflow](.github/workflows/ci.yml), [serving_release.py](tools/serving_release.py) |
-
-## Clone, inspect and test
+## Check it yourself
 
 ```sh
-git clone https://github.com/Maneshwar-Kumar/motomedic-ai.git
-cd motomedic-ai
-git switch codex/public-evaluator
+git clone https://github.com/Maneshwar-Kumar/motomedic-ai.git && cd motomedic-ai
+python tools/check_repository_structure.py          # layout, links, manual hash, frozen inputs
+python tools/serving_release.py verify               # every serving input against manifest v11.1
 ```
 
-The [setup guide](docs/SETUP.md) covers dependencies, the provider-free checks and rebuilding the section index. The rebuild uses the cached parse inside the public [index snapshot](https://github.com/Maneshwar-Kumar/motomedic-ai/releases/tag/index-a3282c4d98cf54595e4ba168). The tests use synthetic providers, stores and a synthetic index, so they make no paid calls. Forking does not supply the original cloud or model credentials.
-
-For more detail, read the [product requirements](docs/PRD.md), [technical requirements](docs/TRD.md), [architecture](docs/ARCHITECTURE.md), [reviewer guide](docs/REVIEWER.md) and [TODO](TODO.md). Contributions follow [CONTRIBUTING.md](CONTRIBUTING.md).
+The provider-free test suite (about 210 tests, all synthetic, no paid calls) is listed in [SETUP](docs/SETUP.md) and runs in [CI](.github/workflows/ci.yml). To ask your own question with a Claude Code generator, see [EXPERIMENTS](docs/EXPERIMENTS.md). Forking supplies no cloud or model credentials.

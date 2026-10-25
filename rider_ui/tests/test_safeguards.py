@@ -9,7 +9,7 @@ from rider_ui.safeguards import (LIMITS, LimitError, Usage, validate_message,
                                 validate_request_body, normalize_photo, check_admission,
                                 AtomicAdmission, diagnostic_projection, check_model_request)
 from rider_ui.client import RiderAPI, APIError
-from controller_contracts import Outcome, Fact
+from cloud.common.session import Outcome, Fact
 
 class SafeguardTests(unittest.TestCase):
     def test_user_word_limit_preserves_text_and_rejects_before_transport(self):

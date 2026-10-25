@@ -23,4 +23,4 @@ Saved views from earlier runtimes are rejected before display or continuation. T
 
 ## Checks
 
-Provider-free CI covers the client, the stream decoder, progress and recovery, the gateway and the Streamlit app (`python -m unittest discover -s rider_ui/tests -p 'test_*.py'`). It uses an engineering loopback fixture server. Hosted browser-to-backend answering, Firestore persistence, worker lifetime and disconnect recovery need a hosted run under a new owner scope; see [TODO](../TODO.md).
+Provider-free CI covers the client, the stream decoder, progress and recovery, the gateway and the Streamlit app (`python -m unittest discover -s rider_ui/tests -p 'test_*.py'`). It uses an engineering loopback fixture server. Hosted browser-to-backend answering, Firestore persistence, worker lifetime and disconnect recovery need a hosted run under a new owner scope; see [TODO](../docs/TODO.md).

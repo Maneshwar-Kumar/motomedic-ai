@@ -17,8 +17,8 @@ import threading
 import time
 import uuid
 
-from controller_contracts import DiagnosticSession
-from generation_providers import ProviderFailure
+from cloud.common.session import DiagnosticSession
+from cloud.common import ProviderFailure
 from cloud.grounded_generation import section_assembly as sa
 from cloud.grounded_generation import section_retrieval as sr
 from cloud.grounded_generation import template_answer as ta
@@ -58,7 +58,7 @@ class ManualSource:
 
     @classmethod
     def load(cls, root, index_identity):
-        return cls(json.loads((Path(root) / 'source_manifest.json').read_text(encoding='utf-8-sig')), index_identity)
+        return cls(json.loads((Path(root) / 'source' / 'source_manifest.json').read_text(encoding='utf-8-sig')), index_identity)
 
     def identity(self):
         return {'manual_id': self.manual_id, 'manual_checksum': self.checksum, 'variant': self.variant,

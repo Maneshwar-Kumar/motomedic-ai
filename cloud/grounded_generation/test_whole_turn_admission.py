@@ -5,7 +5,7 @@ import threading
 import types
 import unittest
 from unittest.mock import patch
-from generation_providers import ProviderFailure
+from cloud.common import ProviderFailure
 from cloud.grounded_generation.whole_turn_admission import (WholeTurnAdmission, ALLOCATION,
     operation_deadline, MAX_SLEEP_SECONDS, PACING_VERSION, GEMMA, HAIKU,
     PLAN_VERSION, SEALED_VERSIONS)
@@ -74,6 +74,34 @@ class Tests(unittest.TestCase):
         ended = self.admit.end_turn()
         self.assertEqual(ended['sealing_status'], 'SEALED_UNUSED_CONFIRMED')
         self.assertEqual(self.client.documents[ALLOCATION]['reserved_tokens'], 239808 + 21800)
+
+    def test_no_token_ceiling_but_attempts_and_haiku_money_still_bind(self):
+        # The ledger as recorded under the retired 2,000,000-token grant, already past it.
+        self.client.documents[ALLOCATION] = {'version': 'whole-turn-capacity-v1', 'maximum_attempts': 100,
+            'maximum_tokens': 2000000, 'token_ceiling_authorization': {'scope_sha256': 'a' * 64},
+            'reserved_attempts': 72, 'reserved_tokens': 2100000}
+        old_event = {'at': self.now - timedelta(hours=2), 'tokens': 21800, 'kind': 'generation',
+            'operation_id': 'old', 'slot': 0, 'consumed': True, 'primary_token_ceiling': 2000000,
+            'token_ceiling_scope_sha256': 'a' * 64}
+        self.client.documents['grounded-provider-global-v1'] = {'events': [old_event]}
+        receipt = self.admit.begin_turn('beyond-old-ceiling', plan=self.plan(haiku_input=500000))
+        self.assertEqual(receipt['token_ceiling'], 'NONE')
+        allocation = self.client.documents[ALLOCATION]
+        self.assertEqual((allocation['reserved_tokens'], allocation['reserved_attempts'], allocation['token_ceiling']),
+                         (2100000 + 501800, 73, 'NONE'))
+        self.assertNotIn('maximum_tokens', allocation)
+        new_event = self.client.documents['grounded-provider-global-v1']['events'][-1]
+        self.assertNotIn('primary_token_ceiling', new_event)
+        self.admit.for_model(HAIKU, role='generation')(501800, 'generation')
+        self.admit.end_turn()
+        allocation['reserved_attempts'] = 100
+        with self.assertRaisesRegex(ProviderFailure, 'ALLOCATION_LIMIT'):
+            self.admit.begin_turn('no-attempts-left', plan=self.plan())
+        allocation['reserved_attempts'] = 80
+        self.client.documents[CLAUDE_ALLOCATION] = {'version': CLAUDE_VERSION, 'model': HAIKU,
+            'maximum_nanodollars': 1000000000, 'reserved_nanodollars': 999999000, 'reservation_count': 9}
+        with self.assertRaisesRegex(ProviderFailure, 'CLAUDE_SPEND_LIMIT'):
+            self.admit.begin_turn('no-money-left', plan=self.plan())
 
     def test_large_input_reserves_the_long_context_price_tier(self):
         receipt = self.admit.begin_turn('large', plan=self.plan(haiku_input=120000))

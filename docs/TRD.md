@@ -1,6 +1,6 @@
 # MotoMedic technical requirements
 
-Version 2.0, 25 October 2026. Paired with the [PRD](PRD.md), [architecture](ARCHITECTURE.md) and [status](STATUS.md). The owner's decisions are [v1](../reports/evals/20261024_answer_release_v1/owner_decision_v1.json), [v2](../reports/evals/20261024_answer_release_v1/owner_decision_v2.json), [v3](../reports/evals/20261025_answer_release_v3/owner_decision_v3.json) and [v4](../reports/evals/20261025_answer_release_v3/owner_decision_v4.json).
+Version 2.1, 25 October 2026. Paired with the [PRD](PRD.md), [architecture](ARCHITECTURE.md) and [status](STATUS.md). The owner's decisions are [v1](../evals/20261024_answer_release_v1/owner_decision_v1.json), [v2](../evals/20261024_answer_release_v1/owner_decision_v2.json), [v3](../evals/20261025_answer_release_v3/owner_decision_v3.json) and [v4](../evals/20261025_answer_release_v3/owner_decision_v4.json).
 
 ## 1. Components
 
@@ -12,7 +12,9 @@ Version 2.0, 25 October 2026. Paired with the [PRD](PRD.md), [architecture](ARCH
 | Answer template and gate | System prompt, native answer schema, deterministic release gate, fixed fallback. | [template_answer.py](../cloud/grounded_generation/template_answer.py) |
 | Generation call | One `claude-haiku-5-5` request with ledger reservation and strict response validation. | [haiku_answer.py](../cloud/grounded_generation/haiku_answer.py) |
 | Turn pipeline | Session checks, the stages above, the saved view and its release binding. | [section_questions.py](../cloud/grounded_generation/section_questions.py) |
-| Admission ledger | Persistent token, attempt and USD reservations, pacing and sealing. | [whole_turn_admission.py](../cloud/grounded_generation/whole_turn_admission.py), [token_ceiling.py](../cloud/grounded_generation/token_ceiling.py), [claude_budget.py](../cloud/grounded_generation/claude_budget.py) |
+| Admission ledger | Persistent attempt and USD reservations, token accounting without a ceiling, pacing and sealing. | [whole_turn_admission.py](../cloud/grounded_generation/whole_turn_admission.py), [claude_budget.py](../cloud/grounded_generation/claude_budget.py) |
+| Shared types | Session records, the provider error and the content hash, unchanged from the retired root modules. | [cloud/common/](../cloud/common/) |
+| Local experiments | The serving retrieval, assembly and gate, with a Claude Code subagent in place of the API call | [tools/local_answer.py](../tools/local_answer.py), [EXPERIMENTS](EXPERIMENTS.md) |
 | Delivery | Operation binding, saved-buffer streaming and recovery. | [delivery.py](../cloud/grounded_generation/delivery.py) |
 | API, worker and store | Rider routes, Cloud Tasks dispatch, fenced worker, Firestore transactions. | [rider_api.py](../cloud/arm_a/rider_api.py), [durable_dispatch.py](../cloud/arm_a/durable_dispatch.py), [store.py](../cloud/arm_a/store.py), [app.py](../cloud/arm_a/app.py) |
 
@@ -38,7 +40,7 @@ The current index is `index_a609ca61c635641e0a22dc48`:
 - 121 boxes attached and 116 continuations;
 - 145 of 149 pages covered, with page 103 flagged as a parse gap.
 
-It was built by the [v3 candidate script](../reports/evals/20261025_answer_release_v3/candidate/section_index.py). The serving copy differs only in its import path. A changed source, parser, sectioning or embedding creates a new index ID.
+It was built by the [v3 candidate script](../evals/20261025_answer_release_v3/candidate/section_index.py). The serving copy differs only in its import path. A changed source, parser, sectioning or embedding creates a new index ID.
 
 ## 3. Retrieval
 
@@ -155,10 +157,11 @@ Open Q&A issues no feedback choices, and there is no feedback route.
 ## 9. Admission, privacy and operations
 
 Admission and ledgers:
-- **Single slot.** Each turn reserves one `generate` slot, and none when nothing is retrieved, in the existing ledgers: the 100-attempt and token allocation and the shared Haiku USD1 ledger.
-- **Pacing.** Slots keep the 61-second pacing.
+- **Single slot.** Each turn reserves one `generate` slot, and none when nothing is retrieved, in the existing ledgers: the 100-attempt allocation and the shared Haiku USD1 ledger.
+- **No token ceiling.** Since 25 October 2026 ([decision v5](../releases/owner_decision_v5.json)), reserved tokens are counted but neither a lifetime nor a rolling-day token total limits a turn. Each call's native window still does. The next hosted admission drops the retired ceiling fields from the allocation document it writes; events reserved under the ceiling stay readable.
+- **Pacing.** Slots keep the 61-second pacing and the rolling 24-hour event limits.
 - **History.** Earlier draft/verify events remain valid and charged when read.
-- **Limits.** There is no reset, refund or new allocation. Ceiling changes need the owner's grant, applied with [manage_primary_token_ceiling.py](../tools/manage_primary_token_ceiling.py).
+- **Limits.** There is no reset, refund or new allocation without the owner.
 
 Input and session limits:
 - Rider text is at most 100 words, 2,000 characters and 8,000 UTF-8 bytes, checked in both UI and API before retrieval or reservation.
@@ -172,22 +175,23 @@ Identity and secrets:
 - **Public gateway.** The gateway issues signed, HttpOnly, SameSite 24-hour cookies after a proof challenge and a private visitor reservation. No client IP is trusted.
 - **Logs.** Traces are redacted, and no credentials, rider records or raw media go to Git.
 
-Availability fallback, answer caching and whole-manual prompting do not exist in this runtime; `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true` refuses startup. Budget records are in [deployment_status.json](../cloud/deployment_status.json): INR2,700 lifetime and the INR2,540 billing-disconnect guard. Stopped billing is never restarted implicitly.
+Availability fallback, answer caching and whole-manual prompting do not exist in this runtime; `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true` refuses startup. The budget is INR3,120 with an INR2,960 billing-disconnect guard, as raised for the [23 October private test](../evals/20261023_private_hosted_v5/README.md); [deployment_status.json](../cloud/deployment_status.json) still records the earlier INR2,700/2,540. Stopped billing is never restarted implicitly.
 
 ## 10. Release and validation
 
-[serving_release.py](../tools/serving_release.py) freezes and verifies schema `motomedic-serving-release-v11`. The manifest binds:
-- every code, UI and workflow file under `cloud/arm_a`, `cloud/grounded_generation`, `rider_ui` and `.github/workflows`;
-- the root modules in the serving import graph;
+[serving_release.py](../tools/serving_release.py) freezes and verifies schema `motomedic-serving-release-v11`; the current file is [v11.1](../releases/serving_manifest_v11_1.json). The manifest binds:
+- every code, UI and workflow file under `cloud/arm_a`, `cloud/common`, `cloud/grounded_generation`, `rider_ui` and `.github/workflows`;
+- `ingest/online_ingest.py`;
 - the manual and source manifest;
-- the owner decision and the evaluation;
+- the owner decisions v3–v5 and the evaluation;
+- the previous v11 manifest;
 - the section index identity and the generation contract.
 
-It records `deployment_authorized: false`. [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index inside an image. Earlier v8–v10.14 manifests stay verifiable history.
+It records `token_ceiling: NONE` and `deployment_authorized: false`. [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index inside an image. Manifests v8–v10.14 are in `archive/`; their bindings were last verified in their original layout at commit `7c412369f055b4d0ee747501e6b026f5987d1564`.
 
 The provider-free tests listed in [CI](../.github/workflows/ci.yml) cover:
 - the index, retrieval, assembly, gate and generation call, on a synthetic index with a fake transport and ledger;
 - the full API → worker → saved stream → UI parser path;
 - durable operations, admission and release tooling.
 
-The [parity check](../reports/evals/20261025_answer_release_v3/serving_parity.py) runs the serving modules on the real index against the v3 run. Hosted acceptance needs a real-model run of held-out questions on the frozen runtime: returned answers, cache reads, saved/stream/recovery equality, ownership and replay, and stage timings. Evaluations live in [reports/evals](../reports/evals/README.md) and are labelled local, private or hosted.
+The [parity check](../evals/20261025_answer_release_v3/serving_parity.py) runs the serving modules on the real index against the v3 run. Hosted acceptance needs a real-model run of held-out questions on the frozen runtime: returned answers, cache reads, saved/stream/recovery equality, ownership and replay, and stage timings. Evaluations live in [reports/evals](../evals/README.md) and are labelled local, private or hosted.
