@@ -1,0 +1,55 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "policy": [
+    {
+      "text": "Use only Royal Enfield genuine accessories that are model specific, and follow the accessory installation procedure.",
+      "evidence_ids": ["E25"]
+    },
+    {
+      "text": "The rider is responsible for safe operation when installing accessories or carrying additional weight.",
+      "evidence_ids": ["E18"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Loading weight or installing accessories incorrectly can affect stability, handling and safe operation, and could cause an accident resulting in serious injury or loss of life.",
+      "evidence_ids": ["E26"]
+    },
+    {
+      "text": "Nonstandard parts, such as aftermarket or custom made extended front forks, can adversely affect performance and handling. Removing or altering original parts can do the same and cause an accident that could result in serious injury or loss of life.",
+      "evidence_ids": ["E28", "E29"]
+    },
+    {
+      "text": "Ignoring model or design specifications counts as misuse of the motorcycle and its accessories, can adversely affect handling and performance, and can cause an accident that could result in serious injury or loss of life.",
+      "evidence_ids": ["E30"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E26",
+      "decision": "INCLUDED",
+      "reason": "Loading weight or fitting accessories incorrectly is directly relevant to adding a trailer."
+    },
+    {
+      "display_id": "E27",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Repeats the general statement that genuine accessories are tested; the policy line already covers genuine accessories."
+    },
+    {
+      "display_id": "E28",
+      "decision": "INCLUDED",
+      "reason": "Warns against nonstandard parts and altering original parts, which matters if the bike must be modified to tow."
+    },
+    {
+      "display_id": "E29",
+      "decision": "INCLUDED",
+      "reason": "Continuation of the E28 warning, cited together with it."
+    },
+    {
+      "display_id": "E30",
+      "decision": "INCLUDED",
+      "reason": "Warns that ignoring model or design specifications is misuse of the motorcycle and accessories."
+    }
+  ]
+}

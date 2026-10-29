@@ -1,0 +1,35 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "The manual says the hazard lights keep working for 30 minutes, unless you switch them off manually.",
+      "evidence_ids": ["E3"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The hazard flasher cannot be switched on when the ignition is off.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Hazard flashing drains the battery, so do not use it for longer than necessary.",
+      "evidence_ids": ["E8"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not say whether turning the ignition off changes this timing."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "NOT_APPLICABLE", "reason": "Concerns turn signals while the hazard switch is on, not hazard duration."},
+    {"display_id": "E6", "decision": "NOT_APPLICABLE", "reason": "Concerns how the indicator lamps flash, not how long they run."},
+    {"display_id": "E8", "decision": "INCLUDED", "reason": "Battery strain from long hazard use bears on how long the lights keep flashing."},
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Concerns the headlamp draining the battery, not the hazard lights."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns an engine-management fault, not the hazard lights."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Concerns the ABS indicator, not the hazard lights."}
+  ]
+}

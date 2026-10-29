@@ -1,0 +1,52 @@
+{
+  "route": "SAFETY_STOP",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "No. The manual says not to run the motorcycle while the ABS lamp stays on above 5 km/h.",
+      "evidence_ids": ["E2", "E8"]
+    },
+    {
+      "text": "Take the motorcycle to the nearest Authorised Royal Enfield Service Centre to have the brake system inspected.",
+      "evidence_ids": ["E3", "E8"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The ABS lamp should turn off once the motorcycle passes 5 km/h, and it lights up again when there is an ABS malfunction.",
+      "evidence_ids": ["E1"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Not getting the brake system inspected can result in serious injuries and loss of life.",
+      "evidence_ids": ["E8"]
+    },
+    {
+      "text": "Keep the instrument cluster working properly, since it is an integral part of the ABS system.",
+      "evidence_ids": ["E12"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not give a waiting period before the lamp must be checked."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E2", "decision": "NOT_APPLICABLE", "reason": "The answer already gives this stop instruction."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "General riding advice, not about the lamp."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Cornering advice, not about the lamp."},
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Stopping distance advice, not about the lamp."},
+    {"display_id": "E12", "decision": "INCLUDED", "reason": "The cluster is part of the ABS system the lamp belongs to."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Brake use advice, not about the lamp."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Same injury risk as the inspection watchout."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Tyre and sprocket approval, not about the lamp."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Suspension travel, not about the lamp."},
+    {"display_id": "E17", "decision": "NOT_APPLICABLE", "reason": "Brake spare parts, no parts work asked."},
+    {"display_id": "E18", "decision": "NOT_APPLICABLE", "reason": "Braking distance, not about the lamp."},
+    {"display_id": "E19", "decision": "NOT_APPLICABLE", "reason": "Toner ring check, not tied to the lamp in the manual."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Toner ring check, not tied to the lamp in the manual."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Toner ring check, not tied to the lamp in the manual."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Sensor debris check, not tied to the lamp in the manual."}
+  ]
+}

@@ -1,0 +1,135 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The manual gives the rear wheel spindle torque as 70 Nm. Ensure both wheels are aligned correctly after adjusting the chain and before tightening the rear wheel spindle nut. Watch out: Make sure the rear wheel is fitted correctly before you ride the motorcycle.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "page_fallback_8b6564d03faed904d5826a8a",
+   "pages": [
+    103
+   ]
+  },
+  {
+   "label": "E48",
+   "evidence_id": "evidence_cb6e4c9ce23fc8a5b6f7beb1",
+   "pages": [
+    100
+   ]
+  }
+ ],
+ "cited_pages": [
+  100,
+  103
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual gives the rear wheel spindle torque as 70 Nm.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "Ensure both wheels are aligned correctly after adjusting the chain and before tightening the rear wheel spindle nut.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Make sure the rear wheel is fitted correctly before you ride the motorcycle.",
+    "evidence_ids": [
+     "E48"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E12",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General caution for front wheel reassembly; the question is about the rear wheel spindle torque."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Front wheel warning; the question is about the rear wheel."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Front wheel consequences; not about the rear spindle torque."
+  },
+  {
+   "display_id": "E24",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Applies to removing the caliper, not to tightening the spindle."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Applies to removing the rear wheel and chain, not to tightening the spindle."
+  },
+  {
+   "display_id": "E26",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Applies to removing the rear wheel from the swing arm."
+  },
+  {
+   "display_id": "E27",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Applies to removing the rear wheel, not to torque."
+  },
+  {
+   "display_id": "E28",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Applies to removing the rear wheel and brake pads."
+  },
+  {
+   "display_id": "E29",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Applies to lifting the motorcycle, not to spindle torque."
+  },
+  {
+   "display_id": "E47",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General reassembly caution; the specific fit check is covered by E48."
+  },
+  {
+   "display_id": "E48",
+   "decision": "INCLUDED",
+   "reason": "Rear wheel must be fitted correctly before riding, which follows tightening the spindle."
+  },
+  {
+   "display_id": "E49",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Consequence statement for poor rear wheel fitting; the watchout keeps to the fit check only."
+  }
+ ],
+ "excluded_watchouts": [
+  "E12",
+  "E13",
+  "E14",
+  "E24",
+  "E25",
+  "E26",
+  "E27",
+  "E28",
+  "E29",
+  "E47",
+  "E49"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

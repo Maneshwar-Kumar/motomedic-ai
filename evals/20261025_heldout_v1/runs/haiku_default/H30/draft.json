@@ -1,0 +1,35 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "Tighten the rear wheel spindle to 70 Nm.",
+      "evidence_ids": ["E1"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "After adjusting the chain, make sure both wheels are aligned before tightening the rear wheel spindle nut.",
+      "evidence_ids": ["E1"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual gives this torque only within the drive chain adjustment steps. The rear wheel assembly steps tell you to tighten the hex nut without giving a torque value."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Caution on front wheel reassembly, not rear spindle torque."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Front wheel fit check, not the rear spindle torque."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "General front wheel consequence, not the torque."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Brake hose caution during rear wheel removal."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Chain caution during rear wheel removal."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Wheel removal caution, not torque."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Brake pedal caution during removal, not torque."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Brake pad protection during removal, not torque."},
+    {"display_id": "E29", "decision": "NOT_APPLICABLE", "reason": "Do not lift the bike by the brake pedal; unrelated to torque."},
+    {"display_id": "E47", "decision": "NOT_APPLICABLE", "reason": "General reassembly caution; it does not give the torque."},
+    {"display_id": "E48", "decision": "NOT_APPLICABLE", "reason": "General fit check before riding; not about the torque."},
+    {"display_id": "E49", "decision": "NOT_APPLICABLE", "reason": "General performance consequence; not about the torque."}
+  ]
+}

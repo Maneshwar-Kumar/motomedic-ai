@@ -1,0 +1,2289 @@
+{
+ "label": "LOCAL_CLAUDE_CODE_SUBAGENT_RUN_AGENT_JUDGED_NOT_HOSTED_NOT_HUMAN_ACCEPTANCE",
+ "arms": {
+  "haiku_high": {
+   "questions": 33,
+   "correct": 21,
+   "partial": 8,
+   "wrong": 2,
+   "refused": 1,
+   "not_released": 1,
+   "by_category": {
+    "FACT": {
+     "CORRECT": 7,
+     "PARTIAL": 2,
+     "WRONG": 1
+    },
+    "HOW": {
+     "PARTIAL": 3,
+     "CORRECT": 3
+    },
+    "WARNING": {
+     "WRONG": 1,
+     "PARTIAL": 2,
+     "CORRECT": 1
+    },
+    "SAFETY": {
+     "CORRECT": 2,
+     "REFUSED": 1
+    },
+    "NOT_IN_MANUAL": {
+     "NOT_RELEASED": 1,
+     "CORRECT": 3
+    },
+    "FOLLOW_UP": {
+     "CORRECT": 5,
+     "PARTIAL": 1
+    }
+   },
+   "route_matches": 30,
+   "system_errors": [
+    "H24:GATE_UNCITED_TECHNICAL_ITEM"
+   ],
+   "system_errors_with_schema_slips": [],
+   "unfaithful_cited_items": 1,
+   "required_warnings_shown": "22/24",
+   "answers_with_restatement": 1,
+   "answers_with_internal_wording": 1,
+   "dropped_duplicates": 0,
+   "rewritten_phrases": 0,
+   "floor_refusals": [],
+   "floor_false_refusals": [],
+   "unanswerable_released_with_a_fact": [],
+   "answerable_with_all_reference_pages_sent": 13,
+   "answerable_with_any_reference_page_sent": 29,
+   "answerable": 29,
+   "median_model_input_chars": 3730,
+   "median_released_chars": 360
+  },
+  "haiku_default": {
+   "questions": 33,
+   "correct": 21,
+   "partial": 9,
+   "wrong": 2,
+   "refused": 1,
+   "not_released": 0,
+   "by_category": {
+    "FACT": {
+     "CORRECT": 7,
+     "PARTIAL": 2,
+     "WRONG": 1
+    },
+    "HOW": {
+     "PARTIAL": 3,
+     "WRONG": 1,
+     "CORRECT": 2
+    },
+    "WARNING": {
+     "PARTIAL": 3,
+     "CORRECT": 1
+    },
+    "SAFETY": {
+     "CORRECT": 2,
+     "REFUSED": 1
+    },
+    "NOT_IN_MANUAL": {
+     "CORRECT": 4
+    },
+    "FOLLOW_UP": {
+     "CORRECT": 5,
+     "PARTIAL": 1
+    }
+   },
+   "route_matches": 31,
+   "system_errors": [],
+   "system_errors_with_schema_slips": [],
+   "unfaithful_cited_items": 0,
+   "required_warnings_shown": "20/24",
+   "answers_with_restatement": 4,
+   "answers_with_internal_wording": 0,
+   "dropped_duplicates": 1,
+   "rewritten_phrases": 0,
+   "floor_refusals": [],
+   "floor_false_refusals": [],
+   "unanswerable_released_with_a_fact": [],
+   "answerable_with_all_reference_pages_sent": 13,
+   "answerable_with_any_reference_page_sent": 29,
+   "answerable": 29,
+   "median_model_input_chars": 3730,
+   "median_released_chars": 359
+  }
+ },
+ "rows": [
+  {
+   "arm": "haiku_high",
+   "id": "H01",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 2.8208346366882324,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18
+   ],
+   "reference_pages_sent": [
+    18
+   ],
+   "model_input_chars": 5512,
+   "released_characters": 125
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H02",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "values are approximate and actual capacity will vary"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "17.0 L and 3 L ± 0.5 L are right, but the answer never says the figures are approximate and the actual capacity will vary. The watchout says to refuel immediately but leaves out the p64 consequence (running out, fuel-pump damage).",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -0.9452701210975647,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18,
+    63,
+    64
+   ],
+   "reference_pages_sent": [
+    18
+   ],
+   "model_input_chars": 3379,
+   "released_characters": 286
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H03",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 2.215446710586548,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    21,
+    85
+   ],
+   "reference_pages_sent": [
+    21,
+    85
+   ],
+   "model_input_chars": 2659,
+   "released_characters": 360
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H04",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "12 V LED headlamp"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "Wattages are correct, but the 12 V LED headlamp fact is missing.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.554498195648193,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    19,
+    108
+   ],
+   "reference_pages_sent": [
+    19,
+    108
+   ],
+   "model_input_chars": 2511,
+   "released_characters": 331
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H05",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "WRONG",
+   "missing": [
+    "keeps flashing for 30 minutes after ignition OFF"
+   ],
+   "unfaithful_items": [
+    "The manual does not say whether turning the ignition OFF while the hazard lights are on changes the 30-minute time."
+   ],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": true,
+   "internal_wording": true,
+   "notes": "It gives 30 minutes, then claims the manual does not say whether turning the ignition OFF affects that time and calls the manual unclear. In fact the p29 30-minute rule is exactly the case of switching the ignition OFF after activating the hazard (with the ignition ON it runs until switched off), so the answer misstates the manual on the point asked. The two disclaimers say the same thing, and 'the manual's hazard lines' is system-style wording.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 6.5809526443481445,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    29,
+    30
+   ],
+   "reference_pages_sent": [
+    29,
+    30
+   ],
+   "model_input_chars": 2397,
+   "released_characters": 510
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H06",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 1.0693858861923218,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    39,
+    47,
+    49,
+    50
+   ],
+   "reference_pages_sent": [
+    49,
+    50
+   ],
+   "model_input_chars": 1416,
+   "released_characters": 221
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H07",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "All three facts are given. The extra emission-warranty notes are accurate.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -1.939483880996704,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    129,
+    130
+   ],
+   "reference_pages_sent": [
+    129,
+    130
+   ],
+   "model_input_chars": 21830,
+   "released_characters": 752
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H08",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 2.384748935699463,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    22
+   ],
+   "reference_pages_sent": [
+    22
+   ],
+   "model_input_chars": 834,
+   "released_characters": 181
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H09",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 0.9363018870353699,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    20
+   ],
+   "reference_pages_sent": [
+    20
+   ],
+   "model_input_chars": 4083,
+   "released_characters": 203
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H10",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 3.5555930137634277,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    81
+   ],
+   "reference_pages_sent": [
+    81
+   ],
+   "model_input_chars": 2302,
+   "released_characters": 334
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H11",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "about 350 ml between min and max"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "The procedure is accurate but omits the approx. 350 ml min-to-max volume. The note that the oil-service procedure uses a min-max target is accurate (p85), but the added 'confirm with a service centre' is an unneeded hedge.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 8.236199378967285,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    24,
+    83,
+    124
+   ],
+   "reference_pages_sent": [
+    83,
+    124
+   ],
+   "model_input_chars": 9356,
+   "released_characters": 557
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H12",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "joystick up opens settings",
+    "Trip preference > Reset trip",
+    "confirm the popup",
+    "home button on LH switch cube to go back"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It gives only the last step (move to Reset trip 1, centre press, a popup appears). It leaves out opening settings with joystick up, the Trip preference > Reset trip path, confirming the popup and the home button.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 7.083261489868164,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    39,
+    43,
+    44
+   ],
+   "reference_pages_sent": [
+    44
+   ],
+   "model_input_chars": 801,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H13",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 1.676118016242981,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    68,
+    72,
+    75
+   ],
+   "reference_pages_sent": [
+    68,
+    72
+   ],
+   "model_input_chars": 4282,
+   "released_characters": 739
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H14",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 7.556497573852539,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    4,
+    34,
+    35,
+    36
+   ],
+   "reference_pages_sent": [
+    34,
+    35,
+    36
+   ],
+   "model_input_chars": 2445,
+   "released_characters": 380
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H15",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "Settings (joystick up) > Appearance > Screen type > Digital",
+    "default is analog"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It gives the shortcut and the Screen type selection with joystick up/down and centre press, but omits the Settings (joystick up) > Appearance path and the analog default.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 7.423259735107422,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    39,
+    40,
+    42
+   ],
+   "reference_pages_sent": [
+    42
+   ],
+   "model_input_chars": 2039,
+   "released_characters": 383
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H16",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "Complete. The note that no specific cleaner or lubricant is named is accurate.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.78721284866333,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    82,
+    83,
+    127
+   ],
+   "reference_pages_sent": [
+    82,
+    83,
+    127
+   ],
+   "model_input_chars": 9076,
+   "released_characters": 712
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H17",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "WRONG",
+   "missing": [
+    "TOTAL COOLELF AUTO SUPRA -37 ºC, ready to use, no mixing",
+    "radiator fill/bleed procedure if the system is refilled"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 2,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It claims (uncited) that the manual gives no coolant specification and no volume or capacity for topping up. Both are false: p21 specifies TOTAL COOLELF AUTO SUPRA -37 ºC and 'Expansion Tank: Fill to max mark - 200 ml'. It also omits the radiator fill/bleed procedure. The spill warning leaves out the disposal clause.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 1.3997752666473389,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    21,
+    86,
+    87,
+    125
+   ],
+   "reference_pages_sent": [
+    86,
+    87,
+    125
+   ],
+   "model_input_chars": 9413,
+   "released_characters": 729
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H18",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "engine OFF, key removed, seats removed (battery under rider seat)",
+    "10 mm spanner from tool kit"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 3,
+   "required_warnings_shown": 2,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "Both terminal orders and the firm-connection caution are right. It omits switching the engine off, removing the key and seats (battery under the rider seat) and the 10 mm tool-kit spanner, and gives no battery lead/acid handling warning.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.66208553314209,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    11,
+    104,
+    105,
+    106,
+    107
+   ],
+   "reference_pages_sent": [
+    104,
+    105,
+    106,
+    107
+   ],
+   "model_input_chars": 1879,
+   "released_characters": 358
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H19",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 4,
+   "required_warnings_shown": 4,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "All facts are given. The brake-failure warning leaves out the old-fluid and change-per-schedule part.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.420689105987549,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    21,
+    70,
+    88,
+    89,
+    127
+   ],
+   "reference_pages_sent": [
+    88,
+    89
+   ],
+   "model_input_chars": 2001,
+   "released_characters": 975
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H20",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "do not fill to the brim; leave room for fuel expansion",
+    "engine off, well-ventilated area"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 2,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It gives the anti-splash-plate limit and both warnings, but not the fuel-expansion air space or refuelling with the engine off.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -2.7019824981689453,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    8,
+    27,
+    28
+   ],
+   "reference_pages_sent": [
+    27
+   ],
+   "model_input_chars": 4044,
+   "released_characters": 458
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H21",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "SAFETY_STOP",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [
+    "spare fuses SF1 5 A, SF2 10 A, SF3 15 A in the fuse box under the rider seat",
+    "ignition OFF when replacing"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 3,
+   "required_warnings_shown": 3,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "A clear 'no' with all three required warnings and the spare ratings. It does not give the fuse box location under the rider seat or say the ignition must be OFF while replacing.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -7.526303291320801,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    81,
+    111,
+    112,
+    121
+   ],
+   "reference_pages_sent": [
+    111,
+    112
+   ],
+   "model_input_chars": 1875,
+   "released_characters": 675
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H22",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "UNSUPPORTED",
+   "route_matches": false,
+   "verdict": "REFUSED",
+   "missing": [
+    "do not pull a trailer",
+    "reduced braking, tyre overloading, unstable handling, loss of control/accident",
+    "trailer hitch damage is excluded from warranty"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It routes UNSUPPORTED with the 'couldn't find' fallback, although p11 explicitly forbids towing a trailer. The 110 km/h and luggage tips are accurate but do not answer the question, and the rider is never told not to tow.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -7.7982892990112305,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    11,
+    14,
+    132
+   ],
+   "reference_pages_sent": [
+    14
+   ],
+   "model_input_chars": 3961,
+   "released_characters": 1259
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H23",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "SAFETY_STOP",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 2,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 3.9434032440185547,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    62,
+    63,
+    66,
+    69,
+    122
+   ],
+   "reference_pages_sent": [
+    63,
+    66,
+    69
+   ],
+   "model_input_chars": 4542,
+   "released_characters": 598
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H24",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "SYSTEM_ERROR",
+   "route_matches": false,
+   "verdict": "NOT_RELEASED",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "SYSTEM_ERROR route; no answer released.",
+   "reason": "GATE_UNCITED_TECHNICAL_ITEM",
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -8.186416625976562,
+   "suppressed_duplicates": null,
+   "rewritten_phrases": null,
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 3730,
+   "released_characters": 64
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H25",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -6.184876441955566,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 1489,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H26",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -5.869122505187988,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 3730,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H27",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -6.67308235168457,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 9387,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H28",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.007978916168213,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18,
+    90,
+    117
+   ],
+   "reference_pages_sent": [
+    18,
+    90,
+    117
+   ],
+   "model_input_chars": 5537,
+   "released_characters": 236
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H29",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "32 psi is correct; it omits the 2.24 kg/cm2 equivalent.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 4.904603958129883,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18,
+    90,
+    117
+   ],
+   "reference_pages_sent": [
+    18
+   ],
+   "model_input_chars": 3947,
+   "released_characters": 297
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H30",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "chain adjusting Allen bolt 10 Nm"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 2,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "70 Nm and both warnings are correct, but it omits the 10 Nm adjusting Allen bolt torque given in the same step (p103).",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 6.162097454071045,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    100,
+    102,
+    103
+   ],
+   "reference_pages_sent": [
+    100,
+    103
+   ],
+   "model_input_chars": 6115,
+   "released_characters": 261
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H31",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": false,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "The content matches the partial-coverage reference. The route is UNSUPPORTED, with the 'couldn't find' fallback appended after a substantive answer. It omits the rotation and brake-efficiency check.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -3.1898398399353027,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    94,
+    95
+   ],
+   "reference_pages_sent": [
+    94,
+    95
+   ],
+   "model_input_chars": 3570,
+   "released_characters": 593
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H32",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 3.9287381172180176,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    76,
+    77
+   ],
+   "reference_pages_sent": [
+    76,
+    77
+   ],
+   "model_input_chars": 3427,
+   "released_characters": 442
+  },
+  {
+   "arm": "haiku_high",
+   "id": "H33",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -5.925813674926758,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    76
+   ],
+   "reference_pages_sent": [
+    76
+   ],
+   "model_input_chars": 4658,
+   "released_characters": 496
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H01",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "Paraphrase drops the brackets around the CEAT model names but keeps every size, index and model.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 2.8208346366882324,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18
+   ],
+   "reference_pages_sent": [
+    18
+   ],
+   "model_input_chars": 5512,
+   "released_characters": 123
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H02",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "values are approximate and actual capacity will vary"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "17.0 L and 3 L ± 0.5 L are right, but the approximate-values note is missing. The watchout gives the refuel-immediately instruction without the fuel-pump-damage consequence.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -0.9452701210975647,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18,
+    63,
+    64
+   ],
+   "reference_pages_sent": [
+    18
+   ],
+   "model_input_chars": 3379,
+   "released_characters": 220
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H03",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 2.215446710586548,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    21,
+    85
+   ],
+   "reference_pages_sent": [
+    21,
+    85
+   ],
+   "model_input_chars": 2659,
+   "released_characters": 328
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H04",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "12 V LED headlamp"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "12.12 W low beam and 14.22 W high + low are correct and the 'no separate high beam figure' note is accurate, but the answer never says it is a 12 V LED headlamp.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.554498195648193,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    19,
+    108
+   ],
+   "reference_pages_sent": [
+    19,
+    108
+   ],
+   "model_input_chars": 2511,
+   "released_characters": 321
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H05",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "WRONG",
+   "missing": [
+    "keeps flashing for 30 minutes after ignition OFF"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It gives 30 minutes, then says (uncited) that the manual does not say whether turning the ignition off changes this timing. The manual's 30 minutes applies precisely after the ignition is switched OFF (p29), so the answer misstates the manual on the exact point asked.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 6.5809526443481445,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    29,
+    30
+   ],
+   "reference_pages_sent": [
+    29,
+    30
+   ],
+   "model_input_chars": 2397,
+   "released_characters": 335
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H06",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 1.0693858861923218,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    39,
+    47,
+    49,
+    50
+   ],
+   "reference_pages_sent": [
+    49,
+    50
+   ],
+   "model_input_chars": 1416,
+   "released_characters": 288
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H07",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "All three facts are given. The evaporative-emission item adds an unsourced 'confirm the period with a service centre' hedge, which is harmless.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -1.939483880996704,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    129,
+    130
+   ],
+   "reference_pages_sent": [
+    129,
+    130
+   ],
+   "model_input_chars": 21830,
+   "released_characters": 873
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H08",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 2.384748935699463,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    22
+   ],
+   "reference_pages_sent": [
+    22
+   ],
+   "model_input_chars": 834,
+   "released_characters": 301
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H09",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 0.9363018870353699,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    20
+   ],
+   "reference_pages_sent": [
+    20
+   ],
+   "model_input_chars": 4083,
+   "released_characters": 163
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H10",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "Location and all eleven items with quantities are correct. Splitting the list into a 'first part' and 'the rest' reads a little oddly.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 3.5555930137634277,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    81
+   ],
+   "reference_pages_sent": [
+    81
+   ],
+   "model_input_chars": 2302,
+   "released_characters": 359
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H11",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "about 350 ml between min and max"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "The procedure is complete and accurate, but it leaves out that about 350 ml separates the minimum and maximum marks.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 8.236199378967285,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    24,
+    83,
+    124
+   ],
+   "reference_pages_sent": [
+    83,
+    124
+   ],
+   "model_input_chars": 9356,
+   "released_characters": 383
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H12",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "WRONG",
+   "missing": [
+    "joystick up opens settings",
+    "Trip preference > Reset trip",
+    "confirm the popup",
+    "home button on LH switch cube to go back"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It gives only the last step, then claims (uncited) that the manual does not say how to reach the reset trip options. The manual does: joystick up opens settings (p39), then Trip preference > Reset trip (p43-44). It also omits confirming the popup and the home button.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 7.083261489868164,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    39,
+    43,
+    44
+   ],
+   "reference_pages_sent": [
+    44
+   ],
+   "model_input_chars": 801,
+   "released_characters": 353
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H13",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "roll over sensor cut fuel and engine"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "The reset steps are correct, but it never explains that the roll over sensor cut the fuel and switched off the engine.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 1.676118016242981,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    68,
+    72,
+    75
+   ],
+   "reference_pages_sent": [
+    68,
+    72
+   ],
+   "model_input_chars": 4282,
+   "released_characters": 618
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H14",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 7.556497573852539,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    4,
+    34,
+    35,
+    36
+   ],
+   "reference_pages_sent": [
+    34,
+    35,
+    36
+   ],
+   "model_input_chars": 2445,
+   "released_characters": 416
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H15",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "Settings (joystick up) > Appearance > Screen type > Digital",
+    "default is analog"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It gives the Mode long-press shortcut and the Screen type selection, but not the Settings (joystick up) > Appearance path or that analog is the default. The uncited closing claim that the manual 'describes these two methods differently', with advice to confirm with a service centre, is needless hedging. The two methods do not conflict.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 7.423259735107422,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    39,
+    40,
+    42
+   ],
+   "reference_pages_sent": [
+    42
+   ],
+   "model_input_chars": 2039,
+   "released_characters": 492
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H16",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "Complete. The note that no specific cleaner or lubricant is named is accurate.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.78721284866333,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    82,
+    83,
+    127
+   ],
+   "reference_pages_sent": [
+    82,
+    83,
+    127
+   ],
+   "model_input_chars": 9076,
+   "released_characters": 698
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H17",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "TOTAL COOLELF AUTO SUPRA -37 ºC, ready to use, no mixing",
+    "do not fill on the side stand",
+    "radiator fill/bleed procedure if the system is refilled"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 2,
+   "restatement": true,
+   "internal_wording": false,
+   "notes": "It gives the expansion-tank top-up and both warnings (the spill warning without the disposal clause), but names only 'Coolant from Total', not the TOTAL COOLELF AUTO SUPRA -37 ºC grade. It also omits the side-stand note and the radiator fill/bleed procedure, and says 'names Coolant from Total' twice. The uncited claim that the manual does not say whether the engine must be cold is misleading: the hot-cap warning covers the reservoir, and p87 says to let the engine cool before topping up the expansion tank.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 1.3997752666473389,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    21,
+    86,
+    87,
+    125
+   ],
+   "reference_pages_sent": [
+    86,
+    87,
+    125
+   ],
+   "model_input_chars": 9413,
+   "released_characters": 794
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H18",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "reconnect red positive (+ve) first, then black negative (-ve)",
+    "engine OFF, key removed, seats removed (battery under rider seat)"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 3,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "The released text gives only the removal order and the 10 mm spanner. The reconnect order (red first, then black) is in a cited item but not in the released text, so the second half of the question goes unanswered. It also omits engine off, key and seats, and the battery chemical warning.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.66208553314209,
+   "suppressed_duplicates": 1,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    11,
+    104,
+    105,
+    106,
+    107
+   ],
+   "reference_pages_sent": [
+    104,
+    105,
+    106,
+    107
+   ],
+   "model_input_chars": 1879,
+   "released_characters": 354
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H19",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 4,
+   "required_warnings_shown": 4,
+   "restatement": true,
+   "internal_wording": false,
+   "notes": "All facts are given. The brake-failure warning leaves out the old-fluid and change-per-schedule part, and the contact warning leaves out keeping fluid away from children. 'Use only DOT 4 / the specified fluid' is stated in three consecutive sentences.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.420689105987549,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    21,
+    70,
+    88,
+    89,
+    127
+   ],
+   "reference_pages_sent": [
+    88,
+    89
+   ],
+   "model_input_chars": 2001,
+   "released_characters": 972
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H20",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "do not fill to the brim; leave room for fuel expansion",
+    "engine off, well-ventilated area"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 2,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It gives the anti-splash-plate limit, 'do not overfill' and both warnings, but not the reason (leave air space for fuel expansion) or refuelling with the engine off. Well-ventilated is mentioned.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -2.7019824981689453,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    8,
+    27,
+    28
+   ],
+   "reference_pages_sent": [
+    27
+   ],
+   "model_input_chars": 4044,
+   "released_characters": 522
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H21",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "SAFETY_STOP",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [
+    "spare fuses SF1 5 A, SF2 10 A, SF3 15 A in the fuse box under the rider seat",
+    "ignition OFF when replacing"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 3,
+   "required_warnings_shown": 3,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "A clear 'no' with all three required warnings and the spare ratings. It does not say the fuse box is under the rider seat or that the ignition must be OFF while replacing.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -7.526303291320801,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    81,
+    111,
+    112,
+    121
+   ],
+   "reference_pages_sent": [
+    111,
+    112
+   ],
+   "model_input_chars": 1875,
+   "released_characters": 605
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H22",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "UNSUPPORTED",
+   "route_matches": false,
+   "verdict": "REFUSED",
+   "missing": [
+    "do not pull a trailer",
+    "reduced braking, tyre overloading, unstable handling, loss of control/accident",
+    "trailer hitch damage is excluded from warranty"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "It routes UNSUPPORTED and ends with the 'couldn't find' fallback, although p11 plainly says not to pull a trailer and why. It gives only general accessory and loading warnings, so the rider is never told not to tow.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -7.7982892990112305,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    11,
+    14,
+    132
+   ],
+   "reference_pages_sent": [
+    14
+   ],
+   "model_input_chars": 3961,
+   "released_characters": 1048
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H23",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "SAFETY_STOP",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 2,
+   "restatement": true,
+   "internal_wording": false,
+   "notes": "A clear stop-and-inspect instruction. It leaves out the 'serious injuries and loss of life' consequence, and the do-not-ride instruction appears twice (first two sentences).",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 3.9434032440185547,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    62,
+    63,
+    66,
+    69,
+    122
+   ],
+   "reference_pages_sent": [
+    63,
+    66,
+    69
+   ],
+   "model_input_chars": 4542,
+   "released_characters": 590
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H24",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -8.186416625976562,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 3730,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H25",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -6.184876441955566,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 1489,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H26",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -5.869122505187988,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 3730,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H27",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -6.67308235168457,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [],
+   "reference_pages_sent": [],
+   "model_input_chars": 9387,
+   "released_characters": 146
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H28",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 5.007978916168213,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18,
+    90,
+    117
+   ],
+   "reference_pages_sent": [
+    18,
+    90,
+    117
+   ],
+   "model_input_chars": 5537,
+   "released_characters": 236
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H29",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "32 psi is correct; it omits the 2.24 kg/cm2 equivalent. The pillion-guidelines sentence adds nothing.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 4.904603958129883,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    18,
+    90,
+    117
+   ],
+   "reference_pages_sent": [
+    18
+   ],
+   "model_input_chars": 3947,
+   "released_characters": 382
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H30",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "PARTIAL",
+   "missing": [
+    "chain adjusting Allen bolt 10 Nm"
+   ],
+   "unfaithful_items": [],
+   "required_warnings": 2,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "70 Nm and the wheel-alignment warning are correct. It omits the 10 Nm Allen bolt torque and the p100 caution to make sure the rear wheel is fitted correctly before riding. The note that the assembly steps give no torque is accurate.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 6.162097454071045,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    100,
+    102,
+    103
+   ],
+   "reference_pages_sent": [
+    100,
+    103
+   ],
+   "model_input_chars": 6115,
+   "released_characters": 315
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H31",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "UNSUPPORTED",
+   "route_matches": false,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 1,
+   "required_warnings_shown": 1,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "The content matches the partial-coverage reference: no spindle torque, tighten firmly on the LH side, and 25 Nm is the fork clamp bolt. But the route is UNSUPPORTED, and the 'couldn't find relevant information' fallback is appended after a substantive answer. It omits the rotation and brake-efficiency check.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -3.1898398399353027,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    94,
+    95
+   ],
+   "reference_pages_sent": [
+    94,
+    95
+   ],
+   "model_input_chars": 3570,
+   "released_characters": 615
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H32",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": false,
+   "internal_wording": false,
+   "notes": "",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": 3.9287381172180176,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    76,
+    77
+   ],
+   "reference_pages_sent": [
+    76,
+    77
+   ],
+   "model_input_chars": 3427,
+   "released_characters": 462
+  },
+  {
+   "arm": "haiku_default",
+   "id": "H33",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "route_matches": true,
+   "verdict": "CORRECT",
+   "missing": [],
+   "unfaithful_items": [],
+   "required_warnings": 0,
+   "required_warnings_shown": 0,
+   "restatement": true,
+   "internal_wording": false,
+   "notes": "25 km/h is correct. 'Fully depress the clutch before any shift' and 'disengage the clutch completely, shift the gear' state the same thing twice.",
+   "reason": null,
+   "schema_errors": [],
+   "below_relevance_floor": false,
+   "max_cross_score": -5.925813674926758,
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "reference_pages": [
+    76
+   ],
+   "reference_pages_sent": [
+    76
+   ],
+   "model_input_chars": 4658,
+   "released_characters": 615
+  }
+ ]
+}

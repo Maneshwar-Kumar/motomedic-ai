@@ -1,0 +1,16 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "Insert the key in the pillion seat key slot and turn it clockwise.", "evidence_ids": ["E1"]},
+    {"text": "Slide the pillion seat forward to remove it.", "evidence_ids": ["E2"]},
+    {"text": "Slide the rider seat backward to remove it.", "evidence_ids": ["E3"]},
+    {"text": "To refit, slide the rider seat forward so it lines up with the frame.", "evidence_ids": ["E6"]},
+    {"text": "Place the pillion seat and slide it backward.", "evidence_ids": ["E7"]},
+    {"text": "Make sure the pillion seat lines up with the frame, then press the seat to lock it with the key in position.", "evidence_ids": ["E8"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Battery terminal connection order, not seat removal or refitting."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Battery cable connection, not seat removal or refitting."}
+  ]
+}

@@ -11,10 +11,10 @@ MotoMedic is a text assistant that answers rider questions about one document: t
 
 | Item | State |
 | --- | --- |
-| Answer path | Implemented and tested without a provider; frozen as [serving manifest v11.1](releases/serving_manifest_v11_1.json) on `main`. |
+| Answer path | Implemented and tested without a provider; frozen as [serving manifest v11.2](releases/serving_manifest_v11_2.json) on `main`. |
 | Hosted service | **Not deployed.** The Google Cloud project's billing is disabled, so the hosted services are offline. Deploying needs a new owner decision. |
 | Experiments | Run here, in Claude Code. [`tools/local_answer.py`](tools/local_answer.py) runs the real retrieval and gate on the real index. A Claude Code Haiku subagent writes the answer instead of the paid API ([how](docs/EXPERIMENTS.md)). |
-| Evidence | A 30-question local run in which the generators were Claude Code subagents and the answers were agent-scored. Haiku at high effort answered 30/30 correctly with no unfaithful citation ([evaluation](evals/20261025_answer_release_v3/README.md)). This is not hosted or human acceptance. |
+| Evidence | Local runs in which Claude Code subagents were the generators and the answers were agent-judged. On 30 development questions, Haiku at high effort answered 30/30 correctly ([v3](evals/20261025_answer_release_v3/README.md)). On 33 new held-out questions, it answered 21/33 correctly, 8 partially and 2 wrongly ([held-out test](evals/20261025_heldout_v1/README.md)). This is not hosted or human acceptance. |
 
 ## How an answer is produced
 
@@ -75,7 +75,7 @@ flowchart LR
 ```sh
 git clone https://github.com/Maneshwar-Kumar/motomedic-ai.git && cd motomedic-ai
 python tools/check_repository_structure.py          # layout, links, manual hash, frozen inputs
-python tools/serving_release.py verify               # every serving input against manifest v11.1
+python tools/serving_release.py verify               # every serving input against manifest v11.2
 ```
 
 The provider-free test suite (about 210 tests, all synthetic, no paid calls) is listed in [SETUP](docs/SETUP.md) and runs in [CI](.github/workflows/ci.yml). To ask your own question with a Claude Code generator, see [EXPERIMENTS](docs/EXPERIMENTS.md). Forking supplies no cloud or model credentials.

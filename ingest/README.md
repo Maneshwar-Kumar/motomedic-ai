@@ -8,10 +8,11 @@ This job parsed and indexed the manual once, before serving. It built the base i
 
 That snapshot is public as a [GitHub release asset](https://github.com/Maneshwar-Kumar/motomedic-ai/releases/tag/index-a3282c4d98cf54595e4ba168).
 
-The current answer path does not use this index directly. It uses the **section index** `index_a609ca61c635641e0a22dc48`, which [section_index.py](../cloud/grounded_generation/section_index.py) builds from this index's cached Docling parse without re-parsing. That build:
+The current answer path does not use this index directly. It uses the **section index** `index_f768fbb216836c003701079e`, which [section_index.py](../cloud/grounded_generation/section_index.py) builds from this index's cached Docling parse without re-parsing. That build:
 - regroups the chunks into content sections;
 - attaches the WARNING, CAUTION and NOTE boxes;
 - rejoins page-break continuations;
+- links split-off subsections to their parent's warnings;
 - re-embeds the chunks.
 
 Rebuild steps are in [SETUP](../docs/SETUP.md#rebuild-the-section-index).

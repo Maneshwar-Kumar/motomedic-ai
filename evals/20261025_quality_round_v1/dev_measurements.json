@@ -1,0 +1,1285 @@
+{
+ "label": "LOCAL_DEVELOPMENT_MEASUREMENT_NO_MODEL_CALLS",
+ "questions": 30,
+ "warning_lines_in_manual": 121,
+ "top3_warnings_not_sent": 66,
+ "questions_whose_best_warning_was_not_sent": 20,
+ "retrieved_max_cross_score": {
+  "answerable": [
+   -7.945,
+   -6.111,
+   -5.474,
+   -4.601,
+   -2.188,
+   -1.308,
+   -0.795,
+   -0.471,
+   0.154,
+   0.208,
+   0.632,
+   2.018,
+   2.05,
+   2.892,
+   3.19,
+   3.51,
+   4.256,
+   4.73,
+   9.233
+  ],
+  "unanswerable": [
+   -9.163,
+   -8.889,
+   -8.228,
+   -8.139,
+   -6.068,
+   -5.317,
+   -5.138,
+   -2.726,
+   -2.668,
+   1.731,
+   7.121
+  ]
+ },
+ "rows": [
+  {
+   "alias": "Q01",
+   "case_id": "N05",
+   "group": "NO_ANSWER",
+   "question": "How deep a water crossing can the bike safely ride through?",
+   "answerable": false,
+   "retrieved_max_cross_score": -8.889,
+   "top_warnings": [
+    {
+     "score": -6.663,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Operate motorcycle only at moderate speeds and out of traffic until you have become thoroughly familiar with its operation and handling characteristics under all conditions."
+    },
+    {
+     "score": -7.729,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "A new motorcycle must be operated according to the special running-in-procedure. See running-in-procedure mentioned in respective section."
+    },
+    {
+     "score": -8.254,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Do not exceed the legal speed limit or ride too fast for existing conditions. Always reduce speed when poor riding conditions exist. High speed increases the influence of any other condition affecting stability and incre"
+    }
+   ]
+  },
+  {
+   "alias": "Q02",
+   "case_id": "EXP038",
+   "group": "PARTIAL",
+   "question": "Which direction can the headlamp beam be adjusted?",
+   "answerable": true,
+   "retrieved_max_cross_score": 9.233,
+   "top_warnings": [
+    {
+     "score": -7.951,
+     "sent": false,
+     "section": "IGNITION/ENGINE KILL SWITCH",
+     "pages": [
+      28
+     ],
+     "text": "Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON."
+    },
+    {
+     "score": -9.526,
+     "sent": false,
+     "section": "CLUTCH CABLE FREE PLAY INSPECTION / ADJUSTMENT",
+     "pages": [
+      101,
+      102
+     ],
+     "text": "Adjuster nut should rest properly in the threaded region."
+    },
+    {
+     "score": -9.881,
+     "sent": false,
+     "section": "CLUTCH CABLE FREE PLAY INSPECTION / ADJUSTMENT",
+     "pages": [
+      101,
+      102
+     ],
+     "text": "Clutch free play should be checked and adjusted only when the engine is cold."
+    }
+   ]
+  },
+  {
+   "alias": "Q03",
+   "case_id": "N08",
+   "group": "NO_ANSWER",
+   "question": "What compression pressure should a healthy engine show on a compression test?",
+   "answerable": false,
+   "retrieved_max_cross_score": -2.726,
+   "top_warnings": [
+    {
+     "score": -10.848,
+     "sent": false,
+     "section": "CLUTCH CABLE FREE PLAY INSPECTION / ADJUSTMENT",
+     "pages": [
+      101,
+      102
+     ],
+     "text": "Clutch free play should be checked and adjusted only when the engine is cold."
+    },
+    {
+     "score": -10.982,
+     "sent": false,
+     "section": "INSPECTION OF TYRES AND WHEELS",
+     "pages": [
+      89,
+      90
+     ],
+     "text": "It is recommended to operate the motorcycle with correct tyre pressure as under inflated tyre may cause tyre to overheat and may result in tyre damage and may cause injury to the rider."
+    },
+    {
+     "score": -11.001,
+     "sent": false,
+     "section": "STARTING",
+     "pages": [
+      72,
+      73,
+      74
+     ],
+     "text": "Push and hold electric start switch until engine starts for a maximum of 5 seconds."
+    }
+   ]
+  },
+  {
+   "alias": "Q04",
+   "case_id": "GEN025",
+   "group": "GOLDEN",
+   "question": "Which riding mode combinations are listed?",
+   "answerable": true,
+   "retrieved_max_cross_score": 2.018,
+   "top_warnings": [
+    {
+     "score": -2.566,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "Follow the recommended up shifting and down shifting speeds."
+    },
+    {
+     "score": -2.992,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "and riding the motorcycle."
+    },
+    {
+     "score": -4.91,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "Always exercise utmost caution while releasing clutch"
+    }
+   ]
+  },
+  {
+   "alias": "Q05",
+   "case_id": "N09",
+   "group": "NO_ANSWER",
+   "question": "What throttle cable free play does the manual specify?",
+   "answerable": false,
+   "retrieved_max_cross_score": 1.731,
+   "top_warnings": [
+    {
+     "score": 1.215,
+     "sent": true,
+     "section": "CLUTCH CABLE FREE PLAY INSPECTION / ADJUSTMENT",
+     "pages": [
+      101,
+      102
+     ],
+     "text": "Clutch free play should be checked and adjusted only when the engine is cold."
+    },
+    {
+     "score": -0.081,
+     "sent": true,
+     "section": "CLUTCH CABLE FREE PLAY INSPECTION / ADJUSTMENT",
+     "pages": [
+      101,
+      102
+     ],
+     "text": "If you are not comfortable to adjust free play as per stated procedure, please visit near by service centre."
+    },
+    {
+     "score": -0.162,
+     "sent": true,
+     "section": "CLUTCH CABLE FREE PLAY INSPECTION / ADJUSTMENT",
+     "pages": [
+      101,
+      102
+     ],
+     "text": "If desired free play is not achieved or there is a suspect of clutch slip- keep positive free play & reach nearest service centre."
+    }
+   ]
+  },
+  {
+   "alias": "Q06",
+   "case_id": "N06",
+   "group": "NO_ANSWER",
+   "question": "Does the manual give any advice for riding at high altitude, like in Ladakh?",
+   "answerable": false,
+   "retrieved_max_cross_score": -8.228,
+   "top_warnings": [
+    {
+     "score": -6.799,
+     "sent": true,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Do not exceed the legal speed limit or ride too fast for existing conditions. Always reduce speed when poor riding conditions exist. High speed increases the influence of any other condition affecting stability and incre"
+    },
+    {
+     "score": -7.259,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "Always exercise utmost caution while releasing clutch"
+    },
+    {
+     "score": -8.29,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "Follow the recommended up shifting and down shifting speeds."
+    }
+   ]
+  },
+  {
+   "alias": "Q07",
+   "case_id": "GEN035",
+   "group": "GOLDEN",
+   "question": "Why does the compass not work with navigation inactive?",
+   "answerable": true,
+   "retrieved_max_cross_score": 2.05,
+   "top_warnings": [
+    {
+     "score": -9.212,
+     "sent": false,
+     "section": "Methods to activate hazard flasher:",
+     "pages": [
+      29,
+      30
+     ],
+     "text": "Turn signals do not work when the hazard light switch is \"ON\"."
+    },
+    {
+     "score": -10.41,
+     "sent": false,
+     "section": "GEAR POSITION INDICATION",
+     "pages": [
+      61,
+      62
+     ],
+     "text": "Do not run motorcycle in case the malfunction remains \"ON\" continuously as it can cause severe damage to the ECU & Sensors. Please visit the nearest authorised Royal Enfield dealer to diagnose & rectify the defect in the"
+    },
+    {
+     "score": -10.456,
+     "sent": false,
+     "section": "ANTI-LOCK BRAKING SYSTEM (ABS)",
+     "pages": [
+      66,
+      67,
+      68
+     ],
+     "text": "ABS does not reduce braking distance. In certain circumstances, ABS may result in a longer stopping distance."
+    }
+   ]
+  },
+  {
+   "alias": "Q08",
+   "case_id": "EXP040",
+   "group": "PARTIAL",
+   "question": "What rear-suspension notch should I use riding solo?",
+   "answerable": true,
+   "retrieved_max_cross_score": 0.208,
+   "top_warnings": [
+    {
+     "score": -3.302,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Royal Enfield cautions you against the use of certain nonstandard parts such as aftermarket and custom made extended front forks or suspensions, which may adversely affect performance and handling. Removing or altering o"
+    },
+    {
+     "score": -5.873,
+     "sent": false,
+     "section": "REAR WHEEL ASSEMBLY",
+     "pages": [
+      98,
+      99,
+      100
+     ],
+     "text": "Please ensure the wheel is fitted correctly before attempting to ride the motorcycle."
+    },
+    {
+     "score": -6.416,
+     "sent": false,
+     "section": "ANTI-LOCK BRAKING SYSTEM (ABS)",
+     "pages": [
+      66,
+      67,
+      68
+     ],
+     "text": "Please ride carefully and apply brakes cautiously, especially while cornering. ABS cannot estimate the \"weight shifts\" and momentum of the motorcycle while negotiating a corner and therefore prevent skidding due to loss "
+    }
+   ]
+  },
+  {
+   "alias": "Q09",
+   "case_id": "GEN048",
+   "group": "PARTIAL",
+   "question": "Will the app work with my new phone OS released this week?",
+   "answerable": true,
+   "retrieved_max_cross_score": -0.471,
+   "top_warnings": [
+    {
+     "score": -11.251,
+     "sent": true,
+     "section": "CHARGER PORT",
+     "pages": [
+      64,
+      65
+     ],
+     "text": "Do not use any other device other than mobile phones, only one mobile shall be charged at one point of time."
+    },
+    {
+     "score": -11.303,
+     "sent": false,
+     "section": "ASSEMBLY",
+     "pages": [
+      105,
+      106,
+      107
+     ],
+     "text": "Connect the red (+ve) positive terminal first and then connect black (-ve) negative terminal only."
+    },
+    {
+     "score": -11.334,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "Always exercise utmost caution while releasing clutch"
+    }
+   ]
+  },
+  {
+   "alias": "Q10",
+   "case_id": "GEN030",
+   "group": "GOLDEN",
+   "question": "Which display languages are listed?",
+   "answerable": true,
+   "retrieved_max_cross_score": -5.474,
+   "top_warnings": [
+    {
+     "score": -11.142,
+     "sent": false,
+     "section": "ASSEMBLY",
+     "pages": [
+      105,
+      106,
+      107
+     ],
+     "text": "Connect the red (+ve) positive terminal first and then connect black (-ve) negative terminal only."
+    },
+    {
+     "score": -11.198,
+     "sent": false,
+     "section": "ANTI-LOCK BRAKING SYSTEM (ABS)",
+     "pages": [
+      66,
+      67,
+      68
+     ],
+     "text": "ABS is a safety feature to help prevent locking of wheels during panic application of brakes. It is by no means a substitute for good riding practices and anticipatory braking."
+    },
+    {
+     "score": -11.205,
+     "sent": false,
+     "section": "MINI BLADE FUSE USAGE LIST",
+     "pages": [
+      112
+     ],
+     "text": "Usage of fuses other than specified rating or usage of any other conductive materials or low grade fuses will damage the complete electrical system."
+    }
+   ]
+  },
+  {
+   "alias": "Q11",
+   "case_id": "GEN007",
+   "group": "GOLDEN",
+   "question": "Does this manual allow E20 fuel?",
+   "answerable": true,
+   "retrieved_max_cross_score": -0.795,
+   "top_warnings": [
+    {
+     "score": -9.142,
+     "sent": false,
+     "section": "FUEL GAUGE",
+     "pages": [
+      63,
+      64
+     ],
+     "text": "Do not use the motorcycle for long duration with the fuel indication in last segment blinking. Refuel at the earliest."
+    },
+    {
+     "score": -9.273,
+     "sent": false,
+     "section": "E-START SWITCH",
+     "pages": [
+      28,
+      29
+     ],
+     "text": "In case of prolonged stoppage of vehicle, please turn off ignition key to avoid discharge of battery."
+    },
+    {
+     "score": -9.991,
+     "sent": false,
+     "section": "STARTING",
+     "pages": [
+      72,
+      73,
+      74
+     ],
+     "text": "Check the fuel level indicator in the cluster for adequate fuel in the fuel tank. In case the last bar is blinking continuously, it indicates low fuel level in the tank. Please re-fuel immediately."
+    }
+   ]
+  },
+  {
+   "alias": "Q12",
+   "case_id": "GEN022",
+   "group": "GOLDEN",
+   "question": "Why will the ignition key not come out while it is ON?",
+   "answerable": true,
+   "retrieved_max_cross_score": 4.256,
+   "top_warnings": [
+    {
+     "score": 3.209,
+     "sent": true,
+     "section": "IGNITION KEY",
+     "pages": [
+      26
+     ],
+     "text": "Do not switch OFF ignition while riding the motorcycle."
+    },
+    {
+     "score": 1.696,
+     "sent": true,
+     "section": "IGNITION KEY",
+     "pages": [
+      26
+     ],
+     "text": "Doing so can cause a potential accident, resulting in serious injury to both rider and other road users, besides causing severe damage to the motorcycle."
+    },
+    {
+     "score": 1.474,
+     "sent": true,
+     "section": "IGNITION/ENGINE KILL SWITCH",
+     "pages": [
+      28
+     ],
+     "text": "Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON."
+    }
+   ]
+  },
+  {
+   "alias": "Q13",
+   "case_id": "N10",
+   "group": "NO_ANSWER",
+   "question": "How do I pair a Bluetooth intercom headset with the bike?",
+   "answerable": false,
+   "retrieved_max_cross_score": -8.139,
+   "top_warnings": [
+    {
+     "score": -7.703,
+     "sent": false,
+     "section": "ASSEMBLY",
+     "pages": [
+      105,
+      106,
+      107
+     ],
+     "text": "Keep the red (+ve) positive terminal and (-ve) negative terminal cables firmly connected to the respective battery terminals. Failure to do so may result in damage to the motorcycle electrical system."
+    },
+    {
+     "score": -8.143,
+     "sent": false,
+     "section": "IGNITION KEY",
+     "pages": [
+      26
+     ],
+     "text": "Do not switch OFF ignition while riding the motorcycle."
+    },
+    {
+     "score": -8.803,
+     "sent": false,
+     "section": "PRECAUTIONS",
+     "pages": [
+      74,
+      75
+     ],
+     "text": "Ensure gear in neutral position and the neutral lamp is glowing in the speedometer. To shift into neutral, move the motorcycle back and forth gently, while simultaneously shifting the gear."
+    }
+   ]
+  },
+  {
+   "alias": "Q14",
+   "case_id": "GEN011",
+   "group": "GOLDEN",
+   "question": "Are the standard and low seats the same adjustable height?",
+   "answerable": true,
+   "retrieved_max_cross_score": 4.73,
+   "top_warnings": [
+    {
+     "score": -11.115,
+     "sent": false,
+     "section": "PARKING MOTORCYCLE ON SIDE STAND",
+     "pages": [
+      79,
+      80
+     ],
+     "text": "The side stand is only designed for the weight of the motorcycle. Do not sit on the motorcycle when it is resting on the side stand. The side stand or frame may become damaged and the motorcycle may fall over."
+    },
+    {
+     "score": -11.122,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Royal Enfield cautions you against the use of certain nonstandard parts such as aftermarket and custom made extended front forks or suspensions, which may adversely affect performance and handling. Removing or altering o"
+    },
+    {
+     "score": -11.126,
+     "sent": false,
+     "section": "COOLANT DRAINING",
+     "pages": [
+      86,
+      87
+     ],
+     "text": "Ensure vehicle is in straight position on ground level."
+    }
+   ]
+  },
+  {
+   "alias": "Q15",
+   "case_id": "N03",
+   "group": "NO_ANSWER",
+   "question": "What mileage in km per litre should I expect from this bike?",
+   "answerable": false,
+   "retrieved_max_cross_score": -6.068,
+   "top_warnings": [
+    {
+     "score": -8.557,
+     "sent": false,
+     "section": "ABS INDICATOR LAMP",
+     "pages": [
+      63
+     ],
+     "text": "Do not run motorcycle in case the ABS indicator lamp is \"ON\" continuously above 5 km/h."
+    },
+    {
+     "score": -10.015,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Operate motorcycle only at moderate speeds and out of traffic until you have become thoroughly familiar with its operation and handling characteristics under all conditions."
+    },
+    {
+     "score": -10.595,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "and riding the motorcycle."
+    }
+   ]
+  },
+  {
+   "alias": "Q16",
+   "case_id": "GEN017",
+   "group": "GOLDEN",
+   "question": "What output rating is listed for the USB port?",
+   "answerable": true,
+   "retrieved_max_cross_score": 0.632,
+   "top_warnings": [
+    {
+     "score": -0.298,
+     "sent": true,
+     "section": "CHARGER PORT",
+     "pages": [
+      64,
+      65
+     ],
+     "text": "If high current draw greater than 2.5 A is observed USB charger will shutdown please check your smart phone battery current ratings before using."
+    },
+    {
+     "score": -5.662,
+     "sent": true,
+     "section": "CHARGER PORT",
+     "pages": [
+      64,
+      65
+     ],
+     "text": "Use standard approved and high quality USB cables for proper functioning."
+    },
+    {
+     "score": -6.548,
+     "sent": true,
+     "section": "CHARGER PORT",
+     "pages": [
+      64,
+      65
+     ],
+     "text": "USB charger will function only when engine is in running condition."
+    }
+   ]
+  },
+  {
+   "alias": "Q17",
+   "case_id": "N02",
+   "group": "NO_ANSWER",
+   "question": "How many seconds does it take to go from 0 to 100 km/h?",
+   "answerable": false,
+   "retrieved_max_cross_score": -5.317,
+   "top_warnings": [
+    {
+     "score": -7.124,
+     "sent": true,
+     "section": "STARTING",
+     "pages": [
+      72,
+      73,
+      74
+     ],
+     "text": "Push and hold electric start switch until engine starts for a maximum of 5 seconds."
+    },
+    {
+     "score": -8.02,
+     "sent": true,
+     "section": "PRECAUTIONS",
+     "pages": [
+      74,
+      75
+     ],
+     "text": "Do not press the starter button more than 5 seconds after three successive cranking, wait for 15 to 20 seconds the battery to recover."
+    },
+    {
+     "score": -8.475,
+     "sent": false,
+     "section": "ABS INDICATOR LAMP",
+     "pages": [
+      63
+     ],
+     "text": "Do not run motorcycle in case the ABS indicator lamp is \"ON\" continuously above 5 km/h."
+    }
+   ]
+  },
+  {
+   "alias": "Q18",
+   "case_id": "GEN014",
+   "group": "GOLDEN",
+   "question": "Are the left and right fork oil quantities identical?",
+   "answerable": true,
+   "retrieved_max_cross_score": -6.111,
+   "top_warnings": [
+    {
+     "score": -11.212,
+     "sent": true,
+     "section": "RECOMMENDED LUBRICANTS",
+     "pages": [
+      21
+     ],
+     "text": "Use of wrong oil grade will reduce the life of the moving parts and seriously affect performance."
+    },
+    {
+     "score": -11.34,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Regularly inspect shock absorbers and front forks and look for leaks. Replace worn out parts. Worn out parts can adversely affect stability and handling."
+    },
+    {
+     "score": -11.38,
+     "sent": false,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Royal Enfield cautions you against the use of certain nonstandard parts such as aftermarket and custom made extended front forks or suspensions, which may adversely affect performance and handling. Removing or altering o"
+    }
+   ]
+  },
+  {
+   "alias": "Q19",
+   "case_id": "N07",
+   "group": "NO_ANSWER",
+   "question": "What is the battery's cold cranking amps (CCA) rating?",
+   "answerable": false,
+   "retrieved_max_cross_score": -9.163,
+   "top_warnings": [
+    {
+     "score": -7.765,
+     "sent": true,
+     "section": "PRECAUTIONS",
+     "pages": [
+      74,
+      75
+     ],
+     "text": "Do not press the starter button more than 5 seconds after three successive cranking, wait for 15 to 20 seconds the battery to recover."
+    },
+    {
+     "score": -9.208,
+     "sent": false,
+     "section": "CLUTCH CABLE FREE PLAY INSPECTION / ADJUSTMENT",
+     "pages": [
+      101,
+      102
+     ],
+     "text": "Clutch free play should be checked and adjusted only when the engine is cold."
+    },
+    {
+     "score": -9.332,
+     "sent": true,
+     "section": "CHARGER PORT",
+     "pages": [
+      64,
+      65
+     ],
+     "text": "If high current draw greater than 2.5 A is observed USB charger will shutdown please check your smart phone battery current ratings before using."
+    }
+   ]
+  },
+  {
+   "alias": "Q20",
+   "case_id": "GEN044",
+   "group": "GOLDEN",
+   "question": "At 300 km, does this manual allow full throttle?",
+   "answerable": true,
+   "retrieved_max_cross_score": 0.154,
+   "top_warnings": [
+    {
+     "score": -8.471,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "If the clutch lever is released abruptly and throttle opening is done insufficiently the motorcycle will have a rough start and cause the engine to stall."
+    },
+    {
+     "score": -9.638,
+     "sent": false,
+     "section": "STARTING",
+     "pages": [
+      72,
+      73,
+      74
+     ],
+     "text": "Push and hold electric start switch until engine starts for a maximum of 5 seconds."
+    },
+    {
+     "score": -9.658,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "Follow the recommended up shifting and down shifting speeds."
+    }
+   ]
+  },
+  {
+   "alias": "Q21",
+   "case_id": "EXP034",
+   "group": "PARTIAL",
+   "question": "How do I check the battery voltage?",
+   "answerable": true,
+   "retrieved_max_cross_score": 3.19,
+   "top_warnings": [
+    {
+     "score": -4.757,
+     "sent": false,
+     "section": "CHARGER PORT",
+     "pages": [
+      64,
+      65
+     ],
+     "text": "If high current draw greater than 2.5 A is observed USB charger will shutdown please check your smart phone battery current ratings before using."
+    },
+    {
+     "score": -6.86,
+     "sent": true,
+     "section": "PRECAUTIONS",
+     "pages": [
+      74,
+      75
+     ],
+     "text": "If the engine does not start. Do not hold the starter switch in depressed condition for long periods, this will cause the battery to drain below the threshold level of 10 V. Please get the motorcycle checked through an R"
+    },
+    {
+     "score": -7.129,
+     "sent": true,
+     "section": "DISMANTLING",
+     "pages": [
+      104,
+      105
+     ],
+     "text": "Always disconnect the black negative (-ve) battery cable first and then the red positive (+ve) cable while removing the battery connections."
+    }
+   ]
+  },
+  {
+   "alias": "Q22",
+   "case_id": "GEN041",
+   "group": "PARTIAL",
+   "question": "The general warning symbol is on. Which exact part has failed?",
+   "answerable": true,
+   "retrieved_max_cross_score": -7.945,
+   "top_warnings": [
+    {
+     "score": -9.849,
+     "sent": false,
+     "section": "CHECKING BRAKE FLUID",
+     "pages": [
+      88,
+      89
+     ],
+     "text": "An insufficient brake fluid level will cause the brake system to fail."
+    },
+    {
+     "score": -10.489,
+     "sent": false,
+     "section": "FRONT WHEEL ASSEMBLY",
+     "pages": [
+      93,
+      94,
+      95
+     ],
+     "text": "Failure to do so may result in the motorcycle not performing correctly, may lead to an accident causing injury to you / other road users and may lead to loss of life."
+    },
+    {
+     "score": -10.509,
+     "sent": false,
+     "section": "ELECTRICALS",
+     "pages": [
+      19
+     ],
+     "text": "Using bulbs/electrical gadgets other than specified rating will lead to overloading/erratic behavior/premature failure of electrical system."
+    }
+   ]
+  },
+  {
+   "alias": "Q23",
+   "case_id": "GEN004",
+   "group": "PARTIAL",
+   "question": "How many kilograms can I put in the panniers and top box?",
+   "answerable": true,
+   "retrieved_max_cross_score": -1.308,
+   "top_warnings": [
+    {
+     "score": -11.352,
+     "sent": false,
+     "section": "ANTI-LOCK BRAKING SYSTEM (ABS)",
+     "pages": [
+      66,
+      67,
+      68
+     ],
+     "text": "ABS is a safety feature to help prevent locking of wheels during panic application of brakes. It is by no means a substitute for good riding practices and anticipatory braking."
+    },
+    {
+     "score": -11.368,
+     "sent": false,
+     "section": "ANTI-LOCK BRAKING SYSTEM (ABS)",
+     "pages": [
+      66,
+      67,
+      68
+     ],
+     "text": "Please ride carefully and apply brakes cautiously, especially while cornering. ABS cannot estimate the \"weight shifts\" and momentum of the motorcycle while negotiating a corner and therefore prevent skidding due to loss "
+    },
+    {
+     "score": -11.383,
+     "sent": false,
+     "section": "ASSEMBLY",
+     "pages": [
+      105,
+      106,
+      107
+     ],
+     "text": "Connect the red (+ve) positive terminal first and then connect black (-ve) negative terminal only."
+    }
+   ]
+  },
+  {
+   "alias": "Q24",
+   "case_id": "EXP027",
+   "group": "PARTIAL",
+   "question": "When do the brake pads need replacement?",
+   "answerable": false,
+   "retrieved_max_cross_score": 7.121,
+   "top_warnings": [
+    {
+     "score": -2.553,
+     "sent": true,
+     "section": "REAR WHEEL REMOVAL",
+     "pages": [
+      95,
+      96,
+      97,
+      98
+     ],
+     "text": "Do not press the rear brake pedal when the rear wheel is being removed as this will cause the brake pads to dislocate from the brake caliper."
+    },
+    {
+     "score": -3.488,
+     "sent": true,
+     "section": "REAR WHEEL REMOVAL",
+     "pages": [
+      95,
+      96,
+      97,
+      98
+     ],
+     "text": "Place a 4 mm thick wooden piece or cardboard sheet between the brake pads to avoid activation of brake pads if rear brake pedal is accidentally pressed."
+    },
+    {
+     "score": -6.826,
+     "sent": false,
+     "section": "ANTI-LOCK BRAKING SYSTEM (ABS)",
+     "pages": [
+      66,
+      67,
+      68
+     ],
+     "text": "ABS is a safety feature to help prevent locking of wheels during panic application of brakes. It is by no means a substitute for good riding practices and anticipatory braking."
+    }
+   ]
+  },
+  {
+   "alias": "Q25",
+   "case_id": "N01",
+   "group": "NO_ANSWER",
+   "question": "What is the top speed of this motorcycle?",
+   "answerable": false,
+   "retrieved_max_cross_score": -2.668,
+   "top_warnings": [
+    {
+     "score": -3.114,
+     "sent": false,
+     "section": "ABS INDICATOR LAMP",
+     "pages": [
+      63
+     ],
+     "text": "Do not run motorcycle in case the ABS indicator lamp is \"ON\" continuously above 5 km/h."
+    },
+    {
+     "score": -4.351,
+     "sent": true,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Do not exceed the legal speed limit or ride too fast for existing conditions. Always reduce speed when poor riding conditions exist. High speed increases the influence of any other condition affecting stability and incre"
+    },
+    {
+     "score": -4.709,
+     "sent": true,
+     "section": "SAFE RIDING TIPS / GUIDELINES",
+     "pages": [
+      8,
+      9,
+      10,
+      11
+     ],
+     "text": "Operate motorcycle only at moderate speeds and out of traffic until you have become thoroughly familiar with its operation and handling characteristics under all conditions."
+    }
+   ]
+  },
+  {
+   "alias": "Q26",
+   "case_id": "GEN012",
+   "group": "GOLDEN",
+   "question": "What spark-plug gap is specified?",
+   "answerable": true,
+   "retrieved_max_cross_score": 3.51,
+   "top_warnings": [
+    {
+     "score": -8.275,
+     "sent": false,
+     "section": "MINI BLADE FUSE USAGE LIST",
+     "pages": [
+      112
+     ],
+     "text": "Usage of fuses other than specified rating or usage of any other conductive materials or low grade fuses will damage the complete electrical system."
+    },
+    {
+     "score": -8.712,
+     "sent": false,
+     "section": "ELECTRICALS",
+     "pages": [
+      19
+     ],
+     "text": "Using bulbs/electrical gadgets other than specified rating will lead to overloading/erratic behavior/premature failure of electrical system."
+    },
+    {
+     "score": -10.732,
+     "sent": false,
+     "section": "ASSEMBLY",
+     "pages": [
+      105,
+      106,
+      107
+     ],
+     "text": "Keep the red (+ve) positive terminal and (-ve) negative terminal cables firmly connected to the respective battery terminals. Failure to do so may result in damage to the motorcycle electrical system."
+    }
+   ]
+  },
+  {
+   "alias": "Q27",
+   "case_id": "EXP037",
+   "group": "PARTIAL",
+   "question": "The number-plate light stopped working. Which bulb should I buy?",
+   "answerable": true,
+   "retrieved_max_cross_score": -4.601,
+   "top_warnings": [
+    {
+     "score": -8.707,
+     "sent": true,
+     "section": "ELECTRICALS",
+     "pages": [
+      19
+     ],
+     "text": "Using bulbs/electrical gadgets other than specified rating will lead to overloading/erratic behavior/premature failure of electrical system."
+    },
+    {
+     "score": -9.928,
+     "sent": false,
+     "section": "ABS INDICATOR LAMP",
+     "pages": [
+      63
+     ],
+     "text": "Do not run motorcycle in case the ABS indicator lamp is \"ON\" continuously above 5 km/h."
+    },
+    {
+     "score": -10.6,
+     "sent": false,
+     "section": "HAZARD LIGHT SWITCH",
+     "pages": [
+      29
+     ],
+     "text": "Hazard flashing will create a strain on battery. Do not use hazard warning for longer period unless necessary."
+    }
+   ]
+  },
+  {
+   "alias": "Q28",
+   "case_id": "N04",
+   "group": "NO_ANSWER",
+   "question": "Does this bike have cruise control?",
+   "answerable": false,
+   "retrieved_max_cross_score": -5.138,
+   "top_warnings": [
+    {
+     "score": -5.042,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "If the acceleration is very high and clutch lever is released abruptly, it will cause motorcycle to move suddenly, which will lead to loss of control leading to an accident resulting in injury and or loss of life to ride"
+    },
+    {
+     "score": -5.868,
+     "sent": true,
+     "section": "ANTI-LOCK BRAKING SYSTEM (ABS)",
+     "pages": [
+      66,
+      67,
+      68
+     ],
+     "text": "Please apply both brakes simultaneously to stop with better traction and control of the motorcycle."
+    },
+    {
+     "score": -6.596,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "If the clutch lever is released abruptly and throttle opening is done insufficiently the motorcycle will have a rough start and cause the engine to stall."
+    }
+   ]
+  },
+  {
+   "alias": "Q29",
+   "case_id": "EXP044",
+   "group": "PARTIAL",
+   "question": "My bike has been stored for over a month. Can I just restart it?",
+   "answerable": true,
+   "retrieved_max_cross_score": 2.892,
+   "top_warnings": [
+    {
+     "score": -7.744,
+     "sent": false,
+     "section": "GEAR SHIFTING, RIDING AND STOPPING",
+     "pages": [
+      76,
+      77,
+      78
+     ],
+     "text": "If the clutch lever is released abruptly and throttle opening is done insufficiently the motorcycle will have a rough start and cause the engine to stall."
+    },
+    {
+     "score": -7.816,
+     "sent": false,
+     "section": "IGNITION KEY",
+     "pages": [
+      26
+     ],
+     "text": "Do not switch OFF ignition while riding the motorcycle."
+    },
+    {
+     "score": -7.866,
+     "sent": false,
+     "section": "FUEL GAUGE",
+     "pages": [
+      63,
+      64
+     ],
+     "text": "Do not use the motorcycle for long duration with the fuel indication in last segment blinking. Refuel at the earliest."
+    }
+   ]
+  },
+  {
+   "alias": "Q30",
+   "case_id": "GEN047",
+   "group": "PARTIAL",
+   "question": "It says Champion: what exact spark-plug part number should I order?",
+   "answerable": true,
+   "retrieved_max_cross_score": -2.188,
+   "top_warnings": [
+    {
+     "score": -11.187,
+     "sent": false,
+     "section": "ASSEMBLY",
+     "pages": [
+      105,
+      106,
+      107
+     ],
+     "text": "Connect the red (+ve) positive terminal first and then connect black (-ve) negative terminal only."
+    },
+    {
+     "score": -11.202,
+     "sent": false,
+     "section": "STARTING",
+     "pages": [
+      72,
+      73,
+      74
+     ],
+     "text": "Push and hold electric start switch until engine starts for a maximum of 5 seconds."
+    },
+    {
+     "score": -11.223,
+     "sent": false,
+     "section": "IGNITION KEY",
+     "pages": [
+      26
+     ],
+     "text": "Doing so can cause a potential accident, resulting in serious injury to both rider and other road users, besides causing severe damage to the motorcycle."
+    }
+   ]
+  }
+ ]
+}

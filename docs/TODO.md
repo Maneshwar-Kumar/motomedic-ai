@@ -4,19 +4,23 @@ Items that touch Google Cloud, billing or provider spending need the owner's exp
 
 ## Answer quality (local, no approval needed)
 
-1. **Measure on held-out questions.** Write 20–30 new questions the 30 development cases do not cover: follow-ups, multi-section questions, conflicts, unanswerable repairs, safety requests. Run them with [local experiments](EXPERIMENTS.md), have them scored, and record the run in `evals/`.
-2. **Restatement.** Add "state each fact once; a watchout must add a warning, not repeat the answer" to the system prompt. Measure whether duplicates drop without losing warnings.
-3. **Deterministic checks to consider.** Test each on the 30 development cases before enforcing it:
-   - reject internal words and label patterns in rider text ("section", "supplied", `E12`);
-   - a total length cap;
-   - near-duplicate sentences across sections;
-   - procedure steps only when the question asks how.
-4. **Warning coverage.** Measure how often a relevant warning sits in a section that was not retrieved. If it matters, attach each section's general warnings (for example the page 15 loading warning) at index time.
-5. **Default-effort Haiku.** The native schema already prevents misspelt or missing fields. Re-measure default effort with schema-checked drafts. If it clears the bar, it is cheaper and faster than effort high.
+The quality round of 25 October ([held-out test](../evals/20261025_heldout_v1/README.md)) left these, in order of measured effect. Test each on development questions, then on a **new** held-out set; the 33 held-out questions have been seen.
+
+1. **Reach a second place in the manual.** 6 of 33 held-out shortfalls were facts the 5 chunks did not contain: menu paths that start on page 39, the coolant grade in the lubricants table, the trailer warning on page 11. Options to measure:
+   - a larger top-k with the whole-section rule;
+   - adding the best-scoring chunk of another chapter;
+   - a query rewrite for "how do I" questions.
+2. **Scope "the manual does not give X".** Every wrong held-out answer is such a claim, made when the fact sat in a section that was not sent, or was misread. Options:
+   - a gate rewrite to "the parts of the manual I checked do not give X";
+   - a prompt rule that limits must name what was checked.
+3. **Facts left out of sent sections.** About 6 shortfalls (the 12 V LED headlamp, the 350 ml between oil marks, the 10 Nm adjuster bolt) were sent but dropped. Measure a prompt rule to give every value of a cited table row or step.
+4. **An uncited "not in the manual" sentence in `answer`.** It failed H24 closed. Measure whether the prompt should send such sentences to `disclaimers`.
+5. **Relevance floor.** At −9.0 it refused nothing on new questions. Either calibrate a better relevance signal or remove the floor; MiniLM scores of answerable and unanswerable questions overlap.
+6. **Default effort.** On new questions it matched effort high on correctness (21/33 each), with no schema slips, but showed 2 fewer required warnings. Moving the runtime to default effort needs an owner decision and a hosted cost and latency measurement.
 
 ## Hosted (needs owner approval)
 
-1. **A hosted run of v11.1.** It needs:
+1. **A hosted run of v11.2.** It needs:
    - an image context with the section index at `build/section-index`;
    - a hosted build;
    - a private deployment at 0% traffic;

@@ -1,0 +1,130 @@
+{
+ "version": "template-answer-v4",
+ "route": "SAFETY_STOP",
+ "coverage": "COMPLETE",
+ "text": "No. Do not bridge the blown fuse with wire or foil. Jumpering a defective fuse gives rise to the risk of a short-circuit and fire. Replace the defective fuse with a new fuse of the same rating. Fuses of another rating or other conductive materials will damage the complete electrical system. The manual lists spare fuses SF1 (5 A, yellow), SF2 (10 A, red) and SF3 (15 A, blue). Watch out: Get the electrical system checked and the faults corrected immediately after any fuse failure, as repeated fuse failure may follow. Watch out: Replace any spare fuse you use in the holder at the earliest opportunity.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E4",
+   "evidence_id": "evidence_90b50d7059435c1578fd7d12",
+   "pages": [
+    112
+   ]
+  },
+  {
+   "label": "E5",
+   "evidence_id": "evidence_4e1a61e411e2b752c1a8716b",
+   "pages": [
+    112
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_00497a5a6998712d564a2df2",
+   "pages": [
+    112
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_0c58e6021490c80a7a7f8d99",
+   "pages": [
+    112
+   ]
+  },
+  {
+   "label": "E8",
+   "evidence_id": "evidence_8b5ef092d20493cd2b9b58b8",
+   "pages": [
+    112
+   ]
+  }
+ ],
+ "cited_pages": [
+  112
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "No. Do not bridge the blown fuse with wire or foil.",
+    "evidence_ids": [
+     "E8",
+     "E6"
+    ]
+   },
+   {
+    "text": "Jumpering a defective fuse gives rise to the risk of a short-circuit and fire.",
+    "evidence_ids": [
+     "E8"
+    ]
+   },
+   {
+    "text": "Replace the defective fuse with a new fuse of the same rating.",
+    "evidence_ids": [
+     "E8"
+    ]
+   },
+   {
+    "text": "Fuses of another rating or other conductive materials will damage the complete electrical system.",
+    "evidence_ids": [
+     "E6"
+    ]
+   },
+   {
+    "text": "The manual lists spare fuses SF1 (5 A, yellow), SF2 (10 A, red) and SF3 (15 A, blue).",
+    "evidence_ids": [
+     "E4"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Get the electrical system checked and the faults corrected immediately after any fuse failure, as repeated fuse failure may follow.",
+    "evidence_ids": [
+     "E5"
+    ]
+   },
+   {
+    "text": "Replace any spare fuse you use in the holder at the earliest opportunity.",
+    "evidence_ids": [
+     "E7"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E5",
+   "decision": "INCLUDED",
+   "reason": "Adds the check of the electrical system after a fuse failure, which the answer does not give."
+  },
+  {
+   "display_id": "E6",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Its content is already stated in the answer."
+  },
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "Adds the duty to replace a spare fuse that is used."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Its content is already stated in the answer."
+  }
+ ],
+ "excluded_watchouts": [
+  "E6",
+  "E8"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

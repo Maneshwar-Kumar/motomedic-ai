@@ -48,6 +48,16 @@ class LocalAnswerTests(unittest.TestCase):
         result, _ = self.release()
         self.assertEqual(result['reason'], 'GATE_INVALID_DRAFT_JSON')
 
+    def test_schema_slips_are_recorded_apart_from_the_gate_result(self):
+        (self.out / 'draft.json').write_text(json.dumps(located(self.assembled)))
+        self.assertEqual(self.release()[0]['schema_errors'], [])
+        slipped = dict(located(self.assembled), route='SUPPORTED_ANSWER', note='x')
+        (self.out / 'draft.json').write_text(json.dumps(slipped))
+        result, printed = self.release()
+        self.assertEqual(result['schema_errors'], ['$.note: not allowed', '$.route: not in enum'])
+        self.assertEqual(result['route'], 'SYSTEM_ERROR')
+        self.assertIn('SCHEMA ERRORS', printed)
+
     def test_nothing_retrieved_needs_no_draft(self):
         (self.out / 'release.json').write_text(json.dumps(ta.no_evidence_release('mailto:support@royalenfield.com')))
         printed = io.StringIO()

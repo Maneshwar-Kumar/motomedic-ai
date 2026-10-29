@@ -6,7 +6,11 @@ Built from the cached Docling parse and the HybridChunker chunks of index_a3282c
 - running chapter headers (one section-header text on 3+ pages, always in the page's top band) do
   not start a new section after their first appearance, so page-break continuations stay in one
   section;
-- each chunk's search text is "<content heading>\n[<box label>\n]<text>" and is re-embedded.
+- each chunk's search text is "<content heading>\n[<box label>\n]<text>" and is re-embedded;
+- a subsection that Docling split from its parent inherits the parent's warnings: a section with no
+  WARNING/CAUTION of its own, directly after one that has some on the same or the previous page,
+  whose heading's first content word appears in that section's heading, records those warnings as
+  related warnings (for example LUGGAGE CATEGORIES after ACCESSORIES AND LUGGAGE).
 
 Usage (project root): python -m cloud.grounded_generation.section_index <source_index_dir> <out_dir> <bge_m3_dir>
 The build is ingestion, run before serving; requests only load and verify the result.
@@ -15,13 +19,18 @@ from collections import Counter, defaultdict
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 import sys
 
-VERSION = 'section-index-v1'
+VERSION = 'section-index-v2'
 BOXES = ('WARNING', 'CAUTION', 'NOTE')
+WARNING_BOXES = ('WARNING', 'CAUTION')
 RUNNING_MIN_PAGES = 3
 RUNNING_TOP_BAND = 0.12
+HEADING_STOPWORDS = frozenset({'and', 'the', 'for', 'with', 'your', 'from', 'how', 'use'})
+RELATED_RULE = ('no own WARNING/CAUTION; previous section has some; page gap 0 or 1; '
+                'first content word of the heading appears in the previous heading')
 
 
 def sha256(path):
@@ -113,6 +122,28 @@ def regroup(chunks, running):
     return out, sections, stats
 
 
+def _heading_words(heading):
+    return [w for w in re.findall(r'[a-z]+', heading.lower()) if len(w) > 2 and w not in HEADING_STOPWORDS]
+
+
+def link_related_warnings(sections):
+    """Give each split-off subsection its parent's warnings; returns the number of links."""
+    links = 0
+    for section in sections:
+        section['related_warnings'], section['related_section'] = [], None
+    for previous, current in zip(sections, sections[1:]):
+        own = [e for e in current['evidence_ids'] if current['box_of'].get(e) in WARNING_BOXES]
+        parent = [e for e in previous['evidence_ids'] if previous['box_of'].get(e) in WARNING_BOXES]
+        words = _heading_words(current['heading'])
+        if (own or not parent or not words or not previous['pdf_pages'] or not current['pdf_pages']
+                or current['pdf_pages'][0] - previous['pdf_pages'][-1] not in (0, 1)
+                or words[0] not in _heading_words(previous['heading'])):
+            continue
+        current['related_warnings'], current['related_section'] = parent, previous['id']
+        links += 1
+    return links
+
+
 def build(source_dir, out_dir, model_dir):
     import numpy as np
     from sentence_transformers import SentenceTransformer
@@ -129,6 +160,7 @@ def build(source_dir, out_dir, model_dir):
     doc = json.loads(parse.read_text(encoding='utf-8'))
     running = running_headers(doc)
     chunks, sections, stats = regroup(read_jsonl(source_dir / 'chunks.jsonl'), running)
+    stats['related_warning_links'] = link_related_warnings(sections)
     evidence = read_jsonl(source_dir / 'evidence.jsonl')
     owners = Counter(eid for s in sections for eid in s['evidence_ids'])
     if any(n != 1 for n in owners.values()):
@@ -138,7 +170,8 @@ def build(source_dir, out_dir, model_dir):
                            batch_size=16, show_progress_bar=False).astype('float32')
     weights = next(p for p in (Path(model_dir) / n for n in ('model.safetensors', 'pytorch_model.bin')) if p.exists())
     config = {'version': VERSION, 'boxes': BOXES, 'running_min_pages': RUNNING_MIN_PAGES,
-              'running_top_band': RUNNING_TOP_BAND, 'search_text': '<content heading>\\n[<box label>\\n]<text>'}
+              'running_top_band': RUNNING_TOP_BAND, 'search_text': '<content heading>\\n[<box label>\\n]<text>',
+              'related_warnings': RELATED_RULE}
     embedding = {**base['embedding'], 'weights_file': weights.name, 'weights_sha256': sha256(weights)}
     code = sha256(__file__)
     index_id = stable_id('index', base['source_sha256'], [base['cached_parse_sha256'], config, embedding, code])

@@ -1,0 +1,17 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "Use 10W40 engine oil that meets API SN and JASO MA2 and is semi synthetic.", "evidence_ids": ["E1"]},
+    {"text": "For an oil change with a new oil filter, the manual gives a refill quantity of 2.1 L.", "evidence_ids": ["E1"]}
+  ],
+  "policy": [
+    {"text": "The manual says the oil capacity values are approximate and the actual capacity will vary.", "evidence_ids": ["E4"]}
+  ],
+  "watchouts": [
+    {"text": "Using the wrong oil grade reduces the life of the moving parts and seriously affects performance.", "evidence_ids": ["E5"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "INCLUDED", "reason": "States the consequence of using the wrong oil grade, which the answer does not give."}
+  ]
+}

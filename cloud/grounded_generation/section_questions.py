@@ -70,7 +70,7 @@ def runtime_lock(source, index_identity, generation_contract):
                    'index': index_identity,
                    'retrieval': {'version': sr.VERSION, 'top_k': sr.TOP_K, 'rrf_k': sr.RRF_K,
                                  'dense_limit': sr.DENSE_LIMIT, 'fuse_depth': sr.FUSE_DEPTH,
-                                 'disagreement_top': sr.DISAGREEMENT_TOP},
+                                 'disagreement_top': sr.DISAGREEMENT_TOP, 'relevance_floor': sr.RELEVANCE_FLOOR},
                    'assembly': sa.VERSION, 'template': ta.VERSION,
                    'system_prompt_sha256': hashlib.sha256(ta.SYSTEM_PROMPT.encode()).hexdigest(),
                    'generation': generation_contract})
@@ -131,7 +131,8 @@ class Questions:
                 progress('retrieving')
             found = self.retriever.search(sr.retrieval_query(query, history))
             controls['retrieval'] = {k: found[k] for k in ('version', 'index_id', 'chunk_ids', 'sections_disagree',
-                                                           'reranked', 'rerank_skip_reason')}
+                                                           'reranked', 'rerank_skip_reason', 'max_cross_score',
+                                                           'below_relevance_floor')}
             if found['index_id'] != self.source.index_id:
                 raise ValueError('RETRIEVAL_INDEX_CHANGED')
             assembled = sa.assemble(self.index, found['chunk_ids'])
@@ -139,8 +140,9 @@ class Questions:
                                     'lines': len(assembled['objects']), 'warnings': len(assembled['warnings']),
                                     'text_sha256': hashlib.sha256(assembled['text'].encode()).hexdigest()}
             controls['retrieval_assembly_seconds'] = time.monotonic() - started
-            if not assembled['objects']:
-                release = ta.no_evidence_release(self.source.support_uri)
+            if not assembled['objects'] or found['below_relevance_floor']:
+                release = ta.no_evidence_release(self.source.support_uri,
+                    'BELOW_RELEVANCE_FLOOR' if assembled['objects'] else 'NOTHING_RETRIEVED')
             else:
                 if progress:
                     progress('drafting')
@@ -156,7 +158,9 @@ class Questions:
             controls['gate'] = {'version': release['version'], 'route': release['route'],
                                 'coverage': release['coverage'], 'citations': len(release['citations']),
                                 'excluded_watchouts': len(release['excluded_watchouts']),
-                                'suppressed_disclaimers': release['suppressed_disclaimers']}
+                                'suppressed_disclaimers': release['suppressed_disclaimers'],
+                                'suppressed_duplicates': release['suppressed_duplicates'],
+                                'rewritten_phrases': len(release['rewritten_phrases'])}
             controls['server_seconds'] = time.monotonic() - started
             return session, self._released(session, operation_id, release, assembled, found, controls), {}
         except ta.ReleaseRejected as exc:

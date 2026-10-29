@@ -53,17 +53,19 @@ The section index is derived from the cached Docling parse inside the public bas
    ```
 
 2. **Get BGE-M3.** Use `BAAI/bge-m3` at revision `5617a9f61b028005a4858fdac845db406aefb181`, with `sentence-transformers` and a CPU build of PyTorch. The model directory must hold `pytorch_model.bin`, SHA-256 `b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38`. [EXPERIMENTS](EXPERIMENTS.md#setup) gives the download call. The index ID includes the weights hash, so a re-saved or converted model gives a different ID.
-3. **Build with the script that produced the frozen index,** so the build-code hash in the ID matches. Set `PYTHONPATH=ingest` so it finds `online_ingest.py`:
+3. **Build with the serving module,** whose file hash is part of the index ID. From the project root:
 
    ```sh
-   PYTHONPATH=ingest python evals/20261025_answer_release_v3/candidate/section_index.py build/index-snapshot build/index-v3-sections <bge_m3_dir>
+   python -m cloud.grounded_generation.section_index build/index-snapshot build/index-v4-sections <bge_m3_dir>
    ```
 
-4. **Compare with the frozen identity:**
+4. **Compare with the frozen identity** (`index_f768fbb216836c003701079e`):
 
    ```sh
-   python -c "import json; from cloud.grounded_generation import section_index as si; m = json.load(open('releases/serving_manifest_v11_1.json')); print(si.verify('build/index-v3-sections', m['index'])['index_id'])"
+   python -c "import json; from cloud.grounded_generation import section_index as si; m = json.load(open('releases/serving_manifest_v11_2.json')); print(si.verify('build/index-v4-sections', m['index'])['index_id'])"
    ```
+
+   The previous index `index_a609ca61c635641e0a22dc48` (v11.1) was built by the [v3 candidate script](../evals/20261025_answer_release_v3/candidate/section_index.py) into `build/index-v3-sections`. The current one adds the related-warning links; its chunks, BM25 postings and embeddings are byte-identical to the previous build.
 
 The sectioning is deterministic, but two things can change the file hashes:
 - **Embedding bytes.** They can differ across CPUs and library versions.

@@ -1,0 +1,101 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "With a pillion on board, the manual gives 32 psi for the rear tyre. When carrying a pillion, follow the manual's guidelines for carrying a pillion, luggage or accessories. Watch out: Do not load weight or install accessories incorrectly. This may affect the motorcycle's stability, handling and safe operation and could cause an accident resulting in serious injury or loss of life.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E2",
+   "evidence_id": "evidence_5b6388c083677b5d5cd6ad4a",
+   "pages": [
+    18
+   ]
+  },
+  {
+   "label": "E16",
+   "evidence_id": "evidence_fe1b0eab8df9910c9491f786",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "label": "E23",
+   "evidence_id": "evidence_b45cd32783b18b7a0f3a6bd3",
+   "pages": [
+    15
+   ]
+  }
+ ],
+ "cited_pages": [
+  14,
+  15,
+  18
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "With a pillion on board, the manual gives 32 psi for the rear tyre.",
+    "evidence_ids": [
+     "E2"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "When carrying a pillion, follow the manual's guidelines for carrying a pillion, luggage or accessories.",
+    "evidence_ids": [
+     "E16"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Do not load weight or install accessories incorrectly. This may affect the motorcycle's stability, handling and safe operation and could cause an accident resulting in serious injury or loss of life.",
+    "evidence_ids": [
+     "E23"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E23",
+   "decision": "INCLUDED",
+   "reason": "A pillion is added load; the watchout covers incorrect loading and its stability risk."
+  },
+  {
+   "display_id": "E24",
+   "decision": "NOT_APPLICABLE",
+   "reason": "States that genuine accessories are tested; does not concern tyre pressure or pillion load."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns nonstandard parts such as aftermarket forks; not part of this question."
+  },
+  {
+   "display_id": "E26",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Continuation of E25 on altering original parts; not part of this question."
+  },
+  {
+   "display_id": "E27",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns model and design specifications; not part of this question."
+  }
+ ],
+ "excluded_watchouts": [
+  "E24",
+  "E25",
+  "E26",
+  "E27"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

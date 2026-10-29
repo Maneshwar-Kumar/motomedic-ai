@@ -22,21 +22,21 @@ This guide is for someone reviewing MotoMedic for the first time. It says what t
 ## 3. Why it is built this way (15 minutes)
 
 - [Decision log](DECISIONS.md): every owner decision, in order, with its record.
-- [Evaluations](../evals/README.md): five runs on the same 30 questions, in the order the design changed. The last, [section answer path v3](../evals/20261025_answer_release_v3/README.md), is the evidence for the current design.
+- [Evaluations](../evals/README.md): five runs on the same 30 questions, in the order the design changed, then the [held-out test](../evals/20261025_heldout_v1/README.md) on 33 new questions. The [section answer path v3](../evals/20261025_answer_release_v3/README.md) is the evidence for the current design.
 
 ## 4. Check the claims yourself
 
 | Claim | Check |
 | --- | --- |
 | The repository is laid out as documented and every link resolves. | `python tools/check_repository_structure.py` |
-| The serving code is exactly what release v11.1 froze. | `python tools/serving_release.py verify` |
+| The serving code is exactly what release v11.2 froze. | `python tools/serving_release.py verify` |
 | The code behaves as specified: retrieval, assembly, gate, the paid call's validation and ledger, the API → worker → saved stream → UI path. | The provider-free suite in [SETUP](SETUP.md), also run by [CI](../.github/workflows/ci.yml) |
-| The serving modules reproduce the v3 run's 30 model inputs and 90 gate outcomes on the real index. | [serving_parity.py](../evals/20261025_answer_release_v3/serving_parity.py) (needs the index; [SETUP](SETUP.md) shows how to rebuild it) |
+| The serving modules reproduce the v3 run's 30 model inputs and 90 gate outcomes on the previous index (on the current index only GEN004 differs, by its added luggage warnings). | [serving_parity.py](../evals/20261025_answer_release_v3/serving_parity.py) (needs the index; [SETUP](SETUP.md) shows how to rebuild it) |
 | A new question goes through the real path. | [EXPERIMENTS](EXPERIMENTS.md): real retrieval and gate here, with a Claude Code Haiku subagent as the generator |
 
 ## 5. How to weigh the evidence
 
-- **The evaluations are local and agent-scored.** Claude Code subagents generated the answers, and the main agent compared them with the canonical answers of an earlier review package. None of it is hosted, human or independent factual acceptance. The 30 questions are now development cases, not held-out evidence.
+- **The evaluations are local and agent-scored.** Claude Code subagents generated the answers, and the main agent compared them with the canonical answers of an earlier review package. None of it is hosted, human or independent factual acceptance. The 30 questions are development cases. The 33 held-out questions were new when run, with a blind agent judge, and are now spent.
 - **The gate checks form, not meaning.** It proves that structure, citations, numbers, page references and warning decisions passed; a released answer can still be wrong in meaning.
 - **Tests use synthetic data.** They run on a synthetic index, a fake model transport and an in-memory store, so they prove behavior, not answer quality or latency.
 - **The hosted service is not running this release.** Hosted latency, cost and prompt-cache use are unmeasured.

@@ -1,0 +1,65 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "Do not exceed 110 km/h when riding solo, carrying a pillion or payload on an accessory equipped motorcycle.",
+      "evidence_ids": ["E20"]
+    },
+    {
+      "text": "Keep luggage weight low and close to the motorcycle, and distribute it evenly on both sides.",
+      "evidence_ids": ["E21", "E22"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The rider must be responsible for safe operation of the motorcycle when installing accessories or carrying additional weight.",
+      "evidence_ids": ["E18"]
+    },
+    {
+      "text": "Use only Royal Enfield genuine accessories, which are model specific, and follow the installation procedure.",
+      "evidence_ids": ["E25"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Loading weight or installing accessories incorrectly may affect stability, handling and safe operation, and could cause an accident resulting in serious injury or loss of life.",
+      "evidence_ids": ["E26"]
+    },
+    {
+      "text": "Aftermarket and custom-made parts, such as extended front forks, may adversely affect the performance and handling of the motorcycle. Removing or altering original parts may do the same, which could cause an accident resulting in serious injury or loss of life.",
+      "evidence_ids": ["E28", "E29"]
+    },
+    {
+      "text": "Ignoring model or design specifications is misuse of the motorcycle and accessories, may adversely affect handling and performance, and could cause an accident resulting in serious injury or loss of life.",
+      "evidence_ids": ["E30"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E26",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on loading weight and installing accessories incorrectly."
+    },
+    {
+      "display_id": "E27",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Repeats the genuine accessories point already given in the policy."
+    },
+    {
+      "display_id": "E28",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on aftermarket and custom parts and altered original parts."
+    },
+    {
+      "display_id": "E29",
+      "decision": "INCLUDED",
+      "reason": "Continuation of E28, cited in the same watchout."
+    },
+    {
+      "display_id": "E30",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on ignoring model or design specifications."
+    }
+  ]
+}

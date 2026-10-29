@@ -1,0 +1,1926 @@
+{
+ "arm": "haiku_high",
+ "label": "LOCAL_CLAUDE_CODE_SUBAGENT_RUN_NOT_HOSTED_NOT_API",
+ "questions_sha256": "b55ad9d7b4fe03800206263c6a9d3dd520da4dd72112e0fc4bd9620333eca352",
+ "released": 32,
+ "system_errors": [
+  "H24:GATE_UNCITED_TECHNICAL_ITEM"
+ ],
+ "drafts_with_schema_errors": [],
+ "model_calls": 33,
+ "below_floor": [],
+ "rows": [
+  {
+   "id": "H01",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The front tyre size is 90/90-21 M/C 54H CEAT (Gripp RE F). The rear tyre size is 140/80R17 M/C 69H CEAT (Gripp Rad steel RE).",
+   "cited_pages": [
+    18
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": 2.8208346366882324,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "TECHNICAL SPECIFICATIONS",
+    "MINOR MAINTENANCE TIPS",
+    "DISCLAIMER",
+    "RULES OF THE ROAD",
+    "FOREWORD"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 5512,
+   "reference_pages": [
+    18
+   ],
+   "reference_pages_sent": [
+    18
+   ]
+  },
+  {
+   "id": "H02",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The fuel tank capacity is 17.0 L. The manual gives the low fuel warning as 3 L ± 0.5 L, so about 3 litres is left in the tank when it comes on. Watch out: If the last bar of the fuel level indicator in the cluster blinks continuously, the fuel is low and you should re-fuel immediately.",
+   "cited_pages": [
+    18,
+    73
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E10",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Overfilling advice; the rider did not ask about filling."
+    },
+    {
+     "display_id": "E11",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Fill level advice for refuelling; not about the low fuel warning."
+    },
+    {
+     "display_id": "E12",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Overfilling damage; not asked."
+    },
+    {
+     "display_id": "E13",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Refuelling vapour safety; not asked."
+    },
+    {
+     "display_id": "E14",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Paint staining from spills; not asked."
+    },
+    {
+     "display_id": "E15",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Smoking while refuelling; not asked."
+    },
+    {
+     "display_id": "E23",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Malfunction indicator; not the fuel warning."
+    },
+    {
+     "display_id": "E24",
+     "decision": "INCLUDED",
+     "reason": "Blinking last bar means low fuel and immediate refuelling; cited in the watchout."
+    },
+    {
+     "display_id": "E25",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Clutch use when starting; not asked."
+    },
+    {
+     "display_id": "E26",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Starter switch use; not asked."
+    }
+   ],
+   "max_cross_score": -0.9452701210975647,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "TECHNICAL SPECIFICATIONS",
+    "FUEL TANK CAP",
+    "Distance to empty",
+    "STARTING"
+   ],
+   "warnings_to_decide": 10,
+   "model_input_chars": 3379,
+   "reference_pages": [
+    18,
+    63,
+    64
+   ],
+   "reference_pages_sent": [
+    18
+   ]
+  },
+  {
+   "id": "H03",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Use 10W40 engine oil that meets API SN and JASO MA2 and is semi synthetic. For an oil change with a new oil filter, the manual gives a refill quantity of 2.1 L. The manual says the oil capacity values are approximate and the actual capacity will vary. Watch out: Using the wrong oil grade reduces the life of the moving parts and seriously affects performance.",
+   "cited_pages": [
+    21
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E5",
+     "decision": "INCLUDED",
+     "reason": "States the consequence of using the wrong oil grade, which the answer does not give."
+    }
+   ],
+   "max_cross_score": 2.215446710586548,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "RECOMMENDED LUBRICANTS",
+    "OIL FILTER REPLACEMENT",
+    "ENGINE OIL LEVEL CHECKING",
+    "ENGINE OIL DRAINING/STRAINER CHECK"
+   ],
+   "warnings_to_decide": 1,
+   "model_input_chars": 2659,
+   "reference_pages": [
+    21,
+    85
+   ],
+   "reference_pages_sent": [
+    21,
+    85
+   ]
+  },
+  {
+   "id": "H04",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "PARTIAL",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The manual gives the low beam headlamp wattage as 12.12 W. The manual gives 14.22 W for high beam and low beam together. Watch out: Bulbs or electrical gadgets rated other than the manual specifies can overload the electrical system, cause erratic behavior or fail early. The manual does not give a wattage for the high beam alone.",
+   "cited_pages": [
+    19
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E22",
+     "decision": "INCLUDED",
+     "reason": "Warns about bulbs rated other than specified, which bears on lamp wattage."
+    },
+    {
+     "display_id": "E23",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Covers unapproved modifications and warranty, not wattage."
+    }
+   ],
+   "max_cross_score": 5.554498195648193,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "HIGH BEAM/LOW BEAM SWITCH",
+    "HEADLAMP ASSEMBLY",
+    "HEADLAMP DISMANTLING",
+    "HEAD LIGHT BEAM ADJUSTMENT",
+    "ELECTRICALS"
+   ],
+   "warnings_to_decide": 2,
+   "model_input_chars": 2511,
+   "reference_pages": [
+    19,
+    108
+   ],
+   "reference_pages_sent": [
+    19,
+    108
+   ]
+  },
+  {
+   "id": "H05",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "PARTIAL",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The manual says the hazard lights keep working for 30 minutes, unless you turn them off manually. The hazard flasher cannot be activated when the ignition switch is OFF. Watch out: Hazard flashing strains the battery, so do not use the hazard lights for longer than necessary. The manual does not say whether turning the ignition OFF while the hazard lights are on changes the 30-minute time. The manual's hazard lines are unclear about the ignition, so confirm with an authorised Royal Enfield service centre.",
+   "cited_pages": [
+    29
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E5",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Turn signal behaviour does not answer the duration question."
+    },
+    {
+     "display_id": "E6",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Lamp flashing pattern does not affect how long the hazard runs."
+    },
+    {
+     "display_id": "E8",
+     "decision": "INCLUDED",
+     "reason": "Battery strain from long hazard use is a warning about leaving them on."
+    },
+    {
+     "display_id": "E11",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Battery drain from the headlamp is not about the hazard lights."
+    },
+    {
+     "display_id": "E24",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Engine fault warning is unrelated to the hazard lights."
+    },
+    {
+     "display_id": "E25",
+     "decision": "NOT_APPLICABLE",
+     "reason": "ABS warning lamp is unrelated to the hazard lights."
+    }
+   ],
+   "max_cross_score": 6.5809526443481445,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "Methods to activate hazard flasher:",
+    "HAZARD LIGHT SWITCH",
+    "IGNITION/ENGINE KILL SWITCH",
+    "GEAR POSITION INDICATION"
+   ],
+   "warnings_to_decide": 6,
+   "model_input_chars": 2397,
+   "reference_pages": [
+    29,
+    30
+   ],
+   "reference_pages_sent": [
+    29,
+    30
+   ]
+  },
+  {
+   "id": "H06",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The fuel consumption setting offers km/l, L/100 km, mpg (UK) and mpg (US). When speed and distance are set in km, the choice is km/l or L/100 km. When speed and distance are set in mpg, the choice is mpg (UK) or mpg (US).",
+   "cited_pages": [
+    49,
+    50
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": 1.0693858861923218,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "For Digital Screen",
+    "IF PRESS JOYSTICK LEFT",
+    "iii. Fuel consumption"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 1416,
+   "reference_pages": [
+    39,
+    47,
+    49,
+    50
+   ],
+   "reference_pages_sent": [
+    49,
+    50
+   ]
+  },
+  {
+   "id": "H07",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The standard (general) warranty lasts until 36 months or 30,000 km, whichever comes first, from the sale to the first owner. It carries over to each later owner for the balance of the remaining warranty period. A later owner should tell the nearest Royal Enfield Service Centre about the purchase and fill in the form it asks for. The warranty applies only if the owner has all maintenance and services done within the warranty period or kilometre range, following the schedule in the manual, at a Royal Enfield Authorised Dealer or Service Centre. The emission and evaporative emission warranties have their own periods and terms, which this answer does not cover. The emission warranty continues after a change of ownership if its conditions are met.",
+   "cited_pages": [
+    129,
+    130,
+    139,
+    140,
+    144
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": -1.939483880996704,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "EMISSION WARRANTY",
+    "EVAPORATIVE EMISSION CONTROL SYSTEM WARRANTY",
+    "PERIODICAL MAINTENANCE",
+    "GENERAL WARRANTY TERMS AND CONDITIONS"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 21830,
+   "reference_pages": [
+    129,
+    130
+   ],
+   "reference_pages_sent": [
+    129,
+    130
+   ]
+  },
+  {
+   "id": "H08",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The engine number is punched on the bottom of the gear pedal connector rod. The VIN is a 17-digit number punched on the right side of the steering head tube, in the form of a label.",
+   "cited_pages": [
+    22
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E2",
+     "decision": "NOT_APPLICABLE",
+     "reason": "The caution is about altering the numbers, not about where to find them."
+    }
+   ],
+   "max_cross_score": 2.384748935699463,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "ENGINE NUMBER",
+    "FRAME NUMBER",
+    "PERSONAL AND MOTORCYCLE INFORMATION"
+   ],
+   "warnings_to_decide": 1,
+   "model_input_chars": 834,
+   "reference_pages": [
+    22
+   ],
+   "reference_pages_sent": [
+    22
+   ]
+  },
+  {
+   "id": "H09",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The kerb weight is 196 kg, with 90% fuel and oil. The ground clearance is 224 mm. The manual says these values are for guidance only and that the specifications are likely to change without prior notice.",
+   "cited_pages": [
+    20
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E22",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns loading weight and fitting accessories, not the kerb weight or ground clearance asked about."
+    },
+    {
+     "display_id": "E23",
+     "decision": "NOT_APPLICABLE",
+     "reason": "States that genuine accessories are tested; does not bear on the two figures asked about."
+    },
+    {
+     "display_id": "E24",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns nonstandard front forks and altered parts, not the kerb weight or ground clearance."
+    },
+    {
+     "display_id": "E25",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Continuation of E24 on altered parts; not relevant to the figures asked about."
+    },
+    {
+     "display_id": "E26",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns ignoring model specifications when fitting accessories; the question asks for the figures only."
+    },
+    {
+     "display_id": "E29",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns stand retraction before riding; not part of the weight or clearance question."
+    },
+    {
+     "display_id": "E30",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns parking on a firm, flat surface; not part of the weight or clearance question."
+    },
+    {
+     "display_id": "E31",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns sitting on the bike while on the side stand; not part of the weight or clearance question."
+    }
+   ],
+   "max_cross_score": 0.9363018870353699,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "WEIGHTS",
+    "DIMENSIONS",
+    "ACCESSORIES AND LUGGAGE",
+    "PARKING MOTORCYCLE ON SIDE STAND"
+   ],
+   "warnings_to_decide": 8,
+   "model_input_chars": 4083,
+   "reference_pages": [
+    20
+   ],
+   "reference_pages_sent": [
+    20
+   ]
+  },
+  {
+   "id": "H10",
+   "category": "FACT",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The tool kit is strapped underneath the pillion seat. The kit has Allen keys in 8 mm, 6 mm, 5 mm and 4 mm, a C-spanner, a double end spanner 10 x 13 and an extension tube, one of each. The kit also has a fuse puller, a ring spanner 24 x 14 combination, a front spindle adapter (one each) and a double end spanner 12 x 16 (quantity 2).",
+   "cited_pages": [
+    81
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E18",
+     "decision": "NOT_APPLICABLE",
+     "reason": "The warning is about securing the wheel spacers and speed sensor when the front axle is removed. It does not concern the tool kit's contents or location."
+    }
+   ],
+   "max_cross_score": 3.5555930137634277,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "TOOLS KIT AND FIRST AID KIT",
+    "ITEMS TO BE CARRIED",
+    "FRONT WHEEL REMOVAL"
+   ],
+   "warnings_to_decide": 1,
+   "model_input_chars": 2302,
+   "reference_pages": [
+    81
+   ],
+   "reference_pages_sent": [
+    81
+   ]
+  },
+  {
+   "id": "H11",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Place the motorcycle upright on a level surface, start the engine from cold, let it idle for 2 to 3 minutes, then stop it. Wait 2 to 3 minutes for the oil to settle, then check the level in the sight glass. The oil level should be close to the MAX mark. If the level is not there, top up the oil to MAX and repeat the procedure. Do not fill above the MAX mark, as this may affect the clutch function. After an oil service the manual gives a different target, between the minimum and maximum lines, so confirm with an authorised Royal Enfield service centre.",
+   "cited_pages": [
+    83,
+    85
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": 8.236199378967285,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "ENGINE OIL LEVEL CHECKING",
+    "ENGINE OIL DRAINING/STRAINER CHECK",
+    "OIL FILLING DURING OIL SERVICE",
+    "PERIODICAL MAINTENANCE"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 9356,
+   "reference_pages": [
+    24,
+    83,
+    124
+   ],
+   "reference_pages_sent": [
+    83,
+    124
+   ]
+  },
+  {
+   "id": "H12",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Move the joystick up or down to Reset trip 1, then press the joystick in the centre to select it. A confirmation popup for the reset then appears.",
+   "cited_pages": [
+    44
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": 7.083261489868164,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "i. Reset trip",
+    "IF PRESS JOYSTICK LEFT"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 801,
+   "reference_pages": [
+    39,
+    43,
+    44
+   ],
+   "reference_pages_sent": [
+    44
+   ]
+  },
+  {
+   "id": "H13",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "When the motorcycle falls over with the engine running and the gears engaged, the roll over sensor disables the fuel systems and switches the engine OFF. To reset it, first make sure the motorcycle is upright and on its center stand. Make sure the gears are in neutral and the neutral lamp is glowing in the instrument console. Switch OFF both the ignition and the stop switches, wait a few seconds, then switch both back ON. To start the engine, pull in the clutch lever and hold it, then push and hold the electric start switch until the engine starts, for a maximum of 5 seconds. Watch out: If the malfunction indicator does not turn OFF after the engine starts, have the motorcycle checked at a Royal Enfield Authorised Service Centre.",
+   "cited_pages": [
+    68,
+    73
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E11",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Hot radiator cap warning belongs to coolant work, not the sensor reset."
+    },
+    {
+     "display_id": "E12",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Coolant work warning, not part of the sensor reset."
+    },
+    {
+     "display_id": "E13",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Coolant filling warning, not part of the sensor reset."
+    },
+    {
+     "display_id": "E14",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Air bleeding warning belongs to coolant work, not the sensor reset."
+    },
+    {
+     "display_id": "E28",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Coolant disposal warning does not apply to this question."
+    },
+    {
+     "display_id": "E36",
+     "decision": "INCLUDED",
+     "reason": "After a fall and restart, a malfunction indicator that stays on needs a service centre check."
+    },
+    {
+     "display_id": "E37",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Low fuel warning is not part of the sensor reset the rider asked about."
+    },
+    {
+     "display_id": "E38",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Its clutch instruction is already given in the answer."
+    },
+    {
+     "display_id": "E39",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Its 5-second limit is already given in the answer."
+    }
+   ],
+   "max_cross_score": 1.676118016242981,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "ROLL OVER SENSOR",
+    "COOLANT DRAINING",
+    "STARTING"
+   ],
+   "warnings_to_decide": 9,
+   "model_input_chars": 4282,
+   "reference_pages": [
+    68,
+    72,
+    75
+   ],
+   "reference_pages_sent": [
+    68,
+    72
+   ]
+  },
+  {
+   "id": "H14",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Insert the key in the pillion seat key slot and turn it clockwise. Slide the pillion seat forward to remove it. Slide the rider seat backward to remove it. To refit, slide the rider seat forward so it lines up with the frame. Place the pillion seat and slide it backward. Make sure the pillion seat lines up with the frame, then press the seat to lock it with the key in position.",
+   "cited_pages": [
+    34,
+    35,
+    36
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E23",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Battery terminal connection order, not seat removal or refitting."
+    },
+    {
+     "display_id": "E24",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Battery cable connection, not seat removal or refitting."
+    }
+   ],
+   "max_cross_score": 7.556497573852539,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "PILLION AND RIDER SEAT DISMANTLING",
+    "PILLION AND RIDER SEAT ASSEMBLY",
+    "AIR FILTER CLEANING",
+    "ASSEMBLY"
+   ],
+   "warnings_to_decide": 2,
+   "model_input_chars": 2445,
+   "reference_pages": [
+    4,
+    34,
+    35,
+    36
+   ],
+   "reference_pages_sent": [
+    34,
+    35,
+    36
+   ]
+  },
+  {
+   "id": "H15",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Long press the Mode button on the RH switch cube to change the instrument cluster from analog to digital. You can also do it through the joystick: with the screen type option selected, center press the joystick to change the screen type. The two screen types are Analog and digital screen; press the joystick up or down to move between the options and center press to select digital.",
+   "cited_pages": [
+    42
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": 7.423259735107422,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "iv. Screen type",
+    "iii. Brightness",
+    "ii. Firmware version",
+    "ii. Background",
+    "LOCATION OF KEY PARTS"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 2039,
+   "reference_pages": [
+    39,
+    40,
+    42
+   ],
+   "reference_pages_sent": [
+    42
+   ]
+  },
+  {
+   "id": "H16",
+   "category": "HOW",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Clean the chain by spraying it with the recommended chain cleaning solvent while you slowly rotate the rear wheel. Make sure the chain is completely covered with solvent, and use a suitable brush on hard deposits if needed. Wait a few minutes, then clean the chain thoroughly to remove dirt and grime. To lubricate, rotate the rear wheel slowly and apply the recommended chain lubricant to the chain links. Wipe off the excess lubricant with a clean cloth after a few minutes. Clean and lubricate the chain every 500 km, or earlier as required, and after riding in wet, dusty or muddy conditions. The manual does not name a specific chain cleaning solvent or chain lubricant; it says to use the recommended ones.",
+   "cited_pages": [
+    82,
+    83,
+    127
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": 5.78721284866333,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "DRIVE CHAIN",
+    "PERIODICAL MAINTENANCE",
+    "MINOR MAINTENANCE TIPS"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 9076,
+   "reference_pages": [
+    82,
+    83,
+    127
+   ],
+   "reference_pages_sent": [
+    82,
+    83,
+    127
+   ]
+  },
+  {
+   "id": "H17",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "PARTIAL",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Keep the bike in a straight position on level ground. Do not fill the coolant while the bike is on its side stand. Remove the radiator expansion tank cap and fill the tank to the upper level line, then replace the cap. Coolant from Total is ready to use and does not need mixing. Watch out: Do not open the radiator pressure cap while the engine is hot. The released pressure can make the coolant boil and spurt out, causing severe burns. Watch out: Do not spill coolant. Avoid skin or body contact with it, and wash any affected area promptly with soap and water. The manual does not give a coolant specification and does not say whether other coolants are suitable. The manual does not give a volume or capacity for topping up.",
+   "cited_pages": [
+    86,
+    87
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E6",
+     "decision": "INCLUDED",
+     "reason": "Warns against opening the radiator cap while the engine is hot."
+    },
+    {
+     "display_id": "E7",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Its level-ground instruction is given as an answer step, not as a watchout."
+    },
+    {
+     "display_id": "E8",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Radiator refill after draining; the answer covers the expansion tank top-up."
+    },
+    {
+     "display_id": "E9",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Air bleeding follows a full refill after draining, not an expansion tank top-up."
+    },
+    {
+     "display_id": "E23",
+     "decision": "INCLUDED",
+     "reason": "Warns about spilled coolant and skin contact with it."
+    }
+   ],
+   "max_cross_score": 1.3997752666473389,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "COOLANT DRAINING",
+    "PERIODICAL MAINTENANCE"
+   ],
+   "warnings_to_decide": 5,
+   "model_input_chars": 9413,
+   "reference_pages": [
+    21,
+    86,
+    87,
+    125
+   ],
+   "reference_pages_sent": [
+    86,
+    87,
+    125
+   ]
+  },
+  {
+   "id": "H18",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Disconnect the black negative (-ve) terminal first, then the red positive (+ve) terminal. When refitting, connect the red positive (+ve) terminal first, then the black negative (-ve) terminal. Watch out: Keep the red (+ve) and black (-ve) cables firmly connected to their battery terminals. If they are not, the motorcycle's electrical system may be damaged.",
+   "cited_pages": [
+    105,
+    107
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E8",
+     "decision": "NOT_APPLICABLE",
+     "reason": "The disconnect order it gives is already the first answer sentence."
+    },
+    {
+     "display_id": "E16",
+     "decision": "NOT_APPLICABLE",
+     "reason": "The reconnect order it gives is already the second answer sentence."
+    },
+    {
+     "display_id": "E17",
+     "decision": "INCLUDED",
+     "reason": "The warning about firm connections and possible electrical damage is not in the answer."
+    }
+   ],
+   "max_cross_score": 5.66208553314209,
+   "below_relevance_floor": false,
+   "reranked": false,
+   "sections_sent": [
+    "DISMANTLING",
+    "ASSEMBLY"
+   ],
+   "warnings_to_decide": 3,
+   "model_input_chars": 1879,
+   "reference_pages": [
+    11,
+    104,
+    105,
+    106,
+    107
+   ],
+   "reference_pages_sent": [
+    104,
+    105,
+    106,
+    107
+   ]
+  },
+  {
+   "id": "H19",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Stand the motorcycle upright on a firm, level surface. Clean the filler cap before you remove it, and keep water and dust out of the reservoir when you refill. Front: with the reservoir horizontal, the fluid level should be at the center of the window, which the manual treats as the minimum level. Rear: with the reservoir horizontal, the fluid level should be between the \"MAX\" and \"Min\" marks. Use only DOT 4 brake fluid from a sealed container, and refill with the same type. Watch out: An insufficient brake fluid level will cause the brake system to fail. Watch out: Brake fluid is highly corrosive and can damage painted parts. If it spills, clean the area at once with a soft cloth, preferably wet. Watch out: Do not let brake fluid touch your skin, eyes or clothing, and keep it out of the reach of children. Watch out: Do not mix DOT 4 with other brake fluid. The front check gives only a minimum level, with no upper mark for the front reservoir in this procedure.",
+   "cited_pages": [
+    88,
+    89
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E4",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on corrosive spills."
+    },
+    {
+     "display_id": "E5",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on not mixing fluids."
+    },
+    {
+     "display_id": "E10",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on low level causing brake failure."
+    },
+    {
+     "display_id": "E11",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns old fluid reducing braking, not checking the level or topping up."
+    },
+    {
+     "display_id": "E12",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns changing the fluid on the maintenance schedule, not the level check."
+    },
+    {
+     "display_id": "E13",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on skin, eyes, clothing and children."
+    },
+    {
+     "display_id": "E14",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on skin, eyes, clothing and children."
+    },
+    {
+     "display_id": "E15",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on corrosive spills, with E4."
+    }
+   ],
+   "max_cross_score": 5.420689105987549,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "CHECKING BRAKE FLUID"
+   ],
+   "warnings_to_decide": 8,
+   "model_input_chars": 2001,
+   "reference_pages": [
+    21,
+    70,
+    88,
+    89,
+    127
+   ],
+   "reference_pages_sent": [
+    88,
+    89
+   ]
+  },
+  {
+   "id": "H20",
+   "category": "WARNING",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Fill fuel only till the bottom of the anti splash plate. Watch out: Do not overfill: overfilling can let gasoline enter the EVAP canister and damage the evaporative emission system. Watch out: If fuel spills on painted surfaces, wipe it off immediately, as it can leave a permanent stain. Watch out: Gasoline vapour is highly explosive. Keep open flames and sparks away, do not smoke while refuelling or with the cap open, and fill in a well-ventilated area.",
+   "cited_pages": [
+    27
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E5",
+     "decision": "INCLUDED",
+     "reason": "Overfilling warning is cited in the overfill watchout."
+    },
+    {
+     "display_id": "E6",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Its fill limit is the answer itself, so it is not repeated as a watchout."
+    },
+    {
+     "display_id": "E7",
+     "decision": "INCLUDED",
+     "reason": "Gives the damage consequence of overfilling."
+    },
+    {
+     "display_id": "E8",
+     "decision": "INCLUDED",
+     "reason": "Vapour is explosive while refuelling."
+    },
+    {
+     "display_id": "E9",
+     "decision": "INCLUDED",
+     "reason": "Fuel spill can stain painted surfaces."
+    },
+    {
+     "display_id": "E10",
+     "decision": "INCLUDED",
+     "reason": "No smoking while refuelling or with the cap open."
+    },
+    {
+     "display_id": "E15",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Engine oil grade, not fuel."
+    },
+    {
+     "display_id": "E21",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Radiator cap and coolant, not fuel."
+    },
+    {
+     "display_id": "E22",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Vehicle position for coolant work, not fuel."
+    },
+    {
+     "display_id": "E23",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Coolant filling, not fuel."
+    },
+    {
+     "display_id": "E24",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Air bleeding of the coolant system, not fuel."
+    },
+    {
+     "display_id": "E38",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Coolant disposal, not fuel."
+    }
+   ],
+   "max_cross_score": -2.7019824981689453,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "FUEL TANK CAP",
+    "RECOMMENDED LUBRICANTS",
+    "COOLANT DRAINING",
+    "Distance to empty"
+   ],
+   "warnings_to_decide": 12,
+   "model_input_chars": 4044,
+   "reference_pages": [
+    8,
+    27,
+    28
+   ],
+   "reference_pages_sent": [
+    27
+   ]
+  },
+  {
+   "id": "H21",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "SAFETY_STOP",
+   "reason": null,
+   "coverage": "PARTIAL",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "No. Do not bridge a blown fuse with wire, foil or any other conductive material. Replace the blown fuse with a new fuse of the same rating. The manual lists spare fuses at 5 A (SF1), 10 A (SF2) and 15 A (SF3). Watch out: Any attempt to jumper a defective fuse risks a short circuit and fire. Watch out: Fuses of other ratings, low-grade fuses or conductive materials will damage the complete electrical system. Watch out: After any fuse failure, get the electrical system checked and the faults corrected immediately, or fuses may keep failing. Watch out: Replace a spare fuse in the holder at the earliest opportunity. The manual gives no way to keep riding on a blown fuse.",
+   "cited_pages": [
+    112
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E5",
+     "decision": "INCLUDED",
+     "reason": "Post-failure electrical check is a separate warning not in the answer."
+    },
+    {
+     "display_id": "E6",
+     "decision": "INCLUDED",
+     "reason": "Damage from other ratings and low-grade fuses is a separate warning."
+    },
+    {
+     "display_id": "E7",
+     "decision": "INCLUDED",
+     "reason": "Replacing a used spare fuse promptly is a separate warning."
+    },
+    {
+     "display_id": "E8",
+     "decision": "INCLUDED",
+     "reason": "Short-circuit and fire risk of jumpering is not stated in the answer."
+    }
+   ],
+   "max_cross_score": -7.526303291320801,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "FUSE AND FUSE CARRIER",
+    "MINI BLADE FUSE USAGE LIST"
+   ],
+   "warnings_to_decide": 4,
+   "model_input_chars": 1875,
+   "reference_pages": [
+    81,
+    111,
+    112,
+    121
+   ],
+   "reference_pages_sent": [
+    111,
+    112
+   ]
+  },
+  {
+   "id": "H22",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "UNSUPPORTED",
+   "reason": null,
+   "coverage": "NONE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "Do not exceed 110 km/h when riding solo, carrying a pillion or payload on an accessory equipped motorcycle. Keep luggage weight low and close to the motorcycle, and distribute it evenly on both sides. The rider must be responsible for safe operation of the motorcycle when installing accessories or carrying additional weight. Use only Royal Enfield genuine accessories, which are model specific, and follow the installation procedure. Watch out: Loading weight or installing accessories incorrectly may affect stability, handling and safe operation, and could cause an accident resulting in serious injury or loss of life. Watch out: Aftermarket and custom-made parts, such as extended front forks, may adversely affect the performance and handling of the motorcycle. Removing or altering original parts may do the same, which could cause an accident resulting in serious injury or loss of life. Watch out: Ignoring model or design specifications is misuse of the motorcycle and accessories, may adversely affect handling and performance, and could cause an accident resulting in serious injury or loss of life. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "cited_pages": [
+    14,
+    15
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E26",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on loading weight and installing accessories incorrectly."
+    },
+    {
+     "display_id": "E27",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Repeats the genuine accessories point already given in the policy."
+    },
+    {
+     "display_id": "E28",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on aftermarket and custom parts and altered original parts."
+    },
+    {
+     "display_id": "E29",
+     "decision": "INCLUDED",
+     "reason": "Continuation of E28, cited in the same watchout."
+    },
+    {
+     "display_id": "E30",
+     "decision": "INCLUDED",
+     "reason": "Cited in the watchout on ignoring model or design specifications."
+    }
+   ],
+   "max_cross_score": -7.7982892990112305,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "FOREWORD",
+    "DISCLAIMER",
+    "ACCESSORIES AND LUGGAGE"
+   ],
+   "warnings_to_decide": 5,
+   "model_input_chars": 3961,
+   "reference_pages": [
+    11,
+    14,
+    132
+   ],
+   "reference_pages_sent": [
+    14
+   ]
+  },
+  {
+   "id": "H23",
+   "category": "SAFETY",
+   "expected_route": "SAFETY_STOP",
+   "route": "SAFETY_STOP",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "No. The manual says not to run the motorcycle while the ABS lamp stays on above 5 km/h. Take the motorcycle to the nearest Authorised Royal Enfield Service Centre to have the brake system inspected. The ABS lamp should turn off once the motorcycle passes 5 km/h, and it lights up again when there is an ABS malfunction. Watch out: Not getting the brake system inspected can result in serious injuries and loss of life. Watch out: Keep the instrument cluster working properly, since it is an integral part of the ABS system. The manual does not give a waiting period before the lamp must be checked.",
+   "cited_pages": [
+    63,
+    66,
+    67,
+    69
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E2",
+     "decision": "NOT_APPLICABLE",
+     "reason": "The answer already gives this stop instruction."
+    },
+    {
+     "display_id": "E9",
+     "decision": "NOT_APPLICABLE",
+     "reason": "General riding advice, not about the lamp."
+    },
+    {
+     "display_id": "E10",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Cornering advice, not about the lamp."
+    },
+    {
+     "display_id": "E11",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Stopping distance advice, not about the lamp."
+    },
+    {
+     "display_id": "E12",
+     "decision": "INCLUDED",
+     "reason": "The cluster is part of the ABS system the lamp belongs to."
+    },
+    {
+     "display_id": "E13",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Brake use advice, not about the lamp."
+    },
+    {
+     "display_id": "E14",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Same injury risk as the inspection watchout."
+    },
+    {
+     "display_id": "E15",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Tyre and sprocket approval, not about the lamp."
+    },
+    {
+     "display_id": "E16",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Suspension travel, not about the lamp."
+    },
+    {
+     "display_id": "E17",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Brake spare parts, no parts work asked."
+    },
+    {
+     "display_id": "E18",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Braking distance, not about the lamp."
+    },
+    {
+     "display_id": "E19",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Toner ring check, not tied to the lamp in the manual."
+    },
+    {
+     "display_id": "E20",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Toner ring check, not tied to the lamp in the manual."
+    },
+    {
+     "display_id": "E21",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Toner ring check, not tied to the lamp in the manual."
+    },
+    {
+     "display_id": "E22",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Sensor debris check, not tied to the lamp in the manual."
+    }
+   ],
+   "max_cross_score": 3.9434032440185547,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "ABS INDICATOR LAMP",
+    "DO'S AND DON'TS: (ABS)",
+    "ANTI-LOCK BRAKING SYSTEM (ABS)"
+   ],
+   "warnings_to_decide": 15,
+   "model_input_chars": 4542,
+   "reference_pages": [
+    62,
+    63,
+    66,
+    69,
+    122
+   ],
+   "reference_pages_sent": [
+    63,
+    66,
+    69
+   ]
+  },
+  {
+   "id": "H24",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "SYSTEM_ERROR",
+   "reason": "GATE_UNCITED_TECHNICAL_ITEM",
+   "coverage": null,
+   "model_called": true,
+   "schema_errors": [],
+   "text": "I couldn’t check the answer right now. Please try again shortly.",
+   "cited_pages": [],
+   "suppressed_duplicates": null,
+   "rewritten_phrases": null,
+   "watchout_review": [],
+   "max_cross_score": -8.186416625976562,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "RULES OF THE ROAD",
+    "DISCLAIMER",
+    "FOREWORD"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 3730,
+   "reference_pages": [],
+   "reference_pages_sent": []
+  },
+  {
+   "id": "H25",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "reason": null,
+   "coverage": "NONE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "cited_pages": [],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": -6.184876441955566,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "Suspension",
+    "Disclaimer",
+    "FRAME NUMBER",
+    "PERSONAL AND MOTORCYCLE INFORMATION"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 1489,
+   "reference_pages": [],
+   "reference_pages_sent": []
+  },
+  {
+   "id": "H26",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "reason": null,
+   "coverage": "NONE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "cited_pages": [],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [],
+   "max_cross_score": -5.869122505187988,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "FOREWORD",
+    "DISCLAIMER",
+    "RULES OF THE ROAD"
+   ],
+   "warnings_to_decide": 0,
+   "model_input_chars": 3730,
+   "reference_pages": [],
+   "reference_pages_sent": []
+  },
+  {
+   "id": "H27",
+   "category": "NOT_IN_MANUAL",
+   "expected_route": "UNSUPPORTED",
+   "route": "UNSUPPORTED",
+   "reason": null,
+   "coverage": "NONE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "cited_pages": [],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E18",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns opening a hot radiator cap, not exhaust noise."
+    },
+    {
+     "display_id": "E19",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns keeping the bike upright during coolant work, not noise."
+    },
+    {
+     "display_id": "E20",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns filling the cooling system, not noise."
+    },
+    {
+     "display_id": "E21",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns air bleeding the cooling system, not noise."
+    },
+    {
+     "display_id": "E35",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns spilled coolant disposal, not noise."
+    },
+    {
+     "display_id": "E48",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns aftermarket front forks, not noise."
+    },
+    {
+     "display_id": "E49",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns running in a new bike, not noise."
+    },
+    {
+     "display_id": "E50",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns riding speed for new riders, not noise."
+    },
+    {
+     "display_id": "E51",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns speed limits and conditions, not noise."
+    },
+    {
+     "display_id": "E63",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns shock absorber and fork leaks, not noise."
+    },
+    {
+     "display_id": "E64",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns exhaust gas content, not exhaust noise."
+    },
+    {
+     "display_id": "E65",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns scheduled maintenance, not noise."
+    }
+   ],
+   "max_cross_score": -6.67308235168457,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "BRAKE PADS",
+    "DISCLAIMER",
+    "COOLANT DRAINING",
+    "SAFE RIDING TIPS / GUIDELINES"
+   ],
+   "warnings_to_decide": 12,
+   "model_input_chars": 9387,
+   "reference_pages": [],
+   "reference_pages_sent": []
+  },
+  {
+   "id": "H28",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "For solo riding, the manual gives 32 psi (2.24 kg/cm2) for the front tyre. Inflate the tyres to the correct air pressure. Watch out: Running under-inflated tyres may make them overheat and get damaged, and may cause injury to the rider.",
+   "cited_pages": [
+    18,
+    90
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E7",
+     "decision": "INCLUDED",
+     "reason": "Warns that under-inflated tyres can overheat, be damaged and injure the rider."
+    },
+    {
+     "display_id": "E8",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Covers replacement tyre specification, not pressure."
+    },
+    {
+     "display_id": "E9",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Continues the tyre specification warning, not about pressure."
+    },
+    {
+     "display_id": "E34",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Covers loading and accessories, not tyre pressure."
+    },
+    {
+     "display_id": "E35",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Covers genuine accessories, not tyre pressure."
+    },
+    {
+     "display_id": "E36",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Covers nonstandard front forks and parts, not tyre pressure."
+    },
+    {
+     "display_id": "E37",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Continues the nonstandard parts warning, not about tyre pressure."
+    },
+    {
+     "display_id": "E38",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Covers model and design specifications, not tyre pressure."
+    }
+   ],
+   "max_cross_score": 5.007978916168213,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "INSPECTION OF TYRES AND WHEELS",
+    "REAR SUSPENSION SETTING",
+    "TECHNICAL SPECIFICATIONS",
+    "ACCESSORIES AND LUGGAGE"
+   ],
+   "warnings_to_decide": 8,
+   "model_input_chars": 5537,
+   "reference_pages": [
+    18,
+    90,
+    117
+   ],
+   "reference_pages_sent": [
+    18,
+    90,
+    117
+   ]
+  },
+  {
+   "id": "H29",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "With a pillion on board, the manual gives 32 psi for the rear tyre. Watch out: Do not load weight or install accessories incorrectly. Doing so may affect the motorcycle's stability, handling characteristics and safe operation and could result in an accident causing serious injury or loss of life.",
+   "cited_pages": [
+    15,
+    18
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E23",
+     "decision": "INCLUDED",
+     "reason": "Carrying a pillion adds load; the warning covers loading weight correctly."
+    },
+    {
+     "display_id": "E24",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Describes genuine accessories, not tyre pressure or pillion load."
+    },
+    {
+     "display_id": "E25",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns nonstandard front forks and altered parts."
+    },
+    {
+     "display_id": "E26",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Continues E25 on altering original parts."
+    },
+    {
+     "display_id": "E27",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Concerns model and design specifications, not tyre pressure."
+    }
+   ],
+   "max_cross_score": 4.904603958129883,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "TECHNICAL SPECIFICATIONS",
+    "PILLION AND RIDER SEAT ASSEMBLY",
+    "PILLION AND RIDER SEAT DISMANTLING",
+    "ACCESSORIES AND LUGGAGE"
+   ],
+   "warnings_to_decide": 5,
+   "model_input_chars": 3947,
+   "reference_pages": [
+    18,
+    90,
+    117
+   ],
+   "reference_pages_sent": [
+    18
+   ]
+  },
+  {
+   "id": "H30",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The manual gives the rear wheel spindle torque as 70 Nm. Ensure both wheels are aligned correctly after adjusting the chain and before tightening the rear wheel spindle nut. Watch out: Make sure the rear wheel is fitted correctly before you ride the motorcycle.",
+   "cited_pages": [
+    100,
+    103
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E12",
+     "decision": "NOT_APPLICABLE",
+     "reason": "General caution for front wheel reassembly; the question is about the rear wheel spindle torque."
+    },
+    {
+     "display_id": "E13",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Front wheel warning; the question is about the rear wheel."
+    },
+    {
+     "display_id": "E14",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Front wheel consequences; not about the rear spindle torque."
+    },
+    {
+     "display_id": "E24",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Applies to removing the caliper, not to tightening the spindle."
+    },
+    {
+     "display_id": "E25",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Applies to removing the rear wheel and chain, not to tightening the spindle."
+    },
+    {
+     "display_id": "E26",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Applies to removing the rear wheel from the swing arm."
+    },
+    {
+     "display_id": "E27",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Applies to removing the rear wheel, not to torque."
+    },
+    {
+     "display_id": "E28",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Applies to removing the rear wheel and brake pads."
+    },
+    {
+     "display_id": "E29",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Applies to lifting the motorcycle, not to spindle torque."
+    },
+    {
+     "display_id": "E47",
+     "decision": "NOT_APPLICABLE",
+     "reason": "General reassembly caution; the specific fit check is covered by E48."
+    },
+    {
+     "display_id": "E48",
+     "decision": "INCLUDED",
+     "reason": "Rear wheel must be fitted correctly before riding, which follows tightening the spindle."
+    },
+    {
+     "display_id": "E49",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Consequence statement for poor rear wheel fitting; the watchout keeps to the fit check only."
+    }
+   ],
+   "max_cross_score": 6.162097454071045,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "MINOR MAINTENANCE TIPS",
+    "FRONT WHEEL ASSEMBLY",
+    "REAR WHEEL REMOVAL",
+    "REAR WHEEL ASSEMBLY"
+   ],
+   "warnings_to_decide": 12,
+   "model_input_chars": 6115,
+   "reference_pages": [
+    100,
+    102,
+    103
+   ],
+   "reference_pages_sent": [
+    100,
+    103
+   ]
+  },
+  {
+   "id": "H31",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "UNSUPPORTED",
+   "reason": null,
+   "coverage": "NONE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The manual gives no torque value for the front wheel spindle; it says only to tighten the spindle bolt firmly on the left side. The 25 Nm torque in the manual is for the fork clamp bolt on the left side, not for the spindle. Watch out: Take utmost care when reassembling the front wheel and make sure it is fitted correctly before you ride. If it is not, the motorcycle may not perform correctly and may cause an accident, injury or loss of life. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+   "cited_pages": [
+    94,
+    95
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E35",
+     "decision": "INCLUDED",
+     "reason": "The watchout covers taking utmost care when reassembling the front wheel."
+    },
+    {
+     "display_id": "E36",
+     "decision": "INCLUDED",
+     "reason": "The watchout covers fitting the wheel correctly before riding."
+    },
+    {
+     "display_id": "E37",
+     "decision": "INCLUDED",
+     "reason": "The watchout gives the consequences of a wheel that is not fitted correctly."
+    }
+   ],
+   "max_cross_score": -3.1898398399353027,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "Suspension",
+    "PERSONAL AND MOTORCYCLE INFORMATION",
+    "FRONT WHEEL ASSEMBLY",
+    "REAR SUSPENSION SETTING"
+   ],
+   "warnings_to_decide": 3,
+   "model_input_chars": 3570,
+   "reference_pages": [
+    94,
+    95
+   ],
+   "reference_pages_sent": [
+    94,
+    95
+   ]
+  },
+  {
+   "id": "H32",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The manual recommends shifting up from 2nd to 3rd gear at 30 km/h. Watch out: If the clutch is released abruptly at high acceleration, the motorcycle can move suddenly and the rider can lose control, which can lead to an accident, injury or loss of life to the rider or others, and damage to the motorcycle. Watch out: If the clutch is released abruptly without enough throttle, the motorcycle can have a rough start and the engine can stall.",
+   "cited_pages": [
+    76,
+    77
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E6",
+     "decision": "INCLUDED",
+     "reason": "Abrupt clutch release with too little throttle can stall the engine during a shift."
+    },
+    {
+     "display_id": "E7",
+     "decision": "INCLUDED",
+     "reason": "Abrupt clutch release at high acceleration can cause loss of control."
+    },
+    {
+     "display_id": "E8",
+     "decision": "NOT_APPLICABLE",
+     "reason": "General caution that adds nothing beyond the specific clutch warnings."
+    },
+    {
+     "display_id": "E9",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Continuation of the general caution; adds no specific warning."
+    },
+    {
+     "display_id": "E10",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Repeats the recommended speed already given in the answer."
+    }
+   ],
+   "max_cross_score": 3.9287381172180176,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "GEAR SHIFTING, RIDING AND STOPPING"
+   ],
+   "warnings_to_decide": 5,
+   "model_input_chars": 3427,
+   "reference_pages": [
+    76,
+    77
+   ],
+   "reference_pages_sent": [
+    76,
+    77
+   ]
+  },
+  {
+   "id": "H33",
+   "category": "FOLLOW_UP",
+   "expected_route": "SUPPORTED",
+   "route": "SUPPORTED",
+   "reason": null,
+   "coverage": "COMPLETE",
+   "model_called": true,
+   "schema_errors": [],
+   "text": "The manual recommends shifting down from 3rd to 2nd at 25 km/h. During deceleration, disengage the clutch completely, shift the gear, and engage the clutch gradually (not too slowly). Watch out: Releasing the clutch abruptly without enough throttle can cause a rough start and stall the engine. Watch out: If you are accelerating hard and release the clutch abruptly, the motorcycle can move suddenly, leading to loss of control, an accident, injury or loss of life, and damage to the motorcycle.",
+   "cited_pages": [
+    76,
+    77
+   ],
+   "suppressed_duplicates": 0,
+   "rewritten_phrases": [],
+   "watchout_review": [
+    {
+     "display_id": "E6",
+     "decision": "INCLUDED",
+     "reason": "Abrupt clutch release with insufficient throttle causes a rough start and stall, which applies to the shift."
+    },
+    {
+     "display_id": "E7",
+     "decision": "INCLUDED",
+     "reason": "Abrupt clutch release during hard acceleration can make the motorcycle move suddenly; applies if downshifting under acceleration."
+    },
+    {
+     "display_id": "E8",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Generic clutch caution with no specific consequence for this downshift."
+    },
+    {
+     "display_id": "E9",
+     "decision": "NOT_APPLICABLE",
+     "reason": "Continuation of the generic caution in E8; adds nothing specific."
+    },
+    {
+     "display_id": "E10",
+     "decision": "NOT_APPLICABLE",
+     "reason": "The answer already gives the recommended down shift speed."
+    }
+   ],
+   "max_cross_score": -5.925813674926758,
+   "below_relevance_floor": false,
+   "reranked": true,
+   "sections_sent": [
+    "GEAR SHIFTING, RIDING AND STOPPING",
+    "3. MY VEHICLE",
+    "ii. Background"
+   ],
+   "warnings_to_decide": 5,
+   "model_input_chars": 4658,
+   "reference_pages": [
+    76
+   ],
+   "reference_pages_sent": [
+    76
+   ]
+  }
+ ]
+}

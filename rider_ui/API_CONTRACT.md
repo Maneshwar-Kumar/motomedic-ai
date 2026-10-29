@@ -7,7 +7,7 @@ Source locks:
 - Schema: `motomedic-rider-api-v1`
 - Runtime policy: `open-manual-section-template-v1`
 - Manual SHA-256: `cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89`
-- Index: `index_a609ca61c635641e0a22dc48`
+- Index: `index_f768fbb216836c003701079e`
 - Variant: `Himalayan BS6`
 - Source display: citation metadata only; no PDF, excerpts or figure crops.
 

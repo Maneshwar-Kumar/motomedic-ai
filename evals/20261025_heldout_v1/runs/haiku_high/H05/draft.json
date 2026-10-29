@@ -1,0 +1,63 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "The manual says the hazard lights keep working for 30 minutes, unless you turn them off manually.",
+      "evidence_ids": ["E3"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The hazard flasher cannot be activated when the ignition switch is OFF.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Hazard flashing strains the battery, so do not use the hazard lights for longer than necessary.",
+      "evidence_ids": ["E8"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not say whether turning the ignition OFF while the hazard lights are on changes the 30-minute time.",
+      "evidence_ids": ["E3"]
+    },
+    {
+      "text": "The manual's hazard lines are unclear about the ignition, so confirm with an authorised Royal Enfield service centre."
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E5",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Turn signal behaviour does not answer the duration question."
+    },
+    {
+      "display_id": "E6",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Lamp flashing pattern does not affect how long the hazard runs."
+    },
+    {
+      "display_id": "E8",
+      "decision": "INCLUDED",
+      "reason": "Battery strain from long hazard use is a warning about leaving them on."
+    },
+    {
+      "display_id": "E11",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Battery drain from the headlamp is not about the hazard lights."
+    },
+    {
+      "display_id": "E24",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Engine fault warning is unrelated to the hazard lights."
+    },
+    {
+      "display_id": "E25",
+      "decision": "NOT_APPLICABLE",
+      "reason": "ABS warning lamp is unrelated to the hazard lights."
+    }
+  ]
+}

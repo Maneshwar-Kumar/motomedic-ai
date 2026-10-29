@@ -1,0 +1,152 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "Keep the bike in a straight position on level ground. Do not fill the coolant while the bike is on its side stand. Remove the radiator expansion tank cap and fill the tank to the upper level line, then replace the cap. Coolant from Total is ready to use and does not need mixing. Watch out: Do not open the radiator pressure cap while the engine is hot. The released pressure can make the coolant boil and spurt out, causing severe burns. Watch out: Do not spill coolant. Avoid skin or body contact with it, and wash any affected area promptly with soap and water. The manual does not give a coolant specification and does not say whether other coolants are suitable. The manual does not give a volume or capacity for topping up.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E6",
+   "evidence_id": "evidence_fd36c1641a183a760642e6eb",
+   "pages": [
+    86
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_4599dc98f6c9e31947e4ca67",
+   "pages": [
+    86
+   ]
+  },
+  {
+   "label": "E15",
+   "evidence_id": "evidence_423ad61a550cf44744fbddce",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E16",
+   "evidence_id": "evidence_ecf9b550d62b6653fa07fa75",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E23",
+   "evidence_id": "evidence_6faf61228a443cbd4fcdff5c",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E24",
+   "evidence_id": "evidence_4054249a4b687a8ac1b03a3c",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E25",
+   "evidence_id": "evidence_3c4844130250c56d079c51ac",
+   "pages": [
+    87
+   ]
+  }
+ ],
+ "cited_pages": [
+  86,
+  87
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Keep the bike in a straight position on level ground.",
+    "evidence_ids": [
+     "E7"
+    ]
+   },
+   {
+    "text": "Do not fill the coolant while the bike is on its side stand.",
+    "evidence_ids": [
+     "E24"
+    ]
+   },
+   {
+    "text": "Remove the radiator expansion tank cap and fill the tank to the upper level line, then replace the cap.",
+    "evidence_ids": [
+     "E15",
+     "E16"
+    ]
+   },
+   {
+    "text": "Coolant from Total is ready to use and does not need mixing.",
+    "evidence_ids": [
+     "E25"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Do not open the radiator pressure cap while the engine is hot. The released pressure can make the coolant boil and spurt out, causing severe burns.",
+    "evidence_ids": [
+     "E6"
+    ]
+   },
+   {
+    "text": "Do not spill coolant. Avoid skin or body contact with it, and wash any affected area promptly with soap and water.",
+    "evidence_ids": [
+     "E23"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a coolant specification and does not say whether other coolants are suitable."
+   },
+   {
+    "text": "The manual does not give a volume or capacity for topping up."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E6",
+   "decision": "INCLUDED",
+   "reason": "Warns against opening the radiator cap while the engine is hot."
+  },
+  {
+   "display_id": "E7",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Its level-ground instruction is given as an answer step, not as a watchout."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Radiator refill after draining; the answer covers the expansion tank top-up."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Air bleeding follows a full refill after draining, not an expansion tank top-up."
+  },
+  {
+   "display_id": "E23",
+   "decision": "INCLUDED",
+   "reason": "Warns about spilled coolant and skin contact with it."
+  }
+ ],
+ "excluded_watchouts": [
+  "E7",
+  "E8",
+  "E9"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

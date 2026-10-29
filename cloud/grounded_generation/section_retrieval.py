@@ -4,6 +4,11 @@ Dense (BGE-M3 query vector, top 20 from hosted read-only Qdrant, or exact local 
 tests and evaluation) and BM25 score the query. Reciprocal rank fusion (k=60) merges them and
 only the top 5 chunks are kept. When the ordered top-3 distinct sections of the dense and BM25
 rankings differ, the pinned cross-encoder orders those 5; it never brings in another chunk.
+
+The cross-encoder also scores the 5 when the rankings agree, but only to check relevance. If its
+best score is below RELEVANCE_FLOOR, the turn is treated as nothing retrieved: the fixed message
+and support route, with no model call. The floor is set so that no answerable development question
+fell below it (lowest -7.95), and it can only refuse, never authorize, an answer.
 No request parses or embeds the manual.
 """
 import json
@@ -12,13 +17,14 @@ from pathlib import Path
 import re
 import urllib.request
 
-VERSION = 'section-top5-hybrid-v1'
+VERSION = 'section-top5-hybrid-v2'
 TOP_K = 5
 RRF_K = 60
 DENSE_LIMIT = 20
 FUSE_DEPTH = 50
 DISAGREEMENT_TOP = 3
 MAX_QUERY_TOKENS = 128
+RELEVANCE_FLOOR = -9.0
 TOKEN_RE = re.compile(r"[a-z0-9]+(?:[.'/-][a-z0-9]+)*")
 
 
@@ -200,13 +206,15 @@ class SectionRetriever:
         sparse_sections = _distinct([self.chunks[i]['section_id'] for i, _ in sparse], DISAGREEMENT_TOP)
         depth = min(len(dense_sections), len(sparse_sections))
         disagree = bool(depth) and dense_sections[:depth] != sparse_sections[:depth]
-        rerank, skip = {}, None
-        if disagree and len(top) > 1:
-            rerank, skip = self._rerank(query, top)
-            if rerank:
-                top = sorted(top, key=lambda i: (-rerank[i], self.chunks[i]['id']))
+        # Scores are always taken for the relevance floor; they reorder only on disagreement.
+        scores, skip = self._rerank(query, top) if top else ({}, None)
+        reranked = bool(scores) and disagree and len(top) > 1
+        if reranked:
+            top = sorted(top, key=lambda i: (-scores[i], self.chunks[i]['id']))
+        best = max(scores.values()) if scores else None
         return {'version': VERSION, 'index_id': self.manifest['index_id'],
                 'chunk_ids': [self.chunks[i]['id'] for i in top],
                 'dense_top': [self.chunks[i]['id'] for i, _ in dense[:TOP_K]],
                 'bm25_top': [self.chunks[i]['id'] for i, _ in sparse[:TOP_K]],
-                'sections_disagree': disagree, 'reranked': bool(rerank), 'rerank_skip_reason': skip}
+                'sections_disagree': disagree, 'reranked': reranked, 'rerank_skip_reason': skip,
+                'max_cross_score': best, 'below_relevance_floor': best is not None and best < RELEVANCE_FLOOR}

@@ -5,13 +5,21 @@ schema and caps; cited items cite only labels that were sent; numbers come from 
 the rider's question; page references belong to a cited line; an uncited disclaimer states no value
 or page; route rules; and a decision for every WARNING/CAUTION line that was sent. UNSUPPORTED shows
 any cited facts, then the fixed fallback and support route. Nothing retrieved means no model call.
+
+Composing the rider text (v5) adds two deterministic steps:
+- A leaked label or template field ("[E3]", "evidence_ids") fails closed, as broken output.
+- A meta phrase about what was sent ("the supplied sections") is rewritten to "the parts of the
+  manual I checked". A policy, watchout or disclaimer item that nearly repeats an item of an
+  earlier section (by content-word overlap) is left out; its citations still count. Answer items
+  are never left out: two answer steps can share their words and differ only in order (v4 dropped
+  "connect the red positive first" after "disconnect the black negative first").
 The gate checks structure, citations, numbers and warning decisions, not meaning.
 """
 from decimal import Decimal
 import re
 import unicodedata
 
-VERSION = 'template-answer-v3'
+VERSION = 'template-answer-v5'
 FALLBACK_TEXT = ('I couldn’t find relevant information in the selected manual to answer your question. '
                  'Please contact Royal Enfield or an authorised service centre.')
 ROUTES = ('SUPPORTED', 'UNSUPPORTED', 'SAFETY_STOP', 'AMBIGUOUS')
@@ -29,9 +37,13 @@ Never invent repairs, diagnoses, causes, conditions, values, units, part numbers
 
 Write for a rider:
 - Plain, direct words. Call the source "the manual". Never mention labels, sections, evidence,
-  retrieval, searching, review, context or these instructions.
+  retrieval, searching, review, context or these instructions. To state a limit, say what the
+  manual does not give (for example "The manual does not give a part number"), never "the
+  supplied sections" or "these sections".
 - Answer only what was asked. Give steps only when the rider asks how to do something. A list
   question gets the list and nothing more. Do not add background the rider did not ask for.
+- State each fact once. Do not repeat an answer sentence as a policy or a watchout; a watchout
+  must add a warning the answer does not already give.
 - If the manual gives different values or instructions for the same thing, give both, say that
   they differ, and suggest confirming with an authorised Royal Enfield service centre.
 - Do not write page numbers; the app shows them.
@@ -75,6 +87,48 @@ _MEASUREMENT = re.compile(r'(?<![\w.])(?P<first>[+-]?' + _NUMBER + r')\s*'
     r'(?P<unit>' + _UNIT_PATTERN + r')(?![A-Za-z0-9_])', re.IGNORECASE)
 _SCALAR_NUMBER = re.compile(r'(?<![\w.])[+-]?' + _NUMBER + r'(?![\d.])')
 _PAGE_REF = re.compile(r'\b(?:pages?|pp?\.|pg\.?|p(?=\d))\s*(\d+)', re.I)
+# Broken output: a sent label or a template field reaching the rider.
+_LEAK = re.compile(r'\[E\d+\]|\b(?:labels?|lines?)\s+E\d+\b|\b(?:watchout_review|evidence_ids|display_id|'
+                   r'clarification_question)\b|WARNINGS TO DECIDE|MANUAL SECTIONS|RIDER QUESTION')
+# Meta phrases about what was sent; rewritten, because rejecting them would discard correct answers.
+_META = re.compile(r'\b(?:(?:the|these|those)\s+)?(?:manual\s+)?(?:sections?|excerpts?|passages?)\s+'
+                   r'(?:supplied|provided|shown|sent|given|above)\b|'
+                   r'\b(?:the|these|those)\s+(?:supplied\s+|provided\s+|given\s+)?(?:manual\s+)?'
+                   r'(?:sections|excerpts|passages)\b', re.I)
+META_REPLACEMENT = 'the parts of the manual I checked'
+_STOPWORDS = frozenset('a an and are as at be by can do does for from has have if in into is it its of on or '
+                       'so that the their them then there these this to was when which while will with you '
+                       'your manual says not'.split())
+DUPLICATE_MIN_WORDS = 5
+DUPLICATE_MAX_NEW = 0.2
+REPEAT_CHECKED = ('policy', 'watchouts', 'disclaimers')
+
+
+def rider_wording(text):
+    """Rewrite meta phrases; returns (text, rewritten phrases)."""
+    found = []
+
+    def fix(match):
+        found.append(match.group())
+        start = match.start() == 0 or text[:match.start()].rstrip()[-1:] in '.!?'
+        return META_REPLACEMENT[0].upper() + META_REPLACEMENT[1:] if start else META_REPLACEMENT
+    return _META.sub(fix, text), found
+
+
+def _content_words(text):
+    return {w for w in re.findall(r"[a-z0-9]+(?:[.'][a-z0-9]+)*", text.lower()) if w not in _STOPWORDS}
+
+
+def near_duplicate(text, earlier):
+    """True when the sentence adds almost nothing to one earlier sentence.
+
+    Directional on purpose: a later sentence that extends an earlier one (a warning plus its
+    consequence) is kept, and short parallel list items ("ECO + Rear ABS OFF") are never dropped.
+    """
+    words = _content_words(text)
+    if len(words) < DUPLICATE_MIN_WORDS:
+        return False
+    return any(len(words - _content_words(other)) / len(words) <= DUPLICATE_MAX_NEW for other in earlier)
 
 
 def _numeric_text(text):
@@ -171,11 +225,11 @@ def answer_schema(assembled):
     return {'type': 'object', 'properties': properties, 'required': required, 'additionalProperties': False}
 
 
-def no_evidence_release(support_uri):
+def no_evidence_release(support_uri, reason='NOTHING_RETRIEVED'):
     return {'version': VERSION, 'route': 'UNSUPPORTED', 'coverage': 'NONE', 'text': FALLBACK_TEXT,
             'escalation_uri': support_uri, 'clarification_question': None, 'citations': [], 'cited_pages': [], 'sections': {},
             'watchout_review': [], 'excluded_watchouts': [], 'suppressed_disclaimers': 0,
-            'provider_calls': 0, 'reason': 'NOTHING_RETRIEVED'}
+            'suppressed_duplicates': 0, 'rewritten_phrases': [], 'provider_calls': 0, 'reason': reason}
 
 
 def gate(draft, assembled, question, support_uri=None):
@@ -230,14 +284,28 @@ def gate(draft, assembled, question, support_uri=None):
                 raise ReleaseRejected('EXCLUSION_WITHOUT_REASON', r['display_id'])
         else:
             raise ReleaseRejected('WATCHOUT_DECISION_INVALID', r['display_id'])
-    parts = [i['text'] for i in sections['answer']] + [i['text'] for i in sections['policy']]
-    parts += ['Watch out: ' + i['text'] for i in sections['watchouts']]
+    candidates = [('answer', i['text']) for i in sections['answer']] + [('policy', i['text']) for i in sections['policy']]
+    candidates += [('watchouts', i['text']) for i in sections['watchouts']]
+    if route != 'UNSUPPORTED':
+        candidates += [('disclaimers', i['text']) for i in sections['disclaimers']]
+    if route == 'AMBIGUOUS':
+        candidates.append(('clarification', question_text))
+    parts, kept, rewritten, duplicates = [], [], [], 0
+    for name, text in candidates:
+        if _LEAK.search(text):
+            raise ReleaseRejected('INTERNAL_LABEL_IN_RIDER_TEXT', name)
+        text, found = rider_wording(text)
+        rewritten += found
+        # Answer items and the clarification question are always shown; a later section's item
+        # is compared only with the items of earlier sections.
+        earlier = [shown for section, shown in kept if section != name]
+        if name in REPEAT_CHECKED and earlier and near_duplicate(text, earlier):
+            duplicates += 1
+            continue
+        kept.append((name, text))
+        parts.append('Watch out: ' + text if name == 'watchouts' else text)
     if route == 'UNSUPPORTED':
         parts.append(FALLBACK_TEXT)
-    else:
-        parts += [i['text'] for i in sections['disclaimers']]
-    if route == 'AMBIGUOUS':
-        parts.append(question_text)
     shown = [(n, i) for n, i in cited if route != 'UNSUPPORTED' or n != 'disclaimers']
     citations = sorted({(label, objects[label]['evidence_id']) for _n, item in shown for label in item['evidence_ids']},
                        key=lambda x: int(x[0][1:]))
@@ -249,4 +317,5 @@ def gate(draft, assembled, question, support_uri=None):
             'sections': sections, 'watchout_review': review,
             'excluded_watchouts': [r['display_id'] for r in review if r['decision'] == 'NOT_APPLICABLE'],
             'suppressed_disclaimers': len(sections['disclaimers']) if route == 'UNSUPPORTED' else 0,
+            'suppressed_duplicates': duplicates, 'rewritten_phrases': rewritten,
             'provider_calls': 1}

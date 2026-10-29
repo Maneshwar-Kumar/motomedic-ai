@@ -1,0 +1,25 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "When the motorcycle falls over with the engine running and the gears engaged, the roll over sensor disables the fuel systems and switches the engine OFF.", "evidence_ids": ["E1"]},
+    {"text": "To reset it, first make sure the motorcycle is upright and on its center stand.", "evidence_ids": ["E2", "E3"]},
+    {"text": "Make sure the gears are in neutral and the neutral lamp is glowing in the instrument console.", "evidence_ids": ["E4"]},
+    {"text": "Switch OFF both the ignition and the stop switches, wait a few seconds, then switch both back ON.", "evidence_ids": ["E5"]},
+    {"text": "To start the engine, pull in the clutch lever and hold it, then push and hold the electric start switch until the engine starts, for a maximum of 5 seconds.", "evidence_ids": ["E38", "E39"]}
+  ],
+  "watchouts": [
+    {"text": "If the malfunction indicator does not turn OFF after the engine starts, have the motorcycle checked at a Royal Enfield Authorised Service Centre.", "evidence_ids": ["E36"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Hot radiator cap warning belongs to coolant work, not the sensor reset."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Coolant work warning, not part of the sensor reset."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Coolant filling warning, not part of the sensor reset."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Air bleeding warning belongs to coolant work, not the sensor reset."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Coolant disposal warning does not apply to this question."},
+    {"display_id": "E36", "decision": "INCLUDED", "reason": "After a fall and restart, a malfunction indicator that stays on needs a service centre check."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Low fuel warning is not part of the sensor reset the rider asked about."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Its clutch instruction is already given in the answer."},
+    {"display_id": "E39", "decision": "NOT_APPLICABLE", "reason": "Its 5-second limit is already given in the answer."}
+  ]
+}

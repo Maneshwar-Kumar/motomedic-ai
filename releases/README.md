@@ -11,9 +11,11 @@ A manifest is never edited after it is committed; a changed input needs a new ve
 
 | File | Status |
 | --- | --- |
-| [serving_manifest_v11_1.json](serving_manifest_v11_1.json) | **Current.** It covers the section-template answer path with no token ceiling, in this repository layout. 81 inputs; [`.sha256`](serving_manifest_v11_1.sha256). |
-| [serving_manifest_v11.json](serving_manifest_v11.json) | The previous release, with the same answer path but the 2,000,000-token ceiling and the pre-reorganization paths. It is kept byte for byte and bound by v11.1 as history. |
+| [serving_manifest_v11_2.json](serving_manifest_v11_2.json) | **Current.** The quality round: section index `index_f768fbb216836c003701079e` with related warnings, the relevance floor and gate v5 (repeats left out, internal wording checked). [`.sha256`](serving_manifest_v11_2.sha256). |
+| [serving_manifest_v11_1.json](serving_manifest_v11_1.json) | The previous release: the section-template answer path with no token ceiling, in this repository layout. 81 inputs. Kept byte for byte and bound by v11.2 as history. |
+| [serving_manifest_v11.json](serving_manifest_v11.json) | The previous release, with the same answer path but the 2,000,000-token ceiling and the pre-reorganization paths. It is kept byte for byte and bound by v11.1 and v11.2 as history. |
 | [owner_decision_v5.json](owner_decision_v5.json) | The decision behind v11.1: merge to `main`, remove the token ceiling, run experiments locally with Claude Code, reorganize the repository |
+| [owner_decision_v6.json](owner_decision_v6.json) | The decision behind v11.2: suggestions 2–6 of the quality review, tested on held-out questions |
 
 To verify the current release, run `python tools/serving_release.py verify`. Add `--committed-revision $(git rev-parse HEAD)` to also check the committed blobs.
 

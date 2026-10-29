@@ -1,0 +1,38 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "Fill fuel only till the bottom of the anti splash plate.",
+      "evidence_ids": ["E6"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not overfill: overfilling can let gasoline enter the EVAP canister and damage the evaporative emission system.",
+      "evidence_ids": ["E5", "E7"]
+    },
+    {
+      "text": "If fuel spills on painted surfaces, wipe it off immediately, as it can leave a permanent stain.",
+      "evidence_ids": ["E9"]
+    },
+    {
+      "text": "Gasoline vapour is highly explosive. Keep open flames and sparks away, do not smoke while refuelling or with the cap open, and fill in a well-ventilated area.",
+      "evidence_ids": ["E8", "E10"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "INCLUDED", "reason": "Overfilling warning is cited in the overfill watchout."},
+    {"display_id": "E6", "decision": "NOT_APPLICABLE", "reason": "Its fill limit is the answer itself, so it is not repeated as a watchout."},
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "Gives the damage consequence of overfilling."},
+    {"display_id": "E8", "decision": "INCLUDED", "reason": "Vapour is explosive while refuelling."},
+    {"display_id": "E9", "decision": "INCLUDED", "reason": "Fuel spill can stain painted surfaces."},
+    {"display_id": "E10", "decision": "INCLUDED", "reason": "No smoking while refuelling or with the cap open."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Engine oil grade, not fuel."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Radiator cap and coolant, not fuel."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Vehicle position for coolant work, not fuel."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Coolant filling, not fuel."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Air bleeding of the coolant system, not fuel."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Coolant disposal, not fuel."}
+  ]
+}

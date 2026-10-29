@@ -2,13 +2,15 @@
 
 No review gate, parser JSON, server-added warning displays or source-gap IDs. Each manual object
 becomes one line with a short label ([E1], [E2], ...); the server keeps the label -> evidence ID and
-page map. WARNING and CAUTION lines are the warnings the model must decide on.
+page map. WARNING and CAUTION lines are the warnings the model must decide on. A section's related
+warnings (its parent's, linked when the index was built) follow its own lines, marked with the
+section they come from, unless that section is itself sent.
 """
 import json
 from pathlib import Path
 import re
 
-VERSION = 'section-plain-text-v1'
+VERSION = 'section-plain-text-v2'
 WARNING_BOXES = ('WARNING', 'CAUTION')
 _PRIVATE_USE = re.compile('[-]')
 _SKIP = {'section_header', 'picture', 'page_header', 'page_footer'}
@@ -75,24 +77,33 @@ def assemble(index, chunk_ids):
         if sid not in order:
             order.append(sid)
     objects, warnings, blocks = {}, [], []
+
+    def add(eid, owner, lines, origin=None):
+        row = index.evidence[eid]
+        text = render(row)
+        if text is None:
+            return
+        label = f'E{len(objects) + 1}'
+        box = owner['box_of'].get(eid)
+        obj_pages = sorted({p['page_no'] for p in row['provenance']})
+        objects[label] = {'evidence_id': eid, 'text': text, 'pages': obj_pages, 'box': box,
+                          'section': owner['heading'], 'type': row['type']}
+        if box in WARNING_BOXES:
+            warnings.append(label)
+        tag = f'({box}, from {clean(origin)}) ' if origin else (f'({box}) ' if box else '')
+        lines.append(f'[{label}] ' + tag + text)
+
     for sid in order:
         section = index.sections[sid]
         pages = section['pdf_pages']
         span = f'page {pages[0]}' if len(pages) == 1 else f'pages {pages[0]}-{pages[-1]}'
         lines = [f'## {clean(section["heading"]) or "Untitled section"} ({span})']
         for eid in section['evidence_ids']:
-            row = index.evidence[eid]
-            text = render(row)
-            if text is None:
-                continue
-            label = f'E{len(objects) + 1}'
-            box = section['box_of'].get(eid)
-            obj_pages = sorted({p['page_no'] for p in row['provenance']})
-            objects[label] = {'evidence_id': eid, 'text': text, 'pages': obj_pages, 'box': box,
-                              'section': section['heading'], 'type': row['type']}
-            if box in WARNING_BOXES:
-                warnings.append(label)
-            lines.append(f'[{label}] ' + (f'({box}) ' if box else '') + text)
+            add(eid, section, lines)
+        parent = index.sections.get(section.get('related_section') or '')
+        if parent is not None and parent['id'] not in order:
+            for eid in section.get('related_warnings', []):
+                add(eid, parent, lines, origin=parent['heading'])
         if len(lines) > 1:
             blocks.append('\n'.join(lines))
     return {'version': VERSION, 'index_id': index.manifest['index_id'], 'sections': order,

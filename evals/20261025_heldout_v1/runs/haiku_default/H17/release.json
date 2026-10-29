@@ -1,0 +1,149 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "To top up the expansion tank, remove its cap and fill the tank to the upper level line. Then replace the expansion tank cap. For coolant, the manual names Coolant from Total, which is ready to use and does not need mixing. Check the coolant level in the expansion tank every 1000 km (or earlier as required) and top up as required. Watch out: Do not open a radiator cap when the engine is hot. The pressure can make the coolant boil and spurt out, causing severe burns. Watch out: Do not spill coolant. Avoid skin or body contact with it, and wash any affected area promptly with soap and water. The manual names only Coolant from Total. It does not give a coolant specification for other brands. The manual does not say whether the engine must be cold before the expansion tank cap is removed.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E6",
+   "evidence_id": "evidence_fd36c1641a183a760642e6eb",
+   "pages": [
+    86
+   ]
+  },
+  {
+   "label": "E15",
+   "evidence_id": "evidence_423ad61a550cf44744fbddce",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E16",
+   "evidence_id": "evidence_ecf9b550d62b6653fa07fa75",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E23",
+   "evidence_id": "evidence_6faf61228a443cbd4fcdff5c",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E25",
+   "evidence_id": "evidence_3c4844130250c56d079c51ac",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E28",
+   "evidence_id": "evidence_cd81c1174bb3a2fbf99ba2d2",
+   "pages": [
+    125
+   ]
+  }
+ ],
+ "cited_pages": [
+  86,
+  87,
+  125
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "To top up the expansion tank, remove its cap and fill the tank to the upper level line.",
+    "evidence_ids": [
+     "E15"
+    ]
+   },
+   {
+    "text": "Then replace the expansion tank cap.",
+    "evidence_ids": [
+     "E16"
+    ]
+   },
+   {
+    "text": "For coolant, the manual names Coolant from Total, which is ready to use and does not need mixing.",
+    "evidence_ids": [
+     "E25"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "Check the coolant level in the expansion tank every 1000 km (or earlier as required) and top up as required.",
+    "evidence_ids": [
+     "E28"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Do not open a radiator cap when the engine is hot. The pressure can make the coolant boil and spurt out, causing severe burns.",
+    "evidence_ids": [
+     "E6"
+    ]
+   },
+   {
+    "text": "Do not spill coolant. Avoid skin or body contact with it, and wash any affected area promptly with soap and water.",
+    "evidence_ids": [
+     "E23"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual names only Coolant from Total. It does not give a coolant specification for other brands.",
+    "evidence_ids": [
+     "E25"
+    ]
+   },
+   {
+    "text": "The manual does not say whether the engine must be cold before the expansion tank cap is removed."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E6",
+   "decision": "INCLUDED",
+   "reason": "Hot radiator cap hazard is a key safety point when handling coolant."
+  },
+  {
+   "display_id": "E7",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Bike position applies to the radiator fill and bleed steps, not the expansion tank top-up."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Describes filling the radiator to the filler neck, not the expansion tank top-up asked about."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Air bleeding is a separate procedure not asked about."
+  },
+  {
+   "display_id": "E23",
+   "decision": "INCLUDED",
+   "reason": "Spill and skin-contact hazard applies while adding coolant."
+  }
+ ],
+ "excluded_watchouts": [
+  "E7",
+  "E8",
+  "E9"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

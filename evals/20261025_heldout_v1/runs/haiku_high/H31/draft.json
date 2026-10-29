@@ -1,0 +1,37 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "The manual gives no torque value for the front wheel spindle; it says only to tighten the spindle bolt firmly on the left side.",
+      "evidence_ids": ["E31"]
+    },
+    {
+      "text": "The 25 Nm torque in the manual is for the fork clamp bolt on the left side, not for the spindle.",
+      "evidence_ids": ["E32"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Take utmost care when reassembling the front wheel and make sure it is fitted correctly before you ride. If it is not, the motorcycle may not perform correctly and may cause an accident, injury or loss of life.",
+      "evidence_ids": ["E35", "E36", "E37"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E35",
+      "decision": "INCLUDED",
+      "reason": "The watchout covers taking utmost care when reassembling the front wheel."
+    },
+    {
+      "display_id": "E36",
+      "decision": "INCLUDED",
+      "reason": "The watchout covers fitting the wheel correctly before riding."
+    },
+    {
+      "display_id": "E37",
+      "decision": "INCLUDED",
+      "reason": "The watchout gives the consequences of a wheel that is not fitted correctly."
+    }
+  ]
+}

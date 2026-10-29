@@ -1,0 +1,18 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {"text": "The low beam headlamp is 12.12 W.", "evidence_ids": ["E14"]},
+    {"text": "The manual gives 14.22 W for high beam and low beam together.", "evidence_ids": ["E14"]}
+  ],
+  "watchouts": [
+    {"text": "Bulbs or electrical gadgets rated other than the specified rating will lead to overloading, erratic behavior or premature failure of the electrical system.", "evidence_ids": ["E22"]}
+  ],
+  "disclaimers": [
+    {"text": "The manual does not give the high beam wattage on its own.", "evidence_ids": ["E14"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E22", "decision": "INCLUDED", "reason": "Electrical ratings that differ from the specified values bear on the wattage figures asked."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Covers unapproved modifications and warranty, not the wattage figures asked."}
+  ]
+}

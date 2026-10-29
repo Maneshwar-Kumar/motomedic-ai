@@ -1,0 +1,92 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "Stand the motorcycle upright on a firm, level surface.",
+      "evidence_ids": ["E3"]
+    },
+    {
+      "text": "Clean the filler cap before you remove it, and keep water and dust out of the reservoir when you refill.",
+      "evidence_ids": ["E6", "E9"]
+    },
+    {
+      "text": "Front: with the reservoir horizontal, the fluid level should be at the center of the window, which the manual treats as the minimum level.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "Rear: with the reservoir horizontal, the fluid level should be between the \"MAX\" and \"Min\" marks.",
+      "evidence_ids": ["E2"]
+    },
+    {
+      "text": "Use only DOT 4 brake fluid from a sealed container, and refill with the same type.",
+      "evidence_ids": ["E6", "E8"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "An insufficient brake fluid level will cause the brake system to fail.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "Brake fluid is highly corrosive and can damage painted parts. If it spills, clean the area at once with a soft cloth, preferably wet.",
+      "evidence_ids": ["E4", "E15"]
+    },
+    {
+      "text": "Do not let brake fluid touch your skin, eyes or clothing, and keep it out of the reach of children.",
+      "evidence_ids": ["E14", "E13"]
+    },
+    {
+      "text": "Do not mix DOT 4 with other brake fluid.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The front check gives only a minimum level, with no upper mark for the front reservoir in this procedure.",
+      "evidence_ids": ["E1"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E4",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on corrosive spills."
+    },
+    {
+      "display_id": "E5",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on not mixing fluids."
+    },
+    {
+      "display_id": "E10",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on low level causing brake failure."
+    },
+    {
+      "display_id": "E11",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns old fluid reducing braking, not checking the level or topping up."
+    },
+    {
+      "display_id": "E12",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns changing the fluid on the maintenance schedule, not the level check."
+    },
+    {
+      "display_id": "E13",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on skin, eyes, clothing and children."
+    },
+    {
+      "display_id": "E14",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on skin, eyes, clothing and children."
+    },
+    {
+      "display_id": "E15",
+      "decision": "INCLUDED",
+      "reason": "Cited in the watchout on corrosive spills, with E4."
+    }
+  ]
+}

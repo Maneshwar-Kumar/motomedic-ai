@@ -1,0 +1,80 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "Use engine oil grade 10W40 API SN, JASO MA2, semi synthetic. For an oil change with a new oil filter, the refill amount is 2.1 L. Watch out: Using the wrong oil grade will reduce the life of the moving parts and seriously affect performance. The manual says the capacity values are approximate and the actual capacity will vary.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+   "pages": [
+    21
+   ]
+  },
+  {
+   "label": "E4",
+   "evidence_id": "evidence_424971c8f0be958200b09990",
+   "pages": [
+    21
+   ]
+  },
+  {
+   "label": "E5",
+   "evidence_id": "evidence_37c6c31f5700495414de1101",
+   "pages": [
+    21
+   ]
+  }
+ ],
+ "cited_pages": [
+  21
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Use engine oil grade 10W40 API SN, JASO MA2, semi synthetic.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "For an oil change with a new oil filter, the refill amount is 2.1 L.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Using the wrong oil grade will reduce the life of the moving parts and seriously affect performance.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual says the capacity values are approximate and the actual capacity will vary.",
+    "evidence_ids": [
+     "E4"
+    ]
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E5",
+   "decision": "INCLUDED",
+   "reason": "The wrong oil grade warning is not given in the answer lines and is cited by the watchout."
+  }
+ ],
+ "excluded_watchouts": [],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

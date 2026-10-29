@@ -1,0 +1,176 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "Fill the tank only up to the bottom of the anti splash plate. Do not overfill the fuel tank. Watch out: Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system. Watch out: Gasoline vapour is highly explosive. Make sure there are no open flames or sparks nearby, and fill only in a well-ventilated area. Watch out: Wipe up any fuel spilled on painted surfaces immediately, as it may leave a permanent stain. Watch out: Do not smoke while refuelling or when the fuel tank cap is open.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E5",
+   "evidence_id": "evidence_4e632b1b7a18bb739a61c9fd",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_5034a983959e52887c0072bf",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_a66e862d634c23573bb30c90",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E8",
+   "evidence_id": "evidence_b02f383c70aefc628503f3ce",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E9",
+   "evidence_id": "evidence_3b85a6b930363f5bd9ce3f4e",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E10",
+   "evidence_id": "evidence_430d1ff1fa68dbcabfbbb0cf",
+   "pages": [
+    27
+   ]
+  }
+ ],
+ "cited_pages": [
+  27
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Fill the tank only up to the bottom of the anti splash plate.",
+    "evidence_ids": [
+     "E6"
+    ]
+   },
+   {
+    "text": "Do not overfill the fuel tank.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system.",
+    "evidence_ids": [
+     "E7"
+    ]
+   },
+   {
+    "text": "Gasoline vapour is highly explosive. Make sure there are no open flames or sparks nearby, and fill only in a well-ventilated area.",
+    "evidence_ids": [
+     "E8"
+    ]
+   },
+   {
+    "text": "Wipe up any fuel spilled on painted surfaces immediately, as it may leave a permanent stain.",
+    "evidence_ids": [
+     "E9"
+    ]
+   },
+   {
+    "text": "Do not smoke while refuelling or when the fuel tank cap is open.",
+    "evidence_ids": [
+     "E10"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E5",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Its point is the answer itself, so it is stated once there."
+  },
+  {
+   "display_id": "E6",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Its fill level is the answer itself, so it is stated once there."
+  },
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "Gives the damage that overfilling can cause."
+  },
+  {
+   "display_id": "E8",
+   "decision": "INCLUDED",
+   "reason": "Fire and vapour hazard while refuelling."
+  },
+  {
+   "display_id": "E9",
+   "decision": "INCLUDED",
+   "reason": "Fuel spills can permanently stain paint."
+  },
+  {
+   "display_id": "E10",
+   "decision": "INCLUDED",
+   "reason": "No smoking while refuelling."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns engine oil grade, not refuelling."
+  },
+  {
+   "display_id": "E21",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns opening a hot radiator cap, not fuel."
+  },
+  {
+   "display_id": "E22",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns coolant filling, not fuel."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns coolant filling, not fuel."
+  },
+  {
+   "display_id": "E24",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns coolant system air bleeding, not fuel."
+  },
+  {
+   "display_id": "E38",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns coolant spillage, not fuel."
+  }
+ ],
+ "excluded_watchouts": [
+  "E5",
+  "E6",
+  "E15",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "E38"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

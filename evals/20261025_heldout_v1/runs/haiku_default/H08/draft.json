@@ -1,0 +1,27 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "The engine number is punched on the bottom of the gear pedal connector rod.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "The VIN is a 17-digit number punched on the right side of the steering head tube, in the form of a label.",
+      "evidence_ids": ["E3"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not tamper with or alter the VIN or engine number. It is illegal and voids the registration and warranty.",
+      "evidence_ids": ["E2"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E2",
+      "decision": "INCLUDED",
+      "reason": "One watchout cites E2 on tampering with the VIN and engine numbers."
+    }
+  ]
+}

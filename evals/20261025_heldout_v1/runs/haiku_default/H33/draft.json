@@ -1,0 +1,57 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "The manual recommends shifting down from 3rd to 2nd gear at 25 km/h.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Fully depress the clutch lever before any gear shift.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "During acceleration or deceleration, disengage the clutch completely, shift the gear, then engage the clutch gradually (not too slowly).",
+      "evidence_ids": ["E3"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "If acceleration is very high and the clutch lever is released abruptly, the motorcycle can move suddenly, causing loss of control, an accident, injury or death, and damage to the motorcycle.",
+      "evidence_ids": ["E7"]
+    },
+    {
+      "text": "If the clutch lever is released abruptly with insufficient throttle opening, the motorcycle will have a rough start and the engine will stall.",
+      "evidence_ids": ["E6"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E6",
+      "decision": "INCLUDED",
+      "reason": "Abrupt clutch release during a shift with insufficient throttle causes a rough start and stalling; one watchout cites it."
+    },
+    {
+      "display_id": "E7",
+      "decision": "INCLUDED",
+      "reason": "Abrupt clutch release at high acceleration can make the motorcycle move suddenly; one watchout cites it."
+    },
+    {
+      "display_id": "E8",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Generic caution about releasing the clutch, already covered by the clutch-release watchouts."
+    },
+    {
+      "display_id": "E9",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Second half of the generic caution in E8; already covered by the clutch-release watchouts."
+    },
+    {
+      "display_id": "E10",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Says to follow the recommended shifting speeds, which the answer already gives."
+    }
+  ]
+}
