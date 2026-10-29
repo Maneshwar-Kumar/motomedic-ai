@@ -19,21 +19,22 @@ The 161-case package and the other review packages are in [archive/](archive/REA
 
 ## Answer path
 
-Index `index_a609ca61c635641e0a22dc48` is built offline from the cached Docling parse of the base index `index_a3282c4d98cf54595e4ba168`, which was produced by [ingest/](ingest/README.md). In the index:
+Index `index_f768fbb216836c003701079e` is built offline from the cached Docling parse of the base index `index_a3282c4d98cf54595e4ba168`, which was produced by [ingest/](ingest/README.md). In the index:
 - WARNING, CAUTION and NOTE boxes join the section they follow;
 - page-break continuations stay in one section;
-- the search text carries the real heading.
+- the search text carries the real heading;
+- a subsection Docling split from its parent inherits the parent's WARNING/CAUTION boxes.
 
 It has 154 sections and 532 chunks embedded with BGE-M3. Requests never reparse or re-embed the manual, and a source, parser, sectioning or embedding change creates a new index.
 
 A turn runs in five steps:
-1. **Retrieval.** Dense search (BGE-M3) and BM25 are fused with reciprocal rank fusion, keeping only the top 5 chunks. When the dense and BM25 top-3 sections differ, the cross-encoder orders those 5; it never adds a chunk.
+1. **Retrieval.** Dense search (BGE-M3) and BM25 are fused with reciprocal rank fusion, keeping only the top 5 chunks. When the dense and BM25 top-3 sections differ, the cross-encoder orders those 5; it never adds a chunk. When its best score over the 5 is below the relevance floor (−9.0), the turn gets the fixed fallback with no model call.
 2. **Model input.** The whole section of each chunk is sent as plain text with short labels. No parser JSON, server-added warning text or source-gap IDs are added.
 3. **Generation.** One `claude-haiku-5-5` call (effort `high`, thinking disabled, system prompt cached for 5 minutes) fills the answer template. There is no verifier, correction round, retry or fallback model.
-4. **Gate.** The deterministic gate releases or fails closed. When nothing is retrieved, the fixed fallback and support route are sent with no model call.
+4. **Gate.** The deterministic gate releases or fails closed. It rejects internal labels in rider text, rewords meta phrases about "the sections supplied", and leaves out policy, watchout or disclaimer sentences that only repeat an earlier section. When nothing is retrieved, the fixed fallback and support route are sent with no model call.
 5. **Delivery.** The released view is saved before any byte streams, and recovery reads the same saved view.
 
-Code is in [cloud/grounded_generation/](cloud/grounded_generation/), with the worker and API wiring in [cloud/arm_a/](cloud/arm_a/) and shared types in [cloud/common/](cloud/common/). The gate checks structure, citations, numbers and warning decisions, not meaning. The 30 evaluation questions are development cases; held-out cases cannot enrich prompts or retrieval tuning.
+Code is in [cloud/grounded_generation/](cloud/grounded_generation/), with the worker and API wiring in [cloud/arm_a/](cloud/arm_a/) and shared types in [cloud/common/](cloud/common/). The gate checks structure, citations, numbers and warning decisions, not meaning. The 30 v3 questions are development cases. The [33 held-out questions](evals/20261025_heldout_v1/README.md) have now been seen, so a new quality claim needs new questions; neither set may enrich prompts or retrieval tuning.
 
 ## Experiments
 
@@ -41,7 +42,7 @@ Run experiments locally with [tools/local_answer.py](tools/local_answer.py) or t
 
 ## Release, operations and spending
 
-The current release is [serving manifest v11.1](releases/serving_manifest_v11_1.json). Never alter a frozen manifest to make a check pass; a changed serving input needs a new frozen version. Manifests v8–v10.14 are history in `archive/`; their bindings were last verified in their original layout at commit `7c412369f055b4d0ee747501e6b026f5987d1564`.
+The current release is [serving manifest v11.2](releases/serving_manifest_v11_2.json). Never alter a frozen manifest to make a check pass; a changed serving input needs a new frozen version. Manifests v8–v10.14 are history in `archive/`; their bindings were last verified in their original layout at commit `7c412369f055b4d0ee747501e6b026f5987d1564`.
 
 There is no token ceiling. The 100-attempt allocation (72 used) and the shared Haiku USD1 ledger still bind; do not reset or refund them. Nothing in the repository authorizes deployment, public opening, provider spending, billing changes or GCP changes. Each needs the owner's explicit scope.
 

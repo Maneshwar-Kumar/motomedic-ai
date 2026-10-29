@@ -59,6 +59,20 @@ class IndexTests(unittest.TestCase):
                + [item('MIXED', 1, 20), item('MIXED', 2, 20), item('MIXED', 3, 500), item('SETTINGS', 2, 400)]}
         self.assertEqual(si.running_headers(doc), {'INSTRUMENT CLUSTER': [1, 2, 3]})
 
+    def test_a_split_off_subsection_inherits_its_parents_warnings_only(self):
+        def section(sid, heading, pages, boxes):
+            return {'id': sid, 'heading': heading, 'pdf_pages': pages, 'evidence_ids': list(boxes), 'box_of': dict(boxes)}
+        sections = [section('a', 'ACCESSORIES AND LUGGAGE', [14, 15], {'w1': 'WARNING', 't1': None}),
+                    section('b', 'LUGGAGE CATEGORIES', [15], {'t2': None}),
+                    section('c', 'CLUTCH CABLE FREE PLAY', [101, 102], {'w2': 'CAUTION'}),
+                    section('d', 'DRIVE CHAIN TENSION (FREE PLAY)', [102], {'t3': None}),
+                    section('e', 'FUEL TANK CAP', [27], {'w3': 'WARNING'}),
+                    section('f', 'FUEL FILLING LEVEL', [30], {'t4': None})]
+        self.assertEqual(si.link_related_warnings(sections), 1)
+        self.assertEqual((sections[1]['related_warnings'], sections[1]['related_section']), (['w1'], 'a'))
+        # "drive" is not in the clutch heading; page 30 is too far from page 27.
+        self.assertEqual([s['related_warnings'] for s in sections[2:]], [[], [], [], []])
+
     def test_serving_verifies_the_pinned_identity_and_every_file(self):
         root = fixture()
         expected = si.identity(root)
@@ -86,12 +100,20 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(len(found['chunk_ids']), sr.TOP_K)
         self.assertEqual(len(set(found['chunk_ids'])), sr.TOP_K)
 
-    def test_agreeing_top_sections_skip_the_reranker(self):
+    def test_agreeing_top_sections_are_scored_for_relevance_but_not_reordered(self):
         found = self.retriever().search('compression ratio')
         self.assertFalse(found['sections_disagree'])
         self.assertFalse(found['reranked'])
-        self.assertEqual(self.cross.calls, [])
+        self.assertEqual(len(self.cross.calls), 1)
         self.assertEqual(found['chunk_ids'][0], 'chunk_synthetic_2_0')
+        self.assertEqual((found['max_cross_score'], found['below_relevance_floor']), (2.0, False))
+
+    def test_best_score_below_the_floor_marks_the_turn_as_nothing_found(self):
+        headings = ('RUNNING IN', 'CHARGER PORT', 'SPECIFICATIONS', 'FUEL TANK CAP', 'FUEL FILLING LEVEL')
+        found = self.retriever(cross=CrossEncoder({h: sr.RELEVANCE_FLOOR - 1 for h in headings})).search('Bluetooth pairing')
+        self.assertTrue(found['below_relevance_floor'])
+        edge = CrossEncoder({h: sr.RELEVANCE_FLOOR for h in headings})
+        self.assertFalse(self.retriever(cross=edge).search('Bluetooth pairing')['below_relevance_floor'])
 
     def test_disagreement_reorders_the_same_five_chunks(self):
         query = 'charger port'
@@ -177,6 +199,16 @@ class AssemblyAndGateTests(unittest.TestCase):
         self.assertEqual(assembled['warnings'], [self.label(assembled, 'in rain')])
         self.assertTrue(assembled['text'].startswith('## CHARGER PORT (page 64)'))
 
+    def test_related_warnings_follow_the_subsection_and_are_listed_for_a_decision(self):
+        assembled = self.sent('chunk_synthetic_4_0')
+        self.assertIn('(WARNING, from FUEL TANK CAP) Do not overfill the fuel tank.', assembled['text'])
+        label = self.label(assembled, 'overfill')
+        self.assertEqual(assembled['warnings'], [label])
+        self.assertEqual(assembled['objects'][label]['section'], 'FUEL TANK CAP')
+        both = self.sent('chunk_synthetic_3_0', 'chunk_synthetic_4_0')
+        self.assertEqual(sum('overfill' in o['text'] for o in both['objects'].values()), 1)
+        self.assertNotIn('from FUEL TANK CAP', both['text'])
+
     def test_sections_are_deduplicated_in_retrieval_order_and_tables_are_rows(self):
         assembled = self.sent('chunk_synthetic_2_0', 'chunk_synthetic_0_1', 'chunk_synthetic_0_0')
         self.assertEqual(len(assembled['sections']), 2)
@@ -256,6 +288,46 @@ class AssemblyAndGateTests(unittest.TestCase):
         self.assertEqual((released['escalation_uri'], released['suppressed_disclaimers']), (SUPPORT, 1))
         nothing = ta.no_evidence_release(SUPPORT)
         self.assertEqual((nothing['text'], nothing['provider_calls'], nothing['route']), (ta.FALLBACK_TEXT, 0, 'UNSUPPORTED'))
+
+    def test_repeated_sentences_are_left_out_but_extensions_and_list_items_stay(self):
+        assembled = self.sent('chunk_synthetic_1_0')
+        label, warning = self.label(assembled, 'located'), assembled['warnings'][0]
+        draft = self.draft(label, 'The charger port is on the centre of the handlebar.', assembled,
+            policy=[{'text': 'The manual says the charger port is located on the centre of the handlebar.',
+                     'evidence_ids': [label]}],
+            watchouts=[{'text': 'Do not use the charger port in rain, to avoid damaging the phone and the charger.',
+                        'evidence_ids': [warning]}],
+            watchout_review=[{'display_id': warning, 'decision': 'INCLUDED', 'reason': 'rain'}])
+        released = ta.gate(draft, assembled, 'Where is the charger port?')
+        self.assertEqual(released['suppressed_duplicates'], 1)
+        self.assertNotIn('The manual says the charger port is located', released['text'])
+        self.assertIn('Watch out: Do not use the charger port in rain', released['text'])
+        self.assertEqual({c['label'] for c in released['citations']}, {label, warning})
+        self.assertFalse(ta.near_duplicate('ECO + Rear ABS OFF.', ['Performance + Rear ABS OFF.']))
+        # Answer steps that share their words but reverse the order are both shown.
+        steps = ['When removing the battery, disconnect the black negative terminal first, then the red positive terminal.',
+                 'When refitting the battery, connect the red positive terminal first, then the black negative terminal.']
+        ordered = self.draft(label, steps[0], assembled, answer=[{'text': s, 'evidence_ids': [label]} for s in steps])
+        released = ta.gate(ordered, assembled, 'Which battery terminal goes first?')
+        self.assertEqual((released['text'].count('battery'), released['suppressed_duplicates']), (2, 0))
+        self.assertFalse(ta.near_duplicate('Do not switch the ignition OFF while riding; it can cause an accident and serious injury.',
+                                           ['Do not switch the ignition OFF while riding.']))
+
+    def test_meta_phrases_are_rewritten_and_leaked_labels_fail_closed(self):
+        assembled = self.sent('chunk_synthetic_1_0')
+        label = self.label(assembled, 'located')
+        partial = self.draft(label, 'The charger port is on the centre of the handlebar.', assembled, coverage='PARTIAL',
+                             disclaimers=[{'text': 'The supplied sections do not give a power rating.'}])
+        released = ta.gate(partial, assembled, 'Where is the charger port and how strong is it?')
+        self.assertIn('The parts of the manual I checked do not give a power rating.', released['text'])
+        self.assertEqual(released['rewritten_phrases'], ['The supplied sections'])
+        self.assertEqual(ta.rider_wording('It is not given in the sections shown.')[0],
+                         'It is not given in the parts of the manual I checked.')
+        for leak in (f'See [{label}].', 'This comes from line E2 of the manual.', 'Every warning needs a display_id.'):
+            with self.subTest(leak=leak):
+                self.assertEqual(self.rejected(self.draft(label, leak, assembled), assembled), 'INTERNAL_LABEL_IN_RIDER_TEXT')
+        self.assertEqual(ta.gate(self.draft(label, 'Use E20 fuel or lower.', assembled), assembled, 'Can I use E20?')['route'],
+                         'SUPPORTED')
 
     def test_disclaimers_pages_partial_clarification_and_caps(self):
         assembled = self.sent('chunk_synthetic_0_0')
@@ -404,7 +476,8 @@ class EmptyRetriever:
 
     def search(self, query):
         return {'version': sr.VERSION, 'index_id': self.manifest['index_id'], 'chunk_ids': [],
-                'sections_disagree': False, 'reranked': False, 'rerank_skip_reason': None}
+                'sections_disagree': False, 'reranked': False, 'rerank_skip_reason': None,
+                'max_cross_score': None, 'below_relevance_floor': False}
 
 
 def located(assembled):
@@ -466,6 +539,18 @@ class QuestionsTests(unittest.TestCase):
                          ('UNSUPPORTED', ta.FALLBACK_TEXT, SUPPORT))
         self.assertEqual((view['provider_calls'], view['response']['release_gate_passed']), (0, False))
         self.assertEqual(view['response']['reason_codes'], ['NOTHING_RETRIEVED'])
+
+    def test_a_best_score_below_the_floor_sends_the_fallback_with_no_call(self):
+        generate = FakeGenerate(located)
+        low = CrossEncoder({h: sr.RELEVANCE_FLOOR - 1 for h in ('RUNNING IN', 'CHARGER PORT', 'SPECIFICATIONS',
+                                                                 'FUEL TANK CAP', 'FUEL FILLING LEVEL')})
+        q = self.questions(generate, sr.SectionRetriever(self.root, Embedder(), low))
+        _s, view, _c = q.answer(q.new_session(), 'How do I pair a Bluetooth intercom?', operation_id='a' * 32)
+        self.assertEqual(generate.calls, [])
+        self.assertEqual((view['response']['type'], view['response']['natural_language'], view['provider_calls']),
+                         ('UNSUPPORTED', ta.FALLBACK_TEXT, 0))
+        self.assertEqual(view['response']['reason_codes'], ['BELOW_RELEVANCE_FLOOR'])
+        self.assertTrue(view['runtime_controls']['retrieval']['below_relevance_floor'])
 
     def test_gate_rejection_and_provider_failure_are_system_errors(self):
         bad = FakeGenerate(lambda a: dict(located(a), answer=[{'text': 'Somewhere.', 'evidence_ids': ['E99']}]))

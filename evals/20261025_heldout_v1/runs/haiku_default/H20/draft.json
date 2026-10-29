@@ -1,0 +1,46 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "Fill the tank only up to the bottom of the anti splash plate.",
+      "evidence_ids": ["E6"]
+    },
+    {
+      "text": "Do not overfill the fuel tank.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system.",
+      "evidence_ids": ["E7"]
+    },
+    {
+      "text": "Gasoline vapour is highly explosive. Make sure there are no open flames or sparks nearby, and fill only in a well-ventilated area.",
+      "evidence_ids": ["E8"]
+    },
+    {
+      "text": "Wipe up any fuel spilled on painted surfaces immediately, as it may leave a permanent stain.",
+      "evidence_ids": ["E9"]
+    },
+    {
+      "text": "Do not smoke while refuelling or when the fuel tank cap is open.",
+      "evidence_ids": ["E10"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "NOT_APPLICABLE", "reason": "Its point is the answer itself, so it is stated once there."},
+    {"display_id": "E6", "decision": "NOT_APPLICABLE", "reason": "Its fill level is the answer itself, so it is stated once there."},
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "Gives the damage that overfilling can cause."},
+    {"display_id": "E8", "decision": "INCLUDED", "reason": "Fire and vapour hazard while refuelling."},
+    {"display_id": "E9", "decision": "INCLUDED", "reason": "Fuel spills can permanently stain paint."},
+    {"display_id": "E10", "decision": "INCLUDED", "reason": "No smoking while refuelling."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Concerns engine oil grade, not refuelling."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Concerns opening a hot radiator cap, not fuel."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns coolant filling, not fuel."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Concerns coolant filling, not fuel."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns coolant system air bleeding, not fuel."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Concerns coolant spillage, not fuel."}
+  ]
+}

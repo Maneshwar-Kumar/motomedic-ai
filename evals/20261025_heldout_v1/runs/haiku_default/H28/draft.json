@@ -1,0 +1,32 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "For riding solo, the manual gives 32 psi (2.24 kg/cm²) for the front tyre.",
+      "evidence_ids": ["E6", "E21"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Inflate the tyres to the correct air pressure the manual specifies.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "An under-inflated tyre may overheat, become damaged and cause injury to the rider.",
+      "evidence_ids": ["E7"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "Warns that an under-inflated tyre may overheat, be damaged and injure the rider."},
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Concerns replacement tyre specification, not pressure."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "Continues the tyre specification warning, not about pressure."},
+    {"display_id": "E34", "decision": "NOT_APPLICABLE", "reason": "Concerns loading weight and fitting accessories."},
+    {"display_id": "E35", "decision": "NOT_APPLICABLE", "reason": "Concerns genuine accessories."},
+    {"display_id": "E36", "decision": "NOT_APPLICABLE", "reason": "Concerns non-standard forks and altered parts."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Continues the non-standard parts warning."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Concerns model specifications and accessory misuse."}
+  ]
+}

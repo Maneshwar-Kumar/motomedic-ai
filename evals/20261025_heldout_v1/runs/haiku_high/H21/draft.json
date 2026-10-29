@@ -1,0 +1,63 @@
+{
+  "route": "SAFETY_STOP",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "No. Do not bridge a blown fuse with wire, foil or any other conductive material.",
+      "evidence_ids": ["E6", "E8"]
+    },
+    {
+      "text": "Replace the blown fuse with a new fuse of the same rating.",
+      "evidence_ids": ["E8"]
+    },
+    {
+      "text": "The manual lists spare fuses at 5 A (SF1), 10 A (SF2) and 15 A (SF3).",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Any attempt to jumper a defective fuse risks a short circuit and fire.",
+      "evidence_ids": ["E8"]
+    },
+    {
+      "text": "Fuses of other ratings, low-grade fuses or conductive materials will damage the complete electrical system.",
+      "evidence_ids": ["E6"]
+    },
+    {
+      "text": "After any fuse failure, get the electrical system checked and the faults corrected immediately, or fuses may keep failing.",
+      "evidence_ids": ["E5"]
+    },
+    {
+      "text": "Replace a spare fuse in the holder at the earliest opportunity.",
+      "evidence_ids": ["E7"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual gives no way to keep riding on a blown fuse."
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E5",
+      "decision": "INCLUDED",
+      "reason": "Post-failure electrical check is a separate warning not in the answer."
+    },
+    {
+      "display_id": "E6",
+      "decision": "INCLUDED",
+      "reason": "Damage from other ratings and low-grade fuses is a separate warning."
+    },
+    {
+      "display_id": "E7",
+      "decision": "INCLUDED",
+      "reason": "Replacing a used spare fuse promptly is a separate warning."
+    },
+    {
+      "display_id": "E8",
+      "decision": "INCLUDED",
+      "reason": "Short-circuit and fire risk of jumpering is not stated in the answer."
+    }
+  ]
+}

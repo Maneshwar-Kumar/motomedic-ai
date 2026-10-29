@@ -1,0 +1,194 @@
+{
+ "version": "template-answer-v4",
+ "route": "SAFETY_STOP",
+ "coverage": "COMPLETE",
+ "text": "No. The manual says not to run the motorcycle while the ABS lamp stays on above 5 km/h. Take the motorcycle to the nearest Authorised Royal Enfield Service Centre to have the brake system inspected. The ABS lamp should turn off once the motorcycle passes 5 km/h, and it lights up again when there is an ABS malfunction. Watch out: Not getting the brake system inspected can result in serious injuries and loss of life. Watch out: Keep the instrument cluster working properly, since it is an integral part of the ABS system. The manual does not give a waiting period before the lamp must be checked.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_f008b65a1c3864b9ce1ca3bc",
+   "pages": [
+    63
+   ]
+  },
+  {
+   "label": "E2",
+   "evidence_id": "evidence_be61e25b35303514cfe3e5c8",
+   "pages": [
+    63
+   ]
+  },
+  {
+   "label": "E3",
+   "evidence_id": "evidence_a798d3ba95cd9f9440be754a",
+   "pages": [
+    69
+   ]
+  },
+  {
+   "label": "E8",
+   "evidence_id": "evidence_26bf2297a667bbfcac0535cc",
+   "pages": [
+    66
+   ]
+  },
+  {
+   "label": "E12",
+   "evidence_id": "evidence_5026a190286d576b63ebe758",
+   "pages": [
+    67
+   ]
+  }
+ ],
+ "cited_pages": [
+  63,
+  66,
+  67,
+  69
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "No. The manual says not to run the motorcycle while the ABS lamp stays on above 5 km/h.",
+    "evidence_ids": [
+     "E2",
+     "E8"
+    ]
+   },
+   {
+    "text": "Take the motorcycle to the nearest Authorised Royal Enfield Service Centre to have the brake system inspected.",
+    "evidence_ids": [
+     "E3",
+     "E8"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "The ABS lamp should turn off once the motorcycle passes 5 km/h, and it lights up again when there is an ABS malfunction.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Not getting the brake system inspected can result in serious injuries and loss of life.",
+    "evidence_ids": [
+     "E8"
+    ]
+   },
+   {
+    "text": "Keep the instrument cluster working properly, since it is an integral part of the ABS system.",
+    "evidence_ids": [
+     "E12"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a waiting period before the lamp must be checked."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E2",
+   "decision": "NOT_APPLICABLE",
+   "reason": "The answer already gives this stop instruction."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General riding advice, not about the lamp."
+  },
+  {
+   "display_id": "E10",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Cornering advice, not about the lamp."
+  },
+  {
+   "display_id": "E11",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Stopping distance advice, not about the lamp."
+  },
+  {
+   "display_id": "E12",
+   "decision": "INCLUDED",
+   "reason": "The cluster is part of the ABS system the lamp belongs to."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Brake use advice, not about the lamp."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Same injury risk as the inspection watchout."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Tyre and sprocket approval, not about the lamp."
+  },
+  {
+   "display_id": "E16",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Suspension travel, not about the lamp."
+  },
+  {
+   "display_id": "E17",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Brake spare parts, no parts work asked."
+  },
+  {
+   "display_id": "E18",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Braking distance, not about the lamp."
+  },
+  {
+   "display_id": "E19",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Toner ring check, not tied to the lamp in the manual."
+  },
+  {
+   "display_id": "E20",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Toner ring check, not tied to the lamp in the manual."
+  },
+  {
+   "display_id": "E21",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Toner ring check, not tied to the lamp in the manual."
+  },
+  {
+   "display_id": "E22",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Sensor debris check, not tied to the lamp in the manual."
+  }
+ ],
+ "excluded_watchouts": [
+  "E2",
+  "E9",
+  "E10",
+  "E11",
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20",
+  "E21",
+  "E22"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

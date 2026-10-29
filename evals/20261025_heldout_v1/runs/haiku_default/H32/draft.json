@@ -1,0 +1,51 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "The manual recommends shifting up from 2nd to 3rd gear at 30 km/h.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Releasing the clutch abruptly while accelerating hard can make the motorcycle move suddenly, causing loss of control, an accident, injury or death, and damage to the motorcycle.",
+      "evidence_ids": ["E7"]
+    },
+    {
+      "text": "Releasing the clutch abruptly with insufficient throttle opening causes a rough start and can stall the engine.",
+      "evidence_ids": ["E6"]
+    },
+    {
+      "text": "Use utmost caution while releasing the clutch and riding the motorcycle.",
+      "evidence_ids": ["E8", "E9"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E6",
+      "decision": "INCLUDED",
+      "reason": "Abrupt clutch release with low throttle causes a rough start and stalling during shifts."
+    },
+    {
+      "display_id": "E7",
+      "decision": "INCLUDED",
+      "reason": "Abrupt clutch release at high acceleration can cause loss of control and injury."
+    },
+    {
+      "display_id": "E8",
+      "decision": "INCLUDED",
+      "reason": "General caution when releasing the clutch, relevant to the shift."
+    },
+    {
+      "display_id": "E9",
+      "decision": "INCLUDED",
+      "reason": "Continuation of the caution in E8 about riding the motorcycle."
+    },
+    {
+      "display_id": "E10",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Repeats the recommended speed already given in the answer."
+    }
+  ]
+}

@@ -63,7 +63,7 @@ A clarification is asked only when the rider can resolve the ambiguity. Reject a
 | FR-03 | Retrieve with dense search and BM25, fuse them and keep only the top 5 chunks. | The trace records the five chunks, the dense and BM25 tops, and whether the reranker ran. No request reparses or embeds the manual. |
 | FR-04 | Rerank only when the dense and BM25 top-3 sections disagree, and only to order the same five. | Agreeing rankings skip the reranker. A disagreement reorders without adding chunks. An over-long query skips with a recorded reason. |
 | FR-05 | Send the whole section of each chunk as plain labelled text, with the section's warnings and notes, and list every WARNING/CAUTION line for a decision. | The model input contains no parser JSON, evidence IDs, hashes or server-added warning text. Labels map to evidence on the server. |
-| FR-06 | Make one Haiku call per turn that fills the answer template, and none when nothing is retrieved. | Only labels that were sent can be cited (schema enum). The call runs at effort high with thinking disabled. There is no verifier, correction, retry or fallback. Nothing retrieved returns the fixed fallback and support route with zero calls. |
+| FR-06 | Make one Haiku call per turn that fills the answer template, and none when nothing relevant is retrieved. | Only labels that were sent can be cited (schema enum). The call runs at effort high with thinking disabled. There is no verifier, correction, retry or fallback. Nothing retrieved, or a best reranker score below the relevance floor, returns the fixed fallback and support route with zero calls. |
 | FR-07 | Release only through the deterministic gate. | The gate checks the schema and caps, that cited labels were sent, that numbers come from the cited line or the question, and that page references belong to a cited line. It also checks that an uncited disclaimer states no value or page, the route rules and a decision for every warning sent. Any failure is SYSTEM_ERROR. |
 | FR-08 | Save the released answer before delivery. | Released, saved, streamed and recovered hashes match. A duplicate operation never repeats a paid call. |
 | FR-09 | Keep the five outcomes distinct. | SUPPORTED, AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR each have tested routing and wording. |
@@ -94,7 +94,7 @@ These messages do not depend on model success and are never labelled as technica
 
 ## 7. Acceptance and operating limits
 
-The design was chosen on a local, agent-scored run of 30 questions ([v3](../evals/20261025_answer_release_v3/README.md)). Haiku at high effort released 30/30 correct answers with no unfaithful citation, which is not hosted or human acceptance. Hosted acceptance needs a real-model run of new held-out questions on the frozen runtime. It must show:
+The design was chosen on a local, agent-scored run of 30 questions ([v3](../evals/20261025_answer_release_v3/README.md)), where Haiku at high effort released 30/30 correct answers. On 33 new held-out questions it was correct on 21, partial on 8 and wrong on 2 ([held-out test](../evals/20261025_heldout_v1/README.md)). Neither run is hosted or human acceptance. Hosted acceptance needs a real-model run of new held-out questions on the frozen runtime. It must show:
 - returned answers;
 - partial and follow-up behavior;
 - prompt-cache creation and reads;

@@ -6,19 +6,19 @@ The stages run as follows:
 
 | Stage | In serving | In a local experiment |
 | --- | --- | --- |
-| Index | `build/section-index`, verified against the release | `build/index-v3-sections`, verified against [release v11.1](../releases/serving_manifest_v11_1.json) |
-| Retrieval | BGE-M3 + BM25, RRF top 5, conditional rerank | Same code, exact search over the pinned vectors |
+| Index | `build/section-index`, verified against the release | `build/index-v4-sections`, verified against [release v11.2](../releases/serving_manifest_v11_2.json) |
+| Retrieval | BGE-M3 + BM25, RRF top 5, conditional rerank, relevance floor | Same code, exact search over the pinned vectors |
 | Model input, system prompt, schema | `section_assembly`, `template_answer` | Same code, written to `model_input.txt`, `instructions.md`, `schema.json` |
 | Generation | One `claude-haiku-5-5` API call, effort high, native JSON schema | One Claude Code subagent, `model: haiku`, `effort: high`, told to match `schema.json` |
 | Gate | `template_answer.gate` | Same code |
 | Ledger, Firestore, Cloud Tasks | Used | Not used; no API key or spend |
 
-One difference matters when you read results. The API call enforces the JSON schema natively, so field names, enums and required fields cannot be wrong. The subagent is only told the schema, so a structural slip that the API would prevent can still fail the gate locally.
+One difference matters when you read results. The API call enforces the JSON schema natively, so field names, enums and required fields cannot be wrong. The subagent is only told the schema, so a structural slip that the API would prevent can still fail the gate locally. `release` therefore records `schema_errors` for every draft: a SYSTEM_ERROR whose draft also has schema errors is one the API would have refused at generation, not a gate failure the runtime would see. The runtime still makes one attempt, so a refused generation would be a SYSTEM_ERROR there too.
 
 ## Setup
 
 1. Use Python 3.12 or newer with NumPy and `sentence-transformers==6.1.0` (CPU PyTorch is enough).
-2. Build the section index at `build/index-v3-sections` ([SETUP](SETUP.md#rebuild-the-section-index)).
+2. Build the section index at `build/index-v4-sections` ([SETUP](SETUP.md#rebuild-the-section-index)).
 3. Download BGE-M3 at revision `5617a9f61b028005a4858fdac845db406aefb181`, keeping `pytorch_model.bin`. `prepare` checks the weights' SHA-256 against the index before it runs.
 
    ```python
@@ -43,7 +43,7 @@ Then spawn one Claude Code subagent with `model: haiku` and `effort: high`. It r
 python tools/local_answer.py release --out build/local_answers/usb_rain
 ```
 
-For a follow-up, pass `--history <file>` with `[{"question": ..., "response": ...}]` for the earlier turns. When nothing is retrieved, `prepare` prints the fixed message and support route itself and no draft is needed. A bad draft is a `SYSTEM_ERROR (GATE_<code>)`; do not edit it or retry, because the runtime makes one attempt.
+For a follow-up, pass `--history <file>` with `[{"question": ..., "response": ...}]` for the earlier turns. When nothing is retrieved, or the best reranker score is below the relevance floor, `prepare` prints `NO_MODEL_CALL` with the fixed message and support route, and no draft is needed. A bad draft is a `SYSTEM_ERROR (GATE_<code>)`; do not edit it or retry, because the runtime makes one attempt.
 
 ## Example run (25 October 2026, local)
 
@@ -58,4 +58,4 @@ It included 3 warnings and marked 8 not applicable, each with a reason. The rain
 
 ## Running a set of questions
 
-For a batch, prepare one folder per question, run one subagent per folder (isolated, so no answer sees another), then release each. To score a batch against canonical answers, follow the [v3 evaluation](../evals/20261025_answer_release_v3/README.md). Its inputs, drafts, gate results and judgments show the format, and new runs belong in `evals/<date>_<name>/`. The 30 existing questions are development cases; a claim about quality needs new held-out questions.
+For a batch, prepare one folder per question, run one subagent per folder (isolated, so no answer sees another), then release each. [evals/20261025_heldout_v1/run_heldout.py](../evals/20261025_heldout_v1/run_heldout.py) does this for a question file, including follow-ups prepared from the first turn's released text. Its [README](../evals/20261025_heldout_v1/README.md) also shows blind judging and scoring. New runs belong in `evals/<date>_<name>/`. The 30 development questions and the 33 held-out questions have both been seen; a new quality claim needs new questions.

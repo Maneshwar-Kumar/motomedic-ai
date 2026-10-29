@@ -1,29 +1,34 @@
 # Status
 
-As of 25 October 2026. The section-template answer path is the only answer path, merged to `main` and frozen as [serving manifest v11.1](../releases/serving_manifest_v11_1.json). It is **not deployed**. Experiments run locally, with Claude Code as the generator ([EXPERIMENTS](EXPERIMENTS.md)). The owner's decisions are in the [decision log](DECISIONS.md).
+As of 25 October 2026. The section-template answer path is the only answer path, frozen as [serving manifest v11.2](../releases/serving_manifest_v11_2.json) after the quality round ([decision v6](../releases/owner_decision_v6.json)). It is **not deployed**. Experiments run locally, with Claude Code as the generator ([EXPERIMENTS](EXPERIMENTS.md)). The owner's decisions are in the [decision log](DECISIONS.md).
 
 ## Built and frozen
 
 | Item | State |
 | --- | --- |
-| Answer path | Five stages, wired in [section_questions.py](../cloud/grounded_generation/section_questions.py):<br>- [section index](../cloud/grounded_generation/section_index.py) `index_a609ca61c635641e0a22dc48`;<br>- [top-5 retrieval](../cloud/grounded_generation/section_retrieval.py);<br>- [plain-text sections](../cloud/grounded_generation/section_assembly.py);<br>- [one Haiku call](../cloud/grounded_generation/haiku_answer.py) at effort high;<br>- the [deterministic gate](../cloud/grounded_generation/template_answer.py).<br><br>Draft-then-verify, the review gate and the availability fallback are deleted (their code is in Git history and [archive/](../archive/README.md)). |
+| Answer path | Five stages, wired in [section_questions.py](../cloud/grounded_generation/section_questions.py):<br>- [section index](../cloud/grounded_generation/section_index.py) `index_f768fbb216836c003701079e`;<br>- [top-5 retrieval](../cloud/grounded_generation/section_retrieval.py) with a relevance floor;<br>- [plain-text sections](../cloud/grounded_generation/section_assembly.py);<br>- [one Haiku call](../cloud/grounded_generation/haiku_answer.py) at effort high;<br>- the [deterministic gate](../cloud/grounded_generation/template_answer.py) `template-answer-v5`.<br><br>Draft-then-verify, the review gate and the availability fallback are deleted (their code is in Git history and [archive/](../archive/README.md)). |
+| Quality round (25 October) | Four changes went into the path:<br>- the gate leaves out a policy, watchout or disclaimer sentence that only repeats an earlier section;<br>- internal labels in rider text fail closed, and meta phrases are reworded;<br>- a subsection split from its parent inherits the parent's warnings;<br>- a relevance floor of −9.0 skips the model call.<br><br>Haiku at default effort was retested as a comparison arm. The [measurements](../evals/20261025_quality_round_v1/README.md) and the [held-out test](../evals/20261025_heldout_v1/README.md) give the details. |
 | Token ceiling | Removed from [admission](../cloud/grounded_generation/whole_turn_admission.py) on 25 October. Reserved tokens are still counted, but they no longer limit a turn. The 100-attempt allocation, the shared Haiku USD1 ledger, the rolling event limits, 61-second pacing and each call's native window still apply. |
-| Frozen release | [v11.1](../releases/serving_manifest_v11_1.json) binds 81 inputs: serving code, UI, workflows, the manual and its manifest, the owner decisions and the evaluation. It pins the section index identity and authorizes no deployment. The previous [v11](../releases/serving_manifest_v11.json) is kept byte for byte. |
-| Section index | Built from the cached Docling parse at `build/index-v3-sections` (not in Git):<br>- 154 sections and 532 chunks;<br>- 121 WARNING/CAUTION/NOTE boxes attached to their sections;<br>- 116 page-break continuations rejoined;<br>- 145 of 149 pages covered, with page 103 flagged as a parse gap.<br><br>It is not published as a release asset and not uploaded to hosted Qdrant; [SETUP](SETUP.md) shows how to rebuild it. |
-| Tests | About 135 backend and 77 UI provider-free tests pass, locally and in [CI](../.github/workflows/ci.yml). They use a synthetic index, a fake model transport, a fake ledger and an in-memory Firestore. |
-| Real-index checks | [Parity](../evals/20261025_answer_release_v3/serving_parity.json): the serving modules reproduce the v3 run's 30 model inputs and 90 gate outcomes, with no model calls. A [local Claude Code run](EXPERIMENTS.md#example-run-25-october-2026-local) of a new question released a cited SAFETY_STOP. |
+| Frozen release | [v11.2](../releases/serving_manifest_v11_2.json) binds serving code, UI, workflows, the manual and its manifest, the owner decisions v3–v6 and the held-out evaluation. It pins the section index identity and authorizes no deployment. The previous [v11.1](../releases/serving_manifest_v11_1.json) and [v11](../releases/serving_manifest_v11.json) are kept byte for byte. |
+| Section index | Built from the cached Docling parse at `build/index-v4-sections` (not in Git):<br>- 154 sections and 532 chunks;<br>- 121 WARNING/CAUTION/NOTE boxes attached to their sections;<br>- 116 page-break continuations rejoined;<br>- 2 related-warning links;<br>- 145 of 149 pages covered, with page 103 flagged as a parse gap.<br><br>Its chunks, BM25 postings and embeddings are byte-identical to the previous index. It is not published as a release asset and not uploaded to hosted Qdrant; [SETUP](SETUP.md) shows how to rebuild it. |
+| Tests | About 145 backend and 77 UI provider-free tests pass, locally and in [CI](../.github/workflows/ci.yml). They use a synthetic index, a fake model transport, a fake ledger and an in-memory Firestore. |
+| Real-index checks | [Parity](../evals/20261025_answer_release_v3/serving_parity.json): on the previous index, the serving modules reproduce the v3 run's 30 model inputs and 90 gate outcomes, with no model calls. On the current index only GEN004's input differs: it now carries the luggage warnings. |
 
-## Evaluation (local, agent-scored; not hosted or human acceptance)
+## Evaluation (local, agent-judged; not hosted or human acceptance)
 
-The [section answer path v3](../evals/20261025_answer_release_v3/README.md) ran 30 questions with isolated Claude Code subagents as generators. All 19 answerable questions had every gold object inside the sections sent. The median model input was 5,261 characters.
+The [held-out test](../evals/20261025_heldout_v1/README.md) ran 33 new questions, written by a separate subagent, through the quality-round path. A blind subagent judged the answers.
 
-| Arm | Released | Correct | Unfaithful cited items | Internal wording |
-| --- | --- | --- | --- | --- |
-| Haiku, default effort | 24 | 24 | 0 of 62 | 1 |
-| **Haiku, high effort** (runtime) | **30** | **30** | 0 of 65 | 2 |
-| Sonnet | 29 | 28 | 0 of 44 | 1 |
+| Arm | Released | Correct | Partial | Wrong | Refused | Unfaithful cited items | Required warnings shown |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Haiku, effort high** (runtime) | 32 | **21** | 8 | 2 | 1 | 1 of 123 | 22 / 24 |
+| Haiku, default effort | 33 | 21 | 9 | 2 | 1 | 0 of 129 | 20 / 24 |
 
-The default-effort arm missed the 27/30 bar on structural slips. The owner accepted the high-effort arm ([v4](../evals/20261025_answer_release_v3/owner_decision_v4.json)), so the runtime uses effort high; its hosted latency and cost are unmeasured.
+On the 30 development questions ([v3](../evals/20261025_answer_release_v3/README.md)) Haiku at high effort was 30/30 correct. New questions show what that number hid:
+- **Retrieval misses.** 6 shortfalls came from facts in a second place in the manual that the 5 chunks did not reach.
+- **Facts left out.** About 6 came from facts that were sent but left out or misread.
+- **Gate failures.** 2 came from the gate.
+
+Default effort matched high effort on correctness and had no schema slips. The runtime stays at effort high; a change needs an owner decision.
 
 ## Hosted state
 
@@ -36,9 +41,9 @@ The default-effort arm missed the 27/30 bar on structural slips. The owner accep
 
 ## Known limits
 
+- **Retrieval reaches one place.** All reference pages reached the model for only 13 of 29 answerable held-out questions. Menu paths, fluid grades and the trailer warning sit in a second section.
+- **"The manual does not give X" can be false.** The model sees five chunks but speaks about the whole manual. Every wrong held-out answer (H05 in both arms, H12 and H17 in one each) is a false claim of this kind.
 - **The gate checks form, not meaning.** It checks structure, citations, numbers and warning decisions. A non-numeric claim in an uncited disclaimer passes.
-- **Restatement.** The same fact often appears in both `answer` and `policy` or `watchouts`, as in the local example.
-- **Internal wording.** Phrases such as "sections supplied" reached 2 of 30 answers.
-- **Warnings outside the retrieved sections.** A warning printed in another section reaches the model only if that section is retrieved.
-- **The no-retrieval path never fires in practice,** because dense search always returns 5 chunks; abstention comes from the model routing UNSUPPORTED.
-- **No held-out evidence.** The 30 questions are development cases, and no hosted run of v11.1 exists.
+- **The relevance floor is inert at −9.0.** It refused nothing on the held-out questions, either rightly or wrongly. Abstention comes from the model routing UNSUPPORTED.
+- **Related warnings are untested in use.** No held-out question retrieved a linked subsection without its parent.
+- **No hosted run of v11.2 exists,** and the held-out questions have now been seen.

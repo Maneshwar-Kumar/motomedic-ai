@@ -16,7 +16,7 @@ Direct public mode uses `MOTOMEDIC_RIDER_ACCESS=public_gateway` and `MOTOMEDIC_E
 The client accepts only:
 - runtime policy `open-manual-section-template-v1`;
 - the manual SHA `cf221a29…7e80da89`;
-- index `index_a609ca61c635641e0a22dc48`;
+- index `index_f768fbb216836c003701079e`;
 - a catalogue reporting `streaming: SAVED_RELEASE_STREAM`.
 
 Saved views from earlier runtimes are rejected before display or continuation. The UI displays released paraphrases and page references only, never the PDF, excerpts or figure crops. Photo and voice stay disabled.

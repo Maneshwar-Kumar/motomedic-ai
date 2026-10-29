@@ -25,9 +25,10 @@ if str(ROOT) not in sys.path:
 from tools.check_installed_serving_release import (ARCHITECTURE, OWNER_DECISIONS, EVALUATION, SCHEMA,
     INDEX, MANUAL_SHA, BASE_IMAGE, UI_BASE_IMAGE, confined, digest, validate_policy)
 
-CURRENT = 'releases/serving_manifest_v11_1.json'
+CURRENT = 'releases/serving_manifest_v11_2.json'
 MANUAL = 'source/royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf'
-PREVIOUS = {'releases/serving_manifest_v11.json': 'aaea45999d2297c56910b2a701795a75fe20766e2574d7d74d632885cea6f32d'}
+PREVIOUS = {'releases/serving_manifest_v11.json': 'aaea45999d2297c56910b2a701795a75fe20766e2574d7d74d632885cea6f32d',
+            'releases/serving_manifest_v11_1.json': 'bf56799a2a94037c5ee38dba0fc2f7924bc270071573edf404bee103aac4eae5'}
 HISTORY_LAYOUT_COMMIT = '7c412369f055b4d0ee747501e6b026f5987d1564'
 SERVING_FOLDERS = ('cloud/arm_a', 'cloud/common', 'cloud/grounded_generation', 'rider_ui')
 NAMED_INPUTS = ('ingest/online_ingest.py', 'source/source_manifest.json', MANUAL,
@@ -35,7 +36,8 @@ NAMED_INPUTS = ('ingest/online_ingest.py', 'source/source_manifest.json', MANUAL
     'tools/serving_release.py', 'tools/test_serving_release.py', 'tools/check_repository_structure.py',
     'tools/check_installed_serving_release.py', 'tools/test_check_installed_serving_release.py',
     'tools/resolve_container_base.py', 'tools/provision_evaluator_secret_hosted.py',
-    *OWNER_DECISIONS, EVALUATION, 'evals/20261025_answer_release_v3/README.md')
+    *OWNER_DECISIONS, EVALUATION, 'evals/20261025_answer_release_v3/README.md',
+    'evals/20261025_heldout_v1/README.md')
 
 
 def dump(path, value, *, exclusive=True):

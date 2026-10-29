@@ -1,0 +1,32 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "For solo riding, the manual gives 32 psi (2.24 kg/cm2) for the front tyre.",
+      "evidence_ids": ["E6", "E21"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Inflate the tyres to the correct air pressure.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Running under-inflated tyres may make them overheat and get damaged, and may cause injury to the rider.",
+      "evidence_ids": ["E7"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "Warns that under-inflated tyres can overheat, be damaged and injure the rider."},
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Covers replacement tyre specification, not pressure."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "Continues the tyre specification warning, not about pressure."},
+    {"display_id": "E34", "decision": "NOT_APPLICABLE", "reason": "Covers loading and accessories, not tyre pressure."},
+    {"display_id": "E35", "decision": "NOT_APPLICABLE", "reason": "Covers genuine accessories, not tyre pressure."},
+    {"display_id": "E36", "decision": "NOT_APPLICABLE", "reason": "Covers nonstandard front forks and parts, not tyre pressure."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Continues the nonstandard parts warning, not about tyre pressure."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Covers model and design specifications, not tyre pressure."}
+  ]
+}

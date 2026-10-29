@@ -1,0 +1,32 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "Place the motorcycle upright on a firm, level surface.", "evidence_ids": ["E3"]},
+    {"text": "Check that the brake fluid reservoir is horizontal.", "evidence_ids": ["E1", "E2"]},
+    {"text": "Front brake: the fluid level should be at the center of the window, which the manual treats as the minimum level.", "evidence_ids": ["E1"]},
+    {"text": "Rear brake: the fluid level should be between the MAX and Min marks.", "evidence_ids": ["E2"]},
+    {"text": "Clean the filler cap before removing it, and use only DOT 4 brake fluid from a sealed container.", "evidence_ids": ["E6"]},
+    {"text": "Refill with the same type of brake fluid, which is DOT 4.", "evidence_ids": ["E8"]}
+  ],
+  "policy": [
+    {"text": "Use only the brake fluid the manual specifies, because other fluids can cause the rubber seals to deteriorate and leak.", "evidence_ids": ["E7"]},
+    {"text": "Keep water and dust out of the brake fluid reservoir when refilling.", "evidence_ids": ["E9"]}
+  ],
+  "watchouts": [
+    {"text": "Brake fluid is highly corrosive and can damage painted parts. Clean any spill immediately with a soft cloth, preferably wet.", "evidence_ids": ["E4"]},
+    {"text": "Do not let brake fluid touch your skin, eyes or clothing.", "evidence_ids": ["E14"]},
+    {"text": "An insufficient brake fluid level will cause the brake system to fail.", "evidence_ids": ["E10"]},
+    {"text": "Do not mix DOT 4 with other brake fluid.", "evidence_ids": ["E5"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E4", "decision": "INCLUDED", "reason": "Corrosive spill warning matters when topping up."},
+    {"display_id": "E5", "decision": "INCLUDED", "reason": "Warns against mixing fluids when topping up."},
+    {"display_id": "E10", "decision": "INCLUDED", "reason": "Low fluid level can cause brake failure, relevant to the level check."},
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Concerns fluid age, not checking or topping up."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Concerns the maintenance schedule, not asked."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "General storage warning, not about checking or topping up."},
+    {"display_id": "E14", "decision": "INCLUDED", "reason": "Skin, eye and clothing contact warning applies when topping up."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Repeats the spill warning already included as E4."}
+  ]
+}

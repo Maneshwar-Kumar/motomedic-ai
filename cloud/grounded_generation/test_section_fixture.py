@@ -1,7 +1,8 @@
 """SYNTHETIC TEST FIXTURE (no tests here): a tiny section index with the real file layout. Not manual content.
 
-Three sections: RUNNING IN (two lines), CHARGER PORT (a line, a WARNING box and a NOTE box) and
-SPECIFICATIONS (a two-row table). Vectors are keyword features, so dense ranking is predictable.
+Five sections: RUNNING IN (two lines), CHARGER PORT (a line, a WARNING box and a NOTE box),
+SPECIFICATIONS (a two-row table), and FUEL TANK CAP (a line and a WARNING) followed by its split-off
+subsection FUEL FILLING LEVEL, which inherits that warning as a related warning. Vectors are keyword features, so dense ranking is predictable.
 """
 import hashlib
 import json
@@ -10,6 +11,7 @@ from pathlib import Path
 # Loaded at import: tests that patch sys.modules must not first import NumPy inside the patch.
 import numpy as np
 from ingest.online_ingest import build_bm25
+from cloud.grounded_generation.section_index import link_related_warnings
 from rider_ui.client import INDEX_ID, MANUAL_SHA
 
 TOPICS = (('running', 'engine', 'rpm', 'throttle', 'km'), ('charger', 'port', 'usb', 'rain', 'cap'),
@@ -21,6 +23,10 @@ SECTIONS = (
                           ('text', 'Do not use the charger port in rain or while washing the motorcycle.', 'WARNING'),
                           ('text', 'Close the charger port cap after use.', 'NOTE')]),
     ('SPECIFICATIONS', 140, [('table', [('Compression ratio', '11.5:1'), ('Bore', '84 mm')], None)]),
+    # A parent with a warning and the subsection Docling split from it (related warnings).
+    ('FUEL TANK CAP', 27, [('text', 'Open the fuel tank cap with the ignition key.', None),
+                           ('text', 'Do not overfill the fuel tank.', 'WARNING')]),
+    ('FUEL FILLING LEVEL', 28, [('text', 'Fill fuel only till the bottom of the anti splash plate.', None)]),
 )
 
 
@@ -80,6 +86,7 @@ def build(root):
             section['evidence_ids'].append(eid)
             section['box_of'][eid] = box
         sections.append(section)
+    link_related_warnings(sections)
     for name, rows in (('chunks.jsonl', chunks), ('sections.jsonl', sections), ('evidence.jsonl', evidence),
                        ('pages.jsonl', [])):
         (root / name).write_text(''.join(json.dumps(r) + '\n' for r in rows), encoding='utf-8')

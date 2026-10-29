@@ -1,0 +1,43 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "With a pillion on board, the manual gives 32 psi for the rear tyre.",
+      "evidence_ids": ["E2"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not load weight or install accessories incorrectly. Doing so may affect the motorcycle's stability, handling characteristics and safe operation and could result in an accident causing serious injury or loss of life.",
+      "evidence_ids": ["E23"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E23",
+      "decision": "INCLUDED",
+      "reason": "Carrying a pillion adds load; the warning covers loading weight correctly."
+    },
+    {
+      "display_id": "E24",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Describes genuine accessories, not tyre pressure or pillion load."
+    },
+    {
+      "display_id": "E25",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns nonstandard front forks and altered parts."
+    },
+    {
+      "display_id": "E26",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Continues E25 on altering original parts."
+    },
+    {
+      "display_id": "E27",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns model and design specifications, not tyre pressure."
+    }
+  ]
+}

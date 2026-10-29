@@ -21,7 +21,7 @@ The command needs Python with `sentence-transformers` and NumPy. It also needs a
    python tools/local_answer.py prepare --question "<question>" --out build/local_answers/<name> [--history build/local_answers/<name>/history.json]
    ```
 
-   If it prints `NO_MODEL_CALL`, nothing was retrieved. Report the fixed message and support route it printed, and stop.
+   If it prints `NO_MODEL_CALL`, nothing relevant was retrieved (no lines, or the best reranker score was below the relevance floor). Report the fixed message and support route it printed, and stop.
 2. Spawn exactly one subagent with `model: haiku` and `effort: high` (the runtime's effort). Pass it the absolute folder path and this prompt:
 
    > You are the answer generator for MotoMedic. Work only in this folder: `<absolute folder>`.
@@ -44,6 +44,6 @@ The command needs Python with `sentence-transformers` and NumPy. It also needs a
    - the pages and the support route;
    - the warning decisions.
 
-   A `SYSTEM_ERROR (GATE_...)` line is a gate failure; report its code.
+   A `SYSTEM_ERROR (GATE_...)` line is a gate failure; report its code. A `SCHEMA ERRORS` line means the draft broke the answer schema, which the API would have refused at generation; report it too.
 
 Label the result as a local Claude Code run, not a hosted or API answer.

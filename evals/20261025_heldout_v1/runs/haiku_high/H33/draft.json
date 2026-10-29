@@ -1,0 +1,21 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "The manual recommends shifting down from 3rd to 2nd at 25 km/h.", "evidence_ids": ["E5"]}
+  ],
+  "policy": [
+    {"text": "During deceleration, disengage the clutch completely, shift the gear, and engage the clutch gradually (not too slowly).", "evidence_ids": ["E3"]}
+  ],
+  "watchouts": [
+    {"text": "Releasing the clutch abruptly without enough throttle can cause a rough start and stall the engine.", "evidence_ids": ["E6"]},
+    {"text": "If you are accelerating hard and release the clutch abruptly, the motorcycle can move suddenly, leading to loss of control, an accident, injury or loss of life, and damage to the motorcycle.", "evidence_ids": ["E7"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E6", "decision": "INCLUDED", "reason": "Abrupt clutch release with insufficient throttle causes a rough start and stall, which applies to the shift."},
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "Abrupt clutch release during hard acceleration can make the motorcycle move suddenly; applies if downshifting under acceleration."},
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Generic clutch caution with no specific consequence for this downshift."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "Continuation of the generic caution in E8; adds nothing specific."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "The answer already gives the recommended down shift speed."}
+  ]
+}

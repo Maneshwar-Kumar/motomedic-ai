@@ -12,12 +12,13 @@ import sys
 SCHEMA = 'motomedic-serving-release-v11'
 ARCHITECTURE = 'SECTION_TOP5_SINGLE_CALL_TEMPLATE_GATE'
 MANUAL_SHA = 'cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89'
-INDEX = 'index_a609ca61c635641e0a22dc48'
-# The design (v3), the integration bar (v4) and the token-ceiling removal and layout (v5).
+INDEX = 'index_f768fbb216836c003701079e'
+# The design (v3), the integration bar (v4), the token-ceiling removal and layout (v5) and the
+# quality round (v6).
 OWNER_DECISIONS = ('evals/20261025_answer_release_v3/owner_decision_v3.json',
                    'evals/20261025_answer_release_v3/owner_decision_v4.json',
-                   'releases/owner_decision_v5.json')
-EVALUATION = 'evals/20261025_answer_release_v3/comparison.json'
+                   'releases/owner_decision_v5.json', 'releases/owner_decision_v6.json')
+EVALUATION = 'evals/20261025_heldout_v1/comparison.json'
 BASE_IMAGE = 'us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/arm-a@sha256:a8946299f34177aeda76cadbbd7fce0a33c5fd8f574438d823281ee78eb045e4'
 UI_BASE_IMAGE = 'docker.io/library/python@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1'
 ACCEPTANCE = {'runtime_quality': 'HOSTED_REAL_MODEL_RUN_REQUIRED',

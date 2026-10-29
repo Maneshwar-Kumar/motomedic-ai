@@ -1,0 +1,178 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "When the motorcycle falls over with the engine running and the gears engaged, the roll over sensor disables the fuel systems and switches the engine OFF. To reset it, first make sure the motorcycle is upright and on its center stand. Make sure the gears are in neutral and the neutral lamp is glowing in the instrument console. Switch OFF both the ignition and the stop switches, wait a few seconds, then switch both back ON. To start the engine, pull in the clutch lever and hold it, then push and hold the electric start switch until the engine starts, for a maximum of 5 seconds. Watch out: If the malfunction indicator does not turn OFF after the engine starts, have the motorcycle checked at a Royal Enfield Authorised Service Centre.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_d55c89c874343898c01f8c86",
+   "pages": [
+    68
+   ]
+  },
+  {
+   "label": "E2",
+   "evidence_id": "evidence_74d1420c8cc627cd3bad5187",
+   "pages": [
+    68
+   ]
+  },
+  {
+   "label": "E3",
+   "evidence_id": "evidence_a190ffe4c326d969345887b7",
+   "pages": [
+    68
+   ]
+  },
+  {
+   "label": "E4",
+   "evidence_id": "evidence_a6731e9ee9f7e4f534f0f447",
+   "pages": [
+    68
+   ]
+  },
+  {
+   "label": "E5",
+   "evidence_id": "evidence_5c5167d58aed6b39fababe88",
+   "pages": [
+    68
+   ]
+  },
+  {
+   "label": "E36",
+   "evidence_id": "evidence_86fc55f5643415ada60288dc",
+   "pages": [
+    73
+   ]
+  },
+  {
+   "label": "E38",
+   "evidence_id": "evidence_017a78d6fdfd30389967f3c9",
+   "pages": [
+    73
+   ]
+  },
+  {
+   "label": "E39",
+   "evidence_id": "evidence_b4e9c215783dd876443da7ac",
+   "pages": [
+    73
+   ]
+  }
+ ],
+ "cited_pages": [
+  68,
+  73
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "When the motorcycle falls over with the engine running and the gears engaged, the roll over sensor disables the fuel systems and switches the engine OFF.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "To reset it, first make sure the motorcycle is upright and on its center stand.",
+    "evidence_ids": [
+     "E2",
+     "E3"
+    ]
+   },
+   {
+    "text": "Make sure the gears are in neutral and the neutral lamp is glowing in the instrument console.",
+    "evidence_ids": [
+     "E4"
+    ]
+   },
+   {
+    "text": "Switch OFF both the ignition and the stop switches, wait a few seconds, then switch both back ON.",
+    "evidence_ids": [
+     "E5"
+    ]
+   },
+   {
+    "text": "To start the engine, pull in the clutch lever and hold it, then push and hold the electric start switch until the engine starts, for a maximum of 5 seconds.",
+    "evidence_ids": [
+     "E38",
+     "E39"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "If the malfunction indicator does not turn OFF after the engine starts, have the motorcycle checked at a Royal Enfield Authorised Service Centre.",
+    "evidence_ids": [
+     "E36"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E11",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Hot radiator cap warning belongs to coolant work, not the sensor reset."
+  },
+  {
+   "display_id": "E12",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Coolant work warning, not part of the sensor reset."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Coolant filling warning, not part of the sensor reset."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Air bleeding warning belongs to coolant work, not the sensor reset."
+  },
+  {
+   "display_id": "E28",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Coolant disposal warning does not apply to this question."
+  },
+  {
+   "display_id": "E36",
+   "decision": "INCLUDED",
+   "reason": "After a fall and restart, a malfunction indicator that stays on needs a service centre check."
+  },
+  {
+   "display_id": "E37",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Low fuel warning is not part of the sensor reset the rider asked about."
+  },
+  {
+   "display_id": "E38",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Its clutch instruction is already given in the answer."
+  },
+  {
+   "display_id": "E39",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Its 5-second limit is already given in the answer."
+  }
+ ],
+ "excluded_watchouts": [
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E28",
+  "E37",
+  "E38",
+  "E39"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

@@ -1,0 +1,98 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The manual recommends shifting up from 2nd to 3rd gear at 30 km/h. Watch out: If the clutch is released abruptly at high acceleration, the motorcycle can move suddenly and the rider can lose control, which can lead to an accident, injury or loss of life to the rider or others, and damage to the motorcycle. Watch out: If the clutch is released abruptly without enough throttle, the motorcycle can have a rough start and the engine can stall.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E4",
+   "evidence_id": "evidence_dcbc10d0837791aed3da51c3",
+   "pages": [
+    76
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_d8ef5c61174ef2c328a86280",
+   "pages": [
+    77
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_1919a71d56aa79aab9c06d31",
+   "pages": [
+    77
+   ]
+  }
+ ],
+ "cited_pages": [
+  76,
+  77
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual recommends shifting up from 2nd to 3rd gear at 30 km/h.",
+    "evidence_ids": [
+     "E4"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "If the clutch is released abruptly at high acceleration, the motorcycle can move suddenly and the rider can lose control, which can lead to an accident, injury or loss of life to the rider or others, and damage to the motorcycle.",
+    "evidence_ids": [
+     "E7"
+    ]
+   },
+   {
+    "text": "If the clutch is released abruptly without enough throttle, the motorcycle can have a rough start and the engine can stall.",
+    "evidence_ids": [
+     "E6"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E6",
+   "decision": "INCLUDED",
+   "reason": "Abrupt clutch release with too little throttle can stall the engine during a shift."
+  },
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "Abrupt clutch release at high acceleration can cause loss of control."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General caution that adds nothing beyond the specific clutch warnings."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Continuation of the general caution; adds no specific warning."
+  },
+  {
+   "display_id": "E10",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Repeats the recommended speed already given in the answer."
+  }
+ ],
+ "excluded_watchouts": [
+  "E8",
+  "E9",
+  "E10"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

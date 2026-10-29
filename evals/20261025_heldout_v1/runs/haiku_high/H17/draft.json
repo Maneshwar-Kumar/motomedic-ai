@@ -1,0 +1,67 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "Keep the bike in a straight position on level ground.",
+      "evidence_ids": ["E7"]
+    },
+    {
+      "text": "Do not fill the coolant while the bike is on its side stand.",
+      "evidence_ids": ["E24"]
+    },
+    {
+      "text": "Remove the radiator expansion tank cap and fill the tank to the upper level line, then replace the cap.",
+      "evidence_ids": ["E15", "E16"]
+    },
+    {
+      "text": "Coolant from Total is ready to use and does not need mixing.",
+      "evidence_ids": ["E25"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not open the radiator pressure cap while the engine is hot. The released pressure can make the coolant boil and spurt out, causing severe burns.",
+      "evidence_ids": ["E6"]
+    },
+    {
+      "text": "Do not spill coolant. Avoid skin or body contact with it, and wash any affected area promptly with soap and water.",
+      "evidence_ids": ["E23"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not give a coolant specification and does not say whether other coolants are suitable."
+    },
+    {
+      "text": "The manual does not give a volume or capacity for topping up."
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E6",
+      "decision": "INCLUDED",
+      "reason": "Warns against opening the radiator cap while the engine is hot."
+    },
+    {
+      "display_id": "E7",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Its level-ground instruction is given as an answer step, not as a watchout."
+    },
+    {
+      "display_id": "E8",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Radiator refill after draining; the answer covers the expansion tank top-up."
+    },
+    {
+      "display_id": "E9",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Air bleeding follows a full refill after draining, not an expansion tank top-up."
+    },
+    {
+      "display_id": "E23",
+      "decision": "INCLUDED",
+      "reason": "Warns about spilled coolant and skin contact with it."
+    }
+  ]
+}

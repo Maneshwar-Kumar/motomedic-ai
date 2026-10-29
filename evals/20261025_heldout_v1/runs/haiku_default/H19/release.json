@@ -1,0 +1,226 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "Place the motorcycle upright on a firm, level surface. Check that the brake fluid reservoir is horizontal. Front brake: the fluid level should be at the center of the window, which the manual treats as the minimum level. Rear brake: the fluid level should be between the MAX and Min marks. Clean the filler cap before removing it, and use only DOT 4 brake fluid from a sealed container. Refill with the same type of brake fluid, which is DOT 4. Use only the brake fluid the manual specifies, because other fluids can cause the rubber seals to deteriorate and leak. Keep water and dust out of the brake fluid reservoir when refilling. Watch out: Brake fluid is highly corrosive and can damage painted parts. Clean any spill immediately with a soft cloth, preferably wet. Watch out: Do not let brake fluid touch your skin, eyes or clothing. Watch out: An insufficient brake fluid level will cause the brake system to fail. Watch out: Do not mix DOT 4 with other brake fluid.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_91ac5ade2895a493bbab1583",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E2",
+   "evidence_id": "evidence_bab06f99aa13ab1578a152a0",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E3",
+   "evidence_id": "evidence_636a0212b65da61d01bc5ff0",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E4",
+   "evidence_id": "evidence_d6ae12d562fda72cd97f73d7",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E5",
+   "evidence_id": "evidence_fdd616b47465a42cfd4f1c01",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_08219b37f69e88ba51ab8ad4",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_fc08bdc40ab26a9700db87e5",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E8",
+   "evidence_id": "evidence_16d0fa8780452cdc8c063917",
+   "pages": [
+    88
+   ]
+  },
+  {
+   "label": "E9",
+   "evidence_id": "evidence_8e1dfabe9f50a1a1b6d184cf",
+   "pages": [
+    89
+   ]
+  },
+  {
+   "label": "E10",
+   "evidence_id": "evidence_83a88ebb31e7e605c31f08e4",
+   "pages": [
+    89
+   ]
+  },
+  {
+   "label": "E14",
+   "evidence_id": "evidence_436176ca24953c494cf78f03",
+   "pages": [
+    89
+   ]
+  }
+ ],
+ "cited_pages": [
+  88,
+  89
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Place the motorcycle upright on a firm, level surface.",
+    "evidence_ids": [
+     "E3"
+    ]
+   },
+   {
+    "text": "Check that the brake fluid reservoir is horizontal.",
+    "evidence_ids": [
+     "E1",
+     "E2"
+    ]
+   },
+   {
+    "text": "Front brake: the fluid level should be at the center of the window, which the manual treats as the minimum level.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "Rear brake: the fluid level should be between the MAX and Min marks.",
+    "evidence_ids": [
+     "E2"
+    ]
+   },
+   {
+    "text": "Clean the filler cap before removing it, and use only DOT 4 brake fluid from a sealed container.",
+    "evidence_ids": [
+     "E6"
+    ]
+   },
+   {
+    "text": "Refill with the same type of brake fluid, which is DOT 4.",
+    "evidence_ids": [
+     "E8"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "Use only the brake fluid the manual specifies, because other fluids can cause the rubber seals to deteriorate and leak.",
+    "evidence_ids": [
+     "E7"
+    ]
+   },
+   {
+    "text": "Keep water and dust out of the brake fluid reservoir when refilling.",
+    "evidence_ids": [
+     "E9"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Brake fluid is highly corrosive and can damage painted parts. Clean any spill immediately with a soft cloth, preferably wet.",
+    "evidence_ids": [
+     "E4"
+    ]
+   },
+   {
+    "text": "Do not let brake fluid touch your skin, eyes or clothing.",
+    "evidence_ids": [
+     "E14"
+    ]
+   },
+   {
+    "text": "An insufficient brake fluid level will cause the brake system to fail.",
+    "evidence_ids": [
+     "E10"
+    ]
+   },
+   {
+    "text": "Do not mix DOT 4 with other brake fluid.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E4",
+   "decision": "INCLUDED",
+   "reason": "Corrosive spill warning matters when topping up."
+  },
+  {
+   "display_id": "E5",
+   "decision": "INCLUDED",
+   "reason": "Warns against mixing fluids when topping up."
+  },
+  {
+   "display_id": "E10",
+   "decision": "INCLUDED",
+   "reason": "Low fluid level can cause brake failure, relevant to the level check."
+  },
+  {
+   "display_id": "E11",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns fluid age, not checking or topping up."
+  },
+  {
+   "display_id": "E12",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns the maintenance schedule, not asked."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General storage warning, not about checking or topping up."
+  },
+  {
+   "display_id": "E14",
+   "decision": "INCLUDED",
+   "reason": "Skin, eye and clothing contact warning applies when topping up."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Repeats the spill warning already included as E4."
+  }
+ ],
+ "excluded_watchouts": [
+  "E11",
+  "E12",
+  "E13",
+  "E15"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

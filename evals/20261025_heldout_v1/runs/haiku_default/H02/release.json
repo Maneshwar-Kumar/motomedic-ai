@@ -1,0 +1,122 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The fuel tank holds 17.0 litres. The low fuel warning comes on when about 3 litres (± 0.5 litres) is left in the tank. Watch out: If the last bar of the fuel gauge in the cluster blinks continuously, re-fuel immediately.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E5",
+   "evidence_id": "evidence_3f8de8466049af12783de7d0",
+   "pages": [
+    18
+   ]
+  },
+  {
+   "label": "E24",
+   "evidence_id": "evidence_272bd86a27fe5489e66a4af6",
+   "pages": [
+    73
+   ]
+  }
+ ],
+ "cited_pages": [
+  18,
+  73
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The fuel tank holds 17.0 litres.",
+    "evidence_ids": [
+     "E5"
+    ]
+   },
+   {
+    "text": "The low fuel warning comes on when about 3 litres (± 0.5 litres) is left in the tank.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "If the last bar of the fuel gauge in the cluster blinks continuously, re-fuel immediately.",
+    "evidence_ids": [
+     "E24"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E10",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Overfilling is not part of the capacity or low fuel question."
+  },
+  {
+   "display_id": "E11",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Filling limit is not part of the capacity or low fuel question."
+  },
+  {
+   "display_id": "E12",
+   "decision": "NOT_APPLICABLE",
+   "reason": "EVAP damage from overfilling is not asked about."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Refuelling vapour safety is not asked about."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Fuel spillage on paint is not asked about."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Smoking while refuelling is not asked about."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Malfunction indicator after starting is unrelated to fuel level."
+  },
+  {
+   "display_id": "E24",
+   "decision": "INCLUDED",
+   "reason": "Cites the fuel gauge low-level indicator and the immediate re-fuel instruction, which the low fuel question concerns."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Clutch engagement for starting is unrelated to fuel level."
+  },
+  {
+   "display_id": "E26",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Starter switch timing is unrelated to fuel level."
+  }
+ ],
+ "excluded_watchouts": [
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E23",
+  "E25",
+  "E26"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

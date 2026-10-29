@@ -1,0 +1,100 @@
+{
+ "version": "template-answer-v4",
+ "route": "UNSUPPORTED",
+ "coverage": "NONE",
+ "text": "The manual gives no torque value for the front wheel spindle; it says only to tighten the spindle bolt firmly on the left side. The 25 Nm torque in the manual is for the fork clamp bolt on the left side, not for the spindle. Watch out: Take utmost care when reassembling the front wheel and make sure it is fitted correctly before you ride. If it is not, the motorcycle may not perform correctly and may cause an accident, injury or loss of life. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+ "escalation_uri": "mailto:support@royalenfield.com",
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E31",
+   "evidence_id": "evidence_b2f76da9245364a30f3315e9",
+   "pages": [
+    94
+   ]
+  },
+  {
+   "label": "E32",
+   "evidence_id": "evidence_f04725541eb2c3601fbe4b50",
+   "pages": [
+    94
+   ]
+  },
+  {
+   "label": "E35",
+   "evidence_id": "evidence_6fd119632e2756349a404170",
+   "pages": [
+    95
+   ]
+  },
+  {
+   "label": "E36",
+   "evidence_id": "evidence_763b8850f305572426506119",
+   "pages": [
+    95
+   ]
+  },
+  {
+   "label": "E37",
+   "evidence_id": "evidence_64a50582d55561b4034b8e3a",
+   "pages": [
+    95
+   ]
+  }
+ ],
+ "cited_pages": [
+  94,
+  95
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual gives no torque value for the front wheel spindle; it says only to tighten the spindle bolt firmly on the left side.",
+    "evidence_ids": [
+     "E31"
+    ]
+   },
+   {
+    "text": "The 25 Nm torque in the manual is for the fork clamp bolt on the left side, not for the spindle.",
+    "evidence_ids": [
+     "E32"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Take utmost care when reassembling the front wheel and make sure it is fitted correctly before you ride. If it is not, the motorcycle may not perform correctly and may cause an accident, injury or loss of life.",
+    "evidence_ids": [
+     "E35",
+     "E36",
+     "E37"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E35",
+   "decision": "INCLUDED",
+   "reason": "The watchout covers taking utmost care when reassembling the front wheel."
+  },
+  {
+   "display_id": "E36",
+   "decision": "INCLUDED",
+   "reason": "The watchout covers fitting the wheel correctly before riding."
+  },
+  {
+   "display_id": "E37",
+   "decision": "INCLUDED",
+   "reason": "The watchout gives the consequences of a wheel that is not fitted correctly."
+  }
+ ],
+ "excluded_watchouts": [],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

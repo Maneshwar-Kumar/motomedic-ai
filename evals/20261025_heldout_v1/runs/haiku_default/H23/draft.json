@@ -1,0 +1,48 @@
+{
+  "route": "SAFETY_STOP",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "No. Do not keep riding with the ABS lamp on continuously above 5 km/h.",
+      "evidence_ids": ["E2"]
+    },
+    {
+      "text": "The manual recommends not driving the motorcycle while the ABS lamp stays on at higher speeds, and having the brake system inspected and corrected at an Authorised Royal Enfield Service Centre.",
+      "evidence_ids": ["E8"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The ABS lamp should turn off once the motorcycle reaches 5 km/h, and it lights up again when there is an ABS malfunction.",
+      "evidence_ids": ["E1"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "If the brake system is repaired, use only spare parts that Royal Enfield has approved for the brake system.",
+      "evidence_ids": ["E17"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not say how long the ABS lamp can stay on before it must be checked."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E2", "decision": "NOT_APPLICABLE", "reason": "Already stated in the answer."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "General riding advice, not about the lamp."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Cornering advice, not asked."},
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Stopping distance advice, not asked."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Cluster function does not change the answer."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Braking technique, not asked."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "General accident warning, not specific to the lamp."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Parts for ABS operation, not about waiting to check."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Suspension travel, not related."},
+    {"display_id": "E17", "decision": "INCLUDED", "reason": "Adds a warning about parts if the brake system is repaired."},
+    {"display_id": "E18", "decision": "NOT_APPLICABLE", "reason": "Braking distance with ABS, not about the lamp."},
+    {"display_id": "E19", "decision": "NOT_APPLICABLE", "reason": "Toner ring inspection, not asked."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Toner ring inspection, not asked."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Toner ring inspection, not asked."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Wheel speed sensor check, not asked."}
+  ]
+}

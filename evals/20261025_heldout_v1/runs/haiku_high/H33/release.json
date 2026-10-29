@@ -1,0 +1,112 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The manual recommends shifting down from 3rd to 2nd at 25 km/h. During deceleration, disengage the clutch completely, shift the gear, and engage the clutch gradually (not too slowly). Watch out: Releasing the clutch abruptly without enough throttle can cause a rough start and stall the engine. Watch out: If you are accelerating hard and release the clutch abruptly, the motorcycle can move suddenly, leading to loss of control, an accident, injury or loss of life, and damage to the motorcycle.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E3",
+   "evidence_id": "evidence_311f5873869017c7bef07579",
+   "pages": [
+    76
+   ]
+  },
+  {
+   "label": "E5",
+   "evidence_id": "evidence_2cc123175704ec55a1145e1c",
+   "pages": [
+    76
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_d8ef5c61174ef2c328a86280",
+   "pages": [
+    77
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_1919a71d56aa79aab9c06d31",
+   "pages": [
+    77
+   ]
+  }
+ ],
+ "cited_pages": [
+  76,
+  77
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual recommends shifting down from 3rd to 2nd at 25 km/h.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "During deceleration, disengage the clutch completely, shift the gear, and engage the clutch gradually (not too slowly).",
+    "evidence_ids": [
+     "E3"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Releasing the clutch abruptly without enough throttle can cause a rough start and stall the engine.",
+    "evidence_ids": [
+     "E6"
+    ]
+   },
+   {
+    "text": "If you are accelerating hard and release the clutch abruptly, the motorcycle can move suddenly, leading to loss of control, an accident, injury or loss of life, and damage to the motorcycle.",
+    "evidence_ids": [
+     "E7"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E6",
+   "decision": "INCLUDED",
+   "reason": "Abrupt clutch release with insufficient throttle causes a rough start and stall, which applies to the shift."
+  },
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "Abrupt clutch release during hard acceleration can make the motorcycle move suddenly; applies if downshifting under acceleration."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Generic clutch caution with no specific consequence for this downshift."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Continuation of the generic caution in E8; adds nothing specific."
+  },
+  {
+   "display_id": "E10",
+   "decision": "NOT_APPLICABLE",
+   "reason": "The answer already gives the recommended down shift speed."
+  }
+ ],
+ "excluded_watchouts": [
+  "E8",
+  "E9",
+  "E10"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

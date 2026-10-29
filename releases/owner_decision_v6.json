@@ -1,0 +1,21 @@
+{
+  "schema": "motomedic-owner-decision-v1",
+  "recorded_at_utc": "2026-10-25T18:00:00Z",
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "extends": "owner_decision_v5.json",
+  "owner_message": "implement suggestions 2,3,4,5,6. Then Test on new questions. Then update the documentation accordingly. Show me the outcome of the new tested questions",
+  "decisions": {
+    "repetition": "IMPLEMENTED: a prompt rule (state each fact once; a watchout must add a warning the answer does not give) and a gate composition step (v5) that leaves out a policy, watchout or disclaimer item of 5+ content words when at most 20% of them are new against a kept item of an earlier section; its citations still count. Gate v4 also compared answer items with each other and, on the held-out test, dropped a battery refit step that reversed the removal step; v5 never drops answer items. The fix was made after seeing held-out output, so its held-out effect is reported as post-hoc",
+    "internal_wording": "IMPLEMENTED: label and field leaks ([E12], 'line E12', watchout_review, display_id, prompt headings) fail closed as INTERNAL_LABEL_IN_RIDER_TEXT; meta phrases such as 'the supplied sections' are rewritten to 'the parts of the manual I checked' instead of rejected, because rejecting them turned correct development answers into errors",
+    "warnings_outside_retrieved_sections": "MEASURED_THEN_IMPLEMENTED_NARROWLY: chapter-wide attachment was measured and adds nothing (chapter-title sections rarely hold warnings); instead, at index build, a subsection Docling split from its parent inherits the parent's WARNING/CAUTION boxes (2 links on this manual); the gate still requires a decision for each",
+    "haiku_default_effort": "RETESTED_AS_A_COMPARISON_ARM_ON_THE_HELD_OUT_QUESTIONS: the runtime stays at effort high (owner decision v4); changing it needs a new owner decision",
+    "relevance_floor": "IMPLEMENTED_AT_-9.0: when the best cross-encoder score of the five retrieved chunks is below -9.0, the turn sends the fixed fallback and support route with no model call; calibrated on development questions only (lowest answerable -7.95), checked for false refusals on the held-out questions without retuning",
+    "held_out_questions": "33 questions written by an independent subagent from the manual text, frozen before any run (evals/20261025_heldout_v1/questions.json); not used to tune prompts, retrieval or the floor; one gate fix (the v5 repeat rule) followed a held-out failure and its effect is reported as post-hoc. The set has now been seen, so a later quality claim needs new questions",
+    "section_index": "REBUILT: the related-warning links change the section file and so the index ID; chunks, search text and embeddings follow the same rules as before"
+  },
+  "review_layer": "NONE",
+  "deployment_authorized": false,
+  "billing_restart_authorized": false,
+  "gcp_changes": false,
+  "human_signoff": false
+}

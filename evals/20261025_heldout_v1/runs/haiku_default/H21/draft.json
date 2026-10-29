@@ -1,0 +1,58 @@
+{
+  "route": "SAFETY_STOP",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "No. Do not bridge the blown fuse with wire or foil.",
+      "evidence_ids": ["E8", "E6"]
+    },
+    {
+      "text": "Jumpering a defective fuse gives rise to the risk of a short-circuit and fire.",
+      "evidence_ids": ["E8"]
+    },
+    {
+      "text": "Replace the defective fuse with a new fuse of the same rating.",
+      "evidence_ids": ["E8"]
+    },
+    {
+      "text": "Fuses of another rating or other conductive materials will damage the complete electrical system.",
+      "evidence_ids": ["E6"]
+    },
+    {
+      "text": "The manual lists spare fuses SF1 (5 A, yellow), SF2 (10 A, red) and SF3 (15 A, blue).",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Get the electrical system checked and the faults corrected immediately after any fuse failure, as repeated fuse failure may follow.",
+      "evidence_ids": ["E5"]
+    },
+    {
+      "text": "Replace any spare fuse you use in the holder at the earliest opportunity.",
+      "evidence_ids": ["E7"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E5",
+      "decision": "INCLUDED",
+      "reason": "Adds the check of the electrical system after a fuse failure, which the answer does not give."
+    },
+    {
+      "display_id": "E6",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Its content is already stated in the answer."
+    },
+    {
+      "display_id": "E7",
+      "decision": "INCLUDED",
+      "reason": "Adds the duty to replace a spare fuse that is used."
+    },
+    {
+      "display_id": "E8",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Its content is already stated in the answer."
+    }
+  ]
+}

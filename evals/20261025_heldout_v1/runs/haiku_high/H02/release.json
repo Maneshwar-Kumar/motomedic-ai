@@ -1,0 +1,122 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The fuel tank capacity is 17.0 L. The manual gives the low fuel warning as 3 L ± 0.5 L, so about 3 litres is left in the tank when it comes on. Watch out: If the last bar of the fuel level indicator in the cluster blinks continuously, the fuel is low and you should re-fuel immediately.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E5",
+   "evidence_id": "evidence_3f8de8466049af12783de7d0",
+   "pages": [
+    18
+   ]
+  },
+  {
+   "label": "E24",
+   "evidence_id": "evidence_272bd86a27fe5489e66a4af6",
+   "pages": [
+    73
+   ]
+  }
+ ],
+ "cited_pages": [
+  18,
+  73
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The fuel tank capacity is 17.0 L.",
+    "evidence_ids": [
+     "E5"
+    ]
+   },
+   {
+    "text": "The manual gives the low fuel warning as 3 L ± 0.5 L, so about 3 litres is left in the tank when it comes on.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "If the last bar of the fuel level indicator in the cluster blinks continuously, the fuel is low and you should re-fuel immediately.",
+    "evidence_ids": [
+     "E24"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E10",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Overfilling advice; the rider did not ask about filling."
+  },
+  {
+   "display_id": "E11",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Fill level advice for refuelling; not about the low fuel warning."
+  },
+  {
+   "display_id": "E12",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Overfilling damage; not asked."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Refuelling vapour safety; not asked."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Paint staining from spills; not asked."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Smoking while refuelling; not asked."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Malfunction indicator; not the fuel warning."
+  },
+  {
+   "display_id": "E24",
+   "decision": "INCLUDED",
+   "reason": "Blinking last bar means low fuel and immediate refuelling; cited in the watchout."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Clutch use when starting; not asked."
+  },
+  {
+   "display_id": "E26",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Starter switch use; not asked."
+  }
+ ],
+ "excluded_watchouts": [
+  "E10",
+  "E11",
+  "E12",
+  "E13",
+  "E14",
+  "E15",
+  "E23",
+  "E25",
+  "E26"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

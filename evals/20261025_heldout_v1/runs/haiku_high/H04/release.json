@@ -1,0 +1,77 @@
+{
+ "version": "template-answer-v4",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "The manual gives the low beam headlamp wattage as 12.12 W. The manual gives 14.22 W for high beam and low beam together. Watch out: Bulbs or electrical gadgets rated other than the manual specifies can overload the electrical system, cause erratic behavior or fail early. The manual does not give a wattage for the high beam alone.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E14",
+   "evidence_id": "evidence_e5038680f235054234151f44",
+   "pages": [
+    19
+   ]
+  },
+  {
+   "label": "E22",
+   "evidence_id": "evidence_da497f5f0bbf1c24b8f93714",
+   "pages": [
+    19
+   ]
+  }
+ ],
+ "cited_pages": [
+  19
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual gives the low beam headlamp wattage as 12.12 W.",
+    "evidence_ids": [
+     "E14"
+    ]
+   },
+   {
+    "text": "The manual gives 14.22 W for high beam and low beam together.",
+    "evidence_ids": [
+     "E14"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Bulbs or electrical gadgets rated other than the manual specifies can overload the electrical system, cause erratic behavior or fail early.",
+    "evidence_ids": [
+     "E22"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a wattage for the high beam alone."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E22",
+   "decision": "INCLUDED",
+   "reason": "Warns about bulbs rated other than specified, which bears on lamp wattage."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers unapproved modifications and warranty, not wattage."
+  }
+ ],
+ "excluded_watchouts": [
+  "E23"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}
