@@ -50,6 +50,7 @@ class ScriptedQuestions:
     index_lock = property(lambda self: self.real.index_lock)
     runtime_lock = property(lambda self: self.real.runtime_lock)
     generate = property(lambda self: self.real.generate)
+    telemetry = property(lambda self: self.real.telemetry)
 
     def new_session(self):
         return self.real.new_session()
@@ -63,14 +64,16 @@ class ScriptedQuestions:
     def fail_generation(self, code='CLAUDE_HTTP_529'):
         self.real.generate.failure = code
 
-    def answer(self, session, query, *, history=(), progress=None, operation_id=None):
+    def answer(self, session, query, *, history=(), progress=None, operation_id=None, trace_id=None):
         self.calls += 1
+        self.trace_id = trace_id
         def staged(stage):
             progress(stage)
             self.reached[stage].set()
             if not self.proceed[stage].wait(5):
                 raise RuntimeError('Test stage blocked: ' + stage)
-        return self.real.answer(session, query, history=history, progress=staged, operation_id=operation_id)
+        return self.real.answer(session, query, history=history, progress=staged, operation_id=operation_id,
+                                trace_id=trace_id)
 
     def release(self):
         for event in self.proceed.values():

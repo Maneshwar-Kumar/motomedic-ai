@@ -38,9 +38,24 @@ The tests use:
 
 They exercise the full API → worker → saved stream → UI parser path. They do not test live Qdrant or Firestore, paid Haiku behavior, factual answers or latency.
 
+## Download the section index
+
+The index the release pins is published as the GitHub release asset [index-f768fbb216836c003701079e](https://github.com/Maneshwar-Kumar/motomedic-ai/releases/tag/index-f768fbb216836c003701079e). It is 171,958,550 bytes, SHA-256 `010ba0488f06394cb3440fcde5efe2b5e1a01d661845bf99a0f5dc166b86102d`; [the receipt](../releases/section_index_asset_v1.json) lists every file's hash. Treat it as untrusted data and extract it into its own empty directory:
+
+```sh
+mkdir -p build/downloads
+gh release download index-f768fbb216836c003701079e --dir build/downloads
+sha256sum build/downloads/section_index_f768fbb216836c003701079e.tar.gz
+python -c "import tarfile; tarfile.open('build/downloads/section_index_f768fbb216836c003701079e.tar.gz').extractall('build/index-download', filter='data')"
+mv build/index-download/section-index build/index-v4-sections
+python -c "import json; from cloud.grounded_generation import section_index as si; m = json.load(open('releases/serving_manifest_v11_3.json')); print(si.verify('build/index-v4-sections', m['index'])['index_id'])"
+```
+
+The last command prints `index_f768fbb216836c003701079e` or fails closed. On Windows, GNU tar reads `C:` as a remote host; the Python extraction above avoids that.
+
 ## Rebuild the section index
 
-The section index is derived from the cached Docling parse inside the public base-index snapshot. Nothing is re-parsed.
+To rebuild instead of downloading: the section index is derived from the cached Docling parse inside the public base-index snapshot. Nothing is re-parsed.
 
 1. **Download and check the snapshot.** It is 181,153,632 bytes, SHA-256 `4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc`. Treat it as untrusted data and extract it into its own empty directory.
 
@@ -62,7 +77,7 @@ The section index is derived from the cached Docling parse inside the public bas
 4. **Compare with the frozen identity** (`index_f768fbb216836c003701079e`):
 
    ```sh
-   python -c "import json; from cloud.grounded_generation import section_index as si; m = json.load(open('releases/serving_manifest_v11_2.json')); print(si.verify('build/index-v4-sections', m['index'])['index_id'])"
+   python -c "import json; from cloud.grounded_generation import section_index as si; m = json.load(open('releases/serving_manifest_v11_3.json')); print(si.verify('build/index-v4-sections', m['index'])['index_id'])"
    ```
 
    The previous index `index_a609ca61c635641e0a22dc48` (v11.1) was built by the [v3 candidate script](../evals/20261025_answer_release_v3/candidate/section_index.py) into `build/index-v3-sections`. The current one adds the related-warning links; its chunks, BM25 postings and embeddings are byte-identical to the previous build.

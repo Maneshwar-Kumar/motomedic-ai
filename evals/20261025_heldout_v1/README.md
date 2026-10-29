@@ -109,6 +109,15 @@ Gate `template-answer-v5` never drops answer items. It compares a policy, watcho
 
 This fix was made after seeing held-out output, so its effect here is not held-out evidence.
 
+## Reproduced from main
+
+On 29 October the run was reproduced from a fresh clone of GitHub `main` at `7826cd7`, with no model calls ([reproduction_main_7826cd7.json](reproduction_main_7826cd7.json), [tools/reproduce_offline.py](../../tools/reproduce_offline.py)). The setup was:
+- a new Python 3.12.14 environment installed only from [tools/requirements-experiments.txt](../../tools/requirements-experiments.txt);
+- the section index downloaded from its [GitHub release](https://github.com/Maneshwar-Kumar/motomedic-ai/releases/tag/index-f768fbb216836c003701079e);
+- BGE-M3 at the pinned revision, checked by weights hash.
+
+For all 66 turns, retrieval, the section text, the model input, the answer schema and the system prompt were identical to the saved files byte for byte. The best reranker scores were identical too. The gate gave the saved result on 65 of 66; the exception is H18 (default effort), the documented v5 fix above. The original run used Python 3.14.7, so the result does not depend on that interpreter. Both runs were on Windows. The [reproduce-offline workflow](../../.github/workflows/reproduce-offline.yml) repeats the check on GitHub's Linux runners.
+
 ## Limits
 
 - **Agent judgment.** One Claude Code subagent judged the answers. It is not human review or independent factual acceptance.

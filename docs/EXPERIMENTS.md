@@ -17,8 +17,8 @@ One difference matters when you read results. The API call enforces the JSON sch
 
 ## Setup
 
-1. Use Python 3.12 or newer with NumPy and `sentence-transformers==6.1.0` (CPU PyTorch is enough).
-2. Build the section index at `build/index-v4-sections` ([SETUP](SETUP.md#rebuild-the-section-index)).
+1. Use Python 3.12 and the pinned packages: `python -m pip install -r tools/requirements-experiments.txt --extra-index-url https://download.pytorch.org/whl/cpu`. This is the setup the held-out test was [reproduced](../evals/20261025_heldout_v1/README.md#reproduced-from-main) in.
+2. Download the section index to `build/index-v4-sections` ([SETUP](SETUP.md#download-the-section-index)), or rebuild it.
 3. Download BGE-M3 at revision `5617a9f61b028005a4858fdac845db406aefb181`, keeping `pytorch_model.bin`. `prepare` checks the weights' SHA-256 against the index before it runs.
 
    ```python
@@ -55,6 +55,10 @@ The question "Can I charge my phone from the USB port while riding in the rain?"
 > ROUTE: SAFETY_STOP — The manual recommends not using the USB charging port in rainy conditions. This is to avoid damage to your smartphone and the charger. The USB charger works only when the engine is running. Only mobile phones may be charged, and only one at a time. Watch out: The manual recommends against using the USB port in rainy conditions to avoid damage to your smartphone and the charger. Watch out: Do not leave the USB port cap open or partly closed when the port is not in use, to avoid a short circuit. Watch out: Keep the USB port cap closed and locked properly when not in use; the warranty does not apply if the cap is damaged and not sealed properly. The manual gives no rain rating for the USB port. It only recommends not using it in rainy conditions. (Pages 64, 65)
 
 It included 3 warnings and marked 8 not applicable, each with a reason. The rain point is said twice, once as an answer sentence and once as a watchout; that is the known restatement weakness ([TODO](TODO.md)).
+
+## Regression runs
+
+A prompt, model, index, retrieval or assembly change ships only after the [regression set](../evals/regression/README.md) passes with it. Use [tools/regression.py](../tools/regression.py): `prepare`, one subagent per folder, `release`, the follow-ups, then `score`. Point `CURRENT` at the new run and freeze. CI checks the receipt on every push.
 
 ## Running a set of questions
 

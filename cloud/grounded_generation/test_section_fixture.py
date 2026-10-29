@@ -95,7 +95,7 @@ def build(root):
     names = ('chunks.jsonl', 'sections.jsonl', 'embeddings.npy', 'bm25.json', 'evidence.jsonl', 'pages.jsonl')
     manifest = {'index_id': INDEX_ID, 'source_sha256': MANUAL_SHA, 'label': 'SYNTHETIC_TEST_FIXTURE',
                 'embedding': {'model': 'synthetic-keyword-features', 'dimensions': 4},
-                'sectioning': {'version': 'section-index-v1'}, 'file_sha256': {n: _sha(root / n) for n in names},
+                'sectioning': {'version': 'section-index-v2'}, 'file_sha256': {n: _sha(root / n) for n in names},
                 'qa': {'chunks': len(chunks), 'sections': len(sections)}}
     (root / 'manifest.json').write_text(json.dumps(manifest, indent=1) + '\n', encoding='utf-8')
     return root

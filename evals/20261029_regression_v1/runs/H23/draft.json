@@ -1,0 +1,46 @@
+{
+  "route": "SAFETY_STOP",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "No. The manual says not to ride the motorcycle if the ABS lamp stays on continuously above 5 km/h.",
+      "evidence_ids": ["E2", "E8"]
+    },
+    {
+      "text": "Take the motorcycle to the nearest Authorised Royal Enfield Service Centre to have the brake system inspected.",
+      "evidence_ids": ["E3", "E8"]
+    },
+    {
+      "text": "The ABS lamp should turn off once the speed passes 5 km/h, and it lights up again when the ABS has a malfunction.",
+      "evidence_ids": ["E1", "E7"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Failing to follow the ABS cautions can cause an accident, serious injuries or loss of life.",
+      "evidence_ids": ["E14"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual gives no time frame for waiting before the brake system is inspected."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E2", "decision": "NOT_APPLICABLE", "reason": "Its stop instruction is already the first answer sentence, so it is not repeated as a watchout."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "General ABS riding advice; the question is about the lamp."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Cornering caution; not related to the lamp."},
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Stopping distance advice; not related to the lamp."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Cluster function is general; the answer already directs the rider to inspection."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Two-brake application advice; not asked."},
+    {"display_id": "E14", "decision": "INCLUDED", "reason": "States the accident and injury risk of not following the ABS cautions, which the answer does not give."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Approved tyre and sprocket rule; the question does not concern parts."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Suspension rule; not related to the lamp."},
+    {"display_id": "E17", "decision": "NOT_APPLICABLE", "reason": "Approved brake spare parts rule; the question does not concern parts."},
+    {"display_id": "E18", "decision": "NOT_APPLICABLE", "reason": "Braking distance note; not about the lamp."},
+    {"display_id": "E19", "decision": "NOT_APPLICABLE", "reason": "Tone ring tooth check is a separate inspection; the lamp instruction is the service centre visit."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Tooth damage check is a separate inspection; not asked."},
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Damaged tone ring advice; the answer already directs the rider to a service centre."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Wheel speed sensor debris check; not asked and not the lamp instruction."}
+  ]
+}

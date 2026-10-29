@@ -1,0 +1,41 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "The manual does not give a compression test pressure for this engine.",
+      "evidence_ids": []
+    },
+    {
+      "text": "The manual's 11.5:1 figure is the compression ratio, not a test pressure.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E31",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Clutch release caution; does not concern a compression test."
+    },
+    {
+      "display_id": "E32",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Clutch release and acceleration caution; does not concern a compression test."
+    },
+    {
+      "display_id": "E33",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Clutch release caution; does not concern a compression test."
+    },
+    {
+      "display_id": "E34",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Riding caution continuation; does not concern a compression test."
+    },
+    {
+      "display_id": "E35",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Shift-speed caution; does not concern a compression test."
+    }
+  ]
+}

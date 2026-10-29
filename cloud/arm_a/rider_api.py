@@ -9,7 +9,7 @@ import json
 import os
 import re
 
-from flask import jsonify, request
+from flask import g, jsonify, request
 from cloud.arm_a.visitor import verify
 from cloud.arm_a.store import Limited, OperationConflict
 from cloud.common.session import SessionConflict
@@ -20,6 +20,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
     source = questions.source
 
     def error(route, code, status, terminal=True):
+        g.error_code = code
         return jsonify({'type':route, 'error':code, 'technical_content':False,
                         'operation_terminal':terminal}), status
 
@@ -207,7 +208,7 @@ def install(app, questions, state_factory, visitor_secret, network_required=Fals
                 return error('SYSTEM_ERROR','DURABLE_DISPATCH_UNCONFIGURED',503)
             from cloud.arm_a.durable_dispatch import make_work
             work = make_work(session, query, (old or {}).get('conversation', []),
-                old['version'] if old else None, questions)
+                old['version'] if old else None, questions, trace_id=g.get('trace_id'))
             prior = store.begin(key,digest,work=work)
             if prior:
                 if prior['state']=='COMPLETE':

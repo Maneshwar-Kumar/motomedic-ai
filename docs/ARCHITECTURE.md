@@ -6,7 +6,7 @@ MotoMedic answers questions about the selected Himalayan BS6 owner's manual:
 - one Haiku `claude-haiku-5-5` call that fills the answer template;
 - a deterministic release gate.
 
-There is no review layer and no verifier. The worker saves the released answer before the API streams or recovers that same buffer. The path is frozen as [serving manifest v11.2](../releases/serving_manifest_v11_2.json) and is **not deployed**; see [status](STATUS.md). Until it is, experiments run the same code locally with a Claude Code subagent as the generator ([EXPERIMENTS](EXPERIMENTS.md)).
+There is no review layer and no verifier. The worker saves the released answer before the API streams or recovers that same buffer. The path is frozen as [serving manifest v11.3](../releases/serving_manifest_v11_3.json) and is **not deployed**; see [status](STATUS.md). Until it is, experiments run the same code locally with a Claude Code subagent as the generator ([EXPERIMENTS](EXPERIMENTS.md)).
 
 ## What runs where
 
@@ -15,7 +15,7 @@ The design targets Google Cloud project `motomedic-ai-20261009`, region `us-cent
 ```mermaid
 flowchart TB
     GIT[GitHub: code, manual, evaluations and frozen manifests]
-    CI[GitHub Actions: provider-free contract and UI tests]
+    CI[GitHub Actions: provider-free tests and the answer-quality regression gate]
     GIT --> CI
 
     subgraph OFFLINE[Offline, once per index version]
@@ -61,6 +61,7 @@ flowchart TB
 | Retrieval | BGE-M3 query vector and BM25 run on the worker CPU, with RRF top 5, conditional reranking and a relevance floor. Dense search uses hosted Qdrant when `MOTOMEDIC_QDRANT_URL` is set, or exact search over the same pinned vectors. | [section_retrieval.py](../cloud/grounded_generation/section_retrieval.py) |
 | Model input and gate | Plain labelled sections, the system prompt, the native answer schema and the deterministic gate. | [section_assembly.py](../cloud/grounded_generation/section_assembly.py), [template_answer.py](../cloud/grounded_generation/template_answer.py) |
 | Generation | One reserved Haiku call, with the system prompt cached for 5 minutes. | [haiku_answer.py](../cloud/grounded_generation/haiku_answer.py) |
+| Telemetry | Allowlisted structured logs and spans for each turn, worker run and request, correlated by trace id, with no rider text ([privacy](PRIVACY.md)). | [telemetry.py](../cloud/common/telemetry.py) |
 | Durable state and ledgers | Sessions, operations, fenced leases, saved views, visitor quotas, the 100-attempt allocation and the Haiku money reservations. Tokens are counted but have no ceiling. | [store.py](../cloud/arm_a/store.py), [whole_turn_admission.py](../cloud/grounded_generation/whole_turn_admission.py) |
 
 ## One rider turn
@@ -77,17 +78,18 @@ flowchart TB
 
    UNSUPPORTED shows any cited facts, then the fixed fallback and support route.
 7. **Failure.** A gate failure, malformed output, quota, outage or integrity failure is SYSTEM_ERROR. Nothing is retried, and an uncertain paid call is never replayed.
-8. **Commit and delivery.** The view is bound to the operation and runtime, validated and committed in one Firestore transaction. The API then streams slices of the saved text, and recovery returns the same saved view.
+8. **Observation.** The worker logs one `answer_turn` event and its stage spans: retrieval hits, gate outcome, failure reason, tokens and timings. It never logs the question or answer text.
+9. **Commit and delivery.** The view is bound to the operation and runtime, validated and committed in one Firestore transaction. The API then streams slices of the saved text, and recovery returns the same saved view.
 
 SUPPORTED includes complete and explicitly partial answers. AMBIGUOUS, UNSUPPORTED, SAFETY_STOP and SYSTEM_ERROR stay distinct. The gate checks structure, citations, numbers and warning decisions, not meaning; a released answer is not independent factual proof.
 
 ## Build, test and release boundaries
 
-[GitHub Actions](../.github/workflows/ci.yml) first runs the repository structure check and the v11.2 frozen-input check, comparing against the committed blobs. It then runs the provider-free unit tests and the UI tests. It requests no provider secret and does not establish hosted answer quality.
+[GitHub Actions](../.github/workflows/ci.yml) first runs the repository structure check and the v11.3 frozen-input check, comparing against the committed blobs. It then runs the provider-free unit tests, the UI tests and the [answer-quality regression gate](../evals/regression/README.md). The gate re-gates and rescores the saved baseline run, and fails when a prompt, model, index, retrieval or assembly change has no new passing run. It requests no provider secret and does not establish hosted answer quality.
 
-[serving_release.py](../tools/serving_release.py) freezes and verifies the serving manifest (currently v11.2). Inside an image, [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index at `build/section-index`. The [Dockerfile](../cloud/arm_a/Dockerfile) runs that check during the build.
+[serving_release.py](../tools/serving_release.py) freezes and verifies the serving manifest (currently v11.3). A freeze is refused unless the regression receipt passes. Inside an image, [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index at `build/section-index`. The [Dockerfile](../cloud/arm_a/Dockerfile) runs that check during the build.
 
-Preparing a v11.2 build context is a later owner-scoped step. So are the hosted build, deployment and any Qdrant collection for the new index. A release record must name the Ready revisions, configuration, traffic, the source, index, runtime and image bindings, rollback and restore.
+Preparing a v11.3 build context is a later owner-scoped step. So are the hosted build, deployment and any Qdrant collection for the new index. A release record must name the Ready revisions, configuration, traffic, the source, index, runtime and image bindings, rollback and restore.
 
 ## Source and spending controls
 

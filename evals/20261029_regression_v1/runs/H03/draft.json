@@ -1,0 +1,18 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "Use 10W40 API SN, JASO MA2 semi synthetic engine oil.", "evidence_ids": ["E1"]},
+    {"text": "For an oil change with a new oil filter, the refill is 2.1 L.", "evidence_ids": ["E1"]}
+  ],
+  "watchouts": [
+    {"text": "Using the wrong oil grade reduces the life of the moving parts and can seriously affect performance.", "evidence_ids": ["E5"]}
+  ],
+  "disclaimers": [
+    {"text": "The 2.4 L figure is the first dry fill, not the oil-change amount.", "evidence_ids": ["E1"]},
+    {"text": "The manual says these values are approximate and the actual capacity will vary.", "evidence_ids": ["E4"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "INCLUDED", "reason": "The wrong-grade caution applies to the oil grade the rider asked about."}
+  ]
+}

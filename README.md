@@ -11,10 +11,10 @@ MotoMedic is a text assistant that answers rider questions about one document: t
 
 | Item | State |
 | --- | --- |
-| Answer path | Implemented and tested without a provider; frozen as [serving manifest v11.2](releases/serving_manifest_v11_2.json) on `main`. |
+| Answer path | Implemented and tested without a provider; frozen as [serving manifest v11.3](releases/serving_manifest_v11_3.json) on `main`. No prompt, model or index change ships without passing the [answer-quality regression gate](evals/regression/README.md). |
 | Hosted service | **Not deployed.** The Google Cloud project's billing is disabled, so the hosted services are offline. Deploying needs a new owner decision. |
 | Experiments | Run here, in Claude Code. [`tools/local_answer.py`](tools/local_answer.py) runs the real retrieval and gate on the real index. A Claude Code Haiku subagent writes the answer instead of the paid API ([how](docs/EXPERIMENTS.md)). |
-| Evidence | Local runs in which Claude Code subagents were the generators and the answers were agent-judged. On 30 development questions, Haiku at high effort answered 30/30 correctly ([v3](evals/20261025_answer_release_v3/README.md)). On 33 new held-out questions, it answered 21/33 correctly, 8 partially and 2 wrongly ([held-out test](evals/20261025_heldout_v1/README.md)). This is not hosted or human acceptance. |
+| Evidence | Local runs in which Claude Code subagents were the generators and the answers were agent-judged. On 30 development questions, Haiku at high effort answered 30/30 correctly ([v3](evals/20261025_answer_release_v3/README.md)). On 33 new held-out questions, it answered 21/33 correctly, 8 partially and 2 wrongly ([held-out test](evals/20261025_heldout_v1/README.md)). On the 63-question regression set it passes 48 ([baseline](evals/20261029_regression_v1/README.md)). This is not hosted or human acceptance. |
 
 ## How an answer is produced
 
@@ -60,12 +60,12 @@ flowchart LR
 
 | Folder | What it holds |
 | --- | --- |
-| [docs/](docs/) | [Review guide](docs/REVIEW_GUIDE.md), [architecture](docs/ARCHITECTURE.md), [product](docs/PRD.md) and [technical](docs/TRD.md) requirements, [status](docs/STATUS.md), [setup](docs/SETUP.md), [local experiments](docs/EXPERIMENTS.md), [decision log](docs/DECISIONS.md), [TODO](docs/TODO.md) |
+| [docs/](docs/) | [Review guide](docs/REVIEW_GUIDE.md), [architecture](docs/ARCHITECTURE.md), [product](docs/PRD.md) and [technical](docs/TRD.md) requirements, [status](docs/STATUS.md), [setup](docs/SETUP.md), [local experiments](docs/EXPERIMENTS.md), [privacy and retention](docs/PRIVACY.md), [decision log](docs/DECISIONS.md), [TODO](docs/TODO.md) |
 | [source/](source/README.md) | The 149-page manual, its source manifest and the graph links used by ingestion |
 | [ingest/](ingest/README.md) | The base ingestion job (Docling parse, chunks, embeddings) whose parse the section index reuses |
 | [cloud/](cloud/README.md) | Serving code: [answer path](cloud/grounded_generation/), [API and worker](cloud/arm_a/), [shared types](cloud/common/), Qdrant wrapper, billing guard |
 | [rider_ui/](rider_ui/README.md) | Streamlit rider interface, public gateway and API client |
-| [tools/](tools/README.md) | Release freeze/verify, repository check and the local experiment tool |
+| [tools/](tools/README.md) | Release freeze/verify, repository check, the regression gate, offline reproduction and the local experiment tool |
 | [evals/](evals/README.md) | Answer-quality evaluations, newest last |
 | [releases/](releases/README.md) | Frozen serving manifests and the latest owner decision |
 | [archive/](archive/README.md) | History: earlier designs, review packages, receipts and retired code. Not used by the current path. |
@@ -75,7 +75,8 @@ flowchart LR
 ```sh
 git clone https://github.com/Maneshwar-Kumar/motomedic-ai.git && cd motomedic-ai
 python tools/check_repository_structure.py          # layout, links, manual hash, frozen inputs
-python tools/serving_release.py verify               # every serving input against manifest v11.2
+python tools/serving_release.py verify               # every serving input against manifest v11.3
+python tools/regression.py check                     # the answer-quality bar, on the saved baseline run
 ```
 
-The provider-free test suite (about 210 tests, all synthetic, no paid calls) is listed in [SETUP](docs/SETUP.md) and runs in [CI](.github/workflows/ci.yml). To ask your own question with a Claude Code generator, see [EXPERIMENTS](docs/EXPERIMENTS.md). Forking supplies no cloud or model credentials.
+The provider-free test suite (252 tests, all synthetic, no paid calls) is listed in [SETUP](docs/SETUP.md) and runs in [CI](.github/workflows/ci.yml). To ask your own question with a Claude Code generator, see [EXPERIMENTS](docs/EXPERIMENTS.md). Forking supplies no cloud or model credentials.

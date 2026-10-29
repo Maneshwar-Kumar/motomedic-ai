@@ -1,0 +1,47 @@
+{
+ "label": "OFFLINE_REPRODUCTION_NO_MODEL_CALLS",
+ "run": "evals/20261025_heldout_v1",
+ "index_id": "index_f768fbb216836c003701079e",
+ "code_root_commit": "7826cd7b7157fb42a5e3a2456e6927b3df275404",
+ "environment": {
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "packages": {
+   "numpy": "2.4.6",
+   "torch": "2.14.1+cpu",
+   "sentence-transformers": "6.1.0",
+   "transformers": "5.19.0",
+   "tokenizers": "0.23.2",
+   "huggingface_hub": "1.33.0",
+   "safetensors": "0.8.0",
+   "Flask": "3.1.2"
+  }
+ },
+ "max_cross_score_delta": 0.0,
+ "summary": {
+  "chunk_ids_match": "66/66",
+  "floor_match": "66/66",
+  "assembly_match": "66/66",
+  "model_input_match": "66/66",
+  "schema_match": "66/66",
+  "system_prompt_match": "66/66",
+  "gate_match": "65/66"
+ },
+ "mismatches": [
+  {
+   "arm": "haiku_default",
+   "id": "H18",
+   "chunk_ids_match": true,
+   "floor_match": true,
+   "cross_score_delta": 0.0,
+   "assembly_match": true,
+   "model_input_match": true,
+   "schema_match": true,
+   "system_prompt_match": true,
+   "gate_match": false,
+   "documented_gate_change": true
+  }
+ ],
+ "unexplained_mismatches": 0,
+ "reproduced": true
+}

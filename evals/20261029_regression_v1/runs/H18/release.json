@@ -1,0 +1,87 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "Disconnect the black negative (-ve) terminal first, then the red positive (+ve) terminal. When you reconnect the battery, connect the red positive (+ve) terminal first, then the black negative (-ve) terminal. Watch out: Keep both cables firmly connected to their battery terminals. If they are not, the motorcycle's electrical system may be damaged.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E8",
+   "evidence_id": "evidence_7c9ae62e3172702a1a3b13cd",
+   "pages": [
+    105
+   ]
+  },
+  {
+   "label": "E16",
+   "evidence_id": "evidence_fd9b2d785aff600ed5a45e2d",
+   "pages": [
+    107
+   ]
+  },
+  {
+   "label": "E17",
+   "evidence_id": "evidence_1ef48d8f41966dab4592fc8b",
+   "pages": [
+    107
+   ]
+  }
+ ],
+ "cited_pages": [
+  105,
+  107
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Disconnect the black negative (-ve) terminal first, then the red positive (+ve) terminal.",
+    "evidence_ids": [
+     "E8"
+    ]
+   },
+   {
+    "text": "When you reconnect the battery, connect the red positive (+ve) terminal first, then the black negative (-ve) terminal.",
+    "evidence_ids": [
+     "E16"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Keep both cables firmly connected to their battery terminals. If they are not, the motorcycle's electrical system may be damaged.",
+    "evidence_ids": [
+     "E17"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "The disconnect order is already the first answer sentence, so it is not repeated as a watchout."
+  },
+  {
+   "display_id": "E16",
+   "decision": "NOT_APPLICABLE",
+   "reason": "The reconnect order is already the second answer sentence, so it is not repeated as a watchout."
+  },
+  {
+   "display_id": "E17",
+   "decision": "INCLUDED",
+   "reason": "Adds the firm-connection caution and the risk of electrical damage, which the answer does not give."
+  }
+ ],
+ "excluded_watchouts": [
+  "E8",
+  "E16"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

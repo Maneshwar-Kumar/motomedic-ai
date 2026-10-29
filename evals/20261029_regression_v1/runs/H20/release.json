@@ -1,0 +1,135 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "Fill fuel only till the bottom of the anti splash plate, and do not overfill the fuel tank. Watch out: Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E5",
+   "evidence_id": "evidence_4e632b1b7a18bb739a61c9fd",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_5034a983959e52887c0072bf",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_a66e862d634c23573bb30c90",
+   "pages": [
+    27
+   ]
+  }
+ ],
+ "cited_pages": [
+  27
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Fill fuel only till the bottom of the anti splash plate, and do not overfill the fuel tank.",
+    "evidence_ids": [
+     "E5",
+     "E6"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system.",
+    "evidence_ids": [
+     "E7"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E5",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Already stated in the answer; not a separate watchout."
+  },
+  {
+   "display_id": "E6",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Fill level is already stated in the answer."
+  },
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "Consequence of overfilling for the evaporative emission system."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Fire safety while refuelling; the question is about fill level."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Spill staining on paint; not about fill level."
+  },
+  {
+   "display_id": "E10",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Smoking rule; not about fill level."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Engine oil grade; not relevant to fuel fill level."
+  },
+  {
+   "display_id": "E21",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Radiator cap warning for coolant work."
+  },
+  {
+   "display_id": "E22",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Vehicle position for coolant work."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Coolant filling warning; not fuel."
+  },
+  {
+   "display_id": "E24",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Coolant air bleeding; not fuel."
+  },
+  {
+   "display_id": "E38",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Coolant disposal; not fuel."
+  }
+ ],
+ "excluded_watchouts": [
+  "E5",
+  "E6",
+  "E8",
+  "E9",
+  "E10",
+  "E15",
+  "E21",
+  "E22",
+  "E23",
+  "E24",
+  "E38"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

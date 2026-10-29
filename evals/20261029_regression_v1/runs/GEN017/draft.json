@@ -1,0 +1,37 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "The USB charger port is rated 5 V, 2 A output.",
+      "evidence_ids": ["E8"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "If the current drawn is higher than 2.5 A, the USB charger shuts down, so check your phone's battery current rating before using it.",
+      "evidence_ids": ["E21"]
+    },
+    {
+      "text": "The USB charger works only while the engine is running.",
+      "evidence_ids": ["E22"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "General overload warning for bulbs and gadgets; not about the USB port rating."},
+    {"display_id": "E10", "decision": "NOT_APPLICABLE", "reason": "Warning about unapproved modifications; not about the USB rating."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Rain warning; does not state the output rating."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Device-type and single-phone limit; does not state the output rating."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Cable insertion and warranty warning; not about the rating."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Port cap warning; not about the rating."},
+    {"display_id": "E16", "decision": "NOT_APPLICABLE", "reason": "Metal-object short-circuit warning; not about the rating."},
+    {"display_id": "E20", "decision": "NOT_APPLICABLE", "reason": "Port cap and warranty caution; not about the rating."},
+    {"display_id": "E21", "decision": "INCLUDED", "reason": "Shutdown above 2.5 A qualifies the 2 A output."},
+    {"display_id": "E22", "decision": "INCLUDED", "reason": "The output is available only with the engine running."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Cable quality advice; not about the rating."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Fuse failure warning; not about the USB port."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Fuse rating warning; not about the USB port."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Spare fuse warning; not about the USB port."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Defective fuse warning; not about the USB port."}
+  ]
+}

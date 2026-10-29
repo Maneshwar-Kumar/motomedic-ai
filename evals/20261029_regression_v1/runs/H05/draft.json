@@ -1,0 +1,60 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "The manual says the hazard lights keep working for 30 minutes, unless they are switched off manually.",
+      "evidence_ids": ["E3"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "The hazard flasher cannot be activated with the ignition switched off.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Hazard flashing strains the battery, so do not use the hazard warning for longer than necessary.",
+      "evidence_ids": ["E8"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not say whether the 30-minute period continues after the ignition is switched off.",
+      "evidence_ids": ["E3"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E5",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns turn signals not working while the hazards are on, not how long the hazards flash."
+    },
+    {
+      "display_id": "E6",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns all indicator lamps flashing together, not duration."
+    },
+    {
+      "display_id": "E8",
+      "decision": "INCLUDED",
+      "reason": "Battery strain from long hazard use bears on leaving the hazards flashing."
+    },
+    {
+      "display_id": "E11",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns battery drain from the headlamp when the engine is not running, not hazard duration."
+    },
+    {
+      "display_id": "E24",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns running the motorcycle with a fault light on, unrelated to hazards."
+    },
+    {
+      "display_id": "E25",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns the ABS lamp, unrelated to hazards."
+    }
+  ]
+}

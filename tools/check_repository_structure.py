@@ -19,7 +19,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 MANUAL = "source/royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf"
 MANUAL_SHA = "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89"
-CURRENT_FREEZE = "releases/serving_manifest_v11_2.json"
+CURRENT_FREEZE = "releases/serving_manifest_v11_3.json"
 
 ROOT_FILES = frozenset({".gitattributes", ".gitignore", ".dockerignore", "README.md", "AGENTS.md", "CONTRIBUTING.md"})
 ROOT_DIRS = frozenset({".claude", ".github", "archive", "cloud", "docs", "evals", "ingest", "releases",
@@ -27,15 +27,18 @@ ROOT_DIRS = frozenset({".claude", ".github", "archive", "cloud", "docs", "evals"
 NAVIGATION = (
     "README.md", "AGENTS.md", "CONTRIBUTING.md",
     "docs/REVIEW_GUIDE.md", "docs/ARCHITECTURE.md", "docs/PRD.md", "docs/TRD.md", "docs/STATUS.md",
-    "docs/SETUP.md", "docs/EXPERIMENTS.md", "docs/DECISIONS.md", "docs/TODO.md",
+    "docs/SETUP.md", "docs/EXPERIMENTS.md", "docs/DECISIONS.md", "docs/TODO.md", "docs/PRIVACY.md",
     "source/README.md", "ingest/README.md", "cloud/README.md", "rider_ui/README.md",
     "rider_ui/API_CONTRACT.md", "rider_ui/SERVICE_SAFEGUARDS.md", "tools/README.md",
     "evals/README.md", "evals/20261025_answer_release_v3/README.md", "evals/20261025_quality_round_v1/README.md",
-    "evals/20261025_heldout_v1/README.md", "releases/README.md", "archive/README.md",
+    "evals/20261025_heldout_v1/README.md", "evals/regression/README.md", "evals/20261029_regression_v1/README.md",
+    "releases/README.md", "archive/README.md",
 )
 CRITICAL = (
     MANUAL, "source/source_manifest.json", CURRENT_FREEZE, "releases/serving_manifest_v11.json",
-    "releases/serving_manifest_v11_1.json", "releases/owner_decision_v5.json", "releases/owner_decision_v6.json",
+    "releases/serving_manifest_v11_1.json", "releases/serving_manifest_v11_2.json", "releases/owner_decision_v5.json",
+    "releases/owner_decision_v6.json", "releases/owner_decision_v7.json", "releases/section_index_asset_v1.json",
+    "evals/regression/set_v1.json", "evals/20261029_regression_v1/receipt.json",
     "evals/20261025_answer_release_v3/owner_decision_v3.json",
     "evals/20261025_answer_release_v3/owner_decision_v4.json", "cloud/deployment_status.json",
 )
@@ -104,7 +107,7 @@ def audit():
         "integrity_errors": integrity,
         "local_links_checked": checked,
         "current_serving_files_verified": current_count,
-        "note": "Layout, reader-facing links, the manual and the current v11.2 serving inputs. Archived history is verified at its layout commit. Not factual or deployment acceptance.",
+        "note": "Layout, reader-facing links, the manual and the current v11.3 serving inputs. Archived history is verified at its layout commit. Not factual or deployment acceptance.",
     }
 
 

@@ -14,7 +14,7 @@ Start with the [README](README.md) and the [review guide](docs/REVIEW_GUIDE.md),
 | Shared session types, provider error and content hash | `cloud/common/` |
 | Rider UI and client | `rider_ui/` |
 | Release, repository and experiment tools | `tools/` |
-| Evaluations | `evals/<date>_<name>/` |
+| Evaluations | `evals/<date>_<name>/`; the regression set in `evals/regression/` |
 | Frozen serving manifests and release-level owner decisions | `releases/` |
 | History: earlier designs, review packages, receipts, retired code | `archive/` (read-only) |
 | Generated environments, index copies, local answers and temporary output | ignored `build/` or `tmp/` |
@@ -26,6 +26,8 @@ Keep credentials and raw rider media out of Git. Do not add files at the reposit
 - **Branches.** Work on a short-lived `codex/<change>` branch with focused commits, and merge to `main` after CI passes. Do not restore draft-then-verify, the review gate or other retired designs.
 - **Tests.** After runtime changes, run the provider-free tests in [CI](.github/workflows/ci.yml). After layout or navigation changes, run `python tools/check_repository_structure.py`.
 - **Freezing.** A change to any serving input needs a new frozen manifest from [serving_release.py](tools/serving_release.py). Never edit a committed manifest to make a check pass.
+- **Answer quality.** A prompt, model, index, retrieval or assembly change needs a new run of the [regression set](evals/regression/README.md) that meets its bar before it can be frozen. A gate change is re-checked by CI from the saved run. Do not lower the bar to make a change pass.
+- **Logging.** A new log field goes on the `FIELDS` allowlist in [telemetry.py](cloud/common/telemetry.py), with a test showing that no rider text reaches it ([privacy](docs/PRIVACY.md)).
 - **Index.** A source, parser, sectioning or embedding change creates a new index ID; freeze it before serving.
 - **Line endings.** On Windows, keep each file's committed line endings (`git ls-files --eol`); the release hashes exact bytes.
 - **Experiments.** Local experiments use Claude Code as the generator ([EXPERIMENTS](docs/EXPERIMENTS.md)) and spend nothing. Hosted real-provider runs need an explicit owner scope.

@@ -1,0 +1,128 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "To check the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre. On the analog screen, the battery gauge has four segments, and each segment carries 1 V. The manual's example reads 12.5 V with 2 segments fully filled, and 13 V with up to 3 segments half filled. The manual does not give a procedure for measuring the battery voltage with a meter, or a voltage range for a healthy battery. The gauge values are the manual's examples, not a test result.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E10",
+   "evidence_id": "evidence_45e01fb1becff7605de0f33d",
+   "pages": [
+    105
+   ]
+  },
+  {
+   "label": "E17",
+   "evidence_id": "evidence_6ea24b0017b92e74e4c193c6",
+   "pages": [
+    37
+   ]
+  },
+  {
+   "label": "E18",
+   "evidence_id": "evidence_8cf19b0f3aa83fe252f906cc",
+   "pages": [
+    38
+   ]
+  }
+ ],
+ "cited_pages": [
+  37,
+  38,
+  105
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "To check the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre.",
+    "evidence_ids": [
+     "E10"
+    ]
+   },
+   {
+    "text": "On the analog screen, the battery gauge has four segments, and each segment carries 1 V.",
+    "evidence_ids": [
+     "E17"
+    ]
+   },
+   {
+    "text": "The manual's example reads 12.5 V with 2 segments fully filled, and 13 V with up to 3 segments half filled.",
+    "evidence_ids": [
+     "E18"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a procedure for measuring the battery voltage with a meter, or a voltage range for a healthy battery."
+   },
+   {
+    "text": "The gauge values are the manual's examples, not a test result.",
+    "evidence_ids": [
+     "E18"
+    ]
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers disconnecting the battery, which the question does not ask about."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers a failed start and prolonged starter use, not voltage checks."
+  },
+  {
+   "display_id": "E29",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General riding care, not related to checking voltage."
+  },
+  {
+   "display_id": "E30",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers shifting into neutral, not voltage checks."
+  },
+  {
+   "display_id": "E31",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers gear shifting, not voltage checks."
+  },
+  {
+   "display_id": "E32",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers the clutch when starting, not voltage checks."
+  },
+  {
+   "display_id": "E33",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers the starter button when starting, not voltage checks."
+  },
+  {
+   "display_id": "E34",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers starter button cranking limits, not voltage checks."
+  }
+ ],
+ "excluded_watchouts": [
+  "E8",
+  "E25",
+  "E29",
+  "E30",
+  "E31",
+  "E32",
+  "E33",
+  "E34"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

@@ -1,0 +1,73 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "For Android, the app's minimum supported version is two versions behind the current Android OS.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "For iOS, the minimum supported version is one version behind the current iOS release.",
+      "evidence_ids": ["E2"]
+    },
+    {
+      "text": "The manual says the app is not compatible with Huawei phones.",
+      "evidence_ids": ["E4"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not say whether the app has been updated for a phone OS released this week."
+    },
+    {
+      "text": "The manual does not give the current Android or iOS release numbers."
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E13",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Charger port warning about rain; the question is about app compatibility."
+    },
+    {
+      "display_id": "E14",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Charger port warning about other devices; not about the app."
+    },
+    {
+      "display_id": "E15",
+      "decision": "NOT_APPLICABLE",
+      "reason": "USB cable insertion warning; not about the app."
+    },
+    {
+      "display_id": "E16",
+      "decision": "NOT_APPLICABLE",
+      "reason": "USB port cap warning; not about the app."
+    },
+    {
+      "display_id": "E17",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Metal objects in the charging port; not about the app."
+    },
+    {
+      "display_id": "E21",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Port cap sealing and warranty; not about the app."
+    },
+    {
+      "display_id": "E22",
+      "decision": "NOT_APPLICABLE",
+      "reason": "High current draw shutdown; not about the app."
+    },
+    {
+      "display_id": "E23",
+      "decision": "NOT_APPLICABLE",
+      "reason": "USB charger works only when the engine runs; not about the app."
+    },
+    {
+      "display_id": "E24",
+      "decision": "NOT_APPLICABLE",
+      "reason": "USB cable quality for charging; not about the app."
+    }
+  ]
+}

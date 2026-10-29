@@ -1,0 +1,69 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "To check the battery voltage, the manual says to contact a Royal Enfield Authorised Service Centre or a battery service centre.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "On the analog screen, the battery gauge has four segments, and each segment carries 1 V.",
+      "evidence_ids": ["E17"]
+    },
+    {
+      "text": "The manual's example reads 12.5 V with 2 segments fully filled, and 13 V with up to 3 segments half filled.",
+      "evidence_ids": ["E18"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not give a procedure for measuring the battery voltage with a meter, or a voltage range for a healthy battery."
+    },
+    {
+      "text": "The gauge values are the manual's examples, not a test result.",
+      "evidence_ids": ["E18"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E8",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Covers disconnecting the battery, which the question does not ask about."
+    },
+    {
+      "display_id": "E25",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Covers a failed start and prolonged starter use, not voltage checks."
+    },
+    {
+      "display_id": "E29",
+      "decision": "NOT_APPLICABLE",
+      "reason": "General riding care, not related to checking voltage."
+    },
+    {
+      "display_id": "E30",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Covers shifting into neutral, not voltage checks."
+    },
+    {
+      "display_id": "E31",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Covers gear shifting, not voltage checks."
+    },
+    {
+      "display_id": "E32",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Covers the clutch when starting, not voltage checks."
+    },
+    {
+      "display_id": "E33",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Covers the starter button when starting, not voltage checks."
+    },
+    {
+      "display_id": "E34",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Covers starter button cranking limits, not voltage checks."
+    }
+  ]
+}

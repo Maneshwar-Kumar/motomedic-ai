@@ -1,0 +1,101 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "Do not exceed the maximum payload for the panniers and top box that the manual defines in the GMA fitting instructions for panniers and top boxes. Watch out: Loading weight or fitting accessories incorrectly may affect the motorcycle's stability, handling characteristics and safe operation, and could cause an accident that results in serious injury or loss of life. Watch out: Ignoring the model and design specifications counts as misuse of the motorcycle and its accessories, and may adversely affect handling and performance and cause an accident. The manual does not give a kilogram limit for the panniers or the top box.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_b9c4e4222f25cb0fca7dffc6",
+   "pages": [
+    15
+   ]
+  },
+  {
+   "label": "E2",
+   "evidence_id": "evidence_b45cd32783b18b7a0f3a6bd3",
+   "pages": [
+    15
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_bbf3e2f088553465b973f78e",
+   "pages": [
+    15
+   ]
+  }
+ ],
+ "cited_pages": [
+  15
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Do not exceed the maximum payload for the panniers and top box that the manual defines in the GMA fitting instructions for panniers and top boxes.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Loading weight or fitting accessories incorrectly may affect the motorcycle's stability, handling characteristics and safe operation, and could cause an accident that results in serious injury or loss of life.",
+    "evidence_ids": [
+     "E2"
+    ]
+   },
+   {
+    "text": "Ignoring the model and design specifications counts as misuse of the motorcycle and its accessories, and may adversely affect handling and performance and cause an accident.",
+    "evidence_ids": [
+     "E6"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a kilogram limit for the panniers or the top box."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E2",
+   "decision": "INCLUDED",
+   "reason": "Watchout on stability and handling from incorrect loading."
+  },
+  {
+   "display_id": "E3",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Says genuine accessories are approved and tested; sets no load limit."
+  },
+  {
+   "display_id": "E4",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns nonstandard parts such as aftermarket forks, not luggage load."
+  },
+  {
+   "display_id": "E5",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Continues the E4 warning on altered original parts."
+  },
+  {
+   "display_id": "E6",
+   "decision": "INCLUDED",
+   "reason": "Watchout that ignoring model and design specifications is misuse."
+  }
+ ],
+ "excluded_watchouts": [
+  "E3",
+  "E4",
+  "E5"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

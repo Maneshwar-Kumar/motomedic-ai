@@ -5,7 +5,9 @@
 Read [README](README.md), [PRD](docs/PRD.md), [TRD](docs/TRD.md), [architecture](docs/ARCHITECTURE.md), [status](docs/STATUS.md), [decision log](docs/DECISIONS.md) and [TODO](docs/TODO.md) before changing behavior, and follow [CONTRIBUTING](CONTRIBUTING.md). The owner's decisions of 24–25 October 2026 define the answer path:
 - [v3](evals/20261025_answer_release_v3/owner_decision_v3.json): the design;
 - [v4](evals/20261025_answer_release_v3/owner_decision_v4.json): Haiku at effort high accepted for integration;
-- [v5](releases/owner_decision_v5.json): token ceiling removed, local Claude Code experiments, repository layout.
+- [v5](releases/owner_decision_v5.json): token ceiling removed, local Claude Code experiments, repository layout;
+- [v6](releases/owner_decision_v6.json): the quality round (repeat and wording checks, related warnings, relevance floor) and the held-out test;
+- [v7](releases/owner_decision_v7.json): the answer-quality regression gate, the published section index, observability with a privacy and retention policy, and the offline setup on `main`.
 
 There is **no review layer**. Every parsed object of the manual can be cited, and no authored catalog, canonical wording, answer scope or StepDefinition gates a question.
 
@@ -34,15 +36,17 @@ A turn runs in five steps:
 4. **Gate.** The deterministic gate releases or fails closed. It rejects internal labels in rider text, rewords meta phrases about "the sections supplied", and leaves out policy, watchout or disclaimer sentences that only repeat an earlier section. When nothing is retrieved, the fixed fallback and support route are sent with no model call.
 5. **Delivery.** The released view is saved before any byte streams, and recovery reads the same saved view.
 
+Every turn, worker run and request emits allowlisted structured logs and spans ([telemetry](cloud/common/telemetry.py)), correlated by trace id. Never put rider questions, answers or manual text in logs, traces, Git or evaluations ([privacy](docs/PRIVACY.md)).
+
 Code is in [cloud/grounded_generation/](cloud/grounded_generation/), with the worker and API wiring in [cloud/arm_a/](cloud/arm_a/) and shared types in [cloud/common/](cloud/common/). The gate checks structure, citations, numbers and warning decisions, not meaning. The 30 v3 questions are development cases. The [33 held-out questions](evals/20261025_heldout_v1/README.md) have now been seen, so a new quality claim needs new questions; neither set may enrich prompts or retrieval tuning.
 
 ## Experiments
 
-Run experiments locally with [tools/local_answer.py](tools/local_answer.py) or the `/motomedic-answer` skill ([docs/EXPERIMENTS.md](docs/EXPERIMENTS.md)). These use the real retrieval, assembly and gate on the pinned index, with a Claude Code Haiku subagent at effort high as the generator. They make no API call and use no ledger. Label results as local Claude Code runs, and put evaluation runs under `evals/<date>_<name>/`.
+Run experiments locally with [tools/local_answer.py](tools/local_answer.py) or the `/motomedic-answer` skill ([docs/EXPERIMENTS.md](docs/EXPERIMENTS.md)), in the pinned environment ([tools/requirements-experiments.txt](tools/requirements-experiments.txt), Python 3.12) with the published section index. These use the real retrieval, assembly and gate on the pinned index, with a Claude Code Haiku subagent at effort high as the generator. They make no API call and use no ledger. Label results as local Claude Code runs, and put evaluation runs under `evals/<date>_<name>/`.
 
 ## Release, operations and spending
 
-The current release is [serving manifest v11.2](releases/serving_manifest_v11_2.json). Never alter a frozen manifest to make a check pass; a changed serving input needs a new frozen version. Manifests v8–v10.14 are history in `archive/`; their bindings were last verified in their original layout at commit `7c412369f055b4d0ee747501e6b026f5987d1564`.
+The current release is [serving manifest v11.3](releases/serving_manifest_v11_3.json). Never alter a frozen manifest to make a check pass; a changed serving input needs a new frozen version. A prompt, model, index, retrieval or assembly change ships only with a new run of the [regression set](evals/regression/README.md) that meets its bar. The freeze refuses otherwise, and CI runs `python tools/regression.py check`. Never lower the bar to make a change pass. Manifests v8–v10.14 are history in `archive/`; their bindings were last verified in their original layout at commit `7c412369f055b4d0ee747501e6b026f5987d1564`.
 
 There is no token ceiling. The 100-attempt allocation (72 used) and the shared Haiku USD1 ledger still bind; do not reset or refund them. Nothing in the repository authorizes deployment, public opening, provider spending, billing changes or GCP changes. Each needs the owner's explicit scope.
 

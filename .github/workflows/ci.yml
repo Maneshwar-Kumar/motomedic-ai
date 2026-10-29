@@ -50,7 +50,11 @@ jobs:
           tools.test_serving_release
           tools.test_check_installed_serving_release
           tools.test_local_answer
+          tools.test_regression
+          cloud.common.test_telemetry
           cloud.budget_guard.test_policy
+      - name: Answer-quality regression gate (saved run re-gated and rescored; no model calls)
+        run: python tools/regression.py check
       - name: Test the complete rider UI against engineering-only loopback HTTP fixtures
         run: python -m unittest discover -s rider_ui/tests -p 'test_*.py' -v
       - name: Record scope of these checks

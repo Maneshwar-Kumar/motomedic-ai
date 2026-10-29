@@ -1,0 +1,41 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "The fuel tank holds 17.0 litres.",
+      "evidence_ids": ["E5"]
+    },
+    {
+      "text": "The manual gives the low fuel warning as 3 litres, plus or minus 0.5 litre, so roughly 3 litres is left in the tank when it comes on.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Do not overfill: fill only to the bottom of the anti splash plate. Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system.",
+      "evidence_ids": ["E10", "E11", "E12"]
+    },
+    {
+      "text": "If the last bar of the fuel level indicator blinks continuously, the tank is low; re-fuel immediately.",
+      "evidence_ids": ["E24"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not say how many litres the fill level at the anti splash plate holds."
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E10", "decision": "INCLUDED", "reason": "The overfill warning is in the first watchout."},
+    {"display_id": "E11", "decision": "INCLUDED", "reason": "The fill-to-plate limit is in the first watchout."},
+    {"display_id": "E12", "decision": "INCLUDED", "reason": "The EVAP damage from overfilling is in the first watchout."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Refuelling fire safety, not tank size or low fuel."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Paint staining during refuelling, not asked."},
+    {"display_id": "E15", "decision": "NOT_APPLICABLE", "reason": "Smoking while refuelling, not asked."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Engine malfunction indicator, not the fuel level."},
+    {"display_id": "E24", "decision": "INCLUDED", "reason": "The blinking last bar and re-fuel advice is in the second watchout."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Clutch use when starting, not asked."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Starter switch timing, not asked."}
+  ]
+}

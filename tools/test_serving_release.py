@@ -44,7 +44,8 @@ class ReleaseTests(unittest.TestCase):
         class Both:
             def __enter__(inner):
                 inner.patches = [patch.object(release, 'verify_previous', return_value=release.PREVIOUS),
-                    patch.object(release, 'serving_inputs', return_value=['runtime.py'])]
+                    patch.object(release, 'serving_inputs', return_value=['runtime.py']),
+                    patch.object(release, 'regression_binding', return_value={'run': 'synthetic', 'passed': True})]
                 for p in inner.patches:
                     p.start()
             def __exit__(inner, *exc):

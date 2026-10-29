@@ -1,0 +1,29 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "The manual's 6000 rpm figure is a maximum engine speed for the first 500 km of running-in, not a top speed.",
+      "evidence_ids": ["E41"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "A new motorcycle must be operated according to the running-in procedure.",
+      "evidence_ids": ["E12"]
+    },
+    {
+      "text": "Do not exceed the legal speed limit or ride too fast for conditions. High speed makes loss of control more likely.",
+      "evidence_ids": ["E14"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Warns about aftermarket suspension parts, not top speed."},
+    {"display_id": "E12", "decision": "INCLUDED", "reason": "Running-in procedure applies to a new motorcycle."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Moderate-speed advice for new riders; E14 covers speed."},
+    {"display_id": "E14", "decision": "INCLUDED", "reason": "Speed limit and loss-of-control warning."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Shock absorber and fork inspection, not speed."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Exhaust gas warning, not speed."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Maintenance warning, not speed."}
+  ]
+}

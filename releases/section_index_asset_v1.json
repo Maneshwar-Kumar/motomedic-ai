@@ -1,0 +1,76 @@
+{
+ "schema": "motomedic-index-asset-receipt-v1",
+ "published_at_utc": "2026-10-29",
+ "index_id": "index_f768fbb216836c003701079e",
+ "built_from_index_id": "index_a3282c4d98cf54595e4ba168",
+ "manual_sha256": "cf221a29e2f9cd5af6e80a99774a697c814e8eda661c27d72e519d8a7e80da89",
+ "pinned_by": "releases/serving_manifest_v11_2.json",
+ "release_tag": "index-f768fbb216836c003701079e",
+ "release_url": "https://github.com/Maneshwar-Kumar/motomedic-ai/releases/tag/index-f768fbb216836c003701079e",
+ "release_target_commit": "7826cd7b7157fb42a5e3a2456e6927b3df275404",
+ "asset": "section_index_f768fbb216836c003701079e.tar.gz",
+ "asset_bytes": 171958550,
+ "asset_sha256": "010ba0488f06394cb3440fcde5efe2b5e1a01d661845bf99a0f5dc166b86102d",
+ "archive_root": "section-index/",
+ "archive_format": "tar.gz; sorted entries, zero timestamps, mode 0644, uid/gid 0",
+ "files": {
+  "bm25.json": {
+   "bytes": 288450,
+   "sha256": "cc3008d39ff46433f64418f3b421ce0f134e92dfad9d07623d66cd4ceb3ebb83"
+  },
+  "chunks.jsonl": {
+   "bytes": 1014315,
+   "sha256": "9476c77b673ba6d8b4330f9f79502ad1b0b152430277e8c0366869ba55a507b7"
+  },
+  "embeddings.npy": {
+   "bytes": 2179200,
+   "sha256": "03c285830953b9724809bf5a441db6a8b6e6c2f89f67378f7d21787df4bd1714"
+  },
+  "evidence.jsonl": {
+   "bytes": 5962237,
+   "sha256": "792408e533d68f99b0787056e02c4a9f2edf6ea1e06b4b0591b743753a6bc2c8"
+  },
+  "manifest.json": {
+   "bytes": 3687,
+   "sha256": "9acf06e3c4313e231be33ebdf5847adc75641da591e86a76a73059164e39ebbe"
+  },
+  "pages.jsonl": {
+   "bytes": 157637,
+   "sha256": "66487927b4a33bef021dbfc93b8a4fbd7f305a16f4bcd8264c3dc675fb912040"
+  },
+  "reranker_model/config.json": {
+   "bytes": 794,
+   "sha256": "380e02c93f431831be65d99a4e7e5f67c133985bf2e77d9d4eba46847190bacc"
+  },
+  "reranker_model/model.safetensors": {
+   "bytes": 90870598,
+   "sha256": "821d1aa69520101d6e0737f78a042ae25b19e5cb9160701909d10434f4aeb0ae"
+  },
+  "reranker_model/pytorch_model.bin": {
+   "bytes": 90903017,
+   "sha256": "3ae17b87eda3d184502a821fddff43d82feb7c206f665a851c491ec715b497ed"
+  },
+  "reranker_model/special_tokens_map.json": {
+   "bytes": 132,
+   "sha256": "3c3507f36dff57bce437223db3b3081d1e2b52ec3e56ee55438193ecb2c94dd6"
+  },
+  "reranker_model/tokenizer.json": {
+   "bytes": 711396,
+   "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+  },
+  "reranker_model/tokenizer_config.json": {
+   "bytes": 1330,
+   "sha256": "a5c2e5a7b1a29a0702cd28c08a399b5ecc110c263009d17f7e3b415f25905fd8"
+  },
+  "reranker_model/vocab.txt": {
+   "bytes": 231508,
+   "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+  },
+  "sections.jsonl": {
+   "bytes": 140397,
+   "sha256": "a02dada1c108bea2c658d90fe76c0ebbd7f3bf5ffc220fffa707e14bfbc14a2a"
+  }
+ },
+ "round_trip": "Downloaded from the release, SHA-256 matched, extracted and passed section_index.verify against the v11.2 index identity",
+ "hosted_qdrant": "NOT_UPLOADED (needs billing; optional)"
+}

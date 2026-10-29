@@ -1,0 +1,139 @@
+{
+ "retrieval": {
+  "version": "section-top5-hybrid-v2",
+  "index_id": "index_f768fbb216836c003701079e",
+  "chunk_ids": [
+   "chunk_e8be7fc45b2c08b659bb1a85",
+   "chunk_e76b0d408b965a7f10f4e160",
+   "chunk_9df53f2865476b085bbcd461",
+   "chunk_c097faf4a888d0f6be80228d",
+   "chunk_cd9afab59118ad5fb63990a9"
+  ],
+  "dense_top": [
+   "chunk_e76b0d408b965a7f10f4e160",
+   "chunk_9df53f2865476b085bbcd461",
+   "chunk_c097faf4a888d0f6be80228d",
+   "chunk_e8be7fc45b2c08b659bb1a85",
+   "chunk_00167536a90359a310825d89"
+  ],
+  "bm25_top": [
+   "chunk_9df53f2865476b085bbcd461",
+   "chunk_e76b0d408b965a7f10f4e160",
+   "chunk_50d204c61b855668dfafe2e5",
+   "chunk_4a880dce6f193618a3a6f1e0",
+   "chunk_5037a96386fa12a317648dc0"
+  ],
+  "sections_disagree": true,
+  "reranked": true,
+  "rerank_skip_reason": null,
+  "max_cross_score": -7.526303291320801,
+  "below_relevance_floor": false
+ },
+ "assembled": {
+  "version": "section-plain-text-v2",
+  "index_id": "index_f768fbb216836c003701079e",
+  "sections": [
+   "section_0e918a9b03d4b1e1fb8438b7",
+   "section_0500987488d548f3e33883ea"
+  ],
+  "objects": {
+   "E1": {
+    "evidence_id": "evidence_2330b5098bd8e9c9111367dc",
+    "text": "The fuse carrier is located underneath rider seat.",
+    "pages": [
+     111
+    ],
+    "box": null,
+    "section": "FUSE AND FUSE CARRIER",
+    "type": "list_item"
+   },
+   "E2": {
+    "evidence_id": "evidence_26212c7ebd75afe794b4e759",
+    "text": "Insert ignition key and turn it clockwise.",
+    "pages": [
+     111
+    ],
+    "box": null,
+    "section": "FUSE AND FUSE CARRIER",
+    "type": "list_item"
+   },
+   "E3": {
+    "evidence_id": "evidence_5db11647810d34b0cece9f39",
+    "text": "Remove the pillion and rider seat outside for opening the same.",
+    "pages": [
+     111
+    ],
+    "box": null,
+    "section": "FUSE AND FUSE CARRIER",
+    "type": "list_item"
+   },
+   "E4": {
+    "evidence_id": "evidence_90b50d7059435c1578fd7d12",
+    "text": "Fuse ID number: F1; Color: Blue; Rating: 15 A; Remarks: Ignition\n    Fuse ID number: F2; Color: Blue; Rating: 15 A; Remarks: EFI relay\n    Fuse ID number: F3; Color: Red; Rating: 10 A; Remarks: Fan\n    Fuse ID number: F4; Color: Yellow; Rating: 5 A; Remarks: POS, lights & CTRL\n    Fuse ID number: F5; Color: Yellow; Rating: 5 A; Remarks: Instruments\n    Fuse ID number: F6; Color: Red; Rating: 10 A; Remarks: Low/High Beam & Accessory\n    Fuse ID number: F7; Color: Red; Rating: 10 A; Remarks: Horn\n    Fuse ID number: F8; Color: Blue; Rating: 15 A; Remarks: ABS S motor\n    Fuse ID number: F9; Color: Red; Rating: 10 A; Remarks: ABS valve\n    Fuse ID number: Spare fuse list\n    Fuse ID number: SF1; Color: Yellow; Rating: 5 A; Remarks: Spare fuse\n    Fuse ID number: SF2; Color: Red; Rating: 10 A\n    Fuse ID number: SF3; Color: Blue; Rating: 15 A",
+    "pages": [
+     112
+    ],
+    "box": null,
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "table"
+   },
+   "E5": {
+    "evidence_id": "evidence_4e1a61e411e2b752c1a8716b",
+    "text": "Please get the electrical system of your motorcycle checked thoroughly and get the faults corrected immediately after experiencing any fuse failure. Failure to do so may result in repeated fuse failure.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E6": {
+    "evidence_id": "evidence_00497a5a6998712d564a2df2",
+    "text": "Usage of fuses other than specified rating or usage of any other conductive materials or low grade fuses will damage the complete electrical system.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E7": {
+    "evidence_id": "evidence_0c58e6021490c80a7a7f8d99",
+    "text": "Please ensure to replace a spare fuse in the holder at the earliest opportunity.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E8": {
+    "evidence_id": "evidence_8b5ef092d20493cd2b9b58b8",
+    "text": "Any attempt to jumper a defective fuse gives rise to the risk of a short-circuit and fire. Always replace a defective fuse with a new fuse of the same rating.",
+    "pages": [
+     112
+    ],
+    "box": "WARNING",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   },
+   "E9": {
+    "evidence_id": "evidence_590e7744c6d77b972e3950ee",
+    "text": "Make sure the ignition switch is in \"OFF\" position when replacing the bulbs, fuses and electrical parts.",
+    "pages": [
+     112
+    ],
+    "box": "NOTE",
+    "section": "MINI BLADE FUSE USAGE LIST",
+    "type": "text"
+   }
+  },
+  "warnings": [
+   "E5",
+   "E6",
+   "E7",
+   "E8"
+  ],
+  "text": "## FUSE AND FUSE CARRIER (page 111)\n[E1] The fuse carrier is located underneath rider seat.\n[E2] Insert ignition key and turn it clockwise.\n[E3] Remove the pillion and rider seat outside for opening the same.\n\n## MINI BLADE FUSE USAGE LIST (page 112)\n[E4] Fuse ID number: F1; Color: Blue; Rating: 15 A; Remarks: Ignition\n    Fuse ID number: F2; Color: Blue; Rating: 15 A; Remarks: EFI relay\n    Fuse ID number: F3; Color: Red; Rating: 10 A; Remarks: Fan\n    Fuse ID number: F4; Color: Yellow; Rating: 5 A; Remarks: POS, lights & CTRL\n    Fuse ID number: F5; Color: Yellow; Rating: 5 A; Remarks: Instruments\n    Fuse ID number: F6; Color: Red; Rating: 10 A; Remarks: Low/High Beam & Accessory\n    Fuse ID number: F7; Color: Red; Rating: 10 A; Remarks: Horn\n    Fuse ID number: F8; Color: Blue; Rating: 15 A; Remarks: ABS S motor\n    Fuse ID number: F9; Color: Red; Rating: 10 A; Remarks: ABS valve\n    Fuse ID number: Spare fuse list\n    Fuse ID number: SF1; Color: Yellow; Rating: 5 A; Remarks: Spare fuse\n    Fuse ID number: SF2; Color: Red; Rating: 10 A\n    Fuse ID number: SF3; Color: Blue; Rating: 15 A\n[E5] (WARNING) Please get the electrical system of your motorcycle checked thoroughly and get the faults corrected immediately after experiencing any fuse failure. Failure to do so may result in repeated fuse failure.\n[E6] (WARNING) Usage of fuses other than specified rating or usage of any other conductive materials or low grade fuses will damage the complete electrical system.\n[E7] (WARNING) Please ensure to replace a spare fuse in the holder at the earliest opportunity.\n[E8] (WARNING) Any attempt to jumper a defective fuse gives rise to the risk of a short-circuit and fire. Always replace a defective fuse with a new fuse of the same rating.\n[E9] (NOTE) Make sure the ignition switch is in \"OFF\" position when replacing the bulbs, fuses and electrical parts."
+ }
+}

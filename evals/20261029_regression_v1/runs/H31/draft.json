@@ -1,0 +1,42 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "PARTIAL",
+  "answer": [
+    {
+      "text": "For the front wheel, the spindle bolt is tightened firmly on the left side.",
+      "evidence_ids": ["E31"]
+    },
+    {
+      "text": "The fork clamp bolt is tightened to a torque of 25 Nm on the left side.",
+      "evidence_ids": ["E32"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Use utmost caution when you reassemble the front wheel, and make sure it is fitted correctly before you ride. A wheel fitted incorrectly can cause poor performance, an accident, injury to you or other road users, or loss of life.",
+      "evidence_ids": ["E35", "E36", "E37"]
+    }
+  ],
+  "disclaimers": [
+    {
+      "text": "The manual does not give a torque value for the front wheel spindle."
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E35",
+      "decision": "INCLUDED",
+      "reason": "Cited in the reassembly caution watchout."
+    },
+    {
+      "display_id": "E36",
+      "decision": "INCLUDED",
+      "reason": "Cited in the reassembly caution watchout."
+    },
+    {
+      "display_id": "E37",
+      "decision": "INCLUDED",
+      "reason": "Cited in the reassembly caution watchout."
+    }
+  ]
+}

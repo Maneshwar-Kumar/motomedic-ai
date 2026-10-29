@@ -1,0 +1,153 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "When you adjust the drive chain, the manual says to tighten the rear wheel spindle to 70 Nm. Align both wheels correctly before you tighten the rear wheel spindle nut. Watch out: Use utmost caution when you reassemble the rear wheel, and make sure it is fitted correctly before you ride. A wheel fitted incorrectly can cause poor performance, an accident, injury to you or other road users, or loss of life. The manual gives this torque only in the drive chain adjustment steps. The rear wheel removal and reassembly steps do not give a torque value for the spindle or its hex nut.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "page_fallback_8b6564d03faed904d5826a8a",
+   "pages": [
+    103
+   ]
+  },
+  {
+   "label": "E47",
+   "evidence_id": "evidence_1737ca600aff6003c4c1a359",
+   "pages": [
+    100
+   ]
+  },
+  {
+   "label": "E48",
+   "evidence_id": "evidence_cb6e4c9ce23fc8a5b6f7beb1",
+   "pages": [
+    100
+   ]
+  },
+  {
+   "label": "E49",
+   "evidence_id": "evidence_f1f832e6d08e090c709474c2",
+   "pages": [
+    100
+   ]
+  }
+ ],
+ "cited_pages": [
+  100,
+  103
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "When you adjust the drive chain, the manual says to tighten the rear wheel spindle to 70 Nm.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "Align both wheels correctly before you tighten the rear wheel spindle nut.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Use utmost caution when you reassemble the rear wheel, and make sure it is fitted correctly before you ride. A wheel fitted incorrectly can cause poor performance, an accident, injury to you or other road users, or loss of life.",
+    "evidence_ids": [
+     "E47",
+     "E48",
+     "E49"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual gives this torque only in the drive chain adjustment steps. The rear wheel removal and reassembly steps do not give a torque value for the spindle or its hex nut."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E12",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Front wheel caution; the question is about the rear wheel."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Front wheel fitting; not the rear wheel spindle."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Front wheel consequences; not the rear wheel spindle."
+  },
+  {
+   "display_id": "E24",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Brake hose during wheel removal; not a torque step."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Chain handling during wheel removal; not a torque step."
+  },
+  {
+   "display_id": "E26",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Wheel removal technique; not a torque step."
+  },
+  {
+   "display_id": "E27",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Brake pedal during wheel removal; not a torque step."
+  },
+  {
+   "display_id": "E28",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Brake pad spacer during wheel removal; not a torque step."
+  },
+  {
+   "display_id": "E29",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Lifting the motorcycle by the brake pedal; not a torque step."
+  },
+  {
+   "display_id": "E47",
+   "decision": "INCLUDED",
+   "reason": "Caution for rear wheel reassembly, which is the context of spindle tightening."
+  },
+  {
+   "display_id": "E48",
+   "decision": "INCLUDED",
+   "reason": "Wheel must be fitted correctly before riding, after the spindle is tightened."
+  },
+  {
+   "display_id": "E49",
+   "decision": "INCLUDED",
+   "reason": "Consequence of poor rear wheel fitting."
+  }
+ ],
+ "excluded_watchouts": [
+  "E12",
+  "E13",
+  "E14",
+  "E24",
+  "E25",
+  "E26",
+  "E27",
+  "E28",
+  "E29"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

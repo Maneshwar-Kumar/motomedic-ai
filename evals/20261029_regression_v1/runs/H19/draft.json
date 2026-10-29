@@ -1,0 +1,88 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "Place the motorcycle upright on a firm, level surface.",
+      "evidence_ids": ["E3"]
+    },
+    {
+      "text": "Front: with the reservoir horizontal, the fluid level should be at the center of the window, which the manual treats as the minimum level.",
+      "evidence_ids": ["E1"]
+    },
+    {
+      "text": "Rear: with the reservoir horizontal, the fluid level should be between the MAX and Min marks.",
+      "evidence_ids": ["E2"]
+    },
+    {
+      "text": "Clean the filler cap before removing it, and top up only with DOT 4 brake fluid from a sealed container.",
+      "evidence_ids": ["E6"]
+    },
+    {
+      "text": "Do not mix DOT 4 with other brake fluid, and refill with the same type.",
+      "evidence_ids": ["E5", "E8"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Keep water and dust out of the reservoir when refilling, because water lowers the boiling point of the fluid and dirt can clog the ABS hydraulic unit valves.",
+      "evidence_ids": ["E9"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Brake fluid is highly corrosive and can damage painted parts, so keep it off every part of the motorcycle and wipe up any spill at once with a soft cloth.",
+      "evidence_ids": ["E4", "E15"]
+    },
+    {
+      "text": "An insufficient brake fluid level will cause the brake system to fail.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "text": "Keep brake fluid away from children, and keep it off your skin, eyes and clothing.",
+      "evidence_ids": ["E13", "E14"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E4",
+      "decision": "INCLUDED",
+      "reason": "Corrosion and spill warning is the first watchout."
+    },
+    {
+      "display_id": "E5",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Mixing warning is already stated in the answer."
+    },
+    {
+      "display_id": "E10",
+      "decision": "INCLUDED",
+      "reason": "Low level causing brake failure is the second watchout."
+    },
+    {
+      "display_id": "E11",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns fluid age and changing, not topping up."
+    },
+    {
+      "display_id": "E12",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Concerns the periodic change schedule, not topping up."
+    },
+    {
+      "display_id": "E13",
+      "decision": "INCLUDED",
+      "reason": "Keep-away-from-children warning is in the third watchout."
+    },
+    {
+      "display_id": "E14",
+      "decision": "INCLUDED",
+      "reason": "Skin, eye and clothing warning is in the third watchout."
+    },
+    {
+      "display_id": "E15",
+      "decision": "INCLUDED",
+      "reason": "Corrosion and spill warning is in the first watchout."
+    }
+  ]
+}

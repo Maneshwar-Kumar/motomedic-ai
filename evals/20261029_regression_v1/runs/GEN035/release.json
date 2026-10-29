@@ -1,0 +1,88 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "The compass works only when navigation is active. The manual does not give the reason the compass needs active navigation.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E4",
+   "evidence_id": "evidence_145c685b98e1e04b7955e1d6",
+   "pages": [
+    57
+   ]
+  }
+ ],
+ "cited_pages": [
+  57
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The compass works only when navigation is active.",
+    "evidence_ids": [
+     "E4"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [],
+  "disclaimers": [
+   {
+    "text": "The manual does not give the reason the compass needs active navigation."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E11",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns cranking the starter when the engine does not start, not the compass."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General riding-care warning, not about the compass."
+  },
+  {
+   "display_id": "E16",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns putting the gear in neutral, not the compass."
+  },
+  {
+   "display_id": "E17",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns shifting gears without moving the motorcycle, not the compass."
+  },
+  {
+   "display_id": "E18",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns the clutch lever during starting, not the compass."
+  },
+  {
+   "display_id": "E19",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns holding the starter button until the engine starts, not the compass."
+  },
+  {
+   "display_id": "E20",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns starter button cranking limits, not the compass."
+  }
+ ],
+ "excluded_watchouts": [
+  "E11",
+  "E15",
+  "E16",
+  "E17",
+  "E18",
+  "E19",
+  "E20"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

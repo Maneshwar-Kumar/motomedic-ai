@@ -1,0 +1,32 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "The manual gives 32 psi (2.24 kg/cm2) for the front tyre when riding solo.",
+      "evidence_ids": ["E6", "E21"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Use only the tyres the manual recommends, inflated to the correct air pressure.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Under-inflated tyres may overheat, get damaged and cause injury to the rider.",
+      "evidence_ids": ["E7"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "Cited watchout covers the risk of under-inflated tyres, which is the pressure question."},
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Concerns the tyre specification used when replacing tyres, not tyre pressure."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "Continues E8 on replacement tyre specification."},
+    {"display_id": "E34", "decision": "NOT_APPLICABLE", "reason": "Concerns loading weight or fitting accessories, not pressure for a solo rider."},
+    {"display_id": "E35", "decision": "NOT_APPLICABLE", "reason": "Concerns genuine accessories, not tyre pressure."},
+    {"display_id": "E36", "decision": "NOT_APPLICABLE", "reason": "Concerns nonstandard fork parts, not tyre pressure."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Continues E36 on nonstandard parts."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Concerns model specifications and accessory misuse, not tyre pressure."}
+  ]
+}

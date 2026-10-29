@@ -1,0 +1,153 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "The fuel tank holds 17.0 litres. The manual gives the low fuel warning as 3 litres, plus or minus 0.5 litre, so roughly 3 litres is left in the tank when it comes on. Watch out: Do not overfill: fill only to the bottom of the anti splash plate. Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system. Watch out: If the last bar of the fuel level indicator blinks continuously, the tank is low; re-fuel immediately. The manual does not say how many litres the fill level at the anti splash plate holds.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E5",
+   "evidence_id": "evidence_3f8de8466049af12783de7d0",
+   "pages": [
+    18
+   ]
+  },
+  {
+   "label": "E10",
+   "evidence_id": "evidence_4e632b1b7a18bb739a61c9fd",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E11",
+   "evidence_id": "evidence_5034a983959e52887c0072bf",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E12",
+   "evidence_id": "evidence_a66e862d634c23573bb30c90",
+   "pages": [
+    27
+   ]
+  },
+  {
+   "label": "E24",
+   "evidence_id": "evidence_272bd86a27fe5489e66a4af6",
+   "pages": [
+    73
+   ]
+  }
+ ],
+ "cited_pages": [
+  18,
+  27,
+  73
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The fuel tank holds 17.0 litres.",
+    "evidence_ids": [
+     "E5"
+    ]
+   },
+   {
+    "text": "The manual gives the low fuel warning as 3 litres, plus or minus 0.5 litre, so roughly 3 litres is left in the tank when it comes on.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Do not overfill: fill only to the bottom of the anti splash plate. Overfilling may let gasoline enter the EVAP canister and damage the evaporative emission system.",
+    "evidence_ids": [
+     "E10",
+     "E11",
+     "E12"
+    ]
+   },
+   {
+    "text": "If the last bar of the fuel level indicator blinks continuously, the tank is low; re-fuel immediately.",
+    "evidence_ids": [
+     "E24"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual does not say how many litres the fill level at the anti splash plate holds."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E10",
+   "decision": "INCLUDED",
+   "reason": "The overfill warning is in the first watchout."
+  },
+  {
+   "display_id": "E11",
+   "decision": "INCLUDED",
+   "reason": "The fill-to-plate limit is in the first watchout."
+  },
+  {
+   "display_id": "E12",
+   "decision": "INCLUDED",
+   "reason": "The EVAP damage from overfilling is in the first watchout."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Refuelling fire safety, not tank size or low fuel."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Paint staining during refuelling, not asked."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Smoking while refuelling, not asked."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Engine malfunction indicator, not the fuel level."
+  },
+  {
+   "display_id": "E24",
+   "decision": "INCLUDED",
+   "reason": "The blinking last bar and re-fuel advice is in the second watchout."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Clutch use when starting, not asked."
+  },
+  {
+   "display_id": "E26",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Starter switch timing, not asked."
+  }
+ ],
+ "excluded_watchouts": [
+  "E13",
+  "E14",
+  "E15",
+  "E23",
+  "E25",
+  "E26"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

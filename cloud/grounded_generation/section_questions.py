@@ -8,6 +8,8 @@ No review layer, verifier, authored answer catalog or server-added warning text.
 4. makes one Haiku call that fills the answer template;
 5. releases through the deterministic gate or fails closed as SYSTEM_ERROR.
 The returned view is a private buffer: the worker saves it before any byte reaches the rider.
+Each turn emits one answer_turn event and its stage spans (cloud.common.telemetry): retrieval
+hits, gate outcome, failure reason and timings, never the question, answer or manual text.
 """
 from dataclasses import replace
 import hashlib
@@ -19,6 +21,7 @@ import uuid
 
 from cloud.common.session import DiagnosticSession
 from cloud.common import ProviderFailure
+from cloud.common import telemetry as tm
 from cloud.grounded_generation import section_assembly as sa
 from cloud.grounded_generation import section_retrieval as sr
 from cloud.grounded_generation import template_answer as ta
@@ -99,8 +102,37 @@ def generation_summary(trace):
     return trace
 
 
+def turn_fields(controls, assembled):
+    """The allowlisted answer_turn fields: ids, codes, counts and timings only."""
+    retrieval, gate = controls.get('retrieval') or {}, controls.get('gate') or {}
+    generation = controls.get('generation') or {}
+    admission = generation.get('admission') or {}
+    fields = {'retrieval_version': retrieval.get('version'), 'chunk_ids': retrieval.get('chunk_ids'),
+              'sections_disagree': retrieval.get('sections_disagree'), 'reranked': retrieval.get('reranked'),
+              'rerank_skip_reason': retrieval.get('rerank_skip_reason'),
+              'max_cross_score': retrieval.get('max_cross_score'),
+              'below_relevance_floor': retrieval.get('below_relevance_floor'),
+              'gate_version': gate.get('version'), 'coverage': gate.get('coverage'),
+              'citations': gate.get('citations'), 'excluded_watchouts': gate.get('excluded_watchouts'),
+              'suppressed_disclaimers': gate.get('suppressed_disclaimers'),
+              'suppressed_duplicates': gate.get('suppressed_duplicates'),
+              'rewritten_phrases': gate.get('rewritten_phrases'),
+              'reservation_mode': admission.get('reservation_mode'), 'sealing_status': admission.get('sealing_status'),
+              'provider_calls': controls.get('provider_calls', 0), 'stage_ms': controls.get('stage_ms'),
+              'server_ms': controls.get('server_ms')}
+    for key in ('generation_calls', 'input_tokens', 'uncached_input_tokens', 'cache_creation_input_tokens',
+                'cache_read_input_tokens', 'cache_hit_observed', 'output_tokens', 'estimated_cost_usd'):
+        fields[key] = generation.get(key)
+    if assembled:
+        fields.update(assembly_version=assembled['version'], sections=assembled['sections'],
+                      lines=len(assembled['objects']), warnings=len(assembled['warnings']),
+                      model_input_chars=len(assembled['text']),
+                      pages_sent=sorted({p for o in assembled['objects'].values() for p in o['pages']}))
+    return fields
+
+
 class Questions:
-    def __init__(self, source, index, retriever, generate, index_identity):
+    def __init__(self, source, index, retriever, generate, index_identity, telemetry=None):
         if not (index.manifest['index_id'] == retriever.manifest['index_id'] == index_identity['index_id']
                 == source.index_id):
             raise ValueError('SECTION_INDEX_MISMATCH')
@@ -109,20 +141,30 @@ class Questions:
         self.index_lock = index_identity['manifest_sha256']
         self.runtime_lock = runtime_lock(source, index_identity, generate.contract)
         self.pipeline_lock = threading.Lock()
+        self.telemetry = telemetry or tm.NULL
 
     def new_session(self):
         s = self.source
         return DiagnosticSession(uuid.uuid4().hex, s.manual_id, s.checksum, s.variant, s.edition, (),
                                  self.index_lock, self.runtime_lock)
 
-    def answer(self, session, query, *, history=(), progress=None, operation_id=None):
+    def answer(self, session, query, *, history=(), progress=None, operation_id=None, trace_id=None):
         """Return (session, private view buffer, choices). Open Q&A issues no choices."""
         session = replace(session, version=session.version + 1, pending_step_id=None, pending_rule_id=None)
         operation_id = operation_id or uuid.uuid4().hex
-        controls = {'questions': VERSION, 'provider_calls': 0}
+        controls = {'questions': VERSION, 'provider_calls': 0, 'stage_ms': {}}
         started = time.monotonic()
+        clock = [started]
+
+        def lap(stage):
+            now = time.monotonic()
+            controls['stage_ms'][stage] = round((now - clock[0]) * 1000, 1)
+            clock[0] = now
         if not self.pipeline_lock.acquire(blocking=False):
-            return session, self._error(session, operation_id, 'PIPELINE_CONCURRENCY_LIMIT', controls), {}
+            view = self._error(session, operation_id, 'PIPELINE_CONCURRENCY_LIMIT', controls)
+            self._observe(operation_id, trace_id, session, query, history, controls, None, view)
+            return session, view, {}
+        view = assembled = None
         try:
             if (session.manual_checksum != self.source.checksum or session.version_lock != self.index_lock or
                     session.generation_lock != self.runtime_lock or session.bike_variant != self.source.variant):
@@ -130,12 +172,14 @@ class Questions:
             if progress:
                 progress('retrieving')
             found = self.retriever.search(sr.retrieval_query(query, history))
+            lap('retrieval')
             controls['retrieval'] = {k: found[k] for k in ('version', 'index_id', 'chunk_ids', 'sections_disagree',
                                                            'reranked', 'rerank_skip_reason', 'max_cross_score',
                                                            'below_relevance_floor')}
             if found['index_id'] != self.source.index_id:
                 raise ValueError('RETRIEVAL_INDEX_CHANGED')
             assembled = sa.assemble(self.index, found['chunk_ids'])
+            lap('assembly')
             controls['assembly'] = {'version': assembled['version'], 'sections': len(assembled['sections']),
                                     'lines': len(assembled['objects']), 'warnings': len(assembled['warnings']),
                                     'text_sha256': hashlib.sha256(assembled['text'].encode()).hexdigest()}
@@ -150,11 +194,15 @@ class Questions:
                 try:
                     draft, _trace = self.generate(assembled, text, operation_id)
                 finally:
+                    lap('generation')
                     controls['generation'] = generation_summary(getattr(self.generate, 'last_trace', None))
                     controls['provider_calls'] = controls['generation'].get('generation_calls', 0)
                 if progress:
                     progress('checking')
-                release = ta.gate(draft, assembled, query, self.source.support_uri)
+                try:
+                    release = ta.gate(draft, assembled, query, self.source.support_uri)
+                finally:
+                    lap('gate')
             controls['gate'] = {'version': release['version'], 'route': release['route'],
                                 'coverage': release['coverage'], 'citations': len(release['citations']),
                                 'excluded_watchouts': len(release['excluded_watchouts']),
@@ -162,17 +210,46 @@ class Questions:
                                 'suppressed_duplicates': release['suppressed_duplicates'],
                                 'rewritten_phrases': len(release['rewritten_phrases'])}
             controls['server_seconds'] = time.monotonic() - started
-            return session, self._released(session, operation_id, release, assembled, found, controls), {}
+            view = self._released(session, operation_id, release, assembled, found, controls)
+            return session, view, {}
         except ta.ReleaseRejected as exc:
             controls['gate'] = {'version': ta.VERSION, 'failure_code': exc.code}
-            return session, self._error(session, operation_id, 'GATE_' + exc.code, controls), {}
+            view = self._error(session, operation_id, 'GATE_' + exc.code, controls)
+            return session, view, {}
         except Exception as exc:
             code = str(exc) if isinstance(exc, (ProviderFailure, ValueError, sr.RetrievalError)) else ''
             if not code.replace('_', '').replace(':', '').isalnum() or not code.isupper():
                 code = 'OPEN_QA_FAILURE'
-            return session, self._error(session, operation_id, code, controls), {}
+            view = self._error(session, operation_id, code, controls)
+            return session, view, {}
         finally:
             self.pipeline_lock.release()
+            controls['server_ms'] = round((time.monotonic() - started) * 1000, 1)
+            self._observe(operation_id, trace_id, session, query, history, controls, assembled, view)
+
+    def _observe(self, operation_id, trace_id, session, query, history, controls, assembled, view):
+        """One answer_turn event and its stage spans; telemetry never fails the turn."""
+        try:
+            trace_id = trace_id or tm.new_trace_id()
+            response = (view or {}).get('response') or {}
+            failed = response.get('type') == 'SYSTEM_ERROR'
+            turn = tm.new_span_id()
+            offset = 0.0
+            for stage, ms in controls.get('stage_ms', {}).items():
+                self.telemetry.span(stage, trace_id, parent=turn, duration_ms=ms, offset_ms=round(offset, 1),
+                                    operation_id=operation_id)
+                offset += ms
+            self.telemetry.span('answer_turn', trace_id, span_id=turn, duration_ms=controls.get('server_ms'),
+                                operation_id=operation_id, status='ERROR' if failed else 'OK')
+            self.telemetry.emit('answer_turn', trace_id=trace_id, span_id=turn,
+                                severity='ERROR' if failed else 'INFO', operation_id=operation_id,
+                                session_version=session.version, index_id=self.source.index_id,
+                                route=response.get('type'), reason_codes=response.get('reason_codes'),
+                                failure_code=controls.get('failure_code'),
+                                history_turns=len([r for r in history if isinstance(r, dict)]),
+                                **tm.question_shape(query), **turn_fields(controls, assembled))
+        except Exception:
+            pass
 
     def _base(self, session, route, text, controls, *, technical=False, released=False, cited=(),
               escalation=None, clarification=None, reasons=()):

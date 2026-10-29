@@ -1,0 +1,148 @@
+{
+ "retrieval": {
+  "version": "section-top5-hybrid-v2",
+  "index_id": "index_f768fbb216836c003701079e",
+  "chunk_ids": [
+   "chunk_4b91b30bfdfa9efc7ba822bb",
+   "chunk_a3b9a94ea01758b0ae2ed061",
+   "chunk_2ba5bb62d2871b7b89ad748a",
+   "chunk_eb33db50755b1c965f4a5536",
+   "chunk_794f11a522b98409b6047f2c"
+  ],
+  "dense_top": [
+   "chunk_a3b9a94ea01758b0ae2ed061",
+   "chunk_ae09b88058696eb8966403af",
+   "chunk_794f11a522b98409b6047f2c",
+   "chunk_2ba5bb62d2871b7b89ad748a",
+   "chunk_eb33db50755b1c965f4a5536"
+  ],
+  "bm25_top": [
+   "chunk_be522d90df62b993dd3569f9",
+   "chunk_4b91b30bfdfa9efc7ba822bb",
+   "chunk_a3b9a94ea01758b0ae2ed061",
+   "chunk_794f11a522b98409b6047f2c",
+   "chunk_eb33db50755b1c965f4a5536"
+  ],
+  "sections_disagree": true,
+  "reranked": true,
+  "rerank_skip_reason": null,
+  "max_cross_score": 4.255619049072266,
+  "below_relevance_floor": false
+ },
+ "assembled": {
+  "version": "section-plain-text-v2",
+  "index_id": "index_f768fbb216836c003701079e",
+  "sections": [
+   "section_f10f6ec0eafd816acbf6eb03",
+   "section_80b3ecf85cb1436aec919488"
+  ],
+  "objects": {
+   "E1": {
+    "evidence_id": "evidence_aec54606c03369cb9d8ed23b",
+    "text": "\"OFF\"",
+    "pages": [
+     26
+    ],
+    "box": null,
+    "section": "IGNITION KEY",
+    "type": "checkbox_selected"
+   },
+   "E2": {
+    "evidence_id": "evidence_f9a08ceebf0595857790355d",
+    "text": "\"ON\"",
+    "pages": [
+     26
+    ],
+    "box": null,
+    "section": "IGNITION KEY",
+    "type": "checkbox_unselected"
+   },
+   "E3": {
+    "evidence_id": "evidence_6d18aae51376185337eba68f",
+    "text": "Key can be removed only if ignition is in OFF or steering is locked.",
+    "pages": [
+     26
+    ],
+    "box": "NOTE",
+    "section": "IGNITION KEY",
+    "type": "list_item"
+   },
+   "E4": {
+    "evidence_id": "evidence_2049671f5b5606c4001a7e60",
+    "text": "Key is common for ignition, fuel tank lock, steering lock and pillion seat.",
+    "pages": [
+     26
+    ],
+    "box": "NOTE",
+    "section": "IGNITION KEY",
+    "type": "list_item"
+   },
+   "E5": {
+    "evidence_id": "evidence_5ebe06a56c37b004ea0c3a55",
+    "text": "Key can be removed from fuel tank and pillion seat only in locked position from the key slots.",
+    "pages": [
+     26
+    ],
+    "box": "NOTE",
+    "section": "IGNITION KEY",
+    "type": "list_item"
+   },
+   "E6": {
+    "evidence_id": "evidence_2b8af8f01370b1d3b9ee880a",
+    "text": "Do not switch OFF ignition while riding the motorcycle.",
+    "pages": [
+     26
+    ],
+    "box": "WARNING",
+    "section": "IGNITION KEY",
+    "type": "list_item"
+   },
+   "E7": {
+    "evidence_id": "evidence_1e819216fd033fbe0f84a38b",
+    "text": "Doing so can cause a potential accident, resulting in serious injury to both rider and other road users, besides causing severe damage to the motorcycle.",
+    "pages": [
+     26
+    ],
+    "box": "WARNING",
+    "section": "IGNITION KEY",
+    "type": "list_item"
+   },
+   "E8": {
+    "evidence_id": "evidence_26096eb949d668e5bf4df512",
+    "text": "\"OFF\"",
+    "pages": [
+     28
+    ],
+    "box": null,
+    "section": "IGNITION/ENGINE KILL SWITCH",
+    "type": "checkbox_selected"
+   },
+   "E9": {
+    "evidence_id": "evidence_a54b5925c3d20360541d2114",
+    "text": "\"ON\"",
+    "pages": [
+     28
+    ],
+    "box": null,
+    "section": "IGNITION/ENGINE KILL SWITCH",
+    "type": "checkbox_unselected"
+   },
+   "E10": {
+    "evidence_id": "evidence_e141910747861df746685a2e",
+    "text": "Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON.",
+    "pages": [
+     28
+    ],
+    "box": "CAUTION",
+    "section": "IGNITION/ENGINE KILL SWITCH",
+    "type": "list_item"
+   }
+  },
+  "warnings": [
+   "E6",
+   "E7",
+   "E10"
+  ],
+  "text": "## IGNITION KEY (page 26)\n[E1] \"OFF\"\n[E2] \"ON\"\n[E3] (NOTE) Key can be removed only if ignition is in OFF or steering is locked.\n[E4] (NOTE) Key is common for ignition, fuel tank lock, steering lock and pillion seat.\n[E5] (NOTE) Key can be removed from fuel tank and pillion seat only in locked position from the key slots.\n[E6] (WARNING) Do not switch OFF ignition while riding the motorcycle.\n[E7] (WARNING) Doing so can cause a potential accident, resulting in serious injury to both rider and other road users, besides causing severe damage to the motorcycle.\n\n## IGNITION/ENGINE KILL SWITCH (page 28)\n[E8] \"OFF\"\n[E9] \"ON\"\n[E10] (CAUTION) Turn OFF ignition switch when engine is not running. Failure to do so will discharge the battery due to the headlamp being continuously ON."
+ }
+}

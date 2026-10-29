@@ -13,14 +13,15 @@ class BudgetGuardTests(unittest.TestCase):
         self.assertTrue(policy.should_stop(self.message("640")))
         self.assertTrue(policy.should_stop(self.message("900")))
     def test_authorized_expansion_configuration(self):
+        # The current recorded budget (cloud/deployment_status.json): INR3,120, guard INR2,960.
         import os
         from unittest.mock import patch
-        with patch.dict(os.environ, {"BUDGET_DISPLAY_NAME": "MotoMedic lifetime INR2700", "BUDGET_INR": "2700", "STOP_INR": "2540"}):
+        with patch.dict(os.environ, {"BUDGET_DISPLAY_NAME": "MotoMedic lifetime INR3120", "BUDGET_INR": "3120", "STOP_INR": "2960"}):
             expanded = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(expanded)
-        message = {"budgetDisplayName": "MotoMedic lifetime INR2700", "currencyCode": "INR", "budgetAmount": 2700, "costAmount": "2539.99"}
+        message = {"budgetDisplayName": "MotoMedic lifetime INR3120", "currencyCode": "INR", "budgetAmount": 3120, "costAmount": "2959.99"}
         self.assertFalse(expanded.should_stop(message))
-        message["costAmount"] = "2540"
+        message["costAmount"] = "2960"
         self.assertTrue(expanded.should_stop(message))
         with self.assertRaises(ValueError): expanded.should_stop(self.message(640))
     def test_other_budgets_rejected(self):

@@ -1,0 +1,23 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "The manual recommends shifting down from 3rd to 2nd at 25 km/h.", "evidence_ids": ["E5"]},
+    {"text": "Fully depress the clutch lever before the gear shift.", "evidence_ids": ["E1"]},
+    {"text": "When slowing down, disengage the clutch completely, shift the gear, then engage the clutch gradually, not too slowly.", "evidence_ids": ["E3"]}
+  ],
+  "policy": [
+    {"text": "Shift to the appropriate lower gear when engine speed drops, when climbing a gradient, or when running at reduced speed, to prevent the engine from stalling or straining.", "evidence_ids": ["E13"]}
+  ],
+  "watchouts": [
+    {"text": "Releasing the clutch abruptly with too little throttle can make the engine stall.", "evidence_ids": ["E6"]},
+    {"text": "Follow the recommended up shifting and down shifting speeds.", "evidence_ids": ["E10"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E6", "decision": "INCLUDED", "reason": "Stall risk when the clutch is released abruptly with too little throttle."},
+    {"display_id": "E7", "decision": "NOT_APPLICABLE", "reason": "Concerns abrupt clutch release at high acceleration; the earlier answer already gave this warning."},
+    {"display_id": "E8", "decision": "NOT_APPLICABLE", "reason": "Generic caution already given in the earlier answer."},
+    {"display_id": "E9", "decision": "NOT_APPLICABLE", "reason": "Generic caution already given in the earlier answer."},
+    {"display_id": "E10", "decision": "INCLUDED", "reason": "Directly about the recommended down shift speeds."}
+  ]
+}

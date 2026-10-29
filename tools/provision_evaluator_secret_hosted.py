@@ -1,4 +1,5 @@
-"""Hosted-only bridge from an existing GitHub secret to the managed verifier.
+"""Hosted-only bridge from the existing GitHub Anthropic key secret to the managed secret the
+generation call reads (resource name motomedic-evaluator-anthropic-v1, kept from its first use).
 
 The restricted federated service account can add versions to this exact secret;
 it cannot read secret values, deploy services, change billing or run providers.

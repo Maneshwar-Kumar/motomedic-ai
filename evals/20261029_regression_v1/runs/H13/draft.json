@@ -1,0 +1,27 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "Make sure the bike is upright and on its center stand, with the gears in neutral and the neutral lamp glowing in the instrument console.", "evidence_ids": ["E3", "E4"]},
+    {"text": "Switch OFF both the ignition and the engine stop switch, wait a few seconds, then switch both ON again to start the engine.", "evidence_ids": ["E5"]},
+    {"text": "This resets the roll-over sensor and reactivates the fuel system.", "evidence_ids": ["E2"]}
+  ],
+  "policy": [
+    {"text": "After a fall on either side with the engine running and a gear engaged, the roll-over sensor switches the engine OFF to prevent damage to the motorcycle and rider.", "evidence_ids": ["E1"]}
+  ],
+  "watchouts": [
+    {"text": "Push and hold the electric start switch until the engine starts, for a maximum of 5 seconds.", "evidence_ids": ["E39"]},
+    {"text": "If the malfunction indicator does not turn OFF after the engine starts, get the motorcycle checked at a Royal Enfield Authorised Service Centre.", "evidence_ids": ["E36"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E11", "decision": "NOT_APPLICABLE", "reason": "Concerns opening a hot radiator cap during coolant work, not the roll-over reset."},
+    {"display_id": "E12", "decision": "NOT_APPLICABLE", "reason": "Belongs to the coolant draining steps."},
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Belongs to the coolant filling steps."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Belongs to the coolant air bleeding step."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Concerns coolant disposal, not the reset."},
+    {"display_id": "E36", "decision": "INCLUDED", "reason": "Cited in the watchout on the malfunction indicator after the engine starts."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Low-fuel caution is not part of the roll-over reset steps."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Clutch use is not part of the neutral reset steps."},
+    {"display_id": "E39", "decision": "INCLUDED", "reason": "Cited in the watchout on how long to press the electric start switch."}
+  ]
+}

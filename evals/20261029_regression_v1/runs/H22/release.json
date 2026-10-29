@@ -1,0 +1,178 @@
+{
+ "version": "template-answer-v5",
+ "route": "UNSUPPORTED",
+ "coverage": "NONE",
+ "text": "The manual says to keep luggage weight close to the motorcycle and as low as possible, and to distribute it evenly on both sides. The manual says not to exceed 110 km/h when riding solo, carrying a pillion or payload on an accessory-equipped motorcycle. The rider is responsible for safe operation of the motorcycle when installing accessories or carrying additional weight. Use only Royal Enfield genuine motorcycle accessories, which are model specific, and follow the installation procedure. Re-check luggage periodically to make sure it is secured and will not shift while riding. Watch out: Loading weight or installing accessories incorrectly may affect stability, handling and safe operation, and could cause an accident that results in serious injury or loss of life. Watch out: Non-standard parts, such as aftermarket or custom-made parts, and removing or altering original parts may adversely affect performance and handling, causing an accident that could result in serious injury or loss of life. Watch out: Ignoring model or design specifications counts as misuse of the motorcycle and accessories and may adversely affect handling and performance. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+ "escalation_uri": "mailto:support@royalenfield.com",
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E18",
+   "evidence_id": "evidence_1816d47b8003f29a29c44542",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "label": "E20",
+   "evidence_id": "evidence_41ddc000f6abdfa3a402fa60",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "label": "E21",
+   "evidence_id": "evidence_bae47efa7a6ce22a3c3b2039",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "label": "E22",
+   "evidence_id": "evidence_cb8341a603cdb0ba99658a9f",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "label": "E24",
+   "evidence_id": "evidence_1e0072a51a34136e217eb0cc",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "label": "E25",
+   "evidence_id": "evidence_05bae4423aeebcb5527e2088",
+   "pages": [
+    14
+   ]
+  },
+  {
+   "label": "E26",
+   "evidence_id": "evidence_b45cd32783b18b7a0f3a6bd3",
+   "pages": [
+    15
+   ]
+  },
+  {
+   "label": "E28",
+   "evidence_id": "evidence_a4bb14d7d40e42aa7a1abdc2",
+   "pages": [
+    15
+   ]
+  },
+  {
+   "label": "E29",
+   "evidence_id": "evidence_32a2dfb5649c03d469c7a578",
+   "pages": [
+    15
+   ]
+  },
+  {
+   "label": "E30",
+   "evidence_id": "evidence_bbf3e2f088553465b973f78e",
+   "pages": [
+    15
+   ]
+  }
+ ],
+ "cited_pages": [
+  14,
+  15
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual says to keep luggage weight close to the motorcycle and as low as possible, and to distribute it evenly on both sides.",
+    "evidence_ids": [
+     "E21",
+     "E22"
+    ]
+   },
+   {
+    "text": "The manual says not to exceed 110 km/h when riding solo, carrying a pillion or payload on an accessory-equipped motorcycle.",
+    "evidence_ids": [
+     "E20"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "The rider is responsible for safe operation of the motorcycle when installing accessories or carrying additional weight.",
+    "evidence_ids": [
+     "E18"
+    ]
+   },
+   {
+    "text": "Use only Royal Enfield genuine motorcycle accessories, which are model specific, and follow the installation procedure.",
+    "evidence_ids": [
+     "E25"
+    ]
+   },
+   {
+    "text": "Re-check luggage periodically to make sure it is secured and will not shift while riding.",
+    "evidence_ids": [
+     "E24"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Loading weight or installing accessories incorrectly may affect stability, handling and safe operation, and could cause an accident that results in serious injury or loss of life.",
+    "evidence_ids": [
+     "E26"
+    ]
+   },
+   {
+    "text": "Non-standard parts, such as aftermarket or custom-made parts, and removing or altering original parts may adversely affect performance and handling, causing an accident that could result in serious injury or loss of life.",
+    "evidence_ids": [
+     "E28",
+     "E29"
+    ]
+   },
+   {
+    "text": "Ignoring model or design specifications counts as misuse of the motorcycle and accessories and may adversely affect handling and performance.",
+    "evidence_ids": [
+     "E30"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E26",
+   "decision": "INCLUDED",
+   "reason": "Cited by the first watchout on incorrect loading or accessory fitting."
+  },
+  {
+   "display_id": "E27",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Approval statement for genuine accessories; the rule itself is already given in the policy."
+  },
+  {
+   "display_id": "E28",
+   "decision": "INCLUDED",
+   "reason": "Cited by the second watchout on non-standard parts."
+  },
+  {
+   "display_id": "E29",
+   "decision": "INCLUDED",
+   "reason": "Continues the E28 warning on performance and accident risk; cited by the second watchout."
+  },
+  {
+   "display_id": "E30",
+   "decision": "INCLUDED",
+   "reason": "Cited by the third watchout on model and design specifications."
+  }
+ ],
+ "excluded_watchouts": [
+  "E27"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

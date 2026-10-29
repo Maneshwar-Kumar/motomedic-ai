@@ -1,0 +1,116 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "The manual says it is preferable to have a stored motorcycle prepared for re-use through a Royal Enfield Authorised Service Centre, so it is restored to its peak operating condition. If the battery was disconnected and removed for storage, the manual says to check its voltage before refitting it. If the voltage is not within specification, the manual says to recharge the battery at an authorised service workshop or battery dealer. The manual does not give a restart procedure for a motorcycle after storage. The manual does not give the battery voltage specification.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E10",
+   "evidence_id": "evidence_fcba93b4680b3116de440b69",
+   "pages": [
+    120
+   ]
+  },
+  {
+   "label": "E11",
+   "evidence_id": "evidence_8fa7f3dd0a735ed98d818a77",
+   "pages": [
+    120
+   ]
+  }
+ ],
+ "cited_pages": [
+  120
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual says it is preferable to have a stored motorcycle prepared for re-use through a Royal Enfield Authorised Service Centre, so it is restored to its peak operating condition.",
+    "evidence_ids": [
+     "E10"
+    ]
+   },
+   {
+    "text": "If the battery was disconnected and removed for storage, the manual says to check its voltage before refitting it.",
+    "evidence_ids": [
+     "E11"
+    ]
+   },
+   {
+    "text": "If the voltage is not within specification, the manual says to recharge the battery at an authorised service workshop or battery dealer.",
+    "evidence_ids": [
+     "E11"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a restart procedure for a motorcycle after storage."
+   },
+   {
+    "text": "The manual does not give the battery voltage specification."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E22",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns opening a hot radiator cap during coolant work, not restarting after storage."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns positioning the bike for coolant work, not restarting."
+  },
+  {
+   "display_id": "E24",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns filling the coolant system, not restarting."
+  },
+  {
+   "display_id": "E25",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns air bleeding the coolant system, not restarting."
+  },
+  {
+   "display_id": "E39",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns spilled coolant disposal, not restarting."
+  },
+  {
+   "display_id": "E44",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns stand position before riding, not starting the engine."
+  },
+  {
+   "display_id": "E45",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns parking on a firm, flat surface, not restarting."
+  },
+  {
+   "display_id": "E46",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns sitting on the bike while it rests on the side stand, not restarting."
+  }
+ ],
+ "excluded_watchouts": [
+  "E22",
+  "E23",
+  "E24",
+  "E25",
+  "E39",
+  "E44",
+  "E45",
+  "E46"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}
