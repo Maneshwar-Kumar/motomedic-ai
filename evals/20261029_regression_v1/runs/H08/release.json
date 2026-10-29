@@ -1,0 +1,73 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The engine number is punched on the bottom of the gear pedal connector rod. The VIN is a 17-digit number punched on the right side steering head tube, in the form of a label. Watch out: Do not tamper with or alter the VIN or engine number. The manual says this is illegal and will void the vehicle registration and warranty.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_2f7f764e154aaf68164ade75",
+   "pages": [
+    22
+   ]
+  },
+  {
+   "label": "E2",
+   "evidence_id": "evidence_a7a3666771636148d6e0ebba",
+   "pages": [
+    22
+   ]
+  },
+  {
+   "label": "E3",
+   "evidence_id": "evidence_875cfcf7fc4f79c898d8f747",
+   "pages": [
+    22
+   ]
+  }
+ ],
+ "cited_pages": [
+  22
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The engine number is punched on the bottom of the gear pedal connector rod.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "The VIN is a 17-digit number punched on the right side steering head tube, in the form of a label.",
+    "evidence_ids": [
+     "E3"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Do not tamper with or alter the VIN or engine number. The manual says this is illegal and will void the vehicle registration and warranty.",
+    "evidence_ids": [
+     "E2"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E2",
+   "decision": "INCLUDED",
+   "reason": "One watchout cites E2: the caution against altering the VIN and engine numbers."
+  }
+ ],
+ "excluded_watchouts": [],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

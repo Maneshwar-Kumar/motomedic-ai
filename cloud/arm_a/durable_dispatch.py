@@ -3,6 +3,8 @@
 No provider work runs on a browser request or a background daemon. Creating a
 queue, granting IAM, deploying this endpoint and activating hosting are separate
 operational actions. The default is disabled without complete dispatch settings.
+The work snapshot carries the rider request's trace id, so the worker's spans and its
+worker_outcome event join the same trace; the task body carries neither text nor trace.
 """
 from dataclasses import asdict
 import base64
@@ -10,6 +12,7 @@ import hashlib
 import json
 import os
 import re
+import time
 from urllib.parse import urlsplit
 import uuid
 
@@ -24,9 +27,9 @@ class DispatchError(RuntimeError):
     pass
 
 
-def make_work(session, query, history, expected_version, questions):
+def make_work(session, query, history, expected_version, questions, trace_id=None):
     """An immutable owner-private work snapshot, never placed in a task body."""
-    return {'version': VERSION, 'session_id': session.session_id,
+    return {'version': VERSION, 'session_id': session.session_id, 'trace_id': trace_id,
         'session_snapshot': json.dumps(asdict(session), allow_nan=False),
         'query': query, 'history': list(history), 'expected_version': expected_version,
         'runtime_lock': session.generation_lock,
@@ -116,6 +119,17 @@ class DurableWorker:
 
     def run(self, owner, key, payload_hash):
         """Task retries observe terminal results or a lease; they never redo work."""
+        started, trace = time.monotonic(), {}
+        status = self._run(owner, key, payload_hash, trace)
+        telemetry = getattr(self.questions, 'telemetry', None)
+        if telemetry is not None:
+            telemetry.emit('worker_outcome', trace_id=trace.get('trace_id'),
+                           severity='INFO' if trace.get('outcome') == 'COMMITTED' else 'WARNING',
+                           operation_id=key, outcome=trace.get('outcome'), http_status=status,
+                           duration_ms=round((time.monotonic() - started) * 1000, 1))
+        return status
+
+    def _run(self, owner, key, payload_hash, trace):
         store = self.state_factory(owner)
         token = uuid.uuid4().hex
         claimed = False
@@ -123,8 +137,10 @@ class DurableWorker:
             work = store.claim_operation(key, payload_hash, token)
             if work is None:
                 operation = store.operation(key)
+                trace['outcome'] = 'OBSERVED_' + operation['state']
                 return 204 if operation['state'] in ('COMPLETE', 'FAILED') else 503
             claimed = True
+            trace['trace_id'] = work.get('trace_id')
             q = self.questions
             if (work['version'] != VERSION or work['manual_checksum'] != q.source.checksum or
                     work['index_id'] != q.source.index_id or work['index_lock'] != q.index_lock or
@@ -140,17 +156,20 @@ class DurableWorker:
             from cloud.grounded_generation.whole_turn_admission import operation_deadline
             with operation_deadline(operation['deadline_at']):
                 updated, view, choices = q.answer(session, work['query'], history=work['history'],
-                    progress=lambda stage: store.progress_operation(key, token, stage), operation_id=key)
+                    progress=lambda stage: store.progress_operation(key, token, stage), operation_id=key,
+                    trace_id=work.get('trace_id'))
             from cloud.grounded_generation.delivery import bind_view
             view = bind_view(view, key, updated.generation_lock)
             self.validate_saved(view)
             store.commit_answer(key, updated, view, choices,
                 expected_version=work['expected_version'], query=work['query'], lease_token=token)
+            trace['outcome'] = 'COMMITTED'
             return 204
         except (OperationConflict, SessionConflict):
             code = 'OPERATION_OR_SESSION_CONFLICT'
         except Exception:
             code = 'OPERATION_NOT_COMMITTED'
+        trace['outcome'] = code
         # A possibly successful commit remains successful. Never save a private
         # answer on an uncertain transaction, and never retry generation.
         try:

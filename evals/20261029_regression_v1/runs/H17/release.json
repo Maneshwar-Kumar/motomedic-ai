@@ -1,0 +1,171 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "Remove the expansion tank cap and fill the tank to the upper level line. Replace the expansion tank cap when you finish. The manual says Coolant from Total is ready to use and does not need mixing. Do not fill the coolant when the vehicle is on its side stand. Check the coolant level in the expansion tank every 1000 km, or earlier as required, and top up as required. Watch out: Do not open a radiator cap when the engine is hot. Boiling coolant can spurt out of the filler neck or reservoir and cause severe burns. Watch out: Keep the vehicle straight on level ground. Watch out: Do not spill coolant, and avoid skin contact. If coolant touches skin, wash the area promptly with soap and water. The manual names only Coolant from Total as ready to use. It gives no coolant grade or specification and does not say whether other coolants can be used.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E6",
+   "evidence_id": "evidence_fd36c1641a183a760642e6eb",
+   "pages": [
+    86
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_4599dc98f6c9e31947e4ca67",
+   "pages": [
+    86
+   ]
+  },
+  {
+   "label": "E15",
+   "evidence_id": "evidence_423ad61a550cf44744fbddce",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E16",
+   "evidence_id": "evidence_ecf9b550d62b6653fa07fa75",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E23",
+   "evidence_id": "evidence_6faf61228a443cbd4fcdff5c",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E24",
+   "evidence_id": "evidence_4054249a4b687a8ac1b03a3c",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E25",
+   "evidence_id": "evidence_3c4844130250c56d079c51ac",
+   "pages": [
+    87
+   ]
+  },
+  {
+   "label": "E28",
+   "evidence_id": "evidence_cd81c1174bb3a2fbf99ba2d2",
+   "pages": [
+    125
+   ]
+  }
+ ],
+ "cited_pages": [
+  86,
+  87,
+  125
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "Remove the expansion tank cap and fill the tank to the upper level line.",
+    "evidence_ids": [
+     "E15"
+    ]
+   },
+   {
+    "text": "Replace the expansion tank cap when you finish.",
+    "evidence_ids": [
+     "E16"
+    ]
+   },
+   {
+    "text": "The manual says Coolant from Total is ready to use and does not need mixing.",
+    "evidence_ids": [
+     "E25"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "Do not fill the coolant when the vehicle is on its side stand.",
+    "evidence_ids": [
+     "E24"
+    ]
+   },
+   {
+    "text": "Check the coolant level in the expansion tank every 1000 km, or earlier as required, and top up as required.",
+    "evidence_ids": [
+     "E28"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Do not open a radiator cap when the engine is hot. Boiling coolant can spurt out of the filler neck or reservoir and cause severe burns.",
+    "evidence_ids": [
+     "E6"
+    ]
+   },
+   {
+    "text": "Keep the vehicle straight on level ground.",
+    "evidence_ids": [
+     "E7"
+    ]
+   },
+   {
+    "text": "Do not spill coolant, and avoid skin contact. If coolant touches skin, wash the area promptly with soap and water.",
+    "evidence_ids": [
+     "E23"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual names only Coolant from Total as ready to use. It gives no coolant grade or specification and does not say whether other coolants can be used.",
+    "evidence_ids": [
+     "E25"
+    ]
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E6",
+   "decision": "INCLUDED",
+   "reason": "Hot-cap burn warning applies when opening the cap to top up."
+  },
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "Upright position on level ground applies while filling."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Full radiator refill step, not the expansion tank top-up."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Air bleeding belongs to the full system refill, not the top-up."
+  },
+  {
+   "display_id": "E23",
+   "decision": "INCLUDED",
+   "reason": "Spill and skin-contact warning applies when handling coolant."
+  }
+ ],
+ "excluded_watchouts": [
+  "E8",
+  "E9"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

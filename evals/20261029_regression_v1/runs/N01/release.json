@@ -1,0 +1,110 @@
+{
+ "version": "template-answer-v5",
+ "route": "UNSUPPORTED",
+ "coverage": "NONE",
+ "text": "The manual's 6000 rpm figure is a maximum engine speed for the first 500 km of running-in, not a top speed. Watch out: A new motorcycle must be operated according to the running-in procedure. Watch out: Do not exceed the legal speed limit or ride too fast for conditions. High speed makes loss of control more likely. I couldn’t find relevant information in the selected manual to answer your question. Please contact Royal Enfield or an authorised service centre.",
+ "escalation_uri": "mailto:support@royalenfield.com",
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E12",
+   "evidence_id": "evidence_dc2d0cac879090964d9460fb",
+   "pages": [
+    9
+   ]
+  },
+  {
+   "label": "E14",
+   "evidence_id": "evidence_ec2116c36225248691aabede",
+   "pages": [
+    9
+   ]
+  },
+  {
+   "label": "E41",
+   "evidence_id": "evidence_b27f0ee41aa174a7ff6818ea",
+   "pages": [
+    71
+   ]
+  }
+ ],
+ "cited_pages": [
+  9,
+  71
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual's 6000 rpm figure is a maximum engine speed for the first 500 km of running-in, not a top speed.",
+    "evidence_ids": [
+     "E41"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "A new motorcycle must be operated according to the running-in procedure.",
+    "evidence_ids": [
+     "E12"
+    ]
+   },
+   {
+    "text": "Do not exceed the legal speed limit or ride too fast for conditions. High speed makes loss of control more likely.",
+    "evidence_ids": [
+     "E14"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E11",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Warns about aftermarket suspension parts, not top speed."
+  },
+  {
+   "display_id": "E12",
+   "decision": "INCLUDED",
+   "reason": "Running-in procedure applies to a new motorcycle."
+  },
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Moderate-speed advice for new riders; E14 covers speed."
+  },
+  {
+   "display_id": "E14",
+   "decision": "INCLUDED",
+   "reason": "Speed limit and loss-of-control warning."
+  },
+  {
+   "display_id": "E26",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Shock absorber and fork inspection, not speed."
+  },
+  {
+   "display_id": "E27",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Exhaust gas warning, not speed."
+  },
+  {
+   "display_id": "E28",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Maintenance warning, not speed."
+  }
+ ],
+ "excluded_watchouts": [
+  "E11",
+  "E13",
+  "E26",
+  "E27",
+  "E28"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

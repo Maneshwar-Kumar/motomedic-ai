@@ -1,0 +1,105 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The manual recommends shifting up from 2nd to 3rd gear at 30 km/h. Watch out: If the acceleration is very high and the clutch lever is released abruptly, the motorcycle can move suddenly, leading to loss of control, an accident, injury or loss of life. Watch out: Always exercise utmost caution while releasing the clutch and riding the motorcycle.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E4",
+   "evidence_id": "evidence_dcbc10d0837791aed3da51c3",
+   "pages": [
+    76
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_1919a71d56aa79aab9c06d31",
+   "pages": [
+    77
+   ]
+  },
+  {
+   "label": "E8",
+   "evidence_id": "evidence_9029bf24bed16abb1dda47da",
+   "pages": [
+    77
+   ]
+  },
+  {
+   "label": "E9",
+   "evidence_id": "evidence_f1dde59cf186e3439e32c7d9",
+   "pages": [
+    77
+   ]
+  }
+ ],
+ "cited_pages": [
+  76,
+  77
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual recommends shifting up from 2nd to 3rd gear at 30 km/h.",
+    "evidence_ids": [
+     "E4"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "If the acceleration is very high and the clutch lever is released abruptly, the motorcycle can move suddenly, leading to loss of control, an accident, injury or loss of life.",
+    "evidence_ids": [
+     "E7"
+    ]
+   },
+   {
+    "text": "Always exercise utmost caution while releasing the clutch and riding the motorcycle.",
+    "evidence_ids": [
+     "E8",
+     "E9"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E6",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Covers a rough start and stalling from an abrupt clutch release, not the up-shift speed."
+  },
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "An abrupt clutch release at high acceleration can cause sudden movement and loss of control."
+  },
+  {
+   "display_id": "E8",
+   "decision": "INCLUDED",
+   "reason": "Caution is needed while releasing the clutch during a shift."
+  },
+  {
+   "display_id": "E9",
+   "decision": "INCLUDED",
+   "reason": "Completes the E8 caution about riding the motorcycle."
+  },
+  {
+   "display_id": "E10",
+   "decision": "NOT_APPLICABLE",
+   "reason": "The answer already gives the recommended up-shift speed."
+  }
+ ],
+ "excluded_watchouts": [
+  "E6",
+  "E10"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

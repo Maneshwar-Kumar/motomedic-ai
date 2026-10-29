@@ -1,0 +1,37 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "Disconnect the black negative (-ve) terminal first, then the red positive (+ve) terminal.",
+      "evidence_ids": ["E8"]
+    },
+    {
+      "text": "When you reconnect the battery, connect the red positive (+ve) terminal first, then the black negative (-ve) terminal.",
+      "evidence_ids": ["E16"]
+    }
+  ],
+  "watchouts": [
+    {
+      "text": "Keep both cables firmly connected to their battery terminals. If they are not, the motorcycle's electrical system may be damaged.",
+      "evidence_ids": ["E17"]
+    }
+  ],
+  "watchout_review": [
+    {
+      "display_id": "E8",
+      "decision": "NOT_APPLICABLE",
+      "reason": "The disconnect order is already the first answer sentence, so it is not repeated as a watchout."
+    },
+    {
+      "display_id": "E16",
+      "decision": "NOT_APPLICABLE",
+      "reason": "The reconnect order is already the second answer sentence, so it is not repeated as a watchout."
+    },
+    {
+      "display_id": "E17",
+      "decision": "INCLUDED",
+      "reason": "Adds the firm-connection caution and the risk of electrical damage, which the answer does not give."
+    }
+  ]
+}

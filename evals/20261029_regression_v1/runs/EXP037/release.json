@@ -1,0 +1,147 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "The number-plate light is an LED unit, listed in the manual as 12 V LED. If it fails, the entire tail lamp/trafficator and license plate illuminator assembly should be replaced. Have an authorised Royal Enfield dealer or service centre replace it. Watch out: Bulbs or electrical gadgets rated differently from the manual's specification can overload the electrical system, behave erratically or fail early. Watch out: Fitments not approved by Royal Enfield will seriously affect the vehicle's performance and void the warranty. The manual does not give a bulb to buy or a part number for the number-plate light.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_9bd367226b5030b7a79beb0f",
+   "pages": [
+    110
+   ]
+  },
+  {
+   "label": "E2",
+   "evidence_id": "evidence_263f3b555e67f5b3d5dd921b",
+   "pages": [
+    110
+   ]
+  },
+  {
+   "label": "E8",
+   "evidence_id": "evidence_e5038680f235054234151f44",
+   "pages": [
+    19
+   ]
+  },
+  {
+   "label": "E16",
+   "evidence_id": "evidence_da497f5f0bbf1c24b8f93714",
+   "pages": [
+    19
+   ]
+  },
+  {
+   "label": "E17",
+   "evidence_id": "evidence_081f245f33f1dec5cb06a080",
+   "pages": [
+    19
+   ]
+  }
+ ],
+ "cited_pages": [
+  19,
+  110
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The number-plate light is an LED unit, listed in the manual as 12 V LED.",
+    "evidence_ids": [
+     "E1",
+     "E8"
+    ]
+   },
+   {
+    "text": "If it fails, the entire tail lamp/trafficator and license plate illuminator assembly should be replaced.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "Have an authorised Royal Enfield dealer or service centre replace it.",
+    "evidence_ids": [
+     "E2"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Bulbs or electrical gadgets rated differently from the manual's specification can overload the electrical system, behave erratically or fail early.",
+    "evidence_ids": [
+     "E16"
+    ]
+   },
+   {
+    "text": "Fitments not approved by Royal Enfield will seriously affect the vehicle's performance and void the warranty.",
+    "evidence_ids": [
+     "E17"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a bulb to buy or a part number for the number-plate light."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E16",
+   "decision": "INCLUDED",
+   "reason": "Warns against bulbs not at the specified rating, which applies to buying a bulb."
+  },
+  {
+   "display_id": "E17",
+   "decision": "INCLUDED",
+   "reason": "Warns that non-approved fitments affect performance and void the warranty."
+  },
+  {
+   "display_id": "E19",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns fuse failures, not the number-plate light."
+  },
+  {
+   "display_id": "E20",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns fuse ratings, not the number-plate light."
+  },
+  {
+   "display_id": "E21",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns spare fuses."
+  },
+  {
+   "display_id": "E22",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns defective fuses."
+  },
+  {
+   "display_id": "E28",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns turn signals with the hazard switch on."
+  },
+  {
+   "display_id": "E29",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns trafficator flashing."
+  }
+ ],
+ "excluded_watchouts": [
+  "E19",
+  "E20",
+  "E21",
+  "E22",
+  "E28",
+  "E29"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

@@ -23,7 +23,7 @@ class HealthTests(unittest.TestCase):
         source = SimpleNamespace(checksum='a'*64,index_id='synthetic-index',variant='Himalayan BS6')
         self.app = create_app(source)
         self.app.config.update(DURABLE_DISPATCH_CONFIGURED=True,ANSWER_PROVIDER='claude-haiku-5-5',
-            PROMPT_CACHE='ANTHROPIC_SYSTEM_PROMPT_5M',RETRIEVAL='section-top5-hybrid-v1',
+            PROMPT_CACHE='ANTHROPIC_SYSTEM_PROMPT_5M',RETRIEVAL='section-top5-hybrid-v2',
             DENSE_BACKEND='EXACT_PINNED_VECTORS',RUNTIME_LOCK='b'*64)
         self.client = self.app.test_client()
         self.headers = {'Authorization':platform_verified_token()}

@@ -1,0 +1,129 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "For Android, the app's minimum supported version is two versions behind the current Android OS. For iOS, the minimum supported version is one version behind the current iOS release. The manual says the app is not compatible with Huawei phones. The manual does not say whether the app has been updated for a phone OS released this week. The manual does not give the current Android or iOS release numbers.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_8b950cdd4b977781b231dfe3",
+   "pages": [
+    54
+   ]
+  },
+  {
+   "label": "E2",
+   "evidence_id": "evidence_6d65a0c9aaa0d6acbf4aab29",
+   "pages": [
+    54
+   ]
+  },
+  {
+   "label": "E4",
+   "evidence_id": "evidence_d536a93a2d9db0bbc972cf33",
+   "pages": [
+    54
+   ]
+  }
+ ],
+ "cited_pages": [
+  54
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "For Android, the app's minimum supported version is two versions behind the current Android OS.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "For iOS, the minimum supported version is one version behind the current iOS release.",
+    "evidence_ids": [
+     "E2"
+    ]
+   },
+   {
+    "text": "The manual says the app is not compatible with Huawei phones.",
+    "evidence_ids": [
+     "E4"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [],
+  "disclaimers": [
+   {
+    "text": "The manual does not say whether the app has been updated for a phone OS released this week."
+   },
+   {
+    "text": "The manual does not give the current Android or iOS release numbers."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E13",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Charger port warning about rain; the question is about app compatibility."
+  },
+  {
+   "display_id": "E14",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Charger port warning about other devices; not about the app."
+  },
+  {
+   "display_id": "E15",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB cable insertion warning; not about the app."
+  },
+  {
+   "display_id": "E16",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB port cap warning; not about the app."
+  },
+  {
+   "display_id": "E17",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Metal objects in the charging port; not about the app."
+  },
+  {
+   "display_id": "E21",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Port cap sealing and warranty; not about the app."
+  },
+  {
+   "display_id": "E22",
+   "decision": "NOT_APPLICABLE",
+   "reason": "High current draw shutdown; not about the app."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB charger works only when the engine runs; not about the app."
+  },
+  {
+   "display_id": "E24",
+   "decision": "NOT_APPLICABLE",
+   "reason": "USB cable quality for charging; not about the app."
+  }
+ ],
+ "excluded_watchouts": [
+  "E13",
+  "E14",
+  "E15",
+  "E16",
+  "E17",
+  "E21",
+  "E22",
+  "E23",
+  "E24"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

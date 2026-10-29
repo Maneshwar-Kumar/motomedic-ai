@@ -1,0 +1,29 @@
+{
+  "route": "UNSUPPORTED",
+  "coverage": "NONE",
+  "answer": [
+    {
+      "text": "The warning symbol glows whenever a vehicle component faults.",
+      "evidence_ids": ["E9"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E13", "decision": "NOT_APPLICABLE", "reason": "Covers the engine MIL and EMS faults, not the general warning symbol."},
+    {"display_id": "E14", "decision": "NOT_APPLICABLE", "reason": "Covers the ABS indicator lamp, not the general warning symbol."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Accessory loading warning; the question is about a warning symbol."},
+    {"display_id": "E25", "decision": "NOT_APPLICABLE", "reason": "Accessory approval statement; no link to the warning symbol."},
+    {"display_id": "E26", "decision": "NOT_APPLICABLE", "reason": "Nonstandard front fork warning; not related to the warning symbol."},
+    {"display_id": "E27", "decision": "NOT_APPLICABLE", "reason": "Continuation of the nonstandard parts warning; not related."},
+    {"display_id": "E28", "decision": "NOT_APPLICABLE", "reason": "Model and design specifications warning; not related."},
+    {"display_id": "E39", "decision": "NOT_APPLICABLE", "reason": "Nonstandard suspension warning; not related."},
+    {"display_id": "E40", "decision": "NOT_APPLICABLE", "reason": "Running-in procedure warning; not related."},
+    {"display_id": "E41", "decision": "NOT_APPLICABLE", "reason": "Moderate speed warning; not related."},
+    {"display_id": "E42", "decision": "NOT_APPLICABLE", "reason": "Speed limit warning; not related."},
+    {"display_id": "E54", "decision": "NOT_APPLICABLE", "reason": "Shock absorber and fork inspection warning; not related."},
+    {"display_id": "E55", "decision": "NOT_APPLICABLE", "reason": "Exhaust gas warning; not related."},
+    {"display_id": "E56", "decision": "NOT_APPLICABLE", "reason": "Maintenance schedule warning; not related."},
+    {"display_id": "E63", "decision": "NOT_APPLICABLE", "reason": "Hazard light battery warning; not related."},
+    {"display_id": "E68", "decision": "NOT_APPLICABLE", "reason": "Turn signal and hazard light warning; not related."},
+    {"display_id": "E69", "decision": "NOT_APPLICABLE", "reason": "Trafficator flashing warning; not related."}
+  ]
+}

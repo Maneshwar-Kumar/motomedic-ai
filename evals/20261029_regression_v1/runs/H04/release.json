@@ -1,0 +1,77 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "PARTIAL",
+ "text": "The low beam headlamp is rated at 12.12 W. The manual gives 14.22 W for the high beam and low beam together. Watch out: Using bulbs or electrical gadgets with a rating other than the specified one can overload the electrical system, cause erratic behavior or lead to premature failure. The manual does not give a wattage for the high beam on its own.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E14",
+   "evidence_id": "evidence_e5038680f235054234151f44",
+   "pages": [
+    19
+   ]
+  },
+  {
+   "label": "E22",
+   "evidence_id": "evidence_da497f5f0bbf1c24b8f93714",
+   "pages": [
+    19
+   ]
+  }
+ ],
+ "cited_pages": [
+  19
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The low beam headlamp is rated at 12.12 W.",
+    "evidence_ids": [
+     "E14"
+    ]
+   },
+   {
+    "text": "The manual gives 14.22 W for the high beam and low beam together.",
+    "evidence_ids": [
+     "E14"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [
+   {
+    "text": "Using bulbs or electrical gadgets with a rating other than the specified one can overload the electrical system, cause erratic behavior or lead to premature failure.",
+    "evidence_ids": [
+     "E22"
+    ]
+   }
+  ],
+  "disclaimers": [
+   {
+    "text": "The manual does not give a wattage for the high beam on its own."
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E22",
+   "decision": "INCLUDED",
+   "reason": "Warns that bulbs rated other than specified overload the electrical system, which bears on the wattage figures."
+  },
+  {
+   "display_id": "E23",
+   "decision": "NOT_APPLICABLE",
+   "reason": "General warning on unapproved modifications; it does not concern the wattage figures."
+  }
+ ],
+ "excluded_watchouts": [
+  "E23"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

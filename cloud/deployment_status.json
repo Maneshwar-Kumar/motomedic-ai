@@ -1,95 +1,127 @@
 {
+  "record": "Hosted Google Cloud state of the MotoMedic project, as last recorded. Not a live read-back.",
+  "as_of": "2026-10-23",
+  "source": "evals/20261023_private_hosted_v5/README.md (owner-authorized private test receipt)",
   "project_id": "motomedic-ai-20261009",
   "region": "us-central1",
-  "service": "motomedic-qdrant",
-  "url": "https://motomedic-qdrant-279945185781.us-central1.run.app",
-  "authenticated": true,
-  "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
-  "qdrant_version": "1.19.2",
-  "selected_index_id": "index_a3282c4d98cf54595e4ba168",
-  "index_bundle_uri": "gs://motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/qdrant_points.json",
-  "index_bundle_sha256": "fb847f240a1aa1def0a5048575279afddaf443c5346bd51cf2727ab60b5f0ee3",
-  "snapshot_uri": "gs://motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz",
-  "snapshot_sha256": "4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc",
-  "limits": {
-    "min_instances": 1,
-    "max_instances": 1,
-    "cpu": 1,
-    "memory_mib": 512,
-    "concurrency": 8,
-    "request_timeout_seconds": 30,
-    "startup_cpu_boost": true
-  },
+  "billing_enabled": false,
+  "hosting_state": "OFFLINE_BILLING_DISABLED",
   "budget": {
-    "display_name": "MotoMedic lifetime INR2700",
     "budget_id": "381ad343-2da4-4676-b9a3-f180783b26d1",
     "currency": "INR",
-    "amount": 2700,
+    "amount": 3120,
+    "automatic_disable_billing_at": 2960,
     "start_date": "2026-10-09",
     "recurring": false,
-    "alert_amounts": [
-      1350,
-      2160,
-      2700
-    ],
-    "automatic_disable_billing_at": 2540,
     "guard_service": "motomedic-budget-guard",
-    "simulation_passed": true,
-    "live_enabled": true,
-    "retries_enabled": true,
-    "exact_USD10_cap_guaranteed": false,
-    "additional_owner_authorized_inr": 1900,
-    "guard_revision": "motomedic-budget-guard-00003-qax"
+    "exact_cap_guaranteed": false,
+    "changed_at": "2026-10-23",
+    "change": "Raised from INR 2,700 / guard 2,540 for the owner-authorized private test; billing was disabled again afterwards",
+    "not_recorded": [
+      "display_name",
+      "alert_amounts",
+      "guard_revision"
+    ]
   },
-  "github_runs": {
-    "miniLM_final": 37908235133,
-    "bge_m3_final": 37908240500
-  },
-  "release_status": "CANDIDATE_RETRIEVAL_ONLY",
-  "may_generate_procedural_advice": false,
-  "live_verification": {
-    "checks": 11,
-    "passed": 11,
-    "report": "cloud/live_smoke.json"
-  },
-  "active_assembly_code_sha256": "fada88cb2c02d16b830e6a4f21703d776730929ce7a261c056c4cf3fcb687ec7",
-  "assembly_contract": "TRD v0.3 candidate evidence boundary",
-  "prior_configuration_20261009": {
+  "qdrant": {
+    "service": "motomedic-qdrant",
+    "url": "https://motomedic-qdrant-279945185781.us-central1.run.app",
+    "authenticated": true,
+    "image": "us-central1-docker.pkg.dev/motomedic-ai-20261009/motomedic/qdrant@sha256:e2ad5afa1977a66c6a7185d93810dc5cf73318cde7122dfe3327b34bb343be37",
+    "qdrant_version": "1.19.2",
+    "active_revision": "motomedic-qdrant-00003-cjb",
     "limits": {
-      "min_instances": 0,
+      "min_instances": 1,
       "max_instances": 1,
       "cpu": 1,
       "memory_mib": 512,
       "concurrency": 8,
-      "request_timeout_seconds": 30
+      "request_timeout_seconds": 30,
+      "startup_cpu_boost": true
     },
-    "budget": {
-      "display_name": "MotoMedic lifetime INR800",
-      "budget_id": "381ad343-2da4-4676-b9a3-f180783b26d1",
-      "currency": "INR",
-      "amount": 800,
-      "start_date": "2026-10-09",
-      "recurring": false,
-      "alert_amounts": [
-        400,
-        640,
-        800
-      ],
-      "automatic_disable_billing_at": 640,
-      "guard_service": "motomedic-budget-guard",
-      "simulation_passed": true,
-      "live_enabled": true,
-      "retries_enabled": true,
-      "exact_USD10_cap_guaranteed": false
-    }
+    "index_id": "index_a3282c4d98cf54595e4ba168",
+    "index_bundle_uri": "gs://motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/qdrant_points.json",
+    "index_bundle_sha256": "fb847f240a1aa1def0a5048575279afddaf443c5346bd51cf2727ab60b5f0ee3",
+    "snapshot_uri": "gs://motomedic-ai-20261009-indices/index_a3282c4d98cf54595e4ba168/index_snapshot.tar.gz",
+    "snapshot_sha256": "4248b6f21bede82375a2aceda2205ad8abb63a061abf18c30e9686cd82bba6bc",
+    "serving_index_uploaded": false,
+    "note": "Holds the base index only. The serving section index index_f768fbb216836c003701079e is published as GitHub release index-f768fbb216836c003701079e and is not uploaded here; without MOTOMEDIC_QDRANT_URL the runtime searches its pinned vectors in the image."
   },
-  "active_revision": "motomedic-qdrant-00003-cjb",
-  "owner_authorized_warm_change_20261011": {
-    "receipt": "reports/warm_instance_budget_20261011.json",
-    "checked_at_utc": "2026-10-11T09:31:17.476194+00:00",
-    "scope": "Existing private Qdrant only; no query/API deployment",
-    "main_billing_enabled": true,
-    "inference_billing_enabled": false,
-    "health_points": 532
+  "history": {
+    "configuration_20261011": {
+      "budget": {
+        "display_name": "MotoMedic lifetime INR2700",
+        "budget_id": "381ad343-2da4-4676-b9a3-f180783b26d1",
+        "currency": "INR",
+        "amount": 2700,
+        "start_date": "2026-10-09",
+        "recurring": false,
+        "alert_amounts": [
+          1350,
+          2160,
+          2700
+        ],
+        "automatic_disable_billing_at": 2540,
+        "guard_service": "motomedic-budget-guard",
+        "simulation_passed": true,
+        "live_enabled": true,
+        "retries_enabled": true,
+        "exact_USD10_cap_guaranteed": false,
+        "additional_owner_authorized_inr": 1900,
+        "guard_revision": "motomedic-budget-guard-00003-qax"
+      },
+      "owner_authorized_warm_change": {
+        "receipt": "archive/reports/warm_instance_budget_20261011.json",
+        "checked_at_utc": "2026-10-11T09:31:17.476194+00:00",
+        "scope": "Existing private Qdrant only; no query/API deployment",
+        "main_billing_enabled": true,
+        "inference_billing_enabled": false,
+        "health_points": 532
+      }
+    },
+    "configuration_20261009": {
+      "limits": {
+        "min_instances": 0,
+        "max_instances": 1,
+        "cpu": 1,
+        "memory_mib": 512,
+        "concurrency": 8,
+        "request_timeout_seconds": 30
+      },
+      "budget": {
+        "display_name": "MotoMedic lifetime INR800",
+        "budget_id": "381ad343-2da4-4676-b9a3-f180783b26d1",
+        "currency": "INR",
+        "amount": 800,
+        "start_date": "2026-10-09",
+        "recurring": false,
+        "alert_amounts": [
+          400,
+          640,
+          800
+        ],
+        "automatic_disable_billing_at": 640,
+        "guard_service": "motomedic-budget-guard",
+        "simulation_passed": true,
+        "live_enabled": true,
+        "retries_enabled": true,
+        "exact_USD10_cap_guaranteed": false
+      }
+    },
+    "retrieval_candidate_20261009": {
+      "github_runs": {
+        "miniLM_final": 37908235133,
+        "bge_m3_final": 37908240500
+      },
+      "release_status": "CANDIDATE_RETRIEVAL_ONLY",
+      "may_generate_procedural_advice": false,
+      "live_verification": {
+        "checks": 11,
+        "passed": 11,
+        "report": "archive/legacy_cloud/live_smoke.json"
+      },
+      "active_assembly_code_sha256": "fada88cb2c02d16b830e6a4f21703d776730929ce7a261c056c4cf3fcb687ec7",
+      "assembly_contract": "TRD v0.3 candidate evidence boundary"
+    }
   }
 }

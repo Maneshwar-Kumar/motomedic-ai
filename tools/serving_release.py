@@ -6,6 +6,10 @@ It also binds the previous v11 manifest as history. The v8-v10.14 manifests and 
 packages now live in archive/; their bindings were last verified in the original layout at
 HISTORY_LAYOUT_COMMIT. Freezing and checking use no providers, cloud writes, builds or secrets,
 and authorize no deployment.
+
+Shipping means freezing. A freeze is refused unless the answer-quality regression receipt
+(tools/regression.py) names the current answer identity and meets its thresholds. Verify, which CI
+runs, recomputes that check and requires it to match the frozen binding.
 """
 from __future__ import annotations
 
@@ -25,10 +29,11 @@ if str(ROOT) not in sys.path:
 from tools.check_installed_serving_release import (ARCHITECTURE, OWNER_DECISIONS, EVALUATION, SCHEMA,
     INDEX, MANUAL_SHA, BASE_IMAGE, UI_BASE_IMAGE, confined, digest, validate_policy)
 
-CURRENT = 'releases/serving_manifest_v11_2.json'
+CURRENT = 'releases/serving_manifest_v11_3.json'
 MANUAL = 'source/royal-enfield-new-himalayan-450-owners-manual-bs-six-english.pdf'
 PREVIOUS = {'releases/serving_manifest_v11.json': 'aaea45999d2297c56910b2a701795a75fe20766e2574d7d74d632885cea6f32d',
-            'releases/serving_manifest_v11_1.json': 'bf56799a2a94037c5ee38dba0fc2f7924bc270071573edf404bee103aac4eae5'}
+            'releases/serving_manifest_v11_1.json': 'bf56799a2a94037c5ee38dba0fc2f7924bc270071573edf404bee103aac4eae5',
+            'releases/serving_manifest_v11_2.json': '59245da529365627c6bc99785f7d8c99cf450eff9a56dff004672a6ed3364efa'}
 HISTORY_LAYOUT_COMMIT = '7c412369f055b4d0ee747501e6b026f5987d1564'
 SERVING_FOLDERS = ('cloud/arm_a', 'cloud/common', 'cloud/grounded_generation', 'rider_ui')
 NAMED_INPUTS = ('ingest/online_ingest.py', 'source/source_manifest.json', MANUAL,
@@ -37,7 +42,8 @@ NAMED_INPUTS = ('ingest/online_ingest.py', 'source/source_manifest.json', MANUAL
     'tools/check_installed_serving_release.py', 'tools/test_check_installed_serving_release.py',
     'tools/resolve_container_base.py', 'tools/provision_evaluator_secret_hosted.py',
     *OWNER_DECISIONS, EVALUATION, 'evals/20261025_answer_release_v3/README.md',
-    'evals/20261025_heldout_v1/README.md')
+    'evals/20261025_heldout_v1/README.md', 'tools/regression.py', 'tools/test_regression.py',
+    'evals/regression/set_v1.json')
 
 
 def dump(path, value, *, exclusive=True):
@@ -99,6 +105,19 @@ def serving_inputs(root=ROOT):
     return sorted(names)
 
 
+def regression_binding(root=ROOT):
+    """The passing regression receipt for the current answer path; anything else is refused."""
+    from tools import regression
+    result = regression.check(root=root)
+    if not result['passed']:
+        reasons = (result.get('problems') or []) + (result.get('shortfalls') or [])
+        raise ValueError('REGRESSION_GATE_NOT_PASSED:' + ','.join(reasons)[:400])
+    identity = json.dumps(result['answer_identity'], sort_keys=True, separators=(',', ':')).encode()
+    return {'run': regression.CURRENT, 'receipt_sha256': result['receipt_sha256'], 'set': regression.SET,
+            'set_sha256': result['set_sha256'], 'answer_identity_sha256': hashlib.sha256(identity).hexdigest(),
+            'totals': result['totals'], 'thresholds': result['thresholds']}
+
+
 def index_policy(index_dir):
     """The exact section index the runtime must load; its files are verified at startup."""
     from cloud.grounded_generation import section_index
@@ -132,6 +151,7 @@ def freeze(root=ROOT, *, index_dir, destination=CURRENT):
     names = serving_inputs(root)
     bindings = {name: digest(confined(root, name)) for name in names}
     identity, index_release = index_policy(index_dir)
+    regression = regression_binding(root)
     value = {'schema_version': SCHEMA, 'frozen_at_utc': datetime.now(timezone.utc).isoformat(),
         'architecture': ARCHITECTURE, 'runtime_policy': RUNTIME_POLICY,
         'previous_serving_manifests': dict(PREVIOUS), 'history_layout_commit': HISTORY_LAYOUT_COMMIT,
@@ -148,6 +168,7 @@ def freeze(root=ROOT, *, index_dir, destination=CURRENT):
         'owner_decisions': [{'path': p, 'sha256': digest(confined(root, p))} for p in OWNER_DECISIONS],
         'evaluation': {'path': EVALUATION, 'sha256': digest(confined(root, EVALUATION)),
             'label': 'AGENT_SCORED_LOCAL_SUBAGENT_RUN_NOT_INDEPENDENT_ACCEPTANCE'},
+        'regression': regression,
         'backend_base_image': BASE_IMAGE, 'ui_base_image': UI_BASE_IMAGE,
         'backend_image_digest': None, 'ui_image_digest': None,
         'provider_calls': 0, 'build_executed': False, 'deployment_authorized': False,
@@ -176,6 +197,8 @@ def verify(root=ROOT, manifest_path=CURRENT, *, committed_revision=None):
             or manifest.get('history_layout_commit') != HISTORY_LAYOUT_COMMIT):
         raise ValueError('SERVING_HISTORY_BINDING_CHANGED')
     validate_policy(manifest, root)
+    if manifest.get('regression') != regression_binding(root):
+        raise ValueError('REGRESSION_BINDING_CHANGED')
     tree_hash = hashlib.sha256(json.dumps(manifest['file_sha256'], sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     if tree_hash != manifest['input_tree_sha256']:
         raise ValueError('SERVING_INPUT_TREE_CHANGED')

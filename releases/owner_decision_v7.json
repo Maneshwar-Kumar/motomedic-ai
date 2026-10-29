@@ -1,0 +1,24 @@
+{
+  "schema": "motomedic-owner-decision-v1",
+  "recorded_at_utc": "2026-10-29T12:00:00Z",
+  "authority": "DIRECT_USER_INSTRUCTION",
+  "extends": "owner_decision_v6.json",
+  "owner_messages": [
+    "commit and merge.\nCI is provider-free and doesn’t measure answer quality. Add a regression set and a pass threshold before any prompt, model or index change ships.\nUpload the new section index (it isn’t uploaded),\n\nfor observability - Structured logs and tracing for retrieval hits, gate outcomes and failure reasons, with a privacy and retention policy for rider questions.",
+    "We did tests offline, in a new setup. Make sure that setup is the one that is on Github on main branch",
+    "docs/TRD.md:44 still names the old index index_a609ca61… as current. STATUS, SETUP and AGENTS.md all say index_f768fbb2…, and a careful reviewer will notice. The TRD isn't bound by the frozen manifest, so correcting it is safe.\ncloud/deployment_status.json still records the old INR 2,700/2,540 budget. The docs mention this, but expect the question.\n\nfix these too. Dont want obsolote info"
+  ],
+  "decisions": {
+    "quality_round": "MERGED: PR #6 into main as 7826cd7b7157fb42a5e3a2456e6927b3df275404 (serving v11.2)",
+    "regression_gate": "IMPLEMENTED: evals/regression/set_v1.json (the 30 development and 33 held-out questions with deterministic checks that agree with every judged answer: 66/66 held-out, 90/90 v3) and thresholds set from baseline run evals/20261029_regression_v1. A serving freeze is refused, and CI fails, unless the receipt names the current answer identity (index, retrieval constants, assembly version, generation contract with the system prompt hash), every saved model input and schema rebuilds, and the re-gated, rescored totals meet the thresholds",
+    "section_index_upload": "PUBLISHED: GitHub release index-f768fbb216836c003701079e (asset SHA-256 010ba0488f06394cb3440fcde5efe2b5e1a01d661845bf99a0f5dc166b86102d), verified by download and identity check; NOT uploaded to hosted Qdrant, which needs billing re-enabled and is optional",
+    "observability": "IMPLEMENTED: allowlisted structured logs (answer_turn, span, worker_outcome, http_request, auth_rejected) correlated by trace id, with no rider, answer or manual text; docs/PRIVACY.md sets the privacy and retention policy. Firestore TTL deletion and log-bucket retention are hosted steps, not applied",
+    "offline_setup": "REPRODUCED_FROM_MAIN: a fresh clone of main at 7826cd7 in a new Python 3.12 environment from tools/requirements-experiments.txt reproduced all 66 held-out turns (retrieval, model input, schema, prompt byte for byte; gate 65/66, the documented post-hoc change); .github/workflows/reproduce-offline.yml repeats it on GitHub",
+    "obsolete_information": "CORRECTED: TRD index, deployment_status.json budget (INR 3,120 / 2,960 from the 23 October receipt), stale paths, stale TODO items and test fixtures"
+  },
+  "review_layer": "NONE",
+  "deployment_authorized": false,
+  "billing_restart_authorized": false,
+  "gcp_changes": false,
+  "human_signoff": false
+}

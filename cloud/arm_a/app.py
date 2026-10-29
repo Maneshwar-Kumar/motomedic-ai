@@ -2,6 +2,8 @@
 
 Answers come only from cloud.grounded_generation.section_questions: top-5 section retrieval,
 one Haiku call and the deterministic release gate. No review layer or verifier.
+Every request except the startup probe emits one http_request event (route template, status,
+error code, latency and trace id; never headers, bodies or rider text).
 """
 import base64
 import hashlib
@@ -9,8 +11,10 @@ import json
 import math
 import os
 from pathlib import Path
+import re
 import time
-from flask import Flask, jsonify, request
+from flask import Flask, g, jsonify, request
+from cloud.common import telemetry as tm
 
 ROOT = Path('/app')
 SCHEMA = 'motomedic-serving-release-v11'
@@ -23,7 +27,7 @@ def cloud_run_owner(headers):
     value = headers.get('X-Serverless-Authorization') or headers.get('Authorization', '')
     def reject(reason):
         # Operational reason only: no header, token, subject, query or media.
-        print(json.dumps({'event':'arm_a_auth_rejected','reason':reason}), flush=True)
+        tm.STDOUT.emit('auth_rejected', severity='WARNING', reason=reason)
         raise PermissionError()
     scheme, separator, credential = value.partition(' ')
     if not separator or scheme.casefold() != 'bearer' or len(value) > 16000:
@@ -55,12 +59,24 @@ def unique_object(pairs):
     return result
 
 
-def create_app(source):
+def route_template(rule):
+    """'/v1/sessions/<session_id>/questions' -> '/v1/sessions/:session_id/questions'."""
+    return re.sub(r'<(?:[^:>]+:)?([^>]+)>', r':\1', rule.rule) if rule is not None else 'UNMATCHED'
+
+
+def create_app(source, telemetry=None):
     app = Flask(__name__)
     app.config['MAX_CONTENT_LENGTH'] = 16384
+    telemetry = telemetry or tm.NULL
+    app.config['TELEMETRY'] = telemetry
 
     def error(route, code, status):
+        g.error_code = code
         return jsonify({'type':route, 'error':code, 'technical_content':False}), status
+
+    @app.before_request
+    def start_trace():
+        g.started, g.trace_id = time.monotonic(), tm.trace_from_headers(request.headers)
 
     @app.before_request
     def require_identity():
@@ -86,6 +102,18 @@ def create_app(source):
     def private_headers(response):
         response.headers['Cache-Control'] = 'no-store'
         response.headers['X-Content-Type-Options'] = 'nosniff'
+        return response
+
+    @app.after_request
+    def observe(response):
+        if request.path != '/healthz':
+            key = request.headers.get('Idempotency-Key') or (request.view_args or {}).get('key')
+            telemetry.emit('http_request', trace_id=g.get('trace_id'),
+                severity='ERROR' if response.status_code >= 500 else 'INFO',
+                method=request.method, path=route_template(request.url_rule), http_status=response.status_code,
+                error_code=g.get('error_code'), replay=response.headers.get('X-Operation-Replay') == 'true',
+                operation_id=key if isinstance(key, str) and re.fullmatch(r'[a-f0-9]{32}', key) else None,
+                duration_ms=round((time.monotonic() - g.get('started', time.monotonic())) * 1000, 1))
         return response
 
     @app.errorhandler(413)
@@ -168,9 +196,10 @@ def load_production():
                                       [c['id'] for c in retriever.chunks])
     client = firestore.Client(project='motomedic-ai-20261009')
     generate = HaikuAnswer(WholeTurnAdmission(client))
-    questions = Questions(source, SectionIndex(index_dir), retriever, generate, identity)
+    telemetry = tm.Telemetry()
+    questions = Questions(source, SectionIndex(index_dir), retriever, generate, identity, telemetry=telemetry)
     state_factory = lambda owner: FirestoreState(client, owner)
-    app = create_app(source)
+    app = create_app(source, telemetry=telemetry)
     app.config.update(ANSWER_PROVIDER=generate.contract['model'], PROMPT_CACHE='ANTHROPIC_SYSTEM_PROMPT_5M',
         RETRIEVAL=lock['retrieval_version'], DENSE_BACKEND='QDRANT' if qdrant else 'EXACT_PINNED_VECTORS',
         RUNTIME_LOCK=questions.runtime_lock)

@@ -1,0 +1,16 @@
+# Local experiments, regression runs and offline reproduction: Python 3.12, CPU only.
+#   python -m pip install -r tools/requirements-experiments.txt --extra-index-url https://download.pytorch.org/whl/cpu
+# The section index (GitHub release index-f768fbb216836c003701079e) and the BGE-M3 query model
+# (revision 5617a9f61b028005a4858fdac845db406aefb181) are separate, hash-checked downloads.
+# The rider UI tests also need rider_ui/requirements.txt.
+numpy==2.4.6
+torch==2.14.1
+sentence-transformers==6.1.0
+transformers==5.19.0
+tokenizers==0.23.2
+huggingface_hub==1.33.0
+safetensors==0.8.0
+scipy==1.17.1
+scikit-learn==1.9.1
+Flask==3.1.2
+Werkzeug==3.1.9

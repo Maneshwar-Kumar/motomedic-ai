@@ -1,0 +1,56 @@
+name: Reproduce an offline evaluation from this commit
+# Re-runs retrieval, assembly and the gate for every saved turn of a local evaluation, with this
+# commit's code, the pinned Python packages, the published section index and BGE-M3 at its
+# pinned revision. No model, provider secret or cloud credential is used.
+on:
+  workflow_dispatch:
+    inputs:
+      run:
+        description: Evaluation folder to reproduce
+        default: evals/20261025_heldout_v1
+      expected_gate_changes:
+        description: Re-gate file listing documented gate changes (empty for none)
+        default: evals/20261025_heldout_v1/regate_current.json
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the pinned experiment environment
+        run: python -m pip install -r tools/requirements-experiments.txt --extra-index-url https://download.pytorch.org/whl/cpu
+      - name: Download and check the pinned section index
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read -r tag asset sha < <(python -c "import json; r = json.load(open('releases/section_index_asset_v1.json')); print(r['release_tag'], r['asset'], r['asset_sha256'])")
+          mkdir -p build/downloads build/index-download
+          gh release download "$tag" --pattern "$asset" --dir build/downloads
+          echo "$sha  build/downloads/$asset" | sha256sum -c
+          python -c "import sys, tarfile; tarfile.open(sys.argv[1]).extractall('build/index-download', filter='data')" "build/downloads/$asset"
+      - name: Download BGE-M3 at the pinned revision
+        run: >-
+          python -c "from huggingface_hub import snapshot_download;
+          snapshot_download('BAAI/bge-m3', revision='5617a9f61b028005a4858fdac845db406aefb181',
+          allow_patterns=['*.json', '*.txt', '*.model', 'pytorch_model.bin', '1_Pooling/*'], local_dir='build/bge_m3')"
+      - name: Reproduce retrieval, model input and gate (no model calls)
+        env:
+          HF_HUB_OFFLINE: '1'
+          RUN: ${{ inputs.run }}
+          EXPECTED: ${{ inputs.expected_gate_changes }}
+        run: |
+          extra=()
+          if [ -n "$EXPECTED" ]; then extra=(--expected-gate-changes "$EXPECTED"); fi
+          python tools/reproduce_offline.py --run "$RUN" --index build/index-download/section-index \
+            --model build/bge_m3 --out build/reproduction.json "${extra[@]}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reproduction-${{ github.run_id }}
+          path: build/reproduction.json
+          if-no-files-found: warn

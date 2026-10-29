@@ -1,6 +1,6 @@
 # MotoMedic technical requirements
 
-Version 2.2, 25 October 2026. Paired with the [PRD](PRD.md), [architecture](ARCHITECTURE.md) and [status](STATUS.md). The owner's decisions are [v1](../evals/20261024_answer_release_v1/owner_decision_v1.json), [v2](../evals/20261024_answer_release_v1/owner_decision_v2.json), [v3](../evals/20261025_answer_release_v3/owner_decision_v3.json), [v4](../evals/20261025_answer_release_v3/owner_decision_v4.json), [v5](../releases/owner_decision_v5.json) and [v6](../releases/owner_decision_v6.json).
+Version 2.3, 29 October 2026. Paired with the [PRD](PRD.md), [architecture](ARCHITECTURE.md) and [status](STATUS.md). The owner's decisions are [v1](../evals/20261024_answer_release_v1/owner_decision_v1.json), [v2](../evals/20261024_answer_release_v1/owner_decision_v2.json), [v3](../evals/20261025_answer_release_v3/owner_decision_v3.json), [v4](../evals/20261025_answer_release_v3/owner_decision_v4.json), [v5](../releases/owner_decision_v5.json), [v6](../releases/owner_decision_v6.json) and [v7](../releases/owner_decision_v7.json).
 
 ## 1. Components
 
@@ -15,6 +15,8 @@ Version 2.2, 25 October 2026. Paired with the [PRD](PRD.md), [architecture](ARCH
 | Admission ledger | Persistent attempt and USD reservations, token accounting without a ceiling, pacing and sealing. | [whole_turn_admission.py](../cloud/grounded_generation/whole_turn_admission.py), [claude_budget.py](../cloud/grounded_generation/claude_budget.py) |
 | Shared types | Session records, the provider error and the content hash, unchanged from the retired root modules. | [cloud/common/](../cloud/common/) |
 | Local experiments | The serving retrieval, assembly and gate, with a Claude Code subagent in place of the API call | [tools/local_answer.py](../tools/local_answer.py), [EXPERIMENTS](EXPERIMENTS.md) |
+| Telemetry | Allowlisted structured log events and spans, correlated by trace id, with no rider text | [telemetry.py](../cloud/common/telemetry.py), [PRIVACY](PRIVACY.md) |
+| Regression gate | The 63-question set, deterministic checks, the receipt and the bar a freeze needs | [tools/regression.py](../tools/regression.py), [evals/regression](../evals/regression/README.md) |
 | Delivery | Operation binding, saved-buffer streaming and recovery. | [delivery.py](../cloud/grounded_generation/delivery.py) |
 | API, worker and store | Rider routes, Cloud Tasks dispatch, fenced worker, Firestore transactions. | [rider_api.py](../cloud/arm_a/rider_api.py), [durable_dispatch.py](../cloud/arm_a/durable_dispatch.py), [store.py](../cloud/arm_a/store.py), [app.py](../cloud/arm_a/app.py) |
 
@@ -41,12 +43,13 @@ The build applies these rules:
 
 The manifest records the identity, `review_layer: NONE` and a QA block covering counts, attached boxes, continuations, page coverage and parser gap pages. `identity()` returns the manifest SHA, every declared file SHA and the counts. `verify()` fails closed on any changed manifest, inventory or file.
 
-The current index is `index_a609ca61c635641e0a22dc48`:
+The current index is `index_f768fbb216836c003701079e`:
 - 154 sections and 532 chunks;
 - 121 boxes attached and 116 continuations;
+- 2 related-warning links;
 - 145 of 149 pages covered, with page 103 flagged as a parse gap.
 
-It was built by the [v3 candidate script](../evals/20261025_answer_release_v3/candidate/section_index.py). The serving copy differs only in its import path. A changed source, parser, sectioning or embedding creates a new index ID.
+It was built by the serving module above and is published as the GitHub release asset [index-f768fbb216836c003701079e](https://github.com/Maneshwar-Kumar/motomedic-ai/releases/tag/index-f768fbb216836c003701079e) ([receipt](../releases/section_index_asset_v1.json)). Its chunks, BM25 postings and embeddings are byte-identical to the previous index `index_a609ca61c635641e0a22dc48`, which had no related-warning links. A changed source, parser, sectioning or embedding creates a new index ID.
 
 ## 3. Retrieval
 
@@ -182,21 +185,44 @@ Identity and secrets:
 - **Credentials.** Managed secrets hold the Anthropic key and the visitor-signing secret.
 - **Service routes.** All API and worker routes except GET `/v1/health` need a cryptographically verified Google identity with the exact audience and an allowlisted service email, before visitor, Tasks or owner checks.
 - **Public gateway.** The gateway issues signed, HttpOnly, SameSite 24-hour cookies after a proof challenge and a private visitor reservation. No client IP is trusted.
-- **Logs.** Traces are redacted, and no credentials, rider records or raw media go to Git.
+- **Logs.** No credentials, rider records or raw media go to Git. Telemetry carries no rider, answer or manual text (§10).
 
-Availability fallback, answer caching and whole-manual prompting do not exist in this runtime; `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true` refuses startup. The budget is INR3,120 with an INR2,960 billing-disconnect guard, as raised for the [23 October private test](../evals/20261023_private_hosted_v5/README.md); [deployment_status.json](../cloud/deployment_status.json) still records the earlier INR2,700/2,540. Stopped billing is never restarted implicitly.
+Availability fallback, answer caching and whole-manual prompting do not exist in this runtime; `MOTOMEDIC_CLAUDE_FALLBACK_ENABLED=true` refuses startup. The budget is INR3,120 with an INR2,960 billing-disconnect guard, as raised for the [23 October private test](../evals/20261023_private_hosted_v5/README.md); [deployment_status.json](../cloud/deployment_status.json) records the same, with the earlier INR2,700/2,540 configuration kept as history. Stopped billing is never restarted implicitly.
 
-## 10. Release and validation
+## 10. Observability
 
-[serving_release.py](../tools/serving_release.py) freezes and verifies schema `motomedic-serving-release-v11`; the current file is [v11.2](../releases/serving_manifest_v11_2.json). The manifest binds:
+Every event is one JSON line in the Cloud Logging structured format, written by [telemetry.py](../cloud/common/telemetry.py). A field must be on the `FIELDS` allowlist, and its value must be a number, a boolean, an id, a code or a page. Anything else is dropped and named in `redacted_fields`. Telemetry never fails a turn.
+
+| Event | Emitted by | Fields |
+| --- | --- | --- |
+| `answer_turn` | `Questions.answer`, once per turn | Route, reason codes and failure code. Retrieval: chunk ids, rerank flags, best reranker score, relevance-floor decision. Assembly: sections, lines, warnings, pages sent, model input size. Gate: version, coverage, citations, excluded warnings, dropped repeats, reworded phrases. Generation: tokens, cache reads and writes, estimated cost, ledger outcome. Also stage timings and question shape. |
+| `span` | The same turn | One per stage (retrieval, assembly, generation, gate) with a duration and an offset, under an `answer_turn` span |
+| `worker_outcome` | `DurableWorker.run` | Outcome code, HTTP status, duration |
+| `http_request` | Every API request except `/healthz` | Method, route template, status, error code, replay flag, operation id, latency |
+| `auth_rejected` | Identity checks | Reason code |
+
+The rider request's trace id comes from `traceparent` or `X-Cloud-Trace-Context`, or a new id. It is stored in the work snapshot, so the API request, the worker's outcome and the turn's spans share one trace. The saved view's `runtime_controls` gains `stage_ms` and `server_ms`. [PRIVACY](PRIVACY.md) sets what may be logged and how long logs and rider records are kept.
+
+## 11. Release and validation
+
+[serving_release.py](../tools/serving_release.py) freezes and verifies schema `motomedic-serving-release-v11`; the current file is [v11.3](../releases/serving_manifest_v11_3.json). The manifest binds:
 - every code, UI and workflow file under `cloud/arm_a`, `cloud/common`, `cloud/grounded_generation`, `rider_ui` and `.github/workflows`;
 - `ingest/online_ingest.py`;
 - the manual and source manifest;
-- the owner decisions v3–v6 and the [held-out evaluation](../evals/20261025_heldout_v1/README.md);
-- the previous v11 and v11.1 manifests;
+- the owner decisions v3–v7 and the [held-out evaluation](../evals/20261025_heldout_v1/README.md);
+- the regression tool, set and receipt;
+- the previous v11, v11.1 and v11.2 manifests;
 - the section index identity and the generation contract.
 
 It records `token_ceiling: NONE` and `deployment_authorized: false`. [check_installed_serving_release.py](../tools/check_installed_serving_release.py) re-checks the installed bytes, the policy and the section index inside an image. Manifests v8–v10.14 are in `archive/`; their bindings were last verified in their original layout at commit `7c412369f055b4d0ee747501e6b026f5987d1564`.
+
+**Answer quality.** Shipping means freezing, and a freeze calls the [regression gate](../evals/regression/README.md). The current receipt must name the current answer identity:
+- the index ID;
+- the retrieval constants;
+- the assembly version;
+- the generation contract, including model, effort and system prompt hash.
+
+Every saved model input and schema must rebuild byte for byte. The re-gated, rescored totals must meet the set's bar. `verify`, which CI runs, recomputes that binding, and CI also runs `python tools/regression.py check`. A gate-only change is re-checked from the saved drafts. A prompt, model, index, retrieval or assembly change needs a new passing run first.
 
 The provider-free tests listed in [CI](../.github/workflows/ci.yml) cover:
 - the index, retrieval, assembly, gate and generation call, on a synthetic index with a fake transport and ledger;

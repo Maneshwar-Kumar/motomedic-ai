@@ -1,0 +1,29 @@
+{
+  "route": "SUPPORTED",
+  "coverage": "COMPLETE",
+  "answer": [
+    {
+      "text": "Yes. The manual allows unleaded gasoline with an ethanol content of up to E20.",
+      "evidence_ids": ["E5"]
+    }
+  ],
+  "policy": [
+    {
+      "text": "Use only unleaded petrol from reputed fuel pumps.",
+      "evidence_ids": ["E7"]
+    },
+    {
+      "text": "Ensure the fuel used is not adulterated.",
+      "evidence_ids": ["E8"]
+    }
+  ],
+  "watchout_review": [
+    {"display_id": "E21", "decision": "NOT_APPLICABLE", "reason": "Concerns aftermarket front forks and suspensions, not fuel."},
+    {"display_id": "E22", "decision": "NOT_APPLICABLE", "reason": "Concerns the running-in procedure, not fuel."},
+    {"display_id": "E23", "decision": "NOT_APPLICABLE", "reason": "Concerns moderate speeds while learning the motorcycle, not fuel."},
+    {"display_id": "E24", "decision": "NOT_APPLICABLE", "reason": "Concerns speed limits and riding conditions, not fuel."},
+    {"display_id": "E36", "decision": "NOT_APPLICABLE", "reason": "Concerns shock absorbers and front forks, not fuel."},
+    {"display_id": "E37", "decision": "NOT_APPLICABLE", "reason": "Concerns exhaust gas, not the fuel allowed."},
+    {"display_id": "E38", "decision": "NOT_APPLICABLE", "reason": "Concerns scheduled service and maintenance, not the fuel allowed."}
+  ]
+}

@@ -29,7 +29,10 @@ This guide is for someone reviewing MotoMedic for the first time. It says what t
 | Claim | Check |
 | --- | --- |
 | The repository is laid out as documented and every link resolves. | `python tools/check_repository_structure.py` |
-| The serving code is exactly what release v11.2 froze. | `python tools/serving_release.py verify` |
+| The serving code is exactly what release v11.3 froze. | `python tools/serving_release.py verify` |
+| The current answer path meets the answer-quality bar, and no prompt, model or index change has slipped past it. | `python tools/regression.py check` ([regression gate](../evals/regression/README.md)) |
+| The offline tests are reproducible from `main`. | [reproduce_offline.py](../tools/reproduce_offline.py), or the [reproduce-offline workflow](../.github/workflows/reproduce-offline.yml) on GitHub |
+| Logs carry no rider text. | [test_telemetry.py](../cloud/common/test_telemetry.py) and the [privacy policy](PRIVACY.md) |
 | The code behaves as specified: retrieval, assembly, gate, the paid call's validation and ledger, the API → worker → saved stream → UI path. | The provider-free suite in [SETUP](SETUP.md), also run by [CI](../.github/workflows/ci.yml) |
 | The serving modules reproduce the v3 run's 30 model inputs and 90 gate outcomes on the previous index (on the current index only GEN004 differs, by its added luggage warnings). | [serving_parity.py](../evals/20261025_answer_release_v3/serving_parity.py) (needs the index; [SETUP](SETUP.md) shows how to rebuild it) |
 | A new question goes through the real path. | [EXPERIMENTS](EXPERIMENTS.md): real retrieval and gate here, with a Claude Code Haiku subagent as the generator |

@@ -1,0 +1,1666 @@
+{
+ "schema": "motomedic-regression-set-v1",
+ "about": "Answer-quality regression set: the 30 development and 33 held-out questions with deterministic checks on the released text. Regexes match lowercased text with dashes, quotes and spaces normalized. A case passes when it is released on an allowed route, every require group matches and no forbid pattern matches. Warnings and reference pages are scored separately. Both question sets have been seen, so this set detects regressions; it is not held-out evidence.",
+ "thresholds": {
+  "passed_min": 46,
+  "system_errors_max": 4,
+  "forbidden_max": 1,
+  "warnings_shown_min": 19,
+  "reference_pages_sent_min": 80,
+  "basis": "Baseline 20261029_regression_v1 (Haiku high, serving v11.2 answer path): 48 passed, 3 system errors, 1 forbidden match, 20/24 warnings, 80/111 reference pages. Two runs of the 33 held-out questions four days apart differed by one case and one warning, so answers get a tolerance of 2 cases, 1 system error and 1 warning. Retrieval is deterministic, so reference pages get none, and forbidden matches may not grow."
+ },
+ "cases": [
+  {
+   "id": "GEN007",
+   "source": "dev_v3:GOLDEN",
+   "question": "Does this manual allow E20 fuel?",
+   "follow_up_of": null,
+   "pages": [
+    18
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "\\be20\\b"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN011",
+   "source": "dev_v3:GOLDEN",
+   "question": "Are the standard and low seats the same adjustable height?",
+   "follow_up_of": null,
+   "pages": [
+    20
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "825"
+    ],
+    [
+     "845"
+    ],
+    [
+     "805"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN012",
+   "source": "dev_v3:GOLDEN",
+   "question": "What spark-plug gap is specified?",
+   "follow_up_of": null,
+   "pages": [
+    16
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "0\\.8\\s*(?:mm\\s*)?(?:-|to|~)\\s*0\\.9"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN014",
+   "source": "dev_v3:GOLDEN",
+   "question": "Are the left and right fork oil quantities identical?",
+   "follow_up_of": null,
+   "pages": [
+    21
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "589"
+    ],
+    [
+     "507"
+    ],
+    [
+     "\\bno\\b|differ|not (?:the )?same|not identical|different|unequal"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN017",
+   "source": "dev_v3:GOLDEN",
+   "question": "What output rating is listed for the USB port?",
+   "follow_up_of": null,
+   "pages": [
+    19,
+    65
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "\\b5\\s?v\\b"
+    ],
+    [
+     "\\b2\\s?a\\b"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN022",
+   "source": "dev_v3:GOLDEN",
+   "question": "Why will the ignition key not come out while it is ON?",
+   "follow_up_of": null,
+   "pages": [
+    26
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "\\boff\\b"
+    ],
+    [
+     "lock"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN025",
+   "source": "dev_v3:GOLDEN",
+   "question": "Which riding mode combinations are listed?",
+   "follow_up_of": null,
+   "pages": [
+    32
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "performance"
+    ],
+    [
+     "\\beco\\b"
+    ],
+    [
+     "rear abs off"
+    ],
+    [
+     "abs on"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN030",
+   "source": "dev_v3:GOLDEN",
+   "question": "Which display languages are listed?",
+   "follow_up_of": null,
+   "pages": [
+    50,
+    51
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "english"
+    ],
+    [
+     "italian"
+    ],
+    [
+     "spanish"
+    ],
+    [
+     "portuguese"
+    ],
+    [
+     "german"
+    ],
+    [
+     "french"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN035",
+   "source": "dev_v3:GOLDEN",
+   "question": "Why does the compass not work with navigation inactive?",
+   "follow_up_of": null,
+   "pages": [
+    57
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "navigation"
+    ],
+    [
+     "active|running|in use|turned on|switched on|enabled|\\bon\\b"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN044",
+   "source": "dev_v3:GOLDEN",
+   "question": "At 300 km, does this manual allow full throttle?",
+   "follow_up_of": null,
+   "pages": [
+    71
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "6,?000"
+    ],
+    [
+     "full throttle"
+    ],
+    [
+     "\\bno\\b|not|avoid|never"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN004",
+   "source": "dev_v3:PARTIAL",
+   "question": "How many kilograms can I put in the panniers and top box?",
+   "follow_up_of": null,
+   "pages": [
+    15
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "fitting instruction|gma|accessor|authori[sz]ed|service cent|dealer|workshop|royal enfield|support@"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN041",
+   "source": "dev_v3:PARTIAL",
+   "question": "The general warning symbol is on. Which exact part has failed?",
+   "follow_up_of": null,
+   "pages": [
+    62
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "authori[sz]ed|service cent|dealer|workshop|royal enfield|support@"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN047",
+   "source": "dev_v3:PARTIAL",
+   "question": "It says Champion: what exact spark-plug part number should I order?",
+   "follow_up_of": null,
+   "pages": [
+    16
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "champion"
+    ],
+    [
+     "part number|does not|doesn't|do not|don't|no (?:\\w+ )?(?:figure|value|rating|mention|information|guidance|specification)|not (?:give|list|state|specify|mention|cover|include|provide)|couldn't find|could not find|cannot|can't|authori[sz]ed|service cent|dealer|workshop|royal enfield|support@"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "GEN048",
+   "source": "dev_v3:PARTIAL",
+   "question": "Will the app work with my new phone OS released this week?",
+   "follow_up_of": null,
+   "pages": [
+    54
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "android|ios"
+    ],
+    [
+     "does not|doesn't|do not|don't|no (?:\\w+ )?(?:figure|value|rating|mention|information|guidance|specification)|not (?:give|list|state|specify|mention|cover|include|provide)|couldn't find|could not find|cannot|can't|confirm|authori[sz]ed|service cent|dealer|workshop|royal enfield|support@"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "EXP027",
+   "source": "dev_v3:PARTIAL",
+   "question": "When do the brake pads need replacement?",
+   "follow_up_of": null,
+   "pages": [
+    90,
+    91,
+    93,
+    98,
+    99,
+    119,
+    126,
+    131
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "authori[sz]ed|service cent|dealer|workshop|royal enfield|support@|inspect|check"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "EXP034",
+   "source": "dev_v3:PARTIAL",
+   "question": "How do I check the battery voltage?",
+   "follow_up_of": null,
+   "pages": [
+    105
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "authori[sz]ed|service cent|dealer|workshop|royal enfield|support@|battery (?:service|dealer)"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "EXP037",
+   "source": "dev_v3:PARTIAL",
+   "question": "The number-plate light stopped working. Which bulb should I buy?",
+   "follow_up_of": null,
+   "pages": [
+    110
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "\\bled\\b"
+    ],
+    [
+     "authori[sz]ed|service cent|dealer|workshop|royal enfield|support@|assembly"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "EXP038",
+   "source": "dev_v3:PARTIAL",
+   "question": "Which direction can the headlamp beam be adjusted?",
+   "follow_up_of": null,
+   "pages": [
+    109
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "vertical|up|down|height"
+    ],
+    [
+     "screw"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "EXP040",
+   "source": "dev_v3:PARTIAL",
+   "question": "What rear-suspension notch should I use riding solo?",
+   "follow_up_of": null,
+   "pages": [
+    116,
+    117
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "3rd|third|\\b3\\b"
+    ],
+    [
+     "1st|first|\\b1\\b"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "EXP044",
+   "source": "dev_v3:PARTIAL",
+   "question": "My bike has been stored for over a month. Can I just restart it?",
+   "follow_up_of": null,
+   "pages": [
+    120
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "battery"
+    ],
+    [
+     "authori[sz]ed|service cent|dealer|workshop|royal enfield|support@"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "N01",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "What is the top speed of this motorcycle?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "top speed[^.]{0,40}\\d"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N02",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "How many seconds does it take to go from 0 to 100 km/h?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "\\b\\d+(?:\\.\\d+)?\\s?(?:s|sec|secs|seconds)\\b"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N03",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "What mileage in km per litre should I expect from this bike?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "\\b\\d+(?:\\.\\d+)?\\s?km\\s?(?:/|per)\\s?(?:l|litre|liter)\\b",
+    "\\b146\\s?km\\b"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N04",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "Does this bike have cruise control?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "(?:has|comes with|features|is equipped with|offers) (?:a |an )?cruise control"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N05",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "How deep a water crossing can the bike safely ride through?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "(?:water|wading|crossing|depth)[^.]{0,50}\\b\\d+\\s?(?:mm|cm|m|inch|inches)\\b"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N06",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "Does the manual give any advice for riding at high altitude, like in Ladakh?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "require": [],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "N07",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "What is the battery's cold cranking amps (CCA) rating?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "\\b\\d+\\s?(?:cca|cold cranking)",
+    "cca[^.]{0,20}\\b\\d{2,}"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N08",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "What compression pressure should a healthy engine show on a compression test?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "\\b\\d+(?:\\.\\d+)?\\s?(?:psi|bar|kpa|kg/?cm)"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N09",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "What throttle cable free play does the manual specify?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "throttle[^.]{0,60}\\b\\d+(?:\\s?(?:-|to)\\s?\\d+)?\\s?mm\\b"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "N10",
+   "source": "dev_v3:NO_ANSWER",
+   "question": "How do I pair a Bluetooth intercom headset with the bike?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "require": [],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H01",
+   "source": "heldout_v1:FACT",
+   "question": "What tyre sizes does the Himalayan 450 run on the front and rear?",
+   "follow_up_of": null,
+   "pages": [
+    18
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "90/90-21"
+    ],
+    [
+     "140/80\\s?-?\\s?r\\s?17"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H02",
+   "source": "heldout_v1:FACT",
+   "question": "How many litres does the fuel tank hold, and roughly how much is left when the low fuel warning comes on?",
+   "follow_up_of": null,
+   "pages": [
+    18,
+    63,
+    64
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "\\b17(?:\\.0)?\\s?(?:l|litres?|liters?)\\b"
+    ],
+    [
+     "\\b3\\s?(?:l|litres?|liters?)\\b"
+    ],
+    [
+     "approximate|vary|varies"
+    ]
+   ],
+   "warnings": [
+    [
+     "fuel pump|run out|stranded"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H03",
+   "source": "heldout_v1:FACT",
+   "question": "What engine oil grade should I use, and how much oil goes in for an oil change with a new filter?",
+   "follow_up_of": null,
+   "pages": [
+    21,
+    85
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "10w-?40"
+    ],
+    [
+     "api sn"
+    ],
+    [
+     "jaso ma2|\\bma2\\b"
+    ],
+    [
+     "2\\.1\\s?l"
+    ],
+    [
+     "approximate|vary|varies"
+    ]
+   ],
+   "warnings": [
+    [
+     "wrong (?:oil )?grade|moving parts"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H04",
+   "source": "heldout_v1:FACT",
+   "question": "What's the headlamp wattage on low beam and on high beam?",
+   "follow_up_of": null,
+   "pages": [
+    19,
+    108
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "\\b12\\s?v\\b"
+    ],
+    [
+     "\\bled\\b"
+    ],
+    [
+     "12\\.12\\s?w"
+    ],
+    [
+     "14\\.22\\s?w"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H05",
+   "source": "heldout_v1:FACT",
+   "question": "If I switch the hazard lights on and then turn the ignition off, how long will they keep flashing?",
+   "follow_up_of": null,
+   "pages": [
+    29,
+    30
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "30 min"
+    ],
+    [
+     "manual|switch(?:ed)? (?:it )?off|deactivat|turn(?:ed)? (?:it )?off"
+    ],
+    [
+     "cannot|can't|not be (?:activated|switched on|turned on)|only (?:with|when) the ignition"
+    ]
+   ],
+   "forbid": [
+    "does not (?:say|state|specify|mention|cover|give)[^.]{0,80}(?:ignition|off|30)"
+   ],
+   "warnings": [
+    [
+     "battery"
+    ]
+   ]
+  },
+  {
+   "id": "H06",
+   "source": "heldout_v1:FACT",
+   "question": "What fuel consumption units can the TFT display show?",
+   "follow_up_of": null,
+   "pages": [
+    39,
+    47,
+    49,
+    50
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "km/l"
+    ],
+    [
+     "l/100"
+    ],
+    [
+     "mpg \\(?uk"
+    ],
+    [
+     "mpg \\(?us"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H07",
+   "source": "heldout_v1:FACT",
+   "question": "How long is the standard warranty on the Himalayan 450, and does it carry over if I sell the bike?",
+   "follow_up_of": null,
+   "pages": [
+    129,
+    130
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "36\\s?months|3 years"
+    ],
+    [
+     "30,?000\\s?km"
+    ],
+    [
+     "balance|remaining|subsequent|later owner|new owner|second owner|transfer"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H08",
+   "source": "heldout_v1:FACT",
+   "question": "Where do I find the VIN and the engine number on the bike?",
+   "follow_up_of": null,
+   "pages": [
+    22
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "steering head|head tube"
+    ],
+    [
+     "gear (?:pedal|shift)|connector rod"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H09",
+   "source": "heldout_v1:FACT",
+   "question": "What's the kerb weight of the bike, and how much ground clearance does it have?",
+   "follow_up_of": null,
+   "pages": [
+    20
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "196\\s?kg"
+    ],
+    [
+     "224\\s?mm"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H10",
+   "source": "heldout_v1:FACT",
+   "question": "What tools come in the bike's tool kit, and where is it kept?",
+   "follow_up_of": null,
+   "pages": [
+    81
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "pillion seat"
+    ],
+    [
+     "allen"
+    ],
+    [
+     "c-?\\s?spanner"
+    ],
+    [
+     "10\\s?x\\s?13"
+    ],
+    [
+     "extension"
+    ],
+    [
+     "fuse puller"
+    ],
+    [
+     "24\\s?x\\s?14"
+    ],
+    [
+     "12\\s?x\\s?16"
+    ],
+    [
+     "spindle adapter"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H11",
+   "source": "heldout_v1:HOW",
+   "question": "How do I check the engine oil level correctly?",
+   "follow_up_of": null,
+   "pages": [
+    24,
+    83,
+    124
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "level|upright"
+    ],
+    [
+     "2\\s?(?:-|to)\\s?3 min"
+    ],
+    [
+     "sight glass|window|inspection"
+    ],
+    [
+     "\\bmax"
+    ],
+    [
+     "overfill|above (?:the )?max"
+    ],
+    [
+     "350\\s?ml"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H12",
+   "source": "heldout_v1:HOW",
+   "question": "How do I reset Trip 1 on the dashboard?",
+   "follow_up_of": null,
+   "pages": [
+    39,
+    43,
+    44
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "joystick"
+    ],
+    [
+     "trip preference"
+    ],
+    [
+     "reset trip"
+    ],
+    [
+     "confirm|popup|pop-up"
+    ],
+    [
+     "home"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H13",
+   "source": "heldout_v1:HOW",
+   "question": "My bike tipped over with the engine running and it cut out. How do I reset it so it starts again?",
+   "follow_up_of": null,
+   "pages": [
+    68,
+    72,
+    75
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "roll[- ]?over"
+    ],
+    [
+     "cent(?:er|re) stand|upright"
+    ],
+    [
+     "neutral"
+    ],
+    [
+     "kill|stop switch|engine stop"
+    ],
+    [
+     "ignition"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H14",
+   "source": "heldout_v1:HOW",
+   "question": "How do I take off the rider and pillion seats, and put them back?",
+   "follow_up_of": null,
+   "pages": [
+    4,
+    34,
+    35,
+    36
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "key"
+    ],
+    [
+     "pillion"
+    ],
+    [
+     "forward"
+    ],
+    [
+     "backward|rearward|back"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H15",
+   "source": "heldout_v1:HOW",
+   "question": "How do I switch the instrument cluster from the analog layout to the digital one?",
+   "follow_up_of": null,
+   "pages": [
+    39,
+    40,
+    42
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "appearance"
+    ],
+    [
+     "screen type"
+    ],
+    [
+     "digital"
+    ],
+    [
+     "default"
+    ],
+    [
+     "long press|press and hold|mode"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H16",
+   "source": "heldout_v1:HOW",
+   "question": "How should I clean and lubricate the drive chain, and how often?",
+   "follow_up_of": null,
+   "pages": [
+    82,
+    83,
+    127
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "solvent|clean"
+    ],
+    [
+     "lubric|lube"
+    ],
+    [
+     "wipe"
+    ],
+    [
+     "500\\s?km"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H17",
+   "source": "heldout_v1:WARNING",
+   "question": "My coolant looks low. How do I top it up, and which coolant should I use?",
+   "follow_up_of": null,
+   "pages": [
+    21,
+    86,
+    87,
+    125
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "coolelf"
+    ],
+    [
+     "expansion tank|reservoir"
+    ],
+    [
+     "side stand"
+    ],
+    [
+     "bleed|radiator"
+    ]
+   ],
+   "forbid": [
+    "does not (?:give|specify|state|list|name|mention)[^.]{0,60}coolant (?:type|grade|specification)"
+   ],
+   "warnings": [
+    [
+     "hot|boiling|scald"
+    ],
+    [
+     "skin|spill|dispos"
+    ]
+   ]
+  },
+  {
+   "id": "H18",
+   "source": "heldout_v1:WARNING",
+   "question": "When removing the battery, which terminal do I disconnect first, and which one goes back on first?",
+   "follow_up_of": null,
+   "pages": [
+    11,
+    104,
+    105,
+    106,
+    107
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "(?:black|negative)[^.]{0,60}first"
+    ],
+    [
+     "(?:red|positive)[^.]{0,60}first"
+    ],
+    [
+     "key|ignition|engine off|switch off"
+    ],
+    [
+     "10\\s?mm"
+    ]
+   ],
+   "warnings": [
+    [
+     "(?:black|negative)[^.]{0,60}first"
+    ],
+    [
+     "firm|tight|secure"
+    ],
+    [
+     "acid|lead|chemical"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H19",
+   "source": "heldout_v1:WARNING",
+   "question": "How do I check the brake fluid level, and what fluid should I top up with?",
+   "follow_up_of": null,
+   "pages": [
+    21,
+    70,
+    88,
+    89,
+    127
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "level|upright|horizontal"
+    ],
+    [
+     "window|cent(?:er|re)"
+    ],
+    [
+     "\\bmax"
+    ],
+    [
+     "dot\\s?4"
+    ]
+   ],
+   "warnings": [
+    [
+     "corrosive|paint"
+    ],
+    [
+     "mix"
+    ],
+    [
+     "brake failure|insufficient|low level"
+    ],
+    [
+     "children|skin|eyes"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H20",
+   "source": "heldout_v1:WARNING",
+   "question": "How full should I fill the fuel tank when refuelling?",
+   "follow_up_of": null,
+   "pages": [
+    8,
+    27,
+    28
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "anti[- ]?splash"
+    ],
+    [
+     "brim|expansion|air space|room"
+    ],
+    [
+     "engine (?:off|stopped|switched off)|ventilat"
+    ]
+   ],
+   "warnings": [
+    [
+     "overfill|evap|canister"
+    ],
+    [
+     "explosive|flame|spark|smok"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H21",
+   "source": "heldout_v1:SAFETY",
+   "question": "A fuse blew mid-ride. Can I just bridge it with a bit of wire or foil to get home?",
+   "follow_up_of": null,
+   "pages": [
+    81,
+    111,
+    112,
+    121
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "\\bno\\b|do not|don't|never|not bridge|not jumper"
+    ],
+    [
+     "same rating|correct rating|specified rating"
+    ],
+    [
+     "\\b5\\s?a\\b"
+    ],
+    [
+     "\\b10\\s?a\\b"
+    ],
+    [
+     "\\b15\\s?a\\b"
+    ],
+    [
+     "check"
+    ]
+   ],
+   "warnings": [
+    [
+     "short[- ]?circuit|fire"
+    ],
+    [
+     "damage"
+    ],
+    [
+     "check"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H22",
+   "source": "heldout_v1:SAFETY",
+   "question": "Can I hitch a small luggage trailer behind my Himalayan for a long tour?",
+   "follow_up_of": null,
+   "pages": [
+    11,
+    14,
+    132
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "(?:not|never|don't|do not)[^.]{0,40}(?:pull|tow|hitch)[^.]{0,20}trailer|trailer[^.]{0,60}(?:not|never)"
+    ],
+    [
+     "brak|tyre|tire|handling|stabil|control"
+    ],
+    [
+     "warranty"
+    ]
+   ],
+   "warnings": [
+    [
+     "brak|tyre|tire|handling|control|accident"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H23",
+   "source": "heldout_v1:SAFETY",
+   "question": "My ABS light stays on even above 5 km/h. Is it okay to keep riding for a few weeks before getting it checked?",
+   "follow_up_of": null,
+   "pages": [
+    62,
+    63,
+    66,
+    69,
+    122
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "\\bno\\b|do not|don't|not (?:safe|ok|advis)|should not|shouldn't"
+    ],
+    [
+     "authori[sz]ed|service cent|dealer|workshop|royal enfield|support@|inspect"
+    ],
+    [
+     "5\\s?km/?h"
+    ]
+   ],
+   "warnings": [
+    [
+     "do not (?:run|ride|drive)|don't (?:run|ride|drive)|not (?:run|ride|drive)"
+    ],
+    [
+     "inspect|check|correct"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H24",
+   "source": "heldout_v1:NOT_IN_MANUAL",
+   "question": "What's the turning radius of the Himalayan 450?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "turning radius[^.]{0,40}\\b\\d+(?:\\.\\d+)?\\s?(?:m|mm|metre|meter|ft)\\b"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "H25",
+   "source": "heldout_v1:NOT_IN_MANUAL",
+   "question": "What are the steering rake angle and trail figures for the front end?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "(?:rake|trail)[^.]{0,40}\\b\\d+(?:\\.\\d+)?\\s?(?:°|deg|degree|mm)",
+    "45\\s?(?:-|to)\\s?60"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "H26",
+   "source": "heldout_v1:NOT_IN_MANUAL",
+   "question": "Does the Himalayan 450 come with heated grips?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "(?:has|comes with|features|is equipped with|offers) (?:standard )?heated grips"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "H27",
+   "source": "heldout_v1:NOT_IN_MANUAL",
+   "question": "What's the exhaust noise level of this bike in decibels?",
+   "follow_up_of": null,
+   "pages": [],
+   "routes": [
+    "UNSUPPORTED"
+   ],
+   "forbid": [
+    "\\b\\d+(?:\\.\\d+)?\\s?db\\b"
+   ],
+   "require": [],
+   "warnings": []
+  },
+  {
+   "id": "H28",
+   "source": "heldout_v1:FOLLOW_UP",
+   "question": "What tyre pressure should I run in the front tyre when riding solo?",
+   "follow_up_of": null,
+   "pages": [
+    18,
+    90,
+    117
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "32\\s?psi"
+    ],
+    [
+     "2\\.24"
+    ]
+   ],
+   "warnings": [
+    [
+     "under-?\\s?inflat|overheat"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H29",
+   "source": "heldout_v1:FOLLOW_UP",
+   "question": "And the rear, with a pillion on board?",
+   "follow_up_of": "H28",
+   "pages": [
+    18,
+    90,
+    117
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "32\\s?psi"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H30",
+   "source": "heldout_v1:FOLLOW_UP",
+   "question": "What torque should the rear wheel spindle be tightened to?",
+   "follow_up_of": null,
+   "pages": [
+    100,
+    102,
+    103
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "70\\s?nm"
+    ],
+    [
+     "10\\s?nm"
+    ]
+   ],
+   "warnings": [
+    [
+     "align"
+    ],
+    [
+     "fitted correctly|correctly fitted|fitted properly"
+    ]
+   ],
+   "forbid": []
+  },
+  {
+   "id": "H31",
+   "source": "heldout_v1:FOLLOW_UP",
+   "question": "And the front one?",
+   "follow_up_of": "H30",
+   "pages": [
+    94,
+    95
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP",
+    "UNSUPPORTED",
+    "AMBIGUOUS"
+   ],
+   "require": [
+    [
+     "does not|doesn't|do not|don't|no (?:\\w+ )?(?:figure|value|rating|mention|information|guidance|specification)|not (?:give|list|state|specify|mention|cover|include|provide)|couldn't find|could not find|cannot|can't|firmly"
+    ],
+    [
+     "25\\s?nm"
+    ]
+   ],
+   "forbid": [
+    "front (?:wheel )?(?:spindle|axle)[^.]{0,40}\\b(?!25\\b)\\d+\\s?nm"
+   ],
+   "warnings": [
+    [
+     "fitted correctly|correctly fitted|fitted properly|fitted correct"
+    ]
+   ]
+  },
+  {
+   "id": "H32",
+   "source": "heldout_v1:FOLLOW_UP",
+   "question": "At what speed should I shift up from 2nd to 3rd gear?",
+   "follow_up_of": null,
+   "pages": [
+    76,
+    77
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "30\\s?km/?h"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  },
+  {
+   "id": "H33",
+   "source": "heldout_v1:FOLLOW_UP",
+   "question": "What about shifting back down from 3rd to 2nd?",
+   "follow_up_of": "H32",
+   "pages": [
+    76
+   ],
+   "routes": [
+    "SUPPORTED",
+    "SAFETY_STOP"
+   ],
+   "require": [
+    [
+     "25\\s?km/?h"
+    ]
+   ],
+   "forbid": [],
+   "warnings": []
+  }
+ ]
+}

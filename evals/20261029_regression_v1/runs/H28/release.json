@@ -1,0 +1,126 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "The manual gives 32 psi (2.24 kg/cm2) for the front tyre when riding solo. Use only the tyres the manual recommends, inflated to the correct air pressure. Watch out: Under-inflated tyres may overheat, get damaged and cause injury to the rider.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E5",
+   "evidence_id": "evidence_114a6d4caa3c57bd3901037e",
+   "pages": [
+    90
+   ]
+  },
+  {
+   "label": "E6",
+   "evidence_id": "evidence_f1b023ea7924903fed5dfe5f",
+   "pages": [
+    90
+   ]
+  },
+  {
+   "label": "E7",
+   "evidence_id": "evidence_c762ef2c61505dc7ac7c01d8",
+   "pages": [
+    90
+   ]
+  },
+  {
+   "label": "E21",
+   "evidence_id": "evidence_5b6388c083677b5d5cd6ad4a",
+   "pages": [
+    18
+   ]
+  }
+ ],
+ "cited_pages": [
+  18,
+  90
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "The manual gives 32 psi (2.24 kg/cm2) for the front tyre when riding solo.",
+    "evidence_ids": [
+     "E6",
+     "E21"
+    ]
+   }
+  ],
+  "policy": [
+   {
+    "text": "Use only the tyres the manual recommends, inflated to the correct air pressure.",
+    "evidence_ids": [
+     "E5"
+    ]
+   }
+  ],
+  "watchouts": [
+   {
+    "text": "Under-inflated tyres may overheat, get damaged and cause injury to the rider.",
+    "evidence_ids": [
+     "E7"
+    ]
+   }
+  ],
+  "disclaimers": []
+ },
+ "watchout_review": [
+  {
+   "display_id": "E7",
+   "decision": "INCLUDED",
+   "reason": "Cited watchout covers the risk of under-inflated tyres, which is the pressure question."
+  },
+  {
+   "display_id": "E8",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns the tyre specification used when replacing tyres, not tyre pressure."
+  },
+  {
+   "display_id": "E9",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Continues E8 on replacement tyre specification."
+  },
+  {
+   "display_id": "E34",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns loading weight or fitting accessories, not pressure for a solo rider."
+  },
+  {
+   "display_id": "E35",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns genuine accessories, not tyre pressure."
+  },
+  {
+   "display_id": "E36",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns nonstandard fork parts, not tyre pressure."
+  },
+  {
+   "display_id": "E37",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Continues E36 on nonstandard parts."
+  },
+  {
+   "display_id": "E38",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Concerns model specifications and accessory misuse, not tyre pressure."
+  }
+ ],
+ "excluded_watchouts": [
+  "E8",
+  "E9",
+  "E34",
+  "E35",
+  "E36",
+  "E37",
+  "E38"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}

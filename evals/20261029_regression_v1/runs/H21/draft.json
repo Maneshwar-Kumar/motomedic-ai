@@ -1,0 +1,24 @@
+{
+  "route": "SAFETY_STOP",
+  "coverage": "COMPLETE",
+  "answer": [
+    {"text": "No. Do not bridge a blown fuse with wire, foil or any other conductive material.", "evidence_ids": ["E6", "E8"]},
+    {"text": "Replace the defective fuse with a new fuse of the same rating.", "evidence_ids": ["E8"]},
+    {"text": "A fuse of another rating, or a low-grade fuse, will damage the complete electrical system.", "evidence_ids": ["E6"]},
+    {"text": "The spare fuses are SF1 (5 A, yellow), SF2 (10 A, red) and SF3 (15 A, blue).", "evidence_ids": ["E4"]}
+  ],
+  "policy": [
+    {"text": "Make sure the ignition switch is in the OFF position when replacing fuses.", "evidence_ids": ["E9"]}
+  ],
+  "watchouts": [
+    {"text": "Bridging a defective fuse risks a short-circuit and fire.", "evidence_ids": ["E8"]},
+    {"text": "After any fuse failure, get the electrical system checked and the faults corrected immediately, or the fuse may fail again.", "evidence_ids": ["E5"]},
+    {"text": "Replace a spare fuse in the holder at the earliest opportunity.", "evidence_ids": ["E7"]}
+  ],
+  "watchout_review": [
+    {"display_id": "E5", "decision": "INCLUDED", "reason": "Electrical check after a fuse failure is not in the answer."},
+    {"display_id": "E6", "decision": "NOT_APPLICABLE", "reason": "Its damage warning is already stated in the answer."},
+    {"display_id": "E7", "decision": "INCLUDED", "reason": "Spare fuse replacement warning is not in the answer."},
+    {"display_id": "E8", "decision": "INCLUDED", "reason": "Short-circuit and fire risk is not in the answer."}
+  ]
+}

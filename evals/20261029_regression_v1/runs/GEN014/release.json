@@ -1,0 +1,74 @@
+{
+ "version": "template-answer-v5",
+ "route": "SUPPORTED",
+ "coverage": "COMPLETE",
+ "text": "No. The manual gives different fill quantities for the two front forks. Right fork (RH): 589 ± 2.5 ml of front fork oil. Left fork (LH): 507 ± 2.5 ml of front fork oil. The manual says these values are approximate and the actual capacity will vary.",
+ "escalation_uri": null,
+ "clarification_question": null,
+ "citations": [
+  {
+   "label": "E1",
+   "evidence_id": "evidence_a6950ea73293cda81e695ce1",
+   "pages": [
+    21
+   ]
+  },
+  {
+   "label": "E4",
+   "evidence_id": "evidence_424971c8f0be958200b09990",
+   "pages": [
+    21
+   ]
+  }
+ ],
+ "cited_pages": [
+  21
+ ],
+ "sections": {
+  "answer": [
+   {
+    "text": "No. The manual gives different fill quantities for the two front forks.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "Right fork (RH): 589 ± 2.5 ml of front fork oil.",
+    "evidence_ids": [
+     "E1"
+    ]
+   },
+   {
+    "text": "Left fork (LH): 507 ± 2.5 ml of front fork oil.",
+    "evidence_ids": [
+     "E1"
+    ]
+   }
+  ],
+  "policy": [],
+  "watchouts": [],
+  "disclaimers": [
+   {
+    "text": "The manual says these values are approximate and the actual capacity will vary.",
+    "evidence_ids": [
+     "E4"
+    ]
+   }
+  ]
+ },
+ "watchout_review": [
+  {
+   "display_id": "E5",
+   "decision": "NOT_APPLICABLE",
+   "reason": "Warns about engine oil grade, not fork oil quantity."
+  }
+ ],
+ "excluded_watchouts": [
+  "E5"
+ ],
+ "suppressed_disclaimers": 0,
+ "suppressed_duplicates": 0,
+ "rewritten_phrases": [],
+ "provider_calls": 1,
+ "schema_errors": []
+}
