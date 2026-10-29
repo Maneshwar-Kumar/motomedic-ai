@@ -9,7 +9,10 @@ the checkout's gate and compares the route and text with the saved release. No m
       --index <section_index_dir> --model <bge_m3_dir> --out <report.json> \\
       [--expected-gate-changes evals/20261025_heldout_v1/regate_current.json]
 
-It exits non-zero on any mismatch, except gate changes listed in a documented re-gate file.
+It exits non-zero on any mismatch, except gate changes listed in a documented re-gate file. A
+chunk-ID difference alone is a retrieval tie, not a mismatch: across CPUs and platforms, scores
+differ in the sixth decimal place and can reorder near-tied chunks. It counts only when it changes
+the sections sent, and the assembly comparison catches that. Ties are reported with both lists.
 --root selects whose code is reproduced (default: this checkout). The report also records the
 Python version, platform and package versions, so a reproduction names its setup.
 """
@@ -68,6 +71,8 @@ def main():
                'cross_score_delta': (None if found['max_cross_score'] is None else
                                      abs(found['max_cross_score'] - saved['retrieval']['max_cross_score'])),
                'assembly_match': json.loads(json.dumps(assembled)) == saved['assembled']}
+        if not row['chunk_ids_match']:
+            row.update(chunk_ids_saved=saved['retrieval']['chunk_ids'], chunk_ids_now=found['chunk_ids'])
         if (out / 'model_input.txt').exists():
             text = sa.model_input(asked['question'], assembled, earlier_turns(asked['history']))
             row['model_input_match'] = text.encode('utf-8') == (out / 'model_input.txt').read_bytes()
@@ -96,17 +101,19 @@ def main():
         expected = {(row['arm'], row['id']) for row in documented['changed']}
     for row in rows:
         row['documented_gate_change'] = row.get('gate_match') is False and (row['arm'], row['id']) in expected
-    unexplained = [r for r in rows if not all(r.get(c, True) for c in checks if c != 'gate_match')
+    unexplained = [r for r in rows if not all(r.get(c, True) for c in checks if c not in ('gate_match', 'chunk_ids_match'))
                    or (r.get('gate_match') is False and not r['documented_gate_change'])]
+    ties = [(r['arm'], r['id']) for r in rows if not r['chunk_ids_match'] and r['assembly_match']]
     report = {'label': 'OFFLINE_REPRODUCTION_NO_MODEL_CALLS', 'run': args.run, 'index_id': identity['index_id'],
               'code_root_commit': (root / '.git').exists() and _head(root), 'environment': environment(),
               'max_cross_score_delta': max(deltas) if deltas else None, 'summary': summary,
               'mismatches': [r for r in rows if not all(r.get(c, True) for c in checks)],
-              'unexplained_mismatches': len(unexplained), 'reproduced': not unexplained}
+              'retrieval_ties': ties, 'unexplained_mismatches': len(unexplained), 'reproduced': not unexplained}
     Path(args.out).write_bytes((json.dumps(report, indent=1) + '\n').encode('utf-8'))
     print(json.dumps({k: report[k] for k in ('index_id', 'code_root_commit', 'environment', 'max_cross_score_delta',
                                               'summary')}, indent=1))
     print('mismatches:', [(r['arm'], r['id'], r['documented_gate_change']) for r in report['mismatches']])
+    print('retrieval ties (same sections sent):', ties)
     print('reproduced:', report['reproduced'])
     raise SystemExit(0 if report['reproduced'] else 1)
 
